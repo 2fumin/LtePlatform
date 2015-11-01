@@ -44,6 +44,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Abp">
+      <HintPath>..\packages\Abp.0.7.2.0\lib\net451\Abp.dll</HintPath>
+    </Reference>
     <Reference Include="Antlr3.Runtime">
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
@@ -103,6 +106,10 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -181,6 +188,9 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\KernelBindingOpertions.cs" />
+    <Compile Include="App_Start\NinjectControllerFactory.cs" />
+    <Compile Include="App_Start\NinjectDependencyResolver.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -214,6 +224,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminitrativeRegion\CityListController.cs" />
     <Compile Include="Controllers\CollegeController.cs" />
     <Compile Include="Controllers\DtController.cs" />
     <Compile Include="Controllers\EvaluationController.cs" />
@@ -339,6 +350,8 @@
     <Content Include="Views\Kpi\TopDrop2GDaily.cshtml" />
     <Content Include="Views\Kpi\TopConnection3G.cshtml" />
     <Content Include="Views\Kpi\Import.cshtml" />
+    <Content Include="Views\Kpi\_CityKpi.cshtml" />
+    <Content Include="Scripts\kpi\index.viewmodel.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -355,6 +368,12 @@
     <EmbeddedResource Include="Migrations\201511010036147_AddHometown20151101.resx">
       <DependentUpon>201511010036147_AddHometown20151101.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lte.Parameters\Lte.Parameters.csproj">
+      <Project>{25b6ccb6-4b12-4df2-b4c9-2d30ae6bd254}</Project>
+      <Name>Lte.Parameters</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -16,8 +16,10 @@
 </div>
 
 @section SPAViews{
+    @{ Html.RenderPartial("_CityKpi");}
 }
 
 @section Scripts{
     @Scripts.Render("~/bundles/knockout")
+    @Scripts.Render("~/bundles/kpiIndex")
 }
