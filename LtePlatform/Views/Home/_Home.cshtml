@@ -1,47 +1,62 @@
 ﻿<!-- ko with: home -->
-<div class="jumbotron">
-    <h2>专题优化——提供专题规划和优化工具</h2>
-    <p class="lead">在这里，我们提供<em>专题优化精品化</em>的功能，更多精彩内容请点击以下各个菜单项。</p>
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h2 class="panel-title">
+            <strong>专题优化</strong>
+            <small>——提供专题规划和优化工具</small>
+        </h2>
+    </div>    
+    <p class="panel-body text-success">
+        在这里，我们提供<em>专题优化精品化</em>的功能，更多精彩内容请点击以下各个菜单项。
+    </p>
 </div>
 <div class="row">
     <div class="col-md-4">
-        <h4>小区覆盖仿真模拟</h4>
-        <p>根据各小区的工程参数模拟覆盖范围，主要覆盖指标（RSRP、SINR）进行分析和呈现</p>       
+        <h4 class="text-warning">小区覆盖仿真模拟</h4>
+        <p class="text-info">根据各小区的工程参数模拟覆盖范围，主要覆盖指标（RSRP、SINR）进行分析和呈现</p>       
         <p>@Html.ActionLink("开始仿真", "RegionDef", "Evaluation", null, new { @class = "btn btn-primary" })</p>
     </div>
 
     <div class="col-md-4">
-        <h4>精确覆盖专题分析</h4>
-        <p>
-            综合分析后台指标、MR、路测心灵和小区跟踪数据，挖掘小区的重叠覆盖、过覆盖等问题，对精确覆盖的效果进行模拟，并在百度地图上呈现。
+        <h4 class="text-warning">精确覆盖专题分析</h4>
+        <p class="text-info">
+            综合分析后台指标、MR、路测信令和小区跟踪数据，挖掘小区的重叠覆盖、过覆盖等问题，对精确覆盖的效果进行模拟，
+            并在百度地图上呈现。
         </p>
         <p>@Html.ActionLink("精确覆盖分析", "Import", "Rutrace", null, new { @class = "btn btn-primary" })</p>
     </div>
 
     <div class="col-md-4">
-        <h4>校园网专题优化</h4>
-        <p>校园网专项优化，包括数据管理、指标分析、支撑工作管理和校园网覆盖呈现</p>
+        <h4 class="text-warning">校园网专题优化</h4>
+        <p class="text-info">校园网专项优化，包括数据管理、指标分析、支撑工作管理和校园网覆盖呈现</p>
         <p>@Html.ActionLink("校园网一览", "Map", "College", null, new { @class = "btn btn-primary" })</p>
     </div>
 
     <div class="col-md-4">
-        <h4>指标监控分析</h4>
-        <p>对日常指标的监控、精确覆盖率指标分析和地理化呈现</p>
+        <h4 class="text-warning">指标监控分析</h4>
+        <p class="text-info">对日常指标的监控、精确覆盖率指标分析和地理化呈现</p>
         <p>@Html.ActionLink("日常指标监控", "Index", "Kpi", null, new { @class = "btn btn-primary" })</p>
     </div>
 
     <div class="col-md-4">
-        <h4>小区基础信息</h4>
-        <p>全网基站、小区列表和地理化显示、对全网的基站按照基站名称、地址等信息进行查询，并进行个别基站小区的增删、修改信息的操作</p>
+        <h4 class="text-warning">小区基础信息</h4>
+        <p class="text-info">全网基站、小区列表和地理化显示、对全网的基站按照基站名称、地址等信息进行查询，并进行个别基站小区的增删、修改信息的操作</p>
         <p>@Html.ActionLink("LTE小区列表", "List", "Parameters", null, new { @class = "btn btn-primary" })</p>
     </div>
 
     <div class="col-md-4">
-        <h4>DT基础信息</h4>
-        <p>按照区域或专题查看已导入的DT基础信息</p>
+        <h4 class="text-warning">DT基础信息</h4>
+        <p class="text-info">按照区域或专题查看已导入的DT基础信息</p>
         <p>@Html.ActionLink("DT数据查看", "List", "Dt", null, new { @class = "btn btn-primary" })</p>
     </div>
+
+    <div class="col-md-4">
+        <h4 class="text-info">当前账户信息</h4>
+        <address>
+            <span data-bind="text: myHometown"></span>
+        </address>
+    </div>
 </div>
-<p data-bind="text: myHometown"></p>
+
 
 <!-- /ko -->

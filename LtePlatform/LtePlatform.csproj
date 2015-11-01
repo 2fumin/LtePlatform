@@ -333,6 +333,12 @@
     <Content Include="Views\Kpi\Index.cshtml" />
     <Content Include="Views\Parameters\List.cshtml" />
     <Content Include="Views\Dt\List.cshtml" />
+    <Content Include="Views\Kpi\_KpiMenu.cshtml" />
+    <Content Include="Views\Kpi\Precise4G.cshtml" />
+    <Content Include="Views\Kpi\TopDrop2G.cshtml" />
+    <Content Include="Views\Kpi\TopDrop2GDaily.cshtml" />
+    <Content Include="Views\Kpi\TopConnection3G.cshtml" />
+    <Content Include="Views\Kpi\Import.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

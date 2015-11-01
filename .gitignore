@@ -38,8 +38,8 @@ app.publish/
 *.application
 *.exe
 uploads/
-
-
+roslyn/
+zh-Hans/
 
 # MSTest test 
 
