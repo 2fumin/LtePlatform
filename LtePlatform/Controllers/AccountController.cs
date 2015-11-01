@@ -87,7 +87,7 @@ namespace LtePlatform.Controllers
 
             // 这不会计入到为执行帐户锁定而统计的登录失败次数中
             // 若要在多次输入错误密码的情况下触发帐户锁定，请更改为 shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -163,7 +163,7 @@ namespace LtePlatform.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Hometown = model.Hometown };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, Hometown = model.Hometown };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -171,9 +171,9 @@ namespace LtePlatform.Controllers
 
                     // 有关如何启用帐户确认和密码重置的详细信息，请访问 http://go.microsoft.com/fwlink/?LinkID=320771
                     // 发送包含此链接的电子邮件
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "确认你的帐户", "请通过单击<a href=\"" + callbackUrl + "\">此处</a>来确认你的帐户");
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    await UserManager.SendEmailAsync(user.Id, "确认你的帐户", "请通过单击<a href=\"" + callbackUrl + "\">此处</a>来确认你的帐户");
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -214,8 +214,9 @@ namespace LtePlatform.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                var userByName = await UserManager.FindByNameAsync(model.UserName);
+                var userByEmail = await UserManager.FindByEmailAsync(model.Email);
+                if (userByName == null || userByEmail == null || !(await UserManager.IsEmailConfirmedAsync(userByName.Id)))
                 {
                     // 请不要显示该用户不存在或者未经确认
                     return View("ForgotPasswordConfirmation");
@@ -223,10 +224,10 @@ namespace LtePlatform.Controllers
 
                 // 有关如何启用帐户确认和密码重置的详细信息，请访问 http://go.microsoft.com/fwlink/?LinkID=320771
                 // 发送包含此链接的电子邮件
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "重置密码", "请通过单击<a href=\"" + callbackUrl + "\">此处</a>来重置你的密码");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                string code = await UserManager.GeneratePasswordResetTokenAsync(userByEmail.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = userByEmail.Id, code = code }, protocol: Request.Url.Scheme);
+                await UserManager.SendEmailAsync(userByEmail.Id, "重置密码", "请通过单击<a href=\"" + callbackUrl + "\">此处</a>来重置你的密码");
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // 如果我们进行到这一步时某个地方出错，则重新显示表单

@@ -8,6 +8,10 @@ namespace LtePlatform.Models
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
+        [Display(Name = "用户名")]
+        public string UserName { get; set; }
+
+        [Required]
         [Display(Name = "电子邮件")]
         public string Email { get; set; }
 
@@ -47,6 +51,10 @@ namespace LtePlatform.Models
     public class ForgotViewModel
     {
         [Required]
+        [Display(Name = "用户名")]
+        public string UserName { get; set; }
+
+        [Required]
         [Display(Name = "电子邮件")]
         public string Email { get; set; }
     }
@@ -54,9 +62,8 @@ namespace LtePlatform.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "电子邮件")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "用户名")]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -69,6 +76,10 @@ namespace LtePlatform.Models
 
     public class RegisterViewModel
     {
+        [Required]
+        [Display(Name = "用户名")]
+        public string UserName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "电子邮件")]
@@ -92,6 +103,10 @@ namespace LtePlatform.Models
     public class ResetPasswordViewModel
     {
         [Required]
+        [Display(Name = "用户名")]
+        public string UserName { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "电子邮件")]
         public string Email { get; set; }
@@ -112,6 +127,10 @@ namespace LtePlatform.Models
 
     public class ForgotPasswordViewModel
     {
+        [Required]
+        [Display(Name = "用户名")]
+        public string UserName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "电子邮件")]
