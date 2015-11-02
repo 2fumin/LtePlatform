@@ -10,6 +10,6 @@ namespace Lte.Evaluations.ViewModels
     {
         public DateTime StatDate { get; set; }
 
-        public CdmaRegionDateView StatView { get; set; }
+        public IEnumerable<CdmaRegionStatView> StatViews { get; set; }
     }
 }
