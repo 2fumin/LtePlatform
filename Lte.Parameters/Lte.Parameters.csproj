@@ -93,10 +93,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\ICdmaRegionStatRepository.cs" />
+    <Compile Include="Abstract\IRegionRepository.cs" />
     <Compile Include="Abstract\ITownRepository.cs" />
     <Compile Include="Abstract\LightWeightRepositroyBase.cs" />
+    <Compile Include="Concrete\EFCdmaRegionStatRepository.cs" />
     <Compile Include="Concrete\EFParametersContext.cs" />
+    <Compile Include="Concrete\EFRegionRepository.cs" />
     <Compile Include="Concrete\EFTownRepository.cs" />
+    <Compile Include="Entities\CdmaRegionStat.cs" />
+    <Compile Include="Entities\OptimizeRegion.cs" />
     <Compile Include="Entities\Town.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

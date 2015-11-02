@@ -1,0 +1,16 @@
+﻿<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>地市/片区</th>
+            <th data-bind="visible: view != '3G'">2G全天话务量</th>
+            <th data-bind="visible: view != '3G'">掉话率</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: kpiDateList">
+        <tr>
+            <td data-bind="text: Region"></td>
+            <td data-bind="text: ErlangIncludingSwitch, visible: view != '3G'"></td>
+            <td data-bind="text: Drop2GRate, visible: view != '3G'"></td>
+        </tr>
+    </tbody>
+</table>

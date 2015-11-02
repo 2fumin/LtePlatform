@@ -3,8 +3,14 @@
 
     app.currentCity = ko.observable();
     app.cities = ko.observableArray([]);
+    app.statDate = ko.observable((new Date()).getDateFromToday(-1).Format("yyyy-MM-dd"));
+    app.view = ko.observable('主要');
+    app.viewOptions = ko.observableArray(['主要', '2G', '3G']);
+    app.kpiDateList = ko.observableArray([]);
 
-    app.initialize = function() {
+    app.initialize = function () {
+        $("#StatDate").datepicker({ dateFormat: 'yy-mm-dd' });
+
         // Make a call to the protected Web API by passing in a Bearer Authorization Header
         $.ajax({
             method: 'get',

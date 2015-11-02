@@ -155,6 +155,13 @@ namespace Lte.Domain.Regular
             }
         }
 
+        /// <summary>
+        /// 安全的对象属性克隆方法（源对象和目标对象具有相同类型）
+        /// </summary>
+        /// <typeparam name="T">对象类型</typeparam>
+        /// <param name="source">源对象</param>
+        /// <param name="destination">目标对象</param>
+        /// <param name="ignoreId">是否忽略Id属性</param>
         public static void CloneProperties<T>(this T source, T destination, bool ignoreId = true)
             where T : class
         {
@@ -169,6 +176,14 @@ namespace Lte.Domain.Regular
             }
         }
 
+        /// <summary>
+        /// 安全的对象属性克隆方法（源对象和目标对象具有不同类型）
+        /// </summary>
+        /// <typeparam name="TSource">源对象类型</typeparam>
+        /// <typeparam name="TDest">目标对象类型</typeparam>
+        /// <param name="source">源对象</param>
+        /// <param name="dest">目标对象</param>
+        /// <param name="protectionConsidered"></param>
         public static void CloneProperties<TSource, TDest>(this TSource source, TDest dest, bool protectionConsidered = false)
             where TSource : class, new()
             where TDest : class, new()

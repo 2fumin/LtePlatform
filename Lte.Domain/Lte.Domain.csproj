@@ -30,6 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Remotion.Data.Linq, Version=1.13.52.2, Culture=neutral, PublicKeyToken=8c59a1bf3e8d42c1, processorArchitecture=MSIL">
+      <HintPath>..\packages\Remotion.Data.Linq.1.0.0\lib\NET40\Remotion.Data.Linq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,10 +48,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LinqToExcel\Entities\ExcelCell.cs" />
+    <Compile Include="LinqToExcel\Entities\ExcelRow.cs" />
+    <Compile Include="LinqToExcel\Entities\ExcelRowNoHeader.cs" />
+    <Compile Include="LinqToExcel\Entities\ProjectorBuildingExpressionTreeVisitor.cs" />
+    <Compile Include="LinqToExcel\Entities\StrictMappingException.cs" />
+    <Compile Include="Regular\ExcelColumnAttribute.cs" />
+    <Compile Include="LinqToExcel\Entities\ExcelDomain.cs" />
+    <Compile Include="LinqToExcel\Entities\ExcelQuery.cs" />
+    <Compile Include="LinqToExcel\Entities\SqlGeneratorQueryModelVisitor.cs" />
+    <Compile Include="LinqToExcel\Entities\WhereClauseExpressionTreeVisitor.cs" />
+    <Compile Include="LinqToExcel\ExcelQueryFactory.cs" />
+    <Compile Include="LinqToExcel\IExcelQueryFactory.cs" />
+    <Compile Include="LinqToExcel\Service\ExcelCommonExtensions.cs" />
+    <Compile Include="LinqToExcel\Service\ExcelQueryExecutor.cs" />
+    <Compile Include="LinqToExcel\Service\ExcelUtilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Regular\CloneProtectionAttribute.cs" />
     <Compile Include="Regular\SecureConversion.cs" />
     <Compile Include="Regular\SecureValue.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -16,5 +16,9 @@ namespace Lte.Parameters.Concrete
         }
 
         public DbSet<Town> Towns { get; set; }
+
+        public DbSet<CdmaRegionStat> CdmaRegionStats { get; set; }
+
+        public DbSet<OptimizeRegion> OptimizeRegions { get; set; }
     }
 }

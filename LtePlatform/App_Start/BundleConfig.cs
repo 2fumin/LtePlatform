@@ -17,9 +17,16 @@ namespace LtePlatform
                 "~/Scripts/jquery.unobtrusive*",
                 "~/Scripts/jquery.validate*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
+                "~/Scripts/jquery-ui-{version}.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
                 "~/Scripts/knockout-{version}.js",
                 "~/Scripts/knockout.validation.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/highcharts").Include(
+                "~/Scripts/Highcharts/highcharts.js",
+                "~/Scripts/Highcharts/highcharts-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                 "~/Scripts/sammy-{version}.js",
@@ -30,10 +37,9 @@ namespace LtePlatform
                 "~/Scripts/app/_run.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/kpiIndex").Include(
-                "~/Scripts/sammy-{version}.js",
                 "~/Scripts/app/common.js",
                 "~/Scripts/app/app.datamodel.js",
-                "~/Scripts/app/app.viewmodel.js",
+                "~/Scripts/app/app.simplemodel.js",
                 "~/Scripts/kpi/index.viewmodel.js",
                 "~/Scripts/app/_run.js"));
 
@@ -49,6 +55,9 @@ namespace LtePlatform
             bundles.Add(new StyleBundle("~/Content/css").Include(
                  "~/Content/bootstrap.css",
                  "~/Content/Site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
+                "~/Content/themes/base/all.css"));
         }
     }
 }
