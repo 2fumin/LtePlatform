@@ -8,7 +8,7 @@ namespace Lte.Evaluations.ViewModels
 {
     public class CdmaRegionStatTrend
     {
-        public IEnumerable<DateTime> StatDates { get; set; }
+        public IEnumerable<string> StatDates { get; set; }
 
         public List<string> RegionList { get; set; } 
 

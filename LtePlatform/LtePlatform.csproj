@@ -45,8 +45,8 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Abp, Version=0.7.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.0.7.2.0\lib\net451\Abp.dll</HintPath>
+    <Reference Include="Abp, Version=0.7.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.0.7.3.0\lib\net451\Abp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Antlr3.Runtime">
@@ -262,6 +262,7 @@
     <Compile Include="Controllers\EvaluationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KpiController.cs" />
+    <Compile Include="Controllers\Kpi\KpiDataListController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MeController.cs" />
     <Compile Include="Controllers\ParametersController.cs" />
@@ -490,6 +491,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lte.Evaluations\Lte.Evaluations.csproj">
+      <Project>{c166940a-6bd2-4f42-8156-8024d9e320c9}</Project>
+      <Name>Lte.Evaluations</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lte.Parameters\Lte.Parameters.csproj">
       <Project>{25b6ccb6-4b12-4df2-b4c9-2d30ae6bd254}</Project>
       <Name>Lte.Parameters</Name>

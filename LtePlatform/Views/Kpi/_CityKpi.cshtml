@@ -9,14 +9,16 @@
                     <input id="StatDate" data-bind="value: statDate"/>
                     视图：
                     <select data-bind="value: view, options: viewOptions"></select>
-                    <button type="button" class="btn btn-primary" data-bind="click: showKpi">
+                    <button type="button" class="btn btn-success" data-bind="click: showKpi">
                         <span class="glyphicon glyphicon-search"></span>
                         显示图表
                     </button>
                 </h3>
             </div>
             <div class="panel-body">
-                
+                @{
+                    Html.RenderPartial("_CityKpiTable");
+                }
             </div>
         </div>
     </div>

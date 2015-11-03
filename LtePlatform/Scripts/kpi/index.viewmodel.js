@@ -21,6 +21,26 @@
             },
             success: function(data) {
                 app.cities(data);
+                if (data.length > 0) {
+                    app.currentCity(data[0]);
+                    app.showKpi();
+                }
+            }
+        });
+    };
+
+    app.showKpi = function () {
+        $.ajax({
+            method: 'get',
+            url: app.dataModel.kpiDataListUrl,
+            contentType: "application/json; charset=utf-8",
+            data: {
+                city: app.currentCity(),
+                statDate: app.statDate()
+            },
+            success: function (data) {
+                app.statDate(data.statDate);
+                app.kpiDateList(data.statViews);
             }
         });
     };

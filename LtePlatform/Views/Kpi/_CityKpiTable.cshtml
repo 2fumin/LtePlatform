@@ -2,15 +2,37 @@
     <thead>
         <tr>
             <th>地市/片区</th>
-            <th data-bind="visible: view != '3G'">2G全天话务量</th>
-            <th data-bind="visible: view != '3G'">掉话率</th>
+            <th data-bind="visible: view() != '3G'">2G全天话务量</th>
+            <th data-bind="visible: view() != '3G'">掉话率</th>
+            <th data-bind="visible: view() != '3G'">2G呼建</th>
+            <th data-bind="visible: view() != '3G'">Ec/Io优良率</th>
+            <th data-bind="visible: view() == '2G'">2G利用率</th>
+            <th data-bind="visible: view() != '2G'">全天流量(GB)</th>
+            <th data-bind="visible: view() == '3G'">3G全天话务量</th>
+            <th data-bind="visible: view() != '2G'">掉线率</th>
+            <th data-bind="visible: view() != '2G'">3G连接</th>
+            <th data-bind="visible: view() != '2G'">C/I优良率</th>
+            <th data-bind="visible: view() == '3G'">反向链路繁忙率</th>
+            <th data-bind="visible: view() != '2G'">3G切2G流量比</th>
+            <th data-bind="visible: view() == '3G'">3G利用率</th>
         </tr>
     </thead>
     <tbody data-bind="foreach: kpiDateList">
         <tr>
-            <td data-bind="text: Region"></td>
-            <td data-bind="text: ErlangIncludingSwitch, visible: view != '3G'"></td>
-            <td data-bind="text: Drop2GRate, visible: view != '3G'"></td>
+            <td data-bind="text: region"></td>
+            <td data-bind="text: erlangIncludingSwitch.toFixed(0), visible: $root.view() != '3G'"></td>
+            <td data-bind="text: drop2GRate.toFixed(2), visible: $root.view() != '3G'"></td>
+            <td data-bind="text: callSetupRate.toFixed(2), visible: $root.view() != '3G'"></td>
+            <td data-bind="text: ecio.toFixed(2), visible: $root.view() != '3G'"></td>
+            <td data-bind="text: utility2GRate.toFixed(2), visible: $root.view() == '2G'"></td>
+            <td data-bind="text: flow.toFixed(2), visible: $root.view() != '2G'"></td>
+            <td data-bind="text: erlang3G.toFixed(2), visible: $root.view() == '3G'"></td>
+            <td data-bind="text: drop3GRate.toFixed(2), visible: $root.view() != '2G'"></td>
+            <td data-bind="text: connectionRate.toFixed(2), visible: $root.view() != '2G'"></td>
+            <td data-bind="text: ci.toFixed(2), visible: $root.view() != '2G'"></td>
+            <td data-bind="text: linkBusyRate.toFixed(2), visible: $root.view() == '3G'"></td>
+            <td data-bind="text: downSwitchRate.toFixed(2), visible: $root.view() != '2G'"></td>
+            <td data-bind="text: utility3GRate.toFixed(2), visible: $root.view() == '3G'"></td>
         </tr>
     </tbody>
 </table>

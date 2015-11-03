@@ -20,7 +20,7 @@ namespace Lte.Evaluations.DataService
             _statRepository = statRepository;
         }
 
-        public CdmaRegionDateView Query(DateTime initialDate, string city)
+        public CdmaRegionDateView QueryLastDateStat(DateTime initialDate, string city)
         {
             DateTime beginDate = initialDate.AddDays(-100);
             var query =
@@ -33,12 +33,12 @@ namespace Lte.Evaluations.DataService
             if (result.Count == 0) return null;
             DateTime maxDate = result.Max(x => x.StatDate);
             var stats = result.Where(x => x.StatDate == maxDate).ToList();
-            var cityStat = stats.Average();
+            var cityStat = stats.ArraySum();
             cityStat.Region = city;
             stats.Add(cityStat);
             return new CdmaRegionDateView
             {
-                StatDate = maxDate,
+                StatDate = maxDate.ToShortDateString(),
                 StatViews = stats.Select(x => new CdmaRegionStatView(x))
             };
         }

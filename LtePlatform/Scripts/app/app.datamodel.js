@@ -5,6 +5,7 @@
     self.siteUrl = "/";
 
     self.cityListUrl = "/api/CityList";
+    self.kpiDataListUrl = "/api/KpiDataList";
 
     // Route operations
 
