@@ -42,5 +42,23 @@ namespace Lte.Evaluations.DataService
                 StatViews = stats.Select(x => new CdmaRegionStatView(x))
             };
         }
+
+        public CdmaRegionStatTrend QueryStatTrend(DateTime begin, DateTime end, string city)
+        {
+            var query = _statRepository.GetAll().Where(x => x.StatDate >= begin && x.StatDate < end.AddDays(1));
+            var result = (from q in query
+                          join r in _regionRepository.GetAll().Where(x => x.City == city)
+                              on q.Region equals r.Region
+                          select q).ToList();
+            if (result.Count == 0) return null;
+            var dates = result.Select(x => x.StatDate).Distinct();
+            var regionList = result.Select(x => x.Region).Distinct().ToList();
+            regionList.Add(city);
+            return new CdmaRegionStatTrend
+            {
+                StatDates = dates.Select(x => x.ToShortDateString()),
+                RegionList = regionList
+            };
+        }
     }
 }

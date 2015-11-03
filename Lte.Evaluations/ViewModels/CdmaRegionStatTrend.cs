@@ -12,30 +12,30 @@ namespace Lte.Evaluations.ViewModels
 
         public List<string> RegionList { get; set; } 
 
-        public IEnumerable<List<double>> Erlang2Gs { get; set; }
+        public List<IEnumerable<double>> Erlang2Gs { get; set; }
 
-        public IEnumerable<List<double>> Drop2GRates { get; set; }
+        public List<IEnumerable<double>> Drop2GRates { get; set; }
 
-        public IEnumerable<List<double>> CallSetupRates { get; set; }
+        public List<IEnumerable<double>> CallSetupRates { get; set; }
 
-        public IEnumerable<List<double>> Ecios { get; set; }
+        public List<IEnumerable<double>> Ecios { get; set; }
 
-        public IEnumerable<List<double>> Utility2GRates { get; set; }
+        public List<IEnumerable<double>> Utility2GRates { get; set; }
 
-        public IEnumerable<List<double>> Flow3Gs { get; set; }
+        public List<IEnumerable<double>> Flow3Gs { get; set; }
 
-        public IEnumerable<List<double>> Erlang3Gs { get; set; }
+        public List<IEnumerable<double>> Erlang3Gs { get; set; }
 
-        public IEnumerable<List<double>> Drop3GRates { get; set; }
+        public List<IEnumerable<double>> Drop3GRates { get; set; }
 
-        public IEnumerable<List<double>> ConnectionRates { get; set; }
+        public List<IEnumerable<double>> ConnectionRates { get; set; }
 
-        public IEnumerable<List<double>> Cis { get; set; }
+        public List<IEnumerable<double>> Cis { get; set; }
 
-        public IEnumerable<List<double>> LinkBusyRates { get; set; }
+        public List<IEnumerable<double>> LinkBusyRates { get; set; }
 
-        public IEnumerable<List<double>> DownSwitchRates { get; set; }
+        public List<IEnumerable<double>> DownSwitchRates { get; set; }
 
-        public IEnumerable<List<double>> Utility3GRates { get; set; }
+        public List<IEnumerable<double>> Utility3GRates { get; set; }
     }
 }

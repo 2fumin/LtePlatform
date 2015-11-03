@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using NUnit.Framework;
 using Moq;
 using Lte.Parameters.Abstract;
@@ -36,6 +37,12 @@ namespace Lte.Evaluations.Test.DataService
         {
             Assert.AreEqual(view.Region, region);
             Assert.AreEqual(view.ErlangIncludingSwitch, erlang);
+        }
+
+        private void AssertDropRate(CdmaRegionStatView view, string region, double dropRate)
+        {
+            Assert.AreEqual(view.Region, region);
+            Assert.AreEqual(view.Drop2GRate, dropRate);
         }
 
         private CdmaRegionDateView QueryDateViewWithSingleStat(string initialDate,
@@ -102,7 +109,7 @@ namespace Lte.Evaluations.Test.DataService
                     Region = regions[i],
                     StatDate = DateTime.Parse(recordDate),
                     Drop2GNum = drop2GNums[i],
-                    DownSwitchDem = drop2GDems[i]
+                    Drop2GDem = drop2GDems[i]
                 });
             }
             _statRepository.MockCdmaRegionStats(statList);
@@ -181,6 +188,27 @@ namespace Lte.Evaluations.Test.DataService
             for (int i=0;i<regions.Length;i++)
                 AssertStatView(result.StatViews.ElementAt(i), regions[i], erlangs[i]);
             AssertStatView(result.StatViews.ElementAt(regions.Length), "city", erlangs.Sum());
+        }
+
+        [TestCase(1, "2015-5-1", new[] { "region1", "region2" },
+            "2015-4-1", new[] { 10, 12 }, new[] { 11, 13 })]
+        [TestCase(2, "2015-6-2", new[] { "region2", "region3", "region1" },
+            "2015-4-20", new[] { 15, 11, 12 }, new[] { 11, 13, 17 })]
+        [TestCase(3, "2015-6-2", new[] { "region3", "region2" },
+            "2015-5-20", new[] { 15, 16 }, new[] { 11, 13 })]
+        public void TestQueryLastDateStat_MultiRegions_SingleDate_DropRateConsidered(int testNo,
+            string initialDate, string[] regions, string recordDate,
+            int[] drop2GNums, int[] drop2GDems)
+        {
+            var result = QueryDateView_MultiRegions_SingleDate_DropRateConsidered(initialDate, regions, recordDate,
+                drop2GNums, drop2GDems);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(DateTime.Parse(result.StatDate), DateTime.Parse(recordDate));
+            Assert.AreEqual(result.StatViews.Count(), regions.Length + 1);
+            for (int i = 0; i < regions.Length; i++)
+                AssertDropRate(result.StatViews.ElementAt(i), regions[i], (double) drop2GNums[i]/drop2GDems[i]);
+            AssertDropRate(result.StatViews.ElementAt(regions.Length), "city",
+                (double) drop2GNums.Sum()/drop2GDems.Sum());
         }
     }
 }
