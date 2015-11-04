@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2AF57E39-BC55-491C-AB7D-374D5A4FE0EA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TraceParser</RootNamespace>
+    <AssemblyName>TraceParser</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\AllTripObject.cs" />
+    <Compile Include="Common\CommonTraceParser.cs" />
+    <Compile Include="Common\EventItem.cs" />
+    <Compile Include="Common\EventRRC.cs" />
+    <Compile Include="Common\EventS1.cs" />
+    <Compile Include="Common\EventX2.cs" />
+    <Compile Include="Common\ITraceMessage.cs" />
+    <Compile Include="Common\TraceResultList.cs" />
+    <Compile Include="Eutra\AC_BarringConfig.cs" />
+    <Compile Include="Eutra\AdditionalSI_Info.cs" />
+    <Compile Include="Eutra\AntennaInfo.cs" />
+    <Compile Include="Eutra\AreaConfiguration.cs" />
+    <Compile Include="Eutra\AS.cs" />
+    <Compile Include="Eutra\BandClass.cs" />
+    <Compile Include="Eutra\BandParameters.cs" />
+    <Compile Include="Eutra\BCCH.cs" />
+    <Compile Include="Eutra\CA.cs" />
+    <Compile Include="Eutra\CarrierFreq.cs" />
+    <Compile Include="Eutra\CellGlobalId.cs" />
+    <Compile Include="Eutra\CellInfo.cs" />
+    <Compile Include="Eutra\CellReselection.cs" />
+    <Compile Include="Eutra\CellSelectionInfo.cs" />
+    <Compile Include="Eutra\CellsToAddMod.cs" />
+    <Compile Include="Eutra\CommonTypes.cs" />
+    <Compile Include="Eutra\ConnEstFailReport.cs" />
+    <Compile Include="Eutra\CounterCheck.cs" />
+    <Compile Include="Eutra\CountingRequestInfo.cs" />
+    <Compile Include="Eutra\CountingResponseInfo.cs" />
+    <Compile Include="Eutra\CQI_Report.cs" />
+    <Compile Include="Eutra\CrossCarrierSchedulingConfig.cs" />
+    <Compile Include="Eutra\CRS_AssistanceInfo.cs" />
+    <Compile Include="Eutra\CSFB.cs" />
+    <Compile Include="Eutra\CSG.cs" />
+    <Compile Include="Eutra\CSI.cs" />
+    <Compile Include="Eutra\Delta.cs" />
+    <Compile Include="Eutra\DLInformationTransfer.cs" />
+    <Compile Include="Eutra\DL_AM_RLC.cs" />
+    <Compile Include="Eutra\DL_CCCH.cs" />
+    <Compile Include="Eutra\DL_DCCH.cs" />
+    <Compile Include="Eutra\DL_UM_RLC.cs" />
+    <Compile Include="Eutra\DMRS_Config.cs" />
+    <Compile Include="Eutra\DRB.cs" />
+    <Compile Include="Eutra\DRX_Config.cs" />
+    <Compile Include="Eutra\EAB_Config.cs" />
+    <Compile Include="Eutra\EPDCCH.cs" />
+    <Compile Include="Eutra\FreqPriority.cs" />
+    <Compile Include="Eutra\Handover.cs" />
+    <Compile Include="Eutra\HandoverPreparation.cs" />
+    <Compile Include="Eutra\IDC.cs" />
+    <Compile Include="Eutra\InDeviceCoexIndication.cs" />
+    <Compile Include="Eutra\InitialUE_Identity.cs" />
+    <Compile Include="Eutra\InterFreq.cs" />
+    <Compile Include="Eutra\IntraFreqNeighCellInfo.cs" />
+    <Compile Include="Eutra\IRAT_Parameters.cs" />
+    <Compile Include="Eutra\LocationInfo.cs" />
+    <Compile Include="Eutra\LogicalChannelConfig.cs" />
+    <Compile Include="Eutra\MAC_MainConfig.cs" />
+    <Compile Include="Eutra\MasterInformationBlock.cs" />
+    <Compile Include="Eutra\MBMS.cs" />
+    <Compile Include="Eutra\MBSFN.cs" />
+    <Compile Include="Eutra\MeasConfig.cs" />
+    <Compile Include="Eutra\MeasObject.cs" />
+    <Compile Include="Eutra\MeasParameters.cs" />
+    <Compile Include="Eutra\MeasResult.cs" />
+    <Compile Include="Eutra\MeasSubframePattern.cs" />
+    <Compile Include="Eutra\MeasurementReport.cs" />
+    <Compile Include="Eutra\Mobility.cs" />
+    <Compile Include="Eutra\MultiBandInfo.cs" />
+    <Compile Include="Eutra\NeighCell.cs" />
+    <Compile Include="Eutra\ObtainLocationConfig.cs" />
+    <Compile Include="Eutra\OTDOA_PositioningCapabilities.cs" />
+    <Compile Include="Eutra\Other.cs" />
+    <Compile Include="Eutra\Paging.cs" />
+    <Compile Include="Eutra\ParametersCDMA2000.cs" />
+    <Compile Include="Eutra\PCCH.cs" />
+    <Compile Include="Eutra\PDCP.cs" />
+    <Compile Include="Eutra\PDSCH_Config.cs" />
+    <Compile Include="Eutra\PHICH_Config.cs" />
+    <Compile Include="Eutra\PhyLayerParameters.cs" />
+    <Compile Include="Eutra\PhysCellId.cs" />
+    <Compile Include="Eutra\PhysicalConfig.cs" />
+    <Compile Include="Eutra\PLMN_Identity.cs" />
+    <Compile Include="Eutra\PMCH.cs" />
+    <Compile Include="Eutra\PowerPrefIndicationConfig.cs" />
+    <Compile Include="Eutra\PowerRampingParameters.cs" />
+    <Compile Include="Eutra\PRACH_Config.cs" />
+    <Compile Include="Eutra\PreRegistrationInfoHRPD.cs" />
+    <Compile Include="Eutra\ProximityIndication.cs" />
+    <Compile Include="Eutra\PUCCH_Config.cs" />
+    <Compile Include="Eutra\PUSCH_Config.cs" />
+    <Compile Include="Eutra\P_C_AndCBSR.cs" />
+    <Compile Include="Eutra\QuantityConfig.cs" />
+    <Compile Include="Eutra\RACH_Config.cs" />
+    <Compile Include="Eutra\RadioResourceConfig.cs" />
+    <Compile Include="Eutra\RedirectedCarrierInfo.cs" />
+    <Compile Include="Eutra\ReestablishmentInfo.cs" />
+    <Compile Include="Eutra\RegisteredMME.cs" />
+    <Compile Include="Eutra\ReportConfig.cs" />
+    <Compile Include="Eutra\RF_Parameters.cs" />
+    <Compile Include="Eutra\RLC_Config.cs" />
+    <Compile Include="Eutra\RLF.cs" />
+    <Compile Include="Eutra\RN.cs" />
+    <Compile Include="Eutra\RRCConnectionReconfiguration.cs" />
+    <Compile Include="Eutra\RRCConnectionReconfigurationComplete.cs" />
+    <Compile Include="Eutra\RRCConnectionReestablishment.cs" />
+    <Compile Include="Eutra\RRCConnectionReestablishmentComplete.cs" />
+    <Compile Include="Eutra\RRCConnectionReestablishmentReject.cs" />
+    <Compile Include="Eutra\RRCConnectionReestablishmentRequest.cs" />
+    <Compile Include="Eutra\RRCConnectionReject.cs" />
+    <Compile Include="Eutra\RRCConnectionRelease.cs" />
+    <Compile Include="Eutra\RRCConnectionRequest.cs" />
+    <Compile Include="Eutra\RRCConnectionSetup.cs" />
+    <Compile Include="Eutra\RRCConnectionSetupComplete.cs" />
+    <Compile Include="Eutra\RRM_Config.cs" />
+    <Compile Include="Eutra\RSTD_InterFreqInfo.cs" />
+    <Compile Include="Eutra\Scheduling.cs" />
+    <Compile Include="Eutra\Security.cs" />
+    <Compile Include="Eutra\SIB8_PerPLMN.cs" />
+    <Compile Include="Eutra\SON_Parameters.cs" />
+    <Compile Include="Eutra\SoundingRS_UL_Config.cs" />
+    <Compile Include="Eutra\SpeedStateScaleFactors.cs" />
+    <Compile Include="Eutra\SPS_Config.cs" />
+    <Compile Include="Eutra\SRB_ToAddMod.cs" />
+    <Compile Include="Eutra\SRS_Config.cs" />
+    <Compile Include="Eutra\STAG_ToAddMod.cs" />
+    <Compile Include="Eutra\SystemInformation.cs" />
+    <Compile Include="Eutra\S_TMSI.cs" />
+    <Compile Include="Eutra\TDD_Config.cs" />
+    <Compile Include="Eutra\ThresholdEUTRA.cs" />
+    <Compile Include="Eutra\TMGI.cs" />
+    <Compile Include="Eutra\TPC.cs" />
+    <Compile Include="Eutra\TraceReference.cs" />
+    <Compile Include="Eutra\TrackingAreaCodeList.cs" />
+    <Compile Include="Eutra\UEAssistanceInformation.cs" />
+    <Compile Include="Eutra\UECapability.cs" />
+    <Compile Include="Eutra\UEInformation.cs" />
+    <Compile Include="Eutra\UE_CapabilityRAT_Container.cs" />
+    <Compile Include="Eutra\UE_EUTRA_Capability.cs" />
+    <Compile Include="Eutra\UE_TimersAndConstants.cs" />
+    <Compile Include="Eutra\ULInformationTransfer.cs" />
+    <Compile Include="Eutra\UL_AM_RLC.cs" />
+    <Compile Include="Eutra\UL_CCCH.cs" />
+    <Compile Include="Eutra\UL_DCCH.cs" />
+    <Compile Include="Eutra\UL_ReferenceSignalsPUSCH.cs" />
+    <Compile Include="Eutra\UL_UM_RLC.cs" />
+    <Compile Include="Eutra\UplinkPowerControl.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="S1ap\Bearers_SubjectToStatusTransfer.cs" />
+    <Compile Include="S1ap\Broadcast.cs" />
+    <Compile Include="S1ap\CancelledCell.cs" />
+    <Compile Include="S1ap\Cause.cs" />
+    <Compile Include="S1ap\Cdma2000.cs" />
+    <Compile Include="S1ap\CellID.cs" />
+    <Compile Include="S1ap\CellIdentity.cs" />
+    <Compile Include="S1ap\CommonTypes.cs" />
+    <Compile Include="S1ap\CompletedCell.cs" />
+    <Compile Include="S1ap\CriticalityDiagnostics.cs" />
+    <Compile Include="S1ap\CSG_Id.cs" />
+    <Compile Include="S1ap\DataCodingScheme.cs" />
+    <Compile Include="S1ap\DeactivateTrace.cs" />
+    <Compile Include="S1ap\Downlink.cs" />
+    <Compile Include="S1ap\EmergencyAreaID.cs" />
+    <Compile Include="S1ap\ENBConfiguration.cs" />
+    <Compile Include="S1ap\ENB_ID.cs" />
+    <Compile Include="S1ap\ErrorIndication.cs" />
+    <Compile Include="S1ap\Extended.cs" />
+    <Compile Include="S1ap\E_RABModify.cs" />
+    <Compile Include="S1ap\E_RABRelease.cs" />
+    <Compile Include="S1ap\E_RABSetup.cs" />
+    <Compile Include="S1ap\E_RAB_ID.cs" />
+    <Compile Include="S1ap\Forbidden.cs" />
+    <Compile Include="S1ap\Handover.cs" />
+    <Compile Include="S1ap\InitialContext.cs" />
+    <Compile Include="S1ap\InitiatingMessage.cs" />
+    <Compile Include="S1ap\Kill.cs" />
+    <Compile Include="S1ap\LAC.cs" />
+    <Compile Include="S1ap\LastVisited.cs" />
+    <Compile Include="S1ap\LocationReport.cs" />
+    <Compile Include="S1ap\MMEConfiguration.cs" />
+    <Compile Include="S1ap\MME_Code.cs" />
+    <Compile Include="S1ap\NAS.cs" />
+    <Compile Include="S1ap\Outcome.cs" />
+    <Compile Include="S1ap\Overload.cs" />
+    <Compile Include="S1ap\Paging.cs" />
+    <Compile Include="S1ap\PathSwitchRequest.cs" />
+    <Compile Include="S1ap\Priority.cs" />
+    <Compile Include="S1ap\PrivateIE.cs" />
+    <Compile Include="S1ap\ProtocolExtension.cs" />
+    <Compile Include="S1ap\ProtocolIE.cs" />
+    <Compile Include="S1ap\Qos.cs" />
+    <Compile Include="S1ap\Reset.cs" />
+    <Compile Include="S1ap\RIM.cs" />
+    <Compile Include="S1ap\S1AP_ELEMENT.cs" />
+    <Compile Include="S1ap\S1AP_ELEMENTARY_PROCEDURE.cs" />
+    <Compile Include="S1ap\S1AP_PROTOCOL_IES.cs" />
+    <Compile Include="S1ap\S1Setup.cs" />
+    <Compile Include="S1ap\Served.cs" />
+    <Compile Include="S1ap\SON.cs" />
+    <Compile Include="S1ap\Source.cs" />
+    <Compile Include="S1ap\TAI.cs" />
+    <Compile Include="S1ap\Target.cs" />
+    <Compile Include="S1ap\TimeSynchronizationInfo.cs" />
+    <Compile Include="S1ap\Trace.cs" />
+    <Compile Include="S1ap\UEContext.cs" />
+    <Compile Include="S1ap\UE_associatedLogicalS1.cs" />
+    <Compile Include="S1ap\UE_Information.cs" />
+    <Compile Include="S1ap\Uplink.cs" />
+    <Compile Include="S1ap\Warning.cs" />
+    <Compile Include="X2ap\CellActivation.cs" />
+    <Compile Include="X2ap\CellInformation.cs" />
+    <Compile Include="X2ap\CellMessage.cs" />
+    <Compile Include="X2ap\CGI.cs" />
+    <Compile Include="X2ap\CommonTypes.cs" />
+    <Compile Include="X2ap\Composite.cs" />
+    <Compile Include="X2ap\CriticalityDiagnostics.cs" />
+    <Compile Include="X2ap\ENBConfiguration.cs" />
+    <Compile Include="X2ap\E_RAB.cs" />
+    <Compile Include="X2ap\Forbidden.cs" />
+    <Compile Include="X2ap\Handover.cs" />
+    <Compile Include="X2ap\InitiatingMessage.cs" />
+    <Compile Include="X2ap\LastVisited.cs" />
+    <Compile Include="X2ap\MBMS.cs" />
+    <Compile Include="X2ap\Measurement.cs" />
+    <Compile Include="X2ap\Mobility.cs" />
+    <Compile Include="X2ap\Outcome.cs" />
+    <Compile Include="X2ap\PRACH.cs" />
+    <Compile Include="X2ap\PrivateIE.cs" />
+    <Compile Include="X2ap\ProtocolIE.cs" />
+    <Compile Include="X2ap\Relative.cs" />
+    <Compile Include="X2ap\ResourceStatus.cs" />
+    <Compile Include="X2ap\ServedCell.cs" />
+    <Compile Include="X2ap\UE.cs" />
+    <Compile Include="X2ap\UL.cs" />
+    <Compile Include="X2ap\X2AP_ELEMENTARY_PROCEDURE.cs" />
+    <Compile Include="X2ap\X2AP_Message.cs" />
+    <Compile Include="X2ap\X2AP_PROTOCOL.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lte.Domain\Lte.Domain.csproj">
+      <Project>{adeef82d-6389-47c4-8f7c-d7f85c01d64e}</Project>
+      <Name>Lte.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

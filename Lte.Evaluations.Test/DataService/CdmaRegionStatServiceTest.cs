@@ -33,18 +33,6 @@ namespace Lte.Evaluations.Test.DataService
             });
         }
 
-        private void AssertStatView(CdmaRegionStatView view, string region, double erlang)
-        {
-            Assert.AreEqual(view.Region, region);
-            Assert.AreEqual(view.ErlangIncludingSwitch, erlang);
-        }
-
-        private void AssertDropRate(CdmaRegionStatView view, string region, double dropRate)
-        {
-            Assert.AreEqual(view.Region, region);
-            Assert.AreEqual(view.Drop2GRate, dropRate);
-        }
-
         private CdmaRegionDateView QueryDateViewWithSingleStat(string initialDate,
             string region, string recordDate, double erlang)
         {
@@ -127,8 +115,8 @@ namespace Lte.Evaluations.Test.DataService
             Assert.IsNotNull(result);
             Assert.AreEqual(DateTime.Parse(result.StatDate), DateTime.Parse(recordDate));
             Assert.AreEqual(result.StatViews.Count(), 2);
-            AssertStatView(result.StatViews.ElementAt(0), region, erlang);
-            AssertStatView(result.StatViews.ElementAt(1), "city", erlang);
+            result.StatViews.ElementAt(0).AssertRegionAndErlang2G(region, erlang);
+            result.StatViews.ElementAt(1).AssertRegionAndErlang2G("city", erlang);
         }
 
         [TestCase("2015-5-1", "region4", "2015-4-1", 10)]
@@ -168,8 +156,8 @@ namespace Lte.Evaluations.Test.DataService
             Assert.IsNotNull(result);
             Assert.AreEqual(DateTime.Parse(result.StatDate), DateTime.Parse(recordDates[matchedIndex]));
             Assert.AreEqual(result.StatViews.Count(), 2);
-            AssertStatView(result.StatViews.ElementAt(0), region, erlangs[matchedIndex]);
-            AssertStatView(result.StatViews.ElementAt(1), "city", erlangs[matchedIndex]);
+            result.StatViews.ElementAt(0).AssertRegionAndErlang2G(region, erlangs[matchedIndex]);
+            result.StatViews.ElementAt(1).AssertRegionAndErlang2G("city", erlangs[matchedIndex]);
         }
 
         [TestCase(1, "2015-5-1", new[] { "region1", "region2" },
@@ -186,8 +174,8 @@ namespace Lte.Evaluations.Test.DataService
             Assert.AreEqual(DateTime.Parse(result.StatDate), DateTime.Parse(recordDate));
             Assert.AreEqual(result.StatViews.Count(), regions.Length + 1);
             for (int i=0;i<regions.Length;i++)
-                AssertStatView(result.StatViews.ElementAt(i), regions[i], erlangs[i]);
-            AssertStatView(result.StatViews.ElementAt(regions.Length), "city", erlangs.Sum());
+                result.StatViews.ElementAt(i).AssertRegionAndErlang2G(regions[i], erlangs[i]);
+            result.StatViews.ElementAt(regions.Length).AssertRegionAndErlang2G("city", erlangs.Sum());
         }
 
         [TestCase(1, "2015-5-1", new[] { "region1", "region2" },
@@ -206,8 +194,8 @@ namespace Lte.Evaluations.Test.DataService
             Assert.AreEqual(DateTime.Parse(result.StatDate), DateTime.Parse(recordDate));
             Assert.AreEqual(result.StatViews.Count(), regions.Length + 1);
             for (int i = 0; i < regions.Length; i++)
-                AssertDropRate(result.StatViews.ElementAt(i), regions[i], (double) drop2GNums[i]/drop2GDems[i]);
-            AssertDropRate(result.StatViews.ElementAt(regions.Length), "city",
+                result.StatViews.ElementAt(i).AssertRegionAndDropRate(regions[i], (double) drop2GNums[i]/drop2GDems[i]);
+            result.StatViews.ElementAt(regions.Length).AssertRegionAndDropRate("city",
                 (double) drop2GNums.Sum()/drop2GDems.Sum());
         }
     }
