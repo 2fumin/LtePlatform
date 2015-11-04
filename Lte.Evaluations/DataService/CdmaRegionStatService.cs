@@ -24,11 +24,12 @@ namespace Lte.Evaluations.DataService
         public CdmaRegionDateView QueryLastDateStat(DateTime initialDate, string city)
         {
             DateTime beginDate = initialDate.AddDays(-100);
+            DateTime endDate = initialDate.AddDays(1);
             var query =
                 _statRepository.GetAll()
-                    .Where(x => x.StatDate >= beginDate && x.StatDate < initialDate.AddDays(1));
+                    .Where(x => x.StatDate >= beginDate && x.StatDate < endDate).ToList();
             var result = (from q in query
-                join r in _regionRepository.GetAll().Where(x => x.City == city)
+                join r in _regionRepository.GetAllList().Where(x => x.City == city)
                     on q.Region equals r.Region
                 select q).ToList();
             if (result.Count == 0) return null;
@@ -72,23 +73,19 @@ namespace Lte.Evaluations.DataService
         public static List<IEnumerable<CdmaRegionStatView>> GenerateViewList(List<CdmaRegionStat> statList,
             IEnumerable<DateTime> dates, List<string> regionList)
         {
-            var viewList = new List<IEnumerable<CdmaRegionStatView>>();
-            for (int i = 0; i < regionList.Count; i++)
-            {
-                var stats = from d in dates
-                            join stat in statList.Where(x => x.Region == regionList[i])
-            on d equals stat.StatDate into temp
-                            from tt in temp.DefaultIfEmpty()
-                            select tt == null 
-                            ? new CdmaRegionStat
-                            {
-                                Region = regionList[i],
-                                StatDate = d
-                            } 
-                            : tt;
-                viewList.Add(stats.ToList().Select(x => new CdmaRegionStatView(x)));
-            }
-            viewList.Add(viewList.Select(x => x.ArraySum()));
+            var viewList = (from t in regionList
+                let regionStats = statList.Where(x => x.Region == t)
+                select (from d in dates
+                    join stat in regionStats on d equals stat.StatDate into temp
+                    from tt in temp.DefaultIfEmpty()
+                    select tt ?? new CdmaRegionStat
+                    {
+                        Region = t, StatDate = d
+                    }).ToList()
+                into stats
+                select stats.Select(x => new CdmaRegionStatView(x))).ToList();
+            var cityStat = viewList.Select(x => x.ArraySum()).ToList();
+            viewList.Add(cityStat);
             return viewList;
         }
     }

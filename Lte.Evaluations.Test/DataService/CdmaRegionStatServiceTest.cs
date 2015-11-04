@@ -85,6 +85,24 @@ namespace Lte.Evaluations.Test.DataService
             return service.QueryLastDateStat(DateTime.Parse(initialDate), "city");
         }
 
+        private CdmaRegionDateView QueryDateView_MultiRegions_MultiDates(string initialDate,
+            string[] regions, string[] recordDates, double[] erlangs)
+        {
+            var statList = new List<CdmaRegionStat>();
+            for (int i = 0; i < regions.Length; i++)
+            {
+                statList.Add(new CdmaRegionStat
+                {
+                    Region = regions[i],
+                    StatDate = DateTime.Parse(recordDates[i]),
+                    ErlangIncludingSwitch = erlangs[i]
+                });
+            }
+            _statRepository.MockCdmaRegionStats(statList);
+            var service = new CdmaRegionStatService(_regionRepository.Object, _statRepository.Object);
+            return service.QueryLastDateStat(DateTime.Parse(initialDate), "city");
+        }
+
         private CdmaRegionDateView QueryDateView_MultiRegions_SingleDate_DropRateConsidered(
             string initialDate, string[] regions, string recordDate, 
             int[] drop2GNums, int[] drop2GDems)
@@ -176,6 +194,41 @@ namespace Lte.Evaluations.Test.DataService
             for (int i=0;i<regions.Length;i++)
                 result.StatViews.ElementAt(i).AssertRegionAndErlang2G(regions[i], erlangs[i]);
             result.StatViews.ElementAt(regions.Length).AssertRegionAndErlang2G("city", erlangs.Sum());
+        }
+
+        [TestCase(1, "2015-5-1", new[] { "region1", "region2" },
+            new[] { "2015-4-1", "2015-4-6" }, new[] { 10.1, 12.4 }, 1)]
+        [TestCase(2, "2015-6-2", new[] { "region2", "region3", "region1" },
+            new[] { "2015-5-20", "2015-5-19", "2015-5-21" }, new[] { 15, 11.4, 12.3 }, 2)]
+        [TestCase(3, "2015-6-2", new[] { "region3", "region2" },
+            new[] { "2015-4-20", "2015-4-26", "2015-4-17" }, new[] { 15.9, 16.4 }, 1)]
+        public void TestQueryLastDateStat_MultiRegions_MultDates_AllRegionsMatched(int testNo,
+            string initialDate, string[] regions, string[] recordDates, double[] erlangs, int matchedIndex)
+        {
+            var result = QueryDateView_MultiRegions_MultiDates(initialDate, regions, recordDates, erlangs);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(DateTime.Parse(result.StatDate), DateTime.Parse(recordDates[matchedIndex]));
+            Assert.AreEqual(result.StatViews.Count(), 2);
+            result.StatViews.ElementAt(0).AssertRegionAndErlang2G(regions[matchedIndex], erlangs[matchedIndex]);
+            result.StatViews.ElementAt(1).AssertRegionAndErlang2G("city", erlangs[matchedIndex]);
+        }
+
+        [TestCase(1, "2015-5-1", new[] { "region1", "region2", "region3" },
+            new[] { "2015-4-1", "2015-4-6", "2015-4-6" }, new[] { 10.1, 12.4, 15.7 }, new[] { 1, 2 })]
+        [TestCase(2, "2015-6-2", new[] { "region2", "region3", "region1", "region2", "region3" },
+            new[] { "2015-5-20", "2015-5-19", "2015-5-21", "2015-5-18", "2015-5-21" }, 
+            new[] { 15, 11.4, 12.3, 21.2, 28.9 }, new[] { 2, 4 })]
+        [TestCase(3, "2015-6-2", new[] { "region3", "region2", "region1", "region3", "region1" },
+            new[] { "2015-4-20", "2015-4-26", "2015-4-17", "2015-4-26", "2015-4-26" }, 
+            new[] { 15.9, 16.4, 20.7, 9.9, 2.3 }, new[] { 1, 3, 4 })]
+        public void TestQueryLastDateStat_MultiRegions_MultDates_OneDateMatchedMultiRegions(int testNo,
+            string initialDate, string[] regions, string[] recordDates, double[] erlangs, int[] matchedIndices)
+        {
+            var result = QueryDateView_MultiRegions_MultiDates(initialDate, regions, recordDates, erlangs);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(DateTime.Parse(result.StatDate), DateTime.Parse(recordDates[matchedIndices[0]]));
+            Assert.AreEqual(result.StatViews.Count(), matchedIndices.Length + 1);
+            result.StatViews.AssertRegionAndErlang2G(regions, erlangs, matchedIndices, "city");
         }
 
         [TestCase(1, "2015-5-1", new[] { "region1", "region2" },

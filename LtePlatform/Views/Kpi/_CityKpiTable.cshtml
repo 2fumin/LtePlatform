@@ -21,16 +21,16 @@
         <tr>
             <td data-bind="text: region"></td>
             <td data-bind="text: erlangIncludingSwitch.toFixed(0), visible: $root.view() != '3G'"></td>
-            <td data-bind="text: drop2GRate.toFixed(2), visible: $root.view() != '3G'"></td>
-            <td data-bind="text: callSetupRate.toFixed(2), visible: $root.view() != '3G'"></td>
-            <td data-bind="text: ecio.toFixed(2), visible: $root.view() != '3G'"></td>
-            <td data-bind="text: utility2GRate.toFixed(2), visible: $root.view() == '2G'"></td>
-            <td data-bind="text: flow.toFixed(2), visible: $root.view() != '2G'"></td>
-            <td data-bind="text: erlang3G.toFixed(2), visible: $root.view() == '3G'"></td>
-            <td data-bind="text: drop3GRate.toFixed(2), visible: $root.view() != '2G'"></td>
-            <td data-bind="text: connectionRate.toFixed(2), visible: $root.view() != '2G'"></td>
-            <td data-bind="text: ci.toFixed(2), visible: $root.view() != '2G'"></td>
-            <td data-bind="text: linkBusyRate.toFixed(2), visible: $root.view() == '3G'"></td>
+            <td data-bind="text: (100 * drop2GRate).toFixed(3), visible: $root.view() != '3G'"></td>
+            <td data-bind="text: (100 * callSetupRate).toFixed(2), visible: $root.view() != '3G'"></td>
+            <td data-bind="text: (100 * ecio).toFixed(2), visible: $root.view() != '3G'"></td>
+            <td data-bind="text: (100 * utility2GRate).toFixed(2), visible: $root.view() == '2G'"></td>
+            <td data-bind="text: flow.toFixed(0), visible: $root.view() != '2G'"></td>
+            <td data-bind="text: erlang3G.toFixed(0), visible: $root.view() == '3G'"></td>
+            <td data-bind="text: (100 * drop3GRate).toFixed(2), visible: $root.view() != '2G'"></td>
+            <td data-bind="text: (100 * connectionRate).toFixed(2), visible: $root.view() != '2G'"></td>
+            <td data-bind="text: (100 * ci).toFixed(2), visible: $root.view() != '2G'"></td>
+            <td data-bind="text: (100 * linkBusyRate).toFixed(2), visible: $root.view() == '3G'"></td>
             <td data-bind="text: downSwitchRate.toFixed(2), visible: $root.view() != '2G'"></td>
             <td data-bind="text: utility3GRate.toFixed(2), visible: $root.view() == '3G'"></td>
         </tr>
