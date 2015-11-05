@@ -50,6 +50,16 @@
     <Compile Include="Common\EventX2.cs" />
     <Compile Include="Common\ITraceMessage.cs" />
     <Compile Include="Common\TraceResultList.cs" />
+    <Compile Include="Eric\EricEvent.cs" />
+    <Compile Include="Eric\EricEventTypeList.cs" />
+    <Compile Include="Eric\EricFooter.cs" />
+    <Compile Include="Eric\EricHeader.cs" />
+    <Compile Include="Eric\EricPmEvent.cs" />
+    <Compile Include="Eric\EricScanner.cs" />
+    <Compile Include="Eric\EricssTrace.cs" />
+    <Compile Include="Eric\EricTcpStream.cs" />
+    <Compile Include="Eric\EricUdpStream.cs" />
+    <Compile Include="Eric\EventObj.cs" />
     <Compile Include="Eutra\AC_BarringConfig.cs" />
     <Compile Include="Eutra\AdditionalSI_Info.cs" />
     <Compile Include="Eutra\AntennaInfo.cs" />
@@ -188,6 +198,17 @@
     <Compile Include="Eutra\UL_ReferenceSignalsPUSCH.cs" />
     <Compile Include="Eutra\UL_UM_RLC.cs" />
     <Compile Include="Eutra\UplinkPowerControl.cs" />
+    <Compile Include="Huawei\HuaweiHeader.cs" />
+    <Compile Include="Huawei\HwEventTypeList.cs" />
+    <Compile Include="Huawei\HwTraceFileParser.cs" />
+    <Compile Include="Huawei\Msg0Block.cs" />
+    <Compile Include="Outputs\CommonTypesDescription.cs" />
+    <Compile Include="Outputs\MeasMaintainousOutputs.cs" />
+    <Compile Include="Outputs\MeasObjectOutputs.cs" />
+    <Compile Include="Outputs\MeasurementReportOutputs.cs" />
+    <Compile Include="Outputs\PhysicalConfigDedicatedOutputs.cs" />
+    <Compile Include="Outputs\RadioResourceOutputs.cs" />
+    <Compile Include="Outputs\RRCConnectionSetupCompleteOutputs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="S1ap\Bearers_SubjectToStatusTransfer.cs" />
     <Compile Include="S1ap\Broadcast.cs" />
@@ -278,6 +299,11 @@
     <Compile Include="X2ap\X2AP_ELEMENTARY_PROCEDURE.cs" />
     <Compile Include="X2ap\X2AP_Message.cs" />
     <Compile Include="X2ap\X2AP_PROTOCOL.cs" />
+    <Compile Include="Zte\ZteEvent.cs" />
+    <Compile Include="Zte\ZteHeader.cs" />
+    <Compile Include="Zte\ZteTraceCollecFile.cs" />
+    <Compile Include="Zte\ZteTraceParser.cs" />
+    <Compile Include="Zte\ZteTraceRecSession.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lte.Domain\Lte.Domain.csproj">

@@ -5,7 +5,7 @@
             <th data-bind="visible: view() != '3G'">2G全天话务量</th>
             <th data-bind="visible: view() != '3G'">掉话率</th>
             <th data-bind="visible: view() != '3G'">2G呼建</th>
-            <th data-bind="visible: view() != '3G'">Ec/Io优良率</th>
+            <th data-bind="visible: view() == '2G'">Ec/Io优良率</th>
             <th data-bind="visible: view() == '2G'">2G利用率</th>
             <th data-bind="visible: view() != '2G'">全天流量(GB)</th>
             <th data-bind="visible: view() == '3G'">3G全天话务量</th>
@@ -23,7 +23,7 @@
             <td data-bind="text: erlangIncludingSwitch.toFixed(0), visible: $root.view() != '3G'"></td>
             <td data-bind="text: (100 * drop2GRate).toFixed(3), visible: $root.view() != '3G'"></td>
             <td data-bind="text: (100 * callSetupRate).toFixed(2), visible: $root.view() != '3G'"></td>
-            <td data-bind="text: (100 * ecio).toFixed(2), visible: $root.view() != '3G'"></td>
+            <td data-bind="text: (100 * ecio).toFixed(2), visible: $root.view() == '2G'"></td>
             <td data-bind="text: (100 * utility2GRate).toFixed(2), visible: $root.view() == '2G'"></td>
             <td data-bind="text: flow.toFixed(0), visible: $root.view() != '2G'"></td>
             <td data-bind="text: erlang3G.toFixed(0), visible: $root.view() == '3G'"></td>

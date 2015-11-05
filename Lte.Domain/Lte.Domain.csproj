@@ -29,6 +29,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
@@ -41,6 +42,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,14 +51,68 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\BigEndianBinaryReader.cs" />
     <Compile Include="Common\BitArrayInputStream.cs" />
     <Compile Include="Common\BitMaskStream.cs" />
+    <Compile Include="Common\Lz4Attributes.cs" />
+    <Compile Include="Common\Lz4Types.cs" />
+    <Compile Include="Common\TextOperations.cs" />
+    <Compile Include="Common\TypeOperations.cs" />
     <Compile Include="Common\Util.cs" />
+    <Compile Include="LinqToCsv\Context\CsvContext.cs" />
+    <Compile Include="LinqToCsv\Context\FileDataAccess.cs" />
+    <Compile Include="LinqToCsv\Context\RowReader.cs" />
+    <Compile Include="LinqToCsv\CsvColumnAttribute.cs" />
+    <Compile Include="LinqToCsv\LinqToCsvException.cs" />
+    <Compile Include="LinqToCsv\StreamDef\CsvStream.cs" />
+    <Compile Include="LinqToCsv\StreamDef\CsvStreamBuffer.cs" />
+    <Compile Include="LinqToCsv\StreamDef\CsvStreamLine.cs" />
+    <Compile Include="LinqToCsv\Description\CsvFileDescription.cs" />
+    <Compile Include="LinqToCsv\Description\DataRow.cs" />
+    <Compile Include="LinqToCsv\Description\DataRowItem.cs" />
+    <Compile Include="LinqToCsv\Description\IDataRow.cs" />
+    <Compile Include="LinqToCsv\Mapper\FieldIndexInfo.cs" />
+    <Compile Include="LinqToCsv\Mapper\FieldMapper.cs" />
+    <Compile Include="LinqToCsv\Mapper\FieldMapper_Reading.cs" />
+    <Compile Include="LinqToCsv\Mapper\TypeFieldInfo.cs" />
     <Compile Include="LinqToExcel\Entities\ExcelCell.cs" />
     <Compile Include="LinqToExcel\Entities\ExcelRow.cs" />
     <Compile Include="LinqToExcel\Entities\ExcelRowNoHeader.cs" />
     <Compile Include="LinqToExcel\Entities\ProjectorBuildingExpressionTreeVisitor.cs" />
     <Compile Include="LinqToExcel\Entities\StrictMappingException.cs" />
+    <Compile Include="Lz4Net\Core\CoreHandlers.cs" />
+    <Compile Include="Lz4Net\Core\DirectoryEventArgs.cs" />
+    <Compile Include="Lz4Net\Core\ExtendedPathFilter.cs" />
+    <Compile Include="Lz4Net\Core\FileSystemScanner.cs" />
+    <Compile Include="Lz4Net\Core\INameTransform.cs" />
+    <Compile Include="Lz4Net\Core\IScanFilter.cs" />
+    <Compile Include="Lz4Net\Core\NameAndSizeFilter.cs" />
+    <Compile Include="Lz4Net\Core\NameFilter.cs" />
+    <Compile Include="Lz4Net\Core\PathFilter.cs" />
+    <Compile Include="Lz4Net\Core\ProgressEventArgs.cs" />
+    <Compile Include="Lz4Net\Core\ScanEventArgs.cs" />
+    <Compile Include="Lz4Net\Core\ScanFailureEventArgs.cs" />
+    <Compile Include="Lz4Net\Core\StreamUtils.cs" />
+    <Compile Include="Lz4Net\Core\WindowsPathUtils.cs" />
+    <Compile Include="Lz4Net\Encryption\PkzipClassic.cs" />
+    <Compile Include="Lz4Net\Encryption\PkzipClassicCryptoBase.cs" />
+    <Compile Include="Lz4Net\Encryption\PkzipClassicDecryptCryptoTransform.cs" />
+    <Compile Include="Lz4Net\Encryption\PkzipClassicEncryptCryptoTransform.cs" />
+    <Compile Include="Lz4Net\Encryption\PkzipClassicManaged.cs" />
+    <Compile Include="Lz4Net\Encryption\ZipAESStream.cs" />
+    <Compile Include="Lz4Net\Encryption\ZipAESTransform.cs" />
+    <Compile Include="Lz4Net\ExtraZip\Lz4CompressStream.cs" />
+    <Compile Include="Lz4Net\ExtraZip\Lz4DecompressStream.cs" />
+    <Compile Include="Lz4Net\ExtraZip\Lz4File.cs" />
+    <Compile Include="Lz4Net\ExtraZip\Lz4Package.cs" />
+    <Compile Include="Lz4Net\ExtraZip\Lz4PackageEntry.cs" />
+    <Compile Include="Lz4Net\ExtraZip\LzEntryOutputStream.cs" />
+    <Compile Include="Lz4Net\Lz4.cs" />
+    <Compile Include="Lz4Net\Lz4CompressionStream.cs" />
+    <Compile Include="Lz4Net\Lz4DecompressionStream.cs" />
+    <Compile Include="Lz4Net\Lz4Mode.cs" />
+    <Compile Include="Regular\BigEndianBitConverter.cs" />
+    <Compile Include="Regular\ColumnAttribute.cs" />
     <Compile Include="Regular\ExcelColumnAttribute.cs" />
     <Compile Include="LinqToExcel\Entities\ExcelDomain.cs" />
     <Compile Include="LinqToExcel\Entities\ExcelQuery.cs" />
@@ -70,8 +126,77 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Regular\CloneProtectionAttribute.cs" />
     <Compile Include="Regular\HexOperations.cs" />
+    <Compile Include="Regular\IOOperations.cs" />
+    <Compile Include="Regular\LittleEndianBitConverter.cs" />
+    <Compile Include="Regular\RowAttribute.cs" />
     <Compile Include="Regular\SecureConversion.cs" />
     <Compile Include="Regular\SecureValue.cs" />
+    <Compile Include="ZipLib\Bzip\BZip2.cs" />
+    <Compile Include="ZipLib\Bzip\BZip2Constants.cs" />
+    <Compile Include="ZipLib\Bzip\BZip2Exception.cs" />
+    <Compile Include="ZipLib\Bzip\BZip2InputStream.cs" />
+    <Compile Include="ZipLib\Bzip\BZip2OutputStream.cs" />
+    <Compile Include="ZipLib\CheckSums\Adler32.cs" />
+    <Compile Include="ZipLib\CheckSums\Crc32.cs" />
+    <Compile Include="ZipLib\CheckSums\IChecksum.cs" />
+    <Compile Include="ZipLib\CheckSums\StrangeCRC.cs" />
+    <Compile Include="ZipLib\Comppression\Deflater.cs" />
+    <Compile Include="ZipLib\Comppression\DeflaterConstants.cs" />
+    <Compile Include="ZipLib\Comppression\DeflaterEngine.cs" />
+    <Compile Include="ZipLib\Comppression\DeflaterHuffman.cs" />
+    <Compile Include="ZipLib\Comppression\DeflaterPending.cs" />
+    <Compile Include="ZipLib\Comppression\DeflateStrategy.cs" />
+    <Compile Include="ZipLib\Comppression\Inflater.cs" />
+    <Compile Include="ZipLib\Comppression\InflaterDynHeader.cs" />
+    <Compile Include="ZipLib\Comppression\InflaterHuffmanTree.cs" />
+    <Compile Include="ZipLib\Comppression\PendingBuffer.cs" />
+    <Compile Include="ZipLib\Gzip\GZipConstants.cs" />
+    <Compile Include="ZipLib\Gzip\GZipException.cs" />
+    <Compile Include="ZipLib\Gzip\GZipInputStream.cs" />
+    <Compile Include="ZipLib\Gzip\GZipOutputStream.cs" />
+    <Compile Include="ZipLib\Lzw\LzwConstants.cs" />
+    <Compile Include="ZipLib\Lzw\LzwException.cs" />
+    <Compile Include="ZipLib\Lzw\LzwInputStream.cs" />
+    <Compile Include="ZipLib\RarHelpper.cs" />
+    <Compile Include="ZipLib\SharpZipBaseException.cs" />
+    <Compile Include="ZipLib\Streams\DeflaterOutputStream.cs" />
+    <Compile Include="ZipLib\Streams\InflaterInputBuffer.cs" />
+    <Compile Include="ZipLib\Streams\InflaterInputStream.cs" />
+    <Compile Include="ZipLib\Streams\OutputWindow.cs" />
+    <Compile Include="ZipLib\Streams\StreamManipulator.cs" />
+    <Compile Include="ZipLib\Tar\TarArchive.cs" />
+    <Compile Include="ZipLib\Tar\TarBuffer.cs" />
+    <Compile Include="ZipLib\Tar\TarEntry.cs" />
+    <Compile Include="ZipLib\Tar\TarException.cs" />
+    <Compile Include="ZipLib\Tar\TarHeader.cs" />
+    <Compile Include="ZipLib\Tar\TarInputStream.cs" />
+    <Compile Include="ZipLib\Tar\TarOutputStream.cs" />
+    <Compile Include="ZipLib\Zip\BaseArchiveStorage.cs" />
+    <Compile Include="ZipLib\Zip\CommonInterfaces.cs" />
+    <Compile Include="ZipLib\Zip\CommonTypes.cs" />
+    <Compile Include="ZipLib\Zip\DescriptorData.cs" />
+    <Compile Include="ZipLib\Zip\DiskArchiveStorage.cs" />
+    <Compile Include="ZipLib\Zip\DynamicDiskDataSource.cs" />
+    <Compile Include="ZipLib\Zip\EntryPatchData.cs" />
+    <Compile Include="ZipLib\Zip\ExtendedUnixData.cs" />
+    <Compile Include="ZipLib\Zip\FastZip.cs" />
+    <Compile Include="ZipLib\Zip\FastZipEvents.cs" />
+    <Compile Include="ZipLib\Zip\KeysRequiredEventArgs.cs" />
+    <Compile Include="ZipLib\Zip\MemoryArchiveStorage.cs" />
+    <Compile Include="ZipLib\Zip\NTTaggedData.cs" />
+    <Compile Include="ZipLib\Zip\RawTaggedData.cs" />
+    <Compile Include="ZipLib\Zip\TestStatus.cs" />
+    <Compile Include="ZipLib\Zip\WindowsNameTransform.cs" />
+    <Compile Include="ZipLib\Zip\ZipConstants.cs" />
+    <Compile Include="ZipLib\Zip\ZipEntry.cs" />
+    <Compile Include="ZipLib\Zip\ZipEntryFactory.cs" />
+    <Compile Include="ZipLib\Zip\ZipException.cs" />
+    <Compile Include="ZipLib\Zip\ZipExtraData.cs" />
+    <Compile Include="ZipLib\Zip\ZipFile.cs" />
+    <Compile Include="ZipLib\Zip\ZipHelperStream.cs" />
+    <Compile Include="ZipLib\Zip\ZipInputStream.cs" />
+    <Compile Include="ZipLib\Zip\ZipNameTransform.cs" />
+    <Compile Include="ZipLib\Zip\ZipOutputStream.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

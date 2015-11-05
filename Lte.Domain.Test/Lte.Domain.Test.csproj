@@ -57,7 +57,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LinqToCsv\CsvContextWriteTests.cs" />
+    <Compile Include="LinqToCsv\IAssertable.cs" />
+    <Compile Include="LinqToCsv\Product\Person.cs" />
+    <Compile Include="LinqToCsv\Product\ProductData.cs" />
+    <Compile Include="LinqToCsv\Product\ProductDataCharLength.cs" />
+    <Compile Include="LinqToCsv\Product\ProductDataParsingOutputFormat.cs" />
+    <Compile Include="LinqToCsv\Product\ProductDataSpecificFieldIndex.cs" />
+    <Compile Include="LinqToCsv\Product\ProductData_DuplicateIndices.cs" />
+    <Compile Include="LinqToCsv\Product\ProductData_MissingFieldIndex.cs" />
+    <Compile Include="LinqToCsv\Test.cs" />
+    <Compile Include="LinqToCsv\TestFieldMapper\FieldMapperConstructorTest.cs" />
+    <Compile Include="LinqToCsv\TestRead\CsvContextReadTest.cs" />
+    <Compile Include="LinqToCsv\TestRead\CsvContextReadTests_Delimited.cs" />
+    <Compile Include="LinqToCsv\TestRead\CsvContextReadTests_OutputFormat.cs" />
+    <Compile Include="LinqToCsv\TestRead\CsvContextReadTests_UnknownColumns.cs" />
+    <Compile Include="LinqToCsv\TestRead\CsvContextReadTests_UseFieldIndex.cs" />
     <Compile Include="LinqToExcel\CellExcelTest.cs" />
+    <Compile Include="LinqToExcel\ColumnFormat\IntegerColumn.cs" />
+    <Compile Include="LinqToExcel\ColumnFormat\IntegerFomatColumn_IntegrationTest.cs" />
     <Compile Include="LinqToExcel\ColumnMappings_IntegrationTests.cs" />
     <Compile Include="LinqToExcel\ColumnMappings_SQLStatements_UnitTests.cs" />
     <Compile Include="LinqToExcel\Company.cs" />
@@ -98,6 +116,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

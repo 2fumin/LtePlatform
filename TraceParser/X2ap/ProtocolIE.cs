@@ -156,7 +156,6 @@ namespace TraceParser.X2ap
 
             public ProtocolIE_FieldPair Decode(BitArrayInputStream input)
             {
-                bool flag2;
                 int nBits = 0;
                 long num3 = 0L;
                 ProtocolIE_FieldPair pair = new ProtocolIE_FieldPair();
@@ -170,7 +169,6 @@ namespace TraceParser.X2ap
                 nBits = 0;
                 while (true)
                 {
-                    flag2 = true;
                     switch (input.readBit())
                     {
                         case 0:
@@ -215,7 +213,6 @@ namespace TraceParser.X2ap
                 nBits = 0;
                 while (true)
                 {
-                    flag2 = true;
                     switch (input.readBit())
                     {
                         case 0:

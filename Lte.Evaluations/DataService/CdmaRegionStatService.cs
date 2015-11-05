@@ -28,9 +28,12 @@ namespace Lte.Evaluations.DataService
             var query =
                 _statRepository.GetAll()
                     .Where(x => x.StatDate >= beginDate && x.StatDate < endDate).ToList();
+            var regions
+                = _regionRepository.GetAllList().Where(x => x.City == city)
+                .Select(x => x.Region).Distinct().OrderBy(x => x);
             var result = (from q in query
-                join r in _regionRepository.GetAllList().Where(x => x.City == city)
-                    on q.Region equals r.Region
+                join r in regions
+                    on q.Region equals r
                 select q).ToList();
             if (result.Count == 0) return null;
             DateTime maxDate = result.Max(x => x.StatDate);
@@ -48,9 +51,12 @@ namespace Lte.Evaluations.DataService
         public CdmaRegionStatTrend QueryStatTrend(DateTime begin, DateTime end, string city)
         {
             var query = _statRepository.GetAll().Where(x => x.StatDate >= begin && x.StatDate < end.AddDays(1));
+            var regions
+                = _regionRepository.GetAllList().Where(x => x.City == city)
+                .Select(x => x.Region).Distinct().OrderBy(x => x);
             var result = (from q in query
-                          join r in _regionRepository.GetAll().Where(x => x.City == city)
-                              on q.Region equals r.Region
+                          join r in regions
+                              on q.Region equals r
                           select q).ToList();
             if (result.Count == 0) return null;
             var dates = result.Select(x => x.StatDate).Distinct().OrderBy(x => x);

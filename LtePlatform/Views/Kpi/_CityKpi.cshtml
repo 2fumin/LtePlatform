@@ -1,5 +1,5 @@
 ﻿<div class="row">
-    <div class="col-md-8">
+    <div class="col-md-6">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">
@@ -23,7 +23,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-6">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">
@@ -31,24 +31,21 @@
                 </h3>
             </div>
             <div class="panel-body">
-                <div class="input-group">
-                    <span class="input-group-addon">
-                        开始日期：
-                    </span>
-                    <input type="text" class="form-control" />
+                开始日期：
+                <input id="BeginDate" data-bind="value: beginDate"/>
+                结束日期：
+                <input id="EndDate" data-bind="value: endDate"/>
+                指标选择:
+                <select data-bind="value: kpiSelection, options: kpiOptions"></select>
+                <button type="button" class="btn btn-success" data-bind="click: showTrend">
+                    <span class="glyphicon glyphicon-book"></span>
+                    图表展示
+                </button>
+                <div class="panel" data-bind="foreach: kpiOptions">
+                    <div data-bind="visible: $data == $root.kpiSelection(), attr: { name: $data}" 
+                         style="min-height: 300px" class="kpi-trend">
+                    </div>
                 </div>
-                <div class="input-group">
-                    <span class="input-group-addon">
-                        结束日期：
-                    </span>
-                    <input type="text" class="form-control" />
-                </div>
-                <p>
-                    <button type="button" class="btn btn-success">
-                        <span class="glyphicon glyphicon-book"></span>
-                        图表展示
-                    </button>
-                </p>
             </div>
         </div>
     </div>

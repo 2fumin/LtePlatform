@@ -7,9 +7,29 @@
     app.view = ko.observable('主要');
     app.viewOptions = ko.observableArray(['主要', '2G', '3G']);
     app.kpiDateList = ko.observableArray([]);
+    app.beginDate = ko.observable((new Date()).getDateFromToday(-7).Format("yyyy-MM-dd"));
+    app.endDate = ko.observable((new Date()).getDateFromToday(-1).Format("yyyy-MM-dd"));
+    app.kpiSelection = ko.observable('掉话率');
+    app.kpiOptions = ko.observableArray([
+        '2G全天话务量',
+        '掉话率',
+        '2G呼建',
+        'Ec/Io优良率',
+        '2G利用率',
+        '全天流量(GB)',
+        '3G全天话务量',
+        '掉线率',
+        '3G连接',
+        'C/I优良率',
+        '反向链路繁忙率',
+        '3G切2G流量比',
+        '3G利用率'
+    ]);
 
     app.initialize = function () {
         $("#StatDate").datepicker({ dateFormat: 'yy-mm-dd' });
+        $("#BeginDate").datepicker({ dateFormat: 'yy-mm-dd' });
+        $("#EndDate").datepicker({ dateFormat: 'yy-mm-dd' });
 
         // Make a call to the protected Web API by passing in a Bearer Authorization Header
         $.ajax({
@@ -42,6 +62,14 @@
                 app.statDate(data.statDate);
                 app.kpiDateList(data.statViews);
             }
+        });
+    };
+
+    app.showTrend = function () {
+        $(".kpi-trend").each(function () {
+            var chart = new comboChart();
+            chart.title.text = $(this).attr('name');
+            $(this).highcharts(chart.options);
         });
     };
 

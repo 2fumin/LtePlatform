@@ -26,7 +26,9 @@ namespace LtePlatform
 
             bundles.Add(new ScriptBundle("~/bundles/highcharts").Include(
                 "~/Scripts/Highcharts/highcharts.js",
-                "~/Scripts/Highcharts/highcharts-*"));
+                "~/Scripts/Highcharts/highcharts-3d.js",
+                "~/Scripts/Highcharts/highcharts-more.js",
+                "~/Scripts/Highcharts/modules/exporting.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                 "~/Scripts/sammy-{version}.js",
@@ -38,6 +40,7 @@ namespace LtePlatform
 
             bundles.Add(new ScriptBundle("~/bundles/kpiIndex").Include(
                 "~/Scripts/app/common.js",
+                "~/Scripts/mycharts/comboChart.js",
                 "~/Scripts/app/app.datamodel.js",
                 "~/Scripts/app/app.simplemodel.js",
                 "~/Scripts/kpi/index.viewmodel.js",
