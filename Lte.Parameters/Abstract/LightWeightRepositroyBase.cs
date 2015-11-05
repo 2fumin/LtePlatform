@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 using Abp.Domain.Entities;
 using Abp.Domain.Repositories;
-using Lte.Domain.Regular;
 using Lte.Parameters.Concrete;
+using Microsoft.Practices.Unity.Utility;
 
 namespace Lte.Parameters.Abstract
 {
@@ -96,7 +95,9 @@ namespace Lte.Parameters.Abstract
 
         public TEntity Insert(TEntity entity)
         {
-            TEntity info = Entities.Add(entity);
+            Guard.ArgumentNotNull(entity, "entity");
+            var info = Entities.Attach(entity);
+            context.Entry(entity).State = EntityState.Added;
             context.SaveChanges();
             return info;
         }
@@ -108,9 +109,7 @@ namespace Lte.Parameters.Abstract
 
         public int InsertAndGetId(TEntity entity)
         {
-            TEntity info = Entities.Add(entity);
-            context.SaveChanges();
-            return info.Id;
+            return Insert(entity).Id;
         }
 
         public Task<int> InsertAndGetIdAsync(TEntity entity)
@@ -120,17 +119,10 @@ namespace Lte.Parameters.Abstract
 
         public TEntity InsertOrUpdate(TEntity entity)
         {
-            TEntity item = Get(entity.Id);
-            return (item == null) ? Insert(entity) : Update(entity, item);
+            var item = Get(entity.Id);
+            return (item == null) ? Insert(entity) : Update(entity);
         }
-
-        private TEntity Update(TEntity entity, TEntity item)
-        {
-            entity.CloneProperties<TEntity>(item);
-            context.SaveChanges();
-            return item;
-        }
-
+        
         public Task<TEntity> InsertOrUpdateAsync(TEntity entity)
         {
             return Task.Run(() => InsertOrUpdate(entity));
@@ -149,8 +141,11 @@ namespace Lte.Parameters.Abstract
 
         public TEntity Update(TEntity entity)
         {
-            TEntity item = Get(entity.Id);
-            return item != null ? Update(entity, item) : null;
+            Guard.ArgumentNotNull(entity, "entity");
+            var info = Entities.Attach(entity);
+            context.Entry(entity).State = EntityState.Modified;
+            context.SaveChanges();
+            return info;
         }
 
         public Task<TEntity> UpdateAsync(TEntity entity)
@@ -163,25 +158,25 @@ namespace Lte.Parameters.Abstract
             TEntity item = Get(id);
             if (item == null) return null;
             updateAction(item);
-            context.SaveChanges();
             return item;
         }
 
         public Task<TEntity> UpdateAsync(int id, Func<TEntity, Task> updateAction)
         {
+            TEntity item = Get(id);
             return Task.Run(() =>
             {
-                TEntity item = Get(id);
                 if (item == null) return null;
                 updateAction(item);
-                context.SaveChanges();
                 return item;
             });
         }
 
         public void Delete(TEntity entity)
         {
-            Entities.Remove(entity);
+            Guard.ArgumentNotNull(entity, "entity");
+            Entities.Attach(entity);
+            context.Entry(entity).State = EntityState.Deleted;
             context.SaveChanges();
         }
 

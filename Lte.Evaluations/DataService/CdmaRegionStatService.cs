@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Lte.Domain.Regular;
 using Lte.Evaluations.ViewModels;
 using Lte.Parameters.Abstract;
@@ -36,7 +34,7 @@ namespace Lte.Evaluations.DataService
                     on q.Region equals r
                 select q).ToList();
             if (result.Count == 0) return null;
-            DateTime maxDate = result.Max(x => x.StatDate);
+            var maxDate = result.Max(x => x.StatDate);
             var stats = result.Where(x => x.StatDate == maxDate).ToList();
             var cityStat = stats.ArraySum();
             cityStat.Region = city;

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using log4net.Core;
 using Lte.Domain.LinqToExcel;
+using Lte.Domain.LinqToExcel.Entities;
 using NUnit.Framework;
 
 namespace Lte.Domain.Test.LinqToExcel.ColumnFormat
@@ -46,6 +47,23 @@ namespace Lte.Domain.Test.LinqToExcel.ColumnFormat
             Assert.AreEqual(rows[0].StringColumn, "1");
             Assert.AreEqual(rows[1].IntegerColumn, 7);
             Assert.AreEqual(rows[2].StringColumn, "abc");
+        }
+
+        [Test]
+        public void Test_NormalCase_ExcelQueryConstructorArgs()
+        {
+            _worksheetName = "Normal";
+            var args = new ExcelQueryArgs(_repo.GetConstructorArgs())
+            {
+                WorksheetName = _worksheetName
+            };
+            Assert.IsNotNull(args);
+            Assert.AreEqual(args.WorksheetName, _worksheetName);
+            Assert.AreEqual(args.ColumnMappings.Count, 2);
+            Console.Write("ColumnMapping[{0}]:{1}",
+                args.ColumnMappings.ElementAt(0).Key,
+                args.ColumnMappings.ElementAt(1).Value);
+            Assert.IsNull(args.NamedRangeName);
         }
 
         [Test]

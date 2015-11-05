@@ -69,10 +69,9 @@ namespace Lte.Domain.LinqToExcel.Service
         {
             var results = ExecuteCollection<T>(queryModel);
 
-            foreach (var resultOperator in queryModel.ResultOperators)
+            if (queryModel.ResultOperators.OfType<LastResultOperator>().Any())
             {
-                if (resultOperator is LastResultOperator)
-                    return results.LastOrDefault();
+                return results.LastOrDefault();
             }
 
             return (returnDefaultWhenEmpty) ?
