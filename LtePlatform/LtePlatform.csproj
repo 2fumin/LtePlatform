@@ -311,6 +311,9 @@
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\baidu\close.png" />
+    <Content Include="Content\themes\baidu\InfoWindow.css" />
+    <Content Include="Content\themes\baidu\tipbox.jpg" />
     <Content Include="Content\themes\base\base.css" />
     <Content Include="Content\themes\base\button.css" />
     <Content Include="Content\themes\base\core.css" />
@@ -490,6 +493,14 @@
     <Content Include="Scripts\kpi\index.viewmodel.js" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <Content Include="Views\Kpi\_CityKpiTable.cshtml" />
+    <Content Include="Views\College\Edit.cshtml" />
+    <Content Include="Views\College\Infrastructure.cshtml" />
+    <Content Include="Views\College\Coverage.cshtml" />
+    <Content Include="Views\College\KpiReport.cshtml" />
+    <Content Include="Views\College\TestReport.cshtml" />
+    <Content Include="Views\College\PreciseKpi.cshtml" />
+    <Content Include="Views\College\_CollegeMenu.cshtml" />
+    <Content Include="Views\College\_Map.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

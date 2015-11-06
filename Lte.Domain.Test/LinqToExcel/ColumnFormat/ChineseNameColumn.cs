@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lte.Domain.Regular;
 
 namespace Lte.Domain.Test.LinqToExcel.ColumnFormat
 {
@@ -12,6 +13,18 @@ namespace Lte.Domain.Test.LinqToExcel.ColumnFormat
 
         public double DoubleColumn { get; set; }
 
+        public int ThirdColumn { get; set; }
+    }
+
+    internal class ChineseClassWithColumnAnnotation
+    {
+        [ExcelColumn("第一列")]
+        public string ChineseColumn { get; set; }
+
+        [ExcelColumn("第二列（复杂的：浮点-》")]
+        public double DoubleColumn { get; set; }
+
+        [ExcelColumn("第3列：\"待引号的\"")]
         public int ThirdColumn { get; set; }
     }
 }

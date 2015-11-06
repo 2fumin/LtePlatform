@@ -9,27 +9,27 @@ namespace Lte.Domain.Regular
     [AttributeUsage(AttributeTargets.Property, Inherited = true, AllowMultiple = false)]
     public sealed class ExcelColumnAttribute : Attribute
     {
-        private readonly string _columnName;
         private readonly TransformEnum _transformation;
 
         public ExcelColumnAttribute(string columnName, TransformEnum transformation = TransformEnum.Default)
         {
-            _columnName = columnName;
+            ColumnName = columnName;
             _transformation = transformation;
         }
 
-        public string ColumnName
-        {
-            get { return _columnName; }
-        }
+        public string ColumnName { get; }
 
         public Func<string, object> Transformation
         {
             get
             {
                 //这里可以根据需要增加我们的转换规则
-                switch(_transformation)
+                switch (_transformation)
                 {
+                    case TransformEnum.IntegerDefaultToZero:
+                        return x => x.ToString().ConvertToInt(0);
+                    case TransformEnum.IntegerRemoveDots:
+                        return x => x.ToString().Replace(".", "").ConvertToInt(0);
                     default:
                         return null;
                 }

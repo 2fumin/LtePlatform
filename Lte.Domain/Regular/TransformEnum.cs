@@ -8,6 +8,8 @@ namespace Lte.Domain.Regular
 {
     public enum TransformEnum
     {
-        Default
+        Default,
+        IntegerDefaultToZero,
+        IntegerRemoveDots
     }
 }

@@ -13,5 +13,35 @@ namespace LtePlatform.Controllers
         {
             return View();
         }
+
+        public ActionResult Edit()
+        {
+            return View();
+        }
+
+        public ActionResult Infrastructure()
+        {
+            return View();
+        }
+
+        public ActionResult Coverage()
+        {
+            return View();
+        }
+
+        public ActionResult KpiReport()
+        {
+            return View();
+        }
+
+        public ActionResult TestReport()
+        {
+            return View();
+        }
+
+        public ActionResult PreciseKpi()
+        {
+            return View();
+        }
     }
 }

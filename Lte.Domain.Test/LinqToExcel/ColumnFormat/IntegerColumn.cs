@@ -22,4 +22,22 @@ namespace Lte.Domain.Test.LinqToExcel.ColumnFormat
         [ExcelColumn("Integer Column")]
         public int IntegerColumn { get; set; }
     }
+
+    internal class IntegerClassWithDefaultTransform
+    {
+        [ExcelColumn("String Column")]
+        public string StringColumn { get; set; }
+
+        [ExcelColumn("Integer Column", TransformEnum.IntegerDefaultToZero)]
+        public int IntegerColumn { get; set; }
+    }
+
+    public class IntegerClassWithDotsTransform
+    {
+        [ExcelColumn("String Column")]
+        public string StringColumn { get; set; }
+
+        [ExcelColumn("Integer Column", TransformEnum.IntegerRemoveDots)]
+        public int IntegerColumn { get; set; }
+    }
 }
