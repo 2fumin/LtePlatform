@@ -81,11 +81,9 @@ namespace Lte.Domain.LinqToExcel.Entities
         {
             foreach (var property in typeof(T).GetProperties())
             {
-                ExcelColumnAttribute att = (ExcelColumnAttribute)Attribute.GetCustomAttribute(property, typeof(ExcelColumnAttribute));
-                if (att != null && !args.ColumnMappings.ContainsKey(property.Name))
-                {
-                    args.ColumnMappings.Add(property.Name, att.ColumnName);
-                }
+                ExcelColumnAttribute att 
+                    = (ExcelColumnAttribute)Attribute.GetCustomAttribute(property, typeof(ExcelColumnAttribute));
+                att.Register(args, property);
             }
         }
 

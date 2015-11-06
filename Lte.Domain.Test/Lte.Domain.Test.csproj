@@ -74,6 +74,10 @@
     <Compile Include="LinqToCsv\TestRead\CsvContextReadTests_UnknownColumns.cs" />
     <Compile Include="LinqToCsv\TestRead\CsvContextReadTests_UseFieldIndex.cs" />
     <Compile Include="LinqToExcel\CellExcelTest.cs" />
+    <Compile Include="LinqToExcel\ColumnFormat\ChineseNameColumn.cs" />
+    <Compile Include="LinqToExcel\ColumnFormat\ChineseNameColumnTest.cs" />
+    <Compile Include="LinqToExcel\ColumnFormat\FormatMappingTest.cs" />
+    <Compile Include="LinqToExcel\ColumnFormat\IntegerClassTest_ColumnAnnotation.cs" />
     <Compile Include="LinqToExcel\ColumnFormat\IntegerColumn.cs" />
     <Compile Include="LinqToExcel\ColumnFormat\IntegerFomatColumn_IntegrationTest.cs" />
     <Compile Include="LinqToExcel\ColumnMappings_IntegrationTests.cs" />

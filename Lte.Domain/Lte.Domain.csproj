@@ -81,6 +81,8 @@
     <Compile Include="LinqToExcel\Entities\ProjectorBuildingExpressionTreeVisitor.cs" />
     <Compile Include="LinqToExcel\Entities\StrictMappingException.cs" />
     <Compile Include="LinqToExcel\Service\CastService.cs" />
+    <Compile Include="LinqToExcel\Service\ExcelAttributesService.cs" />
+    <Compile Include="Regular\TransformEnum.cs" />
     <Compile Include="Lz4Net\Core\CoreHandlers.cs" />
     <Compile Include="Lz4Net\Core\DirectoryEventArgs.cs" />
     <Compile Include="Lz4Net\Core\ExtendedPathFilter.cs" />

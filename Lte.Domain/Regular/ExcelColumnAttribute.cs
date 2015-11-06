@@ -10,15 +10,30 @@ namespace Lte.Domain.Regular
     public sealed class ExcelColumnAttribute : Attribute
     {
         private readonly string _columnName;
+        private readonly TransformEnum _transformation;
 
-        public ExcelColumnAttribute(string columnName)
+        public ExcelColumnAttribute(string columnName, TransformEnum transformation = TransformEnum.Default)
         {
             _columnName = columnName;
+            _transformation = transformation;
         }
 
         public string ColumnName
         {
             get { return _columnName; }
+        }
+
+        public Func<string, object> Transformation
+        {
+            get
+            {
+                //这里可以根据需要增加我们的转换规则
+                switch(_transformation)
+                {
+                    default:
+                        return null;
+                }
+            }
         }
     }
 }
