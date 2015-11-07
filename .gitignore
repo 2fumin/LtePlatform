@@ -22,12 +22,14 @@
 
 
 # Build results
-
+nunit.*.xml
 app.publish/
 [Dd]ebug/
 .vs/
 [Oo]bj/
-
+Moq.xml
+log4net.xml
+Lte*.xml
 *.obj
 *.pdb
 *.dll

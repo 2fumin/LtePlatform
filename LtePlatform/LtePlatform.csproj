@@ -375,6 +375,7 @@
     <Content Include="Content\google\7M5kxD4eGxuhgFaIk95pBfk_vArhqVIZ0nv9q090hN8.woff2" />
     <None Include="Properties\PublishProfiles\Lte2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\college\map.viewmodel.js" />
     <Content Include="Scripts\highcharts\adapters\standalone-framework.js" />
     <Content Include="Scripts\highcharts\adapters\standalone-framework.src.js" />
     <Content Include="Scripts\highcharts\themes\dark-blue.js" />

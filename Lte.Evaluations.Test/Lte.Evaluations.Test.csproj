@@ -91,6 +91,7 @@
     <Compile Include="DataService\GenerateViewListTest.cs" />
     <Compile Include="MockItems\MockItemsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestService\CdmaRegionStatTestService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lte.Evaluations\Lte.Evaluations.csproj">

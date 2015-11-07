@@ -11,6 +11,7 @@ using Lte.Parameters.Entities;
 using Lte.Evaluations.DataService;
 using Lte.Evaluations.ViewModels;
 using Lte.Evaluations.Test.MockItems;
+using Lte.Evaluations.Test.TestService;
 
 namespace Lte.Evaluations.Test.DataService
 {
@@ -21,6 +22,7 @@ namespace Lte.Evaluations.Test.DataService
             = new Mock<IRegionRepository>();
         private readonly Mock<ICdmaRegionStatRepository> _statRepository
             = new Mock<ICdmaRegionStatRepository>();
+        private CdmaRegionStatTestService _testService;
 
         [SetUp]
         public void SetUp()
@@ -31,110 +33,32 @@ namespace Lte.Evaluations.Test.DataService
                 new OptimizeRegion { City = "city", Region = "region2" },
                 new OptimizeRegion { City = "city", Region = "region3" }
             });
+            _testService = new CdmaRegionStatTestService(_regionRepository, _statRepository);
         }
-
-        private CdmaRegionDateView QueryDateViewWithSingleStat(string initialDate,
-            string region, string recordDate, double erlang)
-        {
-            _statRepository.MockCdmaRegionStats(new List<CdmaRegionStat>
-            {
-                new CdmaRegionStat
-                {
-                    Region = region,
-                    StatDate = DateTime.Parse(recordDate),
-                    ErlangIncludingSwitch = erlang
-                }
-            });
-            var service = new CdmaRegionStatService(_regionRepository.Object, _statRepository.Object);
-            return service.QueryLastDateStat(DateTime.Parse(initialDate), "city");
-        }
-
-        private CdmaRegionDateView QueryDateView_SingleRegion_MultiDates(string initialDate,
-            string region, string[] recordDates, double[] erlangs)
-        {
-            var statList = new List<CdmaRegionStat>();
-            for (int i = 0; i < recordDates.Length; i++)
-            {
-                statList.Add(new CdmaRegionStat
-                {
-                    Region = region,
-                    StatDate = DateTime.Parse(recordDates[i]),
-                    ErlangIncludingSwitch = erlangs[i]
-                });
-            }
-            _statRepository.MockCdmaRegionStats(statList);
-            var service = new CdmaRegionStatService(_regionRepository.Object, _statRepository.Object);
-            return service.QueryLastDateStat(DateTime.Parse(initialDate), "city");
-        }
-
-        private CdmaRegionDateView QueryDateView_MultiRegions_SingleDate(string initialDate,
-            string[] regions, string recordDate, double[] erlangs)
-        {
-            var statList = new List<CdmaRegionStat>();
-            for (int i = 0; i < regions.Length; i++)
-            {
-                statList.Add(new CdmaRegionStat
-                {
-                    Region = regions[i],
-                    StatDate = DateTime.Parse(recordDate),
-                    ErlangIncludingSwitch = erlangs[i]
-                });
-            }
-            _statRepository.MockCdmaRegionStats(statList);
-            var service = new CdmaRegionStatService(_regionRepository.Object, _statRepository.Object);
-            return service.QueryLastDateStat(DateTime.Parse(initialDate), "city");
-        }
-
-        private CdmaRegionDateView QueryDateView_MultiRegions_MultiDates(string initialDate,
-            string[] regions, string[] recordDates, double[] erlangs)
-        {
-            var statList = new List<CdmaRegionStat>();
-            for (int i = 0; i < regions.Length; i++)
-            {
-                statList.Add(new CdmaRegionStat
-                {
-                    Region = regions[i],
-                    StatDate = DateTime.Parse(recordDates[i]),
-                    ErlangIncludingSwitch = erlangs[i]
-                });
-            }
-            _statRepository.MockCdmaRegionStats(statList);
-            var service = new CdmaRegionStatService(_regionRepository.Object, _statRepository.Object);
-            return service.QueryLastDateStat(DateTime.Parse(initialDate), "city");
-        }
-
-        private CdmaRegionDateView QueryDateView_MultiRegions_SingleDate_DropRateConsidered(
-            string initialDate, string[] regions, string recordDate, 
-            int[] drop2GNums, int[] drop2GDems)
-        {
-            var statList = new List<CdmaRegionStat>();
-            for (int i = 0; i < regions.Length; i++)
-            {
-                statList.Add(new CdmaRegionStat
-                {
-                    Region = regions[i],
-                    StatDate = DateTime.Parse(recordDate),
-                    Drop2GNum = drop2GNums[i],
-                    Drop2GDem = drop2GDems[i]
-                });
-            }
-            _statRepository.MockCdmaRegionStats(statList);
-            var service = new CdmaRegionStatService(_regionRepository.Object, _statRepository.Object);
-            return service.QueryLastDateStat(DateTime.Parse(initialDate), "city");
-        }
-
+        
         [TestCase("2015-5-1", "region1", "2015-4-1", 10)]
         [TestCase("2015-6-2", "region2", "2015-4-20", 15)]
         [TestCase("2015-6-2", "region3", "2015-5-20", 15)]
         public void TestQueryLastDateStat_Normal(string initialDate,
             string region, string recordDate, double erlang)
         {
-            var result = QueryDateViewWithSingleStat(initialDate, region, recordDate, erlang);
+            _testService.ImportElangRecord(region, recordDate, erlang);
+            var result = _testService.QueryLastDateStat(initialDate, "city");
             Assert.IsNotNull(result);
             Assert.AreEqual(DateTime.Parse(result.StatDate), DateTime.Parse(recordDate));
             Assert.AreEqual(result.StatViews.Count(), 2);
             result.StatViews.ElementAt(0).AssertRegionAndErlang2G(region, erlang);
             result.StatViews.ElementAt(1).AssertRegionAndErlang2G("city", erlang);
+        }
+
+        public void TestQueryDateTrend_Normal(string beginDate, string endDate,
+            string region, string recordDate, double erlang)
+        {
+            _testService.ImportElangRecord(region, recordDate, erlang);
+            var result = _testService.QueryDateTrend(beginDate, endDate, "city");
+            Assert.IsNotNull(result);
+            Assert.AreEqual(DateTime.Parse(result.StatDates.ElementAt(0)), recordDate);
+            Assert.AreEqual(result.ViewList.Count, 2);
         }
 
         [TestCase("2015-5-1", "region4", "2015-4-1", 10)]
@@ -143,7 +67,8 @@ namespace Lte.Evaluations.Test.DataService
         public void TestQueryLastDateStat_RegionNotFound(string initialDate,
             string region, string recordDate, double erlang)
         {
-            var result = QueryDateViewWithSingleStat(initialDate, region, recordDate, erlang);
+            _testService.ImportElangRecord(region, recordDate, erlang);
+            var result = _testService.QueryLastDateStat(initialDate, "city");
             Assert.IsNull(result);
         }
 
@@ -154,7 +79,8 @@ namespace Lte.Evaluations.Test.DataService
         public void TestQueryLastDateStat_DateOutOfRange(string initialDate,
             string region, string recordDate, double erlang)
         {
-            var result = QueryDateViewWithSingleStat(initialDate, region, recordDate, erlang);
+            _testService.ImportElangRecord(region, recordDate, erlang);
+            var result = _testService.QueryLastDateStat(initialDate, "city");
             Assert.IsNull(result);
         }
 
@@ -170,7 +96,8 @@ namespace Lte.Evaluations.Test.DataService
             string initialDate, string region, string[] recordDates, double[] erlangs,
             int matchedIndex)
         {
-            var result = QueryDateView_SingleRegion_MultiDates(initialDate, region, recordDates, erlangs);
+            _testService.ImportElangRecords(region, recordDates, erlangs);
+            var result = _testService.QueryLastDateStat(initialDate, "city");
             Assert.IsNotNull(result);
             Assert.AreEqual(DateTime.Parse(result.StatDate), DateTime.Parse(recordDates[matchedIndex]));
             Assert.AreEqual(result.StatViews.Count(), 2);
@@ -187,7 +114,8 @@ namespace Lte.Evaluations.Test.DataService
         public void TestQueryLastDateStat_MultiRegions_SingleDate_AllRegionsMatched(int testNo,
             string initialDate, string[] regions, string recordDate, double[] erlangs)
         {
-            var result = QueryDateView_MultiRegions_SingleDate(initialDate, regions, recordDate, erlangs);
+            _testService.ImportElangRecords(regions, recordDate, erlangs);
+            var result = _testService.QueryLastDateStat(initialDate, "city");
             Assert.IsNotNull(result);
             Assert.AreEqual(DateTime.Parse(result.StatDate), DateTime.Parse(recordDate));
             Assert.AreEqual(result.StatViews.Count(), regions.Length + 1);
@@ -205,7 +133,8 @@ namespace Lte.Evaluations.Test.DataService
         public void TestQueryLastDateStat_MultiRegions_MultDates_AllRegionsMatched(int testNo,
             string initialDate, string[] regions, string[] recordDates, double[] erlangs, int matchedIndex)
         {
-            var result = QueryDateView_MultiRegions_MultiDates(initialDate, regions, recordDates, erlangs);
+            _testService.ImportElangRecords(regions, recordDates, erlangs);
+            var result = _testService.QueryLastDateStat(initialDate, "city");
             Assert.IsNotNull(result);
             Assert.AreEqual(DateTime.Parse(result.StatDate), DateTime.Parse(recordDates[matchedIndex]));
             Assert.AreEqual(result.StatViews.Count(), 2);
@@ -224,7 +153,8 @@ namespace Lte.Evaluations.Test.DataService
         public void TestQueryLastDateStat_MultiRegions_MultDates_OneDateMatchedMultiRegions(int testNo,
             string initialDate, string[] regions, string[] recordDates, double[] erlangs, int[] matchedIndices)
         {
-            var result = QueryDateView_MultiRegions_MultiDates(initialDate, regions, recordDates, erlangs);
+            _testService.ImportElangRecords(regions, recordDates, erlangs);
+            var result = _testService.QueryLastDateStat(initialDate, "city");
             Assert.IsNotNull(result);
             Assert.AreEqual(DateTime.Parse(result.StatDate), DateTime.Parse(recordDates[matchedIndices[0]]));
             Assert.AreEqual(result.StatViews.Count(), matchedIndices.Length + 1);
@@ -241,8 +171,8 @@ namespace Lte.Evaluations.Test.DataService
             string initialDate, string[] regions, string recordDate,
             int[] drop2GNums, int[] drop2GDems)
         {
-            var result = QueryDateView_MultiRegions_SingleDate_DropRateConsidered(initialDate, regions, recordDate,
-                drop2GNums, drop2GDems);
+            _testService.ImportDrop2Gs(regions, recordDate, drop2GNums, drop2GDems);
+            var result = _testService.QueryLastDateStat(initialDate, "city");
             Assert.IsNotNull(result);
             Assert.AreEqual(DateTime.Parse(result.StatDate), DateTime.Parse(recordDate));
             Assert.AreEqual(result.StatViews.Count(), regions.Length + 1);

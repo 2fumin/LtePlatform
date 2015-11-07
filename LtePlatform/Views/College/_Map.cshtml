@@ -4,11 +4,11 @@
     </div>
     <div class="col-md-4">
         <p>
-            开始日期：<input id="begin-date">
+            开始日期：<input id="BeginDate" data-bind="value: beginDate"/>
         </p>
         <p>
-            结束日期：<input id="end-date" />
-            <button class="btn btn-primary" id="refresh">刷新信息</button>
+            结束日期：<input id="EndDate" data-bind="value: endDate"/>
+            <button class="btn btn-primary" data-bind="click: refresh">刷新信息</button>
         </p>
         <div id="alarms" style="min-height: 300px; margin: 0 auto"></div>
         <div id="test-3G" style="min-height: 300px; margin: 0 auto"></div>

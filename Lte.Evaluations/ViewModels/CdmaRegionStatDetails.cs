@@ -12,31 +12,7 @@ namespace Lte.Evaluations.ViewModels
 
         public List<string> RegionList { get; set; }
 
-        public List<IEnumerable<double>> Erlang2Gs { get; set; }
-
-        public List<IEnumerable<double>> Drop2GRates { get; set; }
-
-        public List<IEnumerable<double>> CallSetupRates { get; set; }
-
-        public List<IEnumerable<double>> Ecios { get; set; }
-
-        public List<IEnumerable<double>> Utility2GRates { get; set; }
-
-        public List<IEnumerable<double>> Flow3Gs { get; set; }
-
-        public List<IEnumerable<double>> Erlang3Gs { get; set; }
-
-        public List<IEnumerable<double>> Drop3GRates { get; set; }
-
-        public List<IEnumerable<double>> ConnectionRates { get; set; }
-
-        public List<IEnumerable<double>> Cis { get; set; }
-
-        public List<IEnumerable<double>> LinkBusyRates { get; set; }
-
-        public List<IEnumerable<double>> DownSwitchRates { get; set; }
-
-        public List<IEnumerable<double>> Utility3GRates { get; set; }
+        public Dictionary<string, List<IEnumerable<double>>> KpiDetails { get; set; }
 
         public CdmaRegionStatDetails(CdmaRegionStatTrend trend)
         {
@@ -47,19 +23,19 @@ namespace Lte.Evaluations.ViewModels
 
         private void ImportDetails(List<IEnumerable<CdmaRegionStatView>> views)
         {
-            this.CallSetupRates = views.Select(x => x.Select(v => v.CallSetupRate)).ToList();
-            this.Cis = views.Select(x => x.Select(v => v.Ci)).ToList();
-            this.ConnectionRates = views.Select(x => x.Select(v => v.ConnectionRate)).ToList();
-            this.DownSwitchRates = views.Select(x => x.Select(v => v.DownSwitchRate)).ToList();
-            this.Drop2GRates = views.Select(x => x.Select(v => v.Drop2GRate)).ToList();
-            this.Drop3GRates = views.Select(x => x.Select(v => v.Drop3GRate)).ToList();
-            this.Ecios = views.Select(x => x.Select(v => v.Ecio)).ToList();
-            this.Erlang2Gs = views.Select(x => x.Select(v => v.ErlangIncludingSwitch)).ToList();
-            this.Erlang3Gs = views.Select(x => x.Select(v => v.Erlang3G)).ToList();
-            this.Flow3Gs = views.Select(x => x.Select(v => v.Flow)).ToList();
-            this.LinkBusyRates = views.Select(x => x.Select(v => v.LinkBusyRate)).ToList();
-            this.Utility2GRates = views.Select(x => x.Select(v => v.Utility2GRate)).ToList();
-            this.Utility3GRates = views.Select(x => x.Select(v => v.Utility3GRate)).ToList();
+            KpiDetails.Add("2G呼建", views.Select(x => x.Select(v => v.CallSetupRate)).ToList());
+            KpiDetails.Add("C/I优良率", views.Select(x => x.Select(v => v.Ci)).ToList());
+            KpiDetails.Add("3G连接", views.Select(x => x.Select(v => v.ConnectionRate)).ToList());
+            KpiDetails.Add("3G切2G流量比", views.Select(x => x.Select(v => v.DownSwitchRate)).ToList());
+            KpiDetails.Add("掉话率", views.Select(x => x.Select(v => v.Drop2GRate)).ToList());
+            KpiDetails.Add("掉线率", views.Select(x => x.Select(v => v.Drop3GRate)).ToList());
+            KpiDetails.Add("Ec/Io优良率", views.Select(x => x.Select(v => v.Ecio)).ToList());
+            KpiDetails.Add("2G全天话务量", views.Select(x => x.Select(v => v.ErlangIncludingSwitch)).ToList());
+            KpiDetails.Add("3G全天话务量", views.Select(x => x.Select(v => v.Erlang3G)).ToList());
+            KpiDetails.Add("全天流量(GB)", views.Select(x => x.Select(v => v.Flow)).ToList());
+            KpiDetails.Add("反向链路繁忙率", views.Select(x => x.Select(v => v.LinkBusyRate)).ToList());
+            KpiDetails.Add("2G利用率", views.Select(x => x.Select(v => v.Utility2GRate)).ToList());
+            KpiDetails.Add("3G利用率", views.Select(x => x.Select(v => v.Utility3GRate)).ToList());
         }
     }
 }

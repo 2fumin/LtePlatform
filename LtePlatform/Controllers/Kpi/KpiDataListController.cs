@@ -27,5 +27,11 @@ namespace LtePlatform.Controllers.Kpi
             var service = new CdmaRegionStatService(_regionRepository, _statRepository);
             return service.QueryLastDateStat(statDate, city);
         }
+
+        public CdmaRegionStatDetails GetKpiDetails(string city, DateTime beginDate, DateTime endDate)
+        {
+            var service = new CdmaRegionStatService(_regionRepository, _statRepository);
+            return service.QueryStatDetails(beginDate, endDate, city);
+        }
     }
 }

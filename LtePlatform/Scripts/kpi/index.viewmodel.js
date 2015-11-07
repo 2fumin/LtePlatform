@@ -66,11 +66,43 @@
     };
 
     app.showTrend = function () {
-        $(".kpi-trend").each(function () {
-            var chart = new comboChart();
-            chart.title.text = $(this).attr('name');
-            $(this).highcharts(chart.options);
-        });
+        $.ajax({
+            method: 'get',
+            url: app.dataModel.kpiDataListUrl,
+            contentType: "application/json; charset=utf-8",
+            data: {
+                city: app.currentCity(),
+                beginDate: app.beginDate(),
+                endDate: app.endDate()
+            },
+            success: function (data) {
+                $(".kpi-trend").each(function () {
+                    var chart = new comboChart();
+                    chart.title.text = $(this).attr('name');
+                    chart.categories = data.statDates;
+                    chart.yAxis.title.text = chart.title.text;
+                    chart.xAxis.title.text = '日期';
+                    for (var i = 0; i < data.regionList.length - 1; i++) {
+                        chart.series.push({
+                            type: 'column',
+                            name: data.regionList[i],
+                            data: data.kpiDetails[i][chart.title.text]
+                        });
+                    }
+                    chart.series.push({
+                        type: 'spline',
+                        name: app.currentCity(),
+                        data: data.kpiDetails[data.regionList.length - 1][chart.title.text],
+                        marker: {
+                            lineWidth: 2,
+                            lineColor: Highcharts.getOptions().colors[3],
+                            fillColor: 'white'
+                        }
+                    });
+                    $(this).highcharts(chart.options);
+                });
+            }
+        });        
     };
 
     return self;
