@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
-using NUnit.Framework;
-using Moq;
-using Lte.Parameters.Abstract;
-using Lte.Parameters.Entities;
-using Lte.Evaluations.DataService;
-using Lte.Evaluations.ViewModels;
 using Lte.Evaluations.Test.MockItems;
 using Lte.Evaluations.Test.TestService;
+using Lte.Parameters.Abstract;
+using Lte.Parameters.Entities;
+using Moq;
+using NUnit.Framework;
 
 namespace Lte.Evaluations.Test.DataService
 {
@@ -51,13 +46,16 @@ namespace Lte.Evaluations.Test.DataService
             result.StatViews.ElementAt(1).AssertRegionAndErlang2G("city", erlang);
         }
 
+        [TestCase("2015-3-30", "2015-5-1", "region1", "2015-4-1", 10)]
+        [TestCase("2015-4-10", "2015-6-2", "region2", "2015-4-20", 15)]
+        [TestCase("2015-5-4", "2015-6-2", "region3", "2015-5-20", 15)]
         public void TestQueryDateTrend_Normal(string beginDate, string endDate,
             string region, string recordDate, double erlang)
         {
             _testService.ImportElangRecord(region, recordDate, erlang);
             var result = _testService.QueryDateTrend(beginDate, endDate, "city");
             Assert.IsNotNull(result);
-            Assert.AreEqual(DateTime.Parse(result.StatDates.ElementAt(0)), recordDate);
+            Assert.AreEqual(DateTime.Parse(result.StatDates.ElementAt(0)), DateTime.Parse(recordDate));
             Assert.AreEqual(result.ViewList.Count, 2);
         }
 

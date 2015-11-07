@@ -12,7 +12,8 @@ namespace Lte.Evaluations.ViewModels
 
         public List<string> RegionList { get; set; }
 
-        public Dictionary<string, List<IEnumerable<double>>> KpiDetails { get; set; }
+        public Dictionary<string, List<IEnumerable<double>>> KpiDetails { get; set; } =
+            new Dictionary<string, List<IEnumerable<double>>>();
 
         public CdmaRegionStatDetails(CdmaRegionStatTrend trend)
         {

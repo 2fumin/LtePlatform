@@ -14,13 +14,13 @@
         '2G全天话务量',
         '掉话率',
         '2G呼建',
-        'Ec/Io优良率',
+        'ec/Io优良率',
         '2G利用率',
         '全天流量(GB)',
         '3G全天话务量',
         '掉线率',
         '3G连接',
-        'C/I优良率',
+        'c/I优良率',
         '反向链路繁忙率',
         '3G切2G流量比',
         '3G利用率'
@@ -80,19 +80,19 @@
                     var chart = new comboChart();
                     chart.title.text = $(this).attr('name');
                     chart.categories = data.statDates;
-                    chart.yAxis.title.text = chart.title.text;
-                    chart.xAxis.title.text = '日期';
+                    chart.yAxis[0].title.text = chart.title.text;
+                    chart.xAxis[0].title.text = '日期';
                     for (var i = 0; i < data.regionList.length - 1; i++) {
                         chart.series.push({
                             type: 'column',
                             name: data.regionList[i],
-                            data: data.kpiDetails[i][chart.title.text]
+                            data: data.kpiDetails[chart.title.text][i]
                         });
                     }
                     chart.series.push({
                         type: 'spline',
                         name: app.currentCity(),
-                        data: data.kpiDetails[data.regionList.length - 1][chart.title.text],
+                        data: data.kpiDetails[chart.title.text][data.regionList.length - 1],
                         marker: {
                             lineWidth: 2,
                             lineColor: Highcharts.getOptions().colors[3],

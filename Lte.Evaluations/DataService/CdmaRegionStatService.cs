@@ -48,7 +48,8 @@ namespace Lte.Evaluations.DataService
 
         public CdmaRegionStatTrend QueryStatTrend(DateTime begin, DateTime end, string city)
         {
-            var query = _statRepository.GetAll().Where(x => x.StatDate >= begin && x.StatDate < end.AddDays(1));
+            var endDate = end.AddDays(1);
+            var query = _statRepository.GetAll().Where(x => x.StatDate >= begin && x.StatDate < endDate);
             var regions
                 = _regionRepository.GetAllList().Where(x => x.City == city)
                 .Select(x => x.Region).Distinct().OrderBy(x => x);
@@ -77,7 +78,7 @@ namespace Lte.Evaluations.DataService
         public static List<IEnumerable<CdmaRegionStatView>> GenerateViewList(List<CdmaRegionStat> statList,
             IEnumerable<DateTime> dates, List<string> regionList)
         {
-            var viewList = (from t in regionList
+            var query= (from t in regionList
                 let regionStats = statList.Where(x => x.Region == t)
                 select (from d in dates
                     join stat in regionStats on d equals stat.StatDate into temp
@@ -85,12 +86,14 @@ namespace Lte.Evaluations.DataService
                     select tt ?? new CdmaRegionStat
                     {
                         Region = t, StatDate = d
-                    }).ToList()
+                    })
                 into stats
-                select stats.Select(x => new CdmaRegionStatView(x))).ToList();
-            var cityStat = viewList.Select(x => x.ArraySum()).ToList();
-            viewList.Add(cityStat);
-            return viewList;
+                select stats.ToList()).ToList();
+            var cityStat = new List<CdmaRegionStat>();
+            for (var i = 0; i < dates.Count(); i++)
+                cityStat.Add(query.Select(x => x.ElementAt(i)).ArraySum());
+            query.Add(cityStat);
+            return query.Select(x => x.Select(s => new CdmaRegionStatView(s))).ToList();
         }
     }
 }

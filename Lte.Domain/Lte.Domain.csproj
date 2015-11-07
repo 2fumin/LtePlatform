@@ -54,6 +54,9 @@
     <Compile Include="Common\BigEndianBinaryReader.cs" />
     <Compile Include="Common\BitArrayInputStream.cs" />
     <Compile Include="Common\BitMaskStream.cs" />
+    <Compile Include="Common\Geo\GeoMath.cs" />
+    <Compile Include="Common\Geo\GeoPoint.cs" />
+    <Compile Include="Common\Geo\IGeoPoint.cs" />
     <Compile Include="Common\Lz4Attributes.cs" />
     <Compile Include="Common\Lz4Types.cs" />
     <Compile Include="Common\TextOperations.cs" />

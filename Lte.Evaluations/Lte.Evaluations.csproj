@@ -85,6 +85,8 @@
     <Compile Include="ViewModels\CdmaRegionStatDetails.cs" />
     <Compile Include="ViewModels\CdmaRegionStatTrend.cs" />
     <Compile Include="ViewModels\CdmaRegionStatView.cs" />
+    <Compile Include="ViewModels\College3GTestView.cs" />
+    <Compile Include="ViewModels\College4GTestView.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lte.Domain\Lte.Domain.csproj">

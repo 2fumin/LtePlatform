@@ -72,5 +72,30 @@ namespace Lte.Evaluations.Test.DataService
             viewList[0].ElementAt(0).AssertErlang2G(erlang2Gs[matchIndex]);
             viewList[1].ElementAt(0).AssertErlang2G(erlang2Gs[matchIndex]);
         }
+
+        [TestCase(new[] { "2015-1-2", "2015-2-4" }, "region1", new[] { 12.8, 22.3 }, 0)]
+        [TestCase(new[] { "2015-1-2", "2015-2-4" }, "region1", new[] { 12.8, 22.3 }, 1)]
+        [TestCase(new[] { "2015-8-2", "2015-7-4" }, "region1", new[] { 12.8, 22.3 }, 2)]
+        [TestCase(new[] { "2015-8-2", "2015-7-4", "2015-3-2" }, "region1", new[] { 12.8, 22.3, 32.1 }, 3)]
+        public void Test_SingleRegion_MultiDates_AllDatesMatched(string[] dates,
+            string region, double[] erlang2Gs, int testNo)
+        {
+            var statList = dates.Select((t, i) => new CdmaRegionStat
+            {
+                ErlangIncludingSwitch = erlang2Gs[i],
+                Region = region,
+                StatDate = DateTime.Parse(t)
+            }).ToList();
+            var regionList = new List<string>
+            {
+                region
+            };
+            var viewList = CdmaRegionStatService.GenerateViewList(statList, dates.Select(DateTime.Parse), regionList);
+            Assert.IsNotNull(viewList);
+            Assert.AreEqual(viewList.Count, 2);
+            Assert.IsNotNull(viewList[0]);
+            Assert.AreEqual(viewList[0].Count(), dates.Length);
+            Assert.AreEqual(viewList[1].Count(), dates.Length);
+        }
     }
 }

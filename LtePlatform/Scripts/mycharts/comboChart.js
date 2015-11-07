@@ -22,9 +22,6 @@
 
     self.xAxis= [{
         categories: self.categories,
-        labels: {
-            step: 1
-        },
         title: {
             text: 'xLabel',
             style: {
