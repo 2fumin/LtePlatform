@@ -3,7 +3,6 @@
     self.title = {
         text: 'The Combo Chart including line, column, pie, ...'
     };
-    self.categories = [];
 
     self.yAxis = [{ 
         labels: {
@@ -21,7 +20,7 @@
     }];
 
     self.xAxis= [{
-        categories: self.categories,
+        categories: [],
         title: {
             text: 'xLabel',
             style: {

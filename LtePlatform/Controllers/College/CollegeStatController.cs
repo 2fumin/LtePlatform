@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Lte.Evaluations.DataService;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 
@@ -11,32 +12,24 @@ namespace LtePlatform.Controllers.College
 {
     public class CollegeStatController : ApiController
     {
-        private readonly ICollegeRepository _repository;
-        private readonly IInfrastructureRepository _infrastructureRepository;
+        private readonly CollegeStatService _service;
 
-        public CollegeStatController(ICollegeRepository repository, 
-            IInfrastructureRepository infrastructureRepository)
+        public CollegeStatController(CollegeStatService service)
         {
-            _repository = repository;
-            _infrastructureRepository = infrastructureRepository;
+            _service = service;
         }
 
         [HttpGet]
         public IHttpActionResult Get(int id)
         {
-            CollegeInfo info = _repository.Get(id);
-            return info == null
-                ? (IHttpActionResult)BadRequest("ID Not Found!")
-                : Ok(new CollegeStat(_repository, info, _infrastructureRepository));
+            CollegeStat stat = _service.QueryStat(id);
+            return stat == null ? (IHttpActionResult)BadRequest("ID Not Found!") : Ok(stat);
         }
 
         [HttpGet]
         public IEnumerable<CollegeStat> Get()
         {
-            IEnumerable<CollegeInfo> infos = _repository.GetAllList();
-            return !infos.Any()
-                ? new List<CollegeStat>()
-                : infos.Select(x => new CollegeStat(_repository, x, _infrastructureRepository));
+            return _service.QueryStats();
         }
     }
 }

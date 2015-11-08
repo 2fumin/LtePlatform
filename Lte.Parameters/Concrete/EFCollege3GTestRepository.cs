@@ -9,8 +9,8 @@ using Lte.Parameters.Entities;
 
 namespace Lte.Parameters.Concrete
 {
-    public class EFRegionRepository : LightWeightRepositroyBase<OptimizeRegion>, IRegionRepository
+    public class EFCollege3GTestRepository : LightWeightRepositroyBase<College3GTestResults>, ICollege3GTestRepository
     {
-        protected override DbSet<OptimizeRegion> Entities => context.OptimizeRegions;
+        protected override DbSet<College3GTestResults> Entities => context.College3GTestResultses;
     }
 }

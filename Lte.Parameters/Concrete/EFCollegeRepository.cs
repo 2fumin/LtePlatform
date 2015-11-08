@@ -11,10 +11,7 @@ namespace Lte.Parameters.Concrete
 {
     public class EFCollegeRepository : LightWeightRepositroyBase<CollegeInfo>, ICollegeRepository
     {
-        protected override DbSet<CollegeInfo> Entities
-        {
-            get { return context.CollegeInfos; }
-        }
+        protected override DbSet<CollegeInfo> Entities => context.CollegeInfos;
 
         public CollegeRegion GetRegion(int id)
         {

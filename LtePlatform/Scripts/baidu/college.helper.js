@@ -1,5 +1,5 @@
 ﻿var addOneCollegeMarkerInfo = function (data) {
-    var marker = new BMap.Marker(new BMap.Point(data.baiduLongtitute, data.baiduLattitute));
+    var marker = new BMap.Marker(new BMap.Point(centerxs[data.id], centerys[data.id]));
     var html = '<div class="infoBoxContent">'
         + '<div class="title"><strong>校园基本信息: </strong></div>'
         + '<div class="list"><ul>'

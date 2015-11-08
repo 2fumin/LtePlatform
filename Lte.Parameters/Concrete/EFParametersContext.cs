@@ -22,5 +22,15 @@ namespace Lte.Parameters.Concrete
         public DbSet<OptimizeRegion> OptimizeRegions { get; set; }
 
         public DbSet<CollegeInfo> CollegeInfos { get; set; }
+
+        public DbSet<InfrastructureInfo> InfrastructureInfos { get; set; }
+
+        public DbSet<AlarmStat> AlarmStats { get; set; }
+
+        public DbSet<College3GTestResults> College3GTestResultses { get; set; }
+
+        public DbSet<College4GTestResults> College4GTestResultses { get; set; }
+
+        public DbSet<CollegeKpi> CollegeKpis { get; set; }
     }
 }

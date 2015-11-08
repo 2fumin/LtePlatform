@@ -12,26 +12,21 @@ namespace LtePlatform.Controllers.Kpi
 {
     public class KpiDataListController : ApiController
     {
-        private readonly IRegionRepository _regionRepository;
-        private readonly ICdmaRegionStatRepository _statRepository;
+        private readonly CdmaRegionStatService _service;
 
-        public KpiDataListController(IRegionRepository regionRepository, 
-            ICdmaRegionStatRepository statRepository)
+        public KpiDataListController(CdmaRegionStatService service)
         {
-            _regionRepository = regionRepository;
-            _statRepository = statRepository;
+            _service = service;
         }
 
         public CdmaRegionDateView GetDateView(string city, DateTime statDate)
         {
-            var service = new CdmaRegionStatService(_regionRepository, _statRepository);
-            return service.QueryLastDateStat(statDate, city);
+            return _service.QueryLastDateStat(statDate, city);
         }
 
         public CdmaRegionStatDetails GetKpiDetails(string city, DateTime beginDate, DateTime endDate)
         {
-            var service = new CdmaRegionStatService(_regionRepository, _statRepository);
-            return service.QueryStatDetails(beginDate, endDate, city);
+            return _service.QueryStatDetails(beginDate, endDate, city);
         }
     }
 }

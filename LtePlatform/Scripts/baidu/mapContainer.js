@@ -21,17 +21,6 @@ var initializeMap = function (tag, zoomLevel) {
         }
         map.setViewport(pointArray);    //调整视野                 
     });
-    $.ajax({
-        method: 'get',
-        url: app.dataModel.collegeQueryUrl,
-        contentType: "application/json; charset=utf-8",
-        headers: {
-            'Authorization': 'Bearer ' + app.dataModel.getAccessToken()
-        },
-        success: function (data) {
-            drawCollegeMap(data);
-        }
-    });
 }
 
 var addOneMarker = function (marker, html) {
@@ -49,7 +38,7 @@ var addOneMarker = function (marker, html) {
         align: INFOBOX_AT_TOP
     });
     marker.addEventListener("click", function () {
-        // this.openInfoWindow(infoWindow);
+        
         infoBox.open(this);
     });
 };

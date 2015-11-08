@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\AlarmTypeDefs.cs" />
     <Compile Include="Common\BigEndianBinaryReader.cs" />
     <Compile Include="Common\BitArrayInputStream.cs" />
     <Compile Include="Common\BitMaskStream.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="LinqToExcel\Entities\StrictMappingException.cs" />
     <Compile Include="LinqToExcel\Service\CastService.cs" />
     <Compile Include="LinqToExcel\Service\ExcelAttributesService.cs" />
+    <Compile Include="Regular\AlarmTypeQueries.cs" />
     <Compile Include="Regular\TransformEnum.cs" />
     <Compile Include="Lz4Net\Core\CoreHandlers.cs" />
     <Compile Include="Lz4Net\Core\DirectoryEventArgs.cs" />

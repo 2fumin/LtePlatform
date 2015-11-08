@@ -1,0 +1,32 @@
+﻿<table class="table table-hover">
+    <thead>
+        <tr>
+            <td>校园</td>
+            <td>小区名称</td>
+            <td>PCI</td>
+            <td>下载速率</td>
+            <td>上传速率</td>
+            <td>接入用户数</td>
+            <td>RSRP</td>
+            <td>SINR</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: test4G">
+        <tr>
+            <td data-bind="text: collegeName"></td>
+            <td data-bind="text: cellName"></td>
+            <td data-bind="text: pci"></td>
+            <td data-bind="text: downloadRate + 'kBps'"></td>
+            <td data-bind="text: uploadRate + 'kBps'"></td>
+            <td data-bind="text: accessUsers"></td>
+            <td data-bind="text: rsrp"></td>
+            <td data-bind="text: sinr"></td>
+            <td>
+                <button class="btn btn-danger" data-bind="click: function () { deleteTest4G(collegeName); }">
+                    删除
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -9,6 +9,17 @@
         $("#EndDate").datepicker({ dateFormat: 'yy-mm-dd' });
 
         initializeMap('all-map', 11);
+        $.ajax({
+            method: 'get',
+            url: app.dataModel.collegeQueryUrl,
+            contentType: "application/json; charset=utf-8",
+            headers: {
+                'Authorization': 'Bearer ' + app.dataModel.getAccessToken()
+            },
+            success: function (data) {
+                drawCollegeMap(data);
+            }
+        });
     };
 
     app.refresh = function () { };

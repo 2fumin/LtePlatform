@@ -384,6 +384,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\college\map.controller.js" />
     <Content Include="Scripts\college\map.viewmodel.js" />
+    <Content Include="Scripts\college\test.viewmodel.js" />
     <Content Include="Scripts\highcharts\adapters\standalone-framework.js" />
     <Content Include="Scripts\highcharts\adapters\standalone-framework.src.js" />
     <Content Include="Scripts\highcharts\themes\dark-blue.js" />
@@ -510,6 +511,11 @@
     <Content Include="Views\College\PreciseKpi.cshtml" />
     <Content Include="Views\College\_CollegeMenu.cshtml" />
     <Content Include="Views\College\_Map.cshtml" />
+    <Content Include="Views\College\_TestReport.cshtml" />
+    <Content Include="Views\College\_College3GTest.cshtml" />
+    <Content Include="Views\College\_College4GTest.cshtml" />
+    <Content Include="Views\College\_Edit3GTest.cshtml" />
+    <Content Include="Views\College\_Edit4GTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

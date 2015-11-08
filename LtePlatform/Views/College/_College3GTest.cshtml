@@ -1,0 +1,26 @@
+﻿<table class="table table-hover">
+    <thead>
+        <tr>
+            <td>校园</td>
+            <td>下载速率</td>
+            <td>接入用户数</td>
+            <td>RSSI</td>
+            <td>驻波比</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: test3G">
+        <tr>
+            <td data-bind="text: collegeName"></td>
+            <td data-bind="text: downloadRate+'kBps'"></td>
+            <td data-bind="text: accessUsers"></td>
+            <td data-bind="text: minRssi+'~'+MaxRssi"></td>
+            <td data-bind="text: vswr"></td>
+            <td>
+                <button class="btn btn-danger" data-bind="click: function () { deleteTest3G(collegeName); }">
+                    删除
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>

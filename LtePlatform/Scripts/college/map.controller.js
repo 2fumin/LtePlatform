@@ -3,8 +3,8 @@ var centerxs = [];
 var centerys = [];
 
 var drawCollegeRegions = function (result) {
-    var type = result.RegionType;
-    var info = result.Info;
+    var type = result.regionType;
+    var info = result.info;
     var coors = info.split(';');
     var centerx = 0;
     var centery = 0;
@@ -39,14 +39,14 @@ var drawCollegeRegions = function (result) {
         map.addOverlay(circle);
     }
 
-    centerxs[result.AreaId] = centerx;
-    centerys[result.AreaId] = centery;
+    centerxs[result.areaId] = centerx;
+    centerys[result.areaId] = centery;
 
     var opts = {
         position: new BMap.Point(centerx, centery),    // 指定文本标注所在的地理位置
         offset: new BMap.Size(10, -20)    //设置文本偏移量
     }
-    var label = new BMap.Label(names[result.AreaId], opts);  // 创建文本标注对象
+    var label = new BMap.Label(names[result.areaId], opts);  // 创建文本标注对象
     label.setStyle({
         color: "red",
         fontSize: "12px",
@@ -59,12 +59,11 @@ var drawCollegeRegions = function (result) {
 
 var drawCollegeMap = function (data) {
     for (var index = 0; index < data.length; index++) {
-        var id = data[index].Id;
-        names[id] = data[index].Name;
+        var id = data[index].id;
+        names[id] = data[index].name;
         $.ajax({
             method: 'get',
-            url: app.dataModel.collegeRegionUrl,
-            data: { id: id },
+            url: app.dataModel.collegeRegionUrl + '/' + id,
             contentType: "application/json; charset=utf-8",
             headers: {
                 'Authorization': 'Bearer ' + app.dataModel.getAccessToken()
@@ -75,8 +74,7 @@ var drawCollegeMap = function (data) {
         });
         $.ajax({
             method: 'get',
-            url: app.dataModel.collegeStatUrl,
-            data: { id: id },
+            url: app.dataModel.collegeStatUrl + '/' + id,
             contentType: "application/json; charset=utf-8",
             headers: {
                 'Authorization': 'Bearer ' + app.dataModel.getAccessToken()

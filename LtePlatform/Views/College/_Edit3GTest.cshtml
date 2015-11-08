@@ -1,0 +1,52 @@
+﻿<div class="modal fade" id="edit-3G">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" data-bind="text: selectedCollege"></h4>-3G测试信息
+            </div>
+            <div class="modal-body form-horizontal" data-bind="with: edit3G">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">测试时间：</label>
+                    <div class="col-sm-10">
+                        <span class="form-control" data-bind="text: testTime"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="downloadRate" class="col-sm-2 control-label">下载速率（kBps）：</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="downloadRate" data-bind="value: downloadRate" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="accessUsers" class="col-sm-2 control-label">接入用户数：</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="accessUsers" data-bind="value: accessUsers" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="minRssi" class="col-sm-2 control-label">RSSI最小值：</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="minRssi" data-bind="value: minRssi" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="maxRssi" class="col-sm-2 control-label">RSSI最大值：</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="maxRssi" data-bind="value: maxRssi" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="vswr" class="col-sm-2 control-label">驻波比：</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="vswr" data-bind="value: vswr" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button class="btn btn-primary" data-bind="click: postTest3G">保存</button>
+            </div>
+        </div>
+    </div>
+</div>

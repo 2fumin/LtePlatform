@@ -79,7 +79,7 @@
                 $(".kpi-trend").each(function () {
                     var chart = new comboChart();
                     chart.title.text = $(this).attr('name');
-                    chart.categories = data.statDates;
+                    chart.xAxis[0].categories = data.statDates;
                     chart.yAxis[0].title.text = chart.title.text;
                     chart.xAxis[0].title.text = '日期';
                     for (var i = 0; i < data.regionList.length - 1; i++) {

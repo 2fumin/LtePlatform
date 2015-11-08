@@ -1,4 +1,5 @@
-﻿using Lte.Parameters.Abstract;
+﻿using Lte.Evaluations.DataService;
+using Lte.Parameters.Abstract;
 using Lte.Parameters.Concrete;
 using Ninject;
 
@@ -15,6 +16,20 @@ namespace LtePlatform
             ninjectKernel.Bind<IRegionRepository>().To<EFRegionRepository>();
 
             ninjectKernel.Bind<ICollegeRepository>().To<EFCollegeRepository>();
+
+            ninjectKernel.Bind<IInfrastructureRepository>().To<EFInfrastructureRepository>();
+
+            ninjectKernel.Bind<IAlarmRepository>().To<EFAlameRepository>();
+
+            ninjectKernel.Bind<ICollege3GTestRepository>().To<EFCollege3GTestRepository>();
+
+            ninjectKernel.Bind<ICollege4GTestRepository>().To<EFCollege4GTestRepository>();
+
+            ninjectKernel.Bind<ICollegeKpiRepository>().To<EFCollegeKpiRepository>();
+
+            ninjectKernel.Bind<CdmaRegionStatService>().ToSelf();
+
+            ninjectKernel.Bind<CollegeStatService>().ToSelf();
         }
     }
 }

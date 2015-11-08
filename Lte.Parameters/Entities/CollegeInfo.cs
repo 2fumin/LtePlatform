@@ -26,10 +26,7 @@ namespace Lte.Parameters.Entities
 
         public DateTime NewOpenDate { get; set; }
 
-        public int ExpectedSubscribers
-        {
-            get { return CurrentSubscribers + NewSubscribers - GraduateStudents; }
-        }
+        public int ExpectedSubscribers => CurrentSubscribers + NewSubscribers - GraduateStudents;
 
         public CollegeRegion CollegeRegion { get; set; }
 
