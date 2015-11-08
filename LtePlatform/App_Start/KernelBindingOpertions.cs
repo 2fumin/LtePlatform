@@ -13,6 +13,8 @@ namespace LtePlatform
             ninjectKernel.Bind<ICdmaRegionStatRepository>().To<EFCdmaRegionStatRepository>();
 
             ninjectKernel.Bind<IRegionRepository>().To<EFRegionRepository>();
+
+            ninjectKernel.Bind<ICollegeRepository>().To<EFCollegeRepository>();
         }
     }
 }

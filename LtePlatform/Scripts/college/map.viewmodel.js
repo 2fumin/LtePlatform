@@ -7,6 +7,8 @@
     app.initialize = function () {
         $("#BeginDate").datepicker({ dateFormat: 'yy-mm-dd' });
         $("#EndDate").datepicker({ dateFormat: 'yy-mm-dd' });
+
+        initializeMap('all-map', 11);
     };
 
     app.refresh = function () { };

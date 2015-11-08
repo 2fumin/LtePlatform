@@ -7,6 +7,10 @@
     self.cityListUrl = "/api/CityList";
     self.kpiDataListUrl = "/api/KpiDataList";
 
+    self.collegeQueryUrl = "/api/CollegeQuery";
+    self.collegeRegionUrl = "/api/CollegeRegion";
+    self.collegeStatUrl = "/api/CollegeStat";
+
     // Route operations
 
     // Other private operations

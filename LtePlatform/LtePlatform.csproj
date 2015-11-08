@@ -274,6 +274,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminitrativeRegion\CityListController.cs" />
     <Compile Include="Controllers\CollegeController.cs" />
+    <Compile Include="Controllers\College\CollegeQueryController.cs" />
+    <Compile Include="Controllers\College\CollegeRegionController.cs" />
+    <Compile Include="Controllers\College\CollegeStatController.cs" />
     <Compile Include="Controllers\DtController.cs" />
     <Compile Include="Controllers\EvaluationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -348,6 +351,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\app\app.simplemodel.js" />
+    <Content Include="Scripts\baidu\college.helper.js" />
+    <Content Include="Scripts\baidu\mapContainer.js" />
+    <Content Include="Scripts\baidu\parameters.helper.js" />
+    <Content Include="Scripts\baidu\plugins\InfoBox.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -375,6 +382,7 @@
     <Content Include="Content\google\7M5kxD4eGxuhgFaIk95pBfk_vArhqVIZ0nv9q090hN8.woff2" />
     <None Include="Properties\PublishProfiles\Lte2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\college\map.controller.js" />
     <Content Include="Scripts\college\map.viewmodel.js" />
     <Content Include="Scripts\highcharts\adapters\standalone-framework.js" />
     <Content Include="Scripts\highcharts\adapters\standalone-framework.src.js" />

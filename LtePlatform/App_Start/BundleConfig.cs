@@ -46,6 +46,18 @@ namespace LtePlatform
                 "~/Scripts/kpi/index.viewmodel.js",
                 "~/Scripts/app/_run.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/collegeMap").Include(
+                "~/Scripts/app/common.js",
+                "~/Scripts/baidu/mapContainer.js",
+                "~/Scripts/baidu/plugins/InfoBox.js",
+                "~/Scripts/baidu/college.helper.js",
+                "~/Scripts/mycharts/comboChart.js",
+                "~/Scripts/app/app.datamodel.js",
+                "~/Scripts/app/app.simplemodel.js",
+                "~/Scripts/college/map.viewmodel.js",
+                "~/Scripts/college/map.controller.js",
+                "~/Scripts/app/_run.js"));
+
             // 使用要用于开发和学习的 Modernizr 的开发版本。然后，当你做好
             // 生产准备时，请使用 http://modernizr.com 上的生成工具来仅选择所需的测试。
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
