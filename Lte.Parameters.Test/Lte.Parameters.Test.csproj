@@ -31,6 +31,14 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Remotion.Data.Linq, Version=1.13.52.2, Culture=neutral, PublicKeyToken=8c59a1bf3e8d42c1, processorArchitecture=MSIL">
+      <HintPath>..\packages\Remotion.Data.Linq.1.0.0\lib\NET40\Remotion.Data.Linq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,7 +49,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Kpi\CdmaRegionStatExcelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lte.Domain.Test\Lte.Domain.Test.csproj">
+      <Project>{D9C3EE9A-14EF-4964-A731-12CEBBDFB693}</Project>
+      <Name>Lte.Domain.Test</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lte.Domain\Lte.Domain.csproj">
+      <Project>{ADEEF82D-6389-47C4-8F7C-D7F85C01D64E}</Project>
+      <Name>Lte.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lte.Parameters\Lte.Parameters.csproj">
+      <Project>{25b6ccb6-4b12-4df2-b4c9-2d30ae6bd254}</Project>
+      <Name>Lte.Parameters</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

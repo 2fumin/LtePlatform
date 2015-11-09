@@ -37,5 +37,11 @@ namespace LtePlatform.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public ViewResult KpiImport()
+        {
+            return View("Import");
+        }
     }
 }

@@ -539,6 +539,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lte.Domain\Lte.Domain.csproj">
+      <Project>{ADEEF82D-6389-47C4-8F7C-D7F85C01D64E}</Project>
+      <Name>Lte.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lte.Evaluations\Lte.Evaluations.csproj">
       <Project>{c166940a-6bd2-4f42-8156-8024d9e320c9}</Project>
       <Name>Lte.Evaluations</Name>

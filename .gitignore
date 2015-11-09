@@ -17,9 +17,10 @@
 .docstates
 
 *.VisualState.xml
-
-
-
+Castle*.xml
+Nito*.xml
+Abp*.xml
+Nito*.xml
 
 # Build results
 nunit.*.xml
