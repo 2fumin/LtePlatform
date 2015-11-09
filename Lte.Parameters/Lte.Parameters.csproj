@@ -115,10 +115,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\ICdmaRegionStatRepository.cs" />
+    <Compile Include="Abstract\ICellRepository.cs" />
     <Compile Include="Abstract\ICollege3GTestRepository.cs" />
     <Compile Include="Abstract\ICollege4GTestRepository.cs" />
     <Compile Include="Abstract\ICollegeKpiRepository.cs" />
     <Compile Include="Abstract\ICollegeRepository.cs" />
+    <Compile Include="Abstract\IENodebRepository.cs" />
+    <Compile Include="Abstract\IIndoorDistributioinRepository.cs" />
     <Compile Include="Abstract\IInfrastructureRepository.cs" />
     <Compile Include="Abstract\IPagingRepository.cs" />
     <Compile Include="Abstract\IRegionRepository.cs" />
@@ -127,10 +130,13 @@
     <Compile Include="Abstract\PagingRepositoryBase.cs" />
     <Compile Include="Concrete\EFAlameRepository.cs" />
     <Compile Include="Concrete\EFCdmaRegionStatRepository.cs" />
+    <Compile Include="Concrete\EFCellRepository.cs" />
     <Compile Include="Concrete\EFCollege3GTestRepository.cs" />
     <Compile Include="Concrete\EFCollege4GTestRepository.cs" />
     <Compile Include="Concrete\EFCollegeKpiRepository.cs" />
     <Compile Include="Concrete\EFCollegeRepository.cs" />
+    <Compile Include="Concrete\EFENodebRepository.cs" />
+    <Compile Include="Concrete\EFIndoorDistributionRepository.cs" />
     <Compile Include="Concrete\EFInfrastructureRepository.cs" />
     <Compile Include="Concrete\EFParametersContext.cs" />
     <Compile Include="Concrete\EFRegionRepository.cs" />
@@ -138,12 +144,15 @@
     <Compile Include="Entities\AlarmStat.cs" />
     <Compile Include="Entities\CdmaRegionStat.cs" />
     <Compile Include="Entities\CdmaRegionStatExcel.cs" />
+    <Compile Include="Entities\Cell.cs" />
     <Compile Include="Entities\College3GTestResults.cs" />
     <Compile Include="Entities\College4GTestResults.cs" />
     <Compile Include="Entities\CollegeInfo.cs" />
     <Compile Include="Entities\CollegeKpi.cs" />
     <Compile Include="Entities\CollegeStat.cs" />
     <Compile Include="Abstract\IAlarmRepository.cs" />
+    <Compile Include="Entities\ENodeb.cs" />
+    <Compile Include="Entities\ENodebPhoto.cs" />
     <Compile Include="Entities\IndoorDistribution.cs" />
     <Compile Include="Entities\IndoorDistributionExcel.cs" />
     <Compile Include="Entities\InfrastructureDefs.cs" />

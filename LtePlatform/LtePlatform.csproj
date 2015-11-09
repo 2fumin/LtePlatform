@@ -274,6 +274,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminitrativeRegion\CityListController.cs" />
     <Compile Include="Controllers\CollegeController.cs" />
+    <Compile Include="Controllers\College\College3GTestController.cs" />
+    <Compile Include="Controllers\College\College4GTestController.cs" />
+    <Compile Include="Controllers\College\CollegeENodebController.cs" />
     <Compile Include="Controllers\College\CollegeQueryController.cs" />
     <Compile Include="Controllers\College\CollegeRegionController.cs" />
     <Compile Include="Controllers\College\CollegeStatController.cs" />
@@ -285,6 +288,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MeController.cs" />
     <Compile Include="Controllers\ParametersController.cs" />
+    <Compile Include="Controllers\Parameters\CellController.cs" />
     <Compile Include="Controllers\RutraceController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -384,6 +388,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\college\map.controller.js" />
     <Content Include="Scripts\college\map.viewmodel.js" />
+    <Content Include="Scripts\college\test.controller.js" />
     <Content Include="Scripts\college\test.viewmodel.js" />
     <Content Include="Scripts\highcharts\adapters\standalone-framework.js" />
     <Content Include="Scripts\highcharts\adapters\standalone-framework.src.js" />

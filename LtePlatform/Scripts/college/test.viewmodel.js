@@ -34,6 +34,17 @@
         });
 
         getTestList();
+
+        app.selectedCollege.subscribe(function (newCollege) {
+            sendRequest(app.dataModel.collegeENodebUrl, "GET", { collegeName: newCollege }, function (data) {
+                app.eNodebs.removeAll();
+                app.eNodebs.push.apply(app.eNodebs, data);
+            });
+        });
+
+        app.date.subscribe(function () { getTestList(); });
+        app.hour.subscribe(function () { getTestList(); });
+        app.selectedENodeb.subscribe(function (newENodeb) { updateSectorSelection(newENodeb); });
     };
 
     app.refresh = function () { };

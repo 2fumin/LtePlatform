@@ -27,9 +27,25 @@ namespace LtePlatform
 
             ninjectKernel.Bind<ICollegeKpiRepository>().To<EFCollegeKpiRepository>();
 
+            ninjectKernel.Bind<IENodebRepository>().To<EFENodebRepository>();
+
+            ninjectKernel.Bind<ICellRepository>().To<EFCellRepository>();
+
+            ninjectKernel.Bind<IIndoorDistributioinRepository>().To<EFIndoorDistributionRepository>();
+
             ninjectKernel.Bind<CdmaRegionStatService>().ToSelf();
 
             ninjectKernel.Bind<CollegeStatService>().ToSelf();
+
+            ninjectKernel.Bind<ENodebQueryService>().ToSelf();
+
+            ninjectKernel.Bind<CollegeENodebService>().ToSelf();
+
+            ninjectKernel.Bind<CellService>().ToSelf();
+
+            ninjectKernel.Bind<College3GTestService>().ToSelf();
+
+            ninjectKernel.Bind<College4GTestService>().ToSelf();
         }
     }
 }

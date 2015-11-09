@@ -32,5 +32,11 @@ namespace Lte.Parameters.Concrete
         public DbSet<College4GTestResults> College4GTestResultses { get; set; }
 
         public DbSet<CollegeKpi> CollegeKpis { get; set; }
+
+        public DbSet<ENodeb> ENodebs { get; set; }
+
+        public DbSet<Cell> Cells { get; set; }
+
+        public DbSet<IndoorDistribution> IndoorDistributions { get; set; }
     }
 }

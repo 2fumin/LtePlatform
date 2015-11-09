@@ -42,5 +42,20 @@ namespace Lte.Domain.Regular
             }
             return list.ToArray();
         }
+
+        public static byte GetLastByte(this int source)
+        {
+            return (byte)(source & GenerateMask(8));
+        }
+
+        public static int GenerateMask(byte length)
+        {
+            int result = 1;
+            for (byte index = 1; index < length; index++)
+            {
+                result |= 1 << index;
+            }
+            return result;
+        }
     }
 }

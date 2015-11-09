@@ -10,6 +10,11 @@
     self.collegeQueryUrl = "/api/CollegeQuery";
     self.collegeRegionUrl = "/api/CollegeRegion";
     self.collegeStatUrl = "/api/CollegeStat";
+    self.collegeENodebUrl = "/api/CollegeENodeb/";
+    self.college3GTestUrl = "/api/College3GTest/";
+    self.college4GTestUrl = "/api/College4GTest/";
+
+    self.cellUrl = "/api/Cell/";
 
     // Route operations
 

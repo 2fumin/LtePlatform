@@ -59,11 +59,15 @@
     <Compile Include="Common\Geo\GeoMath.cs" />
     <Compile Include="Common\Geo\GeoPoint.cs" />
     <Compile Include="Common\Geo\IGeoPoint.cs" />
+    <Compile Include="Common\Geo\ITown.cs" />
     <Compile Include="Common\Lz4Attributes.cs" />
     <Compile Include="Common\Lz4Types.cs" />
     <Compile Include="Common\TextOperations.cs" />
     <Compile Include="Common\TypeOperations.cs" />
     <Compile Include="Common\Util.cs" />
+    <Compile Include="Common\Wireless\AntennaPortsConfigure.cs" />
+    <Compile Include="Common\Wireless\FrequencyBand.cs" />
+    <Compile Include="Common\Wireless\FrequencyBandQueries.cs" />
     <Compile Include="LinqToCsv\Context\CsvContext.cs" />
     <Compile Include="LinqToCsv\Context\FileDataAccess.cs" />
     <Compile Include="LinqToCsv\Context\RowReader.cs" />
@@ -88,6 +92,7 @@
     <Compile Include="LinqToExcel\Service\CastService.cs" />
     <Compile Include="LinqToExcel\Service\ExcelAttributesService.cs" />
     <Compile Include="Regular\AlarmTypeQueries.cs" />
+    <Compile Include="Regular\IpAddress.cs" />
     <Compile Include="Regular\TransformEnum.cs" />
     <Compile Include="Lz4Net\Core\CoreHandlers.cs" />
     <Compile Include="Lz4Net\Core\DirectoryEventArgs.cs" />
