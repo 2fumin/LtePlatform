@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Abp.Domain.Entities;
+using Abp.Domain.Entities.Auditing;
 using Abp.Domain.Repositories;
 using Moq;
 
 namespace Lte.Parameters.MockOperations
 {
-    public static class MockItemsRepository
+    public static class MockItemsAudited
     {
-        public static void SynchronizeValues<T, TRepository>(this Mock<TRepository> repository)
-            where T : Entity
+        public static void SynchronizeAuditedValues<T, TRepository>(this Mock<TRepository> repository)
+            where T : AuditedEntity
             where TRepository : class, IRepository<T>
         {
             repository.Setup(x => x.Count()).Returns(
@@ -22,18 +22,18 @@ namespace Lte.Parameters.MockOperations
                 repository.Object.GetAll().ToList());
         }
 
-        public static void MockQueryItems<T, TRepository>(this Mock<TRepository> repository,
+        public static void MockAuditedItems<T, TRepository>(this Mock<TRepository> repository,
             IQueryable<T> items)
-            where T : Entity
+            where T : AuditedEntity
             where TRepository : class, IRepository<T>
         {
             repository.Setup(x => x.GetAll()).Returns(items);
-            repository.SynchronizeValues<T, TRepository>();
+            repository.SynchronizeAuditedValues<T, TRepository>();
         }
 
         public static void MockRepositorySaveItems<T, TRepository>(
             this Mock<TRepository> repository, IEnumerable<T> items)
-            where T : Entity
+            where T : AuditedEntity
             where TRepository : class, IRepository<T>
         {
             repository.Setup(x => x.Insert(It.IsAny<T>())).Callback<T>(
@@ -41,13 +41,13 @@ namespace Lte.Parameters.MockOperations
                 {
                     repository.Setup(x => x.GetAll()).Returns(
                         items.Concat(new List<T> { e }).AsQueryable());
-                    SynchronizeValues<T, TRepository>(repository);
+                    SynchronizeAuditedValues<T, TRepository>(repository);
                 });
         }
 
         public static void MockRepositorySaveItems<T, TRepository>(
             this Mock<TRepository> repository)
-            where T : Entity
+            where T : AuditedEntity
             where TRepository : class, IRepository<T>
         {
             repository.Setup(x => x.Insert(It.IsAny<T>())).Callback<T>(
@@ -56,13 +56,13 @@ namespace Lte.Parameters.MockOperations
                     IEnumerable<T> btss = repository.Object.GetAll();
                     repository.Setup(x => x.GetAll()).Returns(
                         btss.Concat(new List<T> { e }).AsQueryable());
-                    SynchronizeValues<T, TRepository>(repository);
+                    SynchronizeAuditedValues<T, TRepository>(repository);
                 });
         }
 
         public static void MockRepositoryDeleteItems<T, TRepository>(
             this Mock<TRepository> repository, IEnumerable<T> items)
-            where T : Entity
+            where T : AuditedEntity
             where TRepository : class, IRepository<T>
         {
             repository.Setup(x => x.Delete(It.Is<T>(e => e != null
@@ -72,13 +72,13 @@ namespace Lte.Parameters.MockOperations
                 {
                     repository.Setup(x => x.GetAll()).Returns(
                         items.Except(new List<T> { e }).AsQueryable());
-                    SynchronizeValues<T, TRepository>(repository);
+                    SynchronizeAuditedValues<T, TRepository>(repository);
                 });
         }
 
         public static void MockRepositoryDeleteItems<T, TRepository>(
             this Mock<TRepository> repository)
-            where T : Entity
+            where T : AuditedEntity
             where TRepository : class, IRepository<T>
         {
             if (repository.Object != null)
@@ -91,7 +91,7 @@ namespace Lte.Parameters.MockOperations
                     {
                         repository.Setup(x => x.GetAll()).Returns(
                             items.Except(new List<T> { e }).AsQueryable());
-                        SynchronizeValues<T, TRepository>(repository);
+                        SynchronizeAuditedValues<T, TRepository>(repository);
                     });
             }
         }

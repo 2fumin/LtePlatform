@@ -23,8 +23,8 @@ namespace Lte.Evaluations.DataService
 
         public IEnumerable<College3GTestView> GetViews(DateTime date, int hour)
         {
-            IEnumerable<College3GTestResults> results =
-                _repository.GetAllList().Where(x => x.TestTime == date.AddHours(hour));
+            var statTime = date.AddHours(hour);
+            var results = _repository.GetAll().Where(x => x.TestTime == statTime).ToList();
             if (!results.Any()) return new List<College3GTestView>();
             return results.Select(x =>
             {

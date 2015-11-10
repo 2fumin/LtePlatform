@@ -28,8 +28,8 @@ namespace Lte.Evaluations.DataService
 
         public IEnumerable<College4GTestView> GetViews(DateTime date, int hour)
         {
-            IEnumerable<College4GTestResults> results =
-                _repository.GetAllList().Where(x => x.TestTime == date.AddHours(hour));
+            var statTime = date.AddHours(hour);
+            var results = _repository.GetAllList().Where(x => x.TestTime == statTime).ToList();
             if (!results.Any()) return new List<College4GTestView>();
             return results.Select(x =>
             {
@@ -43,7 +43,7 @@ namespace Lte.Evaluations.DataService
                 {
                     CollegeName = college == null ? "Unknown" : college.Name,
                     CellName = eNodeb == null ? "Undefined" : eNodeb.Name + "-" + x.SectorId,
-                    Pci = cell == null ? (short)-1 : cell.Pci
+                    Pci = cell?.Pci ?? -1
                 };
                 x.CloneProperties(view);
                 return view;

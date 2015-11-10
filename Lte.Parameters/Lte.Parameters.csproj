@@ -159,6 +159,7 @@
     <Compile Include="Entities\InfrastructureInfo.cs" />
     <Compile Include="Entities\OptimizeRegion.cs" />
     <Compile Include="Entities\Town.cs" />
+    <Compile Include="MockOperations\MockItemsAudited.cs" />
     <Compile Include="MockOperations\MockItemsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
