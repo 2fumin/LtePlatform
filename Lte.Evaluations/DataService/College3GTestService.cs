@@ -28,7 +28,7 @@ namespace Lte.Evaluations.DataService
             if (!results.Any()) return new List<College3GTestView>();
             return results.Select(x =>
             {
-                CollegeInfo college = _collegeRepository.FirstOrDefault(c => c.Id == x.CollegeId);
+                CollegeInfo college = _collegeRepository.Get(x.CollegeId);
                 College3GTestView view = new College3GTestView
                 {
                     CollegeName = college == null ? "Unknown" : college.Name

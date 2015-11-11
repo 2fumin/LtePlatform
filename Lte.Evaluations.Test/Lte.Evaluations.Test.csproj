@@ -89,6 +89,7 @@
     <Compile Include="DataService\CdmaRegionStatServiceTest.cs" />
     <Compile Include="DataService\CdmaRegionViewQueries.cs" />
     <Compile Include="DataService\College3GTestServiceTest.cs" />
+    <Compile Include="DataService\College4GTestServiceTest.cs" />
     <Compile Include="DataService\GenerateViewListTest.cs" />
     <Compile Include="MockItems\MockItemsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

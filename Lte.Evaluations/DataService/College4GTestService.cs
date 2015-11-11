@@ -33,7 +33,7 @@ namespace Lte.Evaluations.DataService
             if (!results.Any()) return new List<College4GTestView>();
             return results.Select(x =>
             {
-                CollegeInfo college = _collegeRepository.FirstOrDefault(c => c.Id == x.CollegeId);
+                CollegeInfo college = _collegeRepository.Get(x.CollegeId);
                 ENodeb eNodeb = _eNodebRepository.FirstOrDefault(e => e.ENodebId == x.ENodebId);
                 Cell cell = eNodeb == null
                     ? null
