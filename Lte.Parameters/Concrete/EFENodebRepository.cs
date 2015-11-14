@@ -12,9 +12,16 @@ namespace Lte.Parameters.Concrete
 {
     public class EFENodebRepository : LightWeightRepositroyBase<ENodeb>, IENodebRepository
     {        
-        protected override DbSet<ENodeb> Entities
+        protected override DbSet<ENodeb> Entities => context.ENodebs;
+
+        public ENodeb GetByENodebId(int eNodebId)
         {
-            get { return context.ENodebs; }
+            return FirstOrDefault(x => x.ENodebId == eNodebId);
+        }
+
+        public ENodeb GetByName(string name)
+        {
+            return FirstOrDefault(x => x.Name == name);
         }
     }
 }

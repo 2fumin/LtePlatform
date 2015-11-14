@@ -11,5 +11,8 @@ namespace Lte.Parameters.Abstract
 {
     public interface IENodebRepository : IRepository<ENodeb>
     {
+        ENodeb GetByENodebId(int eNodebId);
+
+        ENodeb GetByName(string name);
     }
 }

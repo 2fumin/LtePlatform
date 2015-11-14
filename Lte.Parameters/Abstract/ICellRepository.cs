@@ -11,5 +11,7 @@ namespace Lte.Parameters.Abstract
     public interface ICellRepository : IRepository<Cell>
     {
         void AddCells(IEnumerable<Cell> cells);
+
+        Cell GetBySectorId(int eNodebId, byte sectorId);
     }
 }

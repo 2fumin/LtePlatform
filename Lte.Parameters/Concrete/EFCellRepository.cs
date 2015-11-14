@@ -11,17 +11,19 @@ namespace Lte.Parameters.Concrete
 {
     public class EFCellRepository : LightWeightRepositroyBase<Cell>, ICellRepository
     {
-        protected override DbSet<Cell> Entities
-        {
-            get { return context.Cells; }
-        }
+        protected override DbSet<Cell> Entities => context.Cells;
 
         public void AddCells(IEnumerable<Cell> cells)
         {
-            foreach (Cell cell in cells)
+            foreach (var cell in cells)
             {
                 Insert(cell);
             }
+        }
+
+        public Cell GetBySectorId(int eNodebId, byte sectorId)
+        {
+            return FirstOrDefault(x => x.ENodebId == eNodebId && x.SectorId == sectorId);
         }
     }
 }

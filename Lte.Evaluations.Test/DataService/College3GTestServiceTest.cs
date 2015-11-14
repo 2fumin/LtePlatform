@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Lte.Evaluations.DataService;
+using Lte.Evaluations.Test.MockItems;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 using Lte.Parameters.MockOperations;
@@ -39,12 +40,8 @@ namespace Lte.Evaluations.Test.DataService
                     Name = "college-3"
                 }
             }.AsQueryable());
-            _collegeRepository.Setup(x => x.Get(It.IsAny<int>())).Returns<int>(
-                id => _collegeRepository.Object.GetAll().FirstOrDefault(
-                    x => x.Id == id));
-            _collegeRepository.Setup(x => x.GetByName(It.IsAny<string>())).Returns<string>(
-                name => _collegeRepository.Object.GetAll().FirstOrDefault(
-                    x => x.Name == name));
+            _collegeRepository.MockOpertions();
+            _repository.MockOperations();
         }
         
         [Test]
@@ -58,21 +55,22 @@ namespace Lte.Evaluations.Test.DataService
             Assert.IsNotNull(_collegeRepository.Object.GetByName("college-2"));
             Assert.IsNotNull(_collegeRepository.Object.GetByName("college-3"));
         }
+
+        [TestCase(3, "2015-3-3")]
+        [TestCase(4, "2015-4-7 12:33")]
+        [TestCase(7, "2012-3-7 11:38")]
+        public void Test_MockTestRepository(int id, string time)
+        {
+            _repository.MockOneItem(id, time);
+            Assert.IsNotNull(_repository.Object.GetByCollegeIdAndTime(id, DateTime.Parse(time)));
+        }
         
         [TestCase(1, "2015-10-10", 4, 15)]
         [TestCase(2, "2015-11-10", 3, 3450)]
         [TestCase(3, "2015-08-07", 11, 2132)]
         public void Test_GetViews_OneTestItem(int collegeId, string testDate, int hour, int users)
         {
-            _repository.MockQueryItems(new List<College3GTestResults>
-            {
-                new College3GTestResults
-                {
-                    CollegeId = collegeId,
-                    TestTime = DateTime.Parse(testDate).AddHours(hour),
-                    AccessUsers = users
-                }
-            }.AsQueryable());
+            _repository.MockOneItem(collegeId, DateTime.Parse(testDate).AddHours(hour), users);
 
             var views = _service.GetViews(DateTime.Parse(testDate), hour).ToList();
             Assert.IsNotNull(views);
@@ -85,18 +83,10 @@ namespace Lte.Evaluations.Test.DataService
         [TestCase(3, "2015-08-07", 11, 2132)]
         public void Test_GetResult_OneTestItem(int collegeId, string testDate, int hour, int users)
         {
-            _repository.MockQueryItems(new List<College3GTestResults>
-            {
-                new College3GTestResults
-                {
-                    CollegeId = collegeId,
-                    TestTime = DateTime.Parse(testDate).AddHours(hour),
-                    AccessUsers = users
-                }
-            }.AsQueryable());
+            _repository.MockOneItem(collegeId, DateTime.Parse(testDate).AddHours(hour), users);
 
-            var result = _service.GetResult(DateTime.Parse(testDate), hour, "colleg-" + collegeId);
-            Assert.IsNotNull(result);
+            var result = _service.GetResult(DateTime.Parse(testDate), hour, "college-" + collegeId);
+            Assert.IsNotNull(result, "the result is null");
             result.AssertUsers(users);
         }
 
@@ -107,19 +97,51 @@ namespace Lte.Evaluations.Test.DataService
         public void Test_GetViews_MultiItems_SingleTestDate(int testNo, int[] collegeIds, string testDate, int hour,
             int[] users)
         {
-            var resultList = collegeIds.Select((t, i) => new College3GTestResults
-            {
-                CollegeId = t,
-                TestTime = DateTime.Parse(testDate).AddHours(hour),
-                AccessUsers = users[i]
-            }).ToList();
-            _repository.MockQueryItems(resultList.AsQueryable());
+            _repository.MockItems(collegeIds, DateTime.Parse(testDate).AddHours(hour), users);
             var views = _service.GetViews(DateTime.Parse(testDate), hour).ToList();
             Assert.IsNotNull(views);
             Assert.AreEqual(views.Count, collegeIds.Length);
             for (var i = 0; i < collegeIds.Length; i++)
             {
                 views[i].AssertUsers(collegeIds[i], users[i]);
+            }
+        }
+
+        [TestCase(1, new[] { 1, 2 }, new[] { "2015-10-10", "2015-4-7"}, 4, new[] { 15, 11 })]
+        [TestCase(2, new[] { 2, 3 }, new[] { "2015-10-10", "2015-4-7" }, 4, new[] { 15, 11 })]
+        [TestCase(3, new[] { 1, 2, 3 }, new[] { "2015-10-10", "2015-4-7", "2015-9-9" }, 4, new[] { 15, 11, 18 })]
+        [TestCase(4, new[] { 2, 3, 1 }, new[] { "2015-10-10", "2015-4-7", "2015-7-8" }, 9, new[] { 14, 11, 88 })]
+        public void Test_GetResult_MultiItems_SingleTestDate(int testNo, int[] collegeIds, string[] testDates, int hour,
+            int[] users)
+        {
+            _repository.MockItems(collegeIds, testDates.Select(x => DateTime.Parse(x).AddHours(hour)).ToArray(), users);
+
+            for (var i = 0; i < collegeIds.Length; i++)
+            {
+                var result = _service.GetResult(DateTime.Parse(testDates[i]), hour, "college-" + collegeIds[i]);
+                Assert.IsNotNull(result, "the result is null");
+                result.AssertUsers(users[i]);
+            }
+        }
+
+        [TestCase(1, new[] { 1, 2 }, new[] { "2015-10-10", "2015-4-7" }, 4, new[] { 15, 11.0 }, "2015-4-1", "2015-10-11", 2)]
+        [TestCase(2, new[] { 2, 3 }, new[] { "2015-10-10", "2015-4-7" }, 4, new[] { 15.0, 11 }, "2015-5-2", "2015-10-12", 1)]
+        [TestCase(3, new[] { 1, 2, 3 }, new[] { "2015-10-10", "2015-4-7", "2015-9-9" }, 4, new[] { 15, 11.0, 18 }, "2015-3-1", "2015-10-17", 3)]
+        [TestCase(4, new[] { 2, 3, 1 }, new[] { "2015-10-10", "2015-4-7", "2015-7-8" }, 9, new[] { 14, 11.2, 88 }, "2015-7-3", "2015-9-8", 1)]
+        [TestCase(5, new[] { 1, 2, 3, 2 }, new[] { "2015-10-10", "2015-4-7", "2015-9-9", "2015-4-17" }, 
+            4, new[] { 15, 11.0, 18, 13 }, "2015-3-1", "2015-10-17", 3)]
+        public void Test_GetAverageRates(int testNo,
+            int[] collegeIds, string[] testDates, int hour, double[] rates,
+            string begin, string end, int resultNum)
+        {
+            _repository.MockRateItems(collegeIds, testDates.Select(x => DateTime.Parse(x).AddHours(hour)).ToArray(), rates);
+
+            var result = _service.GetAverageRates(DateTime.Parse(begin), DateTime.Parse(end));
+            Assert.IsNotNull(result);
+            Assert.AreEqual(result.Count, resultNum);
+            for (var i = 0; i < result.Count; i++)
+            {
+                Console.WriteLine("Average Rate[{0}]: {1}", result.ElementAt(i).Key, result[result.ElementAt(i).Key]);
             }
         }
     }

@@ -11,8 +11,8 @@
 System.*.xml
 Microsoft.*.xml
 *.suo
-
-
+Entity*.xml
+Newton*.xml
 *.sln
 .docstates
 

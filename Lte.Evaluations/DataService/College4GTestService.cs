@@ -33,13 +33,12 @@ namespace Lte.Evaluations.DataService
             if (!results.Any()) return new List<College4GTestView>();
             return results.Select(x =>
             {
-                CollegeInfo college = _collegeRepository.Get(x.CollegeId);
-                ENodeb eNodeb = _eNodebRepository.FirstOrDefault(e => e.ENodebId == x.ENodebId);
-                Cell cell = eNodeb == null
+                var college = _collegeRepository.Get(x.CollegeId);
+                var eNodeb = _eNodebRepository.GetByENodebId(x.ENodebId);
+                var cell = eNodeb == null
                     ? null
-                    : _cellRepository.FirstOrDefault(ce =>
-                        ce.ENodebId == x.ENodebId && ce.SectorId == x.SectorId);
-                College4GTestView view = new College4GTestView
+                    : _cellRepository.GetBySectorId(x.ENodebId, x.SectorId);
+                var view = new College4GTestView
                 {
                     CollegeName = college == null ? "Unknown" : college.Name,
                     CellName = eNodeb == null ? "Undefined" : eNodeb.Name + "-" + x.SectorId,
@@ -52,13 +51,12 @@ namespace Lte.Evaluations.DataService
 
         public College4GTestResults GetResult(DateTime date, int hour, string name, string eNodebName, byte sectorId)
         {
-            CollegeInfo college = _collegeRepository.GetByName(name);
+            var college = _collegeRepository.GetByName(name);
             if (college == null) return null;
-            ENodeb eNodeb = _eNodebRepository.FirstOrDefault(x => x.Name == eNodebName);
+            var eNodeb = _eNodebRepository.GetByName(eNodebName);
             if (eNodeb == null) return null;
-            DateTime time = date.AddHours(hour);
-            College4GTestResults result = _repository.FirstOrDefault(
-                x => x.TestTime == time && x.CollegeId == college.Id);
+            var time = date.AddHours(hour);
+            var result = _repository.GetByCollegeIdAndTime(college.Id, time);
             if (result == null)
                 return new College4GTestResults
                 {
@@ -82,7 +80,7 @@ namespace Lte.Evaluations.DataService
             var results = _repository.GetAllList().Where(x => x.TestTime >= begin && x.TestTime < end);
             var query = from r in results
                         join c in _collegeRepository.GetAllList() on r.CollegeId equals c.Id
-                        select new { Name = c.Name, Rate = (upload == 0) ? r.DownloadRate : r.UploadRate };
+                        select new {c.Name, Rate = (upload == 0) ? r.DownloadRate : r.UploadRate };
             return query.GroupBy(x => x.Name).ToDictionary(s => s.Key, t => t.Average(x => x.Rate));
         }
 
@@ -98,10 +96,10 @@ namespace Lte.Evaluations.DataService
 
         public College4GTestResults GetRecordResult(DateTime recordDate, int hour, string name)
         {
-            CollegeInfo college = _collegeRepository.FirstOrDefault(x => x.Name == name);
+            var college = _collegeRepository.GetByName(name);
             if (college == null) return null;
-            DateTime time = recordDate.AddHours(hour);
-            return _repository.FirstOrDefault(x => x.TestTime == time);
+            var time = recordDate.AddHours(hour);
+            return _repository.GetByTime(time);
         }
     }
 }

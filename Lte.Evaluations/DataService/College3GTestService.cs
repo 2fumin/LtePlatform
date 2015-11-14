@@ -58,10 +58,10 @@ namespace Lte.Evaluations.DataService
 
         public Dictionary<string, double> GetAverageRates(DateTime begin, DateTime end)
         {
-            var results = _repository.GetAllList().Where(x => x.TestTime >= begin && x.TestTime < end);
+            var results = _repository.GetByTimeSpan(begin, end);
             var query = from r in results
                         join c in _collegeRepository.GetAllList() on r.CollegeId equals c.Id
-                        select new { Name = c.Name, Rate = r.DownloadRate };
+                        select new {c.Name, Rate = r.DownloadRate };
             return query.GroupBy(x => x.Name).ToDictionary(s => s.Key, t => t.Average(x => x.Rate));
         }
 
@@ -77,10 +77,10 @@ namespace Lte.Evaluations.DataService
 
         public College3GTestResults GetRecordResult(DateTime recordDate, int hour, string name)
         {
-            CollegeInfo college = _collegeRepository.FirstOrDefault(x => x.Name == name);
+            var college = _collegeRepository.GetByName(name);
             if (college == null) return null;
-            DateTime time = recordDate.AddHours(hour);
-            return _repository.FirstOrDefault(x => x.TestTime == time);
+            var time = recordDate.AddHours(hour);
+            return _repository.GetByTime(time);
         }
     }
 }
