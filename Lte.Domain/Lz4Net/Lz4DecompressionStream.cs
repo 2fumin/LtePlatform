@@ -8,21 +8,10 @@ using System.Threading.Tasks;
 namespace Lte.Domain.Lz4Net
 {
 
-    public sealed class Lz4DecompressionStream : Stream
+    public sealed class Lz4DecompressionStream : Lz4DecompressionStreamBase
     {
-        private const int HeaderSize = 8;
-        private readonly bool m_closeStream;
-        private readonly byte[] m_header = new byte[8];
-        private byte[] m_readBuffer;
-        private Stream m_targetStream;
-        private byte[] m_unpackedBuffer;
-        private int m_unpackedLength;
-        private int m_unpackedOffset;
-
-        public Lz4DecompressionStream(Stream sourceStream, bool closeStream = false)
+        public Lz4DecompressionStream(Stream sourceStream, bool closeStream = false) : base(sourceStream, closeStream)
         {
-            m_closeStream = closeStream;
-            m_targetStream = sourceStream;
             Fill();
         }
 
@@ -33,19 +22,19 @@ namespace Lte.Domain.Lz4Net
                 Flush();
             }
             base.Dispose(disposing);
-            if (m_closeStream && (m_targetStream != null))
+            if (_closeStream)
             {
-                m_targetStream.Dispose();
+                _targetStream?.Dispose();
             }
-            m_targetStream = null;
+            _targetStream = null;
         }
 
         private void Fill()
         {
-            int num = m_targetStream.Read(m_header, 0, 8);
+            int num = _targetStream.Read(_header, 0, HeaderSize);
             if (num == 0)
             {
-                m_unpackedBuffer = null;
+                _unpackedBuffer = null;
             }
             else
             {
@@ -53,18 +42,18 @@ namespace Lte.Domain.Lz4Net
                 {
                     throw new InvalidDataException("input buffer corrupted (header)");
                 }
-                int compressedSize = Lz4.GetCompressedSize(m_header);
-                if ((m_readBuffer == null) || (m_readBuffer.Length < (compressedSize + 8)))
+                int compressedSize = Lz4.GetCompressedSize(_header);
+                if ((_readBuffer == null) || (_readBuffer.Length < (compressedSize + HeaderSize)))
                 {
-                    m_readBuffer = new byte[compressedSize + 8];
+                    _readBuffer = new byte[compressedSize + HeaderSize];
                 }
-                Buffer.BlockCopy(m_header, 0, m_readBuffer, 0, 8);
-                if (m_targetStream.Read(m_readBuffer, 8, compressedSize) != compressedSize)
+                Buffer.BlockCopy(_header, 0, _readBuffer, 0, HeaderSize);
+                if (_targetStream.Read(_readBuffer, HeaderSize, compressedSize) != compressedSize)
                 {
                     throw new InvalidDataException("input buffer corrupted (body)");
                 }
-                m_unpackedLength = Lz4.Decompress(m_readBuffer, 0, ref m_unpackedBuffer);
-                m_unpackedOffset = 0;
+                _unpackedLength = Lz4.Decompress(_readBuffer, 0, ref _unpackedBuffer);
+                _unpackedOffset = 0;
             }
         }
 
@@ -74,23 +63,23 @@ namespace Lte.Domain.Lz4Net
 
         public override int Read(byte[] buffer, int offset, int count)
         {
-            if ((m_unpackedBuffer == null) || (m_unpackedOffset == m_unpackedLength))
+            if ((_unpackedBuffer == null) || (_unpackedOffset == _unpackedLength))
             {
                 Fill();
             }
-            if (m_unpackedBuffer == null)
+            if (_unpackedBuffer == null)
             {
                 return 0;
             }
-            if ((m_unpackedOffset + count) > m_unpackedLength)
+            if ((_unpackedOffset + count) > _unpackedLength)
             {
-                int num = m_unpackedLength - m_unpackedOffset;
+                int num = _unpackedLength - _unpackedOffset;
                 int num2 = Read(buffer, offset, num);
                 int num3 = Read(buffer, offset + num, count - num);
                 return (num2 + num3);
             }
-            Buffer.BlockCopy(m_unpackedBuffer, m_unpackedOffset, buffer, offset, count);
-            m_unpackedOffset += count;
+            Buffer.BlockCopy(_unpackedBuffer, _unpackedOffset, buffer, offset, count);
+            _unpackedOffset += count;
             return count;
         }
 
@@ -101,36 +90,12 @@ namespace Lte.Domain.Lz4Net
 
         public override void SetLength(long value)
         {
-            m_targetStream.SetLength(value);
+            _targetStream.SetLength(value);
         }
 
         public override void Write(byte[] buffer, int offset, int count)
         {
             throw new NotSupportedException();
-        }
-
-        public override bool CanRead
-        {
-            get
-            {
-                return true;
-            }
-        }
-
-        public override bool CanSeek
-        {
-            get
-            {
-                return false;
-            }
-        }
-
-        public override bool CanWrite
-        {
-            get
-            {
-                return false;
-            }
         }
 
         public override long Length

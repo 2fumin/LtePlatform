@@ -3,23 +3,14 @@ using System.IO;
 
 namespace Lte.Domain.Lz4Net.ExtraZip
 {
-    public class Lz4DecompressStream : Stream
+    public class ExtraDecompressStream : Lz4DecompressionStreamBase
     {
-        private readonly bool _closeStream;
         private bool _disposed;
         private bool _eof;
-        private readonly byte[] _header = new byte[8];
         private long _position;
-        private byte[] _readBuffer;
-        private readonly Stream _targetStream;
-        private byte[] _unpackedBuffer;
-        private int _unpackedLength;
-        private int _unpackedOffset;
 
-        public Lz4DecompressStream(Stream targetStream, bool closeStream = false)
+        public ExtraDecompressStream(Stream targetStream, bool closeStream) : base(targetStream, closeStream)
         {
-            _targetStream = targetStream;
-            _closeStream = closeStream;
         }
 
         protected override void Dispose(bool disposing)
@@ -172,31 +163,7 @@ namespace Lte.Domain.Lz4Net.ExtraZip
         {
             throw new NotSupportedException();
         }
-
-        public override bool CanRead
-        {
-            get
-            {
-                return true;
-            }
-        }
-
-        public override bool CanSeek
-        {
-            get
-            {
-                return false;
-            }
-        }
-
-        public override bool CanWrite
-        {
-            get
-            {
-                return false;
-            }
-        }
-
+        
         public long CompressedLength { get; private set; }
 
         public override long Length

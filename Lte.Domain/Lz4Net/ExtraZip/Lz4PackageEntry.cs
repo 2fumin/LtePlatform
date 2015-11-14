@@ -6,12 +6,12 @@ namespace Lte.Domain.Lz4Net.ExtraZip
     [DataContract]
     public class Lz4PackageEntry
     {
-        public Lz4DecompressStream Open()
+        public ExtraDecompressStream Open()
         {
             FileStream targetStream = new FileStream(Package.Filename, FileMode.Open, 
                 FileAccess.Read, FileShare.Read, 0x100000);
             targetStream.Seek(Entry, SeekOrigin.Begin);
-            return new Lz4DecompressStream(targetStream, true);
+            return new ExtraDecompressStream(targetStream, true);
         }
 
         public override string ToString()
