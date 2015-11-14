@@ -1,0 +1,49 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <p>
+            校园名称：
+            <select data-bind="options: colleges, value: selectedCollege"></select>
+        </p>
+        开始日期：<input id="StartDate" data-bind="value: startDate"/>
+        结束日期：<input id="EndDate" data-bind="value: endDate"/>
+        <input type="button" class="btn btn-primary" value="查询" data-bind="click: queryCells"/>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>基站名称</th>
+                <th>基站编号</th>
+                <th>扇区编号</th>
+                <th>频点</th>
+                <th>RS功率</th>
+                <th>室内外</th>
+                <th>高度</th>
+                <th>方位角</th>
+                <th>下倾</th>
+                <th>天线增益(dB)</th>
+                <th>精确覆盖率</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody data-bind="foreach: cellList">
+            <tr data-bind="style: { color: $data.preciseRate < 80 ? 'red' : 'black' }">
+                <td data-bind="text: eNodebName"></td>
+                <td data-bind="text: eNodebId"></td>
+                <td data-bind="text: sectorId"></td>
+                <td data-bind="text: frequency"></td>
+                <td data-bind="text: rsPower"></td>
+                <td data-bind="text: indoor"></td>
+                <td data-bind="text: height"></td>
+                <td data-bind="text: azimuth"></td>
+                <td data-bind="text: downTilt"></td>
+                <td data-bind="text: antennaGain"></td>
+                <td data-bind="text: preciseRate.toFixed(2)"></td>
+                <td>
+                    <input type="button" value="查询趋势" class="btn btn-primary"
+                           data-bind="click: function () { queryPrecise($data);}"/>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div id="dialog-modal"></div>
+    </div>
+</div>

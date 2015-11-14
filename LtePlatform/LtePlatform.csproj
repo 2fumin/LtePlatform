@@ -391,6 +391,8 @@
     <Content Include="Scripts\college\kpi.viewmodel.js" />
     <Content Include="Scripts\college\map.controller.js" />
     <Content Include="Scripts\college\map.viewmodel.js" />
+    <Content Include="Scripts\college\precise.controller.js" />
+    <Content Include="Scripts\college\precise.viewmodel.js" />
     <Content Include="Scripts\college\test.controller.js" />
     <Content Include="Scripts\college\test.viewmodel.js" />
     <Content Include="Scripts\highcharts\adapters\standalone-framework.js" />
@@ -526,6 +528,7 @@
     <Content Include="Views\College\_Edit4GTest.cshtml" />
     <Content Include="Views\College\_KpiReport.cshtml" />
     <Content Include="Views\College\_EditKpi.cshtml" />
+    <Content Include="Views\College\_PreciseKpi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

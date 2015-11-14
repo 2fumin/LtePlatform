@@ -1,6 +1,10 @@
 ﻿<div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-8">
+        <p>
+            校园名称：
+            <select data-bind="options: colleges, value: selectedCollege"></select>
+        </p>
         日期：
         <input id="date" data-bind="value: date"/>
         时段：
@@ -8,42 +12,42 @@
         <button class="btn btn-primary" data-bind="click: createKpi">新建或保存KPI</button>
         <table class="table table-hover">
             <thead>
-                <tr>
-                    <td>校园</td>
-                    <td>在线用户数</td>
-                    <td>下行流量</td>
-                    <td>上行流量</td>
-                    <td>RRC连接成功率</td>
-                    <td>E-RAB连接成功率</td>
-                    <td>E-RAB掉线率</td>
-                    <td>2G呼建成功率</td>
-                    <td>3G连接成功率</td>
-                    <td>3G话务量（Erl）</td>
-                    <td>3G掉线率</td>
-                    <td>3G流量</td>
-                    <td></td>
-                </tr>
+            <tr>
+                <td>校园</td>
+                <td>在线用户数</td>
+                <td>下行流量</td>
+                <td>上行流量</td>
+                <td>RRC连接成功率</td>
+                <td>E-RAB连接成功率</td>
+                <td>E-RAB掉线率</td>
+                <td>2G呼建成功率</td>
+                <td>3G连接成功率</td>
+                <td>3G话务量（Erl）</td>
+                <td>3G掉线率</td>
+                <td>3G流量</td>
+                <td></td>
+            </tr>
             </thead>
             <tbody data-bind="foreach: kpi">
-                <tr>
-                    <td data-bind="text: collegeName"></td>
-                    <td data-bind="text: onlineUsers"></td>
-                    <td data-bind="text: downloadFlow + 'GB'"></td>
-                    <td data-bind="text: uploadFlow + 'GB'"></td>
-                    <td data-bind="text: rrcConnection + '%'"></td>
-                    <td data-bind="text: erabConnection + '%'"></td>
-                    <td data-bind="text: erabDrop + '%'"></td>
-                    <td data-bind="text: connection2G + '%'"></td>
-                    <td data-bind="text: connection3G + '%'"></td>
-                    <td data-bind="text: erlang3G"></td>
-                    <td data-bind="text: drop3G + '%'"></td>
-                    <td data-bind="text: flow3G + 'GB'"></td>
-                    <td>
-                        <button class="btn btn-danger" data-bind="click: function () { deleteKpi(collegeName); }">
-                            删除
-                        </button>
-                    </td>
-                </tr>
+            <tr>
+                <td data-bind="text: collegeName"></td>
+                <td data-bind="text: onlineUsers"></td>
+                <td data-bind="text: downloadFlow + 'GB'"></td>
+                <td data-bind="text: uploadFlow + 'GB'"></td>
+                <td data-bind="text: rrcConnection + '%'"></td>
+                <td data-bind="text: erabConnection + '%'"></td>
+                <td data-bind="text: erabDrop + '%'"></td>
+                <td data-bind="text: connection2G + '%'"></td>
+                <td data-bind="text: connection3G + '%'"></td>
+                <td data-bind="text: erlang3G"></td>
+                <td data-bind="text: drop3G + '%'"></td>
+                <td data-bind="text: flow3G + 'GB'"></td>
+                <td>
+                    <button class="btn btn-danger" data-bind="click: function () { deleteKpi(collegeName); }">
+                        删除
+                    </button>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>
