@@ -1,0 +1,88 @@
+﻿<div class="modal fade" id="edit">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" data-bind="text: selectedCollege"></h4>-KPI信息
+            </div>
+            <div class="modal-body form-horizontal" data-bind="with: edit">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">测试时间：</label>
+                    <div class="col-sm-9">
+                        <span class="form-control" data-bind="text: testTime"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">在线用户数：</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" data-bind="value: onlineUsers" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">下行流量（GB）：</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" data-bind="value: downloadFlow" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">上行流量（GB）：</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" data-bind="value: uploadFlow" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">RRC连接成功率-%：</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" data-bind="value: rrcConnection" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">E-RAB连接成功率-%：</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" data-bind="value: erabConnection" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">E-RAB掉线率-%：</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" data-bind="value: erabDrop" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">2G呼建成功率-%：</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" data-bind="value: connection2G" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">3G连接成功率-%：</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" data-bind="value: connection3G" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">3G话务量（Erl）：</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" data-bind="value: erlang3G" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">3G掉线率-%：</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" data-bind="value: drop3G" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">3G流量（GB）：</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" data-bind="value: flow3G" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button class="btn btn-primary" data-bind="click: postKpi">保存</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -46,8 +46,6 @@
         app.hour.subscribe(function () { getTestList(); });
         app.selectedENodeb.subscribe(function (newENodeb) { updateSectorSelection(newENodeb); });
     };
-
-    app.refresh = function () { };
 }
 
 app.addViewModel({

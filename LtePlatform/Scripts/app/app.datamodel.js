@@ -13,6 +13,7 @@
     self.collegeENodebUrl = "/api/CollegeENodeb/";
     self.college3GTestUrl = "/api/College3GTest/";
     self.college4GTestUrl = "/api/College4GTest/";
+    self.collegeKpiUrl = "/api/CollegeKpi/";
 
     self.cellUrl = "/api/Cell/";
 

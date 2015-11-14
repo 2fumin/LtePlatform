@@ -386,6 +386,8 @@
     <Content Include="Content\google\7M5kxD4eGxuhgFaIk95pBfk_vArhqVIZ0nv9q090hN8.woff2" />
     <None Include="Properties\PublishProfiles\Lte2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\college\kpi.controller.js" />
+    <Content Include="Scripts\college\kpi.viewmodel.js" />
     <Content Include="Scripts\college\map.controller.js" />
     <Content Include="Scripts\college\map.viewmodel.js" />
     <Content Include="Scripts\college\test.controller.js" />
@@ -521,6 +523,8 @@
     <Content Include="Views\College\_College4GTest.cshtml" />
     <Content Include="Views\College\_Edit3GTest.cshtml" />
     <Content Include="Views\College\_Edit4GTest.cshtml" />
+    <Content Include="Views\College\_KpiReport.cshtml" />
+    <Content Include="Views\College\_EditKpi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
