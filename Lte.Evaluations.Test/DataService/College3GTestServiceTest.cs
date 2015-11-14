@@ -42,18 +42,17 @@ namespace Lte.Evaluations.Test.DataService
                 }
             }.AsQueryable());
             _collegeRepository.Setup(x => x.Get(It.IsAny<int>())).Returns<int>(
-                id => new CollegeInfo
-                {
-                    Id = id,
-                    Name = "college-1"
-                });
+                id => _collegeRepository.Object.GetAll().FirstOrDefault(
+                    x => x.Id == id));
         }
         
         [Test]
         public void Test_MockValues()
         {
             Assert.IsNotNull(_collegeRepository.Object.GetAll().FirstOrDefault(x => x.Id == 1));
-            Assert.IsNotNull(_collegeRepository.Object.Get(1)); ;
+            Assert.IsNotNull(_collegeRepository.Object.Get(1));
+            Assert.IsNotNull(_collegeRepository.Object.Get(2));
+            Assert.IsNotNull(_collegeRepository.Object.Get(3));
         }
         
         [TestCase(1, "2015-10-10", 4, 15)]
