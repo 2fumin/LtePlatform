@@ -11,5 +11,7 @@ namespace Lte.Parameters.Abstract
     public interface ICollegeRepository : IRepository<CollegeInfo>
     {
         CollegeRegion GetRegion(int id);
+
+        CollegeInfo GetByName(string name);
     }
 }

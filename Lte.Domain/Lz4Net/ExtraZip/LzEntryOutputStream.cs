@@ -7,13 +7,13 @@ namespace Lte.Domain.Lz4Net.ExtraZip
     {
         private Stream _baseStream;
         private readonly Lz4PackageEntry _entry;
-        private readonly Lz4CompressStream _lz;
+        private readonly ExtraCompressStream _lz;
         private readonly long _pos;
 
         public LzEntryOutputStream(Stream stream, Lz4PackageEntry entry, int bufferSize = 0x100000, Lz4Mode mode = 0)
         {
             _baseStream = stream;
-            _lz = new Lz4CompressStream(stream, bufferSize, mode);
+            _lz = new ExtraCompressStream(stream, bufferSize, mode);
             try
             {
                 _pos = stream.Position;

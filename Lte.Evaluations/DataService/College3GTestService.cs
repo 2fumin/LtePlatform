@@ -40,11 +40,10 @@ namespace Lte.Evaluations.DataService
 
         public College3GTestResults GetResult(DateTime date, int hour, string name)
         {
-            CollegeInfo college = _collegeRepository.FirstOrDefault(x => x.Name == name);
+            CollegeInfo college = _collegeRepository.GetByName(name);
             if (college == null) return null;
             DateTime time = date.AddHours(hour);
-            College3GTestResults result = _repository.FirstOrDefault(
-                x => x.TestTime == time && x.CollegeId == college.Id);
+            College3GTestResults result = _repository.GetByCollegeIdAndTime(college.Id, time);
             return result ?? new College3GTestResults
             {
                 TestTime = date.AddHours(hour),

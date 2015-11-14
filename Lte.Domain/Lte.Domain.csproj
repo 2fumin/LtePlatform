@@ -115,7 +115,7 @@
     <Compile Include="Lz4Net\Encryption\PkzipClassicManaged.cs" />
     <Compile Include="Lz4Net\Encryption\ZipAESStream.cs" />
     <Compile Include="Lz4Net\Encryption\ZipAESTransform.cs" />
-    <Compile Include="Lz4Net\ExtraZip\Lz4CompressStream.cs" />
+    <Compile Include="Lz4Net\ExtraZip\ExtraCompressStream.cs" />
     <Compile Include="Lz4Net\ExtraZip\Lz4DecompressStream.cs" />
     <Compile Include="Lz4Net\ExtraZip\Lz4File.cs" />
     <Compile Include="Lz4Net\ExtraZip\Lz4Package.cs" />

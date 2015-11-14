@@ -9,12 +9,12 @@ namespace Lte.Domain.Lz4Net
 {
     public sealed class Lz4CompressionStream : Stream
     {
-        private readonly bool m_closeStream;
-        private byte[] m_compressedBuffer;
-        private Lz4Mode m_compressionMode;
-        private Stream m_targetStream;
-        private readonly byte[] m_writeBuffer;
-        private int m_writeBufferOffset;
+        private readonly bool _closeStream;
+        private byte[] _compressedBuffer;
+        private readonly Lz4Mode _compressionMode;
+        private Stream _targetStream;
+        private readonly byte[] _writeBuffer;
+        private int _writeBufferOffset;
 
         public Lz4CompressionStream(Stream targetStream, Lz4Mode mode = 0, bool closeStream = false)
             : this(targetStream, 0x40000, mode, closeStream)
@@ -28,11 +28,11 @@ namespace Lte.Domain.Lz4Net
 
         public Lz4CompressionStream(Stream targetStream, byte[] writeBuffer, byte[] compressionBuffer, Lz4Mode mode = 0, bool closeStream = false)
         {
-            m_closeStream = closeStream;
-            m_targetStream = targetStream;
-            m_writeBuffer = writeBuffer;
-            m_compressedBuffer = compressionBuffer;
-            m_compressionMode = mode;
+            _closeStream = closeStream;
+            _targetStream = targetStream;
+            _writeBuffer = writeBuffer;
+            _compressedBuffer = compressionBuffer;
+            _compressionMode = mode;
         }
 
         protected override void Dispose(bool disposing)
@@ -42,21 +42,19 @@ namespace Lte.Domain.Lz4Net
                 Flush();
             }
             base.Dispose(disposing);
-            if (m_closeStream && (m_targetStream != null))
+            if (_closeStream)
             {
-                m_targetStream.Dispose();
+                _targetStream?.Dispose();
             }
-            m_targetStream = null;
+            _targetStream = null;
         }
 
         public override void Flush()
         {
-            if (m_writeBufferOffset > 0)
-            {
-                int count = Lz4.Compress(m_writeBuffer, 0, m_writeBufferOffset, ref m_compressedBuffer, m_compressionMode);
-                m_targetStream.Write(m_compressedBuffer, 0, count);
-                m_writeBufferOffset = 0;
-            }
+            if (_writeBufferOffset <= 0) return;
+            var count = Lz4.Compress(_writeBuffer, 0, _writeBufferOffset, ref _compressedBuffer, _compressionMode);
+            _targetStream.Write(_compressedBuffer, 0, count);
+            _writeBufferOffset = 0;
         }
 
         public override int Read(byte[] buffer, int offset, int count)
@@ -71,16 +69,16 @@ namespace Lte.Domain.Lz4Net
 
         public override void SetLength(long value)
         {
-            m_targetStream.SetLength(value);
+            _targetStream.SetLength(value);
         }
 
         public override void Write(byte[] buffer, int offset, int count)
         {
-            int num = m_writeBuffer.Length - m_writeBufferOffset;
+            int num = _writeBuffer.Length - _writeBufferOffset;
             if (count <= num)
             {
-                Buffer.BlockCopy(buffer, offset, m_writeBuffer, m_writeBufferOffset, count);
-                m_writeBufferOffset += count;
+                Buffer.BlockCopy(buffer, offset, _writeBuffer, _writeBufferOffset, count);
+                _writeBufferOffset += count;
                 if (num == 0)
                 {
                     Flush();
@@ -93,29 +91,11 @@ namespace Lte.Domain.Lz4Net
             }
         }
 
-        public override bool CanRead
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public override bool CanRead => false;
 
-        public override bool CanSeek
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public override bool CanSeek => false;
 
-        public override bool CanWrite
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override bool CanWrite => true;
 
         public override long Length
         {

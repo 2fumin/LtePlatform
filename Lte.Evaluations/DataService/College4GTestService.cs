@@ -52,7 +52,7 @@ namespace Lte.Evaluations.DataService
 
         public College4GTestResults GetResult(DateTime date, int hour, string name, string eNodebName, byte sectorId)
         {
-            CollegeInfo college = _collegeRepository.FirstOrDefault(x => x.Name == name);
+            CollegeInfo college = _collegeRepository.GetByName(name);
             if (college == null) return null;
             ENodeb eNodeb = _eNodebRepository.FirstOrDefault(x => x.Name == eNodebName);
             if (eNodeb == null) return null;

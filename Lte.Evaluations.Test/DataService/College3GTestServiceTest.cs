@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Lte.Evaluations.DataService;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
@@ -44,6 +42,9 @@ namespace Lte.Evaluations.Test.DataService
             _collegeRepository.Setup(x => x.Get(It.IsAny<int>())).Returns<int>(
                 id => _collegeRepository.Object.GetAll().FirstOrDefault(
                     x => x.Id == id));
+            _collegeRepository.Setup(x => x.GetByName(It.IsAny<string>())).Returns<string>(
+                name => _collegeRepository.Object.GetAll().FirstOrDefault(
+                    x => x.Name == name));
         }
         
         [Test]
@@ -53,16 +54,21 @@ namespace Lte.Evaluations.Test.DataService
             Assert.IsNotNull(_collegeRepository.Object.Get(1));
             Assert.IsNotNull(_collegeRepository.Object.Get(2));
             Assert.IsNotNull(_collegeRepository.Object.Get(3));
+            Assert.IsNotNull(_collegeRepository.Object.GetByName("college-1"));
+            Assert.IsNotNull(_collegeRepository.Object.GetByName("college-2"));
+            Assert.IsNotNull(_collegeRepository.Object.GetByName("college-3"));
         }
         
         [TestCase(1, "2015-10-10", 4, 15)]
-        public void Test_GetViews_OneTestItem(int collegId, string testDate, int hour, int users)
+        [TestCase(2, "2015-11-10", 3, 3450)]
+        [TestCase(3, "2015-08-07", 11, 2132)]
+        public void Test_GetViews_OneTestItem(int collegeId, string testDate, int hour, int users)
         {
             _repository.MockQueryItems(new List<College3GTestResults>
             {
                 new College3GTestResults
                 {
-                    CollegeId = collegId,
+                    CollegeId = collegeId,
                     TestTime = DateTime.Parse(testDate).AddHours(hour),
                     AccessUsers = users
                 }
@@ -71,8 +77,50 @@ namespace Lte.Evaluations.Test.DataService
             var views = _service.GetViews(DateTime.Parse(testDate), hour).ToList();
             Assert.IsNotNull(views);
             Assert.AreEqual(views.Count,1);
-            Assert.AreEqual(views[0].CollegeName,"college-"+collegId);
-            Assert.AreEqual(views[0].AccessUsers,users);
+            views[0].AssertUsers(collegeId, users);
+        }
+
+        [TestCase(1, "2015-10-10", 4, 15)]
+        [TestCase(2, "2015-11-10", 3, 3450)]
+        [TestCase(3, "2015-08-07", 11, 2132)]
+        public void Test_GetResult_OneTestItem(int collegeId, string testDate, int hour, int users)
+        {
+            _repository.MockQueryItems(new List<College3GTestResults>
+            {
+                new College3GTestResults
+                {
+                    CollegeId = collegeId,
+                    TestTime = DateTime.Parse(testDate).AddHours(hour),
+                    AccessUsers = users
+                }
+            }.AsQueryable());
+
+            var result = _service.GetResult(DateTime.Parse(testDate), hour, "colleg-" + collegeId);
+            Assert.IsNotNull(result);
+            result.AssertUsers(users);
+        }
+
+        [TestCase(1, new[] {1, 2}, "2015-10-10", 4, new[] {15, 11})]
+        [TestCase(2, new[] { 2, 3 }, "2015-10-10", 4, new[] { 15, 11 })]
+        [TestCase(3, new[] { 1, 2, 3 }, "2015-7-10", 4, new[] { 15, 11, 18 })]
+        [TestCase(4, new[] { 2, 3, 1 }, "2015-6-10", 9, new[] { 14, 11, 88 })]
+        public void Test_GetViews_MultiItems_SingleTestDate(int testNo, int[] collegeIds, string testDate, int hour,
+            int[] users)
+        {
+            var resultList = collegeIds.Select((t, i) => new College3GTestResults
+            {
+                CollegeId = t,
+                TestTime = DateTime.Parse(testDate).AddHours(hour),
+                AccessUsers = users[i]
+            }).ToList();
+            _repository.MockQueryItems(resultList.AsQueryable());
+            var views = _service.GetViews(DateTime.Parse(testDate), hour).ToList();
+            Assert.IsNotNull(views);
+            Assert.AreEqual(views.Count, collegeIds.Length);
+            for (var i = 0; i < collegeIds.Length; i++)
+            {
+                views[i].AssertUsers(collegeIds[i], users[i]);
+            }
         }
     }
 }

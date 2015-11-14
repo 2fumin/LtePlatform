@@ -18,5 +18,10 @@ namespace Lte.Parameters.Concrete
             var query = Entities.Where(x => x.Id == id).Select(x => x.CollegeRegion);
             return query.Any() ? query.First() : null;
         }
+
+        public CollegeInfo GetByName(string name)
+        {
+            return FirstOrDefault(x => x.Name == name);
+        }
     }
 }

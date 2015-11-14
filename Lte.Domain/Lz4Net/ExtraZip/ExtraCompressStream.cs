@@ -4,7 +4,7 @@ using Lte.Domain.Common;
 
 namespace Lte.Domain.Lz4Net.ExtraZip
 {
-    public class Lz4CompressStream : Stream
+    public class ExtraCompressStream : Stream
     {
         private readonly bool _closeStream;
         private byte[] _compressedBuffer;
@@ -15,16 +15,16 @@ namespace Lte.Domain.Lz4Net.ExtraZip
         private readonly byte[] _writeBuffer;
         private int _writeBufferOffset;
 
-        public Lz4CompressStream([NotNull] Stream targetStream, 
+        public ExtraCompressStream([NotNull] Stream targetStream, 
             int bufferSize = 0x100000, Lz4Mode compressionMode = 0, bool closeStream = false)
         {
             if (targetStream == null)
             {
-                throw new ArgumentNullException("targetStream");
+                throw new ArgumentNullException(nameof(targetStream));
             }
             if (bufferSize <= 0)
             {
-                throw new ArgumentOutOfRangeException("bufferSize");
+                throw new ArgumentOutOfRangeException(nameof(bufferSize));
             }
             _targetStream = targetStream;
             _compressionMode = compressionMode;
@@ -87,15 +87,15 @@ namespace Lte.Domain.Lz4Net.ExtraZip
             }
             if (buffer == null)
             {
-                throw new ArgumentNullException("buffer");
+                throw new ArgumentNullException(nameof(buffer));
             }
             if (offset < 0)
             {
-                throw new ArgumentOutOfRangeException("offset");
+                throw new ArgumentOutOfRangeException(nameof(offset));
             }
             if (count < 0)
             {
-                throw new ArgumentOutOfRangeException("count");
+                throw new ArgumentOutOfRangeException(nameof(count));
             }
             if ((offset + count) > buffer.Length)
             {
@@ -132,39 +132,15 @@ namespace Lte.Domain.Lz4Net.ExtraZip
             }
         }
 
-        public override bool CanRead
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public override bool CanRead => false;
 
-        public override bool CanSeek
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public override bool CanSeek => false;
 
-        public override bool CanWrite
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override bool CanWrite => true;
 
         public long CompressedLength { get; private set; }
 
-        public override long Length
-        {
-            get
-            {
-                return _length;
-            }
-        }
+        public override long Length => _length;
 
         public override long Position
         {
