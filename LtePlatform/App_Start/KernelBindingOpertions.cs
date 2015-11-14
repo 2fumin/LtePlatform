@@ -46,6 +46,8 @@ namespace LtePlatform
             ninjectKernel.Bind<College3GTestService>().ToSelf();
 
             ninjectKernel.Bind<College4GTestService>().ToSelf();
+
+            ninjectKernel.Bind<CollegeKpiService>().ToSelf();
         }
     }
 }

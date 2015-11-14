@@ -84,6 +84,7 @@
     <Compile Include="DataService\College3GTestService.cs" />
     <Compile Include="DataService\College4GTestService.cs" />
     <Compile Include="DataService\CollegeENodebService.cs" />
+    <Compile Include="DataService\CollegeKpiService.cs" />
     <Compile Include="DataService\CollegeStatService.cs" />
     <Compile Include="DataService\ENodebQueryService.cs" />
     <Compile Include="DataService\TownQueryService.cs" />

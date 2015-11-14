@@ -80,7 +80,7 @@ namespace Lte.Evaluations.DataService
             var college = _collegeRepository.GetByName(name);
             if (college == null) return null;
             var time = recordDate.AddHours(hour);
-            return _repository.GetByTime(time);
+            return _repository.GetByCollegeIdAndTime(college.Id, time);
         }
     }
 }

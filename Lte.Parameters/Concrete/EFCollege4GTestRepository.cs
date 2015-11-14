@@ -17,10 +17,5 @@ namespace Lte.Parameters.Concrete
         {
             return FirstOrDefault(x => x.CollegeId == collegeId && x.TestTime == time);
         }
-
-        public College4GTestResults GetByTime(DateTime time)
-        {
-            return FirstOrDefault(x => x.TestTime == time);
-        }
     }
 }

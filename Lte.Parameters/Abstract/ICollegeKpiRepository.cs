@@ -10,5 +10,8 @@ namespace Lte.Parameters.Abstract
 {
     public interface ICollegeKpiRepository : IRepository<CollegeKpi>
     {
+        IEnumerable<CollegeKpi> GetList(DateTime time);
+
+        CollegeKpi GetByCollegeIdAndTime(int collegeId, DateTime time);
     }
 }
