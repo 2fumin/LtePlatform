@@ -31,7 +31,7 @@ namespace Lte.Evaluations.DataService
         public List<ENodeb> GetAllWithNames(string city, string district, string town, string eNodebName,
             string address)
         {
-            IEnumerable<Town> _townList = _townRepository.QueryTowns(city, district, town).ToList();
+            IEnumerable<Town> _townList = _townRepository.QueryTowns(city, district, town);
             return (!_townList.Any())
                 ? null
                 : Query(eNodebName, address, _townList).ToList();

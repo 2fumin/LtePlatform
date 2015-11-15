@@ -20,23 +20,12 @@
        @using (Html.BeginForm("KpiImport", "Kpi",
                 FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
        {
+           Html.RenderPartial("_AlertPanel");
            <h4>指标文件选择</h4>
            <div class="form-group">
                <label class="col-md-4 control-label">每日KPI Excel文件选择：</label>
                <div class="col-md-6">
-                   <input name="dailyKpi" class="form-control" type="text" accept=".xls, .xlsx"/>
-               </div>
-           </div>
-           <div class="form-group">
-               <label class="col-md-4 control-label">每日KPI Excel文件选择：</label>
-               <div class="col-md-6">
-                   <input name="alarmZte" class="form-control" type="text" accept=".csv"/>
-               </div>
-           </div>
-           <div class="form-group">
-               <label class="col-md-4 control-label">华为4G告警导入：</label>
-               <div class="col-md-6">
-                   <input name="alarmHw" class="form-control" type="text" accept=".csv"/>
+                   <input name="dailyKpi" class="form-control" type="file" accept=".xls, .xlsx"/>
                </div>
            </div>
            <div class="form-group">
@@ -49,8 +38,7 @@
        }
 </div>
     <div class="col-md-4">
-        @section SPAViews{
-        }
+        
     </div>
 </div>
 

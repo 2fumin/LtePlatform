@@ -72,7 +72,8 @@ namespace Lte.Evaluations.DataService
 
         public CdmaRegionStatDetails QueryStatDetails(DateTime begin, DateTime end, string city)
         {
-            return new CdmaRegionStatDetails(QueryStatTrend(begin, end, city));
+            var trend = QueryStatTrend(begin, end, city);
+            return trend == null ? null : new CdmaRegionStatDetails(trend);
         }
 
         public static List<IEnumerable<CdmaRegionStatView>> GenerateViewList(List<CdmaRegionStat> statList,

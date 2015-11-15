@@ -2,8 +2,8 @@
     sendRequest(app.dataModel.collegeKpiUrl, "GET", {
          date: app.date, hour: app.hour
     }, function (data) {
-        app.kpi.removeAll();
-        app.kpi.push.apply(app.kpi, data);
+        app.kpis.removeAll();
+        app.kpis.push.apply(app.kpis, data);
     });
 };
 

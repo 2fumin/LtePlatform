@@ -1,0 +1,37 @@
+﻿
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <div class="alert alert-success">
+        <a href="#" class="close" data-dismiss="alert">
+            &times;
+        </a>
+        <strong>@ViewBag.Message</strong>
+    </div>
+}
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="alert alert-danger">
+        <a href="#" class="close" data-dismiss="alert">
+            &times;
+        </a>
+        <strong>@ViewBag.ErrorMessage</strong>
+    </div>
+}
+@if (!string.IsNullOrEmpty(ViewBag.WarningMessage))
+{
+    <div class="alert alert-warning">
+        <a href="#" class="close" data-dismiss="alert">
+            &times;
+        </a>
+        <strong>@ViewBag.WarningMessage</strong>
+    </div>
+}
+@if (!string.IsNullOrEmpty(ViewBag.InfoMessage))
+{
+    <div class="alert alert-info">
+        <a href="#" class="close" data-dismiss="alert">
+            &times;
+        </a>
+        <strong>@ViewBag.InfoMessage</strong>
+    </div>
+}

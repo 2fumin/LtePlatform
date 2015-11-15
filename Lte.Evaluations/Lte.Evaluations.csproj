@@ -88,6 +88,7 @@
     <Compile Include="DataService\CollegePreciseService.cs" />
     <Compile Include="DataService\CollegeStatService.cs" />
     <Compile Include="DataService\ENodebQueryService.cs" />
+    <Compile Include="DataService\KpiImportService.cs" />
     <Compile Include="DataService\PreciseStatService.cs" />
     <Compile Include="DataService\TownQueryService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

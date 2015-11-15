@@ -24,9 +24,10 @@ namespace LtePlatform.Controllers.Kpi
             return _service.QueryLastDateStat(statDate, city);
         }
 
-        public CdmaRegionStatDetails GetKpiDetails(string city, DateTime beginDate, DateTime endDate)
+        public IHttpActionResult GetKpiDetails(string city, DateTime beginDate, DateTime endDate)
         {
-            return _service.QueryStatDetails(beginDate, endDate, city);
+            var details = _service.QueryStatDetails(beginDate, endDate, city);
+            return details == null ? (IHttpActionResult)BadRequest("查询日期内的指标失败！") : Ok(details);
         }
     }
 }

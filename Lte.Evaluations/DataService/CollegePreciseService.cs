@@ -26,7 +26,7 @@ namespace Lte.Evaluations.DataService
 
         public IEnumerable<CellPreciseKpiView> Get(string collegeName, DateTime begin, DateTime end)
         {
-            var ids = _repository.GetIds(collegeName);
+            var ids = _repository.GetCellIds(collegeName);
             var query =
                 ids.Select(_cellRepository.Get).Where(cell => cell != null)
                     .Select(x => new CellPreciseKpiView(x, _eNodebRepository)).ToList();

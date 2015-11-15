@@ -13,5 +13,16 @@ namespace LtePlatform.Controllers
         {
             return View();
         }
+
+        public ActionResult AlarmImport()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AlarmPost()
+        {
+            return View("AlarmImport");
+        }
     }
 }

@@ -10,5 +10,6 @@ namespace Lte.Parameters.Abstract
 {
     public interface ITownRepository : IRepository<Town>
     {
+        IEnumerable<Town> QueryTowns(string city, string district, string town);
     }
 }

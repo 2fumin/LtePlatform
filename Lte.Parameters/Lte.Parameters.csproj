@@ -162,6 +162,10 @@
     <Compile Include="Entities\OptimizeRegion.cs" />
     <Compile Include="Entities\PreciseCoverage4G.cs" />
     <Compile Include="Entities\PreciseCoverage4GCsv.cs" />
+    <Compile Include="Entities\TopConnection3GCell.cs" />
+    <Compile Include="Entities\TopConnection3GCellExcel.cs" />
+    <Compile Include="Entities\TopDrop2GCell.cs" />
+    <Compile Include="Entities\TopDrop2GCellExcel.cs" />
     <Compile Include="Entities\Town.cs" />
     <Compile Include="MockOperations\MockItemsAudited.cs" />
     <Compile Include="MockOperations\MockItemsRepository.cs" />

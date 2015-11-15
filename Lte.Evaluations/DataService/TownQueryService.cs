@@ -8,20 +8,18 @@ using Lte.Parameters.Abstract;
 
 namespace Lte.Evaluations.DataService
 {
-    public static class TownQueryService
+    public class TownQueryService
     {
-        public static IEnumerable<Town> QueryTowns(this ITownRepository townRepository,
-            string city, string district, string town)
+        private readonly ITownRepository _repository;
+
+        public TownQueryService(ITownRepository repository)
         {
-            const string flag = "=All=";
-            city = city ?? flag;
-            district = district ?? flag;
-            town = town ?? flag;
-            return townRepository.GetAllList().Where(x =>
-                (x.TownName == town || town.IndexOf(flag, StringComparison.Ordinal) >= 0)
-                && (x.DistrictName == district || district.IndexOf(flag, StringComparison.Ordinal) >= 0)
-                && (x.CityName == city || city.IndexOf(flag, StringComparison.Ordinal) >= 0));
+            _repository = repository;
         }
 
+        public List<string> GetCities()
+        {
+            return _repository.GetAll().Select(x => x.CityName).Distinct().ToList();
+        }
     }
 }

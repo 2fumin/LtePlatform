@@ -3,7 +3,7 @@
 
     app.colleges = ko.observableArray([]);
     app.selectedCollege = ko.observable();
-    app.kpi = ko.observableArray([]);
+    app.kpis = ko.observableArray([]);
     app.edit = ko.observable();
     app.date = ko.observable((new Date()).Format("yyyy-MM-dd"));
     app.hour = ko.observable(8);
@@ -11,9 +11,6 @@
 
     app.initialize = function () {
         $("#date").datepicker({ dateFormat: 'yy-mm-dd' });
-        app.date.subscribe(function () { getKpiList(); });
-        app.hour.subscribe(function () { getKpiList(); });
-        getKpiList();
 
         $.ajax({
             method: 'get',
@@ -29,6 +26,9 @@
                 }
             }
         });
+
+        app.date.subscribe(function () { getKpiList(); });
+        app.hour.subscribe(function () { getKpiList(); });
     };
 }
 

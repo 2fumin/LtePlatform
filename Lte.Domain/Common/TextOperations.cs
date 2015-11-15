@@ -32,5 +32,19 @@ namespace Lte.Domain.Common
             return Regex.IsMatch(ip, regexText);
         }
 
+        public static string GetSubStringInFirstPairOfChars(this string line, char first, char second)
+        {
+            int index1 = line.IndexOf(first);
+            int index2 = line.IndexOf(second);
+            if (index2 == -1) { index2 = line.Length; }
+            string ipData = line.Substring(index1 + 1, index2 - index1 - 1);
+            return ipData;
+        }
+
+        public static string GetSubStringInFirstBracket(this string line)
+        {
+            return line.GetSubStringInFirstPairOfChars('(', ')');
+        }
+
     }
 }

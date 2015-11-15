@@ -547,6 +547,8 @@
     <Content Include="Views\College\_KpiReport.cshtml" />
     <Content Include="Views\College\_EditKpi.cshtml" />
     <Content Include="Views\College\_PreciseKpi.cshtml" />
+    <None Include="Views\Parameters\AlarmImport.cshtml" />
+    <Content Include="Views\Shared\_AlertPanel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
