@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Net.Http.Headers;
 
 namespace LtePlatform.Areas.HelpPage
@@ -18,11 +19,11 @@ namespace LtePlatform.Areas.HelpPage
         {
             if (mediaType == null)
             {
-                throw new ArgumentNullException("mediaType");
+                throw new ArgumentNullException(nameof(mediaType));
             }
 
-            ActionName = String.Empty;
-            ControllerName = String.Empty;
+            ActionName = string.Empty;
+            ControllerName = string.Empty;
             MediaType = mediaType;
             ParameterNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         }
@@ -37,7 +38,7 @@ namespace LtePlatform.Areas.HelpPage
         {
             if (type == null)
             {
-                throw new ArgumentNullException("type");
+                throw new ArgumentNullException(nameof(type));
             }
 
             ParameterType = type;
@@ -54,19 +55,19 @@ namespace LtePlatform.Areas.HelpPage
         {
             if (!Enum.IsDefined(typeof(SampleDirection), sampleDirection))
             {
-                throw new InvalidEnumArgumentException("sampleDirection", (int)sampleDirection, typeof(SampleDirection));
+                throw new InvalidEnumArgumentException(nameof(sampleDirection), (int)sampleDirection, typeof(SampleDirection));
             }
             if (controllerName == null)
             {
-                throw new ArgumentNullException("controllerName");
+                throw new ArgumentNullException(nameof(controllerName));
             }
             if (actionName == null)
             {
-                throw new ArgumentNullException("actionName");
+                throw new ArgumentNullException(nameof(actionName));
             }
             if (parameterNames == null)
             {
-                throw new ArgumentNullException("parameterNames");
+                throw new ArgumentNullException(nameof(parameterNames));
             }
 
             ControllerName = controllerName;
@@ -88,7 +89,7 @@ namespace LtePlatform.Areas.HelpPage
         {
             if (mediaType == null)
             {
-                throw new ArgumentNullException("mediaType");
+                throw new ArgumentNullException(nameof(mediaType));
             }
 
             MediaType = mediaType;
@@ -100,7 +101,7 @@ namespace LtePlatform.Areas.HelpPage
         /// <value>
         /// The name of the controller.
         /// </value>
-        public string ControllerName { get; private set; }
+        public string ControllerName { get; }
 
         /// <summary>
         /// Gets the name of the action.
@@ -108,7 +109,7 @@ namespace LtePlatform.Areas.HelpPage
         /// <value>
         /// The name of the action.
         /// </value>
-        public string ActionName { get; private set; }
+        public string ActionName { get; }
 
         /// <summary>
         /// Gets the media type.
@@ -116,30 +117,30 @@ namespace LtePlatform.Areas.HelpPage
         /// <value>
         /// The media type.
         /// </value>
-        public MediaTypeHeaderValue MediaType { get; private set; }
+        public MediaTypeHeaderValue MediaType { get; }
 
         /// <summary>
         /// Gets the parameter names.
         /// </summary>
-        public HashSet<string> ParameterNames { get; private set; }
+        public HashSet<string> ParameterNames { get; }
 
-        public Type ParameterType { get; private set; }
+        public Type ParameterType { get; }
 
         /// <summary>
         /// Gets the <see cref="SampleDirection"/>.
         /// </summary>
-        public SampleDirection? SampleDirection { get; private set; }
+        public SampleDirection? SampleDirection { get; }
 
         public override bool Equals(object obj)
         {
-            HelpPageSampleKey otherKey = obj as HelpPageSampleKey;
+            var otherKey = obj as HelpPageSampleKey;
             if (otherKey == null)
             {
                 return false;
             }
 
-            return String.Equals(ControllerName, otherKey.ControllerName, StringComparison.OrdinalIgnoreCase) &&
-                String.Equals(ActionName, otherKey.ActionName, StringComparison.OrdinalIgnoreCase) &&
+            return string.Equals(ControllerName, otherKey.ControllerName, StringComparison.OrdinalIgnoreCase) &&
+                string.Equals(ActionName, otherKey.ActionName, StringComparison.OrdinalIgnoreCase) &&
                 (MediaType == otherKey.MediaType || (MediaType != null && MediaType.Equals(otherKey.MediaType))) &&
                 ParameterType == otherKey.ParameterType &&
                 SampleDirection == otherKey.SampleDirection &&
@@ -148,7 +149,7 @@ namespace LtePlatform.Areas.HelpPage
 
         public override int GetHashCode()
         {
-            int hashCode = ControllerName.ToUpperInvariant().GetHashCode() ^ ActionName.ToUpperInvariant().GetHashCode();
+            var hashCode = ControllerName.ToUpperInvariant().GetHashCode() ^ ActionName.ToUpperInvariant().GetHashCode();
             if (MediaType != null)
             {
                 hashCode ^= MediaType.GetHashCode();
@@ -161,12 +162,8 @@ namespace LtePlatform.Areas.HelpPage
             {
                 hashCode ^= ParameterType.GetHashCode();
             }
-            foreach (string parameterName in ParameterNames)
-            {
-                hashCode ^= parameterName.ToUpperInvariant().GetHashCode();
-            }
 
-            return hashCode;
+            return ParameterNames.Aggregate(hashCode, (current, parameterName) => current ^ parameterName.ToUpperInvariant().GetHashCode());
         }
     }
 }

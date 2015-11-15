@@ -6,7 +6,7 @@ namespace TraceParser.Eutra
     [Serializable]
     public class ParametersCDMA2000_r11
     {
-        public void InitDefaults()
+        public static void InitDefaults()
         {
         }
 
@@ -21,7 +21,7 @@ namespace TraceParser.Eutra
         [Serializable]
         public class parameters1XRTT_r11_Type
         {
-            public void InitDefaults()
+            public static void InitDefaults()
             {
             }
 
@@ -48,11 +48,11 @@ namespace TraceParser.Eutra
             {
                 public static readonly PerDecoder Instance = new PerDecoder();
 
-                public parameters1XRTT_r11_Type Decode(BitArrayInputStream input)
+                public static parameters1XRTT_r11_Type Decode(BitArrayInputStream input)
                 {
-                    parameters1XRTT_r11_Type type = new parameters1XRTT_r11_Type();
-                    type.InitDefaults();
-                    BitMaskStream stream = new BitMaskStream(input, 7);
+                    var type = new parameters1XRTT_r11_Type();
+                    InitDefaults();
+                    var stream = new BitMaskStream(input, 7);
                     if (stream.Read())
                     {
                         type.csfb_RegistrationParam1XRTT_r11 = CSFB_RegistrationParam1XRTT.PerDecoder.Instance.Decode(input);
@@ -71,7 +71,7 @@ namespace TraceParser.Eutra
                     }
                     if (stream.Read())
                     {
-                        type.ac_BarringConfig1XRTT_r11 = AC_BarringConfig1XRTT_r9.PerDecoder.Instance.Decode(input);
+                        type.ac_BarringConfig1XRTT_r11 = AC_BarringConfig1XRTT_r9.PerDecoder.Decode(input);
                     }
                     if (stream.Read())
                     {
@@ -79,7 +79,7 @@ namespace TraceParser.Eutra
                     }
                     if (stream.Read())
                     {
-                        int nBits = 1;
+                        const int nBits = 1;
                         type.csfb_DualRxTxSupport_r11 = (csfb_DualRxTxSupport_r11_Enum)input.readBits(nBits);
                     }
                     return type;
@@ -90,7 +90,7 @@ namespace TraceParser.Eutra
         [Serializable]
         public class parametersHRPD_r11_Type
         {
-            public void InitDefaults()
+            public static void InitDefaults()
             {
             }
 
@@ -102,11 +102,11 @@ namespace TraceParser.Eutra
             {
                 public static readonly PerDecoder Instance = new PerDecoder();
 
-                public parametersHRPD_r11_Type Decode(BitArrayInputStream input)
+                public static parametersHRPD_r11_Type Decode(BitArrayInputStream input)
                 {
-                    parametersHRPD_r11_Type type = new parametersHRPD_r11_Type();
-                    type.InitDefaults();
-                    BitMaskStream stream = new BitMaskStream(input, 1);
+                    var type = new parametersHRPD_r11_Type();
+                    InitDefaults();
+                    var stream = new BitMaskStream(input, 1);
                     type.preRegistrationInfoHRPD_r11 = PreRegistrationInfoHRPD.PerDecoder.Instance.Decode(input);
                     if (stream.Read())
                     {
@@ -121,11 +121,11 @@ namespace TraceParser.Eutra
         {
             public static readonly PerDecoder Instance = new PerDecoder();
 
-            public ParametersCDMA2000_r11 Decode(BitArrayInputStream input)
+            public static ParametersCDMA2000_r11 Decode(BitArrayInputStream input)
             {
-                ParametersCDMA2000_r11 _r = new ParametersCDMA2000_r11();
-                _r.InitDefaults();
-                BitMaskStream stream = (input.readBit() != 0) ? new BitMaskStream(input, 3) : new BitMaskStream(input, 3);
+                var _r = new ParametersCDMA2000_r11();
+                InitDefaults();
+                var stream = (input.readBit() != 0) ? new BitMaskStream(input, 3) : new BitMaskStream(input, 3);
                 if (stream.Read())
                 {
                     _r.systemTimeInfo_r11 = systemTimeInfo_r11_Type.PerDecoder.Instance.Decode(input);
@@ -133,11 +133,11 @@ namespace TraceParser.Eutra
                 _r.searchWindowSize_r11 = input.readBits(4);
                 if (stream.Read())
                 {
-                    _r.parametersHRPD_r11 = parametersHRPD_r11_Type.PerDecoder.Instance.Decode(input);
+                    _r.parametersHRPD_r11 = parametersHRPD_r11_Type.PerDecoder.Decode(input);
                 }
                 if (stream.Read())
                 {
-                    _r.parameters1XRTT_r11 = parameters1XRTT_r11_Type.PerDecoder.Instance.Decode(input);
+                    _r.parameters1XRTT_r11 = parameters1XRTT_r11_Type.PerDecoder.Decode(input);
                 }
                 return _r;
             }
@@ -146,7 +146,7 @@ namespace TraceParser.Eutra
         [Serializable]
         public class systemTimeInfo_r11_Type
         {
-            public void InitDefaults()
+            public static void InitDefaults()
             {
             }
 
@@ -160,8 +160,8 @@ namespace TraceParser.Eutra
 
                 public systemTimeInfo_r11_Type Decode(BitArrayInputStream input)
                 {
-                    systemTimeInfo_r11_Type type = new systemTimeInfo_r11_Type();
-                    type.InitDefaults();
+                    var type = new systemTimeInfo_r11_Type();
+                    InitDefaults();
                     switch (input.readBits(1))
                     {
                         case 0:

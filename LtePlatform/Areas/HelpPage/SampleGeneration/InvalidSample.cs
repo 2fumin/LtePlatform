@@ -11,7 +11,7 @@ namespace LtePlatform.Areas.HelpPage
         {
             if (errorMessage == null)
             {
-                throw new ArgumentNullException("errorMessage");
+                throw new ArgumentNullException(nameof(errorMessage));
             }
             ErrorMessage = errorMessage;
         }

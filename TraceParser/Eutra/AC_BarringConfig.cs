@@ -6,7 +6,7 @@ namespace TraceParser.Eutra
     [Serializable]
     public class AC_BarringConfig
     {
-        public void InitDefaults()
+        public static void InitDefaults()
         {
         }
 
@@ -20,11 +20,11 @@ namespace TraceParser.Eutra
         {
             public static readonly PerDecoder Instance = new PerDecoder();
 
-            public AC_BarringConfig Decode(BitArrayInputStream input)
+            public static AC_BarringConfig Decode(BitArrayInputStream input)
             {
-                AC_BarringConfig config = new AC_BarringConfig();
-                config.InitDefaults();
-                int nBits = 4;
+                var config = new AC_BarringConfig();
+                InitDefaults();
+                var nBits = 4;
                 config.ac_BarringFactor = (ac_BarringFactor_Enum)input.readBits(nBits);
                 nBits = 3;
                 config.ac_BarringTime = (ac_BarringTime_Enum)input.readBits(nBits);
@@ -37,7 +37,7 @@ namespace TraceParser.Eutra
     [Serializable]
     public class AC_BarringConfig1XRTT_r9
     {
-        public void InitDefaults()
+        public static void InitDefaults()
         {
         }
 
@@ -65,10 +65,10 @@ namespace TraceParser.Eutra
         {
             public static readonly PerDecoder Instance = new PerDecoder();
 
-            public AC_BarringConfig1XRTT_r9 Decode(BitArrayInputStream input)
+            public static AC_BarringConfig1XRTT_r9 Decode(BitArrayInputStream input)
             {
-                AC_BarringConfig1XRTT_r9 _r = new AC_BarringConfig1XRTT_r9();
-                _r.InitDefaults();
+                var _r = new AC_BarringConfig1XRTT_r9();
+                InitDefaults();
                 _r.ac_Barring0to9_r9 = input.readBits(6);
                 _r.ac_Barring10_r9 = input.readBits(3);
                 _r.ac_Barring11_r9 = input.readBits(3);

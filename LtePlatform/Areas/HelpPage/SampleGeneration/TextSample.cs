@@ -11,12 +11,12 @@ namespace LtePlatform.Areas.HelpPage
         {
             if (text == null)
             {
-                throw new ArgumentNullException("text");
+                throw new ArgumentNullException(nameof(text));
             }
             Text = text;
         }
 
-        public string Text { get; private set; }
+        public string Text { get; }
 
         public override bool Equals(object obj)
         {

@@ -6,7 +6,7 @@ namespace TraceParser.Eutra
     [Serializable]
     public class SIB8_PerPLMN_r11
     {
-        public void InitDefaults()
+        public static void InitDefaults()
         {
         }
 
@@ -17,7 +17,7 @@ namespace TraceParser.Eutra
         [Serializable]
         public class parametersCDMA2000_r11_Type
         {
-            public void InitDefaults()
+            public static void InitDefaults()
             {
             }
 
@@ -31,12 +31,12 @@ namespace TraceParser.Eutra
 
                 public parametersCDMA2000_r11_Type Decode(BitArrayInputStream input)
                 {
-                    parametersCDMA2000_r11_Type type = new parametersCDMA2000_r11_Type();
-                    type.InitDefaults();
+                    var type = new parametersCDMA2000_r11_Type();
+                    InitDefaults();
                     switch (input.readBits(1))
                     {
                         case 0:
-                            type.explicitValue = ParametersCDMA2000_r11.PerDecoder.Instance.Decode(input);
+                            type.explicitValue = ParametersCDMA2000_r11.PerDecoder.Decode(input);
                             return type;
 
                         case 1:
@@ -51,10 +51,10 @@ namespace TraceParser.Eutra
         {
             public static readonly PerDecoder Instance = new PerDecoder();
 
-            public SIB8_PerPLMN_r11 Decode(BitArrayInputStream input)
+            public static SIB8_PerPLMN_r11 Decode(BitArrayInputStream input)
             {
-                SIB8_PerPLMN_r11 _r = new SIB8_PerPLMN_r11();
-                _r.InitDefaults();
+                var _r = new SIB8_PerPLMN_r11();
+                InitDefaults();
                 _r.plmn_Identity_r11 = input.readBits(3) + 1;
                 _r.parametersCDMA2000_r11 = parametersCDMA2000_r11_Type.PerDecoder.Instance.Decode(input);
                 return _r;
