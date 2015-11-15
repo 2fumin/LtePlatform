@@ -1,5 +1,5 @@
 ﻿var queryCells = function () {
-    sendRequest("/api/CollegePrecise/", "GET", {
+    sendRequest(app.dataModel.collegePreciseUrl, "GET", {
         collegeName: app.selectedCollege(),
         begin: app.startDate(),
         end: app.endDate()
@@ -27,29 +27,90 @@ var queryPrecise = function (cell) {
     var secondRates = [];
     var thirdRates = [];
     var mrs = [];
-    var setting = this.setting;
     $.ajax({
-        url: "/api/QueryPreciseStat/",
+        url: app.dataModel.preciseStatUrl,
         type: "GET",
         dataType: "json",
         data: data,
         success: function (result) {
             $(result).each(function (index) {
-                dates.push(result[index].DateString);
-                mrs.push(result[index].TotalMrs);
-                firstRates.push(result[index].FirstRate);
-                secondRates.push(result[index].SecondRate);
-                thirdRates.push(result[index].ThirdRate);
+                dates.push(result[index].dateString);
+                mrs.push(result[index].totalMrs);
+                firstRates.push(result[index].firstRate);
+                secondRates.push(result[index].secondRate);
+                thirdRates.push(result[index].thirdRate);
             });
-            setting.categories = dates;
-            setting.xLabel = "日期";
-            setting.setPrimaryYAxis('次', 'MR数量');
-            setting.addColumnSeries(mrs, 'MR数量', '次', 0);
-            setting.addYAxis('叠重覆盖率', '%', 2);
-            setting.addLineSeries(firstRates, "第一邻区重叠覆盖率(%)", '%', 1);
-            setting.addLineSeries(secondRates, "第二邻区重叠覆盖率(%)", '%', 1);
-            setting.addLineSeries(thirdRates, "第三邻区重叠覆盖率(%)", '%', 1);
-            $(dom.tag).showChartDialog(setting.title, setting.getOptions(), dom.width, dom.height);
+
+            chart.xAxis[0].categories = dates;
+            chart.xAxis[0].title.text = "日期";
+
+            chart.yAxis[0].title.text = 'MR数量';
+            chart.yAxis[0].labels.format = '{value} 次';
+            chart.yAxis.push({
+                title: {
+                    text: '重叠覆盖率',
+                    style: {
+                        color: Highcharts.getOptions().colors[1]
+                    }
+                },
+                labels: {
+                    format: '{value} %',
+                    style: {
+                        color: Highcharts.getOptions().colors[1]
+                    }
+                },
+                opposite: true
+            });
+
+            chart.series.push({
+                type: 'column',
+                name: 'MR数量',
+                data: mrs
+            });
+            chart.series.push({
+                name: '第一邻区重叠覆盖率(%)',
+                type: 'spline',
+                yAxis: 1,
+                data: firstRates,
+                tooltip: {
+                    valueSuffix: '%'
+                }
+            });
+            chart.series.push({
+                name: '第二邻区重叠覆盖率(%)',
+                type: 'spline',
+                yAxis: 1,
+                data: secondRates,
+                tooltip: {
+                    valueSuffix: '%'
+                }
+            });
+            chart.series.push({
+                name: '第三邻区重叠覆盖率(%)',
+                type: 'spline',
+                yAxis: 1,
+                data: thirdRates,
+                tooltip: {
+                    valueSuffix: '%'
+                }
+            });
+
+            $(dom.tag).dialog({
+                modal: true,
+                title: chart.title.text,
+                hide: 'slide',
+                width: dom.width,
+                height: dom.height,
+                buttons: {
+                    '关闭': function () {
+                        $(dom.tag).dialog("close");
+                    }
+                },
+                open: function () {
+                    $(dom.tag).html("");
+                    $(dom.tag).highcharts(chart.options);
+                }
+            });
         }
     });
 };

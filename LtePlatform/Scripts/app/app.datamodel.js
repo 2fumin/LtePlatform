@@ -6,6 +6,7 @@
 
     self.cityListUrl = "/api/CityList";
     self.kpiDataListUrl = "/api/KpiDataList";
+    self.preciseStatUrl = "/api/PreciseStat/";
 
     self.collegeQueryUrl = "/api/CollegeQuery";
     self.collegeRegionUrl = "/api/CollegeRegion";
@@ -14,6 +15,7 @@
     self.college3GTestUrl = "/api/College3GTest/";
     self.college4GTestUrl = "/api/College4GTest/";
     self.collegeKpiUrl = "/api/CollegeKpi/";
+    self.collegePreciseUrl = "/api/CollegePrecise/";
 
     self.cellUrl = "/api/Cell/";
 
