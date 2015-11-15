@@ -33,6 +33,8 @@ namespace LtePlatform
 
             ninjectKernel.Bind<IIndoorDistributioinRepository>().To<EFIndoorDistributionRepository>();
 
+            ninjectKernel.Bind<IPreciseCoverage4GRepository>().To<EFPreciseCoverage4GRepository>();
+
             ninjectKernel.Bind<CdmaRegionStatService>().ToSelf();
 
             ninjectKernel.Bind<CollegeStatService>().ToSelf();
@@ -48,6 +50,10 @@ namespace LtePlatform
             ninjectKernel.Bind<College4GTestService>().ToSelf();
 
             ninjectKernel.Bind<CollegeKpiService>().ToSelf();
+
+            ninjectKernel.Bind<CollegePreciseService>().ToSelf();
+
+            ninjectKernel.Bind<PreciseStatService>().ToSelf();
         }
     }
 }

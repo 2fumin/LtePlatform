@@ -85,18 +85,22 @@
     <Compile Include="DataService\College4GTestService.cs" />
     <Compile Include="DataService\CollegeENodebService.cs" />
     <Compile Include="DataService\CollegeKpiService.cs" />
+    <Compile Include="DataService\CollegePreciseService.cs" />
     <Compile Include="DataService\CollegeStatService.cs" />
     <Compile Include="DataService\ENodebQueryService.cs" />
+    <Compile Include="DataService\PreciseStatService.cs" />
     <Compile Include="DataService\TownQueryService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CdmaRegionDateView.cs" />
     <Compile Include="ViewModels\CdmaRegionStatDetails.cs" />
     <Compile Include="ViewModels\CdmaRegionStatTrend.cs" />
     <Compile Include="ViewModels\CdmaRegionStatView.cs" />
+    <Compile Include="ViewModels\CellPreciseKpiView.cs" />
     <Compile Include="ViewModels\College3GTestView.cs" />
     <Compile Include="ViewModels\College4GTestView.cs" />
     <Compile Include="ViewModels\CollegeKpiView.cs" />
     <Compile Include="ViewModels\ENodebView.cs" />
+    <Compile Include="ViewModels\Precise4GView.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lte.Domain\Lte.Domain.csproj">

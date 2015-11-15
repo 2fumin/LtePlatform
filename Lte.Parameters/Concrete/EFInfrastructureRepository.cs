@@ -12,5 +12,11 @@ namespace Lte.Parameters.Concrete
     public class EFInfrastructureRepository : LightWeightRepositroyBase<InfrastructureInfo>, IInfrastructureRepository
     {
         protected override DbSet<InfrastructureInfo> Entities => context.InfrastructureInfos;
+        public IEnumerable<int> GetIds(string collegeName)
+        {
+            return GetAll().Where(x =>
+                x.HotspotName == collegeName && x.InfrastructureType == InfrastructureType.ENodeb
+                ).Select(x => x.InfrastructureId).ToList();
+        }
     }
 }

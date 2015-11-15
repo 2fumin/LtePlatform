@@ -124,6 +124,7 @@
     <Compile Include="Abstract\IIndoorDistributioinRepository.cs" />
     <Compile Include="Abstract\IInfrastructureRepository.cs" />
     <Compile Include="Abstract\IPagingRepository.cs" />
+    <Compile Include="Abstract\IPreciseCoverage4GRepository.cs" />
     <Compile Include="Abstract\IRegionRepository.cs" />
     <Compile Include="Abstract\ITownRepository.cs" />
     <Compile Include="Abstract\LightWeightRepositroyBase.cs" />
@@ -139,6 +140,7 @@
     <Compile Include="Concrete\EFIndoorDistributionRepository.cs" />
     <Compile Include="Concrete\EFInfrastructureRepository.cs" />
     <Compile Include="Concrete\EFParametersContext.cs" />
+    <Compile Include="Concrete\EFPreciseCoverage4GRepository.cs" />
     <Compile Include="Concrete\EFRegionRepository.cs" />
     <Compile Include="Concrete\EFTownRepository.cs" />
     <Compile Include="Entities\AlarmStat.cs" />
@@ -158,6 +160,8 @@
     <Compile Include="Entities\InfrastructureDefs.cs" />
     <Compile Include="Entities\InfrastructureInfo.cs" />
     <Compile Include="Entities\OptimizeRegion.cs" />
+    <Compile Include="Entities\PreciseCoverage4G.cs" />
+    <Compile Include="Entities\PreciseCoverage4GCsv.cs" />
     <Compile Include="Entities\Town.cs" />
     <Compile Include="MockOperations\MockItemsAudited.cs" />
     <Compile Include="MockOperations\MockItemsRepository.cs" />

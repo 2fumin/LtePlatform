@@ -11,12 +11,6 @@
 var queryPrecise = function (cell) {
     var chart = new comboChart();
     chart.title.text = cell.eNodebName + "-" + cell.sectorId + '精确覆盖率变化趋势';
-    var data = {
-        cellId: cell.eNodebId,
-        sectorId: cell.sectorId,
-        begin: app.startDate(),
-        end: app.endDate()
-    };
     var dom = {
         tag: "#dialog-modal",
         width: 900,
@@ -31,7 +25,12 @@ var queryPrecise = function (cell) {
         url: app.dataModel.preciseStatUrl,
         type: "GET",
         dataType: "json",
-        data: data,
+        data: {
+            cellId: cell.eNodebId,
+            sectorId: cell.sectorId,
+            begin: app.startDate(),
+            end: app.endDate()
+        },
         success: function (result) {
             $(result).each(function (index) {
                 dates.push(result[index].dateString);

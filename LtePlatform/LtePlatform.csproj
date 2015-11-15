@@ -278,6 +278,7 @@
     <Compile Include="Controllers\College\College4GTestController.cs" />
     <Compile Include="Controllers\College\CollegeENodebController.cs" />
     <Compile Include="Controllers\College\CollegeKpiController.cs" />
+    <Compile Include="Controllers\College\CollegePreciseController.cs" />
     <Compile Include="Controllers\College\CollegeQueryController.cs" />
     <Compile Include="Controllers\College\CollegeRegionController.cs" />
     <Compile Include="Controllers\College\CollegeStatController.cs" />
@@ -286,6 +287,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KpiController.cs" />
     <Compile Include="Controllers\Kpi\KpiDataListController.cs" />
+    <Compile Include="Controllers\Kpi\PreciseStatController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MeController.cs" />
     <Compile Include="Controllers\ParametersController.cs" />

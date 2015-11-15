@@ -38,5 +38,7 @@ namespace Lte.Parameters.Concrete
         public DbSet<Cell> Cells { get; set; }
 
         public DbSet<IndoorDistribution> IndoorDistributions { get; set; }
+
+        public DbSet<PreciseCoverage4G> PrecisCoverage4Gs { get; set; }
     }
 }
