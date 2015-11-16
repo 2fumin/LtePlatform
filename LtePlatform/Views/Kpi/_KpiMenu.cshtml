@@ -1,6 +1,15 @@
 ﻿<ul class="nav nav-pills">
     <li>@Html.ActionLink("基本指标", "Index")</li>
-    <li>@Html.ActionLink("4G指标", "Precise4G")</li>
+    <li>
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            4G指标<span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>@Html.ActionLink("总体指标", "Precise4G")</li>
+            <li>@Html.ActionLink("变化趋势", "PreciseTrend")</li>
+            <li></li>
+        </ul>        
+    </li>
     <li>@Html.ActionLink("忙时掉话", "TopDrop2G")</li>
     <li>@Html.ActionLink("全天掉话", "TopDrop2GDaily")</li>
     <li>@Html.ActionLink("3G连接", "TopConnection3G")</li>

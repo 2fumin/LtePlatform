@@ -10,5 +10,6 @@ namespace Lte.Parameters.Abstract
 {
     public interface ITopDrop2GCellRepository : IRepository<TopDrop2GCell>
     {
+        int Import(IEnumerable<TopDrop2GCellExcel> stats);
     }
 }

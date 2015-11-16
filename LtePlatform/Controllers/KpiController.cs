@@ -30,6 +30,16 @@ namespace LtePlatform.Controllers
             return View();
         }
 
+        public ActionResult PreciseTrend()
+        {
+            return View();
+        }
+
+        public ActionResult PreciseTop()
+        {
+            return View();
+        }
+
         public ActionResult TopDrop2G()
         {
             return View();

@@ -10,5 +10,6 @@ namespace Lte.Parameters.Abstract
 {
     public interface ICdmaRegionStatRepository : IRepository<CdmaRegionStat>
     {
+        int Import(IEnumerable<CdmaRegionStatExcel> stats);
     }
 }

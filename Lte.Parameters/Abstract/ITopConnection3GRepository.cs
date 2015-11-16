@@ -10,5 +10,6 @@ namespace Lte.Parameters.Abstract
 {
     public interface ITopConnection3GRepository : IRepository<TopConnection3GCell>
     {
+        int Import(IEnumerable<TopConnection3GCellExcel> stats);
     }
 }
