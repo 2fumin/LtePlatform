@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "4G精确覆盖率指标";
+    ViewBag.Title = "4G精确覆盖率总体指标";
 }
 
 <div class="panel panel-warning">
@@ -16,6 +16,9 @@
 </div>
 
 @section SPAViews{
+    @{
+        Html.RenderPartial("_Precise4G");
+    }
 }
 
 @section Scripts{

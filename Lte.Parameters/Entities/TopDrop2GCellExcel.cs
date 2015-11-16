@@ -44,5 +44,7 @@ namespace Lte.Parameters.Entities
 
         [ExcelColumn("呼叫尝试总次数")]
         public int CallAttempts { get; set; }
+
+        public static string SheetName { get; } = "掉话TOP30小区";
     }
 }

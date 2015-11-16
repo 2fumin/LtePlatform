@@ -14,8 +14,6 @@ namespace Lte.Evaluations.DataService
         private readonly ICdmaRegionStatRepository _regionStatRepository;
         private readonly ITopDrop2GCellRepository _top2GRepository;
         private readonly ITopConnection3GRepository _top3GRepository;
-        const string topDropTag = "掉话TOP30小区";
-        const string topConnectionTag = "连接TOP30小区";
 
         public KpiImportService(ICdmaRegionStatRepository regionStatRepository,
             ITopDrop2GCellRepository top2GRepository, ITopConnection3GRepository top3GRepository)
@@ -37,11 +35,11 @@ namespace Lte.Evaluations.DataService
                 var count = _regionStatRepository.Import(stats);
                 message += "完成导入区域：'" + region + "'的日常指标导入" + count + "条</br>";
             }
-            var topDrops = (from c in factory.Worksheet<TopDrop2GCellExcel>(topDropTag)
+            var topDrops = (from c in factory.Worksheet<TopDrop2GCellExcel>(TopDrop2GCellExcel.SheetName)
                             select c).ToList();
             var drops = _top2GRepository.Import(topDrops);
             message += "完成TOP掉话小区导入" + drops + "个</br>";
-            var topConnections = (from c in factory.Worksheet<TopConnection3GCellExcel>(topConnectionTag)
+            var topConnections = (from c in factory.Worksheet<TopConnection3GCellExcel>(TopConnection3GCellExcel.SheetName)
                                   select c).ToList();
             var connections = _top3GRepository.Import(topConnections);
             message += "完成TOP连接小区导入" + connections + "个";

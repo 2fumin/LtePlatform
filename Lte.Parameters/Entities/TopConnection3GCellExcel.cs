@@ -42,5 +42,6 @@ namespace Lte.Parameters.Entities
         [ExcelColumn("反向链路繁忙率")]
         public double LinkBusyRate { get; set; }
 
+        public static string SheetName { get; } = "连接TOP30小区";
     }
 }
