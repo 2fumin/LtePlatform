@@ -1,1 +1,27 @@
-﻿
+﻿<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    每日指标监控
+                </h3>
+            </div>
+            <div class="panel-body">
+                城市：
+                <select data-bind="value: currentCity, options: cities"></select>
+                日期：
+                <input id="StatDate" data-bind="value: statDate" />
+                视图：
+                <select data-bind="value: view, options: viewOptions"></select>
+                <button type="button" class="btn btn-success" data-bind="click: showKpi">
+                    <span class="glyphicon glyphicon-search"></span>
+                    统计结果
+                </button>
+                @{
+                    Html.RenderPartial("_CityPreciseTable");
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6"></div>
+</div>

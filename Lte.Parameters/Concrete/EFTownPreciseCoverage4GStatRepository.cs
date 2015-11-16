@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Lte.Parameters.Abstract;
+using Lte.Parameters.Entities;
+
+namespace Lte.Parameters.Concrete
+{
+    public class EFTownPreciseCoverage4GStatRepository : LightWeightRepositroyBase<TownPreciseCoverage4GStat>,
+        ITownPreciseCoverage4GStatRepository
+    {
+        protected override DbSet<TownPreciseCoverage4GStat> Entities => context.TownPreciseCoverage4GStats;
+    }
+}

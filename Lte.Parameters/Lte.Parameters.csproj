@@ -128,6 +128,7 @@
     <Compile Include="Abstract\IRegionRepository.cs" />
     <Compile Include="Abstract\ITopConnection3GRepository.cs" />
     <Compile Include="Abstract\ITopDrop2GCellRepository.cs" />
+    <Compile Include="Abstract\ITownPreciseCoverage4GStatRepository.cs" />
     <Compile Include="Abstract\ITownRepository.cs" />
     <Compile Include="Abstract\LightWeightRepositroyBase.cs" />
     <Compile Include="Abstract\PagingRepositoryBase.cs" />
@@ -146,6 +147,7 @@
     <Compile Include="Concrete\EFRegionRepository.cs" />
     <Compile Include="Concrete\EFTopConnection3GRepository.cs" />
     <Compile Include="Concrete\EFTopDrop2GCellRepository.cs" />
+    <Compile Include="Concrete\EFTownPreciseCoverage4GStatRepository.cs" />
     <Compile Include="Concrete\EFTownRepository.cs" />
     <Compile Include="Entities\AlarmStat.cs" />
     <Compile Include="Entities\CdmaRegionStat.cs" />
@@ -171,6 +173,7 @@
     <Compile Include="Entities\TopDrop2GCell.cs" />
     <Compile Include="Entities\TopDrop2GCellExcel.cs" />
     <Compile Include="Entities\Town.cs" />
+    <Compile Include="Entities\TownPreciseCoverage4GStat.cs" />
     <Compile Include="MockOperations\MockItemsAudited.cs" />
     <Compile Include="MockOperations\MockItemsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

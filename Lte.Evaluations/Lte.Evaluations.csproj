@@ -106,6 +106,7 @@
     <Compile Include="ViewModels\CollegeKpiView.cs" />
     <Compile Include="ViewModels\ENodebView.cs" />
     <Compile Include="ViewModels\Precise4GView.cs" />
+    <Compile Include="ViewModels\TownPreciseView.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lte.Domain\Lte.Domain.csproj">

@@ -47,8 +47,7 @@ namespace Lte.Evaluations.DataService
                     StringComparison.Ordinal) >= 0));
         }
 
-        public List<ENodeb> GetAllWithNames(ITownRepository townRepository, ITown town, 
-            string eNodebName, string address)
+        public List<ENodeb> GetAllWithNames(ITown town, string eNodebName, string address)
         {
             return GetAllWithNames(town.CityName, town.DistrictName, town.TownName,
                 eNodebName, address);

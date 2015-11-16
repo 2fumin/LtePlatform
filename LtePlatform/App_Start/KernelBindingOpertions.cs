@@ -39,6 +39,8 @@ namespace LtePlatform
 
             ninjectKernel.Bind<ITopConnection3GRepository>().To<EFTopConnection3GRepository>();
 
+            ninjectKernel.Bind<ITownPreciseCoverage4GStatRepository>().To<EFTownPreciseCoverage4GStatRepository>();
+
             ninjectKernel.Bind<CdmaRegionStatService>().ToSelf();
 
             ninjectKernel.Bind<CollegeStatService>().ToSelf();

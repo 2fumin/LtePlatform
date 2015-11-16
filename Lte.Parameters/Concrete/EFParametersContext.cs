@@ -44,5 +44,7 @@ namespace Lte.Parameters.Concrete
         public DbSet<TopDrop2GCell> TopDrop2GStats { get; set; }
 
         public DbSet<TopConnection3GCell> TopConnection3GStats { get; set; }
+
+        public DbSet<TownPreciseCoverage4GStat> TownPreciseCoverage4GStats { get; set; }
     }
 }
