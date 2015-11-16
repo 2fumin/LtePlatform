@@ -56,5 +56,21 @@ namespace Lte.Parameters.Test.Kpi
             Assert.IsNotNull(info);
             Assert.AreEqual(info.Count, lines);
         }
+
+        [TestCase("2015-10-4", "2015-11-4", 24)]
+        [TestCase("2015-10-4", "2015-10-10", 7)]
+        [TestCase("2015-10-15", "2015-11-4", 13)]
+        [TestCase("2015-10-15", "2015-10-20", 6)]
+        public void Test_Read_ByDateSpan(string beginDate, string endDate, int lines)
+        {
+            var begin = DateTime.Parse(beginDate);
+            var end = DateTime.Parse(endDate);
+            var info = (from c in _repo.Worksheet<CdmaRegionStatExcel>(_worksheetName)
+                where c.StatDate > begin && c.StatDate <= end.AddDays(1)
+                select c).ToList();
+
+            Assert.IsNotNull(info);
+            Assert.AreEqual(info.Count, lines);
+        }
     }
 }

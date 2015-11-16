@@ -35,6 +35,10 @@ namespace LtePlatform
 
             ninjectKernel.Bind<IPreciseCoverage4GRepository>().To<EFPreciseCoverage4GRepository>();
 
+            ninjectKernel.Bind<ITopDrop2GCellRepository>().To<EFTopDrop2GCellRepository>();
+
+            ninjectKernel.Bind<ITopConnection3GRepository>().To<EFTopConnection3GRepository>();
+
             ninjectKernel.Bind<CdmaRegionStatService>().ToSelf();
 
             ninjectKernel.Bind<CollegeStatService>().ToSelf();
@@ -56,6 +60,8 @@ namespace LtePlatform
             ninjectKernel.Bind<PreciseStatService>().ToSelf();
 
             ninjectKernel.Bind<TownQueryService>().ToSelf();
+
+            ninjectKernel.Bind<KpiImportService>().ToSelf();
         }
     }
 }

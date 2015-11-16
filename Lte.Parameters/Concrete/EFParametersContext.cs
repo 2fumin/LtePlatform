@@ -40,5 +40,9 @@ namespace Lte.Parameters.Concrete
         public DbSet<IndoorDistribution> IndoorDistributions { get; set; }
 
         public DbSet<PreciseCoverage4G> PrecisCoverage4Gs { get; set; }
+
+        public DbSet<TopDrop2GCell> TopDrop2GStats { get; set; }
+
+        public DbSet<TopConnection3GCell> TopConnection3GStats { get; set; }
     }
 }

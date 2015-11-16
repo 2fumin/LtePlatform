@@ -12,10 +12,12 @@ namespace LtePlatform.Controllers
     public class KpiController : Controller
     {
         private readonly TownQueryService _townService;
+        private readonly KpiImportService _importService;
 
-        public KpiController(TownQueryService townService)
+        public KpiController(TownQueryService townService, KpiImportService importService)
         {
             _townService = townService;
+            _importService = importService;
         }
 
         public ActionResult Index()
@@ -65,10 +67,12 @@ namespace LtePlatform.Controllers
                 {
                     city = legalCities[0];
                     ViewBag.WarningMessage = "上传文件名对应的城市找不到。使用'" + city + "'代替";
-                    var path = Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "\\uploads\\Kpi"),
-                        httpPostedFileBase.FileName);
-                    httpPostedFileBase.SaveAs(path);
                 }
+                var regions = _townService.GetRegions(city);
+                var path = Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "\\uploads\\Kpi"),
+                    httpPostedFileBase.FileName);
+                httpPostedFileBase.SaveAs(path);
+                message = _importService.Import(path, regions);
             }
             ViewBag.Message = message;
             return View("Import");

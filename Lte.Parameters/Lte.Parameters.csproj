@@ -126,6 +126,8 @@
     <Compile Include="Abstract\IPagingRepository.cs" />
     <Compile Include="Abstract\IPreciseCoverage4GRepository.cs" />
     <Compile Include="Abstract\IRegionRepository.cs" />
+    <Compile Include="Abstract\ITopConnection3GRepository.cs" />
+    <Compile Include="Abstract\ITopDrop2GCellRepository.cs" />
     <Compile Include="Abstract\ITownRepository.cs" />
     <Compile Include="Abstract\LightWeightRepositroyBase.cs" />
     <Compile Include="Abstract\PagingRepositoryBase.cs" />
@@ -142,6 +144,8 @@
     <Compile Include="Concrete\EFParametersContext.cs" />
     <Compile Include="Concrete\EFPreciseCoverage4GRepository.cs" />
     <Compile Include="Concrete\EFRegionRepository.cs" />
+    <Compile Include="Concrete\EFTopConnection3GRepository.cs" />
+    <Compile Include="Concrete\EFTopDrop2GCellRepository.cs" />
     <Compile Include="Concrete\EFTownRepository.cs" />
     <Compile Include="Entities\AlarmStat.cs" />
     <Compile Include="Entities\CdmaRegionStat.cs" />
