@@ -10,5 +10,6 @@ namespace Lte.Parameters.Abstract
 {
     public interface IRegionRepository : IRepository<OptimizeRegion>
     {
+        List<OptimizeRegion> GetAllList(string city);
     }
 }

@@ -104,8 +104,10 @@
     <Compile Include="ViewModels\College3GTestView.cs" />
     <Compile Include="ViewModels\College4GTestView.cs" />
     <Compile Include="ViewModels\CollegeKpiView.cs" />
+    <Compile Include="ViewModels\DistrictPreciseView.cs" />
     <Compile Include="ViewModels\ENodebView.cs" />
     <Compile Include="ViewModels\Precise4GView.cs" />
+    <Compile Include="ViewModels\PreciseRegionDateView.cs" />
     <Compile Include="ViewModels\TownPreciseView.cs" />
   </ItemGroup>
   <ItemGroup>

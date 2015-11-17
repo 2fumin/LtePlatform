@@ -26,6 +26,8 @@
             }
         });
     };
+
+    return self;
 }
 
 app.addViewModel({

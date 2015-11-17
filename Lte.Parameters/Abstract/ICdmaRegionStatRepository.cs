@@ -11,5 +11,7 @@ namespace Lte.Parameters.Abstract
     public interface ICdmaRegionStatRepository : IRepository<CdmaRegionStat>
     {
         int Import(IEnumerable<CdmaRegionStatExcel> stats);
+
+        List<CdmaRegionStat> GetByDateSpan(DateTime begin, DateTime end);
     }
 }

@@ -12,5 +12,10 @@ namespace Lte.Parameters.Concrete
     public class EFRegionRepository : LightWeightRepositroyBase<OptimizeRegion>, IRegionRepository
     {
         protected override DbSet<OptimizeRegion> Entities => context.OptimizeRegions;
+
+        public List<OptimizeRegion> GetAllList(string city)
+        {
+            return GetAllList(x => x.City == city);
+        }
     }
 }

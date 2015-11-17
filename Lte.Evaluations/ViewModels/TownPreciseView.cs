@@ -11,8 +11,6 @@ namespace Lte.Evaluations.ViewModels
 {
     public class TownPreciseView
     {
-        public DateTime StatTime { get; set; }
-
         public string City { get; set; } = "-";
 
         public string District { get; set; } = "-";
@@ -30,6 +28,8 @@ namespace Lte.Evaluations.ViewModels
         public double PreciseRate => 100 - (double)SecondNeighbors * 100 / TotalMrs;
 
         public double FirstRate => 100 - (double) FirstNeighbors*100/TotalMrs;
+
+        public double ThirdRate => 100 - (double) ThirdNeighbors*100/TotalMrs;
 
         public TownPreciseView() { }
 

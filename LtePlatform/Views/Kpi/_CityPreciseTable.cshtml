@@ -9,6 +9,7 @@
         <th>区</th>
         <th>MR总数</th>
         <th>精确覆盖率</th>
+        <th>第一邻区精确覆盖率</th>
         <th></th>
     </tr>
     </thead>
@@ -18,6 +19,7 @@
         <td data-bind="text: $data.district"></td>
         <td data-bind="text: $data.totalMrs"></td>
         <td data-bind="text: $data.preciseRate"></td>
+        <td data-bind="text: $data.firstRate"></td>
         <td><button class="btn btn-primary" data-bind="clidk: function(){showDetails($data.district())}">详细</button></td>
     </tr>
     </tbody>
@@ -34,6 +36,7 @@
         <th>MR总数</th>
         <th>精确覆盖率</th>
         <th>第一邻区精确覆盖率</th>
+        <th>第三邻区精确覆盖率</th>
     </tr>
     </thead>
     <tbody data-bind="foreach: townStats">
@@ -42,6 +45,7 @@
         <td data-bind="text: $data.totalMrs"></td>
         <td data-bind="text: $data.preciseRate"></td>
         <td data-bind="text: $data.firstRate"></td>
+        <td data-bind="text: $data.thirdRate"></td>
     </tr>
     </tbody>
 </table>

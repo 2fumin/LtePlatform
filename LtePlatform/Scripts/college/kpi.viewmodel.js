@@ -30,6 +30,8 @@
         app.date.subscribe(function () { getKpiList(); });
         app.hour.subscribe(function () { getKpiList(); });
     };
+
+    return self;
 }
 
 app.addViewModel({

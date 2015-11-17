@@ -27,5 +27,10 @@ namespace Lte.Parameters.Concrete
             }
             return count;
         }
+
+        public List<CdmaRegionStat> GetByDateSpan(DateTime begin, DateTime end)
+        {
+            return GetAllList(x => x.StatDate >= begin && x.StatDate < end);
+        }
     }
 }

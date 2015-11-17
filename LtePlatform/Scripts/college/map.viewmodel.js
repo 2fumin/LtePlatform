@@ -23,6 +23,8 @@
     };
 
     app.refresh = function () { };
+
+    return self;
 }
 
 app.addViewModel({

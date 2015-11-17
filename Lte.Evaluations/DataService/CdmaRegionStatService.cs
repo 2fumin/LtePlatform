@@ -21,14 +21,12 @@ namespace Lte.Evaluations.DataService
 
         public CdmaRegionDateView QueryLastDateStat(DateTime initialDate, string city)
         {
-            DateTime beginDate = initialDate.AddDays(-100);
-            DateTime endDate = initialDate.AddDays(1);
+            var beginDate = initialDate.AddDays(-100);
+            var endDate = initialDate.AddDays(1);
             var query =
-                _statRepository.GetAll()
-                    .Where(x => x.StatDate >= beginDate && x.StatDate < endDate).ToList();
+                _statRepository.GetByDateSpan(beginDate, endDate);
             var regions
-                = _regionRepository.GetAllList().Where(x => x.City == city)
-                .Select(x => x.Region).Distinct().OrderBy(x => x);
+                = _regionRepository.GetAllList(city).Select(x => x.Region).Distinct().OrderBy(x => x);
             var result = (from q in query
                 join r in regions
                     on q.Region equals r
@@ -76,8 +74,8 @@ namespace Lte.Evaluations.DataService
             return trend == null ? null : new CdmaRegionStatDetails(trend);
         }
 
-        public static List<IEnumerable<CdmaRegionStatView>> GenerateViewList(List<CdmaRegionStat> statList,
-            IEnumerable<DateTime> dates, List<string> regionList)
+        public static List<IEnumerable<CdmaRegionStatView>> GenerateViewList(IEnumerable<CdmaRegionStat> statList,
+            IEnumerable<DateTime> dates, IEnumerable<string> regionList)
         {
             var query= (from t in regionList
                 let regionStats = statList.Where(x => x.Region == t)

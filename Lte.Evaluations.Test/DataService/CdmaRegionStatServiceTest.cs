@@ -19,6 +19,13 @@ namespace Lte.Evaluations.Test.DataService
             = new Mock<ICdmaRegionStatRepository>();
         private CdmaRegionStatTestService _testService;
 
+        [TestFixtureSetUp]
+        public void FixtureSetup()
+        {
+            _statRepository.MockOperation();
+            _regionRepository.MockOperation();
+        }
+
         [SetUp]
         public void SetUp()
         {
