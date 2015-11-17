@@ -13,5 +13,10 @@ namespace Lte.Parameters.Concrete
         ITownPreciseCoverage4GStatRepository
     {
         protected override DbSet<TownPreciseCoverage4GStat> Entities => context.TownPreciseCoverage4GStats;
+
+        public List<TownPreciseCoverage4GStat> GetByDateSpan(DateTime begin, DateTime end)
+        {
+            return GetAllList(x => x.StatTime >= begin && x.StatTime < end);
+        }
     }
 }

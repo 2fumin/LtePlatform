@@ -98,6 +98,8 @@
     <Compile Include="MockItems\MockRegionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestService\CdmaRegionStatTestService.cs" />
+    <Compile Include="TestService\MergeTownPreciseViewTest.cs" />
+    <Compile Include="TestService\PreciseViewTestService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lte.Evaluations\Lte.Evaluations.csproj">

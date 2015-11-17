@@ -7,6 +7,7 @@
     self.cityListUrl = "/api/CityList";
     self.kpiDataListUrl = "/api/KpiDataList";
     self.preciseStatUrl = "/api/PreciseStat/";
+    self.preciseRegionUrl = "/api/PreciseRegion/";
 
     self.collegeQueryUrl = "/api/CollegeQuery";
     self.collegeRegionUrl = "/api/CollegeRegion";

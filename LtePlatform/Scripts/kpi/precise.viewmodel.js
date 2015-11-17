@@ -5,7 +5,7 @@
     app.cities = ko.observableArray([]);
     app.statDate = ko.observable((new Date()).getDateFromToday(-1).Format("yyyy-MM-dd"));
 
-    app.currentDistrict = ko.observable();
+    app.currentDistrict = ko.observable("");
     app.districtStats = ko.observableArray([]);
     app.townStats = ko.observableArray([]);
 
@@ -41,10 +41,17 @@
             },
             success: function (data) {
                 app.statDate(data.statDate);
-                app.kpiDateList(data.statViews);
+                app.districtStats(data.districtPreciseViews);
+                app.townStats(data.townPreciseViews);
             }
         });
     };
 
     return self;
 }
+
+app.addViewModel({
+    name: "Precise",
+    bindingMemberName: "precise",
+    factory: PreciseViewModel
+});

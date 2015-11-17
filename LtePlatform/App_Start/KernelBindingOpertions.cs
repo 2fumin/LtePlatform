@@ -64,6 +64,8 @@ namespace LtePlatform
             ninjectKernel.Bind<TownQueryService>().ToSelf();
 
             ninjectKernel.Bind<KpiImportService>().ToSelf();
+
+            ninjectKernel.Bind<PreciseRegionStatService>().ToSelf();
         }
     }
 }

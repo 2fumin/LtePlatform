@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lte.Domain.Regular;
 
 namespace Lte.Evaluations.ViewModels
 {
@@ -21,5 +22,12 @@ namespace Lte.Evaluations.ViewModels
         public double PreciseRate => 100 - (double)SecondNeighbors * 100 / TotalMrs;
 
         public double FirstRate => 100 - (double)FirstNeighbors * 100 / TotalMrs;
+
+        public DistrictPreciseView() { }
+
+        public DistrictPreciseView(TownPreciseView townView)
+        {
+            townView.CloneProperties(this);
+        }
     }
 }

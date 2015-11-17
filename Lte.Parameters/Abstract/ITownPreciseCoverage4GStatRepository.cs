@@ -10,5 +10,6 @@ namespace Lte.Parameters.Abstract
 {
     public interface ITownPreciseCoverage4GStatRepository : IRepository<TownPreciseCoverage4GStat>
     {
+        List<TownPreciseCoverage4GStat> GetByDateSpan(DateTime begin, DateTime end);
     }
 }
