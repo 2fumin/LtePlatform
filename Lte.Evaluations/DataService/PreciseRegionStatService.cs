@@ -29,7 +29,7 @@ namespace Lte.Evaluations.DataService
                 _statRepository.GetByDateSpan(beginDate, endDate);
             var result =
                 (from q in query
-                    join t in _townRepository.GetAll().Where(x => x.CityName == city) on q.TownId equals t.Id
+                    join t in _townRepository.GetAll(city) on q.TownId equals t.Id
                     select q).ToList();
             if (result.Count == 0) return null;
             var maxDate = result.Max(x => x.StatTime);

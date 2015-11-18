@@ -24,5 +24,10 @@ namespace Lte.Parameters.Concrete
                 && (x.DistrictName == district || district.IndexOf(flag, StringComparison.Ordinal) >= 0)
                 && (x.CityName == city || city.IndexOf(flag, StringComparison.Ordinal) >= 0));
         }
+
+        public IEnumerable<Town> GetAll(string city)
+        {
+            return GetAll().Where(x => x.CityName == city);
+        }
     }
 }

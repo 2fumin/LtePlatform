@@ -41,6 +41,36 @@ namespace Lte.Evaluations.Test.TestService
             });
         }
 
+        public void ImportPreciseRecord(int townId, string[] statDates, int[] totalMrs, int[] firstNeighbors,
+            int[] secondNeighbors, int[] thirdNeighbors)
+        {
+            var statList = statDates.Select((t, i) => new TownPreciseCoverage4GStat
+            {
+                TownId = townId,
+                StatTime = DateTime.Parse(statDates[i]),
+                TotalMrs = totalMrs[i],
+                FirstNeighbors = firstNeighbors[i],
+                SecondNeighbors = secondNeighbors[i],
+                ThirdNeighbors = thirdNeighbors[i]
+            }).ToList();
+            _statRepository.MockPreciseRegionStats(statList);
+        }
+
+        public void ImportPreciseRecord(int[] townIds, string[] statDates, int[] totalMrs, int[] firstNeighbors,
+            int[] secondNeighbors, int[] thirdNeighbors)
+        {
+            var statList = statDates.Select((t, i) => new TownPreciseCoverage4GStat
+            {
+                TownId = townIds[i],
+                StatTime = DateTime.Parse(statDates[i]),
+                TotalMrs = totalMrs[i],
+                FirstNeighbors = firstNeighbors[i],
+                SecondNeighbors = secondNeighbors[i],
+                ThirdNeighbors = thirdNeighbors[i]
+            }).ToList();
+            _statRepository.MockPreciseRegionStats(statList);
+        }
+
         public PreciseRegionDateView QueryLastDateStat(string initialDate, string city)
         {
             var service = new PreciseRegionStatService(_statRepository.Object, _townRepository.Object);

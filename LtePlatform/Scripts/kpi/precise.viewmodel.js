@@ -33,7 +33,7 @@
     app.showKpi = function () {
         $.ajax({
             method: 'get',
-            url: app.dataModel.kpiDataListUrl,
+            url: app.dataModel.preciseRegionUrl,
             contentType: "application/json; charset=utf-8",
             data: {
                 city: app.currentCity(),
@@ -43,8 +43,13 @@
                 app.statDate(data.statDate);
                 app.districtStats(data.districtPreciseViews);
                 app.townStats(data.townPreciseViews);
+                app.currentDistrict(data.districtPreciseViews[0].district);
             }
         });
+    };
+
+    app.showDetails = function(district) {
+        app.currentDistrict(district);
     };
 
     return self;
