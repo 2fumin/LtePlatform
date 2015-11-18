@@ -23,5 +23,17 @@ namespace Lte.Evaluations.Test.MockItems
         {
             repository.MockQueryItems(stats.AsQueryable());
         }
+
+        public static void MockQueryTowns(this Mock<ITownRepository> repository,
+            List<Town> towns)
+        {
+            repository.MockQueryItems(towns.AsQueryable());
+        }
+
+        public static void MockPreciseRegionStats(this Mock<ITownPreciseCoverage4GStatRepository> repository,
+            List<TownPreciseCoverage4GStat> stats)
+        {
+            repository.MockQueryItems(stats.AsQueryable());
+        }
     }
 }

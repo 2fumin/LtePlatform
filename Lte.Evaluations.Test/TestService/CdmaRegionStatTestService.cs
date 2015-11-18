@@ -39,62 +39,46 @@ namespace Lte.Evaluations.Test.TestService
 
         public void ImportElangRecords(string region, string[] recordDates, double[] erlangs)
         {
-            var statList = new List<CdmaRegionStat>();
-            for (int i = 0; i < recordDates.Length; i++)
+            var statList = recordDates.Select((t, i) => new CdmaRegionStat
             {
-                statList.Add(new CdmaRegionStat
-                {
-                    Region = region,
-                    StatDate = DateTime.Parse(recordDates[i]),
-                    ErlangIncludingSwitch = erlangs[i]
-                });
-            }
+                Region = region,
+                StatDate = DateTime.Parse(t),
+                ErlangIncludingSwitch = erlangs[i]
+            }).ToList();
             _statRepository.MockCdmaRegionStats(statList);
         }
 
         public void ImportElangRecords(string[] regions, string recordDate, double[] erlangs)
         {
-            var statList = new List<CdmaRegionStat>();
-            for (int i = 0; i < regions.Length; i++)
+            var statList = regions.Select((t, i) => new CdmaRegionStat
             {
-                statList.Add(new CdmaRegionStat
-                {
-                    Region = regions[i],
-                    StatDate = DateTime.Parse(recordDate),
-                    ErlangIncludingSwitch = erlangs[i]
-                });
-            }
+                Region = t,
+                StatDate = DateTime.Parse(recordDate),
+                ErlangIncludingSwitch = erlangs[i]
+            }).ToList();
             _statRepository.MockCdmaRegionStats(statList);
         }
 
         public void ImportElangRecords(string[] regions, string[] recordDates, double[] erlangs)
         {
-            var statList = new List<CdmaRegionStat>();
-            for (int i = 0; i < regions.Length; i++)
+            var statList = regions.Select((t, i) => new CdmaRegionStat
             {
-                statList.Add(new CdmaRegionStat
-                {
-                    Region = regions[i],
-                    StatDate = DateTime.Parse(recordDates[i]),
-                    ErlangIncludingSwitch = erlangs[i]
-                });
-            }
+                Region = t,
+                StatDate = DateTime.Parse(recordDates[i]),
+                ErlangIncludingSwitch = erlangs[i]
+            }).ToList();
             _statRepository.MockCdmaRegionStats(statList);
         }
 
         public void ImportDrop2Gs(string[] regions, string recordDate, int[] drop2GNums, int[] drop2GDems)
         {
-            var statList = new List<CdmaRegionStat>();
-            for (int i = 0; i < regions.Length; i++)
+            var statList = regions.Select((t, i) => new CdmaRegionStat
             {
-                statList.Add(new CdmaRegionStat
-                {
-                    Region = regions[i],
-                    StatDate = DateTime.Parse(recordDate),
-                    Drop2GNum = drop2GNums[i],
-                    Drop2GDem = drop2GDems[i]
-                });
-            }
+                Region = t,
+                StatDate = DateTime.Parse(recordDate),
+                Drop2GNum = drop2GNums[i],
+                Drop2GDem = drop2GDems[i]
+            }).ToList();
             _statRepository.MockCdmaRegionStats(statList);
         }
 
