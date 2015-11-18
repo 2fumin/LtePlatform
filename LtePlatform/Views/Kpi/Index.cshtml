@@ -16,14 +16,15 @@
 </div>
 
 @section SPAViews{
-    @{ Html.RenderPartial("_CityKpi");}
+    @{ 
+        Html.RenderPartial("_CityKpi");
+    }
 }
 
 @section Scripts{
     @Styles.Render("~/Content/themes/base/css")
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/highcharts")
-    @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/knockout")
     @Scripts.Render("~/bundles/kpiIndex")
 }

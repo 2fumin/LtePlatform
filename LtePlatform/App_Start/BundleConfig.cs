@@ -46,6 +46,13 @@ namespace LtePlatform
                 "~/Scripts/kpi/index.viewmodel.js",
                 "~/Scripts/app/_run.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/kpiPrecise").Include(
+                "~/Scripts/app/common.js",
+                "~/Scripts/app/app.datamodel.js",
+                "~/Scripts/app/app.simplemodel.js",
+                "~/Scripts/kpi/precise.viewmodel.js",
+                "~/Scripts/app/_run.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/collegeMap").Include(
                 "~/Scripts/app/common.js",
                 "~/Scripts/baidu/mapContainer.js",

@@ -40,6 +40,11 @@
         floating: true,
         backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
     };
+    
+    self.tooltip = {
+        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+        pointFormat: '<b>{point.y:.2f}</b>'
+    };
 
     self.options = {
         chart: {
@@ -48,9 +53,7 @@
         title: self.title,
         xAxis: self.xAxis,
         yAxis: self.yAxis,
-        tooltip: {
-            shared: true
-        },
+        tooltip: self.tooltip,
         legend: self.legend,
         series: self.series
     };
