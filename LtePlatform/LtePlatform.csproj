@@ -559,6 +559,8 @@
     <Content Include="Views\Kpi\PreciseTop.cshtml" />
     <Content Include="Views\Kpi\_Precise4G.cshtml" />
     <Content Include="Views\Kpi\_CityPreciseTable.cshtml" />
+    <Content Include="Views\Kpi\_PreciseTrend.cshtml" />
+    <Content Include="Views\Kpi\_PreciseTrendTable.cshtml" />
     <None Include="Views\Parameters\AlarmImport.cshtml" />
     <Content Include="Views\Shared\_AlertPanel.cshtml" />
   </ItemGroup>

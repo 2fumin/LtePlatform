@@ -48,6 +48,7 @@ namespace LtePlatform
 
             bundles.Add(new ScriptBundle("~/bundles/kpiPrecise").Include(
                 "~/Scripts/app/common.js",
+                "~/Scripts/mycharts/drilldownPie.js",
                 "~/Scripts/app/app.datamodel.js",
                 "~/Scripts/app/app.simplemodel.js",
                 "~/Scripts/kpi/precise.controller.js",
