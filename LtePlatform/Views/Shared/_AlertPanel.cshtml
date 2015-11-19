@@ -5,7 +5,7 @@
         <a href="#" class="close" data-dismiss="alert">
             &times;
         </a>
-        <strong>@ViewBag.Message</strong>
+        <strong>@Html.Encode(ViewBag.Message)</strong>
     </div>
 }
 @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
@@ -14,7 +14,7 @@
         <a href="#" class="close" data-dismiss="alert">
             &times;
         </a>
-        <strong>@ViewBag.ErrorMessage</strong>
+        <strong>@Html.Encode(ViewBag.ErrorMessage)</strong>
     </div>
 }
 @if (!string.IsNullOrEmpty(ViewBag.WarningMessage))
@@ -23,7 +23,7 @@
         <a href="#" class="close" data-dismiss="alert">
             &times;
         </a>
-        <strong>@ViewBag.WarningMessage</strong>
+        <strong>@Html.Encode(ViewBag.WarningMessage)</strong>
     </div>
 }
 @if (!string.IsNullOrEmpty(ViewBag.InfoMessage))
@@ -32,6 +32,6 @@
         <a href="#" class="close" data-dismiss="alert">
             &times;
         </a>
-        <strong>@ViewBag.InfoMessage</strong>
+        <strong>@Html.Encode(ViewBag.InfoMessage)</strong>
     </div>
 }

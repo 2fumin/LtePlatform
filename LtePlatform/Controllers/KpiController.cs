@@ -71,12 +71,13 @@ namespace LtePlatform.Controllers
             }
             else
             {
-                var city = httpPostedFileBase.FileName.GetSplittedFields('.')[0];
+                var fields = httpPostedFileBase.FileName.GetSplittedFields(new [] {'.', '\\'});
+                var city = fields[fields.Length - 2];
                 var legalCities = _townService.GetCities();
                 if (legalCities.Count > 0 && legalCities.FirstOrDefault(x => x == city) == null)
                 {
+                    ViewBag.WarningMessage = "上传文件名对应的城市" + city + "找不到。使用'" + legalCities[0] + "'代替";
                     city = legalCities[0];
-                    ViewBag.WarningMessage = "上传文件名对应的城市找不到。使用'" + city + "'代替";
                 }
                 var regions = _townService.GetRegions(city);
                 var path = Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "\\uploads\\Kpi"),

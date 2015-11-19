@@ -43,6 +43,7 @@ namespace LtePlatform
                 "~/Scripts/mycharts/comboChart.js",
                 "~/Scripts/app/app.datamodel.js",
                 "~/Scripts/app/app.simplemodel.js",
+                "~/Scripts/kpi/common.controller.js",
                 "~/Scripts/kpi/index.viewmodel.js",
                 "~/Scripts/app/_run.js"));
 
@@ -51,6 +52,7 @@ namespace LtePlatform
                 "~/Scripts/mycharts/drilldownPie.js",
                 "~/Scripts/app/app.datamodel.js",
                 "~/Scripts/app/app.simplemodel.js",
+                "~/Scripts/kpi/common.controller.js",
                 "~/Scripts/kpi/precise.controller.js",
                 "~/Scripts/kpi/precise.viewmodel.js",
                 "~/Scripts/app/_run.js"));

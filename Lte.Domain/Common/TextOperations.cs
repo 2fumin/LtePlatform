@@ -14,6 +14,11 @@ namespace Lte.Domain.Common
             return line.Split(new[] { '=', ',', '\"', ';' }, StringSplitOptions.RemoveEmptyEntries);
         }
 
+        public static string[] GetSplittedFields(this string line, char[] splitters)
+        {
+            return line.Split(splitters, StringSplitOptions.RemoveEmptyEntries);
+        }
+
         public static string[] GetSplittedFields(this string line, char splitter)
         {
             return line.Split(new[] { splitter }, StringSplitOptions.RemoveEmptyEntries);
