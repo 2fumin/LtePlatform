@@ -3,7 +3,12 @@ function pieChart() {
     self.title = {
         text: 'Drill-down pie chart'
     };
-    self.series = [];
+    self.series = [
+    {
+        name: "Drill-down pie chart",
+        colorByPoint: true,
+        data: []
+    }];
     self.drilldown = {
         series: []
     };
@@ -35,3 +40,17 @@ function pieChart() {
         drilldown: self.drilldown
 	};
 }
+
+pieChart.prototype.addOneSeries = function(name, value, subData) {
+    var self = this;
+    self.series.data.push({
+        name: name,
+        y: value,
+        drilldown: name
+    });
+    self.drilldown.series.push({
+        name: name,
+        id: name,
+        data: subData
+    });
+};

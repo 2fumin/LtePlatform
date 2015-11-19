@@ -50,6 +50,7 @@ namespace LtePlatform
                 "~/Scripts/app/common.js",
                 "~/Scripts/app/app.datamodel.js",
                 "~/Scripts/app/app.simplemodel.js",
+                "~/Scripts/kpi/precise.controller.js",
                 "~/Scripts/kpi/precise.viewmodel.js",
                 "~/Scripts/app/_run.js"));
 

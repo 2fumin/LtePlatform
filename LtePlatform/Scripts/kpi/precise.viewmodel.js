@@ -44,6 +44,7 @@
                 app.districtStats(data.districtPreciseViews);
                 app.townStats(data.townPreciseViews);
                 app.currentDistrict(data.districtPreciseViews[0].district);
+                showMrPie(app.districtStats, app.townStats);
             }
         });
     };

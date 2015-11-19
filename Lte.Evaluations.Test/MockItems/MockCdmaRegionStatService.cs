@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Lte.Parameters.Abstract;
+using Lte.Parameters.Entities;
 using Moq;
 
 namespace Lte.Evaluations.Test.MockItems
@@ -16,6 +17,9 @@ namespace Lte.Evaluations.Test.MockItems
                 .Returns<DateTime, DateTime>(
                     (begin, end) =>
                         repository.Object.GetAll().Where(x => x.StatDate >= begin && x.StatDate < end).ToList());
+
+            repository.Setup(x => x.Import(It.IsAny<IEnumerable<CdmaRegionStatExcel>>()))
+                .Returns<IEnumerable<CdmaRegionStatExcel>>(stats => stats.Count());
         }
     }
 }

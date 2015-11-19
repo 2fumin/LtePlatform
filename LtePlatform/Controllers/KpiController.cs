@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -82,7 +82,7 @@ namespace LtePlatform.Controllers
                 var path = Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "\\uploads\\Kpi"),
                     httpPostedFileBase.FileName);
                 httpPostedFileBase.SaveAs(path);
-                message = _importService.Import(path, regions);
+                 message = _importService.Import(path, regions);
             }
             ViewBag.Message = message;
             return View("Import");
