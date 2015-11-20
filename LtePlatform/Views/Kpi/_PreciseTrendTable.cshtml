@@ -1,8 +1,11 @@
 ﻿<h4 class="text-center text-primary">测量报告数统计</h4>
 <table class="table table-hover">
     <thead>
-    <tr data-bind="foreach: districts">
+    <tr>
+        <th>日期</th>
+        <!-- ko foreach: districts -->
         <th data-bind="text: $data"></th>
+        <!-- /ko -->
     </tr>
     </thead>
     <tbody data-bind="foreach: mrStats">

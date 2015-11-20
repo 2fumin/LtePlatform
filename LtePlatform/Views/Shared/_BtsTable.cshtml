@@ -1,0 +1,26 @@
+﻿<table summary="User Grid" class="zebra">
+    <thead>
+        <tr>
+            <th>CDMA基站编号</th>
+            <th>BSC编号</th>
+            <th>共站LTE基站编号</th>
+            <th>基站名称</th>
+            <th>经度</th>
+            <th>纬度</th>
+            <th>地址</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: btsList">
+        <tr>
+            <td data-bind="text: btsId"></td>
+            <td data-bind="text: bscId"></td>
+            <td data-bind="text: eNodebId"></td>
+            <td data-bind="text: name"></td>
+            <td data-bind="text: longtitute"></td>
+            <td data-bind="text: lattitute"></td>
+            <td data-bind="text: address"></td>
+        </tr>
+    </tbody>
+    <tfoot><tr><td><button data-bind="click: gobackList" class="btn btn-success">返回列表</button></td></tr></tfoot>
+</table>
+

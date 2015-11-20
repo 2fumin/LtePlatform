@@ -414,6 +414,7 @@
     <Content Include="Content\google\7M5kxD4eGxuhgFaIk95pBfk_vArhqVIZ0nv9q090hN8.woff2" />
     <None Include="Properties\PublishProfiles\Lte2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\college\infrastructure.viewmodel.js" />
     <Content Include="Scripts\college\kpi.controller.js" />
     <Content Include="Scripts\college\kpi.viewmodel.js" />
     <Content Include="Scripts\college\map.controller.js" />
@@ -567,8 +568,15 @@
     <Content Include="Views\Kpi\_CityPreciseTable.cshtml" />
     <Content Include="Views\Kpi\_PreciseTrend.cshtml" />
     <Content Include="Views\Kpi\_PreciseTrendTable.cshtml" />
+    <Content Include="Views\College\_Infrastructure.cshtml" />
+    <Content Include="Views\College\_CollegeStatTable.cshtml" />
     <None Include="Views\Parameters\AlarmImport.cshtml" />
     <Content Include="Views\Shared\_AlertPanel.cshtml" />
+    <Content Include="Views\Shared\_ENodebTable.cshtml" />
+    <Content Include="Views\Shared\_LteCellTable.cshtml" />
+    <Content Include="Views\Shared\_BtsTable.cshtml" />
+    <Content Include="Views\Shared\_CdmaCellTable.cshtml" />
+    <Content Include="Views\Shared\_DistributionTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

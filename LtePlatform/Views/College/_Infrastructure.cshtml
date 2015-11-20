@@ -1,0 +1,53 @@
+﻿
+<div class="row">
+    <div class="col-md-12">
+        @{
+            Html.RenderPartial("_CollegeStatTable");
+        }
+        <div data-bind="visible: setView() == 'eNodebs'">
+            <h4><span data-bind="text: currentName"></span>4G基站信息</h4>
+            <p>
+                告警查询日期
+                &nbsp;
+                开始日期：
+                <input id="BeginDate" data-bind="value: beginDate" />
+                结束日期：
+                <input id="EndDate" data-bind="value: endDate" />
+            </p>
+            @{
+                Html.RenderPartial("_ENodebTable");
+            }
+        </div>
+        <div data-bind="visible: setView() == 'cells'">
+            <h4><span data-bind="text: currentName"></span>4G小区信息</h4>
+            @{
+                Html.RenderPartial("_LteCellTable");
+            }
+        </div>
+        <div data-bind="visible: setView() == 'btss'">
+            <h4><span data-bind="text: currentName"></span>3G基站信息</h4>
+            @{
+                Html.RenderPartial("_BtsTable");
+            }
+        </div>
+        <div data-bind="visible: setView() == 'cdmaCells'">
+            <h4><span data-bind="text: currentName"></span>3G小区信息</h4>
+            @{
+                Html.RenderPartial("_CdmaCellTable");
+            }
+        </div>
+        <div data-bind="visible: setView() == 'lteDistributions'">
+            <h4><span data-bind="text: currentName"></span>4G室内分布</h4>
+            @{
+                Html.RenderPartial("_DistributionTable");
+            }
+        </div>
+        <div data-bind="visible: setView() == 'cdmaDistributions'">
+            <h4><span data-bind="text: currentName"></span>3G室内分布</h4>
+            @{
+                Html.RenderPartial("_DistributionTable");
+            }
+        </div>
+    </div>
+</div>
+

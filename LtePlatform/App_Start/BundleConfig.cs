@@ -57,6 +57,15 @@ namespace LtePlatform
                 "~/Scripts/kpi/precise.viewmodel.js",
                 "~/Scripts/app/_run.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/kpiPreciseTrend").Include(
+                "~/Scripts/app/common.js",
+                "~/Scripts/mycharts/drilldownPie.js",
+                "~/Scripts/app/app.datamodel.js",
+                "~/Scripts/app/app.simplemodel.js",
+                "~/Scripts/kpi/common.controller.js",
+                "~/Scripts/kpi/precise.trend.viewmodel.js",
+                "~/Scripts/app/_run.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/collegeMap").Include(
                 "~/Scripts/app/common.js",
                 "~/Scripts/baidu/mapContainer.js",
@@ -83,6 +92,13 @@ namespace LtePlatform
                 "~/Scripts/app/app.simplemodel.js",
                 "~/Scripts/college/kpi.viewmodel.js",
                 "~/Scripts/college/kpi.controller.js",
+                "~/Scripts/app/_run.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/collegeInfrastructure").Include(
+                "~/Scripts/app/common.js",
+                "~/Scripts/app/app.datamodel.js",
+                "~/Scripts/app/app.simplemodel.js",
+                "~/Scripts/college/infrastructure.viewmodel.js",
                 "~/Scripts/app/_run.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/collegePrecise").Include(

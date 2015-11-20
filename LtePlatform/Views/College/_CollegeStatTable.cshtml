@@ -1,0 +1,53 @@
+﻿<table class="table table-hover" data-bind="visible: setView()=='list'">
+    <thead>
+        <tr>
+            <th>校园名称</th>
+            <th>用户数</th>
+            <th>区域面积（平方米）</th>
+            <th>4G基站数</th>
+            <th>4G小区数</th>
+            <th>3G基站数</th>
+            <th>3G小区数</th>
+            <th>4G室分数</th>
+            <th>3G室分数</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: collegeList">
+        <tr>
+            <td data-bind="text: Name"></td>
+            <td data-bind="text: ExpectedSubscribers"></td>
+            <td data-bind="text: $data.Area.toFixed(2)"></td>
+            <td>
+                <a href="#" data-bind="click: function () { showENodebs(Name);}">
+                    <span data-bind="text: TotalLteENodebs"></span>
+                </a>
+            </td>
+            <td>
+                <a href="#" data-bind="click: function () { showCells(Name);}">
+                    <span data-bind="text: TotalLteCells"></span>
+                </a>
+            </td>
+            <td>
+                <a href="#" data-bind="click: function () { showBtss(Name); }">
+                    <span data-bind="text: TotalCdmaBts"></span>
+                </a>
+            </td>
+            <td>
+                <a href="#" data-bind="click: function () { showCdmaCells(Name); }">
+                    <span data-bind="text: TotalCdmaCells"></span>
+                </a>
+            </td>
+            <td>
+                <a href="#" data-bind="click: function () { showLteDistributions(Name); }">
+                    <span data-bind="text: TotalLteIndoors"></span>
+                </a>
+            </td>
+            <td>
+                <a href="#" data-bind="click: function () { showCdmaDistributions(Name); }">
+                    <span data-bind="text: TotalCdmaIndoors"></span>
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+

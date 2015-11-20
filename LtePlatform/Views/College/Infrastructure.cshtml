@@ -1,8 +1,29 @@
-﻿@model dynamic
-
-@{
-    ViewBag.Title = "title";
-    Layout = "_Layout";
+﻿@{
+    ViewBag.Title = "校园网基础信息";
 }
 
-<h2>title</h2>
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h2 class="panel-title">
+            <strong>@ViewBag.Title</strong>
+        </h2>
+    </div>
+    <p>
+        @{
+            Html.RenderPartial("_CollegeMenu");
+        }
+    </p>
+</div>
+
+@section SPAViews{
+    @{
+        Html.RenderPartial("_Infrastructure");
+    }
+}
+
+@section Scripts{
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/knockout")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/collegeInfrastructure")
+}

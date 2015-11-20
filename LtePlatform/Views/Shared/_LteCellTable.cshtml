@@ -1,0 +1,38 @@
+﻿<table summary="User Grid" class="zebra">
+    <thead>
+        <tr>
+            <th>基站名称</th>
+            <th>扇区编号</th>
+            <th>频点</th>
+            <th>频带编号</th>
+            <th>PCI</th>
+            <th>PRACH</th>
+            <th>RS功率</th>
+            <th>TAC</th>
+            <th>室内外</th>
+            <th>高度</th>
+            <th>方位角</th>
+            <th>下倾</th>
+            <th>天线增益(dB)</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: cellList">
+        <tr>
+            <td data-bind="text: eNodebName"></td>
+            <td data-bind="text: sectorId"></td>
+            <td data-bind="text: frequency"></td>
+            <td data-bind="text: bandClass"></td>
+            <td data-bind="text: pci"></td>
+            <td data-bind="text: prach"></td>
+            <td data-bind="text: rsPower"></td>
+            <td data-bind="text: tac"></td>
+            <td data-bind="text: indoor"></td>
+            <td data-bind="text: height"></td>
+            <td data-bind="text: azimuth"></td>
+            <td data-bind="text: downTilt"></td>
+            <td data-bind="text: antennaGain"></td>
+        </tr>
+    </tbody>
+    <tfoot><tr><td><button data-bind="click: gobackList" class="btn btn-success">返回列表</button></td></tr></tfoot>
+</table>
+

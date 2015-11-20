@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Lte.Evaluations.DataService;
+using Lte.Evaluations.ViewModels;
 using Lte.Parameters.Abstract;
 
 namespace LtePlatform.Controllers.College
@@ -22,6 +23,11 @@ namespace LtePlatform.Controllers.College
         public IEnumerable<string> Get(string collegeName)
         {
             return _service.QueryCollegeENodebNames(collegeName);
+        }
+
+        public IEnumerable<ENodebView> Get(string collegeName, DateTime begin, DateTime end)
+        {
+            return _service.QueryCollegeENodebs(collegeName, begin, end);
         }
     }
 }

@@ -1,0 +1,40 @@
+﻿<table summary="User Grid" class="zebra">
+    <thead>
+        <tr>
+            <th>基站编号</th>
+            <th>扇区编号</th>
+            <th>小区类别</th>
+            <th>频点列表</th>
+            <th>小区编号</th>
+            <th>LAC</th>
+            <th>PN</th>
+            <th>经度</th>
+            <th>纬度</th>
+            <th>高度</th>
+            <th>机械下倾</th>
+            <th>电子下倾</th>
+            <th>方位角</th>
+            <th>天线增益</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: cdmaCellList">
+        <tr>
+            <td data-bind="text: btsId"></td>
+            <td data-bind="text: sectorId"></td>
+            <td data-bind="text: cellType"></td>
+            <td data-bind="text: cellName"></td>
+            <td data-bind="text: cellId"></td>
+            <td data-bind="text: lac"></td>
+            <td data-bind="text: pn"></td>
+            <td data-bind="text: longtitute"></td>
+            <td data-bind="text: lattitute"></td>
+            <td data-bind="text: height"></td>
+            <td data-bind="text: mTilt"></td>
+            <td data-bind="text: eTilt"></td>
+            <td data-bind="text: azimuth"></td>
+            <td data-bind="text: antennaGain"></td>
+        </tr>
+    </tbody>
+    <tfoot><tr><td><button data-bind="click: gobackList" class="btn btn-success">返回列表</button></td></tr></tfoot>
+</table>
+
