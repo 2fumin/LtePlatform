@@ -151,9 +151,11 @@
     <Compile Include="Concrete\EFTownRepository.cs" />
     <Compile Include="Entities\AlarmStat.cs" />
     <Compile Include="Entities\CdmaCell.cs" />
+    <Compile Include="Entities\CdmaCellExcel.cs" />
     <Compile Include="Entities\CdmaRegionStat.cs" />
     <Compile Include="Entities\CdmaRegionStatExcel.cs" />
     <Compile Include="Entities\Cell.cs" />
+    <Compile Include="Entities\CellExcel.cs" />
     <Compile Include="Entities\College3GTestResults.cs" />
     <Compile Include="Entities\College4GTestResults.cs" />
     <Compile Include="Entities\CollegeInfo.cs" />
