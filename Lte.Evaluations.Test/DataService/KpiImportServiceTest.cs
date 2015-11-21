@@ -47,8 +47,12 @@ namespace Lte.Evaluations.Test.DataService
         public void Test()
         {
             var message = _service.Import(_excelFileName, _regionSheetNames);
-            Assert.IsTrue(message.Length > 100);
-            Console.Write(message);
+            Assert.AreEqual(message.Count, 6);
+            foreach (var m in message)
+            {
+                Console.Write(m);
+            }
+            
         }
     }
 }

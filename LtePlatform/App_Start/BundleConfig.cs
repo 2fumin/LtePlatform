@@ -28,7 +28,9 @@ namespace LtePlatform
                 "~/Scripts/Highcharts/highcharts.js",
                 "~/Scripts/Highcharts/highcharts-3d.js",
                 "~/Scripts/Highcharts/highcharts-more.js",
-                "~/Scripts/Highcharts/modules/exporting.js"));
+                "~/Scripts/Highcharts/modules/exporting.js",
+                "~/Scripts/Highcharts/modules/data.js",
+                "~/Scripts/Highcharts/modules/drilldown.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                 "~/Scripts/sammy-{version}.js",

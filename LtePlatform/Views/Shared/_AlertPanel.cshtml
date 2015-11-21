@@ -1,11 +1,28 @@
 ﻿
-@if (!string.IsNullOrEmpty(ViewBag.Message))
+@if (ViewBag.Message is List<string>)
 {
     <div class="alert alert-success">
         <a href="#" class="close" data-dismiss="alert">
             &times;
         </a>
-        <strong>@Html.Encode(ViewBag.Message)</strong>
+        <strong>
+            @foreach (string m in ViewBag.Message)
+            {
+                @m
+                <br/>
+            }
+        </strong>
+    </div>
+}
+else if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <div class="alert alert-success">
+        <a href="#" class="close" data-dismiss="alert">
+            &times;
+        </a>
+        <strong>
+            @ViewBag.Message
+        </strong>
     </div>
 }
 @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
@@ -14,7 +31,7 @@
         <a href="#" class="close" data-dismiss="alert">
             &times;
         </a>
-        <strong>@Html.Encode(ViewBag.ErrorMessage)</strong>
+        <strong>@ViewBag.ErrorMessage</strong>
     </div>
 }
 @if (!string.IsNullOrEmpty(ViewBag.WarningMessage))
@@ -23,7 +40,7 @@
         <a href="#" class="close" data-dismiss="alert">
             &times;
         </a>
-        <strong>@Html.Encode(ViewBag.WarningMessage)</strong>
+        <strong>@ViewBag.WarningMessage</strong>
     </div>
 }
 @if (!string.IsNullOrEmpty(ViewBag.InfoMessage))
@@ -32,6 +49,6 @@
         <a href="#" class="close" data-dismiss="alert">
             &times;
         </a>
-        <strong>@Html.Encode(ViewBag.InfoMessage)</strong>
+        <strong>@ViewBag.InfoMessage</strong>
     </div>
 }

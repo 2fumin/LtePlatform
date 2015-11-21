@@ -102,6 +102,7 @@
     <Compile Include="ViewModels\CdmaRegionStatTrend.cs" />
     <Compile Include="ViewModels\CdmaRegionStatView.cs" />
     <Compile Include="ViewModels\CellPreciseKpiView.cs" />
+    <Compile Include="ViewModels\CellView.cs" />
     <Compile Include="ViewModels\College3GTestView.cs" />
     <Compile Include="ViewModels\College4GTestView.cs" />
     <Compile Include="ViewModels\CollegeKpiView.cs" />

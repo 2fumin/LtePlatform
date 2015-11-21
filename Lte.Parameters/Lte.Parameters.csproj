@@ -150,6 +150,7 @@
     <Compile Include="Concrete\EFTownPreciseCoverage4GStatRepository.cs" />
     <Compile Include="Concrete\EFTownRepository.cs" />
     <Compile Include="Entities\AlarmStat.cs" />
+    <Compile Include="Entities\CdmaCell.cs" />
     <Compile Include="Entities\CdmaRegionStat.cs" />
     <Compile Include="Entities\CdmaRegionStatExcel.cs" />
     <Compile Include="Entities\Cell.cs" />

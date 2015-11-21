@@ -25,7 +25,7 @@ function pieChart() {
             series: {
                 dataLabels: {
                     enabled: true,
-                    format: '{point.name}: {point.y}%'
+                    format: '{point.name}: {point.y}'
                 }
             }
         },
@@ -43,7 +43,7 @@ function pieChart() {
 
 pieChart.prototype.addOneSeries = function(name, value, subData) {
     var self = this;
-    self.series.data.push({
+    self.series[0].data.push({
         name: name,
         y: value,
         drilldown: name

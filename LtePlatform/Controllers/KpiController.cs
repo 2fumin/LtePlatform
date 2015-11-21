@@ -63,7 +63,7 @@ namespace LtePlatform.Controllers
         [HttpPost]
         public ViewResult KpiImport()
         {
-            var message = "";
+            var message = new List<string>();
             var httpPostedFileBase = Request.Files["dailyKpi"];
             if (httpPostedFileBase == null || httpPostedFileBase.FileName == "")
             {
@@ -80,10 +80,10 @@ namespace LtePlatform.Controllers
                     city = legalCities[0];
                 }
                 var regions = _townService.GetRegions(city);
-                var path = Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "\\uploads\\Kpi"),
+                var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "uploads\\Kpi",
                     httpPostedFileBase.FileName);
                 httpPostedFileBase.SaveAs(path);
-                 message = _importService.Import(path, regions);
+                message = _importService.Import(path, regions);
             }
             ViewBag.Message = message;
             return View("Import");
