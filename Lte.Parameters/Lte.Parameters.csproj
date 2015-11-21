@@ -114,6 +114,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IBtsRepository.cs" />
     <Compile Include="Abstract\ICdmaRegionStatRepository.cs" />
     <Compile Include="Abstract\ICellRepository.cs" />
     <Compile Include="Abstract\ICollege3GTestRepository.cs" />
@@ -152,6 +153,7 @@
     <Compile Include="Entities\AlarmStat.cs" />
     <Compile Include="Entities\AlarmStatCsv.cs" />
     <Compile Include="Entities\AlarmStatHuawei.cs" />
+    <Compile Include="Entities\CdmaBts.cs" />
     <Compile Include="Entities\CdmaCell.cs" />
     <Compile Include="Entities\CdmaCellExcel.cs" />
     <Compile Include="Entities\CdmaRegionStat.cs" />
