@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Abp.Domain.Entities;
 using Lte.Domain.Regular;
+using Lte.Domain.Common.Wireless;
 
 namespace Lte.Parameters.Entities
 {
@@ -54,9 +55,7 @@ namespace Lte.Parameters.Entities
         public short Pci { get; set; }
 
         public double RsPower { get; set; }
-
-        public static bool UpdateFirstFrequency { get; set; } = true;
-
+        
         public CdmaCell() { }
 
         public CdmaCell(CdmaCellExcel cellExcelInfo)
@@ -64,69 +63,69 @@ namespace Lte.Parameters.Entities
             var currentFrequency = (short)cellExcelInfo.Frequency;
             cellExcelInfo.CloneProperties(this);
             IsOutdoor = (cellExcelInfo.IsIndoor.Trim() == "否");
-            Frequency1 = currentFrequency;
             Frequency = 0;
-            AddFrequency(currentFrequency);
-            UpdateFirstFrequency = false;
+            Frequency1 = AddFrequency(currentFrequency);
         }
 
         public void Import(CdmaCellExcel cellExcelInfo)
         {
             var currentFrequency = (short)cellExcelInfo.Frequency;
-            if (currentFrequency == Frequency1 && UpdateFirstFrequency)
+            if (!currentFrequency.IsCdmaFrequency()) return;
+            cellExcelInfo.CloneProperties(this, true);
+            IsOutdoor = (cellExcelInfo.IsIndoor.Trim() == "否");
+            if (HasFrequency(currentFrequency)) return;
+            if (Frequency1 == -1)
             {
-                cellExcelInfo.CloneProperties(this, true);
-                IsOutdoor = (cellExcelInfo.IsIndoor.Trim() == "否");
-                UpdateFirstFrequency = false;
+                Frequency1 = AddFrequency(currentFrequency);
             }
-            if (currentFrequency == Frequency1 || currentFrequency == Frequency2
-                || currentFrequency == Frequency3 || currentFrequency == Frequency4
-                || currentFrequency == Frequency5)
+            else if (Frequency2 == -1)
             {
-                return;
+                Frequency2 = AddFrequency(currentFrequency);
             }
-            AddFrequency(currentFrequency);
-            if (Frequency2 == -1)
-            { Frequency2 = currentFrequency; }
             else if (Frequency3 == -1)
-            { Frequency3 = currentFrequency; }
+            {
+                Frequency3 = AddFrequency(currentFrequency);
+            }
             else if (Frequency4 == -1)
-            { Frequency4 = currentFrequency; }
+            {
+                Frequency4 = AddFrequency(currentFrequency);
+            }
             else if (Frequency5 == -1)
-            { Frequency5 = currentFrequency; }
+            {
+                Frequency5 = AddFrequency(currentFrequency);
+            }            
         }
 
-        public void AddFrequency(int freq)
+        public short AddFrequency(int freq)
         {
             switch (freq)
             {
                 case 37:
                     Frequency += 1;
-                    break;
+                    return 37;
                 case 78:
                     Frequency += 2;
-                    break;
+                    return 78;
                 case 119:
                     Frequency += 4;
-                    break;
+                    return 119;
                 case 160:
                     Frequency += 8;
-                    break;
+                    return 160;
                 case 201:
                     Frequency += 16;
-                    break;
+                    return 201;
                 case 242:
                     Frequency += 32;
-                    break;
+                    return 242;
                 case 283:
                     Frequency += 64;
-                    break;
+                    return 283;
                 case 1013:
                     Frequency += 128;
-                    break;
+                    return 1013;
                 default:
-                    Frequency += 256;
-                    break;
+                    return -1;
             }
         }
 
@@ -151,7 +150,7 @@ namespace Lte.Parameters.Entities
                 case 1013:
                     return (Frequency & 128) != 0;
                 default:
-                    return (Frequency & 256) != 0;
+                    return false;
             }
         }
 

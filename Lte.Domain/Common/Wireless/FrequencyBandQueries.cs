@@ -74,5 +74,11 @@ namespace Lte.Domain.Common.Wireless
                 def.FrequencyStart + 0.1 * (fcn - def.FcnStart) :
                 double.MinValue;
         }
+
+        public static bool IsCdmaFrequency(this short frequency)
+        {
+            return frequency == 37 || frequency == 78 || frequency == 119 || frequency == 160
+                || frequency == 201 || frequency == 242 || frequency == 283 || frequency == 1013;
+        }
     }
 }
