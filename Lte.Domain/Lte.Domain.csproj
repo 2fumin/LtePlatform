@@ -66,6 +66,7 @@
     <Compile Include="Common\TypeOperations.cs" />
     <Compile Include="Common\Util.cs" />
     <Compile Include="Common\Wireless\AntennaPortsConfigure.cs" />
+    <Compile Include="Common\Wireless\AntennaPortsConfigureQueries.cs" />
     <Compile Include="Common\Wireless\FrequencyBand.cs" />
     <Compile Include="Common\Wireless\FrequencyBandQueries.cs" />
     <Compile Include="LinqToCsv\Context\CsvContext.cs" />

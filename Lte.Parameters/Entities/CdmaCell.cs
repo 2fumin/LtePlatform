@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Abp.Domain.Entities;
+using Lte.Domain.Regular;
 
 namespace Lte.Parameters.Entities
 {
@@ -54,10 +55,47 @@ namespace Lte.Parameters.Entities
 
         public double RsPower { get; set; }
 
-        public static bool UpdateFirstFrequency { get; set; }
+        public static bool UpdateFirstFrequency { get; set; } = true;
 
         public CdmaCell() { }
-        
+
+        public CdmaCell(CdmaCellExcel cellExcelInfo)
+        {
+            var currentFrequency = (short)cellExcelInfo.Frequency;
+            cellExcelInfo.CloneProperties(this);
+            IsOutdoor = (cellExcelInfo.IsIndoor.Trim() == "否");
+            Frequency1 = currentFrequency;
+            Frequency = 0;
+            AddFrequency(currentFrequency);
+            UpdateFirstFrequency = false;
+        }
+
+        public void Import(CdmaCellExcel cellExcelInfo)
+        {
+            var currentFrequency = (short)cellExcelInfo.Frequency;
+            if (currentFrequency == Frequency1 && UpdateFirstFrequency)
+            {
+                cellExcelInfo.CloneProperties(this, true);
+                IsOutdoor = (cellExcelInfo.IsIndoor.Trim() == "否");
+                UpdateFirstFrequency = false;
+            }
+            if (currentFrequency == Frequency1 || currentFrequency == Frequency2
+                || currentFrequency == Frequency3 || currentFrequency == Frequency4
+                || currentFrequency == Frequency5)
+            {
+                return;
+            }
+            AddFrequency(currentFrequency);
+            if (Frequency2 == -1)
+            { Frequency2 = currentFrequency; }
+            else if (Frequency3 == -1)
+            { Frequency3 = currentFrequency; }
+            else if (Frequency4 == -1)
+            { Frequency4 = currentFrequency; }
+            else if (Frequency5 == -1)
+            { Frequency5 = currentFrequency; }
+        }
+
         public void AddFrequency(int freq)
         {
             switch (freq)

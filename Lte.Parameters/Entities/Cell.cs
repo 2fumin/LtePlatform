@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Abp.Domain.Entities;
 using Lte.Domain.Common.Wireless;
+using Lte.Domain.Regular;
 
 namespace Lte.Parameters.Entities
 {
@@ -43,5 +44,15 @@ namespace Lte.Parameters.Entities
         public double AntennaGain { get; set; }
 
         public AntennaPortsConfigure AntennaPorts { get; set; }
+
+        public Cell() { }
+
+        public Cell(CellExcel cellExcelInfo)
+        {
+            cellExcelInfo.CloneProperties(this);
+
+            AntennaPorts = cellExcelInfo.TransmitReceive.GetAntennaPortsConfig();
+            IsOutdoor = (cellExcelInfo.IsIndoor.Trim() == "否");
+        }
     }
 }
