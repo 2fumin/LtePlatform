@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace AutoMapper.Test.Bug
 {
     [TestFixture]
-    public abstract class NullableDateTime : AutoMapperSpecBase
+    public class NullableDateTime : AutoMapperSpecBase
     {
         Destination _destination;
         readonly DateTime _date = new DateTime(1900, 1, 1);
@@ -15,7 +15,7 @@ namespace AutoMapper.Test.Bug
             public DateTime Value { get; set; }
         }
 
-        public abstract class Destination
+        public class Destination
         {
             public DateTime Value { get; set; }
         }
@@ -28,15 +28,11 @@ namespace AutoMapper.Test.Bug
                 c.CreateMap<DateTime, DateTime?>().ConvertUsing(source => source == new DateTime(1900, 1, 1) ? (DateTime?)null : source);
             });
         }
-
-        protected override void Because_of()
-        {
-            _destination = Mapper.Map<Destination>(new Source { Value = _date });
-        }
-
+        
         [Test]
         public void Should_map_as_usual()
         {
+            _destination = Mapper.Map<Destination>(new Source { Value = _date });
             _destination.Value.ShouldEqual(_date);
         }
     }

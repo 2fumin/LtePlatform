@@ -36,19 +36,16 @@ namespace AutoMapper.Test.Bug
                 cfg.CreateMap<FirstClass, SecondClass>();
             });
         }
-
-        protected override void Because_of()
+        
+        [Test]
+        [ExpectedException(typeof(AutoMapperMappingException))]
+        public void Should_match_on_the_name_even_if_values_match()
         {
             var source = new FirstClass
             {
                 EnumValue = FirstEnum.NamedEnum
             };
             _result = Mapper.Map<FirstClass, SecondClass>(source);
-        }
-
-        [Test]
-        public void Should_match_on_the_name_even_if_values_match()
-        {
             _result.EnumValue.ShouldEqual(SecondEnum.DifferentNamedEnum);
         }
     }

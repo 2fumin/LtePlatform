@@ -18,6 +18,7 @@ namespace LtePlatform
 
             ControllerBuilder.Current.SetControllerFactory(new NinjectControllerFactory());
             GlobalConfiguration.Configuration.DependencyResolver = new NinjectDependencyResolver();
+            AutoMapperWebConfiguration.Configure();
         }
     }
 }

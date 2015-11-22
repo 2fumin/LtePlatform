@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Lte.Evaluations.DataService;
+using Lte.Evaluations.MapperSerive;
+using Lte.Evaluations.Test.MockItems;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 using Lte.Parameters.MockOperations;
@@ -26,30 +28,14 @@ namespace Lte.Evaluations.Test.DataService
         {
             _service = new College4GTestService(_repository.Object, _collegeRepository.Object,
                 _eNodebRepository.Object, _cellRepository.Object);
-            _collegeRepository.MockAuditedItems(new List<CollegeInfo>
-            {
-                new CollegeInfo
-                {
-                    Id = 1,
-                    Name = "college-1"
-                },
-                new CollegeInfo
-                {
-                    Id = 2,
-                    Name = "college-2"
-                },
-                new CollegeInfo
-                {
-                    Id = 3,
-                    Name = "college-3"
-                }
-            }.AsQueryable());
+            _collegeRepository.MockThreeColleges();
             _collegeRepository.Setup(x => x.Get(It.IsAny<int>())).Returns<int>(
                 id => new CollegeInfo
                 {
                     Id = id,
                     Name = "college-1"
                 });
+            CollegeMapperService.MapCollege4GTest();
         }
 
         [Test]

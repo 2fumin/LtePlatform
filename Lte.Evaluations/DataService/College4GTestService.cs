@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Lte.Domain.Regular;
 using Lte.Evaluations.ViewModels;
 using Lte.Parameters.Abstract;
@@ -38,13 +39,10 @@ namespace Lte.Evaluations.DataService
                 var cell = eNodeb == null
                     ? null
                     : _cellRepository.GetBySectorId(x.ENodebId, x.SectorId);
-                var view = new College4GTestView
-                {
-                    CollegeName = college == null ? "Unknown" : college.Name,
-                    CellName = eNodeb == null ? "Undefined" : eNodeb.Name + "-" + x.SectorId,
-                    Pci = cell?.Pci ?? -1
-                };
-                x.CloneProperties(view);
+                var view = Mapper.Map<College4GTestResults, College4GTestView>(x);
+                view.CollegeName = college?.Name;
+                view.CellName = eNodeb?.Name + "-" + x.SectorId;
+                view.Pci = cell?.Pci ?? -1;
                 return view;
             });
         }

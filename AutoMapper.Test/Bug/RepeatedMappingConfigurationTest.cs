@@ -3,7 +3,7 @@ using NUnit.Framework;
 namespace AutoMapper.Test.Bug
 {
     [TestFixture]
-	public abstract class When_mapping_for_derived_class_is_duplicated : AutoMapperSpecBase
+	public class When_mapping_for_derived_class_is_duplicated : AutoMapperSpecBase
 	{
 		public class ModelObject
 		{

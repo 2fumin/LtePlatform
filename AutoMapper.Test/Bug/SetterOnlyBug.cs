@@ -33,7 +33,7 @@ namespace AutoMapper.Test.Bug
             public string Property { get; set; }
         }
 
-        public abstract class Desitination
+        public class Desitination
         {
             string _property;
 

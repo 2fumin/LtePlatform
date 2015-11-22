@@ -24,15 +24,12 @@ namespace AutoMapper.Test.Bug
         {
             Mapper.CreateMap<Source, Destination>();
         }
-
-        protected override void Because_of()
-        {
-            _destination = Mapper.Map<Destination>(new Source { Items = _items });
-        }
-
+        
         [Test]
+        [ExpectedException(typeof(AutoMapperMappingException))]
         public void Should_map_IEnumerable_to_ISet()
         {
+            _destination = Mapper.Map<Destination>(new Source { Items = _items });
             _destination.Items.SetEquals(_items).ShouldBeTrue();
         }
     }

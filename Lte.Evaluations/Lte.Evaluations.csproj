@@ -96,6 +96,8 @@
     <Compile Include="DataService\PreciseRegionStatService.cs" />
     <Compile Include="DataService\PreciseStatService.cs" />
     <Compile Include="DataService\TownQueryService.cs" />
+    <Compile Include="MapperSerive\CollegeMapperService.cs" />
+    <Compile Include="MapperSerive\EvalutaionMapperProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CdmaCellView.cs" />
     <Compile Include="ViewModels\CdmaRegionDateView.cs" />
@@ -114,6 +116,10 @@
     <Compile Include="ViewModels\TownPreciseView.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AutoMapper\AutoMapper.csproj">
+      <Project>{75c9d4b5-2117-4b06-a6b1-70afcd6b3bfc}</Project>
+      <Name>AutoMapper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lte.Domain\Lte.Domain.csproj">
       <Project>{adeef82d-6389-47c4-8f7c-d7f85c01d64e}</Project>
       <Name>Lte.Domain</Name>

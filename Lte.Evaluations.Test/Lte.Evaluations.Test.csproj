@@ -91,6 +91,8 @@
     <Compile Include="DataService\College3GTestQueries.cs" />
     <Compile Include="DataService\College3GTestServiceTest.cs" />
     <Compile Include="DataService\College4GTestServiceTest.cs" />
+    <Compile Include="DataService\CollegeKpiQueries.cs" />
+    <Compile Include="DataService\CollegeKpiServiceTest.cs" />
     <Compile Include="DataService\GenerateViewListTest.cs" />
     <Compile Include="DataService\KpiImportServiceTest.cs" />
     <Compile Include="DataService\PreciseRegionStatServiceTest.cs" />

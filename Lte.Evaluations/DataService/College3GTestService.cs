@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Lte.Domain.Regular;
 using Lte.Evaluations.ViewModels;
 using Lte.Parameters.Abstract;
@@ -28,22 +29,19 @@ namespace Lte.Evaluations.DataService
             if (!results.Any()) return new List<College3GTestView>();
             return results.Select(x =>
             {
-                CollegeInfo college = _collegeRepository.Get(x.CollegeId);
-                College3GTestView view = new College3GTestView
-                {
-                    CollegeName = college == null ? "Unknown" : college.Name
-                };
-                x.CloneProperties(view);
+                var college = _collegeRepository.Get(x.CollegeId);
+                var view = Mapper.Map<College3GTestResults, College3GTestView>(x);
+                view.CollegeName = college?.Name;
                 return view;
             });
         }
 
         public College3GTestResults GetResult(DateTime date, int hour, string name)
         {
-            CollegeInfo college = _collegeRepository.GetByName(name);
+            var college = _collegeRepository.GetByName(name);
             if (college == null) return null;
-            DateTime time = date.AddHours(hour);
-            College3GTestResults result = _repository.GetByCollegeIdAndTime(college.Id, time);
+            var time = date.AddHours(hour);
+            var result = _repository.GetByCollegeIdAndTime(college.Id, time);
             return result ?? new College3GTestResults
             {
                 TestTime = date.AddHours(hour),

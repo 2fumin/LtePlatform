@@ -6,7 +6,7 @@ namespace AutoMapper.Test.Bug
     namespace RecognizeIxesBug
     {
         [TestFixture]
-        public abstract class IxesTest : AutoMapperSpecBase
+        public class IxesTest : AutoMapperSpecBase
         {
             private Stuff _source;
             private StuffView _dest;
@@ -56,7 +56,7 @@ namespace AutoMapper.Test.Bug
                 public string RankCode { get; set; }
             }
 
-            public abstract class StuffView
+            public class StuffView
             {
                 public int IdCodeKey { get; set; }
                 public string NameKey { get; set; }

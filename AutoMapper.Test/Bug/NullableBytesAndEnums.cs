@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace AutoMapper.Test.Bug
 {
     [TestFixture]
-	public abstract class NullableBytesAndEnums : AutoMapperSpecBase
+	public class NullableBytesAndEnums : AutoMapperSpecBase
 	{
 		private Destination _destination;
 
@@ -19,7 +19,7 @@ namespace AutoMapper.Test.Bug
 			Splorg = 2
 		}
 
-		public abstract class Destination
+		public class Destination
 		{
 			public Foo? Value { get; set; }
 		}
@@ -31,15 +31,11 @@ namespace AutoMapper.Test.Bug
 				cfg.CreateMap<Source, Destination>();
 			});
 		}
-
-		protected override void Because_of()
-		{
-			_destination = Mapper.Map<Source, Destination>(new Source {Value = 2});
-		}
-
+        
 		[Test]
 		public void Should_map_the_byte_to_the_enum_with_the_same_value()
 		{
+			_destination = Mapper.Map<Source, Destination>(new Source {Value = 2});
 			_destination.Value.ShouldEqual(Foo.Splorg);
 		}
 	}
@@ -63,18 +59,15 @@ namespace AutoMapper.Test.Bug
         {
             Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<Source, Destination>();
+                cfg.CreateMap<Source, Destination>()
+                    .ForMember(d => d.Value, opt => opt.MapFrom(s => (long?) s.Value));
             });
         }
-
-        protected override void Because_of()
-        {
-            _destination = Mapper.Map<Source, Destination>(new Source { Value = 2 });
-        }
-
+        
         [Test]
         public void Should_map_the_byte_to_the_enum_with_the_same_value()
         {
+            _destination = Mapper.Map<Source, Destination>(new Source { Value = 2 });
             _destination.Value.ShouldEqual(2);
         }
     }

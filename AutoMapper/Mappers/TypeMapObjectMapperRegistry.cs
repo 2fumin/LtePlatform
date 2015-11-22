@@ -89,7 +89,7 @@ namespace AutoMapper.Mappers
                 context.TypeMap.BeforeMap(context.SourceValue, mappedObject);
                 context.BeforeMap(mappedObject);
 
-                foreach (PropertyMap propertyMap in context.TypeMap.GetPropertyMaps())
+                foreach (var propertyMap in context.TypeMap.GetPropertyMaps())
                 {
                     MapPropertyValue(context.CreatePropertyMapContext(propertyMap), mapper, mappedObject, propertyMap);
                 }

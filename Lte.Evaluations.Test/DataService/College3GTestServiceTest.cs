@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Lte.Evaluations.DataService;
+using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.Test.MockItems;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
@@ -22,26 +23,10 @@ namespace Lte.Evaluations.Test.DataService
         public void TfSetup()
         {
             _service = new College3GTestService(_repository.Object, _collegeRepository.Object);
-            _collegeRepository.MockAuditedItems(new List<CollegeInfo>
-            {
-                new CollegeInfo
-                {
-                    Id = 1,
-                    Name = "college-1"
-                },
-                new CollegeInfo
-                {
-                    Id = 2,
-                    Name = "college-2"
-                },
-                new CollegeInfo
-                {
-                    Id = 3,
-                    Name = "college-3"
-                }
-            }.AsQueryable());
+            _collegeRepository.MockThreeColleges();
             _collegeRepository.MockOpertions();
             _repository.MockOperations();
+            CollegeMapperService.MapCollege3GTest();
         }
         
         [Test]

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Lte.Domain.Regular;
 using Lte.Evaluations.ViewModels;
 using Lte.Parameters.Abstract;
@@ -30,11 +31,8 @@ namespace Lte.Evaluations.DataService
             return results.Select(x =>
             {
                 var college = _collegeRepository.Get(x.CollegeId);
-                var view = new CollegeKpiView
-                {
-                    CollegeName = college == null ? "Unknown" : college.Name
-                };
-                x.CloneProperties(view);
+                var view = Mapper.Map<CollegeKpi, CollegeKpiView>(x);
+                view.CollegeName = college?.Name;
                 return view;
             });
         }

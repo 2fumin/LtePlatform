@@ -61,7 +61,7 @@ namespace AutoMapper.Test.Bug
     }
 
     [TestFixture]
-    public abstract class MappingInheritanceBug
+    public class MappingInheritanceBug
     {
         [Test]
         public void TestMethod1()
