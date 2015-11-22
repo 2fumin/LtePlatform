@@ -50,7 +50,7 @@ namespace AutoMapper.Mappers
                 i++;
             }
 
-            object valueToAssign = destination;
+            var valueToAssign = destination;
             return valueToAssign;
         }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Lte.Domain.Regular;
 using NUnit.Framework;
 
@@ -36,12 +37,18 @@ namespace Lte.Domain.Test.Regular
             public int M2 { get; set; }
         }
 
+        [TestFixtureSetUp]
+        public void SetupMapping()
+        {
+            Mapper.CreateMap<A, A>();
+            Mapper.CreateMap<A, B>();
+        }
+
         [Test]
         public void TestCloneSelf()
         {
-            A a = new A { M1 = 11, M2 = 22 };
-            A a2 = new A();
-            a.CloneProperties<A>(a2);
+            var a = new A { M1 = 11, M2 = 22 };
+            var a2 = Mapper.Map<A>(a);
             Assert.AreEqual(a2.M1, 11);
             Assert.AreEqual(a2.M2, 22);
         }
@@ -49,9 +56,8 @@ namespace Lte.Domain.Test.Regular
         [Test]
         public void TestClone_InterClass_NoProtection()
         {
-            A a = new A { M1 = 11, M2 = 22 };
-            B b = new B { M1 = 33, M2 = 44 };
-            a.CloneProperties(b);
+            var a = new A { M1 = 11, M2 = 22 };
+            var b = Mapper.Map<A, B>(a);
             Assert.AreEqual(b.M1, 11);
             Assert.AreEqual(b.M2, 22);
 
@@ -63,16 +69,16 @@ namespace Lte.Domain.Test.Regular
         [Test]
         public void TestClone_InterClass_Protection()
         {
-            A1 a = new A1 { M1 = 11, M2 = 22 };
+            var a = new A1 { M1 = 11, M2 = 22 };
 
-            using (B b = new B { M1 = 33, M2 = 44 })
+            using (var b = new B { M1 = 33, M2 = 44 })
             {
                 a.CloneProperties(b);
                 Assert.AreEqual(b.M1, 11);
                 Assert.AreEqual(b.M2, 22);
             }
 
-            using (B b = new B { M1 = 33, M2 = 44 })
+            using (var b = new B { M1 = 33, M2 = 44 })
             {
                 a.CloneProperties(b, true);
                 Assert.AreEqual(b.M1, 11);

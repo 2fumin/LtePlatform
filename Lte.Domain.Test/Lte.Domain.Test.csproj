@@ -112,6 +112,10 @@
     <Compile Include="Regular\CloneAttributeTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AutoMapper\AutoMapper.csproj">
+      <Project>{75c9d4b5-2117-4b06-a6b1-70afcd6b3bfc}</Project>
+      <Name>AutoMapper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lte.Domain\Lte.Domain.csproj">
       <Project>{adeef82d-6389-47c4-8f7c-d7f85c01d64e}</Project>
       <Name>Lte.Domain</Name>
