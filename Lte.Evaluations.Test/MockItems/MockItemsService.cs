@@ -35,5 +35,10 @@ namespace Lte.Evaluations.Test.MockItems
         {
             repository.MockQueryItems(stats.AsQueryable());
         }
+
+        public static void MockBtss(this Mock<IBtsRepository> repository, List<CdmaBts> btss)
+        {
+            repository.MockQueryItems(btss.AsQueryable());
+        }
     }
 }

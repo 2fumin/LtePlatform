@@ -96,6 +96,7 @@
     <Compile Include="DataService\GenerateViewListTest.cs" />
     <Compile Include="DataService\KpiImportServiceTest.cs" />
     <Compile Include="DataService\PreciseRegionStatServiceTest.cs" />
+    <Compile Include="MockItems\MockBtsService.cs" />
     <Compile Include="MockItems\MockCdmaRegionStatService.cs" />
     <Compile Include="MockItems\MockCollegeService.cs" />
     <Compile Include="MockItems\MockItemsService.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="TestService\MergeTownPreciseViewTest.cs" />
     <Compile Include="TestService\PreciseRegionStatTestService.cs" />
     <Compile Include="TestService\PreciseViewTestService.cs" />
+    <Compile Include="ViewModel\CdmaCellViewTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lte.Domain\Lte.Domain.csproj">

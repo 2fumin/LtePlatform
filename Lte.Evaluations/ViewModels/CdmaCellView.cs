@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Lte.Parameters.Entities;
 using Lte.Parameters.Abstract;
 using Lte.Domain.Regular;
@@ -47,13 +48,12 @@ namespace Lte.Evaluations.ViewModels
 
         public CdmaCellView() { }
 
-        public CdmaCellView(CdmaCell cell, IBtsRepository repository)
+        public static CdmaCellView ConstruView(CdmaCell cell, IBtsRepository repository)
         {
-            cell.CloneProperties(this);
-            var bts = repository.FirstOrDefault(x => x.BtsId == cell.BtsId);
-            BtsName = bts == null ? "Undefined" : bts.Name;
-            Indoor = cell.IsOutdoor ? "室外" : "室内";
-            DownTilt = cell.ETilt + cell.MTilt;
+            var view = Mapper.Map<CdmaCell, CdmaCellView>(cell);
+            var bts = repository.GetByBtsId(cell.BtsId);
+            view.BtsName = bts?.Name;
+            return view;
         }
     }
 }

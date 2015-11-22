@@ -13,7 +13,7 @@ namespace Lte.Evaluations.MapperSerive
 
             Mapper.CreateMap<ENodeb, ENodebView>();
             Mapper.CreateMap<Cell, CellView>();
-            Mapper.CreateMap<CdmaCell, CdmaCellView>();
+            InfrastructureMapperService.MapCdmaCell();
             CollegeMapperService.MapCollege3GTest();
             CollegeMapperService.MapCollege4GTest();
             CollegeMapperService.MapCollegeKpi();
