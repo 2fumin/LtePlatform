@@ -44,7 +44,7 @@ namespace Lte.Evaluations.ViewModels
         public CellView(Cell cell, IENodebRepository repository)
         {
             cell.CloneProperties(this);
-            ENodeb eNodeb = repository.FirstOrDefault(x => x.ENodebId == cell.ENodebId);
+            var eNodeb = repository.FirstOrDefault(x => x.ENodebId == cell.ENodebId);
             ENodebName = eNodeb == null ? "Undefined" : eNodeb.Name;
             Indoor = cell.IsOutdoor ? "室外" : "室内";
             DownTilt = cell.ETilt + cell.MTilt;

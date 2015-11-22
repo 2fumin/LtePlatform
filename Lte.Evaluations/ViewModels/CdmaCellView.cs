@@ -50,7 +50,7 @@ namespace Lte.Evaluations.ViewModels
         public CdmaCellView(CdmaCell cell, IBtsRepository repository)
         {
             cell.CloneProperties(this);
-            CdmaBts bts = repository.FirstOrDefault(x => x.BtsId == cell.BtsId);
+            var bts = repository.FirstOrDefault(x => x.BtsId == cell.BtsId);
             BtsName = bts == null ? "Undefined" : bts.Name;
             Indoor = cell.IsOutdoor ? "室外" : "室内";
             DownTilt = cell.ETilt + cell.MTilt;

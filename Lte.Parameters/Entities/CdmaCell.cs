@@ -159,7 +159,7 @@ namespace Lte.Parameters.Entities
             get
             {
                 if (Frequency1 == -1) { return "空"; }
-                string result = Frequency1.ToString(CultureInfo.InvariantCulture);
+                var result = Frequency1.ToString(CultureInfo.InvariantCulture);
                 if (Frequency2 == -1) { return result; }
                 result += "&" + Frequency2;
                 if (Frequency3 == -1) { return result; }

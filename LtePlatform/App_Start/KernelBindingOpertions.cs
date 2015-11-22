@@ -29,7 +29,11 @@ namespace LtePlatform
 
             ninjectKernel.Bind<IENodebRepository>().To<EFENodebRepository>();
 
+            ninjectKernel.Bind<IBtsRepository>().To<EFBtsRepository>();
+
             ninjectKernel.Bind<ICellRepository>().To<EFCellRepository>();
+
+            ninjectKernel.Bind<ICdmaCellRepository>().To<EFCdmaCellRepository>();
 
             ninjectKernel.Bind<IIndoorDistributioinRepository>().To<EFIndoorDistributionRepository>();
 

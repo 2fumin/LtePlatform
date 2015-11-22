@@ -96,6 +96,7 @@
     <Compile Include="Lz4Net\Lz4DecompressionStreamBase.cs" />
     <Compile Include="Regular\AlarmTypeQueries.cs" />
     <Compile Include="Regular\IpAddress.cs" />
+    <Compile Include="Regular\MapperOperations.cs" />
     <Compile Include="Regular\TransformEnum.cs" />
     <Compile Include="Lz4Net\Core\CoreHandlers.cs" />
     <Compile Include="Lz4Net\Core\DirectoryEventArgs.cs" />
@@ -215,7 +216,12 @@
     <Compile Include="ZipLib\Zip\ZipNameTransform.cs" />
     <Compile Include="ZipLib\Zip\ZipOutputStream.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\AutoMapper\AutoMapper.csproj">
+      <Project>{75c9d4b5-2117-4b06-a6b1-70afcd6b3bfc}</Project>
+      <Name>AutoMapper</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
