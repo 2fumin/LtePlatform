@@ -21,7 +21,7 @@ namespace Lte.Evaluations.MapperSerive
             Mapper.CreateMap<Cell, CellPreciseKpiView>()
                 .ForMember(d => d.Indoor, opt => opt.MapFrom(s => s.IsOutdoor ? "室外" : "室内"))
                 .ForMember(d => d.DownTilt, opt => opt.MapFrom(s => s.ETilt + s.MTilt))
-                .ForMember(d => d.PreciseRate, opt => opt.MapFrom(s => 100));
+                .ForMember(d => d.PreciseRate, opt => opt.MapFrom(s => 100.0));
         }
     }
 }

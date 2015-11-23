@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 using Lte.Evaluations.DataService;
 using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.Test.MockItems;
+using Lte.Evaluations.ViewModels;
 using Lte.Parameters.Abstract;
+using Lte.Parameters.Entities;
 using Moq;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 
 namespace Lte.Evaluations.Test.DataService
 {
@@ -29,8 +32,50 @@ namespace Lte.Evaluations.Test.DataService
             _service = new CollegePreciseService(_repository.Object, _cellRepository.Object, _eNodebRepository.Object,
                 _kpiRepository.Object);
             _repository.MockOperations();
+            _eNodebRepository.MockOperations();
             _cellRepository.MockOperations();
+            _repository.MockSixCollegeCells();
+            _eNodebRepository.MockThreeENodebs();
             _cellRepository.MockSixCells();
+        }
+
+        [TestCase(1, "2015-4-1", 1, 1, 100, 50, "2015-3-5", "2015-4-5", true, true)]
+        [TestCase(2, "2015-4-1", 2, 1, 100, 40, "2015-3-5", "2015-4-5", true, true)]
+        [TestCase(3, "2015-4-1", 2, 2, 150, 50, "2015-3-5", "2015-4-5", true, true)]
+        public void Test_GetViews_OneRecord(int collegeId, string statTime, int cellId, byte sectorId, int totalMrs,
+            int secondNeighbors, string begin, string end, bool cellMatched, bool timeMatched)
+        {
+            var kpis = new List<PreciseCoverage4G>
+            {
+                new PreciseCoverage4G
+                {
+                    StatTime = DateTime.Parse(statTime),
+                    CellId = cellId,
+                    SectorId = sectorId,
+                    TotalMrs = totalMrs,
+                    SecondNeighbors = secondNeighbors
+                }
+            };
+            _kpiRepository.MockPreciseStats(kpis);
+            var views = _service.GetViews("College-" + collegeId, DateTime.Parse(begin), DateTime.Parse(end));
+            if (cellMatched)
+            {
+                Assert.AreEqual(views.Count(), 1, "Views");
+                views.ElementAt(0).AssertBasicParameters(cellId, sectorId, 1.1, 20, "室外", 3.3);
+                if (timeMatched)
+                {
+                    Assert.AreEqual(views.ElementAt(0).PreciseRate,
+                        totalMrs == 0 ? 100 : 100 - (double) 100 * secondNeighbors/totalMrs, 1E-6);
+                }
+                else
+                {
+                    Assert.AreEqual(views.ElementAt(0).PreciseRate, 100.0);
+                }
+            }
+            else
+            {
+                Assert.AreEqual(views.Count(), 0);
+            }
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Lte.Evaluations.DataService
             _kpiRepository = kpiRepository;
         }
 
-        public IEnumerable<CellPreciseKpiView> Get(string collegeName, DateTime begin, DateTime end)
+        public IEnumerable<CellPreciseKpiView> GetViews(string collegeName, DateTime begin, DateTime end)
         {
             var ids = _repository.GetCellIds(collegeName);
             var query =

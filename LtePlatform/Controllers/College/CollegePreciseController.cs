@@ -20,7 +20,7 @@ namespace LtePlatform.Controllers.College
 
         public IEnumerable<CellPreciseKpiView> Get(string collegeName, DateTime begin, DateTime end)
         {
-            return _service.Get(collegeName, begin, end);
+            return _service.GetViews(collegeName, begin, end);
         }
     }
 }

@@ -34,10 +34,6 @@ namespace Lte.Evaluations.ViewModels
 
         public double PreciseRate { get; set; }
 
-        public CellPreciseKpiView()
-        {
-        }
-
         public static CellPreciseKpiView ConstructView(Cell cell, IENodebRepository repository)
         {
             var view = Mapper.Map<Cell, CellPreciseKpiView>(cell);
@@ -52,7 +48,8 @@ namespace Lte.Evaluations.ViewModels
                                                        && x.CellId == ENodebId && x.SectorId == SectorId).ToList();
             if (query.Count > 0)
             {
-                PreciseRate = 100 - (double)query.Sum(x => x.SecondNeighbors) / query.Sum(x => x.TotalMrs) * 100;
+                var sum = query.Sum(x => x.TotalMrs);
+                PreciseRate = sum == 0 ? 100 : 100 - (double)query.Sum(x => x.SecondNeighbors) / sum * 100;
             }
         }
     }

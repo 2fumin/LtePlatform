@@ -94,6 +94,7 @@
     <Compile Include="DataService\CollegeKpiQueries.cs" />
     <Compile Include="DataService\CollegeKpiServiceTest.cs" />
     <Compile Include="DataService\CollegePreciseServiceTest.cs" />
+    <Compile Include="DataService\CollegePreciseServiceTestQueries.cs" />
     <Compile Include="DataService\GenerateViewListTest.cs" />
     <Compile Include="DataService\KpiImportServiceTest.cs" />
     <Compile Include="DataService\PreciseRegionStatServiceTest.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="TestService\PreciseViewTestService.cs" />
     <Compile Include="ViewModel\CdmaCellViewTest.cs" />
     <Compile Include="ViewModel\CdmaRegionStatViewTest.cs" />
+    <Compile Include="ViewModel\CellPreciseKpiViewTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lte.Domain\Lte.Domain.csproj">
