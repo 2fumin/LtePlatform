@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Lte.Domain.Regular;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
@@ -39,15 +40,12 @@ namespace Lte.Evaluations.ViewModels
 
         public double AntennaGain { get; set; }
 
-        public CellView() { }
-
-        public CellView(Cell cell, IENodebRepository repository)
+        public static CellView ConstructView(Cell cell, IENodebRepository repository)
         {
-            cell.CloneProperties(this);
-            var eNodeb = repository.FirstOrDefault(x => x.ENodebId == cell.ENodebId);
-            ENodebName = eNodeb == null ? "Undefined" : eNodeb.Name;
-            Indoor = cell.IsOutdoor ? "室外" : "室内";
-            DownTilt = cell.ETilt + cell.MTilt;
+            var view = Mapper.Map<Cell, CellView>(cell);
+            var eNodeb = repository.GetByENodebId(cell.ENodebId);
+            view.ENodebName = eNodeb?.Name;
+            return view;
         }
     }
 }

@@ -42,6 +42,9 @@ namespace Lte.Evaluations.Test.DataService
         [TestCase(1, "2015-4-1", 1, 1, 100, 50, "2015-3-5", "2015-4-5", true, true)]
         [TestCase(2, "2015-4-1", 2, 1, 100, 40, "2015-3-5", "2015-4-5", true, true)]
         [TestCase(3, "2015-4-1", 2, 2, 150, 50, "2015-3-5", "2015-4-5", true, true)]
+        [TestCase(7, "2015-4-1", 2, 2, 150, 50, "2015-3-5", "2015-4-5", false, true)]
+        [TestCase(3, "2015-4-1", 2, 2, 150, 50, "2015-3-5", "2015-3-25", true, false)]
+        [TestCase(9, "2015-4-1", 2, 2, 150, 50, "2015-2-5", "2015-3-5", false, false)]
         public void Test_GetViews_OneRecord(int collegeId, string statTime, int cellId, byte sectorId, int totalMrs,
             int secondNeighbors, string begin, string end, bool cellMatched, bool timeMatched)
         {

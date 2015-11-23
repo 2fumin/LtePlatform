@@ -122,6 +122,11 @@
     <Compile Include="Bug\SetterOnlyBug.cs" />
     <Compile Include="Bug\SubclassMappings.cs" />
     <Compile Include="Bug\TargetISet.cs" />
+    <Compile Include="IMappingExpression\ForCtorParam.cs" />
+    <Compile Include="IMappingExpression\NonGenericAllMembersNullSubstitute.cs" />
+    <Compile Include="IMappingExpression\NonGenericConstructorTests.cs" />
+    <Compile Include="IMappingExpression\NonGenericProjectEnumTest.cs" />
+    <Compile Include="IMappingExpression\NonGenericReverseMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
