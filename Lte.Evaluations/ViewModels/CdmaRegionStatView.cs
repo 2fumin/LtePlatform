@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Lte.Domain.Regular;
 using Lte.Parameters.Entities;
 
@@ -38,11 +39,9 @@ namespace Lte.Evaluations.ViewModels
 
         public double Utility3GRate { get; set; }
 
-        public CdmaRegionStatView() { }
-
-        public CdmaRegionStatView(CdmaRegionStat stat)
+        public static CdmaRegionStatView ConstructView(CdmaRegionStat stat)
         {
-            stat.CloneProperties(this);
+            return Mapper.Map<CdmaRegionStat, CdmaRegionStatView>(stat);  
         }
     }
 }

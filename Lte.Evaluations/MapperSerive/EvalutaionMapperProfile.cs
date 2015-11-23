@@ -17,6 +17,8 @@ namespace Lte.Evaluations.MapperSerive
             CollegeMapperService.MapCollege3GTest();
             CollegeMapperService.MapCollege4GTest();
             CollegeMapperService.MapCollegeKpi();
+            KpiMapperService.MapCdmaRegionStat();
+            KpiMapperService.MapCellPrecise();
         }
     }
 }

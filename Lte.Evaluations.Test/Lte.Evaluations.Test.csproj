@@ -93,12 +93,16 @@
     <Compile Include="DataService\College4GTestServiceTest.cs" />
     <Compile Include="DataService\CollegeKpiQueries.cs" />
     <Compile Include="DataService\CollegeKpiServiceTest.cs" />
+    <Compile Include="DataService\CollegePreciseServiceTest.cs" />
     <Compile Include="DataService\GenerateViewListTest.cs" />
     <Compile Include="DataService\KpiImportServiceTest.cs" />
     <Compile Include="DataService\PreciseRegionStatServiceTest.cs" />
     <Compile Include="MockItems\MockBtsService.cs" />
     <Compile Include="MockItems\MockCdmaRegionStatService.cs" />
+    <Compile Include="MockItems\MockCellService.cs" />
     <Compile Include="MockItems\MockCollegeService.cs" />
+    <Compile Include="MockItems\MockENodebService.cs" />
+    <Compile Include="MockItems\MockInfrastructureService.cs" />
     <Compile Include="MockItems\MockItemsService.cs" />
     <Compile Include="MockItems\MockPreciseRegionStatService.cs" />
     <Compile Include="MockItems\MockRegionService.cs" />
@@ -111,6 +115,7 @@
     <Compile Include="TestService\PreciseRegionStatTestService.cs" />
     <Compile Include="TestService\PreciseViewTestService.cs" />
     <Compile Include="ViewModel\CdmaCellViewTest.cs" />
+    <Compile Include="ViewModel\CdmaRegionStatViewTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lte.Domain\Lte.Domain.csproj">

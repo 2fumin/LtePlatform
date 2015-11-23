@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Lte.Domain.Regular;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
@@ -37,14 +38,12 @@ namespace Lte.Evaluations.ViewModels
         {
         }
 
-        public CellPreciseKpiView(Cell cell, IENodebRepository repository)
+        public static CellPreciseKpiView ConstructView(Cell cell, IENodebRepository repository)
         {
-            cell.CloneProperties(this);
-            ENodeb eNodeb = repository.FirstOrDefault(x => x.ENodebId == cell.ENodebId);
-            ENodebName = eNodeb == null ? "Undefined" : eNodeb.Name;
-            Indoor = cell.IsOutdoor ? "室外" : "室内";
-            DownTilt = cell.ETilt + cell.MTilt;
-            PreciseRate = 100;
+            var view = Mapper.Map<Cell, CellPreciseKpiView>(cell);
+            var eNodeb = repository.GetByENodebId(cell.ENodebId);
+            view.ENodebName = eNodeb?.Name;
+            return view;
         }
 
         public void UpdateKpi(IPreciseCoverage4GRepository repository, DateTime begin, DateTime end)

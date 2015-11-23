@@ -99,6 +99,7 @@
     <Compile Include="MapperSerive\CollegeMapperService.cs" />
     <Compile Include="MapperSerive\EvalutaionMapperProfile.cs" />
     <Compile Include="MapperSerive\InfrastructureMapperService.cs" />
+    <Compile Include="MapperSerive\KpiMapperService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CdmaCellView.cs" />
     <Compile Include="ViewModels\CdmaRegionDateView.cs" />

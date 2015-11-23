@@ -29,7 +29,7 @@ namespace Lte.Evaluations.DataService
             var ids = _repository.GetCellIds(collegeName);
             var query =
                 ids.Select(_cellRepository.Get).Where(cell => cell != null)
-                    .Select(x => new CellPreciseKpiView(x, _eNodebRepository)).ToList();
+                    .Select(x => CellPreciseKpiView.ConstructView(x, _eNodebRepository)).ToList();
             foreach (var view in query)
             {
                 view.UpdateKpi(_kpiRepository, begin, end);

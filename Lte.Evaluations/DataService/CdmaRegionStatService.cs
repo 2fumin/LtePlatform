@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using Lte.Domain.Regular;
 using Lte.Evaluations.ViewModels;
 using Lte.Parameters.Abstract;
@@ -40,7 +41,7 @@ namespace Lte.Evaluations.DataService
             return new CdmaRegionDateView
             {
                 StatDate = maxDate.ToShortDateString(),
-                StatViews = stats.Select(x => new CdmaRegionStatView(x))
+                StatViews = Mapper.Map<List<CdmaRegionStat>, List<CdmaRegionStatView>>(stats)
             };
         }
 
@@ -92,7 +93,7 @@ namespace Lte.Evaluations.DataService
             for (var i = 0; i < dates.Count(); i++)
                 cityStat.Add(query.Select(x => x.ElementAt(i)).ArraySum());
             query.Add(cityStat);
-            return query.Select(x => x.Select(s => new CdmaRegionStatView(s))).ToList();
+            return query.Select(x => Mapper.Map<List<CdmaRegionStat>, IEnumerable<CdmaRegionStatView>>(x)).ToList();
         }
     }
 }

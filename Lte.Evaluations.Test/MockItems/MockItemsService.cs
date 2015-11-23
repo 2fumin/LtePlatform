@@ -36,9 +36,25 @@ namespace Lte.Evaluations.Test.MockItems
             repository.MockQueryItems(stats.AsQueryable());
         }
 
+        public static void MockPreciseStats(this Mock<IPreciseCoverage4GRepository> repository,
+            List<PreciseCoverage4G> stats)
+        {
+            repository.MockQueryItems(stats.AsQueryable());
+        }
+
+        public static void MockENodebs(this Mock<IENodebRepository> repository, List<ENodeb> eNodebs)
+        {
+            repository.MockQueryItems(eNodebs.AsQueryable());
+        }
+
         public static void MockBtss(this Mock<IBtsRepository> repository, List<CdmaBts> btss)
         {
             repository.MockQueryItems(btss.AsQueryable());
+        }
+
+        public static void MockCells(this Mock<ICellRepository> repository, List<Cell> cells)
+        {
+            repository.MockQueryItems(cells.AsQueryable());
         }
     }
 }
