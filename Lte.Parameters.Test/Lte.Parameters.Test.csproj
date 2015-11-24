@@ -69,6 +69,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AutoMapper\AutoMapper.csproj">
+      <Project>{75c9d4b5-2117-4b06-a6b1-70afcd6b3bfc}</Project>
+      <Name>AutoMapper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lte.Domain.Test\Lte.Domain.Test.csproj">
       <Project>{D9C3EE9A-14EF-4964-A731-12CEBBDFB693}</Project>
       <Name>Lte.Domain.Test</Name>

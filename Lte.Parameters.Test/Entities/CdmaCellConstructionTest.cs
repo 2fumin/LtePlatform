@@ -6,12 +6,19 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using Lte.Parameters.Entities;
 using Lte.Domain.Common.Wireless;
+using Lte.Parameters.MockOperations;
 
 namespace Lte.Parameters.Test.Entities
 {
     [TestFixture]
     public class CdmaCellConstructionTest
     {
+        [TestFixtureSetUp]
+        public void TestFixtureSetup()
+        {
+            CoreMapperService.MapCdmaCell();
+        }
+
         [TestCase(1233, 23, 1234, 37, "DO", 1, true)]
         [TestCase(1253, 23, 2234, 78, "DO", 2, true)]
         [TestCase(1353, 33, 2734, 119, "DO", 4, true)]
@@ -33,13 +40,18 @@ namespace Lte.Parameters.Test.Entities
                 CellType = cellType,
                 AntennaGain = 12.8
             };
-            var cell = new CdmaCell(cellExcelInfo);
+            var cell = CdmaCell.ConstructItem(cellExcelInfo);
             Assert.IsNotNull(cell);
             Assert.AreEqual(cell.BtsId, btsId);
             Assert.AreEqual(cell.SectorId, sectorId);
             Assert.AreEqual(cell.CellId, cellId);
             Assert.AreEqual(cell.CellType, cellType);
             Assert.AreEqual(cell.AntennaGain, 12.8);
+            Assert.AreEqual(cell.Frequency, overallFrequency, "Wrong overall frequency");
+            Assert.AreEqual(cell.Frequency2, -1);
+            Assert.AreEqual(cell.Frequency3, -1);
+            Assert.AreEqual(cell.Frequency4, -1);
+            Assert.AreEqual(cell.Frequency5, -1);
             if (updateFrequency)
             {
                 Assert.AreEqual(cell.Frequency1, frequency);
@@ -50,11 +62,6 @@ namespace Lte.Parameters.Test.Entities
                 Assert.AreEqual(cell.Frequency1, -1);
                 Assert.IsFalse(cell.HasFrequency(frequency));
             }
-            Assert.AreEqual(cell.Frequency, overallFrequency);
-            Assert.AreEqual(cell.Frequency2, -1);
-            Assert.AreEqual(cell.Frequency3, -1);
-            Assert.AreEqual(cell.Frequency4, -1);
-            Assert.AreEqual(cell.Frequency5, -1);
         }
 
         [TestCase(1233, 23, 1234, 37, "DO", 13.6, 1)]

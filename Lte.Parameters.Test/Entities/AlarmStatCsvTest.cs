@@ -4,28 +4,36 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Lte.Domain.LinqToCsv.Context;
 using Lte.Domain.LinqToCsv.Description;
 using Lte.Parameters.Entities;
+using Lte.Parameters.MockOperations;
 using NUnit.Framework;
 
 namespace Lte.Parameters.Test.Entities
 {
     [TestFixture]
     public class AlarmStatCsvTest
-    {
+    { 
+        [TestFixtureSetUp]
+        public void TestFixtureSetup()
+        {
+            AlarmMapperService.MapAlarms();
+        }
+
         [Test]
         public void Test_ReadOneLine()
         {
-            CsvFileDescription fileDescription_namesUs = CsvFileDescription.CommaDescription;
+            var fileDescriptionNamesUs = CsvFileDescription.CommaDescription;
 
             const string testInput = @"根源告警标识,确认状态,告警级别,网元,网元内定位,告警码,发生时间,网元类型,告警类型,告警原因,附加文本,ADMC告警,告警恢复时间,重复计数,告警对象类型,告警对象DN,单板类型,告警对象ID,站点名称(局向),站点ID(局向),告警对象名称,产品,告警标识,影响网元,影响网元内定位,告警修改时间,附加内容,确认/反确认用户,确认/反确认系统,告警确认/反确认时间,告警确认/反确认信息,清除用户,清除系统,恢复方式,告警注释,注释用户,注释系统,注释时间,告警编号,网元IP,链路,网元分组,网元代理,系统类型,持续时间(hh:mm:ss),关联业务,产生方式,门限任务信息,调测状态,标准告警码,清除信息
 ,未确认,主要,西樵电信机房LBBU18(550974),""地面资源(MO SDR)=1,机架(MO SDR)=1,机框(MO SDR)=1,单板(MO SDR)=1"",X2断链告警(198094421),2015/8/18 13:22,管理网元(MO SDR),通信告警,1.SCTP偶联断； 2.X2AP建立失败（协商失败或基站无小区）。,单板序列号: 281713201433; L eNBId:550974,否,2015/8/18 13:32,,SDR,""SubNetwork=440610,MEID=550974,TransportNetwork=1"",CCC,550974,西樵电信机房LBBU18,550974,西樵电信机房LBBU18,LTE FDD,148,,,,站点ID(局向) : 550974; 站点名称(局向) : 西樵电信机房LBBU18; 告警对象类型 : SDR; 告警对象ID : 550974; 告警对象名称 : 西樵电信机房LBBU18; 单板类型 : CCC; ,,,,,,,正常恢复,,,,,1.43923E+12,8.142.53.170,,""广东电信LTE_OMMB5,佛山市南海区3(440610)"",广东电信LTE_OMMB5,LTE FDD业务告警(20428),0:09:43,,,,,通信子系统故障(306),";
 
-            IEnumerable<AlarmStatCsv> stats = CsvContext.ReadString<AlarmStatCsv>(testInput, fileDescription_namesUs).ToList();
+            IEnumerable<AlarmStatCsv> stats = CsvContext.ReadString<AlarmStatCsv>(testInput, fileDescriptionNamesUs).ToList();
             Assert.IsNotNull(stats);
             Assert.AreEqual(stats.Count(), 1);
-            AlarmStatCsv stat = stats.ElementAt(0);
+            var stat = stats.ElementAt(0);
             Assert.AreEqual(stat.AlarmCodeDescription, "X2断链告警(198094421)");
             Assert.AreEqual(stat.AlarmLevelDescription, "主要");
             Assert.AreEqual(stat.NetworkItem, "西樵电信机房LBBU18(550974)");
@@ -56,7 +64,7 @@ namespace Lte.Parameters.Test.Entities
             Assert.IsNotNull(stats);
             Assert.AreEqual(stats.Count(), count);
 
-            List<AlarmStat> statList = stats.Select(x => new AlarmStat(x)).ToList();
+            var statList = Mapper.Map<IEnumerable<AlarmStatCsv>, List<AlarmStat>>(stats);
             Assert.AreEqual(statList.Count, count);
         }
 
@@ -77,14 +85,14 @@ namespace Lte.Parameters.Test.Entities
         [TestCase("历史告警查询(所有列)-0914-20-zte2", 3052)]
         public void Test_Integrity(string fileName, int count)
         {
-            string testDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CsvFiles");
-            string path = Path.Combine(testDir, fileName + ".csv");
+            var testDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CsvFiles");
+            var path = Path.Combine(testDir, fileName + ".csv");
             IEnumerable<AlarmStatCsv> stats = CsvContext.Read<AlarmStatCsv>(path,
                 CsvFileDescription.CommaDescription).ToList();
             Assert.IsNotNull(stats);
             Assert.AreEqual(stats.Count(), count);
 
-            List<AlarmStat> statList = stats.Select(x => new AlarmStat(x)).ToList();
+            var statList = Mapper.Map<IEnumerable<AlarmStatCsv>, List<AlarmStat>>(stats);
             Assert.AreEqual(statList.Count, count);
         }
 
@@ -98,7 +106,7 @@ namespace Lte.Parameters.Test.Entities
             Assert.IsNotNull(stats);
             Assert.AreEqual(stats.Count(), count);
 
-            List<AlarmStat> statList = stats.Select(x => new AlarmStat(x)).ToList();
+            var statList = Mapper.Map<IEnumerable<AlarmStatCsv>, List<AlarmStat>>(stats);
             Assert.AreEqual(statList.Count, count);
         }
 
@@ -125,7 +133,7 @@ namespace Lte.Parameters.Test.Entities
             Assert.IsNotNull(stats);
             Assert.AreEqual(stats.Count(), count);
 
-            List<AlarmStat> statList = stats.Select(x => new AlarmStat(x)).ToList();
+            var statList = Mapper.Map<IEnumerable<AlarmStatHuawei>, List<AlarmStat>>(stats);
             Assert.AreEqual(statList.Count, count);
         }
     }

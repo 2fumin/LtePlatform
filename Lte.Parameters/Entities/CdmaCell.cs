@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Abp.Domain.Entities;
+using AutoMapper;
 using Lte.Domain.Regular;
 using Lte.Domain.Common.Wireless;
 
@@ -55,16 +56,12 @@ namespace Lte.Parameters.Entities
         public short Pci { get; set; }
 
         public double RsPower { get; set; }
-        
-        public CdmaCell() { }
 
-        public CdmaCell(CdmaCellExcel cellExcelInfo)
+        public static CdmaCell ConstructItem(CdmaCellExcel cellExcelInfo)
         {
-            var currentFrequency = (short)cellExcelInfo.Frequency;
-            cellExcelInfo.CloneProperties(this);
-            IsOutdoor = (cellExcelInfo.IsIndoor.Trim() == "否");
-            Frequency = 0;
-            Frequency1 = AddFrequency(currentFrequency);
+            var cell = Mapper.Map<CdmaCellExcel, CdmaCell>(cellExcelInfo);
+            cell.Frequency1 = cell.AddFrequency((short)cellExcelInfo.Frequency);
+            return cell;
         }
 
         public void Import(CdmaCellExcel cellExcelInfo)
