@@ -25,9 +25,9 @@ namespace Lte.Parameters.Concrete
                 && (x.CityName == city || city.IndexOf(flag, StringComparison.Ordinal) >= 0));
         }
 
-        public IEnumerable<Town> GetAll(string city)
+        public List<Town> GetAll(string city)
         {
-            return GetAll().Where(x => x.CityName == city);
+            return GetAllList(x => x.CityName == city);
         }
     }
 }

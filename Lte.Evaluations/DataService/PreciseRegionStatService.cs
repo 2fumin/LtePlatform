@@ -26,7 +26,7 @@ namespace Lte.Evaluations.DataService
             var beginDate = initialDate.AddDays(-100);
             var endDate = initialDate.AddDays(1);
             var query =
-                _statRepository.GetByDateSpan(beginDate, endDate);
+                _statRepository.GetAllList(beginDate, endDate);
             var result =
                 (from q in query
                     join t in _townRepository.GetAll(city) on q.TownId equals t.Id
@@ -48,11 +48,13 @@ namespace Lte.Evaluations.DataService
             var districts = townPreciseViews.Select(x => x.District).Distinct();
             var city = townPreciseViews.ElementAt(0).City;
             return districts.Select(district =>
-                new DistrictPreciseView(townPreciseViews.Where(x => x.District == district).ArraySum())
-                {
-                    City = city,
-                    District = district
-                }).ToList();
+            {
+                var view =
+                    DistrictPreciseView.ConstructView(townPreciseViews.Where(x => x.District == district).ArraySum());
+                view.City = city;
+                view.District = district;
+                return view;
+            }).ToList();
         } 
     }
 }

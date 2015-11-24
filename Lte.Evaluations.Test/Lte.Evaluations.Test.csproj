@@ -91,6 +91,7 @@
     <Compile Include="DataService\College3GTestQueries.cs" />
     <Compile Include="DataService\College3GTestServiceTest.cs" />
     <Compile Include="DataService\College4GTestServiceTest.cs" />
+    <Compile Include="DataService\CollegeENodebServiceTest.cs" />
     <Compile Include="DataService\CollegeKpiQueries.cs" />
     <Compile Include="DataService\CollegeKpiServiceTest.cs" />
     <Compile Include="DataService\CollegePreciseServiceTest.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="DataService\GenerateViewListTest.cs" />
     <Compile Include="DataService\KpiImportServiceTest.cs" />
     <Compile Include="DataService\PreciseRegionStatServiceTest.cs" />
+    <Compile Include="MockItems\MockAlarmRepository.cs" />
     <Compile Include="MockItems\MockBtsService.cs" />
     <Compile Include="MockItems\MockCdmaRegionStatService.cs" />
     <Compile Include="MockItems\MockCellService.cs" />
@@ -106,18 +108,21 @@
     <Compile Include="MockItems\MockInfrastructureService.cs" />
     <Compile Include="MockItems\MockItemsService.cs" />
     <Compile Include="MockItems\MockPreciseRegionStatService.cs" />
+    <Compile Include="MockItems\MockPreciseStatService.cs" />
     <Compile Include="MockItems\MockRegionService.cs" />
     <Compile Include="MockItems\MockTop2GDropService.cs" />
     <Compile Include="MockItems\MockTop3GConnectionService.cs" />
     <Compile Include="MockItems\MockTownService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestService\CdmaRegionStatTestService.cs" />
+    <Compile Include="TestService\CollegeENodebTestService.cs" />
     <Compile Include="TestService\MergeTownPreciseViewTest.cs" />
     <Compile Include="TestService\PreciseRegionStatTestService.cs" />
     <Compile Include="TestService\PreciseViewTestService.cs" />
     <Compile Include="ViewModel\CdmaCellViewTest.cs" />
     <Compile Include="ViewModel\CdmaRegionStatViewTest.cs" />
     <Compile Include="ViewModel\CellPreciseKpiViewTest.cs" />
+    <Compile Include="ViewModel\CellViewTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lte.Domain\Lte.Domain.csproj">

@@ -48,7 +48,7 @@ namespace Lte.Evaluations.ViewModels
 
         public CdmaCellView() { }
 
-        public static CdmaCellView ConstruView(CdmaCell cell, IBtsRepository repository)
+        public static CdmaCellView ConstructView(CdmaCell cell, IBtsRepository repository)
         {
             var view = Mapper.Map<CdmaCell, CdmaCellView>(cell);
             var bts = repository.GetByBtsId(cell.BtsId);

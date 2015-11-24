@@ -9,6 +9,6 @@ namespace Lte.Parameters.Abstract
     {
         College3GTestResults GetByCollegeIdAndTime(int collegeId, DateTime time);
 
-        IEnumerable<College3GTestResults> GetByTimeSpan(DateTime begin, DateTime end);
+        List<College3GTestResults> GetAllList(DateTime begin, DateTime end);
     }
 }

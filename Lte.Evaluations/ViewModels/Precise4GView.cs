@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Lte.Domain.Regular;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
@@ -25,17 +26,18 @@ namespace Lte.Evaluations.ViewModels
 
         public double ThirdRate { get; set; }
 
-        public string ENodebName { get; set; }
+        public string ENodebName { get; set; } = "未导入基站";
 
         public Precise4GView()
         {
         }
 
-        public Precise4GView(PreciseCoverage4G stat, IENodebRepository repository)
+        public static Precise4GView ConstructView(PreciseCoverage4G stat, IENodebRepository repository)
         {
-            stat.CloneProperties(this);
-            ENodeb eNodeb = repository.FirstOrDefault(x => x.ENodebId == stat.CellId);
-            ENodebName = eNodeb != null ? eNodeb.Name : "未导入基站";
+            var view = Mapper.Map<PreciseCoverage4G, Precise4GView>(stat);
+            var eNodeb = repository.GetByENodebId(stat.CellId);
+            view.ENodebName = eNodeb?.Name;
+            return view;
         }
     }
 }

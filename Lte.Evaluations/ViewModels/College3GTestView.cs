@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Lte.Domain.Regular;
 using Lte.Parameters.Entities;
 
@@ -22,11 +23,9 @@ namespace Lte.Evaluations.ViewModels
 
         public double Vswr { get; set; }
 
-        public College3GTestView() { }
-
-        public College3GTestView(College3GTestResults results)
+        public static College3GTestView ConstructView(College3GTestResults results)
         {
-            results.CloneProperties(this);
+            return Mapper.Map<College3GTestResults, College3GTestView>(results);
         }
     }
 }

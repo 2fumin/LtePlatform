@@ -17,7 +17,7 @@ namespace Lte.Parameters.Concrete
             return FirstOrDefault(x => x.CollegeId == collegeId && x.TestTime == time);
         }
         
-        public IEnumerable<College3GTestResults> GetByTimeSpan(DateTime begin, DateTime end)
+        public List<College3GTestResults> GetAllList(DateTime begin, DateTime end)
         {
             return GetAllList(x => x.TestTime >= begin && x.TestTime < end);
         }

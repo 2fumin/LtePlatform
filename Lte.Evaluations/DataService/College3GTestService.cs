@@ -56,7 +56,7 @@ namespace Lte.Evaluations.DataService
 
         public Dictionary<string, double> GetAverageRates(DateTime begin, DateTime end)
         {
-            var results = _repository.GetByTimeSpan(begin, end);
+            var results = _repository.GetAllList(begin, end);
             var query = from r in results
                         join c in _collegeRepository.GetAllList() on r.CollegeId equals c.Id
                         select new {c.Name, Rate = r.DownloadRate };

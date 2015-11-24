@@ -25,7 +25,7 @@ namespace Lte.Evaluations.DataService
             var beginDate = initialDate.AddDays(-100);
             var endDate = initialDate.AddDays(1);
             var query =
-                _statRepository.GetByDateSpan(beginDate, endDate);
+                _statRepository.GetAllList(beginDate, endDate);
             var regions
                 = _regionRepository.GetAllList(city).Select(x => x.Region).Distinct().OrderBy(x => x);
             var result = (from q in query

@@ -10,7 +10,7 @@ namespace Lte.Parameters.Concrete
     {
         protected override DbSet<CollegeKpi> Entities => context.CollegeKpis;
 
-        public IEnumerable<CollegeKpi> GetList(DateTime time)
+        public List<CollegeKpi> GetAllList(DateTime time)
         {
             return GetAllList(x => x.TestTime == time);
         }

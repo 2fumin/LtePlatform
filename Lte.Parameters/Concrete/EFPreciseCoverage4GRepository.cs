@@ -14,7 +14,8 @@ namespace Lte.Parameters.Concrete
     {
         protected override DbSet<PreciseCoverage4G> Entities => context.PrecisCoverage4Gs;
 
-        public IEnumerable<PreciseCoverage4G> GetTopCountStats(DateTime begin, DateTime end, int topCount)
+        public IEnumerable<PreciseCoverage4G> GetTopCountStats(DateTime begin, DateTime end, int topCount,
+            byte fieldSelector)
         {
             var query =
                 GetAll()
@@ -38,8 +39,25 @@ namespace Lte.Parameters.Concrete
                     ThirdNeighbors = g.Sum(q => q.ThirdNeighbors),
                     TotalMrs = g.Sum(q => q.TotalMrs)
                 };
-            return result.OrderByDescending(x => x.SecondNeighbors)
-                .Take(topCount).ToList();
+            switch (fieldSelector)
+            {
+                case 0:
+                    return result.OrderBy(x => x.SecondRate)
+                        .Take(topCount).ToList();
+                case 1:
+                    return result.OrderByDescending(x => x.SecondNeighbors)
+                        .Take(topCount).ToList();
+                case 2:
+                    return result.OrderBy(x=>x.FirstRate)
+                        .Take(topCount).ToList();
+                case 3:
+                    return result.OrderByDescending(x => x.FirstNeighbors)
+                        .Take(topCount).ToList();
+                default:
+                    return result.OrderByDescending(x => x.TotalMrs)
+                        .Take(topCount).ToList();
+            }
+            
         }
 
         public List<PreciseCoverage4G> GetAllList(int cellId, byte sectorId, DateTime begin, DateTime end)

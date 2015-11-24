@@ -45,7 +45,7 @@ namespace Lte.Evaluations.Test.ViewModel
                 MTilt = mTilt,
                 Lac = lac
             };
-            var view = CdmaCellView.ConstruView(cell, _repository.Object);
+            var view = CdmaCellView.ConstructView(cell, _repository.Object);
             if (btsId > 0 && btsId <= 3)
                 Assert.AreEqual(view.BtsName, "Bts-" + btsId);
             else

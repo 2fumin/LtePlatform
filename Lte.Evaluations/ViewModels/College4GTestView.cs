@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Lte.Domain.Regular;
 using Lte.Parameters.Entities;
 
@@ -30,11 +31,9 @@ namespace Lte.Evaluations.ViewModels
 
         public double Sinr { get; set; }
 
-        public College4GTestView() { }
-
-        public College4GTestView(College4GTestResults results)
+        public static College4GTestView ConstructView(College4GTestResults results)
         {
-            results.CloneProperties(this);
+            return Mapper.Map<College4GTestResults, College4GTestView>(results);
         }
     }
 }

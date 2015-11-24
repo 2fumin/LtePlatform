@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Lte.Domain.Common.Geo;
 using Lte.Domain.Regular;
 using Lte.Parameters.Entities;
@@ -33,12 +34,11 @@ namespace Lte.Evaluations.ViewModels
 
         public int AlarmTimes { get; set; }
 
-        public ENodebView() { }
-
-        public ENodebView(ENodeb eNodeb, IQueryable<AlarmStat> stats)
+        public static ENodebView ConstructView(ENodeb eNodeb, IEnumerable<AlarmStat> stats)
         {
-            eNodeb.CloneProperties(this);
-            AlarmTimes = stats.Count(x => x.ENodebId == ENodebId);
+            var view = Mapper.Map<ENodeb, ENodebView>(eNodeb);
+            view.AlarmTimes = stats.Count(x => x.ENodebId == eNodeb.ENodebId);
+            return view;
         }
     }
 }

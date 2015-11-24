@@ -24,5 +24,10 @@ namespace Lte.Evaluations.MapperSerive
                 .ForMember(d => d.Indoor, opt => opt.MapFrom(s => s.IsOutdoor ? "室外" : "室内"))
                 .ForMember(d => d.DownTilt, opt => opt.MapFrom(s => s.ETilt + s.MTilt));
         }
+
+        public static void MapENodeb()
+        {
+            Mapper.CreateMap<ENodeb, ENodebView>();
+        }
     }
 }

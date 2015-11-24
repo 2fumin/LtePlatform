@@ -14,7 +14,7 @@ namespace Lte.Parameters.Concrete
     {
         protected override DbSet<TownPreciseCoverage4GStat> Entities => context.TownPreciseCoverage4GStats;
 
-        public List<TownPreciseCoverage4GStat> GetByDateSpan(DateTime begin, DateTime end)
+        public List<TownPreciseCoverage4GStat> GetAllList(DateTime begin, DateTime end)
         {
             return GetAllList(x => x.StatTime >= begin && x.StatTime < end);
         }

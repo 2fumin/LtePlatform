@@ -26,15 +26,15 @@ namespace Lte.Evaluations.DataService
         public IEnumerable<ENodebView> QueryCollegeENodebs(string collegeName,
             DateTime begin, DateTime end)
         {
-            var stats = _alarmRepository.GetAll().Where(x => x.HappenTime >= begin && x.HappenTime < end);
-            IEnumerable<int> ids = _repository.GetIds(collegeName);
+            var stats = _alarmRepository.GetAllList(begin, end);
+            var ids = _repository.GetIds(collegeName);
             return ids.Select(_eNodebRepository.Get
-                ).Where(eNodeb => eNodeb != null).ToList().Select(x => new ENodebView(x, stats));
+                ).Where(eNodeb => eNodeb != null).ToList().Select(x => ENodebView.ConstructView(x, stats));
         }
 
         public IEnumerable<string> QueryCollegeENodebNames(string collegeName)
         {
-            IEnumerable<int> ids = _repository.GetIds(collegeName);
+            var ids = _repository.GetIds(collegeName);
             return ids.Select(_eNodebRepository.Get
                 ).Where(eNodeb => eNodeb != null).ToList().Select(x => x.Name);
         }

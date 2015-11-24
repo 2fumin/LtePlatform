@@ -19,9 +19,9 @@ namespace LtePlatform.Controllers.Kpi
             _service = service;
         }
 
-        public IEnumerable<Precise4GView> Get(DateTime begin, DateTime end, int topCount)
+        public IEnumerable<Precise4GView> Get(DateTime begin, DateTime end, int topCount, byte fieldSelector)
         {
-            return _service.GetTopCountViews(begin, end, topCount);
+            return _service.GetTopCountViews(begin, end, topCount, fieldSelector);
         }
 
         public IEnumerable<PreciseCoverage4G> Get(int cellId, byte sectorId, DateTime date)

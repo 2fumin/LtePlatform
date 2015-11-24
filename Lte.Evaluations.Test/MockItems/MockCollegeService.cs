@@ -28,14 +28,14 @@ namespace Lte.Evaluations.Test.MockItems
                 ).Returns<int, DateTime>((id, time) => repository.Object.GetAll().FirstOrDefault(
                     x => x.CollegeId == id && x.TestTime == time));
 
-            repository.Setup(x => x.GetByTimeSpan(It.IsAny<DateTime>(), It.IsAny<DateTime>()))
+            repository.Setup(x => x.GetAllList(It.IsAny<DateTime>(), It.IsAny<DateTime>()))
                 .Returns<DateTime, DateTime>(
-                    (begin, end) => repository.Object.GetAll().Where(x => x.TestTime > begin && x.TestTime <= end));
+                    (begin, end) => repository.Object.GetAll().Where(x => x.TestTime > begin && x.TestTime <= end).ToList());
         }
 
         public static void MockOperations(this Mock<ICollegeKpiRepository> repository)
         {
-            repository.Setup(x => x.GetList(It.IsAny<DateTime>()))
+            repository.Setup(x => x.GetAllList(It.IsAny<DateTime>()))
                 .Returns<DateTime>(time => repository.Object.GetAll().Where(x => x.TestTime == time).ToList());
         }
 

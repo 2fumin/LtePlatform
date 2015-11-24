@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Lte.Domain.Regular;
 using Lte.Parameters.Entities;
 
@@ -34,11 +35,9 @@ namespace Lte.Evaluations.ViewModels
 
         public double Flow3G { get; set; }
 
-        public CollegeKpiView() { }
-
-        public CollegeKpiView(CollegeKpi stat)
+        public static CollegeKpiView ConstructView(CollegeKpi stat)
         {
-            stat.CloneProperties(this);
+            return Mapper.Map<CollegeKpi, CollegeKpiView>(stat);
         }
     }
 }

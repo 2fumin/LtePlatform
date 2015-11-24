@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using Lte.Evaluations.DataService;
+using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.ViewModels;
 using NUnit.Framework;
 
@@ -13,6 +14,12 @@ namespace Lte.Evaluations.Test.TestService
     [TestFixture]
     public class MergeTownPreciseViewTest
     {
+        [TestFixtureSetUp]
+        public void TestFixtureSetup()
+        {
+            KpiMapperService.MapDistrictPrecise();
+        }
+
         [TestCase("Foshan", "Chancheng", new[] {"town-1", "town-2"}, 
             new[] { 1, 2 }, new[] { 3, 4 }, new[] { 6, 2 })]
         [TestCase("Foshan", "Nanhai", new[] { "town-1", "town-2", "town-1" }, 

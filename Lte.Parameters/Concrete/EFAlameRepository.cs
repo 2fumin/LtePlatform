@@ -12,5 +12,10 @@ namespace Lte.Parameters.Concrete
     public class EFAlameRepository : LightWeightRepositroyBase<AlarmStat>, IAlarmRepository
     {
         protected override DbSet<AlarmStat> Entities => context.AlarmStats;
+
+        public List<AlarmStat> GetAllList(DateTime begin, DateTime end)
+        {
+            return GetAllList(x => x.HappenTime >= begin && x.HappenTime < end);
+        }
     }
 }

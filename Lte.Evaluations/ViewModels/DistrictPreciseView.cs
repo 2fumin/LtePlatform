@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Lte.Domain.Regular;
 
 namespace Lte.Evaluations.ViewModels
@@ -23,11 +24,9 @@ namespace Lte.Evaluations.ViewModels
 
         public double FirstRate => 100 - (double)FirstNeighbors * 100 / TotalMrs;
 
-        public DistrictPreciseView() { }
-
-        public DistrictPreciseView(TownPreciseView townView)
+        public static DistrictPreciseView ConstructView(TownPreciseView townView)
         {
-            townView.CloneProperties(this);
+            return Mapper.Map<TownPreciseView, DistrictPreciseView>(townView);
         }
     }
 }

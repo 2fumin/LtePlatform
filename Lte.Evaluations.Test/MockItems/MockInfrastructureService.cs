@@ -23,7 +23,7 @@ namespace Lte.Evaluations.Test.MockItems
                     x.HotspotName == collegeName && x.InfrastructureType == InfrastructureType.Cell
                     ).Select(x => x.InfrastructureId).ToList());
         }
-
+        
         public static void MockSixCollegeCells(this Mock<IInfrastructureRepository> repository)
         {
             repository.MockInfrastructures(new List<InfrastructureInfo>

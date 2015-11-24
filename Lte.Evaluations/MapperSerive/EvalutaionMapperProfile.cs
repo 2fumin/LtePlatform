@@ -10,15 +10,16 @@ namespace Lte.Evaluations.MapperSerive
         {
             Mapper.CreateMap<CellExcel, Cell>();
             Mapper.CreateMap<CdmaCellExcel, CdmaCell>();
-
-            Mapper.CreateMap<ENodeb, ENodebView>();
-            Mapper.CreateMap<Cell, CellView>();
+            
+            InfrastructureMapperService.MapENodeb();
             InfrastructureMapperService.MapCdmaCell();
+            InfrastructureMapperService.MapCell();
             CollegeMapperService.MapCollege3GTest();
             CollegeMapperService.MapCollege4GTest();
             CollegeMapperService.MapCollegeKpi();
             KpiMapperService.MapCdmaRegionStat();
             KpiMapperService.MapCellPrecise();
+            KpiMapperService.MapDistrictPrecise();
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Lte.Evaluations.DataService
         public IEnumerable<CollegeKpiView> GetViews(DateTime date, int hour)
         {
             var time = date.AddHours(hour);
-            var results = _repository.GetList(time);
+            var results = _repository.GetAllList(time);
 
             if (!results.Any()) return new List<CollegeKpiView>();
             return results.Select(x =>
