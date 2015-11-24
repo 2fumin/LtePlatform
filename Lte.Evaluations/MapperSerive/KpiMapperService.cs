@@ -21,6 +21,16 @@ namespace Lte.Evaluations.MapperSerive
             Mapper.CreateMap<TownPreciseView, DistrictPreciseView>();
         }
 
+        public static void MapTownPrecise()
+        {
+            Mapper.CreateMap<TownPreciseCoverage4GStat, TownPreciseView>();
+        }
+
+        public static void MapPreciseStat()
+        {
+            Mapper.CreateMap<PreciseCoverage4G, Precise4GView>();
+        }
+
         public static void MapCellPrecise()
         {
             Mapper.CreateMap<Cell, CellPreciseKpiView>()

@@ -20,6 +20,7 @@ namespace Lte.Evaluations.MapperSerive
             KpiMapperService.MapCdmaRegionStat();
             KpiMapperService.MapCellPrecise();
             KpiMapperService.MapDistrictPrecise();
+            KpiMapperService.MapTownPrecise();
         }
     }
 }

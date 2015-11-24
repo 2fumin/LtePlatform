@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Lte.Domain.Regular;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
@@ -31,16 +32,14 @@ namespace Lte.Evaluations.ViewModels
 
         public double ThirdRate => 100 - (double) ThirdNeighbors*100/TotalMrs;
 
-        public TownPreciseView() { }
-
-        public TownPreciseView(TownPreciseCoverage4GStat stat, ITownRepository repository)
+        public static TownPreciseView ConstructView(TownPreciseCoverage4GStat stat, ITownRepository repository)
         {
-            stat.CloneProperties(this);
+            var view = Mapper.Map<TownPreciseCoverage4GStat, TownPreciseView>(stat);
             var town = repository.Get(stat.TownId);
-            if (town == null) return;
-            City = town.CityName;
-            District = town.DistrictName;
-            Town = town.TownName;
+            view.City = town?.CityName;
+            view.District = town?.DistrictName;
+            view.Town = town?.TownName;
+            return view;
         }
     }
 }

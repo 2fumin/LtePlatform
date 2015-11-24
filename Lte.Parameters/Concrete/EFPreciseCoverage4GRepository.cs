@@ -17,10 +17,12 @@ namespace Lte.Parameters.Concrete
         public IEnumerable<PreciseCoverage4G> GetTopCountStats(DateTime begin, DateTime end, int topCount,
             byte fieldSelector)
         {
+            if (topCount <= 0)
+                return new List<PreciseCoverage4G>();
             var query =
                 GetAll()
                     .Where(x => x.StatTime >= begin && x.StatTime < end)
-                    .OrderByDescending(x => x.SecondNeighbors)
+                    .OrderByDescending(x => x.TotalMrs)
                     .Take(topCount * (end - begin).Days);
             var result =
                 from q in query.AsEnumerable()

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Castle.Core.Internal;
+using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.Test.MockItems;
 using Lte.Evaluations.Test.TestService;
 using Lte.Evaluations.ViewModels;
@@ -28,6 +29,8 @@ namespace Lte.Evaluations.Test.DataService
         {
             _statRepository.MockOperation();
             _townRepository.MockOpertion();
+            KpiMapperService.MapTownPrecise();
+            KpiMapperService.MapDistrictPrecise();
         }
 
         [SetUp]

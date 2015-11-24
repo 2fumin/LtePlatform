@@ -99,6 +99,7 @@
     <Compile Include="DataService\GenerateViewListTest.cs" />
     <Compile Include="DataService\KpiImportServiceTest.cs" />
     <Compile Include="DataService\PreciseRegionStatServiceTest.cs" />
+    <Compile Include="DataService\PreciseStatServiceTest.cs" />
     <Compile Include="MockItems\MockAlarmRepository.cs" />
     <Compile Include="MockItems\MockBtsService.cs" />
     <Compile Include="MockItems\MockCdmaRegionStatService.cs" />

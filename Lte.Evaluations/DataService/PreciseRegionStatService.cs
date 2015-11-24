@@ -33,7 +33,10 @@ namespace Lte.Evaluations.DataService
                     select q).ToList();
             if (result.Count == 0) return null;
             var maxDate = result.Max(x => x.StatTime);
-            var townViews = result.Where(x => x.StatTime == maxDate).Select(x=>new TownPreciseView(x, _townRepository));
+            var townViews =
+                result.Where(x => x.StatTime == maxDate)
+                    .Select(x => TownPreciseView.ConstructView(x, _townRepository))
+                    .ToList();
             return new PreciseRegionDateView
             {
                 StatDate = maxDate.ToShortDateString(),
