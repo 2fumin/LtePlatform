@@ -122,6 +122,10 @@
     <Compile Include="Bug\SetterOnlyBug.cs" />
     <Compile Include="Bug\SubclassMappings.cs" />
     <Compile Include="Bug\TargetISet.cs" />
+    <Compile Include="Core\ArraysAndLists.cs" />
+    <Compile Include="Core\AutoMapperTester.cs" />
+    <Compile Include="Core\BeforeAfterMapping.cs" />
+    <Compile Include="Core\BidirectionalRelationships.cs" />
     <Compile Include="IMappingExpression\ForCtorParam.cs" />
     <Compile Include="IMappingExpression\NonGenericAllMembersNullSubstitute.cs" />
     <Compile Include="IMappingExpression\NonGenericConstructorTests.cs" />

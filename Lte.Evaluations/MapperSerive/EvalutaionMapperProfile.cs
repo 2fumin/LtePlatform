@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using Lte.Evaluations.ViewModels;
-using Lte.Parameters.Entities;
 using Lte.Parameters.MockOperations;
 
 namespace Lte.Evaluations.MapperSerive
@@ -9,11 +7,14 @@ namespace Lte.Evaluations.MapperSerive
     {
         protected override void Configure()
         {
-            Mapper.CreateMap<CellExcel, Cell>();
             CoreMapperService.MapCdmaCell();
             CoreMapperService.MapCell();
+            CoreMapperService.MapIndoorDistribution();
             AlarmMapperService.MapAlarms();
             StatMapperService.MapCdmaRegionStat();
+            StatMapperService.MapPreciseCoverage();
+            StatMapperService.MapTopConnection3G();
+            StatMapperService.MapTopDrop2G();
             
             InfrastructureMapperService.MapENodeb();
             InfrastructureMapperService.MapCdmaCell();

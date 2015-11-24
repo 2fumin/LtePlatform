@@ -24,5 +24,10 @@ namespace Lte.Parameters.MockOperations
                 .ForMember(d => d.AntennaPorts, opt => opt.MapFrom(s => s.TransmitReceive.GetAntennaPortsConfig()))
                 .ForMember(d => d.IsOutdoor, opt => opt.MapFrom(s => s.IsIndoor.Trim() == "否"));
         }
+
+        public static void MapIndoorDistribution()
+        {
+            Mapper.CreateMap<IndoorDistributionExcel, IndoorDistribution>();
+        }
     }
 }

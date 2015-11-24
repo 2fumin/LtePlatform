@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Abp.Domain.Entities;
+using AutoMapper;
 using Lte.Domain.Regular;
 
 namespace Lte.Parameters.Entities
@@ -34,12 +35,9 @@ namespace Lte.Parameters.Entities
 
         public PreciseCoverage4G() { }
 
-        public PreciseCoverage4G(PreciseCoverage4GCsv info)
+        public static PreciseCoverage4G ConstructStat(PreciseCoverage4GCsv info)
         {
-            info.CloneProperties(this);
-            ThirdNeighbors = (int)(TotalMrs * info.ThirdNeighborRate) / 100;
-            SecondNeighbors = (int)(TotalMrs * info.SecondNeighborRate) / 100;
-            FirstNeighbors = (int)(TotalMrs * info.FirstNeighborRate) / 100;
+            return Mapper.Map<PreciseCoverage4GCsv, PreciseCoverage4G>(info);
         }
     }
 }

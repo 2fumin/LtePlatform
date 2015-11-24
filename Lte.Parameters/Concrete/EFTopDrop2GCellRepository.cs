@@ -16,15 +16,15 @@ namespace Lte.Parameters.Concrete
         public int Import(IEnumerable<TopDrop2GCellExcel> stats)
         {
             var count = 0;
-            foreach(var stat in stats)
+            foreach (var stat in from stat in stats
+                let time = stat.StatDate.AddHours(stat.StatHour)
+                let info =
+                    FirstOrDefault(x => x.BtsId == stat.BtsId && x.SectorId == stat.SectorId && x.StatTime == time)
+                where info == null
+                select stat)
             {
-                var time = stat.StatDate.AddHours(stat.StatHour);
-                var info = FirstOrDefault(x => x.BtsId == stat.BtsId && x.SectorId == stat.SectorId && x.StatTime == time);
-                if (info == null)
-                {
-                    Insert(new TopDrop2GCell(stat));
-                    count++;
-                }
+                Insert(TopDrop2GCell.ConstructStat(stat));
+                count++;
             }
             return count;
         }

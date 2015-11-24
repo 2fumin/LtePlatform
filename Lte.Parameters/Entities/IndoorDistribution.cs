@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Abp.Domain.Entities;
+﻿using Abp.Domain.Entities;
+using AutoMapper;
 using Lte.Domain.Common.Geo;
-using Lte.Domain.Regular;
 
 namespace Lte.Parameters.Entities
 {
@@ -27,11 +22,9 @@ namespace Lte.Parameters.Entities
 
         public double BaiduLattitute => Lattitute + GeoMath.BaiduLattituteOffset;
 
-        public IndoorDistribution() { }
-
-        public IndoorDistribution(IndoorDistributionExcel info)
+        public static IndoorDistribution ConstructItem(IndoorDistributionExcel info)
         {
-            info.CloneProperties(this);
+            return Mapper.Map<IndoorDistributionExcel, IndoorDistribution>(info);
         }
     }
 }

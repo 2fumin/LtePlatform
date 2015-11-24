@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Abp.Domain.Entities;
+using AutoMapper;
 using Lte.Domain.Common;
 using Lte.Domain.Regular;
 
@@ -35,11 +36,9 @@ namespace Lte.Parameters.Entities
 
         public TopConnection3GCell() { }
 
-        public TopConnection3GCell(TopConnection3GCellExcel cellExcel)
+        public static TopConnection3GCell ConstructStat(TopConnection3GCellExcel cellExcel)
         {
-            cellExcel.CloneProperties(this);
-            StatTime = cellExcel.StatDate.AddHours(cellExcel.StatHour);
-            CellId = cellExcel.CellName.GetSubStringInFirstPairOfChars('[', ']').ConvertToInt(1);
+            return Mapper.Map<TopConnection3GCellExcel, TopConnection3GCell>(cellExcel);
         }
     }
 }

@@ -43,6 +43,8 @@ namespace Lte.Evaluations.Test.DataService
             _service = new KpiImportService(_regionRepository.Object, _dropRepository.Object,
                 _connectionRepository.Object);
             StatMapperService.MapCdmaRegionStat();
+            StatMapperService.MapTopConnection3G();
+            StatMapperService.MapTopDrop2G();
         }
         
         [Test]
