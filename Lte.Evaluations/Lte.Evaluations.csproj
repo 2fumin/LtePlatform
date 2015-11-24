@@ -87,6 +87,7 @@
     <Compile Include="DataService\CellService.cs" />
     <Compile Include="DataService\College3GTestService.cs" />
     <Compile Include="DataService\College4GTestService.cs" />
+    <Compile Include="DataService\CollegeCellsService.cs" />
     <Compile Include="DataService\CollegeENodebService.cs" />
     <Compile Include="DataService\CollegeKpiService.cs" />
     <Compile Include="DataService\CollegePreciseService.cs" />
@@ -95,7 +96,9 @@
     <Compile Include="DataService\KpiImportService.cs" />
     <Compile Include="DataService\PreciseRegionStatService.cs" />
     <Compile Include="DataService\PreciseStatService.cs" />
+    <Compile Include="DataService\QueryCdmaCellsService.cs" />
     <Compile Include="DataService\TownQueryService.cs" />
+    <Compile Include="MapperSerive\BaiduMapperService.cs" />
     <Compile Include="MapperSerive\CollegeMapperService.cs" />
     <Compile Include="MapperSerive\EvalutaionMapperProfile.cs" />
     <Compile Include="MapperSerive\InfrastructureMapperService.cs" />
@@ -115,6 +118,7 @@
     <Compile Include="ViewModels\ENodebView.cs" />
     <Compile Include="ViewModels\Precise4GView.cs" />
     <Compile Include="ViewModels\PreciseRegionDateView.cs" />
+    <Compile Include="ViewModels\SectorView.cs" />
     <Compile Include="ViewModels\TownPreciseView.cs" />
   </ItemGroup>
   <ItemGroup>

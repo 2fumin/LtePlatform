@@ -26,6 +26,9 @@ namespace Lte.Evaluations.MapperSerive
             KpiMapperService.MapCellPrecise();
             KpiMapperService.MapDistrictPrecise();
             KpiMapperService.MapTownPrecise();
+
+            BaiduMapperService.MapCdmaCellView();
+            BaiduMapperService.MapCellView();
         }
     }
 }

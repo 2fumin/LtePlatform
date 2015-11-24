@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Lte.Domain.Common.Geo;
 using Lte.Domain.Regular;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
@@ -39,6 +40,14 @@ namespace Lte.Evaluations.ViewModels
         public double DownTilt { get; set; }
 
         public double AntennaGain { get; set; }
+
+        public double Longtitute { get; set; }
+
+        public double Lattitute { get; set; }
+
+        public double BaiduLongtitute => Longtitute + GeoMath.BaiduLongtituteOffset;
+
+        public double BaiduLattitute => Lattitute + GeoMath.BaiduLattituteOffset;
 
         public static CellView ConstructView(Cell cell, IENodebRepository repository)
         {

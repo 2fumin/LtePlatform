@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Lte.Domain.Common.Geo;
 using Lte.Parameters.Entities;
 using Lte.Parameters.Abstract;
 using Lte.Domain.Regular;
@@ -31,6 +32,10 @@ namespace Lte.Evaluations.ViewModels
         public double Longtitute { get; set; }
 
         public double Lattitute { get; set; }
+
+        public double BaiduLongtitute => Longtitute + GeoMath.BaiduLongtituteOffset;
+
+        public double BaiduLattitute => Lattitute + GeoMath.BaiduLattituteOffset;
 
         public double Height { get; set; }
 

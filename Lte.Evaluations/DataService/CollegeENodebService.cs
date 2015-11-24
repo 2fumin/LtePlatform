@@ -37,6 +37,6 @@ namespace Lte.Evaluations.DataService
             var ids = _repository.GetIds(collegeName);
             return ids.Select(_eNodebRepository.Get
                 ).Where(eNodeb => eNodeb != null).ToList().Select(x => x.Name);
-        }
+        } 
     }
 }
