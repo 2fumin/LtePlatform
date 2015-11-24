@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Entities\AlarmStatCsvTest.cs" />
     <Compile Include="Entities\CdmaCellConstructionTest.cs" />
+    <Compile Include="Entities\CellConstructionTest.cs" />
     <Compile Include="Kpi\CdmaCityStatExcelTest.cs" />
     <Compile Include="Kpi\CdmaRegionStatExcelTest.cs" />
     <Compile Include="Kpi\CdmaTopKpiExcelTest.cs" />

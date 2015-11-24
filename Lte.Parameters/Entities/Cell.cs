@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Abp.Domain.Entities;
+using AutoMapper;
 using Lte.Domain.Common.Wireless;
 using Lte.Domain.Regular;
 
@@ -45,14 +46,9 @@ namespace Lte.Parameters.Entities
 
         public AntennaPortsConfigure AntennaPorts { get; set; }
 
-        public Cell() { }
-
-        public Cell(CellExcel cellExcelInfo)
+        public static Cell ConstructItem(CellExcel cellExcelInfo)
         {
-            cellExcelInfo.CloneProperties(this);
-
-            AntennaPorts = cellExcelInfo.TransmitReceive.GetAntennaPortsConfig();
-            IsOutdoor = (cellExcelInfo.IsIndoor.Trim() == "否");
+            return Mapper.Map<CellExcel, Cell>(cellExcelInfo);
         }
     }
 }

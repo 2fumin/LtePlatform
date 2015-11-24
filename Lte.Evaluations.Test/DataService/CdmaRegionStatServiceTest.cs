@@ -8,6 +8,7 @@ using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 using Moq;
 using NUnit.Framework;
+using Lte.Parameters.MockOperations;
 
 namespace Lte.Evaluations.Test.DataService
 {
@@ -26,6 +27,7 @@ namespace Lte.Evaluations.Test.DataService
             _statRepository.MockOperation();
             _regionRepository.MockOperation();
             KpiMapperService.MapCdmaRegionStat();
+            StatMapperService.MapCdmaRegionStat();
         }
 
         [SetUp]

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Abp.Domain.Entities;
+using AutoMapper;
 using Lte.Domain.Regular;
 
 namespace Lte.Parameters.Entities
@@ -82,11 +83,9 @@ namespace Lte.Parameters.Entities
 
         public double Utility3GRate => Utility3GDem == 0 ? 0 : (double)Utility3GNum / Utility3GDem;
 
-        public CdmaRegionStat() { }
-
-        public CdmaRegionStat(CdmaRegionStatExcel item)
+        public static CdmaRegionStat ConstructStat(CdmaRegionStatExcel item)
         {
-            item.CloneProperties(this);
+            return Mapper.Map<CdmaRegionStatExcel, CdmaRegionStat>(item);
         }
     }
 }

@@ -16,14 +16,13 @@ namespace Lte.Parameters.Concrete
         public int Import(IEnumerable<CdmaRegionStatExcel> stats)
         {
             int count = 0;
-            foreach(var stat in stats)
+            foreach (var stat in from stat in stats
+                let info = FirstOrDefault(x => x.Region == stat.Region && x.StatDate == stat.StatDate)
+                where info == null
+                select stat)
             {
-                var info = FirstOrDefault(x => x.Region == stat.Region && x.StatDate == stat.StatDate);
-                if (info == null)
-                {
-                    Insert(new CdmaRegionStat(stat));
-                    count++;
-                }
+                Insert(CdmaRegionStat.ConstructStat(stat));
+                count++;
             }
             return count;
         }

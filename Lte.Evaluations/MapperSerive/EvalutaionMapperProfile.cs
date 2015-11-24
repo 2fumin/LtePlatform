@@ -11,7 +11,9 @@ namespace Lte.Evaluations.MapperSerive
         {
             Mapper.CreateMap<CellExcel, Cell>();
             CoreMapperService.MapCdmaCell();
+            CoreMapperService.MapCell();
             AlarmMapperService.MapAlarms();
+            StatMapperService.MapCdmaRegionStat();
             
             InfrastructureMapperService.MapENodeb();
             InfrastructureMapperService.MapCdmaCell();

@@ -8,6 +8,7 @@ using Lte.Domain.LinqToExcel;
 using Lte.Evaluations.DataService;
 using Lte.Evaluations.Test.MockItems;
 using Lte.Parameters.Abstract;
+using Lte.Parameters.MockOperations;
 using Moq;
 using NUnit.Framework;
 
@@ -41,6 +42,7 @@ namespace Lte.Evaluations.Test.DataService
             _connectionRepository.MockOperation();
             _service = new KpiImportService(_regionRepository.Object, _dropRepository.Object,
                 _connectionRepository.Object);
+            StatMapperService.MapCdmaRegionStat();
         }
         
         [Test]
