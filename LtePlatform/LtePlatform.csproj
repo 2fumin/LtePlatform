@@ -316,6 +316,8 @@
     <Compile Include="Controllers\EvaluationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KpiController.cs" />
+    <Compile Include="Controllers\Kpi\AlarmCountController.cs" />
+    <Compile Include="Controllers\Kpi\AlarmsController.cs" />
     <Compile Include="Controllers\Kpi\KpiDataListController.cs" />
     <Compile Include="Controllers\Kpi\PreciseRegionController.cs" />
     <Compile Include="Controllers\Kpi\PreciseStatController.cs" />

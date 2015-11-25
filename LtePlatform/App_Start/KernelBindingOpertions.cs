@@ -78,6 +78,8 @@ namespace LtePlatform
             ninjectKernel.Bind<KpiImportService>().ToSelf();
 
             ninjectKernel.Bind<PreciseRegionStatService>().ToSelf();
+
+            ninjectKernel.Bind<AlarmsService>().ToSelf();
         }
     }
 }
