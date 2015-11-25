@@ -18,7 +18,7 @@
             <td data-bind="text: address"></td>
             <td>
                 <button class="btn btn-warning" 
-                        data-bind="click: function () { loadAlarms($data.eNodebId);}, visible: $data.alarmTimes>0"
+                        data-bind="click: function () { $root.loadAlarms(eNodebId);}, visible: $data.alarmTimes>0"
                         title="这里表示最近一个月的告警数，点击可查看详细信息">
                     故障数
                     <span class="badge pull-right" data-bind="text: alarmTimes"></span>

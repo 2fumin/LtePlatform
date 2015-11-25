@@ -14,37 +14,37 @@
     </thead>
     <tbody data-bind="foreach: collegeList">
         <tr>
-            <td data-bind="text: Name"></td>
-            <td data-bind="text: ExpectedSubscribers"></td>
-            <td data-bind="text: $data.Area.toFixed(2)"></td>
+            <td data-bind="text: name"></td>
+            <td data-bind="text: expectedSubscribers"></td>
+            <td data-bind="text: $data.area.toFixed(2)"></td>
             <td>
-                <a href="#" data-bind="click: function () { showENodebs(Name);}">
-                    <span data-bind="text: TotalLteENodebs"></span>
+                <a href="#" data-bind="click: function () { $root.showENodebs(name);}">
+                    <span data-bind="text: totalLteENodebs"></span>
                 </a>
             </td>
             <td>
-                <a href="#" data-bind="click: function () { showCells(Name);}">
-                    <span data-bind="text: TotalLteCells"></span>
+                <a href="#" data-bind="click: function () { $root.showCells(name);}">
+                    <span data-bind="text: totalLteCells"></span>
                 </a>
             </td>
             <td>
-                <a href="#" data-bind="click: function () { showBtss(Name); }">
-                    <span data-bind="text: TotalCdmaBts"></span>
+                <a href="#" data-bind="click: function () { $root.showBtss(name); }">
+                    <span data-bind="text: totalCdmaBts"></span>
                 </a>
             </td>
             <td>
-                <a href="#" data-bind="click: function () { showCdmaCells(Name); }">
-                    <span data-bind="text: TotalCdmaCells"></span>
+                <a href="#" data-bind="click: function () { $root.showCdmaCells(name); }">
+                    <span data-bind="text: totalCdmaCells"></span>
                 </a>
             </td>
             <td>
-                <a href="#" data-bind="click: function () { showLteDistributions(Name); }">
-                    <span data-bind="text: TotalLteIndoors"></span>
+                <a href="#" data-bind="click: function () { $root.showLteDistributions(name); }">
+                    <span data-bind="text: totalLteIndoors"></span>
                 </a>
             </td>
             <td>
-                <a href="#" data-bind="click: function () { showCdmaDistributions(Name); }">
-                    <span data-bind="text: TotalCdmaIndoors"></span>
+                <a href="#" data-bind="click: function () { $root.showCdmaDistributions(name); }">
+                    <span data-bind="text: totalCdmaIndoors"></span>
                 </a>
             </td>
         </tr>

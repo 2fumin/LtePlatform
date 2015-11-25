@@ -22,7 +22,7 @@ namespace LtePlatform.Controllers.College
         [HttpGet]
         public IHttpActionResult Get(int id)
         {
-            CollegeStat stat = _service.QueryStat(id);
+            var stat = _service.QueryStat(id);
             return stat == null ? (IHttpActionResult)BadRequest("ID Not Found!") : Ok(stat);
         }
 

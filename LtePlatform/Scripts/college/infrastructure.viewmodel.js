@@ -86,6 +86,10 @@
         });
     };
 
+    app.loadAlarms = function(id, begin, end) {
+        return app.dataModel.loadAlarms(id, begin, end);
+    };
+
     return self;
 }
 

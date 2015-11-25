@@ -30,9 +30,13 @@
     // Other private operations
 
     // Operations
-    self.loadAlarms = function (id) {
-        sendRequest("/api/Alarms/", "GET", { eNodebId: id }, function (result) {
-            model.alarms(result);
+    self.loadAlarms = function (id, begin, end) {
+        sendRequest("/api/Alarms/", "GET", {
+            eNodebId: id,
+            begin: begin,
+            end: end
+        }, function (result) {
+            app.alarms(result);
             $(".modal").modal("show");
         });
     };

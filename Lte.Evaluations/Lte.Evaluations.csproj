@@ -83,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CellTrace\ZteTraceRecord.cs" />
+    <Compile Include="DataService\AlarmsService.cs" />
     <Compile Include="DataService\CdmaRegionStatService.cs" />
     <Compile Include="DataService\CellService.cs" />
     <Compile Include="DataService\College3GTestService.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="MapperSerive\InfrastructureMapperService.cs" />
     <Compile Include="MapperSerive\KpiMapperService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AlarmView.cs" />
     <Compile Include="ViewModels\CdmaBtsView.cs" />
     <Compile Include="ViewModels\CdmaCellView.cs" />
     <Compile Include="ViewModels\CdmaRegionDateView.cs" />
