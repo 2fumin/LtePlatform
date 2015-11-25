@@ -87,6 +87,7 @@
     <Compile Include="DataService\CellService.cs" />
     <Compile Include="DataService\College3GTestService.cs" />
     <Compile Include="DataService\College4GTestService.cs" />
+    <Compile Include="DataService\CollegeCdmaCellsService.cs" />
     <Compile Include="DataService\CollegeCellsService.cs" />
     <Compile Include="DataService\CollegeENodebService.cs" />
     <Compile Include="DataService\CollegeKpiService.cs" />

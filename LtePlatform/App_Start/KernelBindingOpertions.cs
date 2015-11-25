@@ -63,6 +63,10 @@ namespace LtePlatform
 
             ninjectKernel.Bind<CollegePreciseService>().ToSelf();
 
+            ninjectKernel.Bind<CollegeCdmaCellsService>().ToSelf();
+
+            ninjectKernel.Bind<CollegeCellsService>().ToSelf();
+
             ninjectKernel.Bind<PreciseStatService>().ToSelf();
 
             ninjectKernel.Bind<TownQueryService>().ToSelf();

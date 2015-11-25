@@ -13,15 +13,51 @@ namespace Lte.Evaluations.Test.MockItems
     {
         public static void MockOperations(this Mock<IInfrastructureRepository> repository)
         {
-            repository.Setup(x => x.GetIds(It.IsAny<string>()))
+            repository.Setup(x => x.GetENodebIds(It.IsAny<string>()))
                 .Returns<string>(collegeName => repository.Object.GetAll().Where(x =>
                     x.HotspotName == collegeName && x.InfrastructureType == InfrastructureType.ENodeb)
+                    .Select(x => x.InfrastructureId).ToList());
+
+            repository.Setup(x => x.GetBtsIds(It.IsAny<string>()))
+                .Returns<string>(collegeName => repository.Object.GetAll().Where(x =>
+                    x.HotspotName == collegeName && x.InfrastructureType == InfrastructureType.CdmaBts)
                     .Select(x => x.InfrastructureId).ToList());
 
             repository.Setup(x => x.GetCellIds(It.IsAny<string>()))
                 .Returns<string>(collegeName => repository.Object.GetAll().Where(x =>
                     x.HotspotName == collegeName && x.InfrastructureType == InfrastructureType.Cell
                     ).Select(x => x.InfrastructureId).ToList());
+        }
+
+        public static void MockThreeCollegeENodebs(this Mock<IInfrastructureRepository> repository)
+        {
+            repository.MockInfrastructures(new List<InfrastructureInfo>
+            {
+                new InfrastructureInfo
+                {
+                    HotspotName = "College-1",
+                    HotspotType = HotspotType.College,
+                    Id = 1,
+                    InfrastructureType = InfrastructureType.ENodeb,
+                    InfrastructureId = 1
+                },
+                new InfrastructureInfo
+                {
+                    HotspotName = "College-2",
+                    HotspotType = HotspotType.College,
+                    Id = 2,
+                    InfrastructureType = InfrastructureType.ENodeb,
+                    InfrastructureId = 2
+                },
+                new InfrastructureInfo
+                {
+                    HotspotName = "College-3",
+                    HotspotType = HotspotType.College,
+                    Id = 3,
+                    InfrastructureType = InfrastructureType.ENodeb,
+                    InfrastructureId = 3
+                }
+            });
         }
         
         public static void MockSixCollegeCells(this Mock<IInfrastructureRepository> repository)

@@ -10,8 +10,12 @@ namespace Lte.Parameters.Abstract
 {
     public interface IInfrastructureRepository : IRepository<InfrastructureInfo>
     {
-        IEnumerable<int> GetIds(string collegeName);
+        IEnumerable<int> GetENodebIds(string collegeName);
 
         IEnumerable<int> GetCellIds(string collegeName);
+
+        IEnumerable<int> GetBtsIds(string collegeName);
+
+        IEnumerable<int> GetCdmaCellIds(string collegeName);
     }
 }

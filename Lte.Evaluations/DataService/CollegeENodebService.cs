@@ -27,14 +27,14 @@ namespace Lte.Evaluations.DataService
             DateTime begin, DateTime end)
         {
             var stats = _alarmRepository.GetAllList(begin, end);
-            var ids = _repository.GetIds(collegeName);
+            var ids = _repository.GetENodebIds(collegeName);
             return ids.Select(_eNodebRepository.Get
                 ).Where(eNodeb => eNodeb != null).ToList().Select(x => ENodebView.ConstructView(x, stats));
         }
 
         public IEnumerable<string> QueryCollegeENodebNames(string collegeName)
         {
-            var ids = _repository.GetIds(collegeName);
+            var ids = _repository.GetENodebIds(collegeName);
             return ids.Select(_eNodebRepository.Get
                 ).Where(eNodeb => eNodeb != null).ToList().Select(x => x.Name);
         } 

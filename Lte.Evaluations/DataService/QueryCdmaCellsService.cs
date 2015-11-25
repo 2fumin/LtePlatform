@@ -25,7 +25,7 @@ namespace Lte.Evaluations.DataService
 
         public IEnumerable<CdmaCellView> GetViews(string collegeName)
         {
-            var ids = _repository.GetIds(collegeName);
+            var ids = _repository.GetENodebIds(collegeName);
             var query = ids.Select(_cellRepository.Get).Where(cell => cell != null).ToList();
             return query.Any()
                 ? query.Select(x => CdmaCellView.ConstructView(x, _btsRepository))
@@ -34,7 +34,7 @@ namespace Lte.Evaluations.DataService
 
         public IEnumerable<SectorView> QuerySectors(string collegeName)
         {
-            var ids = _repository.GetIds(collegeName);
+            var ids = _repository.GetENodebIds(collegeName);
             var query = ids.Select(_cellRepository.Get).Where(cell => cell != null).ToList();
             return query.Any()
                 ? Mapper.Map<IEnumerable<CdmaCellView>, IEnumerable<SectorView>>(

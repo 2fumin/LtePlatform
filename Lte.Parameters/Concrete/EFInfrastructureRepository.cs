@@ -13,17 +13,32 @@ namespace Lte.Parameters.Concrete
     {
         protected override DbSet<InfrastructureInfo> Entities => context.InfrastructureInfos;
 
-        public IEnumerable<int> GetIds(string collegeName)
+        public IEnumerable<int> GetENodebIds(string collegeName)
         {
             return GetAll().Where(x =>
                 x.HotspotName == collegeName && x.InfrastructureType == InfrastructureType.ENodeb
                 ).Select(x => x.InfrastructureId).ToList();
         }
 
+
         public IEnumerable<int> GetCellIds(string collegeName)
         {
             return GetAll().Where(x =>
                 x.HotspotName == collegeName && x.InfrastructureType == InfrastructureType.Cell
+                ).Select(x => x.InfrastructureId).ToList();
+        }
+
+        public IEnumerable<int> GetBtsIds(string collegeName)
+        {
+            return GetAll().Where(x =>
+                x.HotspotName == collegeName && x.InfrastructureType == InfrastructureType.CdmaBts
+                ).Select(x => x.InfrastructureId).ToList();
+        }
+
+        public IEnumerable<int> GetCdmaCellIds(string collegeName)
+        {
+            return GetAll().Where(x =>
+                x.HotspotName == collegeName && x.InfrastructureType == InfrastructureType.CdmaCell
                 ).Select(x => x.InfrastructureId).ToList();
         }
     }

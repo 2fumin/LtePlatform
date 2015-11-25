@@ -22,7 +22,7 @@ namespace Lte.Evaluations.Test.MockItems
                         repository.Object.GetAll().FirstOrDefault(x => x.ENodebId == eNodebId && x.SectorId == sectorId));
         }
 
-        public static void MockSixCells(this Mock<ICellRepository> repository)
+        public static void MockSixCells(this Mock<ICellRepository> repository, double lon = 113.01, double lat = 23.01)
         {
             repository.MockCells(new List<Cell>
             {
@@ -35,7 +35,10 @@ namespace Lte.Evaluations.Test.MockItems
                     Height = 20,
                     IsOutdoor = true,
                     MTilt = 1.1,
-                    ETilt = 2.2
+                    ETilt = 2.2,
+                    Azimuth = 30,
+                    Longtitute = lon,
+                    Lattitute = lat
                 },
                 new Cell
                 {
@@ -46,7 +49,10 @@ namespace Lte.Evaluations.Test.MockItems
                     Height = 20,
                     IsOutdoor = true,
                     MTilt = 1.1,
-                    ETilt = 2.2
+                    ETilt = 2.2,
+                    Azimuth = 60,
+                    Longtitute = lon,
+                    Lattitute = lat
                 },
                 new Cell
                 {
@@ -57,7 +63,10 @@ namespace Lte.Evaluations.Test.MockItems
                     Height = 20,
                     IsOutdoor = true,
                     MTilt = 1.1,
-                    ETilt = 2.2
+                    ETilt = 2.2,
+                    Azimuth = 90,
+                    Longtitute = lon,
+                    Lattitute = lat
                 },
                 new Cell
                 {
@@ -68,7 +77,10 @@ namespace Lte.Evaluations.Test.MockItems
                     Height = 20,
                     IsOutdoor = true,
                     MTilt = 1.1,
-                    ETilt = 2.2
+                    ETilt = 2.2,
+                    Azimuth = 150,
+                    Longtitute = lon,
+                    Lattitute = lat
                 },
                 new Cell
                 {
@@ -79,7 +91,10 @@ namespace Lte.Evaluations.Test.MockItems
                     Height = 20,
                     IsOutdoor = true,
                     MTilt = 1.1,
-                    ETilt = 2.2
+                    ETilt = 2.2,
+                    Azimuth = 210,
+                    Longtitute = lon,
+                    Lattitute = lat
                 },
                 new Cell
                 {
@@ -90,7 +105,10 @@ namespace Lte.Evaluations.Test.MockItems
                     Height = 20,
                     IsOutdoor = true,
                     MTilt = 1.1,
-                    ETilt = 2.2
+                    ETilt = 2.2,
+                    Azimuth = 270,
+                    Longtitute = lon,
+                    Lattitute = lat
                 }
             });
         }

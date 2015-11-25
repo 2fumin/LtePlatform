@@ -9,36 +9,36 @@ using Lte.Parameters.Abstract;
 
 namespace Lte.Evaluations.DataService
 {
-    public class CollegeCellsService
+    public class CollegeCdmaCellsService
     {
         private readonly IInfrastructureRepository _repository;
-        private readonly ICellRepository _cellRepository;
-        private readonly IENodebRepository _eNodebRepository;
+        private readonly ICdmaCellRepository _cellRepository;
+        private readonly IBtsRepository _btsRepository;
 
-        public CollegeCellsService(IInfrastructureRepository repository, ICellRepository cellRepository,
-            IENodebRepository eNodebRepository)
+        public CollegeCdmaCellsService(IInfrastructureRepository repository, ICdmaCellRepository cellRepository,
+            IBtsRepository btsRepository)
         {
             _repository = repository;
             _cellRepository = cellRepository;
-            _eNodebRepository = eNodebRepository;
+            _btsRepository = btsRepository;
         }
 
-        public IEnumerable<CellView> GetViews(string collegeName)
+        public IEnumerable<CdmaCellView> GetViews(string collegeName)
         {
-            var ids = _repository.GetCellIds(collegeName);
+            var ids = _repository.GetCdmaCellIds(collegeName);
             var query = ids.Select(_cellRepository.Get).Where(cell => cell != null).ToList();
             return query.Any()
-                ? query.Select(x => CellView.ConstructView(x, _eNodebRepository))
+                ? query.Select(x => CdmaCellView.ConstructView(x, _btsRepository))
                 : null;
         }
 
         public IEnumerable<SectorView> QuerySectors(string collegeName)
         {
-            var ids = _repository.GetCellIds(collegeName);
+            var ids = _repository.GetCdmaCellIds(collegeName);
             var query = ids.Select(_cellRepository.Get).Where(cell => cell != null).ToList();
             return query.Any()
-                ? Mapper.Map<IEnumerable<CellView>, IEnumerable<SectorView>>(
-                    query.Select(x => CellView.ConstructView(x, _eNodebRepository)))
+                ? Mapper.Map<IEnumerable<CdmaCellView>, IEnumerable<SectorView>>(
+                    query.Select(x => CdmaCellView.ConstructView(x, _btsRepository)))
                 : null;
         }
     }
