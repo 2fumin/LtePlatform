@@ -219,30 +219,26 @@ namespace LtePlatform.Areas.HelpPage
         public static HelpPageApiModel GetHelpPageApiModel(this HttpConfiguration config, string apiDescriptionId)
         {
             object model;
-            string modelId = ApiModelPrefix + apiDescriptionId;
-            if (!config.Properties.TryGetValue(modelId, out model))
-            {
-                Collection<ApiDescription> apiDescriptions = config.Services.GetApiExplorer().ApiDescriptions;
-                ApiDescription apiDescription = apiDescriptions.FirstOrDefault(api => String.Equals(api.GetFriendlyId(), apiDescriptionId, StringComparison.OrdinalIgnoreCase));
-                if (apiDescription != null)
-                {
-                    model = GenerateApiModel(apiDescription, config);
-                    config.Properties.TryAdd(modelId, model);
-                }
-            }
+            var modelId = ApiModelPrefix + apiDescriptionId;
+            if (config.Properties.TryGetValue(modelId, out model)) return (HelpPageApiModel) model;
+            var apiDescriptions = config.Services.GetApiExplorer().ApiDescriptions;
+            var apiDescription = apiDescriptions.FirstOrDefault(api => string.Equals(api.GetFriendlyId(), apiDescriptionId, StringComparison.OrdinalIgnoreCase));
+            if (apiDescription == null) return null;
+            model = GenerateApiModel(apiDescription, config);
+            config.Properties.TryAdd(modelId, model);
 
             return (HelpPageApiModel)model;
         }
 
         private static HelpPageApiModel GenerateApiModel(ApiDescription apiDescription, HttpConfiguration config)
         {
-            HelpPageApiModel apiModel = new HelpPageApiModel()
+            var apiModel = new HelpPageApiModel()
             {
                 ApiDescription = apiDescription,
             };
 
-            ModelDescriptionGenerator modelGenerator = config.GetModelDescriptionGenerator();
-            HelpPageSampleGenerator sampleGenerator = config.GetHelpPageSampleGenerator();
+            var modelGenerator = config.GetModelDescriptionGenerator();
+            var sampleGenerator = config.GetHelpPageSampleGenerator();
             GenerateUriParameters(apiModel, modelGenerator);
             GenerateRequestModelDescription(apiModel, modelGenerator, sampleGenerator);
             GenerateResourceDescription(apiModel, modelGenerator);
@@ -253,76 +249,80 @@ namespace LtePlatform.Areas.HelpPage
 
         private static void GenerateUriParameters(HelpPageApiModel apiModel, ModelDescriptionGenerator modelGenerator)
         {
-            ApiDescription apiDescription = apiModel.ApiDescription;
-            foreach (ApiParameterDescription apiParameter in apiDescription.ParameterDescriptions)
+            var apiDescription = apiModel.ApiDescription;
+            foreach (var apiParameter in apiDescription.ParameterDescriptions)
             {
-                if (apiParameter.Source == ApiParameterSource.FromUri)
+                if (apiParameter.Source != ApiParameterSource.FromUri) continue;
+                var parameterDescriptor = apiParameter.ParameterDescriptor;
+                Type parameterType = null;
+                ModelDescription typeDescription = null;
+                ComplexTypeModelDescription complexTypeDescription = null;
+                if (parameterDescriptor != null)
                 {
-                    HttpParameterDescriptor parameterDescriptor = apiParameter.ParameterDescriptor;
-                    Type parameterType = null;
-                    ModelDescription typeDescription = null;
-                    ComplexTypeModelDescription complexTypeDescription = null;
-                    if (parameterDescriptor != null)
-                    {
-                        parameterType = parameterDescriptor.ParameterType;
-                        typeDescription = modelGenerator.GetOrCreateModelDescription(parameterType);
-                        complexTypeDescription = typeDescription as ComplexTypeModelDescription;
-                    }
+                    parameterType = parameterDescriptor.ParameterType;
+                    typeDescription = modelGenerator.GetOrCreateModelDescription(parameterType);
+                    complexTypeDescription = typeDescription as ComplexTypeModelDescription;
+                }
 
-                    // Example:
-                    // [TypeConverter(typeof(PointConverter))]
-                    // public class Point
-                    // {
-                    //     public Point(int x, int y)
-                    //     {
-                    //         X = x;
-                    //         Y = y;
-                    //     }
-                    //     public int X { get; set; }
-                    //     public int Y { get; set; }
-                    // }
-                    // Class Point is bindable with a TypeConverter, so Point will be added to UriParameters collection.
-                    // 
-                    // public class Point
-                    // {
-                    //     public int X { get; set; }
-                    //     public int Y { get; set; }
-                    // }
-                    // Regular complex class Point will have properties X and Y added to UriParameters collection.
-                    if (complexTypeDescription != null
-                        && !IsBindableWithTypeConverter(parameterType))
+                // Example:
+                // [TypeConverter(typeof(PointConverter))]
+                // public class Point
+                // {
+                //     public Point(int x, int y)
+                //     {
+                //         X = x;
+                //         Y = y;
+                //     }
+                //     public int X { get; set; }
+                //     public int Y { get; set; }
+                // }
+                // Class Point is bindable with a TypeConverter, so Point will be added to UriParameters collection.
+                // 
+                // public class Point
+                // {
+                //     public int X { get; set; }
+                //     public int Y { get; set; }
+                // }
+                // Regular complex class Point will have properties X and Y added to UriParameters collection.
+                if (complexTypeDescription != null
+                    && !IsBindableWithTypeConverter(parameterType))
+                {
+                    foreach (var uriParameter in complexTypeDescription.Properties)
                     {
-                        foreach (ParameterDescription uriParameter in complexTypeDescription.Properties)
+                        apiModel.UriParameters.Add(uriParameter);
+                    }
+                }
+                else if (parameterDescriptor != null)
+                {
+                    var uriParameter =
+                        AddParameterDescription(apiModel, apiParameter, typeDescription);
+
+                    if (!parameterDescriptor.IsOptional)
+                    {
+                        uriParameter.Annotations.Add(new ParameterAnnotation
                         {
-                            apiModel.UriParameters.Add(uriParameter);
-                        }
+                            Documentation = "Required"
+                        });
                     }
-                    else if (parameterDescriptor != null)
+
+                    var defaultValue = parameterDescriptor.DefaultValue;
+                    if (defaultValue != null)
                     {
-                        ParameterDescription uriParameter =
-                            AddParameterDescription(apiModel, apiParameter, typeDescription);
-
-                        if (!parameterDescriptor.IsOptional)
+                        uriParameter.Annotations.Add(new ParameterAnnotation
                         {
-                            uriParameter.Annotations.Add(new ParameterAnnotation() { Documentation = "Required" });
-                        }
-
-                        object defaultValue = parameterDescriptor.DefaultValue;
-                        if (defaultValue != null)
-                        {
-                            uriParameter.Annotations.Add(new ParameterAnnotation() { Documentation = "Default value is " + Convert.ToString(defaultValue, CultureInfo.InvariantCulture) });
-                        }
+                            Documentation = "Default value is " + Convert.ToString(defaultValue, CultureInfo.InvariantCulture)
+                        });
                     }
-                    else
-                    {
-                        Debug.Assert(parameterDescriptor == null);
+                }
+                else
+                {
+                    Debug.Assert(parameterDescriptor == null);
 
-                        // If parameterDescriptor is null, this is an undeclared route parameter which only occurs
-                        // when source is FromUri. Ignored in request model and among resource parameters but listed
-                        // as a simple string here.
-                        ModelDescription modelDescription = modelGenerator.GetOrCreateModelDescription(typeof(string));
-                        AddParameterDescription(apiModel, apiParameter, modelDescription);
-                    }
+                    // If parameterDescriptor is null, this is an undeclared route parameter which only occurs
+                    // when source is FromUri. Ignored in request model and among resource parameters but listed
+                    // as a simple string here.
+                    var modelDescription = modelGenerator.GetOrCreateModelDescription(typeof(string));
+                    AddParameterDescription(apiModel, apiParameter, modelDescription);
                 }
             }
         }
@@ -340,7 +340,7 @@ namespace LtePlatform.Areas.HelpPage
         private static ParameterDescription AddParameterDescription(HelpPageApiModel apiModel,
             ApiParameterDescription apiParameter, ModelDescription typeDescription)
         {
-            ParameterDescription parameterDescription = new ParameterDescription
+            var parameterDescription = new ParameterDescription
             {
                 Name = apiParameter.Name,
                 Documentation = apiParameter.Documentation,
@@ -353,19 +353,19 @@ namespace LtePlatform.Areas.HelpPage
 
         private static void GenerateRequestModelDescription(HelpPageApiModel apiModel, ModelDescriptionGenerator modelGenerator, HelpPageSampleGenerator sampleGenerator)
         {
-            ApiDescription apiDescription = apiModel.ApiDescription;
-            foreach (ApiParameterDescription apiParameter in apiDescription.ParameterDescriptions)
+            var apiDescription = apiModel.ApiDescription;
+            foreach (var apiParameter in apiDescription.ParameterDescriptions)
             {
                 if (apiParameter.Source == ApiParameterSource.FromBody)
                 {
-                    Type parameterType = apiParameter.ParameterDescriptor.ParameterType;
+                    var parameterType = apiParameter.ParameterDescriptor.ParameterType;
                     apiModel.RequestModelDescription = modelGenerator.GetOrCreateModelDescription(parameterType);
                     apiModel.RequestDocumentation = apiParameter.Documentation;
                 }
                 else if (apiParameter.ParameterDescriptor != null &&
                     apiParameter.ParameterDescriptor.ParameterType == typeof(HttpRequestMessage))
                 {
-                    Type parameterType = sampleGenerator.ResolveHttpRequestMessageType(apiDescription);
+                    var parameterType = sampleGenerator.ResolveHttpRequestMessageType(apiDescription);
 
                     if (parameterType != null)
                     {
@@ -377,8 +377,8 @@ namespace LtePlatform.Areas.HelpPage
 
         private static void GenerateResourceDescription(HelpPageApiModel apiModel, ModelDescriptionGenerator modelGenerator)
         {
-            ResponseDescription response = apiModel.ApiDescription.ResponseDescription;
-            Type responseType = response.ResponseType ?? response.DeclaredType;
+            var response = apiModel.ApiDescription.ResponseDescription;
+            var responseType = response.ResponseType ?? response.DeclaredType;
             if (responseType != null && responseType != typeof(void))
             {
                 apiModel.ResourceDescription = modelGenerator.GetOrCreateModelDescription(responseType);
@@ -426,7 +426,7 @@ namespace LtePlatform.Areas.HelpPage
 
             if (resourceType == typeof(HttpRequestMessage))
             {
-                HelpPageSampleGenerator sampleGenerator = config.GetHelpPageSampleGenerator();
+                var sampleGenerator = config.GetHelpPageSampleGenerator();
                 resourceType = sampleGenerator.ResolveHttpRequestMessageType(apiDescription);
             }
 
@@ -441,9 +441,9 @@ namespace LtePlatform.Areas.HelpPage
 
         private static ModelDescriptionGenerator InitializeModelDescriptionGenerator(HttpConfiguration config)
         {
-            ModelDescriptionGenerator modelGenerator = new ModelDescriptionGenerator(config);
-            Collection<ApiDescription> apis = config.Services.GetApiExplorer().ApiDescriptions;
-            foreach (ApiDescription api in apis)
+            var modelGenerator = new ModelDescriptionGenerator(config);
+            var apis = config.Services.GetApiExplorer().ApiDescriptions;
+            foreach (var api in apis)
             {
                 ApiParameterDescription parameterDescription;
                 Type parameterType;
@@ -457,7 +457,7 @@ namespace LtePlatform.Areas.HelpPage
 
         private static void LogInvalidSampleAsError(HelpPageApiModel apiModel, object sample)
         {
-            InvalidSample invalidSample = sample as InvalidSample;
+            var invalidSample = sample as InvalidSample;
             if (invalidSample != null)
             {
                 apiModel.ErrorMessages.Add(invalidSample.ErrorMessage);

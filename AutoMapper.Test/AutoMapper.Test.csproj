@@ -126,6 +126,10 @@
     <Compile Include="Core\AutoMapperTester.cs" />
     <Compile Include="Core\BeforeAfterMapping.cs" />
     <Compile Include="Core\BidirectionalRelationships.cs" />
+    <Compile Include="Core\CollectionMapping.cs" />
+    <Compile Include="Core\ConditionalMapping.cs" />
+    <Compile Include="Core\ConfigurationValidation.cs" />
+    <Compile Include="Core\Constructors.cs" />
     <Compile Include="IMappingExpression\ForCtorParam.cs" />
     <Compile Include="IMappingExpression\NonGenericAllMembersNullSubstitute.cs" />
     <Compile Include="IMappingExpression\NonGenericConstructorTests.cs" />
