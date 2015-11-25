@@ -47,7 +47,7 @@
     };
 
     app.showCells = function (name) {
-        sendRequest("/api/CollegeCells/", "GET", { collegeName: name }, function (data) {
+        sendRequest(app.dataModel.collegeCellsUrl, "GET", { collegeName: name }, function (data) {
             app.cellList(data);
             app.setView('cells');
             app.currentName(name);
@@ -55,7 +55,7 @@
     };
 
     app.showBtss = function (name) {
-        sendRequest("/api/CollegeBtss/", "GET", { collegeName: name }, function (data) {
+        sendRequest(app.dataModel.collegeBtssUrl, "GET", { collegeName: name }, function (data) {
             app.btsList(data);
             app.setView('btss');
             app.currentName(name);
@@ -63,7 +63,7 @@
     };
 
     app.showCdmaCells = function (name) {
-        sendRequest("/api/CollegeCdmaCells/", "GET", { collegeName: name }, function (data) {
+        sendRequest(app.dataModel.collegeCdmaCellsUrl, "GET", { collegeName: name }, function (data) {
             app.cdmaCellList(data);
             app.setView('cdmaCells');
             app.currentName(name);

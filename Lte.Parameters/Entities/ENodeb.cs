@@ -22,12 +22,6 @@ namespace Lte.Parameters.Entities
         public double Longtitute { get; set; }
         
         public double Lattitute { get; set; }
-
-        public double BaiduLongtitute
-        { get { return Longtitute + GeoMath.BaiduLongtituteOffset; } }
-
-        public double BaiduLattitute
-        { get { return Lattitute + GeoMath.BaiduLattituteOffset; } }
         
         public string Factory { get; set; }
 

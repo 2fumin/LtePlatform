@@ -29,5 +29,10 @@ namespace Lte.Evaluations.MapperSerive
         {
             Mapper.CreateMap<ENodeb, ENodebView>();
         }
+
+        public static void MapBts()
+        {
+            Mapper.CreateMap<CdmaBts, CdmaBtsView>();
+        }
     }
 }

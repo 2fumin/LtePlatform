@@ -17,6 +17,7 @@ namespace Lte.Evaluations.MapperSerive
             StatMapperService.MapTopDrop2G();
             
             InfrastructureMapperService.MapENodeb();
+            InfrastructureMapperService.MapBts();
             InfrastructureMapperService.MapCdmaCell();
             InfrastructureMapperService.MapCell();
             CollegeMapperService.MapCollege3GTest();

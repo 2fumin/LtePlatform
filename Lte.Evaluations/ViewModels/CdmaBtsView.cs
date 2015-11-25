@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Abp.Domain.Entities;
+using AutoMapper;
 using Lte.Domain.Common.Geo;
+using Lte.Parameters.Entities;
 
-namespace Lte.Parameters.Entities
+namespace Lte.Evaluations.ViewModels
 {
-    public class CdmaBts : Entity
+    public class CdmaBtsView
     {
-        public int ENodebId { get; set; } = -1;
-
-        [MaxLength(50)]
         public string Name { get; set; }
 
         public int TownId { get; set; }
@@ -21,11 +18,18 @@ namespace Lte.Parameters.Entities
         public double Longtitute { get; set; }
 
         public double Lattitute { get; set; }
-        
+
+        public double BaiduLongtitute => Longtitute + GeoMath.BaiduLongtituteOffset;
+
+        public double BaiduLattitute => Lattitute + GeoMath.BaiduLattituteOffset;
+
         public string Address { get; set; }
 
         public int BtsId { get; set; }
 
-        public short BscId { get; set; }
+        public static CdmaBtsView ConstructView(CdmaBts bts)
+        {
+            return Mapper.Map<CdmaBts, CdmaBtsView>(bts);
+        }
     }
 }

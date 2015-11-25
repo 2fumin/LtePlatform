@@ -25,6 +25,7 @@ namespace LtePlatform.Controllers.College
             return _service.QueryCollegeENodebNames(collegeName);
         }
 
+        [HttpGet]
         public IEnumerable<ENodebView> Get(string collegeName, DateTime begin, DateTime end)
         {
             return _service.QueryCollegeENodebs(collegeName, begin, end);

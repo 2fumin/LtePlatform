@@ -13,10 +13,13 @@
     self.collegeRegionUrl = "/api/CollegeRegion";
     self.collegeStatUrl = "/api/CollegeStat";
     self.collegeENodebUrl = "/api/CollegeENodeb/";
+    self.collegeBtssUrl = "/api/CollegeBtss/";
     self.college3GTestUrl = "/api/College3GTest/";
     self.college4GTestUrl = "/api/College4GTest/";
     self.collegeKpiUrl = "/api/CollegeKpi/";
     self.collegePreciseUrl = "/api/CollegePrecise/";
+    self.collegeCellsUrl = "/api/CollegeCells/";
+    self.collegeCdmaCellsUrl = "/api/CollegeCdmaCells/";
 
     self.cellUrl = "/api/Cell/";
 

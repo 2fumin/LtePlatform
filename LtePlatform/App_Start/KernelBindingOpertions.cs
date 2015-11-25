@@ -53,6 +53,8 @@ namespace LtePlatform
 
             ninjectKernel.Bind<CollegeENodebService>().ToSelf();
 
+            ninjectKernel.Bind<CollegeBtssService>().ToSelf();
+
             ninjectKernel.Bind<CellService>().ToSelf();
 
             ninjectKernel.Bind<College3GTestService>().ToSelf();

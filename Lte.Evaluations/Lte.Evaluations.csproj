@@ -87,6 +87,7 @@
     <Compile Include="DataService\CellService.cs" />
     <Compile Include="DataService\College3GTestService.cs" />
     <Compile Include="DataService\College4GTestService.cs" />
+    <Compile Include="DataService\CollegeBtssService.cs" />
     <Compile Include="DataService\CollegeCdmaCellsService.cs" />
     <Compile Include="DataService\CollegeCellsService.cs" />
     <Compile Include="DataService\CollegeENodebService.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="MapperSerive\InfrastructureMapperService.cs" />
     <Compile Include="MapperSerive\KpiMapperService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\CdmaBtsView.cs" />
     <Compile Include="ViewModels\CdmaCellView.cs" />
     <Compile Include="ViewModels\CdmaRegionDateView.cs" />
     <Compile Include="ViewModels\CdmaRegionStatDetails.cs" />

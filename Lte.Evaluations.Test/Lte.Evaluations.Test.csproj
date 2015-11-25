@@ -91,6 +91,7 @@
     <Compile Include="DataService\College3GTestQueries.cs" />
     <Compile Include="DataService\College3GTestServiceTest.cs" />
     <Compile Include="DataService\College4GTestServiceTest.cs" />
+    <Compile Include="DataService\CollegeBtssServiceTest.cs" />
     <Compile Include="DataService\CollegeCdmaCellsServiceTest.cs" />
     <Compile Include="DataService\CollegeCellsServiceTest.cs" />
     <Compile Include="DataService\CollegeENodebServiceTest.cs" />
@@ -121,6 +122,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestService\CdmaRegionStatTestService.cs" />
     <Compile Include="TestService\CellViewTestService.cs" />
+    <Compile Include="TestService\CollegeBtsTestService.cs" />
     <Compile Include="TestService\CollegeENodebTestService.cs" />
     <Compile Include="TestService\MergeTownPreciseViewTest.cs" />
     <Compile Include="TestService\PreciseRegionStatTestService.cs" />
@@ -131,6 +133,10 @@
     <Compile Include="ViewModel\CellViewTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AutoMapper\AutoMapper.csproj">
+      <Project>{75c9d4b5-2117-4b06-a6b1-70afcd6b3bfc}</Project>
+      <Name>AutoMapper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lte.Domain\Lte.Domain.csproj">
       <Project>{ADEEF82D-6389-47C4-8F7C-D7F85C01D64E}</Project>
       <Name>Lte.Domain</Name>
