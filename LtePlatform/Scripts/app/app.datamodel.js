@@ -14,6 +14,8 @@
     self.collegeStatUrl = "/api/CollegeStat";
     self.collegeENodebUrl = "/api/CollegeENodeb/";
     self.collegeBtssUrl = "/api/CollegeBtss/";
+    self.collegeLteDistributionsUrl = "/api/CollegeLteDistributions/";
+    self.collegeCdmaDistributionsUrl = "/api/CollegeCdmaDistributions/";
     self.college3GTestUrl = "/api/College3GTest/";
     self.college4GTestUrl = "/api/College4GTest/";
     self.collegeKpiUrl = "/api/CollegeKpi/";

@@ -303,9 +303,11 @@
     <Compile Include="Controllers\College\College4GTestController.cs" />
     <Compile Include="Controllers\College\CollegeBtssController.cs" />
     <Compile Include="Controllers\College\CollegeCdmaCellsController.cs" />
+    <Compile Include="Controllers\College\CollegeCdmaDistributionsController.cs" />
     <Compile Include="Controllers\College\CollegeCellsController.cs" />
     <Compile Include="Controllers\College\CollegeENodebController.cs" />
     <Compile Include="Controllers\College\CollegeKpiController.cs" />
+    <Compile Include="Controllers\College\CollegeLteDistributionsController.cs" />
     <Compile Include="Controllers\College\CollegePreciseController.cs" />
     <Compile Include="Controllers\College\CollegeQueryController.cs" />
     <Compile Include="Controllers\College\CollegeRegionController.cs" />

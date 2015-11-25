@@ -32,6 +32,16 @@ namespace Lte.Evaluations.Test.MockItems
                 .Returns<string>(collegeName => repository.Object.GetAll().Where(x =>
                     x.HotspotName == collegeName && x.InfrastructureType == InfrastructureType.CdmaCell
                     ).Select(x => x.InfrastructureId).ToList());
+
+            repository.Setup(x => x.GetLteDistributionIds(It.IsAny<string>()))
+                .Returns<string>(collegeName => repository.Object.GetAll().Where(x =>
+                    x.HotspotName == collegeName && x.InfrastructureType == InfrastructureType.LteIndoor
+                    ).Select(x => x.InfrastructureId).ToList());
+
+            repository.Setup(x => x.GetCdmaDistributionIds(It.IsAny<string>()))
+                .Returns<string>(collegeName => repository.Object.GetAll().Where(x =>
+                    x.HotspotName == collegeName && x.InfrastructureType == InfrastructureType.CdmaIndoor
+                    ).Select(x => x.InfrastructureId).ToList());
         }
 
         public static void MockThreeCollegeENodebs(this Mock<IInfrastructureRepository> repository)

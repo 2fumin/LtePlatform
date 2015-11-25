@@ -17,5 +17,9 @@ namespace Lte.Parameters.Abstract
         IEnumerable<int> GetBtsIds(string collegeName);
 
         IEnumerable<int> GetCdmaCellIds(string collegeName);
+
+        IEnumerable<int> GetLteDistributionIds(string collegeName);
+
+        IEnumerable<int> GetCdmaDistributionIds(string collegeName);
     }
 }

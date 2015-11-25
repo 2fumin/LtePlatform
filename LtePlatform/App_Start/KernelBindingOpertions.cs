@@ -61,6 +61,8 @@ namespace LtePlatform
 
             ninjectKernel.Bind<College4GTestService>().ToSelf();
 
+            ninjectKernel.Bind<CollegeDistributionService>().ToSelf();
+
             ninjectKernel.Bind<CollegeKpiService>().ToSelf();
 
             ninjectKernel.Bind<CollegePreciseService>().ToSelf();
@@ -68,7 +70,7 @@ namespace LtePlatform
             ninjectKernel.Bind<CollegeCdmaCellsService>().ToSelf();
 
             ninjectKernel.Bind<CollegeCellsService>().ToSelf();
-
+            
             ninjectKernel.Bind<PreciseStatService>().ToSelf();
 
             ninjectKernel.Bind<TownQueryService>().ToSelf();

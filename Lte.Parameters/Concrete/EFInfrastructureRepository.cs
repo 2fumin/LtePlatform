@@ -41,5 +41,19 @@ namespace Lte.Parameters.Concrete
                 x.HotspotName == collegeName && x.InfrastructureType == InfrastructureType.CdmaCell
                 ).Select(x => x.InfrastructureId).ToList();
         }
+
+        public IEnumerable<int> GetLteDistributionIds(string collegeName)
+        {
+            return GetAll().Where(x =>
+                x.HotspotName == collegeName && x.InfrastructureType == InfrastructureType.LteIndoor
+                ).Select(x => x.InfrastructureId).ToList();
+        }
+
+        public IEnumerable<int> GetCdmaDistributionIds(string collegeName)
+        {
+            return GetAll().Where(x =>
+                x.HotspotName == collegeName && x.InfrastructureType == InfrastructureType.CdmaIndoor
+                ).Select(x => x.InfrastructureId).ToList();
+        }
     }
 }

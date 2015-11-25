@@ -71,7 +71,7 @@
     };
 
     app.showLteDistributions = function (name) {
-        sendRequest("/api/CollegeLteDistributions/", "GET", { collegeName: name }, function (data) {
+        sendRequest(app.dataModel.collegeLteDistributionsUrl, "GET", { collegeName: name }, function (data) {
             app.distributionList(data);
             app.setView('lteDistributions');
             app.currentName(name);
@@ -79,7 +79,7 @@
     };
 
     app.showCdmaDistributions = function (name) {
-        sendRequest("/api/CollegeCdmaDistributions/", "GET", { collegeName: name }, function (data) {
+        sendRequest(app.dataModel.collegeCdmaDistributionsUrl, "GET", { collegeName: name }, function (data) {
             app.distributionList(data);
             app.setView('cdmaDistributions');
             app.currentName(name);

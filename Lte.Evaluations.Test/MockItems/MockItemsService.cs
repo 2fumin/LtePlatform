@@ -36,6 +36,12 @@ namespace Lte.Evaluations.Test.MockItems
             repository.MockQueryItems(infos.AsQueryable());
         }
 
+        public static void MockDistributions(this Mock<IIndoorDistributioinRepository> repository,
+            List<IndoorDistribution> distributions)
+        {
+            repository.MockQueryItems(distributions.AsQueryable());
+        }
+
         public static void MockPreciseRegionStats(this Mock<ITownPreciseCoverage4GStatRepository> repository,
             List<TownPreciseCoverage4GStat> stats)
         {

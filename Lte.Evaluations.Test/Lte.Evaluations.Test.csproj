@@ -94,6 +94,7 @@
     <Compile Include="DataService\CollegeBtssServiceTest.cs" />
     <Compile Include="DataService\CollegeCdmaCellsServiceTest.cs" />
     <Compile Include="DataService\CollegeCellsServiceTest.cs" />
+    <Compile Include="DataService\CollegeDistributionServiceTest.cs" />
     <Compile Include="DataService\CollegeENodebServiceTest.cs" />
     <Compile Include="DataService\CollegeKpiQueries.cs" />
     <Compile Include="DataService\CollegeKpiServiceTest.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="MockItems\MockCellService.cs" />
     <Compile Include="MockItems\MockCollegeService.cs" />
     <Compile Include="MockItems\MockENodebService.cs" />
+    <Compile Include="MockItems\MockIndoorDistributionService.cs" />
     <Compile Include="MockItems\MockInfrastructureService.cs" />
     <Compile Include="MockItems\MockInfrastructureServiceTest.cs" />
     <Compile Include="MockItems\MockItemsService.cs" />
@@ -123,6 +125,7 @@
     <Compile Include="TestService\CdmaRegionStatTestService.cs" />
     <Compile Include="TestService\CellViewTestService.cs" />
     <Compile Include="TestService\CollegeBtsTestService.cs" />
+    <Compile Include="TestService\CollegeDistributionTestService.cs" />
     <Compile Include="TestService\CollegeENodebTestService.cs" />
     <Compile Include="TestService\MergeTownPreciseViewTest.cs" />
     <Compile Include="TestService\PreciseRegionStatTestService.cs" />
