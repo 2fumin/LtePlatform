@@ -25,6 +25,9 @@ namespace Lte.Evaluations.Test.MockItems
         {
             repository.Setup(x => x.GetByBtsId(It.IsAny<int>()))
                 .Returns<int>(btsId => repository.Object.GetAll().FirstOrDefault(x => x.BtsId == btsId));
+
+            repository.Setup(x => x.Get(It.IsAny<int>()))
+                .Returns<int>(id => repository.Object.GetAll().FirstOrDefault(x => x.Id == id));
         }
     }
 }

@@ -63,6 +63,11 @@ namespace Lte.Evaluations.Test.MockItems
             repository.MockQueryItems(cells.AsQueryable());
         }
 
+        public static void MockCdmaCells(this Mock<ICdmaCellRepository> repository, List<CdmaCell> cells)
+        {
+            repository.MockQueryItems(cells.AsQueryable());
+        }
+
         public static void MockAlarms(this Mock<IAlarmRepository> repository, List<AlarmStat> alarms)
         {
             repository.MockQueryItems(alarms.AsQueryable());
