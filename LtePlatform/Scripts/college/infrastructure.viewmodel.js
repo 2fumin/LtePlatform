@@ -34,6 +34,24 @@
         app.setView('list');
     };
 
+    app.refreshAlarms = function () {
+        var stats = app.eNodebList();
+        var ids = [];
+        for (var i = 0; i < stats.length; i++) {
+            ids.push(stats[i].eNodebId);
+        }
+        sendRequest(app.dataModel.alarmCountUrl, "GET", {
+            eNodebIds: ids,
+            begin: app.beginDate(),
+            end: app.endDate()
+        }, function(result) {
+            for (var j = 0; j < stats.length; j++) {
+                stats[j].alarmTimes = result[j];
+            }
+            app.eNodebList(stats);
+        });
+    };
+
     app.showENodebs = function (name) {
         sendRequest(app.dataModel.collegeENodebUrl, "GET", {
             collegeName: name,
@@ -86,8 +104,8 @@
         });
     };
 
-    app.loadAlarms = function(id, begin, end) {
-        return app.dataModel.loadAlarms(id, begin, end);
+    app.loadAlarms = function(id) {
+        return app.dataModel.loadAlarms(id, app.beginDate(), app.endDate());
     };
 
     return self;

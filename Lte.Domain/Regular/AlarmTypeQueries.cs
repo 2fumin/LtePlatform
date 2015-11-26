@@ -62,7 +62,7 @@ namespace Lte.Domain.Regular
         public static string GetAlarmTypeDescription(this AlarmType type)
         {
             Tuple<AlarmType, string> tuple = alarmTypeDescriptionList.FirstOrDefault(x => x.Item1 == type);
-            return (tuple != null) ? tuple.Item2 : "其他告警";
+            return (tuple != null) ? tuple.Item2 : type.GetAlarmTypeHuawei();
         }
 
         public static AlarmType GetAlarmType(this string description)

@@ -21,5 +21,10 @@ namespace LtePlatform.Controllers.Kpi
         {
             return _service.GetCounts(eNodebId, begin, end);
         }
+
+        public IEnumerable<int> Get(IEnumerable<int> eNodebIds, DateTime begin, DateTime end)
+        {
+            return eNodebIds.Select(id => _service.GetCounts(id, begin, end));
+        } 
     }
 }

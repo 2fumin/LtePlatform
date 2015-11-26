@@ -12,7 +12,8 @@
                 开始日期：
                 <input id="BeginDate" data-bind="value: beginDate" />
                 结束日期：
-                <input id="EndDate" data-bind="value: endDate" />
+                <input id="EndDate" data-bind="value: endDate"/>
+                <button class="btn btn-primary" data-bind="click: refreshAlarms">刷新告警统计</button>
             </p>
             @{
                 Html.RenderPartial("_ENodebTable");

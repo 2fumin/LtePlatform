@@ -8,6 +8,7 @@
     self.kpiDataListUrl = "/api/KpiDataList";
     self.preciseStatUrl = "/api/PreciseStat/";
     self.preciseRegionUrl = "/api/PreciseRegion/";
+    self.alarmCountUrl = "/api/AlarmCount";
 
     self.collegeQueryUrl = "/api/CollegeQuery";
     self.collegeRegionUrl = "/api/CollegeRegion";
