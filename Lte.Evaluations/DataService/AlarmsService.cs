@@ -21,13 +21,13 @@ namespace Lte.Evaluations.DataService
 
         public IEnumerable<AlarmView> Get(int eNodebId, DateTime begin, DateTime end)
         {
-            var stats = _repository.GetAllList(begin, end).Where(x => x.ENodebId == eNodebId);
+            var stats = _repository.GetAllList(begin, end, eNodebId);
             return Mapper.Map<IEnumerable<AlarmStat>, IEnumerable<AlarmView>>(stats);
         }
 
         public int GetCounts(int eNodebId, DateTime begin, DateTime end)
         {
-            return _repository.GetAllList(begin, end).Count(x => x.ENodebId == eNodebId);
+            return _repository.GetAllList(begin, end, eNodebId).Count;
         }
     }
 }

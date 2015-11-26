@@ -17,5 +17,10 @@ namespace Lte.Parameters.Concrete
         {
             return GetAllList(x => x.HappenTime >= begin && x.HappenTime < end);
         }
+
+        public List<AlarmStat> GetAllList(DateTime begin, DateTime end, int eNodebId)
+        {
+            return GetAllList(x => x.HappenTime >= begin && x.HappenTime < end && x.ENodebId ==eNodebId);
+        }
     }
 }

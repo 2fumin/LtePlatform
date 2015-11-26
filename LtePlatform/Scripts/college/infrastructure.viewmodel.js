@@ -35,21 +35,7 @@
     };
 
     app.refreshAlarms = function () {
-        var stats = app.eNodebList();
-        var ids = [];
-        for (var i = 0; i < stats.length; i++) {
-            ids.push(stats[i].eNodebId);
-        }
-        sendRequest(app.dataModel.alarmCountUrl, "GET", {
-            eNodebIds: ids,
-            begin: app.beginDate(),
-            end: app.endDate()
-        }, function(result) {
-            for (var j = 0; j < stats.length; j++) {
-                stats[j].alarmTimes = result[j];
-            }
-            app.eNodebList(stats);
-        });
+        app.showENodebs(app.currentName());
     };
 
     app.showENodebs = function (name) {

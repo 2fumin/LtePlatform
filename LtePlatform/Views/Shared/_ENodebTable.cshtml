@@ -6,6 +6,8 @@
             <th>规划编号</th>
             <th>入网日期</th>
             <th>地址</th>
+            <th>经度</th>
+            <th>纬度</th>
             <th>告警数量</th>
         </tr>
     </thead>
@@ -14,11 +16,13 @@
             <td data-bind="text: eNodebId"></td>
             <td data-bind="text: name"></td>
             <td data-bind="text: planNum"></td>
-            <td data-bind="text: openDate"></td>
+            <td data-bind="text: openDateString"></td>
             <td data-bind="text: address"></td>
+            <td data-bind="text: longtitute"></td>
+            <td data-bind="text: lattitute"></td>
             <td>
                 <button class="btn btn-warning" 
-                        data-bind="click: function () { $root.loadAlarms(eNodebId);}, visible: $data.alarmTimes>0"
+                        data-bind="click: function () { app.loadAlarms(eNodebId);}, visible: $data.alarmTimes>0"
                         title="这里表示最近一个月的告警数，点击可查看详细信息">
                     故障数
                     <span class="badge pull-right" data-bind="text: alarmTimes"></span>
@@ -48,8 +52,8 @@
                         <tr>
                             <td data-bind="text: position"></td>
                             <td data-bind="text: alarmLevelDescription"></td>
-                            <td data-bind="text: happenTime"></td>
-                            <td data-bind="text: duration"></td>
+                            <td data-bind="text: happenTimeString"></td>
+                            <td data-bind="text: '历时' + duration.toFixed(2) + '分钟'"></td>
                             <td data-bind="text: alarmCategoryDescription"></td>
                             <td data-bind="text: alarmTypeDescription"></td>
                         </tr>

@@ -32,6 +32,8 @@ namespace Lte.Evaluations.ViewModels
 
         public DateTime OpenDate { get; set; }
 
+        public string OpenDateString => OpenDate.ToShortDateString();
+
         public int AlarmTimes { get; set; }
 
         public static ENodebView ConstructView(ENodeb eNodeb, IEnumerable<AlarmStat> stats)

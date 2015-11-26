@@ -8,5 +8,7 @@ namespace Lte.Parameters.Abstract
     public interface IAlarmRepository : IRepository<AlarmStat>
     {
         List<AlarmStat> GetAllList(DateTime begin, DateTime end);
+
+        List<AlarmStat> GetAllList(DateTime begin, DateTime end, int eNodebId);
     }
 }

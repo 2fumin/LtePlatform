@@ -13,6 +13,12 @@ namespace Lte.Evaluations.Test.MockItems
                 .Returns<DateTime, DateTime>(
                     (begin, end) =>
                         repository.Object.GetAll().Where(x => x.HappenTime >= begin && x.HappenTime < end).ToList());
+
+            repository.Setup(x => x.GetAllList(It.IsAny<DateTime>(), It.IsAny<DateTime>(), It.IsAny<int>()))
+                .Returns<DateTime, DateTime, int>(
+                    (begin, end, eNodebId) =>
+                        repository.Object.GetAll()
+                            .Where(x => x.HappenTime >= begin && x.HappenTime < end && x.ENodebId == eNodebId).ToList());
         }
     }
 }

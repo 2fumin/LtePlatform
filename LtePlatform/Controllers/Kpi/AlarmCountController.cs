@@ -17,14 +17,9 @@ namespace LtePlatform.Controllers.Kpi
             _service = service;
         }
 
-        public int Get(int eNodebId, DateTime begin, DateTime end)
+        public Tuple<int, int> Get(int eNodebId, DateTime begin, DateTime end, int index)
         {
-            return _service.GetCounts(eNodebId, begin, end);
+            return new Tuple<int, int>(index, _service.GetCounts(eNodebId, begin, end));
         }
-
-        public IEnumerable<int> Get(IEnumerable<int> eNodebIds, DateTime begin, DateTime end)
-        {
-            return eNodebIds.Select(id => _service.GetCounts(id, begin, end));
-        } 
     }
 }

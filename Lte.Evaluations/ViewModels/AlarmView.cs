@@ -14,6 +14,8 @@ namespace Lte.Evaluations.ViewModels
 
         public DateTime HappenTime { get; set; }
 
+        public string HappenTimeString => HappenTime.ToShortDateString();
+
         public double Duration { get; set; }
 
         public string AlarmLevelDescription { get; set; }
