@@ -100,12 +100,15 @@
     <Compile Include="DataService\KpiImportService.cs" />
     <Compile Include="DataService\PreciseRegionStatService.cs" />
     <Compile Include="DataService\PreciseStatService.cs" />
+    <Compile Include="DataService\TopDrop2GService.cs" />
     <Compile Include="DataService\TownQueryService.cs" />
     <Compile Include="MapperSerive\BaiduMapperService.cs" />
     <Compile Include="MapperSerive\CollegeMapperService.cs" />
     <Compile Include="MapperSerive\EvalutaionMapperProfile.cs" />
     <Compile Include="MapperSerive\InfrastructureMapperService.cs" />
     <Compile Include="MapperSerive\KpiMapperService.cs" />
+    <Compile Include="MapperSerive\TopDrop2GCellContainer.cs" />
+    <Compile Include="MapperSerive\TopDrop2GCellViewContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AlarmView.cs" />
     <Compile Include="ViewModels\CdmaBtsView.cs" />

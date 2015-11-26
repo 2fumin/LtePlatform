@@ -10,7 +10,7 @@ namespace Lte.Evaluations.ViewModels
     {
         public DateTime StatTime { get; set; }
 
-        public int CdmaCellId { get; set; }
+        public int CellId { get; set; }
 
         public string CdmaName { get; set; }
 
@@ -30,6 +30,6 @@ namespace Lte.Evaluations.ViewModels
 
         public int CallAttempts { get; set; }
 
-        public double DropRate => (double)Drops / TrafficAssignmentSuccess;
+        public double DropRate => TrafficAssignmentSuccess == 0 ? 0 : (double) Drops/TrafficAssignmentSuccess;
     }
 }

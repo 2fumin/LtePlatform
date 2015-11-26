@@ -1,0 +1,42 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using AutoMapper;
+using Lte.Evaluations.MapperSerive;
+using Lte.Parameters.Entities;
+using NUnit.Framework;
+
+namespace Lte.Evaluations.Test.ViewModel
+{
+    [TestFixture]
+    public class MapTopDrop2GTest
+    {
+        [TestFixtureSetUp]
+        public void TestFixtureSetup()
+        {
+        }
+
+        [Test]
+        public void Test()
+        {
+            KpiMapperService.MapTopDrop2G();
+            var source = new TopDrop2GCellContainer
+            {
+                LteName = "aaa",
+                CdmaName = "bbb",
+                TopDrop2GCell = new TopDrop2GCell
+                {
+                    CallAttempts = 1001,
+                    Drops = 21
+                }
+            };
+            var dest = Mapper.Map<TopDrop2GCellContainer, TopDrop2GCellViewContainer>(source);
+            Assert.AreEqual(dest.LteName,"aaa");
+            Assert.AreEqual(dest.CdmaName,"bbb");
+            Assert.AreEqual(dest.TopDrop2GCellView.CallAttempts,1001);
+            Assert.AreEqual(dest.TopDrop2GCellView.Drops,21);
+        }
+    }
+}

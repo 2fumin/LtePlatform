@@ -136,6 +136,7 @@
     <Compile Include="ViewModel\CdmaRegionStatViewTest.cs" />
     <Compile Include="ViewModel\CellPreciseKpiViewTest.cs" />
     <Compile Include="ViewModel\CellViewTest.cs" />
+    <Compile Include="ViewModel\MapTopDrop2GTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AutoMapper\AutoMapper.csproj">

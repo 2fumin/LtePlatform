@@ -27,7 +27,7 @@ namespace Lte.Evaluations.DataService
 
         public List<byte> GetSectorIds(string eNodebName)
         {
-            ENodeb eNodeb = _eNodebRepository.FirstOrDefault(x => x.Name == eNodebName);
+            var eNodeb = _eNodebRepository.GetByName(eNodebName);
             return eNodeb == null
                 ? null
                 : _repository.GetAll().Where(x => x.ENodebId == eNodeb.ENodebId).Select(x => x.SectorId).ToList();

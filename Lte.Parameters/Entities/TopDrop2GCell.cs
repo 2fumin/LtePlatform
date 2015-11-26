@@ -34,10 +34,6 @@ namespace Lte.Parameters.Entities
 
         public int CallAttempts { get; set; }
 
-        public double DropRate => (double)Drops / TrafficAssignmentSuccess * 100;
-
-        public TopDrop2GCell() { }
-
         public static TopDrop2GCell ConstructStat(TopDrop2GCellExcel cellExcel)
         {
             return Mapper.Map<TopDrop2GCellExcel, TopDrop2GCell>(cellExcel);

@@ -21,7 +21,7 @@ namespace Lte.Evaluations.DataService
 
         public CollegeStat QueryStat(int id)
         {
-            CollegeInfo info = _repository.Get(id);
+            var info = _repository.Get(id);
             return info == null
                 ? null
                 : new CollegeStat(_repository, info, _infrastructureRepository);

@@ -58,5 +58,15 @@ namespace Lte.Evaluations.MapperSerive
                     opt => opt.MapFrom(s => s.AlarmCategory.GetAlarmCategoryDescription()))
                 .ForMember(d => d.AlarmTypeDescription, opt => opt.MapFrom(s => s.AlarmType.GetAlarmTypeDescription()));
         }
+
+        public static void MapTopDrop2G()
+        {
+            Mapper.CreateMap<TopDrop2GCell, TopDrop2GCellView>();
+            Mapper.CreateMap<TopDrop2GCellContainer, TopDrop2GCellViewContainer>()
+                .ForMember(d => d.TopDrop2GCellView,
+                    opt => opt.MapFrom(s => Mapper.Map<TopDrop2GCell, TopDrop2GCellView>(s.TopDrop2GCell)))
+                .ForMember(d => d.LteName, opt => opt.MapFrom(s => s.LteName))
+                .ForMember(d => d.CdmaName, opt => opt.MapFrom(s => s.CdmaName));
+        }
     }
 }

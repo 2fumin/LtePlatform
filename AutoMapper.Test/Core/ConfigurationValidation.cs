@@ -303,8 +303,10 @@ namespace AutoMapper.Test.Core
             public class Destination
             {
                 public int Value { get; set; }
-                public string ValuePlusOne { get { return (Value + 1).ToString(); } }
-                public int ValuePlusTwo { get { return Value + 2; } }
+
+                public string ValuePlusOne => (Value + 1).ToString();
+
+                public int ValuePlusTwo => Value + 2;
             }
 
             protected override void Establish_context()
