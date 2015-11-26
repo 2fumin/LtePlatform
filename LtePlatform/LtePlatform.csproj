@@ -578,6 +578,8 @@
     <Content Include="Views\Kpi\_PreciseTrendTable.cshtml" />
     <Content Include="Views\College\_Infrastructure.cshtml" />
     <Content Include="Views\College\_CollegeStatTable.cshtml" />
+    <None Include="Views\Kpi\_TopDrop2G.cshtml" />
+    <None Include="Views\Kpi\_TopDrop2GTable.cshtml" />
     <None Include="Views\Parameters\AlarmImport.cshtml" />
     <Content Include="Views\Shared\_AlertPanel.cshtml" />
     <Content Include="Views\Shared\_ENodebTable.cshtml" />
