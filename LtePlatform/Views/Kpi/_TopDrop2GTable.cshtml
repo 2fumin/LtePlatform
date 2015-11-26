@@ -2,28 +2,28 @@
     <thead>
         <tr>
             <th>小区编号</th>
-            <th>@Html.LabelFor(x => x.ElementAt(0).CdmaName)</th>
-            <th>@Html.LabelFor(x => x.ElementAt(0).LteName)</th>
-            <th>@Html.LabelFor(x => x.ElementAt(0).SectorId)</th>
-            <th>@Html.LabelFor(x => x.ElementAt(0).Frequency)</th>
-            <th>@Html.LabelFor(x => x.ElementAt(0).Drops)</th>
-            <th>@Html.LabelFor(x => x.ElementAt(0).DropRate)</th>
+            <th>CDMA基站名称</th>
+            <th>LTE基站名称</th>
+            <th>扇区编号</th>
+            <th>频点</th>
+            <th>掉话次数</th>
+            <th>掉话率</th>
             <th>查看信息</th>
         </tr>
     </thead>
     <tbody data-bind="foreach: oneDayCells">
         
             <tr>
-                <td data-bind="text: dmaCellId"></td>
+                <td data-bind="text: cdmaCellId"></td>
                 <td data-bind="text: cdmaName"></td>
                 <td data-bind="text: lteName"></td>
-                <td>@stat.SectorId</td>
-                <td>@stat.Frequency</td>
-                <td>@stat.Drops</td>
-                <td>@String.Format("{0:0.00}", stat.DropRate * 100)</td>
+                <td data-bind="text: sectorId"></td>
+                <td data-bind="text: frequency"></td>
+                <td data-bind="text: drops"></td>
+                <td data-bind="text: (dropRate * 100).toFixed(2)"></td>
                 <td>
                     <button type="button" class="btn btn-primary btn-lg topdetails"
-                            name="detail;@stat.CdmaName;@stat.CdmaCellId;@stat.SectorId;@stat.Frequency">
+                            data-bind="click: function(){ showHistory($data); }">
                         <span class="glyphicon glyphicon-search"></span>历史信息
                     </button>
                 </td>
