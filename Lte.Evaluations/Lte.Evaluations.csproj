@@ -100,7 +100,6 @@
     <Compile Include="DataService\KpiImportService.cs" />
     <Compile Include="DataService\PreciseRegionStatService.cs" />
     <Compile Include="DataService\PreciseStatService.cs" />
-    <Compile Include="DataService\QueryCdmaCellsService.cs" />
     <Compile Include="DataService\TownQueryService.cs" />
     <Compile Include="MapperSerive\BaiduMapperService.cs" />
     <Compile Include="MapperSerive\CollegeMapperService.cs" />

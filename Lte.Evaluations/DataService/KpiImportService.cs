@@ -26,15 +26,12 @@ namespace Lte.Evaluations.DataService
         public List<string> Import(string path, IEnumerable<string> regions)
         {
             var factory = new ExcelQueryFactory {FileName = path};
-            var message = new List<string>();
-            foreach (var region in regions)
-            {
-                var stats = (from c in factory.Worksheet<CdmaRegionStatExcel>(region)
+            var message = (from region in regions
+                let stats = (from c in factory.Worksheet<CdmaRegionStatExcel>(region)
                     where c.StatDate > DateTime.Today.AddDays(-30) && c.StatDate <= DateTime.Today
-                    select c).ToList();
-                var count = _regionStatRepository.Import(stats);
-                message.Add("完成导入区域：'" + region + "'的日常指标导入" + count + "条");
-            }
+                    select c).ToList()
+                let count = _regionStatRepository.Import(stats)
+                select "完成导入区域：'" + region + "'的日常指标导入" + count + "条").ToList();
             var topDrops = (from c in factory.Worksheet<TopDrop2GCellExcel>(TopDrop2GCellExcel.SheetName)
                             select c).ToList();
             var drops = _top2GRepository.Import(topDrops);

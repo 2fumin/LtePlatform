@@ -33,26 +33,10 @@ namespace Lte.Parameters.Entities
 
         public byte SubIp { get; set; }
 
-        public IpAddress GatewayIp
-        {
-            get
-            {
-                return new IpAddress
-                {
-                    AddressValue = Gateway
-                };
-            }
-        }
+        public IpAddress GatewayIp => new IpAddress { AddressValue = Gateway };
 
-        public IpAddress Ip
-        {
-            get
-            {
-                IpAddress ip = new IpAddress { AddressValue = Gateway, IpByte4 = SubIp };
-                return ip;
-            }
-        }
-        
+        public IpAddress Ip => new IpAddress { AddressValue = Gateway, IpByte4 = SubIp };
+
         public string PlanNum { get; set; }
         
         public DateTime OpenDate { get; set; }
