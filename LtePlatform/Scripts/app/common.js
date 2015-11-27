@@ -101,13 +101,13 @@ var setDefaultCallbacks = function (successCallback, errorCallback) {
     });
 }
 
-var setAjaxHeaders = function (requestHeaders) {
+var setAjaxHeaders = function(requestHeaders) {
     $.ajaxSetup({ headers: requestHeaders });
-}
-
-var multiply = function (array, scaler) {
-    for (var i = 0; i < array.length; i++) {
-        array[i] = array[i] * scaler;
-    }
 };
+
+var lowerFirstLetter = function(str) {
+    return str.substring(0, 1).toLowerCase() +
+        str.substring(1);
+};
+
 
