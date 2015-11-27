@@ -11,5 +11,7 @@ namespace Lte.Parameters.Abstract
     public interface ITopDrop2GCellRepository : IRepository<TopDrop2GCell>
     {
         int Import(IEnumerable<TopDrop2GCellExcel> stats);
+
+        List<TopDrop2GCell> GetAllList(string city, DateTime begin, DateTime end);
     }
 }

@@ -15,6 +15,10 @@ namespace Lte.Evaluations.Test.MockItems
         {
             repository.Setup(x => x.Import(It.IsAny<IEnumerable<TopDrop2GCellExcel>>()))
                 .Returns<IEnumerable<TopDrop2GCellExcel>>(stats => stats.Count());
+
+            repository.Setup(x => x.GetAllList(It.IsAny<string>(), It.IsAny<DateTime>(), It.IsAny<DateTime>()))
+                .Returns<string, DateTime, DateTime>((city, begin, end) =>
+                repository.Object.GetAll().Where(x => x.City == city && x.StatTime >= begin && x.StatTime < end).ToList());
         }
     }
 }

@@ -14,6 +14,15 @@
         initializeCityKpi();
     };
 
+    app.showKpi = function () {
+        sendRequest(app.dataModel.topDrop2GUrl, "GET", {
+            statDate: app.statDate(),
+            city: app.currentCity()
+        }, function (data) {
+            app.oneDayCells(data);
+        });
+    }
+
     return self;
 }
 

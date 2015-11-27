@@ -13,6 +13,11 @@ namespace Lte.Parameters.Concrete
     {
         protected override DbSet<TopDrop2GCell> Entities => context.TopDrop2GStats;
 
+        public List<TopDrop2GCell> GetAllList(string city, DateTime begin, DateTime end)
+        {
+            return GetAll().Where(x => x.StatTime >= begin && x.StatTime < end && x.City == city).ToList();
+        }
+
         public int Import(IEnumerable<TopDrop2GCellExcel> stats)
         {
             var count = 0;

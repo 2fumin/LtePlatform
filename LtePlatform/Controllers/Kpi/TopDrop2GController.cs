@@ -18,9 +18,9 @@ namespace LtePlatform.Controllers.Kpi
             _service = service;
         }
 
-        public IEnumerable<TopDrop2GCellView> GetViews(DateTime statDate, string city, int topCounts)
+        public IEnumerable<TopDrop2GCellView> GetViews(DateTime statDate, string city)
         {
-            return _service.GetViews(statDate, city).Take(topCounts);
+            return _service.GetViews(statDate, city);
         }
     }
 }

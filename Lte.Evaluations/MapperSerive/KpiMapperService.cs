@@ -15,7 +15,8 @@ namespace Lte.Evaluations.MapperSerive
     {
         public static void MapCdmaRegionStat()
         {
-            Mapper.CreateMap<CdmaRegionStat, CdmaRegionStatView>();
+            Mapper.CreateMap<CdmaRegionStat, CdmaRegionStatView>()
+                .ForMember(d => d.Flow, opt => opt.MapFrom(s => s.Flow / 1024));
         }
 
         public static void MapDistrictPrecise()

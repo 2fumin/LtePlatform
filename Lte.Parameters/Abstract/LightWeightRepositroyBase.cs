@@ -50,12 +50,12 @@ namespace Lte.Parameters.Abstract
 
         public TEntity Get(int id)
         {
-            return Entities.FirstOrDefault(x => x.Id == id);
+            return Entities.Find(id);
         }
 
         public Task<TEntity> GetAsync(int id)
         {
-            return Task.Run(() => Get(id));
+            return Entities.FindAsync(id);
         }
 
         public TEntity Single(Expression<Func<TEntity, bool>> predicate)
@@ -90,7 +90,8 @@ namespace Lte.Parameters.Abstract
 
         public TEntity Load(int id)
         {
-            return new TEntity { Id = id };
+            Entities.Load();
+            return Entities.Find(id);
         }
 
         public TEntity Insert(TEntity entity)

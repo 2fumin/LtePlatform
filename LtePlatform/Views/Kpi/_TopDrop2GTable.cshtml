@@ -20,9 +20,9 @@
                 <td data-bind="text: sectorId"></td>
                 <td data-bind="text: frequency"></td>
                 <td data-bind="text: drops"></td>
-                <td data-bind="text: (dropRate * 100).toFixed(2)"></td>
+                <td data-bind="text: (dropRate * 100).toFixed(2) + '%'"></td>
                 <td>
-                    <button type="button" class="btn btn-primary btn-lg topdetails"
+                    <button type="button" class="btn btn-primary"
                             data-bind="click: function(){ showHistory($data); }">
                         <span class="glyphicon glyphicon-search"></span>历史信息
                     </button>
