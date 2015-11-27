@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Lte.Domain.Regular;
 using Lte.Evaluations.DataService;
 using Lte.Evaluations.MapperSerive;
+using Lte.Evaluations.Policy;
 using Lte.Evaluations.Test.MockItems;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
@@ -46,7 +47,8 @@ namespace Lte.Evaluations.Test.DataService
                     StatTime = DateTime.Parse("2015-1-1")
                 }
             });
-            var views = _service.GetTopCountViews(DateTime.Parse("2014-12-30"), DateTime.Parse("2015-1-4"), topCount, 0);
+            var views = _service.GetTopCountViews(DateTime.Parse("2014-12-30"), DateTime.Parse("2015-1-4"), topCount, 
+                OrderPreciseStatService.OrderPreciseStatPolicy.OrderBySecondRate);
             Assert.AreEqual(views.Count(), 0);
         }
     }

@@ -80,6 +80,8 @@ namespace LtePlatform
             ninjectKernel.Bind<PreciseRegionStatService>().ToSelf();
 
             ninjectKernel.Bind<AlarmsService>().ToSelf();
+
+            ninjectKernel.Bind<TopDrop2GService>().ToSelf();
         }
     }
 }

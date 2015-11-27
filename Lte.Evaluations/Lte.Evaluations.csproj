@@ -109,6 +109,8 @@
     <Compile Include="MapperSerive\KpiMapperService.cs" />
     <Compile Include="MapperSerive\TopDrop2GCellContainer.cs" />
     <Compile Include="MapperSerive\TopDrop2GCellViewContainer.cs" />
+    <Compile Include="Policy\OrderPreciseStatService.cs" />
+    <Compile Include="Policy\OrderTopDrop2GService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AlarmView.cs" />
     <Compile Include="ViewModels\CdmaBtsView.cs" />

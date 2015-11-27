@@ -10,8 +10,6 @@ namespace Lte.Parameters.Abstract
 {
     public interface IPreciseCoverage4GRepository : IRepository<PreciseCoverage4G>
     {
-        IEnumerable<PreciseCoverage4G> GetTopCountStats(DateTime begin, DateTime end, int topCount, byte fieldSelector);
-
         List<PreciseCoverage4G> GetAllList(int cellId, byte sectorId, DateTime begin, DateTime end);
     }
 }

@@ -35,7 +35,7 @@ namespace Lte.Evaluations.DataService
                         on stat.BtsId equals bts.BtsId into btsQuery
                     from bq in btsQuery.DefaultIfEmpty()
                     join eNodeb in _eNodebRepository.GetAll()
-                        on bq.ENodebId equals eNodeb.ENodebId into query
+                        on (bq == null ? -1 : bq.ENodebId) equals eNodeb.ENodebId into query
                     from q in query.DefaultIfEmpty()
                     select new TopDrop2GCellContainer
                     {

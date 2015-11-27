@@ -24,19 +24,6 @@ namespace Lte.Evaluations.Test.MockItems
                                     x.CellId == cellId && x.SectorId == sectorId && x.StatTime >= begin &&
                                     x.StatTime < end)
                             .ToList());
-
-            repository.Setup(
-                x => x.GetTopCountStats(It.IsAny<DateTime>(), It.IsAny<DateTime>(), It.IsAny<int>(), It.IsAny<byte>()))
-                .Returns<DateTime, DateTime, int, byte>(
-                    (begin, end, topCount, fieldSelector) => new List<PreciseCoverage4G>());
-            repository.Setup(
-                x =>
-                    x.GetTopCountStats(It.IsAny<DateTime>(), It.IsAny<DateTime>(), It.Is<int>(top => top > 0),
-                        It.IsAny<byte>())).Returns<DateTime, DateTime, int, byte>(
-                            (begin, end, topCount, fieldSelector) =>
-                                repository.Object.GetAll()
-                                    .Where(x => x.StatTime >= begin && x.StatTime < end)
-                                    .Take(topCount));
         }
     }
 }

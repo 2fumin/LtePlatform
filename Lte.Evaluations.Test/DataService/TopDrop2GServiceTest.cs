@@ -35,10 +35,20 @@ namespace Lte.Evaluations.Test.DataService
             _btsRepository.MockSixBtssWithENodebId();
         }
 
-        public void Test_GetViews_SingleStat(int btsId, byte sectorId, int drops, int assignmentSuccess)
+        [TestCase(1, 2, 3, 111, "ENodeb-1", "Bts-1")]
+        [TestCase(2, 2, 3, 211, "ENodeb-2", "Bts-2")]
+        [TestCase(3, 4, 7, 131, "ENodeb-3", "Bts-3")]
+        [TestCase(4, 21, 32, 1611, "无匹配LTE基站", "Bts-4")]
+        [TestCase(5, 21, 322, 1611, "无匹配LTE基站", "Bts-5")]
+        [TestCase(6, 7, 32, 1611, "无匹配LTE基站", "Bts-6")]
+        [TestCase(7, 21, 32, 1611, "无匹配LTE基站", "无匹配CDMA基站")]
+        public void Test_GetViews_SingleStat(int btsId, byte sectorId, int drops, int assignmentSuccess,
+            string lteName, string cdmaName)
         {
             _testService.ImportOneStat(btsId, sectorId, drops, assignmentSuccess);
             var views = _service.GetViews(DateTime.Parse("2015-1-1"), "Foshan");
+            Assert.AreEqual(views.Count(), 1);
+            views.ElementAt(0).AssertEqual(sectorId, drops, assignmentSuccess, lteName, cdmaName);
         }
     }
 }
