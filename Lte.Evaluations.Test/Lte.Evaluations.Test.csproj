@@ -106,6 +106,7 @@
     <Compile Include="DataService\KpiImportServiceTest.cs" />
     <Compile Include="DataService\PreciseRegionStatServiceTest.cs" />
     <Compile Include="DataService\PreciseStatServiceTest.cs" />
+    <Compile Include="DataService\TopDrop2GServiceTest.cs" />
     <Compile Include="MockItems\MockAlarmRepository.cs" />
     <Compile Include="MockItems\MockBtsService.cs" />
     <Compile Include="MockItems\MockCdmaCellService.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="TestService\MergeTownPreciseViewTest.cs" />
     <Compile Include="TestService\PreciseRegionStatTestService.cs" />
     <Compile Include="TestService\PreciseViewTestService.cs" />
+    <Compile Include="TestService\TopDrop2GTestService.cs" />
     <Compile Include="ViewModel\CdmaCellViewTest.cs" />
     <Compile Include="ViewModel\CdmaRegionStatViewTest.cs" />
     <Compile Include="ViewModel\CellPreciseKpiViewTest.cs" />

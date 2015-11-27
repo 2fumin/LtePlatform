@@ -54,6 +54,11 @@ namespace Lte.Evaluations.Test.MockItems
             repository.MockQueryItems(stats.AsQueryable());
         }
 
+        public static void MockTopDrop2GCells(this Mock<ITopDrop2GCellRepository> repository, List<TopDrop2GCell> stats)
+        {
+            repository.MockQueryItems(stats.AsQueryable());
+        }
+
         public static void MockENodebs(this Mock<IENodebRepository> repository, List<ENodeb> eNodebs)
         {
             repository.MockQueryItems(eNodebs.AsQueryable());

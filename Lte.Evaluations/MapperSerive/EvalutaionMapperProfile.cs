@@ -28,6 +28,7 @@ namespace Lte.Evaluations.MapperSerive
             KpiMapperService.MapDistrictPrecise();
             KpiMapperService.MapTownPrecise();
             KpiMapperService.MapAlarmStat();
+            KpiMapperService.MapTopDrop2G();
 
             BaiduMapperService.MapCdmaCellView();
             BaiduMapperService.MapCellView();

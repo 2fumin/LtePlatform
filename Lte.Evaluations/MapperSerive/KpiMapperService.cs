@@ -64,9 +64,7 @@ namespace Lte.Evaluations.MapperSerive
             Mapper.CreateMap<TopDrop2GCell, TopDrop2GCellView>();
             Mapper.CreateMap<TopDrop2GCellContainer, TopDrop2GCellViewContainer>()
                 .ForMember(d => d.TopDrop2GCellView,
-                    opt => opt.MapFrom(s => Mapper.Map<TopDrop2GCell, TopDrop2GCellView>(s.TopDrop2GCell)))
-                .ForMember(d => d.LteName, opt => opt.MapFrom(s => s.LteName))
-                .ForMember(d => d.CdmaName, opt => opt.MapFrom(s => s.CdmaName));
+                    opt => opt.MapFrom(s => Mapper.Map<TopDrop2GCell, TopDrop2GCellView>(s.TopDrop2GCell)));
         }
     }
 }

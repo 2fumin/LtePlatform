@@ -1,0 +1,44 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Lte.Evaluations.DataService;
+using Lte.Evaluations.MapperSerive;
+using Lte.Evaluations.Test.MockItems;
+using Lte.Evaluations.Test.TestService;
+using Lte.Parameters.Abstract;
+using Moq;
+using NUnit.Framework;
+
+namespace Lte.Evaluations.Test.DataService
+{
+    [TestFixture]
+    public class TopDrop2GServiceTest
+    {
+        private readonly Mock<ITopDrop2GCellRepository> _repository = new Mock<ITopDrop2GCellRepository>();
+        private readonly Mock<IBtsRepository> _btsRepository = new Mock<IBtsRepository>();
+        private readonly Mock<IENodebRepository> _eNodebRepository = new Mock<IENodebRepository>();
+        private TopDrop2GService _service;
+        private TopDrop2GTestService _testService;
+
+        [TestFixtureSetUp]
+        public void TestFixtureService()
+        {
+            KpiMapperService.MapTopDrop2G();
+            _service = new TopDrop2GService(_repository.Object, _btsRepository.Object, _eNodebRepository.Object);
+            _testService = new TopDrop2GTestService(_repository, _btsRepository, _eNodebRepository);
+            _repository.MockOperation();
+            _btsRepository.MockOperation();
+            _eNodebRepository.MockOperations();
+            _eNodebRepository.MockThreeENodebs();
+            _btsRepository.MockSixBtssWithENodebId();
+        }
+
+        public void Test_GetViews_SingleStat(int btsId, byte sectorId, int drops, int assignmentSuccess)
+        {
+            _testService.ImportOneStat(btsId, sectorId, drops, assignmentSuccess);
+            var views = _service.GetViews(DateTime.Parse("2015-1-1"), "Foshan");
+        }
+    }
+}
