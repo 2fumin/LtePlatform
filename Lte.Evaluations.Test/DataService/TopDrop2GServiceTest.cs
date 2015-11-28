@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper.Should;
 using Lte.Evaluations.DataService;
 using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.Test.MockItems;
@@ -26,6 +27,7 @@ namespace Lte.Evaluations.Test.DataService
         public void TestFixtureService()
         {
             KpiMapperService.MapTopDrop2G();
+            KpiMapperService.MapTopDrop2GTrend();
             _service = new TopDrop2GService(_repository.Object, _btsRepository.Object, _eNodebRepository.Object);
             _testService = new TopDrop2GTestService(_repository, _btsRepository, _eNodebRepository);
             _repository.MockOperation();
@@ -46,10 +48,26 @@ namespace Lte.Evaluations.Test.DataService
             string lteName, string cdmaName)
         {
             _testService.ImportOneStat(btsId, sectorId, drops, assignmentSuccess);
-            var dateView = _service.GetViews(DateTime.Parse("2015-1-1"), "Foshan");
+            var dateView = _service.GetDateView(DateTime.Parse("2015-1-1"), "Foshan");
             var views = dateView.StatViews;
             Assert.AreEqual(views.Count(), 1);
             views.ElementAt(0).AssertEqual(sectorId, drops, assignmentSuccess, lteName, cdmaName);
+        }
+
+        [TestCase(1, 2, 3, 111, "ENodeb-1", "Bts-1-2")]
+        [TestCase(2, 2, 3, 211, "ENodeb-2", "Bts-2-2")]
+        [TestCase(3, 4, 7, 131, "ENodeb-3", "Bts-3-4")]
+        [TestCase(4, 21, 32, 1611, "无匹配LTE基站", "Bts-4-21")]
+        [TestCase(5, 21, 322, 1611, "无匹配LTE基站", "Bts-5-21")]
+        [TestCase(6, 7, 32, 1611, "无匹配LTE基站", "Bts-6-7")]
+        [TestCase(7, 21, 32, 1611, "无匹配LTE基站", "无匹配CDMA基站-21")]
+        public void Test_GetTrendViews_SingleStat(int btsId, byte sectorId, int drops, int assignmentSuccess,
+            string eNodebName, string cellName)
+        {
+            _testService.ImportOneStat(btsId, sectorId, drops, assignmentSuccess);
+            var views = _service.GetTrendViews(DateTime.Parse("2014-12-31"), DateTime.Parse("2015-1-2"), "Foshan");
+            views.Count().ShouldEqual(1);
+            views.ElementAt(0).AssertEqual(drops, assignmentSuccess, eNodebName, cellName, 1);
         }
     }
 }

@@ -586,6 +586,7 @@
     <Content Include="Views\Dt\_List.cshtml" />
     <None Include="Views\Kpi\_TopDrop2G.cshtml" />
     <None Include="Views\Kpi\_TopDrop2GTable.cshtml" />
+    <Content Include="Views\Kpi\_TopDrop2GTrendTable.cshtml" />
     <None Include="Views\Parameters\AlarmImport.cshtml" />
     <Content Include="Views\Shared\_AlertPanel.cshtml" />
     <Content Include="Views\Shared\_ENodebTable.cshtml" />

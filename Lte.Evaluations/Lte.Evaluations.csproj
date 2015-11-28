@@ -108,7 +108,9 @@
     <Compile Include="MapperSerive\InfrastructureMapperService.cs" />
     <Compile Include="MapperSerive\KpiMapperService.cs" />
     <Compile Include="MapperSerive\TopCellContainer.cs" />
+    <Compile Include="MapperSerive\TopCellQueriesService.cs" />
     <Compile Include="MapperSerive\TopDrop2GCellViewContainer.cs" />
+    <Compile Include="MapperSerive\TopDrop2GTrendViewContainer.cs" />
     <Compile Include="Policy\OrderPreciseStatService.cs" />
     <Compile Include="Policy\OrderTopDrop2GService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -131,6 +133,8 @@
     <Compile Include="ViewModels\SectorView.cs" />
     <Compile Include="ViewModels\TopDrop2GCellView.cs" />
     <Compile Include="ViewModels\TopDrop2GDateView.cs" />
+    <Compile Include="ViewModels\TopDrop2GTrend.cs" />
+    <Compile Include="ViewModels\TopDrop2GTrendView.cs" />
     <Compile Include="ViewModels\TownPreciseView.cs" />
   </ItemGroup>
   <ItemGroup>

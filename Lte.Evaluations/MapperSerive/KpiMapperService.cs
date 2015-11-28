@@ -66,5 +66,15 @@ namespace Lte.Evaluations.MapperSerive
                 .ForMember(d => d.TopDrop2GCellView,
                     opt => opt.MapFrom(s => Mapper.Map<TopDrop2GCell, TopDrop2GCellView>(s.TopCell)));
         }
+
+        public static void MapTopDrop2GTrend()
+        {
+            Mapper.CreateMap<TopDrop2GTrend, TopDrop2GTrendView>();
+            Mapper.CreateMap<TopCellContainer<TopDrop2GTrend>, TopDrop2GTrendViewContainer>()
+                .ForMember(d => d.TopDrop2GTrendView,
+                    opt => opt.MapFrom(s => Mapper.Map<TopDrop2GTrend, TopDrop2GTrendView>(s.TopCell)))
+                .ForMember(d => d.CellName, opt => opt.MapFrom(s => s.CdmaName + "-" + s.TopCell.SectorId))
+                .ForMember(d => d.ENodebName, opt => opt.MapFrom(s => s.LteName));
+        }
     }
 }

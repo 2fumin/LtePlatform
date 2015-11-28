@@ -1,0 +1,20 @@
+﻿<table class="table table-condensed">
+    <thead>
+    <tr>
+        <td>小区名称</td>
+        <td>LTE基站</td>
+        <td>掉话总数</td>
+        <td>掉话率(%)</td>
+        <td>出现次数</td>
+    </tr>
+    </thead>
+    <tbody data-bind="foreach: trendCells">
+    <tr>
+        <td data-bind="text: cellName"></td>
+        <td data-bind="text: eNodebName"></td>
+        <td data-bind="text: totalDrops"></td>
+        <td data-bind="text: (100 * dropRate).toFixed(2)"></td>
+        <td data-bind="text: topDates"></td>
+    </tr>
+    </tbody>
+</table>

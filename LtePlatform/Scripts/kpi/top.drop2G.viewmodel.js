@@ -7,6 +7,7 @@
     self.beginDate = ko.observable((new Date()).getDateFromToday(-7).Format("yyyy-MM-dd"));
     self.endDate = ko.observable((new Date()).getDateFromToday(-1).Format("yyyy-MM-dd"));
     self.oneDayCells = ko.observableArray([]);
+    self.trendCells = ko.observableArray([]);
 
     Sammy(function () {
         this.get('#topDrop2G', function () {

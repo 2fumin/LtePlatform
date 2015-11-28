@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper.Should;
 using Lte.Evaluations.ViewModels;
 using NUnit.Framework;
 
@@ -18,6 +19,16 @@ namespace Lte.Evaluations.Test.DataService
             Assert.AreEqual(view.TrafficAssignmentSuccess, assignmentSuccess);
             Assert.AreEqual(view.LteName, lteName);
             Assert.AreEqual(view.CdmaName, cdmaName);
+        }
+
+        public static void AssertEqual(this TopDrop2GTrendView view, int drops, int assignmentSuccess, string eNodebName,
+            string cellName, int topDates)
+        {
+            view.TotalDrops.ShouldEqual(drops);
+            view.TotalCallAttempst.ShouldEqual(assignmentSuccess);
+            view.TopDates.ShouldEqual(topDates);
+            view.ENodebName.ShouldEqual(eNodebName);
+            view.CellName.ShouldEqual(cellName);
         }
     }
 }

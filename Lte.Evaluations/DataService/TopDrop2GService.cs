@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Castle.Windsor.Diagnostics.DebuggerViews;
 using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.ViewModels;
 using Lte.Parameters.Abstract;
@@ -25,7 +26,7 @@ namespace Lte.Evaluations.DataService
             _eNodebRepository = eNodebRepository;
         }
 
-        public TopDrop2GDateView GetViews(DateTime statDate, string city)
+        public TopDrop2GDateView GetDateView(DateTime statDate, string city)
         {
             var begin = statDate.AddDays(-100);
             var end = statDate.AddDays(1);
@@ -51,20 +52,33 @@ namespace Lte.Evaluations.DataService
 
         private List<TopCellContainer<TopDrop2GCell>> GetStatContainers(string city, DateTime begin, DateTime end)
         {
-            return (from stat in
-                    _repository.GetAllList(city, begin, end)
-                    join bts in _btsRepository.GetAllList()
-                        on stat.BtsId equals bts.BtsId into btsQuery
-                    from bq in btsQuery.DefaultIfEmpty()
-                    join eNodeb in _eNodebRepository.GetAllList()
-                        on (bq == null ? -1 : bq.ENodebId) equals eNodeb.ENodebId into query
-                    from q in query.DefaultIfEmpty()
-                    select new TopCellContainer<TopDrop2GCell>
-                    {
-                        TopCell = stat,
-                        LteName = q == null ? "无匹配LTE基站" : q.Name,
-                        CdmaName = bq == null ? "无匹配CDMA基站" : bq.Name
-                    }).ToList();
+            return _repository.GetAllList(city, begin, end)
+                .QueryContainers(_btsRepository, _eNodebRepository)
+                .ToList();
         }
+
+        public IEnumerable<TopDrop2GTrendView> GetTrendViews(DateTime begin, DateTime end, string city)
+        {
+            var statContainers = GetTrendContainers(city, begin, end);
+            var viewContainers = 
+                Mapper.Map<List<TopCellContainer<TopDrop2GTrend>>, IEnumerable<TopDrop2GTrendViewContainer>>(statContainers);
+            return viewContainers.Select(x =>
+            {
+                var view = x.TopDrop2GTrendView;
+                view.CellName = x.CellName;
+                view.ENodebName = x.ENodebName;
+                return view;
+            });
+        } 
+
+        private List<TopCellContainer<TopDrop2GTrend>> GetTrendContainers(string city, DateTime begin, DateTime end)
+        {
+            return
+                _repository.GetAllList(city, begin, end)
+                    .QueryTrends()
+                    .ToList()
+                    .QueryContainers(_btsRepository, _eNodebRepository)
+                    .ToList();
+        } 
     }
 }
