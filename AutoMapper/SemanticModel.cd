@@ -3,24 +3,30 @@
   <Class Name="AutoMapper.MappingEngine">
     <Position X="1.25" Y="1.5" Width="1.75" />
     <Members>
-      <Field Name="_configuration" Hidden="true" />
-      <Field Name="_proxyFactory" Hidden="true" />
       <Method Name="IMappingEngineRunner.CreateObject" Hidden="true" />
-      <Method Name="IMappingEngineRunner.FormatValue" Hidden="true" />
       <Method Name="IMappingEngineRunner.Map" Hidden="true" />
       <Method Name="MappingEngine" Hidden="true" />
     </Members>
+    <NestedTypes>
+      <Class Name="AutoMapper.MappingEngine.NewFinderVisitor" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>MappingEngine.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="AutoMapper.MappingEngine.ConstantExpressionReplacementVisitor" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>MappingEngine.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAAAAIAABAAgAAAAAAAAAAAAAAAAAAAgAEAAAIBCAA=</HashCode>
+      <HashCode>AAAEAEAAAjQEiAACKAAAAACAAAAAAAAIQEAAQAYBAkA=</HashCode>
       <FileName>MappingEngine.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Configuration" />
-    </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="AutoMapper.Configuration">
-    <Position X="5" Y="3.25" Width="1.5" />
+    <Position X="5" Y="3.25" Width="2.25" />
     <Members>
       <Field Name="_formatterCtor" Hidden="true" />
       <Field Name="_resolverCtor" Hidden="true" />
@@ -75,7 +81,7 @@
       <Method Name="UseCustomMapper" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AACCAgAAAAAgAAAABAAAEAAAEAAAAEgAABAACAAAAAA=</HashCode>
+      <HashCode>JgCCGkBoAABgAIAIxCIIeCIAEIgAFcgAIhlACQgCDAA=</HashCode>
       <FileName>TypeMap.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -87,41 +93,32 @@
     <Members>
       <Field Name="_customMemberResolver" Hidden="true" />
       <Field Name="_customResolver" Hidden="true" />
-      <Field Name="_hasCustomValueResolver" Hidden="true" />
       <Field Name="_ignored" Hidden="true" />
-      <Field Name="_nullSubstitute" Hidden="true" />
-      <Field Name="_valueFormattersToSkip" Hidden="true" />
-      <Method Name="AddFormatter" Hidden="true" />
-      <Method Name="AddFormatterToSkip" Hidden="true" />
       <Method Name="AssignCustomValueResolver" Hidden="true" />
       <Method Name="CanResolveValue" Hidden="true" />
       <Method Name="ChainConstructorForResolver" Hidden="true" />
       <Method Name="ChainResolver" Hidden="true" />
       <Method Name="ChainTypeMemberForResolver" Hidden="true" />
-      <Method Name="FormattersToSkipContains" Hidden="true" />
-      <Method Name="GetFormatters" Hidden="true" />
       <Method Name="GetSourceValueResolvers" Hidden="true" />
       <Method Name="Ignore" Hidden="true" />
       <Method Name="IsIgnored" Hidden="true" />
       <Method Name="IsMapped" Hidden="true" />
       <Method Name="PropertyMap" Hidden="true" />
-      <Method Name="RemoveLastFormatter" Hidden="true" />
       <Method Name="RemoveLastResolver" Hidden="true" />
       <Method Name="ResetSourceMemberChain" Hidden="true" />
       <Method Name="ResolveValue" Hidden="true" />
       <Method Name="SetNullSubstitute" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAQBCAQCAAQAwQQAGAIAAIAQQAhAAAIQABACAAgYgA=</HashCode>
+      <HashCode>CchQBCAQCAIQCxQEwEAAAEoARQgAAIAIEABAAwggQgQ=</HashCode>
       <FileName>PropertyMap.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
       <Field Name="_sourceValueResolvers" />
-      <Field Name="_valueFormatters" />
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="AutoMapper.FormatterExpression" Collapsed="true">
-    <Position X="8.25" Y="4" Width="1.5" />
+    <Position X="7.5" Y="4" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAACAAAEAAARAAAACAQAAAIAAAAIAAAgAAADAABIAE=</HashCode>
       <FileName>Internal\FormatterExpression.cs</FileName>
@@ -134,7 +131,7 @@
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAIAAAAAAAAAAAAAAACAABAAAAAAIAEIAAA=</HashCode>
+      <HashCode>AAAAAAAAAAIAAAAAQAAAAAAACAACAAAAAAgQAAAAAAA=</HashCode>
       <FileName>IConfiguration.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -153,7 +150,7 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="AutoMapper.IValueFormatter" Collapsed="true">
-    <Position X="15.25" Y="5" Width="1.5" />
+    <Position X="14.75" Y="5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
       <FileName>IValueFormatter.cs</FileName>

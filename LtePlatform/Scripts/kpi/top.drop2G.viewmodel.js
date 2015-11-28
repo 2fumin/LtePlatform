@@ -4,6 +4,8 @@
     app.currentCity = ko.observable();
     app.cities = ko.observableArray([]);
     app.statDate = ko.observable((new Date()).getDateFromToday(-1).Format("yyyy-MM-dd"));
+    app.beginDate = ko.observable((new Date()).getDateFromToday(-7).Format("yyyy-MM-dd"));
+    app.endDate = ko.observable((new Date()).getDateFromToday(-1).Format("yyyy-MM-dd"));
     app.oneDayCells = ko.observableArray([]);
 
     app.initialize = function () {
@@ -22,6 +24,14 @@
             app.oneDayCells(data);
         });
     }
+
+    app.trendTable = function () {
+
+    };
+
+    app.trendChart = function () {
+
+    };
 
     return self;
 }

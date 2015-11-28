@@ -1,4 +1,5 @@
-﻿<div class="row">
+﻿<!-- ko with: index -->
+<div class="row">
     <div class="col-md-6">
         <div class="panel panel-primary">
             <div class="panel-heading">
@@ -46,7 +47,7 @@
                     </button>
                 </p>                
                 <div class="panel" data-bind="foreach: kpiOptions">
-                    <div data-bind="visible: $data == $root.kpiSelection(), attr: { name: $data}" 
+                    <div data-bind="visible: $data == $root.index().kpiSelection(), attr: { name: $data}" 
                          style="min-height: 500px" class="kpi-trend">
                     </div>
                 </div>
@@ -54,3 +55,4 @@
         </div>
     </div>
 </div>
+<!-- /ko -->

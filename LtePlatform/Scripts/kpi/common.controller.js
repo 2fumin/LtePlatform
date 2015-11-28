@@ -1,4 +1,4 @@
-﻿var initializeCityKpi = function() {
+﻿var initializeCityKpi = function(viewModel) {
     // Make a call to the protected Web API by passing in a Bearer Authorization Header
     $.ajax({
         method: 'get',
@@ -8,10 +8,10 @@
             'Authorization': 'Bearer ' + app.dataModel.getAccessToken()
         },
         success: function (data) {
-            app.cities(data);
+            viewModel.cities(data);
             if (data.length > 0) {
-                app.currentCity(data[0]);
-                app.showKpi();
+                viewModel.currentCity(data[0]);
+                viewModel.showKpi();
             }
         }
     });

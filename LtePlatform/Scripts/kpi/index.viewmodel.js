@@ -1,58 +1,62 @@
 ﻿function IndexViewModel(app, dataModel) {
     var self = this;
 
-    app.currentCity = ko.observable();
-    app.cities = ko.observableArray([]);
-    app.statDate = ko.observable((new Date()).getDateFromToday(-1).Format("yyyy-MM-dd"));
-    app.view = ko.observable('主要');
-    app.viewOptions = ko.observableArray(['主要', '2G', '3G']);
-    app.kpiDateList = ko.observableArray([]);
-    app.beginDate = ko.observable((new Date()).getDateFromToday(-7).Format("yyyy-MM-dd"));
-    app.endDate = ko.observable((new Date()).getDateFromToday(-1).Format("yyyy-MM-dd"));
-    app.kpiSelection = ko.observable('掉话率');
-    app.kpiOptions = ko.observableArray([]);
+    self.currentCity = ko.observable();
+    self.cities = ko.observableArray([]);
+    self.statDate = ko.observable((new Date()).getDateFromToday(-1).Format("yyyy-MM-dd"));
+    self.view = ko.observable('主要');
+    self.viewOptions = ko.observableArray(['主要', '2G', '3G']);
+    self.kpiDateList = ko.observableArray([]);
+    self.beginDate = ko.observable((new Date()).getDateFromToday(-7).Format("yyyy-MM-dd"));
+    self.endDate = ko.observable((new Date()).getDateFromToday(-1).Format("yyyy-MM-dd"));
+    self.kpiSelection = ko.observable('掉话率');
+    self.kpiOptions = ko.observableArray([]);
 
-    app.initialize = function () {
-        $("#StatDate").datepicker({ dateFormat: 'yy-mm-dd' });
-        $("#BeginDate").datepicker({ dateFormat: 'yy-mm-dd' });
-        $("#EndDate").datepicker({ dateFormat: 'yy-mm-dd' });
+    Sammy(function () {
+        this.get('#index', function () {
+            $("#StatDate").datepicker({ dateFormat: 'yy-mm-dd' });
+            $("#BeginDate").datepicker({ dateFormat: 'yy-mm-dd' });
+            $("#EndDate").datepicker({ dateFormat: 'yy-mm-dd' });
 
-        initializeCityKpi();
-        $.ajax({
-            method: 'get',
-            url: app.dataModel.kpiDataListUrl,
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                app.kpiOptions(data);
-            }
+            initializeCityKpi(self);
+
+            $.ajax({
+                method: 'get',
+                url: app.dataModel.kpiDataListUrl,
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    self.kpiOptions(data);
+                }
+            });
         });
-    };
+        this.get('/Kpi', function () { this.app.runRoute('get', '#index'); })
+    });
 
-    app.showKpi = function () {
+    self.showKpi = function () {
         $.ajax({
             method: 'get',
             url: app.dataModel.kpiDataListUrl,
             contentType: "application/json; charset=utf-8",
             data: {
-                city: app.currentCity(),
-                statDate: app.statDate()
+                city: self.currentCity(),
+                statDate: self.statDate()
             },
             success: function (data) {
-                app.statDate(data.statDate);
-                app.kpiDateList(data.statViews);
+                self.statDate(data.statDate);
+                self.kpiDateList(data.statViews);
             }
         });
     };
 
-    app.showTrend = function () {
+    self.showTrend = function () {
         $.ajax({
             method: 'get',
             url: app.dataModel.kpiDataListUrl,
             contentType: "application/json; charset=utf-8",
             data: {
-                city: app.currentCity(),
-                beginDate: app.beginDate(),
-                endDate: app.endDate()
+                city: self.currentCity(),
+                beginDate: self.beginDate(),
+                endDate: self.endDate()
             },
             success: function (data) {
                 $(".kpi-trend").each(function () {
@@ -71,7 +75,7 @@
                     }
                     chart.series.push({
                         type: 'spline',
-                        name: app.currentCity(),
+                        name: self.currentCity(),
                         data: data.kpiDetails[kpiOption][data.regionList.length - 1],
                         marker: {
                             lineWidth: 2,

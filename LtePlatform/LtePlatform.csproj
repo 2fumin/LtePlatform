@@ -434,6 +434,7 @@
     <Content Include="Scripts\college\precise.viewmodel.js" />
     <Content Include="Scripts\college\test.controller.js" />
     <Content Include="Scripts\college\test.viewmodel.js" />
+    <Content Include="Scripts\dt\list.viewmodel.js" />
     <Content Include="Scripts\highcharts\adapters\standalone-framework.js" />
     <Content Include="Scripts\highcharts\adapters\standalone-framework.src.js" />
     <Content Include="Scripts\highcharts\themes\dark-blue.js" />
@@ -582,6 +583,7 @@
     <Content Include="Views\Kpi\_PreciseTrendTable.cshtml" />
     <Content Include="Views\College\_Infrastructure.cshtml" />
     <Content Include="Views\College\_CollegeStatTable.cshtml" />
+    <Content Include="Views\Dt\_List.cshtml" />
     <None Include="Views\Kpi\_TopDrop2G.cshtml" />
     <None Include="Views\Kpi\_TopDrop2GTable.cshtml" />
     <None Include="Views\Parameters\AlarmImport.cshtml" />

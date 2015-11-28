@@ -1,7 +1,15 @@
 ﻿
 @{
-    ViewBag.Title = "List";
+    ViewBag.Title = "路测数据分析";
 }
 
-<h2>List</h2>
+<h2>@ViewBag.Title</h2>
+
+@section SPAViews {
+    @Html.Partial("_List")
+}
+@section Scripts{
+    @Scripts.Render("~/bundles/knockout")
+    @Scripts.Render("~/bundles/dtList")
+}
 
