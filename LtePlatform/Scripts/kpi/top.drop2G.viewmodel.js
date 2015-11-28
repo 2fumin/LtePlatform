@@ -1,35 +1,42 @@
 ﻿function TopDrop2GViewModel(app, dataModel) {
     var self = this;
 
-    app.currentCity = ko.observable();
-    app.cities = ko.observableArray([]);
-    app.statDate = ko.observable((new Date()).getDateFromToday(-1).Format("yyyy-MM-dd"));
-    app.beginDate = ko.observable((new Date()).getDateFromToday(-7).Format("yyyy-MM-dd"));
-    app.endDate = ko.observable((new Date()).getDateFromToday(-1).Format("yyyy-MM-dd"));
-    app.oneDayCells = ko.observableArray([]);
+    self.currentCity = ko.observable();
+    self.cities = ko.observableArray([]);
+    self.statDate = ko.observable((new Date()).getDateFromToday(-1).Format("yyyy-MM-dd"));
+    self.beginDate = ko.observable((new Date()).getDateFromToday(-7).Format("yyyy-MM-dd"));
+    self.endDate = ko.observable((new Date()).getDateFromToday(-1).Format("yyyy-MM-dd"));
+    self.oneDayCells = ko.observableArray([]);
 
-    app.initialize = function () {
-        $("#StatDate").datepicker({ dateFormat: 'yy-mm-dd' });
-        $("#BeginDate").datepicker({ dateFormat: 'yy-mm-dd' });
-        $("#EndDate").datepicker({ dateFormat: 'yy-mm-dd' });
+    Sammy(function () {
+        this.get('#topDrop2G', function () {
+            $("#StatDate").datepicker({ dateFormat: 'yy-mm-dd' });
+            $("#BeginDate").datepicker({ dateFormat: 'yy-mm-dd' });
+            $("#EndDate").datepicker({ dateFormat: 'yy-mm-dd' });
 
-        initializeCityKpi();
-    };
+            initializeCityKpi(self);
+        });
+        this.get('/Kpi/TopDrop2G', function () { this.app.runRoute('get', '#topDrop2G'); })
+    });
 
-    app.showKpi = function () {
+    self.showKpi = function () {
         sendRequest(app.dataModel.topDrop2GUrl, "GET", {
-            statDate: app.statDate(),
-            city: app.currentCity()
+            statDate: self.statDate(),
+            city: self.currentCity()
         }, function (data) {
-            app.oneDayCells(data);
+            self.oneDayCells(data);
         });
     }
 
-    app.trendTable = function () {
+    self.showHistory = function () {
 
     };
 
-    app.trendChart = function () {
+    self.trendTable = function () {
+
+    };
+
+    self.trendChart = function () {
 
     };
 
