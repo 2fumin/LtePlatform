@@ -107,7 +107,7 @@
     <Compile Include="MapperSerive\EvalutaionMapperProfile.cs" />
     <Compile Include="MapperSerive\InfrastructureMapperService.cs" />
     <Compile Include="MapperSerive\KpiMapperService.cs" />
-    <Compile Include="MapperSerive\TopDrop2GCellContainer.cs" />
+    <Compile Include="MapperSerive\TopCellContainer.cs" />
     <Compile Include="MapperSerive\TopDrop2GCellViewContainer.cs" />
     <Compile Include="Policy\OrderPreciseStatService.cs" />
     <Compile Include="Policy\OrderTopDrop2GService.cs" />
@@ -130,6 +130,7 @@
     <Compile Include="ViewModels\PreciseRegionDateView.cs" />
     <Compile Include="ViewModels\SectorView.cs" />
     <Compile Include="ViewModels\TopDrop2GCellView.cs" />
+    <Compile Include="ViewModels\TopDrop2GDateView.cs" />
     <Compile Include="ViewModels\TownPreciseView.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -62,9 +62,9 @@ namespace Lte.Evaluations.MapperSerive
         public static void MapTopDrop2G()
         {
             Mapper.CreateMap<TopDrop2GCell, TopDrop2GCellView>();
-            Mapper.CreateMap<TopDrop2GCellContainer, TopDrop2GCellViewContainer>()
+            Mapper.CreateMap<TopCellContainer<TopDrop2GCell>, TopDrop2GCellViewContainer>()
                 .ForMember(d => d.TopDrop2GCellView,
-                    opt => opt.MapFrom(s => Mapper.Map<TopDrop2GCell, TopDrop2GCellView>(s.TopDrop2GCell)));
+                    opt => opt.MapFrom(s => Mapper.Map<TopDrop2GCell, TopDrop2GCellView>(s.TopCell)));
         }
     }
 }

@@ -46,7 +46,8 @@ namespace Lte.Evaluations.Test.DataService
             string lteName, string cdmaName)
         {
             _testService.ImportOneStat(btsId, sectorId, drops, assignmentSuccess);
-            var views = _service.GetViews(DateTime.Parse("2015-1-1"), "Foshan");
+            var dateView = _service.GetViews(DateTime.Parse("2015-1-1"), "Foshan");
+            var views = dateView.StatViews;
             Assert.AreEqual(views.Count(), 1);
             views.ElementAt(0).AssertEqual(sectorId, drops, assignmentSuccess, lteName, cdmaName);
         }

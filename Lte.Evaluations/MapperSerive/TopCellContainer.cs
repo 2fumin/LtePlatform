@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 
 namespace Lte.Evaluations.MapperSerive
 {
-    public class TopDrop2GCellContainer
+    public class TopCellContainer<TTopCell>
+        where TTopCell : IBtsIdQuery
     {
-        public TopDrop2GCell TopDrop2GCell { get; set; }
+        public TTopCell TopCell { get; set; }
 
         public string CdmaName { get; set; }
 

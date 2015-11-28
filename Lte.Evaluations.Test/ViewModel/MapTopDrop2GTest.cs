@@ -22,17 +22,17 @@ namespace Lte.Evaluations.Test.ViewModel
         public void Test()
         {
             KpiMapperService.MapTopDrop2G();
-            var source = new TopDrop2GCellContainer
+            var source = new TopCellContainer<TopDrop2GCell>
             {
                 LteName = "aaa",
                 CdmaName = "bbb",
-                TopDrop2GCell = new TopDrop2GCell
+                TopCell = new TopDrop2GCell
                 {
                     CallAttempts = 1001,
                     Drops = 21
                 }
             };
-            var dest = Mapper.Map<TopDrop2GCellContainer, TopDrop2GCellViewContainer>(source);
+            var dest = Mapper.Map<TopCellContainer<TopDrop2GCell>, TopDrop2GCellViewContainer>(source);
             Assert.AreEqual(dest.LteName,"aaa");
             Assert.AreEqual(dest.CdmaName,"bbb");
             Assert.AreEqual(dest.TopDrop2GCellView.CallAttempts,1001);

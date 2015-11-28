@@ -25,22 +25,31 @@ namespace Lte.Evaluations.DataService
             _eNodebRepository = eNodebRepository;
         }
 
-        public IEnumerable<TopDrop2GCellView> GetViews(DateTime statDate, string city)
+        public TopDrop2GDateView GetViews(DateTime statDate, string city)
         {
+            var begin = statDate.AddDays(-100);
             var end = statDate.AddDays(1);
-            var statContainers = GetStatContainers(city, statDate, end);
+            var query = _repository.GetAllList(city, begin, end);
+            begin = query.Select(x => x.StatTime).Max().Date;
+            end = end.AddDays(1);
+            var statContainers = GetStatContainers(city, begin, end);
             var viewContainers =
-                Mapper.Map<List<TopDrop2GCellContainer>, IEnumerable<TopDrop2GCellViewContainer>>(statContainers);
-            return viewContainers.Select(x =>
+                Mapper.Map<List<TopCellContainer<TopDrop2GCell>>, IEnumerable<TopDrop2GCellViewContainer>>(statContainers);
+            var views = viewContainers.Select(x =>
             {
                 var view = x.TopDrop2GCellView;
                 view.LteName = x.LteName;
                 view.CdmaName = x.CdmaName;
                 return view;
             });
+            return new TopDrop2GDateView
+            {
+                StatDate = begin.ToShortDateString(),
+                StatViews = views
+            };
         }
 
-        private List<TopDrop2GCellContainer> GetStatContainers(string city, DateTime begin, DateTime end)
+        private List<TopCellContainer<TopDrop2GCell>> GetStatContainers(string city, DateTime begin, DateTime end)
         {
             return (from stat in
                     _repository.GetAllList(city, begin, end)
@@ -50,9 +59,9 @@ namespace Lte.Evaluations.DataService
                     join eNodeb in _eNodebRepository.GetAllList()
                         on (bq == null ? -1 : bq.ENodebId) equals eNodeb.ENodebId into query
                     from q in query.DefaultIfEmpty()
-                    select new TopDrop2GCellContainer
+                    select new TopCellContainer<TopDrop2GCell>
                     {
-                        TopDrop2GCell = stat,
+                        TopCell = stat,
                         LteName = q == null ? "无匹配LTE基站" : q.Name,
                         CdmaName = bq == null ? "无匹配CDMA基站" : bq.Name
                     }).ToList();

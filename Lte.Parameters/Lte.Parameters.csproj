@@ -114,6 +114,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IBtsIdQuery.cs" />
     <Compile Include="Abstract\IBtsRepository.cs" />
     <Compile Include="Abstract\ICdmaCellRepository.cs" />
     <Compile Include="Abstract\ICdmaRegionStatRepository.cs" />

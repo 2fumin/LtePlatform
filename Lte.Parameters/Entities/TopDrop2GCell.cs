@@ -7,10 +7,11 @@ using Abp.Domain.Entities;
 using AutoMapper;
 using Lte.Domain.Common;
 using Lte.Domain.Regular;
+using Lte.Parameters.Abstract;
 
 namespace Lte.Parameters.Entities
 {
-    public class TopDrop2GCell : Entity
+    public class TopDrop2GCell : Entity, IBtsIdQuery
     {
         public DateTime StatTime { get; set; }
 

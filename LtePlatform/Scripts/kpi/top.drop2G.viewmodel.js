@@ -24,7 +24,8 @@
             statDate: self.statDate(),
             city: self.currentCity()
         }, function (data) {
-            self.oneDayCells(data);
+            self.statDate(data.statDate);
+            self.oneDayCells(data.statViews);
         });
     }
 

@@ -32,6 +32,7 @@ namespace LtePlatform.Controllers.Kpi
             return details == null ? (IHttpActionResult)BadRequest("查询日期内的指标失败！") : Ok(details);
         }
 
+        [HttpGet]
         public List<string> Get()
         {
             return CdmaRegionStatDetails.KpiOptions;
