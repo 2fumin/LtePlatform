@@ -1,7 +1,31 @@
 ﻿
 @{
-    ViewBag.Title = "List";
+    ViewBag.Title = "全网基站小区统计";
 }
 
-<h2>List</h2>
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h2 class="panel-title">
+            <strong>@ViewBag.Title</strong>
+        </h2>
+    </div>
+    <p>
+        @{
+            Html.RenderPartial("_ParametersMenu");
+        }
+    </p>
+</div>
 
+@section SPAViews{
+    @{
+        Html.RenderPartial("_List");
+    }
+}
+
+@section Scripts{
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/highcharts")
+    @Scripts.Render("~/bundles/knockout")
+    @Scripts.Render("~/bundles/parametersIndex")
+}

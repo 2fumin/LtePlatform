@@ -594,6 +594,7 @@
     <Content Include="Views\Shared\_BtsTable.cshtml" />
     <Content Include="Views\Shared\_CdmaCellTable.cshtml" />
     <Content Include="Views\Shared\_DistributionTable.cshtml" />
+    <Content Include="Views\Parameters\_ParametersMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
