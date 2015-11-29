@@ -29,7 +29,7 @@
                 }
             });
         });
-        this.get('/Kpi', function () { this.app.runRoute('get', '#index'); })
+        this.get('/Kpi', function () { this.app.runRoute('get', '#index'); });
     });
 
     self.showKpi = function () {

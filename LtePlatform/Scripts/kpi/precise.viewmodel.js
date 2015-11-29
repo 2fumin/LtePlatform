@@ -1,41 +1,44 @@
 ﻿function PreciseViewModel(app, dataModel) {
     var self = this;
 
-    app.currentCity = ko.observable();
-    app.cities = ko.observableArray([]);
-    app.statDate = ko.observable((new Date()).getDateFromToday(-1).Format("yyyy-MM-dd"));
+    self.currentCity = ko.observable();
+    self.cities = ko.observableArray([]);
+    self.statDate = ko.observable((new Date()).getDateFromToday(-1).Format("yyyy-MM-dd"));
 
-    app.currentDistrict = ko.observable("");
-    app.districtStats = ko.observableArray([]);
-    app.townStats = ko.observableArray([]);
+    self.currentDistrict = ko.observable("");
+    self.districtStats = ko.observableArray([]);
+    self.townStats = ko.observableArray([]);
 
-    app.initialize = function () {
-        $("#StatDate").datepicker({ dateFormat: 'yy-mm-dd' });
+    Sammy(function () {
+        this.get('#precise', function () {
+            $("#StatDate").datepicker({ dateFormat: 'yy-mm-dd' });
 
-        initializeCityKpi();
-    };
+            initializeCityKpi(self);
+        });
+        this.get('/Kpi/Precise', function () { this.app.runRoute('get', '#precise'); });
+    });
 
-    app.showKpi = function () {
+    self.showKpi = function () {
         $.ajax({
             method: 'get',
             url: app.dataModel.preciseRegionUrl,
             contentType: "application/json; charset=utf-8",
             data: {
-                city: app.currentCity(),
-                statDate: app.statDate()
+                city: self.currentCity(),
+                statDate: self.statDate()
             },
             success: function (data) {
-                app.statDate(data.statDate);
-                app.districtStats(data.districtPreciseViews);
-                app.townStats(data.townPreciseViews);
-                app.currentDistrict(data.districtPreciseViews[0].district);
-                showMrPie(app.districtStats(), app.townStats());
+                self.statDate(data.statDate);
+                self.districtStats(data.districtPreciseViews);
+                self.townStats(data.townPreciseViews);
+                self.currentDistrict(data.districtPreciseViews[0].district);
+                showMrPie(self.districtStats(), self.townStats());
             }
         });
     };
 
-    app.showDetails = function(district) {
-        app.currentDistrict(district);
+    self.showDetails = function(district) {
+        self.currentDistrict(district);
     };
 
     return self;

@@ -1,26 +1,29 @@
 ﻿function PreciseTrendViewModel(app, dataModel) {
     var self = this;
 
-    app.currentCity = ko.observable();
-    app.cities = ko.observableArray([]);
-    app.beginDate = ko.observable((new Date()).getDateFromToday(-7).Format("yyyy-MM-dd"));
-    app.endDate = ko.observable((new Date()).getDateFromToday(-1).Format("yyyy-MM-dd"));
-    app.districts = ko.observableArray([]);
-    app.mrStats = ko.observableArray([]);
+    self.currentCity = ko.observable();
+    self.cities = ko.observableArray([]);
+    self.beginDate = ko.observable((new Date()).getDateFromToday(-7).Format("yyyy-MM-dd"));
+    self.endDate = ko.observable((new Date()).getDateFromToday(-1).Format("yyyy-MM-dd"));
+    self.districts = ko.observableArray([]);
+    self.mrStats = ko.observableArray([]);
 
-    app.initialize = function () {
-        $("#BeginDate").datepicker({ dateFormat: 'yy-mm-dd' });
-        $("#EndDate").datepicker({ dateFormat: 'yy-mm-dd' });
+    Sammy(function () {
+        this.get('#preciseTrend', function () {
+            $("#BeginDate").datepicker({ dateFormat: 'yy-mm-dd' });
+            $("#EndDate").datepicker({ dateFormat: 'yy-mm-dd' });
 
-        initializeCityKpi();
-    }
+            initializeCityKpi(self);
+        });
+        this.get('/Precise/Trend', function () { this.app.runRoute('get', '#preciseTrend'); });
+    });
 
-    app.showKpi = function () {
-        app.districts(['A', 'B']);
+    self.showKpi = function () {
+        self.districts(['A', 'B']);
     };
 
-    app.showTrend = function () {
-        app.mrStats([
+    self.showTrend = function () {
+        self.mrStats([
             { statDate: '2015-1-1', values: [1, 2] },
             { statDate: '2015-1-2', values: [3, 4] }
         ]);

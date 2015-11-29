@@ -69,64 +69,71 @@ namespace LtePlatform
                 "~/Scripts/app/_run.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/kpiPrecise").Include(
+                "~/Scripts/sammy-{version}.js",
                 "~/Scripts/app/common.js",
                 "~/Scripts/mycharts/drilldownPie.js",
                 "~/Scripts/app/app.datamodel.js",
-                "~/Scripts/app/app.simplemodel.js",
+                "~/Scripts/app/app.viewmodel.js",
                 "~/Scripts/kpi/common.controller.js",
                 "~/Scripts/kpi/precise.controller.js",
                 "~/Scripts/kpi/precise.viewmodel.js",
                 "~/Scripts/app/_run.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/kpiPreciseTrend").Include(
+                "~/Scripts/sammy-{version}.js",
                 "~/Scripts/app/common.js",
                 "~/Scripts/mycharts/drilldownPie.js",
                 "~/Scripts/app/app.datamodel.js",
-                "~/Scripts/app/app.simplemodel.js",
+                "~/Scripts/app/app.viewmodel.js",
                 "~/Scripts/kpi/common.controller.js",
                 "~/Scripts/kpi/precise.trend.viewmodel.js",
                 "~/Scripts/app/_run.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/collegeMap").Include(
+                "~/Scripts/sammy-{version}.js",
                 "~/Scripts/app/common.js",
                 "~/Scripts/baidu/mapContainer.js",
                 "~/Scripts/baidu/plugins/InfoBox.js",
                 "~/Scripts/baidu/college.helper.js",
                 "~/Scripts/mycharts/comboChart.js",
                 "~/Scripts/app/app.datamodel.js",
-                "~/Scripts/app/app.simplemodel.js",
+                "~/Scripts/app/app.viewmodel.js",
                 "~/Scripts/college/map.viewmodel.js",
                 "~/Scripts/college/map.controller.js",
                 "~/Scripts/app/_run.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/collegeTest").Include(
+                "~/Scripts/sammy-{version}.js",
                 "~/Scripts/app/common.js",
                 "~/Scripts/app/app.datamodel.js",
-                "~/Scripts/app/app.simplemodel.js",
+                "~/Scripts/app/app.viewmodel.js",
                 "~/Scripts/college/test.viewmodel.js",
                 "~/Scripts/college/test.controller.js",
                 "~/Scripts/app/_run.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/collegeKpi").Include(
+                "~/Scripts/sammy-{version}.js",
                 "~/Scripts/app/common.js",
                 "~/Scripts/app/app.datamodel.js",
-                "~/Scripts/app/app.simplemodel.js",
+                "~/Scripts/app/app.viewmodel.js",
                 "~/Scripts/college/kpi.viewmodel.js",
                 "~/Scripts/college/kpi.controller.js",
                 "~/Scripts/app/_run.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/collegeInfrastructure").Include(
+                "~/Scripts/sammy-{version}.js",
                 "~/Scripts/app/common.js",
                 "~/Scripts/app/app.datamodel.js",
-                "~/Scripts/app/app.simplemodel.js",
+                "~/Scripts/app/app.viewmodel.js",
                 "~/Scripts/college/infrastructure.viewmodel.js",
                 "~/Scripts/app/_run.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/collegePrecise").Include(
+                "~/Scripts/sammy-{version}.js",
                 "~/Scripts/app/common.js",
                 "~/Scripts/mycharts/comboChart.js",
                 "~/Scripts/app/app.datamodel.js",
-                "~/Scripts/app/app.simplemodel.js",
+                "~/Scripts/app/app.viewmodel.js",
                 "~/Scripts/college/precise.viewmodel.js",
                 "~/Scripts/college/precise.controller.js",
                 "~/Scripts/app/_run.js"));
