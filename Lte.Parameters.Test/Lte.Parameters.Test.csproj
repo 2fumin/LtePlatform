@@ -66,6 +66,8 @@
     <Compile Include="Excel\CdmaCellExcelTest.cs" />
     <Compile Include="Excel\CellExcelTest.cs" />
     <Compile Include="Excel\ENodebExcelTest.cs" />
+    <Compile Include="Excel\RealCellExcelTest.cs" />
+    <Compile Include="Excel\RealENodebExcelTest.cs" />
     <Compile Include="Kpi\CdmaCityStatExcelTest.cs" />
     <Compile Include="Kpi\CdmaRegionStatExcelTest.cs" />
     <Compile Include="Kpi\CdmaTopKpiExcelTest.cs" />

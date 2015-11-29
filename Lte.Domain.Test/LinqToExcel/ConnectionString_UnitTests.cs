@@ -29,9 +29,9 @@ namespace Lte.Domain.Test.LinqToExcel
 
             try { companies.GetEnumerator(); }
             catch (OleDbException) { }
-            var expected = string.Format(
-                @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={0};Extended Properties=""Excel 8.0;HDR=YES;IMEX=1""",
-                "spreadsheet.xls");
+            var expected =
+                $@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={"spreadsheet.xls"
+                    };Extended Properties=""Excel 8.0;HDR=YES;IMEX=1""";
             Assert.AreEqual(expected, GetConnectionString());
         }
 
@@ -45,9 +45,9 @@ namespace Lte.Domain.Test.LinqToExcel
 
             try { companies.GetEnumerator(); }
             catch (OleDbException) { }
-            var expected = string.Format(
-                @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={0};Extended Properties=""Excel 8.0;HDR=YES;IMEX=1;READONLY=TRUE""",
-                "spreadsheet.xls");
+            var expected =
+                $@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={"spreadsheet.xls"
+                    };Extended Properties=""Excel 8.0;HDR=YES;IMEX=1;READONLY=TRUE""";
             Assert.AreEqual(expected, GetConnectionString());
         }
 
@@ -61,9 +61,9 @@ namespace Lte.Domain.Test.LinqToExcel
 
             try { companies.GetEnumerator(); }
             catch (OleDbException) { }
-            var expected = string.Format(
-                @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=""Excel 12.0;HDR=YES;IMEX=1""",
-                "spreadsheet.xls");
+            var expected =
+                $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={"spreadsheet.xls"
+                    };Extended Properties=""Excel 12.0;HDR=YES;IMEX=1""";
             Assert.AreEqual(expected, GetConnectionString());
         }
 
@@ -81,9 +81,9 @@ namespace Lte.Domain.Test.LinqToExcel
 
             try { companies.GetEnumerator(); }
             catch (OleDbException) { }
-            var expected = string.Format(
-                @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=""Excel 12.0;HDR=YES;IMEX=1;READONLY=TRUE""",
-                "spreadsheet.xls");
+            var expected =
+                $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={"spreadsheet.xls"
+                    };Extended Properties=""Excel 12.0;HDR=YES;IMEX=1;READONLY=TRUE""";
             Assert.AreEqual(expected, GetConnectionString());
         }
 
@@ -95,9 +95,9 @@ namespace Lte.Domain.Test.LinqToExcel
 
             try { companies.GetEnumerator(); }
             catch (OleDbException) { }
-            var expected = string.Format(
-                @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={0};Extended Properties=""Excel 8.0;HDR=YES;IMEX=1""",
-                "spreadsheet.dlo");
+            var expected =
+                $@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={"spreadsheet.dlo"
+                    };Extended Properties=""Excel 8.0;HDR=YES;IMEX=1""";
             Assert.AreEqual(expected, GetConnectionString());
         }
 
@@ -111,9 +111,9 @@ namespace Lte.Domain.Test.LinqToExcel
 
             try { companies.GetEnumerator(); }
             catch (OleDbException) { }
-            var expected = string.Format(
-                @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={0};Extended Properties=""Excel 8.0;HDR=YES;IMEX=1;READONLY=TRUE""",
-                "spreadsheet.dlo");
+            var expected =
+                $@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={"spreadsheet.dlo"
+                    };Extended Properties=""Excel 8.0;HDR=YES;IMEX=1;READONLY=TRUE""";
             Assert.AreEqual(expected, GetConnectionString());
         }
 
@@ -127,9 +127,9 @@ namespace Lte.Domain.Test.LinqToExcel
 
             try { companies.GetEnumerator(); }
             catch (OleDbException) { }
-            var expected = string.Format(
-                @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=""Excel 12.0;HDR=YES;IMEX=1""",
-                "spreadsheet.dlo");
+            var expected =
+                $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={"spreadsheet.dlo"
+                    };Extended Properties=""Excel 12.0;HDR=YES;IMEX=1""";
             Assert.AreEqual(expected, GetConnectionString());
         }
 
@@ -147,9 +147,9 @@ namespace Lte.Domain.Test.LinqToExcel
 
             try { companies.GetEnumerator(); }
             catch (OleDbException) { }
-            var expected = string.Format(
-                @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=""Excel 12.0;HDR=YES;IMEX=1;READONLY=TRUE""",
-                "spreadsheet.dlo");
+            var expected =
+                $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={"spreadsheet.dlo"
+                    };Extended Properties=""Excel 12.0;HDR=YES;IMEX=1;READONLY=TRUE""";
             Assert.AreEqual(expected, GetConnectionString());
         }
 
@@ -161,9 +161,9 @@ namespace Lte.Domain.Test.LinqToExcel
 
             try { companies.GetEnumerator(); }
             catch (OleDbException) { }
-            var expected = string.Format(
-                @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={0};Extended Properties=""text;HDR=YES;FMT=Delimited;IMEX=1""",
-                @"C:\Desktop");
+            var expected =
+                $@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={@"C:\Desktop"
+                    };Extended Properties=""text;HDR=YES;FMT=Delimited;IMEX=1""";
             Assert.AreEqual(expected, GetConnectionString());
         }
 
@@ -177,9 +177,9 @@ namespace Lte.Domain.Test.LinqToExcel
 
             try { companies.GetEnumerator(); }
             catch (OleDbException) { }
-            var expected = string.Format(
-                @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={0};Extended Properties=""text;HDR=YES;FMT=Delimited;IMEX=1;READONLY=TRUE""",
-                @"C:\Desktop");
+            var expected =
+                $@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={@"C:\Desktop"
+                    };Extended Properties=""text;HDR=YES;FMT=Delimited;IMEX=1;READONLY=TRUE""";
             Assert.AreEqual(expected, GetConnectionString());
         }
 
@@ -193,9 +193,9 @@ namespace Lte.Domain.Test.LinqToExcel
 
             try { companies.GetEnumerator(); }
             catch (OleDbException) { }
-            var expected = string.Format(
-                @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=""text;Excel 12.0;HDR=YES;IMEX=1""",
-                @"C:\Desktop");
+            var expected =
+                $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={@"C:\Desktop"
+                    };Extended Properties=""text;Excel 12.0;HDR=YES;IMEX=1""";
             Assert.AreEqual(expected, GetConnectionString());
         }
 
@@ -213,9 +213,9 @@ namespace Lte.Domain.Test.LinqToExcel
 
             try { companies.GetEnumerator(); }
             catch (OleDbException) { }
-            var expected = string.Format(
-                @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=""text;Excel 12.0;HDR=YES;IMEX=1;READONLY=TRUE""",
-                @"C:\Desktop");
+            var expected =
+                $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={@"C:\Desktop"
+                    };Extended Properties=""text;Excel 12.0;HDR=YES;IMEX=1;READONLY=TRUE""";
             Assert.AreEqual(expected, GetConnectionString());
         }
 
@@ -227,9 +227,9 @@ namespace Lte.Domain.Test.LinqToExcel
 
             try { companies.GetEnumerator(); }
             catch (OleDbException) { }
-            var expected = string.Format(
-                @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=""Excel 12.0 Xml;HDR=YES;IMEX=1""",
-                "spreadsheet.xlsx");
+            var expected =
+                $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={"spreadsheet.xlsx"
+                    };Extended Properties=""Excel 12.0 Xml;HDR=YES;IMEX=1""";
             Assert.AreEqual(expected, GetConnectionString());
         }
 
@@ -243,9 +243,9 @@ namespace Lte.Domain.Test.LinqToExcel
 
             try { companies.GetEnumerator(); }
             catch (OleDbException) { }
-            var expected = string.Format(
-                @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=""Excel 12.0 Xml;HDR=YES;IMEX=1;READONLY=TRUE""",
-                "spreadsheet.xlsx");
+            var expected =
+                $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={"spreadsheet.xlsx"
+                    };Extended Properties=""Excel 12.0 Xml;HDR=YES;IMEX=1;READONLY=TRUE""";
             Assert.AreEqual(expected, GetConnectionString());
         }
 
@@ -259,9 +259,9 @@ namespace Lte.Domain.Test.LinqToExcel
 
             try { companies.GetEnumerator(); }
             catch (OleDbException) { }
-            var expected = string.Format(
-                @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=""Excel 12.0 Xml;HDR=YES;IMEX=1""",
-                "spreadsheet.xlsx");
+            var expected =
+                $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={"spreadsheet.xlsx"
+                    };Extended Properties=""Excel 12.0 Xml;HDR=YES;IMEX=1""";
             Assert.AreEqual(expected, GetConnectionString());
         }
 
@@ -273,9 +273,9 @@ namespace Lte.Domain.Test.LinqToExcel
 
             try { companies.GetEnumerator(); }
             catch (OleDbException) { }
-            var expected = string.Format(
-                @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=""Excel 12.0 Xml;HDR=YES;IMEX=1""",
-                "spreadsheet.xlsm");
+            var expected =
+                $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={"spreadsheet.xlsm"
+                    };Extended Properties=""Excel 12.0 Xml;HDR=YES;IMEX=1""";
             Assert.AreEqual(expected, GetConnectionString());
         }
 
@@ -289,9 +289,9 @@ namespace Lte.Domain.Test.LinqToExcel
 
             try { companies.GetEnumerator(); }
             catch (OleDbException) { }
-            var expected = string.Format(
-                @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=""Excel 12.0 Xml;HDR=YES;IMEX=1""",
-                "spreadsheet.xlsm");
+            var expected =
+                $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={"spreadsheet.xlsm"
+                    };Extended Properties=""Excel 12.0 Xml;HDR=YES;IMEX=1""";
             Assert.AreEqual(expected, GetConnectionString());
         }
 
@@ -303,9 +303,9 @@ namespace Lte.Domain.Test.LinqToExcel
 
             try { companies.GetEnumerator(); }
             catch (OleDbException) { }
-            var expected = string.Format(
-                @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=""Excel 12.0;HDR=YES;IMEX=1""",
-                "spreadsheet.xlsb");
+            var expected =
+                $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={"spreadsheet.xlsb"
+                    };Extended Properties=""Excel 12.0;HDR=YES;IMEX=1""";
             Assert.AreEqual(expected, GetConnectionString());
         }
 
@@ -319,9 +319,9 @@ namespace Lte.Domain.Test.LinqToExcel
 
             try { companies.GetEnumerator(); }
             catch (OleDbException) { }
-            var expected = string.Format(
-                @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=""Excel 12.0;HDR=YES;IMEX=1;READONLY=TRUE""",
-                "spreadsheet.xlsb");
+            var expected =
+                $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={"spreadsheet.xlsb"
+                    };Extended Properties=""Excel 12.0;HDR=YES;IMEX=1;READONLY=TRUE""";
             Assert.AreEqual(expected, GetConnectionString());
         }
 
@@ -335,9 +335,9 @@ namespace Lte.Domain.Test.LinqToExcel
 
             try { companies.GetEnumerator(); }
             catch (OleDbException) { }
-            var expected = string.Format(
-                @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=""Excel 12.0;HDR=YES;IMEX=1""",
-                "spreadsheet.xlsb");
+            var expected =
+                $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={"spreadsheet.xlsb"
+                    };Extended Properties=""Excel 12.0;HDR=YES;IMEX=1""";
             Assert.AreEqual(expected, GetConnectionString());
         }
 
@@ -350,9 +350,9 @@ namespace Lte.Domain.Test.LinqToExcel
 
             try { companies.GetEnumerator(); }
             catch (OleDbException) { }
-            var expected = string.Format(
-                @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={0};Extended Properties=""Excel 8.0;HDR=NO;IMEX=1""",
-                "spreadsheet.xls");
+            var expected =
+                $@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={"spreadsheet.xls"
+                    };Extended Properties=""Excel 8.0;HDR=NO;IMEX=1""";
             Assert.AreEqual(expected, GetConnectionString());
         }
 
@@ -366,9 +366,9 @@ namespace Lte.Domain.Test.LinqToExcel
 
             try { companies.GetEnumerator(); }
             catch (OleDbException) { }
-            var expected = string.Format(
-                @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={0};Extended Properties=""Excel 8.0;HDR=NO;IMEX=1;READONLY=TRUE""",
-                "spreadsheet.xls");
+            var expected =
+                $@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={"spreadsheet.xls"
+                    };Extended Properties=""Excel 8.0;HDR=NO;IMEX=1;READONLY=TRUE""";
             Assert.AreEqual(expected, GetConnectionString());
         }
 
@@ -382,9 +382,9 @@ namespace Lte.Domain.Test.LinqToExcel
 
             try { companies.GetEnumerator(); }
             catch (OleDbException) { }
-            var expected = string.Format(
-                @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=""Excel 12.0;HDR=NO;IMEX=1""",
-                "spreadsheet.xls");
+            var expected =
+                $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={"spreadsheet.xls"
+                    };Extended Properties=""Excel 12.0;HDR=NO;IMEX=1""";
             Assert.AreEqual(expected, GetConnectionString());
         }
 
@@ -402,9 +402,9 @@ namespace Lte.Domain.Test.LinqToExcel
 
             try { companies.GetEnumerator(); }
             catch (OleDbException) { }
-            var expected = string.Format(
-                @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=""Excel 12.0;HDR=NO;IMEX=1;READONLY=TRUE""",
-                "spreadsheet.xls");
+            var expected =
+                $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={"spreadsheet.xls"
+                    };Extended Properties=""Excel 12.0;HDR=NO;IMEX=1;READONLY=TRUE""";
             Assert.AreEqual(expected, GetConnectionString());
         }
     }
