@@ -62,6 +62,10 @@
     <Compile Include="Entities\CellConstructionTest.cs" />
     <Compile Include="Entities\IndoorDistributionTest.cs" />
     <Compile Include="Entities\PreciseCoverage4GTest.cs" />
+    <Compile Include="Excel\BtsExcelTest.cs" />
+    <Compile Include="Excel\CdmaCellExcelTest.cs" />
+    <Compile Include="Excel\CellExcelTest.cs" />
+    <Compile Include="Excel\ENodebExcelTest.cs" />
     <Compile Include="Kpi\CdmaCityStatExcelTest.cs" />
     <Compile Include="Kpi\CdmaRegionStatExcelTest.cs" />
     <Compile Include="Kpi\CdmaTopKpiExcelTest.cs" />

@@ -11,6 +11,7 @@ using NUnit.Framework;
 
 namespace Lte.Parameters.Test.Kpi
 {
+    [TestFixture]
     public class CdmaCityStatExcelTest : SQLLogStatements_Helper
     {
         ExcelQueryFactory _repo;
