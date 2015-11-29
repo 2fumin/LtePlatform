@@ -3,12 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Lte.Evaluations.DataService;
+using LtePlatform.Models;
 
 namespace LtePlatform.Controllers
 {
     public class ParametersController : Controller
     {
-        // GET: Parameters
+        private readonly BasicImportService _basicImportService;
+
+        public ParametersController(BasicImportService basicImportService)
+        {
+            _basicImportService = basicImportService;
+        }
+
         public ActionResult List()
         {
             return View();
@@ -33,6 +41,18 @@ namespace LtePlatform.Controllers
         [HttpPost]
         public ActionResult BasicPost()
         {
+            var lteFile = Request.Files["lteExcel"];
+            if (lteFile != null && lteFile.FileName != "")
+            {
+                var ltePath = lteFile.UploadParametersFile();
+                _basicImportService.ImportLteParameters(ltePath);
+            }
+            var cdmaFile = Request.Files["cdmaExcel"];
+            if (cdmaFile != null && cdmaFile.FileName != "")
+            {
+                var cdmaPath = cdmaFile.UploadParametersFile();
+                _basicImportService.ImportCdmaParameters(cdmaPath);
+            }
             return View("BasicImport");
         }
 

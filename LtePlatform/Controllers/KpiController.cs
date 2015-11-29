@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Lte.Domain.Common;
 using Lte.Evaluations.DataService;
+ using LtePlatform.Models;
 
 namespace LtePlatform.Controllers
 {
@@ -80,9 +81,7 @@ namespace LtePlatform.Controllers
                     city = legalCities[0];
                 }
                 var regions = _townService.GetRegions(city);
-                var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "uploads\\Kpi",
-                    httpPostedFileBase.FileName);
-                httpPostedFileBase.SaveAs(path);
+                var path = httpPostedFileBase.UploadKpiFile();
                 message = _importService.Import(path, regions);
             }
             ViewBag.Message = message;

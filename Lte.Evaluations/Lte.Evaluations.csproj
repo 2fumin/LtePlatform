@@ -84,6 +84,7 @@
   <ItemGroup>
     <Compile Include="CellTrace\ZteTraceRecord.cs" />
     <Compile Include="DataService\AlarmsService.cs" />
+    <Compile Include="DataService\BasicImportService.cs" />
     <Compile Include="DataService\CdmaRegionStatService.cs" />
     <Compile Include="DataService\CellService.cs" />
     <Compile Include="DataService\College3GTestService.cs" />

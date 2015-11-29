@@ -328,6 +328,10 @@
     <Compile Include="Controllers\MeController.cs" />
     <Compile Include="Controllers\ParametersController.cs" />
     <Compile Include="Controllers\Parameters\CellController.cs" />
+    <Compile Include="Controllers\Parameters\NewBtsExcelsController.cs" />
+    <Compile Include="Controllers\Parameters\NewCdmaCellExcelsController.cs" />
+    <Compile Include="Controllers\Parameters\NewCellExcelsController.cs" />
+    <Compile Include="Controllers\Parameters\NewENodebExcelsController.cs" />
     <Compile Include="Controllers\RutraceController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -338,6 +342,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\HttpFileUploadService.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MeViewModels.cs" />
