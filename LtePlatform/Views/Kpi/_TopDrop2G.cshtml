@@ -36,23 +36,35 @@
                         <div class="col-md-6">
                             <input id="BeginDate" class="form-control" data-bind="value: beginDate"/>
                         </div>
-                        <div class="col-md-2">
-                            <button class="btn btn-primary" data-bind="click: trendTable">统计</button>
-                        </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-4 control-label">结束日期：</label>
                         <div class="col-md-6">
-                            <input id="EndDate" class="form-control" data-bind="value: endDate"/>
+                            <input id="EndDate" class="form-control" data-bind="value: endDate" />
                         </div>
                         <div class="col-md-2">
                             <button class="btn btn-primary" data-bind="click: trendChart">图表</button>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">排序依据：</label>
+                        <div class="col-md-6">
+                            <select class="form-control" data-bind="value: orderPolicy, options: policySelection" ></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">TOP个数：</label>
+                        <div class="col-md-6">
+                            <select class="form-control" data-bind="value: topCount, options: topCountSelection" ></select>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-primary" data-bind="click: trendTable">统计</button>
+                        </div>
+                    </div>
+                    @{
+                        Html.RenderPartial("_TopDrop2GTrendTable");
+                    }
                 </div>
-                @{
-                    Html.RenderPartial("_TopDrop2GTrendTable");
-                }
             </div>
         </div>
     </div>

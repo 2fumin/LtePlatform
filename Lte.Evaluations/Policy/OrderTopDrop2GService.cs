@@ -13,24 +13,30 @@ namespace Lte.Evaluations.Policy
         public enum OrderTopDrop2GPolicy
         {
             OrderByDropsDescending,
-            OrderByDropRateDescending
+            OrderByDropRateDescending,
+            OrderByTopDatesDescending
         }
 
-        public static Dictionary<string,OrderTopDrop2GPolicy> OrderSelectionList=>new Dictionary<string,OrderTopDrop2GPolicy>
+        public static Dictionary<string, OrderTopDrop2GPolicy> OrderSelectionList
+            => new Dictionary<string, OrderTopDrop2GPolicy>
         {
             {"按照掉话次数降序排列", OrderTopDrop2GPolicy.OrderByDropsDescending },
-            {"按照掉话率降序排列", OrderTopDrop2GPolicy.OrderByDropRateDescending }
+            {"按照掉话率降序排列", OrderTopDrop2GPolicy.OrderByDropRateDescending },
+            {"按照出现次数降序排列", OrderTopDrop2GPolicy.OrderByTopDatesDescending }
         };
 
-        public static IEnumerable<TopDrop2GCellView> Order(this IEnumerable<TopDrop2GCellView> stats, OrderTopDrop2GPolicy policy,
+        public static IEnumerable<TopDrop2GTrendView> Order(this IEnumerable<TopDrop2GTrendView> stats, 
+            OrderTopDrop2GPolicy policy,
             int topCount)
         {
             switch (policy)
             {
                 case OrderTopDrop2GPolicy.OrderByDropRateDescending:
                     return stats.OrderByDescending(x => x.DropRate).Take(topCount);
+                case OrderTopDrop2GPolicy.OrderByDropsDescending:
+                    return stats.OrderByDescending(x => x.TotalDrops).Take(topCount);
                 default:
-                    return stats.OrderByDescending(x => x.Drops).Take(topCount);
+                    return stats.OrderByDescending(x => x.TopDates).Take(topCount);
             }
         }
 
