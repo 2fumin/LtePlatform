@@ -24,5 +24,21 @@ namespace LtePlatform.Controllers
         {
             return View("AlarmImport");
         }
+
+        public ActionResult BasicImport()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult BasicPost()
+        {
+            return View("BasicImport");
+        }
+
+        public ActionResult NeighborImport()
+        {
+            return View();
+        }
     }
 }

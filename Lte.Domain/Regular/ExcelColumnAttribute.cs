@@ -30,6 +30,8 @@ namespace Lte.Domain.Regular
                         return x => x.ToString().ConvertToInt(0);
                     case TransformEnum.IntegerRemoveDots:
                         return x => x.ToString().Replace(".", "").ConvertToInt(0);
+                    case TransformEnum.IpAddress:
+                        return x => new IpAddress(x.ToString());
                     default:
                         return null;
                 }

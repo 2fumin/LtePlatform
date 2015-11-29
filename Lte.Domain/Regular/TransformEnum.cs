@@ -10,6 +10,7 @@ namespace Lte.Domain.Regular
     {
         Default,
         IntegerDefaultToZero,
-        IntegerRemoveDots
+        IntegerRemoveDots,
+        IpAddress
     }
 }

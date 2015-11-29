@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "基本工程参数信息导入";
+}
+
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h2 class="panel-title">
+            <strong>@ViewBag.Title</strong>
+        </h2>
+    </div>
+    <p>
+        @{
+            Html.RenderPartial("_ParametersMenu");
+        }
+    </p>
+</div>
+
+<div class="row">
+    <div class="col-md-5">
+        @using (Html.BeginForm("BasicPost", "Parameters",
+                FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
+        {
+            Html.RenderPartial("_AlertPanel");
+            <h4>工参文件选择</h4>
+            <div class="form-group">
+                <label class="col-md-3 control-label">LTE Excel文件选择：</label>
+                <div class="col-md-7">
+                    <input name="lteExcel" class="form-control" type="file" accept=".xlsx"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">CDMA Excel文件选择：</label>
+                <div class="col-md-7">
+                    <input name="cdmaExcel" class="form-control" type="file" accept=".xls"/>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-save"></span>导入
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-md-7"></div>
+</div>

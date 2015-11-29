@@ -595,6 +595,9 @@
     <Content Include="Views\Shared\_CdmaCellTable.cshtml" />
     <Content Include="Views\Shared\_DistributionTable.cshtml" />
     <Content Include="Views\Parameters\_ParametersMenu.cshtml" />
+    <None Include="Views\Parameters\BasicImport.cshtml" />
+    <None Include="Views\Parameters\NeighborImport.cshtml" />
+    <None Include="Views\Parameters\_List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
