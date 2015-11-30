@@ -32,13 +32,13 @@
     // Other private operations
 
     // Operations
-    self.loadAlarms = function (id, begin, end) {
+    self.loadAlarms = function (id, viewModel) {
         sendRequest("/api/Alarms/", "GET", {
             eNodebId: id,
-            begin: begin,
-            end: end
+            begin: viewModel.beginDate(),
+            end: viewModel.endDate()
         }, function (result) {
-            app.alarms(result);
+            viewModel.alarms(result);
             $(".modal").modal("show");
         });
     };

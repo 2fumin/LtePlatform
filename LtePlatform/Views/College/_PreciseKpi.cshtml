@@ -1,4 +1,5 @@
-﻿<div class="row">
+﻿<!-- ko with: precise -->
+<div class="row">
     <div class="col-md-12">
         <p>
             校园名称：
@@ -39,7 +40,7 @@
                 <td data-bind="text: preciseRate.toFixed(2)"></td>
                 <td>
                     <input type="button" value="查询趋势" class="btn btn-primary"
-                           data-bind="click: function () { queryPrecise($data);}"/>
+                           data-bind="click: function () { $root.precise().queryPrecise($data);}"/>
                 </td>
             </tr>
             </tbody>
@@ -47,3 +48,4 @@
         <div id="dialog-modal"></div>
     </div>
 </div>
+<!-- /ko -->

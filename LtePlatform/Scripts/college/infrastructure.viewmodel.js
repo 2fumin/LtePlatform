@@ -1,99 +1,103 @@
 ﻿function InfrastructureViewModel(app, dataModel) {
     var self = this;
 
-    app.setView = ko.observable('list');
-    app.currentName = ko.observable();
-    app.beginDate = ko.observable((new Date()).getDateFromToday(-7).Format("yyyy-MM-dd"));
-    app.endDate = ko.observable((new Date()).getDateFromToday(-1).Format("yyyy-MM-dd"));
-    app.collegeList = ko.observableArray([]);
-    app.eNodebList = ko.observableArray([]);
-    app.cellList = ko.observableArray([]);
-    app.btsList = ko.observableArray([]);
-    app.cdmaCellList = ko.observableArray([]);
-    app.distributionList = ko.observableArray([]);
-    app.alarms = ko.observableArray([]);
+    self.setView = ko.observable('list');
+    self.currentName = ko.observable();
+    self.beginDate = ko.observable((new Date()).getDateFromToday(-7).Format("yyyy-MM-dd"));
+    self.endDate = ko.observable((new Date()).getDateFromToday(-1).Format("yyyy-MM-dd"));
+    self.collegeList = ko.observableArray([]);
+    self.eNodebList = ko.observableArray([]);
+    self.cellList = ko.observableArray([]);
+    self.btsList = ko.observableArray([]);
+    self.cdmaCellList = ko.observableArray([]);
+    self.distributionList = ko.observableArray([]);
+    self.alarms = ko.observableArray([]);
 
-    app.initialize = function () {
-        $("#BeginDate").datepicker({ dateFormat: 'yy-mm-dd' });
-        $("#EndDate").datepicker({ dateFormat: 'yy-mm-dd' });
+    Sammy(function () {
+        this.get('#infrastructure', function () {
+            $("#BeginDate").datepicker({ dateFormat: 'yy-mm-dd' });
+            $("#EndDate").datepicker({ dateFormat: 'yy-mm-dd' });
 
-        $.ajax({
-            method: 'get',
-            url: app.dataModel.collegeStatUrl,
-            contentType: "application/json; charset=utf-8",
-            headers: {
-                'Authorization': 'Bearer ' + app.dataModel.getAccessToken()
-            },
-            success: function (data) {
-                app.collegeList(data);
-            }
+            $.ajax({
+                method: 'get',
+                url: app.dataModel.collegeStatUrl,
+                contentType: "application/json; charset=utf-8",
+                headers: {
+                    'Authorization': 'Bearer ' + app.dataModel.getAccessToken()
+                },
+                success: function (data) {
+                    self.collegeList(data);
+                }
+            });
         });
+        this.get('/College/Infrastructure', function () { this.app.runRoute('get', '#infrastructure'); });
+    });
+
+    self.gobackList = function () {
+        self.setView('list');
     };
 
-    app.gobackList = function () {
-        app.setView('list');
+    self.refreshAlarms = function () {
+        self.showENodebs(self.currentName());
     };
 
-    app.refreshAlarms = function () {
-        app.showENodebs(app.currentName());
-    };
-
-    app.showENodebs = function (name) {
+    self.showENodebs = function (name) {
         sendRequest(app.dataModel.collegeENodebUrl, "GET", {
             collegeName: name,
-            begin: app.beginDate(),
-            end: app.endDate()
+            begin: self.beginDate(),
+            end: self.endDate()
         }, function (data) {
-            app.eNodebList(data);
-            app.setView('eNodebs');
-            app.currentName(name);
+            self.eNodebList(data);
+            self.setView('eNodebs');
+            self.currentName(name);
         });
     };
 
-    app.showCells = function (name) {
+    self.showCells = function (name) {
         sendRequest(app.dataModel.collegeCellsUrl, "GET", { collegeName: name }, function (data) {
-            app.cellList(data);
-            app.setView('cells');
-            app.currentName(name);
+            self.cellList(data);
+            self.setView('cells');
+            self.currentName(name);
         });
     };
 
-    app.showBtss = function (name) {
+    self.showBtss = function (name) {
         sendRequest(app.dataModel.collegeBtssUrl, "GET", { collegeName: name }, function (data) {
-            app.btsList(data);
-            app.setView('btss');
-            app.currentName(name);
+            self.btsList(data);
+            self.setView('btss');
+            self.currentName(name);
         });
     };
 
-    app.showCdmaCells = function (name) {
+    self.showCdmaCells = function (name) {
         sendRequest(app.dataModel.collegeCdmaCellsUrl, "GET", { collegeName: name }, function (data) {
-            app.cdmaCellList(data);
-            app.setView('cdmaCells');
-            app.currentName(name);
+            self.cdmaCellList(data);
+            self.setView('cdmaCells');
+            self.currentName(name);
         });
     };
 
-    app.showLteDistributions = function (name) {
+    self.showLteDistributions = function (name) {
         sendRequest(app.dataModel.collegeLteDistributionsUrl, "GET", { collegeName: name }, function (data) {
-            app.distributionList(data);
-            app.setView('lteDistributions');
-            app.currentName(name);
+            self.distributionList(data);
+            self.setView('lteDistributions');
+            self.currentName(name);
         });
     };
 
-    app.showCdmaDistributions = function (name) {
+    self.showCdmaDistributions = function (name) {
         sendRequest(app.dataModel.collegeCdmaDistributionsUrl, "GET", { collegeName: name }, function (data) {
-            app.distributionList(data);
-            app.setView('cdmaDistributions');
-            app.currentName(name);
+            self.distributionList(data);
+            self.setView('cdmaDistributions');
+            self.currentName(name);
         });
     };
 
-    app.loadAlarms = function(id) {
-        return app.dataModel.loadAlarms(id, app.beginDate(), app.endDate());
+    self.loadAlarms = function(id) {
+        return app.dataModel.loadAlarms(id, self);
     };
-
+    
+    app.view(self);
     return self;
 }
 

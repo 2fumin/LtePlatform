@@ -71,11 +71,11 @@ namespace Lte.Evaluations.DataService
             return _repository.DeleteAsync(stat);
         }
 
-        public CollegeKpi GetRecordResult(DateTime recordDate, int hour, string name)
+        public CollegeKpi GetRecordResult(CollegeKpiView view)
         {
-            var college = _collegeRepository.GetByName(name);
+            var college = _collegeRepository.GetByName(view.CollegeName);
             if (college == null) return null;
-            var time = recordDate.AddHours(hour);
+            var time = view.TestTime;
             return _repository.GetByCollegeIdAndTime(college.Id, time);
         }
     }

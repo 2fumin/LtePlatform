@@ -1,34 +1,46 @@
 ﻿function KpiViewModel(app, dataModel) {
     var self = this;
 
-    app.colleges = ko.observableArray([]);
-    app.selectedCollege = ko.observable();
-    app.kpis = ko.observableArray([]);
-    app.edit = ko.observable();
-    app.date = ko.observable((new Date()).Format("yyyy-MM-dd"));
-    app.hour = ko.observable(8);
-    app.hourSelection = ko.observableArray([9, 11, 13, 15, 17, 19, 21]);
+    self.colleges = ko.observableArray([]);
+    self.selectedCollege = ko.observable();
+    self.kpis = ko.observableArray([]);
+    self.edit = ko.observable();
+    self.date = ko.observable((new Date()).Format("yyyy-MM-dd"));
+    self.hour = ko.observable(8);
+    self.hourSelection = ko.observableArray([9, 11, 13, 15, 17, 19, 21]);
 
-    app.initialize = function () {
-        $("#date").datepicker({ dateFormat: 'yy-mm-dd' });
+    Sammy(function () {
+        this.get('#kpi', function () {
+            $("#date").datepicker({ dateFormat: 'yy-mm-dd' });
 
-        $.ajax({
-            method: 'get',
-            url: app.dataModel.collegeQueryUrl,
-            contentType: "application/json; charset=utf-8",
-            headers: {
-                'Authorization': 'Bearer ' + app.dataModel.getAccessToken()
-            },
-            success: function (data) {
-                app.colleges.removeAll();
-                for (var i = 0; i < data.length; i++) {
-                    app.colleges.push(data[i].name);
-                }
-            }
+            initializeCollegeList(self);
+
+            self.date.subscribe(function () { getKpiList(self); });
+            self.hour.subscribe(function () { getKpiList(self); });
         });
+        this.get('/College/KpiReport', function () { this.app.runRoute('get', '#kpi'); });
+    });
 
-        app.date.subscribe(function () { getKpiList(); });
-        app.hour.subscribe(function () { getKpiList(); });
+    self.deleteKpi = function (view) {
+        sendRequest(app.dataModel.collegeKpiUrl, "DELETE", view,
+            function () { getKpiList(self); });
+    };
+
+    self.postKpi = function () {
+        sendRequest(app.dataModel.collegeKpiUrl, "POST", self.edit(), function () {
+            $('#edit').modal('hide');
+            getKpiList(self);
+        });
+    };
+
+    self.createKpi = function () {
+        sendRequest(app.dataModel.collegeKpiUrl, "GET", {
+            date: self.date, hour: self.hour, name: self.selectedCollege
+        },
+            function (data) {
+                self.edit(data);
+                $('#edit').modal('show');
+            });
     };
 
     return self;

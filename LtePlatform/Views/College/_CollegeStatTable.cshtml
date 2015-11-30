@@ -18,32 +18,32 @@
             <td data-bind="text: expectedSubscribers"></td>
             <td data-bind="text: $data.area.toFixed(2)"></td>
             <td>
-                <a href="#" data-bind="click: function () { $root.showENodebs(name);}">
+                <a href="#" data-bind="click: function () { $root.infrastructure().showENodebs(name);}">
                     <span data-bind="text: totalLteENodebs"></span>
                 </a>
             </td>
             <td>
-                <a href="#" data-bind="click: function () { $root.showCells(name);}">
+                <a href="#" data-bind="click: function () { $root.infrastructure().showCells(name);}">
                     <span data-bind="text: totalLteCells"></span>
                 </a>
             </td>
             <td>
-                <a href="#" data-bind="click: function () { $root.showBtss(name); }">
+                <a href="#" data-bind="click: function () { $root.infrastructure().showBtss(name); }">
                     <span data-bind="text: totalCdmaBts"></span>
                 </a>
             </td>
             <td>
-                <a href="#" data-bind="click: function () { $root.showCdmaCells(name); }">
+                <a href="#" data-bind="click: function () { $root.infrastructure().showCdmaCells(name); }">
                     <span data-bind="text: totalCdmaCells"></span>
                 </a>
             </td>
             <td>
-                <a href="#" data-bind="click: function () { $root.showLteDistributions(name); }">
+                <a href="#" data-bind="click: function () { $root.infrastructure().showLteDistributions(name); }">
                     <span data-bind="text: totalLteIndoors"></span>
                 </a>
             </td>
             <td>
-                <a href="#" data-bind="click: function () { $root.showCdmaDistributions(name); }">
+                <a href="#" data-bind="click: function () { $root.infrastructure().showCdmaDistributions(name); }">
                     <span data-bind="text: totalCdmaIndoors"></span>
                 </a>
             </td>

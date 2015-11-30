@@ -1,32 +1,8 @@
-﻿var getKpiList = function () {
+﻿var getKpiList = function (viewModel) {
     sendRequest(app.dataModel.collegeKpiUrl, "GET", {
-         date: app.date, hour: app.hour
+         date: viewModel.date, hour: viewModel.hour
     }, function (data) {
-        app.kpis.removeAll();
-        app.kpis.push.apply(app.kpis, data);
+        viewModel.kpis.removeAll();
+        viewModel.kpis.push.apply(viewModel.kpis, data);
     });
-};
-
-var deleteKpi = function (name) {
-    sendRequest(app.dataModel.collegeKpiUrl, "GET", {
-             recordDate: app.date(), hour: app.hour(), name: name
-        },
-        function () { getKpiList(); });
-};
-
-var postKpi = function () {
-    sendRequest(app.dataModel.collegeKpiUrl, "POST", app.edit(), function () {
-        $('#edit').modal('hide');
-        getKpiList();
-    });
-};
-
-var createKpi = function () {
-    sendRequest(app.dataModel.collegeKpiUrl, "GET", {
-             date: app.date, hour: app.hour, name: app.selectedCollege
-        },
-        function (data) {
-            app.edit(data);
-            $('#edit').modal('show');
-        });
 };

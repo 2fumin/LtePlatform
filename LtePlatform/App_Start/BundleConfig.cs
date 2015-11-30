@@ -107,6 +107,7 @@ namespace LtePlatform
                 "~/Scripts/app/common.js",
                 "~/Scripts/app/app.datamodel.js",
                 "~/Scripts/app/app.viewmodel.js",
+                "~/Scripts/college/common.controller.js",
                 "~/Scripts/college/test.viewmodel.js",
                 "~/Scripts/college/test.controller.js",
                 "~/Scripts/app/_run.js"));
@@ -116,6 +117,7 @@ namespace LtePlatform
                 "~/Scripts/app/common.js",
                 "~/Scripts/app/app.datamodel.js",
                 "~/Scripts/app/app.viewmodel.js",
+                "~/Scripts/college/common.controller.js",
                 "~/Scripts/college/kpi.viewmodel.js",
                 "~/Scripts/college/kpi.controller.js",
                 "~/Scripts/app/_run.js"));
@@ -134,6 +136,7 @@ namespace LtePlatform
                 "~/Scripts/mycharts/comboChart.js",
                 "~/Scripts/app/app.datamodel.js",
                 "~/Scripts/app/app.viewmodel.js",
+                "~/Scripts/college/common.controller.js",
                 "~/Scripts/college/precise.viewmodel.js",
                 "~/Scripts/college/precise.controller.js",
                 "~/Scripts/app/_run.js"));

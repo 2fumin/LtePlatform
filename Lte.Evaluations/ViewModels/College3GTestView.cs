@@ -11,6 +11,8 @@ namespace Lte.Evaluations.ViewModels
 {
     public class College3GTestView
     {
+        public DateTime TestTime { get; set; }
+
         public string CollegeName { get; set; }
 
         public double DownloadRate { get; set; }

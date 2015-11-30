@@ -1,4 +1,5 @@
-﻿<div class="row">
+﻿<!-- ko with: kpi -->
+<div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-8">
         <p>
@@ -43,7 +44,7 @@
                 <td data-bind="text: drop3G + '%'"></td>
                 <td data-bind="text: flow3G + 'GB'"></td>
                 <td>
-                    <button class="btn btn-danger" data-bind="click: function () { deleteKpi(collegeName); }">
+                    <button class="btn btn-danger" data-bind="click: function () { $root.kpi().deleteKpi($data); }">
                         删除
                     </button>
                 </td>
@@ -55,3 +56,4 @@
         Html.RenderPartial("_EditKpi");
     }
 </div>
+<!-- /ko -->

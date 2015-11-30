@@ -11,6 +11,8 @@ namespace Lte.Evaluations.ViewModels
 {
     public class CollegeKpiView
     {
+        public DateTime TestTime { get; set; }
+
         public string CollegeName { get; set; }
 
         public int OnlineUsers { get; set; }

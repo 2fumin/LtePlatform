@@ -1,28 +1,53 @@
 ﻿function PreciseViewModel(app, dataModel) {
     var self = this;
 
-    app.colleges = ko.observableArray([]);
-    app.selectedCollege = ko.observable();
-    app.startDate = ko.observable((new Date()).getDateFromToday(-7).Format("yyyy-MM-dd"));
-    app.endDate = ko.observable((new Date()).getDateFromToday(-1).Format("yyyy-MM-dd"));
-    app.cellList = ko.observableArray([]);
+    self.colleges = ko.observableArray([]);
+    self.selectedCollege = ko.observable();
+    self.startDate = ko.observable((new Date()).getDateFromToday(-7).Format("yyyy-MM-dd"));
+    self.endDate = ko.observable((new Date()).getDateFromToday(-1).Format("yyyy-MM-dd"));
+    self.cellList = ko.observableArray([]);
 
-    app.initialize = function () {
-        $("#StartDate").datepicker({ dateFormat: 'yy-mm-dd' });
-        $("#EndDate").datepicker({ dateFormat: 'yy-mm-dd' });
+    Sammy(function () {
+        this.get('#precise', function () {
+            $("#StartDate").datepicker({ dateFormat: 'yy-mm-dd' });
+            $("#EndDate").datepicker({ dateFormat: 'yy-mm-dd' });
+
+            initializeCollegeList(self);
+        });
+        this.get('/College/PreciseKpi', function () { this.app.runRoute('get', '#precise'); });
+    });
+
+    self.queryCells = function () {
+        sendRequest(app.dataModel.collegePreciseUrl, "GET", {
+            collegeName: self.selectedCollege(),
+            begin: self.startDate(),
+            end: self.endDate()
+        }, function (data) {
+            self.cellList(data);
+        });
+    };
+
+    self.queryPrecise = function (cell) {
+        var chart = new comboChart();
+        chart.title.text = cell.eNodebName + "-" + cell.sectorId + '精确覆盖率变化趋势';
+        var dom = {
+            tag: "#dialog-modal",
+            width: 900,
+            height: 480
+        };
 
         $.ajax({
-            method: 'get',
-            url: app.dataModel.collegeQueryUrl,
-            contentType: "application/json; charset=utf-8",
-            headers: {
-                'Authorization': 'Bearer ' + app.dataModel.getAccessToken()
+            url: app.dataModel.preciseStatUrl,
+            type: "GET",
+            dataType: "json",
+            data: {
+                cellId: cell.eNodebId,
+                sectorId: cell.sectorId,
+                begin: self.startDate(),
+                end: self.endDate()
             },
-            success: function (data) {
-                app.colleges.removeAll();
-                for (var i = 0; i < data.length; i++) {
-                    app.colleges.push(data[i].name);
-                }
+            success: function (result) {
+                showPreciseTrend(chart, dom, result);
             }
         });
     };

@@ -41,10 +41,10 @@ namespace LtePlatform.Controllers.College
             return Ok();
         }
 
-        [HttpGet]
-        public async Task<IHttpActionResult> Delete(DateTime recordDate, int hour, string name)
+        [HttpDelete]
+        public async Task<IHttpActionResult> Delete(CollegeKpiView view)
         {
-            var result = _service.GetRecordResult(recordDate, hour, name);
+            var result = _service.GetRecordResult(view);
             if (result == null) return BadRequest("The test record does not exist!");
             await _service.Delete(result);
             return Ok();

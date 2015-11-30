@@ -11,6 +11,8 @@ namespace Lte.Evaluations.ViewModels
 {
     public class College4GTestView
     {
+        public DateTime TestTime { get; set; }
+
         public string CollegeName { get; set; }
 
         public string CellName { get; set; }

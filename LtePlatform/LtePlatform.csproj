@@ -430,6 +430,7 @@
     <Content Include="Content\google\7M5kxD4eGxuhgFaIk95pBfk_vArhqVIZ0nv9q090hN8.woff2" />
     <None Include="Properties\PublishProfiles\Lte2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\college\common.controller.js" />
     <Content Include="Scripts\college\infrastructure.viewmodel.js" />
     <Content Include="Scripts\college\kpi.controller.js" />
     <Content Include="Scripts\college\kpi.viewmodel.js" />
