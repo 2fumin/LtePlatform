@@ -43,23 +43,15 @@
         this.get('/College/TestReport', function () { this.app.runRoute('get', '#test'); });
     });
 
-    self.deleteTest3G = function (name) {
-        sendRequest(app.dataModel.college3GTestUrl, "GET", {
-            recordDate: self.date(),
-            hour: self.hour(),
-            name: name
-        },
+    self.deleteTest3G = function (view) {
+        sendRequest(app.dataModel.college3GTestUrl, "DELETE", view,
             function () {
                 update3GList(self);
             });
     };
 
-    self.deleteTest4G = function (name) {
-        sendRequest(app.dataModel.college4GTestUrl, "GET", {
-            recordDate: self.date(),
-            hour: self.hour(),
-            name: name
-        },
+    self.deleteTest4G = function (view) {
+        sendRequest(app.dataModel.college4GTestUrl, "GET", view,
             function () {
                 update4GList(self);
             });

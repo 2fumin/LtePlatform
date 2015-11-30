@@ -23,7 +23,7 @@
                 <td data-bind="text: (dropRate * 100).toFixed(2) + '%'"></td>
                 <td>
                     <button type="button" class="btn btn-primary"
-                            data-bind="click: function(){ showHistory($data); }">
+                            data-bind="click: function(){ $root.topDrop2G().showHistory($data); }">
                         <span class="glyphicon glyphicon-search"></span>历史信息
                     </button>
                 </td>

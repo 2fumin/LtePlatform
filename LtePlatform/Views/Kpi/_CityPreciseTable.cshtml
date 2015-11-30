@@ -20,7 +20,12 @@
         <td data-bind="text: $data.totalMrs"></td>
         <td data-bind="text: $data.preciseRate.toFixed(2)"></td>
         <td data-bind="text: $data.firstRate.toFixed(2)"></td>
-        <td><button class="btn btn-primary" data-bind="click: function(){ $root.showDetails($data.district);}">详细</button></td>
+        <td>
+            <button class="btn btn-primary" 
+                    data-bind="click: function(){ $root.precise().showDetails($data.district);}">
+                详细
+            </button>
+        </td>
     </tr>
     </tbody>
 </table>
@@ -41,11 +46,11 @@
     </thead>
     <tbody data-bind="foreach: townStats">
     <tr>
-        <td data-bind="text: $data.town, visible: $data.district == $root.currentDistrict()"></td>
-        <td data-bind="text: $data.totalMrs, visible: $data.district == $root.currentDistrict()"></td>
-        <td data-bind="text: $data.preciseRate.toFixed(2), visible: $data.district == $root.currentDistrict()"></td>
-        <td data-bind="text: $data.firstRate.toFixed(2), visible: $data.district == $root.currentDistrict()"></td>
-        <td data-bind="text: $data.thirdRate.toFixed(2), visible: $data.district == $root.currentDistrict()"></td>
+        <td data-bind="text: $data.town, visible: $data.district == $root.precise().currentDistrict()"></td>
+        <td data-bind="text: $data.totalMrs, visible: $data.district == $root.precise().currentDistrict()"></td>
+        <td data-bind="text: $data.preciseRate.toFixed(2), visible: $data.district == $root.precise().currentDistrict()"></td>
+        <td data-bind="text: $data.firstRate.toFixed(2), visible: $data.district == $root.precise().currentDistrict()"></td>
+        <td data-bind="text: $data.thirdRate.toFixed(2), visible: $data.district == $root.precise().currentDistrict()"></td>
     </tr>
     </tbody>
 </table>

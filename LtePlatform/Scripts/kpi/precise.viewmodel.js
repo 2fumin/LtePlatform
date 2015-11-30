@@ -15,7 +15,7 @@
 
             initializeCityKpi(self);
         });
-        this.get('/Kpi/Precise', function () { this.app.runRoute('get', '#precise'); });
+        this.get('/Kpi/Precise4G', function () { this.app.runRoute('get', '#precise'); });
     });
 
     self.showKpi = function () {

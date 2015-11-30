@@ -15,7 +15,7 @@
 
             initializeCityKpi(self);
         });
-        this.get('/Precise/Trend', function () { this.app.runRoute('get', '#preciseTrend'); });
+        this.get('/Kpi/PreciseTrend', function () { this.app.runRoute('get', '#preciseTrend'); });
     });
 
     self.showKpi = function () {

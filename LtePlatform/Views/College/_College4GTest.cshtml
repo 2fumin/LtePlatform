@@ -23,7 +23,8 @@
             <td data-bind="text: rsrp"></td>
             <td data-bind="text: sinr"></td>
             <td>
-                <button class="btn btn-danger" data-bind="click: function () { deleteTest4G(collegeName); }">
+                <button class="btn btn-danger" 
+                        data-bind="click: function () { $root.test().deleteTest4G($data); }">
                     删除
                 </button>
             </td>

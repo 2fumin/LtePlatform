@@ -17,7 +17,8 @@
             <td data-bind="text: minRssi+'~'+maxRssi"></td>
             <td data-bind="text: vswr"></td>
             <td>
-                <button class="btn btn-danger" data-bind="click: function () { deleteTest3G(collegeName); }">
+                <button class="btn btn-danger" 
+                        data-bind="click: function () { $root.test().deleteTest3G($data); }">
                     删除
                 </button>
             </td>

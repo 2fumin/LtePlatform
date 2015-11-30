@@ -92,11 +92,10 @@ namespace Lte.Evaluations.DataService
             return _repository.DeleteAsync(result);
         }
 
-        public College4GTestResults GetRecordResult(DateTime recordDate, int hour, string name)
+        public College4GTestResults GetRecordResult(DateTime time, string name)
         {
             var college = _collegeRepository.GetByName(name);
             if (college == null) return null;
-            var time = recordDate.AddHours(hour);
             return _repository.GetByCollegeIdAndTime(college.Id, time);
         }
     }
