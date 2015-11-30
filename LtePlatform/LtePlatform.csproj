@@ -604,6 +604,7 @@
     <Content Include="Views\Parameters\_ParametersMenu.cshtml" />
     <None Include="Views\Parameters\BasicImport.cshtml" />
     <None Include="Views\Parameters\NeighborImport.cshtml" />
+    <None Include="Views\Parameters\_BasicImport.cshtml" />
     <None Include="Views\Parameters\_List.cshtml" />
   </ItemGroup>
   <ItemGroup>

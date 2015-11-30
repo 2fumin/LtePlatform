@@ -41,17 +41,28 @@ namespace LtePlatform.Controllers
         [HttpPost]
         public ActionResult BasicPost()
         {
+            var messages = new List<string>();
             var lteFile = Request.Files["lteExcel"];
             if (lteFile != null && lteFile.FileName != "")
             {
                 var ltePath = lteFile.UploadParametersFile();
                 _basicImportService.ImportLteParameters(ltePath);
+                messages.Add("完成LTE工参文件读取！");
+            }
+            else
+            {
+                messages.Add("LTE工参文件无选择！");
             }
             var cdmaFile = Request.Files["cdmaExcel"];
             if (cdmaFile != null && cdmaFile.FileName != "")
             {
                 var cdmaPath = cdmaFile.UploadParametersFile();
                 _basicImportService.ImportCdmaParameters(cdmaPath);
+                messages.Add("完成CDMA工参文件读取！");
+            }
+            else
+            {
+                messages.Add("CDMA工参文件无选择！");
             }
             return View("BasicImport");
         }

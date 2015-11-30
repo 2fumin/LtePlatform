@@ -1,6 +1,25 @@
 ﻿function BasicImportViewModel(app, dataModel) {
     var self = this;
 
+    self.newENodebs = ko.observableArray([]);
+    self.newCells = ko.observableArray([]);
+    self.newBtss = ko.observableArray([]);
+    self.newCdmaCells = ko.observableArray([]);
+    self.newENodebsVisible = ko.observable(false);
+    self.newCellsVisible = ko.observable(false);
+    self.newBtssVisible = ko.observable(false);
+    self.newCdmaCellsVisible = ko.observable(false);
+    self.newENodebsImport = ko.observable(true);
+    self.newCellsImport = ko.observable(true);
+    self.newBtssImport = ko.observable(true);
+    self.newCdmaCellsImport = ko.observable(true);
+
+    Sammy(function () {
+        this.get('#basicImport', function () {
+        });
+        this.get('/Parameters/BasicImport', function () { this.app.runRoute('get', '#basicImport'); });
+    });
+
     return self;
 }
 
