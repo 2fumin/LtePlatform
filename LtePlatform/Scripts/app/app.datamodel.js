@@ -26,6 +26,10 @@
     self.collegeCdmaCellsUrl = "/api/CollegeCdmaCells/";
 
     self.cellUrl = "/api/Cell/";
+    self.newENodebExcelsUrl = "/api/NewENodebExcels";
+    self.newCellExcelsUrl = "/api/NewCellExcels";
+    self.newBtsExcelsUrl = "/api/NewBtsExcels";
+    self.newCdmaCellExcelsUrl = "/api/NewCdmaCellExcels";
 
     // Route operations
 

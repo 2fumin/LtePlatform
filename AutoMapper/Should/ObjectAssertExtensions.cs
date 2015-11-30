@@ -234,7 +234,7 @@ namespace AutoMapper.Should
         /// <typeparam name="T">The type of the objects to be compared</typeparam>
         /// <param name="actual">The value to be compared against</param>
         /// <param name="expected">The expected value</param>
-        /// <param name="message">The user message to show on failure</param>
+        /// <param name="userMessage">The user message to show on failure</param>
         /// <exception cref="EqualException">Thrown when the objects are not equal</exception>
         public static void ShouldEqual<T>(this T actual,
                                           T expected,

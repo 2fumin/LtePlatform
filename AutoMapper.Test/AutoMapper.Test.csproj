@@ -153,6 +153,7 @@
     <Compile Include="IMappingExpression\NonGenericProjectEnumTest.cs" />
     <Compile Include="IMappingExpression\NonGenericReverseMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Should\ListOrArrayCompareTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AutoMapper\AutoMapper.csproj">

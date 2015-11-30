@@ -88,6 +88,7 @@
   <ItemGroup>
     <Compile Include="DataService\AlarmsServiceTest.cs" />
     <Compile Include="DataService\AlarmsServiceTestQueries.cs" />
+    <Compile Include="DataService\BasicImportServiceTest.cs" />
     <Compile Include="DataService\CdmaRegionStatServiceTest.cs" />
     <Compile Include="DataService\CdmaRegionViewQueries.cs" />
     <Compile Include="DataService\College3GTestQueries.cs" />

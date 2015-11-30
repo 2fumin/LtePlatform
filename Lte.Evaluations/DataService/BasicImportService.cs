@@ -25,29 +25,29 @@ namespace Lte.Evaluations.DataService
             _cdmaCellRepository = cdmaCellRepository;
         }
 
-        public static List<ENodebExcel> ENodebExcels { get; private set; } = new List<ENodebExcel>();
+        public static List<ENodebExcel> ENodebExcels { get; set; } = new List<ENodebExcel>();
 
-        public static List<CellExcel> CellExcels { get; private set; } = new List<CellExcel>();
+        public static List<CellExcel> CellExcels { get; set; } = new List<CellExcel>();
 
-        public static List<BtsExcel> BtsExcels { get; private set; } = new List<BtsExcel>();
+        public static List<BtsExcel> BtsExcels { get; set; } = new List<BtsExcel>();
 
-        public static List<CdmaCellExcel> CdmaCellExcels { get; private set; } = new List<CdmaCellExcel>();
+        public static List<CdmaCellExcel> CdmaCellExcels { get; set; } = new List<CdmaCellExcel>();
 
         public void ImportLteParameters(string path)
         {
-            var _repo = new ExcelQueryFactory {FileName = path};
-            ENodebExcels = (from c in _repo.Worksheet<ENodebExcel>("基站级")
+            var repo = new ExcelQueryFactory {FileName = path};
+            ENodebExcels = (from c in repo.Worksheet<ENodebExcel>("基站级")
                 select c).ToList();
-            CellExcels = (from c in _repo.Worksheet<CellExcel>("小区级")
+            CellExcels = (from c in repo.Worksheet<CellExcel>("小区级")
                 select c).ToList();
         }
 
         public void ImportCdmaParameters(string path)
         {
-            var _repo = new ExcelQueryFactory { FileName = path };
-            BtsExcels = (from c in _repo.Worksheet<BtsExcel>("基站级")
+            var repo = new ExcelQueryFactory { FileName = path };
+            BtsExcels = (from c in repo.Worksheet<BtsExcel>("基站级")
                 select c).ToList();
-            CdmaCellExcels = (from c in _repo.Worksheet<CdmaCellExcel>("小区级")
+            CdmaCellExcels = (from c in repo.Worksheet<CdmaCellExcel>("小区级")
                 select c).ToList();
         }
 
