@@ -147,6 +147,10 @@
     <Compile Include="Core\IgnoreAllTests.cs" />
     <Compile Include="Core\Indexers.cs" />
     <Compile Include="Core\InterfaceMapping.cs" />
+    <Compile Include="Core\MappingExceptions.cs" />
+    <Compile Include="Core\MappingOrder.cs" />
+    <Compile Include="Core\MapToAttributeTest.cs" />
+    <Compile Include="Core\MaxDepthTests.cs" />
     <Compile Include="IMappingExpression\ForCtorParam.cs" />
     <Compile Include="IMappingExpression\NonGenericAllMembersNullSubstitute.cs" />
     <Compile Include="IMappingExpression\NonGenericConstructorTests.cs" />
