@@ -20,6 +20,7 @@
         @using (Html.BeginForm("BasicPost", "Parameters",
                 FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
         {
+            Html.RenderPartial("_AlertPanel");
             <h4>工参文件选择</h4>
             <div class="form-group">
                 <label class="col-md-3 control-label">LTE Excel文件选择：</label>
