@@ -10,6 +10,8 @@
     self.newBtssImport = ko.observable(true);
     self.newCdmaCellsImport = ko.observable(true);
 
+    self.newENodebLonLatEdits = ko.observableArray([]);
+
     Sammy(function () {
         this.get('#basicImport', function () {
             sendRequest(app.dataModel.newENodebExcelsUrl, "GET", null, function(data) {

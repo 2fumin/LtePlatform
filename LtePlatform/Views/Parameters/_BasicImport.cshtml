@@ -24,7 +24,7 @@
                 <td data-bind="text: newENodebs().length"></td>
                 <td>
                     <div class="btn-group" data-bind="visible: newENodebs().length > 0">
-                        <button class="btn btn-warning">检查经纬度</button>
+                        <button class="btn btn-warning" data-bind="click: checkENodebsLonLat">检查经纬度</button>
                         <button class="btn btn-warning">匹配镇区</button>
                     </div>
                 </td>
