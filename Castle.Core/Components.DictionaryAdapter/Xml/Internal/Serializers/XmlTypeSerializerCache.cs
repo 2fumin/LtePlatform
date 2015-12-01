@@ -12,16 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#if !SILVERLIGHT // Until support for other platforms is verified
-namespace Castle.Components.DictionaryAdapter.Xml
-{
 	using System;
 	using System.Collections.Generic;
 	using System.ComponentModel;
 	using System.Reflection;
 	using System.Xml.Serialization;
 
-	internal class XmlTypeSerializerCache : SingletonDispenser<Type, XmlTypeSerializer>
+#if !SILVERLIGHT // Until support for other platforms is verified
+namespace Castle.Components.DictionaryAdapter.Xml
+{
+	public class XmlTypeSerializerCache : SingletonDispenser<Type, XmlTypeSerializer>
 	{
 		public static readonly XmlTypeSerializerCache
 			Instance = new XmlTypeSerializerCache();

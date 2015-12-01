@@ -18,7 +18,7 @@ namespace Castle.Core.Internal
 
 #if !SILVERLIGHT
 
-	internal class SlimReadWriteLock : Lock
+	public class SlimReadWriteLock : Lock
 	{
 		private readonly ReaderWriterLockSlim locker = new ReaderWriterLockSlim(LockRecursionPolicy.NoRecursion);
 

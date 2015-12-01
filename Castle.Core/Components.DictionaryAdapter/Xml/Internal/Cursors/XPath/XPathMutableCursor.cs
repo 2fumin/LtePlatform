@@ -19,9 +19,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
 	using System.Xml;
 	using System.Xml.XPath;
 
-	internal class XPathMutableCursor : XPathNode, IXmlCursor
+	public sealed class XPathMutableCursor : XPathNode, IXmlCursor
 	{
-		private XPathBufferedNodeIterator iterator;
+		private readonly XPathBufferedNodeIterator iterator;
 		private CompiledXPathStep step;
 		private int depth;
 
@@ -215,7 +215,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
 		}
 
 		public override event EventHandler Realized;
-		protected virtual void OnRealized()
+
+	    private void OnRealized()
 		{
 			if (Realized != null)
 				Realized(this, EventArgs.Empty);

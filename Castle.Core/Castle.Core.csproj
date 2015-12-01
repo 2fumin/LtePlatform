@@ -31,6 +31,12 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog.Extended">
+      <HintPath>..\packages\NLog\NLog.Extended.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -42,7 +48,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components.DictionaryAdapter\DynamicDictionary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\NLogIntegration\ExtendedNLogFactory.cs" />
+    <Compile Include="Services\NLogIntegration\ExtendedNLogLogger.cs" />
+    <Compile Include="Services\NLogIntegration\GlobalContextProperties.cs" />
+    <Compile Include="Services\NLogIntegration\NLogFactory.cs" />
+    <Compile Include="Services\NLogIntegration\NLogLogger.cs" />
+    <Compile Include="Services\NLogIntegration\SecurityAssemblyInfo.cs" />
+    <Compile Include="Services\NLogIntegration\ThreadContextProperties.cs" />
+    <Compile Include="Services\NLogIntegration\ThreadContextStack.cs" />
+    <Compile Include="Services\NLogIntegration\ThreadContextStacks.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Compatibility\IntrospectionExtensions.cs" />
