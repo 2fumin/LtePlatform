@@ -21,25 +21,30 @@
             <tbody>
             <tr>
                 <td>LTE基站</td>
-                <td data-bind="text: newENodebs.length"></td>
-                <td></td>
+                <td data-bind="text: newENodebs().length"></td>
+                <td>
+                    <div class="btn-group" data-bind="visible: newENodebs().length > 0">
+                        <button class="btn btn-warning">检查经纬度</button>
+                        <button class="btn btn-warning">匹配镇区</button>
+                    </div>
+                </td>
                 <td><input type="checkbox" data-bind="checked: newENodebsImport"/></td>
             </tr>
             <tr>
                 <td>LTE小区</td>
-                <td data-bind="text: newCells.length"></td>
+                <td data-bind="text: newCells().length"></td>
                 <td></td>
                 <td><input type="checkbox" data-bind="checked: newCellsImport"/></td>
             </tr>
             <tr>
                 <td>CDMA基站</td>
-                <td data-bind="text: newBtss.length"></td>
+                <td data-bind="text: newBtss().length"></td>
                 <td></td>
                 <td><input type="checkbox" data-bind="checked: newBtssImport"/></td>
             </tr>
             <tr>
                 <td>CDMA小区</td>
-                <td data-bind="text: newCdmaCells.length"></td>
+                <td data-bind="text: newCdmaCells().length"></td>
                 <td></td>
                 <td><input type="checkbox" data-bind="checked: newCdmaCellsImport"/></td>
             </tr>
