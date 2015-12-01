@@ -156,6 +156,12 @@
     <Compile Include="IMappingExpression\NonGenericConstructorTests.cs" />
     <Compile Include="IMappingExpression\NonGenericProjectEnumTest.cs" />
     <Compile Include="IMappingExpression\NonGenericReverseMapping.cs" />
+    <Compile Include="Membel\MemberNameReplacers.cs" />
+    <Compile Include="Membel\MemberResolution.cs" />
+    <Compile Include="Membel\NestedContainers.cs" />
+    <Compile Include="Membel\NullBehavior.cs" />
+    <Compile Include="Membel\ObjectSubstitution.cs" />
+    <Compile Include="Membel\OpenGenerics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Should\ListOrArrayCompareTest.cs" />
   </ItemGroup>
