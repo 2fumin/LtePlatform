@@ -9,3 +9,8 @@ var isLattituteValid = function (lattitute) {
 var isLonLatValid = function (item) {
     return isLongtituteValid(item.longtitute) && isLattituteValid(item.lattitute);
 };
+
+var mapLonLat = function (source, destination) {
+    source.longtitute = destination.longtitute;
+    source.lattitute = destination.lattitute;
+};

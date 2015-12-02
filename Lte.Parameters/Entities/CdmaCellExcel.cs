@@ -10,14 +10,14 @@ namespace Lte.Parameters.Entities
     public class CdmaCellExcel
     {
         [CloneProtection]
-        [ExcelColumn("CELL_ID")]
+        [ExcelColumn("扇区标识")]
         public byte SectorId { get; set; }
 
         [CloneProtection]
         [ExcelColumn("频点")]
         public int Frequency { get; set; }
 
-        [ExcelColumn("是否接室分")]
+        [ExcelColumn("覆盖类型(室内/室外/地铁)")]
         public string IsIndoor { get; set; } = "否";
 
         [ExcelColumn("经度")]
@@ -26,19 +26,19 @@ namespace Lte.Parameters.Entities
         [ExcelColumn("纬度")]
         public double Lattitute { get; set; }
 
-        [ExcelColumn("天线挂高")]
+        [ExcelColumn("挂高")]
         public double Height { get; set; }
 
-        [ExcelColumn("机械下倾角")]
+        [ExcelColumn("下倾角（机械）")]
         public double MTilt { get; set; }
 
-        [ExcelColumn("电下倾角")]
+        [ExcelColumn("下倾角（电调）")]
         public double ETilt { get; set; }
 
         [ExcelColumn("方位角")]
         public double Azimuth { get; set; }
 
-        [ExcelColumn("天线增益")]
+        [ExcelColumn("天线增益（dBi）")]
         public double AntennaGain { get; set; }
 
         [CloneProtection]

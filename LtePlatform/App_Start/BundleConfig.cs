@@ -146,6 +146,8 @@ namespace LtePlatform
                 "~/Scripts/app/common.js",
                 "~/Scripts/app/app.datamodel.js",
                 "~/Scripts/app/app.viewmodel.js",
+                "~/Scripts/parameters/common.controller.js",
+                "~/Scripts/parameters/basicimport.controller.js",
                 "~/Scripts/parameters/basicimport.viewmodel.js",
                 "~/Scripts/app/_run.js"));
 

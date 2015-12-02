@@ -16,11 +16,6 @@
     return result;
 };
 
-var mapLonLat = function (eNodeb, eNodebLonLatEdit) {
-    eNodeb.longtitute = eNodebLonLatEdit.longtitute;
-    eNodeb.lattitute = eNodebLonLatEdit.lattitute;
-};
-
 var mapENodebLonLatEdits = function (eNodebs, eNodebLonLatEdits) {
     for (var i = 0; i < eNodebLonLatEdits.length; i++) {
         if (isLongtituteValid(eNodebLonLatEdits[i])) {
@@ -28,3 +23,39 @@ var mapENodebLonLatEdits = function (eNodebs, eNodebLonLatEdits) {
         }
     }
 };
+
+var queryCellLonLatEdits = function(cells) {
+    var result = [];
+    for (var index = 0; index < cells.length; index++) {
+        if (!isLonLatValid(cells[index])) {
+            result.push({
+                index: index,
+                eNodebId: cells[index].eNodebId,
+                sectorId: cells[index].sectorId,
+                frequency: cells[index].frequency,
+                isIndoor: cells[index].isIndoor,
+                longtitute: cells[index].longtitute,
+                lattitute: cells[index].lattitute
+            });
+        }
+    }
+    return result;
+};
+
+var mapCellLonLatEdits = function(cells, cellLonLatEdits) {
+    for (var i = 0; i < cellLonLatEdits.length; i++) {
+        mapLonLat(cells[cellLonLatEdits[i].index], cellLonLatEdits[i]);
+    }
+};
+
+var queryBtsLonLatEdits=function(btss) {
+    var result = [];
+    for (var index = 0; index < btss.length; index++) {
+        if (!isLonLatValid(btss[index])) {
+            result.push({
+                index: index
+            });
+        }
+    }
+    return result;
+}

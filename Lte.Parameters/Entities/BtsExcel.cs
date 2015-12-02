@@ -9,13 +9,13 @@ namespace Lte.Parameters.Entities
 {
     public class BtsExcel
     {
-        [ExcelColumn("eNodeBName")]
+        [ExcelColumn("基站名称")]
         public string Name { get; set; }
 
-        [ExcelColumn("区域")]
+        [ExcelColumn("行政区域")]
         public string DistrictName { get; set; }
 
-        [ExcelColumn("镇区")]
+        [ExcelColumn("所属镇区")]
         public string TownName { get; set; }
 
         [ExcelColumn("经度")]

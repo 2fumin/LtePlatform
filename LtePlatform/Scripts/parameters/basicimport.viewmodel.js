@@ -30,6 +30,16 @@
         this.get('/Parameters/BasicImport', function () { this.app.runRoute('get', '#basicImport'); });
     });
 
+    self.checkENodebsLonLat = function() {
+        self.newENodebLonLatEdits(queryENodebLonLatEdits(self.newENodebs()));
+        $('#eNodeb-lon-lat').modal('show');
+    };
+
+    self.postENodebLonLat = function() {
+        mapENodebLonLatEdits(self.newENodebs(), self.newENodebLonLatEdits());
+        $('#eNodeb-lon-lat').modal('hide');
+    };
+
     return self;
 }
 
