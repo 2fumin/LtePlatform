@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.f
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+#define DOTNET40
 #if DOTNET40
 namespace Castle.Components.DictionaryAdapter.Xml
 {
@@ -24,10 +24,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
 		protected XmlSetSerializer() { }
 
-		public override Type ListTypeConstructor
-		{
-			get { return typeof(XmlNodeSet<>); }
-		}
+		public override Type ListTypeConstructor => typeof(XmlNodeSet<>);
 	}
 }
 #endif

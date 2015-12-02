@@ -41,10 +41,7 @@ namespace Castle.Core.Test.Main
 
 		private static string peVerifyPath;
 
-		public static string PeVerifyPath
-		{
-			get { return peVerifyPath ?? (peVerifyPath = FindPeVerifyPath()); }
-		}
+		public static string PeVerifyPath => peVerifyPath ?? (peVerifyPath = FindPeVerifyPath());
 	}
 #endif
 
@@ -87,10 +84,7 @@ namespace Castle.Core.Test.Main
 			verificationDisabled = true;
 		}
 
-		public bool IsVerificationDisabled
-		{
-			get { return verificationDisabled; }
-		}
+		public bool IsVerificationDisabled => verificationDisabled;
 
 #if !__MonoCS__ && !SILVERLIGHT // mono doesn't have PEVerify
 #if FEATURE_XUNITNET

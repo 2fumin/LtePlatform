@@ -1349,7 +1349,7 @@ namespace Castle.Core.Test.Main
 		}
 	}
 
-	internal class LevelFilteredLoggerInstance : LevelFilteredLogger
+	public class LevelFilteredLoggerInstance : LevelFilteredLogger
 	{
 		private readonly LoggingTests Fixture;
 

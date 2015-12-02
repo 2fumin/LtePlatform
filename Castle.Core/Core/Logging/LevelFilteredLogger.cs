@@ -12,10 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#define DOTNET40
+using System;
+	using System.Globalization;
 namespace Castle.Core.Logging
 {
-	using System;
-	using System.Globalization;
 #if DOTNET40
 	using System.Security;
 #else
@@ -36,27 +37,24 @@ namespace Castle.Core.Logging
 	public abstract class LevelFilteredLogger : MarshalByRefObject, ILogger
 #endif
 	{
-		private LoggerLevel level = LoggerLevel.Off;
-		private String name = "unnamed";
-
-		/// <summary>
+	    /// <summary>
 		///   Creates a new <c>LevelFilteredLogger</c>.
 		/// </summary>
 		protected LevelFilteredLogger()
 		{
 		}
 
-		protected LevelFilteredLogger(String name)
+		protected LevelFilteredLogger(string name)
 		{
 			ChangeName(name);
 		}
 
 		protected LevelFilteredLogger(LoggerLevel loggerLevel)
 		{
-			level = loggerLevel;
+			Level = loggerLevel;
 		}
 
-		protected LevelFilteredLogger(String loggerName, LoggerLevel loggerLevel) : this(loggerLevel)
+		protected LevelFilteredLogger(string loggerName, LoggerLevel loggerLevel) : this(loggerLevel)
 		{
 			ChangeName(loggerName);
 		}
@@ -83,22 +81,15 @@ namespace Castle.Core.Logging
 		///   The <c>LoggerLevel</c> that this logger
 		///   will be using. Defaults to <c>LoggerLevel.Off</c>
 		/// </value>
-		public LoggerLevel Level
-		{
-			get { return level; }
-			set { level = value; }
-		}
+		public LoggerLevel Level { get; set; } = LoggerLevel.Off;
 
-		/// <value>
+	    /// <value>
 		///   The name that this logger will be using. 
 		///   Defaults to <c>String.Empty</c>
 		/// </value>
-		public String Name
-		{
-			get { return name; }
-		}
+		public string Name { get; private set; } = "unnamed";
 
-		#region ILogger implementation
+	    #region ILogger implementation
 
 		#region Debug
 
@@ -153,7 +144,7 @@ namespace Castle.Core.Logging
 				return;
 			}
 
-			Log(LoggerLevel.Debug, String.Format(CultureInfo.CurrentCulture, format, args), null);
+			Log(LoggerLevel.Debug, string.Format(CultureInfo.CurrentCulture, format, args), null);
 		}
 
 		/// <summary>
@@ -169,7 +160,7 @@ namespace Castle.Core.Logging
 				return;
 			}
 
-			Log(LoggerLevel.Debug, String.Format(CultureInfo.CurrentCulture, format, args), exception);
+			Log(LoggerLevel.Debug, string.Format(CultureInfo.CurrentCulture, format, args), exception);
 		}
 
 		/// <summary>
@@ -185,7 +176,7 @@ namespace Castle.Core.Logging
 				return;
 			}
 
-			Log(LoggerLevel.Debug, String.Format(formatProvider, format, args), null);
+			Log(LoggerLevel.Debug, string.Format(formatProvider, format, args), null);
 		}
 
 		/// <summary>
@@ -202,7 +193,7 @@ namespace Castle.Core.Logging
 				return;
 			}
 
-			Log(LoggerLevel.Debug, String.Format(formatProvider, format, args), exception);
+			Log(LoggerLevel.Debug, string.Format(formatProvider, format, args), exception);
 		}
 
 		#endregion
@@ -260,7 +251,7 @@ namespace Castle.Core.Logging
 				return;
 			}
 
-			Log(LoggerLevel.Info, String.Format(CultureInfo.CurrentCulture, format, args), null);
+			Log(LoggerLevel.Info, string.Format(CultureInfo.CurrentCulture, format, args), null);
 		}
 
 		/// <summary>
@@ -276,7 +267,7 @@ namespace Castle.Core.Logging
 				return;
 			}
 
-			Log(LoggerLevel.Info, String.Format(CultureInfo.CurrentCulture, format, args), exception);
+			Log(LoggerLevel.Info, string.Format(CultureInfo.CurrentCulture, format, args), exception);
 		}
 
 		/// <summary>
@@ -292,7 +283,7 @@ namespace Castle.Core.Logging
 				return;
 			}
 
-			Log(LoggerLevel.Info, String.Format(formatProvider, format, args), null);
+			Log(LoggerLevel.Info, string.Format(formatProvider, format, args), null);
 		}
 
 		/// <summary>
@@ -309,7 +300,7 @@ namespace Castle.Core.Logging
 				return;
 			}
 
-			Log(LoggerLevel.Info, String.Format(formatProvider, format, args), exception);
+			Log(LoggerLevel.Info, string.Format(formatProvider, format, args), exception);
 		}
 
 		#endregion
@@ -367,7 +358,7 @@ namespace Castle.Core.Logging
 				return;
 			}
 
-			Log(LoggerLevel.Warn, String.Format(CultureInfo.CurrentCulture, format, args), null);
+			Log(LoggerLevel.Warn, string.Format(CultureInfo.CurrentCulture, format, args), null);
 		}
 
 		/// <summary>
@@ -383,7 +374,7 @@ namespace Castle.Core.Logging
 				return;
 			}
 
-			Log(LoggerLevel.Warn, String.Format(CultureInfo.CurrentCulture, format, args), exception);
+			Log(LoggerLevel.Warn, string.Format(CultureInfo.CurrentCulture, format, args), exception);
 		}
 
 		/// <summary>
@@ -399,7 +390,7 @@ namespace Castle.Core.Logging
 				return;
 			}
 
-			Log(LoggerLevel.Warn, String.Format(formatProvider, format, args), null);
+			Log(LoggerLevel.Warn, string.Format(formatProvider, format, args), null);
 		}
 
 		/// <summary>
@@ -416,7 +407,7 @@ namespace Castle.Core.Logging
 				return;
 			}
 
-			Log(LoggerLevel.Warn, String.Format(formatProvider, format, args), exception);
+			Log(LoggerLevel.Warn, string.Format(formatProvider, format, args), exception);
 		}
 
 		#endregion
@@ -474,7 +465,7 @@ namespace Castle.Core.Logging
 				return;
 			}
 
-			Log(LoggerLevel.Error, String.Format(CultureInfo.CurrentCulture, format, args), null);
+			Log(LoggerLevel.Error, string.Format(CultureInfo.CurrentCulture, format, args), null);
 		}
 
 		/// <summary>
@@ -490,7 +481,7 @@ namespace Castle.Core.Logging
 				return;
 			}
 
-			Log(LoggerLevel.Error, String.Format(CultureInfo.CurrentCulture, format, args), exception);
+			Log(LoggerLevel.Error, string.Format(CultureInfo.CurrentCulture, format, args), exception);
 		}
 
 		/// <summary>
@@ -506,7 +497,7 @@ namespace Castle.Core.Logging
 				return;
 			}
 
-			Log(LoggerLevel.Error, String.Format(formatProvider, format, args), null);
+			Log(LoggerLevel.Error, string.Format(formatProvider, format, args), null);
 		}
 
 		/// <summary>
@@ -523,7 +514,7 @@ namespace Castle.Core.Logging
 				return;
 			}
 
-			Log(LoggerLevel.Error, String.Format(formatProvider, format, args), exception);
+			Log(LoggerLevel.Error, string.Format(formatProvider, format, args), exception);
 		}
 
 		#endregion
@@ -581,7 +572,7 @@ namespace Castle.Core.Logging
 				return;
 			}
 
-			Log(LoggerLevel.Fatal, String.Format(CultureInfo.CurrentCulture, format, args), null);
+			Log(LoggerLevel.Fatal, string.Format(CultureInfo.CurrentCulture, format, args), null);
 		}
 
 		/// <summary>
@@ -597,7 +588,7 @@ namespace Castle.Core.Logging
 				return;
 			}
 
-			Log(LoggerLevel.Fatal, String.Format(CultureInfo.CurrentCulture, format, args), exception);
+			Log(LoggerLevel.Fatal, string.Format(CultureInfo.CurrentCulture, format, args), exception);
 		}
 
 		/// <summary>
@@ -613,7 +604,7 @@ namespace Castle.Core.Logging
 				return;
 			}
 
-			Log(LoggerLevel.Fatal, String.Format(formatProvider, format, args), null);
+			Log(LoggerLevel.Fatal, string.Format(formatProvider, format, args), null);
 		}
 
 		/// <summary>
@@ -630,7 +621,7 @@ namespace Castle.Core.Logging
 				return;
 			}
 
-			Log(LoggerLevel.Fatal, String.Format(formatProvider, format, args), exception);
+			Log(LoggerLevel.Fatal, string.Format(formatProvider, format, args), exception);
 		}
 
 		#endregion
@@ -639,48 +630,33 @@ namespace Castle.Core.Logging
 		///   Determines if messages of priority "debug" will be logged.
 		/// </summary>
 		/// <value><c>true</c> if log level flags include the <see cref = "LoggerLevel.Debug" /> bit</value>
-		public bool IsDebugEnabled
-		{
-			get { return (Level >= LoggerLevel.Debug); }
-		}
+		public bool IsDebugEnabled => (Level >= LoggerLevel.Debug);
 
-		/// <summary>
+	    /// <summary>
 		///   Determines if messages of priority "info" will be logged.
 		/// </summary>
 		/// <value><c>true</c> if log level flags include the <see cref = "LoggerLevel.Info" /> bit</value>
-		public bool IsInfoEnabled
-		{
-			get { return (Level >= LoggerLevel.Info); }
-		}
+		public bool IsInfoEnabled => (Level >= LoggerLevel.Info);
 
-		/// <summary>
+	    /// <summary>
 		///   Determines if messages of priority "warn" will be logged.
 		/// </summary>
 		/// <value><c>true</c> if log level flags include the <see cref = "LoggerLevel.Warn" /> bit</value>
-		public bool IsWarnEnabled
-		{
-			get { return (Level >= LoggerLevel.Warn); }
-		}
+		public bool IsWarnEnabled => (Level >= LoggerLevel.Warn);
 
-		/// <summary>
+	    /// <summary>
 		///   Determines if messages of priority "error" will be logged.
 		/// </summary>
 		/// <value><c>true</c> if log level flags include the <see cref = "LoggerLevel.Error" /> bit</value>
-		public bool IsErrorEnabled
-		{
-			get { return (Level >= LoggerLevel.Error); }
-		}
+		public bool IsErrorEnabled => (Level >= LoggerLevel.Error);
 
-		/// <summary>
+	    /// <summary>
 		///   Determines if messages of priority "fatal" will be logged.
 		/// </summary>
 		/// <value><c>true</c> if log level flags include the <see cref = "LoggerLevel.Fatal" /> bit</value>
-		public bool IsFatalEnabled
-		{
-			get { return (Level >= LoggerLevel.Fatal); }
-		}
+		public bool IsFatalEnabled => (Level >= LoggerLevel.Fatal);
 
-		#endregion
+	    #endregion
 
 		/// <summary>
 		///   Implementors output the log content by implementing this method only.
@@ -690,19 +666,19 @@ namespace Castle.Core.Logging
 		/// <param name = "loggerName"></param>
 		/// <param name = "message"></param>
 		/// <param name = "exception"></param>
-		protected abstract void Log(LoggerLevel loggerLevel, String loggerName, String message, Exception exception);
+		protected abstract void Log(LoggerLevel loggerLevel, string loggerName, string message, Exception exception);
 
-		protected void ChangeName(String newName)
+		protected void ChangeName(string newName)
 		{
 			if (newName == null)
 			{
-				throw new ArgumentNullException("newName");
+				throw new ArgumentNullException(nameof(newName));
 			}
 
-			name = newName;
+			Name = newName;
 		}
 
-		private void Log(LoggerLevel loggerLevel, String message, Exception exception)
+		private void Log(LoggerLevel loggerLevel, string message, Exception exception)
 		{
 			Log(loggerLevel, Name, message, exception);
 		}

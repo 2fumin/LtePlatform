@@ -12,9 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.DynamicProxy
-{
-	using System;
+#define DOTNET40
+using System;
 	using System.Collections.Generic;
 	using System.Diagnostics;
 	using System.Reflection;
@@ -30,6 +29,8 @@ namespace Castle.DynamicProxy
 	using Castle.Core.Logging;
 	using Castle.DynamicProxy.Generators;
 
+namespace Castle.DynamicProxy
+{
 	/// <summary>
 	///   Provides proxy objects for classes and interfaces.
 	/// </summary>

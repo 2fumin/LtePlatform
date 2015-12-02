@@ -12,9 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.DynamicProxy.Generators.Emitters
-{
-	using System;
+#define DOTNET40
+using System;
 	using System.Collections.Generic;
 	using System.Linq;
 	using System.Reflection;
@@ -23,6 +22,8 @@ namespace Castle.DynamicProxy.Generators.Emitters
 	using System.Security.Permissions;
 #endif
 
+namespace Castle.DynamicProxy.Generators.Emitters
+{
 	public static class StrongNameUtil
 	{
 		private static readonly IDictionary<Assembly, bool> signedAssemblyCache = new Dictionary<Assembly, bool>();

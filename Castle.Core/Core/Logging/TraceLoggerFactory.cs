@@ -11,14 +11,14 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
-namespace Castle.Core.Logging
-{
+#define DOTNET40
 #if DOTNET40
-	using System.Security;
+using System.Security;
 
 #endif
 
+namespace Castle.Core.Logging
+{
 #if !SILVERLIGHT
 
 	/// <summary>

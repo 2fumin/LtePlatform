@@ -23,8 +23,8 @@ namespace Castle.Core.Test.DynamicProxy.Serialization
     [Serializable]
 	public class ClassWithDirectAndIndirectSelfReference
 	{
-		public ArrayList List = new ArrayList();
-		public ClassWithDirectAndIndirectSelfReference This;
+		public readonly ArrayList List = new ArrayList();
+		public readonly ClassWithDirectAndIndirectSelfReference This;
 
 		public ClassWithDirectAndIndirectSelfReference()
 		{

@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-	using System;
-	using System.Collections.Generic;
-	using System.ComponentModel;
-	using System.Reflection;
-	using System.Xml.Serialization;
+#define DOTNET40
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Xml;
 
 #if !SILVERLIGHT // Until support for other platforms is verified
 namespace Castle.Components.DictionaryAdapter.Xml
@@ -96,7 +96,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 			if (type.IsCustomSerializable())
 				return XmlCustomSerializer.Instance;
 #if !SILVERLIGHT
-			if (typeof(System.Xml.XmlNode).IsAssignableFrom(type))
+			if (typeof(XmlNode).IsAssignableFrom(type))
 				return XmlXmlNodeSerializer.Instance;
 #endif
 			return new XmlDefaultSerializer(type);

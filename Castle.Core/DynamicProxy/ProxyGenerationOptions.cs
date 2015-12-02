@@ -12,9 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.DynamicProxy
-{
-	using System;
+#define DOTNET40
+#define FEATURE_SERIALIZATION
+
+using System;
 	using System.Collections.Generic;
 	using System.Reflection.Emit;
 #if FEATURE_SERIALIZATION
@@ -24,6 +25,8 @@ namespace Castle.DynamicProxy
 #if DOTNET40
 	using System.Security;
 #endif
+namespace Castle.DynamicProxy
+{
 
 #if FEATURE_SERIALIZATION
 	[Serializable]

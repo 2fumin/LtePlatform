@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#define FEATURE_SERIALIZATION
 #if FEATURE_SERIALIZATION
 
 namespace Castle.DynamicProxy.Serialization
@@ -23,31 +24,26 @@ namespace Castle.DynamicProxy.Serialization
 	using System.Reflection.Emit;
 	using System.Runtime.Serialization.Formatters.Binary;
 
-	using Castle.DynamicProxy.Generators;
+	using Generators;
 
 	/// <summary>
 	///   Applied to the assemblies saved by <see cref="ModuleScope" /> in order to persist the cache data included in the persisted assembly.
 	/// </summary>
-	[AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false)]
+	[AttributeUsage(AttributeTargets.Assembly)]
 	[CLSCompliant(false)]
 	public class CacheMappingsAttribute : Attribute
 	{
 		private static readonly ConstructorInfo constructor =
 			typeof(CacheMappingsAttribute).GetConstructor(new[] { typeof(byte[]) });
 
-		private readonly byte[] serializedCacheMappings;
-
-		public CacheMappingsAttribute(byte[] serializedCacheMappings)
+	    public CacheMappingsAttribute(byte[] serializedCacheMappings)
 		{
-			this.serializedCacheMappings = serializedCacheMappings;
+			SerializedCacheMappings = serializedCacheMappings;
 		}
 
-		public byte[] SerializedCacheMappings
-		{
-			get { return serializedCacheMappings; }
-		}
+		public byte[] SerializedCacheMappings { get; }
 
-		public Dictionary<CacheKey, string> GetDeserializedMappings()
+	    public Dictionary<CacheKey, string> GetDeserializedMappings()
 		{
 			using (var stream = new MemoryStream(SerializedCacheMappings))
 			{

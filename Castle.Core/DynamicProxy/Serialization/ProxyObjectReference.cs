@@ -12,10 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#define DOTNET40
+#define FEATURE_SERIALIZATION
 #if FEATURE_SERIALIZATION
 
-namespace Castle.DynamicProxy.Serialization
-{
 	using System;
 	using System.Collections.Generic;
 	using System.Diagnostics;
@@ -28,6 +28,8 @@ namespace Castle.DynamicProxy.Serialization
 	using Castle.DynamicProxy.Generators;
 	using Castle.DynamicProxy.Internal;
 
+namespace Castle.DynamicProxy.Serialization
+{
 	/// <summary>
 	///   Handles the deserialization of proxies.
 	/// </summary>

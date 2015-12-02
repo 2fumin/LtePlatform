@@ -12,14 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#if !SILVERLIGHT // Until support for other platforms is verified
-namespace Castle.Components.DictionaryAdapter.Xml
-{
+#define DOTNET40
+
 	using System;
 	using System.Threading;
 	using System.Xml;
 	using System.Xml.Serialization;
 
+#if !SILVERLIGHT // Until support for other platforms is verified
+namespace Castle.Components.DictionaryAdapter.Xml
+{
     public class XmlSubtreeReader : XmlReader
     {
         private readonly string rootLocalName;
@@ -51,13 +53,10 @@ namespace Castle.Components.DictionaryAdapter.Xml
         private void DisposeReader()
         {
             IDisposable value = Interlocked.Exchange(ref reader, null);
-            if (null != value) value.Dispose();
+            value?.Dispose();
         }
 
-        public bool IsDisposed
-        {
-            get { return null == reader; }
-        }
+        public bool IsDisposed => null == reader;
 
         private void RequireNotDisposed()
         {
@@ -70,20 +69,11 @@ namespace Castle.Components.DictionaryAdapter.Xml
             get { RequireNotDisposed(); return reader; }
         }
 
-        public override ReadState ReadState
-        {
-            get { return IsDisposed ? ReadState.Closed : reader.ReadState; }
-        }
+        public override ReadState ReadState => IsDisposed ? ReadState.Closed : reader.ReadState;
 
-        public override int Depth
-        {
-            get { return Reader.Depth; }
-        }
+        public override int Depth => Reader.Depth;
 
-        public override XmlNodeType NodeType
-        {
-            get { return Reader.NodeType; }
-        }
+        public override XmlNodeType NodeType => Reader.NodeType;
 
         public bool IsAtRootElement
         {
@@ -100,27 +90,15 @@ namespace Castle.Components.DictionaryAdapter.Xml
             }
         }
 
-        public override bool EOF
-        {
-            get { return Reader.EOF; }
-        }
+        public override bool EOF => Reader.EOF;
 
-        public override string Prefix
-        {
-            get { return Reader.Prefix; }
-        }
+        public override string Prefix => Reader.Prefix;
 
-        public override string LocalName
-        {
-            get { return IsAtRootElement ? rootLocalName : Reader.LocalName; }
-        }
+        public override string LocalName => IsAtRootElement ? rootLocalName : Reader.LocalName;
 
-        public override string NamespaceURI
-        {
-            get { return IsAtRootElement ? CaptureNamespaceUri() : TranslateNamespaceURI(); }
-        }
+        public override string NamespaceURI => IsAtRootElement ? CaptureNamespaceUri() : TranslateNamespaceURI();
 
-		private string CaptureNamespaceUri()
+        private string CaptureNamespaceUri()
 		{
 			if (underlyingNamespaceURI == null)
 				underlyingNamespaceURI = Reader.NamespaceURI;
@@ -138,37 +116,19 @@ namespace Castle.Components.DictionaryAdapter.Xml
 #if !DOTNET40
 		// Virtual in .NET 4.0, abstract in .NET 3.5
 		// Use default implementation from .NET 4.0
-		public override bool HasValue
-		{
-			get { return 0UL != (HasValueMask & (1UL << ((int)NodeType & 31))); }
-		}
-		private const ulong HasValueMask = 0x0002659CU;
+		public override bool HasValue => 0UL != (HasValueMask & (1UL << ((int)NodeType & 31)));
+        private const ulong HasValueMask = 0x0002659CU;
 #endif
 
-        public override string Value
-        {
-            get { return Reader.Value; }
-        }
+        public override string Value => Reader.Value;
 
-        public override bool IsEmptyElement
-        {
-            get { return Reader.IsEmptyElement; }
-        }
+        public override bool IsEmptyElement => Reader.IsEmptyElement;
 
-        public override int AttributeCount
-        {
-            get { return Reader.AttributeCount; }
-        }
+        public override int AttributeCount => Reader.AttributeCount;
 
-        public override string BaseURI
-        {
-            get { return Reader.BaseURI; }
-        }
+        public override string BaseURI => Reader.BaseURI;
 
-        public override XmlNameTable NameTable
-        {
-            get { return Reader.NameTable; }
-        }
+        public override XmlNameTable NameTable => Reader.NameTable;
 
         public override bool Read()
         {

@@ -1,4 +1,4 @@
-﻿
+﻿#define DOTNET40
 // Sets up assembly level security settings
 
 #if !SILVERLIGHT

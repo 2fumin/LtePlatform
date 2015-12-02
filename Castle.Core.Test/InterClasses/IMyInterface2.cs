@@ -21,13 +21,13 @@ namespace Castle.Core.Test.InterClasses
 	/// </summary>
 	public interface IMyInterface2
 	{
-		String Name { get; set; }
+		string Name { get; set; }
 
 		bool Started { get; set; }
 
 		int Calc(int x, int y);
 
-		int Calc(int x, int y, int z, Single k);
+		int Calc(int x, int y, int z, float k);
 	}
 
 	/// <summary>
@@ -39,29 +39,18 @@ namespace Castle.Core.Test.InterClasses
 	[My("MyInterfaceImpl")]
 	public class MyInterfaceImpl : IMyInterface2
 	{
-		private String _name;
-		private bool _started;
+	    public virtual string Name { get; set; }
 
-		public virtual String Name
-		{
-			get { return _name; }
-			set { _name = value; }
-		}
+	    public virtual bool Started { get; set; }
 
-		public virtual bool Started
-		{
-			get { return _started; }
-			set { _started = value; }
-		}
-
-		[My("Calc1")]
+	    [My("Calc1")]
 		public virtual int Calc(int x, int y)
 		{
 			return x + y;
 		}
 
 		[My("Calc2")]
-		public virtual int Calc(int x, int y, int z, Single k)
+		public virtual int Calc(int x, int y, int z, float k)
 		{
 			return x + y + z + (int) k;
 		}
@@ -75,16 +64,11 @@ namespace Castle.Core.Test.InterClasses
 	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Property | AttributeTargets.Method)]
 	public class MyAttribute : Attribute
 	{
-		private string _name;
-
-		public MyAttribute(String name)
+	    public MyAttribute(string name)
 		{
-			_name = name;
+			this.name = name;
 		}
 
-		public string name
-		{
-			get { return _name; }
-		}
+		public string name { get; }
 	}
 }

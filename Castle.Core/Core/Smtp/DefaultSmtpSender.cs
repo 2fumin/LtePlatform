@@ -12,11 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Core.Smtp
-{
-	#if !SILVERLIGHT
+#define DOTNET40
+#if !SILVERLIGHT
 
-	using System;
+using System;
 	using System.Collections.Generic;
 	using System.ComponentModel;
 	using System.Net;
@@ -27,6 +26,8 @@ namespace Castle.Core.Smtp
 	using System.Security.Permissions;
 	using Castle.Core.Internal;
 
+namespace Castle.Core.Smtp
+{
 	/// <summary>
 	/// Default <see cref="IEmailSender"/> implementation.
 	/// </summary>
@@ -71,12 +72,9 @@ namespace Castle.Core.Smtp
 		/// Gets the hostname.
 		/// </summary>
 		/// <value>The hostname.</value>
-		public string Hostname
-		{
-			get { return hostname; }
-		}
+		public string Hostname => hostname;
 
-		/// <summary>
+	    /// <summary>
 		/// Gets or sets a value which is used to 
 		/// configure if emails are going to be sent asynchronously or not.
 		/// </summary>
@@ -256,10 +254,7 @@ namespace Castle.Core.Smtp
 		/// <value>
 		/// <see langword="true"/> if this instance has credentials; otherwise, <see langword="false"/>.
 		/// </value>
-		private bool HasCredentials
-		{
-			get { return !string.IsNullOrEmpty(credentials.UserName); }
-		}
+		private bool HasCredentials => !string.IsNullOrEmpty(credentials.UserName);
 
 #if DOTNET40
 		[SecuritySafeCritical]

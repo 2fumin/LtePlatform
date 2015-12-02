@@ -11,15 +11,16 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+#define DOTNET40
 
-namespace Castle.Components.DictionaryAdapter
-{
-	using System;
+using System;
 	using System.Collections;
 	using System.Collections.Generic;
 	using System.Linq;
 	using System.Diagnostics;
 
+namespace Castle.Components.DictionaryAdapter
+{
 	[DebuggerDisplay("Type: {Type.FullName,nq}")]
 	public class DictionaryAdapterMeta
 	{
@@ -42,19 +43,19 @@ namespace Castle.Components.DictionaryAdapter
 			InitializeMeta();
 		}
 
-		public Type Type { get; private set; }
+		public Type Type { get; }
 
 		public Type Implementation { get; private set; }
 
-		public object[] Behaviors { get; private set; }
+		public object[] Behaviors { get; }
 
-		public IDictionaryAdapterFactory Factory { get; private set; }
+		public IDictionaryAdapterFactory Factory { get; }
 
 		public IDictionary<string, PropertyDescriptor> Properties { get; private set; }
 
-		public IDictionaryMetaInitializer[] MetaInitializers { get; private set; }
+		public IDictionaryMetaInitializer[] MetaInitializers { get; }
 
-		public IDictionaryInitializer[] Initializers { get; private set; }
+		public IDictionaryInitializer[] Initializers { get; }
 
 		public IDictionary ExtendedProperties
 		{

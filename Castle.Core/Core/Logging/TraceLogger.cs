@@ -12,16 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Core.Logging
-{
+#define DOTNET40
 #if !SILVERLIGHT
-	using System;
+using System;
 	using System.Diagnostics;
 	using System.Collections.Generic;
 #if DOTNET40
 	using System.Security;
 #endif
 
+namespace Castle.Core.Logging
+{
 	/// <summary>
 	///   The TraceLogger sends all logging to the System.Diagnostics.TraceSource
 	///   built into the .net framework.

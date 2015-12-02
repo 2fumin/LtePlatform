@@ -12,9 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.Components.DictionaryAdapter
-{
-	using System;
+#define DOTNET40
+using System;
 	using System.Collections;
 	using System.Collections.Generic;
 #if !SILVERLIGHT
@@ -30,6 +29,8 @@ namespace Castle.Components.DictionaryAdapter
 #endif
 	using System.Diagnostics;
 
+namespace Castle.Components.DictionaryAdapter
+{
 #if !SILVERLIGHT // Until support for other platforms is verified
 	using Castle.Components.DictionaryAdapter.Xml;
 #endif
@@ -133,9 +134,9 @@ namespace Castle.Components.DictionaryAdapter
 			PropertyDescriptor descriptor, DictionaryAdapterMeta other)
 		{
 			if (type == null)
-				throw new ArgumentNullException("type");
+				throw new ArgumentNullException(nameof(type));
 			if (type.GetTypeInfo().IsInterface == false)
-				throw new ArgumentException("Only interfaces can be adapted to a dictionary", "type");
+				throw new ArgumentException("Only interfaces can be adapted to a dictionary", nameof(type));
 
 			DictionaryAdapterMeta meta;
 

@@ -95,7 +95,7 @@ namespace Castle.Core.Test.Main
 #if FEATURE_XUNITNET
 			var ex = Assert.Throws<Xunit.Sdk.TrueException>(() => FindVerificationErrors());
 #else
-			var ex = Assert.Throws<AssertionException>(() => FindVerificationErrors());
+			var ex = Assert.Throws<AssertionException>(FindVerificationErrors);
 #endif
 			StringAssert.Contains("PeVerify reported error(s)", ex.Message);
 			StringAssert.Contains("fall through end of the method without returning", ex.Message);

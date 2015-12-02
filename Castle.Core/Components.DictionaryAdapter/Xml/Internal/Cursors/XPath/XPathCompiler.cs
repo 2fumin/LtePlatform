@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#define DOTNET40
 #if !SILVERLIGHT // Until support for other platforms is verified
 namespace Castle.Components.DictionaryAdapter.Xml
 {
@@ -330,30 +331,21 @@ namespace Castle.Components.DictionaryAdapter.Xml
 			}
 
 			// Type of the current token
-			public Token Token
-			{
-				get { return token; }
-			}
+			public Token Token => token;
 
-			// Text of the current token
-			public string Text
-			{
-				get { return input.Substring(start, index - start + 1); }
-			}
+		    // Text of the current token
+			public string Text => input.Substring(start, index - start + 1);
 
-			// Gets text that has been consumed previously
-			public string GetConsumedText(int start)
+		    // Gets text that has been consumed previously
+			public string GetConsumedText(int startStr)
 			{
-				return input.Substring(start, prior - start + 1);
+				return input.Substring(startStr, prior - startStr + 1);
 			}
 
 			// Index where current token starts
-			public int Index
-			{
-				get { return start; }
-			}
+			public int Index => start;
 
-			// Consider the current token consumed, and read next token
+		    // Consider the current token consumed, and read next token
 			public void Consume()
 			{
 				prior = index;

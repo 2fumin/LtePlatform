@@ -307,6 +307,8 @@
     <Compile Include="Interfaces\ISimple.cs" />
     <Compile Include="Interfaces\ITwo.cs" />
     <Compile Include="Interfaces\IWithRefOut.cs" />
+    <Compile Include="Junior\DynamicProxy\DefaultProxyBuiderTest.cs" />
+    <Compile Include="Junior\DynamicProxy\ModuleScopeTest.cs" />
     <Compile Include="Main\AccessLevelTestCase.cs" />
     <Compile Include="Main\BasePEVerifyTestCase.cs" />
     <Compile Include="Main\BaseTestCaseTestCase.cs" />
@@ -397,6 +399,9 @@
       <Project>{7caa6d18-6d6f-4786-ac4f-e575ce1e100e}</Project>
       <Name>Castle.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
