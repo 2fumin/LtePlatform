@@ -32,6 +32,8 @@ namespace Lte.Domain.Regular
                         return x => x.ToString().Replace(".", "").ConvertToInt(0);
                     case TransformEnum.IpAddress:
                         return x => new IpAddress(x.ToString());
+                    case TransformEnum.DefaultZeroDouble:
+                        return x => x.ToString().ConvertToDouble(0.0);
                     default:
                         return null;
                 }

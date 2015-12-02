@@ -33,19 +33,31 @@
             <tr>
                 <td>LTE小区</td>
                 <td data-bind="text: newCells().length"></td>
-                <td></td>
+                <td>
+                    <div class="btn-group" data-bind="visible: newCells().length > 0">
+                        <button class="btn btn-warning" data-bind="click: checkCellsLonLat">检查经纬度</button>
+                    </div>
+                </td>
                 <td><input type="checkbox" data-bind="checked: newCellsImport"/></td>
             </tr>
             <tr>
                 <td>CDMA基站</td>
                 <td data-bind="text: newBtss().length"></td>
-                <td></td>
+                <td>
+                    <div class="btn-group" data-bind="visible: newBtss().length > 0">
+                        <button class="btn btn-warning" data-bind="click: checkBtssLonLat">检查经纬度</button>
+                    </div>
+                </td>
                 <td><input type="checkbox" data-bind="checked: newBtssImport"/></td>
             </tr>
             <tr>
                 <td>CDMA小区</td>
                 <td data-bind="text: newCdmaCells().length"></td>
-                <td></td>
+                <td>
+                    <div class="btn-group" data-bind="visible: newCdmaCells().length > 0">
+                        <button class="btn btn-warning" data-bind="click: checkCdmaCellsLonLat">检查经纬度</button>
+                    </div>
+                </td>
                 <td><input type="checkbox" data-bind="checked: newCdmaCellsImport"/></td>
             </tr>
             </tbody>
@@ -54,5 +66,8 @@
 </div>
 @{
     Html.RenderPartial("_ENodebLonLatTable");
+    Html.RenderPartial("_CellLonLatTable");
+    Html.RenderPartial("_BtsLonLatTable");
+    Html.RenderPartial("_CdmaCellLonLatTable");
 }
 <!-- /ko -->

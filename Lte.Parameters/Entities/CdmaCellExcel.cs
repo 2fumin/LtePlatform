@@ -38,7 +38,7 @@ namespace Lte.Parameters.Entities
         [ExcelColumn("方位角")]
         public double Azimuth { get; set; }
 
-        [ExcelColumn("天线增益（dBi）")]
+        [ExcelColumn("天线增益（dBi）", TransformEnum.DefaultZeroDouble)]
         public double AntennaGain { get; set; }
 
         [CloneProtection]

@@ -11,6 +11,9 @@
     self.newCdmaCellsImport = ko.observable(true);
 
     self.newENodebLonLatEdits = ko.observableArray([]);
+    self.newCellLonLatEdits = ko.observableArray([]);
+    self.newBtsLonLatEdits = ko.observableArray([]);
+    self.newCdmaCellLonLatEdits = ko.observableArray([]);
 
     Sammy(function () {
         this.get('#basicImport', function () {
@@ -36,8 +39,38 @@
     };
 
     self.postENodebLonLat = function() {
-        mapENodebLonLatEdits(self.newENodebs(), self.newENodebLonLatEdits());
+        mapLonLatEdits(self.newENodebs(), self.newENodebLonLatEdits());
         $('#eNodeb-lon-lat').modal('hide');
+    };
+
+    self.checkCellsLonLat = function() {
+        self.newCellLonLatEdits(queryCellLonLatEdits(self.newCells()));
+        $('#cell-lon-lat').modal('show');
+    };
+
+    self.postCellLonLat=function() {
+        mapLonLatEdits(self.newCells(), self.newCellLonLatEdits());
+        $('#cell-lon-lat').modal('hide');
+    }
+
+    self.checkBtssLonLat = function() {
+        self.newBtsLonLatEdits(queryBtsLonLatEdits(self.newBtss()));
+        $('#bts-lon-lat').modal('show');
+    };
+
+    self.postBtsLonLat = function() {
+        mapLonLatEdits(self.newBtss(), self.newBtsLonLatEdits());
+        $('#bts-lon-lat').modal('hide');
+    };
+
+    self.checkCdmaCellsLonLat = function() {
+        self.newCdmaCellLonLatEdits(queryCdmaCellLonLatEdits(self.newCdmaCells()));
+        $('#cdmaCell-lon-lat').modal('show');
+    };
+
+    self.postCdmaCellLonLat = function() {
+        mapLonLatEdits(self.newCdmaCells(), self.newCdmaCellLonLatEdits());
+        $('#cdmaCell-lon-lat').modal('hide');
     };
 
     return self;

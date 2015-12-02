@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -66,6 +67,7 @@
     <Compile Include="Excel\CdmaCellExcelTest.cs" />
     <Compile Include="Excel\CellExcelTest.cs" />
     <Compile Include="Excel\ENodebExcelTest.cs" />
+    <Compile Include="Excel\PracticalCdmaCellExcelTest.cs" />
     <Compile Include="Excel\RealCellExcelTest.cs" />
     <Compile Include="Excel\RealENodebExcelTest.cs" />
     <Compile Include="Kpi\CdmaCityStatExcelTest.cs" />

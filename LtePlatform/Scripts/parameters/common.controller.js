@@ -14,3 +14,11 @@ var mapLonLat = function (source, destination) {
     source.longtitute = destination.longtitute;
     source.lattitute = destination.lattitute;
 };
+
+var mapLonLatEdits = function (sourceList, destList) {
+    for (var i = 0; i < destList.length; i++) {
+        if (isLongtituteValid(destList[i])) {
+            mapLonLat(sourceList[destList[i].index], destList[i]);
+        }
+    }
+};

@@ -1,0 +1,50 @@
+﻿<div class="modal fade" id="cell-lon-lat">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4>LTE小区经纬度调整</h4>
+            </div>
+        </div>
+        <div class="modal-body form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">基站编号</label>
+                <label class="col-sm-1 control-label">扇区编号</label>
+                <label class="col-sm-1 control-label">频点</label>
+                <label class="col-sm-2 control-label">是否室内</label>
+                <label class="col-sm-3 control-label">经度</label>
+                <label class="col-sm-3 control-label">纬度</label>
+            </div>
+            <!-- ko foreach: newCellLonLatEdits -->
+            <div class="form-group">
+                <div class="col-sm-2">
+                    <span class="form-control" data-bind="text: eNodebId"></span>
+                </div>
+                <div class="col-sm-1">
+                    <span class="form-control" data-bind="text: sectorId"></span>
+                </div>
+                <div class="col-sm-1">
+                    <span class="form-control" data-bind="text: frequency"></span>
+                </div>
+                <div class="col-sm-2">
+                    <span class="form-control" data-bind="text: isIndoor"></span>
+                </div>
+                <div class="col-sm-3">
+                    <span class="form-control" data-bind="text: longtitute, visible: isLongtituteValid(longtitute)"></span>
+                    <input class="form-control" data-bind="value: longtitute, visible: !isLongtituteValid(longtitute)" />
+                </div>
+                <div class="col-sm-3">
+                    <span class="form-control" data-bind="text: lattitute, visible: isLattituteValid(lattitute)"></span>
+                    <input class="form-control" data-bind="value: lattitute, visible: !isLattituteValid(lattitute)" />
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" data-dismiss="modal">关闭</button>
+            <button class="btn btn-primary" data-bind="click: postCellLonLat">保存</button>
+        </div>
+    </div>
+</div>
+
+

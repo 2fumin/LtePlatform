@@ -16,14 +16,6 @@
     return result;
 };
 
-var mapENodebLonLatEdits = function (eNodebs, eNodebLonLatEdits) {
-    for (var i = 0; i < eNodebLonLatEdits.length; i++) {
-        if (isLongtituteValid(eNodebLonLatEdits[i])) {
-            mapLonLat(eNodebs[eNodebLonLatEdits[i].index], eNodebLonLatEdits[i]);
-        }
-    }
-};
-
 var queryCellLonLatEdits = function(cells) {
     var result = [];
     for (var index = 0; index < cells.length; index++) {
@@ -42,20 +34,38 @@ var queryCellLonLatEdits = function(cells) {
     return result;
 };
 
-var mapCellLonLatEdits = function(cells, cellLonLatEdits) {
-    for (var i = 0; i < cellLonLatEdits.length; i++) {
-        mapLonLat(cells[cellLonLatEdits[i].index], cellLonLatEdits[i]);
-    }
-};
-
-var queryBtsLonLatEdits=function(btss) {
+var queryBtsLonLatEdits = function(btss) {
     var result = [];
     for (var index = 0; index < btss.length; index++) {
         if (!isLonLatValid(btss[index])) {
             result.push({
-                index: index
+                index: index,
+                bscId: btss[index].bscId,
+                btsId: btss[index].btsId,
+                name: btss[index].name,
+                districtName: btss[index].districtName,
+                longtitute: eNodebs[index].longtitute,
+                lattitute: eNodebs[index].lattitute
             });
         }
     }
     return result;
-}
+};
+
+var queryCdmaCellLonLatEdits = function(cells) {
+    var result = [];
+    for (var index = 0; index < cells.length; index++) {
+        if (!isLonLatValid(cells[index])) {
+            result.push({
+                index: index,
+                btsId: cells[index].btsId,
+                sectorId: cells[index].sectorId,
+                frequency: cells[index].frequency,
+                isIndoor: cells[index].isIndoor,
+                longtitute: cells[index].longtitute,
+                lattitute: cells[index].lattitute
+            });
+        }
+    }
+    return result;
+};
