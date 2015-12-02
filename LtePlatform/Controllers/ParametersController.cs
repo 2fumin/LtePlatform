@@ -39,7 +39,7 @@ namespace LtePlatform.Controllers
         }
 
         [HttpPost]
-        public ActionResult BasicPost()
+        public ActionResult LteImportPost()
         {
             var lteFile = Request.Files["lteExcel"];
             if (lteFile != null && lteFile.FileName != "")
@@ -47,6 +47,12 @@ namespace LtePlatform.Controllers
                 var ltePath = lteFile.UploadParametersFile();
                 _basicImportService.ImportLteParameters(ltePath);
             }
+            return RedirectToAction("BasicImport");
+        }
+
+        [HttpPost]
+        public ActionResult CdmaImportPost()
+        {
             var cdmaFile = Request.Files["cdmaExcel"];
             if (cdmaFile != null && cdmaFile.FileName != "")
             {
