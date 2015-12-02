@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Lte.Domain.LinqToExcel;
 using Lte.Parameters.Abstract;
+using Lte.Parameters.Concrete;
 using Lte.Parameters.Entities;
 
 namespace Lte.Evaluations.DataService
@@ -93,6 +95,6 @@ namespace Lte.Evaluations.DataService
                 from cq in cellQuery.DefaultIfEmpty()
                 where cq == null
                 select info;
-        } 
+        }
     }
 }
