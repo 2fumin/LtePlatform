@@ -97,6 +97,7 @@
     <Compile Include="DataService\CollegeKpiService.cs" />
     <Compile Include="DataService\CollegePreciseService.cs" />
     <Compile Include="DataService\CollegeStatService.cs" />
+    <Compile Include="DataService\Dump\BtsDumpService.cs" />
     <Compile Include="DataService\Dump\ENodebDumpService.cs" />
     <Compile Include="DataService\ENodebQueryService.cs" />
     <Compile Include="DataService\KpiImportService.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="DataService\TopDrop2GService.cs" />
     <Compile Include="DataService\TownQueryService.cs" />
     <Compile Include="MapperSerive\BaiduMapperService.cs" />
+    <Compile Include="MapperSerive\BtsExcelWithTownIdContainer.cs" />
     <Compile Include="MapperSerive\CollegeMapperService.cs" />
     <Compile Include="MapperSerive\ENodebExcelWithTownIdContainer.cs" />
     <Compile Include="MapperSerive\EvalutaionMapperProfile.cs" />

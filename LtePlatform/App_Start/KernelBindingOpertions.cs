@@ -87,6 +87,8 @@ namespace LtePlatform
             ninjectKernel.Bind<BasicImportService>().ToSelf();
 
             ninjectKernel.Bind<ENodebDumpService>().ToSelf();
+
+            ninjectKernel.Bind<BtsDumpService>().ToSelf();
         }
     }
 }

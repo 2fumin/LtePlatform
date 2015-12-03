@@ -17,6 +17,7 @@ namespace Lte.Evaluations.MapperSerive
             StatMapperService.MapTopDrop2G();
 
             ParametersDumpMapperService.MapFromENodebContainerService();
+            ParametersDumpMapperService.MapFromBtsContainerService();
             
             InfrastructureMapperService.MapENodeb();
             InfrastructureMapperService.MapBts();
