@@ -103,6 +103,7 @@
     <Compile Include="DataService\CollegeKpiServiceTest.cs" />
     <Compile Include="DataService\CollegePreciseServiceTest.cs" />
     <Compile Include="DataService\CollegePreciseServiceTestQueries.cs" />
+    <Compile Include="DataService\ENodebDumpServiceTest.cs" />
     <Compile Include="DataService\GenerateViewListTest.cs" />
     <Compile Include="DataService\KpiImportServiceTest.cs" />
     <Compile Include="DataService\PreciseRegionStatServiceTest.cs" />

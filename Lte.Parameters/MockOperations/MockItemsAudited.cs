@@ -31,7 +31,7 @@ namespace Lte.Parameters.MockOperations
             repository.SynchronizeAuditedValues<T, TRepository>();
         }
 
-        public static void MockRepositorySaveItems<T, TRepository>(
+        public static void MockAuditedSaveItems<T, TRepository>(
             this Mock<TRepository> repository, IEnumerable<T> items)
             where T : AuditedEntity
             where TRepository : class, IRepository<T>
@@ -45,7 +45,7 @@ namespace Lte.Parameters.MockOperations
                 });
         }
 
-        public static void MockRepositorySaveItems<T, TRepository>(
+        public static void MockAuditedSaveItems<T, TRepository>(
             this Mock<TRepository> repository)
             where T : AuditedEntity
             where TRepository : class, IRepository<T>
@@ -60,7 +60,7 @@ namespace Lte.Parameters.MockOperations
                 });
         }
 
-        public static void MockRepositoryDeleteItems<T, TRepository>(
+        public static void MockAuditedDeleteItems<T, TRepository>(
             this Mock<TRepository> repository, IEnumerable<T> items)
             where T : AuditedEntity
             where TRepository : class, IRepository<T>
@@ -76,7 +76,7 @@ namespace Lte.Parameters.MockOperations
                 });
         }
 
-        public static void MockRepositoryDeleteItems<T, TRepository>(
+        public static void MockAuditedDeleteItems<T, TRepository>(
             this Mock<TRepository> repository)
             where T : AuditedEntity
             where TRepository : class, IRepository<T>

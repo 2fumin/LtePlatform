@@ -33,6 +33,7 @@ namespace Lte.Evaluations.DataService.Dump
                     TownId = town.Id
                 };
 
+            if (!containers.Any()) return;
             var items =
                 Mapper.Map<IEnumerable<ENodebExcelWithTownIdContainer>, List<ENodebWithTownIdContainer>>(containers);
             items.ForEach(x => { x.ENodeb.TownId = x.TownId; });

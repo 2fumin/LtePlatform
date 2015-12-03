@@ -83,5 +83,10 @@ namespace Lte.Evaluations.Test.MockItems
         {
             repository.MockQueryItems(alarms.AsQueryable());
         }
+
+        public static void MockTowns(this Mock<ITownRepository> repository, List<Town> towns)
+        {
+            repository.MockQueryItems(towns.AsQueryable());
+        }
     }
 }
