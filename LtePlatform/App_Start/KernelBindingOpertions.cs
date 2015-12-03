@@ -1,4 +1,5 @@
 ﻿using Lte.Evaluations.DataService;
+using Lte.Evaluations.DataService.Dump;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Concrete;
 using Ninject;
@@ -84,6 +85,8 @@ namespace LtePlatform
             ninjectKernel.Bind<TopDrop2GService>().ToSelf();
 
             ninjectKernel.Bind<BasicImportService>().ToSelf();
+
+            ninjectKernel.Bind<ENodebDumpService>().ToSelf();
         }
     }
 }
