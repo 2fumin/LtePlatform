@@ -162,6 +162,15 @@
     <Compile Include="Membel\NullBehavior.cs" />
     <Compile Include="Membel\ObjectSubstitution.cs" />
     <Compile Include="Membel\OpenGenerics.cs" />
+    <Compile Include="Membel\Profiles.cs" />
+    <Compile Include="Membel\PropertyMapContexts.cs" />
+    <Compile Include="Membel\Regression.cs" />
+    <Compile Include="Membel\ReverseMapping.cs" />
+    <Compile Include="Membel\TesterExtensions.cs" />
+    <Compile Include="Membel\TypeConverters.cs" />
+    <Compile Include="Membel\TypeExtensionsTests.cs" />
+    <Compile Include="Membel\UsingEngineInsideMap.cs" />
+    <Compile Include="Membel\ValueTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Should\ListOrArrayCompareTest.cs" />
   </ItemGroup>
