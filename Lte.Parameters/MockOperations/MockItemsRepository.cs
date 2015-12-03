@@ -58,6 +58,7 @@ namespace Lte.Parameters.MockOperations
                         btss.Concat(new List<T> { e }).AsQueryable());
                     SynchronizeValues<T, TRepository>(repository);
                 });
+            repository.Setup(x => x.InsertAsync(It.IsAny<T>())).Callback<T>(e => repository.Object.Insert(e));
         }
 
         public static void MockRepositoryDeleteItems<T, TRepository>(

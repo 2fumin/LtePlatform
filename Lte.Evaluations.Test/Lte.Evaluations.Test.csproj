@@ -87,7 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataService\AlarmsServiceTest.cs" />
-    <Compile Include="DataService\AlarmsServiceTestQueries.cs" />
+    <Compile Include="DataService\Queries\AlarmsServiceTestQueries.cs" />
     <Compile Include="DataService\BasicImportServiceTest.cs" />
     <Compile Include="DataService\CdmaRegionStatServiceTest.cs" />
     <Compile Include="DataService\CdmaRegionViewQueries.cs" />
@@ -108,6 +108,7 @@
     <Compile Include="DataService\KpiImportServiceTest.cs" />
     <Compile Include="DataService\PreciseRegionStatServiceTest.cs" />
     <Compile Include="DataService\PreciseStatServiceTest.cs" />
+    <Compile Include="DataService\Queries\DumpServiceTestQueries.cs" />
     <Compile Include="DataService\TopDrop2GServiceTest.cs" />
     <Compile Include="DataService\TopDrop2GTestQueries.cs" />
     <Compile Include="MapperService\MapFromENodebContainerServiceTest.cs" />

@@ -24,7 +24,8 @@ namespace Lte.Evaluations.Test.MapperService
 
         [TestCase("abc", "ieowue", 1, 2, "10.17.165.0", "10.17.165.100")]
         [TestCase("arebc", "ieo--wue", 3, 4, "219.128.254.0", "219.128.254.41")]
-        public void Test_OneItem(string name, string address, int townId, int eNodebId, string gatewayAddress, string ipAddress)
+        public void Test_OneItem(string name, string address, int townId, int eNodebId, string gatewayAddress,
+            string ipAddress)
         {
             var container = new ENodebExcelWithTownIdContainer
             {
@@ -39,12 +40,13 @@ namespace Lte.Evaluations.Test.MapperService
                 TownId = townId
             };
             var item = Mapper.Map<ENodebExcelWithTownIdContainer, ENodebWithTownIdContainer>(container);
-  
+
             item.ENodeb.ENodebId.ShouldEqual(eNodebId);
             item.ENodeb.Name.ShouldEqual(name);
             item.ENodeb.Address.ShouldEqual(address);
             item.TownId.ShouldEqual(townId);
             item.ENodeb.Ip.AddressString.ShouldEqual(ipAddress);
+            item.ENodeb.GatewayIp.AddressString.ShouldEqual(gatewayAddress);
         }
 
         [TestCase(new [] { "abc"}, new [] { "ieowue"}, new [] { 1}, new [] { 2})]
