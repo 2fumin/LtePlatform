@@ -110,6 +110,7 @@
     <Compile Include="MapperSerive\EvalutaionMapperProfile.cs" />
     <Compile Include="MapperSerive\InfrastructureMapperService.cs" />
     <Compile Include="MapperSerive\KpiMapperService.cs" />
+    <Compile Include="MapperSerive\ParametersDumpMapperService.cs" />
     <Compile Include="MapperSerive\TopCellContainer.cs" />
     <Compile Include="MapperSerive\TopCellQueriesService.cs" />
     <Compile Include="MapperSerive\TopDrop2GCellViewContainer.cs" />

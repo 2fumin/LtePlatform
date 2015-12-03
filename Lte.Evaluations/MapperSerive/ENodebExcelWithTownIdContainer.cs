@@ -13,4 +13,11 @@ namespace Lte.Evaluations.MapperSerive
 
         public int TownId { get; set; }
     }
+
+    public class ENodebWithTownIdContainer
+    {
+        public ENodeb ENodeb { get; set; }
+
+        public int TownId { get; set; }
+    }
 }

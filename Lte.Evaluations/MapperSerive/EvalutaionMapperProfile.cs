@@ -15,6 +15,8 @@ namespace Lte.Evaluations.MapperSerive
             StatMapperService.MapPreciseCoverage();
             StatMapperService.MapTopConnection3G();
             StatMapperService.MapTopDrop2G();
+
+            ParametersDumpMapperService.MapFromENodebContainerService();
             
             InfrastructureMapperService.MapENodeb();
             InfrastructureMapperService.MapBts();
