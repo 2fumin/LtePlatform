@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Castle.DynamicProxy;
 using NUnit.Framework;
 
 namespace Castle.Core.Test.Junior.DynamicProxy
@@ -19,7 +20,7 @@ namespace Castle.Core.Test.Junior.DynamicProxy
         [Test]
         public void Test_SimpleConstructor()
         {
-            var scope = new ModuleScopeTest();
+            var scope = new ModuleScope();
             Assert.IsNotNull(scope);
         }
     }
