@@ -63,8 +63,6 @@
     <Compile Include="IMemberGetter.cs" />
     <Compile Include="IMemberResolver.cs" />
     <Compile Include="INamingConvention.cs" />
-    <Compile Include="Internal\AggregateException.cs" />
-    <Compile Include="Internal\ConcurrentDictionaryFactory.cs" />
     <Compile Include="Internal\DefaultResolver.cs" />
     <Compile Include="Internal\DeferredInstantiatedConverter.cs" />
     <Compile Include="Internal\DeferredInstantiatedResolver.cs" />
@@ -72,7 +70,6 @@
     <Compile Include="Internal\DelegateBasedResolver2.cs" />
     <Compile Include="Internal\DelegateFactory.cs" />
     <Compile Include="Internal\EnumerableExtensions.cs" />
-    <Compile Include="Internal\EnumNameValueMapperFactory.cs" />
     <Compile Include="Internal\FieldAccessor.cs" />
     <Compile Include="Internal\FieldGetter.cs" />
     <Compile Include="Internal\IDelegateFactory.cs" />
