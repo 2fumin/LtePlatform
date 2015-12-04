@@ -1,26 +1,191 @@
-#time-control-btns{overflow:hidden}
-.time-control-btn{margin-left:5px;padding:5px 10px;border:1px solid #acb2bb;background:#fff;color:#000;text-decoration:none;float:left}
-.time-control-btn.active{background:#278df2;color:#fff}
-#time-panel{background:rgba(255,255,255,.8);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);border:1px solid #acb2bb;padding:13px;margin-top:5px;width:295px;overflow:hidden;position:absolute;top:32px;right:0;display:none}
-.time-panel-title{font-weight:700;font-size:14px}
-.time-panel-title .time-panel-time{font-size:12px;font-weight:400;margin-left:10px}
-.time-panel-control{overflow:hidden}
-.time-panel-progress-container{float:left;width:252px}
-.time-panel-progress-bar{width:100%;height:8px;position:relative;margin-top:10px}
-.time-panel-progress-text{overflow:hidden;margin-top:-3px;width:100%;position:relative;}
-.time-panel-progress-tick{float:left;background:url(../../images/TimeControl/tick.png) no-repeat 50% 0;padding-top:7px;width:12.5%;text-align:center;*width:12.4%;cursor:pointer;}
-.time-panel-week .time-panel-progress-tick{width:14.28%;*width:14.2%}
-.time-panel-progress{background:url(../../images/TimeControl/time-progress.png) no-repeat 0 0;width:16px;height:16px;position:absolute;top:-5px;left:0}
-.time-panel-btn{background:url(../../images/TimeControl/time-btn-pause.png) no-repeat 0 0;width:33px;height:33px;float:right;cursor:pointer}
-.time-panel-btn.play{background:url(../../images/TimeControl/time-btn-play.png) no-repeat 0 0}
-#time-control{font: 12px arial,ËÎÌו,sans-serif;position: absolute; z-index: 1001; bottom: auto; right: 10px; top: 10px; left: auto;}
-.map-ztian{ background-color:#ffffff; border:1px solid #acb2bb; width:86px; height:25px; float:left; margin-right:4px;}
-.map-ztian-1{ text-decoration:none; width:43px; height:25px; background-color:#ffffff; text-align:center; line-height:25px; cursor:pointer; float:left;}
-.map-ztian-1:hover{ background-color:#acb2bb; color:#ffffff;}
-.map-ztian-2{ text-decoration:none; width:43px; height:25px; background-color:#278df2; color:#ffffff; text-align:center; line-height:25px; cursor:pointer; float:left;}
-.map-k-time-1{ width:190px; height:28px; color:#ffffff; background-color:#acb2bb; float:left; line-height:28px; text-indent:5px; margin-right:4px;}
-.map-k-time-2{ background-color:#ffffff; border:1px solid #acb2bb; width:121px; height:24px; color:#a6a6a6;}
-.map-k-time-3{ width:90px; height:28px; color:#ffffff; background-color:#acb2bb; line-height:28px; float:left; text-indent:5px;}
-.map-k-time-4{ background-color:#ffffff; border:1px solid #acb2bb; width:48px; height:28px; color:#a6a6a6; float:right;}
-.map-k-time {display:none;}
-   
+#time-control-btns {
+    overflow: hidden;
+}
+
+.time-control-btn {
+    margin-left: 5px;
+    padding: 5px 10px;
+    border: 1px solid #acb2bb;
+    background: #fff;
+    color: #000;
+    text-decoration: none;
+    float: left;
+}
+
+    .time-control-btn.active {
+        background: #278df2;
+        color: #fff;
+    }
+
+#time-panel {
+    background: rgba(255,255,255,.8);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
+    border: 1px solid #acb2bb;
+    padding: 13px;
+    margin-top: 5px;
+    width: 295px;
+    overflow: hidden;
+    position: absolute;
+    top: 32px;
+    right: 0;
+    display: none;
+}
+
+.time-panel-title {
+    font-weight: 700;
+    font-size: 14px;
+}
+
+    .time-panel-title .time-panel-time {
+        font-size: 12px;
+        font-weight: 400;
+        margin-left: 10px;
+    }
+
+.time-panel-control {
+    overflow: hidden;
+}
+
+.time-panel-progress-container {
+    float: left;
+    width: 252px;
+}
+
+.time-panel-progress-bar {
+    width: 100%;
+    height: 8px;
+    position: relative;
+    margin-top: 10px;
+}
+
+.time-panel-progress-text {
+    overflow: hidden;
+    margin-top: -3px;
+    width: 100%;
+    position: relative;
+}
+
+.time-panel-progress-tick {
+    float: left;
+    background: url(../../images/TimeControl/tick.png) no-repeat 50% 0;
+    padding-top: 7px;
+    width: 12.5%;
+    text-align: center;
+    *width: 12.4%;
+    cursor: pointer;
+}
+
+.time-panel-week .time-panel-progress-tick {
+    width: 14.28%;
+    *width: 14.2%;
+}
+
+.time-panel-progress {
+    background: url(../../images/TimeControl/time-progress.png) no-repeat 0 0;
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: -5px;
+    left: 0;
+}
+
+.time-panel-btn {
+    background: url(../../images/TimeControl/time-btn-pause.png) no-repeat 0 0;
+    width: 33px;
+    height: 33px;
+    float: right;
+    cursor: pointer;
+}
+
+    .time-panel-btn.play {
+        background: url(../../images/TimeControl/time-btn-play.png) no-repeat 0 0;
+    }
+
+#time-control {
+    font: 12px arial,ËÎÌו,sans-serif;
+    position: absolute;
+    z-index: 1001;
+    bottom: auto;
+    right: 10px;
+    top: 10px;
+    left: auto;
+}
+
+.map-ztian {
+    background-color: #ffffff;
+    border: 1px solid #acb2bb;
+    width: 86px;
+    height: 25px;
+    float: left;
+    margin-right: 4px;
+}
+
+.map-ztian-1 {
+    text-decoration: none;
+    width: 43px;
+    height: 25px;
+    background-color: #ffffff;
+    text-align: center;
+    line-height: 25px;
+    cursor: pointer;
+    float: left;
+}
+
+    .map-ztian-1:hover {
+        background-color: #acb2bb;
+        color: #ffffff;
+    }
+
+.map-ztian-2 {
+    text-decoration: none;
+    width: 43px;
+    height: 25px;
+    background-color: #278df2;
+    color: #ffffff;
+    text-align: center;
+    line-height: 25px;
+    cursor: pointer;
+    float: left;
+}
+
+.map-k-time-1 {
+    width: 190px;
+    height: 28px;
+    color: #ffffff;
+    background-color: #acb2bb;
+    float: left;
+    line-height: 28px;
+    text-indent: 5px;
+    margin-right: 4px;
+}
+
+.map-k-time-2 {
+    background-color: #ffffff;
+    border: 1px solid #acb2bb;
+    width: 121px;
+    height: 24px;
+    color: #a6a6a6;
+}
+
+.map-k-time-3 {
+    width: 90px;
+    height: 28px;
+    color: #ffffff;
+    background-color: #acb2bb;
+    line-height: 28px;
+    float: left;
+    text-indent: 5px;
+}
+
+.map-k-time-4 {
+    background-color: #ffffff;
+    border: 1px solid #acb2bb;
+    width: 48px;
+    height: 28px;
+    color: #a6a6a6;
+    float: right;
+}
+
+.map-k-time {
+    display: none;
+}
