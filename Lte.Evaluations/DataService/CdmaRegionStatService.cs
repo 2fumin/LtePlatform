@@ -93,7 +93,7 @@ namespace Lte.Evaluations.DataService
             for (var i = 0; i < dates.Count(); i++)
                 cityStat.Add(query.Select(x => x.ElementAt(i)).ArraySum());
             query.Add(cityStat);
-            return query.Select(x => Mapper.Map<List<CdmaRegionStat>, IEnumerable<CdmaRegionStatView>>(x)).ToList();
+            return query.Select(Mapper.Map<List<CdmaRegionStat>, IEnumerable<CdmaRegionStatView>>).ToList();
         }
     }
 }

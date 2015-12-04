@@ -90,7 +90,7 @@
     <Compile Include="DataService\Queries\AlarmsServiceTestQueries.cs" />
     <Compile Include="DataService\BasicImportServiceTest.cs" />
     <Compile Include="DataService\CdmaRegionStatServiceTest.cs" />
-    <Compile Include="DataService\CdmaRegionViewQueries.cs" />
+    <Compile Include="DataService\Queries\CdmaRegionViewQueries.cs" />
     <Compile Include="DataService\College3GTestQueries.cs" />
     <Compile Include="DataService\College3GTestServiceTest.cs" />
     <Compile Include="DataService\College4GTestServiceTest.cs" />
@@ -103,7 +103,7 @@
     <Compile Include="DataService\CollegeKpiServiceTest.cs" />
     <Compile Include="DataService\CollegePreciseServiceTest.cs" />
     <Compile Include="DataService\CollegePreciseServiceTestQueries.cs" />
-    <Compile Include="DataService\ENodebDumpServiceTest.cs" />
+    <Compile Include="DataService\Dump\ENodebDumpServiceTest.cs" />
     <Compile Include="DataService\GenerateViewListTest.cs" />
     <Compile Include="DataService\KpiImportServiceTest.cs" />
     <Compile Include="DataService\PreciseRegionStatServiceTest.cs" />

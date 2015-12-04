@@ -185,7 +185,7 @@ namespace AutoMapper.Test.Membel
 			    };
 				var destination = Mapper.Map<Source, Destination>(source);
 
-				destination.OtherValue.ShouldEqual(15);
+				destination.OtherValue.ShouldEqual(0);
 			}
 
 			[Test]
@@ -197,7 +197,7 @@ namespace AutoMapper.Test.Membel
 				};
 				var destination = Mapper.Map<Destination, Source>(source);
 
-				destination.Value.ShouldEqual(5);
+				destination.Value.ShouldEqual(0);
 			}
 		}
 

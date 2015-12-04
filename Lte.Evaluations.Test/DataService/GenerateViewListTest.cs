@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Lte.Evaluations.DataService;
+using Lte.Evaluations.MapperSerive;
+using Lte.Evaluations.Test.DataService.Queries;
 using Lte.Parameters.Entities;
 using NUnit.Framework;
 
@@ -10,6 +12,12 @@ namespace Lte.Evaluations.Test.DataService
     [TestFixture]
     public class GenerateViewListTest
     {
+        [TestFixtureSetUp]
+        public void TestFixtureSetup()
+        {
+            KpiMapperService.MapCdmaRegionStat();
+        }
+
         [TestCase("2015-1-2", "region1", 12.3)]
         [TestCase("2015-3-2", "region3", 20.3)]
         public void Test_OneElement_Matched(string date, string region, double erlang2G)

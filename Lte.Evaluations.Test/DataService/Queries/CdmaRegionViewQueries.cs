@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Lte.Evaluations.ViewModels;
 using NUnit.Framework;
 
-namespace Lte.Evaluations.Test.DataService
+namespace Lte.Evaluations.Test.DataService.Queries
 {
     public static class CdmaRegionViewQueries
     {
