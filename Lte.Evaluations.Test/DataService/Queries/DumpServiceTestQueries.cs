@@ -20,5 +20,16 @@ namespace Lte.Evaluations.Test.DataService.Queries
             eNodeb.GatewayIp.AddressString.ShouldEqual(gatewayAddress);
             eNodeb.Ip.AddressString.ShouldEqual(ipAddress);
         }
+
+        public static void ShouldEqual(this CdmaBts bts, string name, string address, int townId, int btsId,
+            double longtitute, double lattitute)
+        {
+            bts.Name.ShouldEqual(name);
+            bts.Address.ShouldEqual(address);
+            bts.TownId.ShouldEqual(townId);
+            bts.BtsId.ShouldEqual(btsId);
+            bts.Longtitute.ShouldEqual(longtitute);
+            bts.Lattitute.ShouldEqual(lattitute);
+        }
     }
 }

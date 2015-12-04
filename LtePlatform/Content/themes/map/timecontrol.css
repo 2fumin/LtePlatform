@@ -19,7 +19,7 @@
 
 #time-panel {
     background: rgba(255,255,255,.8);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFF, endColorstr=#CCFFFF);
     border: 1px solid #acb2bb;
     padding: 13px;
     margin-top: 5px;
