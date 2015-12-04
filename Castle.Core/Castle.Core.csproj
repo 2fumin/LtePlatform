@@ -176,6 +176,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
@@ -184,6 +187,7 @@
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Compatibility\IntrospectionExtensions.cs" />
+    <Compile Include="Components.DictionaryAdapter\DynamicDictionary.cs" />
     <Compile Include="Components.DictionaryAdapter\Util\ListProjectionDebugView.cs" />
     <Compile Include="Components.DictionaryAdapter\Util\ICollectionAdapter.cs" />
     <Compile Include="Components.DictionaryAdapter\Attributes\ReferenceAttribute.cs" />
@@ -611,6 +615,15 @@
     <Compile Include="Core\Smtp\DefaultSmtpSender.cs" />
     <Compile Include="Core\StringObjectDictionaryAdapter.cs" />
     <Compile Include="SecurityAssemblyInfo.cs" />
+    <Compile Include="Services\NLogIntegration\ExtendedNLogFactory.cs" />
+    <Compile Include="Services\NLogIntegration\ExtendedNLogLogger.cs" />
+    <Compile Include="Services\NLogIntegration\GlobalContextProperties.cs" />
+    <Compile Include="Services\NLogIntegration\NLogFactory.cs" />
+    <Compile Include="Services\NLogIntegration\NLogLogger.cs" />
+    <Compile Include="Services\NLogIntegration\SecurityAssemblyInfo.cs" />
+    <Compile Include="Services\NLogIntegration\ThreadContextProperties.cs" />
+    <Compile Include="Services\NLogIntegration\ThreadContextStack.cs" />
+    <Compile Include="Services\NLogIntegration\ThreadContextStacks.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DynamicProxy\DynProxy.snk" />

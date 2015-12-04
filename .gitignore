@@ -62,3 +62,6 @@ packages/
 uploads/
 
 *.rar
+/Castle.Core.Test/bin/Release
+/Castle.Core/bin/Release
+/Castle.Core/bin/NET45-Release
