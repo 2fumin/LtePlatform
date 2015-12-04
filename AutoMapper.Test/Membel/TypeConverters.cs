@@ -152,28 +152,37 @@ namespace AutoMapper.Test.Membel
 
 				public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
 				{
-					return new Destination
-						{
-							OtherValue = ((Source) value).Value + 10
-						};
+				    return new Destination
+				    {
+				        OtherValue = ((Source) value).Value + 10
+				    };
 				}
+
 				public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
 				{
 					return sourceType == typeof(Destination);
 				}
+
 				public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
 				{
 					return new Source {Value = ((Destination) value).OtherValue - 10};
 				}
 			}
 
+            [TestFixtureSetUp]
+            public void TestFixtureSetup()
+            {
+                Mapper.CreateMap<Source, Destination>();
+                Mapper.CreateMap<Destination, Source>();
+            }
+
 			[Test]
 			public void Should_convert_from_type_using_the_custom_type_converter()
 			{
-				var source = new Source
-					{
-						Value = 5
-					};
+			    var source = new Source
+			    {
+			        Value = 5
+			    };
 				var destination = Mapper.Map<Source, Destination>(source);
 
 				destination.OtherValue.ShouldEqual(15);

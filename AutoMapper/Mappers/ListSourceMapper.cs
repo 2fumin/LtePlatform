@@ -1,3 +1,4 @@
+#define NET4
 #if MONODROID || MONOTOUCH || __IOS__ || NET4
 namespace AutoMapper.Mappers
 {

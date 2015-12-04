@@ -1,4 +1,5 @@
-﻿#if PORTABLE || NETCORE45 || WINDOWS_PHONE
+﻿
+#if PORTABLE || NETCORE45 || WINDOWS_PHONE
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
