@@ -78,7 +78,7 @@ namespace Castle.Core.Test.Main
 			}
 		}
 
-		public sealed class MyClass
+		public class MyClass
 		{
 			public void MyMethod(out int i, ref string s, int i1, out string s2)
 			{

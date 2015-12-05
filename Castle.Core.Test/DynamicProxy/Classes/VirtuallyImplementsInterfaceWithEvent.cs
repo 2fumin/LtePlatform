@@ -17,7 +17,7 @@ using Castle.Core.Test.Main;
 
 namespace Castle.Core.Test.DynamicProxy.Classes
 {
-    public sealed class VirtuallyImplementsInterfaceWithEvent : IHasEvent
+    public class VirtuallyImplementsInterfaceWithEvent : IHasEvent
 	{
 		public event EventHandler MyEvent;
 

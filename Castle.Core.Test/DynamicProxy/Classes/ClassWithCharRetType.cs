@@ -14,7 +14,7 @@
 
 namespace Castle.Core.Test.DynamicProxy.Classes
 {
-	public sealed class ClassWithCharRetType
+	public class ClassWithCharRetType
 	{
 		public static char DoSomething()
 		{

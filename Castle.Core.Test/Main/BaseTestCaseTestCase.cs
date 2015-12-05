@@ -98,8 +98,8 @@ namespace Castle.Core.Test.Main
 			var ex = Assert.Throws<AssertionException>(FindVerificationErrors);
 #endif
 			StringAssert.Contains("PeVerify reported error(s)", ex.Message);
-			StringAssert.Contains("fall through end of the method without returning", ex.Message);
-		}
+			StringAssert.Contains("InvalidType::InvalidMethod", ex.Message);
+        }
 
 		[Test]
 		public void DisableVerification_DisablesVerificationForTestCase()

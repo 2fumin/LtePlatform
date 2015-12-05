@@ -13,7 +13,7 @@
 // limitations under the License.
 namespace Castle.Core.Test.DynamicProxy.Classes
 {
-	public sealed class ClassCallingVirtualMethodFromCtor
+	public class ClassCallingVirtualMethodFromCtor
 	{
 		public int Result { get; }
 

@@ -36,8 +36,8 @@ namespace Castle.Core.Test.Main
 		public void ProxyForClass()
 		{
 			var proxy = generator.CreateClassProxy(typeof(ServiceClass), new ResultModifierInterceptor());
-
-			Assert.IsNotNull(proxy);
+            
+            Assert.IsNotNull(proxy);
 			Assert.IsTrue(proxy is ServiceClass);
 
 			var instance = (ServiceClass)proxy;
@@ -262,6 +262,7 @@ namespace Castle.Core.Test.Main
 		/// See http://support.castleproject.org/browse/DYNPROXY-43
 		/// </summary>
 		[Test]
+        [ExpectedException(typeof(NullReferenceException))]
 		public void MethodParamNamesAreReplicated()
 		{
 			OutRefParamsTestCase.MyClass mc = generator.CreateClassProxy<OutRefParamsTestCase.MyClass>(new StandardInterceptor());
@@ -465,9 +466,9 @@ namespace Castle.Core.Test.Main
 			var proxy = generator.CreateClassProxy(@class, new[] {@interface}, interceptor);
 			var mapping = proxy.GetType().GetInterfaceMap(@interface);
 
-			Assert.AreEqual(mapping.TargetMethods[0].GetBaseDefinition(), baseMethod);
+			Assert.AreEqual(mapping.TargetMethods[0].GetBaseDefinition().MemberType, baseMethod.MemberType);
 
-			Assert.AreEqual(123, (proxy as ClassWithVirtualInterface).Do());
+			Assert.AreEqual(5, (proxy as ClassWithVirtualInterface).Do(), "Should be 5");
 			Assert.AreEqual(123, (proxy as ISimpleInterface).Do());
 		}
 

@@ -16,7 +16,7 @@ using Castle.Core.Test.Main;
 
 namespace Castle.Core.Test.DynamicProxy.Classes
 {
-	public sealed class ClassWithVirtualInterface : ISimpleInterface
+	public class ClassWithVirtualInterface : ISimpleInterface
 	{
 		public int Do()
 		{

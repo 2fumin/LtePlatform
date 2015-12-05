@@ -16,7 +16,7 @@ using Castle.Core.Test.Main;
 
 namespace Castle.Core.Test.DynamicProxy.Classes
 {
-	public sealed class VirtuallyImplementsInterfaceWithProperty:IHasProperty
+	public class VirtuallyImplementsInterfaceWithProperty:IHasProperty
 	{
 		public int Prop
 		{
