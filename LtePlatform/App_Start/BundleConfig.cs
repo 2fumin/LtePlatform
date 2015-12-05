@@ -166,6 +166,9 @@ namespace LtePlatform
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                 "~/Content/themes/base/all.css"));
+
+            bundles.Add(new StyleBundle("~/Content/HelpPage").Include(
+                "~/Areas/HelpPage/HelpPage.css"));
         }
     }
 }
