@@ -89,6 +89,10 @@ namespace LtePlatform
             ninjectKernel.Bind<ENodebDumpService>().ToSelf();
 
             ninjectKernel.Bind<BtsDumpService>().ToSelf();
+
+            ninjectKernel.Bind<CellDumpService>().ToSelf();
+
+            ninjectKernel.Bind<CdmaCellDumpService>().ToSelf();
         }
     }
 }

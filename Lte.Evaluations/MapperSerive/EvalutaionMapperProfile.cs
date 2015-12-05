@@ -18,6 +18,7 @@ namespace Lte.Evaluations.MapperSerive
 
             ParametersDumpMapperService.MapFromENodebContainerService();
             ParametersDumpMapperService.MapFromBtsContainerService();
+            ParametersDumpMapperService.MapENodebBtsIdService();
             
             InfrastructureMapperService.MapENodeb();
             InfrastructureMapperService.MapBts();
