@@ -438,6 +438,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\app\app.simplemodel.js" />
+    <Content Include="Scripts\app\base64-string.js" />
+    <Content Include="Scripts\app\html5csv.js" />
+    <Content Include="Scripts\app\lz-string.js" />
+    <Content Include="Scripts\app\lz-string.min.js" />
     <Content Include="Scripts\baidu\college.helper.js" />
     <Content Include="Scripts\baidu\mapContainer.js" />
     <Content Include="Scripts\baidu\parameters.helper.js" />
