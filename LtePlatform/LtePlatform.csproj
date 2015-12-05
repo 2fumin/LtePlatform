@@ -298,6 +298,8 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Areas\TestPage\Controllers\QUnitTestController.cs" />
+    <Compile Include="Areas\TestPage\TestPageAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminitrativeRegion\CityListController.cs" />
     <Compile Include="Controllers\CollegeController.cs" />
@@ -471,6 +473,8 @@
     <Content Include="Content\google\q41y_9MUP_N8ipOH4ORRvw.woff2" />
     <Content Include="Content\google\F587cG5P5ff3TX6w4JloryEAvth_LlrfE80CYdSH47w.woff2" />
     <Content Include="Content\google\7M5kxD4eGxuhgFaIk95pBfk_vArhqVIZ0nv9q090hN8.woff2" />
+    <Content Include="Areas\TestPage\Views\web.config" />
+    <Content Include="Areas\TestPage\Views\_ViewStart.cshtml" />
     <None Include="Properties\PublishProfiles\Lte2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\college\common.controller.js" />
@@ -659,6 +663,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\HelpPage\Views\Shared\" />
+    <Folder Include="Areas\TestPage\Models\" />
+    <Folder Include="Areas\TestPage\Views\QUnitTest\" />
+    <Folder Include="Areas\TestPage\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
