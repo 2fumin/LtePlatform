@@ -27,10 +27,10 @@ namespace Castle.Core.Test.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>c:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\NETFX 4.0 Tools</string>
-  <string>c:\Program Files (x86)\Microsoft SDKs\Windows\v7.1\Bin\NETFX 4.0 Tools</string>
+  <string>C:\Program Files (x86)\Microsoft SDKs\Windows\v8.0A\bin\NETFX 4.0 Tools</string>
+  <string>C:\Program Files (x86)\Microsoft SDKs\Windows\v8.1A\bin\NETFX 4.5.1 Tools</string>
   <string>c:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\NETFX 4.0 Tools</string>
-  <string>c:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Bin\NETFX 4.0 Tools</string>
+  <string>C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6 Tools</string>
   <string>c:\Program Files\Microsoft SDKs\Windows\v6.0A\Bin</string>
   <string>C:\Program Files (x86)\Microsoft Visual Studio 8\SDK\v2.0\bin</string>
 </ArrayOfString>")]

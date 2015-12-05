@@ -30,7 +30,11 @@ namespace Castle.Core.Test.Junior.DynamicProxy
         public void Test_GetKeyPair()
         {
             var keyPair = ModuleScope.GetKeyPair();
-            keyPair.Length.ShouldEqual(0);
+            keyPair.Length.ShouldEqual(596);
+            foreach (var k in keyPair)
+            {
+                Console.WriteLine("Key:{0}", k.ToString());
+            }
         }
     }
 }
