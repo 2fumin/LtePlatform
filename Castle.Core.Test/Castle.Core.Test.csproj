@@ -395,6 +395,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AutoMapper\AutoMapper.csproj">
+      <Project>{75c9d4b5-2117-4b06-a6b1-70afcd6b3bfc}</Project>
+      <Name>AutoMapper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Castle.Core\Castle.Core.csproj">
       <Project>{7caa6d18-6d6f-4786-ac4f-e575ce1e100e}</Project>
       <Name>Castle.Core</Name>
