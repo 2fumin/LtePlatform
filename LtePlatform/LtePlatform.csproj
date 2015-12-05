@@ -475,6 +475,8 @@
     <Content Include="Content\google\7M5kxD4eGxuhgFaIk95pBfk_vArhqVIZ0nv9q090hN8.woff2" />
     <Content Include="Areas\TestPage\Views\web.config" />
     <Content Include="Areas\TestPage\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\TestPage\Views\QUnitTest\Index.cshtml" />
+    <Content Include="Areas\TestPage\Views\Shared\_QUnitTestContents.cshtml" />
     <None Include="Properties\PublishProfiles\Lte2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\college\common.controller.js" />
@@ -664,8 +666,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\HelpPage\Views\Shared\" />
     <Folder Include="Areas\TestPage\Models\" />
-    <Folder Include="Areas\TestPage\Views\QUnitTest\" />
-    <Folder Include="Areas\TestPage\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
