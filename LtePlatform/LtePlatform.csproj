@@ -356,6 +356,7 @@
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\TestPage\Scripts\reporter-html.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\google\sandsignika.css" />
@@ -397,6 +398,7 @@
     <Content Include="Content\Images\TimeControl\time-btn-pause.png" />
     <Content Include="Content\Images\TimeControl\time-btn-play.png" />
     <Content Include="Content\Images\TimeControl\time-progress.png" />
+    <Content Include="Content\qunit-1.20.0.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -444,6 +446,7 @@
     <Content Include="Scripts\app\html5csv.js" />
     <Content Include="Scripts\app\lz-string.js" />
     <Content Include="Scripts\app\lz-string.min.js" />
+    <Content Include="Scripts\app\qunit-1.20.0.js" />
     <Content Include="Scripts\baidu\college.helper.js" />
     <Content Include="Scripts\baidu\mapContainer.js" />
     <Content Include="Scripts\baidu\parameters.helper.js" />
@@ -477,6 +480,7 @@
     <Content Include="Areas\TestPage\Views\_ViewStart.cshtml" />
     <Content Include="Areas\TestPage\Views\QUnitTest\Index.cshtml" />
     <Content Include="Areas\TestPage\Views\Shared\_QUnitTestContents.cshtml" />
+    <Content Include="Areas\TestPage\Views\QUnitTest\LegacyMarkup.cshtml" />
     <None Include="Properties\PublishProfiles\Lte2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\college\common.controller.js" />
