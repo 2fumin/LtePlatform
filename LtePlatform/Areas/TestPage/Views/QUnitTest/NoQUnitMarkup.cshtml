@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "reporter-html-no-qunit-element";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        @{
+            Html.RenderPartial("_QUnitTestContents");
+        }
+    </div>
+    <div class="col-md-8">
+        <h2>@ViewBag.Title</h2>
+
+    </div>
+</div>
+
+@section Scripts
+{
+    <link rel="stylesheet" href="~/Content/qunit-1.20.0.css">
+    <script src="~/Scripts/app/qunit-1.20.0.js"></script>
+    <script>
+        var time = setTimeout(function() {
+            console.error("timeout error with no QUnit markup");
+        }, 50);
+
+        QUnit.module("reporter-html-no-qunit-element");
+
+        QUnit.test("no qunit markup", function(assert) {
+            assert.expect(1);
+            assert.ok(true);
+        });
+
+        QUnit.done(function() {
+            clearTimeout(time);
+        });
+    </script>
+}

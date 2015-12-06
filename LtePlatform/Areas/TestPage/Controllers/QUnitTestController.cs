@@ -18,5 +18,15 @@ namespace LtePlatform.Areas.TestPage.Controllers
         {
             return View();
         }
+
+        public ActionResult NoQUnitMarkup()
+        {
+            return View();
+        }
+
+        public ActionResult SingleTestId()
+        {
+            return View();
+        }
     }
 }
