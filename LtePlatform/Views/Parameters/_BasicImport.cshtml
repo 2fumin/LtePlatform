@@ -1,4 +1,12 @@
 ﻿<!-- ko with: basicImport -->
+<div class="alert alert-success" data-bind="visible: dumpResultMessage() !== ''">
+    <a href="#" class="close" data-dismiss="alert">
+        &times;
+    </a>
+    <strong>
+        <span data-bind="text: dumpResultMessage"></span>
+    </strong>
+</div>
 <div class="panel panel-info">
     <div class="panel-heading">
         <h3 class="panel-title">
@@ -7,7 +15,7 @@
     </div>
     <div class="panel-body">
         <p>
-            <button class="btn btn-primary">一键导入</button>
+            <button class="btn btn-primary" data-bind="click: postAll">一键导入</button>
         </p>
         <table class="table table-hover">
             <thead>
