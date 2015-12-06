@@ -29,12 +29,12 @@ namespace LtePlatform.Controllers.Parameters
         }
 
         [HttpPost]
-        public async Task Post(IEnumerable<CellExcel> infos)
+        public async Task Post(NewCellListContainer container)
         {
             await Task.Run(() =>
             {
-                _dumpService.DumpNewCellExcels(infos);
-                _dumpService.UpdateENodebBtsIds(infos);
+                _dumpService.DumpNewCellExcels(container.Infos);
+                _dumpService.UpdateENodebBtsIds(container.Infos);
             });
         }
     }

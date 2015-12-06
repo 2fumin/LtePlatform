@@ -29,9 +29,9 @@ namespace LtePlatform.Controllers.Parameters
         }
 
         [HttpPost]
-        public async Task Post(IEnumerable<CdmaCellExcel> infos)
+        public async Task Post(NewCdmaCellListContainer container)
         {
-            await Task.Run(() => { _dumpService.DumpNewCellExcels(infos); });
+            await Task.Run(() => { _dumpService.DumpNewCellExcels(container.Infos); });
         }
     }
 }

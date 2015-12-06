@@ -38,7 +38,7 @@ namespace Lte.Evaluations.DataService.Dump
                 Mapper.Map<IEnumerable<ENodebExcelWithTownIdContainer>, List<ENodebWithTownIdContainer>>(containers);
             items.ForEach(x => { x.ENodeb.TownId = x.TownId; });
 
-            items.Select(x => x.ENodeb).ToList().ForEach(x => _eNodebRepository.InsertAsync(x));
+            items.Select(x => x.ENodeb).ToList().ForEach(x => _eNodebRepository.Insert(x));
         }
     }
 }

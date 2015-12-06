@@ -29,11 +29,9 @@ namespace LtePlatform.Controllers.Parameters
         }
 
         [HttpPost]
-        public int Post(string list)
+        public async Task Post(NewENodebListContainer container)
         {
-            //await Task.Run(() => { _dumpService.DumpNewEnodebExcels(infos); });
-            //var infos = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ENodebExcel>>(list);
-            return list.Length;
+            await Task.Run(() => { _dumpService.DumpNewEnodebExcels(container.Infos); });
         }
     }
 }

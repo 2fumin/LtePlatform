@@ -21,7 +21,7 @@ namespace Lte.Evaluations.DataService.Dump
         public void DumpNewCellExcels(IEnumerable<CdmaCellExcel> infos)
         {
             var cellList = Mapper.Map<IEnumerable<CdmaCellExcel>, List<CdmaCell>>(infos);
-            cellList.ForEach(cell => _cellRepository.InsertAsync(cell));
+            cellList.ForEach(cell => _cellRepository.Insert(cell));
         }
     }
 }

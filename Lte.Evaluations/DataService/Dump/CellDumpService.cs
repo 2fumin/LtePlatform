@@ -24,7 +24,7 @@ namespace Lte.Evaluations.DataService.Dump
         public void DumpNewCellExcels(IEnumerable<CellExcel> infos)
         {
             var cellList = Mapper.Map<IEnumerable<CellExcel>, List<Cell>>(infos);
-            cellList.ForEach(cell => _cellRepository.InsertAsync(cell));
+            cellList.ForEach(cell => _cellRepository.Insert(cell));
         }
 
         public void UpdateENodebBtsIds(IEnumerable<CellExcel> infos)
@@ -40,7 +40,7 @@ namespace Lte.Evaluations.DataService.Dump
                 var bts = _btsRepository.GetByBtsId(x.BtsId);
                 if (bts == null) return;
                 bts.ENodebId = x.ENodebId;
-                _btsRepository.UpdateAsync(bts);
+                _btsRepository.Update(bts);
             });
         }
     }

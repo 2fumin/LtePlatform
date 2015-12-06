@@ -76,26 +76,37 @@
 
     self.postAll = function () {
         if (self.newENodebs().length > 0) {
-            sendRequest(app.dataModel.newENodebExcelsUrl, "POST", JSON.stringify(self.newENodebs()), function (result) {
-                //self.dumpResultMessage(self.dumpResultMessage() + "完成LTE基站导入；");
-                alert(result);
+            sendRequest(app.dataModel.newENodebExcelsUrl, "POST", {
+                infos: self.newENodebs()
+            }, function () {
+                self.dumpResultMessage(self.dumpResultMessage() + "完成LTE基站导入；");
+                self.newENodebs([]);
             });
         }
-        //if (self.newBtss().length > 0) {
-        //    sendRequest(app.dataModel.newBtsExcelsUrl, "POST", JSON.stringify(self.newBtss()), function() {
-        //        self.dumpResultMessage(self.dumpResultMessage() + "完成CDMA基站导入；");
-        //    });
-        //}
-        //if (self.newCells().length > 0) {
-        //    sendRequest(app.dataModel.newCellExcelsUrl, "POST", JSON.stringify(self.newCells()), function() {
-        //        self.dumpResultMessage(self.dumpResultMessage() + "完成LTE小区导入；");
-        //    });
-        //}
-        //if (self.newCdmaCells().length > 0) {
-        //    sendRequest(app.dataModel.newCdmaCellExcelsUrl, "POST", JSON.stringify(self.newCdmaCells()), function() {
-        //        self.dumpResultMessage(self.dumpResultMessage() + "完成CDMA小区导入；");
-        //    });
-        //}
+        if (self.newBtss().length > 0) {
+            sendRequest(app.dataModel.newBtsExcelsUrl, "POST", {
+                infos: self.newBtss()
+            }, function() {
+                self.dumpResultMessage(self.dumpResultMessage() + "完成CDMA基站导入；");
+                self.newBtss([]);
+            });
+        }
+        if (self.newCells().length > 0) {
+            sendRequest(app.dataModel.newCellExcelsUrl, "POST", {
+                infos: self.newCells()
+            }, function() {
+                self.dumpResultMessage(self.dumpResultMessage() + "完成LTE小区导入；");
+                self.newCells([]);
+            });
+        }
+        if (self.newCdmaCells().length > 0) {
+            sendRequest(app.dataModel.newCdmaCellExcelsUrl, "POST", {
+                infos: self.newCdmaCells()
+            }, function() {
+                self.dumpResultMessage(self.dumpResultMessage() + "完成CDMA小区导入；");
+                self.newCdmaCells([]);
+            });
+        }
     };
 
     return self;

@@ -38,7 +38,7 @@ namespace Lte.Evaluations.DataService.Dump
                 Mapper.Map<IEnumerable<BtsExcelWithTownIdContainer>, List<BtsWithTownIdContainer>>(containers);
             items.ForEach(x => { x.CdmaBts.TownId = x.TownId; });
 
-            items.Select(x => x.CdmaBts).ToList().ForEach(x => _btsRepository.InsertAsync(x));
+            items.Select(x => x.CdmaBts).ToList().ForEach(x => _btsRepository.Insert(x));
         }
     }
 }
