@@ -299,6 +299,9 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Areas\TestPage\Controllers\QUnitTestController.cs" />
+    <Compile Include="Areas\TestPage\Controllers\SimpleTypeTestSumController.cs" />
+    <Compile Include="Areas\TestPage\Controllers\WebApiTestController.cs" />
+    <Compile Include="Areas\TestPage\Models\SimpleTypeClass.cs" />
     <Compile Include="Areas\TestPage\TestPageAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminitrativeRegion\CityListController.cs" />
@@ -489,6 +492,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Areas\TestPage\Views\WebApiTest\SimpleType.cshtml" />
     <None Include="Properties\PublishProfiles\Lte2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -680,7 +684,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\HelpPage\Views\Shared\" />
-    <Folder Include="Areas\TestPage\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

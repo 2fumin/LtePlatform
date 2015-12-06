@@ -1,0 +1,98 @@
+﻿<div class="row">
+    <div class="col-md-4">
+        @{
+            Html.RenderPartial("_QUnitTestContents");
+        }
+    </div>
+    <div class="col-md-8">
+        <h3>简单类型测试</h3>
+        <p>
+            A=<span id="simple-A"></span>,&nbsp;
+            B=<span id="simple-B"></span>,&nbsp;
+            A+B=<span id="simple-sum"></span>&nbsp;
+            <button class="btn btn-primary" onclick="calculateSimple()">Calculate</button>
+        </p>
+        <h3>容器类型测试</h3>
+        <p>
+            A=<span id="container-A"></span>,&nbsp;
+            B=<span id="container-B"></span>,&nbsp;
+            A+B=<span id="container-sum"></span>&nbsp;
+            <button class="btn btn-primary" onclick="calculateContainer()">Calculate</button>
+        </p>
+        <h3>列表容器类型测试</h3>
+        <p>
+            A=<span id="list1-A"></span>,&nbsp;
+            B=<span id="list1-B"></span>
+        </p>
+        <p>
+            A=<span id="list2-A"></span>,&nbsp;
+            B=<span id="list2-B"></span>
+        </p>
+        <p>
+            A=<span id="list3-A"></span>,&nbsp;
+            B=<span id="list3-B"></span>
+        </p>
+        <p>
+            The sum is:<span id="list-container-sum"></span>&nbsp;
+            <button class="btn btn-primary" onclick="calculateList()">Calculate</button>
+        </p>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript" src="~/Scripts/app/common.js"></script>
+    <script type="text/javascript">
+        var simpleObject = {
+            a: 1,
+            b: 2
+        };
+        $("#simple-A").html(simpleObject.a);
+        $("#simple-B").html(simpleObject.b);
+        var calculateSimple = function() {
+            sendRequest("/api/SimpleTypeTestSum", "POST", simpleObject, function(result) {
+                $("#simple-sum").html(result);
+            });
+        };
+
+        var containerObject = {
+            simpleTypeClass: {
+                a: 2,
+                b: 3
+            }
+        };
+        $("#container-A").html(containerObject.simpleTypeClass.a);
+        $("#container-B").html(containerObject.simpleTypeClass.b);
+        var calculateContainer = function() {
+            sendRequest("/api/SimpleTypeContainer", "POST", containerObject, function(result) {
+                $("#container-sum").html(result);
+            });
+        };
+
+        var listContainerObject = {
+            list: [
+                {
+                    a: 1,
+                    b: 3
+                }, {
+                    a: 3,
+                    b: 4
+                }, {
+                    a: 7,
+                    b: 2
+                }
+            ]
+        };
+        $("#list1-A").html(listContainerObject.list[0].a);
+        $("#list2-A").html(listContainerObject.list[1].a);
+        $("#list3-A").html(listContainerObject.list[2].a);
+        $("#list1-B").html(listContainerObject.list[0].b);
+        $("#list2-B").html(listContainerObject.list[1].b);
+        $("#list3-B").html(listContainerObject.list[2].b);
+        var calculateList = function() {
+            sendRequest("/api/ListTypeContainer", "POST", listContainerObject, function(result) {
+                $("#list-container-sum").html(result);
+            });
+        };
+    </script>
+}
