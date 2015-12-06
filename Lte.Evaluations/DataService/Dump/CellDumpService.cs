@@ -34,9 +34,11 @@ namespace Lte.Evaluations.DataService.Dump
                     .Where(x => x.BtsId != -1)
                     .Distinct()
                     .ToList();
+            if (!idPairs.Any()) return;
             idPairs.ForEach(x =>
             {
                 var bts = _btsRepository.GetByBtsId(x.BtsId);
+                if (bts == null) return;
                 bts.ENodebId = x.ENodebId;
                 _btsRepository.UpdateAsync(bts);
             });
