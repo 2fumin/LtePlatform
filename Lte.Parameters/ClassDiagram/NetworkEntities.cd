@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Lte.Parameters.Entities.CdmaBts">
+    <Position X="4.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAACAIAAAAQAAAQAAAgAAAACAAAAAABAAAA=</HashCode>
+      <FileName>Entities\CdmaBts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lte.Parameters.Entities.CdmaCell">
+    <Position X="6.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIACAAAABCAABoAgIAQQAACAAIgAAAAAAACQAABgHEA=</HashCode>
+      <FileName>Entities\CdmaCell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lte.Parameters.Entities.Cell">
+    <Position X="9.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIACAAAAhAQiAgAgIAQAAACAAIgAAAAAAAAAAAAgCEA=</HashCode>
+      <FileName>Entities\Cell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lte.Parameters.Entities.ENodeb">
+    <Position X="11.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAggAAAAACAAAAIQQAIAQAAAgAAAACABAAAABAIAA=</HashCode>
+      <FileName>Entities\ENodeb.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Lte.Parameters.Entities.ENodebExcel">
+    <Position X="15.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAIAACAgAAIAQAIAQQAAgAAAACQBEAAAAAYAA=</HashCode>
+      <FileName>Entities\ENodebExcel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lte.Parameters.Entities.CdmaCellExcel">
+    <Position X="2.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAABCAAAIAgIAQAAAAACIgAAAAAAACAAAAAGEA=</HashCode>
+      <FileName>Entities\CdmaCellExcel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lte.Parameters.Entities.BtsExcel">
+    <Position X="0.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAoAAAAQAAAQAAAgAAAACQAAAAAAAAAA=</HashCode>
+      <FileName>Entities\BtsExcel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lte.Parameters.Entities.CellExcel">
+    <Position X="13.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAABAQiAAggIAwAAACACIgACAAAAAAAAAggCEA=</HashCode>
+      <FileName>Entities\CellExcel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

@@ -10,6 +10,10 @@ using Lte.Domain.Regular;
 
 namespace Lte.Parameters.Entities
 {
+    /// <summary>
+    /// 定义LTE小区数据库中对应的ORM对象。
+    /// </summary>
+    /// <remarks>需要定义与CellView之间的映射关系</remarks>
     public class Cell : Entity
     {
         public int ENodebId { get; set; }
@@ -37,11 +41,11 @@ namespace Lte.Parameters.Entities
         public double Height { get; set; }
 
         public double Azimuth { get; set; }
-        
+
         public double MTilt { get; set; }
-        
+
         public double ETilt { get; set; }
-        
+
         public double AntennaGain { get; set; }
 
         public AntennaPortsConfigure AntennaPorts { get; set; }

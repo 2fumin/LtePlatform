@@ -11,6 +11,10 @@ using Lte.Domain.Common.Wireless;
 
 namespace Lte.Parameters.Entities
 {
+    /// <summary>
+    /// 定义CDMA小区数据库中对应的ORM对象。
+    /// </summary>
+    /// <remarks>需要定义与CdmaCellView的映射关系。</remarks>
     public class CdmaCell : Entity
     {
         public int BtsId { get; set; } = -1;
@@ -90,7 +94,7 @@ namespace Lte.Parameters.Entities
             else if (Frequency5 == -1)
             {
                 Frequency5 = AddFrequency(currentFrequency);
-            }            
+            }
         }
 
         public short AddFrequency(int freq)

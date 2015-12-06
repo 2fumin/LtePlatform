@@ -7,6 +7,10 @@ using Lte.Domain.Regular;
 
 namespace Lte.Parameters.Entities
 {
+    /// <summary>
+    /// 定义记录LTE基站的信息的Excel导出数据项
+    /// </summary>
+    /// <remarks>需要定义与ENodeb之间的映射关系</remarks>
     public class ENodebExcel
     {
         [ExcelColumn("eNodeBName")]
