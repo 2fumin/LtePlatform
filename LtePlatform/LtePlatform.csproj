@@ -300,6 +300,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Areas\TestPage\Controllers\QUnitTestController.cs" />
     <Compile Include="Areas\TestPage\Controllers\SimpleTypeTestSumController.cs" />
+    <Compile Include="Areas\TestPage\Controllers\TestPostOriginENodebsController.cs" />
     <Compile Include="Areas\TestPage\Controllers\WebApiTestController.cs" />
     <Compile Include="Areas\TestPage\Models\SimpleTypeClass.cs" />
     <Compile Include="Areas\TestPage\TestPageAreaRegistration.cs" />
@@ -359,6 +360,7 @@
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\TestPage\Scripts\basicpost.viewmodel.js" />
     <Content Include="Areas\TestPage\Scripts\reporter-html.js" />
     <Content Include="Areas\TestPage\Scripts\single-testid.js" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -495,7 +497,9 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Areas\TestPage\Views\QUnitTest\NoQUnitMarkup.cshtml" />
     <None Include="Areas\TestPage\Views\QUnitTest\SingleTestId.cshtml" />
+    <Content Include="Areas\TestPage\Views\WebApiTest\BasicPost.cshtml" />
     <None Include="Areas\TestPage\Views\WebApiTest\SimpleType.cshtml" />
+    <Content Include="Areas\TestPage\Views\WebApiTest\_BasicPost.cshtml" />
     <None Include="Properties\PublishProfiles\Lte2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
