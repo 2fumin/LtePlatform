@@ -100,16 +100,8 @@ namespace LtePlatform.Areas.HelpPage
 
         private static string GetTagValue(XPathNavigator parentNode, string tagName)
         {
-            if (parentNode != null)
-            {
-                var node = parentNode.SelectSingleNode(tagName);
-                if (node != null)
-                {
-                    return node.Value.Trim();
-                }
-            }
-
-            return null;
+            var node = parentNode?.SelectSingleNode(tagName);
+            return node?.Value.Trim();
         }
 
         private XPathNavigator GetTypeNode(Type type)

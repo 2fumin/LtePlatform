@@ -8,9 +8,11 @@ using System.Web.Http;
 using Lte.Evaluations.DataService;
 using Lte.Evaluations.ViewModels;
 using Lte.Parameters.Entities;
+using LtePlatform.Models;
 
 namespace LtePlatform.Controllers.College
 {
+    [ApiControl("校园网4G测试控制器")]
     public class College4GTestController : ApiController
     {
         private readonly College4GTestService _service;
@@ -20,7 +22,17 @@ namespace LtePlatform.Controllers.College
             _service = service;
         }
 
+        /// <summary>
+        /// 获取4G测试记录集合
+        /// </summary>
+        /// <param name="date">指定日期</param>
+        /// <param name="hour">指定时段</param>
+        /// <returns></returns>
         [HttpGet]
+        [ApiDoc("获取4G测试记录集合")]
+        [ApiParameterDoc("date", "指定日期")]
+        [ApiParameterDoc("hour", "指定时段")]
+        [ApiResponse("4G测试记录集合")]
         public IEnumerable<College4GTestView> GetViews(DateTime date, int hour)
         {
             return _service.GetViews(date, hour);
