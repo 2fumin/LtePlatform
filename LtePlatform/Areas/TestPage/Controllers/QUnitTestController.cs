@@ -28,5 +28,15 @@ namespace LtePlatform.Areas.TestPage.Controllers
         {
             return View();
         }
+
+        public ActionResult AutoStart()
+        {
+            return View();
+        }
+
+        public ActionResult Headless()
+        {
+            return View();
+        }
     }
 }

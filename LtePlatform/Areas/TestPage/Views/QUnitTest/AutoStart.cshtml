@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "QUnit Autostart Test Suite";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        @{
+            Html.RenderPartial("_QUnitTestContents");
+        }
+    </div>
+    <div class="col-md-8">
+        <h2>@ViewBag.Title</h2>
+
+        <div id="qunit"></div>
+        <div id="qunit-fixture">foobar</div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <link rel="stylesheet" href="~/Content/qunit-1.20.0.css">
+    <script src="~/Scripts/app/qunit-1.20.0.js"></script>
+    <script src="~/Areas/TestPage/Scripts/main/test.js"></script>
+    <script src="~/Areas/TestPage/Scripts/main/deepEqual.js"></script>
+    <script>
+	var beginData,
+		times = {};
+
+	(function() {
+		var now = Date.now || function() {
+			return new Date().getTime();
+		};
+		var asyncDelay = 1000;
+
+		QUnit.config.autostart = false;
+
+		// Mark the current time
+		times.autostartOff = now() + asyncDelay;
+
+		// Simulate a delay in loading the tests, as when they are loaded
+		// asynchronously using requirejs, steal, etc.
+		setTimeout(function() {
+			var script = document.createElement( "script" );
+			script.src = "/Areas/TestPage/Scripts/autostart.js";
+			document.getElementsByTagName( "head" )[ 0 ].appendChild( script );
+		}, asyncDelay );
+
+		QUnit.begin(function( data ) {
+			beginData = data;
+			times.runStarted = now();
+		});
+	})();
+</script>
+}
