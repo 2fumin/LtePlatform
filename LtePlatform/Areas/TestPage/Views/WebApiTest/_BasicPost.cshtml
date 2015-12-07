@@ -59,5 +59,34 @@
             </tbody>
         </table>
     </div>
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            下发基站信息
+        </h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>基站名称</th>
+                    <th>基站编号</th>
+                    <th>基站地址</th>
+                    <th>规划编号</th>
+                    <th>镇区编号</th>
+                    <th>开通日期</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: thirdENodebs">
+                <tr>
+                    <td data-bind="text: name"></td>
+                    <td data-bind="text: eNodebId"></td>
+                    <td data-bind="text: address"></td>
+                    <td data-bind="text: planNum"></td>
+                    <td data-bind="text: townId"></td>
+                    <td data-bind="text: openDate"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 <!-- /ko -->

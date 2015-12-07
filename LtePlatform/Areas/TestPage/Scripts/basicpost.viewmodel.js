@@ -67,12 +67,18 @@
             townName: "乐从"
         }]);
     self.secondENodebs = ko.observableArray([]);
+    self.thirdENodebs = ko.observableArray([]);
 
     self.postOrigin = function () {
         sendRequest("/api/TestPostOriginENodebs", "POST", {
             infos: self.originENodebs()
         }, function (result) {
             self.secondENodebs(result);
+        });
+        sendRequest("/api/TestPostBackENodebs", "POST", {
+            infos: self.originENodebs()
+        }, function (result) {
+            self.thirdENodebs(result);
         });
     };
 
