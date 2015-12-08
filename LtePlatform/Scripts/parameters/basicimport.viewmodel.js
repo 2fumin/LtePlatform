@@ -104,6 +104,12 @@
         });
     };
 
+    self.postSingleCell=function() {
+        if (self.editCell() === null && self.newCells().length > 0) {
+            self.editCell(self.newCells().pop());
+        }
+    }
+
     return self;
 }
 

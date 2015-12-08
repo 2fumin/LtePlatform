@@ -43,5 +43,23 @@ namespace Lte.Evaluations.DataService.Dump
                 _btsRepository.Update(bts);
             });
         }
+
+        public bool DumpSingleCellExcel(CellExcel info)
+        {
+            var cell = Cell.ConstructItem(info);
+            var result = _cellRepository.Insert(cell);
+            if (result != null)
+            {
+                var item =
+                    BasicImportService.CellExcels.FirstOrDefault(
+                        x => x.ENodebId == info.ENodebId && x.SectorId == info.SectorId);
+                if (item != null)
+                {
+                    BasicImportService.CellExcels.Remove(item);
+                }
+                return true;
+            }
+            return false;
+        }
     }
 }

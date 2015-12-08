@@ -31,6 +31,7 @@
     self.newBtsExcelsUrl = "/api/NewBtsExcels";
     self.newCdmaCellExcelsUrl = "/api/NewCdmaCellExcels";
     self.dumpENodebExcelUrl = "/api/DumpENodebExcel";
+    self.dumpCellExcelUrl = "/api/DumpCellExcel";
 
     // Route operations
 
