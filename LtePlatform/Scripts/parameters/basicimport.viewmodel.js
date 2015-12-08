@@ -81,10 +81,10 @@
     };
 
     self.postAll = function () {
-        postAllENodebs(self);
-        postAllBtss(self);
-        postAllCells(self);
-        postAllCdmaCells(self);
+        if (self.newENodebsImport() === true) postAllENodebs(self);
+        if (self.newBtssImport() === true) postAllBtss(self);
+        if (self.newCellsImport() === true) postAllCells(self);
+        if (self.newCdmaCellsImport() === true) postAllCdmaCells(self);
     };
 
     self.postSingleENodeb = function() {
@@ -135,6 +135,23 @@
                 self.dumpResultMessage("完成一个LTE小区导入数据库！");
             }
             $("#editCell").modal("hide");
+        });
+    };
+
+    self.postSingleCdmaCell = function () {
+        if (self.editCdmaCell() === null && self.newCdmaCells().length > 0) {
+            self.editCdmaCell(self.newCdmaCells().pop());
+        }
+        $("#editCdmaCell").modal("show");
+    }
+
+    self.saveCdmaCell = function () {
+        sendRequest(app.dataModel.dumpCdmaCellExcelUrl, "POST", self.editCdmaCell(), function (result) {
+            if (result === true) {
+                self.editCdmaCell(null);
+                self.dumpResultMessage("完成一个CDMA小区导入数据库！");
+            }
+            $("#editCdmaCell").modal("hide");
         });
     };
 

@@ -33,6 +33,7 @@
     self.dumpENodebExcelUrl = "/api/DumpENodebExcel";
     self.dumpCellExcelUrl = "/api/DumpCellExcel";
     self.dumpBtsExcelUrl = "/api/DumpBtsExcel";
+    self.dumpCdmaCellExcelUrl = "/api/DumpCdmaCellExcel";
 
     // Route operations
 

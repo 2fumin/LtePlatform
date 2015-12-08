@@ -72,8 +72,7 @@ namespace Lte.Parameters.Entities
         {
             var currentFrequency = (short)cellExcelInfo.Frequency;
             if (!currentFrequency.IsCdmaFrequency()) return;
-            cellExcelInfo.CloneProperties(this, true);
-            IsOutdoor = (cellExcelInfo.IsIndoor.Trim() == "否");
+            
             if (HasFrequency(currentFrequency)) return;
             if (Frequency1 == -1)
             {

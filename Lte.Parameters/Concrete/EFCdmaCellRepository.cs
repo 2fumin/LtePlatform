@@ -16,5 +16,10 @@ namespace Lte.Parameters.Concrete
         {
             return FirstOrDefault(x => x.BtsId == btsId && x.SectorId == sectorId);
         }
+
+        public CdmaCell GetBySectorIdAndCellType(int btsId, byte sectorId, string cellType)
+        {
+            return FirstOrDefault(x => x.BtsId == btsId && x.SectorId == sectorId && x.CellType == cellType);
+        }
     }
 }
