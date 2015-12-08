@@ -66,5 +66,10 @@ namespace LtePlatform.Controllers
         {
             return View();
         }
+
+        public ActionResult QueryMap()
+        {
+            return View();
+        }
     }
 }

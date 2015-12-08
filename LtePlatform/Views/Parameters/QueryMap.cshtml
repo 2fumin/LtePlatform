@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "全网基站小区地图";
+}
+
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h2 class="panel-title">
+            <strong>@ViewBag.Title</strong>
+        </h2>
+    </div>
+    <p>
+        @{
+            Html.RenderPartial("_ParametersMenu");
+        }
+    </p>
+</div>
+
+@section SPAViews{
+    @{
+        Html.RenderPartial("_QueryMap");
+    }
+}
+
+@section Scripts{
+    @Scripts.Render("~/bundles/knockout")
+    @Scripts.Render("~/bundles/parametersMap")
+}

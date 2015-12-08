@@ -10,7 +10,7 @@ body {
     padding: 0px;
 }
 
-div#wrapper {
+.cloudmap-wrapper {
     width: 100%;
     overflow: hidden;
     position: relative;
@@ -23,14 +23,14 @@ div#contentWrapper {
     float: left;
 }
 
-div#mapWrapper {
+.cloudmap-baiduwrapper {
     overflow: hidden;
     position: relative;
     border-left: 1px solid #b0b6be;
     text-align: left;
 }
 
-#tools {
+.cloudmap-tools {
     border-bottom: 1px solid #e6e7ea;
     width: 100%;
     height: 35px;
@@ -110,7 +110,7 @@ div#mapWrapper {
 }
 
 .search-city-b {
-    background-image: url(../../../images/Hotmap/map_u7.png);
+    background-image: url(../../images/Hotmap/map_u7.png);
     background-repeat: no-repeat;
     width: 49px;
     height: 24px;

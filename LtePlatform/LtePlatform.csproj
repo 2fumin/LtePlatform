@@ -699,6 +699,7 @@
     <Content Include="Views\Parameters\_ParametersMenu.cshtml" />
     <None Include="Views\Parameters\BasicImport.cshtml" />
     <None Include="Views\Parameters\NeighborImport.cshtml" />
+    <Content Include="Views\Parameters\QueryMap.cshtml" />
     <None Include="Views\Parameters\_BasicImport.cshtml" />
     <Content Include="Views\Parameters\_ENodebLonLatTable.cshtml" />
     <Content Include="Views\Parameters\_CellLonLatTable.cshtml" />
@@ -709,6 +710,7 @@
     <Content Include="Views\Parameters\_EditBtsExcel.cshtml" />
     <Content Include="Views\Parameters\_EditCdmaCellExcel.cshtml" />
     <None Include="Views\Parameters\_List.cshtml" />
+    <Content Include="Views\Parameters\_QueryMap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
