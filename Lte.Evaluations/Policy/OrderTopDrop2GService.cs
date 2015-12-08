@@ -17,6 +17,9 @@ namespace Lte.Evaluations.Policy
             OrderByTopDatesDescending
         }
 
+        /// <summary>
+        /// TOP掉话排序标准的所有选项字典
+        /// </summary>
         public static Dictionary<string, OrderTopDrop2GPolicy> OrderSelectionList
             => new Dictionary<string, OrderTopDrop2GPolicy>
         {
