@@ -14,7 +14,8 @@
 
 #define FEATURE_SERIALIZATION
 using System;
-	using System.Reflection;
+using System.Linq;
+using System.Reflection;
 
 namespace Castle.DynamicProxy.Generators
 {
@@ -49,19 +50,15 @@ namespace Castle.DynamicProxy.Generators
 		/// <param name = "target">Type of the target.</param>
 		/// <param name = "interfaces">The interfaces.</param>
 		/// <param name = "options">The options.</param>
-		public CacheKey(Type target, Type[] interfaces, ProxyGenerationOptions options)
+		public CacheKey(MemberInfo target, Type[] interfaces, ProxyGenerationOptions options)
 			: this(target, null, interfaces, options)
 		{
 		}
 
 		public override int GetHashCode()
 		{
-			var result = target.GetHashCode();
-			foreach (var inter in interfaces)
-			{
-				result += 29 + inter.GetHashCode();
-			}
-			if (options != null)
+			var result = target.GetHashCode() + interfaces.Sum(inter => 29 + inter.GetHashCode());
+		    if (options != null)
 			{
 				result = 29*result + options.GetHashCode();
 			}
@@ -85,7 +82,7 @@ namespace Castle.DynamicProxy.Generators
 				return false;
 			}
 
-			if (!Equals(type, cacheKey.type))
+			if (!(type == cacheKey.type))
 			{
 				return false;
 			}
@@ -97,18 +94,7 @@ namespace Castle.DynamicProxy.Generators
 			{
 				return false;
 			}
-			for (var i = 0; i < interfaces.Length; i++)
-			{
-				if (!Equals(interfaces[i], cacheKey.interfaces[i]))
-				{
-					return false;
-				}
-			}
-			if (!Equals(options, cacheKey.options))
-			{
-				return false;
-			}
-			return true;
+			return !interfaces.Where((t, i) => !(t == cacheKey.interfaces[i])).Any() && Equals(options, cacheKey.options);
 		}
 	}
 }

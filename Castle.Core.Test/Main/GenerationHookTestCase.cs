@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#define FEATURE_SERIALIZATION
+
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -50,7 +52,7 @@ namespace Castle.Core.Test.Main
 		public void HookIsUsedForInterfaceProxy()
 		{
 			var logger = new LogInvocationInterceptor();
-			var hook = new LogHook(typeof(IService), false);
+			var hook = new LogHook(typeof(IService));
 
 			var options = new ProxyGenerationOptions(hook);
 
@@ -133,55 +135,38 @@ namespace Castle.Core.Test.Main
 	{
 		private readonly Type targetTypeToAssert;
 		private readonly bool screeningEnabled;
-		private readonly IList<MemberInfo> nonVirtualMembers = new List<MemberInfo>();
-		private readonly IList<MemberInfo> askedMembers = new List<MemberInfo>();
-		private bool completed;
 
-		public LogHook(Type targetTypeToAssert, bool screeningEnabled = false)
+	    public LogHook(Type targetTypeToAssert, bool screeningEnabled = false)
 		{
 			this.targetTypeToAssert = targetTypeToAssert;
 			this.screeningEnabled = screeningEnabled;
 		}
 
-		public IList<MemberInfo> NonVirtualMembers
-		{
-			get { return nonVirtualMembers; }
-		}
+		public IList<MemberInfo> NonVirtualMembers { get; } = new List<MemberInfo>();
 
-		public IList<MemberInfo> AskedMembers
-		{
-			get { return askedMembers; }
-		}
+	    public IList<MemberInfo> AskedMembers { get; } = new List<MemberInfo>();
 
-		public bool Completed
-		{
-			get { return completed; }
-		}
+	    public bool Completed { get; private set; }
 
-		public bool ShouldInterceptMethod(Type type, MethodInfo memberInfo)
+	    public bool ShouldInterceptMethod(Type type, MethodInfo memberInfo)
 		{
 			Assert.AreEqual(targetTypeToAssert, type);
 
-			askedMembers.Add(memberInfo);
+			AskedMembers.Add(memberInfo);
 
-			if (screeningEnabled && memberInfo.Name.StartsWith("Sum"))
-			{
-				return false;
-			}
-
-			return true;
+			return !screeningEnabled || !memberInfo.Name.StartsWith("Sum");
 		}
 
 		public void NonProxyableMemberNotification(Type type, MemberInfo memberInfo)
 		{
 			Assert.AreEqual(targetTypeToAssert, type);
 
-			nonVirtualMembers.Add(memberInfo);
+			NonVirtualMembers.Add(memberInfo);
 		}
 
 		public void MethodsInspected()
 		{
-			completed = true;
+			Completed = true;
 		}
 	}
 }

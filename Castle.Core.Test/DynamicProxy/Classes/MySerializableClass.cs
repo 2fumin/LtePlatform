@@ -12,7 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
+#define FEATURE_SERIALIZATION
 using System;
+using System.Runtime.Serialization;
 
 namespace Castle.Core.Test.DynamicProxy.Classes
 {
@@ -31,12 +34,9 @@ namespace Castle.Core.Test.DynamicProxy.Classes
 			current = DateTime.Now;
 		}
 
-		public virtual DateTime Current
-		{
-			get { return current; }
-		}
+		public virtual DateTime Current => current;
 
-		public virtual double CalculateSumDistanceNow()
+        public virtual double CalculateSumDistanceNow()
 		{
 			return Math.PI;
 		}

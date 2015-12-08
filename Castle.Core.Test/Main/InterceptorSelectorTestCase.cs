@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#define FEATURE_SERIALIZATION
+
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -36,9 +38,11 @@ namespace Castle.Core.Test.Main
 		[Test]
 		public void BasicCase()
 		{
-			var options = new ProxyGenerationOptions();
-			options.Selector = new AllInterceptorSelector();
-			var target = generator.CreateInterfaceProxyWithTarget(typeof(ISimpleInterface), new SimpleClass(), options, new StandardInterceptor()) as ISimpleInterface;
+		    var options = new ProxyGenerationOptions
+		    {
+		        Selector = new AllInterceptorSelector()
+		    };
+		    var target = generator.CreateInterfaceProxyWithTarget(typeof(ISimpleInterface), new SimpleClass(), options, new StandardInterceptor()) as ISimpleInterface;
 			Assert.IsNotNull(target);
 			target.Do();
 		}
@@ -291,7 +295,7 @@ namespace Castle.Core.Test.Main
 			var ex = Assert.Throws<GeneratorException>(() =>
 				generator.CreateInterfaceProxyWithTarget<PrivateInterface>(new PrivateClass(), new IInterceptor[0]));
 			StringAssert.StartsWith(
-				"Can not create proxy for type Castle.DynamicProxy.Tests.InterceptorSelectorTestCase+PrivateInterface because it is not accessible. Make it public, or internal",
+                "Can not create proxy for type Castle.Core.Test.Main.InterceptorSelectorTestCase+PrivateInterface because it is not accessible. Make it public, or internal",
 				ex.Message);
 		}
 
@@ -299,13 +303,14 @@ namespace Castle.Core.Test.Main
 		public void Cannot_proxy_generic_interface_with_inaccessible_type_argument()
 		{
 			var ex = Assert.Throws<GeneratorException>(() =>
-				generator.CreateInterfaceProxyWithTarget<IList<PrivateInterface>>(new List<PrivateInterface>(), new IInterceptor[0]));
-			StringAssert.StartsWith(
-				"Can not create proxy for type System.Collections.Generic.IList`1[[Castle.DynamicProxy.Tests.InterceptorSelectorTestCase+PrivateInterface, Castle.Core.Tests, Version=0.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc]] because type Castle.DynamicProxy.Tests.InterceptorSelectorTestCase+PrivateInterface is not accessible. Make it public, or internal",
-				ex.Message);
-		}
+				generator.CreateInterfaceProxyWithTarget<IList<PrivateInterface>>(new List<PrivateInterface>()));
+            Console.WriteLine(ex.Message);
+            StringAssert.StartsWith(
+                "Can not create proxy for type System.Collections.Generic.IList`1[[Castle.Core.Test.Main.InterceptorSelectorTestCase+PrivateInterface, Castle.Core.Test, Version=1.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc]] because type Castle.Core.Test.Main.InterceptorSelectorTestCase+PrivateInterface is not accessible. Make it public, or internal",
+                ex.Message);
+        }
 
-		[Test]
+        [Test]
 		public void Cannot_proxy_generic_interface_with_type_argument_that_has_inaccessible_type_argument()
 		{
 			Assert.Throws<GeneratorException>(() => generator.CreateInterfaceProxyWithTarget<IList<IList<PrivateInterface>>>(new List<IList<PrivateInterface>>(), new IInterceptor[0]));

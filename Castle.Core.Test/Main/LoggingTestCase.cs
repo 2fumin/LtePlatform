@@ -15,6 +15,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using Castle.Core.Logging;
 using Castle.Core.Test.DynamicProxy.Classes;
 using Castle.DynamicProxy;
@@ -37,7 +38,7 @@ namespace Castle.Core.Test.Main
 
 			// Assert
 			Assert.True(logger.RecordedMessage(LoggerLevel.Debug, "No cached proxy type was found for target type " +
-				"CastleTests.DynamicProxy.Tests.Classes.EmptyClass."));
+                "Castle.Core.Test.DynamicProxy.Classes.EmptyClass."));
 		}
 
 		[Test]
@@ -53,7 +54,7 @@ namespace Castle.Core.Test.Main
 
 			// Assert
 			Assert.True(logger.RecordedMessage(LoggerLevel.Debug, "Found cached proxy type Castle.Proxies.EmptyClassProxy " +
-				"for target type CastleTests.DynamicProxy.Tests.Classes.EmptyClass."));
+                "for target type Castle.Core.Test.DynamicProxy.Classes.EmptyClass."));
 		}
 
 		[Test]
@@ -66,13 +67,15 @@ namespace Castle.Core.Test.Main
 			// Act
 			generator.CreateInterfaceProxyWithoutTarget<IEmptyInterface>();
 			generator.CreateInterfaceProxyWithoutTarget<IEmptyInterface>();
+            Console.WriteLine(logger.Length);
+            Console.WriteLine(logger[0]);
+            Console.WriteLine(logger[1]);
+            // Assert
+            Assert.True(logger.RecordedMessage(LoggerLevel.Debug, "Found cached proxy type Castle.Proxies.IEmptyInterfaceProxy " +
+                "for target type Castle.Core.Test.Main.LoggingTestCase+IEmptyInterface."));
+        }
 
-			// Assert
-			Assert.True(logger.RecordedMessage(LoggerLevel.Debug, "Found cached proxy type Castle.Proxies.IEmptyInterfaceProxy " +
-				"for target type Castle.DynamicProxy.Tests.LoggingTestCase+IEmptyInterface."));
-		}
-
-		[Test]
+        [Test]
 		public void ProxyGenerationOptionsEqualsAndGetHashCodeNotOverriden()
 		{
 			// Arrange
@@ -87,7 +90,7 @@ namespace Castle.Core.Test.Main
 
 			// Assert
 			Assert.True(logger.RecordedMessage(LoggerLevel.Warn, "The IProxyGenerationHook type " +
-				"Castle.DynamicProxy.Tests.LoggingTestCase+EmptyHook does not override both Equals and GetHashCode. " +
+                "Castle.Core.Test.Main.LoggingTestCase+EmptyHook does not override both Equals and GetHashCode. " +
 				"If these are not correctly overridden caching will fail to work causing performance problems."));
 		}
 
@@ -104,9 +107,9 @@ namespace Castle.Core.Test.Main
 
 			// Assert
 			Assert.True(logger.RecordedMessage(LoggerLevel.Debug, "Excluded non-virtual method ClassMethod on " +
-				"Castle.DynamicProxy.Tests.LoggingTestCase+NonVirtualMethodClass because it cannot be intercepted."));
+                "Castle.Core.Test.Main.LoggingTestCase+NonVirtualMethodClass because it cannot be intercepted."));
 			Assert.True(logger.RecordedMessage(LoggerLevel.Debug, "Excluded sealed method InterfaceMethod on " +
-				"Castle.DynamicProxy.Tests.LoggingTestCase+NonVirtualMethodClass because it cannot be intercepted."));
+                "Castle.Core.Test.Main.LoggingTestCase+NonVirtualMethodClass because it cannot be intercepted."));
 		}
 #endif
 		#region Test Types
@@ -162,6 +165,10 @@ namespace Castle.Core.Test.Main
 	public class CollectingLogger : ILogger
 	{
 		private readonly List<string> messages = new List<string>();
+
+	    public int Length => messages.Count;
+
+	    public string this[int index] => messages[index];
 
 		public bool RecordedMessage(LoggerLevel level, string message)
 		{
