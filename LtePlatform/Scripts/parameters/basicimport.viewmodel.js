@@ -16,13 +16,14 @@
     self.newCdmaCellLonLatEdits = ko.observableArray([]);
     self.dumpResultMessage = ko.observable("");
 
-    self.editENodeb = ko.observable();
-    self.editCell = ko.observable();
-    self.editBts = ko.observable();
-    self.editCdmaCell = ko.observable();
+    self.editENodeb = ko.observable(null);
+    self.editCell = ko.observable(null);
+    self.editBts = ko.observable(null);
+    self.editCdmaCell = ko.observable(null);
 
     Sammy(function () {
         this.get('#basicImport', function () {
+            $("#open-date").datepicker({ dateFormat: 'yy-mm-dd' });
             sendRequest(app.dataModel.newENodebExcelsUrl, "GET", null, function(data) {
                 self.newENodebs(data);
             });
@@ -87,7 +88,20 @@
     };
 
     self.postSingleENodeb = function() {
+        if (self.editENodeb() === null && self.newENodebs().length > 0) {
+            self.editENodeb(self.newENodebs().pop());
+        }
+        $("#editENodeb").modal("show");
+    };
 
+    self.saveENodeb = function() {
+        sendRequest(app.dataModel.dumpENodebExcelUrl, "POST", self.editENodeb(), function(result) {
+            if (result === true) {
+                self.editENodeb(null);
+                self.dumpResultMessage("完成一个LTE基站导入数据库！");
+            }
+            $("#editENodeb").modal("hide");
+        });
     };
 
     return self;

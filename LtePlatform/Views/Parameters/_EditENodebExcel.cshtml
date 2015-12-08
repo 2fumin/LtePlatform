@@ -1,0 +1,80 @@
+﻿<div class="modal fade" id="editENodeb">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">编辑LTE基站信息</h4>
+            </div>
+            <div class="modal-body form-horizontal" data-bind="with: editENodeb">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">基站名称</label>
+                    <div class="col-sm-9">
+                        <span class="form-control" data-bind="text: name"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">基站编号</label>
+                    <div class="col-sm-3">
+                        <span class="form-control" data-bind="text: eNodebId"></span>
+                    </div>
+                    <label class="col-sm-3 control-label">城市</label>
+                    <div class="col-sm-3">
+                        <span class="form-control" data-bind="text: cityName"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">区域</label>
+                    <div class="col-sm-3">
+                        <span class="form-control" data-bind="text: districtName"></span>
+                    </div>
+                    <label class="col-sm-3 control-label">镇区</label>
+                    <div class="col-sm-3">
+                        <span class="form-control" data-bind="text: townName"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">经度</label>
+                    <div class="col-sm-3">
+                        <span class="form-control" data-bind="text: longtitute"></span>
+                    </div>
+                    <label class="col-sm-3 control-label">纬度</label>
+                    <div class="col-sm-3">
+                        <span class="form-control" data-bind="text: lattitute"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">地址</label>
+                    <div class="col-sm-9">
+                        <span class="form-control" data-bind="text: address"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">规划编号</label>
+                    <div class="col-sm-9">
+                        <input class="form-control" data-bind="value: planNum"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">入网日期</label>
+                    <div class="col-sm-9">
+                        <input id="open-date" class="form-control" data-bind="value: openDate" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">厂家</label>
+                    <div class="col-sm-3">
+                        <span class="form-control" data-bind="text: factory"></span>
+                    </div>
+                    <label class="col-sm-3 control-label">制式</label>
+                    <div class="col-sm-3">
+                        <span class="form-control" data-bind="text: divisionDuplex"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button class="btn btn-primary" data-bind="click: saveENodeb">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
