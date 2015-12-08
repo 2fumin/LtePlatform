@@ -108,7 +108,18 @@
         if (self.editCell() === null && self.newCells().length > 0) {
             self.editCell(self.newCells().pop());
         }
+        $("#editCell").modal("show");
     }
+
+    self.saveCell = function () {
+        sendRequest(app.dataModel.dumpCellExcelUrl, "POST", self.editCell(), function (result) {
+            if (result === true) {
+                self.editCell(null);
+                self.dumpResultMessage("完成一个LTE小区导入数据库！");
+            }
+            $("#editCell").modal("hide");
+        });
+    };
 
     return self;
 }

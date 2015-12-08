@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Lte.Domain.Common;
+using Lte.Domain.Regular;
 using Lte.Evaluations.MapperSerive;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
@@ -47,6 +49,17 @@ namespace Lte.Evaluations.DataService.Dump
         public bool DumpSingleCellExcel(CellExcel info)
         {
             var cell = Cell.ConstructItem(info);
+            var fields = info.ShareCdmaInfo.GetSplittedFields('_');
+            var btsId = (fields.Length > 2) ? fields[1].ConvertToInt(-1) : -1;
+            if (btsId > 0)
+            {
+                var bts = _btsRepository.GetByBtsId(btsId);
+                if (bts != null)
+                {
+                    bts.ENodebId = info.ENodebId;
+                    _btsRepository.Update(bts);
+                }
+            }
             var result = _cellRepository.Insert(cell);
             if (result != null)
             {

@@ -703,6 +703,7 @@
     <Content Include="Views\Parameters\_BtsLonLatTable.cshtml" />
     <Content Include="Views\Parameters\_CdmaCellLonLatTable.cshtml" />
     <Content Include="Views\Parameters\_EditENodebExcel.cshtml" />
+    <Content Include="Views\Parameters\_EditCellExcel.cshtml" />
     <None Include="Views\Parameters\_List.cshtml" />
   </ItemGroup>
   <ItemGroup>
