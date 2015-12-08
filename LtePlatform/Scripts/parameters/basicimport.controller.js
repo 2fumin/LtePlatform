@@ -69,3 +69,47 @@ var queryCdmaCellLonLatEdits = function(cells) {
     }
     return result;
 };
+
+var postAllENodebs = function(viewModel) {
+    if (viewModel.newENodebs().length > 0) {
+        sendRequest(app.dataModel.newENodebExcelsUrl, "POST", {
+            infos: viewModel.newENodebs()
+        }, function() {
+            viewModel.dumpResultMessage(viewModel.dumpResultMessage() + "完成LTE基站导入；");
+            viewModel.newENodebs([]);
+        });
+    }
+};
+
+var postAllBtss = function(viewModel) {
+    if (viewModel.newBtss().length > 0) {
+        sendRequest(app.dataModel.newBtsExcelsUrl, "POST", {
+            infos: viewModel.newBtss()
+        }, function() {
+            viewModel.dumpResultMessage(viewModel.dumpResultMessage() + "完成CDMA基站导入；");
+            viewModel.newBtss([]);
+        });
+    }
+};
+
+var postAllCells = function(viewModel) {
+    if (viewModel.newCells().length > 0) {
+        sendRequest(app.dataModel.newCellExcelsUrl, "POST", {
+            infos: viewModel.newCells()
+        }, function() {
+            viewModel.dumpResultMessage(viewModel.dumpResultMessage() + "完成LTE小区导入；");
+            viewModel.newCells([]);
+        });
+    }
+};
+
+var postAllCdmaCells = function(viewModel) {
+    if (viewModel.newCdmaCells().length > 0) {
+        sendRequest(app.dataModel.newCdmaCellExcelsUrl, "POST", {
+            infos: viewModel.newCdmaCells()
+        }, function() {
+            viewModel.dumpResultMessage(viewModel.dumpResultMessage() + "完成CDMA小区导入；");
+            viewModel.newCdmaCells([]);
+        });
+    }
+};

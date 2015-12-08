@@ -23,7 +23,7 @@ namespace Lte.Evaluations.DataService.Dump
 
         public void DumpNewEnodebExcels(IEnumerable<ENodebExcel> infos)
         {
-            var containers = from info in infos
+            var containers = (from info in infos
                 join town in _townRepository.GetAllList()
                     on new {info.CityName, info.DistrictName, info.TownName} equals
                     new {town.CityName, town.DistrictName, town.TownName}
@@ -31,7 +31,7 @@ namespace Lte.Evaluations.DataService.Dump
                 {
                     ENodebExcel = info,
                     TownId = town.Id
-                };
+                }).ToArray();
 
             if (!containers.Any()) return;
             var items =
@@ -39,6 +39,11 @@ namespace Lte.Evaluations.DataService.Dump
             items.ForEach(x => { x.ENodeb.TownId = x.TownId; });
 
             items.Select(x => x.ENodeb).ToList().ForEach(x => _eNodebRepository.Insert(x));
+        }
+
+        public void DumpSingleENodebExcels(ENodebExcel info)
+        {
+            
         }
     }
 }

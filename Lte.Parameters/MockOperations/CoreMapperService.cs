@@ -29,5 +29,19 @@ namespace Lte.Parameters.MockOperations
         {
             Mapper.CreateMap<IndoorDistributionExcel, IndoorDistribution>();
         }
+
+        public static void MapENodeb()
+        {
+            Mapper.CreateMap<ENodebExcel, ENodeb>()
+                .ForMember(d => d.IsFdd,
+                    opt => opt.MapFrom(s => s.DivisionDuplex.IndexOf("FDD", StringComparison.Ordinal) >= 0))
+                .ForMember(d => d.Gateway, opt => opt.MapFrom(s => s.Gateway.AddressValue))
+                .ForMember(d => d.SubIp, opt => opt.MapFrom(s => s.Ip.IpByte4));
+        }
+
+        public static void MapBts()
+        {
+            Mapper.CreateMap<BtsExcel, CdmaBts>();
+        }
     }
 }

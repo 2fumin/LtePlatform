@@ -34,6 +34,8 @@ namespace Lte.Domain.Regular
                         return x => new IpAddress(x.ToString());
                     case TransformEnum.DefaultZeroDouble:
                         return x => x.ToString().ConvertToDouble(0.0);
+                    case TransformEnum.DefaultOpenDate:
+                        return x => x.ToString().ConvertToDateTime(DateTime.Today.AddMonths(-1));
                     default:
                         return null;
                 }

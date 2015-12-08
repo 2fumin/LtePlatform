@@ -12,6 +12,7 @@ namespace Lte.Domain.Regular
         IntegerDefaultToZero,
         IntegerRemoveDots,
         IpAddress,
-        DefaultZeroDouble
+        DefaultZeroDouble,
+        DefaultOpenDate
     }
 }

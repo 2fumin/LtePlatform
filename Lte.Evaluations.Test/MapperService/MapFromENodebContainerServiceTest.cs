@@ -9,6 +9,7 @@ using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using Lte.Domain.Regular;
 using Lte.Evaluations.MapperSerive;
 using Lte.Parameters.Entities;
+using Lte.Parameters.MockOperations;
 using NUnit.Framework;
 
 namespace Lte.Evaluations.Test.MapperService
@@ -19,6 +20,7 @@ namespace Lte.Evaluations.Test.MapperService
         [TestFixtureSetUp]
         public void TestFixtureSetup()
         {
+            CoreMapperService.MapENodeb();
             ParametersDumpMapperService.MapFromENodebContainerService();
         }
 

@@ -186,7 +186,6 @@
     <Compile Include="buildscripts\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Compatibility\IntrospectionExtensions.cs" />
     <Compile Include="Components.DictionaryAdapter\DynamicDictionary.cs" />
     <Compile Include="Components.DictionaryAdapter\Util\ListProjectionDebugView.cs" />
     <Compile Include="Components.DictionaryAdapter\Util\ICollectionAdapter.cs" />

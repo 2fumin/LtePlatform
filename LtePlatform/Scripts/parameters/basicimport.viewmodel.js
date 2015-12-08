@@ -16,6 +16,11 @@
     self.newCdmaCellLonLatEdits = ko.observableArray([]);
     self.dumpResultMessage = ko.observable("");
 
+    self.editENodeb = ko.observable();
+    self.editCell = ko.observable();
+    self.editBts = ko.observable();
+    self.editCdmaCell = ko.observable();
+
     Sammy(function () {
         this.get('#basicImport', function () {
             sendRequest(app.dataModel.newENodebExcelsUrl, "GET", null, function(data) {
@@ -75,38 +80,14 @@
     };
 
     self.postAll = function () {
-        if (self.newENodebs().length > 0) {
-            sendRequest(app.dataModel.newENodebExcelsUrl, "POST", {
-                infos: self.newENodebs()
-            }, function () {
-                self.dumpResultMessage(self.dumpResultMessage() + "完成LTE基站导入；");
-                self.newENodebs([]);
-            });
-        }
-        if (self.newBtss().length > 0) {
-            sendRequest(app.dataModel.newBtsExcelsUrl, "POST", {
-                infos: self.newBtss()
-            }, function() {
-                self.dumpResultMessage(self.dumpResultMessage() + "完成CDMA基站导入；");
-                self.newBtss([]);
-            });
-        }
-        if (self.newCells().length > 0) {
-            sendRequest(app.dataModel.newCellExcelsUrl, "POST", {
-                infos: self.newCells()
-            }, function() {
-                self.dumpResultMessage(self.dumpResultMessage() + "完成LTE小区导入；");
-                self.newCells([]);
-            });
-        }
-        if (self.newCdmaCells().length > 0) {
-            sendRequest(app.dataModel.newCdmaCellExcelsUrl, "POST", {
-                infos: self.newCdmaCells()
-            }, function() {
-                self.dumpResultMessage(self.dumpResultMessage() + "完成CDMA小区导入；");
-                self.newCdmaCells([]);
-            });
-        }
+        postAllENodebs(self);
+        postAllBtss(self);
+        postAllCells(self);
+        postAllCdmaCells(self);
+    };
+
+    self.postSingleENodeb = function() {
+
     };
 
     return self;

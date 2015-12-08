@@ -5,8 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Abp.Domain.Entities;
+using AutoMapper;
 using Lte.Domain.Common.Geo;
 using Lte.Domain.Regular;
+using Lte.Parameters.Abstract;
 
 namespace Lte.Parameters.Entities
 {
@@ -44,5 +46,13 @@ namespace Lte.Parameters.Entities
         public string PlanNum { get; set; }
 
         public DateTime OpenDate { get; set; }
+
+        public static ENodeb ConstructENodeb(ENodebExcel info, ITownRepository repository)
+        {
+            var town = repository.QueryTown(info.CityName, info.DistrictName, info.TownName);
+            var eNodeb = Mapper.Map<ENodebExcel, ENodeb>(info);
+            eNodeb.TownId = town?.Id ?? -1;
+            return eNodeb;
+        }
     }
 }

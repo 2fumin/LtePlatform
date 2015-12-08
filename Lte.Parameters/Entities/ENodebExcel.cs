@@ -59,7 +59,7 @@ namespace Lte.Parameters.Entities
         [ExcelColumn("制式")]
         public string DivisionDuplex { get; set; } = "FDD";
 
-        [ExcelColumn("入网日期")]
+        [ExcelColumn("入网日期", TransformEnum.DefaultOpenDate)]
         public DateTime OpenDate { get; set; }
     }
 }

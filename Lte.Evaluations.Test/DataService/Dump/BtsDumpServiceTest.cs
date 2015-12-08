@@ -34,6 +34,7 @@ namespace Lte.Evaluations.Test.DataService.Dump
             _townRepository.MockOpertion();
             _townRepository.MockSixTowns();
             ParametersDumpMapperService.MapFromBtsContainerService();
+            CoreMapperService.MapBts();
         }
 
         [SetUp]

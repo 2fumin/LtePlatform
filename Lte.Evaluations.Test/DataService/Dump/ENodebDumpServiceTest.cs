@@ -29,6 +29,7 @@ namespace Lte.Evaluations.Test.DataService.Dump
             _townRepository.MockOpertion();
             _townRepository.MockSixTowns();
             ParametersDumpMapperService.MapFromENodebContainerService();
+            CoreMapperService.MapENodeb();
         }
 
         [SetUp]

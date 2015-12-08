@@ -9,7 +9,10 @@ namespace Lte.Evaluations.MapperSerive
         {
             CoreMapperService.MapCdmaCell();
             CoreMapperService.MapCell();
+            CoreMapperService.MapENodeb();
+            CoreMapperService.MapBts();
             CoreMapperService.MapIndoorDistribution();
+
             AlarmMapperService.MapAlarms();
             StatMapperService.MapCdmaRegionStat();
             StatMapperService.MapPreciseCoverage();

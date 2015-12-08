@@ -33,7 +33,7 @@
                 <td>
                     <div class="btn-group" data-bind="visible: newENodebs().length > 0">
                         <button class="btn btn-warning" data-bind="click: checkENodebsLonLat">检查经纬度</button>
-                        <button class="btn btn-warning">匹配镇区</button>
+                        <button class="btn btn-warning">逐个导入</button>
                     </div>
                 </td>
                 <td><input type="checkbox" data-bind="checked: newENodebsImport"/></td>
@@ -44,6 +44,7 @@
                 <td>
                     <div class="btn-group" data-bind="visible: newCells().length > 0">
                         <button class="btn btn-warning" data-bind="click: checkCellsLonLat">检查经纬度</button>
+                        <button class="btn btn-warning" data-bind="click: postSingleENodeb">逐个导入</button>
                     </div>
                 </td>
                 <td><input type="checkbox" data-bind="checked: newCellsImport"/></td>
@@ -54,6 +55,7 @@
                 <td>
                     <div class="btn-group" data-bind="visible: newBtss().length > 0">
                         <button class="btn btn-warning" data-bind="click: checkBtssLonLat">检查经纬度</button>
+                        <button class="btn btn-warning">逐个导入</button>
                     </div>
                 </td>
                 <td><input type="checkbox" data-bind="checked: newBtssImport"/></td>
@@ -64,6 +66,7 @@
                 <td>
                     <div class="btn-group" data-bind="visible: newCdmaCells().length > 0">
                         <button class="btn btn-warning" data-bind="click: checkCdmaCellsLonLat">检查经纬度</button>
+                        <button class="btn btn-warning">逐个导入</button>
                     </div>
                 </td>
                 <td><input type="checkbox" data-bind="checked: newCdmaCellsImport"/></td>
