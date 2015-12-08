@@ -334,6 +334,7 @@
     <Compile Include="Controllers\MeController.cs" />
     <Compile Include="Controllers\ParametersController.cs" />
     <Compile Include="Controllers\Parameters\CellController.cs" />
+    <Compile Include="Controllers\Parameters\DumpENodebExcelController.cs" />
     <Compile Include="Controllers\Parameters\NewBtsExcelsController.cs" />
     <Compile Include="Controllers\Parameters\NewCdmaCellExcelsController.cs" />
     <Compile Include="Controllers\Parameters\NewCellExcelsController.cs" />

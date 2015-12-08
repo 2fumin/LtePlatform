@@ -41,9 +41,20 @@ namespace Lte.Evaluations.DataService.Dump
             items.Select(x => x.ENodeb).ToList().ForEach(x => _eNodebRepository.Insert(x));
         }
 
-        public void DumpSingleENodebExcels(ENodebExcel info)
+        public bool DumpSingleENodebExcel(ENodebExcel info)
         {
-            
+            var eNodeb = ENodeb.ConstructENodeb(info, _townRepository);
+            var result = _eNodebRepository.Insert(eNodeb);
+            if (result != null)
+            {
+                var item = BasicImportService.ENodebExcels.FirstOrDefault(x => x.ENodebId == info.ENodebId);
+                if (item != null)
+                {
+                    BasicImportService.ENodebExcels.Remove(item);
+                }
+                return true;
+            }
+            return false;
         }
     }
 }
