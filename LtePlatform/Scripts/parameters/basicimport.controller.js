@@ -74,8 +74,8 @@ var postAllENodebs = function(viewModel) {
     if (viewModel.newENodebs().length > 0) {
         sendRequest(app.dataModel.newENodebExcelsUrl, "POST", {
             infos: viewModel.newENodebs()
-        }, function() {
-            viewModel.dumpResultMessage(viewModel.dumpResultMessage() + "完成LTE基站导入；");
+        }, function(result) {
+            viewModel.dumpResultMessage(viewModel.dumpResultMessage() + "完成LTE基站导入" + result + "个；");
             viewModel.newENodebs([]);
         });
     }
@@ -84,9 +84,9 @@ var postAllENodebs = function(viewModel) {
 var postAllBtss = function(viewModel) {
     if (viewModel.newBtss().length > 0) {
         sendRequest(app.dataModel.newBtsExcelsUrl, "POST", {
-            infos: viewModel.newBtss()
+            infos: viewModel.newBtss(result)
         }, function() {
-            viewModel.dumpResultMessage(viewModel.dumpResultMessage() + "完成CDMA基站导入；");
+            viewModel.dumpResultMessage(viewModel.dumpResultMessage() + "完成CDMA基站导入" + result + "个；");
             viewModel.newBtss([]);
         });
     }
@@ -96,8 +96,8 @@ var postAllCells = function(viewModel) {
     if (viewModel.newCells().length > 0) {
         sendRequest(app.dataModel.newCellExcelsUrl, "POST", {
             infos: viewModel.newCells()
-        }, function() {
-            viewModel.dumpResultMessage(viewModel.dumpResultMessage() + "完成LTE小区导入；");
+        }, function(result) {
+            viewModel.dumpResultMessage(viewModel.dumpResultMessage() + "完成LTE小区导入" + result + "个；");
             viewModel.newCells([]);
         });
     }

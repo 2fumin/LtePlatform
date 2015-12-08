@@ -334,6 +334,7 @@
     <Compile Include="Controllers\MeController.cs" />
     <Compile Include="Controllers\ParametersController.cs" />
     <Compile Include="Controllers\Parameters\CellController.cs" />
+    <Compile Include="Controllers\Parameters\DumpBtsExcelController.cs" />
     <Compile Include="Controllers\Parameters\DumpCellExcelController.cs" />
     <Compile Include="Controllers\Parameters\DumpENodebExcelController.cs" />
     <Compile Include="Controllers\Parameters\NewBtsExcelsController.cs" />
@@ -704,6 +705,7 @@
     <Content Include="Views\Parameters\_CdmaCellLonLatTable.cshtml" />
     <Content Include="Views\Parameters\_EditENodebExcel.cshtml" />
     <Content Include="Views\Parameters\_EditCellExcel.cshtml" />
+    <Content Include="Views\Parameters\_EditBtsExcel.cshtml" />
     <None Include="Views\Parameters\_List.cshtml" />
   </ItemGroup>
   <ItemGroup>

@@ -30,6 +30,11 @@ namespace Lte.Parameters.Concrete
             return FirstOrDefault(x => x.CityName == city && x.DistrictName == district && x.TownName == town);
         }
 
+        public Town QueryTown(string district, string town)
+        {
+            return FirstOrDefault(x => x.DistrictName == district && x.TownName == town);
+        }
+
         public List<Town> GetAll(string city)
         {
             return GetAllList(x => x.CityName == city);

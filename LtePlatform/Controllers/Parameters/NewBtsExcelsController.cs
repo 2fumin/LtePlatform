@@ -29,9 +29,9 @@ namespace LtePlatform.Controllers.Parameters
         }
 
         [HttpPost]
-        public async Task Post(NewBtsListContainer container)
+        public int Post(NewBtsListContainer container)
         {
-            await Task.Run(() => { _dumpService.DumpBtsExcels(container.Infos); });
+            return _dumpService.DumpBtsExcels(container.Infos);
         }
     }
 }

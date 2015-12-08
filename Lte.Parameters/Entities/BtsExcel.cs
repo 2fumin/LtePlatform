@@ -28,7 +28,7 @@ namespace Lte.Parameters.Entities
         [ExcelColumn("纬度")]
         public double Lattitute { get; set; }
 
-        [ExcelColumn("地址")]
+        [ExcelColumn("地址", TransformEnum.AntiNullAddress)]
         public string Address { get; set; }
 
         [ExcelColumn("基站编号")]

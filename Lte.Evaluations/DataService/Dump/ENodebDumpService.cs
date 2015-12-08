@@ -21,7 +21,7 @@ namespace Lte.Evaluations.DataService.Dump
             _townRepository = townRepository;
         }
 
-        public void DumpNewEnodebExcels(IEnumerable<ENodebExcel> infos)
+        public int DumpNewEnodebExcels(IEnumerable<ENodebExcel> infos)
         {
             var containers = (from info in infos
                 join town in _townRepository.GetAllList()
@@ -33,12 +33,18 @@ namespace Lte.Evaluations.DataService.Dump
                     TownId = town.Id
                 }).ToArray();
 
-            if (!containers.Any()) return;
+            if (!containers.Any()) return 0;
             var items =
                 Mapper.Map<IEnumerable<ENodebExcelWithTownIdContainer>, List<ENodebWithTownIdContainer>>(containers);
             items.ForEach(x => { x.ENodeb.TownId = x.TownId; });
 
-            items.Select(x => x.ENodeb).ToList().ForEach(x => _eNodebRepository.Insert(x));
+            var count = 0;
+            foreach (var eNodeb in items.Select(x => x.ENodeb).ToList())
+            {
+                if (_eNodebRepository.Insert(eNodeb) != null)
+                    count++;
+            }
+            return count;
         }
 
         public bool DumpSingleENodebExcel(ENodebExcel info)

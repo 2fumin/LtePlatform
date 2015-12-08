@@ -29,13 +29,10 @@ namespace LtePlatform.Controllers.Parameters
         }
 
         [HttpPost]
-        public async Task Post(NewCellListContainer container)
+        public int Post(NewCellListContainer container)
         {
-            await Task.Run(() =>
-            {
-                _dumpService.DumpNewCellExcels(container.Infos);
-                _dumpService.UpdateENodebBtsIds(container.Infos);
-            });
+            _dumpService.UpdateENodebBtsIds(container.Infos);
+            return _dumpService.DumpNewCellExcels(container.Infos);
         }
     }
 }

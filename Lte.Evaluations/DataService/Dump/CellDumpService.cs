@@ -23,10 +23,17 @@ namespace Lte.Evaluations.DataService.Dump
             _cellRepository = cellRepository;
         }
 
-        public void DumpNewCellExcels(IEnumerable<CellExcel> infos)
+        public int DumpNewCellExcels(IEnumerable<CellExcel> infos)
         {
             var cellList = Mapper.Map<IEnumerable<CellExcel>, List<Cell>>(infos);
-            cellList.ForEach(cell => _cellRepository.Insert(cell));
+            if (!cellList.Any()) return 0;
+            var count = 0;
+            foreach (var cell in cellList)
+            {
+                if (_cellRepository.Insert(cell) != null)
+                    count++;
+            }
+            return count;
         }
 
         public void UpdateENodebBtsIds(IEnumerable<CellExcel> infos)

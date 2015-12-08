@@ -5,7 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Abp.Domain.Entities;
+using AutoMapper;
 using Lte.Domain.Common.Geo;
+using Lte.Parameters.Abstract;
 
 namespace Lte.Parameters.Entities
 {
@@ -31,5 +33,13 @@ namespace Lte.Parameters.Entities
         public int BtsId { get; set; }
 
         public short BscId { get; set; }
+
+        public static CdmaBts ConstructBts(BtsExcel info,ITownRepository repository)
+        {
+            var town = repository.QueryTown(info.DistrictName, info.TownName);
+            var bts = Mapper.Map<BtsExcel, CdmaBts>(info);
+            bts.TownId = town?.Id ?? -1;
+            return bts;
+        }
     }
 }

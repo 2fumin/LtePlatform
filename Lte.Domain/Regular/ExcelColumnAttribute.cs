@@ -36,6 +36,8 @@ namespace Lte.Domain.Regular
                         return x => x.ToString().ConvertToDouble(0.0);
                     case TransformEnum.DefaultOpenDate:
                         return x => x.ToString().ConvertToDateTime(DateTime.Today.AddMonths(-1));
+                    case TransformEnum.AntiNullAddress:
+                        return x => string.IsNullOrEmpty(x.ToString()) ? "请编辑地址" : x.ToString();
                     default:
                         return null;
                 }

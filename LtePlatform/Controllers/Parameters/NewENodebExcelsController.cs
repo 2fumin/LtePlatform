@@ -29,9 +29,9 @@ namespace LtePlatform.Controllers.Parameters
         }
 
         [HttpPost]
-        public async Task Post(NewENodebListContainer container)
+        public int Post(NewENodebListContainer container)
         {
-            await Task.Run(() => { _dumpService.DumpNewEnodebExcels(container.Infos); });
+            return _dumpService.DumpNewEnodebExcels(container.Infos);
         }
     }
 }

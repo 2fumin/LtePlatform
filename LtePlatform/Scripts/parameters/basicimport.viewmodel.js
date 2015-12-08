@@ -104,6 +104,23 @@
         });
     };
 
+    self.postSingleBts = function () {
+        if (self.editBts() === null && self.newBtss().length > 0) {
+            self.editBts(self.newBtss().pop());
+        }
+        $("#editBts").modal("show");
+    };
+
+    self.saveBts = function () {
+        sendRequest(app.dataModel.dumpBtsExcelUrl, "POST", self.editBts(), function (result) {
+            if (result === true) {
+                self.editBts(null);
+                self.dumpResultMessage("完成一个CDMA基站导入数据库！");
+            }
+            $("#editBts").modal("hide");
+        });
+    };
+
     self.postSingleCell=function() {
         if (self.editCell() === null && self.newCells().length > 0) {
             self.editCell(self.newCells().pop());

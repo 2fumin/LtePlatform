@@ -14,6 +14,8 @@ namespace Lte.Parameters.Abstract
 
         Town QueryTown(string city, string district, string town);
 
+        Town QueryTown(string district, string town);
+
         List<Town> GetAll(string city);
     }
 }
