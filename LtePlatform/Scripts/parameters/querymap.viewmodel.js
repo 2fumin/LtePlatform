@@ -35,13 +35,17 @@
                 district: self.currentDistrict(),
                 town: self.currentTown()
             }, function(result) {
-                console.log(result);
+                for (var i = 0; i < result.length; i++) {
+                    addOneENodebMarker(result[i]);
+                }
             });
         } else {
             sendRequest(app.dataModel.eNodebUrl, "GET", {
                 name: self.queryText()
             }, function(result) {
-                console.log(result);
+                for (var i = 0; i < result.length; i++) {
+                    addOneENodebMarker(result[i]);
+                }
             });
         }
     };

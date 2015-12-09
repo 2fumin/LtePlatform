@@ -155,6 +155,7 @@ namespace LtePlatform
                 "~/Scripts/sammy-{version}.js",
                 "~/Scripts/app/common.js",
                 "~/Scripts/baidu/mapContainer.js",
+                "~/Scripts/baidu/parameters.helper.js",
                 "~/Scripts/app/app.datamodel.js",
                 "~/Scripts/app/app.viewmodel.js",
                 "~/Scripts/parameters/common.controller.js",
