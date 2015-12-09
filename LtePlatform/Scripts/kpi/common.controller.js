@@ -1,5 +1,5 @@
 ﻿var initializeCityKpi = function(viewModel) {
-    // Make a call to the protected Web API by passing in a Bearer Authorization Header
+    
     $.ajax({
         method: 'get',
         url: app.dataModel.cityListUrl,

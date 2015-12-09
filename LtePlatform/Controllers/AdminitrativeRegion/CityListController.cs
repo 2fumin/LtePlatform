@@ -10,7 +10,6 @@ using LtePlatform.Models;
 
 namespace LtePlatform.Controllers.AdminitrativeRegion
 {
-    [Authorize]
     [ApiControl("获取行政区域信息的控制器")]
     public class CityListController : ApiController
     {

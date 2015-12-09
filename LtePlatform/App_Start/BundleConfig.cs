@@ -157,6 +157,7 @@ namespace LtePlatform
                 "~/Scripts/baidu/mapContainer.js",
                 "~/Scripts/app/app.datamodel.js",
                 "~/Scripts/app/app.viewmodel.js",
+                "~/Scripts/parameters/common.controller.js",
                 "~/Scripts/parameters/querymap.viewmodel.js",
                 "~/Scripts/app/_run.js"));
 
