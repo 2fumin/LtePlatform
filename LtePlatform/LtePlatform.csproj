@@ -698,6 +698,7 @@
     <Content Include="Views\College\_CollegeStatTable.cshtml" />
     <Content Include="Views\Dt\_List.cshtml" />
     <Content Include="Scripts\knockout.validation.min.js.map" />
+    <Content Include="Views\College\_CollegeMapInfoBox.cshtml" />
     <None Include="Views\Kpi\_TopDrop2G.cshtml" />
     <None Include="Views\Kpi\_TopDrop2GTable.cshtml" />
     <Content Include="Views\Kpi\_TopDrop2GTrendTable.cshtml" />
