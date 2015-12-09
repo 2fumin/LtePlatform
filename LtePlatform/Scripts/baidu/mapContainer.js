@@ -3,7 +3,13 @@
 var initializeMap = function (tag, zoomLevel) {
     map = new BMap.Map(tag);
     map.centerAndZoom("佛山", zoomLevel);
+    map.setMinZoom(8);  //设置地图最小级别
+    map.setMaxZoom(17);  //设置地图最大级别
+
     map.enableScrollWheelZoom(); //启用滚轮放大缩小
+    map.enableDragging();
+    map.disableDoubleClickZoom();
+
     var bdary = new BMap.Boundary();
     bdary.get("佛山市", function (rs) {       //获取行政区域
         var count = rs.boundaries.length; //行政区域的点有多少个
@@ -21,6 +27,13 @@ var initializeMap = function (tag, zoomLevel) {
         }
         map.setViewport(pointArray);    //调整视野                 
     });
+
+    var topLeftControl = new BMap.ScaleControl({ anchor: BMAP_ANCHOR_TOP_LEFT });// 左上角，添加比例尺
+    var topLeftNavigation = new BMap.NavigationControl();  //左上角，添加默认缩放平移控件
+
+    map.addControl(topLeftControl);
+    map.addControl(topLeftNavigation);
+
 }
 
 var addOneMarker = function (marker, html) {

@@ -84,8 +84,6 @@ currentPlayTime = null;//当前获取数据的时间
 function loadMap(city) {
 
     map = new BMap.Map("mapContent", { enableMapClick: false });          // 创建地图实例
-    map.setMinZoom(8);  //设置地图最小级别
-    map.setMaxZoom(17);  //设置地图最大级别
 
     var point = new BMap.Point(113.312213, 23.147267);//广州市中心
     map.centerAndZoom(point, 8);
@@ -99,12 +97,6 @@ function loadMap(city) {
     map.setDefaultCursor("url('bird.cur')");
     map.enableDragging();
     map.disableDoubleClickZoom();
-
-    var top_left_control = new BMap.ScaleControl({ anchor: BMAP_ANCHOR_TOP_LEFT });// 左上角，添加比例尺
-    var top_left_navigation = new BMap.NavigationControl();  //左上角，添加默认缩放平移控件
-
-    map.addControl(top_left_control);
-    map.addControl(top_left_navigation);
 
     map.addEventListener('zoomstart', zoomStart);
     map.addEventListener('zoomend', zoomEnd);
@@ -584,7 +576,7 @@ function isShowStationsZoom() {
 
 function loadStations() {
 
-    clearStations();
+    map.clearOverlays();
 
 
     if (isShowStations && isShowStationsZoom()) {
@@ -592,27 +584,16 @@ function loadStations() {
     }
 }
 
-function clearStations() {
-
-    //$.each(overlayList, function (i, item) {
-    //    map.removeOverlay(item)
-    //});
-
-    //overlayList = new Array();
-    map.clearOverlays();
-}
-
 function getStationsTimeOut() {
     var zoom = map.getZoom();
-    if (zoom == 14) { return 3000; }
-    else if (zoom = 15) { return 500; }
+    if (zoom === 14) { return 3000; }
+    else if (zoom === 15) { return 500; }
     else { return 100; }
 }
 
-
 function markStation() {
 
-    clearStations();
+    map.clearOverlays();
 
     var queryParam = getQueryParam();
 

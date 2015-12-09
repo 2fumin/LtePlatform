@@ -40,9 +40,9 @@ var initializeCities = function(viewModel) {
     });
 };
 
-var updateDistricts = function(viewModel) {
+var updateDistricts = function(viewModel, name) {
     sendRequest(app.dataModel.cityListUrl, "GET", {
-        city: viewModel.currentCity()
+        city: name
     }, function(data) {
         viewModel.districts(data);
         if (data.length > 0) {
@@ -51,10 +51,10 @@ var updateDistricts = function(viewModel) {
     });
 };
 
-var updateTowns = function(viewModel) {
+var updateTowns = function(viewModel, name) {
     sendRequest(app.dataModel.cityListUrl, "GET", {
         city: viewModel.currentCity(),
-        district: viewModel.currentDistrict()
+        district: name
     }, function(data) {
         viewModel.towns(data);
         if (data.length > 0) {

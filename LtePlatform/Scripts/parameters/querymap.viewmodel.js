@@ -16,12 +16,12 @@
 
             initializeCities(self);
 
-            self.currentCity.subscribe(function() {
-                updateDistricts(self);
+            self.currentCity.subscribe(function(name) {
+                updateDistricts(self, name);
             });
 
-            self.currentDistrict.subscribe(function() {
-                updateTowns(self);
+            self.currentDistrict.subscribe(function(name) {
+                updateTowns(self, name);
             });
 
         });
@@ -30,9 +30,19 @@
 
     self.queryENodebs = function() {
         if (self.queryText().trim() === "") {
-
+            sendRequest(app.dataModel.eNodebUrl, "GET", {
+                city: self.currentCity(),
+                district: self.currentDistrict(),
+                town: self.currentTown()
+            }, function(result) {
+                console.log(result);
+            });
         } else {
-            
+            sendRequest(app.dataModel.eNodebUrl, "GET", {
+                name: self.queryText()
+            }, function(result) {
+                console.log(result);
+            });
         }
     };
 

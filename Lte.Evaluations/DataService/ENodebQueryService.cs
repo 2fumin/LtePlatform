@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 using Lte.Parameters.Concrete;
 using Lte.Domain.Common.Geo;
+using Lte.Evaluations.ViewModels;
+using Lte.Domain.Regular;
 
 namespace Lte.Evaluations.DataService
 {
@@ -21,36 +24,40 @@ namespace Lte.Evaluations.DataService
             _eNodebRepository = eNodebRepository;
         }
 
-        public List<ENodeb> GetAllWithIds(IEnumerable<int> ids)
+        public IEnumerable<ENodebView> GetByTownNames(string city, string district, string town)
         {
-            return (from a in _eNodebRepository.GetAll()
-                    join b in ids on a.ENodebId equals b
-                    select a).OrderBy(x => x.ENodebId).ToList();
-        }
-
-        public List<ENodeb> GetAllWithNames(string city, string district, string town, string eNodebName,
-            string address)
-        {
-            IEnumerable<Town> _townList = _townRepository.QueryTowns(city, district, town);
-            return (!_townList.Any())
+            var townItem =
+                _townRepository.FirstOrDefault(
+                    x => x.CityName == city && x.DistrictName == district && x.TownName == town);
+            return townItem == null
                 ? null
-                : Query(eNodebName, address, _townList).ToList();
+                : Mapper.Map<List<ENodeb>, IEnumerable<ENodebView>>(
+                    _eNodebRepository.GetAll().Where(x => x.TownId == townItem.Id).ToList());
         }
 
-        private IEnumerable<ENodeb> Query(string eNodebName, string address, IEnumerable<Town> _townList)
+        public IEnumerable<ENodebView> GetByGeneralName(string name)
         {
-            return _eNodebRepository.GetAllList().Where(x =>
-                _townList.FirstOrDefault(t => t.Id == x.TownId) != null
-                && (string.IsNullOrEmpty(eNodebName) || x.Name.IndexOf(eNodebName.Trim(),
-                    StringComparison.Ordinal) >= 0)
-                && (string.IsNullOrEmpty(address) || x.Address.IndexOf(address.Trim(),
-                    StringComparison.Ordinal) >= 0));
-        }
-
-        public List<ENodeb> GetAllWithNames(ITown town, string eNodebName, string address)
-        {
-            return GetAllWithNames(town.CityName, town.DistrictName, town.TownName,
-                eNodebName, address);
+            var items =
+                _eNodebRepository.GetAllList().Where(x => x.Name.IndexOf(name.Trim(), StringComparison.Ordinal) >= 0).ToArray();
+            if (items.Any())
+                return Mapper.Map<IEnumerable<ENodeb>, IEnumerable<ENodebView>>(items);
+            var eNodebId = name.Trim().ConvertToInt(0);
+            if (eNodebId > 0)
+            {
+                items = _eNodebRepository.GetAll().Where(x => x.ENodebId == eNodebId).ToArray();
+                if (items.Any())
+                    return Mapper.Map<IEnumerable<ENodeb>, IEnumerable<ENodebView>>(items);
+            }
+            items =
+                _eNodebRepository.GetAllList()
+                    .Where(
+                        x =>
+                            x.Address.IndexOf(name.Trim(), StringComparison.Ordinal) >= 0 ||
+                            x.PlanNum.IndexOf(name.Trim(), StringComparison.Ordinal) >= 0)
+                    .ToArray();
+            if (items.Any())
+                return Mapper.Map<IEnumerable<ENodeb>, IEnumerable<ENodebView>>(items);
+            return null;
         }
     }
 }
