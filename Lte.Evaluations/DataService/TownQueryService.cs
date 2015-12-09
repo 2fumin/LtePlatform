@@ -28,6 +28,22 @@ namespace Lte.Evaluations.DataService
         {
             return _regionRepository.GetAllList().Where(x => x.City == city)
                 .Select(x => x.Region).Distinct().OrderBy(x => x);
-        }  
+        }
+
+        public List<string> GetDistricts(string city)
+        {
+            return _repository.GetAllList().Where(x => x.CityName == city)
+                .Select(x => x.DistrictName).Distinct().ToList();
+        }
+
+        public List<string> GetTowns(string city, string district)
+        {
+            return
+                _repository.GetAllList()
+                    .Where(x => x.CityName == city && x.DistrictName == district)
+                    .Select(x => x.TownName)
+                    .Distinct()
+                    .ToList();
+        } 
     }
 }

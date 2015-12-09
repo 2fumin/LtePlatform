@@ -14,7 +14,7 @@ var initializeMap = function (tag, zoomLevel) {
         var pointArray = [];
         for (var i = 0; i < count; i++) {
             var ply = new BMap.Polygon(rs.boundaries[i], {
-                strokeWeight: 2, strokeColor: "#ff0000", fillColor: "#001000", fillOpacity: 0
+                strokeWeight: 2, strokeColor: "#ff0000", fillOpacity: 0.1
             }); //建立多边形覆盖物
             map.addOverlay(ply);  //添加覆盖物
             pointArray = pointArray.concat(ply.getPath());

@@ -460,6 +460,7 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\themes\map\all.css" />
     <Content Include="Content\themes\map\cloudmap.css" />
     <Content Include="Content\themes\map\timecontrol.css" />
     <Content Include="favicon.ico" />
@@ -597,6 +598,7 @@
     <Content Include="Scripts\parameters\basicimport.controller.js" />
     <Content Include="Scripts\parameters\basicimport.viewmodel.js" />
     <Content Include="Scripts\parameters\common.controller.js" />
+    <Content Include="Scripts\parameters\querymap.viewmodel.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\sammy-0.7.5.js" />

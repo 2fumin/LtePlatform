@@ -1,15 +1,4 @@
 ﻿
-body {
-    background-color: #ffffff;
-    color: #4c4c4c;
-    font-size: 12px;
-    font-family: "宋体";
-    overflow-x: hidden;
-    line-height: normal;
-    margin: 0px;
-    padding: 0px;
-}
-
 .cloudmap-wrapper {
     width: 100%;
     overflow: hidden;
@@ -37,79 +26,28 @@ div#contentWrapper {
     background-color: #f9f9fb;
 }
 
-.index-select-city {
-    height: 32px;
-    line-height: 32px;
+.cloudmap-select-city {
+    height: 22px;
+    line-height: 22px;
     padding-left: 15px;
-    width: 150px;
-    float: left;
 }
 
-.city-name {
+.cloudmap-city-name {
     color: #333333;
     font-weight: 700;
     cursor: pointer;
 }
 
-    .city-name:hover {
+    .cloudmap-city-name:hover {
         color: #3977d2;
     }
 
-#index_sel_city {
-    width: 0px;
-    height: 0px;
-}
-
-.index-sel-city-cover {
-    width: 232px;
-    position: absolute;
-    background-color: #ffffff;
-    border: 1px solid #e6e7ea;
-}
-
-.city-title {
-    height: 30px;
-    line-height: 30px;
-    padding-left: 20px;
-    border-bottom: 1px solid #e6e7ea;
-}
-
-.city-content {
-    padding: 5px 5px 5px 14px;
-    position: relative;
-}
-
-    .city-content a {
-        text-decoration: none;
-        height: 22px;
-        line-height: 22px;
-        margin-right: 7px;
-        padding: 2px 5px;
-        color: #333333;
-    }
-
-        .city-content a:hover {
-            color: #3977d2;
-            background-color: #ebf1fb;
-        }
-
-.search-city {
+.cloudmap-search-city {
     padding: 0px 10px 20px;
     margin-bottom: 20px;
 }
 
-.search-city-a {
-    background-color: #ffffff;
-    border: 1px solid #dbdbdb;
-    width: 148px;
-    height: 20px;
-    margin-left: 5px;
-    margin-top: 8px;
-    color: #a6a6a6;
-    text-indent: 3px;
-}
-
-.search-city-b {
+.cloudmap-search-b {
     background-image: url(../../images/Hotmap/map_u7.png);
     background-repeat: no-repeat;
     width: 49px;
@@ -117,10 +55,9 @@ div#contentWrapper {
     margin-left: 5px;
     margin-top: 8px;
     cursor: pointer;
-    float: left;
 }
 
-    .search-city-b:hover {
+    .cloudmap-search-b:hover {
         background-image: url(../../images/Hotmap/map_u8.png);
         background-repeat: no-repeat;
     }

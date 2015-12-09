@@ -151,6 +151,15 @@ namespace LtePlatform
                 "~/Scripts/parameters/basicimport.viewmodel.js",
                 "~/Scripts/app/_run.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/parametersQueryMap").Include(
+                "~/Scripts/sammy-{version}.js",
+                "~/Scripts/app/common.js",
+                "~/Scripts/baidu/mapContainer.js",
+                "~/Scripts/app/app.datamodel.js",
+                "~/Scripts/app/app.viewmodel.js",
+                "~/Scripts/parameters/querymap.viewmodel.js",
+                "~/Scripts/app/_run.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/webapiBasicPost").Include(
                 "~/Scripts/sammy-{version}.js",
                 "~/Scripts/app/common.js",
@@ -174,6 +183,9 @@ namespace LtePlatform
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                 "~/Content/themes/base/all.css"));
+
+            bundles.Add(new StyleBundle("~/Content/themes/cloudmap/css").Include(
+                "~/Content/themes/map/all.css"));
 
             bundles.Add(new StyleBundle("~/Content/HelpPage").Include(
                 "~/Areas/HelpPage/HelpPage.css"));
