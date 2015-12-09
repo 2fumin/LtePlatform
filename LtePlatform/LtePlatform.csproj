@@ -369,6 +369,9 @@
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Areas\TestPage\Scripts\autostart.js" />
     <Content Include="Areas\TestPage\Scripts\basicpost.viewmodel.js" />
+    <Content Include="Areas\TestPage\Scripts\diff.js" />
+    <Content Include="Areas\TestPage\Scripts\globals-node.js" />
+    <Content Include="Areas\TestPage\Scripts\logs.js" />
     <Content Include="Areas\TestPage\Scripts\main\assert.js" />
     <Content Include="Areas\TestPage\Scripts\main\async.js" />
     <Content Include="Areas\TestPage\Scripts\main\deepEqual.js" />
@@ -378,8 +381,12 @@
     <Content Include="Areas\TestPage\Scripts\main\promise.js" />
     <Content Include="Areas\TestPage\Scripts\main\stack.js" />
     <Content Include="Areas\TestPage\Scripts\main\test.js" />
+    <Content Include="Areas\TestPage\Scripts\only.js" />
     <Content Include="Areas\TestPage\Scripts\reporter-html.js" />
+    <Content Include="Areas\TestPage\Scripts\setTimeout.js" />
     <Content Include="Areas\TestPage\Scripts\single-testid.js" />
+    <Content Include="Areas\TestPage\Scripts\stack-errors.js" />
+    <Content Include="Areas\TestPage\Scripts\startError.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -515,6 +522,8 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Areas\TestPage\Views\QUnitTest\AutoStart.cshtml" />
     <Content Include="Areas\TestPage\Views\QUnitTest\Headless.cshtml" />
+    <Content Include="Areas\TestPage\Views\QUnitTest\Main.cshtml" />
+    <Content Include="Areas\TestPage\Views\QUnitTest\Logs.cshtml" />
     <None Include="Areas\TestPage\Views\QUnitTest\NoQUnitMarkup.cshtml" />
     <None Include="Areas\TestPage\Views\QUnitTest\SingleTestId.cshtml" />
     <Content Include="Areas\TestPage\Views\WebApiTest\BasicPost.cshtml" />

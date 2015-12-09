@@ -11,11 +11,13 @@
         <div id="exampleTests" class="panel-collapse collapse in">
             <div class="panel-body">
                 <div class="list-group">
-                    @Html.ActionLink("Legacy Markup", "LegacyMarkup", "QUnitTest", null, new { @class="list-group-item" })
-                    @Html.ActionLink("No QUnit Markup", "NoQUnitMarkup", "QUnitTest", null, new { @class = "list-group-item" })
-                    @Html.ActionLink("Single Test Id", "SingleTestId", "QUnitTest", null, new { @class = "list-group-item" })
-                    @Html.ActionLink("Auto Start", "AutoStart", "QUnitTest", null, new { @class = "list-group-item" })
-                    @Html.ActionLink("Headless", "Headless", "QUnitTest", null, new { @class = "list-group-item" })
+                    @Html.ActionLink("Main Test", "Main", "QUnitTest", null, new { @class = "list-group-item" })
+                    @Html.ActionLink("Legacy Markup", "LegacyMarkup", "QUnitTest", null, new {@class = "list-group-item"})
+                    @Html.ActionLink("No QUnit Markup", "NoQUnitMarkup", "QUnitTest", null, new {@class = "list-group-item"})
+                    @Html.ActionLink("Single Test Id", "SingleTestId", "QUnitTest", null, new {@class = "list-group-item"})
+                    @Html.ActionLink("Auto Start", "AutoStart", "QUnitTest", null, new {@class = "list-group-item"})
+                    @Html.ActionLink("Headless", "Headless", "QUnitTest", null, new {@class = "list-group-item"})
+                    @Html.ActionLink("Logs", "Logs", "QUnitTest", null, new { @class = "list-group-item" })
                 </div>
             </div>
         </div>

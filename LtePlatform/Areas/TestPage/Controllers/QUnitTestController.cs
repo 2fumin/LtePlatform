@@ -38,5 +38,15 @@ namespace LtePlatform.Areas.TestPage.Controllers
         {
             return View();
         }
+
+        public ActionResult Main()
+        {
+            return View();
+        }
+
+        public ActionResult Logs()
+        {
+            return View();
+        }
     }
 }

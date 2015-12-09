@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "QUnit Main Test Suite";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        @{
+            Html.RenderPartial("_QUnitTestContents");
+        }
+    </div>
+    <div class="col-md-8">
+        <h2>@ViewBag.Title</h2>
+
+        <div id="qunit"></div>
+        <div id="qunit-fixture">test markup</div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <link rel="stylesheet" href="~/Content/qunit-1.20.0.css">
+    <script src="~/Scripts/app/qunit-1.20.0.js"></script>
+    <script src="~/Areas/TestPage/Scripts/reporter-html.js"></script>
+    <script src="~/Areas/TestPage/Scripts/main/test.js"></script>
+    <script src="~/Areas/TestPage/Scripts/main/assert.js"></script>
+    <script src="~/Areas/TestPage/Scripts/main/async.js"></script>
+    <script src="~/Areas/TestPage/Scripts/main/promise.js"></script>
+    <script src="~/Areas/TestPage/Scripts/main/dump.js"></script>
+    <script src="~/Areas/TestPage/Scripts/main/modules.js"></script>
+    <script src="~/Areas/TestPage/Scripts/main/deepEqual.js"></script>
+    <script src="~/Areas/TestPage/Scripts/main/globals.js"></script>
+    <script src="~/Areas/TestPage/Scripts/main/stack.js"></script>
+    <script src="~/Areas/TestPage/Scripts/setTimeout.js"></script>
+    <script src="~/Areas/TestPage/Scripts/reporter-html.js"></script>
+    <script src="~/Areas/TestPage/Scripts/diff.js"></script>
+}
+
