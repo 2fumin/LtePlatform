@@ -1,7 +1,7 @@
 ﻿var addOneCollegeMarkerInfo = function (data) {
     var marker = new BMap.Marker(new BMap.Point(centerxs[data.id], centerys[data.id]));
     var html = generateCollegeInfoHtml(data);
-    addOneMarker(marker, html);
+    addOneMarker(marker, html, "College");
 };
 
 var generateCollegeInfoHtml = function(data) {
@@ -16,3 +16,10 @@ var generateCollegeInfoHtml = function(data) {
     $("#college-cdma-distributions").html(data.totalCdmaIndoors);
     return $("#college-info-box").html();
 };
+
+var removeAllColleges= function() {
+    var count = map.CollegeMarkers.length;
+    for (var i = 0; i < count; i++) {
+        map.removeOverlay(map.CollegeMarkers.pop());
+    }
+}

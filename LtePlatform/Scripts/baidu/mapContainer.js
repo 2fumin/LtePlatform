@@ -34,9 +34,20 @@ var initializeMap = function (tag, zoomLevel) {
     map.addControl(topLeftControl);
     map.addControl(topLeftNavigation);
 
+    map.collegeMarkers = [];
+    map.eNodebMarkers = [];
 }
 
-var addOneMarker = function (marker, html) {
+var addOneMarker = function (marker, html, type) {
+    if (type === undefined) type = "College";
+    switch (type) {
+        case "ENodeb":
+            map.eNodebMarkers.push(marker);
+            break;
+        default:
+            map.collegeMarkers.push(marker);
+            break;
+    }
     map.addOverlay(marker);
 
     var infoBox = new BMapLib.InfoBox(map, html, {

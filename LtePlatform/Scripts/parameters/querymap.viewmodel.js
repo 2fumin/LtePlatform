@@ -28,26 +28,8 @@
         this.get('/Parameters/QueryMap', function () { this.app.runRoute('get', '#queryMap'); });
     });
 
-    self.queryENodebs = function() {
-        if (self.queryText().trim() === "") {
-            sendRequest(app.dataModel.eNodebUrl, "GET", {
-                city: self.currentCity(),
-                district: self.currentDistrict(),
-                town: self.currentTown()
-            }, function(result) {
-                for (var i = 0; i < result.length; i++) {
-                    addOneENodebMarker(result[i]);
-                }
-            });
-        } else {
-            sendRequest(app.dataModel.eNodebUrl, "GET", {
-                name: self.queryText()
-            }, function(result) {
-                for (var i = 0; i < result.length; i++) {
-                    addOneENodebMarker(result[i]);
-                }
-            });
-        }
+    self.queryItems = function() {
+        queryENodebs(self);
     };
 
     return self;

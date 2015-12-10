@@ -1,7 +1,7 @@
 ﻿var addOneENodebMarker = function (data) {
     var marker = new BMap.Marker(new BMap.Point(data.baiduLongtitute, data.baiduLattitute));
     var html = getENodebInfoHtml(data);
-    addOneMarker(marker, html);
+    addOneMarker(marker, html, "ENodeb");
 };
 
 var getENodebInfoHtml = function(data) {
@@ -15,6 +15,13 @@ var getENodebInfoHtml = function(data) {
     $("#enodeb-lattitute").html(data.lattitute);
     return $("#enodeb-info-box").html();
 };
+
+var removeAllENodebs= function() {
+    var count = map.eNodebMarkers.length;
+    for (var i = 0; i < count; i++) {
+        map.removeOverlay(map.eNodebMarkers.pop());
+    }
+}
 
 var addOneBtsMarker = function (data) {
     var marker = new BMap.Marker(new BMap.Point(data.baiduLongtitute, data.baiduLattitute));

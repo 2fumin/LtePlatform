@@ -155,11 +155,13 @@ namespace LtePlatform
                 "~/Scripts/sammy-{version}.js",
                 "~/Scripts/app/common.js",
                 "~/Scripts/baidu/mapContainer.js",
+                "~/Scripts/baidu/plugins/InfoBox.js",
                 "~/Scripts/baidu/parameters.helper.js",
                 "~/Scripts/app/app.datamodel.js",
                 "~/Scripts/app/app.viewmodel.js",
                 "~/Scripts/parameters/common.controller.js",
                 "~/Scripts/parameters/querymap.viewmodel.js",
+                "~/Scripts/parameters/querymap.controller.js",
                 "~/Scripts/app/_run.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/webapiBasicPost").Include(

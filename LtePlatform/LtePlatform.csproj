@@ -608,6 +608,7 @@
     <Content Include="Scripts\parameters\basicimport.controller.js" />
     <Content Include="Scripts\parameters\basicimport.viewmodel.js" />
     <Content Include="Scripts\parameters\common.controller.js" />
+    <Content Include="Scripts\parameters\querymap.controller.js" />
     <Content Include="Scripts\parameters\querymap.viewmodel.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
