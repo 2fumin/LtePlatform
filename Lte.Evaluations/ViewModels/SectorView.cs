@@ -17,5 +17,11 @@ namespace Lte.Evaluations.ViewModels
         public double BaiduLongtitute { get; set; }
 
         public double BaiduLattitute { get; set; }
+
+        public double Height { get; set; }
+
+        public double DownTilt { get; set; }
+
+        public double AntennaGain { get; set; }
     }
 }

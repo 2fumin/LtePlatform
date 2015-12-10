@@ -53,14 +53,16 @@ var removeAllBtss = function() {
 };
 
 var addOneLteSector = function(data) {
-    var center = { lon: data.baiduLongtitute, lat: data.baiduLattitute };
+    var center = { lng: data.baiduLongtitute, lat: data.baiduLattitute };
     var iangle = 65;
     var irotation = data.azimuth - iangle / 2;
     var zoom = map.getZoom();
-    var sector = new BMap.Polygon(generateSectorPolygonPoints(center, irotation, iangle, zoom), {
+    var points = generateSectorPolygonPoints(center, irotation, iangle, zoom);
+    
+    var sector = new BMap.Polygon(points, {
         strokeWeight: 2,
         strokeColor: "blue",
-        fillColor: fillColor,
+        fillColor: "blue",
         fillOpacity: 0.5
     });
     var html = getLteSectorInfoHtml(data);
