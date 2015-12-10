@@ -206,7 +206,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram\AdministrativeRegion.cd" />
+    <None Include="ClassDiagram\CdmaKpi.cd" />
+    <None Include="ClassDiagram\CdmaTopKpi.cd" />
+    <None Include="ClassDiagram\CollegeEntities.cd" />
     <None Include="ClassDiagram\NetworkEntities.cd" />
+    <None Include="ClassDiagram\Precise4GKpi.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using Lte.Evaluations.ViewModels;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 
@@ -32,5 +34,14 @@ namespace Lte.Evaluations.DataService
                 ? null
                 : _repository.GetAll().Where(x => x.ENodebId == eNodeb.ENodebId).Select(x => x.SectorId).ToList();
         }
+
+        public IEnumerable<SectorView> QuerySectors(int eNodebId)
+        {
+            var cells = _repository.GetAllList(eNodebId);
+            return cells.Any()
+                ? Mapper.Map<IEnumerable<CellView>, IEnumerable<SectorView>>(
+                    cells.Select(x => CellView.ConstructView(x, _eNodebRepository)))
+                : new List<SectorView>();
+        }  
     }
 }

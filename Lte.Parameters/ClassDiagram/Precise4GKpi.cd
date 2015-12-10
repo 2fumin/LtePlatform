@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Lte.Parameters.Entities.PreciseCoverage4G">
+    <Position X="1" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAIAgAAAAgAgCAAACAEAIAAACQAAAAAEA=</HashCode>
+      <FileName>Entities\PreciseCoverage4G.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lte.Parameters.Entities.PreciseCoverage4GCsv">
+    <Position X="3.75" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAiAAAAAAAAAgAAAACCAAAAAEA=</HashCode>
+      <FileName>Entities\PreciseCoverage4GCsv.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lte.Parameters.Entities.TownPreciseCoverage4GStat">
+    <Position X="6.5" Y="0.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAgAACAAAAAEAIAAAAAAABAAAA=</HashCode>
+      <FileName>Entities\TownPreciseCoverage4GStat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="微软雅黑" Size="9" />
+</ClassDiagram>

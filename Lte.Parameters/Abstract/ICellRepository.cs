@@ -13,5 +13,7 @@ namespace Lte.Parameters.Abstract
         void AddCells(IEnumerable<Cell> cells);
 
         Cell GetBySectorId(int eNodebId, byte sectorId);
+
+        List<Cell> GetAllList(int eNodebId);
     }
 }

@@ -25,5 +25,10 @@ namespace Lte.Parameters.Concrete
         {
             return FirstOrDefault(x => x.ENodebId == eNodebId && x.SectorId == sectorId);
         }
+
+        public List<Cell> GetAllList(int eNodebId)
+        {
+            return GetAll().Where(x => x.ENodebId == eNodebId).ToList();
+        }
     }
 }

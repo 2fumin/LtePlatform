@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Lte.Parameters.Entities.College3GTestResults">
+    <Position X="4.25" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAACABCAAAAAEACAAAAAAACA=</HashCode>
+      <FileName>Entities\College3GTestResults.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lte.Parameters.Entities.College4GTestResults">
+    <Position X="6.25" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAADAAIAAAAAAACAACAAAAAAACAAAAAIAGA=</HashCode>
+      <FileName>Entities\College4GTestResults.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lte.Parameters.Entities.CollegeInfo">
+    <Position X="0.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AEBAAAAAAAAAAAAAAAIAAAQAAAAIAAAAECAACABgAAA=</HashCode>
+      <FileName>Entities\CollegeInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lte.Parameters.Entities.CollegeRegion">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAUAAAAA=</HashCode>
+      <FileName>Entities\CollegeInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lte.Parameters.Entities.CollegeKpi">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAQAAAAAAAAAAAAIAAAAECABABAIAAAAASQAAAAAACA=</HashCode>
+      <FileName>Entities\CollegeKpi.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lte.Parameters.Entities.CollegeStat">
+    <Position X="10" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACIAAAEAAAABAAAAAAAAQAIAAAAAQAAAACAQBgAAA=</HashCode>
+      <FileName>Entities\CollegeStat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="微软雅黑" Size="9" />
+</ClassDiagram>
