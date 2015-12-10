@@ -25,7 +25,7 @@ var removeAllENodebs = function() {
 
 var addOneBtsMarker = function (data) {
     var marker = new BMap.Marker(new BMap.Point(data.baiduLongtitute, data.baiduLattitute));
-    var html = getBtsInfoHtml();
+    var html = getBtsInfoHtml(data);
     addOneMarker(marker, html);
 };
 

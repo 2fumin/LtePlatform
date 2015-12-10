@@ -27,4 +27,27 @@
 
 var queryBtss = function(viewModel) {
     removeAllBtss();
+    if (viewModel.queryText().trim() === "") {
+        sendRequest(app.dataModel.btsUrl, "GET", {
+            city: viewModel.currentCity(),
+            district: viewModel.currentDistrict(),
+            town: viewModel.currentTown()
+        }, function (result) {
+            for (var i = 0; i < result.length; i++) {
+                addOneBtsMarker(result[i]);
+            }
+        }, function (result) {
+            alert(getErrorMessage(result));
+        });
+    } else {
+        sendRequest(app.dataModel.btsUrl, "GET", {
+            name: viewModel.queryText()
+        }, function (result) {
+            for (var i = 0; i < result.length; i++) {
+                addOneBtsMarker(result[i]);
+            }
+        }, function (result) {
+            alert(getErrorMessage(result));
+        });
+    }
 };

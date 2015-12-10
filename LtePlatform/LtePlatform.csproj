@@ -333,6 +333,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MeController.cs" />
     <Compile Include="Controllers\ParametersController.cs" />
+    <Compile Include="Controllers\Parameters\BtsController.cs" />
     <Compile Include="Controllers\Parameters\CellController.cs" />
     <Compile Include="Controllers\Parameters\DumpBtsExcelController.cs" />
     <Compile Include="Controllers\Parameters\DumpCdmaCellExcelController.cs" />

@@ -8,7 +8,7 @@
     self.currentTown = ko.observable("");
     self.towns = ko.observableArray([]);
     self.queryText = ko.observable("");
-    self.currentNetowrk = ko.observable("LTE");
+    self.currentNetwork = ko.observable("LTE");
     self.networks = ko.observableArray(["LTE", "CDMA"]);
 
     Sammy(function () {
@@ -31,10 +31,11 @@
     });
 
     self.queryItems = function () {
-        if (self.currentNetowrk() === "LTE")
+        if (self.currentNetwork() === "LTE") {
             queryENodebs(self);
-        else
+        } else {
             queryBtss(self);
+        }
     };
 
     return self;
