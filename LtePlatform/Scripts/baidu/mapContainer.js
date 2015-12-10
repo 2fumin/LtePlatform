@@ -37,6 +37,8 @@ var initializeMap = function (tag, zoomLevel) {
     map.collegeMarkers = [];
     map.eNodebMarkers = [];
     map.btsMarkers = [];
+    map.lteSectors = [];
+    map.cdmaSectors = [];
 }
 
 var addOneMarker = function (marker, html, type) {
@@ -66,6 +68,34 @@ var addOneMarker = function (marker, html, type) {
     });
     marker.addEventListener("click", function () {
         
+        infoBox.open(this);
+    });
+};
+
+var addOneSector = function(sector, html, type) {
+    if (type === undefined) type = "LteCell";
+    switch (type) {
+    case "CdmaCell":
+        map.cdmaSectors.push(sector);
+        break;
+    default:
+        map.lteSectors.push(sector);
+        break;
+    }
+    map.addOverlay(sector);
+
+    var infoBox = new BMapLib.InfoBox(map, html, {
+        boxStyle: {
+            background: "url('/Content/themes/baidu/tipbox.jpg') no-repeat center top",
+            width: "270px",
+            height: "200px"
+        },
+        closeIconUrl: "/Content/themes/baidu/close.png",
+        closeIconMargin: "1px 1px 0 0",
+        enableAutoPan: true,
+        align: INFOBOX_AT_TOP
+    });
+    sector.addEventListener("click", function() {
         infoBox.open(this);
     });
 };

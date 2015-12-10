@@ -35,7 +35,7 @@ var addOneBtsMarker = function (data) {
     addOneMarker(marker, html);
 };
 
-var getBtsInfoHtml= function(data) {
+var getBtsInfoHtml = function(data) {
     $("#bts-id").html(data.btsId);
     $("#bts-name").html(data.name);
     $("#bts-address").html(data.address);
@@ -43,11 +43,37 @@ var getBtsInfoHtml= function(data) {
     $("#bts-longtitute").html(data.longtitute);
     $("#bts-lattitute").html(data.lattitute);
     return $("#bts-info-box").html();
-}
+};
 
 var removeAllBtss = function() {
     var count = map.btsMarkers.length;
     for (var i = 0; i < count; i++) {
         map.removeOverlay(map.btsMarkers.pop());
+    }
+};
+
+var addOneLteSector = function(data) {
+    var center = { lon: data.baiduLongtitute, lat: data.baiduLattitute };
+    var iangle = 65;
+    var irotation = data.azimuth - iangle / 2;
+    var zoom = map.getZoom();
+    var sector = new BMap.Polygon(generateSectorPolygonPoints(center, irotation, iangle, zoom), {
+        strokeWeight: 2,
+        strokeColor: "blue",
+        fillColor: fillColor,
+        fillOpacity: 0.5
+    });
+    var html = getLteSectorInfoHtml(data);
+    addOneSector(sector, html);
+};
+
+var getLteSectorInfoHtml = function(data) {
+    return "";
+};
+
+var removeAllLteSectors = function() {
+    var count = map.lteSectors.length;
+    for (var i = 0; i < count; i++) {
+        map.removeOverlay(map.lteSectors.pop());
     }
 };
