@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using Lte.Domain.Regular;
 using Lte.Evaluations.ViewModels;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 
-namespace Lte.Evaluations.DataService
+namespace Lte.Evaluations.DataService.College
 {
     public class College4GTestService
     {

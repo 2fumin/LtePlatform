@@ -1,4 +1,5 @@
 ﻿using Lte.Evaluations.DataService;
+using Lte.Evaluations.DataService.College;
 using Lte.Evaluations.DataService.Dump;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Concrete;
@@ -51,6 +52,8 @@ namespace LtePlatform
             ninjectKernel.Bind<CollegeStatService>().ToSelf();
 
             ninjectKernel.Bind<ENodebQueryService>().ToSelf();
+
+            ninjectKernel.Bind<BtsQueryService>().ToSelf();
 
             ninjectKernel.Bind<CollegeENodebService>().ToSelf();
 

@@ -8,6 +8,8 @@
     self.currentTown = ko.observable("");
     self.towns = ko.observableArray([]);
     self.queryText = ko.observable("");
+    self.currentNetowrk = ko.observable("LTE");
+    self.networks = ko.observableArray(["LTE", "CDMA"]);
 
     Sammy(function () {
         this.get('#queryMap', function() {
@@ -28,8 +30,11 @@
         this.get('/Parameters/QueryMap', function () { this.app.runRoute('get', '#queryMap'); });
     });
 
-    self.queryItems = function() {
-        queryENodebs(self);
+    self.queryItems = function () {
+        if (self.currentNetowrk() === "LTE")
+            queryENodebs(self);
+        else
+            queryBtss(self);
     };
 
     return self;

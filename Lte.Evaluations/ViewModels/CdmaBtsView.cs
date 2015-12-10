@@ -27,6 +27,8 @@ namespace Lte.Evaluations.ViewModels
 
         public int BtsId { get; set; }
 
+        public int BscId { get; set; }
+
         public static CdmaBtsView ConstructView(CdmaBts bts)
         {
             return Mapper.Map<CdmaBts, CdmaBtsView>(bts);

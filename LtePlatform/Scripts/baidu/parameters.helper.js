@@ -16,24 +16,32 @@ var getENodebInfoHtml = function(data) {
     return $("#enodeb-info-box").html();
 };
 
-var removeAllENodebs= function() {
+var removeAllENodebs = function() {
     var count = map.eNodebMarkers.length;
     for (var i = 0; i < count; i++) {
         map.removeOverlay(map.eNodebMarkers.pop());
     }
-}
+};
 
 var addOneBtsMarker = function (data) {
     var marker = new BMap.Marker(new BMap.Point(data.baiduLongtitute, data.baiduLattitute));
-    var html = '<div class="infoBoxContent">'
-        + '<div class="title"><strong>基站基本信息: </strong></div>'
-        + '<div class="list"><ul>'
-        + '<li><div class="left">BTS ID:</div><div class="rmb"> ' + data.btsId
-        + '</div></li><li><div class="left">Name:</div><div class="rmb"> ' + data.name
-        + '</div></li><li><div class="left">Address: </div><div class="rmb">' + data.address
-        + '</div></li><li><div class="left">BSC ID: </div><div class="rmb">' + data.bscId
-        + '</div></li>'
-        + '</ul></div>'
-        + '</div>';
+    var html = getBtsInfoHtml();
     addOneMarker(marker, html);
+};
+
+var getBtsInfoHtml= function(data) {
+    $("#bts-id").html(data.btsId);
+    $("#bts-name").html(data.name);
+    $("#bts-address").html(data.address);
+    $("#bts-bscid").html(data.bscId);
+    $("#bts-longtitute").html(data.longtitute);
+    $("#bts-lattitute").html(data.lattitute);
+    return $("#bts-info-box").html();
+}
+
+var removeAllBtss = function() {
+    var count = map.btsMarkers.length;
+    for (var i = 0; i < count; i++) {
+        map.removeOverlay(map.btsMarkers.pop());
+    }
 };

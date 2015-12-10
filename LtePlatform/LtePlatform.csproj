@@ -724,6 +724,7 @@
     <Content Include="Views\Parameters\_EditBtsExcel.cshtml" />
     <Content Include="Views\Parameters\_EditCdmaCellExcel.cshtml" />
     <Content Include="Views\Parameters\_ENodebMapInfoBox.cshtml" />
+    <Content Include="Views\Parameters\_BtsMapInfoBox.cshtml" />
     <None Include="Views\Parameters\_List.cshtml" />
     <Content Include="Views\Parameters\_QueryMap.cshtml" />
   </ItemGroup>

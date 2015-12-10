@@ -24,3 +24,7 @@
         });
     }
 };
+
+var queryBtss = function(viewModel) {
+    removeAllBtss();
+};

@@ -36,6 +36,7 @@ var initializeMap = function (tag, zoomLevel) {
 
     map.collegeMarkers = [];
     map.eNodebMarkers = [];
+    map.btsMarkers = [];
 }
 
 var addOneMarker = function (marker, html, type) {
@@ -44,6 +45,8 @@ var addOneMarker = function (marker, html, type) {
         case "ENodeb":
             map.eNodebMarkers.push(marker);
             break;
+        case "Bts":
+            map.btsMarkers.push(marker);
         default:
             map.collegeMarkers.push(marker);
             break;

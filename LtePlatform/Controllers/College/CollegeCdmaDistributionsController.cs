@@ -5,10 +5,13 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Lte.Evaluations.DataService;
+using Lte.Evaluations.DataService.College;
 using Lte.Parameters.Entities;
+using LtePlatform.Models;
 
 namespace LtePlatform.Controllers.College
 {
+    [ApiControl("查询校园网CDMA室内分布的控制器")]
     public class CollegeCdmaDistributionsController : ApiController
     {
         private readonly CollegeDistributionService _service;
@@ -19,6 +22,9 @@ namespace LtePlatform.Controllers.College
         }
 
         [HttpGet]
+        [ApiDoc("查询校园网CDMA室内分布列表")]
+        [ApiParameterDoc("collegeName", "校园名称")]
+        [ApiResponse("校园网CDMA室内分布列表")]
         public IEnumerable<IndoorDistribution> Get(string collegeName)
         {
             return _service.QueryCdmaDistributions(collegeName);
