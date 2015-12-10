@@ -308,6 +308,7 @@
     <Compile Include="Interfaces\ISimple.cs" />
     <Compile Include="Interfaces\ITwo.cs" />
     <Compile Include="Interfaces\IWithRefOut.cs" />
+    <Compile Include="Junior\DynamicProxy\CreateInstanceTest.cs" />
     <Compile Include="Junior\DynamicProxy\DefaultProxyBuiderTest.cs" />
     <Compile Include="Junior\DynamicProxy\ModuleScopeTest.cs" />
     <Compile Include="Main\AccessLevelTestCase.cs" />

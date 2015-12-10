@@ -16,79 +16,24 @@ namespace Castle.Core.Test.Components
 {
 	public class Address : InfrastructureStub,  IAddress
 	{
-		private string line1;
-		private string line2;
-		private string city;
-		private string state;
-		private string zipCode;
-		private IPhone phone;
+	    private IPhone phone;
 		private IPhone mobile;
 		private IPhone emergency;
 
-		public string Line1
-		{
-			get { return line1; }
-			set { line1 = value; }
-		}
+		public string Line1 { get; set; }
 
-		public string Line2
-		{
-			get { return line2; }
-			set { line2 = value; }
-		}
+	    public string Line2 { get; set; }
 
-		public string City
-		{
-			get { return city; }
-			set { city = value; }
-		}
+	    public string City { get; set; }
 
-		public string State
-		{
-			get { return state; }
-			set { state = value; }
-		}
+	    public string State { get; set; }
 
-		public string ZipCode
-		{
-			get { return zipCode; }
-			set { zipCode = value; }
-		}
+	    public string ZipCode { get; set; }
 
-		public IPhone Phone
-		{
-			get
-			{
-				if (phone == null)
-				{
-					phone = new Phone();
-				}
-				return phone;
-			}
-		}
+	    public IPhone Phone => phone ?? (phone = new Phone());
 
-		public IPhone Mobile
-		{
-			get
-			{
-				if (mobile == null)
-				{
-					mobile = new Phone();
-				}
-				return mobile;
-			}
-		}
+	    public IPhone Mobile => mobile ?? (mobile = new Phone());
 
-		public IPhone Emergency
-		{
-			get
-			{
-				if (emergency == null)
-				{
-					emergency = new Phone();
-				}
-				return emergency;
-			}
-		}
+	    public IPhone Emergency => emergency ?? (emergency = new Phone());
 	}
 }

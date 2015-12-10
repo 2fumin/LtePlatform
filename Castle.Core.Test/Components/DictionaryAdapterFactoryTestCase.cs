@@ -164,7 +164,8 @@ namespace Castle.Core.Test.Components
 			person.Height = 72;
 
 			Assert.AreEqual(72, person.Height);
-			Assert.AreEqual(72, dictionary["Tests.IPersonWithTypePrefixOverride#Height"]);
+            Assert.AreEqual(dictionary.Count, 1);
+			Assert.AreEqual(72, dictionary["Castle.Core.Test.Components.IPersonWithTypePrefixOverride#Height"]);
 		}
 
 		[Test]

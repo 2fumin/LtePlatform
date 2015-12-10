@@ -38,11 +38,9 @@ namespace Castle.Core.Test.Components
 		[Test]
 		public void Should_Handle_String_String()
 		{
-			var dictionary = new Dictionary<string, string>();
-			dictionary.Add("Team", "Giants");
-			dictionary.Add("Points", "23");
+		    var dictionary = new Dictionary<string, string> {{"Team", "Giants"}, {"Points", "23"}};
 
-			var player = _factory.GetAdapter<IPlayer, string>(dictionary);
+		    var player = _factory.GetAdapter<IPlayer, string>(dictionary);
 			Assert.AreEqual("Giants", player.Team);
 			Assert.AreEqual(23, player.Points);
 		}

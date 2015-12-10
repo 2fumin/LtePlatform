@@ -246,7 +246,7 @@ namespace Castle.Core.Test.Main
 			var ex = Assert.Throws<GeneratorException>(() =>
 				generator.CreateInterfaceProxyWithoutTarget(typeof(PrivateInterface), new IInterceptor[0]));
 			StringAssert.StartsWith(
-				"Can not create proxy for type Castle.DynamicProxy.Tests.BasicInterfaceProxyTestCase+PrivateInterface because it is not accessible. Make it public, or internal",
+				"Can not create proxy for type Castle.Core.Test.Main.BasicInterfaceProxyTestCase+PrivateInterface because it is not accessible. Make it public, or internal",
 				ex.Message);
 		}
 
@@ -256,15 +256,15 @@ namespace Castle.Core.Test.Main
 			var ex = Assert.Throws<GeneratorException>(() =>
 				generator.CreateInterfaceProxyWithoutTarget(typeof(IList<PrivateInterface>), new IInterceptor[0]));
 			StringAssert.StartsWith(
-				"Can not create proxy for type System.Collections.Generic.IList`1[[Castle.DynamicProxy.Tests.BasicInterfaceProxyTestCase+PrivateInterface, Castle.Core.Tests, Version=0.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc]] because type Castle.DynamicProxy.Tests.BasicInterfaceProxyTestCase+PrivateInterface is not accessible. Make it public, or internal",
+                "Can not create proxy for type System.Collections.Generic.IList`1[[Castle.Core.Test.Main.BasicInterfaceProxyTestCase+PrivateInterface, Castle.Core.Test, Version=1.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc]] because type Castle.Core.Test.Main.BasicInterfaceProxyTestCase+PrivateInterface is not accessible. Make it public, or internal",
 				ex.Message);
 		}
 
 		[Test]
 		public void Cannot_proxy_generic_interface_with_type_argument_that_has_inaccessible_type_argument()
 		{
-			var expected = string.Format("Can not create proxy for type {0} because type {1} is not accessible. Make it public, or internal",
-				typeof(IList<IList<PrivateInterface>>).FullName, typeof(PrivateInterface).FullName);
+			var expected =
+			    $"Can not create proxy for type {typeof (IList<IList<PrivateInterface>>).FullName} because type {typeof (PrivateInterface).FullName} is not accessible. Make it public, or internal";
 
 			var exception = Assert.Throws<GeneratorException>(() => generator.CreateInterfaceProxyWithoutTarget(typeof(IList<IList<PrivateInterface>>), new IInterceptor[0]));
 			StringAssert.StartsWith(expected, exception.Message);

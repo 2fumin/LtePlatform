@@ -19,14 +19,11 @@ namespace Castle.Core.Test.Components
 {
     public class CustomGetter : DictionaryBehaviorAttribute, IDictionaryPropertyGetter
 	{
-		private List<string> propertiesFetched = new List<string>();
+		private readonly List<string> propertiesFetched = new List<string>();
 
-		public IList<string> PropertiesFetched
-		{
-			get { return propertiesFetched; }
-		}
+		public IList<string> PropertiesFetched => propertiesFetched;
 
-		public void Reset()
+        public void Reset()
 		{
 			propertiesFetched.Clear();
 		}

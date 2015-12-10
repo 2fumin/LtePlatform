@@ -16,7 +16,8 @@
 using System;
 	using System.Collections.Generic;
 	using System.Diagnostics;
-	using System.Reflection;
+using System.Linq;
+using System.Reflection;
 #if !SILVERLIGHT
 	using System.Runtime.InteropServices;
 	using System.Runtime.Remoting;
@@ -95,12 +96,9 @@ namespace Castle.DynamicProxy
 		///   Gets the proxy builder instance used to generate proxy types.
 		/// </summary>
 		/// <value>The proxy builder.</value>
-		public IProxyBuilder ProxyBuilder
-		{
-			get { return proxyBuilder; }
-		}
+		public IProxyBuilder ProxyBuilder => proxyBuilder;
 
-		/// <summary>
+	    /// <summary>
 		///   Creates proxy object intercepting calls to members of interface <typeparamref name = "TInterface" /> on <paramref
 		///    name = "target" /> object with given <paramref name = "interceptors" />.
 		/// </summary>
@@ -307,26 +305,26 @@ namespace Castle.DynamicProxy
 		{
 			if (interfaceToProxy == null)
 			{
-				throw new ArgumentNullException("interfaceToProxy");
+				throw new ArgumentNullException(nameof(interfaceToProxy));
 			}
 			if (target == null)
 			{
-				throw new ArgumentNullException("target");
+				throw new ArgumentNullException(nameof(target));
 			}
 			if (interceptors == null)
 			{
-				throw new ArgumentNullException("interceptors");
+				throw new ArgumentNullException(nameof(interceptors));
 			}
 
 			if (!interfaceToProxy.GetTypeInfo().IsInterface)
 			{
-				throw new ArgumentException("Specified type is not an interface", "interfaceToProxy");
+				throw new ArgumentException("Specified type is not an interface", nameof(interfaceToProxy));
 			}
 
 			var targetType = target.GetType();
 			if (!interfaceToProxy.IsAssignableFrom(targetType))
 			{
-				throw new ArgumentException("Target does not implement interface " + interfaceToProxy.FullName, "target");
+				throw new ArgumentException("Target does not implement interface " + interfaceToProxy.FullName, nameof(target));
 			}
 
 			CheckNotGenericTypeDefinition(interfaceToProxy, "interfaceToProxy");
@@ -561,21 +559,21 @@ namespace Castle.DynamicProxy
 
 			if (interfaceToProxy == null)
 			{
-				throw new ArgumentNullException("interfaceToProxy");
+				throw new ArgumentNullException(nameof(interfaceToProxy));
 			}
 			// In the case of a transparent proxy, the call to IsInstanceOfType was executed on the real object.
 			if (target != null && interfaceToProxy.IsInstanceOfType(target) == false)
 			{
-				throw new ArgumentException("Target does not implement interface " + interfaceToProxy.FullName, "target");
+				throw new ArgumentException("Target does not implement interface " + interfaceToProxy.FullName, nameof(target));
 			}
 			if (interceptors == null)
 			{
-				throw new ArgumentNullException("interceptors");
+				throw new ArgumentNullException(nameof(interceptors));
 			}
 
 			if (!interfaceToProxy.GetTypeInfo().IsInterface)
 			{
-				throw new ArgumentException("Specified type is not an interface", "interfaceToProxy");
+				throw new ArgumentException("Specified type is not an interface", nameof(interfaceToProxy));
 			}
 
 			var isRemotingProxy = false;
@@ -599,7 +597,7 @@ namespace Castle.DynamicProxy
 						if (result == 0 && isInterfacePointerNull)
 						{
 							throw new ArgumentException("Target COM object does not implement interface " + interfaceToProxy.FullName,
-														"target");
+														nameof(target));
 						}
 					}
 				}
@@ -845,16 +843,16 @@ namespace Castle.DynamicProxy
 		{
 			if (interfaceToProxy == null)
 			{
-				throw new ArgumentNullException("interfaceToProxy");
+				throw new ArgumentNullException(nameof(interfaceToProxy));
 			}
 			if (interceptors == null)
 			{
-				throw new ArgumentNullException("interceptors");
+				throw new ArgumentNullException(nameof(interceptors));
 			}
 
 			if (!interfaceToProxy.GetTypeInfo().IsInterface)
 			{
-				throw new ArgumentException("Specified type is not an interface", "interfaceToProxy");
+				throw new ArgumentException("Specified type is not an interface", nameof(interfaceToProxy));
 			}
 
 			CheckNotGenericTypeDefinition(interfaceToProxy, "interfaceToProxy");
@@ -1155,15 +1153,15 @@ namespace Castle.DynamicProxy
 		{
 			if (classToProxy == null)
 			{
-				throw new ArgumentNullException("classToProxy");
+				throw new ArgumentNullException(nameof(classToProxy));
 			}
 			if (options == null)
 			{
-				throw new ArgumentNullException("options");
+				throw new ArgumentNullException(nameof(options));
 			}
 			if (!classToProxy.GetTypeInfo().IsClass)
 			{
-				throw new ArgumentException("'classToProxy' must be a class", "classToProxy");
+				throw new ArgumentException("'classToProxy' must be a class", nameof(classToProxy));
 			}
 
 			CheckNotGenericTypeDefinition(classToProxy, "classToProxy");
@@ -1419,15 +1417,15 @@ namespace Castle.DynamicProxy
 		{
 			if (classToProxy == null)
 			{
-				throw new ArgumentNullException("classToProxy");
+				throw new ArgumentNullException(nameof(classToProxy));
 			}
 			if (options == null)
 			{
-				throw new ArgumentNullException("options");
+				throw new ArgumentNullException(nameof(options));
 			}
 			if (!classToProxy.GetTypeInfo().IsClass)
 			{
-				throw new ArgumentException("'classToProxy' must be a class", "classToProxy");
+				throw new ArgumentException("'classToProxy' must be a class", nameof(classToProxy));
 			}
 
 			CheckNotGenericTypeDefinition(classToProxy, "classToProxy");
@@ -1462,15 +1460,14 @@ namespace Castle.DynamicProxy
 				}
 				else
 				{
-					message.AppendLine("Could not find a constructor that would match given arguments:");
-					foreach (var argument in constructorArguments)
-					{
-						var argumentText = argument == null ? "<null>" : argument.GetType().ToString();
-						message.AppendLine(argumentText);
-					}
+				    message.AppendLine("Could not find a constructor that would match given arguments:");
+				    foreach (var argumentText in constructorArguments.Select(argument => argument?.GetType().ToString() ?? "<null>"))
+				    {
+				        message.AppendLine(argumentText);
+				    }
 				}
 
-				throw new InvalidProxyConstructorArgumentsException(message.ToString(),proxyType,classToProxy);
+			    throw new InvalidProxyConstructorArgumentsException(message.ToString(),proxyType,classToProxy);
 			}
 		}
 
@@ -1478,8 +1475,8 @@ namespace Castle.DynamicProxy
 		{
 			if (type != null && type.GetTypeInfo().IsGenericTypeDefinition)
 			{
-				throw new GeneratorException(string.Format("Can not create proxy for type {0} because it is an open generic type.",
-														   type.GetBestName()));
+				throw new GeneratorException(
+				    $"Can not create proxy for type {type.GetBestName()} because it is an open generic type.");
 			}
 		}
 
@@ -1495,12 +1492,11 @@ namespace Castle.DynamicProxy
 			}
 		}
 
-		protected List<object> BuildArgumentListForClassProxyWithTarget(object target, ProxyGenerationOptions options,
+		protected static List<object> BuildArgumentListForClassProxyWithTarget(object target, ProxyGenerationOptions options,
 		                                                                IInterceptor[] interceptors)
 		{
-			var arguments = new List<object>();
-			arguments.Add(target);
-			arguments.AddRange(options.MixinData.Mixins);
+		    var arguments = new List<object> {target};
+		    arguments.AddRange(options.MixinData.Mixins);
 			arguments.Add(interceptors);
 			if (options.Selector != null)
 			{
@@ -1509,7 +1505,7 @@ namespace Castle.DynamicProxy
 			return arguments;
 		}
 
-		protected List<object> BuildArgumentListForClassProxy(ProxyGenerationOptions options, IInterceptor[] interceptors)
+		protected static List<object> BuildArgumentListForClassProxy(ProxyGenerationOptions options, IInterceptor[] interceptors)
 		{
 			var arguments = new List<object>(options.MixinData.Mixins) { interceptors };
 			if (options.Selector != null)

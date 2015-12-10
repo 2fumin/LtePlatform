@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#define FEATURE_SERIALIZATION
+
 using System;
 using Castle.Core.Test.InterClasses;
 using Castle.Core.Test.Mixins;
@@ -137,7 +139,7 @@ namespace Castle.Core.Test.Main
 			                                                           options, interceptor);
 
 			Assert.IsNotNull(proxy);
-			Assert.IsTrue(typeof (IService).IsAssignableFrom(proxy.GetType()));
+			Assert.IsTrue(proxy is IService);
 
 			Assert.IsFalse(interceptor.Invoked);
 
@@ -163,7 +165,7 @@ namespace Castle.Core.Test.Main
 			                                                                 interceptor);
 
 			Assert.IsNotNull(proxy);
-			Assert.IsTrue(typeof (IService).IsAssignableFrom(proxy.GetType()));
+			Assert.IsTrue(proxy is IService);
 
 			Assert.IsFalse(interceptor.Invoked);
 
@@ -195,7 +197,7 @@ namespace Castle.Core.Test.Main
 			Assert.IsFalse(interceptor.Invoked);
 
 			Assert.IsNotNull(proxy);
-			Assert.IsTrue(typeof (SimpleClass).IsAssignableFrom(proxy.GetType()));
+			Assert.IsTrue(proxy is SimpleClass);
 
 			var mixin = proxy as ISimpleMixin;
 			Assert.IsNotNull(mixin);
@@ -229,7 +231,7 @@ namespace Castle.Core.Test.Main
 				typeof (IMyInterface), target, proxyGenerationOptions, interceptor);
 
 			Assert.IsNotNull(proxy);
-			Assert.IsTrue(typeof (IMyInterface).IsAssignableFrom(proxy.GetType()));
+			Assert.IsTrue(proxy is IMyInterface);
 
 			Assert.IsFalse(interceptor.Invoked);
 
@@ -269,7 +271,7 @@ namespace Castle.Core.Test.Main
 				typeof (SimpleClass), proxyGenerationOptions, interceptor);
 
 			Assert.IsNotNull(proxy);
-			Assert.IsTrue(typeof (SimpleClass).IsAssignableFrom(proxy.GetType()));
+			Assert.IsTrue(proxy is SimpleClass);
 
 			Assert.IsFalse(interceptor.Invoked);
 

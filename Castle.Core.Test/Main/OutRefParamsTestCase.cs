@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#define FEATURE_SERIALIZATION
+
 using System;
 using Castle.Core.Test.Interceptors;
 using Castle.Core.Test.Interfaces;
@@ -82,13 +84,31 @@ namespace Castle.Core.Test.Main
 		{
 			public void MyMethod(out int i, ref string s, int i1, out string s2)
 			{
-				throw new NotImplementedException();
+			    i = _i;
+			    s = _s;
+			    s2 = _s2;
+			    _i1 = i1;
 			}
 
 			public void MyMethodWithStruct(ref MyStruct s)
 			{
 				s.Value = 2*s.Value;
 			}
+
+		    private readonly int _i;
+		    private readonly string _s;
+		    private int _i1;
+		    private readonly string _s2;
+
+		    public MyClass(int i, string s, int i1, string s2)
+		    {
+		        _i = i;
+		        _i1 = i1;
+		        _s = s;
+		        _s2 = s2;
+		    }
+
+            public MyClass() : this(0, "iii", 0, "bbb") { }
 		}
 
 		[Test]

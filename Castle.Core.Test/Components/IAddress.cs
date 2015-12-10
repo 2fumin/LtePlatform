@@ -21,9 +21,13 @@ namespace Castle.Core.Test.Components
 	public interface IAddress : IEditableObject, INotifyPropertyChanged, IDataErrorInfo
 	{
 		string Line1 { get; set; }
+
 		string Line2 { get; set; }
+
 		string City { get; set; }
+
 		string State { get; set; }
+
 		string ZipCode { get; set; }
 
 		[Component]

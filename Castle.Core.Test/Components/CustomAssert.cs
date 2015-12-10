@@ -106,7 +106,7 @@ namespace Castle.Core.Test.Components
 		private static XmlElement GetElement(IXPathNavigable source)
 		{
 			var hasNode = source as IHasXmlNode;
-			return (null == hasNode ? null : hasNode.GetNode() as XmlElement)
+			return hasNode?.GetNode() as XmlElement
 				?? ParseXml(source.CreateNavigator().OuterXml);
 		}
 	}
