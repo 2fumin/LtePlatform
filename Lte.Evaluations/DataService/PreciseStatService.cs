@@ -63,7 +63,7 @@ namespace Lte.Evaluations.DataService
 
         public IEnumerable<PreciseCoverage4G> GetTimeSpanStats(int cellId, byte sectorId, DateTime begin, DateTime end)
         {
-            return _repository.GetAllList(cellId, sectorId, begin, end);
+            return _repository.GetAllList(cellId, sectorId, begin, end).OrderBy(x => x.StatTime);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper.Should;
 using Lte.Domain.Regular;
 using Lte.Evaluations.DataService;
 using Lte.Evaluations.MapperSerive;
@@ -50,6 +51,39 @@ namespace Lte.Evaluations.Test.DataService
             var views = _service.GetTopCountViews(DateTime.Parse("2014-12-30"), DateTime.Parse("2015-1-4"), topCount, 
                 OrderPreciseStatService.OrderPreciseStatPolicy.OrderBySecondRate);
             Assert.AreEqual(views.Count(), 0);
+        }
+
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(3)]
+        public void Test_GetTopCountViews_LegalTopCounts(int topCount)
+        {
+            _repository.MockPreciseStats(new List<PreciseCoverage4G>
+            {
+                new PreciseCoverage4G
+                {
+                    CellId = 1,
+                    SectorId = 1,
+                    StatTime = DateTime.Parse("2015-1-1")
+                }
+            });
+            var views = _service.GetTopCountViews(DateTime.Parse("2014-12-30"), DateTime.Parse("2015-1-4"), topCount,
+                OrderPreciseStatService.OrderPreciseStatPolicy.OrderBySecondRate);
+            Assert.AreEqual(views.Count(), 1);
+        }
+
+        [TestCase(new[] {"2015-2-1", "2015-2-2" }, new[] { "2015-2-1", "2015-2-2" }, "2015-1-31", "2015-2-3")]
+        [TestCase(new[] { "2015-2-2", "2015-2-1" }, new[] { "2015-2-1", "2015-2-2" }, "2015-1-31", "2015-2-3")]
+        public void Test_GetTimeSpanStats(string[] soureDates, string[] resultDates, string beginDate, string endDate)
+        {
+            _repository.MockPreciseStats(soureDates.Select(x=>new PreciseCoverage4G
+            {
+                CellId = 1,
+                SectorId = 1,
+                StatTime = DateTime.Parse(x)
+            }).ToList());
+            var stats = _service.GetTimeSpanStats(1, 1, DateTime.Parse(beginDate), DateTime.Parse(endDate));
+            stats.Select(x => x.StatTime).ShouldEqual(resultDates.Select(DateTime.Parse));
         }
     }
 }
