@@ -23,5 +23,9 @@ namespace Lte.Evaluations.ViewModels
         public double DownTilt { get; set; }
 
         public double AntennaGain { get; set; }
+
+        public int Frequency { get; set; }
+
+        public string OtherInfos { get; set; }
     }
 }

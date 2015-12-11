@@ -52,7 +52,7 @@ var removeAllBtss = function() {
     }
 };
 
-var addOneLteSector = function(data) {
+var addOneGeneralSector = function(data) {
     var center = { lng: data.baiduLongtitute, lat: data.baiduLattitute };
     var iangle = 65;
     var irotation = data.azimuth - iangle / 2;
@@ -65,11 +65,11 @@ var addOneLteSector = function(data) {
         fillColor: "blue",
         fillOpacity: 0.5
     });
-    var html = getLteSectorInfoHtml(data);
+    var html = getSectorInfoHtml(data);
     addOneSector(sector, html);
 };
 
-var getLteSectorInfoHtml = function(data) {
+var getSectorInfoHtml = function(data) {
     return "";
 };
 
