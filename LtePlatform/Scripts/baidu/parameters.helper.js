@@ -77,7 +77,7 @@ var getSectorInfoHtml = function (data) {
     $("#sector-downtilt").html(data.downTilt);
     $("#sector-antennagain").html(data.antennaGain);
     $("#sector-frequency").html(data.frequency);
-    $("#sector-otherinfo").html(data.otherInfo);
+    $("#sector-otherinfo").html(data.otherInfos);
     return $("#sector-info-box").html();
 };
 

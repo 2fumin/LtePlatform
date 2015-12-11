@@ -485,6 +485,7 @@
     <Content Include="Scripts\baidu\college.helper.js" />
     <Content Include="Scripts\baidu\mapContainer.js" />
     <Content Include="Scripts\baidu\parameters.helper.js" />
+    <Content Include="Scripts\baidu\plugins\baidu.tangram.js" />
     <Content Include="Scripts\baidu\plugins\InfoBox.js" />
     <Content Include="Scripts\baidu\cloud\gridmap.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />

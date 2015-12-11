@@ -92,8 +92,9 @@ namespace LtePlatform
             bundles.Add(new ScriptBundle("~/bundles/collegeMap").Include(
                 "~/Scripts/sammy-{version}.js",
                 "~/Scripts/app/common.js",
-                "~/Scripts/baidu/mapContainer.js",
+                "~/Scripts/baidu/plugins/baidu.tangram.js",
                 "~/Scripts/baidu/plugins/InfoBox.js",
+                "~/Scripts/baidu/mapContainer.js",
                 "~/Scripts/baidu/college.helper.js",
                 "~/Scripts/mycharts/comboChart.js",
                 "~/Scripts/app/app.datamodel.js",
@@ -164,8 +165,9 @@ namespace LtePlatform
             bundles.Add(new ScriptBundle("~/bundles/parametersQueryMap").Include(
                 "~/Scripts/sammy-{version}.js",
                 "~/Scripts/app/common.js",
-                "~/Scripts/baidu/mapContainer.js",
+                "~/Scripts/baidu/plugins/baidu.tangram.js",
                 "~/Scripts/baidu/plugins/InfoBox.js",
+                "~/Scripts/baidu/mapContainer.js",
                 "~/Scripts/baidu/cloud/geography.map.js",
                 "~/Scripts/baidu/parameters.helper.js",
                 "~/Scripts/app/app.datamodel.js",

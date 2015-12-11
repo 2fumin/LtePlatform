@@ -88,14 +88,14 @@ var addOneSector = function(sector, html, type) {
         boxStyle: {
             background: "url('/Content/themes/baidu/tipbox.jpg') no-repeat center top",
             width: "270px",
-            height: "200px"
+            height: "300px"
         },
         closeIconUrl: "/Content/themes/baidu/close.png",
         closeIconMargin: "1px 1px 0 0",
-        enableAutoPan: false,
+        enableAutoPan: true,
         align: INFOBOX_AT_TOP
     });
     sector.addEventListener("click", function() {
-        infoBox.open(this);
+        infoBox.open(this.getPath()[2]);
     });
 };
