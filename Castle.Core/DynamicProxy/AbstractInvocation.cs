@@ -24,8 +24,7 @@ namespace Castle.DynamicProxy
 		private readonly object[] arguments;
 		private int currentInterceptorIndex = -1;
 		private Type[] genericMethodArguments;
-		private readonly MethodInfo proxiedMethod;
-		protected readonly object proxyObject;
+	    protected readonly object proxyObject;
 
 		protected AbstractInvocation(
 			object proxy,
@@ -36,7 +35,7 @@ namespace Castle.DynamicProxy
 			Debug.Assert(proxiedMethod != null);
 			proxyObject = proxy;
 			this.interceptors = interceptors;
-			this.proxiedMethod = proxiedMethod;
+			this.Method = proxiedMethod;
 			this.arguments = arguments;
 		}
 
@@ -51,22 +50,13 @@ namespace Castle.DynamicProxy
 
 		public abstract MethodInfo MethodInvocationTarget { get; }
 
-		public Type[] GenericArguments
-		{
-			get { return genericMethodArguments; }
-		}
+		public Type[] GenericArguments => genericMethodArguments;
 
-		public object Proxy
-		{
-			get { return proxyObject; }
-		}
+	    public object Proxy => proxyObject;
 
-		public MethodInfo Method
-		{
-			get { return proxiedMethod; }
-		}
+	    public MethodInfo Method { get; }
 
-		public MethodInfo GetConcreteMethod()
+	    public MethodInfo GetConcreteMethod()
 		{
 			return EnsureClosedMethod(Method);
 		}
@@ -82,12 +72,9 @@ namespace Castle.DynamicProxy
 
 		public object ReturnValue { get; set; }
 
-		public object[] Arguments
-		{
-			get { return arguments; }
-		}
+		public object[] Arguments => arguments;
 
-		public void SetArgumentValue(int index, object value)
+	    public void SetArgumentValue(int index, object value)
 		{
 			arguments[index] = value;
 		}
@@ -147,15 +134,9 @@ namespace Castle.DynamicProxy
 		protected void ThrowOnNoTarget()
 		{
 			// let's try to build as friendly message as we can
-			string interceptorsMessage;
-			if (interceptors.Length == 0)
-			{
-				interceptorsMessage = "There are no interceptors specified";
-			}
-			else
-			{
-				interceptorsMessage = "The interceptor attempted to 'Proceed'";
-			}
+		    var interceptorsMessage = interceptors.Length == 0
+		        ? "There are no interceptors specified"
+		        : "The interceptor attempted to 'Proceed'";
 
 			string methodKindIs;
 			string methodKindDescription;
@@ -170,23 +151,19 @@ namespace Castle.DynamicProxy
 				methodKindDescription = "method without target";
 			}
 
-			var message = string.Format("This is a DynamicProxy2 error: {0} for method '{1}' which {2}. " +
-			                            "When calling {3} there is no implementation to 'proceed' to and " +
-			                            "it is the responsibility of the interceptor to mimic the implementation " +
-			                            "(set return value, out arguments etc)",
-			                            interceptorsMessage, Method, methodKindIs, methodKindDescription);
+			var message = $"This is a DynamicProxy2 error: {interceptorsMessage} for method '{Method}' which {methodKindIs}. " +
+			              $"When calling {methodKindDescription} there is no implementation to 'proceed' to and " +
+			              "it is the responsibility of the interceptor to mimic the implementation " +
+			              "(set return value, out arguments etc)";
 
 			throw new NotImplementedException(message);
 		}
 
 		private MethodInfo EnsureClosedMethod(MethodInfo method)
 		{
-			if (method.ContainsGenericParameters)
-			{
-				Debug.Assert(genericMethodArguments != null);
-				return method.GetGenericMethodDefinition().MakeGenericMethod(genericMethodArguments);
-			}
-			return method;
+		    if (!method.ContainsGenericParameters) return method;
+		    Debug.Assert(genericMethodArguments != null);
+		    return method.GetGenericMethodDefinition().MakeGenericMethod(genericMethodArguments);
 		}
 	}
 }

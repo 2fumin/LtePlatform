@@ -311,6 +311,7 @@
     <Compile Include="Junior\DynamicProxy\CreateInstanceTest.cs" />
     <Compile Include="Junior\DynamicProxy\DefaultProxyBuiderTest.cs" />
     <Compile Include="Junior\DynamicProxy\ModuleScopeTest.cs" />
+    <Compile Include="Junior\Interceptors\WithCallbackInterceptorTest.cs" />
     <Compile Include="Main\AccessLevelTestCase.cs" />
     <Compile Include="Main\BasePEVerifyTestCase.cs" />
     <Compile Include="Main\BaseTestCaseTestCase.cs" />

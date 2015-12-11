@@ -110,7 +110,7 @@ namespace Castle.Core.Test.GenInterfaces
 
 		public class Find2Invo<T> : AbstractInvocation
 		{
-			private GenInterfaceWithGenericTypesImpl target;
+			private readonly GenInterfaceWithGenericTypesImpl target;
 
 			public Find2Invo(GenInterfaceWithGenericTypesImpl target, IInterceptor[] interceptors, Type targetType,
 			                 MethodInfo targetMethod, MethodInfo interfMethod, object[] arguments)
@@ -142,7 +142,7 @@ namespace Castle.Core.Test.GenInterfaces
 
 		public class Find1Invo : AbstractInvocation
 		{
-			private GenInterfaceWithGenericTypesImpl target;
+			private readonly GenInterfaceWithGenericTypesImpl target;
 
 			public Find1Invo(GenInterfaceWithGenericTypesImpl target, IInterceptor[] interceptors, Type targetType,
 			                 MethodInfo targetMethod, MethodInfo interfMethod, object[] arguments) :
@@ -168,13 +168,13 @@ namespace Castle.Core.Test.GenInterfaces
 
 			protected override void InvokeMethodOnTarget()
 			{
-				ReturnValue = (target as GenInterfaceWithGenericTypesImpl).Find((String[,]) GetArgumentValue(0));
+				ReturnValue = target.Find((string[,]) GetArgumentValue(0));
 			}
 		}
 
 		public class Find1InvoA : AbstractInvocation
 		{
-			private GenInterfaceWithGenericTypesImpl target;
+			private readonly GenInterfaceWithGenericTypesImpl target;
 
 			public Find1InvoA(GenInterfaceWithGenericTypesImpl target, IInterceptor[] interceptors, Type targetType,
 			                  MethodInfo targetMethod, MethodInfo interfMethod, object[] arguments)
@@ -206,7 +206,7 @@ namespace Castle.Core.Test.GenInterfaces
 
 		public class Find3Invo<T> : AbstractInvocation
 		{
-			private GenInterfaceWithGenericTypesImpl target;
+			private readonly GenInterfaceWithGenericTypesImpl target;
 
 			public Find3Invo(GenInterfaceWithGenericTypesImpl target,
 			                 IInterceptor[] interceptors, Type targetType,
