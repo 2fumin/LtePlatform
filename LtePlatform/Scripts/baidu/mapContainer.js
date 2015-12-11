@@ -92,7 +92,7 @@ var addOneSector = function(sector, html, type) {
         },
         closeIconUrl: "/Content/themes/baidu/close.png",
         closeIconMargin: "1px 1px 0 0",
-        enableAutoPan: true,
+        enableAutoPan: false,
         align: INFOBOX_AT_TOP
     });
     sector.addEventListener("click", function() {

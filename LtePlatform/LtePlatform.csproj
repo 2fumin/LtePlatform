@@ -730,6 +730,7 @@
     <Content Include="Views\Parameters\_BtsMapInfoBox.cshtml" />
     <None Include="Views\Parameters\_List.cshtml" />
     <Content Include="Views\Parameters\_QueryMap.cshtml" />
+    <Content Include="Views\Parameters\_SectorMapInfoBox.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

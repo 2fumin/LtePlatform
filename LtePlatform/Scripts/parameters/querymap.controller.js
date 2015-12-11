@@ -6,7 +6,7 @@
                 eNodebId: result[i].eNodebId
             }, function(cells) {
                 for (var j = 0; j < cells.length; j++) {
-                    addOneGeneralSector(cells[j]);
+                    addOneGeneralSector(cells[j], "LteCell");
                 }
             });
         }

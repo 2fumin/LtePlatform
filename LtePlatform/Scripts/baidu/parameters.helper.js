@@ -52,7 +52,7 @@ var removeAllBtss = function() {
     }
 };
 
-var addOneGeneralSector = function(data) {
+var addOneGeneralSector = function(data, type) {
     var center = { lng: data.baiduLongtitute, lat: data.baiduLattitute };
     var iangle = 65;
     var irotation = data.azimuth - iangle / 2;
@@ -66,11 +66,19 @@ var addOneGeneralSector = function(data) {
         fillOpacity: 0.5
     });
     var html = getSectorInfoHtml(data);
-    addOneSector(sector, html);
+    addOneSector(sector, html, type);
 };
 
-var getSectorInfoHtml = function(data) {
-    return "";
+var getSectorInfoHtml = function (data) {
+    $("#sector-cellname").html(data.cellName);
+    $("#sector-indoor").html(data.indoor);
+    $("#sector-azimuth").html(data.azimuth);
+    $("#sector-height").html(data.height);
+    $("#sector-downtilt").html(data.downTilt);
+    $("#sector-antennagain").html(data.antennaGain);
+    $("#sector-frequency").html(data.frequency);
+    $("#sector-otherinfo").html(data.otherInfo);
+    return $("#sector-info-box").html();
 };
 
 var removeAllLteSectors = function() {

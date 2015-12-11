@@ -45,7 +45,6 @@ namespace Castle.Core.Test.Main
 		{
 			var message = "Debug message";
 			var level = LoggerLevel.Debug;
-			Exception exception = null;
 			
 			logger.Debug(message);
 
@@ -69,7 +68,6 @@ namespace Castle.Core.Test.Main
 		{
 			const string message = "Info message";
 			var level = LoggerLevel.Info;
-			Exception exception = null;
 			
 			logger.Info(message);
 
