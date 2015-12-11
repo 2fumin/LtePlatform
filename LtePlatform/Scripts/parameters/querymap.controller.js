@@ -31,15 +31,22 @@ var queryENodebs = function (viewModel) {
     }
 };
 
-var drawBtss= function(viewModel, options) {
+var drawBtss = function (viewModel, options) {
     sendRequest(app.dataModel.btsUrl, "GET", options, function (result) {
         for (var i = 0; i < result.length; i++) {
             addOneBtsMarker(result[i]);
+            sendRequest(app.dataModel.cdmaCellUrl, "GET", {
+                btsId: result[i].btsId
+            }, function (cells) {
+                for (var j = 0; j < cells.length; j++) {
+                    addOneGeneralSector(cells[j], "CdmaCell");
+                }
+            });
         }
     }, function (result) {
         alert(getErrorMessage(result));
     });
-}
+};
 
 var queryBtss = function(viewModel) {
     removeAllBtss();

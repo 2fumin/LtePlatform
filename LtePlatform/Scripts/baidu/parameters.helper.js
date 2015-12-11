@@ -87,3 +87,10 @@ var removeAllLteSectors = function() {
         map.removeOverlay(map.lteSectors.pop());
     }
 };
+
+var removeAllCdmaSectors = function () {
+    var count = map.cdmaSectors.length;
+    for (var i = 0; i < count; i++) {
+        map.removeOverlay(map.cdmaSectors.pop());
+    }
+}

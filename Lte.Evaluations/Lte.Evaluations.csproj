@@ -86,6 +86,7 @@
     <Compile Include="DataService\AlarmsService.cs" />
     <Compile Include="DataService\BasicImportService.cs" />
     <Compile Include="DataService\BtsQueryService.cs" />
+    <Compile Include="DataService\CdmaCellService.cs" />
     <Compile Include="DataService\CdmaRegionStatService.cs" />
     <Compile Include="DataService\CellService.cs" />
     <Compile Include="DataService\College\College3GTestService.cs" />

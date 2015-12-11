@@ -61,6 +61,8 @@ namespace LtePlatform
 
             ninjectKernel.Bind<CellService>().ToSelf();
 
+            ninjectKernel.Bind<CdmaCellService>().ToSelf();
+
             ninjectKernel.Bind<College3GTestService>().ToSelf();
 
             ninjectKernel.Bind<College4GTestService>().ToSelf();

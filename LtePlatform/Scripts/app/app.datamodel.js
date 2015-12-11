@@ -26,6 +26,7 @@
     self.collegeCdmaCellsUrl = "/api/CollegeCdmaCells/";
 
     self.cellUrl = "/api/Cell/";
+    self.cdmaCellUrl = "/api/CdmaCell";
     self.eNodebUrl = "/api/ENodeb";
     self.btsUrl = "/api/Bts";
     self.newENodebExcelsUrl = "/api/NewENodebExcels";
