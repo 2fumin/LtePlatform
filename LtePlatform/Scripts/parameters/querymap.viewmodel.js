@@ -15,6 +15,8 @@
         this.get('#queryMap', function() {
 
             initializeMap('mapContent', 11);
+            var timeControl = new TimeControl();
+            map.addControl(timeControl);
 
             initializeCities(self);
 

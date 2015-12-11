@@ -483,6 +483,8 @@
     <Content Include="Scripts\app\lz-string.min.js" />
     <Content Include="Scripts\app\qunit-1.20.0.js" />
     <Content Include="Scripts\baidu\cloud\geography.map.js" />
+    <Content Include="Scripts\baidu\cloud\page.js" />
+    <Content Include="Scripts\baidu\cloud\timecontrol.js" />
     <Content Include="Scripts\baidu\college.helper.js" />
     <Content Include="Scripts\baidu\mapContainer.js" />
     <Content Include="Scripts\baidu\parameters.helper.js" />
