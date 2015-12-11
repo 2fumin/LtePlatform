@@ -19,7 +19,12 @@
     });
 
     self.showKpi = function () {
-        self.districts(['A', 'B']);
+        sendRequest(app.dataModel.cityListUrl, "GET", {
+            city: self.currentCity
+        }, function(result) {
+            result.push(self.currentCity);
+            self.districts(result);
+        });
     };
 
     self.showTrend = function () {

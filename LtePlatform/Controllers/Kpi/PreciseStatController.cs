@@ -8,9 +8,11 @@ using Lte.Evaluations.DataService;
 using Lte.Evaluations.Policy;
 using Lte.Evaluations.ViewModels;
 using Lte.Parameters.Entities;
+using LtePlatform.Models;
 
 namespace LtePlatform.Controllers.Kpi
 {
+    [ApiControl("单小区精确覆盖率查询控制器")]
     public class PreciseStatController : ApiController
     {
         private readonly PreciseStatService _service;
@@ -20,24 +22,44 @@ namespace LtePlatform.Controllers.Kpi
             _service = service;
         }
 
+        [HttpGet]
+        [ApiDoc("获得TOP精确覆盖率排序的标准")]
+        [ApiResponse("精确TOP覆盖率排序的标准")]
         public IEnumerable<string> Get()
         {
             return OrderPreciseStatService.OrderSelectionList.Select(x => x.Key);
         }
 
         [HttpGet]
+        [ApiDoc("指定日期范围、TOP个数和排序标准，获得TOP精确覆盖率TOP列表")]
+        [ApiParameterDoc("begin","开始日期")]
+        [ApiParameterDoc("end", "结束日期")]
+        [ApiParameterDoc("topCount", "TOP个数")]
+        [ApiParameterDoc("orderSelection", "排序标准")]
+        [ApiResponse("TOP精确覆盖率TOP列表")]
         public IEnumerable<Precise4GView> Get(DateTime begin, DateTime end, int topCount, string orderSelection)
         {
             return _service.GetTopCountViews(begin, end, topCount, orderSelection.GetPrecisePolicy());
         }
 
         [HttpGet]
+        [ApiDoc("指定小区（基站）编号、扇区编号和日期，获得一周以内的精确覆盖率统计记录")]
+        [ApiParameterDoc("cellId", "小区（基站）编号")]
+        [ApiParameterDoc("sectorId", "扇区编号")]
+        [ApiParameterDoc("date", "日期（最后一天）")]
+        [ApiResponse("一周以内的精确覆盖率统计记录")]
         public IEnumerable<PreciseCoverage4G> Get(int cellId, byte sectorId, DateTime date)
         {
             return _service.GetOneWeekStats(cellId, sectorId, date);
         }
 
         [HttpGet]
+        [ApiDoc("指定小区（基站）编号、扇区编号和日期范围，获得一周以内的精确覆盖率统计记录")]
+        [ApiParameterDoc("cellId", "小区（基站）编号")]
+        [ApiParameterDoc("sectorId", "扇区编号")]
+        [ApiParameterDoc("begin", "开始日期")]
+        [ApiParameterDoc("end", "结束日期")]
+        [ApiResponse("一周以内的精确覆盖率统计记录")]
         public IEnumerable<PreciseCoverage4G> Get(int cellId, byte sectorId, DateTime begin, DateTime end)
         {
             return _service.GetTimeSpanStats(cellId, sectorId, begin, end);
