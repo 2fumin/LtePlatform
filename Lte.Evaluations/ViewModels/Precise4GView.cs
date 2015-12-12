@@ -28,6 +28,8 @@ namespace Lte.Evaluations.ViewModels
 
         public string ENodebName { get; set; } = "未导入基站";
 
+        public int TopDates { get; set; }
+
         public static Precise4GView ConstructView(PreciseCoverage4G stat, IENodebRepository repository)
         {
             var view = Mapper.Map<PreciseCoverage4G, Precise4GView>(stat);

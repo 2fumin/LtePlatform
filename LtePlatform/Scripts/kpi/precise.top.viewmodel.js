@@ -7,6 +7,7 @@
     self.policySelection = ko.observableArray([]);
     self.topCount = ko.observable(10);
     self.topCountSelection = ko.observableArray([10, 20, 30, 50]);
+    self.cellViews = ko.observableArray([]);
 
     Sammy(function () {
         this.get('#preciseTop', function () {
@@ -27,6 +28,14 @@
         });
         this.get('/Kpi/PreciseTop', function () { this.app.runRoute('get', '#preciseTop'); });
     });
+
+    self.showStat = function () {
+
+    };
+
+    self.showChart = function () {
+
+    };
 
     return self;
 }

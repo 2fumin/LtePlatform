@@ -1,7 +1,34 @@
-﻿
-@{
-    ViewBag.Title = "PreciseTop";
+﻿@{
+    ViewBag.Title = "4G精确覆盖率TOP指标";
 }
 
-<h2>PreciseTop</h2>
 
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h2 class="panel-title">
+            <strong>@ViewBag.Title</strong>
+        </h2>
+    </div>
+    <p>
+        @{
+            Html.RenderPartial("_KpiMenu");
+        }
+    </p>
+</div>
+
+@section SPAViews{
+    @{
+        Html.RenderPartial("_PreciseTop");
+    }
+}
+
+@section Scripts{
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=OeWDTDlnolWHBNP1GSkDph34"></script>
+    <link rel="stylesheet" href="~/Content/themes/baidu/InfoWindow.css" />
+    @Styles.Render("~/Content/themes/cloudmap/css")
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/highcharts")
+    @Scripts.Render("~/bundles/knockout")
+    @Scripts.Render("~/bundles/kpiPreciseTop")
+}

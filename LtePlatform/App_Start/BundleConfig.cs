@@ -89,6 +89,21 @@ namespace LtePlatform
                 "~/Scripts/kpi/precise.trend.viewmodel.js",
                 "~/Scripts/app/_run.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/kpiPreciseTop").Include(
+                "~/Scripts/sammy-{version}.js",
+                "~/Scripts/app/common.js",
+                "~/Scripts/baidu/plugins/baidu.tangram.js",
+                "~/Scripts/baidu/plugins/InfoBox.js",
+                "~/Scripts/baidu/mapContainer.js",
+                "~/Scripts/baidu/cloud/timecontrol.js",
+                "~/Scripts/baidu/cloud/geography.map.js",
+                "~/Scripts/baidu/parameters.helper.js",
+                "~/Scripts/app/app.datamodel.js",
+                "~/Scripts/app/app.viewmodel.js",
+                "~/Scripts/kpi/common.controller.js",
+                "~/Scripts/kpi/precise.top.viewmodel.js",
+                "~/Scripts/app/_run.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/collegeMap").Include(
                 "~/Scripts/sammy-{version}.js",
                 "~/Scripts/app/common.js",
@@ -168,6 +183,7 @@ namespace LtePlatform
                 "~/Scripts/baidu/plugins/baidu.tangram.js",
                 "~/Scripts/baidu/plugins/InfoBox.js",
                 "~/Scripts/baidu/mapContainer.js",
+                "~/Scripts/baidu/cloud/timecontrol.js",
                 "~/Scripts/baidu/cloud/geography.map.js",
                 "~/Scripts/baidu/parameters.helper.js",
                 "~/Scripts/app/app.datamodel.js",

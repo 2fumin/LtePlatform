@@ -708,6 +708,8 @@
     <Content Include="Views\Dt\_List.cshtml" />
     <Content Include="Scripts\knockout.validation.min.js.map" />
     <Content Include="Views\College\_CollegeMapInfoBox.cshtml" />
+    <Content Include="Views\Kpi\_PreciseTop.cshtml" />
+    <Content Include="Views\Kpi\_PreciseTopTable.cshtml" />
     <None Include="Views\Kpi\_TopDrop2G.cshtml" />
     <None Include="Views\Kpi\_TopDrop2GTable.cshtml" />
     <Content Include="Views\Kpi\_TopDrop2GTrendTable.cshtml" />
