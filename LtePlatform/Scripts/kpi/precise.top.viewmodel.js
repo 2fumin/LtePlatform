@@ -45,6 +45,7 @@
                 views: result
             }, function(sectors) {
                 self.cellSectors(sectors);
+                removeAllLteSectors();
                 for (var i = 0; i < sectors.length; i++) {
                     if (sectors[i].height >= 0) {
                         addOneGeneralSector(sectors[i], "PreciseSector");
@@ -59,6 +60,13 @@
     };
 
     self.queryTrend = function (cell) {
+        for (var i = 0; i < self.cellSectors().length; i++) {
+            var sector = self.cellSectors()[i];
+            if (sector.cellId === cell.cellId && sector.sectorId === cell.sectorId) {
+                setCellFocus(sector);
+            }
+        }
+        
         queryPreciseChart(self, cell, "#dialog-modal");
     };
 

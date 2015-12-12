@@ -65,19 +65,36 @@ var addOneGeneralSector = function(data, type) {
         fillColor: "blue",
         fillOpacity: 0.5
     });
-    var html = getSectorInfoHtml(data);
+    var html = getSectorInfoHtml(data, type);
     addOneSector(sector, html, type);
 };
 
-var getSectorInfoHtml = function (data) {
-    $("#sector-cellname").html(data.cellName);
-    $("#sector-indoor").html(data.indoor);
-    $("#sector-azimuth").html(data.azimuth);
-    $("#sector-height").html(data.height);
-    $("#sector-downtilt").html(data.downTilt);
-    $("#sector-antennagain").html(data.antennaGain);
-    $("#sector-frequency").html(data.frequency);
-    $("#sector-otherinfo").html(data.otherInfos);
+var getSectorInfoHtml = function (data, type) {
+    switch (type) {
+    case "PreciseSector":
+        $("#sector-cellname").html(data.eNodebName + "-" + data.sectorId);
+        $("#sector-totalMrs").html(data.totalMrs);
+        $("#sector-firstPrecise").html((100 - data.firstRate).toFixed(2));
+        $("#sector-secondPrecise").html((100 - data.secondRate).toFixed(2));
+        $("#sector-thirdPrecise").html((100 - data.thirdRate).toFixed(2));
+        $("#sector-topDates").html(data.topDates);
+        $("#sector-azimuth").html(data.azimuth);
+        $("#sector-height").html(data.height);
+        $("#sector-downtilt").html(data.downTilt);
+        $("#sector-pci").html(data.pci);
+        $("#sector-rsPower").html(data.rsPower);
+        break;
+    default:
+        $("#sector-cellname").html(data.cellName);
+        $("#sector-indoor").html(data.indoor);
+        $("#sector-azimuth").html(data.azimuth);
+        $("#sector-height").html(data.height);
+        $("#sector-downtilt").html(data.downTilt);
+        $("#sector-antennagain").html(data.antennaGain);
+        $("#sector-frequency").html(data.frequency);
+        $("#sector-otherinfo").html(data.otherInfos);
+        break;
+    }
     return $("#sector-info-box").html();
 };
 

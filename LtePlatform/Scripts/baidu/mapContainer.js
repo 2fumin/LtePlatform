@@ -84,11 +84,13 @@ var addOneSector = function(sector, html, type) {
     }
     map.addOverlay(sector);
 
+    var boxHeight = type === "PreciseSector" ? "420pz" : "300px";
+
     var infoBox = new BMapLib.InfoBox(map, html, {
         boxStyle: {
             background: "url('/Content/themes/baidu/tipbox.jpg') no-repeat center top",
             width: "270px",
-            height: "300px"
+            height: boxHeight
         },
         closeIconUrl: "/Content/themes/baidu/close.png",
         closeIconMargin: "1px 1px 0 0",
@@ -98,4 +100,8 @@ var addOneSector = function(sector, html, type) {
     sector.addEventListener("click", function() {
         infoBox.open(this.getPath()[2]);
     });
+};
+
+var setCellFocus = function(cell) {
+    map.centerAndZoom(new BMap.Point(cell.baiduLongtitute, cell.baiduLattitute), 15);
 };
