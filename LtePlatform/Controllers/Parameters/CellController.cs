@@ -50,6 +50,16 @@ namespace LtePlatform.Controllers.Parameters
         public IEnumerable<SectorView> Get(int eNodebId)
         {
             return _service.QuerySectors(eNodebId);
-        } 
+        }
+
+        [HttpGet]
+        [ApiDoc("给定基站编号和扇区编号查询对应的小区")]
+        [ApiParameterDoc("eNodebId", "基站编号")]
+        [ApiParameterDoc("sectorId", "扇区编号")]
+        [ApiResponse("对应的小区")]
+        public Cell Get(int eNodebId, byte sectorId)
+        {
+            return _service.QueryCell(eNodebId, sectorId);
+        }
     }
 }

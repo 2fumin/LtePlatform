@@ -97,6 +97,7 @@ namespace LtePlatform
                 "~/Scripts/baidu/mapContainer.js",
                 "~/Scripts/baidu/cloud/timecontrol.js",
                 "~/Scripts/baidu/cloud/geography.map.js",
+                "~/Scripts/baidu/parameters.helper.js",
                 "~/Scripts/mycharts/comboChart.js",
                 "~/Scripts/baidu/parameters.helper.js",
                 "~/Scripts/app/app.datamodel.js",

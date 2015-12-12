@@ -42,6 +42,11 @@ namespace Lte.Evaluations.DataService
                 ? Mapper.Map<IEnumerable<CellView>, IEnumerable<SectorView>>(
                     cells.Select(x => CellView.ConstructView(x, _eNodebRepository)))
                 : new List<SectorView>();
-        }  
+        }
+
+        public Cell QueryCell(int eNodebId, byte sectorId)
+        {
+            return _repository.FirstOrDefault(x => x.ENodebId == eNodebId && x.SectorId == sectorId);
+        }
     }
 }

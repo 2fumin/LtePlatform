@@ -31,6 +31,7 @@ namespace Lte.Evaluations.MapperSerive
         public static void MapPreciseStat()
         {
             Mapper.CreateMap<PreciseCoverage4G, Precise4GView>();
+            Mapper.CreateMap<Precise4GView, Precise4GSector>();
         }
 
         public static void MapCellPrecise()

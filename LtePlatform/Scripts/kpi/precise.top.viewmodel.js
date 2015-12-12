@@ -40,6 +40,19 @@
             orderSelection: self.orderPolicy()
         }, function (result) {
             self.cellViews(result);
+            for (var i = 0; i < result.length; i++) {
+                var cell = result[i];
+                sendRequest(app.dataModel.cellUrl, "GET", {
+                    eNodebId: cell.cellId,
+                    sectorId: cell.sectorId
+                },function(item) {
+                    if (item.eNodebId !== undefined) {
+                        cell.height = item.height;
+
+                    }
+                })
+                addOneGeneralSector(result[i], "TopPreciseCell");
+            }
         });
     };
 
