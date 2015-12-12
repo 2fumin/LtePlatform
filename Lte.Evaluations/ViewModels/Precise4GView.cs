@@ -60,11 +60,17 @@ namespace Lte.Evaluations.ViewModels
         {
             var sector = Mapper.Map<Precise4GView, Precise4GSector>(view);
             var cell = repository.GetBySectorId(view.CellId, view.SectorId);
-            if (cell == null) return sector;
-            cell.CloneProperties(sector);
-            sector.DownTilt = cell.MTilt + cell.ETilt;
-            sector.BaiduLongtitute = cell.Longtitute + GeoMath.BaiduLongtituteOffset;
-            sector.BaiduLattitute = cell.Lattitute + GeoMath.BaiduLattituteOffset;
+            if (cell == null)
+            {
+                sector.Height = -1;
+            }
+            else
+            {
+                cell.CloneProperties(sector);
+                sector.DownTilt = cell.MTilt + cell.ETilt;
+                sector.BaiduLongtitute = cell.Longtitute + GeoMath.BaiduLongtituteOffset;
+                sector.BaiduLattitute = cell.Lattitute + GeoMath.BaiduLattituteOffset;
+            }
             return sector;
         }
     }

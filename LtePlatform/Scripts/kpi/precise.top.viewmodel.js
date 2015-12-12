@@ -8,6 +8,7 @@
     self.topCount = ko.observable(10);
     self.topCountSelection = ko.observableArray([10, 20, 30, 50]);
     self.cellViews = ko.observableArray([]);
+    self.cellSectors = ko.observableArray([]);
 
     Sammy(function () {
         this.get('#preciseTop', function () {
@@ -40,19 +41,16 @@
             orderSelection: self.orderPolicy()
         }, function (result) {
             self.cellViews(result);
-            for (var i = 0; i < result.length; i++) {
-                var cell = result[i];
-                sendRequest(app.dataModel.cellUrl, "GET", {
-                    eNodebId: cell.cellId,
-                    sectorId: cell.sectorId
-                },function(item) {
-                    if (item.eNodebId !== undefined) {
-                        cell.height = item.height;
-
+            sendRequest(app.dataModel.cellUrl, "POST", {
+                views: result
+            }, function(sectors) {
+                self.cellSectors(sectors);
+                for (var i = 0; i < sectors.length; i++) {
+                    if (sectors[i].height >= 0) {
+                        addOneGeneralSector(sectors[i], "PreciseSector");
                     }
-                })
-                addOneGeneralSector(result[i], "TopPreciseCell");
-            }
+                }
+            });
         });
     };
 

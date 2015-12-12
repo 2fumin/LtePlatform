@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Lte.Evaluations.DataService;
+using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.ViewModels;
 using Lte.Parameters.Entities;
 using LtePlatform.Models;
@@ -52,14 +53,13 @@ namespace LtePlatform.Controllers.Parameters
             return _service.QuerySectors(eNodebId);
         }
 
-        [HttpGet]
-        [ApiDoc("给定基站编号和扇区编号查询对应的小区")]
-        [ApiParameterDoc("eNodebId", "基站编号")]
-        [ApiParameterDoc("sectorId", "扇区编号")]
-        [ApiResponse("对应的小区")]
-        public Cell Get(int eNodebId, byte sectorId)
+        [HttpPost]
+        [ApiDoc("将Top精确覆盖率4G小区视图列表转化为便于地理化显示的Top精确覆盖率4G扇区列表")]
+        [ApiParameterDoc("container", "Top精确覆盖率4G小区视图列表")]
+        [ApiResponse("Top精确覆盖率4G扇区列表")]
+        public IEnumerable<Precise4GSector> Post(TopPreciseViewContainer container)
         {
-            return _service.QueryCell(eNodebId, sectorId);
+            return _service.QuerySectors(container);
         }
     }
 }

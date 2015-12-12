@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.ViewModels;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
@@ -44,9 +45,9 @@ namespace Lte.Evaluations.DataService
                 : new List<SectorView>();
         }
 
-        public Cell QueryCell(int eNodebId, byte sectorId)
+        public IEnumerable<Precise4GSector> QuerySectors(TopPreciseViewContainer container)
         {
-            return _repository.FirstOrDefault(x => x.ENodebId == eNodebId && x.SectorId == sectorId);
-        }
+            return container.Views.Select(x => Precise4GSector.ConstructSector(x, _repository));
+        } 
     }
 }
