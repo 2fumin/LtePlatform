@@ -2,8 +2,22 @@
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th>基站编号</th>
-            <th>扇区编号</th>
+            <th>小区名称</th>
+            <th>精确覆盖率</th>
+            <th>第一邻区精确覆盖率</th>
+            <th>查询</th>
         </tr>
     </thead>
+    <tbody data-bind="foreach: cellViews">
+        <tr>
+            <td data-bind="text: eNodebName + '-' + sectorId"></td>
+            <td data-bind="text: (100 * secondRate).toFixed(2)"></td>
+            <td data-bind="text: (100 * firstRage).toFixed(2)"></td>
+            <td>
+                <button class="btn btn-sm btn-primary" data-bind="click: function(){ queryTrend($data); }">
+                    趋势
+                </button>
+            </td>
+        </tr>
+    </tbody>
 </table>

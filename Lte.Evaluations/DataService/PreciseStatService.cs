@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.Policy;
 using Lte.Evaluations.ViewModels;
 using Lte.Parameters.Abstract;
@@ -40,18 +41,27 @@ namespace Lte.Evaluations.DataService
                     q.SectorId
                 }
                     into g
-                select new PreciseCoverage4G
+                select new TopPrecise4GContainer
                 {
-                    CellId = g.Key.CellId,
-                    SectorId = g.Key.SectorId,
-                    FirstNeighbors = g.Sum(q => q.FirstNeighbors),
-                    SecondNeighbors = g.Sum(q => q.SecondNeighbors),
-                    ThirdNeighbors = g.Sum(q => q.ThirdNeighbors),
-                    TotalMrs = g.Sum(q => q.TotalMrs)
-                };
+                    PreciseCoverage4G = new PreciseCoverage4G
+                    {
+                        CellId = g.Key.CellId,
+                        SectorId = g.Key.SectorId,
+                        FirstNeighbors = g.Sum(q => q.FirstNeighbors),
+                        SecondNeighbors = g.Sum(q => q.SecondNeighbors),
+                        ThirdNeighbors = g.Sum(q => q.ThirdNeighbors),
+                        TotalMrs = g.Sum(q => q.TotalMrs)
+                    },
+                    TopDates = g.Count()
+                }; 
 
             var orderResult = result.Order(policy, topCount);
-            return orderResult.Select(x => Precise4GView.ConstructView(x, _eNodebRepository));
+            return orderResult.Select(x =>
+            {
+                var view = Precise4GView.ConstructView(x.PreciseCoverage4G, _eNodebRepository);
+                view.TopDates = x.TopDates;
+                return view;
+            });
         }
 
         public IEnumerable<PreciseCoverage4G> GetOneWeekStats(int cellId, byte sectorId, DateTime date)

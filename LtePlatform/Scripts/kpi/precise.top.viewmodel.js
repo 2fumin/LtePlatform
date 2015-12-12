@@ -37,6 +37,10 @@
 
     };
 
+    self.queryTrend = function (cell) {
+
+    };
+
     return self;
 }
 

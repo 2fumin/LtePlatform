@@ -110,8 +110,8 @@ var lowerFirstLetter = function(str) {
         str.substring(1);
 };
 
-var getErrorMessage=function(result) {
+var getErrorMessage = function (result) {
     var error = result.error();
     var responseText = error.responseText;
     return "Status: " + error.status + "; Status Text: " + error.statusText + "; Message: " + responseText;
-}
+};
