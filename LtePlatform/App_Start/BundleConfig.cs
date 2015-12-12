@@ -101,6 +101,7 @@ namespace LtePlatform
                 "~/Scripts/app/app.datamodel.js",
                 "~/Scripts/app/app.viewmodel.js",
                 "~/Scripts/kpi/common.controller.js",
+                "~/Scripts/college/precise.controller.js",
                 "~/Scripts/kpi/precise.top.viewmodel.js",
                 "~/Scripts/app/_run.js"));
 

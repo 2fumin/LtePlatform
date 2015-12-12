@@ -84,3 +84,28 @@
         }
     });
 };
+
+var queryPreciseChart = function (viewModel, cell, tag) {
+    var chart = new comboChart();
+    chart.title.text = cell.eNodebName + "-" + cell.sectorId + '精确覆盖率变化趋势';
+    var dom = {
+        tag: tag,
+        width: 900,
+        height: 480
+    };
+
+    $.ajax({
+        url: app.dataModel.preciseStatUrl,
+        type: "GET",
+        dataType: "json",
+        data: {
+            cellId: cell.eNodebId,
+            sectorId: cell.sectorId,
+            begin: viewModel.startDate(),
+            end: viewModel.endDate()
+        },
+        success: function (result) {
+            showPreciseTrend(chart, dom, result);
+        }
+    });
+};

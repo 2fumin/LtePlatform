@@ -28,28 +28,7 @@
     };
 
     self.queryPrecise = function (cell) {
-        var chart = new comboChart();
-        chart.title.text = cell.eNodebName + "-" + cell.sectorId + '精确覆盖率变化趋势';
-        var dom = {
-            tag: "#dialog-modal",
-            width: 900,
-            height: 480
-        };
-
-        $.ajax({
-            url: app.dataModel.preciseStatUrl,
-            type: "GET",
-            dataType: "json",
-            data: {
-                cellId: cell.eNodebId,
-                sectorId: cell.sectorId,
-                begin: self.startDate(),
-                end: self.endDate()
-            },
-            success: function (result) {
-                showPreciseTrend(chart, dom, result);
-            }
-        });
+        queryPreciseChart(self, cell, "#dialog-modal");
     };
 
     return self;

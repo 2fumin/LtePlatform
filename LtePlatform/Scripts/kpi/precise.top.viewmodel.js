@@ -25,12 +25,22 @@
                     self.policySelection(data);
                 }
             });
+
+            initializeMap("#all-map", 12);
         });
         this.get('/Kpi/PreciseTop', function () { this.app.runRoute('get', '#preciseTop'); });
     });
 
     self.showStat = function () {
-
+        self.cellViews([]);
+        sendRequest(app.dataModel.preciseStatUrl, "GET", {
+            begin: self.beginDate(),
+            end: self.endDate(),
+            topCount: self.topCount(),
+            orderSelection: self.orderPolicy()
+        }, function (result) {
+            self.cellViews(result);
+        });
     };
 
     self.showChart = function () {
@@ -38,7 +48,7 @@
     };
 
     self.queryTrend = function (cell) {
-
+        queryPreciseChart(self, cell, "#dialog-modal");
     };
 
     return self;
