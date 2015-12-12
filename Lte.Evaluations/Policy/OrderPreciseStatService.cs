@@ -22,10 +22,10 @@ namespace Lte.Evaluations.Policy
 
         public static Dictionary<string, OrderPreciseStatPolicy> OrderSelectionList => new Dictionary<string, OrderPreciseStatPolicy>
         {
-            { "按照精确覆盖率升序", OrderPreciseStatPolicy.OrderBySecondNeighborsDescending},
-            { "按照第二邻区数量降序", OrderPreciseStatPolicy.OrderBySecondRate},
-            { "按照第一邻区精确覆盖率升序", OrderPreciseStatPolicy.OrderByFirstNeighborsDescending},
-            { "按照第一邻区数量降序", OrderPreciseStatPolicy.OrderByFirstRate},
+            { "按照精确覆盖率升序", OrderPreciseStatPolicy.OrderBySecondRate},
+            { "按照第二邻区数量降序", OrderPreciseStatPolicy.OrderBySecondNeighborsDescending},
+            { "按照第一邻区精确覆盖率升序", OrderPreciseStatPolicy.OrderByFirstRate},
+            { "按照第一邻区数量降序", OrderPreciseStatPolicy.OrderByFirstNeighborsDescending},
             { "按照总测量报告数降序", OrderPreciseStatPolicy.OrderByTotalMrsDescending},
             { "按照TOP天数排序", OrderPreciseStatPolicy.OrderByTopDatesDescending }
         };
@@ -36,13 +36,13 @@ namespace Lte.Evaluations.Policy
             switch (policy)
             {
                 case OrderPreciseStatPolicy.OrderBySecondRate:
-                    return result.OrderBy(x => x.PreciseCoverage4G.SecondRate)
+                    return result.OrderByDescending(x => x.PreciseCoverage4G.SecondRate)
                         .Take(topCount).ToList();
                 case OrderPreciseStatPolicy.OrderBySecondNeighborsDescending:
                     return result.OrderByDescending(x => x.PreciseCoverage4G.SecondNeighbors)
                         .Take(topCount).ToList();
                 case OrderPreciseStatPolicy.OrderByFirstRate:
-                    return result.OrderBy(x => x.PreciseCoverage4G.FirstRate)
+                    return result.OrderByDescending(x => x.PreciseCoverage4G.FirstRate)
                         .Take(topCount).ToList();
                 case OrderPreciseStatPolicy.OrderByFirstNeighborsDescending:
                     return result.OrderByDescending(x => x.PreciseCoverage4G.FirstNeighbors)

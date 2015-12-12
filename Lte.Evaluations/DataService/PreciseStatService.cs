@@ -30,9 +30,7 @@ namespace Lte.Evaluations.DataService
                 return new List<Precise4GView>();
             var query =
                 _repository.GetAll()
-                    .Where(x => x.StatTime >= begin && x.StatTime < end)
-                    .OrderByDescending(x => x.TotalMrs)
-                    .Take(topCount * (end - begin).Days);
+                    .Where(x => x.StatTime >= begin && x.StatTime < end && x.TotalMrs > 100);
             var result =
                 from q in query.AsEnumerable()
                 group q by new

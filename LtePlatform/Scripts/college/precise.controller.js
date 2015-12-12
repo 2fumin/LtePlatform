@@ -93,6 +93,7 @@ var queryPreciseChart = function (viewModel, cell, tag) {
         width: 900,
         height: 480
     };
+    if (cell.eNodebId === undefined) cell.eNodebId = cell.cellId;
 
     $.ajax({
         url: app.dataModel.preciseStatUrl,

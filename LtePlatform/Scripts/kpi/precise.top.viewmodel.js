@@ -1,7 +1,7 @@
 ﻿function PreciseTopViewModel(app, dataModel) {
     var self = this;
 
-    self.beginDate = ko.observable((new Date()).getDateFromToday(-7).Format("yyyy-MM-dd"));
+    self.startDate = ko.observable((new Date()).getDateFromToday(-7).Format("yyyy-MM-dd"));
     self.endDate = ko.observable((new Date()).getDateFromToday(-1).Format("yyyy-MM-dd"));
     self.orderPolicy = ko.observable("");
     self.policySelection = ko.observableArray([]);
@@ -11,6 +11,7 @@
 
     Sammy(function () {
         this.get('#preciseTop', function () {
+            initializeMap("all-map", 12);//注意：标签前面不能有#
             $("#BeginDate").datepicker({ dateFormat: 'yy-mm-dd' });
             $("#EndDate").datepicker({ dateFormat: 'yy-mm-dd' });
 
@@ -26,7 +27,6 @@
                 }
             });
 
-            initializeMap("#all-map", 12);
         });
         this.get('/Kpi/PreciseTop', function () { this.app.runRoute('get', '#preciseTop'); });
     });
@@ -34,7 +34,7 @@
     self.showStat = function () {
         self.cellViews([]);
         sendRequest(app.dataModel.preciseStatUrl, "GET", {
-            begin: self.beginDate(),
+            begin: self.startDate(),
             end: self.endDate(),
             topCount: self.topCount(),
             orderSelection: self.orderPolicy()

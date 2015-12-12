@@ -11,10 +11,10 @@
     <tbody data-bind="foreach: cellViews">
         <tr>
             <td data-bind="text: eNodebName + '-' + sectorId"></td>
-            <td data-bind="text: (100 * secondRate).toFixed(2)"></td>
-            <td data-bind="text: (100 * firstRage).toFixed(2)"></td>
+            <td data-bind="text: (100 - secondRate).toFixed(2)"></td>
+            <td data-bind="text: (100 - firstRate).toFixed(2)"></td>
             <td>
-                <button class="btn btn-sm btn-primary" data-bind="click: function(){ queryTrend($data); }">
+                <button class="btn btn-sm btn-primary" data-bind="click: function(){ $root.preciseTop().queryTrend($data); }">
                     趋势
                 </button>
             </td>

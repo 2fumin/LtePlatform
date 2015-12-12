@@ -30,6 +30,7 @@ namespace Lte.Evaluations.MapperSerive
             CollegeMapperService.MapCollege3GTest();
             CollegeMapperService.MapCollege4GTest();
             CollegeMapperService.MapCollegeKpi();
+
             KpiMapperService.MapCdmaRegionStat();
             KpiMapperService.MapCellPrecise();
             KpiMapperService.MapDistrictPrecise();
@@ -37,6 +38,7 @@ namespace Lte.Evaluations.MapperSerive
             KpiMapperService.MapAlarmStat();
             KpiMapperService.MapTopDrop2G();
             KpiMapperService.MapTopDrop2GTrend();
+            KpiMapperService.MapPreciseStat();
 
             BaiduMapperService.MapCdmaCellView();
             BaiduMapperService.MapCellView();
