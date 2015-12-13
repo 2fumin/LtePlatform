@@ -3,6 +3,7 @@
 
     self.beginDate = ko.observable((new Date()).getDateFromToday(-7).Format("yyyy-MM-dd"));
     self.endDate = ko.observable((new Date()).getDateFromToday(-1).Format("yyyy-MM-dd"));
+    self.collegeInfos = ko.observableArray([]);
 
     Sammy(function () {
         this.get('#collegeMap', function () {
@@ -18,7 +19,7 @@
                     'Authorization': 'Bearer ' + app.dataModel.getAccessToken()
                 },
                 success: function (data) {
-                    drawCollegeMap(data);
+                    drawCollegeMap(self, data);
                 }
             });
         });

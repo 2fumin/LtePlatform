@@ -57,21 +57,12 @@ var drawCollegeRegions = function (result) {
     map.addOverlay(label);
 };
 
-var drawCollegeMap = function (data) {
+var drawCollegeMap = function (viewModel, data) {
     for (var index = 0; index < data.length; index++) {
-        var id = data[index].id;
-        names[id] = data[index].name;
-        $.ajax({
-            method: 'get',
-            url: app.dataModel.collegeRegionUrl + '/' + id,
-            contentType: "application/json; charset=utf-8",
-            headers: {
-                'Authorization': 'Bearer ' + app.dataModel.getAccessToken()
-            },
-            success: function (result) {
-                drawCollegeRegions(result);
-            }
-        });
+        var info = {};
+        info.id = data[index].id;
+        info.name = data[index].name;
+        viewModel.collegeInfos.push(info);
         $.ajax({
             method: 'get',
             url: app.dataModel.collegeStatUrl + '/' + id,
@@ -81,6 +72,17 @@ var drawCollegeMap = function (data) {
             },
             success: function (college) {
                 addOneCollegeMarkerInfo(college);
+            }
+        });
+        $.ajax({
+            method: 'get',
+            url: app.dataModel.collegeRegionUrl + '/' + id,
+            contentType: "application/json; charset=utf-8",
+            headers: {
+                'Authorization': 'Bearer ' + app.dataModel.getAccessToken()
+            },
+            success: function (result) {
+                drawCollegeRegions(result);
             }
         });
     }
