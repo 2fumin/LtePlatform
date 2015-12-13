@@ -4,6 +4,7 @@
     self.beginDate = ko.observable((new Date()).getDateFromToday(-7).Format("yyyy-MM-dd"));
     self.endDate = ko.observable((new Date()).getDateFromToday(-1).Format("yyyy-MM-dd"));
     self.collegeInfos = ko.observableArray([]);
+    self.collegeNames = ko.observableArray([]);
 
     Sammy(function () {
         this.get('#collegeMap', function () {
@@ -20,6 +21,9 @@
                 },
                 success: function (data) {
                     drawCollegeMap(self, data);
+                    for (var i = 0; i < data.length; i++) {
+                        self.collegeNames.push(data[i].name);
+                    }
                 }
             });
         });
@@ -30,7 +34,20 @@
 
     self.toggleCollegeMarkers = function () {
         toggleDisplay(map.collegeMarkers);
-    }
+    };
+
+    self.focusCollege = function (name) {
+        for (var i = 0; i < self.collegeInfos().length; i++) {
+            if (self.collegeInfos()[i].name == name) {
+                var cell = {
+                    baiduLongtitute: self.collegeInfos()[i].centerx,
+                    baiduLattitute: self.collegeInfos()[i].centery
+                };
+                setCellFocus(cell);
+                break;
+            }
+        }
+    };
 
     return self;
 }
