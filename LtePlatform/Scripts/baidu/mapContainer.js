@@ -102,6 +102,21 @@ var addOneSector = function(sector, html, type) {
     });
 };
 
+// 
+// 自动定位到具有百度经纬度的覆盖物中心
 var setCellFocus = function(cell) {
     map.centerAndZoom(new BMap.Point(cell.baiduLongtitute, cell.baiduLattitute), 15);
+};
+
+//
+// 控制覆盖物的显示和隐藏
+var toggleDisplay = function (overlays) {
+    if (overlays === undefined || overlays.length === 0) return;
+    for (var i = 0; i < overlays.length; i++) {
+        if (overlays[i].isVisible() === true) {
+            overlays[i].hide(); 
+        } else if (overlays[i].isVisible() === false) {
+            overlays[i].show();
+        }
+    }
 };

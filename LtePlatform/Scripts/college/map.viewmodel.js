@@ -28,6 +28,10 @@
 
     self.refresh = function () { };
 
+    self.toggleCollegeMarkers = function () {
+        toggleDisplay(map.collegeMarkers);
+    }
+
     return self;
 }
 
