@@ -1,7 +1,13 @@
-﻿var addOneCollegeMarkerInfo = function (data) {
-    var marker = new BMap.Marker(new BMap.Point(centerxs[data.id], centerys[data.id]));
-    var html = generateCollegeInfoHtml(data);
-    addOneMarker(marker, html, "College");
+﻿var addOneCollegeMarkerInfo = function (viewModel, data) {
+    for (var i = 0; i < viewModel.collegeInfos().length; i++) {
+        var info = viewModel.collegeInfos()[i];
+        if (info.id == data.id) {
+            var marker = new BMap.Marker(new BMap.Point(info.centerx, info.centery));
+            var html = generateCollegeInfoHtml(data);
+            addOneMarker(marker, html, "College");
+            break;
+        }
+    };
 };
 
 var generateCollegeInfoHtml = function(data) {

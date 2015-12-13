@@ -1,8 +1,5 @@
-﻿var names = [];
-var centerxs = [];
-var centerys = [];
-
-var drawCollegeRegions = function (result) {
+﻿
+var drawCollegeRegions = function (viewModel, result) {
     var type = result.regionType;
     var info = result.info;
     var coors = info.split(';');
@@ -39,22 +36,28 @@ var drawCollegeRegions = function (result) {
         map.addOverlay(circle);
     }
 
-    centerxs[result.areaId] = centerx;
-    centerys[result.areaId] = centery;
-
-    var opts = {
-        position: new BMap.Point(centerx, centery),    // 指定文本标注所在的地理位置
-        offset: new BMap.Size(10, -20)    //设置文本偏移量
+    for (var i = 0; i < viewModel.collegeInfos().length; i++) {
+        var info = viewModel.collegeInfos()[i];
+        if (info.id == result.areaId) {
+            info.centerx = centerx;
+            info.centery = centery;
+            var opts = {
+                position: new BMap.Point(centerx, centery),    // 指定文本标注所在的地理位置
+                offset: new BMap.Size(10, -20)    //设置文本偏移量
+            };
+            var label = new BMap.Label(info.name, opts);  // 创建文本标注对象
+            label.setStyle({
+                color: "red",
+                fontSize: "12px",
+                height: "20px",
+                lineHeight: "20px",
+                fontFamily: "微软雅黑"
+            });
+            map.addOverlay(label);
+            break;
+        }
     }
-    var label = new BMap.Label(names[result.areaId], opts);  // 创建文本标注对象
-    label.setStyle({
-        color: "red",
-        fontSize: "12px",
-        height: "20px",
-        lineHeight: "20px",
-        fontFamily: "微软雅黑"
-    });
-    map.addOverlay(label);
+
 };
 
 var drawCollegeMap = function (viewModel, data) {
@@ -65,24 +68,24 @@ var drawCollegeMap = function (viewModel, data) {
         viewModel.collegeInfos.push(info);
         $.ajax({
             method: 'get',
-            url: app.dataModel.collegeStatUrl + '/' + id,
-            contentType: "application/json; charset=utf-8",
-            headers: {
-                'Authorization': 'Bearer ' + app.dataModel.getAccessToken()
-            },
-            success: function (college) {
-                addOneCollegeMarkerInfo(college);
-            }
-        });
-        $.ajax({
-            method: 'get',
-            url: app.dataModel.collegeRegionUrl + '/' + id,
+            url: app.dataModel.collegeRegionUrl + '/' + info.id,
             contentType: "application/json; charset=utf-8",
             headers: {
                 'Authorization': 'Bearer ' + app.dataModel.getAccessToken()
             },
             success: function (result) {
-                drawCollegeRegions(result);
+                drawCollegeRegions(viewModel, result);
+            }
+        });
+        $.ajax({
+            method: 'get',
+            url: app.dataModel.collegeStatUrl + '/' + info.id,
+            contentType: "application/json; charset=utf-8",
+            headers: {
+                'Authorization': 'Bearer ' + app.dataModel.getAccessToken()
+            },
+            success: function (college) {
+                addOneCollegeMarkerInfo(viewModel, college);
             }
         });
     }

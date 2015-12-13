@@ -84,7 +84,7 @@ var addOneSector = function(sector, html, type) {
     }
     map.addOverlay(sector);
 
-    var boxHeight = type === "PreciseSector" ? "420pz" : "300px";
+    var boxHeight = type === "PreciseSector" ? "400px" : "300px";
 
     var infoBox = new BMapLib.InfoBox(map, html, {
         boxStyle: {
