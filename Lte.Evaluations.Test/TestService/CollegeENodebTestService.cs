@@ -46,5 +46,21 @@ namespace Lte.Evaluations.Test.TestService
                 new AlarmStat {HappenTime = DateTime.Parse(dateString), Details = "Single"}
             });
         }
+
+        public void MockManyENodebInfrastructure(Dictionary<string, IEnumerable<int>> definitions)
+        {
+            var infrastructures = new List<InfrastructureInfo>();
+            foreach (var definition in definitions)
+            {
+                infrastructures.AddRange(definition.Value.Select(x => new InfrastructureInfo
+                {
+                    HotspotName = definition.Key,
+                    HotspotType = HotspotType.College,
+                    InfrastructureType = InfrastructureType.ENodeb,
+                    InfrastructureId = x
+                }));
+            }
+            _repository.MockInfrastructures(infrastructures);
+        }
     }
 }

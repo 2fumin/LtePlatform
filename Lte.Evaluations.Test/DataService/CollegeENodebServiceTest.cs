@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper.Should;
 using Lte.Evaluations.DataService;
 using Lte.Evaluations.DataService.College;
 using Lte.Evaluations.MapperSerive;
@@ -107,6 +108,63 @@ namespace Lte.Evaluations.Test.DataService
             {
                 Assert.AreEqual(views.Count(), 0, "abnormal case");
             }
+        }
+
+        [TestCase("aaa", new[] {1}, 1)]
+        [TestCase("aab", new[] { 1, 2 }, 2)]
+        [TestCase("acb", new[] { 1, 2, 3 }, 3)]
+        [TestCase("acbs", new[] { 1, 2, 3, 4 }, 3)]
+        public void Test_QueryCollegeENodebs_FromENodebNames_OneCollege(string collegeName, int[] eNodebIds,
+            int resultCounts)
+        {
+            _testService.MockManyENodebInfrastructure(new Dictionary<string, IEnumerable<int>>
+            {
+                {collegeName, eNodebIds }
+            });
+            var views = _service.QueryCollegeENodebs(new List<string> {collegeName});
+            views.Count().ShouldEqual(resultCounts);
+        }
+
+        [TestCase("aaa", "bbb", new[] { 1 }, new[] { 2 }, 2)]
+        [TestCase("aaa", "bbb", new[] { 1 }, new[] { 1 }, 1)]
+        [TestCase("aaa", "bbb", new[] { 1, 2 }, new[] { 2 }, 2)]
+        [TestCase("aaa", "bbb", new[] { 1, 2 }, new[] { 3 }, 3)]
+        [TestCase("aaa1", "bbb2", new[] { 1, 2 }, new[] { 2, 3 }, 3)]
+        [TestCase("aaa13", "bbb2", new[] { 1, 2, 4 }, new[] { 2, 3 }, 3)]
+        public void Test_QueryCollegeENodebs_FromENodebNames_TwoColleges(string collegeName1, string collegeName2,
+            int[] eNodebIds1, int[] eNodebIds2, int resultCounts)
+        {
+            _testService.MockManyENodebInfrastructure(new Dictionary<string, IEnumerable<int>>
+            {
+                {collegeName1, eNodebIds1 },
+                {collegeName2, eNodebIds2 }
+            });
+            var views = _service.QueryCollegeENodebs(new List<string>
+            {
+                collegeName1,
+                collegeName2
+            });
+            views.Count().ShouldEqual(resultCounts);
+        }
+
+        [TestCase("aaa", "bbb", "cccc", new[] { 1 }, new[] { 2 }, new[] { 3 }, 3)]
+        [TestCase("aaa", "bbb", "cccc", new[] { 1 }, new[] { 2 }, new[] { 2 }, 2)]
+        public void Test_QueryCollegeENodebs_FromENodebNames_ThreeColleges(string collegeName1, string collegeName2,
+            string collegeName3, int[] eNodebIds1, int[] eNodebIds2, int[] eNodebIds3, int resultCounts)
+        {
+            _testService.MockManyENodebInfrastructure(new Dictionary<string, IEnumerable<int>>
+            {
+                {collegeName1, eNodebIds1 },
+                {collegeName2, eNodebIds2 },
+                {collegeName3, eNodebIds3 }
+            });
+            var views = _service.QueryCollegeENodebs(new List<string>
+            {
+                collegeName1,
+                collegeName2,
+                collegeName3
+            });
+            views.Count().ShouldEqual(resultCounts);
         }
     }
 }

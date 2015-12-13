@@ -15,9 +15,9 @@ var drawCollegeRegions = function (viewModel, result) {
         centerx /= coors.length / 2;
         centery /= coors.length / 2;
         var polygon = new BMap.Polygon(points,
-            { strokeColor: "blue", strokeWeight: 2, strokeOpacity: 0.5 });
+            { strokeColor: "blue", strokeWeight: 2, strokeOpacity: 0.2 });
         map.addOverlay(polygon);
-    } else if (type == 1) {
+    } else if (type === 1) {
         centerx = (parseFloat(coors[0]) + parseFloat(coors[2])) / 2;
         centery = (parseFloat(coors[1]) + parseFloat(coors[3])) / 2;
         var rectangle = new BMap.Polygon([
@@ -25,20 +25,20 @@ var drawCollegeRegions = function (viewModel, result) {
             new BMap.Point(parseFloat(coors[2]), parseFloat(coors[1])),
             new BMap.Point(parseFloat(coors[2]), parseFloat(coors[3])),
             new BMap.Point(parseFloat(coors[0]), parseFloat(coors[3]))
-        ], { strokeColor: "blue", strokeWeight: 2, strokeOpacity: 0.5 });
+        ], { strokeColor: "blue", strokeWeight: 2, strokeOpacity: 0.2 });
         map.addOverlay(rectangle);
-    } else if (type == 0) {
+    } else if (type === 0) {
         centerx = parseFloat(coors[0]);
         centery = parseFloat(coors[1]);
         var circle = new BMap.Circle(new BMap.Point(parseFloat(coors[0]), parseFloat(coors[1])),
             parseFloat(coors[2]),
-            { strokeColor: "blue", strokeWeight: 2, strokeOpacity: 0.5 });
+            { strokeColor: "blue", strokeWeight: 2, strokeOpacity: 0.2 });
         map.addOverlay(circle);
     }
 
     for (var i = 0; i < viewModel.collegeInfos().length; i++) {
-        var info = viewModel.collegeInfos()[i];
-        if (info.id == result.areaId) {
+        info = viewModel.collegeInfos()[i];
+        if (info.id === result.areaId) {
             info.centerx = centerx;
             info.centery = centery;
             var opts = {
