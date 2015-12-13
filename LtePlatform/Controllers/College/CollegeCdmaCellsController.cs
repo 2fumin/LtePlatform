@@ -30,5 +30,14 @@ namespace LtePlatform.Controllers.College
         {
             return _service.GetViews(collegeName);
         }
+
+        [HttpPost]
+        [ApiDoc("查询多个校园对应的CDMA小区扇区列表（可用于地理化显示）")]
+        [ApiParameterDoc("collegeNames", "校园名称列表")]
+        [ApiResponse("CDMA小区扇区列表（可用于地理化显示）")]
+        public IEnumerable<SectorView> Post(IEnumerable<string> collegeNames)
+        {
+            return _service.QuerySectors(collegeNames);
+        }
     }
 }

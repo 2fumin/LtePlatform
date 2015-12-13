@@ -23,6 +23,13 @@ namespace Lte.Evaluations.DataService.College
             var ids = _repository.GetBtsIds(collegeName);
             var btss = ids.Select(_btsRepository.Get).Where(bts => bts != null).ToList();
             return Mapper.Map<List<CdmaBts>, IEnumerable<CdmaBtsView>>(btss); 
-        } 
+        }
+
+        public IEnumerable<CdmaBtsView> QueryCollegeBtss(IEnumerable<string> collegeNames)
+        {
+            var ids = collegeNames.Select(x => _repository.GetBtsIds(x)).Aggregate((x, y) => x.Concat(y)).Distinct();
+            var btss = ids.Select(_btsRepository.Get).Where(bts => bts != null).ToList();
+            return Mapper.Map<List<CdmaBts>, IEnumerable<CdmaBtsView>>(btss);
+        }
     }
 }

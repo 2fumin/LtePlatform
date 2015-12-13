@@ -38,5 +38,15 @@ namespace Lte.Evaluations.DataService.College
                     query.Select(x => CellView.ConstructView(x, _eNodebRepository)))
                 : null;
         }
+
+        public IEnumerable<SectorView> QuerySectors(IEnumerable<string> collegeNames)
+        {
+            var ids = collegeNames.Select(x => _repository.GetCellIds(x)).Aggregate((x, y) => x.Concat(y)).Distinct();
+            var query = ids.Select(_cellRepository.Get).Where(cell => cell != null).ToList();
+            return query.Any()
+                ? Mapper.Map<IEnumerable<CellView>, IEnumerable<SectorView>>(
+                    query.Select(x => CellView.ConstructView(x, _eNodebRepository)))
+                : null;
+        } 
     }
 }

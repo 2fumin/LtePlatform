@@ -30,5 +30,25 @@ namespace Lte.Evaluations.DataService.College
             var distributions = ids.Select(_indoorRepository.Get).Where(distribution => distribution != null).ToList();
             return distributions;
         }
+
+        public IEnumerable<IndoorDistribution> QueryLteDistributions(IEnumerable<string> collegeNames)
+        {
+            var ids =
+                collegeNames.Select(x => _repository.GetLteDistributionIds(x))
+                    .Aggregate((x, y) => x.Concat(y))
+                    .Distinct();
+            var distributions = ids.Select(_indoorRepository.Get).Where(distribution => distribution != null).ToList();
+            return distributions;
+        }
+
+        public IEnumerable<IndoorDistribution> QueryCdmaDistributions(IEnumerable<string> collegeNames)
+        {
+            var ids =
+                collegeNames.Select(x => _repository.GetCdmaDistributionIds(x))
+                    .Aggregate((x, y) => x.Concat(y))
+                    .Distinct();
+            var distributions = ids.Select(_indoorRepository.Get).Where(distribution => distribution != null).ToList();
+            return distributions;
+        }
     }
 }

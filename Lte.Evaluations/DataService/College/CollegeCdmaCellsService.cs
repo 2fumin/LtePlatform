@@ -38,5 +38,16 @@ namespace Lte.Evaluations.DataService.College
                     query.Select(x => CdmaCellView.ConstructView(x, _btsRepository)))
                 : null;
         }
+
+        public IEnumerable<SectorView> QuerySectors(IEnumerable<string> collegeNames)
+        {
+            var ids =
+                collegeNames.Select(x => _repository.GetCdmaCellIds(x)).Aggregate((x, y) => x.Concat(y)).Distinct();
+            var query = ids.Select(_cellRepository.Get).Where(cell => cell != null).ToList();
+            return query.Any()
+                ? Mapper.Map<IEnumerable<CdmaCellView>, IEnumerable<SectorView>>(
+                    query.Select(x => CdmaCellView.ConstructView(x, _btsRepository)))
+                : null;
+        }
     }
 }
