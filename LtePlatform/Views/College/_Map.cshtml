@@ -25,22 +25,25 @@
                         </div>
                         <div class="col-md-2">
                             <button class="btn btn-primary" data-bind="click: refresh">
-                                查询
+                                刷新
                             </button>
                         </div>
-                    </div>                    
+                    </div> 
+                </div>
+                <div class="panel-body">
+                    <h4>校园列表</h4>
                     <!-- ko foreach: collegeNames -->
                     <div class="form-group">
                         <label class="col-md-8 control-label" data-bind="text: $data"></label>
                         <div class="col-md-4">
-                            <button class="btn btn-primary" 
+                            <button class="btn btn-primary btn-sm"
                                     data-bind="click: function(){$root.collegeMap().focusCollege($data);}">
                                 定位
                             </button>
                         </div>
                     </div>
                     <!-- /ko -->
-                    </div>
+                </div>
             </div>
         </div>
         @{ 
