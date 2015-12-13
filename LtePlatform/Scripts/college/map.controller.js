@@ -118,11 +118,29 @@ var drawCollegeCells = function(viewModel) {
     });
 };
 
-var drawCollegeCdmaCells=function(viewModel) {
+var drawCollegeCdmaCells = function(viewModel) {
     if (map.cdmaSectors.length > 0) return;
     sendRequest(app.dataModel.collegeCdmaCellsUrl, "POST", viewModel.collegeNames(), function(result) {
         for (var i = 0; i < result.length; i++) {
             addOneGeneralSector(result[i], "CdmaCell");
         }
     });
-}
+};
+
+var drawCollegeLteDistributions = function(viewModel) {
+    if (map.lteDistributions.length > 0) return;
+    sendRequest(app.dataModel.collegeLteDistributionsUrl, "POST", viewModel.collegeNames(), function(result) {
+        for (var i = 0; i < result.length; i++) {
+            addOneLteDistributionMarkerInfo(result[i]);
+        }
+    });
+};
+
+var drawCollegeCdmaDistributions = function(viewModel) {
+    if (map.cdmaDistributions.length > 0) return;
+    sendRequest(app.dataModel.collegeCdmaDistributionsUrl, "POST", viewModel.collegeNames(), function(result) {
+        for (var i = 0; i < result.length; i++) {
+            addOneCdmaDistributionMarkerInfo(result[i]);
+        }
+    });
+};

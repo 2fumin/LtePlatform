@@ -12,6 +12,17 @@
             $("#EndDate").datepicker({ dateFormat: 'yy-mm-dd' });
 
             initializeMap('all-map', 11);
+            map.addEventListener("zoomend", function() {
+                if (map.getzoom() > 14) {
+                    drawCollegeENodebs();
+                    drawCollegeBtss();
+                    drawCollegeCells();
+                    drawCollegeCdmaCells();
+                    drawCollegeLteDistributions();
+                    drawCollegeCdmaDistributions();
+                }
+            });
+
             $.ajax({
                 method: 'get',
                 url: app.dataModel.collegeQueryUrl,

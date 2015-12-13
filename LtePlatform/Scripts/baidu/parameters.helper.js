@@ -32,7 +32,7 @@ var addOneBtsMarker = function (data) {
          icon: btsIcon
     });
     var html = getBtsInfoHtml(data);
-    addOneMarker(marker, html);
+    addOneMarker(marker, html, "Bts");
 };
 
 var getBtsInfoHtml = function(data) {
