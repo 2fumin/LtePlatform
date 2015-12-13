@@ -1,6 +1,25 @@
 ﻿<!-- ko with: kpi -->
 <div class="row">
-    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion"
+                       href="#queryInfo">
+                        信息查询
+                    </a>
+                </h4>
+            </div>
+            <div id="queryInfo" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    待开发
+                </div>
+            </div>
+        </div>
+        @{
+            Html.RenderPartial("_CollegeMenu");
+        }
+    </div>
     <div class="col-md-8">
         <p>
             校园名称：
