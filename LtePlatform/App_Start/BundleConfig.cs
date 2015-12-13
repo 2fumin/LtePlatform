@@ -114,6 +114,7 @@ namespace LtePlatform
                 "~/Scripts/baidu/plugins/InfoBox.js",
                 "~/Scripts/baidu/mapContainer.js",
                 "~/Scripts/baidu/college.helper.js",
+                "~/Scripts/baidu/parameters.helper.js",
                 "~/Scripts/mycharts/comboChart.js",
                 "~/Scripts/app/app.datamodel.js",
                 "~/Scripts/app/app.viewmodel.js",

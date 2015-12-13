@@ -39,6 +39,8 @@ var initializeMap = function (tag, zoomLevel) {
     map.btsMarkers = [];
     map.lteSectors = [];
     map.cdmaSectors = [];
+    map.lteDistributions = [];
+    map.cdmaDistributions = [];
 }
 
 var addOneMarker = function (marker, html, type) {

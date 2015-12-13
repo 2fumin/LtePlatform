@@ -5,7 +5,7 @@ var drawCollegeRegions = function (viewModel, result) {
     var coors = info.split(';');
     var centerx = 0;
     var centery = 0;
-    if (type == 2) {
+    if (type === 2) {
         var points = [];
         for (var p = 0; p < coors.length / 2; p++) {
             points.push(new BMap.Point(parseFloat(coors[2 * p]), parseFloat(coors[2 * p + 1])));
@@ -91,5 +91,38 @@ var drawCollegeMap = function (viewModel, data) {
     }
 };
 
+var drawCollegeENodebs = function(viewModel) {
+    if (map.eNodebMarkers.length > 0) return;
+    sendRequest(app.dataModel.collegeENodebUrl, "POST", viewModel.collegeNames(), function(result) {
+        for (var i = 0; i < result.length; i++) {
+            addOneENodebMarker(result[i]);
+        }
+    });
+};
 
+var drawCollegeBtss = function(viewModel) {
+    if (map.btsMarkers.length > 0) return;
+    sendRequest(app.dataModel.collegeBtssUrl, "POST", viewModel.collegeNames(), function(result) {
+        for (var i = 0; i < result.length; i++) {
+            addOneBtsMarker(result[i]);
+        }
+    });
+};
 
+var drawCollegeCells = function(viewModel) {
+    if (map.lteSectors.length > 0) return;
+    sendRequest(app.dataModel.collegeCellsUrl, "POST", viewModel.collegeNames(), function(result) {
+        for (var i = 0; i < result.length; i++) {
+            addOneGeneralSector(result[i], "LteCell");
+        }
+    });
+};
+
+var drawCollegeCdmaCells=function(viewModel) {
+    if (map.cdmaSectors.length > 0) return;
+    sendRequest(app.dataModel.collegeCdmaCellsUrl, "POST", viewModel.collegeNames(), function(result) {
+        for (var i = 0; i < result.length; i++) {
+            addOneGeneralSector(result[i], "CdmaCell");
+        }
+    });
+}
