@@ -13,13 +13,13 @@
 
             initializeMap('all-map', 11);
             map.addEventListener("zoomend", function() {
-                if (map.getzoom() > 14) {
-                    drawCollegeENodebs();
-                    drawCollegeBtss();
-                    drawCollegeCells();
-                    drawCollegeCdmaCells();
-                    drawCollegeLteDistributions();
-                    drawCollegeCdmaDistributions();
+                if (map.getZoom() > 13) {
+                    drawCollegeENodebs(self);
+                    drawCollegeBtss(self);
+                    drawCollegeCells(self);
+                    drawCollegeCdmaCells(self);
+                    drawCollegeLteDistributions(self);
+                    drawCollegeCdmaDistributions(self);
                 }
             });
 

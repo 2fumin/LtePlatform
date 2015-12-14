@@ -34,9 +34,9 @@ namespace LtePlatform.Controllers.College
         [ApiDoc("查询多个校园对应的LTE室内分布列表（可用于地理化显示）")]
         [ApiParameterDoc("collegeNames", "校园名称列表")]
         [ApiResponse("LTE室内分布列表（可用于地理化显示）")]
-        public IEnumerable<IndoorDistribution> Post(IEnumerable<string> collegeNames)
+        public IEnumerable<IndoorDistribution> Post(CollegeNamesContainer collegeNames)
         {
-            return _service.QueryLteDistributions(collegeNames);
+            return _service.QueryLteDistributions(collegeNames.Names);
         }
     }
 }

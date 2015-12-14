@@ -34,9 +34,9 @@ namespace LtePlatform.Controllers.College
         [ApiDoc("查询多个校园的CDMA基站视图")]
         [ApiParameterDoc("collegeNames", "校园名称列表")]
         [ApiResponse("CDMA基站视图列表")]
-        public IEnumerable<CdmaBtsView> Post(IEnumerable<string> collegeNames)
+        public IEnumerable<CdmaBtsView> Post(CollegeNamesContainer collegeNames)
         {
-            return _service.QueryCollegeBtss(collegeNames);
+            return _service.QueryCollegeBtss(collegeNames.Names);
         }
     }
 }

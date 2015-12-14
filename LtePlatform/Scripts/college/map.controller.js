@@ -93,7 +93,9 @@ var drawCollegeMap = function (viewModel, data) {
 
 var drawCollegeENodebs = function(viewModel) {
     if (map.eNodebMarkers.length > 0) return;
-    sendRequest(app.dataModel.collegeENodebUrl, "POST", viewModel.collegeNames(), function(result) {
+    sendRequest(app.dataModel.collegeENodebUrl, "POST", {
+        names: viewModel.collegeNames()
+    }, function(result) {
         for (var i = 0; i < result.length; i++) {
             addOneENodebMarker(result[i]);
         }
@@ -102,7 +104,9 @@ var drawCollegeENodebs = function(viewModel) {
 
 var drawCollegeBtss = function(viewModel) {
     if (map.btsMarkers.length > 0) return;
-    sendRequest(app.dataModel.collegeBtssUrl, "POST", viewModel.collegeNames(), function(result) {
+    sendRequest(app.dataModel.collegeBtssUrl, "POST", {
+        names: viewModel.collegeNames()
+    }, function (result) {
         for (var i = 0; i < result.length; i++) {
             addOneBtsMarker(result[i]);
         }
@@ -111,7 +115,9 @@ var drawCollegeBtss = function(viewModel) {
 
 var drawCollegeCells = function(viewModel) {
     if (map.lteSectors.length > 0) return;
-    sendRequest(app.dataModel.collegeCellsUrl, "POST", viewModel.collegeNames(), function(result) {
+    sendRequest(app.dataModel.collegeCellsUrl, "POST", {
+        names: viewModel.collegeNames()
+    }, function (result) {
         for (var i = 0; i < result.length; i++) {
             addOneGeneralSector(result[i], "LteCell");
         }
@@ -120,7 +126,9 @@ var drawCollegeCells = function(viewModel) {
 
 var drawCollegeCdmaCells = function(viewModel) {
     if (map.cdmaSectors.length > 0) return;
-    sendRequest(app.dataModel.collegeCdmaCellsUrl, "POST", viewModel.collegeNames(), function(result) {
+    sendRequest(app.dataModel.collegeCdmaCellsUrl, "POST", {
+        names: viewModel.collegeNames()
+    }, function (result) {
         for (var i = 0; i < result.length; i++) {
             addOneGeneralSector(result[i], "CdmaCell");
         }
@@ -129,7 +137,9 @@ var drawCollegeCdmaCells = function(viewModel) {
 
 var drawCollegeLteDistributions = function(viewModel) {
     if (map.lteDistributions.length > 0) return;
-    sendRequest(app.dataModel.collegeLteDistributionsUrl, "POST", viewModel.collegeNames(), function(result) {
+    sendRequest(app.dataModel.collegeLteDistributionsUrl, "POST", {
+        names: viewModel.collegeNames()
+    }, function (result) {
         for (var i = 0; i < result.length; i++) {
             addOneLteDistributionMarkerInfo(result[i]);
         }
@@ -138,7 +148,9 @@ var drawCollegeLteDistributions = function(viewModel) {
 
 var drawCollegeCdmaDistributions = function(viewModel) {
     if (map.cdmaDistributions.length > 0) return;
-    sendRequest(app.dataModel.collegeCdmaDistributionsUrl, "POST", viewModel.collegeNames(), function(result) {
+    sendRequest(app.dataModel.collegeCdmaDistributionsUrl, "POST", {
+        names: viewModel.collegeNames()
+    }, function (result) {
         for (var i = 0; i < result.length; i++) {
             addOneCdmaDistributionMarkerInfo(result[i]);
         }

@@ -46,9 +46,9 @@ namespace LtePlatform.Controllers.College
         [ApiDoc("查询多个校园的LTE基站视图")]
         [ApiParameterDoc("collegeNames", "校园名称列表")]
         [ApiResponse("LTE基站视图列表")]
-        public IEnumerable<ENodebView> Post(IEnumerable<string> collegeNames)
+        public IEnumerable<ENodebView> Post(CollegeNamesContainer collegeNames)
         {
-            return _service.QueryCollegeENodebs(collegeNames);
+            return _service.QueryCollegeENodebs(collegeNames.Names);
         }
     }
 }

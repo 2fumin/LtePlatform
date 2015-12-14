@@ -34,9 +34,9 @@ namespace LtePlatform.Controllers.College
         [ApiDoc("查询多个校园对应的LTE小区扇区列表（可用于地理化显示）")]
         [ApiParameterDoc("collegeNames", "校园名称列表")]
         [ApiResponse("LTE小区扇区列表（可用于地理化显示）")]
-        public IEnumerable<SectorView> Post(IEnumerable<string> collegeNames)
+        public IEnumerable<SectorView> Post(CollegeNamesContainer collegeNames)
         {
-            return _service.QuerySectors(collegeNames);
+            return _service.QuerySectors(collegeNames.Names);
         }
     }
 }
