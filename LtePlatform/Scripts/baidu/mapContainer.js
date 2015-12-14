@@ -51,10 +51,13 @@ var addOneMarker = function (marker, html, type) {
             break;
         case "Bts":
             map.btsMarkers.push(marker);
+            break;
         case "LteDistribution":
             map.lteDistributions.push(marker);
+            break;
         case "CdmaDistribution":
             map.cdmaDistributions.push(marker);
+            break;
         default:
             map.collegeMarkers.push(marker);
             break;

@@ -47,9 +47,33 @@
         toggleDisplay(map.collegeMarkers);
     };
 
+    self.toggleCollegeENodebs = function() {
+        toggleDisplay(map.eNodebMarkers);
+    };
+
+    self.toggleCollegeCells = function() {
+        toggleDisplay(map.lteSectors);
+    };
+
+    self.toggleCollegeLteDistributions = function() {
+        toggleDisplay(map.lteDistributions);
+    };
+
+    self.toggleCollegeBtss = function() {
+        toggleDisplay(map.btsMarkers);
+    };
+
+    self.toggleCollegeCdmaCells = function() {
+        toggleDisplay(map.cdmaSectors);
+    };
+
+    self.toggleCollegeCdmaDistributions = function() {
+        toggleDisplay(map.cdmaDistributions);
+    };
+
     self.focusCollege = function (name) {
         for (var i = 0; i < self.collegeInfos().length; i++) {
-            if (self.collegeInfos()[i].name == name) {
+            if (self.collegeInfos()[i].name === name) {
                 var cell = {
                     baiduLongtitute: self.collegeInfos()[i].centerx,
                     baiduLattitute: self.collegeInfos()[i].centery
