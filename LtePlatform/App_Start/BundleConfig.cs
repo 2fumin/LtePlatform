@@ -182,6 +182,15 @@ namespace LtePlatform
                 "~/Scripts/parameters/basicimport.viewmodel.js",
                 "~/Scripts/app/_run.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/parametersAlarmImport").Include(
+                "~/Scripts/sammy-{version}.js",
+                "~/Scripts/app/common.js",
+                "~/Scripts/app/app.datamodel.js",
+                "~/Scripts/app/app.viewmodel.js",
+                "~/Scripts/parameters/common.controller.js",
+                "~/Scripts/parameters/alarmimport.viewmodel.js",
+                "~/Scripts/app/_run.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/parametersQueryMap").Include(
                 "~/Scripts/sammy-{version}.js",
                 "~/Scripts/app/common.js",

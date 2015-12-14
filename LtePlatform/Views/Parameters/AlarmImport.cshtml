@@ -1,7 +1,22 @@
-﻿
+﻿@{
+    ViewBag.Title = "告警信息导入";
+}
+
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h2 class="panel-title">
+            <strong>@ViewBag.Title</strong>
+        </h2>
+    </div>
+    <p>
+        @{
+            Html.RenderPartial("_ParametersMenu");
+        }
+    </p>
+</div>
 
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-4">
         @using (Html.BeginForm("AlarmPost", "Parameters",
                 FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
         {
@@ -27,5 +42,16 @@
             </div>
         }
     </div>
-    <div class="col-md-4"></div>
+    <div class="col-md-8">
+        @{
+            Html.RenderPartial("_AlarmImport");
+        }
+    </div>
 </div>
+
+@section Scripts{
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/knockout")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/parametersAlarmImport")
+}

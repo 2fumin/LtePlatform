@@ -614,6 +614,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\mycharts\comboChart.js" />
     <Content Include="Scripts\mycharts\drilldownPie.js" />
+    <Content Include="Scripts\parameters\alarmimport.viewmodel.js" />
     <Content Include="Scripts\parameters\basicimport.controller.js" />
     <Content Include="Scripts\parameters\basicimport.viewmodel.js" />
     <Content Include="Scripts\parameters\common.controller.js" />
@@ -727,6 +728,7 @@
     <None Include="Views\Parameters\BasicImport.cshtml" />
     <None Include="Views\Parameters\NeighborImport.cshtml" />
     <Content Include="Views\Parameters\QueryMap.cshtml" />
+    <None Include="Views\Parameters\_AlarmImport.cshtml" />
     <None Include="Views\Parameters\_BasicImport.cshtml" />
     <Content Include="Views\Parameters\_ENodebLonLatTable.cshtml" />
     <Content Include="Views\Parameters\_CellLonLatTable.cshtml" />
