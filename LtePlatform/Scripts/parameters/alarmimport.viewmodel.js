@@ -5,12 +5,16 @@
         this.get('#alarmImport', function () {
             console.log("Here's import");
         });
-        this.post('#alarmPost', function() {
-            console.log("Here's post");
+        this.post('#alarmZtePost', function() {
+            console.log("Here's zte post");
+        });
+        this.post('#alarmHwPost', function () {
+            console.log("Here's hw post");
         });
 
         this.get('/Parameters/AlarmImport', function () { this.app.runRoute('get', '#alarmImport'); });
-        this.get('/Parameters/AlarmPost', function () { this.app.runRoute('post', '#alarmPost'); });
+        this.get('/Parameters/ZteAlarmPost', function () { this.app.runRoute('post', '#alarmZtePost'); });
+        this.get('/Parameters/HwAlarmPost', function () { this.app.runRoute('post', '#alarmHwPost'); });
     });
 
     return self;

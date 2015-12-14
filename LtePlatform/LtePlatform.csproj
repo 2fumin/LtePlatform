@@ -337,6 +337,7 @@
     <Compile Include="Controllers\Parameters\BtsController.cs" />
     <Compile Include="Controllers\Parameters\CdmaCellController.cs" />
     <Compile Include="Controllers\Parameters\CellController.cs" />
+    <Compile Include="Controllers\Parameters\DumpAlarmController.cs" />
     <Compile Include="Controllers\Parameters\DumpBtsExcelController.cs" />
     <Compile Include="Controllers\Parameters\DumpCdmaCellExcelController.cs" />
     <Compile Include="Controllers\Parameters\DumpCellExcelController.cs" />

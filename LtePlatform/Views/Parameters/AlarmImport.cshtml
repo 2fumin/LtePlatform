@@ -16,33 +16,42 @@
 </div>
 
 <div class="row">
-    <div class="col-md-4">
-        @using (Html.BeginForm("AlarmPost", "Parameters",
-                FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
-        {
-            <h4>告警文件选择</h4>
-            <div class="form-group">
-                <label class="col-md-4 control-label">中兴4G告警导入：</label>
-                <div class="col-md-6">
-                    <input name="alarmZte" class="form-control" type="file" accept=".csv" />
+    <div class="col-md-6">
+        @{
+            Html.RenderPartial("_AlertPanel");
+            using (Html.BeginForm("ZteAlarmPost", "Parameters",
+                FormMethod.Post, new {enctype = "multipart/form-data", @class = "form-horizontal", role = "form"}))
+            {
+                <div class="form-group">
+                    <label class="col-md-4 control-label">中兴4G告警导入：</label>
+                    <div class="col-md-6">
+                        <input name="alarmZte" class="form-control" type="file" multiple accept=".csv"/>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-save"></span>导入
+                        </button>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-4 control-label">华为4G告警导入：</label>
-                <div class="col-md-6">
-                    <input name="alarmHw" class="form-control" type="file" accept=".csv" />
+            }
+            using (Html.BeginForm("HwAlarmPost", "Parameters",
+                FormMethod.Post, new {enctype = "multipart/form-data", @class = "form-horizontal", role = "form"}))
+            {
+                <div class="form-group">
+                    <label class="col-md-4 control-label">华为4G告警导入：</label>
+                    <div class="col-md-6">
+                        <input name="alarmHw" class="form-control" type="file" multiple accept=".csv"/>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-save"></span>导入
+                        </button>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <button type="submit" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-save"></span>导入文件
-                    </button>
-                </div>
-            </div>
+            }
         }
     </div>
-    <div class="col-md-8">
+    <div class="col-md-6">
         @{
             Html.RenderPartial("_AlarmImport");
         }
