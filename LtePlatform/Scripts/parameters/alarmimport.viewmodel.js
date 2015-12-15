@@ -1,15 +1,17 @@
 ﻿function AlarmImportViewModel(app, dataModel) {
     var self = this;
 
+    self.initialize = ko.observable(true);
+
     Sammy(function () {
         this.get('#alarmImport', function () {
-            console.log("Here's import");
+            self.initialize(true);
         });
         this.post('#alarmZtePost', function() {
-            console.log("Here's zte post");
+            self.initialize(false);
         });
         this.post('#alarmHwPost', function () {
-            console.log("Here's hw post");
+            self.initialize(false);
         });
 
         this.get('/Parameters/AlarmImport', function () { this.app.runRoute('get', '#alarmImport'); });

@@ -82,5 +82,10 @@ namespace Lte.Evaluations.DataService
             }
             return true;
         }
+
+        public int GetAlarmsToBeDump()
+        {
+            return AlarmStats.Count;
+        }
     }
 }

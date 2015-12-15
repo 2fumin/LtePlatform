@@ -3,9 +3,8 @@
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <RootPath Condition=" '$(RootPath)' == '' ">$(MSBuildProjectDirectory)\..</RootPath>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5656D21E-968F-4B30-9E39-70FDB5CECEDD}</ProjectGuid>
+    <ProjectGuid>{EE27E11C-6C25-4D85-AD17-E0801D7E83D7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Castle.Windsor</RootNamespace>
@@ -22,16 +21,16 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'NET45-Release|AnyCPU'">
-    <OutputPath>bin\NET45-Release\</OutputPath>
-    <DefineConstants>TRACE;DOTNET;DOTNET45</DefineConstants>
-    <DocumentationFile>bin\NET45-Release\Castle.Windsor.XML</DocumentationFile>
-    <Optimize>true</Optimize>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <NoWarn>1591</NoWarn>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;DOTNET;DOTNET45</DefineConstants>
+    <DocumentationFile>bin\Release\Castle.Windsor.XML</DocumentationFile>
     <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -46,7 +45,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="buildscripts\CommonAssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Castle.Core\Castle.Core.csproj">
+      <Project>{7caa6d18-6d6f-4786-ac4f-e575ce1e100e}</Project>
+      <Name>Castle.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Internal\SimpleThreadSafeCollection.cs" />
@@ -546,9 +552,6 @@
     <Compile Include="MicroKernel\Util\ReferenceExpressionUtil.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="..\..\buildscripts\CommonAssemblyInfo.cs">
-      <Link>CommonAssemblyInfo.cs</Link>
-    </Compile>
     <Compile Include="MicroKernel\Util\SimpleMethodEqualityComparer.cs" />
     <Compile Include="MicroKernel\Util\SimpleTypeEqualityComparer.cs" />
     <Compile Include="SecurityAssemblyInfo.cs" />
@@ -713,25 +716,34 @@
     <Compile Include="Windsor\WindsorServiceProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />
+    <Content Include="buildscripts\ASL - Apache Software Foundation License.txt" />
+    <Content Include="buildscripts\Committers.txt" />
+    <Content Include="buildscripts\NDependProject.xml" />
+    <Content Include="buildscripts\readme.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\buildscripts\CastleKey.snk">
-      <Link>CastleKey.snk</Link>
-    </None>
+    <None Include="buildscripts\build.cmd" />
+    <None Include="buildscripts\Build.proj" />
+    <None Include="buildscripts\Castle.Common.Targets" />
+    <None Include="buildscripts\Castle.Core-log4net.nuspec" />
+    <None Include="buildscripts\Castle.Core-NLog.nuspec" />
+    <None Include="buildscripts\Castle.Core-Serilog.nuspec" />
+    <None Include="buildscripts\Castle.Core.nuspec" />
+    <None Include="buildscripts\CastleKey.snk" />
+    <None Include="buildscripts\Get-NuGetVars.ps1" />
+    <None Include="buildscripts\nuspec.tmpl" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="MicroKernel\SubSystems\Scoping\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Castle.Core\Castle.Core.csproj">
-      <Project>{7caa6d18-6d6f-4786-ac4f-e575ce1e100e}</Project>
-      <Name>Castle.Core</Name>
-    </ProjectReference>
+    <None Include="buildscripts\CastleKey.snk">
+      <Link>CastleKey.snk</Link>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(RootPath)\Settings-windsor.proj" />
-  <Import Project="$(RootPath)\Castle.Windsor\buildscripts\Castle.Common.targets" />
+  <Import Project="..\Settings-windsor.proj" />
+  <Import Project="buildscripts\Castle.Common.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

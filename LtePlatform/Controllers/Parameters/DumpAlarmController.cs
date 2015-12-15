@@ -19,11 +19,20 @@ namespace LtePlatform.Controllers.Parameters
             _service = service;
         }
 
+        [HttpPut]
         [ApiDoc("导入一条告警信息")]
         [ApiResponse("导入结果")]
-        public bool Get()
+        public bool Put()
         {
             return _service.DumpOneStat();
+        }
+
+        [HttpGet]
+        [ApiDoc("获取当前等待导入告警数")]
+        [ApiResponse("当前等待导入告警数")]
+        public int Get()
+        {
+            return _service.GetAlarmsToBeDump();
         }
     }
 }

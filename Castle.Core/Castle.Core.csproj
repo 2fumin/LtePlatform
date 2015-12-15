@@ -183,9 +183,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="buildscripts\CommonAssemblyInfo.cs">
-      <Link>CommonAssemblyInfo.cs</Link>
-    </Compile>
+    <Compile Include="buildscripts\CommonAssemblyInfo.cs" />
     <Compile Include="Components.DictionaryAdapter\DynamicDictionary.cs" />
     <Compile Include="Components.DictionaryAdapter\Util\ListProjectionDebugView.cs" />
     <Compile Include="Components.DictionaryAdapter\Util\ICollectionAdapter.cs" />
@@ -386,7 +384,6 @@
     <Compile Include="Core\Logging\LoggerLevel.cs" />
     <Compile Include="DynamicProxy\AbstractInvocation.cs" />
     <Compile Include="DynamicProxy\AllMethodsHook.cs" />
-    <Compile Include="AssemblyInfo.cs" />
     <Compile Include="DynamicProxy\Generators\Emitters\SimpleAST\TryStatement.cs" />
     <Compile Include="DynamicProxy\Generators\Emitters\SimpleAST\FinallyStatement.cs" />
     <Compile Include="DynamicProxy\Generators\Emitters\SimpleAST\EndExceptionBlockStatement.cs" />
@@ -631,12 +628,30 @@
     <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="buildscripts\build.cmd" />
+    <None Include="buildscripts\Build.proj" />
+    <None Include="buildscripts\Castle.Common.Targets">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="buildscripts\Castle.Core-log4net.nuspec" />
+    <None Include="buildscripts\Castle.Core-NLog.nuspec" />
+    <None Include="buildscripts\Castle.Core-Serilog.nuspec" />
+    <None Include="buildscripts\Castle.Core.nuspec" />
     <None Include="buildscripts\CastleKey.snk">
       <Link>CastleKey.snk</Link>
     </None>
+    <None Include="buildscripts\CastleKey.snk" />
+    <None Include="buildscripts\Get-NuGetVars.ps1" />
+    <None Include="buildscripts\nuspec.tmpl" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Components.DictionaryAdapter\Xml\Internal\Cursors\XLinq\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="buildscripts\ASL - Apache Software Foundation License.txt" />
+    <Content Include="buildscripts\Committers.txt" />
+    <Content Include="buildscripts\NDependProject.xml" />
+    <Content Include="buildscripts\readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" Condition="($(MSBuildTargets) == '') Or ($(MSBuildTargets) == 'CSharp')" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight\v4.0\Microsoft.Silverlight.CSharp.targets" Condition="$(MSBuildTargets) == 'Silverlight 4.0'" />
