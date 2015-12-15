@@ -26,4 +26,11 @@ namespace Lte.Evaluations.ViewModels
 
         public string Details { get; set; }
     }
+
+    public class AlarmHistory
+    {
+        public string DateString { get; set; }
+
+        public int Alarms { get; set; }
+    }
 }

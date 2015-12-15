@@ -615,6 +615,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\mycharts\comboChart.js" />
     <Content Include="Scripts\mycharts\drilldownPie.js" />
+    <Content Include="Scripts\parameters\alarmimport.controller.js" />
     <Content Include="Scripts\parameters\alarmimport.viewmodel.js" />
     <Content Include="Scripts\parameters\basicimport.controller.js" />
     <Content Include="Scripts\parameters\basicimport.viewmodel.js" />

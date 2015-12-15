@@ -9,6 +9,7 @@
     self.preciseStatUrl = "/api/PreciseStat/";
     self.preciseRegionUrl = "/api/PreciseRegion/";
     self.alarmCountUrl = "/api/AlarmCount";
+    self.dumpAlarmUrl = "/api/DumpAlarm";
     self.topDrop2GUrl = "/api/TopDrop2G/";
 
     self.collegeQueryUrl = "/api/CollegeQuery";

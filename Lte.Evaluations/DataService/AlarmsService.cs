@@ -87,5 +87,21 @@ namespace Lte.Evaluations.DataService
         {
             return AlarmStats.Count;
         }
-    }
+
+        public IEnumerable<AlarmHistory> GetAlarmHistories(DateTime begin, DateTime end)
+        {
+            var results = new List<AlarmHistory>();
+            while (begin < end)
+            {
+                var items = _repository.GetAllList(x => x.HappenTime >= begin && x.HappenTime < begin.AddDays(1));
+                results.Add(new AlarmHistory
+                {
+                    DateString = begin.ToShortDateString(),
+                    Alarms = items.Count
+                });
+                begin = begin.AddDays(1);
+            }
+            return results;
+        } 
+    } 
 }

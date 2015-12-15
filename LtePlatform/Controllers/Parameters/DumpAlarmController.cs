@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Lte.Evaluations.DataService;
+using Lte.Evaluations.ViewModels;
 using LtePlatform.Models;
 
 namespace LtePlatform.Controllers.Parameters
@@ -33,6 +34,16 @@ namespace LtePlatform.Controllers.Parameters
         public int Get()
         {
             return _service.GetAlarmsToBeDump();
+        }
+
+        [HttpGet]
+        [ApiDoc("获取给定日期范围内的历史告警记录数")]
+        [ApiParameterDoc("begin", "开始日期")]
+        [ApiParameterDoc("end", "结束日期")]
+        [ApiResponse("历史告警记录数")]
+        public IEnumerable<AlarmHistory> Get(DateTime begin, DateTime end)
+        {
+            return _service.GetAlarmHistories(begin, end);
         }
     }
 }
