@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Lte.Evaluations.DataService;
+﻿using System.Linq;
 using Lte.Evaluations.DataService.College;
 using Lte.Evaluations.Test.MockItems;
 using Lte.Evaluations.Test.TestService;
@@ -11,7 +6,7 @@ using Lte.Parameters.Abstract;
 using Moq;
 using NUnit.Framework;
 
-namespace Lte.Evaluations.Test.DataService
+namespace Lte.Evaluations.Test.DataService.College
 {
     public class CollegeDistributionServiceTest
     {

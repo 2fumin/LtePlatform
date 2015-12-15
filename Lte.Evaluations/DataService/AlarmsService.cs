@@ -20,6 +20,8 @@ namespace Lte.Evaluations.DataService
         public AlarmsService(IAlarmRepository repository)
         {
             _repository = repository;
+            if (AlarmStats == null)
+                AlarmStats = new Stack<AlarmStat>();
         }
 
         public IEnumerable<AlarmView> Get(int eNodebId, DateTime begin, DateTime end)
@@ -33,7 +35,7 @@ namespace Lte.Evaluations.DataService
             return _repository.GetAllList(begin, end, eNodebId).Count;
         }
 
-        private static Stack<AlarmStat> AlarmStats { get; } = new Stack<AlarmStat>();
+        private static Stack<AlarmStat> AlarmStats { get; set; }
 
         public void UploadZteAlarms(StreamReader reader)
         {
@@ -93,7 +95,9 @@ namespace Lte.Evaluations.DataService
             var results = new List<AlarmHistory>();
             while (begin < end)
             {
-                var items = _repository.GetAllList(x => x.HappenTime >= begin && x.HappenTime < begin.AddDays(1));
+                var beginDate = begin;
+                var endDate = begin.AddDays(1);
+                var items = _repository.GetAllList(x => x.HappenTime >= beginDate && x.HappenTime < endDate);
                 results.Add(new AlarmHistory
                 {
                     DateString = begin.ToShortDateString(),

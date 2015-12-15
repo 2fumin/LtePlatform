@@ -7,11 +7,11 @@ using Lte.Evaluations.Test.MockItems;
 using Lte.Evaluations.Test.TestService;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
+using Lte.Parameters.MockOperations;
 using Moq;
 using NUnit.Framework;
-using Lte.Parameters.MockOperations;
 
-namespace Lte.Evaluations.Test.DataService
+namespace Lte.Evaluations.Test.DataService.College
 {
     [TestFixture]
     public class CdmaRegionStatServiceTest

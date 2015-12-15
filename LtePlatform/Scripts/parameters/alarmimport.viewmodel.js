@@ -20,7 +20,8 @@
             $("#BeginDate").datepicker({ dateFormat: 'yy-mm-dd' });
             $("#EndDate").datepicker({ dateFormat: 'yy-mm-dd' });
             self.initialize(false);
-            sendRequest(app.dataModel.dumpAlarmUrl, "GET", function (result) {
+            updateDumpHistory(self);
+            sendRequest(app.dataModel.dumpAlarmUrl, "GET", null, function (result) {
                 self.totalDumpItems(result);
             });
         });
@@ -28,7 +29,8 @@
             $("#BeginDate").datepicker({ dateFormat: 'yy-mm-dd' });
             $("#EndDate").datepicker({ dateFormat: 'yy-mm-dd' });
             self.initialize(false);
-            sendRequest(app.dataModel.dumpAlarmUrl, "GET", function (result) {
+            updateDumpHistory(self);
+            sendRequest(app.dataModel.dumpAlarmUrl, "GET", null, function (result) {
                 self.totalDumpItems(result);
             });
         });

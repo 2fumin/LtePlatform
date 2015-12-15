@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using Lte.Evaluations.DataService;
@@ -38,7 +39,7 @@ namespace LtePlatform.Controllers
                 ViewBag.Message = "共上传中兴告警信息文件" + alarmZte.Length + "个！";
                 foreach (var file in alarmZte)
                 {
-                    _alarmsService.UploadZteAlarms(new StreamReader(file.InputStream));
+                    _alarmsService.UploadZteAlarms(new StreamReader(file.InputStream, Encoding.GetEncoding("GB2312")));
                 }
             }
             return View("AlarmImport");
@@ -52,7 +53,7 @@ namespace LtePlatform.Controllers
                 ViewBag.Message = "共上传华为告警信息文件" + alarmHw.Length + "个！";
                 foreach (var file in alarmHw)
                 {
-                    _alarmsService.UploadHwAlarms(new StreamReader(file.InputStream));
+                    _alarmsService.UploadHwAlarms(new StreamReader(file.InputStream, Encoding.GetEncoding("GB2312")));
                 }
             }
             return View("AlarmImport");

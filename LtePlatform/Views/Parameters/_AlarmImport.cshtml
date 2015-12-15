@@ -1,2 +1,48 @@
 ﻿<!-- ko with: alarmImport -->
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            告警数据库历史统计
+        </h3>
+    </div>
+    <div class="panel-body">
+        <p>
+            开始日期：
+            <input id="BeginDate" data-bind="value: beginDate" />
+            结束日期：
+            <input id="EndDate" data-bind="value: endDate" />
+        </p>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>日期</th>
+                <th>告警数量</th>
+            </tr>
+            </thead>
+            <tbody data-bind="foreach: dumpHistory">
+            <tr>
+                <td data-bind="text: dateString"></td>
+                <td data-bind="text: alarms"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="panel panel-info" data-bind="visible: initialize()!==true">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            告警导入进度
+        </h3>
+    </div>
+    <div class="panel-body">
+        <p>
+            <button class="btn btn-primary" data-bind="click: dumpItems">一键导入</button>
+        </p>
+        <p>
+            总数：<span data-bind="text: totalDumpItems"></span>&nbsp;
+            成功数：<span data-bind="text: totalSuccessItems"></span>&nbsp;
+            失败数：<span data-bind="text: totalFailItems"></span>
+        </p>
+    </div>
+</div>
 <!-- /ko -->
