@@ -12,6 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#define FEATURE_SERIALIZATION
+
+using System;
 using Castle.Core.Test.Main;
 
 namespace Castle.Core.Test.DynamicProxy.Explicit
@@ -19,7 +22,7 @@ namespace Castle.Core.Test.DynamicProxy.Explicit
 #if FEATURE_SERIALIZATION
 	[Serializable]
 #endif
-	public sealed class SimpleInterfaceExplicit : ISimpleInterface
+	public class SimpleInterfaceExplicit : ISimpleInterface
 	{
 		int ISimpleInterface.Do()
 		{

@@ -74,7 +74,7 @@ namespace Castle.Core.Test.Main
 			var emitter = new ClassEmitter(generator.ProxyBuilder.ModuleScope, "Foo", typeof (object), Type.EmptyTypes,
 			                                        TypeAttributes.Public, false);
 			var t = emitter.BuildType();
-			Assert.AreEqual(shouldBeSigned, StrongNameUtil.IsAssemblySigned(t.Assembly));
+			Assert.AreEqual(shouldBeSigned, t.Assembly.IsAssemblySigned());
 		}
 #endif
 
@@ -84,7 +84,7 @@ namespace Castle.Core.Test.Main
 			var emitter = new ClassEmitter(generator.ProxyBuilder.ModuleScope, "Foo", typeof (object), Type.EmptyTypes,
 			                                        TypeAttributes.Public, true);
 			var t = emitter.BuildType();
-			Assert.IsFalse(StrongNameUtil.IsAssemblySigned(t.Assembly));
+			Assert.IsFalse(t.Assembly.IsAssemblySigned());
 		}
 
 		[Test]

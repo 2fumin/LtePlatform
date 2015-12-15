@@ -12,6 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#define DOTNET45
+
+using System.Linq;
+using Castle.Core.Test.DynamicProxy.Classes;
+using Castle.Core.Test.DynamicProxy.Interfaces;
+using Castle.Core.Test.Interceptors;
 using Castle.Core.Test.Main;
 using NUnit.Framework;
 

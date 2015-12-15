@@ -12,6 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#define FEATURE_SERIALIZATION
+
+using Castle.Core.Test.Interceptors;
+using Castle.Core.Test.Main;
+
 #if FEATURE_SERIALIZATION
 
 namespace CastleTests
@@ -19,7 +24,6 @@ namespace CastleTests
 	using System.Reflection;
 
 	using Castle.DynamicProxy;
-	using Castle.DynamicProxy.Tests.Interceptors;
 
 	using NUnit.Framework;
 

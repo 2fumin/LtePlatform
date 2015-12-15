@@ -16,7 +16,7 @@ using System;
 
 namespace Castle.Core.Test.DynamicProxy.Classes
 {
-    public sealed class ClassWith_Smart_Attribute
+    public class ClassWith_Smart_Attribute
 	{
 		[Smart]
 		public string PropertyWithAttribute { get; set; }

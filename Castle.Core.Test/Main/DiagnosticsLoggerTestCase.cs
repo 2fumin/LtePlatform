@@ -94,11 +94,13 @@ namespace Castle.Core.Test.Main
 			logger.Warn("my message");
 			logger.Error("my other message", new Exception("Bad, bad exception"));
 
-			var log = new EventLog();
-			log.Log = "castle_testlog";
-			log.MachineName = ".";
+		    var log = new EventLog
+		    {
+		        Log = "castle_testlog",
+		        MachineName = "."
+		    };
 
-			Assert.AreEqual(2, log.Entries.Count);
+		    Assert.AreEqual(2, log.Entries.Count);
 		}
 	}
 }

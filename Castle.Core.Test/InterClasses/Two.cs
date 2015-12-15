@@ -12,6 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#define FEATURE_SERIALIZATION
+
+using System;
 using Castle.Core.Test.Interfaces;
 
 namespace Castle.Core.Test.InterClasses

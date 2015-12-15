@@ -23,8 +23,8 @@ namespace Castle.Core.Test.Main
     [TestFixture]
 	public class ConsoleLoggerTestCase
 	{
-		private StringWriter outWriter = new StringWriter();
-		private StringWriter errorWriter = new StringWriter();
+		private readonly StringWriter outWriter = new StringWriter();
+		private readonly StringWriter errorWriter = new StringWriter();
 
 #if FEATURE_XUNITNET
 		public ConsoleLoggerTestCase()

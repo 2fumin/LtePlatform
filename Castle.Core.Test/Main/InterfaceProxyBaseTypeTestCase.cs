@@ -30,11 +30,9 @@ namespace Castle.Core.Test.Main
 			                                                                                                     Type.EmptyTypes,
 			                                                                                                     WithBase<Sealed>()));
 			Assert.AreEqual(
-				string.Format(
-					"Type {0} is not valid base type for interface proxy, because it is sealed. " +
-					"Only a non-sealed class with non-private default constructor can be used as base type for interface proxy. " +
-					"Please use some other valid type.",
-					typeof(Sealed)), exception.Message);
+			    $"Type {typeof (Sealed)} is not valid base type for interface proxy, because it is sealed. " +
+			    "Only a non-sealed class with non-private default constructor can be used as base type for interface proxy. " +
+			    "Please use some other valid type.", exception.Message);
 		}
 
 		[Test]
@@ -45,11 +43,9 @@ namespace Castle.Core.Test.Main
 																												 Type.EmptyTypes,
 																												 WithBase<ISomething>()));
 			Assert.AreEqual(
-				string.Format(
-					"Type {0} is not valid base type for interface proxy, because it is not a class type. " +
-					"Only a non-sealed class with non-private default constructor can be used as base type for interface proxy. " +
-					"Please use some other valid type.",
-					typeof(ISomething)), exception.Message);
+			    $"Type {typeof (ISomething)} is not valid base type for interface proxy, because it is not a class type. " +
+			    "Only a non-sealed class with non-private default constructor can be used as base type for interface proxy. " +
+			    "Please use some other valid type.", exception.Message);
 		}
 
 		[Test]
@@ -60,11 +56,9 @@ namespace Castle.Core.Test.Main
 																												 Type.EmptyTypes,
 																												 WithBase<NoDefaultCtor>()));
 			Assert.AreEqual(
-				string.Format(
-					"Type {0} is not valid base type for interface proxy, because it does not have accessible parameterless constructor. " +
-					"Only a non-sealed class with non-private default constructor can be used as base type for interface proxy. " +
-					"Please use some other valid type.",
-					typeof(NoDefaultCtor)), exception.Message);
+			    $"Type {typeof (NoDefaultCtor)} is not valid base type for interface proxy, because it does not have accessible parameterless constructor. " +
+			    "Only a non-sealed class with non-private default constructor can be used as base type for interface proxy. " +
+			    "Please use some other valid type.", exception.Message);
 		}
 
 		[Test]
@@ -75,11 +69,9 @@ namespace Castle.Core.Test.Main
 																												 Type.EmptyTypes,
 																												 WithBase<DefaultPrivateCtor>()));
 			Assert.AreEqual(
-				string.Format(
-					"Type {0} is not valid base type for interface proxy, because it does not have accessible parameterless constructor. " +
-					"Only a non-sealed class with non-private default constructor can be used as base type for interface proxy. " +
-					"Please use some other valid type.",
-					typeof(DefaultPrivateCtor)), exception.Message);
+			    $"Type {typeof (DefaultPrivateCtor)} is not valid base type for interface proxy, because it does not have accessible parameterless constructor. " +
+			    "Only a non-sealed class with non-private default constructor can be used as base type for interface proxy. " +
+			    "Please use some other valid type.", exception.Message);
 		}
 
 		[Test]

@@ -125,7 +125,7 @@ namespace Castle.Core.Test.DynamicProxy
 		{
 			var ex = Assert.Throws<GeneratorException>(() => generator.CreateClassProxy(typeof(PrivateClass), new IInterceptor[0]));
 			StringAssert.StartsWith(
-				"Can not create proxy for type Castle.DynamicProxy.Tests.ClassProxyConstructorsTestCase+PrivateClass because it is not accessible. Make it public, or internal",
+                "Can not create proxy for type Castle.Core.Test.DynamicProxy.ClassProxyConstructorsTestCase+PrivateClass because it is not accessible. Make it public, or internal",
 				ex.Message);
 		}
 
@@ -135,7 +135,7 @@ namespace Castle.Core.Test.DynamicProxy
 			var ex = Assert.Throws<GeneratorException>(() =>
 				generator.CreateClassProxy(typeof(List<PrivateClass>), new IInterceptor[0]));
 			StringAssert.StartsWith(
-				"Can not create proxy for type System.Collections.Generic.List`1[[Castle.DynamicProxy.Tests.ClassProxyConstructorsTestCase+PrivateClass, Castle.Core.Tests, Version=0.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc]] because type Castle.DynamicProxy.Tests.ClassProxyConstructorsTestCase+PrivateClass is not accessible. Make it public, or internal",
+                "Can not create proxy for type System.Collections.Generic.List`1[[Castle.Core.Test.DynamicProxy.ClassProxyConstructorsTestCase+PrivateClass, Castle.Core.Test, Version=1.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc]] because type Castle.Core.Test.DynamicProxy.ClassProxyConstructorsTestCase+PrivateClass is not accessible. Make it public, or internal",
 				ex.Message);
 		}
 

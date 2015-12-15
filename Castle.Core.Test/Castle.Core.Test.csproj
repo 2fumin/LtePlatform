@@ -399,16 +399,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Castle.Core\Castle.Core.csproj">
-      <Project>{7caa6d18-6d6f-4786-ac4f-e575ce1e100e}</Project>
-      <Name>Castle.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Castle.Core\Castle.Core.csproj">
+      <Project>{7caa6d18-6d6f-4786-ac4f-e575ce1e100e}</Project>
+      <Name>Castle.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(RootPath)\Settings.proj" />
