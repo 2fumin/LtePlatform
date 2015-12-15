@@ -4,13 +4,18 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EE27E11C-6C25-4D85-AD17-E0801D7E83D7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Castle.Windsor</RootNamespace>
+    <RootNamespace>Castle</RootNamespace>
     <AssemblyName>Castle.Windsor</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>buildscripts\CastleKey.snk</AssemblyOriginatorKeyFile>
+    <DefineConstants>DOTNET;DOTNET45</DefineConstants>
+    <ProjectGuid>{73FB5B0B-5796-41DC-A5A6-743D585F6B5B}</ProjectGuid>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -18,23 +23,26 @@
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NoWarn>1591</NoWarn>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE;DOTNET;DOTNET45</DefineConstants>
-    <DocumentationFile>bin\Release\Castle.Windsor.XML</DocumentationFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NoWarn>1591</NoWarn>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
-    <NoWarn>1591</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -43,10 +51,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="buildscripts\CommonAssemblyInfo.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Castle.Core\Castle.Core.csproj">
@@ -552,6 +556,9 @@
     <Compile Include="MicroKernel\Util\ReferenceExpressionUtil.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="buildscripts\CommonAssemblyInfo.cs">
+      <Link>CommonAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="MicroKernel\Util\SimpleMethodEqualityComparer.cs" />
     <Compile Include="MicroKernel\Util\SimpleTypeEqualityComparer.cs" />
     <Compile Include="SecurityAssemblyInfo.cs" />
@@ -716,30 +723,13 @@
     <Compile Include="Windsor\WindsorServiceProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="buildscripts\ASL - Apache Software Foundation License.txt" />
-    <Content Include="buildscripts\Committers.txt" />
-    <Content Include="buildscripts\NDependProject.xml" />
-    <Content Include="buildscripts\readme.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="buildscripts\build.cmd" />
-    <None Include="buildscripts\Build.proj" />
-    <None Include="buildscripts\Castle.Common.Targets" />
-    <None Include="buildscripts\Castle.Core-log4net.nuspec" />
-    <None Include="buildscripts\Castle.Core-NLog.nuspec" />
-    <None Include="buildscripts\Castle.Core-Serilog.nuspec" />
-    <None Include="buildscripts\Castle.Core.nuspec" />
-    <None Include="buildscripts\CastleKey.snk" />
-    <None Include="buildscripts\Get-NuGetVars.ps1" />
-    <None Include="buildscripts\nuspec.tmpl" />
+    <None Include="..\buildscripts\CastleKey.snk">
+      <Link>CastleKey.snk</Link>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="MicroKernel\SubSystems\Scoping\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="buildscripts\CastleKey.snk">
-      <Link>CastleKey.snk</Link>
-    </None>
+    <Folder Include="Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\Settings-windsor.proj" />
