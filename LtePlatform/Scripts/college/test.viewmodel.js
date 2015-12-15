@@ -51,7 +51,7 @@
     };
 
     self.deleteTest4G = function (view) {
-        sendRequest(app.dataModel.college4GTestUrl, "GET", view,
+        sendRequest(app.dataModel.college4GTestUrl, "DELETE", view,
             function () {
                 update4GList(self);
             });

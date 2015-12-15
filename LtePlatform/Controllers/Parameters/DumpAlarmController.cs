@@ -45,5 +45,12 @@ namespace LtePlatform.Controllers.Parameters
         {
             return _service.GetAlarmHistories(begin, end);
         }
+
+        [HttpDelete]
+        [ApiDoc("清除已上传告警记录（未写入数据库）")]
+        public void Delete()
+        {
+            _service.ClearAlarmStats();
+        }
     }
 }

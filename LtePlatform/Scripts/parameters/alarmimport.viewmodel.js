@@ -15,6 +15,7 @@
             $("#EndDate").datepicker({ dateFormat: 'yy-mm-dd' });
             self.initialize(true);
             updateDumpHistory(self);
+            self.clearItems();
         });
         this.post('#alarmZtePost', function () {
             $("#BeginDate").datepicker({ dateFormat: 'yy-mm-dd' });
@@ -40,16 +41,28 @@
         this.get('/Parameters/HwAlarmPost', function () { this.app.runRoute('post', '#alarmHwPost'); });
     });
 
-    self.dumpItems = function() {
-        while (self.totalSuccessItems() + self.totalFailItems() < self.totalDumpItems()) {
-            sendRequest(app.dataModel.dumpAlarmUrl, "PUT", null, function(result) {
-                if (result === true) {
-                    self.totalSuccessItems(self.totalSuccessItems() + 1);
-                } else {
-                    self.totalFailItems(self.totalFailItems() + 1);
-                }
-            });
-        }
+    self.dumpItems = function () {
+        sendRequest(app.dataModel.dumpAlarmUrl, "PUT", null, function (result) {
+            if (result === true) {
+                self.totalSuccessItems(self.totalSuccessItems() + 1);
+            } else {
+                self.totalFailItems(self.totalFailItems() + 1);
+            }
+            if (self.totalSuccessItems() + self.totalFailItems() < self.totalDumpItems()) {
+                self.dumpItems();
+            } else {
+                updateDumpHistory(self);
+                self.clearItems();
+            }
+        });
+    };
+
+    self.clearItems = function() {
+        sendRequest(app.dataModel.dumpAlarmUrl, "DELETE", null, function() {
+            self.totalDumpItems(0);
+            self.totalFailItems(0);
+            self.totalSuccessItems(0);
+        });
     };
 
     return self;

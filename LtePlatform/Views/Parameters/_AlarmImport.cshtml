@@ -43,6 +43,10 @@
             成功数：<span data-bind="text: totalSuccessItems"></span>&nbsp;
             失败数：<span data-bind="text: totalFailItems"></span>
         </p>
+        <div class="progress" data-bind="visible: totalDumpItems()>0">
+            <div class="progress-bar" role="progressbar" aria-valuemax="100" aria-valuemin="0"
+                 data-bind="style:{width: 100*(totalSuccessItems()+totalFailItems())/totalDumpItems()+'%'}"></div>
+        </div>
     </div>
 </div>
 <!-- /ko -->

@@ -90,10 +90,15 @@ namespace Lte.Evaluations.DataService
             return AlarmStats.Count;
         }
 
+        public void ClearAlarmStats()
+        {
+            AlarmStats.Clear();
+        }
+
         public IEnumerable<AlarmHistory> GetAlarmHistories(DateTime begin, DateTime end)
         {
             var results = new List<AlarmHistory>();
-            while (begin < end)
+            while (begin < end.AddDays(1))
             {
                 var beginDate = begin;
                 var endDate = begin.AddDays(1);
