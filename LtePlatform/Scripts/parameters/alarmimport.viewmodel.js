@@ -54,6 +54,14 @@
                 updateDumpHistory(self);
                 self.clearItems();
             }
+        }, function() {
+            self.totalFailItems(self.totalFailItems() + 1);
+            if (self.totalSuccessItems() + self.totalFailItems() < self.totalDumpItems()) {
+                self.dumpItems();
+            } else {
+                updateDumpHistory(self);
+                self.clearItems();
+            }
         });
     };
 

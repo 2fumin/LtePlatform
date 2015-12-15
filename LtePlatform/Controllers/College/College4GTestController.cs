@@ -58,6 +58,7 @@ namespace LtePlatform.Controllers.College
         [ApiDoc("获取各个校园对应的速率等指标")]
         [ApiParameterDoc("begin", "开始日期")]
         [ApiParameterDoc("end", "结束日期")]
+        [ApiParameterDoc("upload", "是否查询上行速率，0表示下行，其他值表示上行")]
         [ApiResponse("各个校园对应的速率等指标，以字典格式表示")]
         public Dictionary<string, double> GetAverageRates(DateTime begin, DateTime end, byte upload)
         {

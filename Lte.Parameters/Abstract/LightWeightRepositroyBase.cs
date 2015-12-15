@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Abp.Domain.Entities;
 using Abp.Domain.Repositories;
+using Lte.Domain.Regular;
 using Lte.Parameters.Concrete;
 using Microsoft.Practices.Unity.Utility;
 
@@ -121,7 +122,8 @@ namespace Lte.Parameters.Abstract
         public TEntity InsertOrUpdate(TEntity entity)
         {
             var item = Get(entity.Id);
-            return (item == null) ? Insert(entity) : Update(entity);
+            entity.CloneProperties(item);
+            return (item == null) ? Insert(entity) : Update(item);
         }
         
         public Task<TEntity> InsertOrUpdateAsync(TEntity entity)
