@@ -34,7 +34,7 @@ namespace LtePlatform.Controllers.College
         [ApiParameterDoc("date", "指定日期")]
         [ApiParameterDoc("hour", "指定时段")]
         [ApiResponse("4G测试记录集合")]
-        public IEnumerable<College4GTestView> GetViews(DateTime date, int hour)
+        public IEnumerable<College4GTestView> Get(DateTime date, int hour)
         {
             return _service.GetViews(date, hour);
         }
@@ -47,7 +47,7 @@ namespace LtePlatform.Controllers.College
         [ApiParameterDoc("eNodebName", "基站名称")]
         [ApiParameterDoc("sectorId", "扇区编号")]
         [ApiResponse("4G测试记录集合查询结果，或错误输出信息")]
-        public IHttpActionResult GetResult(DateTime date, int hour, string name, string eNodebName, byte sectorId)
+        public IHttpActionResult Get(DateTime date, int hour, string name, string eNodebName, byte sectorId)
         {
             var result = _service.GetResult(date, hour, name, eNodebName, sectorId);
             return result == null ? (IHttpActionResult)BadRequest("Illegal input arguments!") :
@@ -60,7 +60,7 @@ namespace LtePlatform.Controllers.College
         [ApiParameterDoc("end", "结束日期")]
         [ApiParameterDoc("upload", "是否查询上行速率，0表示下行，其他值表示上行")]
         [ApiResponse("各个校园对应的速率等指标，以字典格式表示")]
-        public Dictionary<string, double> GetAverageRates(DateTime begin, DateTime end, byte upload)
+        public Dictionary<string, double> Get(DateTime begin, DateTime end, byte upload)
         {
             return _service.GetAverageRates(begin, end, upload);
         }

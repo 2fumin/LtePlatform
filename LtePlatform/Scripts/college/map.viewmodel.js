@@ -41,7 +41,29 @@
         this.get('/College/Map', function () { this.app.runRoute('get', '#collegeMap'); });
     });
 
-    self.refresh = function () { };
+    self.showRates = function() {
+        sendRequest(app.dataModel.college4GTestUrl, "GET", {
+            begin: self.beginDate(),
+            end: self.endDate(),
+            upload: 1
+        }, function(download) {
+            var downloadRates = matchCollegeStats(self.collegeNames(), download);
+            sendRequest(app.dataModel.college4GTestUrl, "GET", {
+                begin: self.beginDate(),
+                end: self.endDate(),
+                upload: 0
+            }, function(upload) {
+                var uploadRates = matchCollegeStats(self.collegeNames(), upload);
+                sendRequest(app.dataModel.college3GTestUrl, "GET", {
+                    begin: self.beginDate(),
+                    end: self.endDate()
+                }, function(evdo) {
+                    var evdoRates = matchCollegeStats(self.collegeNames(), evdo);
+                    showCollegeRates(self.collegeNames(), downloadRates, uploadRates, evdoRates, "#college-rates");
+                });
+            });
+        });
+    };
 
     self.toggleCollegeMarkers = function () {
         toggleDisplay(map.collegeMarkers);

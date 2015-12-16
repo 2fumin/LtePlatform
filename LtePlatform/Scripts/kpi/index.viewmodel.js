@@ -60,7 +60,7 @@
             },
             success: function (data) {
                 $(".kpi-trend").each(function () {
-                    var chart = new comboChart();
+                    var chart = new ComboChart();
                     chart.title.text = $(this).attr('name');
                     var kpiOption = lowerFirstLetter(chart.title.text);
                     chart.xAxis[0].categories = data.statDates;

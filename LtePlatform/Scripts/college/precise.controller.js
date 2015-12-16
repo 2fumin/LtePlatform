@@ -86,7 +86,7 @@
 };
 
 var queryPreciseChart = function (viewModel, cell, tag) {
-    var chart = new comboChart();
+    var chart = new ComboChart();
     chart.title.text = cell.eNodebName + "-" + cell.sectorId + '精确覆盖率变化趋势';
     var dom = {
         tag: tag,

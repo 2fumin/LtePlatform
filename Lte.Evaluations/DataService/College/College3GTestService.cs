@@ -61,6 +61,42 @@ namespace Lte.Evaluations.DataService.College
             return query.GroupBy(x => x.Name).ToDictionary(s => s.Key, t => t.Average(x => x.Rate));
         }
 
+        public Dictionary<string, double> GetAverageUsers(DateTime begin, DateTime end)
+        {
+            var results = _repository.GetAllList(begin, end);
+            var query = from r in results
+                join c in _collegeRepository.GetAllList() on r.CollegeId equals c.Id
+                select new {c.Name, Users = (double) r.AccessUsers};
+            return query.GroupBy(x => x.Name).ToDictionary(s => s.Key, t => t.Average(x => x.Users));
+        }
+
+        public Dictionary<string, double> GetAverageMinRssi(DateTime begin, DateTime end)
+        {
+            var results = _repository.GetAllList(begin, end);
+            var query = from r in results
+                        join c in _collegeRepository.GetAllList() on r.CollegeId equals c.Id
+                        select new { c.Name, Rssi = r.MinRssi };
+            return query.GroupBy(x => x.Name).ToDictionary(s => s.Key, t => t.Average(x => x.Rssi));
+        }
+
+        public Dictionary<string, double> GetAverageMaxRssi(DateTime begin, DateTime end)
+        {
+            var results = _repository.GetAllList(begin, end);
+            var query = from r in results
+                        join c in _collegeRepository.GetAllList() on r.CollegeId equals c.Id
+                        select new { c.Name, Rssi = r.MaxRssi };
+            return query.GroupBy(x => x.Name).ToDictionary(s => s.Key, t => t.Average(x => x.Rssi));
+        }
+
+        public Dictionary<string, double> GetAverageVswr(DateTime begin, DateTime end)
+        {
+            var results = _repository.GetAllList(begin, end);
+            var query = from r in results
+                        join c in _collegeRepository.GetAllList() on r.CollegeId equals c.Id
+                        select new { c.Name, Vswr = r.Vswr };
+            return query.GroupBy(x => x.Name).ToDictionary(s => s.Key, t => t.Average(x => x.Vswr));
+        }
+
         public Task<College3GTestResults> Post(College3GTestResults result)
         {
             return _repository.InsertOrUpdateAsync(result);

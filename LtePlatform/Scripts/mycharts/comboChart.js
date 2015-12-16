@@ -1,4 +1,4 @@
-﻿function comboChart() {
+﻿function ComboChart() {
     var self = this;
     self.title = {
         text: 'The Combo Chart including line, column, pie, ...'

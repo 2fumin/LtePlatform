@@ -122,8 +122,10 @@ namespace Lte.Parameters.Abstract
         public TEntity InsertOrUpdate(TEntity entity)
         {
             var item = Get(entity.Id);
+            if (item == null)
+                return Insert(entity);
             entity.CloneProperties(item);
-            return (item == null) ? Insert(entity) : Update(item);
+            return Update(item);
         }
         
         public Task<TEntity> InsertOrUpdateAsync(TEntity entity)

@@ -28,7 +28,7 @@ namespace LtePlatform.Controllers.College
         [ApiParameterDoc("date", "日期")]
         [ApiParameterDoc("hour", "时段")]
         [ApiResponse("3G测试记录视图列表")]
-        public IEnumerable<College3GTestView> GetViews(DateTime date, int hour)
+        public IEnumerable<College3GTestView> Get(DateTime date, int hour)
         {
             return _service.GetViews(date, hour);
         }
@@ -39,7 +39,7 @@ namespace LtePlatform.Controllers.College
         [ApiParameterDoc("hour", "时段")]
         [ApiParameterDoc("name", "校园名称")]
         [ApiResponse("3G测试记录视图")]
-        public IHttpActionResult GetResult(DateTime date, int hour, string name)
+        public IHttpActionResult Get(DateTime date, int hour, string name)
         {
             var result = _service.GetResult(date, hour, name);
             return result == null ? (IHttpActionResult)BadRequest("Bad College Name!") : Ok(result);
@@ -50,9 +50,31 @@ namespace LtePlatform.Controllers.College
         [ApiParameterDoc("begin", "开始日期")]
         [ApiParameterDoc("end", "结束日期")]
         [ApiResponse("各校园的平均速率")]
-        public Dictionary<string, double> GetAverageRates(DateTime begin, DateTime end)
+        public Dictionary<string, double> Get(DateTime begin, DateTime end)
         {
             return _service.GetAverageRates(begin, end);
+        }
+
+
+        [HttpGet]
+        [ApiDoc("查询指定日期范围内的各校园的单项指标")]
+        [ApiParameterDoc("begin", "开始日期")]
+        [ApiParameterDoc("end", "结束日期")]
+        [ApiParameterDoc("kpiName", "指标名称")]
+        [ApiResponse("各校园的单项指标")]
+        public Dictionary<string, double> Get(DateTime begin, DateTime end, string kpiName)
+        {
+            switch (kpiName)
+            {
+                case "users":
+                    return _service.GetAverageUsers(begin, end);
+                case "minRssi":
+                    return _service.GetAverageMinRssi(begin, end);
+                case "maxRssi":
+                    return _service.GetAverageMaxRssi(begin, end);
+                default:
+                    return _service.GetAverageVswr(begin, end);
+            }
         }
 
         [HttpPost]

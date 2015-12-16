@@ -156,3 +156,59 @@ var drawCollegeCdmaDistributions = function(viewModel) {
         }
     });
 };
+
+var matchCollegeStats = function(names, dict) {
+    var stats = [];
+    for (var i = 0; i < names.length; i++) {
+        if (dict[names[i]] !== undefined) {
+            stats.push(dict[names[i]]);
+        } else {
+            stats.push(null);
+        }
+    }
+    return stats;
+};
+
+var showCollegeRates = function(collegeNames, downloadRates, uploadRates, evdoRates, tag) {
+    var chart = new ComboChart();
+    chart.title.text = "校园网速率统计";
+
+    chart.xAxis[0].categories = collegeNames;
+    chart.xAxis[0].title.text = "校园名称";
+
+    chart.yAxis[0].title.text = '数据速率';
+    chart.yAxis[0].labels.format = '{value} kByte/s';
+
+    chart.series.push({
+        type: 'column',
+        name: '4G下行速率',
+        data: downloadRates
+    });
+    chart.series.push({
+        type: 'column',
+        name: '4G上行行速率',
+        data: uploadRates
+    });
+    chart.series.push({
+        type: 'line',
+        name: '3G下行速率',
+        data: evdoRates
+    });
+
+    $(tag).dialog({
+        modal: true,
+        title: chart.title.text,
+        hide: 'slide',
+        width: 960,
+        height: 680,
+        buttons: {
+            '关闭': function () {
+                $(tag).dialog("close");
+            }
+        },
+        open: function () {
+            $(tag).html("");
+            $(tag).highcharts(chart.options);
+        }
+    });
+};
