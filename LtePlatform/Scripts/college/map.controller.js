@@ -186,7 +186,7 @@ var showCollegeRates = function(collegeNames, downloadRates, uploadRates, evdoRa
     });
     chart.series.push({
         type: 'column',
-        name: '4G上行行速率',
+        name: '4G上行速率',
         data: uploadRates
     });
     chart.series.push({
@@ -207,6 +207,171 @@ var showCollegeRates = function(collegeNames, downloadRates, uploadRates, evdoRa
             }
         },
         open: function () {
+            $(tag).html("");
+            $(tag).highcharts(chart.options);
+        }
+    });
+};
+
+var showCollegeUsers = function(collegeNames, lteUsers, evdoUsers, tag) {
+    var chart = new ComboChart();
+    chart.title.text = "校园网平均用户数统计";
+
+    chart.xAxis[0].categories = collegeNames;
+    chart.xAxis[0].title.text = "校园名称";
+
+    chart.yAxis[0].title.text = '平均用户数';
+
+    chart.series.push({
+        type: 'column',
+        name: '4G用户数',
+        data: lteUsers
+    });
+    chart.series.push({
+        type: 'column',
+        name: '3G用户数',
+        data: evdoUsers
+    });
+
+    $(tag).dialog({
+        modal: true,
+        title: chart.title.text,
+        hide: 'slide',
+        width: 960,
+        height: 680,
+        buttons: {
+            '关闭': function() {
+                $(tag).dialog("close");
+            }
+        },
+        open: function() {
+            $(tag).html("");
+            $(tag).highcharts(chart.options);
+        }
+    });
+};
+
+var showCollegeCoverage = function(collegeNames, rsrpStats, sinrStats, tag) {
+    var chart = new ComboChart();
+    chart.title.text = "校园网4G覆盖指标统计";
+
+    chart.xAxis[0].categories = collegeNames;
+    chart.xAxis[0].title.text = "校园名称";
+
+    chart.yAxis[0].title.text = 'RSRP';
+    chart.yAxis[0].labels.format = '{value} dBm';
+    chart.yAxis.push({
+        title: {
+            text: 'SINR',
+            style: {
+                color: Highcharts.getOptions().colors[1]
+            }
+        },
+        labels: {
+            format: '{value} dB',
+            style: {
+                color: Highcharts.getOptions().colors[1]
+            }
+        },
+        opposite: true
+    });
+
+    chart.series.push({
+        type: 'column',
+        name: 'RSRP(dBm)',
+        data: rsrpStats,
+        tooltip: {
+            valueSuffix: 'dBm'
+        }
+    });
+    chart.series.push({
+        type: 'line',
+        name: 'SINR(dB)',
+        data: sinrStats,
+        yAxis: 1,
+        tooltip: {
+            valueSuffix: 'dB'
+        }
+    });
+    
+    $(tag).dialog({
+        modal: true,
+        title: chart.title.text,
+        hide: 'slide',
+        width: 960,
+        height: 680,
+        buttons: {
+            '关闭': function() {
+                $(tag).dialog("close");
+            }
+        },
+        open: function() {
+            $(tag).html("");
+            $(tag).highcharts(chart.options);
+        }
+    });
+};
+
+var showCollegeInterference = function(collegeNames, minRssiStats, maxRssiStats, vswrStats, tag) {
+    var chart = new ComboChart();
+    chart.title.text = "校园网3G干扰指标统计";
+
+    chart.xAxis[0].categories = collegeNames;
+    chart.xAxis[0].title.text = "校园名称";
+
+    chart.yAxis[0].title.text = '驻波比';
+    chart.yAxis.push({
+        title: {
+            text: 'RSSI',
+            style: {
+                color: Highcharts.getOptions().colors[1]
+            }
+        },
+        labels: {
+            format: '{value} dBm',
+            style: {
+                color: Highcharts.getOptions().colors[1]
+            }
+        },
+        opposite: true
+    });
+
+    chart.series.push({
+        type: 'column',
+        name: '驻波比',
+        data: vswrStats
+    });
+    chart.series.push({
+        type: 'line',
+        name: 'RSSI最大值',
+        data: maxRssiStats,
+        yAxis: 1,
+        tooltip: {
+            valueSuffix: 'dBm'
+        }
+    });
+    chart.series.push({
+        type: 'line',
+        name: 'RSSI最小值',
+        data: minRssiStats,
+        yAxis: 1,
+        tooltip: {
+            valueSuffix: 'dBm'
+        }
+    });
+
+    $(tag).dialog({
+        modal: true,
+        title: chart.title.text,
+        hide: 'slide',
+        width: 960,
+        height: 680,
+        buttons: {
+            '关闭': function() {
+                $(tag).dialog("close");
+            }
+        },
+        open: function() {
             $(tag).html("");
             $(tag).highcharts(chart.options);
         }

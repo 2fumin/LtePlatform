@@ -93,7 +93,7 @@ namespace Lte.Evaluations.DataService.College
             var results = _repository.GetAllList(begin, end);
             var query = from r in results
                         join c in _collegeRepository.GetAllList() on r.CollegeId equals c.Id
-                        select new { c.Name, Vswr = r.Vswr };
+                        select new { c.Name, r.Vswr };
             return query.GroupBy(x => x.Name).ToDictionary(s => s.Key, t => t.Average(x => x.Vswr));
         }
 

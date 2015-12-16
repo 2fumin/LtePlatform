@@ -65,6 +65,67 @@
         });
     };
 
+    self.showUsers = function() {
+        sendRequest(app.dataModel.college4GTestUrl, "GET", {
+            begin: self.beginDate(),
+            end: self.endDate(),
+            kpiName: "users"
+        }, function(lte) {
+            var lteUsers = matchCollegeStats(self.collegeNames(), lte);
+            sendRequest(app.dataModel.college3GTestUrl, "GET", {
+                begin: self.beginDate(),
+                end: self.endDate(),
+                kpiName: "users"
+            }, function(evdo) {
+                var evdoUsers = matchCollegeStats(self.collegeNames(), evdo);
+                showCollegeUsers(self.collegeNames(), lteUsers, evdoUsers, "#college-users");
+            });
+        });
+    };
+
+    self.showCoverage = function() {
+        sendRequest(app.dataModel.college4GTestUrl, "GET", {
+            begin: self.beginDate(),
+            end: self.endDate(),
+            kpiName: "rsrp"
+        }, function(rsrp) {
+            var rsrpStats = matchCollegeStats(self.collegeNames(), rsrp);
+            sendRequest(app.dataModel.college4GTestUrl, "GET", {
+                begin: self.beginDate(),
+                end: self.endDate(),
+                kpiName: "sinr"
+            }, function(sinr) {
+                var sinrStats = matchCollegeStats(self.collegeNames(), sinr);
+                showCollegeCoverage(self.collegeNames(), rsrpStats, sinrStats, "#college-coverage");
+            });
+        });
+    };
+
+    self.showInterference = function() {
+        sendRequest(app.dataModel.college3GTestUrl, "GET", {
+            begin: self.beginDate(),
+            end: self.endDate(),
+            kpiName: "minRssi"
+        }, function(minRssi) {
+            var minRssiStats = matchCollegeStats(self.collegeNames(), minRssi);
+            sendRequest(app.dataModel.college3GTestUrl, "GET", {
+                begin: self.beginDate(),
+                end: self.endDate(),
+                kpiName: "maxRssi"
+            }, function(maxRssi) {
+                var maxRssiStats = matchCollegeStats(self.collegeNames(), maxRssi);
+                sendRequest(app.dataModel.college3GTestUrl, "GET", {
+                    begin: self.beginDate(),
+                    end: self.endDate(),
+                    kpiName: "vswr"
+                }, function(vswr) {
+                    var vswrStats = matchCollegeStats(self.collegeNames(), vswr);
+                    showCollegeInterference(self.collegeNames(), minRssiStats, maxRssiStats, vswrStats, "#college-interference");
+                });
+            });
+        });
+    };
+
     self.toggleCollegeMarkers = function () {
         toggleDisplay(map.collegeMarkers);
     };

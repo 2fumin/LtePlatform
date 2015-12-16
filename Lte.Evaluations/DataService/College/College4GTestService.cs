@@ -80,6 +80,33 @@ namespace Lte.Evaluations.DataService.College
             return query.GroupBy(x => x.Name).ToDictionary(s => s.Key, t => t.Average(x => x.Rate));
         }
 
+        public Dictionary<string, double> GetAverageUsers(DateTime begin, DateTime end)
+        {
+            var results = _repository.GetAllList().Where(x => x.TestTime >= begin && x.TestTime < end);
+            var query = from r in results
+                        join c in _collegeRepository.GetAllList() on r.CollegeId equals c.Id
+                        select new { c.Name, Users = (double)r.AccessUsers };
+            return query.GroupBy(x => x.Name).ToDictionary(s => s.Key, t => t.Average(x => x.Users));
+        }
+
+        public Dictionary<string, double> GetAverageRsrp(DateTime begin, DateTime end)
+        {
+            var results = _repository.GetAllList().Where(x => x.TestTime >= begin && x.TestTime < end);
+            var query = from r in results
+                        join c in _collegeRepository.GetAllList() on r.CollegeId equals c.Id
+                        select new { c.Name, r.Rsrp };
+            return query.GroupBy(x => x.Name).ToDictionary(s => s.Key, t => t.Average(x => x.Rsrp));
+        }
+
+        public Dictionary<string, double> GetAverageSinr(DateTime begin, DateTime end)
+        {
+            var results = _repository.GetAllList().Where(x => x.TestTime >= begin && x.TestTime < end);
+            var query = from r in results
+                        join c in _collegeRepository.GetAllList() on r.CollegeId equals c.Id
+                        select new { c.Name, r.Sinr };
+            return query.GroupBy(x => x.Name).ToDictionary(s => s.Key, t => t.Average(x => x.Sinr));
+        }
+
         public Task<College4GTestResults> Post(College4GTestResults result)
         {
             return _repository.InsertOrUpdateAsync(result);

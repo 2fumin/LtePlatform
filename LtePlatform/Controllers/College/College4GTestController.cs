@@ -65,6 +65,25 @@ namespace LtePlatform.Controllers.College
             return _service.GetAverageRates(begin, end, upload);
         }
 
+        [HttpGet]
+        [ApiDoc("获取各个校园对应的单项指标")]
+        [ApiParameterDoc("begin", "开始日期")]
+        [ApiParameterDoc("end", "结束日期")]
+        [ApiParameterDoc("kpiName", "指标名称")]
+        [ApiResponse("各个校园对应的单项指标，以字典格式表示")]
+        public Dictionary<string, double> Get(DateTime begin, DateTime end, string kpiName)
+        {
+            switch (kpiName)
+            {
+                case "users":
+                    return _service.GetAverageUsers(begin, end);
+                case "rsrp":
+                    return _service.GetAverageRsrp(begin, end);
+                default:
+                    return _service.GetAverageSinr(begin, end);
+            }
+        }
+
         [HttpPost]
         [ApiDoc("保存4G测试结果信息")]
         [ApiParameterDoc("result", "测试记录信息")]
