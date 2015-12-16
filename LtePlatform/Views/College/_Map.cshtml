@@ -23,7 +23,7 @@
                         <div class="col-md-7">
                             <input id="EndDate" class="form-control" data-bind="value: endDate" />
                         </div>
-                    </div> 
+                    </div>
                     <div class="btn-group">
                         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                             测试
@@ -34,6 +34,18 @@
                             <li><a href="#" data-bind="click: showUsers">用户数</a></li>
                             <li><a href="#" data-bind="click: showCoverage">覆盖</a></li>
                             <li><a href="#" data-bind="click: showInterference">干扰</a></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                            指标
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#" data-bind="click: showAlarms">告警分析</a></li>
+                            <li><a href="#" data-bind="click: showFlows">流量</a></li>
+                            <li><a href="#" data-bind="click: showConnection">连接性能</a></li>
+                            <li><a href="#" data-bind="click: showDrop">保持性能</a></li>
                         </ul>
                     </div>
                 </div>

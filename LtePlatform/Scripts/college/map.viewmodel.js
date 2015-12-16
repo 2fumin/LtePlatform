@@ -126,6 +126,22 @@
         });
     };
 
+    self.showAlarms = function() {
+
+    };
+
+    self.showFlows = function() {
+
+    };
+
+    self.showConnection = function() {
+
+    };
+
+    self.showDrop = function() {
+
+    };
+
     self.toggleCollegeMarkers = function () {
         toggleDisplay(map.collegeMarkers);
     };
