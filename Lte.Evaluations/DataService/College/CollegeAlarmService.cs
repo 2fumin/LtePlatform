@@ -1,0 +1,37 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Lte.Parameters.Abstract;
+
+namespace Lte.Evaluations.DataService.College
+{
+    public class CollegeAlarmService
+    {
+        private readonly ICollegeRepository _repository;
+        private readonly CollegeENodebService _service;
+
+        public CollegeAlarmService(ICollegeRepository repository, IInfrastructureRepository infrastructureRepository,
+            IENodebRepository eNodebRepository, IAlarmRepository alarmRepository)
+        {
+            _repository = repository;
+            _service = new CollegeENodebService(infrastructureRepository, eNodebRepository, alarmRepository);
+        }
+
+        public Dictionary<string, IEnumerable<Tuple<string, int>>> GetAlarmCounts(DateTime begin, DateTime end)
+        {
+            var colleges = _repository.GetAllList().Select(x => x.Name);
+            var results = new Dictionary<string, IEnumerable<Tuple<string, int>>>();
+            foreach (var college in colleges)
+            {
+                var alarms = _service.QueryCollegeENodebs(college, begin, end);
+                if (alarms.Any())
+                {
+                    results.Add(college, alarms.Select(x => new Tuple<string, int>(x.Name, x.AlarmTimes)));
+                }
+            }
+            return results;
+        }
+    }
+}

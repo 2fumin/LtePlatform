@@ -91,6 +91,7 @@
     <Compile Include="DataService\CellService.cs" />
     <Compile Include="DataService\College\College3GTestService.cs" />
     <Compile Include="DataService\College\College4GTestService.cs" />
+    <Compile Include="DataService\College\CollegeAlarmService.cs" />
     <Compile Include="DataService\College\CollegeBtssService.cs" />
     <Compile Include="DataService\College\CollegeCdmaCellsService.cs" />
     <Compile Include="DataService\College\CollegeCellsService.cs" />
