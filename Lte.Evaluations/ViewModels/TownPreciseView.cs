@@ -18,6 +18,8 @@ namespace Lte.Evaluations.ViewModels
 
         public string Town { get; set; } = "-";
 
+        public int TownId { get; set; }
+
         public int TotalMrs { get; set; }
 
         public int ThirdNeighbors { get; set; }

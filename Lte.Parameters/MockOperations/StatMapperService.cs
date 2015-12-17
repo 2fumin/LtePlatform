@@ -24,6 +24,7 @@ namespace Lte.Parameters.MockOperations
                 .ForMember(d => d.ThirdNeighbors, opt => opt.MapFrom(s => (int) (s.TotalMrs*s.ThirdNeighborRate)/100))
                 .ForMember(d => d.SecondNeighbors, opt => opt.MapFrom(s => (int) (s.TotalMrs*s.SecondNeighborRate)/100))
                 .ForMember(d => d.FirstNeighbors, opt => opt.MapFrom(s => (int) (s.TotalMrs*s.FirstNeighborRate)/100));
+            Mapper.CreateMap<PreciseCoverage4G, TownPreciseCoverage4GStat>();
         }
 
         public static void MapTopConnection3G()

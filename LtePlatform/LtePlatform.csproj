@@ -479,6 +479,11 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\angular-messages.js" />
+    <Content Include="Scripts\angular-messages.min.js" />
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\app.simplemodel.js" />
     <Content Include="Scripts\app\base64-string.js" />
     <Content Include="Scripts\app\html5csv.js" />
@@ -540,6 +545,8 @@
     <None Include="Areas\TestPage\Views\WebApiTest\SimpleType.cshtml" />
     <Content Include="Areas\TestPage\Views\WebApiTest\_BasicPost.cshtml" />
     <None Include="Properties\PublishProfiles\Lte2.pubxml" />
+    <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Scripts\angular-messages.min.js.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
