@@ -719,6 +719,7 @@
     <Content Include="Views\Kpi\_PreciseTopTable.cshtml" />
     <Content Include="Views\Kpi\_PreciseSectorMapInfoBox.cshtml" />
     <Content Include="Views\College\_DistributionMapInfoBox.cshtml" />
+    <None Include="Views\Kpi\PreciseImport.cshtml" />
     <None Include="Views\Kpi\_TopDrop2G.cshtml" />
     <None Include="Views\Kpi\_TopDrop2GTable.cshtml" />
     <Content Include="Views\Kpi\_TopDrop2GTrendTable.cshtml" />

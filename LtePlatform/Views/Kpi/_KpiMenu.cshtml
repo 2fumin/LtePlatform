@@ -15,6 +15,14 @@
     <li>@Html.ActionLink("忙时掉话", "TopDrop2G")</li>
     <li>@Html.ActionLink("全天掉话", "TopDrop2GDaily")</li>
     <li>@Html.ActionLink("3G连接", "TopConnection3G")</li>
-    <li>@Html.ActionLink("指标导入", "Import")</li>
+    <li>
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            指标导入<span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>@Html.ActionLink("2G指标导入", "Import")</li>
+            <li>@Html.ActionLink("精确覆盖率导入", "PreciseImport")</li>
+        </ul>
+    </li>
 </ul>
 

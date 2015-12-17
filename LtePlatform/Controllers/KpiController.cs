@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Web;
+ using System.Text;
+ using System.Web;
 using System.Web.Mvc;
 using Lte.Domain.Common;
 using Lte.Evaluations.DataService;
@@ -86,6 +87,28 @@ namespace LtePlatform.Controllers
             }
             ViewBag.Message = message;
             return View("Import");
+        }
+
+        public ActionResult PreciseImport()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ViewResult PrecisePost()
+        {
+            var message = new List<string>();
+            var httpPostedFileBase = Request.Files["preciseFile"];
+            if (httpPostedFileBase == null || httpPostedFileBase.FileName == "")
+            {
+                ViewBag.ErrorMessage = "上传文件为空！请先上传文件。";
+            }
+            else
+            {
+                var reader = new StreamReader(httpPostedFileBase.InputStream, Encoding.GetEncoding("GB2312"));
+            }
+            ViewBag.Message = message;
+            return View("PreciseImport");
         }
     }
 }
