@@ -25,7 +25,7 @@ namespace LtePlatform
                 "~/Scripts/knockout.validation.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/highcharts").Include(
-                "~/Scripts/Highcharts/highcharts.js",
+                "~/Scripts/Highcharts/highcharts.src.js",
                 "~/Scripts/Highcharts/highcharts-3d.js",
                 "~/Scripts/Highcharts/highcharts-more.js",
                 "~/Scripts/Highcharts/modules/exporting.js",
@@ -71,6 +71,7 @@ namespace LtePlatform
             bundles.Add(new ScriptBundle("~/bundles/kpiPrecise").Include(
                 "~/Scripts/sammy-{version}.js",
                 "~/Scripts/app/common.js",
+                "~/Scripts/mycharts/drilldown.chart.js",
                 "~/Scripts/mycharts/drilldownPie.js",
                 "~/Scripts/app/app.datamodel.js",
                 "~/Scripts/app/app.viewmodel.js",
@@ -82,6 +83,7 @@ namespace LtePlatform
             bundles.Add(new ScriptBundle("~/bundles/kpiPreciseTrend").Include(
                 "~/Scripts/sammy-{version}.js",
                 "~/Scripts/app/common.js",
+                "~/Scripts/mycharts/drilldown.chart.js",
                 "~/Scripts/mycharts/drilldownPie.js",
                 "~/Scripts/app/app.datamodel.js",
                 "~/Scripts/app/app.viewmodel.js",
@@ -110,6 +112,8 @@ namespace LtePlatform
             bundles.Add(new ScriptBundle("~/bundles/collegeMap").Include(
                 "~/Scripts/sammy-{version}.js",
                 "~/Scripts/app/common.js",
+                "~/Scripts/mycharts/drilldown.chart.js",
+                "~/Scripts/mycharts/drilldownColumn.js",
                 "~/Scripts/baidu/plugins/baidu.tangram.js",
                 "~/Scripts/baidu/plugins/InfoBox.js",
                 "~/Scripts/baidu/mapContainer.js",

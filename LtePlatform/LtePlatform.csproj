@@ -615,6 +615,8 @@
     <Content Include="Scripts\kpi\top.drop2G.viewmodel.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\mycharts\comboChart.js" />
+    <Content Include="Scripts\mycharts\drilldown.chart.js" />
+    <Content Include="Scripts\mycharts\drilldownColumn.js" />
     <Content Include="Scripts\mycharts\drilldownPie.js" />
     <Content Include="Scripts\parameters\alarmimport.controller.js" />
     <Content Include="Scripts\parameters\alarmimport.viewmodel.js" />

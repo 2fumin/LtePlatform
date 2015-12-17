@@ -1,5 +1,5 @@
 ﻿var showMrPie = function(districtStats, townStats) {
-    var chart = new pieChart();
+    var chart = new DrilldownPie();
     chart.title.text = "分镇区测量报告数分布图";
     chart.series[0].data = [];
     chart.drilldown.series = [];

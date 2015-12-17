@@ -127,7 +127,25 @@
     };
 
     self.showAlarms = function() {
-
+        sendRequest(app.dataModel.collegeAlarmUrl, "GET", {
+            begin: self.beginDate(),
+            end: self.endDate()
+        }, function(results) {
+            var chart = new DrilldownColumn();
+            for (var i = 0; i < self.collegeNames().length; i++) {
+                var collegeName = self.collegeNames()[i];
+                if (results[collegeName] !== undefined) {
+                    var collegeAlarms = 0;
+                    var subData = [];
+                    for (var j = 0; j < results[collegeName].length; j++) {
+                        collegeAlarms += results[collegeName].item2;
+                        subData.push([results[collegeName].item1, results[collegeName].item2]);
+                    }
+                    chart.addOneSeries(collegeName, collegeAlarms, subData);
+                }
+            }
+            $("#college-alarms").highcharts(chart.options);
+        });
     };
 
     self.showFlows = function() {

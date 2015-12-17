@@ -25,6 +25,7 @@
     self.collegePreciseUrl = "/api/CollegePrecise/";
     self.collegeCellsUrl = "/api/CollegeCells/";
     self.collegeCdmaCellsUrl = "/api/CollegeCdmaCells/";
+    self.collegeAlarmUrl = "/api/CollegeAlarm";
 
     self.cellUrl = "/api/Cell/";
     self.cdmaCellUrl = "/api/CdmaCell";
