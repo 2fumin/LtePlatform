@@ -114,3 +114,22 @@ var getErrorMessage = function (result) {
     var responseText = error.responseText;
     return "Status: " + error.status + "; Status Text: " + error.statusText + "; Message: " + responseText;
 };
+
+var showChartDialog = function(tag, chart) {
+    $(tag).dialog({
+        modal: true,
+        title: chart.title.text,
+        hide: 'slide',
+        width: 960,
+        height: 680,
+        buttons: {
+            '关闭': function() {
+                $(tag).dialog("close");
+            }
+        },
+        open: function() {
+            $(tag).html("");
+            $(tag).highcharts(chart.options);
+        }
+    });
+};

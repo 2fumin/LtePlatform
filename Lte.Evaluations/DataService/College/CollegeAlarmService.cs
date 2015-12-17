@@ -25,7 +25,7 @@ namespace Lte.Evaluations.DataService.College
             var results = new Dictionary<string, IEnumerable<Tuple<string, int>>>();
             foreach (var college in colleges)
             {
-                var alarms = _service.QueryCollegeENodebs(college, begin, end);
+                var alarms = _service.QueryCollegeENodebs(college, begin, end).Where(x => x.AlarmTimes > 0).ToArray();
                 if (alarms.Any())
                 {
                     results.Add(college, alarms.Select(x => new Tuple<string, int>(x.Name, x.AlarmTimes)));

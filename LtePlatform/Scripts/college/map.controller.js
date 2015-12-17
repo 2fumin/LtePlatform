@@ -195,22 +195,7 @@ var showCollegeRates = function(collegeNames, downloadRates, uploadRates, evdoRa
         data: evdoRates
     });
 
-    $(tag).dialog({
-        modal: true,
-        title: chart.title.text,
-        hide: 'slide',
-        width: 960,
-        height: 680,
-        buttons: {
-            '关闭': function () {
-                $(tag).dialog("close");
-            }
-        },
-        open: function () {
-            $(tag).html("");
-            $(tag).highcharts(chart.options);
-        }
-    });
+    showChartDialog(tag, chart);
 };
 
 var showCollegeUsers = function(collegeNames, lteUsers, evdoUsers, tag) {
@@ -233,22 +218,7 @@ var showCollegeUsers = function(collegeNames, lteUsers, evdoUsers, tag) {
         data: evdoUsers
     });
 
-    $(tag).dialog({
-        modal: true,
-        title: chart.title.text,
-        hide: 'slide',
-        width: 960,
-        height: 680,
-        buttons: {
-            '关闭': function() {
-                $(tag).dialog("close");
-            }
-        },
-        open: function() {
-            $(tag).html("");
-            $(tag).highcharts(chart.options);
-        }
-    });
+    showChartDialog(tag, chart);
 };
 
 var showCollegeCoverage = function(collegeNames, rsrpStats, sinrStats, tag) {
@@ -294,22 +264,7 @@ var showCollegeCoverage = function(collegeNames, rsrpStats, sinrStats, tag) {
         }
     });
     
-    $(tag).dialog({
-        modal: true,
-        title: chart.title.text,
-        hide: 'slide',
-        width: 960,
-        height: 680,
-        buttons: {
-            '关闭': function() {
-                $(tag).dialog("close");
-            }
-        },
-        open: function() {
-            $(tag).html("");
-            $(tag).highcharts(chart.options);
-        }
-    });
+    showChartDialog(tag, chart);
 };
 
 var showCollegeInterference = function(collegeNames, minRssiStats, maxRssiStats, vswrStats, tag) {
@@ -360,20 +315,5 @@ var showCollegeInterference = function(collegeNames, minRssiStats, maxRssiStats,
         }
     });
 
-    $(tag).dialog({
-        modal: true,
-        title: chart.title.text,
-        hide: 'slide',
-        width: 960,
-        height: 680,
-        buttons: {
-            '关闭': function() {
-                $(tag).dialog("close");
-            }
-        },
-        open: function() {
-            $(tag).html("");
-            $(tag).highcharts(chart.options);
-        }
-    });
+    showChartDialog(tag, chart);
 };

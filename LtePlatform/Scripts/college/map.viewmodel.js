@@ -138,13 +138,13 @@
                     var collegeAlarms = 0;
                     var subData = [];
                     for (var j = 0; j < results[collegeName].length; j++) {
-                        collegeAlarms += results[collegeName].item2;
-                        subData.push([results[collegeName].item1, results[collegeName].item2]);
+                        collegeAlarms += results[collegeName][j].item2;
+                        subData.push([results[collegeName][j].item1, results[collegeName][j].item2]);
                     }
                     chart.addOneSeries(collegeName, collegeAlarms, subData);
                 }
             }
-            $("#college-alarms").highcharts(chart.options);
+            showChartDialog("#college-alarms", chart);
         });
     };
 
