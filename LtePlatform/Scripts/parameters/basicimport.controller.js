@@ -84,8 +84,8 @@ var postAllENodebs = function(viewModel) {
 var postAllBtss = function(viewModel) {
     if (viewModel.newBtss().length > 0) {
         sendRequest(app.dataModel.newBtsExcelsUrl, "POST", {
-            infos: viewModel.newBtss(result)
-        }, function() {
+            infos: viewModel.newBtss()
+        }, function(result) {
             viewModel.dumpResultMessage(viewModel.dumpResultMessage() + "完成CDMA基站导入" + result + "个；");
             viewModel.newBtss([]);
         });
@@ -107,8 +107,8 @@ var postAllCdmaCells = function(viewModel) {
     if (viewModel.newCdmaCells().length > 0) {
         sendRequest(app.dataModel.newCdmaCellExcelsUrl, "POST", {
             infos: viewModel.newCdmaCells()
-        }, function() {
-            viewModel.dumpResultMessage(viewModel.dumpResultMessage() + "完成CDMA小区导入；");
+        }, function(result) {
+            viewModel.dumpResultMessage(viewModel.dumpResultMessage() + "完成CDMA小区导入" + result + "个；");
             viewModel.newCdmaCells([]);
         });
     }
