@@ -11,5 +11,7 @@ namespace Lte.Parameters.Abstract
     public interface ITownPreciseCoverage4GStatRepository : IRepository<TownPreciseCoverage4GStat>
     {
         List<TownPreciseCoverage4GStat> GetAllList(DateTime begin, DateTime end);
+
+        TownPreciseCoverage4GStat GetByTown(int townId, DateTime statTime);
     }
 }

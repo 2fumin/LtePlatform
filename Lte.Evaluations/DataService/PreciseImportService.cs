@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Lte.Domain.LinqToCsv.Context;
 using Lte.Domain.LinqToCsv.Description;
+using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.ViewModels;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
@@ -22,6 +23,8 @@ namespace Lte.Evaluations.DataService
 
         private static Stack<PreciseCoverage4G> PreciseCoverage4Gs { get; set; } 
 
+        public static List<TownPreciseView> TownPreciseViews { get; set; }
+
         public PreciseImportService(IPreciseCoverage4GRepository repository,
             ITownPreciseCoverage4GStatRepository regionRepository,
             IENodebRepository eNodebRepository, ITownRepository townRepository)
@@ -32,9 +35,11 @@ namespace Lte.Evaluations.DataService
             _townRepository = townRepository;
             if (PreciseCoverage4Gs == null)
                 PreciseCoverage4Gs = new Stack<PreciseCoverage4G>();
+            if (TownPreciseViews == null)
+                TownPreciseViews = new List<TownPreciseView>();
         }
 
-        public IEnumerable<TownPreciseView> UploadItems(StreamReader reader)
+        public void UploadItems(StreamReader reader)
         {
             try
             {
@@ -58,12 +63,36 @@ namespace Lte.Evaluations.DataService
                     townStat.TownId = x.TownId;
                     return townStat;
                 });
-                return townStats.Select(x=>TownPreciseView.ConstructView(x,_townRepository));
+                var statTime = items[0].StatTime;
+                var mergeStats = from stat in townStats
+                    group stat by stat.TownId
+                    into g
+                    select new TownPreciseCoverage4GStat
+                    {
+                        TownId = g.Key,
+                        FirstNeighbors = g.Sum(x => x.FirstNeighbors),
+                        SecondNeighbors = g.Sum(x => x.SecondNeighbors),
+                        ThirdNeighbors = g.Sum(x => x.ThirdNeighbors),
+                        TotalMrs = g.Sum(x => x.TotalMrs),
+                        StatTime = statTime
+                    };
+                TownPreciseViews = mergeStats.Select(x => TownPreciseView.ConstructView(x, _townRepository)).ToList();
             }
             catch
             {
                 // ignored
-                return new List<TownPreciseView>();
+                TownPreciseViews = new List<TownPreciseView>();
+            }
+        }
+        
+        public void DumpTownStats(TownPreciseViewContainer container)
+        {
+            var stats = Mapper.Map<IEnumerable<TownPreciseView>, IEnumerable<TownPreciseCoverage4GStat>>(container.Views);
+            foreach (var stat in from stat in stats
+                                 let item = _regionRepository.GetByTown(stat.TownId, stat.StatTime)
+                                 where item != null select stat)
+            {
+                _regionRepository.Insert(stat);
             }
         }
 

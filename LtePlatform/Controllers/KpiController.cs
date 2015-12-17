@@ -15,11 +15,14 @@ namespace LtePlatform.Controllers
     {
         private readonly TownQueryService _townService;
         private readonly KpiImportService _importService;
+        private readonly PreciseImportService _preciseImportService;
 
-        public KpiController(TownQueryService townService, KpiImportService importService)
+        public KpiController(TownQueryService townService, KpiImportService importService,
+            PreciseImportService preciseImportService)
         {
             _townService = townService;
             _importService = importService;
+            _preciseImportService = preciseImportService;
         }
 
         public ActionResult Index()
@@ -106,6 +109,7 @@ namespace LtePlatform.Controllers
             else
             {
                 var reader = new StreamReader(httpPostedFileBase.InputStream, Encoding.GetEncoding("GB2312"));
+                _preciseImportService.UploadItems(reader);
             }
             ViewBag.Message = message;
             return View("PreciseImport");
