@@ -13,5 +13,7 @@ namespace Lte.Parameters.Abstract
         List<CollegeKpi> GetAllList(DateTime time);
 
         CollegeKpi GetByCollegeIdAndTime(int collegeId, DateTime time);
+
+        List<CollegeKpi> GetAllList(DateTime begin, DateTime end);
     }
 }

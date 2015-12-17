@@ -317,3 +317,147 @@ var showCollegeInterference = function(collegeNames, minRssiStats, maxRssiStats,
 
     showChartDialog(tag, chart);
 };
+
+var showCollegeDrop = function (collegeNames, erlang3G, erabDrop, drop3G, tag) {
+    var chart = new ComboChart();
+    chart.title.text = "校园网保持性能指标统计";
+
+    chart.xAxis[0].categories = collegeNames;
+    chart.xAxis[0].title.text = "校园名称";
+
+    chart.yAxis[0].title.text = '3G话务量';
+    chart.yAxis.push({
+        title: {
+            text: '掉线率',
+            style: {
+                color: Highcharts.getOptions().colors[1]
+            }
+        },
+        labels: {
+            format: '{value} %',
+            style: {
+                color: Highcharts.getOptions().colors[1]
+            }
+        },
+        opposite: true
+    });
+
+    chart.series.push({
+        type: 'column',
+        name: '3G话务量',
+        data: erlang3G
+    });
+    chart.series.push({
+        type: 'line',
+        name: 'E-RAB掉线率',
+        data: erabDrop,
+        yAxis: 1,
+        tooltip: {
+            valueSuffix: '%'
+        }
+    });
+    chart.series.push({
+        type: 'line',
+        name: '3G掉线率',
+        data: drop3G,
+        yAxis: 1,
+        tooltip: {
+            valueSuffix: '%'
+        }
+    });
+
+    showChartDialog(tag, chart);
+}
+
+var showCollegeFlows = function(collegeNames, usersStats, downloadFlowStats, uploadFlowStats, flow3GStats, tag) {
+    var chart = new ComboChart();
+    chart.title.text = "校园网业务流量指标统计";
+
+    chart.xAxis[0].categories = collegeNames;
+    chart.xAxis[0].title.text = "校园名称";
+
+    chart.yAxis[0].title.text = '用户数';
+    chart.yAxis.push({
+        title: {
+            text: '流量',
+            style: {
+                color: Highcharts.getOptions().colors[1]
+            }
+        },
+        labels: {
+            format: '{value} GB',
+            style: {
+                color: Highcharts.getOptions().colors[1]
+            }
+        },
+        opposite: true
+    });
+
+    chart.series.push({
+        type: 'column',
+        name: '4G用户数',
+        data: usersStats
+    });
+    chart.series.push({
+        type: 'line',
+        name: '4G下行流量',
+        data: downloadFlowStats,
+        yAxis: 1,
+        tooltip: {
+            valueSuffix: 'GB'
+        }
+    });
+    chart.series.push({
+        type: 'line',
+        name: '4G上行流量',
+        data: uploadFlowStats,
+        yAxis: 1,
+        tooltip: {
+            valueSuffix: 'GB'
+        }
+    });
+    chart.series.push({
+        type: 'line',
+        name: '3G流量',
+        data: flow3GStats,
+        yAxis: 1,
+        tooltip: {
+            valueSuffix: 'GB'
+        }
+    });
+
+    showChartDialog(tag, chart);
+};
+
+var showCollegeConnection = function (collegeNames, rrcConnection, erabConnection, connection2G, connection3G, tag) {
+    var chart = new ComboChart();
+    chart.title.text = "校园网业务流量指标统计";
+
+    chart.xAxis[0].categories = collegeNames;
+    chart.xAxis[0].title.text = "校园名称";
+
+    chart.yAxis[0].title.text = '连接成功率';
+
+    chart.series.push({
+        type: 'column',
+        name: 'RRC连接成功率',
+        data: rrcConnection
+    });
+    chart.series.push({
+        type: 'column',
+        name: 'E-RAB连接成功率',
+        data: erabConnection
+    });
+    chart.series.push({
+        type: 'column',
+        name: '2G呼建成功率',
+        data: connection2G
+    });
+    chart.series.push({
+        type: 'column',
+        name: '3G连接成功率',
+        data: connection3G
+    });
+
+    showChartDialog(tag, chart);
+}

@@ -19,5 +19,10 @@ namespace Lte.Parameters.Concrete
         {
             return FirstOrDefault(x => x.CollegeId == collegeId && x.TestTime == time);
         }
+
+        public List<CollegeKpi> GetAllList(DateTime begin, DateTime end)
+        {
+            return GetAllList(x => x.TestTime >= begin && x.TestTime < end);
+        }
     }
 }

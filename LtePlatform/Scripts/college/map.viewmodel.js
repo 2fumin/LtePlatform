@@ -159,15 +159,92 @@
     };
 
     self.showFlows = function() {
-
+        sendRequest(app.dataModel.collegeKpiUrl, "GET", {
+            begin: self.beginDate(),
+            end: self.endDate(),
+            kpiName: "users"
+        }, function (users) {
+            var usersStats = matchCollegeStats(self.collegeNames(), users);
+            sendRequest(app.dataModel.collegeKpiUrl, "GET", {
+                begin: self.beginDate(),
+                end: self.endDate(),
+                kpiName: "downloadFlow"
+            }, function (downloadFlow) {
+                var downloadFlowStats = matchCollegeStats(self.collegeNames(), downloadFlow);
+                sendRequest(app.dataModel.collegeKpiUrl, "GET", {
+                    begin: self.beginDate(),
+                    end: self.endDate(),
+                    kpiName: "uploadFlow"
+                }, function (uploadFlow) {
+                    var uploadFlowStats = matchCollegeStats(self.collegeNames(), uploadFlow);
+                    sendRequest(app.dataModel.collegeKpiUrl, "GET", {
+                        begin: self.beginDate(),
+                        end: self.endDate(),
+                        kpiName: "flow3G"
+                    }, function(flow3G) {
+                        var flow3GStats = matchCollegeStats(self.collegeNames(), flow3G);
+                        showCollegeFlows(self.collegeNames(), usersStats, downloadFlowStats, uploadFlowStats, flow3GStats, "#college-flows");
+                    });
+                });
+            });
+        });
     };
 
     self.showConnection = function() {
-
+        sendRequest(app.dataModel.collegeKpiUrl, "GET", {
+            begin: self.beginDate(),
+            end: self.endDate(),
+            kpiName: "rrcConnection"
+        }, function (rrcConnection) {
+            var rrcConnectionStats = matchCollegeStats(self.collegeNames(), rrcConnection);
+            sendRequest(app.dataModel.collegeKpiUrl, "GET", {
+                begin: self.beginDate(),
+                end: self.endDate(),
+                kpiName: "erabConnection"
+            }, function (erabConnection) {
+                var erabConnectionStats = matchCollegeStats(self.collegeNames(), erabConnection);
+                sendRequest(app.dataModel.collegeKpiUrl, "GET", {
+                    begin: self.beginDate(),
+                    end: self.endDate(),
+                    kpiName: "connection2G"
+                }, function (connection2G) {
+                    var connection2GStats = matchCollegeStats(self.collegeNames(), connection2G);
+                    sendRequest(app.dataModel.collegeKpiUrl, "GET", {
+                        begin: self.beginDate(),
+                        end: self.endDate(),
+                        kpiName: "connection3G"
+                    }, function (connection3G) {
+                        var connection3GStats = matchCollegeStats(self.collegeNames(), connection3G);
+                        showCollegeConnection(self.collegeNames(), rrcConnectionStats, erabConnectionStats, connection2GStats, connection3GStats, $("#college-connection"));
+                    });
+                });
+            });
+        });
     };
 
     self.showDrop = function() {
-
+        sendRequest(app.dataModel.collegeKpiUrl, "GET", {
+            begin: self.beginDate(),
+            end: self.endDate(),
+            kpiName: "erlang3G"
+        }, function (erlang3G) {
+            var erlang3GStats = matchCollegeStats(self.collegeNames(), erlang3G);
+            sendRequest(app.dataModel.collegeKpiUrl, "GET", {
+                begin: self.beginDate(),
+                end: self.endDate(),
+                kpiName: "erabDrop"
+            }, function (erabDrop) {
+                var erabDropStats = matchCollegeStats(self.collegeNames(), erabDrop);
+                sendRequest(app.dataModel.collegeKpiUrl, "GET", {
+                    begin: self.beginDate(),
+                    end: self.endDate(),
+                    kpiName: "drop3G"
+                }, function (drop3G) {
+                    var drop3GStats = matchCollegeStats(self.collegeNames(), drop3G);
+                    showCollegeDrop(self.collegeNames(), erlang3GStats, erabDropStats, drop3GStats, $("#college-drop"));
+                });
+            });
+        });
     };
 
     self.toggleCollegeMarkers = function () {

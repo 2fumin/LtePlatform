@@ -54,8 +54,7 @@ namespace LtePlatform.Controllers.College
         {
             return _service.GetAverageRates(begin, end);
         }
-
-
+        
         [HttpGet]
         [ApiDoc("查询指定日期范围内的各校园的单项指标")]
         [ApiParameterDoc("begin", "开始日期")]
