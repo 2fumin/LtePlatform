@@ -9,3 +9,7 @@ DrilldownColumn.prototype.options.chart = {
 };
 
 DrilldownColumn.prototype.options.plotOptions.series.dataLabels.format = '{point.y}';
+
+DrilldownColumn.prototype.options.xAxis = {
+    type: 'category'
+};

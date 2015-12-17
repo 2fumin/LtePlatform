@@ -132,6 +132,16 @@
             end: self.endDate()
         }, function(results) {
             var chart = new DrilldownColumn();
+            chart.title.text = "校园网告警分布图";
+            chart.series[0].data = [];
+            chart.drilldown.series = [];
+            chart.series[0].name = "校园名称";
+            chart.options.yAxis = {
+                title: {
+                    text: '告警总数'
+                }
+
+            };
             for (var i = 0; i < self.collegeNames().length; i++) {
                 var collegeName = self.collegeNames()[i];
                 if (results[collegeName] !== undefined) {

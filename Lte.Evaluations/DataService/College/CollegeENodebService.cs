@@ -25,10 +25,13 @@ namespace Lte.Evaluations.DataService.College
         public IEnumerable<ENodebView> QueryCollegeENodebs(string collegeName,
             DateTime begin, DateTime end)
         {
-            var stats = _alarmRepository.GetAllList(begin, end);
             var ids = _repository.GetENodebIds(collegeName);
-            return ids.Select(_eNodebRepository.Get
-                ).Where(eNodeb => eNodeb != null).ToList().Select(x => ENodebView.ConstructView(x, stats));
+            return (from id in ids
+                select _eNodebRepository.Get(id)
+                into eNodeb
+                where eNodeb != null
+                let stats = _alarmRepository.GetAllList(begin, end, eNodeb.ENodebId)
+                select ENodebView.ConstructView(eNodeb, stats)).ToList();
         }
 
         public IEnumerable<string> QueryCollegeENodebNames(string collegeName)
