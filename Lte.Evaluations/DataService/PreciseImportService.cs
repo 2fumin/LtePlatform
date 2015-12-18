@@ -120,5 +120,25 @@ namespace Lte.Evaluations.DataService
         {
             PreciseCoverage4Gs.Clear();
         }
+
+        public IEnumerable<PreciseHistory> GetPreciseHistories(DateTime begin, DateTime end)
+        {
+            var results = new List<PreciseHistory>();
+            while (begin < end.AddDays(1))
+            {
+                var beginDate = begin;
+                var endDate = begin.AddDays(1);
+                var items = _repository.GetAllList(beginDate, endDate);
+                var townItems = _repository.GetAllList(beginDate, endDate);
+                results.Add(new PreciseHistory
+                {
+                    DateString = begin.ToShortDateString(),
+                    PreciseStats = items.Count,
+                    TownPreciseStats = townItems.Count
+                });
+                begin = begin.AddDays(1);
+            }
+            return results;
+        }
     }
 }

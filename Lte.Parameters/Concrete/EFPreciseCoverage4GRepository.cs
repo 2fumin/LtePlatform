@@ -13,7 +13,12 @@ namespace Lte.Parameters.Concrete
         IPreciseCoverage4GRepository
     {
         protected override DbSet<PreciseCoverage4G> Entities => context.PrecisCoverage4Gs;
-        
+
+        public List<PreciseCoverage4G> GetAllList(DateTime begin, DateTime end)
+        {
+            return GetAllList(x => x.StatTime >= begin && x.StatTime < end);
+        }
+
         public List<PreciseCoverage4G> GetAllList(int cellId, byte sectorId, DateTime begin, DateTime end)
         {
             return GetAllList(x =>

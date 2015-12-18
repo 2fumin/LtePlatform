@@ -15,15 +15,14 @@
             $("#BeginDate").datepicker({ dateFormat: 'yy-mm-dd' });
             $("#EndDate").datepicker({ dateFormat: 'yy-mm-dd' });
             self.initialize(true);
-            updateDumpHistory(self);
-            self.clearItems();
+            self.updateHistoryItems();
         });
         this.post('#precisePost', function () {
             $("#BeginDate").datepicker({ dateFormat: 'yy-mm-dd' });
             $("#EndDate").datepicker({ dateFormat: 'yy-mm-dd' });
             self.initialize(false);
             updateDumpHistory(self);
-            sendRequest(app.dataModel.dumpAlarmUrl, "GET", null, function (result) {
+            sendRequest(app.dataModel.preciseImportUrl, "GET", null, function (result) {
                 self.totalDumpItems(result);
             });
         });
@@ -31,6 +30,23 @@
         this.get('/Parameters/PreciseImport', function () { this.app.runRoute('get', '#preciseImport'); });
         this.get('/Parameters/PrecisePost', function () { this.app.runRoute('post', '#precisePost'); });
     });
+
+    self.dumpItems = function () {
+        dumpProgressItems(self, app.dataModel.preciseImportUrl);
+    };
+
+    self.updateHistoryItems = function () {
+        updateDumpHistory(self);
+        self.clearItems();
+    };
+
+    self.clearItems = function () {
+        sendRequest(app.dataModel.preciseImportUrl, "DELETE", null, function () {
+            self.totalDumpItems(0);
+            self.totalFailItems(0);
+            self.totalSuccessItems(0);
+        });
+    };
 
     return self;
 }

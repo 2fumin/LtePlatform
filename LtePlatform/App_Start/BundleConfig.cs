@@ -91,6 +91,16 @@ namespace LtePlatform
                 "~/Scripts/kpi/precise.trend.viewmodel.js",
                 "~/Scripts/app/_run.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/kpiPreciseImport").Include(
+                "~/Scripts/sammy-{version}.js",
+                "~/Scripts/app/common.js",
+                "~/Scripts/app/app.datamodel.js",
+                "~/Scripts/app/app.viewmodel.js",
+                "~/Scripts/kpi/common.controller.js",
+                "~/Scripts/kpi/preciseimport.controller.js",
+                "~/Scripts/kpi/preciseimport.viewmodel.js",
+                "~/Scripts/app/_run.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/kpiPreciseTop").Include(
                 "~/Scripts/sammy-{version}.js",
                 "~/Scripts/app/common.js",

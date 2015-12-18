@@ -14,8 +14,7 @@
             $("#BeginDate").datepicker({ dateFormat: 'yy-mm-dd' });
             $("#EndDate").datepicker({ dateFormat: 'yy-mm-dd' });
             self.initialize(true);
-            updateDumpHistory(self);
-            self.clearItems();
+            self.updateHistoryItems();
         });
         this.post('#alarmZtePost', function () {
             $("#BeginDate").datepicker({ dateFormat: 'yy-mm-dd' });

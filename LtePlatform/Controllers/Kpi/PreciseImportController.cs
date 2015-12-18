@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Lte.Evaluations.DataService;
+using Lte.Evaluations.ViewModels;
 using LtePlatform.Models;
 
 namespace LtePlatform.Controllers.Kpi
@@ -25,6 +26,16 @@ namespace LtePlatform.Controllers.Kpi
         public int Get()
         {
             return _service.GetStatsToBeDump();
+        }
+
+        [HttpGet]
+        [ApiDoc("获得指定日期范围内的已导入精确覆盖率记录统计")]
+        [ApiParameterDoc("begin", "开始日期")]
+        [ApiParameterDoc("end", "结束日期")]
+        [ApiResponse("指定日期范围内的已导入精确覆盖率记录统计")]
+        public IEnumerable<PreciseHistory> Get(DateTime begin, DateTime end)
+        {
+            return _service.GetPreciseHistories(begin, end);
         }
 
         [HttpPut]

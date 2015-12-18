@@ -102,7 +102,7 @@ namespace Lte.Evaluations.DataService
             {
                 var beginDate = begin;
                 var endDate = begin.AddDays(1);
-                var items = _repository.GetAllList(x => x.HappenTime >= beginDate && x.HappenTime < endDate);
+                var items = _repository.GetAllList(beginDate, endDate);
                 results.Add(new AlarmHistory
                 {
                     DateString = begin.ToShortDateString(),
