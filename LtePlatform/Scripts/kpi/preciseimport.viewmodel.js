@@ -25,14 +25,20 @@
             sendRequest(app.dataModel.preciseImportUrl, "GET", null, function (result) {
                 self.totalDumpItems(result);
             });
+            sendRequest(app.dataModel.townPreciseImportUrl, "GET", null, function (result) {
+                self.townPreciseViews(result);
+            });
         });
 
-        this.get('/Parameters/PreciseImport', function () { this.app.runRoute('get', '#preciseImport'); });
-        this.get('/Parameters/PrecisePost', function () { this.app.runRoute('post', '#precisePost'); });
+        this.get('/Kpi/PreciseImport', function () { this.app.runRoute('get', '#preciseImport'); });
+        this.get('/Kpi/PrecisePost', function () { this.app.runRoute('post', '#precisePost'); });
     });
 
     self.dumpItems = function () {
         dumpProgressItems(self, app.dataModel.preciseImportUrl);
+        sendRequest(app.dataModel.townPreciseImportUrl, "POST", self.townPreciseViews(), function () {
+            self.townPreciseViews([]);
+        });
     };
 
     self.updateHistoryItems = function () {

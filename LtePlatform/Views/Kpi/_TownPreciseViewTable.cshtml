@@ -1,0 +1,24 @@
+﻿<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>城市</th>
+            <th>区域</th>
+            <th>镇区</th>
+            <th>MR总数</th>
+            <th>第一邻区数</th>
+            <th>第二邻区数</th>
+            <th>第三邻区数</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: townPreciseViews">
+        <tr>
+            <td data-bind="text: city"></td>
+            <td data-bind="text: district"></td>
+            <td data-bind="text: town"></td>
+            <td data-bind="text: totalMrs"></td>
+            <td data-bind="text: firstNeighbors"></td>
+            <td data-bind="text: secondNeighbors"></td>
+            <td data-bind="text: thirdNeighbors"></td>
+        </tr>
+    </tbody>
+</table>

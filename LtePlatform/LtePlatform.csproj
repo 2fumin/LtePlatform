@@ -732,9 +732,11 @@
     <Content Include="Views\College\_DistributionMapInfoBox.cshtml" />
     <None Include="Views\Kpi\PreciseImport.cshtml" />
     <Content Include="Views\Kpi\_PreciseImport.cshtml" />
+    <Content Include="Views\Kpi\_PreciseHistoryTable.cshtml" />
     <None Include="Views\Kpi\_TopDrop2G.cshtml" />
     <None Include="Views\Kpi\_TopDrop2GTable.cshtml" />
     <Content Include="Views\Kpi\_TopDrop2GTrendTable.cshtml" />
+    <Content Include="Views\Kpi\_TownPreciseViewTable.cshtml" />
     <None Include="Views\Parameters\AlarmImport.cshtml" />
     <Content Include="Views\Shared\_AlertPanel.cshtml" />
     <Content Include="Views\Shared\_ENodebTable.cshtml" />

@@ -110,6 +110,7 @@ namespace LtePlatform.Controllers
             {
                 var reader = new StreamReader(httpPostedFileBase.InputStream, Encoding.GetEncoding("GB2312"));
                 _preciseImportService.UploadItems(reader);
+                ViewBag.Message = "成功上传精确覆盖率文件" + httpPostedFileBase.FileName;
             }
             ViewBag.Message = message;
             return View("PreciseImport");

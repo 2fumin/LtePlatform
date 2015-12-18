@@ -1,0 +1,31 @@
+﻿<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            精确覆盖率数据库历史统计
+        </h3>
+    </div>
+    <div class="panel-body">
+        <p>
+            开始日期：
+            <input id="BeginDate" data-bind="value: beginDate" />
+            结束日期：
+            <input id="EndDate" data-bind="value: endDate" />
+        </p>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>日期</th>
+                    <th>小区统计数量</th>
+                    <th>镇区统计数量</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: dumpHistory">
+                <tr>
+                    <td data-bind="text: dateString"></td>
+                    <td data-bind="text: preciseStats"></td>
+                    <td data-bind="text: townPreciseStats"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
