@@ -187,12 +187,9 @@ namespace LtePlatform.Areas.HelpPage.ModelDescriptions
                 return GenerateDictionaryModelDescription(modelType, typeof(object), typeof(object));
             }
 
-            if (typeof(IEnumerable).IsAssignableFrom(modelType))
-            {
-                return GenerateCollectionModelDescription(modelType, typeof(object));
-            }
-
-            return GenerateComplexTypeModelDescription(modelType);
+            return typeof (IEnumerable).IsAssignableFrom(modelType)
+                ? GenerateCollectionModelDescription(modelType, typeof (object))
+                : GenerateComplexTypeModelDescription(modelType);
         }
 
         // Change this to provide different name for the member.
@@ -204,16 +201,9 @@ namespace LtePlatform.Areas.HelpPage.ModelDescriptions
                 return jsonProperty.PropertyName;
             }
 
-            if (hasDataContractAttribute)
-            {
-                var dataMember = member.GetCustomAttribute<DataMemberAttribute>();
-                if (dataMember != null && !string.IsNullOrEmpty(dataMember.Name))
-                {
-                    return dataMember.Name;
-                }
-            }
-
-            return member.Name;
+            if (!hasDataContractAttribute) return member.Name;
+            var dataMember = member.GetCustomAttribute<DataMemberAttribute>();
+            return !string.IsNullOrEmpty(dataMember?.Name) ? dataMember.Name : member.Name;
         }
 
         private static bool ShouldDisplayMember(MemberInfo member, bool hasDataContractAttribute)
@@ -392,19 +382,17 @@ namespace LtePlatform.Areas.HelpPage.ModelDescriptions
             var hasDataContractAttribute = modelType.GetCustomAttribute<DataContractAttribute>() != null;
             foreach (var field in modelType.GetFields(BindingFlags.Public | BindingFlags.Static))
             {
-                if (ShouldDisplayMember(field, hasDataContractAttribute))
+                if (!ShouldDisplayMember(field, hasDataContractAttribute)) continue;
+                var enumValue = new EnumValueDescription
                 {
-                    var enumValue = new EnumValueDescription
-                    {
-                        Name = field.Name,
-                        Value = field.GetRawConstantValue().ToString()
-                    };
-                    if (DocumentationProvider != null)
-                    {
-                        enumValue.Documentation = DocumentationProvider.GetDocumentation(field);
-                    }
-                    enumDescription.Values.Add(enumValue);
+                    Name = field.Name,
+                    Value = field.GetRawConstantValue().ToString()
+                };
+                if (DocumentationProvider != null)
+                {
+                    enumValue.Documentation = DocumentationProvider.GetDocumentation(field);
                 }
+                enumDescription.Values.Add(enumValue);
             }
             GeneratedModels.Add(enumDescription.Name, enumDescription);
 
