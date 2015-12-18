@@ -42,27 +42,12 @@
     });
 
     self.dumpItems = function () {
-        sendRequest(app.dataModel.dumpAlarmUrl, "PUT", null, function (result) {
-            if (result === true) {
-                self.totalSuccessItems(self.totalSuccessItems() + 1);
-            } else {
-                self.totalFailItems(self.totalFailItems() + 1);
-            }
-            if (self.totalSuccessItems() + self.totalFailItems() < self.totalDumpItems()) {
-                self.dumpItems();
-            } else {
-                updateDumpHistory(self);
-                self.clearItems();
-            }
-        }, function() {
-            self.totalFailItems(self.totalFailItems() + 1);
-            if (self.totalSuccessItems() + self.totalFailItems() < self.totalDumpItems()) {
-                self.dumpItems();
-            } else {
-                updateDumpHistory(self);
-                self.clearItems();
-            }
-        });
+        dumpProgressItems(self, app.dataModel.dumpAlarmUrl);
+    };
+
+    self.updateHistoryItems = function() {
+        updateDumpHistory(self);
+        self.clearItems();
     };
 
     self.clearItems = function() {

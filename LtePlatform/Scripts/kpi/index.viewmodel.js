@@ -68,7 +68,7 @@
                     chart.xAxis[0].title.text = '日期';
                     for (var i = 0; i < data.regionList.length - 1; i++) {
                         chart.series.push({
-                            type: 'column',
+                            type: kpiOption === "2G呼建(%)" ? 'line' : 'column',
                             name: data.regionList[i],
                             data: data.kpiDetails[kpiOption][i]
                         });

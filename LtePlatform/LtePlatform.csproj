@@ -621,6 +621,7 @@
     <Content Include="Scripts\kpi\precise.top.viewmodel.js" />
     <Content Include="Scripts\kpi\precise.trend.viewmodel.js" />
     <Content Include="Scripts\kpi\precise.viewmodel.js" />
+    <Content Include="Scripts\kpi\preciseimport.viewmodel.js" />
     <Content Include="Scripts\kpi\top.drop2G.viewmodel.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\mycharts\comboChart.js" />
@@ -729,6 +730,7 @@
     <Content Include="Views\Kpi\_PreciseSectorMapInfoBox.cshtml" />
     <Content Include="Views\College\_DistributionMapInfoBox.cshtml" />
     <None Include="Views\Kpi\PreciseImport.cshtml" />
+    <Content Include="Views\Kpi\_PreciseImport.cshtml" />
     <None Include="Views\Kpi\_TopDrop2G.cshtml" />
     <None Include="Views\Kpi\_TopDrop2GTable.cshtml" />
     <Content Include="Views\Kpi\_TopDrop2GTrendTable.cshtml" />

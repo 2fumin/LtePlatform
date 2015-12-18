@@ -53,7 +53,7 @@ namespace Lte.Evaluations.ViewModels
             KpiDetails.Add(KpiOptions[9], views.Select(x => x.Select(v => v.Flow / 1024)).ToList());
             KpiDetails.Add(KpiOptions[10], views.Select(x => x.Select(v => v.LinkBusyRate * 100)).ToList());
             KpiDetails.Add(KpiOptions[11], views.Select(x => x.Select(v => v.Utility2GRate * 100)).ToList());
-            KpiDetails.Add(KpiOptions[12], views.Select(x => x.Select(v => v.Utility3GRate * 100)).ToList());
+            KpiDetails.Add(KpiOptions[12], views.Select(x => x.Select(v => v.Utility3GRate)).ToList());
         }
     }
 }

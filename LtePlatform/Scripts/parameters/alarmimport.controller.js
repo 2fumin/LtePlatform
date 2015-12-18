@@ -1,8 +1,8 @@
-﻿var updateDumpHistory= function(viewModel) {
+﻿var updateDumpHistory = function (viewModel) {
     sendRequest(app.dataModel.dumpAlarmUrl, "GET", {
         begin: viewModel.beginDate(),
         end: viewModel.endDate()
-    }, function(result) {
+    }, function (result) {
         viewModel.dumpHistory(result);
     });
-}
+};

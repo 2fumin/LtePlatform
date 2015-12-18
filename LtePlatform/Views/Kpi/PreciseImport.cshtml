@@ -36,7 +36,9 @@
             }
         }
     </div>
-    <div class="col-md-6"></div>
+    @{
+        Html.RenderPartial("_PreciseImport");
+    }
 </div>
 
 @section Scripts{

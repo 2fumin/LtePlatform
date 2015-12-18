@@ -35,6 +35,7 @@ namespace LtePlatform.Controllers.Kpi
         public void Post(TownPreciseViewContainer container)
         {
             _service.DumpTownStats(container);
+            PreciseImportService.TownPreciseViews.Clear();
         }
     }
 }

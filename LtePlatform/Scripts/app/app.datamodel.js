@@ -11,6 +11,8 @@
     self.alarmCountUrl = "/api/AlarmCount";
     self.dumpAlarmUrl = "/api/DumpAlarm";
     self.topDrop2GUrl = "/api/TopDrop2G/";
+    self.preciseImportUrl = "/api/PreciseImport";
+    self.townPreciseImportUrl = "/api/TownPreciseImport";
 
     self.collegeQueryUrl = "/api/CollegeQuery";
     self.collegeRegionUrl = "/api/CollegeRegion";
