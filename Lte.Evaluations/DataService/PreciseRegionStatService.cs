@@ -45,6 +45,24 @@ namespace Lte.Evaluations.DataService
             };
         }
 
+        public IEnumerable<PreciseRegionDateView> QueryDateViews(DateTime begin, DateTime end, string city)
+        {
+            var query = _statRepository.GetAllList(begin, end);
+            var result =
+                (from q in query
+                 join t in _townRepository.GetAll(city) on q.TownId equals t.Id
+                 select q).ToList();
+            var townViews = result.Select(x => TownPreciseView.ConstructView(x, _townRepository)).ToList();
+            return from view in townViews
+                   group view by view.StatTime into g
+                   select new PreciseRegionDateView
+                   {
+                       StatDate = g.Key.ToShortDateString(),
+                       TownPreciseViews = g.Select(x => x),
+                       DistrictPreciseViews = Merge(g.Select(x => x))
+                   };
+        }
+
         public static IEnumerable<DistrictPreciseView> Merge(IEnumerable<TownPreciseView> townPreciseViews)
         {
             if (!townPreciseViews.Any()) return null;
