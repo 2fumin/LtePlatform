@@ -34,11 +34,16 @@
         this.get('/Kpi/PrecisePost', function () { this.app.runRoute('post', '#precisePost'); });
     });
 
-    self.dumpItems = function () {
-        dumpProgressItems(self, app.dataModel.preciseImportUrl);
-        sendRequest(app.dataModel.townPreciseImportUrl, "POST", self.townPreciseViews(), function () {
+    self.dumpTownItems = function () {
+        sendRequest(app.dataModel.townPreciseImportUrl, "POST", {
+            views: self.townPreciseViews()
+        }, function () {
             self.townPreciseViews([]);
         });
+    };
+
+    self.dumpItems = function () {
+        dumpProgressItems(self, app.dataModel.preciseImportUrl);
     };
 
     self.updateHistoryItems = function () {

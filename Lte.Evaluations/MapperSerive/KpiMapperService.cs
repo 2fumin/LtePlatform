@@ -26,6 +26,7 @@ namespace Lte.Evaluations.MapperSerive
         public static void MapTownPrecise()
         {
             Mapper.CreateMap<TownPreciseCoverage4GStat, TownPreciseView>();
+            Mapper.CreateMap<TownPreciseView, TownPreciseCoverage4GStat>();
         }
 
         public static void MapPreciseStat()

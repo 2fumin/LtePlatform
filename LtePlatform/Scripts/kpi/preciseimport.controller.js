@@ -3,6 +3,7 @@
         begin: viewModel.beginDate(),
         end: viewModel.endDate()
     }, function (result) {
+        viewModel.dumpHistory([]);
         viewModel.dumpHistory(result);
     });
 };

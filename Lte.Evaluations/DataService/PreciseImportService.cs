@@ -90,7 +90,7 @@ namespace Lte.Evaluations.DataService
             var stats = Mapper.Map<IEnumerable<TownPreciseView>, IEnumerable<TownPreciseCoverage4GStat>>(container.Views);
             foreach (var stat in from stat in stats
                                  let item = _regionRepository.GetByTown(stat.TownId, stat.StatTime)
-                                 where item != null select stat)
+                                 where item == null select stat)
             {
                 _regionRepository.Insert(stat);
             }
@@ -129,7 +129,7 @@ namespace Lte.Evaluations.DataService
                 var beginDate = begin;
                 var endDate = begin.AddDays(1);
                 var items = _repository.GetAllList(beginDate, endDate);
-                var townItems = _repository.GetAllList(beginDate, endDate);
+                var townItems = _regionRepository.GetAllList(beginDate, endDate);
                 results.Add(new PreciseHistory
                 {
                     DateString = begin.ToShortDateString(),
