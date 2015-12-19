@@ -35,39 +35,47 @@
             end: self.endDate,
             city: self.currentCity
         }, function (result) {
-            for (var i = 0; i < result.length; i++) {
-                var districtViews = result[i].districtPreciseViews;
-                var statDate = result[i].statDate;
-                var totalMrs = 0;
-                var totalSecondNeighbors = 0;
-                var districtMrStats = [];
-                var districtPreciseRates = [];
-                for (var j = 0; j < self.districts().length - 1; j++) {
-                    var currentDistrictMrs = 0;
-                    var currentPreciseRate = 0;
-                    for (var k = 0; k < districtViews.length; k++) {
-                        var view = districtViews[k];
-                        if (view.district === self.districts()[j]) {
-                            currentDistrictMrs = view.totalMrs;
-                            currentPreciseRate = view.preciseRate;
-                            totalMrs += currentDistrictMrs;
-                            totalSecondNeighbors += view.secondNeighbors;
-                            break;
+            generateDistrictStats(self, result);
+
+            if (result.length > 0) {
+                var districtStats = result[0].districtPreciseViews;
+                var townStats = result[0].townPreciseViews;
+                for (var i = 1; i < result.length; i++) {
+                    for (var j = 0; j < result[i].districtPreciseViews.length; j++) {
+                        var currentDistrictStat = result[i].districtPreciseViews[j];
+                        for (var k = 0; k < districtStats.length; k++) {
+                            if (districtStats[k].city === currentDistrictStat.city
+                                && districtStats[k].district === currentDistrictStat.district) {
+                                accumulatePreciseStat(districtStats[k], currentDistrictStat);
+                                break;
+                            }
+                        }
+                        if (k === districtStats.length) {
+                            districtStats.push(currentDistrictStat);
                         }
                     }
-                    districtMrStats.push(currentDistrictMrs);
-                    districtPreciseRates.push(currentPreciseRate);
+                    for (j = 0; j < result[i].townPreciseViews.length; j++) {
+                        var currentTownStat = result[i].townPreciseViews[j];
+                        for (k = 0; k < townStats.length; k++) {
+                            if (townStats[k].city===currentTownStat.city
+                                &&townStats[k].district===currentTownStat.district
+                                && townStats[k].town === currentTownStat.town) {
+                                accumulatePreciseStat(townStats[k], currentTownStat);
+                                break;
+                            }
+                        }
+                        if (k === townStats.length) {
+                            townStats.push(currentTownStat);
+                        }
+                    }
                 }
-                districtMrStats.push(totalMrs);
-                districtPreciseRates.push(100 - 100 * totalSecondNeighbors / totalMrs);
-                self.mrStats.push({
-                    statDate: statDate,
-                    values: districtMrStats
-                });
-                self.preciseStats.push({
-                    statDate: statDate,
-                    values: districtPreciseRates
-                });
+                for (k = 0; k < districtStats.length; k++) {
+                    calculateDistrictRates(districtStats[k]);
+                }
+                for (k = 0; k < townStats.length; k++) {
+                    calculateTownRates(townStats[k]);
+                }
+                showMrPie(districtStats, townStats);
             }
         });
     };
