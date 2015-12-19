@@ -18,4 +18,21 @@
     </tbody>
 </table>
 <h4 class="text-center text-primary">精确覆盖率统计</h4>
-<div style="min-height: 400px" id="precise-rate"></div>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>日期</th>
+            <!-- ko foreach: districts -->
+            <th data-bind="text: $data"></th>
+            <!-- /ko -->
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: preciseStats">
+        <tr>
+            <td data-bind="text: $data.statDate"></td>
+            <!-- ko foreach: $data.values -->
+            <td data-bind="text: $data.toFixed(2)"></td>
+            <!-- /ko -->
+        </tr>
+    </tbody>
+</table>

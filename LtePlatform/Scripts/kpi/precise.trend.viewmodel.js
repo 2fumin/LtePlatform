@@ -39,23 +39,34 @@
                 var districtViews = result[i].districtPreciseViews;
                 var statDate = result[i].statDate;
                 var totalMrs = 0;
+                var totalSecondNeighbors = 0;
                 var districtMrStats = [];
+                var districtPreciseRates = [];
                 for (var j = 0; j < self.districts().length - 1; j++) {
                     var currentDistrictMrs = 0;
+                    var currentPreciseRate = 0;
                     for (var k = 0; k < districtViews.length; k++) {
                         var view = districtViews[k];
                         if (view.district === self.districts()[j]) {
                             currentDistrictMrs = view.totalMrs;
+                            currentPreciseRate = view.preciseRate;
                             totalMrs += currentDistrictMrs;
+                            totalSecondNeighbors += view.secondNeighbors;
                             break;
                         }
                     }
                     districtMrStats.push(currentDistrictMrs);
+                    districtPreciseRates.push(currentPreciseRate);
                 }
                 districtMrStats.push(totalMrs);
+                districtPreciseRates.push(100 - 100 * totalSecondNeighbors / totalMrs);
                 self.mrStats.push({
                     statDate: statDate,
                     values: districtMrStats
+                });
+                self.preciseStats.push({
+                    statDate: statDate,
+                    values: districtPreciseRates
                 });
             }
         });
