@@ -157,6 +157,7 @@
     <Compile Include="Entities\AlarmStat.cs" />
     <Compile Include="Entities\AlarmStatCsv.cs" />
     <Compile Include="Entities\AlarmStatHuawei.cs" />
+    <Compile Include="Entities\AreaTestDate.cs" />
     <Compile Include="Entities\BtsExcel.cs" />
     <Compile Include="Entities\CdmaBts.cs" />
     <Compile Include="Entities\CdmaCell.cs" />
@@ -171,6 +172,7 @@
     <Compile Include="Entities\CollegeKpi.cs" />
     <Compile Include="Entities\CollegeStat.cs" />
     <Compile Include="Abstract\IAlarmRepository.cs" />
+    <Compile Include="Entities\CsvFilesInfo.cs" />
     <Compile Include="Entities\ENodeb.cs" />
     <Compile Include="Entities\ENodebExcel.cs" />
     <Compile Include="Entities\ENodebPhoto.cs" />
