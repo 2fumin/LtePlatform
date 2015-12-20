@@ -8,6 +8,7 @@
     self.currentDistrict = ko.observable("");
     self.districtStats = ko.observableArray([]);
     self.townStats = ko.observableArray([]);
+    self.cityStat = ko.observable();
 
     Sammy(function () {
         this.get('#precise', function () {
@@ -31,6 +32,21 @@
                 self.statDate(data.statDate);
                 self.districtStats(data.districtPreciseViews);
                 self.townStats(data.townPreciseViews);
+                var stat = {
+                    city: self.currentCity(),
+                    district: "-",
+                    totalMrs: 0,
+                    firstNeighbors: 0,
+                    secondNeighbors: 0,
+                    thirdNeighbors: 0,
+                    firstRate: 0,
+                    preciseRate: 0
+                };
+                for (var i = 0; i < self.districtStats().length; i++) {
+                    accumulatePreciseStat(stat, self.districtStats()[i]);
+                }
+                calculateDistrictRates(stat);
+                self.cityStat(stat);
                 self.currentDistrict(data.districtPreciseViews[0].district);
                 showMrPie(self.districtStats(), self.townStats());
             }
