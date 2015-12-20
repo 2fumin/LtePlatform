@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
+using LtePlatform.Areas.HelpPage.ModelDescriptions;
 
 namespace LtePlatform.Models
 {
-    public class DocProvider : IDocumentationProvider
+    public class DocProvider : IDocumentationProvider, IModelDocumentationProvider
     {
         public string GetDocumentation(HttpParameterDescriptor parameterDescriptor)
         {
@@ -54,6 +56,16 @@ namespace LtePlatform.Models
                 doc = attr.Documentation;
             }
             return doc;
+        }
+
+        public string GetDocumentation(MemberInfo member)
+        {
+            return "To be supported....";
+        }
+
+        public string GetDocumentation(Type type)
+        {
+            return "To be supported...";
         }
     }
 }

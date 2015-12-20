@@ -96,6 +96,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ModelDescription\EnumTypeModelDescriptionTest.cs" />
     <Compile Include="ModelDescription\ModelDescriptionGeneratorTest.cs" />
     <Compile Include="ModelDescription\ModelNameHelperTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

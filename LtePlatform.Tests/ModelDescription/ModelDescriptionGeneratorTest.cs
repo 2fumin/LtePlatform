@@ -88,5 +88,135 @@ namespace LtePlatform.Tests.ModelDescription
             Assert.AreEqual(description.ModelType, typeof(ulong));
             Assert.AreEqual(description.Documentation, "unsigned integer");
         }
+
+        [Test]
+        public void Test_GetOrCreateModelDescription_byteType()
+        {
+            var description = generator.GetOrCreateModelDescription(typeof(byte));
+            Assert.IsTrue(description is SimpleTypeModelDescription);
+            Assert.AreEqual(description.Name, "Byte");
+            Assert.AreEqual(description.ModelType, typeof(byte));
+            Assert.AreEqual(description.Documentation, "byte");
+        }
+
+        [Test]
+        public void Test_GetOrCreateModelDescription_charType()
+        {
+            var description = generator.GetOrCreateModelDescription(typeof(char));
+            Assert.IsTrue(description is SimpleTypeModelDescription);
+            Assert.AreEqual(description.Name, "Char");
+            Assert.AreEqual(description.ModelType, typeof(char));
+            Assert.AreEqual(description.Documentation, "character");
+        }
+
+        [Test]
+        public void Test_GetOrCreateModelDescription_sbyteType()
+        {
+            var description = generator.GetOrCreateModelDescription(typeof(sbyte));
+            Assert.IsTrue(description is SimpleTypeModelDescription);
+            Assert.AreEqual(description.Name, "SByte");
+            Assert.AreEqual(description.ModelType, typeof(sbyte));
+            Assert.AreEqual(description.Documentation, "signed byte");
+        }
+
+        [Test]
+        public void Test_GetOrCreateModelDescription_UriType()
+        {
+            var description = generator.GetOrCreateModelDescription(typeof(Uri));
+            Assert.IsTrue(description is SimpleTypeModelDescription);
+            Assert.AreEqual(description.Name, "Uri");
+            Assert.AreEqual(description.ModelType, typeof(Uri));
+            Assert.AreEqual(description.Documentation, "URI");
+        }
+
+        [Test]
+        public void Test_GetOrCreateModelDescription_floatType()
+        {
+            var description = generator.GetOrCreateModelDescription(typeof(float));
+            Assert.IsTrue(description is SimpleTypeModelDescription);
+            Assert.AreEqual(description.Name, "Single");
+            Assert.AreEqual(description.ModelType, typeof(float));
+            Assert.AreEqual(description.Documentation, "decimal number");
+        }
+
+        [Test]
+        public void Test_GetOrCreateModelDescription_doubleType()
+        {
+            var description = generator.GetOrCreateModelDescription(typeof(double));
+            Assert.IsTrue(description is SimpleTypeModelDescription);
+            Assert.AreEqual(description.Name, "Double");
+            Assert.AreEqual(description.ModelType, typeof(double));
+            Assert.AreEqual(description.Documentation, "decimal number");
+        }
+
+        [Test]
+        public void Test_GetOrCreateModelDescription_decimalType()
+        {
+            var description = generator.GetOrCreateModelDescription(typeof(decimal));
+            Assert.IsTrue(description is SimpleTypeModelDescription);
+            Assert.AreEqual(description.Name, "Decimal");
+            Assert.AreEqual(description.ModelType, typeof(decimal));
+            Assert.AreEqual(description.Documentation, "decimal number");
+        }
+
+        [Test]
+        public void Test_GetOrCreateModelDescription_stringType()
+        {
+            var description = generator.GetOrCreateModelDescription(typeof(string));
+            Assert.IsTrue(description is SimpleTypeModelDescription);
+            Assert.AreEqual(description.Name, "String");
+            Assert.AreEqual(description.ModelType, typeof(string));
+            Assert.AreEqual(description.Documentation, "string");
+        }
+
+        [Test]
+        public void Test_GetOrCreateModelDescription_GuidType()
+        {
+            var description = generator.GetOrCreateModelDescription(typeof(Guid));
+            Assert.IsTrue(description is SimpleTypeModelDescription);
+            Assert.AreEqual(description.Name, "Guid");
+            Assert.AreEqual(description.ModelType, typeof(Guid));
+            Assert.AreEqual(description.Documentation, "globally unique identifier");
+        }
+
+        [Test]
+        public void Test_GetOrCreateModelDescription_TimeSpan()
+        {
+            var description = generator.GetOrCreateModelDescription(typeof(TimeSpan));
+            Assert.IsTrue(description is SimpleTypeModelDescription);
+            Assert.AreEqual(description.Name, "TimeSpan");
+            Assert.AreEqual(description.ModelType, typeof(TimeSpan));
+            Assert.AreEqual(description.Documentation, "time interval");
+        }
+
+        [Test]
+        public void Test_GetOrCreateModelDescription_DateTime()
+        {
+            var description = generator.GetOrCreateModelDescription(typeof(DateTime));
+            Assert.IsTrue(description is SimpleTypeModelDescription);
+            Assert.AreEqual(description.Name, "DateTime");
+            Assert.AreEqual(description.ModelType, typeof(DateTime));
+            Assert.AreEqual(description.Documentation, "date");
+        }
+
+        [Test]
+        public void Test_GetOrCreateModelDescription_DateTimeOffset()
+        {
+            var description = generator.GetOrCreateModelDescription(typeof(DateTimeOffset));
+            Assert.IsTrue(description is SimpleTypeModelDescription);
+            Assert.AreEqual(description.Name, "DateTimeOffset");
+            Assert.AreEqual(description.ModelType, typeof(DateTimeOffset));
+            Assert.AreEqual(description.Documentation, "date");
+        }
+
+        [Test]
+        public void Test_GetOrCreateModelDescription_boolType()
+        {
+            var description = generator.GetOrCreateModelDescription(typeof(bool));
+            Assert.IsTrue(description is SimpleTypeModelDescription);
+            Assert.AreEqual(description.Name, "Boolean");
+            Assert.AreEqual(description.ModelType, typeof(bool));
+            Assert.AreEqual(description.Documentation, "boolean");
+        }
     }
 }

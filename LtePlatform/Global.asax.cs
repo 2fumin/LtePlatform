@@ -4,6 +4,7 @@ using System.Web.Http.Description;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using LtePlatform.Areas.HelpPage.ModelDescriptions;
 using LtePlatform.Models;
 
 namespace LtePlatform

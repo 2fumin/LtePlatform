@@ -99,7 +99,7 @@ namespace LtePlatform.Areas.HelpPage.ModelDescriptions
 
         public Dictionary<string, ModelDescription> GeneratedModels { get; }
 
-        private IModelDocumentationProvider DocumentationProvider => _documentationProvider.Value;
+        public IModelDocumentationProvider DocumentationProvider => _documentationProvider.Value;
 
         public ModelDescription GetOrCreateModelDescription(Type modelType)
         {
