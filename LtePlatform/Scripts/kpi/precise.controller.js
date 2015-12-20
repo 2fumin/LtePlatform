@@ -55,6 +55,64 @@ var generateDistrictStats = function (viewModel, result) {
     }
 };
 
+var showMrsDistrictChart = function (viewModel, tag) {
+    var chart = new ComboChart();
+    chart.title.text = "MR总数变化趋势图";
+    var statDates = [];
+    var districtStats = [];
+    for (var i = 0; i < viewModel.mrStats().length; i++) {
+        var stat = viewModel.mrStats()[i];
+        statDates.push(stat.statDate);
+        for (var j = 0; j < viewModel.districts().length ; j++) {
+            if (i == 0) {
+                districtStats.push([stat.values[j]]);
+            } else {
+                districtStats[j].push(stat.values[j]);
+            }
+        }
+    }
+    chart.xAxis[0].categories = statDates;
+    chart.yAxis[0].title.text = "MR总数";
+    chart.xAxis[0].title.text = '日期';
+    for (j = 0; j < viewModel.districts().length; j++) {
+        chart.series.push({
+            type: j == viewModel.districts() - 1 ? "spline" : "column",
+            name: viewModel.districts()[j],
+            data: districtStats[j]
+        });
+    }
+    $(tag).highcharts(chart.options);
+};
+
+var showPreciseDistrictChart = function (viewModel) {
+    var chart = new ComboChart();
+    chart.title.text = "精确覆盖率变化趋势图";
+    var statDates = [];
+    var districtStats = [];
+    for (var i = 0; i < viewModel.preciseStats().length; i++) {
+        var stat = viewModel.preciseStats()[i];
+        statDates.push(stat.statDate);
+        for (var j = 0; j < viewModel.districts().length ; j++) {
+            if (i == 0) {
+                districtStats.push([stat.values[j]]);
+            } else {
+                districtStats[j].push(stat.values[j]);
+            }
+        }
+    }
+    chart.xAxis[0].categories = statDates;
+    chart.yAxis[0].title.text = "精确覆盖率";
+    chart.xAxis[0].title.text = '日期';
+    for (j = 0; j < viewModel.districts().length; j++) {
+        chart.series.push({
+            type: j == viewModel.districts() - 1 ? "spline" : "line",
+            name: viewModel.districts()[j],
+            data: districtStats[j]
+        });
+    }
+    $(tag).highcharts(chart.options);
+};
+
 var accumulatePreciseStat = function (source, accumulate) {
     source.totalMrs += accumulate.totalMrs;
     source.firstNeighbors += accumulate.firstNeighbors;
