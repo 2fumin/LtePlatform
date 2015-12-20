@@ -76,7 +76,7 @@ var showMrsDistrictChart = function (viewModel, tag) {
     chart.xAxis[0].title.text = '日期';
     for (j = 0; j < viewModel.districts().length; j++) {
         chart.series.push({
-            type: j == viewModel.districts() - 1 ? "spline" : "column",
+            type: j === viewModel.districts().length - 1 ? "spline" : "column",
             name: viewModel.districts()[j],
             data: districtStats[j]
         });
@@ -84,7 +84,7 @@ var showMrsDistrictChart = function (viewModel, tag) {
     $(tag).highcharts(chart.options);
 };
 
-var showPreciseDistrictChart = function (viewModel) {
+var showPreciseDistrictChart = function (viewModel, tag) {
     var chart = new ComboChart();
     chart.title.text = "精确覆盖率变化趋势图";
     var statDates = [];
@@ -105,7 +105,7 @@ var showPreciseDistrictChart = function (viewModel) {
     chart.xAxis[0].title.text = '日期';
     for (j = 0; j < viewModel.districts().length; j++) {
         chart.series.push({
-            type: j == viewModel.districts() - 1 ? "spline" : "line",
+            type: j === viewModel.districts().length - 1 ? "spline" : "line",
             name: viewModel.districts()[j],
             data: districtStats[j]
         });

@@ -83,6 +83,7 @@ namespace LtePlatform
             bundles.Add(new ScriptBundle("~/bundles/kpiPreciseTrend").Include(
                 "~/Scripts/sammy-{version}.js",
                 "~/Scripts/app/common.js",
+                "~/Scripts/mycharts/comboChart.js",
                 "~/Scripts/mycharts/drilldown.chart.js",
                 "~/Scripts/mycharts/drilldownPie.js",
                 "~/Scripts/app/app.datamodel.js",

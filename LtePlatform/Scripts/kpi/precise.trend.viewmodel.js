@@ -76,6 +76,8 @@
                     calculateTownRates(townStats[k]);
                 }
                 showMrPie(districtStats, townStats);
+                showMrsDistrictChart(self, "#mr-chart");
+                showPreciseDistrictChart(self, "#precise-chart");
             }
         });
     };
