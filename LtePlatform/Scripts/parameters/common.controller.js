@@ -15,12 +15,17 @@ var mapLonLat = function (source, destination) {
     source.lattitute = destination.lattitute;
 };
 
-var mapLonLatEdits = function (sourceList, destList) {
+var mapLonLatEdits = function (sourceFunc, destList) {
+    var sourceList = sourceFunc();
     for (var i = 0; i < destList.length; i++) {
-        if (isLongtituteValid(destList[i])) {
+        destList[i].longtitute = parseFloat(destList[i].longtitute);
+        destList[i].lattitute = parseFloat(destList[i].lattitute);
+        if (isLonLatValid(destList[i])) {
+            console.log(destList[i]);
             mapLonLat(sourceList[destList[i].index], destList[i]);
         }
     }
+    sourceFunc(sourceList);
 };
 
 var initializeCities = function(viewModel) {

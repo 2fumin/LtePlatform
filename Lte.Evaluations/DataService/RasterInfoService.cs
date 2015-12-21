@@ -22,6 +22,27 @@ namespace Lte.Evaluations.DataService
         public IEnumerable<RasterInfoView> QueryAllList()
         {
             return Mapper.Map<IEnumerable<RasterInfo>, IEnumerable<RasterInfoView>>(_repository.RasterInfos.ToList());
+        }
+
+        public IEnumerable<RasterInfoView> QueryWithDataType(string dataType)
+        {
+            List<RasterInfo> infos;
+            switch (dataType)
+            {
+                case "2G":
+                    infos = _repository.RasterInfos.Where(x => x.CsvFilesName2G != "").ToList();
+                    break;
+                    ;
+                case "3G":
+                    infos = _repository.RasterInfos.Where(x => x.CsvFilesName3G != "").ToList();
+                    break;
+
+                default:
+                    infos = _repository.RasterInfos.Where(x => x.CsvFilesName4G != "").ToList();
+                    break;
+
+            }
+            return Mapper.Map<IEnumerable<RasterInfo>, IEnumerable<RasterInfoView>>(infos);
         } 
     }
 }

@@ -27,6 +27,11 @@ namespace LtePlatform.Controllers.Dt
         public IEnumerable<RasterInfoView> Get()
         {
             return _service.QueryAllList();
+        }
+
+        public IEnumerable<RasterInfoView> Get(string dataType)
+        {
+            return _service.QueryWithDataType(dataType);
         } 
     }
 }

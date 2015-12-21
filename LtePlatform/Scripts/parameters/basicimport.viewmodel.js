@@ -46,7 +46,7 @@
     };
 
     self.postENodebLonLat = function() {
-        mapLonLatEdits(self.newENodebs(), self.newENodebLonLatEdits());
+        mapLonLatEdits(self.newENodebs, self.newENodebLonLatEdits());
         $('#eNodeb-lon-lat').modal('hide');
     };
 
@@ -55,10 +55,10 @@
         $('#cell-lon-lat').modal('show');
     };
 
-    self.postCellLonLat=function() {
-        mapLonLatEdits(self.newCells(), self.newCellLonLatEdits());
+    self.postCellLonLat = function() {
+        mapLonLatEdits(self.newCells, self.newCellLonLatEdits());
         $('#cell-lon-lat').modal('hide');
-    }
+    };
 
     self.checkBtssLonLat = function() {
         self.newBtsLonLatEdits(queryBtsLonLatEdits(self.newBtss()));
@@ -66,7 +66,7 @@
     };
 
     self.postBtsLonLat = function() {
-        mapLonLatEdits(self.newBtss(), self.newBtsLonLatEdits());
+        mapLonLatEdits(self.newBtss, self.newBtsLonLatEdits());
         $('#bts-lon-lat').modal('hide');
     };
 
@@ -76,7 +76,7 @@
     };
 
     self.postCdmaCellLonLat = function() {
-        mapLonLatEdits(self.newCdmaCells(), self.newCdmaCellLonLatEdits());
+        mapLonLatEdits(self.newCdmaCells, self.newCdmaCellLonLatEdits());
         $('#cdmaCell-lon-lat').modal('hide');
     };
 
