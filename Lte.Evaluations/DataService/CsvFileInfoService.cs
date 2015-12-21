@@ -20,6 +20,11 @@ namespace Lte.Evaluations.DataService
         public IEnumerable<CsvFilesInfo> QueryAllList()
         {
             return _repository.CsvFilesInfos.ToList();
+        }
+
+        public IEnumerable<FileRecord4G> GetFileRecord4Gs(string fileName)
+        {
+            return _repository.GetFileRecord4Gs(fileName);
         } 
     }
 }

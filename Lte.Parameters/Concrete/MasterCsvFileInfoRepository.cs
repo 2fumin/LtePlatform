@@ -13,5 +13,10 @@ namespace Lte.Parameters.Concrete
         private readonly MasterTestContext _context = new MasterTestContext();
 
         public IQueryable<CsvFilesInfo> CsvFilesInfos => _context.CsvFilesInfos;
+
+        public IEnumerable<FileRecord4G> GetFileRecord4Gs(string fileName)
+        {
+            return _context.Get4GFileContents(fileName);
+        }
     }
 }

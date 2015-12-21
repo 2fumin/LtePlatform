@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Lte.Parameters.Entities;
@@ -12,7 +13,7 @@ namespace Lte.Parameters.Concrete
     [Database(Name = "masterTest")]
     public class MasterTestContext : DataContext
     {
-        private static MappingSource _mappingSource = new AttributeMappingSource();
+        private static readonly MappingSource _mappingSource = new AttributeMappingSource();
 
         public MasterTestContext()
             : base(
@@ -27,5 +28,12 @@ namespace Lte.Parameters.Concrete
         public Table<CsvFilesInfo> CsvFilesInfos => GetTable<CsvFilesInfo>();
 
         public Table<RasterInfo> RasterInfos => GetTable<RasterInfo>();
+
+        [Function(Name = "dbo.sp_get4GFileContents")]
+        public ISingleResult<FileRecord4G> Get4GFileContents([Parameter(DbType = "varchar(max)")] string tableName)
+        {
+            var result = ExecuteMethodCall(this, ((MethodInfo)(MethodBase.GetCurrentMethod())), tableName);
+            return (ISingleResult<FileRecord4G>) result?.ReturnValue;
+        }
     }
 }

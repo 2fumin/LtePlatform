@@ -9,6 +9,8 @@ namespace Lte.Parameters.Abstract
 {
     public interface ICsvFileInfoRepository
     {
-        IQueryable<CsvFilesInfo> CsvFilesInfos { get; } 
+        IQueryable<CsvFilesInfo> CsvFilesInfos { get; }
+
+        IEnumerable<FileRecord4G> GetFileRecord4Gs(string fileName);
     }
 }
