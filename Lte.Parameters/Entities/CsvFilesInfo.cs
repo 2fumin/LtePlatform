@@ -1,28 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Linq.Mapping;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Lte.Parameters.Entities
 {
-    [Table("csvFilesInfo")]
+    [Table(Name = "dbo.csvFilesInfo")]
     public class CsvFilesInfo
     {
-        [Column("testDate")]
+        [Column(Name = "testDate", DbType = "DateTime")]
         public DateTime? TestDate { get; set; }
 
-        [Column("csvFileName")]
-        public string csvFileName { get; set; }
+        [Column(Name = "csvFileName", DbType = "Char(300)")]
+        public string CsvFileName { get; set; }
 
-        [Column("direct")]
+        [Column(Name = "direct", DbType = "Char(300)")]
         public string Directory { get; set; }
 
-        [Column("dataType")]
+        [Column(Name = "dataType", DbType = "Char(50)")]
         public string DataType { get; set; }
 
-        [Column("distance")]
+        [Column(Name = "distance", DbType = "float")]
         public double? Distance { get; set; }
     }
 }

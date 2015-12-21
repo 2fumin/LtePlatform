@@ -47,6 +47,10 @@ namespace LtePlatform
 
             ninjectKernel.Bind<ITownPreciseCoverage4GStatRepository>().To<EFTownPreciseCoverage4GStatRepository>();
 
+            ninjectKernel.Bind<IAreaTestDateRepository>().To<MasterAreaTestDateDateRepository>();
+
+            ninjectKernel.Bind<ICsvFileInfoRepository>().To<MasterCsvFileInfoRepository>();
+
             ninjectKernel.Bind<CdmaRegionStatService>().ToSelf();
 
             ninjectKernel.Bind<CollegeStatService>().ToSelf();
@@ -102,6 +106,8 @@ namespace LtePlatform
             ninjectKernel.Bind<CellDumpService>().ToSelf();
 
             ninjectKernel.Bind<CdmaCellDumpService>().ToSelf();
+
+            ninjectKernel.Bind<AreaTestDateService>().ToSelf();
         }
     }
 }

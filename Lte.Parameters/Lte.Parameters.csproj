@@ -102,6 +102,7 @@
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
@@ -114,6 +115,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IAreaTestDateRepository.cs" />
     <Compile Include="Abstract\IBtsIdQuery.cs" />
     <Compile Include="Abstract\IBtsRepository.cs" />
     <Compile Include="Abstract\ICdmaCellRepository.cs" />
@@ -123,6 +125,7 @@
     <Compile Include="Abstract\ICollege4GTestRepository.cs" />
     <Compile Include="Abstract\ICollegeKpiRepository.cs" />
     <Compile Include="Abstract\ICollegeRepository.cs" />
+    <Compile Include="Abstract\ICsvFileInfoRepository.cs" />
     <Compile Include="Abstract\IENodebRepository.cs" />
     <Compile Include="Abstract\IIndoorDistributioinRepository.cs" />
     <Compile Include="Abstract\IInfrastructureRepository.cs" />
@@ -154,6 +157,9 @@
     <Compile Include="Concrete\EFTopDrop2GCellRepository.cs" />
     <Compile Include="Concrete\EFTownPreciseCoverage4GStatRepository.cs" />
     <Compile Include="Concrete\EFTownRepository.cs" />
+    <Compile Include="Concrete\MasterAreaTestDateDateRepository.cs" />
+    <Compile Include="Concrete\MasterCsvFileInfoRepository.cs" />
+    <Compile Include="Concrete\MasterTestContext.cs" />
     <Compile Include="Entities\AlarmStat.cs" />
     <Compile Include="Entities\AlarmStatCsv.cs" />
     <Compile Include="Entities\AlarmStatHuawei.cs" />

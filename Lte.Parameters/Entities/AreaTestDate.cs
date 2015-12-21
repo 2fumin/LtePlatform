@@ -1,30 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Abp.Domain.Entities;
+using System.Data.Linq.Mapping;
 
 namespace Lte.Parameters.Entities
 {
-    [Table("areaTestDate")]
+    [Table(Name = "dbo.areaTestDate")]
     public class AreaTestDate
     {
-        [Column("area")]
-        [MaxLength(50)]
+        [Column(Name = "area", DbType = "Char(50)")]
         public string Area { get; set; }
 
-        [Column("latestTestDate2G")]
-        [MaxLength(100)]
+        [Column(Name = "latestTestDate2G", DbType = "Char(100)")]
         public string LatestTestDate2G { get; set; }
 
-        [Column("latestTestDate3G")]
-        [MaxLength(100)]
+        [Column(Name = "latestTestDate3G", DbType = "Char(100)")]
         public string LatestTestDate3G { get; set; }
 
-        [Column("latestTestDate4G")]
-        [MaxLength(100)]
+        [Column(Name = "latestTestDate4G", DbType = "Char(100)")]
         public string LatestTestDate4G { get; set; }
     }
 }
