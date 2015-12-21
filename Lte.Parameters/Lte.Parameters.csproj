@@ -184,6 +184,7 @@
     <Compile Include="Entities\ENodeb.cs" />
     <Compile Include="Entities\ENodebExcel.cs" />
     <Compile Include="Entities\ENodebPhoto.cs" />
+    <Compile Include="Entities\FileRecord4G.cs" />
     <Compile Include="Entities\IndoorDistribution.cs" />
     <Compile Include="Entities\IndoorDistributionExcel.cs" />
     <Compile Include="Entities\InfrastructureDefs.cs" />
