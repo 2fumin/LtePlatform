@@ -51,6 +51,8 @@ namespace LtePlatform
 
             ninjectKernel.Bind<ICsvFileInfoRepository>().To<MasterCsvFileInfoRepository>();
 
+            ninjectKernel.Bind<IRasterInfoRepository>().To<MasterRasterInfoRepository>();
+
             ninjectKernel.Bind<CdmaRegionStatService>().ToSelf();
 
             ninjectKernel.Bind<CollegeStatService>().ToSelf();
@@ -110,6 +112,8 @@ namespace LtePlatform
             ninjectKernel.Bind<AreaTestDateService>().ToSelf();
 
             ninjectKernel.Bind<CsvFileInfoService>().ToSelf();
+
+            ninjectKernel.Bind<RasterInfoService>().ToSelf();
         }
     }
 }

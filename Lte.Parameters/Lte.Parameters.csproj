@@ -131,6 +131,7 @@
     <Compile Include="Abstract\IInfrastructureRepository.cs" />
     <Compile Include="Abstract\IPagingRepository.cs" />
     <Compile Include="Abstract\IPreciseCoverage4GRepository.cs" />
+    <Compile Include="Abstract\IRasterInfoRepository.cs" />
     <Compile Include="Abstract\IRegionRepository.cs" />
     <Compile Include="Abstract\ITopConnection3GRepository.cs" />
     <Compile Include="Abstract\ITopDrop2GCellRepository.cs" />
@@ -159,6 +160,7 @@
     <Compile Include="Concrete\EFTownRepository.cs" />
     <Compile Include="Concrete\MasterAreaTestDateDateRepository.cs" />
     <Compile Include="Concrete\MasterCsvFileInfoRepository.cs" />
+    <Compile Include="Concrete\MasterRasterInfoRepository.cs" />
     <Compile Include="Concrete\MasterTestContext.cs" />
     <Compile Include="Entities\AlarmStat.cs" />
     <Compile Include="Entities\AlarmStatCsv.cs" />
@@ -189,6 +191,7 @@
     <Compile Include="Entities\OptimizeRegion.cs" />
     <Compile Include="Entities\PreciseCoverage4G.cs" />
     <Compile Include="Entities\PreciseCoverage4GCsv.cs" />
+    <Compile Include="Entities\RasterInfo.cs" />
     <Compile Include="Entities\TopConnection3GCell.cs" />
     <Compile Include="Entities\TopConnection3GCellExcel.cs" />
     <Compile Include="Entities\TopDrop2GCell.cs" />

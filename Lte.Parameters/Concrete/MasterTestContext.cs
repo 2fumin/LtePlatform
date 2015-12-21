@@ -25,5 +25,7 @@ namespace Lte.Parameters.Concrete
         public Table<AreaTestDate> AreaTestDates => GetTable<AreaTestDate>();
 
         public Table<CsvFilesInfo> CsvFilesInfos => GetTable<CsvFilesInfo>();
+
+        public Table<RasterInfo> RasterInfos => GetTable<RasterInfo>();
     }
 }
