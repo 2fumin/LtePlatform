@@ -35,5 +35,13 @@ namespace Lte.Parameters.Concrete
             var result = ExecuteMethodCall(this, ((MethodInfo)(MethodBase.GetCurrentMethod())), tableName);
             return (ISingleResult<FileRecord4G>) result?.ReturnValue;
         }
+
+        [Function(Name = "dbo.sp_get4GFileContentsRasterConsidered")]
+        public ISingleResult<FileRecord4G> Get4GFileContents([Parameter(DbType = "varchar(max)")] string tableName,
+            [Parameter(DbType = "Int")] int rasterNum)
+        {
+            var result = ExecuteMethodCall(this, ((MethodInfo)(MethodBase.GetCurrentMethod())), tableName, rasterNum);
+            return (ISingleResult<FileRecord4G>)result?.ReturnValue;
+        }
     }
 }

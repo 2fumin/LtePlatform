@@ -21,6 +21,11 @@ namespace LtePlatform.Controllers.Dt
         public IEnumerable<FileRecord4G> Get(string fileName)
         {
             return _service.GetFileRecord4Gs(fileName);
+        }
+
+        public IEnumerable<FileRecord4G> Get(string fileName, int rasterNum)
+        {
+            return _service.GetFileRecord4Gs(fileName, rasterNum);
         } 
     }
 }

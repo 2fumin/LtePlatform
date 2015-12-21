@@ -12,5 +12,7 @@ namespace Lte.Parameters.Abstract
         IQueryable<CsvFilesInfo> CsvFilesInfos { get; }
 
         IEnumerable<FileRecord4G> GetFileRecord4Gs(string fileName);
+
+        IEnumerable<FileRecord4G> GetFileRecord4Gs(string fileName, int rasterNum);
     }
 }

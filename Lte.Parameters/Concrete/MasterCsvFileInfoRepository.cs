@@ -18,5 +18,10 @@ namespace Lte.Parameters.Concrete
         {
             return _context.Get4GFileContents(fileName);
         }
+
+        public IEnumerable<FileRecord4G> GetFileRecord4Gs(string fileName, int rasterNum)
+        {
+            return _context.Get4GFileContents(fileName, rasterNum);
+        }
     }
 }
