@@ -13,7 +13,7 @@ namespace LtePlatform.Models
         {
             Documentation = doc;
         }
-        public string Documentation { get; set; }
+        public string Documentation { get; }
     }
 
     [AttributeUsage(AttributeTargets.Method)]
@@ -23,7 +23,7 @@ namespace LtePlatform.Models
         {
             Documentation = doc;
         }
-        public string Documentation { get; set; }
+        public string Documentation { get; }
     }
 
     [AttributeUsage(AttributeTargets.Class)]
@@ -33,7 +33,7 @@ namespace LtePlatform.Models
         {
             Documentation = doc;
         }
-        public string Documentation { get; set; }
+        public string Documentation { get; }
     }
 
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
@@ -44,7 +44,7 @@ namespace LtePlatform.Models
             Parameter = param;
             Documentation = doc;
         }
-        public string Parameter { get; set; }
-        public string Documentation { get; set; }
+        public string Parameter { get; }
+        public string Documentation { get; }
     }
 }

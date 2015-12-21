@@ -92,7 +92,7 @@ namespace LtePlatform.Tests.ModelDescription
         }
 
         [Test]
-        public void Tewt_SimpleEnum_WithSimpleModelDocumentationProvider()
+        public void Test_SimpleEnum_WithSimpleModelDocumentationProvider()
         {
             InitializeProvider();
             var description = generator.GetOrCreateModelDescription(typeof(SimpleEnum));
