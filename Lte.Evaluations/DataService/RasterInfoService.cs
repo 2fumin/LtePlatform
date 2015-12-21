@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using Lte.Evaluations.ViewModels;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 
@@ -17,9 +19,9 @@ namespace Lte.Evaluations.DataService
             _repository = repository;
         }
 
-        public IEnumerable<RasterInfo> QueryAllList()
+        public IEnumerable<RasterInfoView> QueryAllList()
         {
-            return _repository.RasterInfos.ToList();
+            return Mapper.Map<IEnumerable<RasterInfo>, IEnumerable<RasterInfoView>>(_repository.RasterInfos.ToList());
         } 
     }
 }

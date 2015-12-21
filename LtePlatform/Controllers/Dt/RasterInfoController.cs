@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Lte.Evaluations.DataService;
+using Lte.Evaluations.ViewModels;
 using Lte.Parameters.Entities;
 using LtePlatform.Models;
 
@@ -22,8 +23,8 @@ namespace LtePlatform.Controllers.Dt
 
         [HttpGet]
         [ApiDoc("查询所有网格的测试信息")]
-        [ApiResponse("所有网格的测试信息，包括网格坐标、所属镇区和包含的测试数据表列表")]
-        public IEnumerable<RasterInfo> Get()
+        [ApiResponse("所有网格的测试信息视图，包括网格坐标、所属镇区和包含的测试数据表列表")]
+        public IEnumerable<RasterInfoView> Get()
         {
             return _service.QueryAllList();
         } 

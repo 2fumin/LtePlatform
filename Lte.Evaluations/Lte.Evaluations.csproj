@@ -153,6 +153,7 @@
     <Compile Include="ViewModels\Precise4GView.cs" />
     <Compile Include="ViewModels\PreciseHistory.cs" />
     <Compile Include="ViewModels\PreciseRegionDateView.cs" />
+    <Compile Include="ViewModels\RasterInfoView.cs" />
     <Compile Include="ViewModels\SectorView.cs" />
     <Compile Include="ViewModels\TopDrop2GCellView.cs" />
     <Compile Include="ViewModels\TopDrop2GDateView.cs" />
