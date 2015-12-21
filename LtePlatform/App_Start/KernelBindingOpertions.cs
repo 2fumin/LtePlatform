@@ -108,6 +108,8 @@ namespace LtePlatform
             ninjectKernel.Bind<CdmaCellDumpService>().ToSelf();
 
             ninjectKernel.Bind<AreaTestDateService>().ToSelf();
+
+            ninjectKernel.Bind<CsvFileInfoService>().ToSelf();
         }
     }
 }

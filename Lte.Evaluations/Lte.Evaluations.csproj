@@ -101,6 +101,7 @@
     <Compile Include="DataService\College\CollegeKpiService.cs" />
     <Compile Include="DataService\College\CollegePreciseService.cs" />
     <Compile Include="DataService\College\CollegeStatService.cs" />
+    <Compile Include="DataService\CsvFileInfoService.cs" />
     <Compile Include="DataService\Dump\BtsDumpService.cs" />
     <Compile Include="DataService\Dump\CdmaCellDumpService.cs" />
     <Compile Include="DataService\Dump\CellDumpService.cs" />

@@ -324,6 +324,7 @@
     <Compile Include="Controllers\College\CollegeStatController.cs" />
     <Compile Include="Controllers\DtController.cs" />
     <Compile Include="Controllers\Dt\AreaTestDateController.cs" />
+    <Compile Include="Controllers\Dt\CsvFileInfoController.cs" />
     <Compile Include="Controllers\EvaluationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KpiController.cs" />
