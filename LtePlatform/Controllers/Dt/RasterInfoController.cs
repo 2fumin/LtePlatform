@@ -34,4 +34,19 @@ namespace LtePlatform.Controllers.Dt
             return _service.QueryWithDataType(dataType);
         } 
     }
+
+    public class RasterFileController : ApiController
+    {
+        private readonly RasterInfoService _service;
+
+        public RasterFileController(RasterInfoService service)
+        {
+            _service = service;
+        }
+
+        public IEnumerable<FileRasterInfoView> Get(string dataType)
+        {
+            return _service.QueryFileNames(dataType);
+        }
+    }
 }

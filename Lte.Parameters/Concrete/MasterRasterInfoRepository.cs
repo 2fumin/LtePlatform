@@ -12,6 +12,28 @@ namespace Lte.Parameters.Concrete
     {
         private readonly MasterTestContext _context = new MasterTestContext();
 
+        private static List<RasterInfo> _list;  
+
         public IQueryable<RasterInfo> RasterInfos => _context.RasterInfos;
+
+        public List<RasterInfo> GetAllList()
+        {
+            if (_list == null || !_list.Any())
+                _list = RasterInfos.ToList();
+            return _list;
+        }
+
+        public List<RasterInfo> GetAllList(string dataType)
+        {
+            switch (dataType)
+            {
+                case "2G":
+                    return GetAllList().Where(x => x.CsvFilesName2G != "").ToList();
+                case "3G":
+                    return GetAllList().Where(x => x.CsvFilesName3G != "").ToList();
+                default:
+                    return GetAllList().Where(x => x.CsvFilesName4G != "").ToList();
+            }
+        }
     }
 }

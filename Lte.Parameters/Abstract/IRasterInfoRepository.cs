@@ -10,5 +10,9 @@ namespace Lte.Parameters.Abstract
     public interface IRasterInfoRepository
     {
         IQueryable<RasterInfo> RasterInfos { get; }
+
+        List<RasterInfo> GetAllList();
+
+        List<RasterInfo> GetAllList(string dataType);
     }
 }

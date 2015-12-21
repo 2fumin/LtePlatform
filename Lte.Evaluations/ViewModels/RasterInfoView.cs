@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lte.Parameters.Entities;
 
 namespace Lte.Evaluations.ViewModels
 {
@@ -25,5 +26,30 @@ namespace Lte.Evaluations.ViewModels
         public double SouthLattitute { get; set; }
 
         public double NorthLattitute { get; set; }
+    }
+
+    public class RasterFileInfoView
+    {
+        public int RasterNum { get; set; }
+
+        public IEnumerable<string> CsvFilesNames { get; set; } = new List<string>();
+
+        public RasterFileInfoView(RasterInfo info, string dataType)
+        {
+            RasterNum = info.RasterNum ?? 0;
+            if (dataType == "2G" && !string.IsNullOrEmpty(info.CsvFilesName2G))
+                CsvFilesNames = info.CsvFilesName2G.Split(';');
+            if (dataType == "3G" && !string.IsNullOrEmpty(info.CsvFilesName3G))
+                CsvFilesNames = info.CsvFilesName3G.Split(';');
+            if (dataType == "4G" && !string.IsNullOrEmpty(info.CsvFilesName4G))
+                CsvFilesNames = info.CsvFilesName4G.Split(';');
+        }
+    }
+
+    public class FileRasterInfoView
+    {
+        public string CsvFileName { get; set; }
+
+        public IEnumerable<int> RasterNums { get; set; } 
     }
 }
