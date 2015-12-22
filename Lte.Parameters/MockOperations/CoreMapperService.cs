@@ -43,5 +43,15 @@ namespace Lte.Parameters.MockOperations
         {
             Mapper.CreateMap<BtsExcel, CdmaBts>();
         }
+
+        public static void MapDtItems()
+        {
+            Mapper.CreateMap<FileRecord2G, FileRecordCoverage2G>()
+                .ForMember(d => d.Longtitute, opt => opt.MapFrom(s => s.Longtitute ?? -1))
+                .ForMember(d => d.Lattitute, opt => opt.MapFrom(s => s.Lattitute ?? -1))
+                .ForMember(d => d.Ecio, opt => opt.MapFrom(s => s.Ecio ?? 0))
+                .ForMember(d => d.RxAgc, opt => opt.MapFrom(s => s.RxAgc ?? 0))
+                .ForMember(d => d.TxPower, opt => opt.MapFrom(s => s.TxPower ?? 0));
+        }
     }
 }

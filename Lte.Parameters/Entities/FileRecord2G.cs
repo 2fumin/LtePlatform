@@ -4,6 +4,7 @@ using System.Data.Linq.Mapping;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lte.Domain.Common.Geo;
 
 namespace Lte.Parameters.Entities
 {
@@ -38,5 +39,22 @@ namespace Lte.Parameters.Entities
 
         [Column(Name = "txGain", DbType = "Real")]
         public double? TxGain { get; set; }
+    }
+
+    public class FileRecordCoverage2G
+    {
+        public double Longtitute { get; set; }
+
+        public double Lattitute { get; set; }
+
+        public double BaiduLongtitute => Longtitute + GeoMath.BaiduLongtituteOffset;
+
+        public double BaiduLattitute => Lattitute + GeoMath.BaiduLattituteOffset;
+
+        public double Ecio { get; set; }
+
+        public double RxAgc { get; set; }
+
+        public double TxPower { get; set; }
     }
 }

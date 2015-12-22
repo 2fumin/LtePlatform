@@ -12,6 +12,7 @@ namespace Lte.Evaluations.MapperSerive
             CoreMapperService.MapENodeb();
             CoreMapperService.MapBts();
             CoreMapperService.MapIndoorDistribution();
+            CoreMapperService.MapDtItems();
 
             AlarmMapperService.MapAlarms();
             StatMapperService.MapCdmaRegionStat();

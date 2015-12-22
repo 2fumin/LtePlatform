@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using Lte.Evaluations.ViewModels;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 
@@ -56,5 +58,15 @@ namespace Lte.Evaluations.DataService
         {
             return _repository.GetFileRecord2Gs(fileName, rasterNum);
         }
+
+        public IEnumerable<FileRecordCoverage2G> GetCoverage2Gs(FileRasterInfoView infoView)
+        {
+            var query =
+                infoView.RasterNums.Select(
+                    x =>
+                        Mapper.Map<IEnumerable<FileRecord2G>, IEnumerable<FileRecordCoverage2G>>(
+                            GetFileRecord2Gs(infoView.CsvFileName, x)));
+            return query.Aggregate((x, y) => x.Concat(y));
+        } 
     }
 }
