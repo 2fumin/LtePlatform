@@ -13,5 +13,7 @@ namespace Lte.Parameters.Abstract
         CollegeRegion GetRegion(int id);
 
         CollegeInfo GetByName(string name);
+
+        RectangleRange GetRange(string name);
     }
 }

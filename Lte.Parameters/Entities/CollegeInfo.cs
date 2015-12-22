@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Abp.Domain.Entities.Auditing;
+using Lte.Domain.Regular;
 
 namespace Lte.Parameters.Entities
 {
@@ -43,5 +44,47 @@ namespace Lte.Parameters.Entities
         public RegionType RegionType { get; set; }
 
         public string Info { get; set; }
+
+        public RectangleRange RectangleRange
+        {
+            get
+            {
+                var coordinates = Info.Split(';');
+                switch (RegionType)
+                {
+                    case RegionType.Circle:
+                        return new RectangleRange
+                        {
+                            West = coordinates[0].ConvertToDouble(112) - coordinates[2].ConvertToDouble(0.01),
+                            East = coordinates[0].ConvertToDouble(112) + coordinates[2].ConvertToDouble(0.01),
+                            South = coordinates[1].ConvertToDouble(23) - coordinates[2].ConvertToDouble(0.01),
+                            North = coordinates[1].ConvertToDouble(23) - coordinates[2].ConvertToDouble(0.01)
+                        };
+                    case RegionType.Rectangle:
+                        return new RectangleRange
+                        {
+                            West = coordinates[0].ConvertToDouble(112),
+                            East = coordinates[2].ConvertToDouble(112.01),
+                            South = coordinates[1].ConvertToDouble(23),
+                            North = coordinates[3].ConvertToDouble(23.01)
+                        };
+                    default:
+                        var xcoors = new List<double>();
+                        var ycoors = new List<double>();
+                        for (var i = 0; i < coordinates.Length; i += 2)
+                        {
+                            xcoors.Add(coordinates[i].ConvertToDouble(112));
+                            ycoors.Add(coordinates[i + 1].ConvertToDouble(23));
+                        }
+                        return new RectangleRange
+                        {
+                            West = xcoors.Min() - 0.005,
+                            East = xcoors.Max() + 0.005,
+                            South = ycoors.Min() - 0.005,
+                            North = ycoors.Max() + 0.005
+                        };
+                }
+            }
+        }
     }
 }

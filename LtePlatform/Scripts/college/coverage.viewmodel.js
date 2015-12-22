@@ -11,6 +11,7 @@
     self.includeAllFiles = ko.observable(true);
     self.dataFile = ko.observable();
     self.dataFileList = ko.observableArray([]);
+    self.rasterFileList = ko.observableArray([]);
 
     Sammy(function () {
         this.get('#collegeCoverage', function () {
@@ -38,7 +39,29 @@
     });
 
     self.showDataFile = function() {
-
+        var fileList = [];
+        sendRequest(app.dataModel.collegeRegionUrl, "GET", {
+            collegeName: self.selectedCollege()
+        }, function(result) {
+            sendRequest(app.dataModel.rasterFileUrl, "GET", {
+                dataType: self.networkType(),
+                west: result.west,
+                east: result.east,
+                south: result.south,
+                north: result.north,
+                begin: self.beginDate(),
+                end: self.endDate()
+            }, function(list) {
+                self.rasterFileList(list);
+                for (var i = 0; i < list.length; i++) {
+                    fileList.push(list[i].csvFileName);
+                }
+                self.dataFileList(fileList);
+                if (fileList.length > 0) {
+                    self.dataFile(fileList[0]);
+                }
+            });
+        });
     };
 
     self.showResults = function() {

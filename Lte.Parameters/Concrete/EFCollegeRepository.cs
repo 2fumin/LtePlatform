@@ -23,5 +23,11 @@ namespace Lte.Parameters.Concrete
         {
             return FirstOrDefault(x => x.Name == name);
         }
+
+        public RectangleRange GetRange(string name)
+        {
+            var college = GetByName(name);
+            return college == null ? null : GetRegion(college.Id)?.RectangleRange;
+        }
     }
 }
