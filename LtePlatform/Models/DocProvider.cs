@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
+using Lte.Domain.Regular;
 using LtePlatform.Areas.HelpPage.ModelDescriptions;
 
 namespace LtePlatform.Models
@@ -40,12 +41,14 @@ namespace LtePlatform.Models
 
         public string GetDocumentation(MemberInfo member)
         {
-            return "To be supported....";
+            var attr = member.GetCustomAttributes<MemberDocAttribute>().FirstOrDefault();
+            return attr != null ? attr.Documentation : "";
         }
 
         public string GetDocumentation(Type type)
         {
-            return "To be supported...";
+            var attr = type.GetCustomAttributes<TypeDocAttribute>().FirstOrDefault();
+            return attr != null ? attr.Documentation : "";
         }
     }
 }

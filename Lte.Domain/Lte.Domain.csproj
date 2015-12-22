@@ -149,6 +149,7 @@
     <Compile Include="Regular\RowAttribute.cs" />
     <Compile Include="Regular\SecureConversion.cs" />
     <Compile Include="Regular\SecureValue.cs" />
+    <Compile Include="Regular\TypeDocAttribute.cs" />
     <Compile Include="ZipLib\Bzip\BZip2.cs" />
     <Compile Include="ZipLib\Bzip\BZip2Constants.cs" />
     <Compile Include="ZipLib\Bzip\BZip2Exception.cs" />
