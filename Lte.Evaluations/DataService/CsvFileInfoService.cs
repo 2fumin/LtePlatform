@@ -67,6 +67,16 @@ namespace Lte.Evaluations.DataService
                         Mapper.Map<IEnumerable<FileRecord2G>, IEnumerable<FileRecordCoverage2G>>(
                             GetFileRecord2Gs(infoView.CsvFileName, x)));
             return query.Aggregate((x, y) => x.Concat(y));
-        } 
+        }
+
+        public IEnumerable<FileRecordCoverage3G> GetCoverage3Gs(FileRasterInfoView infoView)
+        {
+            var query =
+                infoView.RasterNums.Select(
+                    x =>
+                        Mapper.Map<IEnumerable<FileRecord3G>, IEnumerable<FileRecordCoverage3G>>(
+                            GetFileRecord3Gs(infoView.CsvFileName, x)));
+            return query.Aggregate((x, y) => x.Concat(y));
+        }
     }
 }

@@ -52,6 +52,12 @@ namespace Lte.Parameters.MockOperations
                 .ForMember(d => d.Ecio, opt => opt.MapFrom(s => s.Ecio ?? 0))
                 .ForMember(d => d.RxAgc, opt => opt.MapFrom(s => s.RxAgc ?? 0))
                 .ForMember(d => d.TxPower, opt => opt.MapFrom(s => s.TxPower ?? 0));
+            Mapper.CreateMap<FileRecord3G, FileRecordCoverage3G>()
+                .ForMember(d => d.Longtitute, opt => opt.MapFrom(s => s.Longtitute ?? -1))
+                .ForMember(d => d.Lattitute, opt => opt.MapFrom(s => s.Lattitute ?? -1))
+                .ForMember(d => d.RxAgc0, opt => opt.MapFrom(s => s.RxAgc0 ?? 0))
+                .ForMember(d => d.RxAgc1, opt => opt.MapFrom(s => s.RxAgc1 ?? 0))
+                .ForMember(d => d.Sinr, opt => opt.MapFrom(s => s.Sinr ?? 0));
         }
     }
 }

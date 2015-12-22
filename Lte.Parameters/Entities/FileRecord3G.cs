@@ -4,6 +4,7 @@ using System.Data.Linq.Mapping;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lte.Domain.Common.Geo;
 
 namespace Lte.Parameters.Entities
 {
@@ -44,5 +45,22 @@ namespace Lte.Parameters.Entities
 
         [Column(Name = "RLPThrDL", DbType = "Int")]
         public int? RlpThroughput { get; set; }
+    }
+
+    public class FileRecordCoverage3G
+    {
+        public double Longtitute { get; set; }
+
+        public double Lattitute { get; set; }
+
+        public double BaiduLongtitute => Longtitute + GeoMath.BaiduLongtituteOffset;
+
+        public double BaiduLattitute => Lattitute + GeoMath.BaiduLattituteOffset;
+
+        public double Sinr { get; set; }
+
+        public double RxAgc0 { get; set; }
+
+        public double RxAgc1 { get; set; }
     }
 }

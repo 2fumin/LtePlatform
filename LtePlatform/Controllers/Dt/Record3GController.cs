@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Lte.Evaluations.DataService;
+using Lte.Evaluations.ViewModels;
 using Lte.Parameters.Entities;
 using LtePlatform.Models;
 
@@ -35,6 +36,15 @@ namespace LtePlatform.Controllers.Dt
         public IEnumerable<FileRecord3G> Get(string fileName, int rasterNum)
         {
             return _service.GetFileRecord3Gs(fileName, rasterNum);
+        }
+
+        [HttpPost]
+        [ApiDoc("给定数据文件名称和网格编号列表，查询覆盖指标列表")]
+        [ApiParameterDoc("infoView", "包含数据文件名称和网格编号列表的视图")]
+        [ApiResponse("覆盖指标列表")]
+        public IEnumerable<FileRecordCoverage3G> Post(FileRasterInfoView infoView)
+        {
+            return _service.GetCoverage3Gs(infoView);
         }
     }
 }
