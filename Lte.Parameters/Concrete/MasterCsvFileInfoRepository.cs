@@ -43,5 +43,10 @@ namespace Lte.Parameters.Concrete
         {
             return _context.Get2GFileContents(fileName, rasterNum);
         }
+
+        public List<CsvFilesInfo> GetAllList(DateTime begin, DateTime end)
+        {
+            return CsvFilesInfos.Where(x => x.TestDate != null && x.TestDate >= begin && x.TestDate < end).ToList();
+        }
     }
 }

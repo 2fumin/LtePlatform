@@ -35,5 +35,16 @@ namespace Lte.Parameters.Concrete
                     return GetAllList().Where(x => x.CsvFilesName4G != "").ToList();
             }
         }
+
+        public List<RasterInfo> GetAllList(string dataType, double west, double east, double south, double north)
+        {
+            return
+                GetAllList(dataType)
+                    .Where(
+                        x =>
+                            x.WestLongtitute < east && x.EastLongtitute > west && x.SouthLattitute < north &&
+                            x.NorthLattitute > south)
+                    .ToList();
+        }
     }
 }

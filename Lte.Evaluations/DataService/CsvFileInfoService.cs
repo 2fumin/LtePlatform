@@ -22,6 +22,11 @@ namespace Lte.Evaluations.DataService
             return _repository.CsvFilesInfos.ToList();
         }
 
+        public IEnumerable<CsvFilesInfo> QueryFilesInfos(DateTime begin, DateTime end)
+        {
+            return _repository.GetAllList(begin, end);
+        } 
+
         public IEnumerable<FileRecord4G> GetFileRecord4Gs(string fileName)
         {
             return _repository.GetFileRecord4Gs(fileName);

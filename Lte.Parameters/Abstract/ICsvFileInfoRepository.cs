@@ -22,5 +22,7 @@ namespace Lte.Parameters.Abstract
         IEnumerable<FileRecord2G> GetFileRecord2Gs(string fileName);
 
         IEnumerable<FileRecord2G> GetFileRecord2Gs(string fileName, int rasterNum);
+
+        List<CsvFilesInfo> GetAllList(DateTime begin, DateTime end);
     }
 }

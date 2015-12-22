@@ -26,6 +26,16 @@ namespace LtePlatform.Controllers.Dt
         public IEnumerable<CsvFilesInfo> Get()
         {
             return _service.QueryAllList();
-        } 
+        }
+        
+        [HttpGet]
+        [ApiDoc("获得指定日期范围内的DT测试数据文件信息")]
+        [ApiParameterDoc("begin", "开始日期")]
+        [ApiParameterDoc("end", "结束日期")]
+        [ApiResponse("DT测试数据文件信息，包括测试时间、数据名称、存放目录、测试网络（2G3G4G）和测试距离等")]
+        public IEnumerable<CsvFilesInfo> Get(DateTime begin, DateTime end)
+        {
+            return _service.QueryAllList();
+        }
     }
 }

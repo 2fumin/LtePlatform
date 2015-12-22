@@ -14,5 +14,7 @@ namespace Lte.Parameters.Abstract
         List<RasterInfo> GetAllList();
 
         List<RasterInfo> GetAllList(string dataType);
+
+        List<RasterInfo> GetAllList(string dataType, double west, double east, double south, double north);
     }
 }
