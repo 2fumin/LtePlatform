@@ -1,13 +1,13 @@
 ﻿<div class="cloudmap-wrapper">
     <div class="cloudmap-tools">
         <span class="cloudmap-city-name">测试数据文件</span>
-        <select class="cloudmap-select-city" data-bind="value: dataFile, options: dataFileList"></select>
-        <input type="checkbox" data-bind="checked: showAllFiles"/>
+        <select class="cloudmap-select-city" data-bind="value: dataFile, options: dataFileList, enable: !includeAllFiles"></select>
+        <input type="checkbox" data-bind="checked: includeAllFiles"/>
         <span class="cloudmap-city-name">展示全部数据</span>
-        <button class="cloudmap-search-b" data-bind="click: showResults"></button>
+        <button class="cloudmap-search-b" data-bind="click: showResults, enable: dataFileList().length>0"></button>
     </div>
     <div class="cloudmap-baiduwrapper">
-        <div id="mapContent" style="width: 100%;height: 600px;overflow: hidden;margin:0;"></div>
+        <div id="all-map" style="width: 100%;height: 600px;overflow: hidden;margin:0;"></div>
         <div class="map-w">
             <ul id="colorBar">
                 <li class="map-w-1"></li>

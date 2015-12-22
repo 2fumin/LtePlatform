@@ -42,6 +42,14 @@
     self.dumpBtsExcelUrl = "/api/DumpBtsExcel";
     self.dumpCdmaCellExcelUrl = "/api/DumpCdmaCellExcel";
 
+    self.areaTestDateUrl = "/api/AreaTestDate";
+    self.csvFileInfoUrl = "/api/CsvFileInfo";
+    self.rasterInfoUrl = "/api/RasterInfo";
+    self.rasterFileUrl = "/api/RasterFile";
+    self.record2GUrl = "/api/Record2G";
+    self.record3GUrl = "/api/Record3G";
+    self.record4GUrl = "/api/Record4G";
+
     // Route operations
 
     // Other private operations

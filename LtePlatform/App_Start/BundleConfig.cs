@@ -139,6 +139,20 @@ namespace LtePlatform
                 "~/Scripts/college/map.controller.js",
                 "~/Scripts/app/_run.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/collegeCoverage").Include(
+                "~/Scripts/sammy-{version}.js",
+                "~/Scripts/app/common.js",
+                "~/Scripts/baidu/plugins/baidu.tangram.js",
+                "~/Scripts/baidu/plugins/InfoBox.js",
+                "~/Scripts/baidu/mapContainer.js",
+                "~/Scripts/baidu/cloud/geography.map.js",
+                "~/Scripts/baidu/college.helper.js",
+                "~/Scripts/app/app.datamodel.js",
+                "~/Scripts/app/app.viewmodel.js",
+                "~/Scripts/college/map.controller.js",
+                "~/Scripts/college/coverage.viewmodel.js",
+                "~/Scripts/app/_run.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/collegeTest").Include(
                 "~/Scripts/sammy-{version}.js",
                 "~/Scripts/app/common.js",
