@@ -58,5 +58,20 @@ namespace Lte.Parameters.Concrete
             var result = ExecuteMethodCall(this, ((MethodInfo)(MethodBase.GetCurrentMethod())), tableName, rasterNum);
             return (ISingleResult<FileRecord3G>)result?.ReturnValue;
         }
+
+        [Function(Name = "dbo.sp_get2GFileContents")]
+        public ISingleResult<FileRecord2G> Get2GFileContents([Parameter(DbType = "varchar(max)")] string tableName)
+        {
+            var result = ExecuteMethodCall(this, ((MethodInfo)(MethodBase.GetCurrentMethod())), tableName);
+            return (ISingleResult<FileRecord2G>)result?.ReturnValue;
+        }
+
+        [Function(Name = "dbo.sp_get2GFileContentsRasterConsidered")]
+        public ISingleResult<FileRecord2G> Get2GFileContents([Parameter(DbType = "varchar(max)")] string tableName,
+            [Parameter(DbType = "Int")] int rasterNum)
+        {
+            var result = ExecuteMethodCall(this, ((MethodInfo)(MethodBase.GetCurrentMethod())), tableName, rasterNum);
+            return (ISingleResult<FileRecord2G>)result?.ReturnValue;
+        }
     }
 }

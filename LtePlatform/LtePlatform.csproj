@@ -326,6 +326,7 @@
     <Compile Include="Controllers\Dt\AreaTestDateController.cs" />
     <Compile Include="Controllers\Dt\CsvFileInfoController.cs" />
     <Compile Include="Controllers\Dt\RasterInfoController.cs" />
+    <Compile Include="Controllers\Dt\Record2GController.cs" />
     <Compile Include="Controllers\Dt\Record3GController.cs" />
     <Compile Include="Controllers\Dt\Record4GController.cs" />
     <Compile Include="Controllers\EvaluationController.cs" />
