@@ -43,5 +43,20 @@ namespace Lte.Parameters.Concrete
             var result = ExecuteMethodCall(this, ((MethodInfo)(MethodBase.GetCurrentMethod())), tableName, rasterNum);
             return (ISingleResult<FileRecord4G>)result?.ReturnValue;
         }
+
+        [Function(Name = "dbo.sp_get3GFileContents")]
+        public ISingleResult<FileRecord3G> Get3GFileContents([Parameter(DbType = "varchar(max)")] string tableName)
+        {
+            var result = ExecuteMethodCall(this, ((MethodInfo)(MethodBase.GetCurrentMethod())), tableName);
+            return (ISingleResult<FileRecord3G>)result?.ReturnValue;
+        }
+
+        [Function(Name = "dbo.sp_get3GFileContentsRasterConsidered")]
+        public ISingleResult<FileRecord3G> Get3GFileContents([Parameter(DbType = "varchar(max)")] string tableName,
+            [Parameter(DbType = "Int")] int rasterNum)
+        {
+            var result = ExecuteMethodCall(this, ((MethodInfo)(MethodBase.GetCurrentMethod())), tableName, rasterNum);
+            return (ISingleResult<FileRecord3G>)result?.ReturnValue;
+        }
     }
 }

@@ -14,5 +14,9 @@ namespace Lte.Parameters.Abstract
         IEnumerable<FileRecord4G> GetFileRecord4Gs(string fileName);
 
         IEnumerable<FileRecord4G> GetFileRecord4Gs(string fileName, int rasterNum);
+
+        IEnumerable<FileRecord3G> GetFileRecord3Gs(string fileName);
+
+        IEnumerable<FileRecord3G> GetFileRecord3Gs(string fileName, int rasterNum);
     }
 }

@@ -10,12 +10,12 @@ using LtePlatform.Models;
 
 namespace LtePlatform.Controllers.Dt
 {
-    [ApiControl("4G测试数据查询控制器")]
-    public class Record4GController : ApiController
+    [ApiControl("3G测试数据查询控制器")]
+    public class Record3GController : ApiController
     {
         private readonly CsvFileInfoService _service;
 
-        public Record4GController(CsvFileInfoService service)
+        public Record3GController(CsvFileInfoService service)
         {
             _service = service;
         }
@@ -23,18 +23,18 @@ namespace LtePlatform.Controllers.Dt
         [ApiDoc("查询指定数据文件的测试数据")]
         [ApiParameterDoc("fileName", "数据文件名")]
         [ApiResponse("指定数据文件的测试数据")]
-        public IEnumerable<FileRecord4G> Get(string fileName)
+        public IEnumerable<FileRecord3G> Get(string fileName)
         {
-            return _service.GetFileRecord4Gs(fileName);
+            return _service.GetFileRecord3Gs(fileName);
         }
 
         [ApiDoc("查询指定数据文件和网格编号的测试数据")]
         [ApiParameterDoc("fileName", "数据文件名")]
         [ApiParameterDoc("rasterNum", "网格编号")]
         [ApiResponse("指定数据文件的测试数据")]
-        public IEnumerable<FileRecord4G> Get(string fileName, int rasterNum)
+        public IEnumerable<FileRecord3G> Get(string fileName, int rasterNum)
         {
-            return _service.GetFileRecord4Gs(fileName, rasterNum);
-        } 
+            return _service.GetFileRecord3Gs(fileName, rasterNum);
+        }
     }
 }

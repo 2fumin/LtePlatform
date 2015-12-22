@@ -29,12 +29,17 @@ namespace LtePlatform.Controllers.Dt
             return _service.QueryAllList();
         }
 
+        [HttpGet]
+        [ApiDoc("查询包含指定数据类型的所有网格的测试信息")]
+        [ApiParameterDoc("dataType", "指定数据类型（2G、3G、4G）")]
+        [ApiResponse("包含指定数据类型的所有网格的测试信息视图，包括网格坐标、所属镇区和包含的测试数据表列表")]
         public IEnumerable<RasterInfoView> Get(string dataType)
         {
             return _service.QueryWithDataType(dataType);
         } 
     }
 
+    [ApiControl("网格测试文件信息查询控制器")]
     public class RasterFileController : ApiController
     {
         private readonly RasterInfoService _service;
@@ -44,6 +49,10 @@ namespace LtePlatform.Controllers.Dt
             _service = service;
         }
 
+        [HttpGet]
+        [ApiDoc("查询包含指定数据类型的所有网格的测试文件信息")]
+        [ApiParameterDoc("dataType", "指定数据类型（2G、3G、4G）")]
+        [ApiResponse("包含指定数据类型的所有网格的测试文件信息视图，包括测试文件编号和包含的网格编号列表")]
         public IEnumerable<FileRasterInfoView> Get(string dataType)
         {
             return _service.QueryFileNames(dataType);

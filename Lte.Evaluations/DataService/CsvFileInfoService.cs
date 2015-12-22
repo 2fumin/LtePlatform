@@ -30,6 +30,16 @@ namespace Lte.Evaluations.DataService
         public IEnumerable<FileRecord4G> GetFileRecord4Gs(string fileName, int rasterNum)
         {
             return _repository.GetFileRecord4Gs(fileName, rasterNum);
+        }
+
+        public IEnumerable<FileRecord3G> GetFileRecord3Gs(string fileName)
+        {
+            return _repository.GetFileRecord3Gs(fileName);
+        }
+
+        public IEnumerable<FileRecord3G> GetFileRecord3Gs(string fileName, int rasterNum)
+        {
+            return _repository.GetFileRecord3Gs(fileName, rasterNum);
         } 
     }
 }
