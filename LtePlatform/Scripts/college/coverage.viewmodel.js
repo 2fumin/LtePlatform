@@ -12,6 +12,7 @@
     self.dataFile = ko.observable();
     self.dataFileList = ko.observableArray([]);
     self.rasterFileList = ko.observableArray([]);
+    self.coverageKpiList = ko.observableArray([]);
 
     Sammy(function () {
         this.get('#collegeCoverage', function () {
@@ -65,7 +66,34 @@
     };
 
     self.showResults = function() {
+        if (self.dataFileList().length === 0) return;
+        var url;
+        switch (self.networkType()) {
+        case "4G":
+            url = app.dataModel.record4GUrl;
+            break;
+        case "3G":
+            url = app.dataModel.record3GUrl;
+            break;
+        default:
+            url = app.dataModel.record2GUrl;
+            break;
+        }
+        self.calculateCoverageResults(0, url, []);
+    };
 
+    self.calculateCoverageResults = function(index, url, originList) {
+        if (index === self.dataFileList().length) {
+            self.coverageKpiList(originList);
+        } else if (self.dataFile() === self.dataFileList()[index] || self.includeAllFiles()) {
+            sendRequest(url, "POST", self.rasterFileList()[index], function(result) {
+                self.calculateCoverageResults(index + 1, url, originList.concat(result));
+            }, function() {
+                self.calculateCoverageResults(index + 1, url, originList);
+            });
+        } else {
+            self.calculateCoverageResults(index + 1, url, originList);
+        }
     };
 
     return self;
