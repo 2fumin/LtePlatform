@@ -4,6 +4,7 @@ using System.Data.Linq.Mapping;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lte.Domain.Common.Geo;
 
 namespace Lte.Parameters.Entities
 {
@@ -95,5 +96,20 @@ namespace Lte.Parameters.Entities
 
         [Column(Name = "n3RSRP", DbType = "Real")]
         public double? N3Rsrp { get; set; }
+    }
+
+    public class FileRecordCoverage4G
+    {
+        public double Longtitute { get; set; }
+
+        public double Lattitute { get; set; }
+
+        public double BaiduLongtitute => Longtitute + GeoMath.BaiduLongtituteOffset;
+
+        public double BaiduLattitute => Lattitute + GeoMath.BaiduLattituteOffset;
+
+        public double Sinr { get; set; }
+
+        public double Rsrp { get; set; }
     }
 }
