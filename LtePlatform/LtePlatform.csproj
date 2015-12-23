@@ -772,6 +772,7 @@
     <None Include="Views\Parameters\_List.cshtml" />
     <Content Include="Views\Parameters\_QueryMap.cshtml" />
     <Content Include="Views\Parameters\_SectorMapInfoBox.cshtml" />
+    <Content Include="Views\Shared\_DtKpiSelection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

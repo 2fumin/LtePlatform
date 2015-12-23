@@ -4,7 +4,7 @@
         <select class="cloudmap-select-city" data-bind="value: dataFile, options: dataFileList, enable: !includeAllFiles()"></select>
         <input type="checkbox" data-bind="checked: includeAllFiles"/>
         <span class="cloudmap-city-name">展示全部数据</span>
-        <button class="cloudmap-search-b" data-bind="click: showResults, enable: dataFileList().length>0"></button>
+        <button class="btn btn-sm btn-warning" data-bind="click: showResults, enable: dataFileList().length>0">查询</button>
     </div>
     <div class="cloudmap-baiduwrapper">
         <div id="all-map" style="width: 100%;height: 600px;overflow: hidden;margin:0;"></div>
@@ -14,12 +14,13 @@
                 <li class="map-w-i"></li>
             </ul>
         </div>
-        <div id="time-control">
+        <div id="time-control" data-bind="visible: coverageKpiList().length>0">
             <div id="time-control-btns">
-                <button class="time-control-btn">模3染色</button>
-                <button class="time-control-btn">邻区关系</button>
             </div>
         </div>
+        @{
+            Html.RenderPartial("_DtKpiSelection");
+        }
     </div>
 </div>
 

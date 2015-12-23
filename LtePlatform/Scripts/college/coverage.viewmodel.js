@@ -71,12 +71,15 @@
         switch (self.networkType()) {
         case "4G":
             url = app.dataModel.record4GUrl;
+            $("#time-control-btns").html($("#4G-coverage-selection").html());
             break;
         case "3G":
             url = app.dataModel.record3GUrl;
+            $("#time-control-btns").html($("#3G-coverage-selection").html());
             break;
         default:
             url = app.dataModel.record2GUrl;
+            $("#time-control-btns").html($("#2G-coverage-selection").html());
             break;
         }
         self.calculateCoverageResults(0, url, []);
@@ -94,6 +97,10 @@
         } else {
             self.calculateCoverageResults(index + 1, url, originList);
         }
+    };
+
+    self.showRsrp = function() {
+
     };
 
     return self;
