@@ -48,7 +48,6 @@ var initializeMap = function(tag, zoomLevel) {
 };
 
 var addOneDtPoint = function (lon, lat, color, radius) {
-    console.log(radius);
     var circle = new BMap.Circle(
         new BMap.Point(lon, lat),
         radius, {
@@ -61,8 +60,9 @@ var addOneDtPoint = function (lon, lat, color, radius) {
 
 var clearAllDtPoints = function() {
     for (var i = 0; i < map.coveragePoints.length; i++) {
-        map.removeOverlay(map.coveragePoints.pop());
+        map.removeOverlay(map.coveragePoints[i]);
     }
+    map.coveragePoints = [];
 };
 
 var addOneMarker = function (marker, html, type) {

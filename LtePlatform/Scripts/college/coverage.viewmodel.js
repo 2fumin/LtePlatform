@@ -126,6 +126,7 @@
 
     self.showSinr = function() {
         clearAllDtPoints();
+        self.dtGenerator.generateSinrPoints(self.coverageKpiList(), self.dtGenerator.defaultSinrCriteria);
     };
 
     self.showSinr3G = function() {
