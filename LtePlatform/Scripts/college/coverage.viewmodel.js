@@ -146,14 +146,17 @@
 
     self.showEcio = function() {
         clearAllDtPoints();
+        self.dtGenerator.generateEcioPoints(self.coverageKpiList(), self.dtGenerator.defaultEcioCriteria);
     };
 
     self.showRxAgc2G = function() {
         clearAllDtPoints();
+        self.dtGenerator.generateRxPoints(self.coverageKpiList(), self.dtGenerator.defaultRxCriteria);
     };
 
     self.showTxPower = function() {
         clearAllDtPoints();
+        self.dtGenerator.generateTxPoints(self.coverageKpiList(), self.dtGenerator.defaultTxCriteria);
     };
 
     return self;
