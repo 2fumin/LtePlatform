@@ -122,6 +122,18 @@
     }];
 }
 
+DtGenerator.prototype.generateLegends= function(criteria, sign) {
+    $("#colorBar .map-w-i").remove();
+    for (var i = 0; i < criteria.length; i++) {
+        $("#colorBar").append("<li class='map-w-i' style='background-color:#"
+            + criteria[i].color + "; border:1px solid #" + criteria[i].color + ";'>"
+            + (sign !== false ? "&lt;" : "&gt;") + criteria[i].threshold + "</li>");
+    }
+    $("#colorBar").append("<li class='map-w-i' style='background-color:#"
+        + "077f07" + "; border:1px solid #" + "077f07" + ";'>"
+        + (sign !== false ? "&gt;=" : "&lt;=") + criteria[criteria.length - 1].threshold + "</li>");
+}
+
 DtGenerator.prototype.generateRsrpPoints = function (coverageData, criteria) {
     var radius = getDtPointRadius(map.getZoom());
     for (var i = 0; i < coverageData.length; i++) {

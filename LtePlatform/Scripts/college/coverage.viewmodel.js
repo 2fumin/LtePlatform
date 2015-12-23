@@ -66,6 +66,7 @@
                 if (fileList.length > 0) {
                     self.dataFile(fileList[0]);
                 }
+                self.showResults();
             });
         });
     };
@@ -109,6 +110,17 @@
     self.calculateCoverageResults = function(index, url, originList) {
         if (index === self.dataFileList().length) {
             self.coverageKpiList(originList);
+            switch (self.networkType()) {
+                case "4G":
+                    self.showRsrp();
+                    break;
+                case "3G":
+                    self.showSinr3G();
+                    break;
+                default:
+                    self.showEcio();
+                    break;
+            }
         } else if (self.dataFile() === self.dataFileList()[index] || self.includeAllFiles()) {
             sendRequest(url, "POST", self.rasterFileList()[index], function(result) {
                 self.calculateCoverageResults(index + 1, url, originList.concat(result));
@@ -124,48 +136,56 @@
         clearAllDtPoints();
         self.legendTitle("4G-RSRP(dBm):");
         self.dtGenerator.generateRsrpPoints(self.coverageKpiList(), self.dtGenerator.defaultRsrpCriteria);
+        self.dtGenerator.generateLegends(self.dtGenerator.defaultRsrpCriteria);
     };
 
     self.showSinr = function() {
         clearAllDtPoints();
         self.legendTitle("4G-SINR(dB):");
         self.dtGenerator.generateSinrPoints(self.coverageKpiList(), self.dtGenerator.defaultSinrCriteria);
+        self.dtGenerator.generateLegends(self.dtGenerator.defaultSinrCriteria);
     };
 
     self.showSinr3G = function() {
         clearAllDtPoints();
         self.legendTitle("3G-SINR(dB):");
         self.dtGenerator.generateSinrPoints(self.coverageKpiList(), self.dtGenerator.defaultSinr3GCriteria);
+        self.dtGenerator.generateLegends(self.dtGenerator.defaultSinr3GCriteria);
     };
 
     self.showRxAgc0 = function() {
         clearAllDtPoints();
         self.legendTitle("3G-RX0(dBm):");
         self.dtGenerator.generateRx0Points(self.coverageKpiList(), self.dtGenerator.defaultRxCriteria);
+        self.dtGenerator.generateLegends(self.dtGenerator.defaultRxCriteria);
     };
 
     self.showRxAgc1 = function () {
         clearAllDtPoints();
         self.legendTitle("3G-RX1(dBm):");
         self.dtGenerator.generateRx1Points(self.coverageKpiList(), self.dtGenerator.defaultRxCriteria);
+        self.dtGenerator.generateLegends(self.dtGenerator.defaultRxCriteria);
     };
 
     self.showEcio = function() {
         clearAllDtPoints();
         self.legendTitle("2G-Ec/Io(dB):");
         self.dtGenerator.generateEcioPoints(self.coverageKpiList(), self.dtGenerator.defaultEcioCriteria);
+        self.dtGenerator.generateLegends(self.dtGenerator.defaultEcioCriteria);
     };
 
     self.showRxAgc2G = function() {
         clearAllDtPoints();
         self.legendTitle("2G-RX(dBm):");
         self.dtGenerator.generateRxPoints(self.coverageKpiList(), self.dtGenerator.defaultRxCriteria);
+        self.dtGenerator.generateLegends(self.dtGenerator.defaultRxCriteria);
     };
 
     self.showTxPower = function() {
         clearAllDtPoints();
         self.legendTitle("2G-TX(dBm):");
         self.dtGenerator.generateTxPoints(self.coverageKpiList(), self.dtGenerator.defaultTxCriteria);
+        self.dtGenerator.generateLegends(self.dtGenerator.defaultTxCriteria, false);
     };
 
     return self;
