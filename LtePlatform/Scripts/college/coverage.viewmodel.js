@@ -131,14 +131,17 @@
 
     self.showSinr3G = function() {
         clearAllDtPoints();
+        self.dtGenerator.generateSinrPoints(self.coverageKpiList(), self.dtGenerator.defaultSinr3GCriteria);
     };
 
     self.showRxAgc0 = function() {
         clearAllDtPoints();
+        self.dtGenerator.generateRx0Points(self.coverageKpiList(), self.dtGenerator.defaultRxCriteria);
     };
 
     self.showRxAgc1 = function () {
         clearAllDtPoints();
+        self.dtGenerator.generateRx1Points(self.coverageKpiList(), self.dtGenerator.defaultRxCriteria);
     };
 
     self.showEcio = function() {
