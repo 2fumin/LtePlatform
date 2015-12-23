@@ -17,6 +17,7 @@
     self.show4GResults = ko.observable(false);
     self.show3GResults = ko.observable(false);
     self.show2GResults = ko.observable(false);
+    self.legendTitle = ko.observable();
 
     Sammy(function () {
         this.get('#collegeCoverage', function () {
@@ -121,41 +122,49 @@
 
     self.showRsrp = function () {
         clearAllDtPoints();
+        self.legendTitle("4G-RSRP(dBm):");
         self.dtGenerator.generateRsrpPoints(self.coverageKpiList(), self.dtGenerator.defaultRsrpCriteria);
     };
 
     self.showSinr = function() {
         clearAllDtPoints();
+        self.legendTitle("4G-SINR(dB):");
         self.dtGenerator.generateSinrPoints(self.coverageKpiList(), self.dtGenerator.defaultSinrCriteria);
     };
 
     self.showSinr3G = function() {
         clearAllDtPoints();
+        self.legendTitle("3G-SINR(dB):");
         self.dtGenerator.generateSinrPoints(self.coverageKpiList(), self.dtGenerator.defaultSinr3GCriteria);
     };
 
     self.showRxAgc0 = function() {
         clearAllDtPoints();
+        self.legendTitle("3G-RX0(dBm):");
         self.dtGenerator.generateRx0Points(self.coverageKpiList(), self.dtGenerator.defaultRxCriteria);
     };
 
     self.showRxAgc1 = function () {
         clearAllDtPoints();
+        self.legendTitle("3G-RX1(dBm):");
         self.dtGenerator.generateRx1Points(self.coverageKpiList(), self.dtGenerator.defaultRxCriteria);
     };
 
     self.showEcio = function() {
         clearAllDtPoints();
+        self.legendTitle("2G-Ec/Io(dB):");
         self.dtGenerator.generateEcioPoints(self.coverageKpiList(), self.dtGenerator.defaultEcioCriteria);
     };
 
     self.showRxAgc2G = function() {
         clearAllDtPoints();
+        self.legendTitle("2G-RX(dBm):");
         self.dtGenerator.generateRxPoints(self.coverageKpiList(), self.dtGenerator.defaultRxCriteria);
     };
 
     self.showTxPower = function() {
         clearAllDtPoints();
+        self.legendTitle("2G-TX(dBm):");
         self.dtGenerator.generateTxPoints(self.coverageKpiList(), self.dtGenerator.defaultTxCriteria);
     };
 
