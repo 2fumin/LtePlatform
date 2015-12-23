@@ -16,11 +16,11 @@
         </div>
         <div id="time-control" data-bind="visible: coverageKpiList().length>0">
             <div id="time-control-btns">
+                @{
+                    Html.RenderPartial("_DtKpiSelection");
+                }
             </div>
         </div>
-        @{
-            Html.RenderPartial("_DtKpiSelection");
-        }
     </div>
 </div>
 

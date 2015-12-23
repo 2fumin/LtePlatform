@@ -1,30 +1,6 @@
 
 $(function () {
 
-    $('#dialogTip').dialog({
-        buttons: [{
-            text: '导出',
-            iconCls: 'icon-print',
-            handler: function () {
-                exportTip();
-            }
-        }
-        ]
-    });
-
-    $('#dialogTip').dialog("close");
-
-    $('#dialogSector').dialog({
-        buttons: [{
-            text: '导出',
-            iconCls: 'icon-print',
-            handler: function () {
-                exportSector();
-            }
-        }
-        ]
-    });
-
     $('#dialogSector').dialog("close");
 
     //先加载控件再加载地图
@@ -611,67 +587,6 @@ function markStation() {
         }
     });
 }
-
-function mark(data) {
-
-    var r = getRadius().rStation;
-    var zoom = map.getZoom();
-
-    if (data.Sataions) {
-
-        $.each(data.Sataions, function (i, item) {
-            var point = new BMap.Point(item.LONGITUDE, item.LATITUDE);
-            var circle = new BMap.Circle(point, r, { strokeColor: "#d967fe", strokeWeight: 0.1, strokeOpacity: 0.3, fillColor: '#d967fe' }); //创建圆
-            circle.BTSID = item.BTSID;
-            circle.BTSNAME = item.BTSNAME;
-            circle.OverlayType = "BTS";
-
-            circle.addEventListener("click", sectorClick);
-            map.addOverlay(circle);
-            overlayList.push(circle);
-        });
-    }
-    if (data.Sector) {
-        $.each(data.Sector, function (i, item) {
-            var point = new BMap.Point(item.LONGITUDE, item.LATITUDE);
-            var polygon = new BMap.Polygon(add_sector(point, item.ANGLE, 65), {
-                strokeColor: "#3269eb", strokeWeight: 2, strokeOpacity: 0.2, fillColor: '#3269eb', title: item.SECTOR
-            });
-
-            polygon.OverlayType = "SECTOR";
-            polygon.BTSID = item.BTSID;
-            polygon.CELLID = item.CELLID;
-            polygon.BTSNAME = item.BTSNAME;
-            polygon.SECTOR = item.SECTOR;
-            polygon.addEventListener("click", sectorClick);
-            map.addOverlay(polygon);
-            overlayList.push(polygon);
-        });
-    }
-
-    if (data.PlanStations) {
-        var size = zoom < 15 ? 24 : 32;
-        var icon = new BMap.Icon("../../images/Hotmap/bts_" + size + ".png", new BMap.Size(size, size));
-        $.each(data.PlanStations, function (i, item) {
-            var marker = new BMap.Marker(new BMap.Point(item.LONGITUDE, item.LATITUDE), { icon: icon });
-            marker.OverlayType = "PlanningBTS";
-            marker.BTSNAME = item.BTSNAME;
-            marker.addEventListener("click", planningBTSClick);
-            marker.LONGITUDE = item.LONGITUDE;
-            marker.LATITUDE = item.LATITUDE;
-            map.addOverlay(marker);
-            overlayList.push(marker);
-        });
-    }
-
-}
-
-
-    $('#tbSector').datagrid({
-        columns: [columns],
-        rownumbers: true
-    });
-
 
     $('#tbSector').datagrid('loadData', { total: 0, rows: [] });
 

@@ -43,35 +43,10 @@ $(function () {
 
     var lastHour = new Date(new Date().getTime() - 60 * 60 * 1000);
 
-    $('#dateHistory,#beginDate,#endDate').datetimebox({          //时间
-        required: true,
-        showSeconds: false,
-        editable: false,
-        formatter: function (date) {
-            return getHistoryDate(date, $(this).attr("id"));
-        },
-        onChange: function (date) {
-            if ($(this).attr("id") == "dateHistory") {
-                changeHistory();
-            }
-        }
-
-    });
-
-
     $('#dateHistory').datebox('setValue', getHistoryDate(lastHour, $(this).attr("id")));
     $('#beginDate').datebox('setValue', getHistoryDate(new Date(new Date().getTime() - 48 * 60 * 60 * 1000), 'beginDate'));
     $('#endDate').datebox('setValue', getHistoryDate(new Date(new Date().getTime() - 24 * 60 * 60 * 1000), 'beginDate'));
 
-
-    var nScrollHight = 0; //滚动距离总长(注意不是滚动条的长度)   
-    $('#bts').scroll(function () {
-        nScrollHight = $(this)[0].scrollHeight;
-        if ($(this)[0].scrollTop + $(this).height() == nScrollHight) {
-            //$('#btsList').height($('#btsList').height() + 650);
-            getBtsList();
-        }
-    });
 
     //选择数据类型
     $("#dataType").change(function () {

@@ -145,6 +145,7 @@ namespace LtePlatform
                 "~/Scripts/baidu/plugins/baidu.tangram.js",
                 "~/Scripts/baidu/plugins/InfoBox.js",
                 "~/Scripts/baidu/mapContainer.js",
+                "~/Scripts/baidu/dtgenerator.js",
                 "~/Scripts/baidu/cloud/geography.map.js",
                 "~/Scripts/baidu/college.helper.js",
                 "~/Scripts/app/app.datamodel.js",

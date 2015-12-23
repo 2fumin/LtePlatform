@@ -13,6 +13,10 @@
     self.dataFileList = ko.observableArray([]);
     self.rasterFileList = ko.observableArray([]);
     self.coverageKpiList = ko.observableArray([]);
+    self.dtGenerator = new DtGenerator();
+    self.show4GResults = ko.observable(false);
+    self.show3GResults = ko.observable(false);
+    self.show2GResults = ko.observable(false);
 
     Sammy(function () {
         this.get('#collegeCoverage', function () {
@@ -81,15 +85,21 @@
         switch (self.networkType()) {
         case "4G":
             url = app.dataModel.record4GUrl;
-            $("#time-control-btns").html($("#4G-coverage-selection").html());
+            self.show2GResults(false);
+            self.show3GResults(false);
+            self.show4GResults(true);
             break;
         case "3G":
             url = app.dataModel.record3GUrl;
-            $("#time-control-btns").html($("#3G-coverage-selection").html());
+            self.show2GResults(false);
+            self.show3GResults(true);
+            self.show4GResults(false);
             break;
         default:
             url = app.dataModel.record2GUrl;
-            $("#time-control-btns").html($("#2G-coverage-selection").html());
+            self.show2GResults(true);
+            self.show3GResults(false);
+            self.show4GResults(false);
             break;
         }
         self.calculateCoverageResults(0, url, []);
@@ -109,36 +119,37 @@
         }
     };
 
-    self.showRsrp = function() {
-
+    self.showRsrp = function () {
+        clearAllDtPoints();
+        self.dtGenerator.generateRsrpPoints(self.coverageKpiList(), self.dtGenerator.defaultRsrpCriteria);
     };
 
     self.showSinr = function() {
-
+        clearAllDtPoints();
     };
 
     self.showSinr3G = function() {
-
+        clearAllDtPoints();
     };
 
     self.showRxAgc0 = function() {
-
+        clearAllDtPoints();
     };
 
     self.showRxAgc1 = function () {
-
+        clearAllDtPoints();
     };
 
     self.showEcio = function() {
-
+        clearAllDtPoints();
     };
 
     self.showRxAgc2G = function() {
-
+        clearAllDtPoints();
     };
 
     self.showTxPower = function() {
-
+        clearAllDtPoints();
     };
 
     return self;

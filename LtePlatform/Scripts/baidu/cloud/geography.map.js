@@ -74,7 +74,7 @@ var getRadius = function(zoom) {
 };
 
 var getDtPointRadius = function (zoom) {
-    var radius = 0.06;
+    var radius = 20;
     switch (zoom) {
         case 15:
             radius *= 0.75;

@@ -1,17 +1,17 @@
 ﻿var map = { };
 
-var initializeMap = function (tag, zoomLevel) {
+var initializeMap = function(tag, zoomLevel) {
     map = new BMap.Map(tag);
     map.centerAndZoom("佛山", zoomLevel);
-    map.setMinZoom(8);  //设置地图最小级别
-    map.setMaxZoom(17);  //设置地图最大级别
+    map.setMinZoom(8); //设置地图最小级别
+    map.setMaxZoom(17); //设置地图最大级别
 
     map.enableScrollWheelZoom(); //启用滚轮放大缩小
     map.enableDragging();
     map.disableDoubleClickZoom();
 
     var bdary = new BMap.Boundary();
-    bdary.get("佛山市", function (rs) {       //获取行政区域
+    bdary.get("佛山市", function(rs) { //获取行政区域
         var count = rs.boundaries.length; //行政区域的点有多少个
         if (count === 0) {
             alert('未能获取当前输入行政区域');
@@ -20,16 +20,18 @@ var initializeMap = function (tag, zoomLevel) {
         var pointArray = [];
         for (var i = 0; i < count; i++) {
             var ply = new BMap.Polygon(rs.boundaries[i], {
-                strokeWeight: 2, strokeColor: "#ff0000", fillOpacity: 0.1
+                strokeWeight: 2,
+                strokeColor: "#ff0000",
+                fillOpacity: 0.1
             }); //建立多边形覆盖物
-            map.addOverlay(ply);  //添加覆盖物
+            map.addOverlay(ply); //添加覆盖物
             pointArray = pointArray.concat(ply.getPath());
         }
-        map.setViewport(pointArray);    //调整视野                 
+        map.setViewport(pointArray); //调整视野                 
     });
 
-    var topLeftControl = new BMap.ScaleControl({ anchor: BMAP_ANCHOR_TOP_LEFT });// 左上角，添加比例尺
-    var topLeftNavigation = new BMap.NavigationControl();  //左上角，添加默认缩放平移控件
+    var topLeftControl = new BMap.ScaleControl({ anchor: BMAP_ANCHOR_TOP_LEFT }); // 左上角，添加比例尺
+    var topLeftNavigation = new BMap.NavigationControl(); //左上角，添加默认缩放平移控件
 
     map.addControl(topLeftControl);
     map.addControl(topLeftNavigation);
@@ -41,7 +43,27 @@ var initializeMap = function (tag, zoomLevel) {
     map.cdmaSectors = [];
     map.lteDistributions = [];
     map.cdmaDistributions = [];
-}
+
+    map.coveragePoints = [];
+};
+
+var addOneDtPoint = function (lon, lat, color, radius) {
+    console.log(radius);
+    var circle = new BMap.Circle(
+        new BMap.Point(lon, lat),
+        radius, {
+            strokeColor: color,
+            fillColor: "#" + color
+        });
+    map.coveragePoints.push(circle);
+    map.addOverlay(circle);
+};
+
+var clearAllDtPoints = function() {
+    for (var i = 0; i < map.coveragePoints.length; i++) {
+        map.removeOverlay(map.coveragePoints.pop());
+    }
+};
 
 var addOneMarker = function (marker, html, type) {
     if (type === undefined) type = "College";
