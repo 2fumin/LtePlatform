@@ -72,3 +72,21 @@ var getRadius = function(zoom) {
 
     return { rSector: rSector, rStation: rSation };
 };
+
+var getDtPointRadius = function (zoom) {
+    var radius = 0.06;
+    switch (zoom) {
+        case 15:
+            radius *= 0.75;
+            break;
+        case 16:
+            radius /= 2.5;
+            break;
+        case 17:
+            radius /= 5;
+            break;
+        default:
+            break;
+    }
+    return radius;
+}

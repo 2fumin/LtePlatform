@@ -67,6 +67,16 @@
 
     self.showResults = function() {
         if (self.dataFileList().length === 0) return;
+        for (var i = 0; i < self.collegeInfos().length; i++) {
+            if (self.collegeInfos()[i].name === self.selectedCollege()) {
+                var cell = {
+                    baiduLongtitute: self.collegeInfos()[i].centerx,
+                    baiduLattitute: self.collegeInfos()[i].centery
+                };
+                setCellFocus(cell);
+                break;
+            }
+        }
         var url;
         switch (self.networkType()) {
         case "4G":
@@ -100,6 +110,34 @@
     };
 
     self.showRsrp = function() {
+
+    };
+
+    self.showSinr = function() {
+
+    };
+
+    self.showSinr3G = function() {
+
+    };
+
+    self.showRxAgc0 = function() {
+
+    };
+
+    self.showRxAgc1 = function () {
+
+    };
+
+    self.showEcio = function() {
+
+    };
+
+    self.showRxAgc2G = function() {
+
+    };
+
+    self.showTxPower = function() {
 
     };
 
