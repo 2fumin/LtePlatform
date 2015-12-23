@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,6 +52,7 @@ namespace Lte.Evaluations.ViewModels
     public class FileRasterInfoView
     {
         [MemberDoc("测试数据文件名")]
+        [Required]
         public string CsvFileName { get; set; }
 
         [MemberDoc("包含的网格编号列表")]
