@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lte.Domain.Regular;
 using Lte.Parameters.Entities;
 
 namespace Lte.Evaluations.ViewModels
@@ -46,10 +47,13 @@ namespace Lte.Evaluations.ViewModels
         }
     }
 
+    [TypeDoc("测试数据文件网格视图，一个测试数据文件包含的若干个网格")]
     public class FileRasterInfoView
     {
+        [MemberDoc("测试数据文件名")]
         public string CsvFileName { get; set; }
 
+        [MemberDoc("包含的网格编号列表")]
         public IEnumerable<int> RasterNums { get; set; } 
     }
 }
