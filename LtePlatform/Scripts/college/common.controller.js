@@ -11,6 +11,9 @@
             for (var i = 0; i < data.length; i++) {
                 viewModel.colleges.push(data[i].name);
             }
+            if (viewModel.queryCells !== undefined) {
+                viewModel.queryCells();
+            }
         }
     });
 };
