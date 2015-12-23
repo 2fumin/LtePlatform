@@ -53,6 +53,10 @@ namespace LtePlatform
 
             ninjectKernel.Bind<IRasterInfoRepository>().To<MasterRasterInfoRepository>();
 
+            ninjectKernel.Bind<ILteNeighborCellRepository>().To<EFLteNeighborCellRepository>();
+
+            ninjectKernel.Bind<INearestPciCellRepository>().To<EFNearestPciCellRepository>();
+
             ninjectKernel.Bind<CdmaRegionStatService>().ToSelf();
 
             ninjectKernel.Bind<CollegeStatService>().ToSelf();
