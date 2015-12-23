@@ -740,6 +740,7 @@
     <Content Include="Views\College\_DistributionMapInfoBox.cshtml" />
     <Content Include="Views\College\_Coverage.cshtml" />
     <Content Include="Views\College\_CoverageMap.cshtml" />
+    <None Include="Views\College\_Edit.cshtml" />
     <None Include="Views\Kpi\PreciseImport.cshtml" />
     <Content Include="Views\Kpi\_PreciseImport.cshtml" />
     <Content Include="Views\Kpi\_PreciseHistoryTable.cshtml" />

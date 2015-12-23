@@ -1,7 +1,17 @@
-﻿@model dynamic
-
-@{
-    ViewBag.Title = "title";
+﻿@{
+    ViewBag.Title = "校园网信息编辑";
 }
 
-<h2>title</h2>
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h2 class="panel-title">
+            <strong>@ViewBag.Title</strong>
+        </h2>
+    </div>
+</div>
+
+@section SPAViews{
+    @{
+        Html.RenderPartial("_Edit");
+    }
+}

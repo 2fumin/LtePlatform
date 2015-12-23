@@ -16,6 +16,8 @@ namespace Lte.Evaluations.DataService
         private readonly IPreciseCoverage4GRepository _repository;
         private readonly IENodebRepository _eNodebRepository;
 
+        public static int TotalMrsThreshold { get; } = 3000;
+
         public PreciseStatService(IPreciseCoverage4GRepository repository,
             IENodebRepository eNodebRepository)
         {
@@ -30,7 +32,7 @@ namespace Lte.Evaluations.DataService
                 return new List<Precise4GView>();
             var query =
                 _repository.GetAll()
-                    .Where(x => x.StatTime >= begin && x.StatTime < end && x.TotalMrs > 100);
+                    .Where(x => x.StatTime >= begin && x.StatTime < end && x.TotalMrs > TotalMrsThreshold);
             var result =
                 from q in query.AsEnumerable()
                 group q by new
