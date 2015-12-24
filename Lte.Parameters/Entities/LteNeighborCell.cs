@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Abp.Domain.Entities;
+using System.Runtime.Serialization;
 
 namespace Lte.Parameters.Entities
 {
     [Table("dbo.LteNeighborCells")]
+    [KnownType(typeof(NearestPciCell))]
     public class LteNeighborCell : Entity
     {
         public int CellId { get; set; }

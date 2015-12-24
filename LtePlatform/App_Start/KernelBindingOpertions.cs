@@ -118,6 +118,10 @@ namespace LtePlatform
             ninjectKernel.Bind<CsvFileInfoService>().ToSelf();
 
             ninjectKernel.Bind<RasterInfoService>().ToSelf();
+
+            ninjectKernel.Bind<LteNeighborCellService>().ToSelf();
+
+            ninjectKernel.Bind<NearestPciCellService>().ToSelf();
         }
     }
 }

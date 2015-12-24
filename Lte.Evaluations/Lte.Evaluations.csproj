@@ -113,6 +113,8 @@
     <Compile Include="DataService\Dump\NewENodebListContainer.cs" />
     <Compile Include="DataService\ENodebQueryService.cs" />
     <Compile Include="DataService\KpiImportService.cs" />
+    <Compile Include="DataService\LteNeighborCellService.cs" />
+    <Compile Include="DataService\NearestPciCellService.cs" />
     <Compile Include="DataService\PreciseImportService.cs" />
     <Compile Include="DataService\PreciseRegionStatService.cs" />
     <Compile Include="DataService\PreciseStatService.cs" />

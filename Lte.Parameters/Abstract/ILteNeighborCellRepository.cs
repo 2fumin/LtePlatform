@@ -10,10 +10,11 @@ namespace Lte.Parameters.Abstract
 {
     public interface ILteNeighborCellRepository : IRepository<LteNeighborCell>
     {
+        List<LteNeighborCell> GetAllList(int cellId, byte sectorId);
     }
 
     public interface INearestPciCellRepository : IRepository<NearestPciCell>
     {
-        
+        List<NearestPciCell> GetAllList(int cellId, byte sectorId);
     }
 }
