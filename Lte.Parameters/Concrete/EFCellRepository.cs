@@ -30,5 +30,11 @@ namespace Lte.Parameters.Concrete
         {
             return GetAll().Where(x => x.ENodebId == eNodebId).ToList();
         }
+
+        public List<Cell> GetAllList(double west, double east, double south, double north)
+        {
+            return GetAllList(x =>
+                x.Longtitute >= west && x.Longtitute <= east && x.Lattitute >= south && x.Lattitute <= north);
+        }
     }
 }

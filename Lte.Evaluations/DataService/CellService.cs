@@ -24,8 +24,7 @@ namespace Lte.Evaluations.DataService
 
         public IEnumerable<Cell> GetCells(double west, double east, double south, double north)
         {
-            return _repository.GetAll().Where(x =>
-                x.Longtitute >= west && x.Longtitute <= east && x.Lattitute >= south && x.Lattitute <= north);
+            return _repository.GetAllList(west, east, south, north);
         }
 
         public List<byte> GetSectorIds(string eNodebName)
@@ -39,6 +38,15 @@ namespace Lte.Evaluations.DataService
         public IEnumerable<SectorView> QuerySectors(int eNodebId)
         {
             var cells = _repository.GetAllList(eNodebId);
+            return cells.Any()
+                ? Mapper.Map<IEnumerable<CellView>, IEnumerable<SectorView>>(
+                    cells.Select(x => CellView.ConstructView(x, _eNodebRepository)))
+                : new List<SectorView>();
+        }
+
+        public IEnumerable<SectorView> QuerySectors(double west, double east, double south, double north)
+        {
+            var cells = _repository.GetAllList(west, east, south, north);
             return cells.Any()
                 ? Mapper.Map<IEnumerable<CellView>, IEnumerable<SectorView>>(
                     cells.Select(x => CellView.ConstructView(x, _eNodebRepository)))

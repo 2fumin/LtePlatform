@@ -358,6 +358,7 @@
     <Compile Include="Controllers\Parameters\NewCdmaCellExcelsController.cs" />
     <Compile Include="Controllers\Parameters\NewCellExcelsController.cs" />
     <Compile Include="Controllers\Parameters\NewENodebExcelsController.cs" />
+    <Compile Include="Controllers\Parameters\SectorViewController.cs" />
     <Compile Include="Controllers\RutraceController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
