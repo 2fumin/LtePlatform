@@ -18,6 +18,7 @@
     self.show3GResults = ko.observable(false);
     self.show2GResults = ko.observable(false);
     self.legendTitle = ko.observable();
+    self.coverageRate = ko.observable(100);
 
     Sammy(function () {
         this.get('#collegeCoverage', function () {
@@ -112,12 +113,15 @@
             self.coverageKpiList(originList);
             switch (self.networkType()) {
                 case "4G":
+                    calculate4GCoverageRate(self);
                     self.showRsrp();
                     break;
                 case "3G":
+                    calculate3GCoverageRate(self);
                     self.showSinr3G();
                     break;
                 default:
+                    calculate2GCoverageRate(self);
                     self.showEcio();
                     break;
             }

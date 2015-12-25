@@ -439,25 +439,61 @@ var showCollegeConnection = function (collegeNames, rrcConnection, erabConnectio
     chart.yAxis[0].title.text = '连接成功率';
 
     chart.series.push({
-        type: 'column',
+        type: 'spline',
         name: 'RRC连接成功率',
         data: rrcConnection
     });
     chart.series.push({
-        type: 'column',
+        type: 'spline',
         name: 'E-RAB连接成功率',
         data: erabConnection
     });
     chart.series.push({
-        type: 'column',
+        type: 'line',
         name: '2G呼建成功率',
         data: connection2G
     });
     chart.series.push({
-        type: 'column',
+        type: 'line',
         name: '3G连接成功率',
         data: connection3G
     });
 
     showChartDialog(tag, chart);
-}
+};
+
+var calculate4GCoverageRate = function (viewModel) {
+    var coveragePoints = 0;
+    var kpiList = viewModel.coverageKpiList();
+    for (var i = 0; i < kpiList.length; i++) {
+        var kpi = kpiList[i];
+        if (kpi.rsrp > -105 && kpi.sinr > -3) {
+            coveragePoints++;
+        }
+    }
+    viewModel.coverageRate(100 * coveragePoints / kpiList.length);
+};
+
+var calculate3GCoverageRate = function (viewModel) {
+    var coveragePoints = 0;
+    var kpiList = viewModel.coverageKpiList();
+    for (var i = 0; i < kpiList.length; i++) {
+        var kpi = kpiList[i];
+        if (kpi.rxAgc0 > -95 && kpi.rxAgc1 > -95 && kpi.sinr > -3) {
+            coveragePoints++;
+        }
+    }
+    viewModel.coverageRate(100 * coveragePoints / kpiList.length);
+};
+
+var calculate2GCoverageRate = function (viewModel) {
+    var coveragePoints = 0;
+    var kpiList = viewModel.coverageKpiList();
+    for (var i = 0; i < kpiList.length; i++) {
+        var kpi = kpiList[i];
+        if (kpi.rxAgc > -95 && kpi.txPower < 0 && kpi.ecio > -12) {
+            coveragePoints++;
+        }
+    }
+    viewModel.coverageRate(100 * coveragePoints / kpiList.length);
+};
