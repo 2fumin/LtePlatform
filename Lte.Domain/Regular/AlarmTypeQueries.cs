@@ -61,13 +61,13 @@ namespace Lte.Domain.Regular
 
         public static string GetAlarmTypeDescription(this AlarmType type)
         {
-            Tuple<AlarmType, string> tuple = alarmTypeDescriptionList.FirstOrDefault(x => x.Item1 == type);
+            var tuple = alarmTypeDescriptionList.FirstOrDefault(x => x.Item1 == type);
             return (tuple != null) ? tuple.Item2 : type.GetAlarmTypeHuawei();
         }
 
         public static AlarmType GetAlarmType(this string description)
         {
-            Tuple<AlarmType, string> tuple = alarmTypeDescriptionList.FirstOrDefault(x => x.Item2 == description);
+            var tuple = alarmTypeDescriptionList.FirstOrDefault(x => x.Item2 == description);
             return (tuple != null) ? tuple.Item1 : AlarmType.Others;
         }
 
@@ -118,13 +118,13 @@ namespace Lte.Domain.Regular
 
         public static string GetAlarmTypeHuawei(this AlarmType type)
         {
-            Tuple<AlarmType, string> tuple = alarmTypeHuaweiList.FirstOrDefault(x => x.Item1 == type);
+            var tuple = alarmTypeHuaweiList.FirstOrDefault(x => x.Item1 == type);
             return (tuple != null) ? tuple.Item2 : "其他告警";
         }
 
         public static AlarmType GetAlarmHuawei(this string description)
         {
-            Tuple<AlarmType, string> tuple = alarmTypeHuaweiList.FirstOrDefault(x => x.Item2 == description);
+            var tuple = alarmTypeHuaweiList.FirstOrDefault(x => x.Item2 == description);
             return (tuple != null) ? tuple.Item1 : AlarmType.Others;
         }
 
@@ -141,13 +141,13 @@ namespace Lte.Domain.Regular
 
         public static string GetAlarmLevelDescription(this AlarmLevel level)
         {
-            Tuple<AlarmLevel, string> tuple = alarmLevelDescriptionList.FirstOrDefault(x => x.Item1 == level);
+            var tuple = alarmLevelDescriptionList.FirstOrDefault(x => x.Item1 == level);
             return (tuple != null) ? tuple.Item2 : "次要";
         }
 
         public static AlarmLevel GetAlarmLevel(this string description)
         {
-            Tuple<AlarmLevel, string> tuple = alarmLevelDescriptionList.FirstOrDefault(x => x.Item2 == description);
+            var tuple = alarmLevelDescriptionList.FirstOrDefault(x => x.Item2 == description);
             return (tuple != null) ? tuple.Item1 : AlarmLevel.Secondary;
         }
 
@@ -163,13 +163,13 @@ namespace Lte.Domain.Regular
 
         public static string GetAlarmCategoryDescription(this AlarmCategory category)
         {
-            Tuple<AlarmCategory, string> tuple = alarmCategoryDescriptionList.FirstOrDefault(x => x.Item1 == category);
+            var tuple = alarmCategoryDescriptionList.FirstOrDefault(x => x.Item1 == category);
             return (tuple != null) ? tuple.Item2 : "服务质量告警";
         }
 
         public static AlarmCategory GetCategory(this string description)
         {
-            Tuple<AlarmCategory, string> tuple = alarmCategoryDescriptionList.FirstOrDefault(x => x.Item2 == description);
+            var tuple = alarmCategoryDescriptionList.FirstOrDefault(x => x.Item2 == description);
             return (tuple != null) ? tuple.Item1 : AlarmCategory.Qos;
         }
     }
