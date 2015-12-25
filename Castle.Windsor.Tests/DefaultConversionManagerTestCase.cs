@@ -12,19 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace CastleTests
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Threading;
+using Castle.Core.Configuration;
+using Castle.MicroKernel.SubSystems.Conversion;
+using NUnit.Framework;
+
+namespace Castle.Windsor.Tests
 {
-	using System;
-	using System.Collections;
-	using System.Collections.Generic;
-	using System.Threading;
-
-	using Castle.Core.Configuration;
-	using Castle.MicroKernel.SubSystems.Conversion;
-
-	using NUnit.Framework;
-
-	[TestFixture]
+    [TestFixture]
 	public class DefaultConversionManagerTestCase
 	{
 		private readonly DefaultConversionManager converter = new DefaultConversionManager();
@@ -73,7 +71,7 @@ namespace CastleTests
 		{
 			Assert.AreEqual(typeof(DefaultConversionManagerTestCase),
 			                converter.PerformConversion(
-			                	"CastleTests.DefaultConversionManagerTestCase, Castle.Windsor.Tests",
+			                	"Castle.Windsor.Tests.DefaultConversionManagerTestCase, Castle.Windsor.Tests",
 			                	typeof(Type)));
 		}
 

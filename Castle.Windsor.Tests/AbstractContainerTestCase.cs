@@ -12,14 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace CastleTests
+using Castle.MicroKernel;
+using NUnit.Framework;
+
+namespace Castle.Windsor.Tests
 {
-	using Castle.MicroKernel;
-	using Castle.Windsor;
-
-	using NUnit.Framework;
-
-	[TestFixture]
+    [TestFixture]
 	public abstract class AbstractContainerTestCase
 	{
 		[TearDown]
@@ -37,17 +35,11 @@ namespace CastleTests
 
 		private WindsorContainer container;
 
-		protected IWindsorContainer Container
-		{
-			get { return container; }
-		}
+		protected IWindsorContainer Container => container;
 
-		protected IKernel Kernel
-		{
-			get { return container.Kernel; }
-		}
+	    protected IKernel Kernel => container.Kernel;
 
-		protected virtual void AfterContainerCreated()
+	    protected virtual void AfterContainerCreated()
 		{
 		}
 
