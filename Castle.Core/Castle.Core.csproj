@@ -176,8 +176,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="NLog">
       <HintPath>..\packages\NLog\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog">
+      <HintPath>..\packages\NLog\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.FullNetFX">
+      <HintPath>..\packages\NLog\Serilog.FullNetFX.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -611,12 +620,29 @@
     <Compile Include="Core\Smtp\DefaultSmtpSender.cs" />
     <Compile Include="Core\StringObjectDictionaryAdapter.cs" />
     <Compile Include="SecurityAssemblyInfo.cs" />
+    <Compile Include="Services\Logging\log4netIntegration\ExtendedLog4netFactory.cs" />
+    <Compile Include="Services\Logging\log4netIntegration\ExtendedLog4netLogger.cs" />
+    <Compile Include="Services\Logging\log4netIntegration\GlobalContextProperties.cs" />
+    <Compile Include="Services\Logging\log4netIntegration\Log4netFactory.cs" />
+    <Compile Include="Services\Logging\log4netIntegration\Log4netLogger.cs" />
+    <Compile Include="Services\Logging\log4netIntegration\ThreadContextProperties.cs" />
+    <Compile Include="Services\Logging\log4netIntegration\ThreadContextStack.cs" />
+    <Compile Include="Services\Logging\log4netIntegration\ThreadContextStacks.cs" />
+    <Compile Include="Services\Logging\NLogIntegration\ExtendedNLogFactory.cs" />
+    <Compile Include="Services\Logging\NLogIntegration\ExtendedNLogLogger.cs" />
+    <Compile Include="Services\Logging\NLogIntegration\GlobalContextProperties.cs" />
+    <Compile Include="Services\Logging\NLogIntegration\NLogFactory.cs" />
+    <Compile Include="Services\Logging\NLogIntegration\NLogLogger.cs" />
+    <Compile Include="Services\Logging\NLogIntegration\ThreadContextProperties.cs" />
+    <Compile Include="Services\Logging\NLogIntegration\ThreadContextStack.cs" />
+    <Compile Include="Services\Logging\NLogIntegration\ThreadContextStacks.cs" />
+    <Compile Include="Services\Logging\SerilogIntegration\SerilogFactory.cs" />
+    <Compile Include="Services\Logging\SerilogIntegration\SerilogLogger.cs" />
     <Compile Include="Services\NLogIntegration\ExtendedNLogFactory.cs" />
     <Compile Include="Services\NLogIntegration\ExtendedNLogLogger.cs" />
     <Compile Include="Services\NLogIntegration\GlobalContextProperties.cs" />
     <Compile Include="Services\NLogIntegration\NLogFactory.cs" />
     <Compile Include="Services\NLogIntegration\NLogLogger.cs" />
-    <Compile Include="Services\NLogIntegration\SecurityAssemblyInfo.cs" />
     <Compile Include="Services\NLogIntegration\ThreadContextProperties.cs" />
     <Compile Include="Services\NLogIntegration\ThreadContextStack.cs" />
     <Compile Include="Services\NLogIntegration\ThreadContextStacks.cs" />

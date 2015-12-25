@@ -41,16 +41,22 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Castle.Core\Castle.Core.csproj">
@@ -61,9 +67,41 @@
   <ItemGroup>
     <Compile Include="Core\Internal\SimpleThreadSafeCollection.cs" />
     <Compile Include="Core\Internal\SimpleThreadSafeSet.cs" />
+    <Compile Include="Facilities\Everything\EventSubscriber.cs" />
+    <Compile Include="Facilities\Everything\EventSubscribers.cs" />
+    <Compile Include="Facilities\Everything\EventWiringDescriptor.cs" />
+    <Compile Include="Facilities\Everything\EventWiringException.cs" />
+    <Compile Include="Facilities\Everything\EventWiringFacility.cs" />
+    <Compile Include="Facilities\Everything\EventWiringInspector.cs" />
+    <Compile Include="Facilities\Everything\EventWiringRegistrationExtensions.cs" />
+    <Compile Include="Facilities\Everything\NaiveMethodNameExtractor.cs" />
+    <Compile Include="Facilities\Everything\OpCodeValues.cs" />
+    <Compile Include="Facilities\FactorySupport\AccessorActivator.cs" />
+    <Compile Include="Facilities\FactorySupport\FactoryActivator.cs" />
+    <Compile Include="Facilities\FactorySupport\FactorySupportFacility.cs" />
+    <Compile Include="Facilities\Logging\LoggerImplementation.cs" />
+    <Compile Include="Facilities\Logging\LoggerResolver.cs" />
+    <Compile Include="Facilities\Logging\LoggingFacility.cs" />
     <Compile Include="Facilities\Startable\IStartFlagInternal.cs" />
     <Compile Include="Facilities\Startable\StartableFacility.nested.cs" />
     <Compile Include="Facilities\Startable\StartFlag.cs" />
+    <Compile Include="Facilities\Synchronize\AbstractAsyncResult.cs" />
+    <Compile Include="Facilities\Synchronize\Constants.cs" />
+    <Compile Include="Facilities\Synchronize\CreateOnUIThreadActivator.cs" />
+    <Compile Include="Facilities\Synchronize\CreateOnUIThreadInspector.cs" />
+    <Compile Include="Facilities\Synchronize\Result.cs" />
+    <Compile Include="Facilities\Synchronize\Result.Void.cs" />
+    <Compile Include="Facilities\Synchronize\SynchronizeAttribute.cs" />
+    <Compile Include="Facilities\Synchronize\SynchronizeComponentInspector.cs" />
+    <Compile Include="Facilities\Synchronize\SynchronizeContextReference.cs" />
+    <Compile Include="Facilities\Synchronize\SynchronizeContextReferenceType.cs" />
+    <Compile Include="Facilities\Synchronize\SynchronizeFacility.cs" />
+    <Compile Include="Facilities\Synchronize\SynchronizeInterceptor.cs" />
+    <Compile Include="Facilities\Synchronize\SynchronizeInterceptorSelector.cs" />
+    <Compile Include="Facilities\Synchronize\SynchronizeMetaInfo.cs" />
+    <Compile Include="Facilities\Synchronize\SynchronizeMetaInfoStore.cs" />
+    <Compile Include="Facilities\Synchronize\SynchronizeProxyHook.cs" />
+    <Compile Include="Facilities\Synchronize\SynchronousResult.cs" />
     <Compile Include="MicroKernel\ComponentActivator\WebUserControlComponentActivator.cs" />
     <Compile Include="AutoregisterPerWebRequestLifestyleModule.cs" />
     <Compile Include="Core\BoundToAttribute.cs" />

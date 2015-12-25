@@ -66,3 +66,4 @@ uploads/
 /Castle.Core/bin/Release
 /Castle.Core/bin/NET45-Release
 /UpgradeLog2.htm
+/Castle.Windsor/AssemblyInfo.cs
