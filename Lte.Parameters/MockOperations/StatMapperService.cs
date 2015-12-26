@@ -8,6 +8,7 @@ using AutoMapper;
 using Lte.Parameters.Entities;
 using Lte.Domain.Common;
 using Lte.Domain.Regular;
+using Lte.Parameters.Entities.Work;
 
 namespace Lte.Parameters.MockOperations
 {
@@ -41,6 +42,15 @@ namespace Lte.Parameters.MockOperations
                 .ForMember(d => d.StatTime, opt => opt.MapFrom(s => s.StatDate.AddHours(s.StatHour)))
                 .ForMember(d => d.CellId,
                     opt => opt.MapFrom(s => s.CellName.GetSubStringInFirstPairOfChars('[', ']').ConvertToInt(1)));
+        }
+
+        public static void MapWorkItem()
+        {
+            Mapper.CreateMap<WorkItemExcel, WorkItem>()
+                .ForMember(d => d.Type, opt => opt.MapFrom(s => s.Title.Split('_')[1]))
+                .ForMember(d => d.Subtype, opt => opt.MapFrom(s => s.Title.Split('_')[2]))
+                .ForMember(d => d.Cause, opt => opt.MapFrom(s => s.CauseDescription.GetWorkItemCause()))
+                .ForMember(d => d.State, opt => opt.MapFrom(s => s.StateDescription.GetState()));
         }
     }
 }

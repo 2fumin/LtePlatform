@@ -28,10 +28,10 @@ namespace Lte.Parameters.Entities.Work
         public DateTime Deadline { get; set; }
 
         [ExcelColumn("重复派单数")]
-        public byte RepeatTimes { get; set; }
+        public short RepeatTimes { get; set; }
 
         [ExcelColumn("退回次数")]
-        public byte RejectTimes { get; set; }
+        public short RejectTimes { get; set; }
 
         [ExcelColumn("处理人")]
         public string StaffName { get; set; }
