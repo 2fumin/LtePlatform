@@ -111,5 +111,17 @@ namespace Lte.Parameters.Entities.Work
             new Tuple<WorkItemCause, string>(WorkItemCause.WeakCoverage, "弱覆盖问题"),
             new Tuple<WorkItemCause, string>(WorkItemCause.WrongDownTilt, "下倾角错误")
         };
+
+        public static string GetWorkItemCauseDescription(this WorkItemCause cause)
+        {
+            var tuple = workItemCauseList.FirstOrDefault(x => x.Item1 == cause);
+            return tuple != null ? tuple.Item2 : "其它原因";
+        }
+
+        public static WorkItemCause GetWorkItemCause(this string description)
+        {
+            var tuple = workItemCauseList.FirstOrDefault(x => x.Item2 == description);
+            return tuple != null ? tuple.Item1 : WorkItemCause.Others;
+        }
     }
 }

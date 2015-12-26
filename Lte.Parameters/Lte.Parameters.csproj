@@ -206,6 +206,7 @@
     <Compile Include="Entities\TopDrop2GCellExcel.cs" />
     <Compile Include="Entities\Town.cs" />
     <Compile Include="Entities\TownPreciseCoverage4GStat.cs" />
+    <Compile Include="Entities\Work\WorkItemExcel.cs" />
     <Compile Include="Entities\Work\WorkItemType.cs" />
     <Compile Include="Entities\Work\WorkItemTypeQueries.cs" />
     <Compile Include="MockOperations\AlarmMapperService.cs" />

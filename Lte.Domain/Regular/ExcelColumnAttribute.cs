@@ -30,6 +30,10 @@ namespace Lte.Domain.Regular
                         return x => x.ToString().ConvertToInt(0);
                     case TransformEnum.IntegerRemoveDots:
                         return x => x.ToString().Replace(".", "").ConvertToInt(0);
+                    case TransformEnum.IntegerRemoveQuotions:
+                        return x => x.ToString().Replace("'", "").ConvertToInt(0);
+                    case TransformEnum.ByteRemoveQuotions:
+                        return x => x.ToString().Replace("'", "").ConvertToByte(0);
                     case TransformEnum.IpAddress:
                         return x => new IpAddress(x.ToString());
                     case TransformEnum.DefaultZeroDouble:
@@ -38,6 +42,8 @@ namespace Lte.Domain.Regular
                         return x => x.ToString().ConvertToDateTime(DateTime.Today.AddMonths(-1));
                     case TransformEnum.AntiNullAddress:
                         return x => string.IsNullOrEmpty(x.ToString()) ? "请编辑地址" : x.ToString();
+                    case TransformEnum.NullabelDateTime:
+                        return x => string.IsNullOrEmpty(x) ? (DateTime?)null : x.ConvertToDateTime(DateTime.Now);
                     default:
                         return null;
                 }
