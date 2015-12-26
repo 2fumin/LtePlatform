@@ -59,5 +59,57 @@ namespace Lte.Parameters.Entities.Work
             var tuple = workItemSubtypeList.FirstOrDefault(x => x.Item2 == description);
             return tuple != null ? tuple.Item1 : WorkItemSubtype.Others;
         }
+
+        private static readonly Tuple<WorkItemState, string>[] workItemStateList =
+        {
+            new Tuple<WorkItemState, string>(WorkItemState.Processing, "待处理"),
+            new Tuple<WorkItemState, string>(WorkItemState.Processed, "待归档"),
+            new Tuple<WorkItemState, string>(WorkItemState.Finished, "已归档")
+        };
+
+        public static string GetWorkItemStateDescription(this WorkItemState state)
+        {
+            var tuple = workItemStateList.FirstOrDefault(x => x.Item1 == state);
+            return tuple != null ? tuple.Item2 : "已归档";
+        }
+
+        public static WorkItemState GetState(this string description)
+        {
+            var tuple = workItemStateList.FirstOrDefault(x => x.Item2 == description);
+            return tuple != null ? tuple.Item1 : WorkItemState.Finished;
+        }
+
+        private static readonly Tuple<WorkItemCause, string>[] workItemCauseList =
+        {
+            new Tuple<WorkItemCause, string>(WorkItemCause.Antenna, "天线问题"),
+            new Tuple<WorkItemCause, string>(WorkItemCause.AntennaFeedline, "天馈器件异常"),
+            new Tuple<WorkItemCause, string>(WorkItemCause.ApplianceProblem, "设备故障"),
+            new Tuple<WorkItemCause, string>(WorkItemCause.FeedAppliance, "馈线链接器件问题"),
+            new Tuple<WorkItemCause, string>(WorkItemCause.HardSwitch, "硬切换问题"),
+            new Tuple<WorkItemCause, string>(WorkItemCause.ImproperPower, "功率不合理"),
+            new Tuple<WorkItemCause, string>(WorkItemCause.IndoorDistribution, "室分器件异常"),
+            new Tuple<WorkItemCause, string>(WorkItemCause.InterferenceCoverage, "干扰覆盖问题"),
+            new Tuple<WorkItemCause, string>(WorkItemCause.InvisibleAlarm, "主设备隐性故障"),
+            new Tuple<WorkItemCause, string>(WorkItemCause.Jamming, "拥塞"),
+            new Tuple<WorkItemCause, string>(WorkItemCause.MainAlarm, "主设备障碍告警"),
+            new Tuple<WorkItemCause, string>(WorkItemCause.NeighborCell, "邻区漏配"),
+            new Tuple<WorkItemCause, string>(WorkItemCause.Others, "其他"),
+            new Tuple<WorkItemCause, string>(WorkItemCause.Others, "其它"),
+            new Tuple<WorkItemCause, string>(WorkItemCause.Others, "其它原因"),
+            new Tuple<WorkItemCause, string>(WorkItemCause.OuterInterference, "外界干扰"),
+            new Tuple<WorkItemCause, string>(WorkItemCause.OuterInterference, "网络外部干扰"),
+            new Tuple<WorkItemCause, string>(WorkItemCause.OverCoverage, "越区覆盖"),
+            new Tuple<WorkItemCause, string>(WorkItemCause.OverCoverage, "越区覆盖问题"),
+            new Tuple<WorkItemCause, string>(WorkItemCause.Overload, "负荷过载"),
+            new Tuple<WorkItemCause, string>(WorkItemCause.PagingChannelBusy, "寻呼信道负荷高"),
+            new Tuple<WorkItemCause, string>(WorkItemCause.ParameterConfig, "参数配置错误"),
+            new Tuple<WorkItemCause, string>(WorkItemCause.PilotPolution, "导频污染"),
+            new Tuple<WorkItemCause, string>(WorkItemCause.ResouceJamming, "资源拥塞"),
+            new Tuple<WorkItemCause, string>(WorkItemCause.Rssi, "RSSI异常"),
+            new Tuple<WorkItemCause, string>(WorkItemCause.TrunkProblem, "传输故障"),
+            new Tuple<WorkItemCause, string>(WorkItemCause.WeakCoverage, "弱覆盖"),
+            new Tuple<WorkItemCause, string>(WorkItemCause.WeakCoverage, "弱覆盖问题"),
+            new Tuple<WorkItemCause, string>(WorkItemCause.WrongDownTilt, "下倾角错误")
+        };
     }
 }

@@ -69,16 +69,6 @@
     <Reference Include="System.Data" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
-  <ItemGroup Condition="$(MSBuildTargets)=='Silverlight 5.0'">
-    <Reference Include="NUnit.Silverlight.Framework">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\sl5\NUnit.Silverlight.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="NUnit.Silverlight.Compatibility">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\sl5\NUnit.Silverlight.Compatibility.dll</HintPath>
-    </Reference>
-  </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractContainerTestCase.cs" />
     <Compile Include="BugAttribute.cs" />

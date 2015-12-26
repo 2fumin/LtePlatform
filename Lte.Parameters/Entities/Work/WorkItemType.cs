@@ -33,4 +33,39 @@ namespace Lte.Parameters.Entities.Work
         UplinkSevereInterference,
         Others
     }
+
+    public enum WorkItemState: byte
+    {
+        Processing,
+        Processed,
+        Finished
+    }
+
+    public enum WorkItemCause: short
+    {
+        Rssi,
+        ParameterConfig,
+        TrunkProblem,
+        PilotPolution,
+        Overload,
+        InterferenceCoverage,
+        ImproperPower,
+        FeedAppliance,
+        NeighborCell,
+        Others,
+        WeakCoverage,
+        ApplianceProblem,
+        IndoorDistribution,
+        AntennaFeedline,
+        Antenna,
+        OuterInterference,
+        WrongDownTilt,
+        PagingChannelBusy,
+        HardSwitch,
+        Jamming,
+        OverCoverage,
+        InvisibleAlarm,
+        MainAlarm,
+        ResouceJamming
+    }
 }
