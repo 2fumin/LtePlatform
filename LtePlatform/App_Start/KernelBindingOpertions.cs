@@ -57,6 +57,8 @@ namespace LtePlatform
 
             ninjectKernel.Bind<INearestPciCellRepository>().To<EFNearestPciCellRepository>();
 
+            ninjectKernel.Bind<IWorkItemRepository>().To<EFWorkItemRepository>();
+
             ninjectKernel.Bind<CdmaRegionStatService>().ToSelf();
 
             ninjectKernel.Bind<CollegeStatService>().ToSelf();
@@ -122,6 +124,8 @@ namespace LtePlatform
             ninjectKernel.Bind<LteNeighborCellService>().ToSelf();
 
             ninjectKernel.Bind<NearestPciCellService>().ToSelf();
+
+            ninjectKernel.Bind<WorkItemService>().ToSelf();
         }
     }
 }

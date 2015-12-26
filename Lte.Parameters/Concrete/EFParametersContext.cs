@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Abp.EntityFramework;
 using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Work;
 
 namespace Lte.Parameters.Concrete
 {
@@ -54,5 +55,7 @@ namespace Lte.Parameters.Concrete
         public DbSet<LteNeighborCell> LteNeighborCells { get; set; }
 
         public DbSet<NearestPciCell> NearestPciCells { get; set; }
+
+        public DbSet<WorkItem> WorkItems { get; set; }
     }
 }

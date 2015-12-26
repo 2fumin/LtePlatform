@@ -340,6 +340,7 @@
     <Compile Include="Controllers\Kpi\PreciseStatController.cs" />
     <Compile Include="Controllers\Kpi\TopDrop2GController.cs" />
     <Compile Include="Controllers\Kpi\TownPreciseImportController.cs" />
+    <Compile Include="Controllers\Kpi\WorkItemController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MeController.cs" />
     <Compile Include="Controllers\ParametersController.cs" />

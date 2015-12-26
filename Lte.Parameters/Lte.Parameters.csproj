@@ -139,6 +139,7 @@
     <Compile Include="Abstract\ITopDrop2GCellRepository.cs" />
     <Compile Include="Abstract\ITownPreciseCoverage4GStatRepository.cs" />
     <Compile Include="Abstract\ITownRepository.cs" />
+    <Compile Include="Abstract\IWorkItemRepository.cs" />
     <Compile Include="Abstract\LightWeightRepositroyBase.cs" />
     <Compile Include="Abstract\PagingRepositoryBase.cs" />
     <Compile Include="Concrete\EFAlameRepository.cs" />
@@ -161,6 +162,7 @@
     <Compile Include="Concrete\EFTopDrop2GCellRepository.cs" />
     <Compile Include="Concrete\EFTownPreciseCoverage4GStatRepository.cs" />
     <Compile Include="Concrete\EFTownRepository.cs" />
+    <Compile Include="Concrete\EFWorkItemRepository.cs" />
     <Compile Include="Concrete\MasterAreaTestDateDateRepository.cs" />
     <Compile Include="Concrete\MasterCsvFileInfoRepository.cs" />
     <Compile Include="Concrete\MasterRasterInfoRepository.cs" />
@@ -210,6 +212,11 @@
     <Compile Include="Entities\Work\WorkItemExcel.cs" />
     <Compile Include="Entities\Work\WorkItemType.cs" />
     <Compile Include="Entities\Work\WorkItemTypeQueries.cs" />
+    <Compile Include="Migrations\201512261045576_AddWorkItemDatabase_20151226.cs" />
+    <Compile Include="Migrations\201512261045576_AddWorkItemDatabase_20151226.Designer.cs">
+      <DependentUpon>201512261045576_AddWorkItemDatabase_20151226.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MockOperations\AlarmMapperService.cs" />
     <Compile Include="MockOperations\CoreMapperService.cs" />
     <Compile Include="MockOperations\MockItemsAudited.cs" />
@@ -236,6 +243,11 @@
     <None Include="ClassDiagram\NetworkEntities.cd" />
     <None Include="ClassDiagram\Precise4GKpi.cd" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201512261045576_AddWorkItemDatabase_20151226.resx">
+      <DependentUpon>201512261045576_AddWorkItemDatabase_20151226.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

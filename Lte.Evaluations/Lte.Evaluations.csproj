@@ -121,6 +121,7 @@
     <Compile Include="DataService\RasterInfoService.cs" />
     <Compile Include="DataService\TopDrop2GService.cs" />
     <Compile Include="DataService\TownQueryService.cs" />
+    <Compile Include="DataService\WorkItemService.cs" />
     <Compile Include="MapperSerive\BaiduMapperService.cs" />
     <Compile Include="MapperSerive\BtsExcelWithTownIdContainer.cs" />
     <Compile Include="MapperSerive\CollegeMapperService.cs" />
