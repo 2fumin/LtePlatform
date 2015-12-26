@@ -110,7 +110,7 @@ namespace Castle.Windsor.Configuration.Interpreters.XmlProcessor
 			}
 			catch (Exception ex)
 			{
-				var message = String.Format("Error processing node resource {0}", resource);
+				var message = $"Error processing node resource {resource}";
 
 				throw new ConfigurationProcessingException(message, ex);
 			}

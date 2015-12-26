@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Linq;
+
 namespace Castle.Core.Resource
 {
 	using System;
@@ -23,43 +25,34 @@ namespace Castle.Core.Resource
 	{
 		private string assemblyName;
 		private string resourcePath;
-		private String basePath;
+		private string basePath;
 
 		public AssemblyResource(CustomUri resource)
 		{
-			CreateStream = delegate
-			{
-				return CreateResourceFromUri(resource, null);
-			};
+			CreateStream = () => CreateResourceFromUri(resource, null);
 		}
 
-		public AssemblyResource(CustomUri resource, String basePath)
+		public AssemblyResource(CustomUri resource, string basePath)
 		{
-			CreateStream = delegate
-			{
-				return CreateResourceFromUri(resource, basePath);
-			};
+			CreateStream = () => CreateResourceFromUri(resource, basePath);
 		}
 
-		public AssemblyResource(String resource)
+		public AssemblyResource(string resource)
 		{
-			CreateStream = delegate
-			{
-				return CreateResourceFromPath(resource, basePath);
-			};
+			CreateStream = () => CreateResourceFromPath(resource, basePath);
 		}
 
-		public override IResource CreateRelative(String relativePath)
+		public override IResource CreateRelative(string relativePath)
 		{
 			throw new NotImplementedException();
 		}
 
 		public override string ToString()
 		{
-			return String.Format(CultureInfo.CurrentCulture, "AssemblyResource: [{0}] [{1}]", assemblyName, resourcePath);
+			return string.Format(CultureInfo.CurrentCulture, "AssemblyResource: [{0}] [{1}]", assemblyName, resourcePath);
 		}
 
-		private Stream CreateResourceFromPath(String resource, String path)
+		private Stream CreateResourceFromPath(string resource, string path)
 		{
 			if (!resource.StartsWith("assembly" + CustomUri.SchemeDelimiter, StringComparison.CurrentCulture))
 			{
@@ -69,18 +62,18 @@ namespace Castle.Core.Resource
 			return CreateResourceFromUri(new CustomUri(resource), path);
 		}
 
-		private Stream CreateResourceFromUri(CustomUri resourcex, String path)
+		private Stream CreateResourceFromUri(CustomUri resourcex, string path)
 		{
-			if (resourcex == null) throw new ArgumentNullException("resourcex");
+			if (resourcex == null) throw new ArgumentNullException(nameof(resourcex));
 
 			assemblyName = resourcex.Host;
 			resourcePath = ConvertToResourceName(assemblyName, resourcex.Path);
 
-			Assembly assembly = ObtainAssembly(assemblyName);
+			var assembly = ObtainAssembly(assemblyName);
 
-			String[] names = assembly.GetManifestResourceNames();
+			var names = assembly.GetManifestResourceNames();
 
-			String nameFound = GetNameFound(names);
+			var nameFound = GetNameFound(names);
 
 			if (nameFound == null)
 			{
@@ -90,7 +83,7 @@ namespace Castle.Core.Resource
 
 			if (nameFound == null)
 			{
-				String message = String.Format(CultureInfo.InvariantCulture, "The assembly resource {0} could not be located", resourcePath);
+				var message = string.Format(CultureInfo.InvariantCulture, "The assembly resource {0} could not be located", resourcePath);
 				throw new ResourceException(message);
 			}
 
@@ -101,28 +94,19 @@ namespace Castle.Core.Resource
 
 		private string GetNameFound(string[] names)
 		{
-			string nameFound = null;
-			foreach(String name in names)
-			{
-				if (String.Compare(resourcePath, name, StringComparison.OrdinalIgnoreCase) == 0)
-				{
-					nameFound = name;
-					break;
-				}
-			}
-			return nameFound;
+		    return names.FirstOrDefault(name => string.Compare(resourcePath, name, StringComparison.OrdinalIgnoreCase) == 0);
 		}
 
-		private string ConvertToResourceName(String assembly, String resource)
+	    private string ConvertToResourceName(string assembly, string resource)
 		{
 			assembly = GetSimpleName(assembly);
 			// TODO: use path for relative name construction
-			return String.Format(CultureInfo.CurrentCulture, "{0}{1}", assembly, resource.Replace('/', '.'));
+			return string.Format(CultureInfo.CurrentCulture, "{0}{1}", assembly, resource.Replace('/', '.'));
 		}
 
 		private string GetSimpleName(string assembly)
 		{
-			int indexOfComma = assembly.IndexOf(',');
+			var indexOfComma = assembly.IndexOf(',');
 			if(indexOfComma<0)
 			{
 				return assembly;
@@ -130,9 +114,9 @@ namespace Castle.Core.Resource
 			return assembly.Substring(0, indexOfComma);
 		}
 
-		private string ConvertToPath(String resource)
+		private string ConvertToPath(string resource)
 		{
-			string path = resource.Replace('.', '/');
+			var path = resource.Replace('.', '/');
 			if (path[0] != '/')
 			{
 				path = string.Format(CultureInfo.CurrentCulture, "/{0}", path);
@@ -140,7 +124,7 @@ namespace Castle.Core.Resource
 			return path;
 		}
 
-		private static Assembly ObtainAssembly(String assemblyName)
+		private static Assembly ObtainAssembly(string assemblyName)
 		{
 			try
 			{
@@ -148,7 +132,7 @@ namespace Castle.Core.Resource
 			}
 			catch(Exception ex)
 			{
-				String message = String.Format(CultureInfo.InvariantCulture, "The assembly {0} could not be loaded", assemblyName);
+				var message = string.Format(CultureInfo.InvariantCulture, "The assembly {0} could not be loaded", assemblyName);
 				throw new ResourceException(message, ex);
 			}
 		}

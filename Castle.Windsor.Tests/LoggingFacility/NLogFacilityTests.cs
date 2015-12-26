@@ -35,19 +35,16 @@ namespace Castle.Facilities.Logging.Tests
 		[SetUp]
 		public void Setup()
 		{
-			container = base.CreateConfiguredContainer(LoggerImplementation.NLog);
+			container = CreateConfiguredContainer(LoggerImplementation.NLog);
 		}
 
 		[TearDown]
 		public void Teardown()
 		{
-			if (container != null)
-			{
-				container.Dispose();
-			}
+		    container?.Dispose();
 		}
 
-		private IWindsorContainer container;
+	    private IWindsorContainer container;
 
 		[Test]
 		public void SimpleTest()
@@ -57,8 +54,8 @@ namespace Castle.Facilities.Logging.Tests
 
 			test.DoSomething();
 
-			var expectedLogOutput = String.Format("|INFO|{0}|Hello world", typeof(SimpleLoggingComponent).FullName);
-			var actualLogOutput = (LogManager.Configuration.FindTargetByName("memory") as MemoryTarget).Logs[0].ToString();
+			var expectedLogOutput = $"|INFO|{typeof (SimpleLoggingComponent).FullName}|Hello world";
+			var actualLogOutput = (LogManager.Configuration.FindTargetByName("memory") as MemoryTarget).Logs[0];
 			actualLogOutput = actualLogOutput.Substring(actualLogOutput.IndexOf('|'));
 			Assert.AreEqual(expectedLogOutput, actualLogOutput);
 		}

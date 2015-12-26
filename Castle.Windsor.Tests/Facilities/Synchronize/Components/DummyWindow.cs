@@ -28,12 +28,9 @@ namespace CastleTests.Facilities.Synchronize.Components
 			Content = stackPanel;
 		}
 
-		public Panel Panel
-		{
-			get { return stackPanel; }
-		}
+		public Panel Panel => stackPanel;
 
-		public virtual int AddControl(Control control)
+	    public virtual int AddControl(Control control)
 		{
 			stackPanel.Children.Add(control);
 			return stackPanel.Children.Count;

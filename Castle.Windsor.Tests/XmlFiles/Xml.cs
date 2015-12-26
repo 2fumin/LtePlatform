@@ -25,7 +25,7 @@ namespace Castle.XmlFiles
 
 	public class Xml
 	{
-		private static readonly string embedded = "assembly://" + typeof(Xml).Assembly.FullName + "/CastleTests/XmlFiles/";
+		private static readonly string embedded = "assembly://" + typeof(Xml).Assembly.FullName + "/XmlFiles/";
 
 		public static IResource Embedded(string name)
 		{

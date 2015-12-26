@@ -30,7 +30,6 @@ namespace CastleTests
 	using NUnit.Framework;
 
 	[Explicit]
-	[TestFixture]
 	public class ConventionVerification
 	{
 		private void Scan(MethodInfo interfaceMethod, MethodInfo classMethod, StringBuilder message)
@@ -40,13 +39,13 @@ namespace CastleTests
 			{
 				if (obsolete.Item1.IsError != obsolete.Item2.IsError)
 				{
-					message.AppendLine(string.Format("Different error levels for {0}", interfaceMethod));
+					message.AppendLine($"Different error levels for {interfaceMethod}");
 				}
 				if (obsolete.Item1.Message != obsolete.Item2.Message)
 				{
-					message.AppendLine(string.Format("Different message for {0}", interfaceMethod));
-					message.AppendLine(string.Format("\t interface: {0}", obsolete.Item1.Message));
-					message.AppendLine(string.Format("\t class    : {0}", obsolete.Item2.Message));
+					message.AppendLine($"Different message for {interfaceMethod}");
+					message.AppendLine($"\t interface: {obsolete.Item1.Message}");
+					message.AppendLine($"\t class    : {obsolete.Item2.Message}");
 				}
 			}
 			else
@@ -57,12 +56,12 @@ namespace CastleTests
 			{
 				if (browsable.Item3 == false)
 				{
-					message.AppendLine(string.Format("EditorBrowsable not applied to {0}", interfaceMethod));
+					message.AppendLine($"EditorBrowsable not applied to {interfaceMethod}");
 					return;
 				}
 				if (browsable.Item1.State != browsable.Item2.State || browsable.Item2.State != EditorBrowsableState.Never)
 				{
-					message.AppendLine(string.Format("Different/wrong browsable states for {0}", interfaceMethod));
+					message.AppendLine($"Different/wrong browsable states for {interfaceMethod}");
 				}
 			}
 		}
@@ -72,24 +71,19 @@ namespace CastleTests
 		{
 			var fromInterface = interfaceMethod.GetAttributes<TAttribute>().SingleOrDefault();
 			var fromClass = classMethod.GetAttributes<TAttribute>().SingleOrDefault();
-			var bothHaveTheAttribute = true;
-			if (fromInterface != null)
+		    if (fromInterface != null)
 			{
-				if (fromClass == null)
-				{
-					message.AppendLine(string.Format("Method {0} has {1} on the interface, but not on the class.", interfaceMethod, typeof(TAttribute)));
-					bothHaveTheAttribute = false;
-				}
+			    if (fromClass != null) return Tuple.Create(fromInterface, fromClass, true);
+			    message.AppendLine($"Method {interfaceMethod} has {typeof (TAttribute)} on the interface, but not on the class.");
 			}
 			else
 			{
 				if (fromClass != null)
 				{
-					message.AppendLine(string.Format("Method {0} has {1}  on the class, but not on the interface.", interfaceMethod, typeof(TAttribute)));
+					message.AppendLine($"Method {interfaceMethod} has {typeof (TAttribute)}  on the class, but not on the interface.");
 				}
-				bothHaveTheAttribute = false;
 			}
-			return Tuple.Create(fromInterface, fromClass, bothHaveTheAttribute);
+			return Tuple.Create(fromInterface, fromClass, false);
 		}
 
 		[Test]

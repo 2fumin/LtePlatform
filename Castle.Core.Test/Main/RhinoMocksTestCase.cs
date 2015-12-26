@@ -69,7 +69,7 @@ namespace Castle.Core.Test.Main
 			void OriginalMethod2();
 		}
 
-		public sealed class MultiClass : IMulti
+		public class MultiClass : IMulti
 		{
 			// NON-virtual method
 

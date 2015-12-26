@@ -67,3 +67,9 @@ uploads/
 /Castle.Core/bin/NET45-Release
 /UpgradeLog2.htm
 /Castle.Windsor/AssemblyInfo.cs
+/Abp/bin/Release/NLog.xml
+/Abp.Tests/bin/Release/xunit.execution.desktop.xml
+/Abp.Tests/bin/Release/xunit.core.xml
+/Abp.Tests/bin/Release/xunit.assert.xml
+/Abp.Tests/bin/Release/NSubstitute.xml
+/Abp.Tests/bin/Release/NLog.xml
