@@ -18,7 +18,7 @@ namespace Abp
         {
             if (action == null)
             {
-                throw new ArgumentNullException("action");
+                throw new ArgumentNullException(nameof(action));
             }
 
             _action = action;
