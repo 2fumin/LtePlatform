@@ -28,7 +28,7 @@ namespace Lte.Parameters.Entities.Work
         public static WorkItemType GetWorkItemType(this string description)
         {
             var tuple = workItemTypeList.FirstOrDefault(x => x.Item2 == description);
-            return tuple != null ? tuple.Item1 : WorkItemType.Others;
+            return tuple?.Item1 ?? WorkItemType.Others;
         }
 
         private static readonly Tuple<WorkItemSubtype, string>[] workItemSubtypeList =
@@ -54,10 +54,10 @@ namespace Lte.Parameters.Entities.Work
             return tuple != null ? tuple.Item2 : "其他类型";
         }
 
-        public static WorkItemSubtype GetSubtype(this string description)
+        public static WorkItemSubtype GetWorkItemSubtype(this string description)
         {
             var tuple = workItemSubtypeList.FirstOrDefault(x => x.Item2 == description);
-            return tuple != null ? tuple.Item1 : WorkItemSubtype.Others;
+            return tuple?.Item1 ?? WorkItemSubtype.Others;
         }
 
         private static readonly Tuple<WorkItemState, string>[] workItemStateList =
@@ -76,7 +76,7 @@ namespace Lte.Parameters.Entities.Work
         public static WorkItemState GetState(this string description)
         {
             var tuple = workItemStateList.FirstOrDefault(x => x.Item2 == description);
-            return tuple != null ? tuple.Item1 : WorkItemState.Finished;
+            return tuple?.Item1 ?? WorkItemState.Finished;
         }
 
         private static readonly Tuple<WorkItemCause, string>[] workItemCauseList =
@@ -121,7 +121,7 @@ namespace Lte.Parameters.Entities.Work
         public static WorkItemCause GetWorkItemCause(this string description)
         {
             var tuple = workItemCauseList.FirstOrDefault(x => x.Item2 == description);
-            return tuple != null ? tuple.Item1 : WorkItemCause.Others;
+            return tuple?.Item1 ?? WorkItemCause.Others;
         }
     }
 }

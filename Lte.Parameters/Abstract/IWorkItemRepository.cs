@@ -10,6 +10,6 @@ namespace Lte.Parameters.Abstract
 {
     public interface IWorkItemRepository : IRepository<WorkItem>
     {
-        int Import(IEnumerable<WorkItemExcel> itemExcels);
+        void Import(WorkItemExcel itemExcel);
     }
 }

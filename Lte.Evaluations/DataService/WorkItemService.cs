@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Lte.Domain.LinqToExcel;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities.Work;
@@ -29,7 +30,28 @@ namespace Lte.Evaluations.DataService
             const string sheetName = "工单查询结果";
             var infos = (from c in factory.Worksheet<WorkItemExcel>(sheetName)
                         select c).ToList();
-            return "完成工单导入：" + _repository.Import(infos) + "条";
+            var oldInfos = from info in infos
+                join item in _repository.GetAllList() on info.SerialNumber equals item.SerialNumber
+                select info;
+            var newInfos = infos.Except(oldInfos).ToList();
+            var newItems = Mapper.Map<List<WorkItemExcel>, List<WorkItem>>(newInfos);
+            foreach (var oldInfo in oldInfos)
+            {
+                _repository.Import(oldInfo);
+            }
+            var count = UpdateNewItems(newItems);
+            return "完成工单导入：" + count + "条";
+        }
+
+        private int UpdateNewItems(List<WorkItem> newItems)
+        {
+            var count = 0;
+            for (var i = 0; i < newItems.Count; i++)
+            {
+                var item = newItems[i];
+                if (_repository.Insert(item) != null) count++;
+            }
+            return count;
         }
     }
 }

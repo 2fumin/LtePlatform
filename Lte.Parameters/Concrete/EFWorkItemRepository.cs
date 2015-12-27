@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Lte.Domain.Regular;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities.Work;
 
@@ -16,13 +17,20 @@ namespace Lte.Parameters.Concrete
 
         protected override DbSet<WorkItem> Entities => _context.WorkItems;
 
-        public int Import(IEnumerable<WorkItemExcel> itemExcels)
+        public void Import(WorkItemExcel itemExcel)
         {
-            foreach (var item in itemExcels.Select(Mapper.Map<WorkItemExcel, WorkItem>))
-            {
-                InsertOrUpdateAsync(item);
-            }
-            return itemExcels.Count();
+            var stat = FirstOrDefault(x => x.SerialNumber == itemExcel.SerialNumber);
+            if (stat == null) return;
+            var info = Mapper.Map<WorkItemExcel, WorkItem>(itemExcel);
+            stat.Comments = info.Comments;
+            stat.FeedbackContents = info.FeedbackContents;
+            stat.FeedbackTime = info.FeedbackTime;
+            stat.FinishTime = info.FinishTime;
+            stat.RejectTimes = info.RejectTimes;
+            stat.RepeatTimes = info.RepeatTimes;
+            stat.State = info.State;
+
+            Update(stat);
         }
     }
 }

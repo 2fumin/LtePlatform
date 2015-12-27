@@ -47,8 +47,8 @@ namespace Lte.Parameters.MockOperations
         public static void MapWorkItem()
         {
             Mapper.CreateMap<WorkItemExcel, WorkItem>()
-                .ForMember(d => d.Type, opt => opt.MapFrom(s => s.Title.Split('_')[1]))
-                .ForMember(d => d.Subtype, opt => opt.MapFrom(s => s.Title.Split('_')[2]))
+                .ForMember(d => d.Type, opt => opt.MapFrom(s => s.Title.Split('_')[1].GetWorkItemType()))
+                .ForMember(d => d.Subtype, opt => opt.MapFrom(s => s.Title.Split('_')[2].GetWorkItemSubtype()))
                 .ForMember(d => d.Cause, opt => opt.MapFrom(s => s.CauseDescription.GetWorkItemCause()))
                 .ForMember(d => d.State, opt => opt.MapFrom(s => s.StateDescription.GetState()));
         }
