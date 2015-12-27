@@ -179,16 +179,10 @@ namespace Castle.Core.Logging
 #endif
 		private static bool IsSourceConfigured(TraceSource source)
 		{
-			if (source.Listeners.Count == 1 &&
-			    source.Listeners[0] is DefaultTraceListener &&
-			    source.Listeners[0].Name == "Default")
-			{
-				return false;
-			}
-			return true;
+		    return source.Listeners.Count != 1 || !(source.Listeners[0] is DefaultTraceListener) || source.Listeners[0].Name != "Default";
 		}
 
-		private static LoggerLevel MapLoggerLevel(SourceLevels level)
+	    private static LoggerLevel MapLoggerLevel(SourceLevels level)
 		{
 			switch (level)
 			{

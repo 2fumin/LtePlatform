@@ -40,7 +40,7 @@ namespace Castle.Core.Logging
 		{
 			if (type == null)
 			{
-				throw new ArgumentNullException("type");
+				throw new ArgumentNullException(nameof(type));
 			}
 
 			return Create(type.FullName, level);

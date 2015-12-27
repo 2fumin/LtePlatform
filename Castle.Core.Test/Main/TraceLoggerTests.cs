@@ -15,6 +15,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using Castle.Core.Logging;
 using NUnit.Framework;
@@ -38,7 +39,7 @@ namespace Castle.Core.Test.Main
 		public void Initialize()
 #endif
 		{
-			Listener.ClearMessages();
+			MyListener.ClearMessages();
 		}
 
 #if FEATURE_XUNITNET
@@ -48,8 +49,44 @@ namespace Castle.Core.Test.Main
 		public void Cleanup()
 #endif
 		{
-			Listener.ClearMessages();
+			MyListener.ClearMessages();
 		}
+
+        [Test]
+        public void Test_Logger_Creater()
+        {
+            var factory = new TraceLoggerFactory();
+            var logger = factory.Create("Castle.Core.Test.Main.TraceLoggerTests", LoggerLevel.Debug);
+            Assert.IsNotNull(logger);
+        }
+
+        [Test]
+        public void Test_New_TraceLogger()
+        {
+            var logger = new TraceLogger("Castle.Core.Test.Main.TraceLoggerTests", LoggerLevel.Debug);
+            Assert.IsNotNull(logger);
+            Assert.AreEqual(logger.Name, "Castle.Core.Test.Main.TraceLoggerTests");
+            Assert.AreEqual(logger.Level, LoggerLevel.Debug);
+        }
+
+        [Test]
+        public void Test_TraceSource()
+        {
+            var source = new TraceSource("Castle.Core.Test.Main.TraceLoggerTests");
+            Assert.AreEqual(source.Listeners.Count, 2);
+            Assert.AreEqual(source.Listeners[0].Name, "Default");
+            Assert.IsTrue(source.Listeners[0] is DefaultTraceListener);
+            Assert.AreEqual(source.Listeners[1].Name, "tests");
+        }
+
+        [Test]
+        public void Test_MyListener()
+        {
+            var source = new TraceSource("Castle.Core.Test.Main");
+            Assert.AreEqual(source.Listeners.Count, 1);
+            Assert.AreEqual(source.Listeners[0].Name, "Default");
+            Assert.IsTrue(source.Listeners[0] is DefaultTraceListener);
+        }
 
 		[Test]
 		[Platform(Exclude = "mono", Reason = "Mono has a bug that causes the listeners to not fully work.")]
@@ -58,9 +95,11 @@ namespace Castle.Core.Test.Main
 			var factory = new TraceLoggerFactory();
 			var logger = factory.Create(typeof(TraceLoggerTests), LoggerLevel.Debug);
 			logger.Debug("this is a tracing message");
+            Assert.IsTrue(logger is LevelFilteredLogger);
+            Assert.AreEqual((logger as LevelFilteredLogger).Name, "Castle.Core.Test.Main.TraceLoggerTests");
 
-			Listener.AssertContains("testsrule", "Castle.Core.Logging.Tests.TraceLoggerTests");
-			Listener.AssertContains("testsrule", "this is a tracing message");
+			MyListener.AssertContains("testsrule", "Castle.Core.Test.Main.TraceLoggerTests");
+			MyListener.AssertContains("testsrule", "this is a tracing message");
 		}
 
 		[Test]
@@ -85,14 +124,14 @@ namespace Castle.Core.Test.Main
 				logger.Error("Problem handled", ex);
 			}
 
-			Listener.AssertContains("testsrule", "Castle.Core.Logging.Tests.TraceLoggerTests");
-			Listener.AssertContains("testsrule", "Problem handled");
-			Listener.AssertContains("testsrule", "ApplicationException");
-			Listener.AssertContains("testsrule", "Inner error is");
-			Listener.AssertContains("testsrule", "ArgumentOutOfRangeException");
-			Listener.AssertContains("testsrule", "fakearg");
-			Listener.AssertContains("testsrule", "Thisisavalue");
-			Listener.AssertContains("testsrule", "Thisisamessage");
+			MyListener.AssertContains("testsrule", "Castle.Core.Test.Main.TraceLoggerTests");
+			MyListener.AssertContains("testsrule", "Problem handled");
+			MyListener.AssertContains("testsrule", "ApplicationException");
+			MyListener.AssertContains("testsrule", "Inner error is");
+			MyListener.AssertContains("testsrule", "ArgumentOutOfRangeException");
+			MyListener.AssertContains("testsrule", "fakearg");
+			MyListener.AssertContains("testsrule", "Thisisavalue");
+			MyListener.AssertContains("testsrule", "Thisisamessage");
 		}
 
 		[Test]
@@ -103,8 +142,8 @@ namespace Castle.Core.Test.Main
 			var logger = factory.Create(typeof(Configuration.Xml.XmlConfigurationDeserializer), LoggerLevel.Debug);
 			logger.Info("Logging to config namespace");
 
-			Listener.AssertContains("configrule", "Castle.Core.Configuration.Xml.XmlConfigurationDeserializer");
-			Listener.AssertContains("configrule", "Logging to config namespace");
+			MyListener.AssertContains("configrule", "Castle.Core.Configuration.Xml.XmlConfigurationDeserializer");
+			MyListener.AssertContains("configrule", "Logging to config namespace");
 		}
 
 		[Test]
@@ -114,39 +153,41 @@ namespace Castle.Core.Test.Main
 			var factory = new TraceLoggerFactory();
 			var logger = factory.Create("System.Xml.XmlDocument", LoggerLevel.Debug);
 			logger.Info("Logging to non-configured namespace namespace");
+            Assert.IsNotNull(logger);
 
-			Listener.AssertContains("defaultrule", "System.Xml.XmlDocument");
-			Listener.AssertContains("defaultrule", "Logging to non-configured namespace namespace");
+			MyListener.AssertContains("defaultrule", "System.Xml.XmlDocument");
+			MyListener.AssertContains("defaultrule", "Logging to non-configured namespace namespace");
 		}
-
-		#region in-memory listener class
+	
+        #region in-memory listener class
 
 		/// <summary>
 		/// This class captures trace text and records it to StringBuilders in a static dictionary.
 		/// Used for the sake of unit testing.
 		/// </summary>
-		public class Listener : TraceListener
+		public class MyListener : TraceListener
 		{
-			public Listener()
+			public MyListener()
 			{
 			}
 
-			public Listener(string initializationData)
+			public MyListener(string initializationData)
 			{
 				traceName = initializationData;
 			}
 
-			static Dictionary<string, StringBuilder> traces = new Dictionary<string, StringBuilder>();
-			readonly string traceName;
+		    readonly string traceName;
 
-			StringBuilder GetStringBuilder()
+		    public static Dictionary<string, StringBuilder> Traces { get; private set; } = new Dictionary<string, StringBuilder>();
+
+		    StringBuilder GetStringBuilder()
 			{
-				lock (traces)
+				lock (Traces)
 				{
-					if (!traces.ContainsKey(traceName))
-						traces.Add(traceName, new StringBuilder());
+					if (!Traces.ContainsKey(traceName))
+						Traces.Add(traceName, new StringBuilder());
 
-					return traces[traceName];
+					return Traces[traceName];
 				}
 			}
 
@@ -162,16 +203,17 @@ namespace Castle.Core.Test.Main
 
 			public static void AssertContains(string traceName, string expected)
 			{
-				Assert.IsTrue(traces.ContainsKey(traceName), "Trace named {0} not found", traceName);
-				Assert.IsTrue(traces[traceName].ToString().Contains(expected), string.Format("Trace text expected to contain '{0}'", expected));
+				Assert.IsTrue(Traces.ContainsKey(traceName), "Trace named {0} not found", traceName);
+				Assert.IsTrue(Traces[traceName].ToString().Contains(expected), $"Trace text expected to contain '{expected}'");
 			}
 
 			public static void ClearMessages()
 			{
-				traces = new Dictionary<string, StringBuilder>();
+				Traces = new Dictionary<string, StringBuilder>();
 			}
 		}
 		#endregion
 	}
+	
 }
 #endif

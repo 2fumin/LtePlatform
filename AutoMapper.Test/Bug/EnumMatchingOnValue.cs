@@ -38,7 +38,6 @@ namespace AutoMapper.Test.Bug
         }
         
         [Test]
-        [ExpectedException(typeof(AutoMapperMappingException))]
         public void Should_match_on_the_name_even_if_values_match()
         {
             var source = new FirstClass
