@@ -193,14 +193,13 @@ namespace LtePlatform
                 "~/Scripts/college/precise.controller.js",
                 "~/Scripts/app/_run.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/parametersIndex").Include(
+            bundles.Add(new ScriptBundle("~/bundles/parametersList").Include(
                 "~/Scripts/sammy-{version}.js",
                 "~/Scripts/app/common.js",
                 "~/Scripts/app/app.datamodel.js",
                 "~/Scripts/app/app.viewmodel.js",
                 "~/Scripts/parameters/common.controller.js",
-                "~/Scripts/parameters/basicimport.controller.js",
-                "~/Scripts/parameters/basicimport.viewmodel.js",
+                "~/Scripts/parameters/list.viewmodel.js",
                 "~/Scripts/app/_run.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/parametersBasicImport").Include(

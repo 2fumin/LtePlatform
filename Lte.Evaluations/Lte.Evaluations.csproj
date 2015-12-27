@@ -163,6 +163,7 @@
     <Compile Include="ViewModels\TopDrop2GDateView.cs" />
     <Compile Include="ViewModels\TopDrop2GTrend.cs" />
     <Compile Include="ViewModels\TopDrop2GTrendView.cs" />
+    <Compile Include="ViewModels\TownENodebStatView.cs" />
     <Compile Include="ViewModels\TownPreciseView.cs" />
   </ItemGroup>
   <ItemGroup>
