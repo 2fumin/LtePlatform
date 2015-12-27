@@ -41,7 +41,7 @@ namespace Lte.Parameters.Test.Excel
                         select c).ToList();
 
             Assert.IsNotNull(info);
-            Assert.AreEqual(info.Count, 5);
+            Assert.AreEqual(info.Count, 1004);
         }
     }
 }

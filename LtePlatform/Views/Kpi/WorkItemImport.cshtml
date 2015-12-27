@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "工单文件导入";
+}
+
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h2 class="panel-title">
+            <strong>@ViewBag.Title</strong>
+        </h2>
+    </div>
+    <p>
+        @{
+            Html.RenderPartial("_KpiMenu");
+        }
+    </p>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        @using (Html.BeginForm("WorkItemPost", "Kpi",
+                    FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
+        {
+            Html.RenderPartial("_AlertPanel");
+            <h4>指标文件选择</h4>
+            <div class="form-group">
+                <label class="col-md-4 control-label">工单文件选择：</label>
+                <div class="col-md-6">
+                    <input name="workItem" class="form-control" type="file" accept=".xls, .xlsx" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="submit" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-save"></span>导入文件
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-md-4">
+
+    </div>
+</div>

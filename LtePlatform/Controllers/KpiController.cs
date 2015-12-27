@@ -16,13 +16,15 @@ namespace LtePlatform.Controllers
         private readonly TownQueryService _townService;
         private readonly KpiImportService _importService;
         private readonly PreciseImportService _preciseImportService;
+        private readonly WorkItemService _workItemService;
 
         public KpiController(TownQueryService townService, KpiImportService importService,
-            PreciseImportService preciseImportService)
+            PreciseImportService preciseImportService, WorkItemService workItemService)
         {
             _townService = townService;
             _importService = importService;
             _preciseImportService = preciseImportService;
+            _workItemService = workItemService;
         }
 
         public ActionResult Index()
@@ -114,6 +116,27 @@ namespace LtePlatform.Controllers
             }
             ViewBag.Message = message;
             return View("PreciseImport");
+        }
+
+        public ActionResult WorkItemImport()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult WorkItemPost()
+        {
+            var httpPostedFileBase = Request.Files["workItem"];
+            if (httpPostedFileBase == null || httpPostedFileBase.FileName == "")
+            {
+                ViewBag.ErrorMessage = "上传文件为空！请先上传文件。";
+            }
+            else
+            {
+                var path = httpPostedFileBase.UploadKpiFile();
+                ViewBag.Message = _workItemService.ImportExcelFiles(path);
+            }
+            return View("WorkItemImport");
         }
     }
 }
