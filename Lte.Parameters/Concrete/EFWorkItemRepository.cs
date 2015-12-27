@@ -13,9 +13,7 @@ namespace Lte.Parameters.Concrete
 {
     public class EFWorkItemRepository : LightWeightRepositroyBase<WorkItem>, IWorkItemRepository
     {
-        private readonly EFParametersContext _context = new EFParametersContext();
-
-        protected override DbSet<WorkItem> Entities => _context.WorkItems;
+        protected override DbSet<WorkItem> Entities => context.WorkItems;
 
         public void Import(WorkItemExcel itemExcel)
         {

@@ -34,24 +34,17 @@ namespace Lte.Evaluations.DataService
                 join item in _repository.GetAllList() on info.SerialNumber equals item.SerialNumber
                 select info;
             var newInfos = infos.Except(oldInfos).ToList();
-            var newItems = Mapper.Map<List<WorkItemExcel>, List<WorkItem>>(newInfos);
+            var newItems = Mapper.Map<List<WorkItemExcel>, IEnumerable<WorkItem>>(newInfos);
             foreach (var oldInfo in oldInfos)
             {
                 _repository.Import(oldInfo);
             }
-            var count = UpdateNewItems(newItems);
-            return "完成工单导入：" + count + "条";
-        }
-
-        private int UpdateNewItems(List<WorkItem> newItems)
-        {
             var count = 0;
-            for (var i = 0; i < newItems.Count; i++)
+            foreach (var item in newItems)
             {
-                var item = newItems[i];
                 if (_repository.Insert(item) != null) count++;
             }
-            return count;
+            return "完成工单导入：" + count + "条";
         }
     }
 }
