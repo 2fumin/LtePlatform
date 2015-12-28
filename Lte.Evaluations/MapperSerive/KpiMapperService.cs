@@ -9,6 +9,7 @@ using Lte.Domain.Regular;
 using Lte.Evaluations.ViewModels;
 using Lte.Evaluations.ViewModels.RegionKpi;
 using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Work;
 
 namespace Lte.Evaluations.MapperSerive
 {
@@ -78,6 +79,15 @@ namespace Lte.Evaluations.MapperSerive
                     opt => opt.MapFrom(s => Mapper.Map<TopDrop2GTrend, TopDrop2GTrendView>(s.TopCell)))
                 .ForMember(d => d.CellName, opt => opt.MapFrom(s => s.CdmaName + "-" + s.TopCell.SectorId))
                 .ForMember(d => d.ENodebName, opt => opt.MapFrom(s => s.LteName));
+        }
+
+        public static void MapWorkItem()
+        {
+            Mapper.CreateMap<WorkItem, WorkItemView>()
+                .ForMember(d => d.WorkItemCause, opt => opt.MapFrom(s => s.Cause.GetWorkItemCauseDescription()))
+                .ForMember(d => d.WorkItemState, opt => opt.MapFrom(s => s.State.GetWorkItemStateDescription()))
+                .ForMember(d => d.WorkItemType, opt => opt.MapFrom(s => s.Type.GetWorkItemTypeDescription()))
+                .ForMember(d => d.WorkItemSubType, opt => opt.MapFrom(s => s.Subtype.GetWorkItemSubtypeDescription()));
         }
     }
 }

@@ -9,18 +9,12 @@
             </div>
             <div class="panel-body">
                 <p>
-                    <input type="checkbox" data-bind="checked: wholeCity"/>
-                    查询全市&nbsp;&nbsp;
-                    城市：
-                    <select data-bind="value: currentCity, options: cities"></select>&nbsp;&nbsp;
-                    区域：
-                    <select data-bind="value: currentDistrict, options: districts, enable: wholeCity()===false"></select>
-                </p>
-                <p>
                     工单状态：
-                    <select data-bind="value: currentState, options: states"></select>
+                    <select data-bind="value: currentState, options: states"></select>&nbsp;
                     工单分类：
-                    <select data-bind="value: currentType, options: types"></select>
+                    <select data-bind="value: currentType, options: types"></select>&nbsp;
+                    <button class="btn btn-primary">统计</button>
+                    <button class="btn btn-success">图表</button>
                 </p>
                 @{
                     Html.RenderPartial("_WorkItemTable");

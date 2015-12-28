@@ -41,6 +41,7 @@ namespace Lte.Evaluations.MapperSerive
             KpiMapperService.MapTopDrop2G();
             KpiMapperService.MapTopDrop2GTrend();
             KpiMapperService.MapPreciseStat();
+            KpiMapperService.MapWorkItem();
 
             BaiduMapperService.MapCdmaCellView();
             BaiduMapperService.MapCellView();

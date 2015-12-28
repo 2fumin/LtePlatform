@@ -9,4 +9,19 @@
         <th>操作</th>
     </tr>
     </thead>
+    <tbody data-bind="foreach: workItemViews">
+    <tr>
+        <td data-bind="text: district"></td>
+        <td data-bind="text: serialNumber"></td>
+        <td data-bind="text: workItemType"></td>
+        <td data-bind="text: workItemState"></td>
+        <td data-bind="text: deadLine"></td>
+        <td>
+            <div class="btn-group-xs">
+                <button class="btn btn-xs btn-primary">详细</button>
+                <button class="btn btn-xs btn-info">反馈</button>
+            </div>
+        </td>
+    </tr>
+    </tbody>
 </table>

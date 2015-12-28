@@ -137,6 +137,7 @@
     <Compile Include="MapperSerive\TopDrop2GTrendViewContainer.cs" />
     <Compile Include="MapperSerive\TopPrecise4GContainer.cs" />
     <Compile Include="MapperSerive\TownPreciseViewContainer.cs" />
+    <Compile Include="Policy\FilterWorkItemService.cs" />
     <Compile Include="Policy\OrderPreciseStatService.cs" />
     <Compile Include="Policy\OrderTopDrop2GService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
