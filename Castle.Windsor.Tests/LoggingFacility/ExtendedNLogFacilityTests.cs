@@ -25,7 +25,7 @@ namespace Castle.Facilities.Logging.Tests
 	using NUnit.Framework;
 
 	[TestFixture]
-	public class ExtendedNLogFacilityTests : BaseTest
+	public class ExtendedNLogFacilityTestCase : BaseTest
 	{
 		private IWindsorContainer container;
 

@@ -21,7 +21,7 @@ namespace Castle.Windsor.Tests.Bugs
 	using NUnit.Framework;
 
 	[TestFixture]
-	public class IoC_138
+	public class IoC_138TestCase
 	{
 		[Test]
 		public void TestResolveSubComponentInConstructorWithParameters()

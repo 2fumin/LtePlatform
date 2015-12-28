@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Collections.Generic;
+
 namespace Castle.Facilities.Logging.Tests
 {
 #if !SILVERLIGHT && !CLIENTPROFILE
@@ -30,14 +32,14 @@ namespace Castle.Facilities.Logging.Tests
 	/// Summary description for Log4NetFacilityTests.
 	/// </summary>
 	[TestFixture]
-	public class Log4NetFacilityTests : BaseTest
+	public class Log4NetFacilityTestCase : BaseTest
 	{
 		private IWindsorContainer container;
 
 		[SetUp]
 		public void Setup()
 		{
-			container = base.CreateConfiguredContainer(LoggerImplementation.ExtendedLog4net);
+			container = CreateConfiguredContainer(LoggerImplementation.ExtendedLog4net);
 		}
 
 		[TearDown]
@@ -50,14 +52,14 @@ namespace Castle.Facilities.Logging.Tests
 		public void SimpleTest()
 		{
 			container.Register(Component.For(typeof(SimpleLoggingComponent)).Named("component"));
-			SimpleLoggingComponent test = container.Resolve<SimpleLoggingComponent>("component");
+			var test = container.Resolve<SimpleLoggingComponent>("component");
 
 			test.DoSomething();
 
-			String expectedLogOutput = String.Format("[INFO ] [{0}] - Hello world" + Environment.NewLine, typeof(SimpleLoggingComponent).FullName);
-			MemoryAppender memoryAppender = ((Hierarchy) LogManager.GetRepository()).Root.GetAppender("memory") as MemoryAppender;
+			var expectedLogOutput = string.Format("[INFO ] [{0}] - Hello world" + Environment.NewLine, typeof(SimpleLoggingComponent).FullName);
+			var memoryAppender = ((Hierarchy) LogManager.GetRepository()).Root.GetAppender("memory") as MemoryAppender;
 			TextWriter actualLogOutput = new StringWriter();
-			PatternLayout patternLayout = new PatternLayout("[%-5level] [%logger] - %message%newline");
+			var patternLayout = new PatternLayout("[%-5level] [%logger] - %message%newline");
 			patternLayout.Format(actualLogOutput, memoryAppender.GetEvents()[0]);
 
 			Assert.AreEqual(expectedLogOutput, actualLogOutput.ToString());

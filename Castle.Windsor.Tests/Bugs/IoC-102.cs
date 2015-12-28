@@ -18,7 +18,7 @@ using NUnit.Framework;
 namespace Castle.Windsor.Tests.Bugs
 {
     [TestFixture]
-    public class IoC_102
+    public class IoC_102TestCase
     {
         [Test]
         public void ComponentResolutionOrderForKernelAndDpendencyResolverIsTheSame()

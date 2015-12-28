@@ -31,21 +31,15 @@ namespace Castle.MicroKernel.Facilities
 		/// </summary>
 		/// <value>The <see cref = "IConfiguration" /> representing 
 		///   the facility configuration.</value>
-		protected IConfiguration FacilityConfig
-		{
-			get { return facilityConfig; }
-		}
+		protected IConfiguration FacilityConfig => facilityConfig;
 
-		/// <summary>
+	    /// <summary>
 		///   Gets the <see cref = "IKernel" /> where the facility is registered.
 		/// </summary>
 		/// <value>The <see cref = "IKernel" />.</value>
-		protected IKernel Kernel
-		{
-			get { return kernel; }
-		}
+		protected IKernel Kernel => kernel;
 
-		/// <summary>
+	    /// <summary>
 		///   The custom initialization for the Facility.
 		/// </summary>
 		/// <remarks>

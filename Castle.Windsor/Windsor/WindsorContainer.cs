@@ -333,18 +333,14 @@ namespace Castle.Windsor
 				throw new ArgumentNullException(nameof(childContainer));
 			}
 
-			if (!childContainers.ContainsKey(childContainer.Name))
-			{
-				lock (childContainersLocker)
-				{
-					if (!childContainers.ContainsKey(childContainer.Name))
-					{
-						kernel.AddChildKernel(childContainer.Kernel);
-						childContainers.Add(childContainer.Name, childContainer);
-						childContainer.Parent = this;
-					}
-				}
-			}
+		    if (childContainers.ContainsKey(childContainer.Name)) return;
+		    lock (childContainersLocker)
+		    {
+		        if (childContainers.ContainsKey(childContainer.Name)) return;
+		        kernel.AddChildKernel(childContainer.Kernel);
+		        childContainers.Add(childContainer.Name, childContainer);
+		        childContainer.Parent = this;
+		    }
 		}
 
 		/// <summary>

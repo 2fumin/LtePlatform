@@ -280,7 +280,7 @@ namespace Castle.MicroKernel
 		public virtual IKernel AddFacility(IFacility facility)
 		{
 #pragma warning disable 612,618
-			return AddFacility(facility != null ? facility.GetType().FullName : null, facility);
+			return AddFacility(facility?.GetType().FullName, facility);
 #pragma warning restore 612,618
 		}
 
@@ -293,11 +293,8 @@ namespace Castle.MicroKernel
 			where T : IFacility, new()
 		{
 			var facility = new T();
-			if (onCreate != null)
-			{
-				onCreate(facility);
-			}
-			return AddFacility(facility);
+		    onCreate?.Invoke(facility);
+		    return AddFacility(facility);
 		}
 
 		public void AddHandlerSelector(IHandlerSelector selector)

@@ -157,9 +157,9 @@ namespace Castle.MicroKernel.SubSystems.Configuration
 			return installers.ToArray();
 		}
 
-		public IResource GetResource(String resourceUri, IResource resource)
+		public IResource GetResource(string resourceUri, IResource resource)
 		{
-			if (resourceUri.IndexOf(Uri.SchemeDelimiter) == -1)
+			if (resourceUri.IndexOf(Uri.SchemeDelimiter, StringComparison.Ordinal) == -1)
 			{
 				return resource.CreateRelative(resourceUri);
 			}

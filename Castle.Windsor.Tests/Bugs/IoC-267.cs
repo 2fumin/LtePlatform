@@ -26,7 +26,7 @@ namespace Castle.Bugs
 	using NUnit.Framework;
 
 	[TestFixture]
-	public class IoC_267
+	public class IoC_267TestCase
 	{
 		[Test]
 		public void When_attemting_to_register_component_descended_from_valuetype_should_not_compile()

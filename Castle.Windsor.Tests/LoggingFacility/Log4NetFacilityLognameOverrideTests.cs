@@ -30,7 +30,7 @@ namespace Castle.Facilities.Logging.Tests
 	using log4net.Repository.Hierarchy;
 
 	[TestFixture]
-	public class Log4NetFacilityLognameOverrideTests : OverrideLoggerTest
+	public class Log4NetFacilityLognameOverrideTestCase : OverrideLoggerTest
 	{
 		[SetUp]
 		public void Setup()

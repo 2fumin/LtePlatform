@@ -147,7 +147,7 @@ namespace Castle.Facilities.Logging
 		{
 			if (configFile == null)
 			{
-				throw new ArgumentNullException("configFile");
+				throw new ArgumentNullException(nameof(configFile));
 			}
 
 			configFileName = configFile;
@@ -240,11 +240,7 @@ namespace Castle.Facilities.Logging
 				return configFileName;
 			}
 
-			if (FacilityConfig != null)
-			{
-				return FacilityConfig.Attributes["configFile"];
-			}
-			return null;
+		    return FacilityConfig?.Attributes["configFile"];
 		}
 
 		private Type GetCustomLoggerType()
@@ -298,15 +294,8 @@ namespace Castle.Facilities.Logging
 			{
 				return true;
 			}
-			if (FacilityConfig != null)
-			{
-				var value = FacilityConfig.Attributes["configuredExternally"];
-				if (value != null)
-				{
-					return converter.PerformConversion<bool>(value);
-				}
-			}
-			return false;
+		    var value = FacilityConfig?.Attributes["configuredExternally"];
+		    return value != null && converter.PerformConversion<bool>(value);
 		}
 
 		private LoggerLevel? GetLoggingLevel()
@@ -315,15 +304,12 @@ namespace Castle.Facilities.Logging
 			{
 				return loggerLevel;
 			}
-			if (FacilityConfig != null)
-			{
-				var level = FacilityConfig.Attributes["loggerLevel"];
-				if (level != null)
-				{
-					return converter.PerformConversion<LoggerLevel>(level);
-				}
-			}
-			return null;
+		    var level = FacilityConfig?.Attributes["loggerLevel"];
+		    if (level != null)
+		    {
+		        return converter.PerformConversion<LoggerLevel>(level);
+		    }
+		    return null;
 		}
 
 		private Type GetLoggingFactoryType(LoggerImplementation loggerApi)

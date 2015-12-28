@@ -21,7 +21,7 @@ namespace Castle.Windsor.Tests.Bugs
 	using NUnit.Framework;
 
 	[TestFixture]
-	public class IoC_115 : AbstractContainerTestCase
+	public class IoC_115TestCase : AbstractContainerTestCase
 	{
 		public interface IParentService
 		{

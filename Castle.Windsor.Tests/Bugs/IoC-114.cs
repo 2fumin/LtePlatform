@@ -21,7 +21,7 @@ namespace CastleTests.Bugs
 	using NUnit.Framework;
 
 	[TestFixture]
-	public class IoC_114 : AbstractContainerTestCase
+	public class IoC_114TestCase : AbstractContainerTestCase
 	{
 		public interface IService1
 		{

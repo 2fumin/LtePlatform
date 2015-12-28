@@ -56,7 +56,7 @@ namespace Castle.MicroKernel.SubSystems.Conversion
 		{
 			if (parser == null)
 			{
-				throw new ArgumentNullException("parser");
+				throw new ArgumentNullException(nameof(parser));
 			}
 
 			this.parser = parser;
@@ -67,7 +67,7 @@ namespace Castle.MicroKernel.SubSystems.Conversion
 			return type == typeof(Type);
 		}
 
-		public override object PerformConversion(String value, Type targetType)
+		public override object PerformConversion(string value, Type targetType)
 		{
 			try
 			{
@@ -79,7 +79,7 @@ namespace Castle.MicroKernel.SubSystems.Conversion
 			}
 			catch (Exception ex)
 			{
-				throw new ConverterException(String.Format("Could not convert string '{0}' to a type.", value), ex);
+				throw new ConverterException($"Could not convert string '{value}' to a type.", ex);
 			}
 		}
 
@@ -93,7 +93,8 @@ namespace Castle.MicroKernel.SubSystems.Conversion
 			var typeName = ParseName(name);
 			if (typeName == null)
 			{
-				throw new ConverterException(String.Format("Could not convert string '{0}' to a type. It doesn't appear to be a valid type name.", name));
+				throw new ConverterException(
+				    $"Could not convert string '{name}' to a type. It doesn't appear to be a valid type name.");
 			}
 
 			InitializeAppDomainAssemblies(forceLoad: false);
@@ -111,23 +112,18 @@ namespace Castle.MicroKernel.SubSystems.Conversion
 				return type;
 			}
 			var assemblyName = typeName.ExtractAssemblyName();
-			if (assemblyName != null)
-			{
-				var namePart = assemblyName + ", Version=";
-				var assembly = assemblies.FirstOrDefault(a => a.FullName.StartsWith(namePart, StringComparison.OrdinalIgnoreCase));
-				if (assembly != null)
-				{
-					throw new ConverterException(String.Format(
-						"Could not convert string '{0}' to a type. Assembly {1} was matched, but it doesn't contain the type. Make sure that the type name was not mistyped.",
-						name, assembly.FullName));
-				}
-				throw new ConverterException(String.Format(
-					"Could not convert string '{0}' to a type. Assembly was not found. Make sure it was deployed and the name was not mistyped.",
-					name));
-			}
-			throw new ConverterException(String.Format(
-				"Could not convert string '{0}' to a type. Make sure assembly containing the type has been loaded into the process, or consider specifying assembly qualified name of the type.",
-				name));
+		    if (assemblyName == null)
+		        throw new ConverterException(
+		            $"Could not convert string '{name}' to a type. Make sure assembly containing the type has been loaded into the process, or consider specifying assembly qualified name of the type.");
+		    var namePart = assemblyName + ", Version=";
+		    var assembly = assemblies.FirstOrDefault(a => a.FullName.StartsWith(namePart, StringComparison.OrdinalIgnoreCase));
+		    if (assembly != null)
+		    {
+		        throw new ConverterException(
+		            $"Could not convert string '{name}' to a type. Assembly {assembly.FullName} was matched, but it doesn't contain the type. Make sure that the type name was not mistyped.");
+		    }
+		    throw new ConverterException(
+		        $"Could not convert string '{name}' to a type. Assembly was not found. Make sure it was deployed and the name was not mistyped.");
 		}
 
 		private bool InitializeAppDomainAssemblies(bool forceLoad)
@@ -231,7 +227,7 @@ namespace Castle.MicroKernel.SubSystems.Conversion
 				return;
 			}
 
-			var message = new StringBuilder(string.Format("Could not uniquely identify type for '{0}'. ", value));
+			var message = new StringBuilder($"Could not uniquely identify type for '{value}'. ");
 			message.AppendLine("The following types were matched:");
 			foreach (var matchedType in type)
 			{
@@ -250,12 +246,9 @@ namespace Castle.MicroKernel.SubSystems.Conversion
 				inner.AddFirst(type);
 			}
 
-			public bool HasOne
-			{
-				get { return inner.Count == 1; }
-			}
+			public bool HasOne => inner.Count == 1;
 
-			public MultiType AddInnerType(Type type)
+		    public MultiType AddInnerType(Type type)
 			{
 				inner.AddLast(type);
 				return this;

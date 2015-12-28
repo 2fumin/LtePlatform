@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Linq;
+
 namespace Castle.MicroKernel.SubSystems.Conversion
 {
 	using System;
@@ -81,58 +83,34 @@ namespace Castle.MicroKernel.SubSystems.Conversion
 
 		public bool CanHandleType(Type type)
 		{
-			foreach (var converter in converters)
-			{
-				if (converter.CanHandleType(type))
-				{
-					return true;
-				}
-			}
-
-			return false;
+		    return converters.Any(converter => converter.CanHandleType(type));
 		}
 
-		public bool CanHandleType(Type type, IConfiguration configuration)
+	    public bool CanHandleType(Type type, IConfiguration configuration)
 		{
-			foreach (var converter in converters)
-			{
-				if (converter.CanHandleType(type, configuration))
-				{
-					return true;
-				}
-			}
-
-			return false;
+		    return converters.Any(converter => converter.CanHandleType(type, configuration));
 		}
 
-		public object PerformConversion(String value, Type targetType)
+	    public object PerformConversion(string value, Type targetType)
 		{
-			foreach (var converter in converters)
+			foreach (var converter in converters.Where(converter => converter.CanHandleType(targetType)))
 			{
-				if (converter.CanHandleType(targetType))
-				{
-					return converter.PerformConversion(value, targetType);
-				}
+			    return converter.PerformConversion(value, targetType);
 			}
 
-			var message = String.Format("No converter registered to handle the type {0}",
-			                            targetType.FullName);
+			var message = $"No converter registered to handle the type {targetType.FullName}";
 
 			throw new ConverterException(message);
 		}
 
 		public object PerformConversion(IConfiguration configuration, Type targetType)
 		{
-			foreach (var converter in converters)
+			foreach (var converter in converters.Where(converter => converter.CanHandleType(targetType, configuration)))
 			{
-				if (converter.CanHandleType(targetType, configuration))
-				{
-					return converter.PerformConversion(configuration, targetType);
-				}
+			    return converter.PerformConversion(configuration, targetType);
 			}
 
-			var message = String.Format("No converter registered to handle the type {0}",
-			                            targetType.FullName);
+			var message = $"No converter registered to handle the type {targetType.FullName}";
 
 			throw new ConverterException(message);
 		}
@@ -147,12 +125,9 @@ namespace Castle.MicroKernel.SubSystems.Conversion
 			return (TTarget)PerformConversion(configuration, typeof(TTarget));
 		}
 
-		IKernelInternal ITypeConverterContext.Kernel
-		{
-			get { return Kernel; }
-		}
+		IKernelInternal ITypeConverterContext.Kernel => Kernel;
 
-		public void Push(ComponentModel model, CreationContext context)
+	    public void Push(ComponentModel model, CreationContext context)
 		{
 			CurrentStack.Push(new Pair<ComponentModel, CreationContext>(model, context));
 		}
@@ -162,38 +137,13 @@ namespace Castle.MicroKernel.SubSystems.Conversion
 			CurrentStack.Pop();
 		}
 
-		public ComponentModel CurrentModel
-		{
-			get
-			{
-				if (CurrentStack.Count == 0)
-				{
-					return null;
-				}
+		public ComponentModel CurrentModel => CurrentStack.Count == 0 ? null : CurrentStack.Peek().First;
 
-				return CurrentStack.Peek().First;
-			}
-		}
+	    public CreationContext CurrentCreationContext => CurrentStack.Count == 0 ? null : CurrentStack.Peek().Second;
 
-		public CreationContext CurrentCreationContext
-		{
-			get
-			{
-				if (CurrentStack.Count == 0)
-				{
-					return null;
-				}
+	    public ITypeConverter Composition => this;
 
-				return CurrentStack.Peek().Second;
-			}
-		}
-
-		public ITypeConverter Composition
-		{
-			get { return this; }
-		}
-
-		private Stack<Pair<ComponentModel, CreationContext>> CurrentStack
+	    private Stack<Pair<ComponentModel, CreationContext>> CurrentStack
 		{
 			get
 			{
@@ -206,13 +156,11 @@ namespace Castle.MicroKernel.SubSystems.Conversion
 				return slot;
 #else
 				var stack = (Stack<Pair<ComponentModel, CreationContext>>)Thread.GetData(slot);
-				if (stack == null)
-				{
-					stack = new Stack<Pair<ComponentModel, CreationContext>>();
-					Thread.SetData(slot, stack);
-				}
+			    if (stack != null) return stack;
+			    stack = new Stack<Pair<ComponentModel, CreationContext>>();
+			    Thread.SetData(slot, stack);
 
-				return stack;
+			    return stack;
 
 #endif
 			}

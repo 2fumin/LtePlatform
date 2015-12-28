@@ -24,12 +24,12 @@ namespace Castle.Facilities.Logging.Tests
 	/// </summary>
 	public abstract class BaseTest
 	{
-		protected virtual IWindsorContainer CreateConfiguredContainer(LoggerImplementation loggerApi)
+		protected IWindsorContainer CreateConfiguredContainer(LoggerImplementation loggerApi)
 		{
-			return CreateConfiguredContainer(loggerApi, String.Empty);
+			return CreateConfiguredContainer(loggerApi, string.Empty);
 		}
 
-		protected virtual IWindsorContainer CreateConfiguredContainer(LoggerImplementation loggerApi, String custom)
+		protected IWindsorContainer CreateConfiguredContainer(LoggerImplementation loggerApi, string custom)
 		{
 			IWindsorContainer container = new WindsorContainer(new DefaultConfigurationStore());
 			var configFile = GetConfigFile(loggerApi);

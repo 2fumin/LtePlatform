@@ -22,7 +22,7 @@ namespace Castle.MicroKernel.Tests.Bugs
 	using NUnit.Framework;
 
 	[TestFixture]
-	public class IoC_95
+	public class IoC_95TestCase
 	{
 		[Test]
 		public void AddingComponentToRootKernelWhenChildKernelHasStartableFacility()

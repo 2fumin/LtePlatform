@@ -57,15 +57,15 @@ namespace CastleTests
 		[Bug("IOC-141")]
 		public void No_resolvable_constructor_open_generic_component()
 		{
-			Container.Register(Component.For(typeof(IoC_141.IProcessor<>)).ImplementedBy(typeof(IoC_141.DefaultProcessor<>)).Named("processor"),
-			                   Component.For<IoC_141.IAssembler<object>>().ImplementedBy<IoC_141.ObjectAssembler>());
+			Container.Register(Component.For(typeof(IoC_141TestCase.IProcessor<>)).ImplementedBy(typeof(IoC_141TestCase.DefaultProcessor<>)).Named("processor"),
+			                   Component.For<IoC_141TestCase.IAssembler<object>>().ImplementedBy<IoC_141TestCase.ObjectAssembler>());
 
-			var exception = Assert.Throws<HandlerException>(() => Container.Resolve<IoC_141.IProcessor<int>>());
+			var exception = Assert.Throws<HandlerException>(() => Container.Resolve<IoC_141TestCase.IProcessor<int>>());
 
 			var message = string.Format(
 				"Can't create component 'processor' as it has dependencies to be satisfied.{0}{0}" +
 				"'processor' is waiting for the following dependencies:{0}" +
-				"- Service 'Castle.MicroKernel.Tests.Bugs.IoC_141+IAssembler`1[[{1}]]' which was not registered.{0}",
+				"- Service 'Castle.MicroKernel.Tests.Bugs.IoC_141TestCase+IAssembler`1[[{1}]]' which was not registered.{0}",
 				Environment.NewLine, typeof(int).AssemblyQualifiedName);
 
 			Assert.AreEqual(message, exception.Message);
@@ -125,10 +125,8 @@ namespace CastleTests
 				                                          Container.Resolve<A>("Stefan-Mucha"));
 
 			var expected =
-				string.Format(
-					"Requested component named 'Stefan-Mucha' was not found in the container. Did you forget to register it?{0}" +
-					"There are 2 other components supporting requested service '{1}'. Were you looking for any of them?",
-					Environment.NewLine, typeof(A).FullName);
+			    $"Requested component named 'Stefan-Mucha' was not found in the container. Did you forget to register it?{Environment.NewLine}" +
+			    $"There are 2 other components supporting requested service '{typeof (A).FullName}'. Were you looking for any of them?";
 
 			Assert.AreEqual(expected, exception.Message);
 		}
@@ -143,10 +141,8 @@ namespace CastleTests
 				                                          Container.Resolve<A>("Stefan-Mucha"));
 
 			var expected =
-				string.Format(
-					"Requested component named 'Stefan-Mucha' was not found in the container. Did you forget to register it?{0}" +
-					"There is one other component supporting requested service '{1}'. Is it what you were looking for?",
-					Environment.NewLine, typeof(A).FullName);
+			    $"Requested component named 'Stefan-Mucha' was not found in the container. Did you forget to register it?{Environment.NewLine}" +
+			    $"There is one other component supporting requested service '{typeof (A).FullName}'. Is it what you were looking for?";
 
 			Assert.AreEqual(expected, exception.Message);
 		}
@@ -159,10 +155,8 @@ namespace CastleTests
 				                                          Container.Resolve<A>("Stefan-Mucha"));
 
 			var expected =
-				string.Format(
-					"Requested component named 'Stefan-Mucha' was not found in the container. Did you forget to register it?{0}" +
-					"There are no components supporting requested service '{1}'. You need to register components in order to be able to use them.",
-					Environment.NewLine, typeof(A).FullName);
+			    $"Requested component named 'Stefan-Mucha' was not found in the container. Did you forget to register it?{Environment.NewLine}" +
+			    $"There are no components supporting requested service '{typeof (A).FullName}'. You need to register components in order to be able to use them.";
 
 			Assert.AreEqual(expected, exception.Message);
 		}

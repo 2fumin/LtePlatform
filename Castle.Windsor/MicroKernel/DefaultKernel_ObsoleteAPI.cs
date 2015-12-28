@@ -27,21 +27,15 @@ namespace Castle.MicroKernel
 	{
 		[Obsolete("Use Resolve(key, new Arguments()) instead")]
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public virtual object this[String key]
-		{
-			get { return Resolve<object>(key); }
-		}
+		public virtual object this[string key] => Resolve<object>(key);
 
-		[Obsolete("Use Resolve(service) instead")]
+	    [Obsolete("Use Resolve(service) instead")]
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public virtual object this[Type service]
-		{
-			get { return Resolve(service); }
-		}
+		public virtual object this[Type service] => Resolve(service);
 
-		[Obsolete("Use Register(Component.For(classType).Named(key)) or generic version instead.")]
+	    [Obsolete("Use Register(Component.For(classType).Named(key)) or generic version instead.")]
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public virtual void AddComponent(String key, Type classType)
+		public virtual void AddComponent(string key, Type classType)
 		{
 			AddComponent(key, classType, classType);
 		}
@@ -62,7 +56,7 @@ namespace Castle.MicroKernel
 
 		[Obsolete("Use Register(Component.For(serviceType).ImplementedBy(classType).Named(key)) or generic version instead.")]
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public virtual void AddComponent(String key, Type serviceType, Type classType)
+		public virtual void AddComponent(string key, Type serviceType, Type classType)
 		{
 			AddComponent(key, serviceType, classType, LifestyleType.Singleton);
 		}
@@ -80,19 +74,19 @@ namespace Castle.MicroKernel
 		{
 			if (key == null)
 			{
-				throw new ArgumentNullException("key");
+				throw new ArgumentNullException(nameof(key));
 			}
 			if (serviceType == null)
 			{
-				throw new ArgumentNullException("serviceType");
+				throw new ArgumentNullException(nameof(serviceType));
 			}
 			if (classType == null)
 			{
-				throw new ArgumentNullException("classType");
+				throw new ArgumentNullException(nameof(classType));
 			}
 			if (LifestyleType.Undefined == lifestyle)
 			{
-				throw new ArgumentException("The specified lifestyle must be Thread, Transient, or Singleton.", "lifestyle");
+				throw new ArgumentException("The specified lifestyle must be Thread, Transient, or Singleton.", nameof(lifestyle));
 			}
 			var model = ComponentModelBuilder.BuildModel(new ComponentName(key, true), new[] { serviceType }, classType, null);
 
@@ -155,15 +149,15 @@ namespace Castle.MicroKernel
 
 		[Obsolete("Use Register(Component.For(instance.GetType()).Named(key).Instance(instance)) or generic version instead.")]
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public void AddComponentInstance(String key, object instance)
+		public void AddComponentInstance(string key, object instance)
 		{
 			if (key == null)
 			{
-				throw new ArgumentNullException("key");
+				throw new ArgumentNullException(nameof(key));
 			}
 			if (instance == null)
 			{
-				throw new ArgumentNullException("instance");
+				throw new ArgumentNullException(nameof(instance));
 			}
 
 			var classType = instance.GetType();
@@ -178,7 +172,7 @@ namespace Castle.MicroKernel
 
 		[Obsolete("Use Register(Component.For(serviceType).Named(key).Instance(instance)) or generic version instead.")]
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public void AddComponentInstance(String key, Type serviceType, object instance)
+		public void AddComponentInstance(string key, Type serviceType, object instance)
 		{
 			AddComponentInstance(key, serviceType, instance.GetType(), instance);
 		}
@@ -189,19 +183,19 @@ namespace Castle.MicroKernel
 		{
 			if (key == null)
 			{
-				throw new ArgumentNullException("key");
+				throw new ArgumentNullException(nameof(key));
 			}
 			if (serviceType == null)
 			{
-				throw new ArgumentNullException("serviceType");
+				throw new ArgumentNullException(nameof(serviceType));
 			}
 			if (instance == null)
 			{
-				throw new ArgumentNullException("instance");
+				throw new ArgumentNullException(nameof(instance));
 			}
 			if (classType == null)
 			{
-				throw new ArgumentNullException("classType");
+				throw new ArgumentNullException(nameof(classType));
 			}
 
 			var model = new ComponentModel(new ComponentName(key, true), new[] { serviceType }, classType, new Arguments { { "instance", instance } })
@@ -232,19 +226,19 @@ namespace Castle.MicroKernel
 
 		[Obsolete("Use Register(Component.For(classType).Named(key).ExtendedProperties(extendedProperties)) or generic version instead.")]
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public virtual void AddComponentWithExtendedProperties(String key, Type classType, IDictionary extendedProperties)
+		public virtual void AddComponentWithExtendedProperties(string key, Type classType, IDictionary extendedProperties)
 		{
 			if (key == null)
 			{
-				throw new ArgumentNullException("key");
+				throw new ArgumentNullException(nameof(key));
 			}
 			if (extendedProperties == null)
 			{
-				throw new ArgumentNullException("extendedProperties");
+				throw new ArgumentNullException(nameof(extendedProperties));
 			}
 			if (classType == null)
 			{
-				throw new ArgumentNullException("classType");
+				throw new ArgumentNullException(nameof(classType));
 			}
 
 			var model = ComponentModelBuilder.BuildModel(new ComponentName(key, true), new[] { classType }, classType, extendedProperties);
@@ -254,23 +248,23 @@ namespace Castle.MicroKernel
 		[Obsolete(
 			"Use Register(Component.For(serviceType).ImplementedBy(classType).Named(key).ExtendedProperties(extendedProperties)) or generic version instead.")]
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public virtual void AddComponentWithExtendedProperties(String key, Type serviceType, Type classType, IDictionary extendedProperties)
+		public virtual void AddComponentWithExtendedProperties(string key, Type serviceType, Type classType, IDictionary extendedProperties)
 		{
 			if (key == null)
 			{
-				throw new ArgumentNullException("key");
+				throw new ArgumentNullException(nameof(key));
 			}
 			if (extendedProperties == null)
 			{
-				throw new ArgumentNullException("extendedProperties");
+				throw new ArgumentNullException(nameof(extendedProperties));
 			}
 			if (serviceType == null)
 			{
-				throw new ArgumentNullException("serviceType");
+				throw new ArgumentNullException(nameof(serviceType));
 			}
 			if (classType == null)
 			{
-				throw new ArgumentNullException("classType");
+				throw new ArgumentNullException(nameof(classType));
 			}
 
 			var model = ComponentModelBuilder.BuildModel(new ComponentName(key, true), new[] { serviceType }, classType, extendedProperties);
@@ -279,19 +273,17 @@ namespace Castle.MicroKernel
 
 		[Obsolete("Use AddFacility(IFacility) instead.")]
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public virtual IKernel AddFacility(String key, IFacility facility)
+		public virtual IKernel AddFacility(string key, IFacility facility)
 		{
 			if (facility == null)
 			{
-				throw new ArgumentNullException("facility");
+				throw new ArgumentNullException(nameof(facility));
 			}
 			var facilityType = facility.GetType();
 			if (facilities.Any(f => f.GetType() == facilityType))
 			{
 				throw new ArgumentException(
-					string.Format(
-						"Facility of type '{0}' has already been registered with the container. Only one facility of a given type can exist in the container.",
-						facilityType.FullName));
+				    $"Facility of type '{facilityType.FullName}' has already been registered with the container. Only one facility of a given type can exist in the container.");
 			}
 			facilities.Add(facility);
 			facility.Init(this, ConfigurationStore.GetFacilityConfiguration(key));
@@ -299,16 +291,22 @@ namespace Castle.MicroKernel
 			return this;
 		}
 
+        [Obsolete("For Test Only! It should not be used except in the test project.")]
+	    public void InsertOneFacility(IFacility facility)
+	    {
+	        facilities.Add(facility);
+	    }
+        
 		[Obsolete("Use AddFacility<TFacility>() instead.")]
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public IKernel AddFacility<T>(String key) where T : IFacility, new()
+		public IKernel AddFacility<T>(string key) where T : IFacility, new()
 		{
 			return AddFacility(new T());
 		}
 
 		[Obsolete("Use AddFacility<TFacility>(Action<TFacility>) instead.")]
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public IKernel AddFacility<T>(String key, Action<T> onCreate)
+		public IKernel AddFacility<T>(string key, Action<T> onCreate)
 			where T : IFacility, new()
 		{
 			return AddFacility(onCreate);

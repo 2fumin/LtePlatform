@@ -24,7 +24,7 @@ namespace CastleTests.Bugs.Ioc113
 	using NUnit.Framework;
 
 	[TestFixture]
-	public class IoC_113_When_resolving_initializable_disposable_and_startable_component
+	public class IoC_113_When_resolving_initializable_disposable_and_startable_componentTestCase
 	{
 		[SetUp]
 		public void SetUp()
