@@ -26,5 +26,20 @@ namespace Lte.Parameters.Abstract
                     .Take(pageSize)
                     .AsQueryable();
         }
+
+        public IQueryable<TEntity> GetAll<TKey>(int pageIndex, int pageSize,
+            Expression<Func<TEntity, TKey>> sortKeySelector, bool isAsc = true)
+        {
+            Guard.ArgumentNotNull(sortKeySelector, "sortKeySelector");
+            return isAsc
+                ? Entities.OrderBy(sortKeySelector)
+                    .Skip(pageSize*(pageIndex - 1))
+                    .Take(pageSize)
+                    .AsQueryable()
+                : Entities.OrderByDescending(sortKeySelector)
+                    .Skip(pageSize*(pageIndex - 1))
+                    .Take(pageSize)
+                    .AsQueryable();
+        }
     }
 }

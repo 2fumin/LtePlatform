@@ -11,5 +11,8 @@ namespace Lte.Parameters.Abstract
     {
         IQueryable<TEntity> Get<TKey>(Expression<Func<TEntity, bool>> predicate, int pageIndex, int pageSize,
             Expression<Func<TEntity, TKey>> sortKeySelector, bool isAsc = true);
+
+        IQueryable<TEntity> GetAll<TKey>(int pageIndex, int pageSize, Expression<Func<TEntity, TKey>> sortKeySelector,
+            bool isAsc = true);
     }
 }

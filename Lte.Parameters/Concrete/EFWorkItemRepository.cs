@@ -11,7 +11,7 @@ using Lte.Parameters.Entities.Work;
 
 namespace Lte.Parameters.Concrete
 {
-    public class EFWorkItemRepository : LightWeightRepositroyBase<WorkItem>, IWorkItemRepository
+    public class EFWorkItemRepository : PagingRepositoryBase<WorkItem>, IWorkItemRepository
     {
         protected override DbSet<WorkItem> Entities => context.WorkItems;
 

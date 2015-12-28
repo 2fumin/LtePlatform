@@ -760,6 +760,8 @@
     <None Include="Views\Kpi\_TopDrop2GTable.cshtml" />
     <Content Include="Views\Kpi\_TopDrop2GTrendTable.cshtml" />
     <Content Include="Views\Kpi\_TownPreciseViewTable.cshtml" />
+    <None Include="Views\Kpi\_WorkItemList.cshtml" />
+    <None Include="Views\Kpi\_WorkItemTable.cshtml" />
     <None Include="Views\Parameters\AlarmImport.cshtml" />
     <Content Include="Views\Shared\_AlertPanel.cshtml" />
     <Content Include="Views\Shared\_ENodebTable.cshtml" />

@@ -1,0 +1,33 @@
+﻿<!-- ko with: workItemList -->
+<div class="row">
+    <div class="col-md-7">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    工单监控
+                </h3>
+            </div>
+            <div class="panel-body">
+                <p>
+                    <input type="checkbox" data-bind="checked: wholeCity"/>
+                    查询全市&nbsp;&nbsp;
+                    城市：
+                    <select data-bind="value: currentCity, options: cities"></select>&nbsp;&nbsp;
+                    区域：
+                    <select data-bind="value: currentDistrict, options: districts, enable: wholeCity()===false"></select>
+                </p>
+                <p>
+                    工单状态：
+                    <select data-bind="value: currentState, options: states"></select>
+                    工单分类：
+                    <select data-bind="value: currentType, options: types"></select>
+                </p>
+                @{
+                    Html.RenderPartial("_WorkItemTable");
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5"></div>
+</div>
+<!-- /ko -->

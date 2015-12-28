@@ -8,7 +8,7 @@ using Lte.Parameters.Entities.Work;
 
 namespace Lte.Parameters.Abstract
 {
-    public interface IWorkItemRepository : IRepository<WorkItem>
+    public interface IWorkItemRepository : IPagingRepository<WorkItem>
     {
         void Import(WorkItemExcel itemExcel);
     }

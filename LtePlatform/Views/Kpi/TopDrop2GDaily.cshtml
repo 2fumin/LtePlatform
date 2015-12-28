@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "全天TOP掉话指标";
+    ViewBag.Title = "网优平台工单监控";
 }
 
 <div class="panel panel-warning">
@@ -16,6 +16,9 @@
 </div>
 
 @section SPAViews{
+    @{
+        Html.RenderPartial("_WorkItemList");
+    }
 }
 
 @section Scripts{
