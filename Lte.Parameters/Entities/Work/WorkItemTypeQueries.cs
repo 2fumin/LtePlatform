@@ -8,7 +8,7 @@ namespace Lte.Parameters.Entities.Work
 {
     public static class WorkItemTypeQueries
     {
-        private static readonly Tuple<WorkItemType, string>[] workItemTypeList =
+        private static readonly Tuple<WorkItemType, string>[] WorkItemTypeList =
         {
             new Tuple<WorkItemType, string>(WorkItemType.Infrastructure4G, "4G基础数据"),
             new Tuple<WorkItemType, string>(WorkItemType.Interference4G, "4G干扰故障"),
@@ -21,17 +21,17 @@ namespace Lte.Parameters.Entities.Work
 
         public static string GetWorkItemTypeDescription(this WorkItemType type)
         {
-            var tuple = workItemTypeList.FirstOrDefault(x => x.Item1 == type);
+            var tuple = WorkItemTypeList.FirstOrDefault(x => x.Item1 == type);
             return tuple != null ? tuple.Item2 : "其他类型";
         }
 
         public static WorkItemType GetWorkItemType(this string description)
         {
-            var tuple = workItemTypeList.FirstOrDefault(x => x.Item2 == description);
+            var tuple = WorkItemTypeList.FirstOrDefault(x => x.Item2 == description);
             return tuple?.Item1 ?? WorkItemType.Others;
         }
 
-        private static readonly Tuple<WorkItemSubtype, string>[] workItemSubtypeList =
+        private static readonly Tuple<WorkItemSubtype, string>[] WorkItemSubtypeList =
         {
             new Tuple<WorkItemSubtype, string>(WorkItemSubtype.CallSetup, "小区级呼叫建立成功率异常"),
             new Tuple<WorkItemSubtype, string>(WorkItemSubtype.DataMaintainence, "数据维护"),
@@ -50,36 +50,37 @@ namespace Lte.Parameters.Entities.Work
 
         public static string GetWorkItemSubtypeDescription(this WorkItemSubtype type)
         {
-            var tuple = workItemSubtypeList.FirstOrDefault(x => x.Item1 == type);
+            var tuple = WorkItemSubtypeList.FirstOrDefault(x => x.Item1 == type);
             return tuple != null ? tuple.Item2 : "其他类型";
         }
 
         public static WorkItemSubtype GetWorkItemSubtype(this string description)
         {
-            var tuple = workItemSubtypeList.FirstOrDefault(x => x.Item2 == description);
+            var tuple = WorkItemSubtypeList.FirstOrDefault(x => x.Item2 == description);
             return tuple?.Item1 ?? WorkItemSubtype.Others;
         }
 
-        private static readonly Tuple<WorkItemState, string>[] workItemStateList =
+        private static readonly Tuple<WorkItemState, string>[] WorkItemStateList =
         {
             new Tuple<WorkItemState, string>(WorkItemState.Processing, "待处理"),
             new Tuple<WorkItemState, string>(WorkItemState.Processed, "待归档"),
-            new Tuple<WorkItemState, string>(WorkItemState.Finished, "已归档")
+            new Tuple<WorkItemState, string>(WorkItemState.Finished, "已归档"),
+            new Tuple<WorkItemState, string>(WorkItemState.ToBeSigned, "待签单")
         };
 
         public static string GetWorkItemStateDescription(this WorkItemState state)
         {
-            var tuple = workItemStateList.FirstOrDefault(x => x.Item1 == state);
+            var tuple = WorkItemStateList.FirstOrDefault(x => x.Item1 == state);
             return tuple != null ? tuple.Item2 : "已归档";
         }
 
         public static WorkItemState GetState(this string description)
         {
-            var tuple = workItemStateList.FirstOrDefault(x => x.Item2 == description);
+            var tuple = WorkItemStateList.FirstOrDefault(x => x.Item2 == description);
             return tuple?.Item1 ?? WorkItemState.Finished;
         }
 
-        private static readonly Tuple<WorkItemCause, string>[] workItemCauseList =
+        private static readonly Tuple<WorkItemCause, string>[] WorkItemCauseList =
         {
             new Tuple<WorkItemCause, string>(WorkItemCause.Antenna, "天线问题"),
             new Tuple<WorkItemCause, string>(WorkItemCause.AntennaFeedline, "天馈器件异常"),
@@ -114,13 +115,13 @@ namespace Lte.Parameters.Entities.Work
 
         public static string GetWorkItemCauseDescription(this WorkItemCause cause)
         {
-            var tuple = workItemCauseList.FirstOrDefault(x => x.Item1 == cause);
+            var tuple = WorkItemCauseList.FirstOrDefault(x => x.Item1 == cause);
             return tuple != null ? tuple.Item2 : "其它原因";
         }
 
         public static WorkItemCause GetWorkItemCause(this string description)
         {
-            var tuple = workItemCauseList.FirstOrDefault(x => x.Item2 == description);
+            var tuple = WorkItemCauseList.FirstOrDefault(x => x.Item2 == description);
             return tuple?.Item1 ?? WorkItemCause.Others;
         }
     }

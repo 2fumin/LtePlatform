@@ -38,7 +38,8 @@ namespace Lte.Parameters.Entities.Work
     {
         Processing,
         Processed,
-        Finished
+        Finished,
+        ToBeSigned
     }
 
     public enum WorkItemCause: short
