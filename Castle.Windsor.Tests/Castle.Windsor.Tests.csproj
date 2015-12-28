@@ -377,7 +377,7 @@
     <Compile Include="LoggingFacility\Classes\SmtpServer.cs" />
     <Compile Include="LoggingFacility\ConsoleFacilityTestCase.cs" />
     <Compile Include="LoggingFacility\ConsoleLoggerTestCase.cs" />
-    <Compile Include="LoggingFacility\CustomFacilityTests.cs" />
+    <Compile Include="LoggingFacility\CustomFacilityTestCase.cs" />
     <Compile Include="LoggingFacility\ExtendedLog4NetFacilityTestCase.cs" />
     <Compile Include="LoggingFacility\ExtendedNLogFacilityTests.cs" />
     <Compile Include="LoggingFacility\Facilities77.cs" />
@@ -900,7 +900,7 @@
     <Compile Include="SelectAllSelector.cs" />
     <Compile Include="CustomSubDependencyResolversTestCase.cs" />
     <Compile Include="ModelInterceptorsSelectorTestCase.cs" />
-    <Compile Include="RegistrationOrderingTestsCase.cs">
+    <Compile Include="RegistrationOrderingTestCase.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Windsor.Tests\XmlConfigStructureTestCase.cs" />
@@ -1295,7 +1295,7 @@
       <Name>Castle.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Castle.Windsor\Castle.Windsor.csproj">
-      <Project>{ee27e11c-6c25-4d85-ad17-e0801d7e83d7}</Project>
+      <Project>{73fb5b0b-5796-41dc-a5a6-743d585f6b5b}</Project>
       <Name>Castle.Windsor</Name>
     </ProjectReference>
   </ItemGroup>

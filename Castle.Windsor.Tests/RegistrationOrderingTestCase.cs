@@ -13,17 +13,17 @@
 // limitations under the License.
 
 using Castle.Windsor.Tests;
-
-namespace CastleTests
-{
 	using Castle.MicroKernel.Registration;
 
 	using CastleTests.Components;
 
 	using NUnit.Framework;
 
+
+namespace CastleTests
+{
 	[TestFixture]
-	public class RegistrationOrderingTestsCase : AbstractContainerTestCase
+	public class RegistrationOrderingTestCase : AbstractContainerTestCase
 	{
 		[Test]
 		public void CtorSourceOrderDoesNotMatter()

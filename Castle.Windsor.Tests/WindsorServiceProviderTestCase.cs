@@ -22,7 +22,7 @@ namespace CastleTests
 	using NUnit.Framework;
 
 	[TestFixture]
-	public class WindsorServiceProviderTextCase : AbstractContainerTestCase
+	public class WindsorServiceProviderTestCase : AbstractContainerTestCase
 	{
 		[Test]
 		public void Can_windsor_service_provider_resolve_services()

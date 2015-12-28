@@ -22,7 +22,7 @@ namespace CastleTests.Bugs
 	using NUnit.Framework;
 
 	[TestFixture]
-	public class IoC_334
+	public class IoC_334TestCase
 	{
 		[Test]
 		public void FacilityConfig_is_not_null()

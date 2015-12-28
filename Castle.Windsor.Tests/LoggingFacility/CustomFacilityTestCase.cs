@@ -27,7 +27,7 @@ namespace CastleTests.LoggingFacility
 	using NUnit.Framework;
 
 	[TestFixture]
-	public class CustomFacilityTests
+	public class CustomFacilityTestCase
 	{
 		[Test]
 		public void ReadCustomFacilityConfigFromXML()

@@ -78,6 +78,18 @@
     <Compile Include="Configuration\DictionaryBasedConfig_Test.cs" />
     <Compile Include="Configuration\MyChangableSession.cs" />
     <Compile Include="Configuration\SettingManager_Tests.cs" />
+    <Compile Include="Dependency\Circular_Constructor_Dependency_Tests.cs" />
+    <Compile Include="Dependency\Circular_Property_Dependency_Tests.cs" />
+    <Compile Include="Dependency\DisposableDependencyObjectWrapper_Tests.cs" />
+    <Compile Include="Dependency\GenericInjection_Tests.cs" />
+    <Compile Include="Dependency\Interceptors\Interceptors_Can_Have_Injected_Objects.cs" />
+    <Compile Include="Dependency\IocManager_LifeStyle_Tests.cs" />
+    <Compile Include="Dependency\IocManager_Self_Register_Tests.cs" />
+    <Compile Include="Dependency\IocManager_Tests.cs" />
+    <Compile Include="Dependency\PropertyInjection_Tests.cs" />
+    <Compile Include="Dependency\Registrar_And_Resolver_Tests.cs" />
+    <Compile Include="Dependency\ShouldInitialize_Simple_Tests.cs" />
+    <Compile Include="Dependency\SimpleDisposableObject.cs" />
     <Compile Include="DisposeAction_Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestBaseWithLocalIocManager.cs" />
@@ -92,7 +104,7 @@
       <Name>Castle.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Castle.Windsor\Castle.Windsor.csproj">
-      <Project>{ee27e11c-6c25-4d85-ad17-e0801d7e83d7}</Project>
+      <Project>{73fb5b0b-5796-41dc-a5a6-743d585f6b5b}</Project>
       <Name>Castle.Windsor</Name>
     </ProjectReference>
   </ItemGroup>

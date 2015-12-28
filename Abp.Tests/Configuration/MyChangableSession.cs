@@ -9,13 +9,7 @@ namespace Abp.Tests.Configuration
 
         public int? TenantId { get; set; }
 
-        public MultiTenancySides MultiTenancySide
-        {
-            get
-            {
-                return !TenantId.HasValue ? MultiTenancySides.Host : MultiTenancySides.Tenant;
-            }
-        }
+        public MultiTenancySides MultiTenancySide => !TenantId.HasValue ? MultiTenancySides.Host : MultiTenancySides.Tenant;
 
         public long? ImpersonatorUserId { get; set; }
 
