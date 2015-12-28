@@ -15,8 +15,7 @@ namespace Abp.Configuration
         /// <summary>
         /// Gets singleton instance.
         /// </summary>
-        public static DefaultConfigSettingStore Instance { get { return SingletonInstance; } }
-        private static readonly DefaultConfigSettingStore SingletonInstance = new DefaultConfigSettingStore();
+        public static DefaultConfigSettingStore Instance { get; } = new DefaultConfigSettingStore();
 
         private DefaultConfigSettingStore()
         {
@@ -37,19 +36,31 @@ namespace Abp.Configuration
         /// <inheritdoc/>
         public async Task DeleteAsync(SettingInfo setting)
         {
-            LogHelper.Logger.Warn("ISettingStore is not implemented, using DefaultConfigSettingStore which does not support DeleteAsync.");
+            await Task.Run(() =>
+            {
+                LogHelper.Logger.Warn(
+                    "ISettingStore is not implemented, using DefaultConfigSettingStore which does not support DeleteAsync.");
+            });
         }
 
         /// <inheritdoc/>
         public async Task CreateAsync(SettingInfo setting)
         {
-            LogHelper.Logger.Warn("ISettingStore is not implemented, using DefaultConfigSettingStore which does not support CreateAsync.");
+            await Task.Run(() =>
+            {
+                LogHelper.Logger.Warn(
+                    "ISettingStore is not implemented, using DefaultConfigSettingStore which does not support CreateAsync.");
+            });
         }
 
         /// <inheritdoc/>
         public async Task UpdateAsync(SettingInfo setting)
         {
-            LogHelper.Logger.Warn("ISettingStore is not implemented, using DefaultConfigSettingStore which does not support UpdateAsync.");
+            await Task.Run(()=>
+            {
+                LogHelper.Logger.Warn(
+                    "ISettingStore is not implemented, using DefaultConfigSettingStore which does not support UpdateAsync.");
+            });
         }
 
         /// <inheritdoc/>
