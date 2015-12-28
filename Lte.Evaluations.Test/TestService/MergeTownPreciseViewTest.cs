@@ -7,6 +7,7 @@ using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using Lte.Evaluations.DataService;
 using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.ViewModels;
+using Lte.Evaluations.ViewModels.RegionKpi;
 using NUnit.Framework;
 
 namespace Lte.Evaluations.Test.TestService

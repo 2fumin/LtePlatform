@@ -7,6 +7,7 @@ using AutoMapper;
 using Lte.Domain.Common;
 using Lte.Domain.Regular;
 using Lte.Evaluations.ViewModels;
+using Lte.Evaluations.ViewModels.RegionKpi;
 using Lte.Parameters.Entities;
 
 namespace Lte.Evaluations.MapperSerive

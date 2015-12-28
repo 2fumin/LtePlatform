@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Lte.Evaluations.DataService;
 using Lte.Evaluations.Test.MockItems;
 using Lte.Evaluations.ViewModels;
+using Lte.Evaluations.ViewModels.RegionKpi;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 using Moq;

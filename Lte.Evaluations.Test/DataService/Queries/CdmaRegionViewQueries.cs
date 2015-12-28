@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Lte.Evaluations.ViewModels;
+using Lte.Evaluations.ViewModels.RegionKpi;
 using NUnit.Framework;
 
 namespace Lte.Evaluations.Test.DataService.Queries

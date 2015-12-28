@@ -9,6 +9,7 @@ using Lte.Domain.LinqToCsv.Context;
 using Lte.Domain.LinqToCsv.Description;
 using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.ViewModels;
+using Lte.Evaluations.ViewModels.RegionKpi;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 

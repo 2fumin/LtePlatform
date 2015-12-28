@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using Lte.Domain.Regular;
+﻿using AutoMapper;
 
-namespace Lte.Evaluations.ViewModels
+namespace Lte.Evaluations.ViewModels.RegionKpi
 {
     public class DistrictPreciseView
     {

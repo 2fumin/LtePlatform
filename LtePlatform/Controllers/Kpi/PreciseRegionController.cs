@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Lte.Evaluations.DataService;
 using Lte.Evaluations.ViewModels;
+using Lte.Evaluations.ViewModels.RegionKpi;
 using LtePlatform.Models;
 
 namespace LtePlatform.Controllers.Kpi

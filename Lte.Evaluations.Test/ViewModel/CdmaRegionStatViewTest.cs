@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.ViewModels;
+using Lte.Evaluations.ViewModels.RegionKpi;
 using Lte.Parameters.Entities;
 using NUnit.Framework;
 
