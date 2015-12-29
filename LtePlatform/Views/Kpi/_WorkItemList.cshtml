@@ -13,10 +13,11 @@
                     <select data-bind="value: currentState, options: states"></select>&nbsp;
                     工单分类：
                     <select data-bind="value: currentType, options: types"></select>&nbsp;
-                    <button class="btn btn-primary">统计</button>
+                    <button class="btn btn-primary" data-bind="click: query">统计</button>
                     <button class="btn btn-success">图表</button>
                 </p>
                 @{
+                    
                     Html.RenderPartial("_WorkItemTable");
                 }
             </div>

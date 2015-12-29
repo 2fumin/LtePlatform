@@ -61,7 +61,8 @@ namespace LtePlatform
             bundles.Add(new ScriptBundle("~/bundles/kpiWorkItem").Include(
                 "~/Scripts/sammy-{version}.js",
                 "~/Scripts/app/common.js",
-                "~/Scripts/mycharts/comboChart.js",
+                "~/Scripts/mycharts/drilldown.chart.js",
+                "~/Scripts/mycharts/drilldownPie.js",
                 "~/Scripts/app/app.datamodel.js",
                 "~/Scripts/app/app.viewmodel.js",
                 "~/Scripts/kpi/common.controller.js",

@@ -41,6 +41,7 @@
     self.dumpCellExcelUrl = "/api/DumpCellExcel";
     self.dumpBtsExcelUrl = "/api/DumpBtsExcel";
     self.dumpCdmaCellExcelUrl = "/api/DumpCdmaCellExcel";
+    self.workItemUrl = "/api/WorkItem";
 
     self.areaTestDateUrl = "/api/AreaTestDate";
     self.csvFileInfoUrl = "/api/CsvFileInfo";
