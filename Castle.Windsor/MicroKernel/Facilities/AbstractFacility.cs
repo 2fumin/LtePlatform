@@ -23,8 +23,9 @@ namespace Castle.MicroKernel.Facilities
 	/// </summary>
 	public abstract class AbstractFacility : IFacility, IDisposable
 	{
-		private IConfiguration facilityConfig;
-		private IKernel kernel;
+		protected IConfiguration facilityConfig;
+
+		protected IKernel kernel;
 
 		/// <summary>
 		///   Gets the facility configuration.

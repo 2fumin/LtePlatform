@@ -1,6 +1,7 @@
 using System;
 using Castle.MicroKernel;
 using Castle.MicroKernel.SubSystems.Configuration;
+using Castle.MicroKernel.SubSystems.Conversion;
 using Castle.Windsor;
 using NUnit.Framework;
 
@@ -45,6 +46,7 @@ namespace Castle.Facilities.Logging.Tests
         public void Test_Kernal()
         {
             IKernel kernel = new DefaultKernel();
+            kernel.ConfigurationStore = new DefaultConfigurationStore();
             var configFile = GetConfigFile(LoggerImplementation.ExtendedLog4net);
             kernel.AddFacility<LoggingFacility>(
                 (f => f.LogUsing(LoggerImplementation.ExtendedLog4net).WithConfig(configFile)));
@@ -55,6 +57,7 @@ namespace Castle.Facilities.Logging.Tests
         public void Test_Facility()
         {
             IKernel kernel = new DefaultKernel();
+            kernel.ConfigurationStore = new DefaultConfigurationStore();
             var configFile = GetConfigFile(LoggerImplementation.ExtendedLog4net);
             Action<LoggingFacility> onCreate = f => f.LogUsing(LoggerImplementation.ExtendedLog4net).WithConfig(configFile);
             var facility = new LoggingFacility();
@@ -66,6 +69,7 @@ namespace Castle.Facilities.Logging.Tests
         public void Test_Kernerl_AddFacility()
         {
             IKernel kernel = new DefaultKernel();
+            kernel.ConfigurationStore = new DefaultConfigurationStore();
             var configFile = GetConfigFile(LoggerImplementation.ExtendedLog4net);
             Action<LoggingFacility> onCreate = f => f.LogUsing(LoggerImplementation.ExtendedLog4net).WithConfig(configFile);
             var facility = new LoggingFacility();
@@ -78,6 +82,7 @@ namespace Castle.Facilities.Logging.Tests
         public void Test_Facility_FullName()
         {
             IKernel kernel = new DefaultKernel();
+            kernel.ConfigurationStore = new DefaultConfigurationStore();
             var configFile = GetConfigFile(LoggerImplementation.ExtendedLog4net);
             Assert.AreEqual(configFile, "LoggingFacility\\log4net.facilities.test.config");
             Action<LoggingFacility> onCreate = f => f.LogUsing(LoggerImplementation.ExtendedLog4net).WithConfig(configFile);
@@ -90,6 +95,7 @@ namespace Castle.Facilities.Logging.Tests
         public void Test_Kernel_AddFacility_WithFullName()
         {
             IKernel kernel = new DefaultKernel();
+            kernel.ConfigurationStore = new DefaultConfigurationStore();
             var configFile = GetConfigFile(LoggerImplementation.ExtendedLog4net);
             Action<LoggingFacility> onCreate = f => f.LogUsing(LoggerImplementation.ExtendedLog4net).WithConfig(configFile);
             var facility = new LoggingFacility();
@@ -104,6 +110,7 @@ namespace Castle.Facilities.Logging.Tests
         public void Test_Kernel_AddFacility_ToFacilities()
         {
             IKernel kernel = new DefaultKernel();
+            kernel.ConfigurationStore = new DefaultConfigurationStore();
             var configFile = GetConfigFile(LoggerImplementation.ExtendedLog4net);
             Action<LoggingFacility> onCreate = f => f.LogUsing(LoggerImplementation.ExtendedLog4net).WithConfig(configFile);
             var facility = new LoggingFacility();
@@ -116,6 +123,7 @@ namespace Castle.Facilities.Logging.Tests
         public void Test_Kenel_GetFacilityConfiguration()
         {
             var kernel = new DefaultKernel();
+            kernel.ConfigurationStore = new DefaultConfigurationStore();
             var configFile = GetConfigFile(LoggerImplementation.ExtendedLog4net);
             Action<LoggingFacility> onCreate = f => f.LogUsing(LoggerImplementation.ExtendedLog4net).WithConfig(configFile);
             var facility = new LoggingFacility();
@@ -125,7 +133,7 @@ namespace Castle.Facilities.Logging.Tests
 #pragma warning restore 612, 618
             var configuration =
                 kernel.ConfigurationStore.GetFacilityConfiguration("Castle.Facilities.Logging.LoggingFacility");
-            Assert.IsNotNull(configuration);
+            Assert.IsNull(configuration);
         }
 
         [Test]
@@ -146,5 +154,122 @@ namespace Castle.Facilities.Logging.Tests
             Assert.IsNotNull(facility);
         }
 
+        [Test]
+        public void Test_MyFacility_Init()
+        {
+            IKernel kernel = new DefaultKernel();
+            kernel.ConfigurationStore = new DefaultConfigurationStore();
+            var configFile = GetConfigFile(LoggerImplementation.ExtendedLog4net);
+            Action<LoggingFacility> onCreate = f => f.LogUsing(LoggerImplementation.ExtendedLog4net).WithConfig(configFile);
+            var facility = new MyLoggingFacility(kernel, null);
+            onCreate.Invoke(facility);
+            facility.MyInit();
+            Assert.IsNotNull(facility);
+        }
+
+        [Test]
+        public void Test_MyFacility_CreateLoggerFactory()
+        {
+            IKernel kernel = new DefaultKernel();
+            kernel.ConfigurationStore = new DefaultConfigurationStore();
+            var configFile = GetConfigFile(LoggerImplementation.ExtendedLog4net);
+            Action<LoggingFacility> onCreate = f => f.LogUsing(LoggerImplementation.ExtendedLog4net).WithConfig(configFile);
+            var facility = new MyLoggingFacility(kernel, null);
+            onCreate.Invoke(facility);
+            facility.SetupConverter();
+            var factory = facility.CreateLoggerFactory();
+            Assert.IsNotNull(factory);
+        }
+
+        [Test]
+        public void Test_MyFacility_ReadLoggingApi()
+        {
+            IKernel kernel = new DefaultKernel();
+            kernel.ConfigurationStore = new DefaultConfigurationStore();
+            var configFile = GetConfigFile(LoggerImplementation.ExtendedLog4net);
+            Action<LoggingFacility> onCreate = f => f.LogUsing(LoggerImplementation.ExtendedLog4net).WithConfig(configFile);
+            var facility = new MyLoggingFacility(kernel, null);
+            onCreate.Invoke(facility);
+            facility.SetupConverter();
+            var api = facility.ReadApi();
+            Assert.IsNotNull(api);
+            Assert.AreEqual(api, LoggerImplementation.ExtendedLog4net);
+        }
+
+        [Test]
+        public void Test_MyFacility_CreateLoggerFactory_FromApi()
+        {
+            IKernel kernel = new DefaultKernel();
+            kernel.ConfigurationStore = new DefaultConfigurationStore();
+            var configFile = GetConfigFile(LoggerImplementation.ExtendedLog4net);
+            Action<LoggingFacility> onCreate = f => f.LogUsing(LoggerImplementation.ExtendedLog4net).WithConfig(configFile);
+            var facility = new MyLoggingFacility(kernel, null);
+            onCreate.Invoke(facility);
+            facility.SetupConverter();
+            var factory = facility.CreateLoggerFactory(LoggerImplementation.ExtendedLog4net);
+            Assert.IsNotNull(factory);
+        }
+
+        [Test]
+        public void Test_MyFacility_GetLoggerFactoryType()
+        {
+            IKernel kernel = new DefaultKernel();
+            kernel.ConfigurationStore = new DefaultConfigurationStore();
+            var configFile = GetConfigFile(LoggerImplementation.ExtendedLog4net);
+            Action<LoggingFacility> onCreate = f => f.LogUsing(LoggerImplementation.ExtendedLog4net).WithConfig(configFile);
+            var facility = new MyLoggingFacility(kernel, null);
+            onCreate.Invoke(facility);
+            facility.SetupConverter();
+            var type = facility.GetFactoryType(LoggerImplementation.ExtendedLog4net);
+            Assert.IsNotNull(type);
+        }
+
+        [Test]
+        public void Test_MyFacility_SetupConverter()
+        {
+            IKernel kernel = new DefaultKernel();
+            kernel.ConfigurationStore = new DefaultConfigurationStore();
+            var configFile = GetConfigFile(LoggerImplementation.ExtendedLog4net);
+            Action<LoggingFacility> onCreate = f => f.LogUsing(LoggerImplementation.ExtendedLog4net).WithConfig(configFile);
+            var facility = new MyLoggingFacility(kernel, null);
+            onCreate.Invoke(facility);
+            var converter =
+                facility.MyKernel.GetSubSystem(SubSystemConstants.ConversionManagerKey) as IConversionManager;
+            Assert.IsNotNull(converter);
+        }
+
+        [Test]
+        public void Test_MyFacility_SetupConverter_PerformConversion()
+        {
+            IKernel kernel = new DefaultKernel();
+            kernel.ConfigurationStore = new DefaultConfigurationStore();
+            var configFile = GetConfigFile(LoggerImplementation.ExtendedLog4net);
+            Action<LoggingFacility> onCreate = f => f.LogUsing(LoggerImplementation.ExtendedLog4net).WithConfig(configFile);
+            var facility = new MyLoggingFacility(kernel, null);
+            onCreate.Invoke(facility);
+            var converter =
+                facility.MyKernel.GetSubSystem(SubSystemConstants.ConversionManagerKey) as IConversionManager;
+            Assert.IsNotNull(converter);
+            var type= converter.PerformConversion<Type>(MyLoggingFacility.ExtendedLog4NetLoggerFactoryTypeName);
+            Assert.IsNotNull(type);
+        }
+
+        [Test]
+        public void Test_MyFacility_Converter_PerformConversion()
+        {
+            IKernel kernel = new DefaultKernel();
+            kernel.ConfigurationStore = new DefaultConfigurationStore();
+            var configFile = GetConfigFile(LoggerImplementation.ExtendedLog4net);
+            Action<LoggingFacility> onCreate = f => f.LogUsing(LoggerImplementation.ExtendedLog4net).WithConfig(configFile);
+            var facility = new MyLoggingFacility(kernel, null);
+            onCreate.Invoke(facility);
+            var converter =
+                facility.MyKernel.GetSubSystem(SubSystemConstants.ConversionManagerKey) as IConversionManager;
+            Assert.IsNotNull(converter);
+            var type =
+                (Type)
+                    converter.PerformConversion(MyLoggingFacility.ExtendedLog4NetLoggerFactoryTypeName, typeof (Type));
+            Assert.IsNotNull(type);
+        }
     }
 }

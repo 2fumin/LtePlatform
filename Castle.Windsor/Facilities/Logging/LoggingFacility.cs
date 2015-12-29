@@ -32,25 +32,25 @@ namespace Castle.Facilities.Logging
 	{
 #if !SILVERLIGHT
 #if !CLIENTPROFILE
-		private static readonly String ExtendedLog4NetLoggerFactoryTypeName =
+		private static readonly string ExtendedLog4NetLoggerFactoryTypeName =
 			"Castle.Services.Logging.Log4netIntegration.ExtendedLog4netFactory," +
-			"Castle.Services.Logging.Log4netIntegration,Version=3.3.0.0, Culture=neutral," +
+			"Castle.Core,Version=3.3.0.0, Culture=neutral," +
 			"PublicKeyToken=407dd0808d44fbdc";
 
-		private static readonly String ExtendedNLogLoggerFactoryTypeName =
+		private static readonly string ExtendedNLogLoggerFactoryTypeName =
 			"Castle.Services.Logging.NLogIntegration.ExtendedNLogFactory," +
-			"Castle.Services.Logging.NLogIntegration,Version=3.3.0.0, Culture=neutral," +
+			"Castle.Core,Version=3.3.0.0, Culture=neutral," +
 			"PublicKeyToken=407dd0808d44fbdc";
 
-		private static readonly String Log4NetLoggerFactoryTypeName =
+		private static readonly string Log4NetLoggerFactoryTypeName =
 			"Castle.Services.Logging.Log4netIntegration.Log4netFactory," +
-			"Castle.Services.Logging.Log4netIntegration,Version=3.3.0.0, Culture=neutral," +
+			"Castle.Core,Version=3.3.0.0, Culture=neutral," +
 			"PublicKeyToken=407dd0808d44fbdc";
 #endif
 
-		private static readonly String NLogLoggerFactoryTypeName =
+		private static readonly string NLogLoggerFactoryTypeName =
 			"Castle.Services.Logging.NLogIntegration.NLogFactory," +
-			"Castle.Services.Logging.NLogIntegration,Version=3.3.0.0, Culture=neutral," +
+			"Castle.Core,Version=3.3.0.0, Culture=neutral," +
 			"PublicKeyToken=407dd0808d44fbdc";
 #endif
 		private readonly string customLoggerFactoryTypeName;
@@ -214,7 +214,7 @@ namespace Castle.Facilities.Logging
 			RegisterSubResolver(loggerFactory);
 		}
 
-		private ILoggerFactory CreateProperLoggerFactory(LoggerImplementation loggerApi)
+		protected ILoggerFactory CreateProperLoggerFactory(LoggerImplementation loggerApi)
 		{
 			var loggerFactoryType = GetLoggingFactoryType(loggerApi);
 			Debug.Assert(loggerFactoryType != null, "loggerFactoryType != null");
@@ -312,7 +312,7 @@ namespace Castle.Facilities.Logging
 		    return null;
 		}
 
-		private Type GetLoggingFactoryType(LoggerImplementation loggerApi)
+		protected Type GetLoggingFactoryType(LoggerImplementation loggerApi)
 		{
 			switch (loggerApi)
 			{
@@ -345,11 +345,11 @@ namespace Castle.Facilities.Logging
 			}
 		}
 
-		private ILoggerFactory ReadConfigurationAndCreateLoggerFactory()
+		protected ILoggerFactory ReadConfigurationAndCreateLoggerFactory()
 		{
 			var logApi = ReadLoggingApi();
-			var loggerFactory = CreateProperLoggerFactory(logApi);
-			return loggerFactory;
+			var factory = CreateProperLoggerFactory(logApi);
+			return factory;
 		}
 
 		private Type ReadCustomLoggerType()
@@ -377,17 +377,13 @@ namespace Castle.Facilities.Logging
 			throw new FacilityException(message);
 		}
 
-		private LoggerImplementation ReadLoggingApi()
+		protected LoggerImplementation ReadLoggingApi()
 		{
-			if (FacilityConfig != null)
-			{
-				var configLoggingApi = FacilityConfig.Attributes["loggingApi"];
-				if (string.IsNullOrEmpty(configLoggingApi) == false)
-				{
-					return converter.PerformConversion<LoggerImplementation>(configLoggingApi);
-				}
-			}
-			return loggerImplementation.GetValueOrDefault(LoggerImplementation.Console);
+		    if (FacilityConfig == null) return loggerImplementation.GetValueOrDefault(LoggerImplementation.Console);
+		    var configLoggingApi = FacilityConfig.Attributes["loggingApi"];
+		    return string.IsNullOrEmpty(configLoggingApi) == false
+		        ? converter.PerformConversion<LoggerImplementation>(configLoggingApi)
+		        : loggerImplementation.GetValueOrDefault(LoggerImplementation.Console);
 		}
 
 		private void RegisterDefaultILogger(ILoggerFactory factory)
@@ -429,7 +425,7 @@ namespace Castle.Facilities.Logging
 			Kernel.Resolver.AddSubResolver(new LoggerResolver(extendedLoggerFactory, logName));
 		}
 
-		private void SetUpTypeConverter()
+		protected void SetUpTypeConverter()
 		{
 			converter = Kernel.GetSubSystem(SubSystemConstants.ConversionManagerKey) as IConversionManager;
 		}

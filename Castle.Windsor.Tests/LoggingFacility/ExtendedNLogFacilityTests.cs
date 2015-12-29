@@ -32,7 +32,7 @@ namespace Castle.Facilities.Logging.Tests
 		[SetUp]
 		public void Setup()
 		{
-			container = base.CreateConfiguredContainer(LoggerImplementation.ExtendedNLog);
+			container = CreateConfiguredContainer(LoggerImplementation.ExtendedNLog);
 		}
 
 		[TearDown]
@@ -50,8 +50,8 @@ namespace Castle.Facilities.Logging.Tests
 
 			test.DoSomething();
 
-			String expectedLogOutput = String.Format("|INFO|{0}|Hello world", typeof(SimpleLoggingComponent).FullName);
-			String actualLogOutput = (NLog.LogManager.Configuration.FindTargetByName("memory") as MemoryTarget).Logs[0].ToString();
+			string expectedLogOutput = $"|INFO|{typeof (SimpleLoggingComponent).FullName}|Hello world";
+			string actualLogOutput = (NLog.LogManager.Configuration.FindTargetByName("memory") as MemoryTarget).Logs[0].ToString();
 			actualLogOutput = actualLogOutput.Substring(actualLogOutput.IndexOf('|'));
 			
 			Assert.AreEqual(expectedLogOutput, actualLogOutput);
@@ -63,7 +63,7 @@ namespace Castle.Facilities.Logging.Tests
 			smtpServer.InternalSend("rbellamy@pteradigm.com", "jobs@castlestronghold.com", "We're looking for a few good porgrammars.");
 			smtpServer.Stop();
 
-			expectedLogOutput = String.Format("|INFO|Castle.Facilities.Logging.Tests.Classes.SmtpServer|InternalSend rbellamy@pteradigm.com jobs@castlestronghold.com We're looking for a few good porgrammars.", typeof(SmtpServer).FullName);
+			expectedLogOutput = string.Format("|INFO|Castle.Facilities.Logging.Tests.Classes.SmtpServer|InternalSend rbellamy@pteradigm.com jobs@castlestronghold.com We're looking for a few good porgrammars.", typeof(SmtpServer).FullName);
 			actualLogOutput = (NLog.LogManager.Configuration.FindTargetByName("memory") as MemoryTarget).Logs[1].ToString();
 			actualLogOutput = actualLogOutput.Substring(actualLogOutput.IndexOf('|'));
 			
@@ -79,8 +79,8 @@ namespace Castle.Facilities.Logging.Tests
 
 			complexLoggingComponent.DoSomeContextual();
 
-			String expectedLogOutput = String.Format("|DEBUG|Castle.Facilities.Logging.Tests.Classes.ComplexLoggingComponent|flam|bar|Outside Inside0|Bim, bam boom.", typeof(ComplexLoggingComponent).FullName);
-			String actualLogOutput = (NLog.LogManager.Configuration.FindTargetByName("memory1") as MemoryTarget).Logs[0].ToString();
+			string expectedLogOutput = string.Format("|DEBUG|Castle.Facilities.Logging.Tests.Classes.ComplexLoggingComponent|flam|bar|Outside Inside0|Bim, bam boom.", typeof(ComplexLoggingComponent).FullName);
+			string actualLogOutput = (NLog.LogManager.Configuration.FindTargetByName("memory1") as MemoryTarget).Logs[0].ToString();
 			actualLogOutput = actualLogOutput.Substring(actualLogOutput.IndexOf('|'));
 
 			Assert.AreEqual(expectedLogOutput, actualLogOutput.ToString());

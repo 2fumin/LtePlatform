@@ -169,7 +169,7 @@ namespace Castle.MicroKernel
 			}
 		}
 
-		public IHandlerFactory HandlerFactory { get; private set; }
+		public IHandlerFactory HandlerFactory { get; }
 
 		public virtual IKernel Parent
 		{
@@ -206,7 +206,7 @@ namespace Castle.MicroKernel
 
 		public IReleasePolicy ReleasePolicy { get; set; }
 
-		public IDependencyResolver Resolver { get; private set; }
+		public IDependencyResolver Resolver { get; }
 
 		protected IConversionManager ConversionSubSystem { get; private set; }
 
@@ -249,7 +249,7 @@ namespace Castle.MicroKernel
 		{
 			if (childKernel == null)
 			{
-				throw new ArgumentNullException("childKernel");
+				throw new ArgumentNullException(nameof(childKernel));
 			}
 
 			childKernel.Parent = this;
@@ -268,7 +268,7 @@ namespace Castle.MicroKernel
 		{
 			if (model == null)
 			{
-				throw new ArgumentNullException("model");
+				throw new ArgumentNullException(nameof(model));
 			}
 
 			RaiseComponentModelCreated(model);
@@ -307,15 +307,15 @@ namespace Castle.MicroKernel
 			NamingSubSystem.AddHandlersFilter(filter);
 		}
 
-		public virtual void AddSubSystem(String name, ISubSystem subsystem)
+		public virtual void AddSubSystem(string name, ISubSystem subsystem)
 		{
 			if (name == null)
 			{
-				throw new ArgumentNullException("name");
+				throw new ArgumentNullException(nameof(name));
 			}
 			if (subsystem == null)
 			{
-				throw new ArgumentNullException("subsystem");
+				throw new ArgumentNullException(nameof(subsystem));
 			}
 
 			subsystem.Init(this);
@@ -365,11 +365,11 @@ namespace Castle.MicroKernel
 			return facilities.ToArray();
 		}
 
-		public virtual IHandler GetHandler(String name)
+		public virtual IHandler GetHandler(string name)
 		{
 			if (name == null)
 			{
-				throw new ArgumentNullException("name");
+				throw new ArgumentNullException(nameof(name));
 			}
 
 			var handler = NamingSubSystem.GetHandler(name);
@@ -386,7 +386,7 @@ namespace Castle.MicroKernel
 		{
 			if (service == null)
 			{
-				throw new ArgumentNullException("service");
+				throw new ArgumentNullException(nameof(service));
 			}
 
 			var handler = NamingSubSystem.GetHandler(service);
@@ -408,30 +408,25 @@ namespace Castle.MicroKernel
 			var result = NamingSubSystem.GetHandlers(service);
 
 			// If a parent kernel exists, we merge both results
-			if (Parent != null)
-			{
-				var parentResult = Parent.GetHandlers(service);
+		    var parentResult = Parent?.GetHandlers(service);
 
-				if (parentResult.Length > 0)
-				{
-					var newResult = new IHandler[result.Length + parentResult.Length];
-					result.CopyTo(newResult, 0);
-					parentResult.CopyTo(newResult, result.Length);
-					result = newResult;
-				}
-			}
+		    if (!(parentResult?.Length > 0)) return result;
+		    var newResult = new IHandler[result.Length + parentResult.Length];
+		    result.CopyTo(newResult, 0);
+		    parentResult.CopyTo(newResult, result.Length);
+		    result = newResult;
 
-			return result;
+		    return result;
 		}
 
-		public virtual ISubSystem GetSubSystem(String name)
+		public virtual ISubSystem GetSubSystem(string name)
 		{
 			ISubSystem subsystem;
 			subsystems.TryGetValue(name, out subsystem);
 			return subsystem;
 		}
 
-		public virtual bool HasComponent(String name)
+		public virtual bool HasComponent(string name)
 		{
 			if (name == null)
 			{
@@ -443,12 +438,7 @@ namespace Castle.MicroKernel
 				return true;
 			}
 
-			if (Parent != null)
-			{
-				return Parent.HasComponent(name);
-			}
-
-			return false;
+			return Parent != null && Parent.HasComponent(name);
 		}
 
 		public virtual bool HasComponent(Type serviceType)
@@ -463,12 +453,7 @@ namespace Castle.MicroKernel
 				return true;
 			}
 
-			if (Parent != null)
-			{
-				return Parent.HasComponent(serviceType);
-			}
-
-			return false;
+			return Parent != null && Parent.HasComponent(serviceType);
 		}
 
 		/// <summary>
@@ -490,7 +475,7 @@ namespace Castle.MicroKernel
 		{
 			if (registrations == null)
 			{
-				throw new ArgumentNullException("registrations");
+				throw new ArgumentNullException(nameof(registrations));
 			}
 
 			var token = OptimizeDependencyResolution();
@@ -498,11 +483,8 @@ namespace Castle.MicroKernel
 			{
 				registration.Register(this);
 			}
-			if (token != null)
-			{
-				token.Dispose();
-			}
-			return this;
+		    token?.Dispose();
+		    return this;
 		}
 
 		/// <summary>
@@ -517,10 +499,7 @@ namespace Castle.MicroKernel
 			}
 			else
 			{
-				if (Parent != null)
-				{
-					Parent.ReleaseComponent(instance);
-				}
+			    Parent?.ReleaseComponent(instance);
 			}
 		}
 
@@ -528,7 +507,7 @@ namespace Castle.MicroKernel
 		{
 			if (childKernel == null)
 			{
-				throw new ArgumentNullException("childKernel");
+				throw new ArgumentNullException(nameof(childKernel));
 			}
 
 			childKernel.Parent = null;
@@ -598,11 +577,7 @@ namespace Castle.MicroKernel
 		private static IScopeAccessor CreateScopeAccessor(ComponentModel model)
 		{
 			var scopeAccessorType = model.GetScopeAccessorType();
-			if (scopeAccessorType == null)
-			{
-				return new LifetimeScopeAccessor();
-			}
-			return scopeAccessorType.CreateInstance<IScopeAccessor>();
+			return scopeAccessorType == null ? new LifetimeScopeAccessor() : scopeAccessorType.CreateInstance<IScopeAccessor>();
 		}
 
 		private IScopeAccessor CreateScopeAccessorForBoundLifestyle(ComponentModel model)
@@ -611,8 +586,7 @@ namespace Castle.MicroKernel
 			if (selector == null)
 			{
 				throw new ComponentRegistrationException(
-					string.Format("Component {0} has lifestyle {1} but it does not specify mandatory 'scopeRootSelector'.",
-					              model.Name, LifestyleType.Bound));
+				    $"Component {model.Name} has lifestyle {LifestyleType.Bound} but it does not specify mandatory 'scopeRootSelector'.");
 			}
 
 			return new CreationContextScopeAccessor(model, selector);
@@ -622,7 +596,7 @@ namespace Castle.MicroKernel
 		{
 			if (model == null)
 			{
-				throw new ArgumentNullException("model");
+				throw new ArgumentNullException(nameof(model));
 			}
 
 			IComponentActivator activator;
@@ -666,12 +640,8 @@ namespace Castle.MicroKernel
 		protected void DisposeHandler(IHandler handler)
 		{
 			var disposable = handler as IDisposable;
-			if (disposable == null)
-			{
-				return;
-			}
 
-			disposable.Dispose();
+		    disposable?.Dispose();
 		}
 
 		void IKernelInternal.RaiseEventsOnHandlerCreated(IHandler handler)
@@ -799,7 +769,7 @@ namespace Castle.MicroKernel
 		{
 			if (name == null)
 			{
-				throw new ArgumentNullException("name");
+				throw new ArgumentNullException(nameof(name));
 			}
 
 			var handler = GetHandler(name);
@@ -845,7 +815,7 @@ namespace Castle.MicroKernel
 		{
 			if (service == null)
 			{
-				throw new ArgumentNullException("service");
+				throw new ArgumentNullException(nameof(service));
 			}
 
 			var handler = GetHandler(service);

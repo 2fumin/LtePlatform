@@ -26,13 +26,13 @@ namespace Castle.Facilities.Logging.Tests
 	public class ConsoleFacilityTestCase : BaseTest
 	{
 		private IWindsorContainer container;
-		private StringWriter outWriter = new StringWriter();
-		private StringWriter errorWriter = new StringWriter();
+		private readonly StringWriter outWriter = new StringWriter();
+		private readonly StringWriter errorWriter = new StringWriter();
 
 		[SetUp]
 		public void Setup()
 		{
-			container = base.CreateConfiguredContainer(LoggerImplementation.Console);
+			container = CreateConfiguredContainer(LoggerImplementation.Console);
 
 			outWriter.GetStringBuilder().Length = 0;
 			errorWriter.GetStringBuilder().Length = 0;
@@ -44,13 +44,10 @@ namespace Castle.Facilities.Logging.Tests
 		[TearDown]
 		public void Teardown()
 		{
-			if (container != null)
-			{
-				container.Dispose();
-			}
+		    container?.Dispose();
 		}
 
-		[Test]
+	    [Test]
 		public void SimpleTest()
 		{
 			container.Register(Component.For(typeof(SimpleLoggingComponent)).Named("component"));
