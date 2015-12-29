@@ -10,6 +10,16 @@
     self.itemsPerPage = ko.observable(20);
     self.pageSizeSelection = ko.observableArray([10, 15, 20, 30, 50]);
     self.workItemViews = ko.observableArray([]);
+    self.canGotoCurrentPage = ko.observable(false);
+
+    self.currentPage.subscribe(function(page) {
+        if (page >= 1 && page <= self.totalPages()) {
+            self.canGotoCurrentPage(true);
+        } else {
+            self.canGotoCurrentPage(false);
+            self.currentPage(1);
+        }
+    });
 
     Sammy(function () {
         this.get('#workItem', function () {
@@ -34,6 +44,26 @@
         }, function(result) {
             self.workItemViews(result);
         });
+    };
+
+    self.queryFirstPage = function() {
+        self.currentPage(1);
+        self.query();
+    };
+
+    self.queryPrevPage = function() {
+        self.currentPage(self.currentPage() - 1);
+        self.query();
+    };
+
+    self.queryNextPage = function() {
+        self.currentPage(self.currentPage() + 1);
+        self.query();
+    };
+
+    self.queryLastPage = function() {
+        self.currentPage(self.totalPages());
+        self.query();
     };
 
     return self;
