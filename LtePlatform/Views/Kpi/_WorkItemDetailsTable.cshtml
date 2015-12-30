@@ -1,0 +1,79 @@
+﻿<table class="table table-striped">
+    <thead>
+        <tr>
+            <th style="width: 100px">项目</th>
+            <th>信息</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>工单类型</td>
+            <td data-bind="text: workItemType"></td>
+        </tr>
+        <tr>
+            <td>工单子类型</td>
+            <td data-bind="text: workItemSubType"></td>
+        </tr>
+        <tr>
+            <td>基站编号</td>
+            <td data-bind="text: eNodebId"></td>
+        </tr>
+        <tr>
+            <td>扇区编号</td>
+            <td data-bind="text: sectorId"></td>
+        </tr>
+        <tr>
+            <td>区域信息</td>
+            <td>
+                <span data-bind="text: city"></span>
+                <span data-bind="text: district"></span>
+                <span data-bind="text: town"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>派单时间</td>
+            <td data-bind="text: beginTime"></td>
+        </tr>
+        <tr>
+            <td>回单期限</td>
+            <td data-bind="text: deadline"></td>
+        </tr>
+        <tr>
+            <td>重复信息</td>
+            <td>
+                重复派单次数：
+                <span data-bind="text: repeatTimes"></span>
+                ；驳回次数：
+                <span data-bind="text: repeatTimes"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>责任人</td>
+            <td data-bind="text: staffName"></td>
+        </tr>
+        <tr>
+            <td>反馈时间</td>
+            <td data-bind="text: feedbackTime"></td>
+        </tr>
+        <tr>
+            <td>完成时间</td>
+            <td data-bind="text: finishTime"></td>
+        </tr>
+        <tr>
+            <td>定位原因</td>
+            <td data-bind="text: workItemCause"></td>
+        </tr>
+        <tr>
+            <td>工单状态</td>
+            <td data-bind="text: workItemState"></td>
+        </tr>
+        <tr>
+            <td>平台信息</td>
+            <td data-bind="text: comments"></td>
+        </tr>
+        <tr>
+            <td>反馈信息</td>
+            <td data-bind="text: feedbackContents"></td>
+        </tr>
+    </tbody>
+</table>

@@ -11,6 +11,7 @@
     self.pageSizeSelection = ko.observableArray([10, 15, 20, 30, 50]);
     self.workItemViews = ko.observableArray([]);
     self.canGotoCurrentPage = ko.observable(false);
+    self.currentView = ko.observable();
 
     self.currentPage.subscribe(function(page) {
         if (page >= 1 && page <= self.totalPages()) {
@@ -23,6 +24,14 @@
 
     self.itemsPerPage.subscribe(function(items) {
         updateWorkItemTable(self, items);
+    });
+
+    self.currentState.subscribe(function() {
+        updateWorkItemTable(self, self.itemsPerPage());
+    });
+
+    self.currentType.subscribe(function() {
+        updateWorkItemTable(self, self.itemsPerPage());
     });
 
     Sammy(function () {
@@ -61,6 +70,10 @@
     self.queryLastPage = function() {
         self.currentPage(self.totalPages());
         self.query();
+    };
+
+    self.showDetails = function(data) {
+        self.currentView(data);
     };
 
     return self;

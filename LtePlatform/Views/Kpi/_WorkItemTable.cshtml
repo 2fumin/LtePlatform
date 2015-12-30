@@ -18,7 +18,8 @@
         <td data-bind="text: deadline"></td>
         <td>
             <div class="btn-group-xs">
-                <button class="btn btn-xs btn-primary">详细</button>
+                <button class="btn btn-xs btn-primary" 
+                        data-bind="click: function(){$root.workItemList().showDetails($data);}">详细</button>
                 <button class="btn btn-xs btn-info">反馈</button>
             </div>
         </td>
