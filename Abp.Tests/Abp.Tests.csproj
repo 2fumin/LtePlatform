@@ -46,6 +46,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -91,6 +92,12 @@
     <Compile Include="Dependency\ShouldInitialize_Simple_Tests.cs" />
     <Compile Include="Dependency\SimpleDisposableObject.cs" />
     <Compile Include="DisposeAction_Test.cs" />
+    <Compile Include="Domain\Entities\Department.cs" />
+    <Compile Include="Domain\Entities\Manager.cs" />
+    <Compile Include="Domain\Entities\Test_Entities.cs" />
+    <Compile Include="Domain\Entities\Worker.cs" />
+    <Compile Include="Domain\Uow\InnerUnitOfWorkCompleteHandle_Test.cs" />
+    <Compile Include="Domain\Uow\UnitOfWorkManager_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestBaseWithLocalIocManager.cs" />
   </ItemGroup>
@@ -104,7 +111,7 @@
       <Name>Castle.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Castle.Windsor\Castle.Windsor.csproj">
-      <Project>{ee27e11c-6c25-4d85-ad17-e0801d7e83d7}</Project>
+      <Project>{73fb5b0b-5796-41dc-a5a6-743d585f6b5b}</Project>
       <Name>Castle.Windsor</Name>
     </ProjectReference>
   </ItemGroup>
