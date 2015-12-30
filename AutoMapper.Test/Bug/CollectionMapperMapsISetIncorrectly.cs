@@ -25,7 +25,6 @@ namespace AutoMapper.Test.Bug
         }
 
         [Test]
-        [ExpectedException(typeof(AutoMapperMappingException))]
         public void ShouldMapToNewISet()
         {
             Mapper.Initialize(config =>

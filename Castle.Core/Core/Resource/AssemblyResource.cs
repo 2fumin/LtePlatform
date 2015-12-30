@@ -107,11 +107,7 @@ namespace Castle.Core.Resource
 		private string GetSimpleName(string assembly)
 		{
 			var indexOfComma = assembly.IndexOf(',');
-			if(indexOfComma<0)
-			{
-				return assembly;
-			}
-			return assembly.Substring(0, indexOfComma);
+			return indexOfComma<0 ? assembly : assembly.Substring(0, indexOfComma);
 		}
 
 		private string ConvertToPath(string resource)

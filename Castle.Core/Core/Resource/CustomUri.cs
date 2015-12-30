@@ -26,14 +26,7 @@ namespace Castle.Core.Resource
 		public static readonly string UriSchemeFile = "file";
 		public static readonly string UriSchemeAssembly = "assembly";
 
-		private string scheme;
-		private string host;
-		private string path;
-		private bool isUnc;
-		private bool isFile;
-		private bool isAssembly;
-
-		public CustomUri(string resourceIdentifier)
+	    public CustomUri(string resourceIdentifier)
 		{
 			if (resourceIdentifier == null)
 			{
@@ -47,17 +40,17 @@ namespace Castle.Core.Resource
 			ParseIdentifier(resourceIdentifier);
 		}
 
-		public bool IsUnc => isUnc;
+		public bool IsUnc { get; private set; }
 
-	    public bool IsFile => isFile;
+	    public bool IsFile { get; private set; }
 
-	    public bool IsAssembly => isAssembly;
+	    public bool IsAssembly { get; private set; }
 
-	    public string Scheme => scheme;
+	    public string Scheme { get; private set; }
 
-	    public string Host => host;
+	    public string Host { get; private set; }
 
-	    public string Path => path;
+	    public string Path { get; private set; }
 
 	    private void ParseIdentifier(string identifier)
 		{
@@ -74,26 +67,26 @@ namespace Castle.Core.Resource
 			{
 				// Unc
 
-				isUnc = true;
-				isFile = true;
-				scheme = UriSchemeFile;
+				IsUnc = true;
+				IsFile = true;
+				Scheme = UriSchemeFile;
 				translateSlashes = false;
 			}
 			else if (identifier[comma + 1] == '/' && identifier[comma + 2] == '/')
 			{
 				// Extract scheme
 
-				scheme = identifier.Substring(0, comma);
+				Scheme = identifier.Substring(0, comma);
 
-				isFile = (scheme == UriSchemeFile);
-				isAssembly = (scheme == UriSchemeAssembly);
+				IsFile = (Scheme == UriSchemeFile);
+				IsAssembly = (Scheme == UriSchemeAssembly);
 
 				identifier = identifier.Substring(comma + SchemeDelimiter.Length);
 			}
 			else
 			{
-				isFile = true;
-				scheme = UriSchemeFile;
+				IsFile = true;
+				Scheme = UriSchemeFile;
 			}
 
 			var sb = new StringBuilder();
@@ -101,9 +94,9 @@ namespace Castle.Core.Resource
 			{
 				if (translateSlashes && (ch == '\\' || ch == '/'))
 				{
-					if (host == null && !IsFile)
+					if (Host == null && !IsFile)
 					{
-						host = sb.ToString();
+						Host = sb.ToString();
 						sb.Length = 0;
 					}
 
@@ -118,7 +111,7 @@ namespace Castle.Core.Resource
 #if SILVERLIGHT
 			path = sb.ToString();
 #else
-			path = Environment.ExpandEnvironmentVariables(sb.ToString());
+			Path = Environment.ExpandEnvironmentVariables(sb.ToString());
 #endif
 		}
 	}

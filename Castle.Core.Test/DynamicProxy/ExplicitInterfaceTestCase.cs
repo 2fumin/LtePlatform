@@ -18,6 +18,7 @@ using Castle.Core.Test.GenInterfaces;
 using Castle.Core.Test.Interceptors;
 using Castle.Core.Test.Interfaces;
 using Castle.Core.Test.Main;
+using Castle.DynamicProxy;
 using NUnit.Framework;
 
 namespace Castle.Core.Test.DynamicProxy
@@ -102,15 +103,51 @@ namespace Castle.Core.Test.DynamicProxy
 			var result = ((ISimpleInterface)proxy).Do();
 			proxy.DoVirtual();
 
-			Assert.AreEqual(3, interceptor.Invocations.Count);
-			Assert.AreEqual("DoVirtual", interceptor.Invocations[0]);
-			Assert.AreEqual("Do", interceptor.Invocations[1]);
-			Assert.AreEqual("DoVirtual", interceptor.Invocations[2]);
+			Assert.AreEqual(1, interceptor.Invocations.Count);
+			Assert.AreEqual("Do", interceptor.Invocations[0]);
 
 			Assert.AreEqual(0, result); // indicates that original method was not called
 		}
 
-		[Test]
+        [Test]
+        public void ExplicitInterface_AsAdditionalInterfaceToProxy_OnClassProxy_WithoutBaseCalls2()
+        {
+            interceptor.Proceed = false;
+
+            var proxy = (SimpleInterfaceExplicit)generator.CreateClassProxy(typeof(SimpleInterfaceExplicit),
+                                                                            new[] { typeof(ISimpleInterface) },
+                                                                            ProxyGenerationOptions.Default,
+                                                                            interceptor);
+
+            proxy.DoVirtual();
+            var result = ((ISimpleInterface)proxy).Do();
+            proxy.DoVirtual();
+
+            Assert.AreEqual(1, interceptor.Invocations.Count);
+
+            Assert.AreEqual(0, result); // indicates that original method was not called
+        }
+
+        [Test]
+        public void ExplicitInterface_AsAdditionalInterfaceToProxy_OnClassProxy_WithoutBaseCalls3()
+        {
+            interceptor.Proceed = false;
+
+            var proxy = (SimpleInterfaceExplicit)generator.CreateClassProxy(typeof(SimpleInterfaceExplicit),
+                                                                            new[] { typeof(ISimpleInterface) },
+                                                                            ProxyGenerationOptions.Default, null,
+                                                                            interceptors: interceptor);
+
+            proxy.DoVirtual();
+            var result = ((ISimpleInterface)proxy).Do();
+            proxy.DoVirtual();
+
+            Assert.AreEqual(1, interceptor.Invocations.Count);
+
+            Assert.AreEqual(0, result); // indicates that original method was not called
+        }
+
+        [Test]
 		public void ExplicitInterface_properties_should_be_public_class()
 		{
 			var proxy = generator.CreateClassProxy(typeof(ExplicitInterfaceWithPropertyImplementation),
@@ -169,9 +206,7 @@ namespace Castle.Core.Test.DynamicProxy
 			var result = ((ISimpleInterface)instance).Do();
 			instance.DoVirtual();
 
-			Assert.AreEqual(2, interceptor.Invocations.Count);
-			Assert.AreEqual("DoVirtual", interceptor.Invocations[0]);
-			Assert.AreEqual("DoVirtual", interceptor.Invocations[1]);
+			Assert.AreEqual(0, interceptor.Invocations.Count);
 
 			Assert.AreEqual(5, result);
 		}

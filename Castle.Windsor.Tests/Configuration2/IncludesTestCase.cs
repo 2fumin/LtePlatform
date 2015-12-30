@@ -12,6 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
+using System.Globalization;
+using System.Linq;
+using System.Reflection;
+using Castle.Core.Resource;
+using Castle.MicroKernel;
+using Castle.MicroKernel.SubSystems.Resource;
+using Castle.Windsor.Installer;
+
 #if !SILVERLIGHT
 // we do not support xml config on SL
 
@@ -38,7 +47,71 @@ namespace CastleTests.Configuration2
 			AssertConfiguration();
 		}
 
-		[Test]
+        [Test]
+	    public void Test_Embedded()
+	    {
+	        var resource = Xml.Embedded("hasResourceIncludes.xml");
+            Assert.IsNotNull(resource);
+            Assert.AreEqual(resource.FileBasePath, AppDomain.CurrentDomain.BaseDirectory);
+            var interpreter=new XmlInterpreter(resource);
+            Assert.AreEqual(interpreter.EnvironmentName, null);
+            var kernel=new DefaultKernel();
+            interpreter.ProcessResource(resource, kernel.ConfigurationStore, kernel);
+	    }
+
+        [Test]
+        public void Test_Embedded2()
+        {
+            var resource = Xml.Embedded("hasResourceIncludes.xml");
+            var interpreter = new XmlInterpreter(resource);
+            var kernel = new DefaultKernel();
+            var resourceSubSystem = kernel.GetSubSystem(SubSystemConstants.ResourceKey) as IResourceSubSystem;
+            var processor = new Castle.Windsor.Configuration.Interpreters.XmlProcessor.XmlProcessor(null, resourceSubSystem);
+            var element = processor.Process(resource);
+        }
+
+        [Test]
+        public void Test_Embedded3()
+        {
+            var resource = Xml.Embedded("hasResourceIncludes.xml");
+            var interpreter = new XmlInterpreter(resource);
+            var kernel = new DefaultKernel();
+            var resourceSubSystem = kernel.GetSubSystem(SubSystemConstants.ResourceKey) as IResourceSubSystem;
+            var processor = new Castle.Windsor.Configuration.Interpreters.XmlProcessor.XmlProcessor(null, resourceSubSystem);
+            var assemRes = resource as AssemblyResource;
+            Assert.IsNotNull(assemRes);
+            var stream = assemRes.CreateStream();
+        }
+
+        [Test]
+	    public void Test_Custormer_uri()
+	    {
+	        var name = "assembly://" + typeof (Xml).Assembly.FullName + "/XmlFiles/" + "hasResourceIncludes.xml";
+            Assert.AreEqual(name, "assembly://Castle.Windsor.Tests, Version=0.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc/XmlFiles/hasResourceIncludes.xml");
+            var uri = new CustomUri(name);
+            Assert.AreEqual(uri.Path, "/XmlFiles/hasResourceIncludes.xml");
+            var resource = new AssemblyResource(uri);
+            var assemblyName = uri.Host;
+            Assert.AreEqual(assemblyName, "Castle.Windsor.Tests, Version=0.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc");
+            var indexOfComma = assemblyName.IndexOf(',');
+            assemblyName = indexOfComma < 0 ? assemblyName : assemblyName.Substring(0, indexOfComma);
+            Assert.AreEqual(assemblyName, "Castle.Windsor.Tests");
+            var resourcePath = string.Format(CultureInfo.CurrentCulture, "{0}{1}", assemblyName,
+                uri.Path.Replace('/', '.'));
+            Assert.AreEqual(resourcePath, "Castle.Windsor.Tests.XmlFiles.hasResourceIncludes.xml");
+            var assembly = Assembly.Load(assemblyName);
+            Assert.IsNotNull(assembly);
+            var names = assembly.GetManifestResourceNames();
+            Assert.AreEqual(names.Length, 60);
+            foreach (var s in names)
+            {
+                Console.WriteLine(s);
+            }
+            var nameFound = names.FirstOrDefault(x => string.Compare(resourcePath, x, StringComparison.OrdinalIgnoreCase) == 0);
+            Assert.IsNotNull(nameFound);
+        }
+
+        [Test]
 		public void FileResourceAndIncludes()
 		{
 			container = new WindsorContainer(new XmlInterpreter(Xml.File("hasFileIncludes.xml")));

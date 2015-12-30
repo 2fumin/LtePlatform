@@ -77,7 +77,7 @@ namespace Castle.Windsor.Configuration.Interpreters.XmlProcessor
 			}
 			catch (Exception ex)
 			{
-				var message = String.Format("Error processing node {0}, inner content {1}", node.Name, node.InnerXml);
+				var message = $"Error processing node {node.Name}, inner content {node.InnerXml}";
 
 				throw new ConfigurationProcessingException(message, ex);
 			}

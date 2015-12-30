@@ -221,6 +221,7 @@
     <Compile Include="DynamicProxy\Interfaces\InterfaceWithMethodWithParameterWithNullDefaultValue.cs" />
     <Compile Include="DynamicProxy\Interfaces\ISub1.cs" />
     <Compile Include="DynamicProxy\Interfaces\ISub2.cs" />
+    <Compile Include="DynamicProxy\MyExplicitInterfaceTestCase.cs" />
     <Compile Include="DynamicProxy\ProxyTypeCachingTestCase.cs" />
     <Compile Include="DynamicProxy\ProxyTypeCachingWithDifferentHooksTestCase.cs" />
     <Compile Include="DynamicProxy\SerializableClassTestCase.cs" />

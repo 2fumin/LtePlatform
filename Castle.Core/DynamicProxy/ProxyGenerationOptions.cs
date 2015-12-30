@@ -77,18 +77,16 @@ namespace Castle.DynamicProxy
 
 		public void Initialize()
 		{
-			if (mixinData == null)
-			{
-				try
-				{
-					mixinData = new MixinData(mixins);
-				}
-				catch (ArgumentException ex)
-				{
-					throw new InvalidMixinConfigurationException(
-						"There is a problem with the mixins added to this ProxyGenerationOptions: " + ex.Message, ex);
-				}
-			}
+		    if (mixinData != null) return;
+		    try
+		    {
+		        mixinData = new MixinData(mixins);
+		    }
+		    catch (ArgumentException ex)
+		    {
+		        throw new InvalidMixinConfigurationException(
+		            "There is a problem with the mixins added to this ProxyGenerationOptions: " + ex.Message, ex);
+		    }
 		}
 
 #if FEATURE_SERIALIZATION

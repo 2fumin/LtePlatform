@@ -12,21 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Collections.Generic;
+using System.Linq;
+using Castle.MicroKernel.Registration;
 using Castle.Windsor.Tests;
+using Castle.Windsor.Tests.Properties;
+using CastleTests.Components;
+using NUnit.Framework;
 
 namespace CastleTests.Registration
 {
-	using System.Collections.Generic;
-	using System.Linq;
-
-	using Castle.MicroKernel.Registration;
-
-	using CastleTests.Components;
-	using CastleTests.Properties;
-
-	using NUnit.Framework;
-
-	public class DependsOnTestCase : AbstractContainerTestCase
+    public class DependsOnTestCase : AbstractContainerTestCase
 	{
 #if !SILVERLIGHT
 		[Test]

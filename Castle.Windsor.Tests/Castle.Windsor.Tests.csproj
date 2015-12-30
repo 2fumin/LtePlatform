@@ -7,7 +7,7 @@
     <ProjectGuid>{FB55D884-EBB0-40CA-9593-15EF791B5F7C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Castle</RootNamespace>
+    <RootNamespace>Castle.Windsor.Tests</RootNamespace>
     <AssemblyName>Castle.Windsor.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

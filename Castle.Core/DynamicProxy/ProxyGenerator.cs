@@ -327,8 +327,8 @@ namespace Castle.DynamicProxy
 				throw new ArgumentException("Target does not implement interface " + interfaceToProxy.FullName, nameof(target));
 			}
 
-			CheckNotGenericTypeDefinition(interfaceToProxy, "interfaceToProxy");
-			CheckNotGenericTypeDefinitions(additionalInterfacesToProxy, "additionalInterfacesToProxy");
+			CheckNotGenericTypeDefinition(interfaceToProxy);
+			CheckNotGenericTypeDefinitions(additionalInterfacesToProxy);
 
 			var generatedType = CreateInterfaceProxyTypeWithTarget(interfaceToProxy, additionalInterfacesToProxy, targetType,
 			                                                       options);
@@ -605,8 +605,8 @@ namespace Castle.DynamicProxy
 			
 #endif
 
-			CheckNotGenericTypeDefinition(interfaceToProxy, "interfaceToProxy");
-			CheckNotGenericTypeDefinitions(additionalInterfacesToProxy, "additionalInterfacesToProxy");
+			CheckNotGenericTypeDefinition(interfaceToProxy);
+			CheckNotGenericTypeDefinitions(additionalInterfacesToProxy);
 
 			var generatedType = CreateInterfaceProxyTypeWithTargetInterface(interfaceToProxy, additionalInterfacesToProxy,
 			                                                                options);
@@ -855,8 +855,8 @@ namespace Castle.DynamicProxy
 				throw new ArgumentException("Specified type is not an interface", nameof(interfaceToProxy));
 			}
 
-			CheckNotGenericTypeDefinition(interfaceToProxy, "interfaceToProxy");
-			CheckNotGenericTypeDefinitions(additionalInterfacesToProxy, "additionalInterfacesToProxy");
+			CheckNotGenericTypeDefinition(interfaceToProxy);
+			CheckNotGenericTypeDefinitions(additionalInterfacesToProxy);
 
 			var generatedType = CreateInterfaceProxyTypeWithoutTarget(interfaceToProxy, additionalInterfacesToProxy, options);
 			var arguments = GetConstructorArguments(null, interceptors, options);
@@ -1164,8 +1164,8 @@ namespace Castle.DynamicProxy
 				throw new ArgumentException("'classToProxy' must be a class", nameof(classToProxy));
 			}
 
-			CheckNotGenericTypeDefinition(classToProxy, "classToProxy");
-			CheckNotGenericTypeDefinitions(additionalInterfacesToProxy, "additionalInterfacesToProxy");
+			CheckNotGenericTypeDefinition(classToProxy);
+			CheckNotGenericTypeDefinitions(additionalInterfacesToProxy);
 
 			var proxyType = CreateClassProxyTypeWithTarget(classToProxy, additionalInterfacesToProxy, options);
 
@@ -1428,8 +1428,8 @@ namespace Castle.DynamicProxy
 				throw new ArgumentException("'classToProxy' must be a class", nameof(classToProxy));
 			}
 
-			CheckNotGenericTypeDefinition(classToProxy, "classToProxy");
-			CheckNotGenericTypeDefinitions(additionalInterfacesToProxy, "additionalInterfacesToProxy");
+			CheckNotGenericTypeDefinition(classToProxy);
+			CheckNotGenericTypeDefinitions(additionalInterfacesToProxy);
 
 			var proxyType = CreateClassProxyType(classToProxy, additionalInterfacesToProxy, options);
 
@@ -1471,7 +1471,7 @@ namespace Castle.DynamicProxy
 			}
 		}
 
-		protected void CheckNotGenericTypeDefinition(Type type, string argumentName)
+		protected void CheckNotGenericTypeDefinition(Type type)
 		{
 			if (type != null && type.GetTypeInfo().IsGenericTypeDefinition)
 			{
@@ -1480,7 +1480,7 @@ namespace Castle.DynamicProxy
 			}
 		}
 
-		protected void CheckNotGenericTypeDefinitions(IEnumerable<Type> types, string argumentName)
+		protected void CheckNotGenericTypeDefinitions(IEnumerable<Type> types)
 		{
 			if (types == null)
 			{
@@ -1488,7 +1488,7 @@ namespace Castle.DynamicProxy
 			}
 			foreach (var t in types)
 			{
-				CheckNotGenericTypeDefinition(t, argumentName);
+				CheckNotGenericTypeDefinition(t);
 			}
 		}
 

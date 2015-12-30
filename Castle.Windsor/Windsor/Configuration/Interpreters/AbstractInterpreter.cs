@@ -37,17 +37,16 @@ namespace Castle.Windsor.Configuration.Interpreters
 		protected static readonly string InstallersNodeName = "installers";
 		protected static readonly string InstallNodeName = "install";
 
-		private readonly IResource source;
-		private readonly Stack<IResource> resourceStack = new Stack<IResource>();
+	    private readonly Stack<IResource> resourceStack = new Stack<IResource>();
 
 		protected AbstractInterpreter(IResource source)
 		{
 			if (source == null)
 			{
-				throw new ArgumentNullException("source", "IResource is null");
+				throw new ArgumentNullException(nameof(source), "IResource is null");
 			}
 
-			this.source = source;
+			this.Source = source;
 
 			PushResource(source);
 		}
@@ -100,12 +99,9 @@ namespace Castle.Windsor.Configuration.Interpreters
 		///   which the interpreter is likely to hold
 		/// </summary>
 		/// <value></value>
-		public IResource Source
-		{
-			get { return source; }
-		}
+		public IResource Source { get; }
 
-		/// <summary>
+	    /// <summary>
 		///   Gets or sets the name of the environment.
 		/// </summary>
 		/// <value>The name of the environment.</value>
