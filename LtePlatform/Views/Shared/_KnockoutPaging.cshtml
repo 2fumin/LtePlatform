@@ -1,5 +1,14 @@
 ﻿<p>
     <div class="btn-group">
+        <button class="btn btn-default" disabled>
+            每页
+        </button>
+        <select class="form-control col-md-2" style="width: 15%" data-bind="value: itemsPerPage, options: pageSizeSelection">
+            
+        </select>
+        <button class="btn btn-default" disabled>
+            条
+        </button>
         <button type="button" class="btn btn-primary" data-bind="enable: currentPage()>1, click: queryFirstPage">
             <span class="glyphicon glyphicon-step-backward"></span> 
         </button>
@@ -12,10 +21,10 @@
         <button class="btn btn-default" disabled>
             第
         </button>
-        <input type="text" class="form-control col-md-2" style="width: 10%" data-bind="value: currentPage" />
+        <input type="text" class="form-control col-md-2" style="width: 10%" data-bind="value: currentPage"/>
         <button class="btn btn-default" disabled>
             <span data-bind="text: '/' + totalPages() + '页'"></span>
-        </button> 
+        </button>
         <button type="button" class="btn btn-success" data-bind="enable: currentPage()<totalPages(), click: queryNextPage">
             <span class="glyphicon glyphicon-chevron-right"></span>
         </button>

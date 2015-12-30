@@ -17,7 +17,7 @@
     });
 };
 
-var dumpProgressItems= function(viewModel, actionUrl) {
+var dumpProgressItems = function (viewModel, actionUrl) {
     sendRequest(actionUrl, "PUT", null, function (result) {
         if (result === true) {
             viewModel.totalSuccessItems(viewModel.totalSuccessItems() + 1);
@@ -37,4 +37,15 @@ var dumpProgressItems= function(viewModel, actionUrl) {
             viewModel.updateHistoryItems();
         }
     });
-}
+};
+
+var updateWorkItemTable = function(viewModel, items) {
+    sendRequest(app.dataModel.workItemUrl, "GET", {
+        statCondition: viewModel.currentState(),
+        typeCondition: viewModel.currentType(),
+        itemsPerPage: items
+    }, function(result) {
+        viewModel.totalPages(result);
+        viewModel.query();
+    });
+};

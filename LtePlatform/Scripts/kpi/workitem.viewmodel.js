@@ -21,16 +21,13 @@
         }
     });
 
+    self.itemsPerPage.subscribe(function(items) {
+        updateWorkItemTable(self, items);
+    });
+
     Sammy(function () {
         this.get('#workItem', function () {
-            sendRequest(app.dataModel.workItemUrl, "GET", {
-                statCondition: self.currentState(),
-                typeCondition: self.currentType(),
-                itemsPerPage: self.itemsPerPage()
-            }, function(result) {
-                self.totalPages(result);
-                self.query();
-            });
+            updateWorkItemTable(self, self.itemsPerPage());
         });
         this.get('/Kpi/TopDrop2GDaily', function () { this.app.runRoute('get', '#workItem'); });
     });
