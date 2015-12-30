@@ -74,6 +74,13 @@ namespace Lte.Evaluations.DataService
             var views = Mapper.Map<List<WorkItem>, List<WorkItemView>>(stats.ToList());
             views.ForEach(x => x.UpdateTown(_eNodebRepository, _btsRepository, _townRepository));
             return views;
-        } 
+        }
+
+        public IEnumerable<WorkItemView> QueryViews()
+        {
+            var views = Mapper.Map<List<WorkItem>, List<WorkItemView>>(_repository.GetAllList());
+            views.ForEach(x => x.UpdateTown(_eNodebRepository, _btsRepository, _townRepository));
+            return views;
+        }
     }
 }

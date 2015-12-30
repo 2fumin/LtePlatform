@@ -30,6 +30,7 @@
 
     self.showTrend = function () {
         self.mrStats([]);
+        self.preciseStats([]);
         sendRequest(app.dataModel.preciseRegionUrl, "GET", {
             begin: self.beginDate,
             end: self.endDate,

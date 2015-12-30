@@ -46,6 +46,9 @@ var updateWorkItemTable = function(viewModel, items) {
         itemsPerPage: items
     }, function(result) {
         viewModel.totalPages(result);
+        if (viewModel.currentPage() > result) {
+            viewModel.currentPage(result);
+        }
         viewModel.query();
     });
 };

@@ -66,6 +66,7 @@ namespace LtePlatform
                 "~/Scripts/app/app.datamodel.js",
                 "~/Scripts/app/app.viewmodel.js",
                 "~/Scripts/kpi/common.controller.js",
+                "~/Scripts/kpi/workitem.controller.js",
                 "~/Scripts/kpi/workitem.viewmodel.js",
                 "~/Scripts/app/_run.js"));
 

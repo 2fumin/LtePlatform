@@ -13,7 +13,7 @@
                     <select data-bind="value: currentState, options: states"></select>&nbsp;
                     工单分类：
                     <select data-bind="value: currentType, options: types"></select>&nbsp;
-                    <button class="btn btn-success">图表</button>
+                    <button class="btn btn-success" data-bind="click: showCharts">图表</button>
                 </p>
                 @{
                     Html.RenderPartial("_KnockoutPaging");
@@ -23,7 +23,7 @@
         </div>
     </div>
     <div class="col-md-5">
-        <div class="panel panel-info" data-bind="with: currentView">
+        <div class="panel panel-info" data-bind="with: currentView, visible: chartView()=='details'">
             <div class="panel-heading">
                 <h3 class="panel-title">
                     工单编号<span data-bind="text: serialNumber"></span>信息
@@ -33,6 +33,17 @@
                 @{
                     Html.RenderPartial("_WorkItemDetailsTable");
                 }
+            </div>
+        </div>
+        <div class="panel panel-info" data-bind="visible: chartView()=='chart'">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    工单统计图表
+                </div>
+            </div>
+            <div class="panel-body">
+                <div id="type-chart" style="min-height: 400px"></div>
+                <div id="state-chart" style="min-height: 400px"></div>
             </div>
         </div>
     </div>

@@ -12,6 +12,7 @@
     self.workItemViews = ko.observableArray([]);
     self.canGotoCurrentPage = ko.observable(false);
     self.currentView = ko.observable();
+    self.chartView = ko.observable("initial");
 
     self.currentPage.subscribe(function(page) {
         if (page >= 1 && page <= self.totalPages()) {
@@ -72,8 +73,20 @@
         self.query();
     };
 
-    self.showDetails = function(data) {
+    self.showDetails = function (data) {
+        self.chartView("details");
         self.currentView(data);
+    };
+
+    self.showCharts = function () {
+        if (self.chartView() === 'initial') {
+            sendRequest(app.dataModel.workItemUrl, "GET", null, function(result) {
+                showTypePieChart(result, "#type-chart");
+                showStatePieChart(result, "#state-chart");
+            });
+        }
+
+        self.chartView("chart");
     };
 
     return self;
