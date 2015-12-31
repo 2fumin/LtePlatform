@@ -74,7 +74,7 @@ and a quoted ""string"""
                 FileCultureName = "nl-NL" // default is the current culture
             };
 
-            const string testInput = "moonbuggy\t       23/5/08\t   5-Mei-2009 16:11 pm\t   34.184\t  \"Paris, New York\"\t 1F\t    €540,12\t        true\t  newly launched product\r\n\"mouse trap\"\t        2/1/1985\t  \"7 Augustus 1988\t 0:00\"\t45E-5\t \"This field has\r\na newline\"\t 100\t \"€78.300\"\t     FALSE\t \"This field has quotes(\"\"), and\r\ntwo newlines\r\nand a quoted \"\"string\"\"\"\r\ndog house\t29 Feb 2004\t \t    \"45.230.990\"\t\"\"\t                  FF10\t \"12.008\"\t        True";
+            const string testInput = "moonbuggy\t       23/5/08\t   5-Mei-2009 16:11 pm\t   34.184\t  \"Paris, New York\"\t 1F\t    €540,12\t        true\t  newly launched product\n\"mouse trap\"\t        2/1/1985\t  \"7 Augustus 1988\t 0:00\"\t45E-5\t \"This field has\na newline\"\t 100\t \"€78.300\"\t     FALSE\t \"This field has quotes(\"\"), and\r\ntwo newlines\r\nand a quoted \"\"string\"\"\"\r\ndog house\t29 Feb 2004\t \t    \"45.230.990\"\t\"\"\t                  FF10\t \"12.008\"\t        True";
             var expected = new[] {
                 new ProductData {
                     Name = "moonbuggy", Weight = 34184, StartDate = new DateTime(2008, 5, 23), 

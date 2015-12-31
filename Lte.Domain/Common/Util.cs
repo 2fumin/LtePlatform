@@ -15,12 +15,7 @@ namespace Lte.Domain.Common
 
         public static string NormalizeString(string s)
         {
-            if (s == null)
-            {
-                return null;
-            }
-
-            return s.Replace("\r\n", "\n");
+            return s?.Replace("\r\n", "\n");
         }
     }
 }

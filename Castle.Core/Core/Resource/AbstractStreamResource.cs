@@ -24,24 +24,14 @@ namespace Castle.Core.Resource
 	/// </summary>
 	public abstract class AbstractStreamResource : AbstractResource
 	{
-		/// <summary>
-		/// This returns a new stream instance each time it is called.
-		/// It is the responsibility of the caller to dispose of this stream
-		/// </summary>
-		private StreamFactory createStream;
-
-		~AbstractStreamResource()
+	    ~AbstractStreamResource()
 		{
 			Dispose(false);
 		}
 
-		public StreamFactory CreateStream
-		{
-			get { return createStream; }
-			set { createStream = value; }
-		}
+		public StreamFactory CreateStream { get; protected set; }
 
-		public override TextReader GetStreamReader()
+	    public override TextReader GetStreamReader()
 		{
 			return new StreamReader(CreateStream());
 		}

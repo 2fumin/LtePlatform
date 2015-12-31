@@ -16,9 +16,11 @@ using System;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Xml;
 using Castle.Core.Resource;
 using Castle.MicroKernel;
 using Castle.MicroKernel.SubSystems.Resource;
+using Castle.Windsor.Configuration.Interpreters.XmlProcessor;
 using Castle.Windsor.Installer;
 
 #if !SILVERLIGHT
@@ -66,7 +68,7 @@ namespace CastleTests.Configuration2
             var interpreter = new XmlInterpreter(resource);
             var kernel = new DefaultKernel();
             var resourceSubSystem = kernel.GetSubSystem(SubSystemConstants.ResourceKey) as IResourceSubSystem;
-            var processor = new Castle.Windsor.Configuration.Interpreters.XmlProcessor.XmlProcessor(null, resourceSubSystem);
+            var processor = new XmlProcessor(null, resourceSubSystem);
             var element = processor.Process(resource);
         }
 
@@ -77,10 +79,32 @@ namespace CastleTests.Configuration2
             var interpreter = new XmlInterpreter(resource);
             var kernel = new DefaultKernel();
             var resourceSubSystem = kernel.GetSubSystem(SubSystemConstants.ResourceKey) as IResourceSubSystem;
-            var processor = new Castle.Windsor.Configuration.Interpreters.XmlProcessor.XmlProcessor(null, resourceSubSystem);
+            var processor = new XmlProcessor(null, resourceSubSystem);
             var assemRes = resource as AssemblyResource;
             Assert.IsNotNull(assemRes);
             var stream = assemRes.CreateStream();
+        }
+
+        [Test]
+        public void Test_Embedded4()
+        {
+            var resource = Xml.Embedded("hasResourceIncludes.xml");
+            var interpreter = new XmlInterpreter(resource);
+            var kernel = new DefaultKernel();
+            var resourceSubSystem = kernel.GetSubSystem(SubSystemConstants.ResourceKey) as IResourceSubSystem;
+            var processor = new XmlProcessor(null, resourceSubSystem);
+            var assemRes = resource as AssemblyResource;
+            Assert.IsNotNull(assemRes);
+            var doc = new XmlDocument();
+            using (var stream = resource.GetStreamReader())
+            {
+                doc.Load(stream);
+            }
+            var engine = new DefaultXmlProcessorEngine(null, resourceSubSystem);
+            engine.PushResource(resource);
+            Assert.AreEqual(doc.DocumentElement.InnerText, "");
+            var element = processor.Process(doc.DocumentElement);
+            engine.PopResource();
         }
 
         [Test]
