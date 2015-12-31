@@ -6,9 +6,11 @@ using System.Net.Http;
 using System.Web.Http;
 using Lte.Evaluations.DataService;
 using Lte.Evaluations.ViewModels;
+using LtePlatform.Models;
 
 namespace LtePlatform.Controllers.Kpi
 {
+    [ApiControl("告警列表查询控制器")]
     public class AlarmsController : ApiController
     {
         private readonly AlarmsService _service;
@@ -18,6 +20,11 @@ namespace LtePlatform.Controllers.Kpi
             _service = service;
         }
 
+        [ApiDoc("查询指定基站和时间段内的告警列表视图")]
+        [ApiParameterDoc("eNodebId", "基站编号")]
+        [ApiParameterDoc("begin", "开始日期")]
+        [ApiParameterDoc("end", "结束日期")]
+        [ApiResponse("告警列表视图")]
         public IEnumerable<AlarmView> Get(int eNodebId, DateTime begin, DateTime end)
         {
             return _service.Get(eNodebId, begin, end);

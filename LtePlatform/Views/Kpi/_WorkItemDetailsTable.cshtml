@@ -16,11 +16,21 @@
         </tr>
         <tr>
             <td>基站编号</td>
-            <td data-bind="text: eNodebId"></td>
+            <td>
+                <span data-bind="text: eNodebId"></span>
+                <button class="btn btn-primary btn-xs" style="float: right" data-bind="visible: eNodebId>0">
+                    基站信息
+                </button>
+            </td>
         </tr>
         <tr>
             <td>扇区编号</td>
-            <td data-bind="text: sectorId"></td>
+            <td>
+                <span data-bind="text: sectorId"></span>
+                <button class="btn btn-primary btn-xs" style="float: right" data-bind="visible: eNodebId>0">
+                    小区信息
+                </button>
+            </td>
         </tr>
         <tr>
             <td>区域信息</td>
