@@ -11,8 +11,6 @@ asyncTest("session CSV retrieve", 2, postCreate(function (csvname, csvdata) {
     );
 }, null, null));
 
-
-
 asyncTest("local CSV to HTML table display and retrieve", 3, postCreate(function (csvname, csvdata) {
     CSV.begin(csvname).table("tab1", { header: 1, caption: 'CSV/HTML display-retrieve test data' }).go(
 	function (e, D) {
@@ -32,7 +30,6 @@ asyncTest("local CSV to HTML table display and retrieve", 3, postCreate(function
 	},
 	3000);
 }, null, null));
-
 
 asyncTest("HTML table data retrieve -- check that new lines and white space are trimmed", 3, function () {
     var newHTML = "<div id='tab1'><table>\n<tr>\n<th>      A    \n</th><th>  B    \n            \n</th><th>\n\nC</th></tr><tr><td>1</td><td>2\n\n\n\n\n      \n</td><td>3\n\n</td></tr><tr><td>     9            \n</td><td>       \n   8     \n</td><td>\n               7           \n</td>\n\n\n</tr>        \n       </table>       \n</div>";
@@ -220,7 +217,6 @@ asyncTest("editor -- change 52nd b to 8.5 with b=50,e=60", 3, postCreate(functio
 
 }));
 
-
 asyncTest("editor -- change last a to 23, scrollable", 4, postCreate(function (csvname, csvdata) {
     var lastRow = csvdata.length - 1;
     var old = csvdata[lastRow][0];
@@ -274,4 +270,160 @@ asyncTest("editor -- change last a to 23 -- header off", 3, postCreate(function 
 	    $('.editorDoneButton').click();
 	}, 1200);
 
+}));
+
+asyncTest("appendCol, function with rowprop, compare with postLM",
+	  postLMlength + 1,
+	  postLM([100, 200, 300, -400], function (csvname, csvdata) {
+	      CSV.begin(csvname).
+		  appendCol("y",
+			    function (i, r) {
+			        return 100 * r.a + 200 * r.b + 300 * r.c - 400 * r.d;
+			    },
+			    true).
+		  go(function (e, D) {
+		      var i, l;
+		      ok(!e, "errors: " + e);
+		      for (i = 1, l = D.rows.length; i < l; ++i)
+		          equal(D.rows[i][4], D.rows[i][5], "z===y row" + i);
+		      start();
+		  }
+		    );
+	  }));
+
+asyncTest("ols, no intercept", 10, postLM([100, 200, 300, -400], function (csvname, csvdata) {
+    CSV.begin(csvname).
+	ols([["fit1", "z", ["a", "b", "c", "d"]]]).
+	go(function (e, D) {
+	    ok(!e, "errors: " + e);
+	    ok(!!D.fit, "D.fit exists");
+	    ok(!!D.fit.fit1, "D.fit.fit1 exists");
+	    equal(D.fit.fit1.dep, 'z', "D.fit.fit1.dep set to z");
+	    deepEqual(D.fit.fit1.indep, ['a', 'b', 'c', 'd'], "D.fit.fit1.indep correct");
+	    ok(!!D.fit.fit1.beta, "beta exists [" + D.fit.fit1.beta.join(',') + "]");
+	    ok(Math.abs(D.fit.fit1.beta[0] - 100) < 1, "beta[0] between 99,101");
+	    ok(Math.abs(D.fit.fit1.beta[1] - 200) < 2, "beta[1] between 198,202");
+	    ok(Math.abs(D.fit.fit1.beta[2] - 300) < 3, "beta[2] between 297,303");
+	    ok(Math.abs(D.fit.fit1.beta[3] + 400) < 4, "beta[3] between -404,-396");
+	    start();
+	});
+}));
+
+asyncTest("ols, estimate intercept, check zero", 11, postLM([100, 200, 300, -400], function (csvname, csvdata) {
+    CSV.begin(csvname).
+	ols([["fit1", "z", ["a", "b", "c", "d", 1]]]).
+	go(function (e, D) {
+	    ok(!e, "errors: " + e);
+	    ok(!!D.fit, "D.fit exists");
+	    ok(!!D.fit.fit1, "D.fit.fit1 exists");
+	    equal(D.fit.fit1.dep, 'z', "D.fit.fit1.dep set to z");
+	    deepEqual(D.fit.fit1.indep, ['a', 'b', 'c', 'd', 1], "D.fit.fit1.indep correct");
+	    ok(!!D.fit.fit1.beta, "beta exists [" + D.fit.fit1.beta.join(',') + "]");
+	    ok(Math.abs(D.fit.fit1.beta[0] - 100) < 1, "beta[0] between 99,101");
+	    ok(Math.abs(D.fit.fit1.beta[1] - 200) < 2, "beta[1] between 198,202");
+	    ok(Math.abs(D.fit.fit1.beta[2] - 300) < 3, "beta[2] between 297,303");
+	    ok(Math.abs(D.fit.fit1.beta[3] + 400) < 4, "beta[3] between -404,-396");
+	    ok(Math.abs(D.fit.fit1.beta[4]) < 1.0, "beta[4] (intercept) between -1,1");
+	    start();
+	}
+	  );
+}));
+
+asyncTest("ols, estimate intercept, check -2.5", 11, postLM([100, 200, 300, -400, -2.5], function (csvname, csvdata) {
+    CSV.begin(csvname).
+	ols([["fit1", "z", ["a", "b", "c", "d", 1]]]).
+	go(function (e, D) {
+	    ok(!e, "errors: " + e);
+	    ok(!!D.fit, "D.fit exists");
+	    ok(!!D.fit.fit1, "D.fit.fit1 exists");
+	    equal(D.fit.fit1.dep, 'z', "D.fit.fit1.dep set to z");
+	    deepEqual(D.fit.fit1.indep, ['a', 'b', 'c', 'd', 1], "D.fit.fit1.indep correct");
+	    ok(!!D.fit.fit1.beta, "beta exists [" + D.fit.fit1.beta.join(',') + "]");
+	    ok(Math.abs(D.fit.fit1.beta[0] - 100) < 1, "beta[0] between 99,101");
+	    ok(Math.abs(D.fit.fit1.beta[1] - 200) < 2, "beta[1] between 198,202");
+	    ok(Math.abs(D.fit.fit1.beta[2] - 300) < 3, "beta[2] between 297,303");
+	    ok(Math.abs(D.fit.fit1.beta[3] + 400) < 4, "beta[3] between -404,-396");
+	    ok(Math.abs(D.fit.fit1.beta[4] + 2.5) < 0.01, "beta[4] (intercept) between -2.51,-2.49");
+	    start();
+	}
+	  );
+}));
+
+asyncTest("numerically invalid ols, identical columns", 7, postLM([100, 200, 300, -400, -2.5], function (csvname, csvdata) {
+    CSV.begin(csvname).
+	ols([["fit1", "z", ["a", "b", "c", "d", 1, 1]]]).
+	go(function (e, D) {
+	    ok(!e, "errors: " + e);
+	    ok(!!D.fit, "D.fit exists");
+	    ok(!!D.fit.fit1, "D.fit.fit1 exists");
+	    equal(D.fit.fit1.dep, 'z', "D.fit.fit1.dep set to z");
+	    deepEqual(D.fit.fit1.indep, ['a', 'b', 'c', 'd', 1, 1], "D.fit.fit1.indep correct");
+	    ok(!D.fit.fit1.beta, "beta absent");
+	    ok(D.fit.fit1.error, "error string present, e:" + D.fit.fit1.error);
+	    start();
+	}
+	  );
+}));
+
+asyncTest("multiple ols", 38, postLM([100, 200, 300, -400, -2.5], function (csvname, csvdata) {
+    // need to calculate what some reasonable (99%) tolerances should be
+    // on some of these tests
+    CSV.begin(csvname).
+	ols([
+	    ["fit1", "z", ["a", "b", "c", "d", 1, 1]],
+	    ["fit2", "z", ["a", 1]],
+	    ["fit3", "z", ["b", 1]],
+	    ["fit4", "z", ["c", 1]],
+	    ["fit5", "z", ["d", 1]],
+	    ["fit6", "z", ["a", "b", 1]],
+	    ["fit7", "z", ["a", "b", "c", 1]]
+	]).
+	go(function (e, D) {
+	    ok(!e, "errors: " + e);
+	    ok(!!D.fit, "D.fit exists");
+	    ok(!!D.fit.fit1, "D.fit.fit1 exists");
+	    ok(!!D.fit.fit2, "D.fit.fit2 exists");
+	    ok(!!D.fit.fit3, "D.fit.fit3 exists");
+	    ok(!!D.fit.fit4, "D.fit.fit4 exists");
+	    ok(!!D.fit.fit5, "D.fit.fit5 exists");
+	    ok(!!D.fit.fit6, "D.fit.fit6 exists");
+	    ok(!!D.fit.fit7, "D.fit.fit7 exists");
+	    equal(D.fit.fit1.dep, 'z', "D.fit.fit1.dep set to z");
+	    equal(D.fit.fit2.dep, 'z', "D.fit.fit2.dep set to z");
+	    equal(D.fit.fit3.dep, 'z', "D.fit.fit3.dep set to z");
+	    equal(D.fit.fit4.dep, 'z', "D.fit.fit4.dep set to z");
+	    equal(D.fit.fit5.dep, 'z', "D.fit.fit5.dep set to z");
+	    equal(D.fit.fit6.dep, 'z', "D.fit.fit6.dep set to z");
+	    equal(D.fit.fit7.dep, 'z', "D.fit.fit7.dep set to z");
+	    deepEqual(D.fit.fit1.indep, ['a', 'b', 'c', 'd', 1, 1], "D.fit.fit1.indep correct");
+	    deepEqual(D.fit.fit2.indep, ['a', 1], "D.fit.fit2.indep correct");
+	    deepEqual(D.fit.fit3.indep, ['b', 1], "D.fit.fit3.indep correct");
+	    deepEqual(D.fit.fit4.indep, ['c', 1], "D.fit.fit4.indep correct");
+	    deepEqual(D.fit.fit5.indep, ['d', 1], "D.fit.fit5.indep correct");
+	    deepEqual(D.fit.fit6.indep, ['a', 'b', 1], "D.fit.fit6.indep correct");
+	    deepEqual(D.fit.fit7.indep, ['a', 'b', 'c', 1], "D.fit.fit7.indep correct");
+	    ok(!D.fit.fit1.beta, "fit1.beta absent");
+	    ok(D.fit.fit1.error, "fit1 error string present, e:" + D.fit.fit1.error);
+	    function okfit(n, m, v, tol) {
+	        var x = D.fit['fit' + n].beta[m];
+	        ok(Math.abs(x - v) < tol,
+               "fit" + n + ".beta[" + m + "] " + x + " equals " + v + " +/- " + tol
+              );
+	    }
+	    okfit(2, 0, 100, 20);
+	    okfit(2, 1, 47.5, 20);
+	    okfit(3, 0, 200, 40);
+	    okfit(3, 1, -2.5, 20);
+	    okfit(4, 0, 300, 60);
+	    okfit(4, 1, -52.5, 30);
+	    okfit(5, 0, -400, 80);
+	    okfit(5, 1, 297.5, 60);
+	    okfit(6, 0, 100, 20);
+	    okfit(6, 1, 200, 50);
+	    okfit(7, 0, 100, 20);
+	    okfit(7, 1, 200, 40);
+	    okfit(7, 2, 300, 60);
+	    start();
+	}
+	  );
 }));

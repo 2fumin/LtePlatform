@@ -384,6 +384,7 @@
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\TestPage\Scripts\5ch5\OWL2.js" />
     <Content Include="Areas\TestPage\Scripts\autostart.js" />
     <Content Include="Areas\TestPage\Scripts\basicpost.viewmodel.js" />
     <Content Include="Areas\TestPage\Scripts\diff.js" />
@@ -569,6 +570,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\coffee-script.js" />
     <Content Include="Scripts\college\common.controller.js" />
     <Content Include="Scripts\college\coverage.viewmodel.js" />
     <Content Include="Scripts\college\infrastructure.viewmodel.js" />
