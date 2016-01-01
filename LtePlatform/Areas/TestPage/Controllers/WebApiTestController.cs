@@ -18,5 +18,15 @@ namespace LtePlatform.Areas.TestPage.Controllers
         {
             return View();
         }
+
+        public ActionResult Html5Test()
+        {
+            return View();
+        }
+
+        public ActionResult Html5PostTest()
+        {
+            return View();
+        }
     }
 }

@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Html5csv测试";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        @{
+            Html.RenderPartial("_QUnitTestContents");
+        }
+    </div>
+    <div class="col-md-8">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <h3>@ViewBag.Title</h3>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div id="qunit"></div>
+                <div id="qunit-fixture"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <link rel="stylesheet" href="~/Content/themes/qtestcsv.css" />
+    <link rel="stylesheet" href="~/Content/qunit-1.20.0.css">
+    <script src="~/Scripts/app/qunit-1.20.0.js"></script>
+    <script src="~/Scripts/app/lz-string.js"></script>
+    <script src="~/Scripts/app/html5csv.js"></script>
+    <script src="~/Scripts/numeric/numeric.js"></script>
+    <script src="~/Areas/TestPage/Scripts/html5csv/random.data.js"></script>
+    <script src="~/Areas/TestPage/Scripts/html5csv/qtestcsv.js"></script>
+}
+

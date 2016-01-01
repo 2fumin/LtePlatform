@@ -388,6 +388,9 @@
     <Content Include="Areas\TestPage\Scripts\basicpost.viewmodel.js" />
     <Content Include="Areas\TestPage\Scripts\diff.js" />
     <Content Include="Areas\TestPage\Scripts\globals-node.js" />
+    <Content Include="Areas\TestPage\Scripts\html5csv\qtestcsv.js" />
+    <Content Include="Areas\TestPage\Scripts\html5csv\qtestcsv.post.js" />
+    <Content Include="Areas\TestPage\Scripts\html5csv\random.data.js" />
     <Content Include="Areas\TestPage\Scripts\logs.js" />
     <Content Include="Areas\TestPage\Scripts\main\assert.js" />
     <Content Include="Areas\TestPage\Scripts\main\async.js" />
@@ -488,6 +491,7 @@
     <Content Include="Content\themes\map\all.css" />
     <Content Include="Content\themes\map\cloudmap.css" />
     <Content Include="Content\themes\map\timecontrol.css" />
+    <Content Include="Content\themes\qtestcsv.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -555,6 +559,8 @@
     <Content Include="Areas\TestPage\Views\QUnitTest\Only.cshtml" />
     <None Include="Areas\TestPage\Views\QUnitTest\SingleTestId.cshtml" />
     <Content Include="Areas\TestPage\Views\WebApiTest\BasicPost.cshtml" />
+    <Content Include="Areas\TestPage\Views\WebApiTest\Html5Test.cshtml" />
+    <Content Include="Areas\TestPage\Views\WebApiTest\Html5PostTest.cshtml" />
     <None Include="Areas\TestPage\Views\WebApiTest\SimpleType.cshtml" />
     <Content Include="Areas\TestPage\Views\WebApiTest\_BasicPost.cshtml" />
     <None Include="Properties\PublishProfiles\Lte2.pubxml" />
