@@ -385,7 +385,19 @@
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\TestPage\Scripts\5ch5\Dictionary.js">
+      <DependentUpon>Dictionary.coffee</DependentUpon>
+    </Content>
+    <Content Include="Areas\TestPage\Scripts\5ch5\Grid.js">
+      <DependentUpon>Grid.coffee</DependentUpon>
+    </Content>
+    <Content Include="Areas\TestPage\Scripts\5ch5\jq5x5.js">
+      <DependentUpon>jq5x5.coffee</DependentUpon>
+    </Content>
     <Content Include="Areas\TestPage\Scripts\5ch5\OWL2.js" />
+    <Content Include="Areas\TestPage\Scripts\5ch5\Player.js">
+      <DependentUpon>Player.coffee</DependentUpon>
+    </Content>
     <Content Include="Areas\TestPage\Scripts\autostart.js" />
     <Content Include="Areas\TestPage\Scripts\basicpost.viewmodel.js" />
     <Content Include="Areas\TestPage\Scripts\diff.js" />
@@ -559,10 +571,38 @@
     <Content Include="Areas\TestPage\Views\QUnitTest\Main.cshtml" />
     <Content Include="Areas\TestPage\Views\QUnitTest\Logs.cshtml" />
     <Content Include="Areas\TestPage\Views\CoffeeScript\Hotseat.cshtml" />
-    <Content Include="Areas\TestPage\Scripts\5ch5\Dictionary.coffee" />
-    <Content Include="Areas\TestPage\Scripts\5ch5\Grid.coffee" />
-    <Content Include="Areas\TestPage\Scripts\5ch5\jq5x5.coffee" />
-    <Content Include="Areas\TestPage\Scripts\5ch5\Player.coffee" />
+    <Content Include="Areas\TestPage\Scripts\5ch5\Dictionary.coffee">
+      <Compile>True</Compile>
+      <Minify>True</Minify>
+      <IgnoreWarnings>True</IgnoreWarnings>
+      <IgnoreErrors>True</IgnoreErrors>
+      <Bare>True</Bare>
+      <Iced>False</Iced>
+    </Content>
+    <Content Include="Areas\TestPage\Scripts\5ch5\Grid.coffee">
+      <Compile>True</Compile>
+      <Minify>True</Minify>
+      <IgnoreWarnings>True</IgnoreWarnings>
+      <IgnoreErrors>True</IgnoreErrors>
+      <Bare>True</Bare>
+      <Iced>False</Iced>
+    </Content>
+    <Content Include="Areas\TestPage\Scripts\5ch5\jq5x5.coffee">
+      <Compile>True</Compile>
+      <Minify>True</Minify>
+      <IgnoreWarnings>True</IgnoreWarnings>
+      <IgnoreErrors>True</IgnoreErrors>
+      <Bare>True</Bare>
+      <Iced>False</Iced>
+    </Content>
+    <Content Include="Areas\TestPage\Scripts\5ch5\Player.coffee">
+      <Compile>True</Compile>
+      <Minify>True</Minify>
+      <IgnoreWarnings>True</IgnoreWarnings>
+      <IgnoreErrors>True</IgnoreErrors>
+      <Bare>True</Bare>
+      <Iced>False</Iced>
+    </Content>
     <None Include="Areas\TestPage\Views\QUnitTest\NoQUnitMarkup.cshtml" />
     <Content Include="Areas\TestPage\Views\QUnitTest\Only.cshtml" />
     <None Include="Areas\TestPage\Views\QUnitTest\SingleTestId.cshtml" />

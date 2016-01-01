@@ -16,17 +16,19 @@ newGame = ->
     $("#p#{player.num}name").html player.name
     $("#p#{player.num}score").html 0
   showMessage 'firstTile'
+  return
 #END:newGame
 
 #START:drawTiles
 drawTiles = ->
-    gridHtml = ''
-    for y in [0...grid.tiles.length]
-      gridHtml += '<ul>'
-      for x in [0...grid.tiles.length]
-        gridHtml += "<li id='tile#{x}_#{y}'>#{grid.tiles[x][y]}</li>"
-      gridHtml += '</ul>'
-    $('#grid').html gridHtml
+  gridHtml = ''
+  for y in [0...grid.tiles.length]
+    gridHtml += '<ul>'
+    for x in [0...grid.tiles.length]
+      gridHtml += "<li id='tile#{x}_#{y}'>#{grid.tiles[x][y]}</li>"
+    gridHtml += '</ul>'
+  $('#grid').html gridHtml
+  return
 #END:drawTiles
 
 #START:showMessage
@@ -37,10 +39,12 @@ showMessage = (messageType) ->
     when 'secondTile'
       messageHtml = "Please select a second tile."
   $('#message').html messageHtml
+  return
 #END:showMessage
 
 #START:tileClick
 tileClick = ->
+  console.log $(this)
   $tile = $(this)
   if $tile.hasClass 'selected'
     # undo
@@ -51,6 +55,7 @@ tileClick = ->
     $tile.addClass 'selected'
     [x, y] = @id.match(/(\d+)_(\d+)/)[1..]
     selectTile x, y
+  return
 #END:tileClick
 
 #START:selectTile
@@ -63,6 +68,7 @@ selectTile = (x, y) ->
     selectedCoordinates.y2 = y    
     $('#grid li').removeClass 'selected'
     doMove()
+  return
 #END:selectTile
 
 #START:doMove
@@ -81,6 +87,7 @@ doMove = ->
     """)
   showThenFade $notice
   endTurn()
+  return
 #END:doMove
 
 #START:endTurn
@@ -90,6 +97,8 @@ endTurn = ->
   selectedCoordinates = null
   $("#p#{currPlayer.num}score").html currPlayer.score
   currPlayer = if currPlayer is player1 then player2 else player1
+  $('#grid li').bind 'click', tileClick
+  return
 #END:endTurn
 
 #START:showThenFade
@@ -97,10 +106,12 @@ showThenFade = ($elem) ->
   $elem.insertAfter $('#grid')
   animationTarget = opacity: 0, height: 0, padding: 0
   $elem.delay(5000).animate animationTarget, 500, -> $elem.remove()
+  return
 #END:showThenFade
 
 #START:ready
 $(document).ready ->
   newGame()
-  $('#grid li').live 'click', tileClick
+  $('#grid li').bind 'click', tileClick
+  return
 #END:ready
