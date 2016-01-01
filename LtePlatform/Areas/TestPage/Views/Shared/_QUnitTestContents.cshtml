@@ -28,13 +28,15 @@
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion"
                    href="#collegeTests">
-                    校园网脚本测试
+                    CoffeeScript脚本测试
                 </a>
             </h4>
         </div>
         <div id="collegeTests" class="panel-collapse collapse in">
             <div class="panel-body">
-                留空待租
+                <div class="list-group">
+                    @Html.ActionLink("Hotseat 5x5", "Hotseat", "CoffeeScript", null, new { @class = "list-group-item" })
+                </div>
             </div>
         </div>
     </div>
@@ -85,8 +87,8 @@
             <div class="panel-body">
                 <div class="list-group">
                     @Html.ActionLink("简单类型测试", "SimpleType", "WebApiTest", null, new { @class = "list-group-item" })
-                                        @Html.ActionLink("Html5csv测试", "Html5Test", "WebApiTest", null, new { @class = "list-group-item" })
-                                        @Html.ActionLink("Html5csv测试-2", "Html5PostTest", "WebApiTest", null, new { @class = "list-group-item" })
+                    @Html.ActionLink("Html5csv测试", "Html5Test", "WebApiTest", null, new { @class = "list-group-item" })
+                    @Html.ActionLink("Html5csv测试-2", "Html5PostTest", "WebApiTest", null, new { @class = "list-group-item" })
                 </div>
             </div>
         </div>

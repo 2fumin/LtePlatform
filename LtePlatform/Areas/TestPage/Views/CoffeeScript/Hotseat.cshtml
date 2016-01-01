@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Hotseat 5x5";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        @{
+            Html.RenderPartial("_QUnitTestContents");
+        }
+    </div>
+    <div class="col-md-8">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <h3>@ViewBag.Title</h3>
+                </div>
+            </div>
+            <div class="panel-body">
+                <p id="message"></p>
+                <div id="grid"></div>
+                <table id="scores">
+                    <tr>
+                        <th id="p1name"></th>
+                        <th id="p2name"></th>
+                    </tr>
+                    <tr>
+                        <td id="p1score"></td>
+                        <td id="p2score"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <link rel="stylesheet" type="text/css" href="~/Content/themes/coffee/style.css" />
+    <script type="text/javascript" src="~/Scripts/coffee-script.js"></script>
+    <script type="text/javascript" src="~/Areas/TestPage/Scripts/5ch5/OWL2.js"></script>
+}
+
