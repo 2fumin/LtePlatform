@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Linq;
+using System.Reflection;
 using System.Text;
 using Abp.IO.Extensions;
 
@@ -26,33 +27,28 @@ namespace Abp.Localization.Dictionaries.Xml
         public override void Initialize(string sourceName)
         {
             var resourceNames = _assembly.GetManifestResourceNames();
-            foreach (var resourceName in resourceNames)
+            foreach (var resourceName in resourceNames.Where(resourceName => resourceName.StartsWith(_rootNamespace)))
             {
-                if (resourceName.StartsWith(_rootNamespace))
+                using (var stream = _assembly.GetManifestResourceStream(resourceName))
                 {
-                    using (var stream = _assembly.GetManifestResourceStream(resourceName))
+                    var bytes = stream.GetAllBytes();
+                    var xmlString = Encoding.UTF8.GetString(bytes, 3, bytes.Length - 3); //Skipping byte order mark
+
+                    var dictionary = CreateXmlLocalizationDictionary(xmlString);
+                    if (Dictionaries.ContainsKey(dictionary.CultureInfo.Name))
                     {
-                        var bytes = stream.GetAllBytes();
-                        var xmlString = Encoding.UTF8.GetString(bytes, 3, bytes.Length - 3); //Skipping byte order mark
-
-                        var dictionary = CreateXmlLocalizationDictionary(xmlString);
-                        if (Dictionaries.ContainsKey(dictionary.CultureInfo.Name))
-                        {
-                            throw new AbpInitializationException(sourceName + " source contains more than one dictionary for the culture: " + dictionary.CultureInfo.Name);
-                        }
-
-                        Dictionaries[dictionary.CultureInfo.Name] = dictionary;
-
-                        if (resourceName.EndsWith(sourceName + ".xml"))
-                        {
-                            if (DefaultDictionary != null)
-                            {
-                                throw new AbpInitializationException("Only one default localization dictionary can be for source: " + sourceName);
-                            }
-
-                            DefaultDictionary = dictionary;
-                        }
+                        throw new AbpInitializationException(sourceName + " source contains more than one dictionary for the culture: " + dictionary.CultureInfo.Name);
                     }
+
+                    Dictionaries[dictionary.CultureInfo.Name] = dictionary;
+
+                    if (!resourceName.EndsWith(sourceName + ".xml")) continue;
+                    if (DefaultDictionary != null)
+                    {
+                        throw new AbpInitializationException("Only one default localization dictionary can be for source: " + sourceName);
+                    }
+
+                    DefaultDictionary = dictionary;
                 }
             }
         }
