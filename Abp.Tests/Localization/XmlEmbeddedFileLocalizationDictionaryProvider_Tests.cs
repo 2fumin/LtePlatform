@@ -21,16 +21,6 @@ namespace Abp.Tests.Localization
         }
 
         [Fact]
-        public void Test_Assmebly()
-        {
-            var assmebly = Assembly.GetExecutingAssembly();
-            assmebly.FullName.ShouldBe("Abp.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null");
-            var names = assmebly.GetManifestResourceNames();
-            Assert.Equal(names.Length, 1);
-            Assert.Equal(names[0], "");
-        }
-
-        [Fact]
         public void Should_Get_Dictionaries()
         {
             var dictionaries = _dictionaryProvider.Dictionaries.Values.ToList();
