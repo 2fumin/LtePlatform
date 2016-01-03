@@ -115,12 +115,17 @@
     <Compile Include="Extensions\StringExtensions_Tests.cs" />
     <Compile Include="Localization\LocalizationDictionaryWithAddMethod.cs" />
     <Compile Include="Localization\ResourceFileLocalizationSource_Tests.cs" />
-    <Compile Include="Localization\TestResourceFiles\MyTestResource.Designer.cs" />
     <Compile Include="Localization\Test_Assembly.cs" />
     <Compile Include="Localization\Test_DictionaryBasedLocalizationSource.cs" />
     <Compile Include="Localization\Test_XmlLocalizationDictionaryBuilder.cs" />
+    <Compile Include="Localization\TestResourceFiles\MyTestResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyTestResource.resx</DependentUpon>
+    </Compile>
     <Compile Include="Localization\XmlEmbeddedFileLocalizationDictionaryProvider_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Embedded\EmbeddedResourceTests.cs" />
     <Compile Include="TestBaseWithLocalIocManager.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -138,18 +143,23 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Localization\TestResourceFiles\MyTestResource.resx" />
+    <EmbeddedResource Include="Localization\TestResourceFiles\MyTestResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MyTestResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Localization\TestResourceFiles\MyTestResource.tr.resx" />
+    <EmbeddedResource Include="Resources\Embedded\MyResources\js\MyScriptFile1.js" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Localization\TestXmlFiles\Test-tr.xml" />
-    <Content Include="Localization\TestXmlFiles\Test.xml" />
+    <EmbeddedResource Include="Localization\TestXmlFiles\Test-tr.xml" />
+    <EmbeddedResource Include="Localization\TestXmlFiles\Test.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
