@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Simple AngularJS Test";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        @{ 
+            Html.RenderPartial("_QUnitTestContents");
+        }
+    </div>
+    <div class="col-md-8">
+        <h2>@ViewBag.Title</h2>
+        <div data-ng-app="simpleAngular">
+            <h3>简单类型测试</h3>
+            <div ng-controller="SimpleTypeController">
+                A={{simpleA}}&nbsp;
+                B={{simpleB}}
+            </div>            
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/Scripts/angular.js"></script>
+    <script>
+        (function () {
+            var app = angular.module("simpleAngular", []);
+            var SimpleTypeController = function ($scope) {
+                $scope.simpleA = 1;
+                $scope.simpleB = 2;
+            }
+            app.controller("SimpleTypeController", SimpleTypeController);
+        }());
+    </script>
+}
+
