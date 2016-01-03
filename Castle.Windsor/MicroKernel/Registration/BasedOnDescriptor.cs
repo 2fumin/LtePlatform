@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Castle.MicroKernel.Registration
-{
 	using System;
 	using System.Collections.Generic;
 	using System.ComponentModel;
@@ -22,6 +20,8 @@ namespace Castle.MicroKernel.Registration
 	using Castle.Core;
 	using Castle.MicroKernel.Lifestyle.Scoped;
 
+namespace Castle.MicroKernel.Registration
+{
 	/// <summary>
 	///   Describes how to register a group of related types.
 	/// </summary>
@@ -30,8 +30,7 @@ namespace Castle.MicroKernel.Registration
 		private readonly List<Type> potentialBases;
 		private Action<ComponentRegistration> configuration;
 		private readonly FromDescriptor from;
-		private readonly ServiceDescriptor service;
-		private Predicate<Type> ifFilter;
+	    private Predicate<Type> ifFilter;
 		private Predicate<Type> unlessFilter;
 
 		/// <summary>
@@ -41,19 +40,16 @@ namespace Castle.MicroKernel.Registration
 		{
 			potentialBases = basedOn.ToList();
 			this.from = from;
-			service = new ServiceDescriptor(this);
+			WithService = new ServiceDescriptor(this);
 			If(additionalFilters);
 		}
 
 		/// <summary>
 		///   Gets the service descriptor.
 		/// </summary>
-		public ServiceDescriptor WithService
-		{
-			get { return service; }
-		}
+		public ServiceDescriptor WithService { get; }
 
-		/// <summary>
+	    /// <summary>
 		///   Allows a type to be registered multiple times.
 		/// </summary>
 		public FromDescriptor AllowMultipleMatches()
@@ -419,39 +415,15 @@ namespace Castle.MicroKernel.Registration
 
 		protected bool ExecuteIfCondition(Type type)
 		{
-			if (ifFilter == null)
-			{
-				return true;
-			}
-
-			foreach (Predicate<Type> filter in ifFilter.GetInvocationList())
-			{
-				if (filter(type) == false)
-				{
-					return false;
-				}
-			}
-
-			return true;
+		    return ifFilter == null || ifFilter.GetInvocationList().Cast<Predicate<Type>>().All(filter => filter(type));
 		}
 
-		protected bool ExecuteUnlessCondition(Type type)
+	    protected bool ExecuteUnlessCondition(Type type)
 		{
-			if (unlessFilter == null)
-			{
-				return false;
-			}
-			foreach (Predicate<Type> filter in unlessFilter.GetInvocationList())
-			{
-				if (filter(type))
-				{
-					return true;
-				}
-			}
-			return false;
+		    return unlessFilter != null && unlessFilter.GetInvocationList().Cast<Predicate<Type>>().Any(filter => filter(type));
 		}
 
-		protected bool IsBasedOn(Type type, out Type[] baseTypes)
+	    protected bool IsBasedOn(Type type, out Type[] baseTypes)
 		{
 			var actuallyBasedOn = new List<Type>();
 			foreach (var potentialBase in potentialBases)
@@ -489,7 +461,7 @@ namespace Castle.MicroKernel.Registration
 				return false;
 			}
 			var defaults = CastleComponentAttribute.GetDefaultsFor(type);
-			var serviceTypes = service.GetServices(type, baseTypes);
+			var serviceTypes = WithService.GetServices(type, baseTypes);
 			if (serviceTypes.Count == 0 && defaults.Services.Length > 0)
 			{
 				serviceTypes = defaults.Services;
@@ -497,11 +469,8 @@ namespace Castle.MicroKernel.Registration
 			var registration = Component.For(serviceTypes);
 			registration.ImplementedBy(type);
 
-			if (configuration != null)
-			{
-				configuration(registration);
-			}
-			if (String.IsNullOrEmpty(registration.Name) && !String.IsNullOrEmpty(defaults.Name))
+		    configuration?.Invoke(registration);
+		    if (string.IsNullOrEmpty(registration.Name) && !string.IsNullOrEmpty(defaults.Name))
 			{
 				registration.Named(defaults.Name);
 			}
@@ -533,23 +502,19 @@ namespace Castle.MicroKernel.Registration
 		private static bool IsBasedOnGenericInterface(Type type, Type basedOn, out Type[] baseTypes)
 		{
 			var types = new List<Type>(4);
-			foreach (var @interface in type.GetInterfaces())
+			foreach (var @interface in type.GetInterfaces().Where(@interface => @interface.IsGenericType && @interface.GetGenericTypeDefinition() == basedOn))
 			{
-				if (@interface.IsGenericType &&
-				    @interface.GetGenericTypeDefinition() == basedOn)
-				{
-					if (@interface.ReflectedType == null &&
-					    @interface.ContainsGenericParameters)
-					{
-						types.Add(@interface.GetGenericTypeDefinition());
-					}
-					else
-					{
-						types.Add(@interface);
-					}
-				}
+			    if (@interface.ReflectedType == null &&
+			        @interface.ContainsGenericParameters)
+			    {
+			        types.Add(@interface.GetGenericTypeDefinition());
+			    }
+			    else
+			    {
+			        types.Add(@interface);
+			    }
 			}
-			baseTypes = types.ToArray();
+		    baseTypes = types.ToArray();
 			return baseTypes.Length > 0;
 		}
 

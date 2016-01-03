@@ -54,6 +54,7 @@
     <Compile Include="AbpDbContext.cs" />
     <Compile Include="AbpEntityFrameworkModule.cs" />
     <Compile Include="Dependency\EntityFrameworkConventionalRegistrar.cs" />
+    <Compile Include="Dependency\IocResolverHelper.cs" />
     <Compile Include="Extensions\DbContextExtensions.cs" />
     <Compile Include="Extensions\QueryableExtensions.cs" />
     <Compile Include="IDbContextProvider.cs" />
@@ -69,7 +70,9 @@
     <Compile Include="Uow\UnitOfWorkDbContextProvider.cs" />
     <Compile Include="Uow\UnitOfWorkExtensions.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Abp\Abp.csproj">
       <Project>{2c221d3b-5f54-4c5b-8082-318636415132}</Project>
