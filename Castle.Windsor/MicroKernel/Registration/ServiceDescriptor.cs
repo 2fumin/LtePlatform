@@ -163,7 +163,7 @@ namespace Castle.MicroKernel.Registration
 			return Select((t, b) => new[] { t });
 		}
 
-		internal ICollection<Type> GetServices(Type type, Type[] baseType)
+		public ICollection<Type> GetServices(Type type, Type[] baseType)
 		{
 			var services = new HashSet<Type>();
 			if (serviceSelector != null)

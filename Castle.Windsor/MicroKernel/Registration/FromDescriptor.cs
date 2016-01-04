@@ -23,14 +23,15 @@ namespace Castle.MicroKernel.Registration
 	public abstract class FromDescriptor : IRegistration
 	{
 		private readonly Predicate<Type> additionalFilters;
-		private readonly IList<BasedOnDescriptor> criterias;
-		private bool allowMultipleMatches;
+	    private bool allowMultipleMatches;
 
-		protected FromDescriptor(Predicate<Type> additionalFilters)
+	    public IList<BasedOnDescriptor> Criterias { get; }
+
+	    protected FromDescriptor(Predicate<Type> additionalFilters)
 		{
 			this.additionalFilters = additionalFilters;
 			allowMultipleMatches = false;
-			criterias = new List<BasedOnDescriptor>();
+			Criterias = new List<BasedOnDescriptor>();
 		}
 
 		protected abstract IEnumerable<Type> SelectedTypes(IKernel kernel);
@@ -82,7 +83,7 @@ namespace Castle.MicroKernel.Registration
 		public BasedOnDescriptor BasedOn(IEnumerable<Type> basedOn)
 		{
 			var descriptor = new BasedOnDescriptor(basedOn, this, additionalFilters);
-			criterias.Add(descriptor);
+			Criterias.Add(descriptor);
 			return descriptor;
 		}
 
@@ -166,20 +167,20 @@ namespace Castle.MicroKernel.Registration
 		public BasedOnDescriptor Where(Predicate<Type> accepted)
 		{
 			var descriptor = new BasedOnDescriptor(new[] { typeof(object) }, this, additionalFilters).If(accepted);
-			criterias.Add(descriptor);
+			Criterias.Add(descriptor);
 			return descriptor;
 		}
 
 		void IRegistration.Register(IKernelInternal kernel)
 		{
-			if (criterias.Count == 0)
+			if (Criterias.Count == 0)
 			{
 				return;
 			}
 
 			foreach (var type in SelectedTypes(kernel))
 			{
-				foreach (var criteria in criterias)
+				foreach (var criteria in Criterias)
 				{
 					if (criteria.TryRegister(type, kernel) && !allowMultipleMatches)
 					{

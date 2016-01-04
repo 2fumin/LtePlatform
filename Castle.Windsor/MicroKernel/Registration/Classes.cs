@@ -141,5 +141,7 @@ namespace Castle.MicroKernel.Registration
 		{
 			return type.IsClass && type.IsAbstract == false;
 		}
+
+	    public static Predicate<Type> MyFilter => Filter;
 	}
 }

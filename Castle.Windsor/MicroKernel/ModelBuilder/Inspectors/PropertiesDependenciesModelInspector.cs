@@ -105,9 +105,9 @@ namespace Castle.MicroKernel.ModelBuilder.Inspectors
 			return new PropertySet(property, dependency);
 		}
 
-		private PropertiesInspectionBehavior GetInspectionBehaviorFromTheConfiguration(IConfiguration config)
+		public PropertiesInspectionBehavior GetInspectionBehaviorFromTheConfiguration(IConfiguration config)
 		{
-			if (config == null || config.Attributes["inspectionBehavior"] == null)
+			if (config?.Attributes["inspectionBehavior"] == null)
 			{
 				// return default behavior
 				return PropertiesInspectionBehavior.All;
@@ -122,11 +122,11 @@ namespace Castle.MicroKernel.ModelBuilder.Inspectors
 			catch (Exception)
 			{
 				var message =
-					String.Format(
+					string.Format(
 						"Error on properties inspection. Could not convert the inspectionBehavior attribute value into an expected enum value. " +
 						"Value found is '{0}' while possible values are '{1}'",
 						enumStringVal,
-						String.Join(", ",
+						string.Join(", ",
 #if SILVERLIGHT
 				                                        new[]
 				                                        {
@@ -144,7 +144,7 @@ namespace Castle.MicroKernel.ModelBuilder.Inspectors
 			}
 		}
 
-		private List<PropertyInfo> GetProperties(ComponentModel model, Type targetType)
+		public List<PropertyInfo> GetProperties(ComponentModel model, Type targetType)
 		{
 			BindingFlags bindingFlags;
 			if (model.InspectionBehavior == PropertiesInspectionBehavior.DeclaredOnly)

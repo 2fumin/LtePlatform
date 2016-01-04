@@ -1061,12 +1061,12 @@ namespace Castle.MicroKernel.Registration
 			return UsingFactoryMethod((k, m, c) => factoryMethod(k, c));
 		}
 
-		internal void RegisterOptionally()
+		public void RegisterOptionally()
 		{
 			ifComponentRegisteredIgnore = true;
 		}
 
-		private Type[] FilterServices(IKernel kernel)
+		public Type[] FilterServices(IKernel kernel)
 		{
 			var services = new List<Type>(potentialServices);
 			if (registerNewServicesOnly)
@@ -1080,7 +1080,7 @@ namespace Castle.MicroKernel.Registration
 			return services.ToArray();
 		}
 
-		private IComponentModelDescriptor[] GetContributors(Type[] services)
+		public IComponentModelDescriptor[] GetContributors(Type[] services)
 		{
 			var list = new List<IComponentModelDescriptor>
 			{

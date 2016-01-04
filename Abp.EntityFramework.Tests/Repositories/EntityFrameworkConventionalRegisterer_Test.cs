@@ -38,6 +38,7 @@ namespace Abp.EntityFramework.Tests.Repositories
             context3.CalledConstructorWithConnectionString.ShouldBe(true);
         }
 
+    }
         public class MyDbContext : AbpDbContext
         {
             public bool CalledConstructorWithConnectionString { get; private set; }
@@ -58,5 +59,4 @@ namespace Abp.EntityFramework.Tests.Repositories
 
             }
         }
-    }
 }

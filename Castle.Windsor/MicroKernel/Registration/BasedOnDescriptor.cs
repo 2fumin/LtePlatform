@@ -28,18 +28,20 @@ namespace Castle.MicroKernel.Registration
 	public class BasedOnDescriptor : IRegistration
 	{
 		private readonly List<Type> potentialBases;
-		private Action<ComponentRegistration> configuration;
-		private readonly FromDescriptor from;
 	    private Predicate<Type> ifFilter;
 		private Predicate<Type> unlessFilter;
 
-		/// <summary>
-		///   Initializes a new instance of the BasedOnDescriptor.
-		/// </summary>
-		internal BasedOnDescriptor(IEnumerable<Type> basedOn, FromDescriptor from, Predicate<Type> additionalFilters)
+	    public FromDescriptor FromDescriptor { get; }
+
+	    public Action<ComponentRegistration> Configuration { get; private set; }
+
+	    /// <summary>
+        ///   Initializes a new instance of the BasedOnDescriptor.
+        /// </summary>
+        public BasedOnDescriptor(IEnumerable<Type> basedOn, FromDescriptor from, Predicate<Type> additionalFilters)
 		{
 			potentialBases = basedOn.ToList();
-			this.from = from;
+			FromDescriptor = from;
 			WithService = new ServiceDescriptor(this);
 			If(additionalFilters);
 		}
@@ -54,7 +56,7 @@ namespace Castle.MicroKernel.Registration
 		/// </summary>
 		public FromDescriptor AllowMultipleMatches()
 		{
-			return from.AllowMultipleMatches();
+			return FromDescriptor.AllowMultipleMatches();
 		}
 
 		/// <summary>
@@ -66,7 +68,7 @@ namespace Castle.MicroKernel.Registration
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public BasedOnDescriptor BasedOn<T>()
 		{
-			return from.BasedOn<T>();
+			return FromDescriptor.BasedOn<T>();
 		}
 
 		/// <summary>
@@ -78,7 +80,7 @@ namespace Castle.MicroKernel.Registration
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public BasedOnDescriptor BasedOn(Type basedOn)
 		{
-			return from.BasedOn(basedOn);
+			return FromDescriptor.BasedOn(basedOn);
 		}
 
 		/// <summary>
@@ -99,7 +101,7 @@ namespace Castle.MicroKernel.Registration
 		/// <returns> </returns>
 		public BasedOnDescriptor Configure(Action<ComponentRegistration> configurer)
 		{
-			configuration += configurer;
+			Configuration += configurer;
 			return this;
 		}
 
@@ -126,7 +128,7 @@ namespace Castle.MicroKernel.Registration
 		public BasedOnDescriptor ConfigureIf(Predicate<ComponentRegistration> condition,
 		                                     Action<ComponentRegistration> configurer)
 		{
-			configuration += r =>
+			Configuration += r =>
 			{
 				if (condition(r))
 				{
@@ -147,7 +149,7 @@ namespace Castle.MicroKernel.Registration
 		                                     Action<ComponentRegistration> configurerWhenTrue,
 		                                     Action<ComponentRegistration> configurerWhenFalse)
 		{
-			configuration += r =>
+			Configuration += r =>
 			{
 				if (condition(r))
 				{
@@ -175,11 +177,11 @@ namespace Castle.MicroKernel.Registration
 		/// <summary>
 		///   Assigns a conditional predication which must not be satisfied.
 		/// </summary>
-		/// <param name = "unlessFilter"> The predicate not to satisify. </param>
+		/// <param name = "myUnlessFilter"> The predicate not to satisify. </param>
 		/// <returns> </returns>
-		public BasedOnDescriptor Unless(Predicate<Type> unlessFilter)
+		public BasedOnDescriptor Unless(Predicate<Type> myUnlessFilter)
 		{
-			this.unlessFilter += unlessFilter;
+			unlessFilter += myUnlessFilter;
 			return this;
 		}
 
@@ -193,7 +195,7 @@ namespace Castle.MicroKernel.Registration
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public BasedOnDescriptor Where(Predicate<Type> accepted)
 		{
-			return from.Where(accepted);
+			return FromDescriptor.Where(accepted);
 		}
 
 		/// <summary>
@@ -406,7 +408,7 @@ namespace Castle.MicroKernel.Registration
 			return WithService.Select(types);
 		}
 
-		protected virtual bool Accepts(Type type, out Type[] baseTypes)
+		public virtual bool Accepts(Type type, out Type[] baseTypes)
 		{
 			return IsBasedOn(type, out baseTypes)
 			       && ExecuteIfCondition(type)
@@ -452,7 +454,7 @@ namespace Castle.MicroKernel.Registration
 			return baseTypes.Length > 0;
 		}
 
-		internal bool TryRegister(Type type, IKernel kernel)
+		public bool TryRegister(Type type, IKernel kernel)
 		{
 			Type[] baseTypes;
 
@@ -469,7 +471,7 @@ namespace Castle.MicroKernel.Registration
 			var registration = Component.For(serviceTypes);
 			registration.ImplementedBy(type);
 
-		    configuration?.Invoke(registration);
+		    Configuration?.Invoke(registration);
 		    if (string.IsNullOrEmpty(registration.Name) && !string.IsNullOrEmpty(defaults.Name))
 			{
 				registration.Named(defaults.Name);
@@ -520,7 +522,7 @@ namespace Castle.MicroKernel.Registration
 
 		void IRegistration.Register(IKernelInternal kernel)
 		{
-			((IRegistration)from).Register(kernel);
+			((IRegistration)FromDescriptor).Register(kernel);
 		}
 	}
 }

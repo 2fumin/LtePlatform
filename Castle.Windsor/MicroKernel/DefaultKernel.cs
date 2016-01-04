@@ -141,7 +141,7 @@ namespace Castle.MicroKernel
 		}
 #endif
 
-		public IComponentModelBuilder ComponentModelBuilder { get; set; }
+		public IComponentModelBuilder ComponentModelBuilder { get; }
 
 		public virtual IConfigurationStore ConfigurationStore
 		{

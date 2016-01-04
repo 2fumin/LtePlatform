@@ -29,7 +29,7 @@ namespace Castle.MicroKernel.Registration
 		protected readonly IEnumerable<Assembly> assemblies;
 		protected bool nonPublicTypes;
 
-		protected internal FromAssemblyDescriptor(Assembly assembly, Predicate<Type> additionalFilters) : base(additionalFilters)
+		public FromAssemblyDescriptor(Assembly assembly, Predicate<Type> additionalFilters) : base(additionalFilters)
 		{
 			assemblies = new[] { assembly };
 		}
@@ -56,5 +56,10 @@ namespace Castle.MicroKernel.Registration
 		{
 			return assemblies.SelectMany(a => a.GetAvailableTypesOrdered(nonPublicTypes));
 		}
+
+	    public IEnumerable<Type> GetTypes(IKernel kernel)
+	    {
+	        return SelectedTypes(kernel);
+	    } 
 	}
 }

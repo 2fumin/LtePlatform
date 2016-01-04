@@ -45,12 +45,9 @@ namespace Castle.MicroKernel.ModelBuilder
 		///   Gets the contributors.
 		/// </summary>
 		/// <value>The contributors.</value>
-		public IContributeComponentModelConstruction[] Contributors
-		{
-			get { return contributors.ToArray(); }
-		}
+		public IContributeComponentModelConstruction[] Contributors => contributors.ToArray();
 
-		/// <summary>
+	    /// <summary>
 		///   "To give or supply in common with others; give to a
 		///   common fund or for a common purpose". The contributor
 		///   should inspect the component, or even the configuration
