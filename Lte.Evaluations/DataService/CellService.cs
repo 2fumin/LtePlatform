@@ -53,6 +53,21 @@ namespace Lte.Evaluations.DataService
                 : new List<SectorView>();
         }
 
+        public IEnumerable<SectorView> QuerySectors(SectorRangeContainer container)
+        {
+            var cells = _repository.GetAllList(container.West, container.East, container.South, container.North);
+            var excludeCells = from cell in cells join sector in container.ExcludedCells on new CellIdPair
+                {
+                    CellId = cell.ENodebId,
+                    SectorId = cell.SectorId
+                } equals sector select cell;
+            cells = cells.Except(excludeCells).ToList();
+            return cells.Any()
+                ? Mapper.Map<IEnumerable<CellView>, IEnumerable<SectorView>>(
+                    cells.Select(x => CellView.ConstructView(x, _eNodebRepository)))
+                : new List<SectorView>();
+        }
+
         public IEnumerable<Precise4GSector> QuerySectors(TopPreciseViewContainer container)
         {
             return container.Views.Select(x => Precise4GSector.ConstructSector(x, _repository));

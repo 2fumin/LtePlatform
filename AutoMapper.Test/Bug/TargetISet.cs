@@ -26,7 +26,6 @@ namespace AutoMapper.Test.Bug
         }
         
         [Test]
-        [ExpectedException(typeof(AutoMapperMappingException))]
         public void Should_map_IEnumerable_to_ISet()
         {
             _destination = Mapper.Map<Destination>(new Source { Items = _items });

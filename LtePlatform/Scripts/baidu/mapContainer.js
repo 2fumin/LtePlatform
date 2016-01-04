@@ -43,6 +43,7 @@ var initializeMap = function(tag, zoomLevel) {
     map.cdmaSectors = [];
     map.lteDistributions = [];
     map.cdmaDistributions = [];
+    map.neighborSectors = [];
 
     map.coveragePoints = [];
 };
@@ -108,6 +109,9 @@ var addOneSector = function(sector, html, type) {
     switch (type) {
     case "CdmaCell":
         map.cdmaSectors.push(sector);
+        break;
+    case "NeighborCell":
+        map.neighborSectors.push(sector);
         break;
     default:
         map.lteSectors.push(sector);

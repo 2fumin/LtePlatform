@@ -60,12 +60,21 @@
     };
 
     self.queryTrend = function (cell) {
+        var cellIds = [];
         for (var i = 0; i < self.cellSectors().length; i++) {
             var sector = self.cellSectors()[i];
+            cellIds.push({
+                cellId: sector.cellId,
+                sectorId: sector.sectorId
+            });
             if (sector.cellId === cell.cellId && sector.sectorId === cell.sectorId) {
                 setCellFocus(sector);
             }
         }
+        var west = map.getBounds().getSouthWest().lon;
+        var south = map.getBounds().getSouthWest().lat;
+        var east = map.getBounds().getNorthEast().lon;
+        var north = map.getBounds().getNorthEast().lat;
         
         queryPreciseChart(self, cell, "#dialog-modal");
     };

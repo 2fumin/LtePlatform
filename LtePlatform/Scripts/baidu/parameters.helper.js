@@ -58,11 +58,12 @@ var addOneGeneralSector = function(data, type) {
     var irotation = data.azimuth - iangle / 2;
     var zoom = map.getZoom();
     var points = generateSectorPolygonPoints(center, irotation, iangle, zoom);
+    var sectorColor = type === "NeighborCell" ? "green" : "blue";
     
     var sector = new BMap.Polygon(points, {
         strokeWeight: 2,
-        strokeColor: "blue",
-        fillColor: "blue",
+        strokeColor: sectorColor,
+        fillColor: sectorColor,
         fillOpacity: 0.5
     });
     var html = getSectorInfoHtml(data, type);
@@ -105,9 +106,16 @@ var removeAllLteSectors = function() {
     }
 };
 
-var removeAllCdmaSectors = function () {
+var removeAllCdmaSectors = function() {
     var count = map.cdmaSectors.length;
     for (var i = 0; i < count; i++) {
         map.removeOverlay(map.cdmaSectors.pop());
     }
-}
+};
+
+var removeAllNeighborSectors = function() {
+    var count = map.neighborSectors.length;
+    for (var i = 0; i < count; i++) {
+        map.removeOverlay(map.neighborSectors.pop());
+    }
+};
