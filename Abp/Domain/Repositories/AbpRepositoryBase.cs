@@ -188,7 +188,9 @@ namespace Abp.Domain.Repositories
 
         public virtual async Task DeleteAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            Delete(predicate);
+            await Task.Run(() => { Delete(predicate); });
+            ;
+
         }
 
         public virtual int Count()

@@ -16,7 +16,7 @@ namespace Abp.Domain.Uow
 
         public async override Task SaveChangesAsync()
         {
-
+            await Task.Run(() => { });
         }
 
         protected override void BeginUow()
@@ -31,7 +31,7 @@ namespace Abp.Domain.Uow
 
         protected async override Task CompleteUowAsync()
         {
-
+            await Task.Run(() => { });
         }
 
         protected override void DisposeUow()

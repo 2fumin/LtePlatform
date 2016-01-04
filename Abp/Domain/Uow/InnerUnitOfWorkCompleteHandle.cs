@@ -24,7 +24,8 @@ namespace Abp.Domain.Uow
 
         public async Task CompleteAsync()
         {
-            _isCompleteCalled = true;           
+            await Task.Run(() => { _isCompleteCalled = true; });
+
         }
 
         public void Dispose()

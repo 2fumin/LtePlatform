@@ -664,10 +664,6 @@
     <None Include="buildscripts\Castle.Core-NLog.nuspec" />
     <None Include="buildscripts\Castle.Core-Serilog.nuspec" />
     <None Include="buildscripts\Castle.Core.nuspec" />
-    <None Include="buildscripts\CastleKey.snk">
-      <Link>CastleKey.snk</Link>
-    </None>
-    <None Include="buildscripts\CastleKey.snk" />
     <None Include="buildscripts\Get-NuGetVars.ps1" />
     <None Include="buildscripts\nuspec.tmpl" />
   </ItemGroup>
