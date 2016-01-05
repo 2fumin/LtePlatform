@@ -815,6 +815,7 @@
     <Content Include="Views\Kpi\_PreciseImport.cshtml" />
     <Content Include="Views\Kpi\_PreciseHistoryTable.cshtml" />
     <Content Include="Views\Kpi\WorkItemImport.cshtml" />
+    <Content Include="Views\Kpi\_NeighborMapInfoBox.cshtml" />
     <None Include="Views\Kpi\_TopDrop2G.cshtml" />
     <None Include="Views\Kpi\_TopDrop2GTable.cshtml" />
     <Content Include="Views\Kpi\_TopDrop2GTrendTable.cshtml" />

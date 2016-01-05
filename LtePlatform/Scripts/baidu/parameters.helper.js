@@ -70,7 +70,7 @@ var addOneGeneralSector = function(data, type) {
     addOneSector(sector, html, type);
 };
 
-var getSectorInfoHtml = function (data, type) {
+var getSectorInfoHtml = function(data, type) {
     switch (type) {
     case "PreciseSector":
         $("#sector-cellname").html(data.eNodebName + "-" + data.sectorId);
@@ -85,6 +85,16 @@ var getSectorInfoHtml = function (data, type) {
         $("#sector-pci").html(data.pci);
         $("#sector-rsPower").html(data.rsPower);
         break;
+    case "NeighborCell":
+        $("#neighbor-cellname").html(data.cellName);
+        $("#neighbor-indoor").html(data.indoor);
+        $("#neighbor-azimuth").html(data.azimuth);
+        $("#neighbor-height").html(data.height);
+        $("#neighbor-downtilt").html(data.downTilt);
+        $("#neighbor-antennagain").html(data.antennaGain);
+        $("#neighbor-frequency").html(data.frequency);
+        $("#neighbor-otherinfo").html(data.otherInfos);
+        return $("#neighbor-info-box").html();
     default:
         $("#sector-cellname").html(data.cellName);
         $("#sector-indoor").html(data.indoor);
