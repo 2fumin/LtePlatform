@@ -821,6 +821,7 @@
     <Content Include="Views\Kpi\_TopDrop2GTrendTable.cshtml" />
     <Content Include="Views\Kpi\_TownPreciseViewTable.cshtml" />
     <Content Include="Views\Kpi\_WorkItemDetailsTable.cshtml" />
+    <Content Include="Views\Kpi\_WorkItemInfrastructureDialog.cshtml" />
     <None Include="Views\Kpi\_WorkItemList.cshtml" />
     <None Include="Views\Kpi\_WorkItemTable.cshtml" />
     <None Include="Views\Parameters\AlarmImport.cshtml" />

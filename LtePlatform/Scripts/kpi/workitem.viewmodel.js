@@ -12,7 +12,10 @@
     self.workItemViews = ko.observableArray([]);
     self.canGotoCurrentPage = ko.observable(false);
     self.currentView = ko.observable();
+    self.eNodebDetails = ko.observable();
+    self.btsDetails = ko.observable();
     self.chartView = ko.observable("initial");
+    self.detailsView = ko.observable("none");
 
     self.currentPage.subscribe(function(page) {
         if (page >= 1 && page <= self.totalPages()) {
@@ -76,6 +79,22 @@
     self.showDetails = function (data) {
         self.chartView("details");
         self.currentView(data);
+    };
+
+    self.queryBtsInfo = function() {
+        var eNodebId = self.currentView().eNodebId;
+        if (eNodebId > 10000) {
+            self.detailsView("eNodeb");
+            sendRequest(app.dataModel.eNodebUrl, "GET", { eNodebId: eNodebId }, function(result) {
+                self.eNodebDetails(result);
+            });
+        } else {
+            self.detailsView("bts");
+            sendRequest(app.dataModel.btsUrl, "GET", { btsId: eNodebId }, function(result) {
+                self.btsDetails(result);
+            });
+        }
+        $(".modal").modal("show");
     };
 
     self.showCharts = function () {

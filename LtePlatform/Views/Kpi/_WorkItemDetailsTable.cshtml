@@ -18,7 +18,7 @@
             <td>基站编号</td>
             <td>
                 <span data-bind="text: eNodebId"></span>
-                <button class="btn btn-primary btn-xs" style="float: right" data-bind="visible: eNodebId>0, click: queryBtsInfo">
+                <button class="btn btn-primary btn-xs" style="float: right" data-bind="visible: eNodebId>0, click: $root.workItemList().queryBtsInfo">
                     基站信息
                 </button>
             </td>
