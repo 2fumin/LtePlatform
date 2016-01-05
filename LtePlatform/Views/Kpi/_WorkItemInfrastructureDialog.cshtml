@@ -25,7 +25,14 @@
                     <td data-bind="text: openDate"></td>
                 </tr>
                 </tbody>
-                <tbody data-bind="visible: $root.workItemList().detailsView()==='bts'"></tbody>
+                <tbody data-bind="visible: $root.workItemList().detailsView()==='bts', with: $root.workItemList().btsDetails">
+                <tr>
+                    <td>基站地址</td>
+                    <td colspan="3" data-bind="text: address"></td>
+                    <td>基站名称</td>
+                    <td data-bind="text: name"></td>
+                </tr>
+                </tbody>
                 <tbody data-bind="visible: $root.workItemList().detailsView()==='lteCell'"></tbody>
                 <tbody data-bind="visible: $root.workItemList().detailsView()==='cdmaCell'"></tbody>
             </table>
