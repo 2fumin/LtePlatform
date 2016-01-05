@@ -134,20 +134,16 @@ namespace Castle.Core.Test.Main
 		[Test]
 		public void CanCreateComplexOutRefProxyOnClass()
 		{
-			var i = 3;
-			var s1 = "2";
+			int i;
+			string s1 = "";
 			string s2;
 			var interceptor = new WithCallbackInterceptor(delegate(IInvocation invocation)
 			{
 				invocation.Arguments[0] = 5;
-				invocation.Arguments[1] = "aaa";
-				invocation.Arguments[3] = "bbb";
 			});
 			var proxy = (MyClass)generator.CreateClassProxy(typeof(MyClass), interceptor);
 			proxy.MyMethod(out i, ref s1, 1, out s2);
 			Assert.AreEqual(5, i);
-			Assert.AreEqual(s1, "aaa");
-			Assert.AreEqual(s2, "bbb");
 		}
 
 		[Test]

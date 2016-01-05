@@ -311,7 +311,7 @@ namespace Castle.Core.Test.DynamicProxy
 			Assert.AreEqual(otherHolder.Element.GetType().BaseType,
 			                otherHolder.Element.GetType().GetMethod("CalculateSumDistanceNow").DeclaringType);
 			options2 = (ProxyGenerationOptions)otherHolder.Element.GetType().GetField("proxyGenerationOptions").GetValue(null);
-			Assert.IsNotNull(Array.Find(options2.MixinsAsArray(), delegate(object o) { return o is SerializableMixin; }));
+			Assert.IsNotNull(Array.Find(options2.MixinsAsArray(), o => o is SerializableMixin));
 			Assert.IsNotNull(options2.Selector);
 		}
 
