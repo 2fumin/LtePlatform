@@ -55,13 +55,18 @@
         });
     };
 
+    self.toggleNeighbors = function() {
+        toggleDisplay(map.neighborSectors);
+    };
+
     self.showChart = function () {
 
     };
 
     self.queryTrend = function (cell) {
         var cellIds = [];
-        for (var i = 0; i < self.cellSectors().length; i++) {
+        var i;
+        for (i = 0; i < self.cellSectors().length; i++) {
             var sector = self.cellSectors()[i];
             cellIds.push({
                 cellId: sector.cellId,
@@ -71,10 +76,22 @@
                 setCellFocus(sector);
             }
         }
-        var west = map.getBounds().getSouthWest().lon;
+        var west = map.getBounds().getSouthWest().lng;
         var south = map.getBounds().getSouthWest().lat;
-        var east = map.getBounds().getNorthEast().lon;
+        var east = map.getBounds().getNorthEast().lng;
         var north = map.getBounds().getNorthEast().lat;
+        sendRequest(app.dataModel.sectorViewUrl, "POST", {
+            west: west,
+            east: east,
+            south: south,
+            north: north,
+            excludedCells: cellIds
+        }, function (sectors) {
+            removeAllNeighborSectors();
+            for (i = 0; i < sectors.length; i++) {
+                addOneGeneralSector(sectors[i], "NeighborCell");
+            }
+        });
         
         queryPreciseChart(self, cell, "#dialog-modal");
     };

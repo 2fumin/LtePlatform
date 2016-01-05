@@ -33,7 +33,7 @@ namespace LtePlatform.Controllers.Parameters
             return _service.QuerySectors(west, east, south, north);
         }
 
-        [HttpGet]
+        [HttpPost]
         [ApiDoc("获取经纬度范围内的除某些小区外的扇区视图列表")]
         [ApiParameterDoc("container", "指定条件范围")]
         [ApiResponse("指定条件范围内的扇区视图列表")]

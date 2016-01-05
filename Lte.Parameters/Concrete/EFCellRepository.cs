@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lte.Domain.Common.Geo;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 
@@ -34,7 +35,10 @@ namespace Lte.Parameters.Concrete
         public List<Cell> GetAllList(double west, double east, double south, double north)
         {
             return GetAllList(x =>
-                x.Longtitute >= west && x.Longtitute <= east && x.Lattitute >= south && x.Lattitute <= north);
+                x.Longtitute + GeoMath.BaiduLongtituteOffset >= west 
+                && x.Longtitute + GeoMath.BaiduLongtituteOffset <= east 
+                && x.Lattitute + GeoMath.BaiduLattituteOffset >= south 
+                && x.Lattitute + GeoMath.BaiduLattituteOffset <= north);
         }
     }
 }

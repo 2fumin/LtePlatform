@@ -30,6 +30,7 @@
     self.collegeAlarmUrl = "/api/CollegeAlarm";
 
     self.cellUrl = "/api/Cell/";
+    self.sectorViewUrl = "/api/SectorView";
     self.cdmaCellUrl = "/api/CdmaCell";
     self.eNodebUrl = "/api/ENodeb";
     self.btsUrl = "/api/Bts";
