@@ -10,6 +10,7 @@ using Abp.EntityFramework.Dependency;
 using Abp.Tests;
 using Abp.Tests.Dependency;
 using Castle.Core;
+using Castle.Core.Internal;
 using Castle.MicroKernel;
 using Castle.MicroKernel.ModelBuilder;
 using Castle.MicroKernel.ModelBuilder.Inspectors;
@@ -423,6 +424,28 @@ namespace Abp.EntityFramework.Tests.Repositories
         }
 
         [Test]
+        public void Test_MyDbContext()
+        {
+            var targetType = typeof(MyDbContext);
+            
+            var bindingFlags = BindingFlags.Public | BindingFlags.Instance;
+            var properties = targetType.GetProperties(bindingFlags);
+            Assert.AreEqual(properties.Length, 7);
+            foreach (var property in properties)
+            {
+                Console.WriteLine(property.Name);
+                try
+                {
+                    var parameters = property.GetIndexParameters();
+                }
+                catch
+                {
+                    throw new NullReferenceException(@"GetIndexParameters Fail:" + property.Name);
+                }
+            }
+        }
+
+        [Test]
         public void Test_KernelRegister17()
         {
             var context = new ConventionalRegistrationContext(
@@ -437,6 +460,7 @@ namespace Abp.EntityFramework.Tests.Repositories
             var type = typeof(MyDbContext);
             Assert.IsTrue(result.Accepts(type, out baseTypes));
             Assert.AreEqual(baseTypes.Length, 1);
+            Assert.AreEqual(baseTypes[0].Name, "AbpDbContext");
             var defaults = CastleComponentAttribute.GetDefaultsFor(type);
             Assert.IsNotNull(defaults);
             var serviceTypes = result.WithService.GetServices(type, baseTypes);
@@ -458,6 +482,7 @@ namespace Abp.EntityFramework.Tests.Repositories
             var builder = kernel.ComponentModelBuilder;
             var customContributors = registration.GetContributors(services);
             var model = new ComponentModel();
+
             Array.ForEach(customContributors, c => c.BuildComponentModel(kernel, model));
             Assert.AreEqual(builder.Contributors.Length, 11);
             Assert.AreEqual(customContributors.Length, 2);
@@ -470,7 +495,39 @@ namespace Abp.EntityFramework.Tests.Repositories
                     model.InspectionBehavior =
                             (construction as PropertiesDependenciesModelInspector)
                                 .GetInspectionBehaviorFromTheConfiguration(model.Configuration);
-                    var properties = (construction as PropertiesDependenciesModelInspector).GetProperties(model, targetType);
+                    Assert.AreEqual(model.InspectionBehavior, PropertiesInspectionBehavior.All);
+                    var bindingFlags = BindingFlags.Public | BindingFlags.Instance;
+                    var properties = targetType.GetProperties(bindingFlags);
+                    Assert.AreEqual(properties.Length, 7);
+
+                    foreach (var property in properties)
+                    {
+                        Console.WriteLine(property.Name);
+                        try
+                        {
+                            var canWrite = property.CanWrite;
+                        }
+                        catch
+                        {
+                            Console.WriteLine(@"CanWrite Fail, Construction:{0}, Property{1}", construction, property);
+                        }
+                        try
+                        {
+                            var parameters = property.GetIndexParameters();
+                        }
+                        catch
+                        {
+                            throw new NullReferenceException(@"GetIndexParameters Fail:"+property.Name);
+                        }
+                        try
+                        {
+                            var hasAttribute = property.HasAttribute<DoNotWireAttribute>();
+                        }
+                        catch
+                        {
+                            Console.WriteLine(@"HasAttribute Fail, Construction:{0}, Property{1}", construction, property);
+                        }
+                    }
                     break;
                 }
             }

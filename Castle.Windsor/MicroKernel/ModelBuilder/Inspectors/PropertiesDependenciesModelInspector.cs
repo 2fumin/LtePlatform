@@ -167,8 +167,7 @@ namespace Castle.MicroKernel.ModelBuilder.Inspectors
 
 		private static bool HasParameters(PropertyInfo property)
 		{
-			var indexerParams = property.GetIndexParameters();
-			return indexerParams != null && indexerParams.Length != 0;
+			return property.GetIndexParameters().Length != 0;
 		}
 
 		private static bool IsSettable(PropertyInfo property)
