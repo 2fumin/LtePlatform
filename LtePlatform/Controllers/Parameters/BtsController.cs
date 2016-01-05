@@ -40,5 +40,15 @@ namespace LtePlatform.Controllers.Parameters
             var result = _service.GetByGeneralName(name);
             return result == null ? (IHttpActionResult)BadRequest("No eNodebs given the query conditions!") : Ok(result);
         }
+
+        [HttpGet]
+        [ApiDoc("根据基站编号条件查询基站")]
+        [ApiParameterDoc("btsId", "基站编号")]
+        [ApiResponse("查询得到的基站列表结果，如果没有则会报错")]
+        public IHttpActionResult Get(int btsId)
+        {
+            var result = _service.GetByBtsId(btsId);
+            return result == null ? (IHttpActionResult)BadRequest("No bts given the query conditions!") : Ok(result);
+        }
     }
 }

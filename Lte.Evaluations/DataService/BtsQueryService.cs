@@ -56,5 +56,11 @@ namespace Lte.Evaluations.DataService
                 return Mapper.Map<IEnumerable<CdmaBts>, IEnumerable<CdmaBtsView>>(items);
             return null;
         }
+
+        public CdmaBtsView GetByBtsId(int btsId)
+        {
+            var item = _btsRepository.GetByBtsId(btsId);
+            return item == null ? null : Mapper.Map<CdmaBts, CdmaBtsView>(item);
+        }
     }
 }

@@ -59,5 +59,11 @@ namespace Lte.Evaluations.DataService
                 return Mapper.Map<IEnumerable<ENodeb>, IEnumerable<ENodebView>>(items);
             return null;
         }
+
+        public ENodebView GetByENodebId(int eNodebId)
+        {
+            var item = _eNodebRepository.GetByENodebId(eNodebId);
+            return item == null ? null : Mapper.Map<ENodeb, ENodebView>(item);
+        }
     }
 }
