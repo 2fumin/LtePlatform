@@ -56,11 +56,15 @@ namespace Lte.Evaluations.DataService
         public IEnumerable<SectorView> QuerySectors(SectorRangeContainer container)
         {
             var cells = _repository.GetAllList(container.West, container.East, container.South, container.North);
-            var excludeCells = from cell in cells join sector in container.ExcludedCells on new CellIdPair
+            var excludeCells = from cell in cells join sector in container.ExcludedCells on new
                 {
                     CellId = cell.ENodebId,
-                    SectorId = cell.SectorId
-                } equals sector select cell;
+                    cell.SectorId
+                } equals new
+                {
+                    sector.CellId,
+                    sector.SectorId
+                } select cell;
             cells = cells.Except(excludeCells).ToList();
             return cells.Any()
                 ? Mapper.Map<IEnumerable<CellView>, IEnumerable<SectorView>>(

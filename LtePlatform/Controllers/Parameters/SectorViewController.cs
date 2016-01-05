@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Lte.Evaluations.DataService;
+using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.ViewModels;
 using LtePlatform.Models;
 
@@ -30,6 +31,15 @@ namespace LtePlatform.Controllers.Parameters
         public IEnumerable<SectorView> Get(double west, double east, double south, double north)
         {
             return _service.QuerySectors(west, east, south, north);
+        }
+
+        [HttpGet]
+        [ApiDoc("获取经纬度范围内的除某些小区外的扇区视图列表")]
+        [ApiParameterDoc("container", "指定条件范围")]
+        [ApiResponse("指定条件范围内的扇区视图列表")]
+        public IEnumerable<SectorView> Get(SectorRangeContainer container)
+        {
+            return _service.QuerySectors(container);
         }
     }
 }

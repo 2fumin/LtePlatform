@@ -116,6 +116,7 @@
     <Compile Include="DataService\TopDrop2GServiceTest.cs" />
     <Compile Include="DataService\TopDrop2GTestQueries.cs" />
     <Compile Include="MapperService\MapFromENodebContainerServiceTest.cs" />
+    <Compile Include="MapperService\QuerySectorsTest.cs" />
     <Compile Include="MapperService\TopCellQueriesServiceTest.cs" />
     <Compile Include="MockItems\MockAlarmRepository.cs" />
     <Compile Include="MockItems\MockBtsService.cs" />

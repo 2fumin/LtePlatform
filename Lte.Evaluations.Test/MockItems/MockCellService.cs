@@ -24,7 +24,19 @@ namespace Lte.Evaluations.Test.MockItems
 
         public static void MockSixCells(this Mock<ICellRepository> repository, double lon = 113.01, double lat = 23.01)
         {
-            repository.MockCells(new List<Cell>
+            repository.MockCells(GenerateCells(lon, lat));
+        }
+
+        public static void MockRangeCells(this Mock<ICellRepository> repository)
+        {
+            repository.Setup(
+                x => x.GetAllList(It.IsAny<double>(), It.IsAny<double>(), It.IsAny<double>(), It.IsAny<double>()))
+                .Returns(GenerateCells(113, 23));
+        }
+
+        private static List<Cell> GenerateCells(double lon, double lat)
+        {
+            return new List<Cell>
             {
                 new Cell
                 {
@@ -110,7 +122,7 @@ namespace Lte.Evaluations.Test.MockItems
                     Longtitute = lon,
                     Lattitute = lat
                 }
-            });
+            };
         }
     }
 }
