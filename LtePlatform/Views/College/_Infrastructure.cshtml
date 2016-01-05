@@ -50,7 +50,6 @@
             @{
                 Html.RenderPartial("_BtsTable");
             }
-            <p><button data-bind="click: gobackList" class="btn btn-success">返回列表</button></p>
         </div>
         <div data-bind="visible: setView() == 'cdmaCells'">
             <h4><span data-bind="text: currentName"></span>3G小区信息</h4>
@@ -70,6 +69,7 @@
                 Html.RenderPartial("_DistributionTable");
             }
         </div>
+        <p><button data-bind="click: gobackList, visible: setView()!='list'" class="btn btn-success">返回列表</button></p>
     </div>
 </div>
 <!-- /ko -->
