@@ -62,6 +62,7 @@ namespace Lte.Parameters.Entities
         [MemberDoc("入网日期")]
         public DateTime OpenDate { get; set; }
 
+        [MemberDoc("是否在用")]
         public bool IsInUse { get; set; } = true;
 
         public static ENodeb ConstructENodeb(ENodebExcel info, ITownRepository repository)
