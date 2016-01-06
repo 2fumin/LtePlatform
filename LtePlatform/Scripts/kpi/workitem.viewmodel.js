@@ -14,6 +14,9 @@
     self.currentView = ko.observable();
     self.eNodebDetails = ko.observable();
     self.btsDetails = ko.observable();
+    self.lteCellDetails = ko.observable();
+    self.cdmaCellDetails = ko.observable();
+
     self.chartView = ko.observable("initial");
     self.detailsView = ko.observable("none");
 
@@ -92,6 +95,29 @@
             self.detailsView("bts");
             sendRequest(app.dataModel.btsUrl, "GET", { btsId: eNodebId }, function(result) {
                 self.btsDetails(result);
+            });
+        }
+        $(".modal").modal("show");
+    };
+
+    self.queryCellInfo = function() {
+        var eNodebId = self.currentView().eNodebId;
+        var sectorId = self.currentView().sectorId;
+        if (eNodebId > 10000) {
+            self.detailsView("lteCell");
+            sendRequest(app.dataModel.cellUrl, "GET", {
+                eNodebId: eNodebId,
+                sectorId: sectorId
+            }, function(result) {
+                self.lteCellDetails(result);
+            });
+        } else {
+            self.detailsView("cdmaCell");
+            sendRequest(app.dataModel.cdmaCellUrl, "GET", {
+                btsId: eNodebId,
+                sectorId: sectorId
+            }, function(result) {
+                self.cdmaCellDetails(result);
             });
         }
         $(".modal").modal("show");

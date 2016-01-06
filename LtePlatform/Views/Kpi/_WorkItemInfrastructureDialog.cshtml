@@ -19,22 +19,100 @@
                     <td data-bind="text: planNum"></td>
                 </tr>
                 <tr>
-                    <td>基站地址</td>
-                    <td colspan="3" data-bind="text: address"></td>
+                    <td>经度</td>
+                    <td data-bind="text: longtitute"></td>
+                    <td>纬度</td>
+                    <td data-bind="text: lattitute"></td>
                     <td>开通日期</td>
                     <td data-bind="text: openDate"></td>
+                </tr>
+                <tr>
+                    <td>基站地址</td>
+                    <td colspan="5" data-bind="text: address"></td>
                 </tr>
                 </tbody>
                 <tbody data-bind="visible: $root.workItemList().detailsView()==='bts', with: $root.workItemList().btsDetails">
                 <tr>
-                    <td>基站地址</td>
-                    <td colspan="3" data-bind="text: address"></td>
                     <td>基站名称</td>
                     <td data-bind="text: name"></td>
+                    <td>经度</td>
+                    <td data-bind="text: longtitute"></td>
+                    <td>纬度</td>
+                    <td data-bind="text: lattitute"></td>
+                </tr>
+                <tr>
+                    <td>基站地址</td>
+                    <td colspan="5" data-bind="text: address"></td>
                 </tr>
                 </tbody>
-                <tbody data-bind="visible: $root.workItemList().detailsView()==='lteCell'"></tbody>
-                <tbody data-bind="visible: $root.workItemList().detailsView()==='cdmaCell'"></tbody>
+                <tbody data-bind="visible: $root.workItemList().detailsView()==='lteCell', with: $root.workItemList().lteCellDetails">
+                <tr>
+                    <td>频点</td>
+                    <td data-bind="text: frequency"></td>
+                    <td>经度</td>
+                    <td data-bind="text: longtitute"></td>
+                    <td>纬度</td>
+                    <td data-bind="text: lattitute"></td>
+                </tr>
+                <tr>
+                    <td>挂高</td>
+                    <td data-bind="text: height"></td>
+                    <td>方位角</td>
+                    <td data-bind="text: azimuth"></td>
+                    <td>下倾角</td>
+                    <td data-bind="text: downTilt"></td>
+                </tr>
+                <tr>
+                    <td>室内外</td>
+                    <td data-bind="text: indoor"></td>
+                    <td>天线增益</td>
+                    <td data-bind="text: antennaGain"></td>
+                    <td>RS功率</td>
+                    <td data-bind="text: rsPower"></td>
+                </tr>
+                <tr>
+                    <td>PCI</td>
+                    <td data-bind="text: pci"></td>
+                    <td>PRACH</td>
+                    <td data-bind="text: prach"></td>
+                    <td>TAC</td>
+                    <td data-bind="text: tac"></td>
+                </tr>
+                </tbody>
+                <tbody data-bind="visible: $root.workItemList().detailsView()==='cdmaCell', with: $root.workItemList().cdmaCellDetails">
+                <tr>
+                    <td>小区编号</td>
+                    <td data-bind="text: cellId"></td>
+                    <td>经度</td>
+                    <td data-bind="text: longtitute"></td>
+                    <td>纬度</td>
+                    <td data-bind="text: lattitute"></td>
+                </tr>
+                <tr>
+                    <td>挂高</td>
+                    <td data-bind="text: height"></td>
+                    <td>方位角</td>
+                    <td data-bind="text: azimuth"></td>
+                    <td>下倾角</td>
+                    <td data-bind="text: downTilt"></td>
+                </tr>
+                <tr>
+                    <td>室内外</td>
+                    <td data-bind="text: indoor"></td>
+                    <td>天线增益</td>
+                    <td data-bind="text: antennaGain"></td>
+                    <td>PN</td>
+                    <td data-bind="text: pn"></td>
+                </tr>
+                <tr>
+                    <td>1X频点</td>
+                    <td data-bind="text: onexFrequencyList"></td>
+                    <td>DO频点</td>
+                    <td data-bind="text: evdoFrequencyList"></td>
+                    <td>LAC</td>
+                    <td data-bind="text: lac"></td>
+                </tr>
+                </tbody>
             </table>
         </div>
     </div>

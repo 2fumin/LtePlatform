@@ -1,4 +1,7 @@
 ﻿<!-- ko with: workItemList -->
+@{
+    Html.RenderPartial("_WorkItemInfrastructureDialog");
+}
 <div class="row">
     <div class="col-md-7">
         <div class="panel panel-primary">
@@ -18,7 +21,6 @@
                 @{
                     Html.RenderPartial("_KnockoutPaging");
                     Html.RenderPartial("_WorkItemTable");
-                    Html.RenderPartial("_WorkItemInfrastructureDialog");
                 }
             </div>
         </div>
