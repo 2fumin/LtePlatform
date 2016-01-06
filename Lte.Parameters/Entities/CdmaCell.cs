@@ -61,6 +61,8 @@ namespace Lte.Parameters.Entities
 
         public double RsPower { get; set; }
 
+        public bool IsInUse { get; set; } = true;
+
         public static CdmaCell ConstructItem(CdmaCellExcel cellExcelInfo)
         {
             var cell = Mapper.Map<CdmaCellExcel, CdmaCell>(cellExcelInfo);

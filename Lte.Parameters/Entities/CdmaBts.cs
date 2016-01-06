@@ -34,6 +34,8 @@ namespace Lte.Parameters.Entities
 
         public short BscId { get; set; }
 
+        public bool IsInUse { get; set; } = true;
+
         public static CdmaBts ConstructBts(BtsExcel info,ITownRepository repository)
         {
             var town = repository.QueryTown(info.DistrictName, info.TownName);

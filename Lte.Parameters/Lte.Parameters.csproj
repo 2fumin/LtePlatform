@@ -216,6 +216,10 @@
     <Compile Include="Migrations\201512261045576_AddWorkItemDatabase_20151226.Designer.cs">
       <DependentUpon>201512261045576_AddWorkItemDatabase_20151226.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601060923310_Parameters_Add_IsInUse_Flag_20160106.cs" />
+    <Compile Include="Migrations\201601060923310_Parameters_Add_IsInUse_Flag_20160106.Designer.cs">
+      <DependentUpon>201601060923310_Parameters_Add_IsInUse_Flag_20160106.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MockOperations\AlarmMapperService.cs" />
     <Compile Include="MockOperations\CoreMapperService.cs" />
@@ -247,6 +251,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201512261045576_AddWorkItemDatabase_20151226.resx">
       <DependentUpon>201512261045576_AddWorkItemDatabase_20151226.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601060923310_Parameters_Add_IsInUse_Flag_20160106.resx">
+      <DependentUpon>201601060923310_Parameters_Add_IsInUse_Flag_20160106.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

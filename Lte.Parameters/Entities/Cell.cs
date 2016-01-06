@@ -50,6 +50,8 @@ namespace Lte.Parameters.Entities
 
         public AntennaPortsConfigure AntennaPorts { get; set; }
 
+        public bool IsInUse { get; set; } = true;
+
         public static Cell ConstructItem(CellExcel cellExcelInfo)
         {
             return Mapper.Map<CellExcel, Cell>(cellExcelInfo);

@@ -62,6 +62,8 @@ namespace Lte.Parameters.Entities
         [MemberDoc("入网日期")]
         public DateTime OpenDate { get; set; }
 
+        public bool IsInUse { get; set; } = true;
+
         public static ENodeb ConstructENodeb(ENodebExcel info, ITownRepository repository)
         {
             var town = repository.QueryTown(info.CityName, info.DistrictName, info.TownName);
