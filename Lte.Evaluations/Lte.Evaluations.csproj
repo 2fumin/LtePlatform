@@ -145,6 +145,7 @@
     <Compile Include="ViewModels\AlarmView.cs" />
     <Compile Include="ViewModels\CdmaBtsView.cs" />
     <Compile Include="ViewModels\CdmaCellView.cs" />
+    <Compile Include="ViewModels\CdmaCompoundCellView.cs" />
     <Compile Include="ViewModels\RegionKpi\CdmaRegionDateView.cs" />
     <Compile Include="ViewModels\RegionKpi\CdmaRegionStatDetails.cs" />
     <Compile Include="ViewModels\RegionKpi\CdmaRegionStatTrend.cs" />

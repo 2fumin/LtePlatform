@@ -51,8 +51,6 @@ namespace Lte.Evaluations.ViewModels
 
         public string FrequencyList { get; set; }
 
-        public CdmaCellView() { }
-
         public static CdmaCellView ConstructView(CdmaCell cell, IBtsRepository repository)
         {
             var view = Mapper.Map<CdmaCell, CdmaCellView>(cell);

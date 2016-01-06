@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Lte.Evaluations.ViewModels;
 using Lte.Parameters.Abstract;
+using Lte.Parameters.Entities;
 
 namespace Lte.Evaluations.DataService
 {
@@ -18,6 +19,13 @@ namespace Lte.Evaluations.DataService
         {
             _repository = repository;
             _btsRepository = btsRepository;
+        }
+
+        public CdmaCompoundCellView QueryCell(int btsId, byte sectorId)
+        {
+            var onexCell = _repository.GetBySectorIdAndCellType(btsId, sectorId, "1X");
+            var evdoCell = _repository.GetBySectorIdAndCellType(btsId, sectorId, "DO");
+            return CdmaCompoundCellView.ConstructView(onexCell, evdoCell, _btsRepository);
         }
 
         public IEnumerable<SectorView> QuerySectors(int btsId)

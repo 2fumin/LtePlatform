@@ -22,6 +22,12 @@ namespace Lte.Evaluations.DataService
             _eNodebRepository = eNodebRepository;
         }
 
+        public CellView GetCell(int eNodebId, byte sectorId)
+        {
+            var cell = _repository.GetBySectorId(eNodebId, sectorId);
+            return cell == null ? null : CellView.ConstructView(cell, _eNodebRepository);
+        }
+
         public IEnumerable<Cell> GetCells(double west, double east, double south, double north)
         {
             return _repository.GetAllList(west, east, south, north);

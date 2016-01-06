@@ -16,6 +16,9 @@ namespace Lte.Evaluations.MapperSerive
             Mapper.CreateMap<CdmaCell, CdmaCellView>()
                 .ForMember(d => d.Indoor, opt => opt.MapFrom(s => s.IsOutdoor ? "室外" : "室内"))
                 .ForMember(d => d.DownTilt, opt => opt.MapFrom(s => s.ETilt + s.MTilt));
+            Mapper.CreateMap<CdmaCell, CdmaCompoundCellView>()
+                .ForMember(d => d.Indoor, opt => opt.MapFrom(s => s.IsOutdoor ? "室外" : "室内"))
+                .ForMember(d => d.DownTilt, opt => opt.MapFrom(s => s.ETilt + s.MTilt));
         }
 
         public static void MapCell()

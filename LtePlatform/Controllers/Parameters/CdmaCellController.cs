@@ -28,5 +28,16 @@ namespace LtePlatform.Controllers.Parameters
         {
             return _service.QuerySectors(btsId);
         }
+
+        [HttpGet]
+        [ApiDoc("给定基站编号和扇区编号查询CDMA小区")]
+        [ApiParameterDoc("btsId", "基站编号")]
+        [ApiParameterDoc("sectorId", "扇区编号")]
+        [ApiResponse("CDMA小区，如果找不到则会返回错误")]
+        public IHttpActionResult Get(int btsId, byte sectorId)
+        {
+            var item = _service.QueryCell(btsId, sectorId);
+            return item == null ? (IHttpActionResult)BadRequest("The cell cannot be found!") : Ok(item);
+        }
     }
 }
