@@ -18,7 +18,7 @@ namespace Castle.Facilities.Logging.Tests.Classes
 
 	public class ComplexLoggingComponent
 	{
-		private IExtendedLogger logger;
+		private readonly IExtendedLogger logger;
 
 		public ComplexLoggingComponent(IExtendedLogger logger)
 		{

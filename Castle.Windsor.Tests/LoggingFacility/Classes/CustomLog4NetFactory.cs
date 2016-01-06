@@ -32,13 +32,13 @@ namespace CastleTests.LoggingFacility.Tests.Classes
 			BasicConfigurator.Configure();
 		}
 
-		public override ILogger Create(String name)
+		public override ILogger Create(string name)
 		{
 			var log = LogManager.GetLogger(name);
 			return new Log4netLogger(log.Logger, this);
 		}
 
-		public override ILogger Create(String name, LoggerLevel level)
+		public override ILogger Create(string name, LoggerLevel level)
 		{
 			throw new NotSupportedException("Logger levels cannot be set at runtime. Please review your configuration file.");
 		}
