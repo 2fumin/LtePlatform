@@ -15,11 +15,13 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+
+using Castle.DynamicProxy.Generators;
+using Castle.Core.Test.BugsReported;
 using Castle.Core.Test.Interceptors;
 using Castle.Core.Test.InterClasses;
 using Castle.Core.Test.Interfaces;
 using Castle.DynamicProxy;
-using Castle.DynamicProxy.Generators;
 using NUnit.Framework;
 
 namespace Castle.Core.Test.Main
@@ -168,13 +170,13 @@ namespace Castle.Core.Test.Main
 		[Test]
 		public void MethodParamNamesAreReplicated()
 		{
-			// Try with interface proxy (with target)
-			MixinTestCase.IMyInterface i = generator.CreateInterfaceProxyWithTarget(typeof (MixinTestCase.IMyInterface), new OutRefParamsTestCase.MyClass(),
-			                                                          new StandardInterceptor()) as MixinTestCase.IMyInterface;
+            // Try with interface proxy (with target)
+            IMyInterface i = generator.CreateInterfaceProxyWithTarget(typeof(IMyInterface), new MyClass(),
+                                                                      new StandardInterceptor()) as IMyInterface;
 
-			var methodParams = GetMyTestMethodParams(i.GetType());
-			Assert.AreEqual("myParam", methodParams[0].Name);
-		}
+            ParameterInfo[] methodParams = GetMyTestMethodParams(i.GetType());
+            Assert.AreEqual("myParam", methodParams[0].Name);
+        }
 
 		[Test]
 		public void Should_properly_implement_two_interfaces_with_methods_with_identical_signatures()

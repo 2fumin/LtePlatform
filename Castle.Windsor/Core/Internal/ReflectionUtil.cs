@@ -56,8 +56,7 @@ namespace Castle.Core.Internal
 			if (index < 0)
 			{
 				throw new ArgumentException(
-					string.Format("Could not determine application name for assembly \"{0}\". Please use a different method for obtaining assemblies.",
-					              rootAssembly.FullName));
+				    $"Could not determine application name for assembly \"{rootAssembly.FullName}\". Please use a different method for obtaining assemblies.");
 			}
 
 			var applicationName = rootAssembly.FullName.Substring(0, index);
@@ -114,7 +113,7 @@ namespace Castle.Core.Internal
 			catch (Exception e)
 			{
 				// in theory there should be no other exception kind
-				throw new Exception(string.Format("Could not load assembly {0}", assemblyName), e);
+				throw new Exception($"Could not load assembly {assemblyName}", e);
 			}
 		}
 
@@ -278,12 +277,11 @@ namespace Castle.Core.Internal
 			string message;
 			if (typeof(TBase).IsInterface)
 			{
-				message = String.Format("Type {0} does not implement the interface {1}.", subtypeofTBase.FullName,
-				                        typeof(TBase).FullName);
+				message = $"Type {subtypeofTBase.FullName} does not implement the interface {typeof (TBase).FullName}.";
 			}
 			else
 			{
-				message = String.Format("Type {0} does not inherit from {1}.", subtypeofTBase.FullName, typeof(TBase).FullName);
+				message = $"Type {subtypeofTBase.FullName} does not inherit from {typeof (TBase).FullName}.";
 			}
 			throw new InvalidCastException(message);
 		}
@@ -322,15 +320,14 @@ namespace Castle.Core.Internal
 				string message;
 				if (ctorArgs.Length == 0)
 				{
-					message = String.Format("Type {0} does not have a public default constructor and could not be instantiated.",
-					                        subtypeofTBase.FullName);
+					message =
+					    $"Type {subtypeofTBase.FullName} does not have a public default constructor and could not be instantiated.";
 				}
 				else
 				{
 					var messageBuilder = new StringBuilder();
 					messageBuilder.AppendLine(
-						String.Format("Type {0} does not have a public constructor matching arguments of the following types:",
-						              subtypeofTBase.FullName));
+					    $"Type {subtypeofTBase.FullName} does not have a public constructor matching arguments of the following types:");
 					foreach (var type in ctorArgs.Select(o => o.GetType()))
 					{
 						messageBuilder.AppendLine(type.FullName);
@@ -341,16 +338,15 @@ namespace Castle.Core.Internal
 			}
 			catch (Exception ex)
 			{
-				var message = String.Format("Could not instantiate {0}.", subtypeofTBase.FullName);
+				var message = $"Could not instantiate {subtypeofTBase.FullName}.";
 				throw new Exception(message, ex);
 			}
 		}
 
 		public static object Instantiate(this ConstructorInfo ctor, object[] ctorArgs)
 		{
-			Func<object[], object> factory;
 #if !(DOTNET35 || SILVERLIGHT)
-			factory = factories.GetOrAdd(ctor, BuildFactory);
+		    var factory = factories.GetOrAdd(ctor, BuildFactory);
 #else
 			if (factories.TryGetValue(ctor, out factory) == false)
 			{
@@ -367,7 +363,7 @@ namespace Castle.Core.Internal
 			return factory.Invoke(ctorArgs);
 		}
 
-		private static bool IsDll(string extension)
+	    private static bool IsDll(string extension)
 		{
 			return ".dll".Equals(extension, StringComparison.OrdinalIgnoreCase);
 		}

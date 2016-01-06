@@ -497,7 +497,7 @@ namespace Castle.Core.Test.Components.Xml
 			Assert.AreEqual("RISE", document.DocumentElement.NamespaceURI);
 		}
 
-		[Test, Ignore("Not done")]
+		[Ignore("Not done")]
 		public void Can_Use_XPath_To_Translate_Properties()
 		{
 			XmlDocument document = null;

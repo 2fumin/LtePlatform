@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lte.Domain.LinqToCsv.Test
 {
-    public interface IAssertable<T>
+    public interface IAssertable<in T>
     {
         void AssertEqual(T other);
     }

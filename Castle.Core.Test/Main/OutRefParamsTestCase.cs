@@ -80,38 +80,20 @@ namespace Castle.Core.Test.Main
 			}
 		}
 
-		public class MyClass
-		{
-			public void MyMethod(out int i, ref string s, int i1, out string s2)
-			{
-			    i = _i;
-			    s = _s;
-			    s2 = _s2;
-			    _i1 = i1;
-			}
+        public class MyClass
+        {
+            public virtual void MyMethod(out int i, ref string s, int i1, out string s2)
+            {
+                throw new NotImplementedException();
+            }
 
-			public void MyMethodWithStruct(ref MyStruct s)
-			{
-				s.Value = 2*s.Value;
-			}
+            public virtual void MyMethodWithStruct(ref MyStruct s)
+            {
+                s.Value = 2 * s.Value;
+            }
+        }
 
-		    private readonly int _i;
-		    private readonly string _s;
-		    private int _i1;
-		    private readonly string _s2;
-
-		    public MyClass(int i, string s, int i1, string s2)
-		    {
-		        _i = i;
-		        _i1 = i1;
-		        _s = s;
-		        _s2 = s2;
-		    }
-
-            public MyClass() : this(0, "iii", 0, "bbb") { }
-		}
-
-		[Test]
+        [Test]
 		public void CanAffectValueOfOutParameter()
 		{
 			int i;
@@ -134,17 +116,21 @@ namespace Castle.Core.Test.Main
 		[Test]
 		public void CanCreateComplexOutRefProxyOnClass()
 		{
-			int i;
-			string s1 = "";
-			string s2;
-			var interceptor = new WithCallbackInterceptor(delegate(IInvocation invocation)
-			{
-				invocation.Arguments[0] = 5;
-			});
-			var proxy = (MyClass)generator.CreateClassProxy(typeof(MyClass), interceptor);
-			proxy.MyMethod(out i, ref s1, 1, out s2);
-			Assert.AreEqual(5, i);
-		}
+            var i = 3;
+            var s1 = "2";
+            string s2;
+            var interceptor = new WithCallbackInterceptor(delegate (IInvocation invocation)
+            {
+                invocation.Arguments[0] = 5;
+                invocation.Arguments[1] = "aaa";
+                invocation.Arguments[3] = "bbb";
+            });
+            var proxy = (MyClass)generator.CreateClassProxy(typeof(MyClass), interceptor);
+            proxy.MyMethod(out i, ref s1, 1, out s2);
+            Assert.AreEqual(5, i);
+            Assert.AreEqual(s1, "aaa");
+            Assert.AreEqual(s2, "bbb");
+        }
 
 		[Test]
 		public void CanCreateProxyOfInterfaceWithOutParameter()
