@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Lte.Domain.LinqToExcel;
+using Lte.Evaluations.MapperSerive;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Concrete;
 using Lte.Parameters.Entities;
@@ -57,7 +58,7 @@ namespace Lte.Evaluations.DataService
         {
             if (!ENodebExcels.Any()) return new List<ENodebExcel>();
             return from info in ENodebExcels
-                join eNodeb in _eNodebRepository.GetAllList()
+                join eNodeb in _eNodebRepository.GetAllInUseList()
                     on info.ENodebId equals eNodeb.ENodebId into eNodebQuery
                 from eq in eNodebQuery.DefaultIfEmpty()
                 where eq == null
@@ -85,6 +86,18 @@ namespace Lte.Evaluations.DataService
                 where cq == null
                 select info;
         }
+
+        public IEnumerable<CellIdPair> GetVanishedCellIds()
+        {
+            if (!CellExcels.Any()) return new List<CellIdPair>();
+            return from cell in _cellRepository.GetAllInUseList()
+                join info in CellExcels
+                    on new {cell.ENodebId, cell.SectorId} equals new {info.ENodebId, info.SectorId}
+                    into cellQuery
+                from cq in cellQuery.DefaultIfEmpty()
+                where cq == null
+                select new CellIdPair {CellId = cell.ENodebId, SectorId = cell.SectorId};
+        } 
 
         public IEnumerable<BtsExcel> GetNewBtsExcels()
         {

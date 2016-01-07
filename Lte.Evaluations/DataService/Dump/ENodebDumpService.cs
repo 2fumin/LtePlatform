@@ -41,25 +41,45 @@ namespace Lte.Evaluations.DataService.Dump
             var count = 0;
             foreach (var eNodeb in items.Select(x => x.ENodeb).ToList())
             {
-                var result = _eNodebRepository.Insert(eNodeb);
-                if (result != null) count++;
+                var item = _eNodebRepository.GetByENodebId(eNodeb.ENodebId);
+                if (item == null)
+                {
+                    var result = _eNodebRepository.Insert(eNodeb);
+                    if (result != null) count++;
+                }
+                else
+                {
+                    item.IsInUse = true;
+                    _eNodebRepository.Update(item);
+                }
             }
             return count;
         }
 
         public bool DumpSingleENodebExcel(ENodebExcel info)
         {
-            var eNodeb = ENodeb.ConstructENodeb(info, _townRepository);
-            var result = _eNodebRepository.Insert(eNodeb);
-            if (result != null)
+            var eNodeb = _eNodebRepository.GetByENodebId(info.ENodebId);
+            if (eNodeb == null)
             {
-                var item = BasicImportService.ENodebExcels.FirstOrDefault(x => x.ENodebId == info.ENodebId);
-                if (item != null)
+                eNodeb = ENodeb.ConstructENodeb(info, _townRepository);
+                var result = _eNodebRepository.Insert(eNodeb);
+                if (result != null)
                 {
-                    BasicImportService.ENodebExcels.Remove(item);
+                    var item = BasicImportService.ENodebExcels.FirstOrDefault(x => x.ENodebId == info.ENodebId);
+                    if (item != null)
+                    {
+                        BasicImportService.ENodebExcels.Remove(item);
+                    }
+                    return true;
                 }
+            }
+            else
+            {
+                eNodeb.IsInUse = true;
+                _eNodebRepository.Update(eNodeb);
                 return true;
             }
+
             return false;
         }
 

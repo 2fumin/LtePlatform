@@ -81,5 +81,18 @@ namespace Lte.Evaluations.DataService.Dump
             }
             return false;
         }
+
+        public void VanishCells(CellIdsContainer container)
+        {
+            foreach (var cellIdPair in container.CellIdPairs)
+            {
+                var cell = _cellRepository.GetBySectorId(cellIdPair.CellId, cellIdPair.SectorId);
+                if (cell != null)
+                {
+                    cell.IsInUse = false;
+                    _cellRepository.Update(cell);
+                }
+            }
+        }
     }
 }

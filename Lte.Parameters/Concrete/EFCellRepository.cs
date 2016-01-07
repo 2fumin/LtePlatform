@@ -40,5 +40,10 @@ namespace Lte.Parameters.Concrete
                 && x.Lattitute + GeoMath.BaiduLattituteOffset >= south 
                 && x.Lattitute + GeoMath.BaiduLattituteOffset <= north);
         }
+
+        public List<Cell> GetAllInUseList()
+        {
+            return GetAll().Where(x => x.IsInUse).ToList();
+        }
     }
 }

@@ -17,5 +17,7 @@ namespace Lte.Parameters.Abstract
         List<Cell> GetAllList(int eNodebId);
 
         List<Cell> GetAllList(double west, double east, double south, double north);
+
+        List<Cell> GetAllInUseList();
     }
 }
