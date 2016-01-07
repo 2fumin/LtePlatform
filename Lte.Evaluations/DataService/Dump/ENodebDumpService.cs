@@ -41,8 +41,8 @@ namespace Lte.Evaluations.DataService.Dump
             var count = 0;
             foreach (var eNodeb in items.Select(x => x.ENodeb).ToList())
             {
-                if (_eNodebRepository.Insert(eNodeb) != null)
-                    count++;
+                var result = _eNodebRepository.Insert(eNodeb);
+                if (result != null) count++;
             }
             return count;
         }
@@ -61,6 +61,19 @@ namespace Lte.Evaluations.DataService.Dump
                 return true;
             }
             return false;
+        }
+
+        public void VanishENodebs(ENodebIdsContainer container)
+        {
+            foreach (var eNodebId in container.ENodebIds)
+            {
+                var eNodeb = _eNodebRepository.GetByENodebId(eNodebId);
+                if (eNodeb != null)
+                {
+                    eNodeb.IsInUse = false;
+                    _eNodebRepository.Update(eNodeb);
+                }
+            }
         }
     }
 }

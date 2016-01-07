@@ -64,6 +64,17 @@ namespace Lte.Evaluations.DataService
                 select info;
         }
 
+        public IEnumerable<int> GetVanishedENodebIds()
+        {
+            if (!ENodebExcels.Any()) return new List<int>();
+            return from eNodeb in _eNodebRepository.GetAllInUseList()
+                join info in ENodebExcels
+                    on eNodeb.ENodebId equals info.ENodebId into eNodebQuery
+                from eq in eNodebQuery.DefaultIfEmpty()
+                where eq == null
+                select eNodeb.ENodebId;
+        } 
+
         public IEnumerable<CellExcel> GetNewCellExcels()
         {
             if (!CellExcels.Any()) return new List<CellExcel>();

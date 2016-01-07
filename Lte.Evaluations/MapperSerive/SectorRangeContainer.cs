@@ -35,4 +35,18 @@ namespace Lte.Evaluations.MapperSerive
         [MemberDoc("扇区编号")]
         public byte SectorId { get; set; }
     }
+
+    [TypeDoc("基站编号容器")]
+    public class ENodebIdsContainer
+    {
+        [MemberDoc("基站编号列表")]
+        public IEnumerable<int> ENodebIds { get; set; } 
+    }
+
+    [TypeDoc("小区编号容器")]
+    public class CellIdsContainer
+    {
+        [MemberDoc("小区编号列表")]
+        public IEnumerable<CellIdPair> CellIdPairs { get; set; } 
+    }
 }

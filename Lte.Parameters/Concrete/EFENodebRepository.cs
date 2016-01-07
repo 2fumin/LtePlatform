@@ -23,5 +23,10 @@ namespace Lte.Parameters.Concrete
         {
             return FirstOrDefault(x => x.Name == name);
         }
+
+        public List<ENodeb> GetAllInUseList()
+        {
+            return GetAll().Where(x => x.IsInUse).ToList();
+        }
     }
 }
