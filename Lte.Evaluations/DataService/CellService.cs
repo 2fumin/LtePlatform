@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -61,7 +62,9 @@ namespace Lte.Evaluations.DataService
 
         public IEnumerable<SectorView> QuerySectors(SectorRangeContainer container)
         {
-            var cells = _repository.GetAllList(container.West, container.East, container.South, container.North);
+            var cells =
+                _repository.GetAllList(container.West, container.East, container.South, container.North)
+                    .Where(x => x.IsInUse).ToList();
             var excludeCells = from cell in cells join sector in container.ExcludedCells on new
                 {
                     CellId = cell.ENodebId,

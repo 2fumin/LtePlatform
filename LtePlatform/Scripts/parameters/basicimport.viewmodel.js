@@ -16,6 +16,7 @@
     self.newCdmaCellLonLatEdits = ko.observableArray([]);
 
     self.vanishedENodebIds = ko.observableArray([]);
+    self.vanishedCellIds = ko.observableArray([]);
     self.dumpResultMessage = ko.observable("");
     self.canDump = ko.observable(true);
 
@@ -41,6 +42,9 @@
             });
             sendRequest(app.dataModel.dumpENodebExcelUrl, "GET", null, function(data) {
                 self.vanishedENodebIds(data);
+            });
+            sendRequest(app.dataModel.dumpCellExcelUrl, "GET", null, function(data) {
+                self.vanishedCellIds(data);
             });
         });
         this.get('/Parameters/BasicImport', function () { this.app.runRoute('get', '#basicImport'); });
@@ -98,6 +102,14 @@
             }, function() {
                 self.dumpResultMessage(self.dumpResultMessage() + "；完成消亡LTE基站：" + self.vanishedENodebIds().length);
                 self.vanishedENodebIds([]);
+            });
+        }
+        if (self.vanishedCellIds().length > 0) {
+            sendRequest(app.dataModel.dumpCellExcelUrl, "PUT", {
+                cellIdPairs: self.vanishedCellIds()
+            }, function() {
+                self.dumpResultMessage(self.dumpResultMessage() + "；完成消亡LTE小区：" + self.vanishedCellIds().length);
+                self.vanishedCellIds([]);
             });
         }
     };
