@@ -235,7 +235,7 @@ namespace Castle.Core.Internal
 		{
 			if (filePath == null)
 			{
-				throw new ArgumentNullException("filePath");
+				throw new ArgumentNullException(nameof(filePath));
 			}
 
 			string extension;
@@ -267,7 +267,7 @@ namespace Castle.Core.Internal
 				new[] { argument }).Compile();
 		}
 
-		private static void EnsureIsAssignable<TBase>(Type subtypeofTBase)
+		public static void EnsureIsAssignable<TBase>(Type subtypeofTBase)
 		{
 			if (subtypeofTBase.Is<TBase>())
 			{
@@ -302,10 +302,10 @@ namespace Castle.Core.Internal
 		}
 #endif
 
-		private static TBase Instantiate<TBase>(Type subtypeofTBase, object[] ctorArgs)
+		public static TBase Instantiate<TBase>(Type subtypeofTBase, object[] ctorArgs)
 		{
 			ctorArgs = ctorArgs ?? new object[0];
-			var types = ctorArgs.ConvertAll(a => a == null ? typeof(object) : a.GetType());
+			var types = ctorArgs.ConvertAll(a => a?.GetType() ?? typeof(object));
 			var constructor = subtypeofTBase.GetConstructor(BindingFlags.Instance | BindingFlags.Public, null, types, null);
 			if (constructor != null)
 			{

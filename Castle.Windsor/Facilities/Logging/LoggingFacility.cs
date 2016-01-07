@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using Castle.Core.Configuration;
+
 namespace Castle.Facilities.Logging
 {
 	using System;
@@ -214,7 +216,13 @@ namespace Castle.Facilities.Logging
 			RegisterSubResolver(loggerFactory);
 		}
 
-		protected ILoggerFactory CreateProperLoggerFactory(LoggerImplementation loggerApi)
+	    public void SetKerenlAndConfig(IKernel kernel, IConfiguration facilityConfig)
+	    {
+            this.kernel = kernel;
+            this.facilityConfig = facilityConfig;
+        }
+
+		public ILoggerFactory CreateProperLoggerFactory(LoggerImplementation loggerApi)
 		{
 			var loggerFactoryType = GetLoggingFactoryType(loggerApi);
 			Debug.Assert(loggerFactoryType != null, "loggerFactoryType != null");
@@ -233,7 +241,7 @@ namespace Castle.Facilities.Logging
 			                            "' does not implement either ILoggerFactory or IExtendedLoggerFactory.");
 		}
 
-		private string GetConfigFile()
+		public string GetConfigFile()
 		{
 			if (configFileName != null)
 			{
@@ -248,7 +256,7 @@ namespace Castle.Facilities.Logging
 			return EnsureIsValidLoggerFactoryType(ReadCustomLoggerType());
 		}
 
-		private object[] GetLoggingFactoryArguments(Type loggerFactoryType)
+		public object[] GetLoggingFactoryArguments(Type loggerFactoryType)
 		{
 			const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public;
 
@@ -288,7 +296,7 @@ namespace Castle.Facilities.Logging
 			throw new FacilityException("No support constructor found for logging type " + loggerFactoryType);
 		}
 
-		private bool IsConfiguredExternally()
+		public bool IsConfiguredExternally()
 		{
 			if (configuredExternally)
 			{
@@ -345,7 +353,7 @@ namespace Castle.Facilities.Logging
 			}
 		}
 
-		protected ILoggerFactory ReadConfigurationAndCreateLoggerFactory()
+		public ILoggerFactory ReadConfigurationAndCreateLoggerFactory()
 		{
 			var logApi = ReadLoggingApi();
 			var factory = CreateProperLoggerFactory(logApi);
@@ -377,7 +385,7 @@ namespace Castle.Facilities.Logging
 			throw new FacilityException(message);
 		}
 
-		protected LoggerImplementation ReadLoggingApi()
+		public LoggerImplementation ReadLoggingApi()
 		{
 		    if (FacilityConfig == null) return loggerImplementation.GetValueOrDefault(LoggerImplementation.Console);
 		    var configLoggingApi = FacilityConfig.Attributes["loggingApi"];
@@ -425,7 +433,7 @@ namespace Castle.Facilities.Logging
 			Kernel.Resolver.AddSubResolver(new LoggerResolver(extendedLoggerFactory, logName));
 		}
 
-		protected void SetUpTypeConverter()
+		public void SetUpTypeConverter()
 		{
 			converter = Kernel.GetSubSystem(SubSystemConstants.ConversionManagerKey) as IConversionManager;
 		}

@@ -384,6 +384,7 @@
     <Compile Include="LoggingFacility\Log4NetCreateConfigurationCreateTestCase.cs" />
     <Compile Include="LoggingFacility\Log4NetFacilityLognameOverrideTests.cs" />
     <Compile Include="LoggingFacility\Log4NetFacilityTests.cs" />
+    <Compile Include="LoggingFacility\MyFacilityTests.cs" />
     <Compile Include="LoggingFacility\MyLoggingFacility.cs" />
     <Compile Include="LoggingFacility\NLogFacilityTests.cs" />
     <Compile Include="LoggingFacility\NullFacilityTest.cs" />

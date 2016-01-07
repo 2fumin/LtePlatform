@@ -21,11 +21,9 @@ namespace Castle.Facilities.Logging.Tests.Classes
 	/// </summary>
 	public class SimpleLoggingComponent
 	{
-		private ILogger logger;
-
-		public SimpleLoggingComponent(ILogger logger)
+	    public SimpleLoggingComponent(ILogger logger)
 		{
-			this.logger = logger;
+			Logger = logger;
 		}
 
 		public void DoSomething()
@@ -33,9 +31,6 @@ namespace Castle.Facilities.Logging.Tests.Classes
 			Logger.Info("Hello world");
 		}
 
-		public ILogger Logger
-		{
-			get { return logger; }
-		}
+		public ILogger Logger { get; }
 	}
 }

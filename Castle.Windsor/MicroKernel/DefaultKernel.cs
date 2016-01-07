@@ -340,20 +340,15 @@ namespace Castle.MicroKernel
 			var result = NamingSubSystem.GetAssignableHandlers(service);
 
 			// If a parent kernel exists, we merge both results
-			if (Parent != null)
-			{
-				var parentResult = Parent.GetAssignableHandlers(service);
+		    var parentResult = Parent?.GetAssignableHandlers(service);
 
-				if (parentResult.Length > 0)
-				{
-					var newResult = new IHandler[result.Length + parentResult.Length];
-					result.CopyTo(newResult, 0);
-					parentResult.CopyTo(newResult, result.Length);
-					result = newResult;
-				}
-			}
+		    if (!(parentResult?.Length > 0)) return result;
+		    var newResult = new IHandler[result.Length + parentResult.Length];
+		    result.CopyTo(newResult, 0);
+		    parentResult.CopyTo(newResult, result.Length);
+		    result = newResult;
 
-			return result;
+		    return result;
 		}
 
 		/// <summary>
