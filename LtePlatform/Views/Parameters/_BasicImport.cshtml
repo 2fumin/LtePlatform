@@ -16,7 +16,7 @@
         </div>
         <div class="panel-body">
             <p>
-                <button class="btn btn-primary" data-bind="click: postAll">一键导入</button>
+                <button class="btn btn-primary" data-bind="click: postAll, enable: canDump() === true">一键导入</button>
             </p>
             <table class="table table-hover">
                 <thead>
@@ -32,7 +32,7 @@
                     <tr>
                         <td>LTE基站</td>
                         <td data-bind="text: newENodebs().length"></td>
-                        <td></td>
+                        <td data-bind="text: vanishedENodebIds().length"></td>
                         <td>
                             <div class="btn-group" data-bind="visible: newENodebs().length > 0">
                                 <button class="btn btn-warning" data-bind="click: checkENodebsLonLat">检查经纬度</button>

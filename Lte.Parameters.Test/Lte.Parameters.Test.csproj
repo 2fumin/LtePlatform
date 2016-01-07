@@ -66,6 +66,7 @@
     <Compile Include="Excel\BtsExcelTest.cs" />
     <Compile Include="Excel\CdmaCellExcelTest.cs" />
     <Compile Include="Excel\CellExcelTest.cs" />
+    <Compile Include="Excel\CellExcelWithTextIdTest.cs" />
     <Compile Include="Excel\ENodebExcelTest.cs" />
     <Compile Include="Excel\PracticalCdmaCellExcelTest.cs" />
     <Compile Include="Excel\RealCellExcelTest.cs" />

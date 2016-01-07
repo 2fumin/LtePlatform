@@ -14,7 +14,10 @@
     self.newCellLonLatEdits = ko.observableArray([]);
     self.newBtsLonLatEdits = ko.observableArray([]);
     self.newCdmaCellLonLatEdits = ko.observableArray([]);
+
+    self.vanishedENodebIds = ko.observableArray([]);
     self.dumpResultMessage = ko.observable("");
+    self.canDump = ko.observable(true);
 
     self.editENodeb = ko.observable(null);
     self.editCell = ko.observable(null);
@@ -35,6 +38,9 @@
             });
             sendRequest(app.dataModel.newCdmaCellExcelsUrl, "GET", null, function (data) {
                 self.newCdmaCells(data);
+            });
+            sendRequest(app.dataModel.dumpENodebExcelUrl, "GET", null, function(data) {
+                self.vanishedENodebIds(data);
             });
         });
         this.get('/Parameters/BasicImport', function () { this.app.runRoute('get', '#basicImport'); });
@@ -81,10 +87,19 @@
     };
 
     self.postAll = function () {
+        self.canDump(false);
         if (self.newENodebsImport() === true) postAllENodebs(self);
         if (self.newBtssImport() === true) postAllBtss(self);
         if (self.newCellsImport() === true) postAllCells(self);
         if (self.newCdmaCellsImport() === true) postAllCdmaCells(self);
+        if (self.vanishedENodebIds().length > 0) {
+            sendRequest(app.dataModel.dumpENodebExcelUrl, "PUT", {
+                eNodebIds: self.vanishedENodebIds()
+            }, function() {
+                self.dumpResultMessage(self.dumpResultMessage() + "；完成消亡LTE基站：" + self.vanishedENodebIds().length);
+                self.vanishedENodebIds([]);
+            });
+        }
     };
 
     self.postSingleENodeb = function() {

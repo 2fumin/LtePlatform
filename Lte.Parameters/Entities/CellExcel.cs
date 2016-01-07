@@ -14,7 +14,7 @@ namespace Lte.Parameters.Entities
     public class CellExcel
     {
         [CloneProtection]
-        [ExcelColumn("CELL_ID")]
+        [ExcelColumn("CELL_ID", TransformEnum.ByteRemoveQuotions)]
         public byte SectorId { get; set; }
 
         [CloneProtection]
@@ -45,7 +45,7 @@ namespace Lte.Parameters.Entities
         [ExcelColumn("天线增益")]
         public double AntennaGain { get; set; }
 
-        [ExcelColumn("eNodeB ID")]
+        [ExcelColumn("eNodeB ID", TransformEnum.IntegerRemoveQuotions)]
         public int ENodebId { get; set; }
 
         [ExcelColumn("频段号")]
