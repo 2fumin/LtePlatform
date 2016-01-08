@@ -16,7 +16,17 @@
             <div ng-controller="SimpleTypeController">
                 A={{simpleA}}&nbsp;
                 B={{simpleB}}
-            </div>            
+            </div>  
+            <h3>时钟控制器</h3>  
+            <div ng-controller="ClockController">
+                <span>Hello {{clock}}</span>
+            </div>  
+            <h3>简单加减法</h3>  
+            <div ng-controller="AddController">
+                <button ng-click="add(1)" class="btn btn-primary">加1</button>
+                <button ng-click="subtract(1)" class="btn btn-danger">减1</button>
+                <h4>Current count: {{ counter }}</h4>
+            </div>    
         </div>
     </div>
 </div>
@@ -32,6 +42,24 @@
                 $scope.simpleB = 2;
             }
             app.controller("SimpleTypeController", SimpleTypeController);
+
+            var ClockController = function ($scope, $timeout) {
+                var updateClock = function () {
+                    $scope.clock = new Date();
+                    $timeout(function () {
+                        updateClock();
+                    }, 1000);
+                };
+                updateClock();
+            };
+            app.controller("ClockController", ClockController);
+
+            var AddController = function ($scope) {
+                $scope.counter = 0;
+                $scope.add = function (amount) { $scope.counter += amount; };
+                $scope.subtract = function (amount) { $scope.counter -= amount; };
+            };
+            app.controller("AddController", AddController);
         }());
     </script>
 }
