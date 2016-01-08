@@ -79,3 +79,6 @@ uploads/
 /Abp.EntityFramework.Tests/bin/Release/NSubstitute.xml
 /Abp.EntityFramework.Tests/bin/Release/NLog.xml
 /Abp.EntityFramework/bin/Release/NLog.xml
+/Moq.Tests/bin/Release/xunit.execution.desktop.xml
+/Moq.Tests/bin/Release/xunit.core.xml
+/Moq.Tests/bin/Release/xunit.assert.xml
