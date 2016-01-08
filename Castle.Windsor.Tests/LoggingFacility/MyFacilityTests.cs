@@ -165,7 +165,7 @@ namespace Castle.Facilities.Logging.Tests.Classes
             var loggerFactoryType =
                 ((ITypeConverter) converter).PerformConversion<Type>(
                     "Castle.Services.Logging.NLogIntegration.NLogFactory," +
-                    "Castle.Core,Version=3.3.0.0, Culture=neutral," +
+                    "Castle.Services.Logging,Version=3.3.0.0, Culture=neutral," +
                     "PublicKeyToken=407dd0808d44fbdc");
             Assert.AreEqual(loggerFactoryType, typeof(NLogFactory));
             var ctorArgs = facility.GetLoggingFactoryArguments(loggerFactoryType);

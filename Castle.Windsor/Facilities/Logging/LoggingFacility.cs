@@ -41,7 +41,7 @@ namespace Castle.Facilities.Logging
 
 		private static readonly string ExtendedNLogLoggerFactoryTypeName =
 			"Castle.Services.Logging.NLogIntegration.ExtendedNLogFactory," +
-			"Castle.Core,Version=3.3.0.0, Culture=neutral," +
+            "Castle.Services.Logging,Version=3.3.0.0, Culture=neutral," +
 			"PublicKeyToken=407dd0808d44fbdc";
 
 		private static readonly string Log4NetLoggerFactoryTypeName =
@@ -52,7 +52,7 @@ namespace Castle.Facilities.Logging
 
 		private static readonly string NLogLoggerFactoryTypeName =
 			"Castle.Services.Logging.NLogIntegration.NLogFactory," +
-			"Castle.Core,Version=3.3.0.0, Culture=neutral," +
+            "Castle.Services.Logging,Version=3.3.0.0, Culture=neutral," +
 			"PublicKeyToken=407dd0808d44fbdc";
 #endif
 		private readonly string customLoggerFactoryTypeName;

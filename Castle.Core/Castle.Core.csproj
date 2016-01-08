@@ -629,14 +629,6 @@
     <Compile Include="Services\Logging\log4netIntegration\ThreadContextProperties.cs" />
     <Compile Include="Services\Logging\log4netIntegration\ThreadContextStack.cs" />
     <Compile Include="Services\Logging\log4netIntegration\ThreadContextStacks.cs" />
-    <Compile Include="Services\Logging\NLogIntegration\ExtendedNLogFactory.cs" />
-    <Compile Include="Services\Logging\NLogIntegration\ExtendedNLogLogger.cs" />
-    <Compile Include="Services\Logging\NLogIntegration\GlobalContextProperties.cs" />
-    <Compile Include="Services\Logging\NLogIntegration\NLogFactory.cs" />
-    <Compile Include="Services\Logging\NLogIntegration\NLogLogger.cs" />
-    <Compile Include="Services\Logging\NLogIntegration\ThreadContextProperties.cs" />
-    <Compile Include="Services\Logging\NLogIntegration\ThreadContextStack.cs" />
-    <Compile Include="Services\Logging\NLogIntegration\ThreadContextStacks.cs" />
     <Compile Include="Services\Logging\SerilogIntegration\SerilogFactory.cs" />
     <Compile Include="Services\Logging\SerilogIntegration\SerilogLogger.cs" />
   </ItemGroup>

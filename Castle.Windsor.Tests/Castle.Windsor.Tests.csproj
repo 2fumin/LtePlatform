@@ -1297,6 +1297,10 @@
       <Project>{7caa6d18-6d6f-4786-ac4f-e575ce1e100e}</Project>
       <Name>Castle.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Castle.Services.Logging\Castle.Services.Logging.csproj">
+      <Project>{171075f5-8887-47e3-a6fb-a95052ca2ea2}</Project>
+      <Name>Castle.Services.Logging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Castle.Windsor\Castle.Windsor.csproj">
       <Project>{ee27e11c-6c25-4d85-ad17-e0801d7e83d7}</Project>
       <Name>Castle.Windsor</Name>

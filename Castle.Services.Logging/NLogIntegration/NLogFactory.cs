@@ -24,7 +24,6 @@ namespace Castle.Services.Logging.NLogIntegration
     /// <summary>
     ///   Implementation of <see cref="ILoggerFactory" /> for NLog.
     /// </summary>
-    [System.Security.SecuritySafeCritical]
     public class NLogFactory : AbstractLoggerFactory
 	{
 		internal const string defaultConfigFileName = "nlog.config";
