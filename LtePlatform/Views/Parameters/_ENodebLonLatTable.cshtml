@@ -5,44 +5,44 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4>LTE基站经纬度调整</h4>
             </div>
-        </div>
-        <div class="modal-body form-horizontal">
-            <div class="form-group">
-                <label class="col-sm-2 control-label">基站编号</label>
-                <label class="col-sm-2 control-label">基站名称</label>
-                <label class="col-sm-1 control-label">区域</label>
-                <label class="col-sm-1 control-label">镇区</label>
-                <label class="col-sm-3 control-label">经度</label>
-                <label class="col-sm-3 control-label">纬度</label>
+            <div class="modal-body form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">基站编号</label>
+                    <label class="col-sm-2 control-label">基站名称</label>
+                    <label class="col-sm-1 control-label">区域</label>
+                    <label class="col-sm-1 control-label">镇区</label>
+                    <label class="col-sm-3 control-label">经度</label>
+                    <label class="col-sm-3 control-label">纬度</label>
+                </div>
+                <!-- ko foreach: newENodebLonLatEdits -->
+                <div class="form-group">
+                    <div class="col-sm-2">
+                        <span class="form-control" data-bind="text: eNodebId"></span>
+                    </div>
+                    <div class="col-sm-2">
+                        <span class="form-control" data-bind="text: name"></span>
+                    </div>
+                    <div class="col-sm-1">
+                        <span class="form-control" data-bind="text: district"></span>
+                    </div>
+                    <div class="col-sm-1">
+                        <span class="form-control" data-bind="text: town"></span>
+                    </div>
+                    <div class="col-sm-3">
+                        <span class="form-control" data-bind="text: longtitute, visible: isLongtituteValid(longtitute)"></span>
+                        <input class="form-control" data-bind="value: longtitute, visible: !isLongtituteValid(longtitute)" />
+                    </div>
+                    <div class="col-sm-3">
+                        <span class="form-control" data-bind="text: lattitute, visible: isLattituteValid(lattitute)"></span>
+                        <input class="form-control" data-bind="value: lattitute, visible: !isLattituteValid(lattitute)" />
+                    </div>
+                </div>
+                <!-- /ko -->
             </div>
-            <!-- ko foreach: newENodebLonLatEdits -->
-            <div class="form-group">
-                <div class="col-sm-2">
-                    <span class="form-control" data-bind="text: eNodebId"></span>
-                </div>
-                <div class="col-sm-2">
-                    <span class="form-control" data-bind="text: name"></span>
-                </div>
-                <div class="col-sm-1">
-                    <span class="form-control" data-bind="text: district"></span>
-                </div>
-                <div class="col-sm-1">
-                    <span class="form-control" data-bind="text: town"></span>
-                </div>
-                <div class="col-sm-3">
-                    <span class="form-control" data-bind="text: longtitute, visible: isLongtituteValid(longtitute)"></span>
-                    <input class="form-control" data-bind="value: longtitute, visible: !isLongtituteValid(longtitute)"/>
-                </div>
-                <div class="col-sm-3">
-                    <span class="form-control" data-bind="text: lattitute, visible: isLattituteValid(lattitute)"></span>
-                    <input class="form-control" data-bind="value: lattitute, visible: !isLattituteValid(lattitute)"/>
-                </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button class="btn btn-primary" data-bind="click: postENodebLonLat">保存</button>
             </div>
-            <!-- /ko -->
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-default" data-dismiss="modal">关闭</button>
-            <button class="btn btn-primary" data-bind="click: postENodebLonLat">保存</button>
         </div>
     </div>
 </div>
