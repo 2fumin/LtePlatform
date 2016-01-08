@@ -27,10 +27,10 @@ namespace Castle.Core.Logging
 		/// </summary>
 		new IExtendedLogger Create(Type type);
 
-		/// <summary>
-		///   Creates a new extended logger.
-		/// </summary>
-		new IExtendedLogger Create(String name);
+        /// <summary>
+        ///   Creates a new extended logger.
+        /// </summary>
+        new IExtendedLogger Create(String name);
 
 		/// <summary>
 		///   Creates a new extended logger, getting the logger name from the specified type.

@@ -11,10 +11,12 @@ using Castle.Core.Internal;
 using Castle.Core.Logging;
 using Castle.Facilities.Logging;
 using Castle.MicroKernel;
+using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.MicroKernel.SubSystems.Conversion;
 using Castle.Services.Logging.NLogIntegration;
 using Castle.Windsor;
+using NLog;
 using NUnit.Framework;
 
 namespace Castle.Facilities.Logging.Tests.Classes
@@ -87,6 +89,48 @@ namespace Castle.Facilities.Logging.Tests.Classes
             facility.SetKerenlAndConfig(kernel, configuration);
             facility.SetUpTypeConverter();
             var loggerFactory = facility.ReadConfigurationAndCreateLoggerFactory();
+            facility.RegisterLoggerFactory(loggerFactory);
+            facility.RegisterDefaultILogger(loggerFactory);
+        }
+
+        [Test]
+        public void Test_DefaultKernel_AddFacility13()
+        {
+            var facility = new LoggingFacility();
+            facility.LogUsing(LoggerImplementation.NLog).WithConfig("LoggingFacility\\NLog.facilities.test.config");
+            var kernel = new DefaultKernel();
+
+            var configuration =
+                kernel.ConfigurationStore.GetFacilityConfiguration("LoggingFacility\\NLog.facilities.test.config");
+            facility.SetKerenlAndConfig(kernel, configuration);
+            facility.SetUpTypeConverter();
+            var loggerFactory = facility.ReadConfigurationAndCreateLoggerFactory();
+            facility.RegisterLoggerFactory(loggerFactory);
+            var extendedLoggerFactory = loggerFactory as NLogFactory;
+            Assert.IsNotNull(extendedLoggerFactory);
+            var log = LogManager.GetLogger("LoggingFacility\\NLog.facilities.test.config");
+            var logger = new NLogLogger(log, (NLogFactory)loggerFactory);
+            //loggerFactory.Create("LoggingFacility\\NLog.facilities.test.config");
+            //facility.RegisterDefaultILogger(loggerFactory);
+        }
+
+        [Test]
+        public void Test_DefaultKernel_AddFacility14()
+        {
+            var facility = new LoggingFacility();
+            facility.LogUsing(LoggerImplementation.NLog).WithConfig("LoggingFacility\\NLog.facilities.test.config");
+            var kernel = new DefaultKernel();
+
+            var configuration =
+                kernel.ConfigurationStore.GetFacilityConfiguration("LoggingFacility\\NLog.facilities.test.config");
+            facility.SetKerenlAndConfig(kernel, configuration);
+            facility.SetUpTypeConverter();
+            var loggerFactory = facility.ReadConfigurationAndCreateLoggerFactory();
+            facility.RegisterLoggerFactory(loggerFactory);
+            var extendedLoggerFactory = loggerFactory as NLogFactory;
+            Assert.IsNotNull(extendedLoggerFactory);
+            ((NLogFactory)loggerFactory).Create("LoggingFacility\\NLog.facilities.test.config");
+            //facility.RegisterDefaultILogger(loggerFactory);
         }
 
         [Test]

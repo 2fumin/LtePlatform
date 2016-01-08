@@ -14,11 +14,11 @@
 
 using System.Runtime.CompilerServices;
 using Castle.Core.Test.Main;
+using Castle.Services.Logging.NLogIntegration;
 using NLog;
 using NLog.Config;
 using NLog.Targets;
 using NUnit.Framework;
-using Castle.Core.Services.NLogIntegration;
 
 
 namespace Castle.Core.Test.NLogIntegration

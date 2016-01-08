@@ -20,7 +20,7 @@ namespace Castle.Core.Logging
 #if SILVERLIGHT
 	public abstract class AbstractExtendedLoggerFactory : IExtendedLoggerFactory
 #else
-	public abstract class AbstractExtendedLoggerFactory : MarshalByRefObject, IExtendedLoggerFactory
+    public abstract class AbstractExtendedLoggerFactory : MarshalByRefObject, IExtendedLoggerFactory
 #endif
 	{
 		/// <summary>
@@ -30,7 +30,7 @@ namespace Castle.Core.Logging
 		{
 			if (type == null)
 			{
-				throw new ArgumentNullException("type");
+				throw new ArgumentNullException(nameof(type));
 			}
 
 			return Create(type.FullName);
@@ -48,7 +48,7 @@ namespace Castle.Core.Logging
 		{
 			if (type == null)
 			{
-				throw new ArgumentNullException("type");
+				throw new ArgumentNullException(nameof(type));
 			}
 
 			return Create(type.FullName, level);

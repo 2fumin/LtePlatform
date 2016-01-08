@@ -20,10 +20,10 @@ namespace Castle.Services.Logging.NLogIntegration
 
 	using NLog;
 
-	/// <summary>
-	///   Implementation of <see cref="ILogger" /> for NLog.
-	/// </summary>
-	public class NLogLogger : ILogger
+    /// <summary>
+    ///   Implementation of <see cref="ILogger" /> for NLog.
+    /// </summary>
+    public class NLogLogger : ILogger
 	{
 		/// <summary>
 		///   Initializes a new instance of the <see cref="NLogLogger" /> class.

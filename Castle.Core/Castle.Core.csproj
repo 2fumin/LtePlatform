@@ -639,14 +639,6 @@
     <Compile Include="Services\Logging\NLogIntegration\ThreadContextStacks.cs" />
     <Compile Include="Services\Logging\SerilogIntegration\SerilogFactory.cs" />
     <Compile Include="Services\Logging\SerilogIntegration\SerilogLogger.cs" />
-    <Compile Include="Services\NLogIntegration\ExtendedNLogFactory.cs" />
-    <Compile Include="Services\NLogIntegration\ExtendedNLogLogger.cs" />
-    <Compile Include="Services\NLogIntegration\GlobalContextProperties.cs" />
-    <Compile Include="Services\NLogIntegration\NLogFactory.cs" />
-    <Compile Include="Services\NLogIntegration\NLogLogger.cs" />
-    <Compile Include="Services\NLogIntegration\ThreadContextProperties.cs" />
-    <Compile Include="Services\NLogIntegration\ThreadContextStack.cs" />
-    <Compile Include="Services\NLogIntegration\ThreadContextStacks.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DynamicProxy\DynProxy.snk" />

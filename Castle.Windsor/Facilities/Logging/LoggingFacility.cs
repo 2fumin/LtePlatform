@@ -394,11 +394,12 @@ namespace Castle.Facilities.Logging
 		        : loggerImplementation.GetValueOrDefault(LoggerImplementation.Console);
 		}
 
-		private void RegisterDefaultILogger(ILoggerFactory factory)
+		public void RegisterDefaultILogger(ILoggerFactory factory)
 		{
-			if (factory is IExtendedLoggerFactory)
+		    var extendedLoggerFactory = factory as IExtendedLoggerFactory;
+		    if (extendedLoggerFactory != null)
 			{
-				var defaultLogger = ((IExtendedLoggerFactory) factory).Create(logName ?? "Default");
+				var defaultLogger = extendedLoggerFactory.Create(logName ?? "Default");
 				Kernel.Register(Component.For<IExtendedLogger>().NamedAutomatically("ilogger.default").Instance(defaultLogger),
 				                Component.For<ILogger>().NamedAutomatically("ilogger.default.base").Instance(defaultLogger));
 			}
@@ -408,7 +409,7 @@ namespace Castle.Facilities.Logging
 			}
 		}
 
-		private void RegisterLoggerFactory(ILoggerFactory factory)
+	    public void RegisterLoggerFactory(ILoggerFactory factory)
 		{
 			if (factory is IExtendedLoggerFactory)
 			{
