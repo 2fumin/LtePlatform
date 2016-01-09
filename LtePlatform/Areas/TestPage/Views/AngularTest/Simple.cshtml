@@ -26,7 +26,20 @@
                 <button ng-click="add(1)" class="btn btn-primary">加1</button>
                 <button ng-click="subtract(1)" class="btn btn-danger">减1</button>
                 <h4>Current count: {{ counter }}</h4>
-            </div>    
+            </div>
+            <h3>表达式解析测试</h3> 
+            <div ng-controller="ParseController">
+                表达式：<input ng-model="expr" type="text" placeholder="Enter an expression" />&nbsp;
+                表达式解析结果：<span>{{parsedValue}}</span>
+            </div>  
+            <h3>插值字符串测试</h3> 
+            <div ng-controller="InterpolateController">
+                <input ng-model="to"
+                       type="email"
+                       placeholder="Recipient" />
+                <textarea ng-model="emailBody"></textarea>
+                <pre>{{ previewText }}</pre>
+            </div>
         </div>
     </div>
 </div>
@@ -60,6 +73,27 @@
                 $scope.subtract = function (amount) { $scope.counter -= amount; };
             };
             app.controller("AddController", AddController);
+
+            var ParseController = function ($scope, $parse) {
+                $scope.$watch('expr', function (newVal, oldVal, scope) {
+                    if (newVal !== oldVal) {
+                        var parseFun = $parse(newVal);
+                        $scope.parsedValue = parseFun(scope);
+                    }
+                });
+            };
+            app.controller("ParseController", ParseController);
+
+            var InterpolateController = function ($scope, $interpolate) {
+                // 设置监听
+                $scope.$watch('emailBody', function (body) {
+                    if (body) {
+                        var template = $interpolate(body);
+                        $scope.previewText = template({ to: $scope.to });
+                    }
+                });
+            };
+            app.controller("InterpolateController", InterpolateController);
         }());
     </script>
 }
