@@ -118,16 +118,23 @@ namespace LtePlatform.Controllers
             }
             // 生成令牌并发送该令牌
             var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), model.Number);
-            if (UserManager.SmsService != null)
-            {
-                var message = new IdentityMessage
+            if (UserManager.SmsService == null)
+                return RedirectToAction("VerifyPhoneNumber", new
                 {
-                    Destination = model.Number,
-                    Body = "你的安全代码是: " + code
-                };
-                await UserManager.SmsService.SendAsync(message);
-            }
-            return RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.Number });
+                    PhoneNumber = model.Number,
+                    Code = code
+                });
+            var message = new IdentityMessage
+            {
+                Destination = model.Number,
+                Body = "你的安全代码是: " + code
+            };
+            await UserManager.SmsService.SendAsync(message);
+            return RedirectToAction("VerifyPhoneNumber", new
+            {
+                PhoneNumber = model.Number,
+                Code = code
+            });
         }
 
         //
@@ -162,11 +169,14 @@ namespace LtePlatform.Controllers
 
         //
         // GET: /Manage/VerifyPhoneNumber
-        public async Task<ActionResult> VerifyPhoneNumber(string phoneNumber)
+        public ActionResult VerifyPhoneNumber(string phoneNumber, string code)
         {
-            var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), phoneNumber);
             // 通过 SMS 提供程序发送短信以验证电话号码
-            return phoneNumber == null ? View("Error") : View(new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber });
+            return phoneNumber == null ? View("Error") : View(new VerifyPhoneNumberViewModel
+            {
+                PhoneNumber = phoneNumber,
+                Code = code
+            });
         }
 
         //

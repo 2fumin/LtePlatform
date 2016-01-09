@@ -8,5 +8,7 @@ namespace LtePlatform.Models
     public class GetViewModel
     {
         public string Hometown { get; set; }
+
+        public string RoleList { get; set; }
     }
 }

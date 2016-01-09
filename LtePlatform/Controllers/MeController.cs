@@ -44,7 +44,12 @@ namespace LtePlatform.Controllers
         public GetViewModel Get()
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
-            return new GetViewModel() { Hometown = user.Hometown };
+            var roleNames = user.Roles.Select(x => x.RoleId);
+            return new GetViewModel
+            {
+                Hometown = user.Hometown,
+                RoleList = roleNames.Any() ? roleNames.Aggregate((x, y) => x + "," + y) : ""
+            };
         }
     }
 }
