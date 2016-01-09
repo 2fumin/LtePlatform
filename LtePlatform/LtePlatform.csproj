@@ -291,6 +291,7 @@
     <Compile Include="Areas\TestPage\Models\SimpleTypeClass.cs" />
     <Compile Include="Areas\TestPage\TestPageAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Account\ApplicationUsersController.cs" />
     <Compile Include="Controllers\AdminitrativeRegion\CityListController.cs" />
     <Compile Include="Controllers\CollegeController.cs" />
     <Compile Include="Controllers\College\College3GTestController.cs" />
