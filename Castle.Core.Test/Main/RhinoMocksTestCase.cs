@@ -49,7 +49,7 @@ namespace Castle.Core.Test.Main
 			event EventHandler Foo;
 		}
 
-		public sealed class FakeWithEvents : IWithEvents
+		public class FakeWithEvents : IWithEvents
 		{
 			#region IWithEvents Members
 

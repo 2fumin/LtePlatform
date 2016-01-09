@@ -30,8 +30,11 @@ namespace Castle.Core.Test.Properties {
   <string>C:\Program Files (x86)\Microsoft SDKs\Windows\v8.0A\bin\NETFX 4.0 Tools</string>
   <string>C:\Program Files (x86)\Microsoft SDKs\Windows\v8.1A\bin\NETFX 4.5.1 Tools</string>
   <string>c:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\NETFX 4.0 Tools</string>
+  <string>C:\Program Files\Microsoft SDKs\Windows\v8.0A\bin\NETFX 4.0 Tools</string>
+  <string>C:\Program Files\Microsoft SDKs\Windows\v8.1A\bin\NETFX 4.5.1 Tools</string>
   <string>C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6 Tools</string>
-  <string>c:\Program Files\Microsoft SDKs\Windows\v6.0A\Bin</string>
+  <string>C:\Program Files\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6 Tools</string>
+  <string>C:\Program Files\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6.1 Tools</string>
   <string>C:\Program Files (x86)\Microsoft Visual Studio 8\SDK\v2.0\bin</string>
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection PeVerifyProbingPaths {

@@ -163,7 +163,6 @@ namespace AutoMapper.Test.Core
 				int Value { get; set; }
 			}
             
-            [ExpectedException(typeof(AutoMapperMappingException))]
 			[Test]
 			public void Should_allow_dynamic_mapping()
 			{
