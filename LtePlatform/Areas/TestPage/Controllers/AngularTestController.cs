@@ -13,5 +13,10 @@ namespace LtePlatform.Areas.TestPage.Controllers
         {
             return View();
         }
+
+        public ActionResult SubmitForm()
+        {
+            return View();
+        }
     }
 }
