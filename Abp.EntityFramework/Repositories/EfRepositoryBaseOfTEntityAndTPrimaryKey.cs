@@ -146,9 +146,10 @@ namespace Abp.EntityFramework.Repositories
         {
             AttachIfNot(entity);
 
-            if (entity is ISoftDelete)
+            var softDelete = entity as ISoftDelete;
+            if (softDelete != null)
             {
-                (entity as ISoftDelete).IsDeleted = true;
+                softDelete.IsDeleted = true;
             }
             else
             {

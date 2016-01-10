@@ -10,5 +10,7 @@ namespace Lte.Parameters.Abstract
         College3GTestResults GetByCollegeIdAndTime(int collegeId, DateTime time);
 
         List<College3GTestResults> GetAllList(DateTime begin, DateTime end);
+
+        int SaveChanges();
     }
 }
