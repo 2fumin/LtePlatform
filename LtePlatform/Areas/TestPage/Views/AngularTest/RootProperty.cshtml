@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "Root Property AngularJS Test";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        @{
+            Html.RenderPartial("_QUnitTestContents");
+        }
+    </div>
+    <div class="col-md-8">
+        <h2>@ViewBag.Title</h2>
+        <div data-ng-app="myApp">
+            <p>We can access: {{ rootProperty }}</p>
+            <div ng-controller="ParentController">
+                <p>
+                    We can access: {{ rootProperty }}
+                    and {{ parentProperty }}
+                </p>
+                <div ng-controller="ChildController">
+                    <p>
+                        We can access:
+                        {{ rootProperty }} and
+                        {{ parentProperty }} and
+                        {{ childProperty }}
+                    </p>
+                    <p>{{ fullSentenceFromChild }}</p>
+                </div>
+            </div>
+            <div my-directive
+                 my-url="https://www.google.com"
+                 my-link-text="Click me to go to Google"></div>
+            <br/>
+            <label>Their URL field:</label>
+            <input type="text" ng-model="theirUrl">
+            <div their-directive
+                 some-attr="theirUrl"
+                 my-link-text="Click me to go to other url"></div>
+            <p>
+                Type here to make sibling readonly:
+                <input type="text" ng-model="someProperty"><br />
+                <input type="text"
+                       ng-readonly="someProperty"
+                       value="Some text here" />
+            </p>
+            <p>
+                <label>someProperty = {{otherProperty}}</label>
+                <input type="checkbox"
+                       ng-checked="otherProperty"
+                       ng-init="otherProperty = true"
+                       ng-model="otherProperty">
+            </p>
+            <p>
+                <label>someProperty = {{anotherProperty}}</label>
+                <input type="checkbox"
+                       ng-checked="anotherProperty"
+                       ng-init="anotherProperty = false"
+                       ng-model="anotherProperty">
+            </p>
+            <p>
+                <label>Select Two Fish:</label>
+                <input type="checkbox"
+                       ng-model="isTwoFish"><br />
+                <select>
+                    <option>One Fish</option>
+                    <option ng-selected="isTwoFish">Two Fish</option>
+                </select>
+            </p>
+            <p>
+                <!-- 当herf中包含{{expression}}时始终使用ng-href -->
+                <a ng-href="{{ myHref }}">
+                    I'm feeling lucky, when I load
+
+                    <!-- href在用户点击前不会加载 -->
+                    <a href="{{ myHref }}">I'm feeling 404
+            </p>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Areas/TestPage/Scripts/angular/root.property.js"></script>
+}
+
