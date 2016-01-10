@@ -1,4 +1,5 @@
-﻿using Lte.Evaluations.DataService;
+﻿using Abp.EntityFramework;
+using Lte.Evaluations.DataService;
 using Lte.Evaluations.DataService.College;
 using Lte.Evaluations.DataService.Dump;
 using Lte.Parameters.Abstract;
@@ -11,6 +12,11 @@ namespace LtePlatform
     {
         public static void AddBindings(this IKernel ninjectKernel)
         {
+            ninjectKernel.Bind<EFParametersContext>().ToSelf();
+
+            ninjectKernel.Bind<IDbContextProvider<EFParametersContext>>()
+                .To<SimpleDbContextProvider<EFParametersContext>>();
+
             ninjectKernel.Bind<ITownRepository>().To<EFTownRepository>();
 
             ninjectKernel.Bind<ICdmaRegionStatRepository>().To<EFCdmaRegionStatRepository>();

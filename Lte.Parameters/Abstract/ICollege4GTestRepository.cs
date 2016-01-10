@@ -11,5 +11,7 @@ namespace Lte.Parameters.Abstract
     public interface ICollege4GTestRepository : IRepository<College4GTestResults>
     {
         College4GTestResults GetByCollegeIdAndTime(int collegeId, DateTime time);
+
+        int SaveChanges();
     }
 }

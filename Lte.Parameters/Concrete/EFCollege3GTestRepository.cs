@@ -31,11 +31,5 @@ namespace Lte.Parameters.Concrete
         public EFCollege3GTestRepository(IDbContextProvider<EFParametersContext> dbContextProvider) : base(dbContextProvider)
         {
         }
-
-        public EFCollege3GTestRepository()
-            : base(new SimpleDbContextProvider<EFParametersContext>(new EFParametersContext()))
-        {
-            
-        }
     }
 }

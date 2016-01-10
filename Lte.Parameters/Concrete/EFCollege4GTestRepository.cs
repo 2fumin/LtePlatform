@@ -4,18 +4,27 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Abp.EntityFramework;
+using Abp.EntityFramework.Repositories;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 
 namespace Lte.Parameters.Concrete
 {
-    public class EFCollege4GTestRepository : LightWeightRepositroyBase<College4GTestResults>, ICollege4GTestRepository
+    public class EFCollege4GTestRepository : EfRepositoryBase<EFParametersContext, College4GTestResults>, ICollege4GTestRepository
     {
-        protected override DbSet<College4GTestResults> Entities => context.College4GTestResultses;
-
         public College4GTestResults GetByCollegeIdAndTime(int collegeId, DateTime time)
         {
             return FirstOrDefault(x => x.CollegeId == collegeId && x.TestTime == time);
+        }
+
+        public int SaveChanges()
+        {
+            return Context.SaveChanges();
+        }
+
+        public EFCollege4GTestRepository(IDbContextProvider<EFParametersContext> dbContextProvider) : base(dbContextProvider)
+        {
         }
     }
 }

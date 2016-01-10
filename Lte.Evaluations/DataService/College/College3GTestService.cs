@@ -97,23 +97,22 @@ namespace Lte.Evaluations.DataService.College
             return query.GroupBy(x => x.Name).ToDictionary(s => s.Key, t => t.Average(x => x.Vswr));
         }
 
-        public Task<int> Post(College3GTestResults result)
+        public async Task<int> Post(College3GTestResults result)
         {
-            _repository.InsertOrUpdateAsync(result);
-            return Task.FromResult(_repository.SaveChanges());
+            await _repository.InsertOrUpdateAsync(result);
+            return _repository.SaveChanges();
         }
 
-        public Task<int> Delete(College3GTestResults result)
+        public async Task<int> Delete(College3GTestResults result)
         {
-            _repository.DeleteAsync(result);
-            return Task.FromResult(_repository.SaveChanges());
+            await _repository.DeleteAsync(result);
+            return _repository.SaveChanges();
         }
 
         public College3GTestResults GetRecordResult(DateTime time, string name)
         {
             var college = _collegeRepository.GetByName(name);
-            if (college == null) return null;
-            return _repository.GetByCollegeIdAndTime(college.Id, time);
+            return college == null ? null : _repository.GetByCollegeIdAndTime(college.Id, time);
         }
     }
 }

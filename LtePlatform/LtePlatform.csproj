@@ -870,6 +870,10 @@
       <Project>{75c9d4b5-2117-4b06-a6b1-70afcd6b3bfc}</Project>
       <Name>AutoMapper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Castle.Windsor\Castle.Windsor.csproj">
+      <Project>{73FB5B0B-5796-41DC-A5A6-743D585F6B5B}</Project>
+      <Name>Castle.Windsor</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lte.Domain\Lte.Domain.csproj">
       <Project>{ADEEF82D-6389-47C4-8F7C-D7F85C01D64E}</Project>
       <Name>Lte.Domain</Name>
