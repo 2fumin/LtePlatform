@@ -9,13 +9,20 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace LtePlatform.Controllers.Account
 {
+    [Authorize]
     public class ApplicationUsersController : ApiController
     {
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<ApplicationUserViewModel> Get()
         {
             var context = ApplicationDbContext.Create();
-            return context.Users.Select(x=>x.UserName);
+            return context.Users.Select(x => new ApplicationUserViewModel
+            {
+                UserName = x.UserName,
+                Email = x.Email,
+                PhoneNumber = x.PhoneNumber,
+                Hometown = x.Hometown
+            });
         } 
     }
 }

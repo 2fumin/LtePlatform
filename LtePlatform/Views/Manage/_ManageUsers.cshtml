@@ -7,7 +7,24 @@
     </div>
     <div class="panel-body">
         <table class="table table-hover">
-            
+            <thead>
+            <tr>
+                <th>用户名</th>
+                <th>邮箱</th>
+                <th>号码</th>
+                <th>家乡</th>
+                <th>查询操作</th>
+            </tr>
+            </thead>
+            <tbody data-bind="foreach: applicationUsers">
+            <tr>
+                <td data-bind="text: userName"></td>
+                <td data-bind="text: eMail"></td>
+                <td data-bind="text: phoneNumber"></td>
+                <td data-bind="text: homeTown"></td>
+                <td></td>
+            </tr>
+            </tbody>
         </table>
     </div>
 </div>
