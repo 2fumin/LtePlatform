@@ -82,3 +82,9 @@ uploads/
 /Moq.Tests/bin/Release/xunit.execution.desktop.xml
 /Moq.Tests/bin/Release/xunit.core.xml
 /Moq.Tests/bin/Release/xunit.assert.xml
+/Lte.Parameters.Test/bin/Release/xunit.execution.desktop.xml
+/Lte.Parameters.Test/bin/Release/xunit.core.xml
+/Lte.Parameters.Test/bin/Release/xunit.assert.xml
+/LtePlatform.Tests/bin/Release/xunit.execution.desktop.xml
+/LtePlatform.Tests/bin/Release/xunit.core.xml
+/LtePlatform.Tests/bin/Release/xunit.assert.xml
