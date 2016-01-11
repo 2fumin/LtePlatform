@@ -11,6 +11,7 @@
     self.preciseRegionUrl = "/api/PreciseRegion/";
     self.alarmCountUrl = "/api/AlarmCount";
     self.dumpAlarmUrl = "/api/DumpAlarm";
+    self.dumpNeighborUrl = "/api/DumpNeighbor";
     self.topDrop2GUrl = "/api/TopDrop2G/";
     self.preciseImportUrl = "/api/PreciseImport";
     self.townPreciseImportUrl = "/api/TownPreciseImport";

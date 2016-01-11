@@ -714,6 +714,7 @@
     <Content Include="Scripts\parameters\basicimport.viewmodel.js" />
     <Content Include="Scripts\parameters\common.controller.js" />
     <Content Include="Scripts\parameters\list.viewmodel.js" />
+    <Content Include="Scripts\parameters\neighborimport.viewmodel.js" />
     <Content Include="Scripts\parameters\querymap.controller.js" />
     <Content Include="Scripts\parameters\querymap.viewmodel.js" />
     <Content Include="Scripts\respond.js" />
@@ -855,6 +856,7 @@
     <Content Include="Views\Parameters\_SectorMapInfoBox.cshtml" />
     <Content Include="Views\Shared\_DtKpiSelection.cshtml" />
     <Content Include="Views\Shared\_KnockoutPaging.cshtml" />
+    <None Include="Views\Parameters\_NeighborImport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
