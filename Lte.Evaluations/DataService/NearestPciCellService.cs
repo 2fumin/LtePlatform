@@ -34,18 +34,7 @@ namespace Lte.Evaluations.DataService
 
         public void UploadZteNeighbors(StreamReader reader)
         {
-            var infos = CsvContext.Read<NeighborCellZteCsv>(reader, CsvFileDescription.CommaDescription);
-            var groupInfos = (from info in infos
-                group info by new {info.ENodebId, info.SectorId, info.NeighborRelation}
-                into g
-                select new NeighborCellZteCsv
-                {
-                    ENodebId = g.Key.ENodebId,
-                    SectorId = g.Key.SectorId,
-                    NeighborRelation = g.Key.NeighborRelation,
-                    IntraSystemTimes = g.Sum(x => x.IntraSystemTimes),
-                    InterSystemTimes = g.Sum(x => x.InterSystemTimes)
-                }).ToList();
+            var groupInfos = NeighborCellZteCsv.ReadNeighborCellZteCsvs(reader);
             foreach (var info in groupInfos)
             {
                 var cell = NearestPciCell.ConstructCell(info, _cellRepository);
@@ -55,15 +44,7 @@ namespace Lte.Evaluations.DataService
 
         public void UploadHwNeighbors(StreamReader reader)
         {
-            var infos = CsvContext.Read<NeighborCellHwCsv>(reader, CsvFileDescription.CommaDescription);
-            var groupInfos = (from info in infos
-                group info by info.CellRelation
-                into g
-                select new NeighborCellHwCsv
-                {
-                    CellRelation = g.Key,
-                    TotalTimes = g.Sum(x => x.TotalTimes)
-                }).ToList();
+            var groupInfos = NeighborCellHwCsv.ReadNeighborCellHwCsvs(reader);
             foreach (var info in groupInfos)
             {
                 var cell = NearestPciCell.ConstructCell(info, _cellRepository);
