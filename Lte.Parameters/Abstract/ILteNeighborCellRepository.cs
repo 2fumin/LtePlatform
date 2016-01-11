@@ -16,5 +16,7 @@ namespace Lte.Parameters.Abstract
     public interface INearestPciCellRepository : IRepository<NearestPciCell>
     {
         List<NearestPciCell> GetAllList(int cellId, byte sectorId);
+
+        int SaveChanges();
     }
 }

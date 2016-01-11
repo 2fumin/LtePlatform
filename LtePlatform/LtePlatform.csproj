@@ -340,6 +340,7 @@
     <Compile Include="Controllers\Parameters\DumpCdmaCellExcelController.cs" />
     <Compile Include="Controllers\Parameters\DumpCellExcelController.cs" />
     <Compile Include="Controllers\Parameters\DumpENodebExcelController.cs" />
+    <Compile Include="Controllers\Parameters\DumpNeighborController.cs" />
     <Compile Include="Controllers\Parameters\ENodebController.cs" />
     <Compile Include="Controllers\Parameters\LteNeighborCellController.cs" />
     <Compile Include="Controllers\Parameters\NearestPciCellController.cs" />

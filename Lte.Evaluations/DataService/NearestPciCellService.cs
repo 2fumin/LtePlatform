@@ -70,5 +70,37 @@ namespace Lte.Evaluations.DataService
                 if (cell.Pci >= 0) NearestCells.Push(cell);
             }
         }
+
+        public async Task<bool> DumpOneStat()
+        {
+            var stat = NearestCells.Pop();
+            if (stat == null) return false;
+            var item =
+                _repository.FirstOrDefault(
+                    x =>
+                        x.CellId == stat.CellId && x.SectorId == stat.SectorId && x.NearestCellId == stat.NearestCellId &&
+                        x.NearestSectorId == stat.NearestSectorId);
+            if (item == null)
+            {
+                await _repository.InsertAsync(stat);
+            }
+            else if (stat.TotalTimes > 0)
+            {
+                item.TotalTimes = stat.TotalTimes;
+                await _repository.UpdateAsync(item);
+            }
+            _repository.SaveChanges();
+            return true;
+        }
+
+        public int GetNeighborsToBeDump()
+        {
+            return NearestCells.Count;
+        }
+
+        public void ClearNeighbors()
+        {
+            NearestCells.Clear();
+        }
     }
 }
