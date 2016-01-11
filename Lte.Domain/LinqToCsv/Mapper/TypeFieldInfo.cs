@@ -11,19 +11,13 @@ namespace Lte.Domain.LinqToCsv.Mapper
     {
         private int _index = ColumnAttribute.McDefaultFieldIndex;
 
-        public int Index
-        {
-            get { return _index; }
-        }
+        public int Index => _index;
 
         public string Name { get; private set; }
 
         private bool _canBeNull = true;
 
-        public bool CanBeNull
-        {
-            get { return _canBeNull; }
-        }
+        public bool CanBeNull => _canBeNull;
 
         private NumberStyles _inputNumberStyle = NumberStyles.Any;
 
@@ -42,9 +36,9 @@ namespace Lte.Domain.LinqToCsv.Mapper
             HasColumnAttribute = false;
             CharLength = 0;
 
-            foreach (Object attribute in _memberInfo.GetCustomAttributes(typeof(CsvColumnAttribute), true))
+            foreach (var attribute in _memberInfo.GetCustomAttributes(typeof(CsvColumnAttribute), true))
             {
-                CsvColumnAttribute cca = (CsvColumnAttribute)attribute;
+                var cca = (CsvColumnAttribute)attribute;
 
                 if (!string.IsNullOrEmpty(cca.Name))
                 {
@@ -87,18 +81,15 @@ namespace Lte.Domain.LinqToCsv.Mapper
             { 
                 _memberInfo = value;
 
-                PropertyInfo info = value as PropertyInfo;
-                _fieldType = info != null ? info.PropertyType : ((FieldInfo)value).FieldType;
+                var info = value as PropertyInfo;
+                _fieldType = info?.PropertyType ?? ((FieldInfo)value).FieldType;
 
             }
         }
 
         private Type _fieldType;
 
-        public string TypeName
-        {
-            get { return _fieldType.Name; }
-        }
+        public string TypeName => _fieldType.Name;
 
         private TypeConverter _typeConverter;
         private MethodInfo _parseNumberMethod;
@@ -128,7 +119,7 @@ namespace Lte.Domain.LinqToCsv.Mapper
         
         public override string ToString()
         {
-            return string.Format("Index: {0}, Name: {1}", _index, Name);
+            return $"Index: {_index}, Name: {Name}";
         }
 
         public string UpdateLastName<T>(string lastName, ref int lastFieldIndex)
@@ -144,10 +135,10 @@ namespace Lte.Domain.LinqToCsv.Mapper
             return Name;
         }
 
-        public Object UpdateObjectValue(string value, 
+        public object UpdateObjectValue(string value, 
             CultureInfo fileCultureInfo)
         {
-            Object objValue;
+            object objValue;
 
             // Normally, either tfi.typeConverter is not null,
             // or tfi.parseNumberMethod is not null. 
@@ -159,14 +150,14 @@ namespace Lte.Domain.LinqToCsv.Mapper
             if (_parseExactMethod != null)
             {
                 objValue = _parseExactMethod.Invoke(_fieldType,
-                    new Object[] { value, 
+                    new object[] { value, 
                         OutputFormat, 
                         fileCultureInfo });
             }
             else if (_parseNumberMethod != null)
             {
                 objValue = _parseNumberMethod.Invoke(_fieldType,
-                    new Object[] { value, 
+                    new object[] { value, 
                         _inputNumberStyle, 
                         fileCultureInfo });
             }

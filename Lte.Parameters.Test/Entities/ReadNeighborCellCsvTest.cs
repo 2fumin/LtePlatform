@@ -37,5 +37,41 @@ namespace Lte.Parameters.Test.Entities
             var infos = NeighborCellHwCsv.ReadNeighborCellHwCsvs(reader);
             Assert.AreEqual(infos.Count, 7);
         }
+
+        [Test]
+        public void Test_ZteFile1()
+        {
+            var testDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            var csvFilesDirectory = Path.Combine(testDirectory, "CsvFiles");
+            var path = Path.Combine(csvFilesDirectory, "NeighborCellZte1.csv");
+
+            var reader = new StreamReader(path, Encoding.GetEncoding("GB2312"));
+            var infos = CsvContext.Read<NeighborCellZteCsv>(reader, CsvFileDescription.CommaDescription).ToList();
+            Assert.AreEqual(infos.Count, 1);
+        }
+
+        [Test]
+        public void Test_ZteFile()
+        {
+            var testDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            var csvFilesDirectory = Path.Combine(testDirectory, "CsvFiles");
+            var path = Path.Combine(csvFilesDirectory, "NeighborCellZte.csv");
+
+            var reader = new StreamReader(path, Encoding.GetEncoding("GB2312"));
+            var infos = CsvContext.Read<NeighborCellZteCsv>(reader, CsvFileDescription.CommaDescription).ToList();
+            Assert.AreEqual(infos.Count, 998);
+        }
+
+        [Test]
+        public void Test_ZteFile_Merge()
+        {
+            var testDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            var csvFilesDirectory = Path.Combine(testDirectory, "CsvFiles");
+            var path = Path.Combine(csvFilesDirectory, "NeighborCellZte.csv");
+
+            var reader = new StreamReader(path, Encoding.GetEncoding("GB2312"));
+            var infos = NeighborCellZteCsv.ReadNeighborCellZteCsvs(reader);
+            Assert.AreEqual(infos.Count, 998);
+        }
     }
 }

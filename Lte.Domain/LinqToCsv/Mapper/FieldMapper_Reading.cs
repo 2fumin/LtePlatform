@@ -19,8 +19,8 @@ namespace Lte.Domain.LinqToCsv.Mapper
         public void ReadNames(IDataRow row)
         {
 
-            int currentNameIndex = 0;
-            for (int i = 0; i < row.Count; i++)
+            var currentNameIndex = 0;
+            for (var i = 0; i < row.Count; i++)
             {
                 if (row[i].Value == null) { continue; }
                 if (!nameToInfo.ContainsKey(row[i].Value))
@@ -47,9 +47,7 @@ namespace Lte.Domain.LinqToCsv.Mapper
 
         public List<int> GetCharLengths()
         {
-            if (!FileDescription.NoSeparatorChar)
-                return null;
-            return fieldIndexInfo.GetCharLengthList();
+            return !FileDescription.NoSeparatorChar ? null : fieldIndexInfo.GetCharLengthList();
         }
 
         public T ReadObject(IDataRow row, AggregatedException ae)
@@ -64,15 +62,15 @@ namespace Lte.Domain.LinqToCsv.Mapper
                 }
             }
 
-            T obj = new T();
+            var obj = new T();
 
             //If we will be using the mappings, we just iterate through all the cells in this row
-            int maxRowCount = fieldIndexInfo.GetMaxRowCount(row.Count);
+            var maxRowCount = fieldIndexInfo.GetMaxRowCount(row.Count);
 
 
-            for (int i = 0; i < maxRowCount; i++)
+            for (var i = 0; i < maxRowCount; i++)
             {
-                TypeFieldInfo tfi = fieldIndexInfo.QueryTypeFieldInfo(FileDescription.IgnoreUnknownColumns, i);
+                var tfi = fieldIndexInfo.QueryTypeFieldInfo(FileDescription.IgnoreUnknownColumns, i);
                 if (tfi == null) { continue; }
 
                 if (FileDescription.EnforceCsvColumnAttribute &&
@@ -100,10 +98,10 @@ namespace Lte.Domain.LinqToCsv.Mapper
                 }
 
 
-                int index = FileDescription.UseFieldIndexForReadingData ? tfi.Index - 1 : i;
+                var index = FileDescription.UseFieldIndexForReadingData ? tfi.Index - 1 : i;
 
                 // value to put in the object
-                string value = row[index].Value;
+                var value = row[index].Value;
 
                 if (string.IsNullOrEmpty(value) && tfi.TypeName!="String")
                 {
@@ -118,13 +116,14 @@ namespace Lte.Domain.LinqToCsv.Mapper
                 {
                     if (tfi.OutputFormat == "HH:mm:ss.fff")
                     {
-                        value = value.Substring(0, 8) + "." + value.Substring(9);
+                        if (value != null) value = value.Substring(0, 8) + "." + value.Substring(9);
                     }
-                    Object objValue = tfi.UpdateObjectValue(value, FileDescription.FileCultureInfo);
+                    var objValue = tfi.UpdateObjectValue(value, FileDescription.FileCultureInfo);
 
-                    if (tfi.MemberInfo is PropertyInfo)
+                    var info = tfi.MemberInfo as PropertyInfo;
+                    if (info != null)
                     {
-                        ((PropertyInfo) tfi.MemberInfo).SetValue(obj, objValue, null);
+                        info.SetValue(obj, objValue, null);
                     }
                     else
                     {
@@ -133,9 +132,9 @@ namespace Lte.Domain.LinqToCsv.Mapper
                 }
             }
 
-            for (int i = row.Count; i < fieldIndexInfo.IndexToInfo.Length; i++)
+            for (var i = row.Count; i < fieldIndexInfo.IndexToInfo.Length; i++)
             {
-                TypeFieldInfo tfi = fieldIndexInfo.IndexToInfo[i];
+                var tfi = fieldIndexInfo.IndexToInfo[i];
 
                 if (((!FileDescription.EnforceCsvColumnAttribute) || tfi.HasColumnAttribute) &&
                     (!tfi.CanBeNull))
