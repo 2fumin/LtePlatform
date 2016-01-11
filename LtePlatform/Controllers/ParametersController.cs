@@ -97,5 +97,17 @@ namespace LtePlatform.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult ZteNeighborPost()
+        {
+            return View("NeighborImport");
+        }
+
+        [HttpPost]
+        public ActionResult HwNeighborPost(HttpPostedFileBase[] neighborHw)
+        {
+            return View("NeighborImport");
+        }
     }
 }

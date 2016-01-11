@@ -1,18 +1,66 @@
-﻿@model dynamic
-
-@{
-    Layout = null;
+﻿@{
+    ViewBag.Title = "邻区信息导入";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>title</title>
-</head>
-<body>
-<div>
-      
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h2 class="panel-title">
+            <strong>@ViewBag.Title</strong>
+        </h2>
+    </div>
+    <p>
+        @{
+            Html.RenderPartial("_ParametersMenu");
+        }
+    </p>
 </div>
-</body>
-</html>
+
+<div class="row">
+    <div class="col-md-6">
+        @{
+            Html.RenderPartial("_AlertPanel");
+            using (Html.BeginForm("ZteNeighborPost", "Parameters",
+                FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
+            {
+                <div class="form-group">
+                    <label class="col-md-4 control-label">中兴邻区关系导入：</label>
+                    <div class="col-md-6">
+                        <input name="neighborZte" class="form-control" type="file" multiple accept=".csv" />
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-save"></span>导入
+                        </button>
+                    </div>
+                </div>
+            }
+            using (Html.BeginForm("HwNeighborPost", "Parameters",
+                FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
+            {
+                <div class="form-group">
+                    <label class="col-md-4 control-label">华为邻区关系导入：</label>
+                    <div class="col-md-6">
+                        <input name="neighborHw" class="form-control" type="file" multiple accept=".csv" />
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-save"></span>导入
+                        </button>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+    <div class="col-md-6">
+        @{
+            Html.RenderPartial("_AlarmImport");
+        }
+    </div>
+</div>
+
+@section Scripts{
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/knockout")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/parametersAlarmImport")
+}
