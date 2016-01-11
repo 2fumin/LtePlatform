@@ -14,11 +14,14 @@ namespace LtePlatform.Controllers
     {
         private readonly BasicImportService _basicImportService;
         private readonly AlarmsService _alarmsService;
+        private readonly NearestPciCellService _neighborService;
 
-        public ParametersController(BasicImportService basicImportService, AlarmsService alarmsService)
+        public ParametersController(BasicImportService basicImportService, AlarmsService alarmsService,
+            NearestPciCellService neighborService)
         {
             _basicImportService = basicImportService;
             _alarmsService = alarmsService;
+            _neighborService = neighborService;
         }
 
         public ActionResult List()
@@ -99,14 +102,30 @@ namespace LtePlatform.Controllers
         }
 
         [HttpPost]
-        public ActionResult ZteNeighborPost()
+        public ActionResult ZteNeighborPost(HttpPostedFileBase[] neighborZte)
         {
+            if (neighborZte != null && neighborZte.Length > 0 && !string.IsNullOrEmpty(neighborZte[0]?.FileName))
+            {
+                ViewBag.Message = "共上传中兴邻区信息文件" + neighborZte.Length + "个！";
+                foreach (var file in neighborZte)
+                {
+                    _neighborService.UploadZteNeighbors(new StreamReader(file.InputStream, Encoding.GetEncoding("GB2312")));
+                }
+            }
             return View("NeighborImport");
         }
 
         [HttpPost]
         public ActionResult HwNeighborPost(HttpPostedFileBase[] neighborHw)
         {
+            if (neighborHw != null && neighborHw.Length > 0 && !string.IsNullOrEmpty(neighborHw[0]?.FileName))
+            {
+                ViewBag.Message = "共上传华为邻区信息文件" + neighborHw.Length + "个！";
+                foreach (var file in neighborHw)
+                {
+                    _neighborService.UploadHwNeighbors(new StreamReader(file.InputStream, Encoding.GetEncoding("GB2312")));
+                }
+            }
             return View("NeighborImport");
         }
     }
