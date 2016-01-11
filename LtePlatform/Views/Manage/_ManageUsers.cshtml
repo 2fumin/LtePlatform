@@ -1,4 +1,4 @@
-﻿<!-- ko with: manageUsers -->
+﻿<!-- ko with: index -->
 <div class="panel panel-info">
     <div class="panel-heading">
         <h3 class="panel-title">
@@ -16,12 +16,12 @@
                 <th>查询操作</th>
             </tr>
             </thead>
-            <tbody data-bind="foreach: applicationUsers">
+            <tbody data-bind="foreach: manageUsers">
             <tr>
                 <td data-bind="text: userName"></td>
-                <td data-bind="text: eMail"></td>
+                <td data-bind="text: email"></td>
                 <td data-bind="text: phoneNumber"></td>
-                <td data-bind="text: homeTown"></td>
+                <td data-bind="text: hometown"></td>
                 <td></td>
             </tr>
             </tbody>

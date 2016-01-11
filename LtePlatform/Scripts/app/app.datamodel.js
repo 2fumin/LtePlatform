@@ -3,6 +3,7 @@
     // Routes
     self.userInfoUrl = "/api/Me";
     self.siteUrl = "/";
+    self.applicationUsersUrl = "/api/ApplicationUsers";
 
     self.cityListUrl = "/api/CityList";
     self.kpiDataListUrl = "/api/KpiDataList";
