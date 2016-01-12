@@ -72,13 +72,13 @@ namespace ZipLib.Comppression
                     s |= 0x20;
                 }
                 s += 0x1f - (s % 0x1f);
-                pending.WriteShortMSB(s);
+                pending.WriteShortMsb(s);
                 if ((state & 1) != 0)
                 {
                     int adler = engine.Adler;
                     engine.ResetAdler();
-                    pending.WriteShortMSB(adler >> BUSY_STATE);
-                    pending.WriteShortMSB(adler & 0xffff);
+                    pending.WriteShortMsb(adler >> BUSY_STATE);
+                    pending.WriteShortMsb(adler & 0xffff);
                 }
                 state = BUSY_STATE | (state & 12);
             }
@@ -115,8 +115,8 @@ namespace ZipLib.Comppression
                         if (!noZlibHeaderOrFooter)
                         {
                             int num7 = engine.Adler;
-                            pending.WriteShortMSB(num7 >> BUSY_STATE);
-                            pending.WriteShortMSB(num7 & 0xffff);
+                            pending.WriteShortMsb(num7 >> BUSY_STATE);
+                            pending.WriteShortMsb(num7 & 0xffff);
                         }
                         state = FINISHED_STATE;
                     }

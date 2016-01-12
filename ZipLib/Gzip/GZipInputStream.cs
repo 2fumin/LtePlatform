@@ -7,8 +7,8 @@ namespace ZipLib.Gzip
 {
     public class GZipInputStream : InflaterInputStream
     {
-        protected Crc32 crc;
-        private bool readGZIPHeader;
+        private Crc32 _crc;
+        private bool _readGzipHeader;
 
         public GZipInputStream(Stream baseInputStream, int size = 0x1000)
             : base(baseInputStream, new Inflater(true), size)
@@ -20,14 +20,14 @@ namespace ZipLib.Gzip
             int num;
             do
             {
-                if (!readGZIPHeader && !ReadHeader())
+                if (!_readGzipHeader && !ReadHeader())
                 {
                     return 0;
                 }
                 num = Read(buffer, offset, count);
                 if (num > 0)
                 {
-                    crc.Update(buffer, offset, num);
+                    _crc.Update(buffer, offset, num);
                 }
                 if (Inf.IsFinished)
                 {
@@ -56,11 +56,11 @@ namespace ZipLib.Gzip
             int num4 
                 = (((outBuffer[0] & 0xff) | ((outBuffer[1] & 0xff) << 8))
                 | ((outBuffer[2] & 0xff) << GZipConstants.FCOMMENT)) | (outBuffer[3] << 0x18);
-            if (num4 != ((int)crc.Value))
+            if (num4 != ((int)_crc.Value))
             {
                 throw new GZipException(string.Concat(new object[]
                 {
-                    "GZIP crc sum mismatch, theirs \"", num4, "\" and ours \"", (int)crc.Value
+                    "GZIP crc sum mismatch, theirs \"", num4, "\" and ours \"", (int)_crc.Value
                 }));
             }
             uint num5 = (uint)((((outBuffer[4] & 0xff) | ((outBuffer[5] & 0xff) << 8)) 
@@ -69,12 +69,12 @@ namespace ZipLib.Gzip
             {
                 throw new GZipException("Number of bytes mismatch in footer");
             }
-            readGZIPHeader = false;
+            _readGzipHeader = false;
         }
 
         private bool ReadHeader()
         {
-            crc = new Crc32();
+            _crc = new Crc32();
             if (InputBuffer.Available <= 0)
             {
                 InputBuffer.Fill();
@@ -211,7 +211,7 @@ namespace ZipLib.Gzip
                     throw new GZipException("Header CRC value mismatch");
                 }
             }
-            readGZIPHeader = true;
+            _readGzipHeader = true;
             return true;
         }
     }

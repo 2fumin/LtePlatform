@@ -8,13 +8,13 @@ namespace ZipLib.Gzip
 {
     public class GZipOutputStream : DeflaterOutputStream
     {
-        protected Crc32 crc;
-        private OutputState state_;
+        private readonly Crc32 _crc;
+        private OutputState _state;
 
         public GZipOutputStream(Stream baseOutputStream, int size = 0x1000)
             : base(baseOutputStream, new Deflater(-1, true), size)
         {
-            crc = new Crc32();
+            _crc = new Crc32();
         }
 
         public override void Close()
@@ -25,12 +25,12 @@ namespace ZipLib.Gzip
             }
             finally
             {
-                if (state_ != OutputState.Closed)
+                if (_state != OutputState.Closed)
                 {
-                    state_ = OutputState.Closed;
+                    _state = OutputState.Closed;
                     if (IsStreamOwner)
                     {
-                        baseOutputStream_.Close();
+                        BaseOutputStream.Close();
                     }
                 }
             }
@@ -38,25 +38,25 @@ namespace ZipLib.Gzip
 
         public override void Finish()
         {
-            if (state_ == OutputState.Header)
+            if (_state == OutputState.Header)
             {
                 WriteHeader();
             }
-            if (state_ == OutputState.Footer)
+            if (_state == OutputState.Footer)
             {
-                state_ = OutputState.Finished;
+                _state = OutputState.Finished;
                 base.Finish();
-                uint num = (uint)(((ulong)deflater_.TotalIn) & 0xffffffffL);
-                uint num2 = (uint)(((ulong)crc.Value) & 0xffffffffL);
+                uint num = (uint)(((ulong)Deflater.TotalIn) & 0xffffffffL);
+                uint num2 = (uint)(((ulong)_crc.Value) & 0xffffffffL);
                 byte[] buffer = { (byte)num2, (byte)(num2 >> 8), (byte)(num2 >> 0x10), (byte)(num2 >> 0x18),
                     (byte)num, (byte)(num >> 8), (byte)(num >> 0x10), (byte)(num >> 0x18) };
-                baseOutputStream_.Write(buffer, 0, buffer.Length);
+                BaseOutputStream.Write(buffer, 0, buffer.Length);
             }
         }
 
         public int GetLevel()
         {
-            return deflater_.GetLevel();
+            return Deflater.GetLevel();
         }
 
         public void SetLevel(int level)
@@ -65,28 +65,28 @@ namespace ZipLib.Gzip
             {
                 throw new ArgumentOutOfRangeException("level");
             }
-            deflater_.SetLevel(level);
+            Deflater.SetLevel(level);
         }
 
         public override void Write(byte[] buffer, int off, int count)
         {
-            if (state_ == OutputState.Header)
+            if (_state == OutputState.Header)
             {
                 WriteHeader();
             }
-            if (state_ != OutputState.Footer)
+            if (_state != OutputState.Footer)
             {
                 throw new InvalidOperationException("Write not permitted in current state");
             }
-            crc.Update(buffer, off, count);
+            _crc.Update(buffer, off, count);
             base.Write(buffer, off, count);
         }
 
         private void WriteHeader()
         {
-            if (state_ == OutputState.Header)
+            if (_state == OutputState.Header)
             {
-                state_ = OutputState.Footer;
+                _state = OutputState.Footer;
                 DateTime time2 = new DateTime(0x7b2, 1, 1);
                 int num = (int)((DateTime.Now.Ticks - time2.Ticks) / 0x989680L);
                 byte[] buffer2 = { 0x1f, 0x8b, 8, 0, 0, 0, 0, 0, 0, 0xff };
@@ -95,7 +95,7 @@ namespace ZipLib.Gzip
                 buffer2[6] = (byte)(num >> 0x10);
                 buffer2[7] = (byte)(num >> 0x18);
                 byte[] buffer = buffer2;
-                baseOutputStream_.Write(buffer, 0, buffer.Length);
+                BaseOutputStream.Write(buffer, 0, buffer.Length);
             }
         }
 

@@ -4,11 +4,11 @@ namespace ZipLib.Comppression
 {
     public class PendingBuffer
     {
-        private int bitCount;
-        private uint bits;
-        private byte[] buffer_;
-        private int end;
-        private int start;
+        private int _bitCount;
+        private uint _bits;
+        private readonly byte[] _buffer;
+        private int _end;
+        private int _start;
 
         protected PendingBuffer()
             : this(0x1000)
@@ -17,107 +17,107 @@ namespace ZipLib.Comppression
 
         protected PendingBuffer(int bufferSize)
         {
-            buffer_ = new byte[bufferSize];
+            _buffer = new byte[bufferSize];
         }
 
         public void AlignToByte()
         {
-            if (bitCount > 0)
+            if (_bitCount > 0)
             {
-                buffer_[end++] = (byte)bits;
-                if (bitCount > 8)
+                _buffer[_end++] = (byte)_bits;
+                if (_bitCount > 8)
                 {
-                    buffer_[end++] = (byte)(bits >> 8);
+                    _buffer[_end++] = (byte)(_bits >> 8);
                 }
             }
-            bits = 0;
-            bitCount = 0;
+            _bits = 0;
+            _bitCount = 0;
         }
 
         public int Flush(byte[] output, int offset, int length)
         {
-            if (bitCount >= 8)
+            if (_bitCount >= 8)
             {
-                buffer_[end++] = (byte)bits;
-                bits = bits >> 8;
-                bitCount -= 8;
+                _buffer[_end++] = (byte)_bits;
+                _bits = _bits >> 8;
+                _bitCount -= 8;
             }
-            if (length > (end - start))
+            if (length > (_end - _start))
             {
-                length = end - start;
-                Array.Copy(buffer_, start, output, offset, length);
-                start = 0;
-                end = 0;
+                length = _end - _start;
+                Array.Copy(_buffer, _start, output, offset, length);
+                _start = 0;
+                _end = 0;
                 return length;
             }
-            Array.Copy(buffer_, start, output, offset, length);
-            start += length;
+            Array.Copy(_buffer, _start, output, offset, length);
+            _start += length;
             return length;
         }
 
         public void Reset()
         {
-            start = end = bitCount = 0;
+            _start = _end = _bitCount = 0;
         }
 
         public byte[] ToByteArray()
         {
-            byte[] destinationArray = new byte[end - start];
-            Array.Copy(buffer_, start, destinationArray, 0, destinationArray.Length);
-            start = 0;
-            end = 0;
+            byte[] destinationArray = new byte[_end - _start];
+            Array.Copy(_buffer, _start, destinationArray, 0, destinationArray.Length);
+            _start = 0;
+            _end = 0;
             return destinationArray;
         }
 
         public void WriteBits(int b, int count)
         {
-            bits |= (uint)(b << bitCount);
-            bitCount += count;
-            if (bitCount >= 0x10)
+            _bits |= (uint)(b << _bitCount);
+            _bitCount += count;
+            if (_bitCount >= 0x10)
             {
-                buffer_[end++] = (byte)bits;
-                buffer_[end++] = (byte)(bits >> 8);
-                bits = bits >> 0x10;
-                bitCount -= 0x10;
+                _buffer[_end++] = (byte)_bits;
+                _buffer[_end++] = (byte)(_bits >> 8);
+                _bits = _bits >> 0x10;
+                _bitCount -= 0x10;
             }
         }
 
         public void WriteBlock(byte[] block, int offset, int length)
         {
-            Array.Copy(block, offset, buffer_, end, length);
-            end += length;
+            Array.Copy(block, offset, _buffer, _end, length);
+            _end += length;
         }
 
         public void WriteByte(int value)
         {
-            buffer_[end++] = (byte)value;
+            _buffer[_end++] = (byte)value;
         }
 
         public void WriteInt(int value)
         {
-            buffer_[end++] = (byte)value;
-            buffer_[end++] = (byte)(value >> 8);
-            buffer_[end++] = (byte)(value >> 0x10);
-            buffer_[end++] = (byte)(value >> 0x18);
+            _buffer[_end++] = (byte)value;
+            _buffer[_end++] = (byte)(value >> 8);
+            _buffer[_end++] = (byte)(value >> 0x10);
+            _buffer[_end++] = (byte)(value >> 0x18);
         }
 
         public void WriteShort(int value)
         {
-            buffer_[end++] = (byte)value;
-            buffer_[end++] = (byte)(value >> 8);
+            _buffer[_end++] = (byte)value;
+            _buffer[_end++] = (byte)(value >> 8);
         }
 
-        public void WriteShortMSB(int s)
+        public void WriteShortMsb(int s)
         {
-            buffer_[end++] = (byte)(s >> 8);
-            buffer_[end++] = (byte)s;
+            _buffer[_end++] = (byte)(s >> 8);
+            _buffer[_end++] = (byte)s;
         }
 
         public int BitCount
         {
             get
             {
-                return bitCount;
+                return _bitCount;
             }
         }
 
@@ -125,7 +125,7 @@ namespace ZipLib.Comppression
         {
             get
             {
-                return (end == 0);
+                return (_end == 0);
             }
         }
     }

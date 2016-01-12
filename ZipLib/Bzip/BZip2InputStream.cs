@@ -6,52 +6,52 @@ namespace ZipLib.Bzip
 {
     public class BZip2InputStream : Stream
     {
-        private int[][] baseArray = new int[6][];
-        private Stream baseStream;
-        private bool blockRandomised;
-        private int blockSize100k;
-        private int bsBuff;
-        private int bsLive;
-        private int ch2;
-        private int chPrev;
-        private int computedBlockCRC;
-        private uint computedCombinedCRC;
-        private int count;
-        private int currentChar = -1;
-        private int currentState = 1;
-        private int i2;
-        private bool[] inUse = new bool[0x100];
-        private bool isStreamOwner = true;
-        private int j2;
-        private int last;
-        private int[][] limit = new int[6][];
-        private byte[] ll8;
-        private IChecksum mCrc = new StrangeCRC();
-        private int[] minLens = new int[6];
-        private int nInUse;
-        private int origPtr;
-        private int[][] perm = new int[6][];
-        private int rNToGo;
-        private int rTPos;
-        private byte[] selector = new byte[0x4652];
-        private byte[] selectorMtf = new byte[0x4652];
-        private byte[] seqToUnseq = new byte[0x100];
-        private int storedBlockCRC;
-        private int storedCombinedCRC;
-        private bool streamEnd;
-        private int tPos;
-        private int[] tt;
-        private byte[] unseqToSeq = new byte[0x100];
-        private int[] unzftab = new int[0x100];
-        private byte z;
+        private readonly int[][] _baseArray = new int[6][];
+        private Stream _baseStream;
+        private bool _blockRandomised;
+        private int _blockSize100K;
+        private int _bsBuff;
+        private int _bsLive;
+        private int _ch2;
+        private int _chPrev;
+        private int _computedBlockCrc;
+        private uint _computedCombinedCrc;
+        private int _count;
+        private int _currentChar = -1;
+        private int _currentState = 1;
+        private int _i2;
+        private readonly bool[] _inUse = new bool[0x100];
+        private bool _isStreamOwner = true;
+        private int _j2;
+        private int _last;
+        private readonly int[][] _limit = new int[6][];
+        private byte[] _ll8;
+        private readonly IChecksum _mCrc = new StrangeCRC();
+        private readonly int[] _minLens = new int[6];
+        private int _nInUse;
+        private int _origPtr;
+        private readonly int[][] _perm = new int[6][];
+        private int _rNToGo;
+        private int _rTPos;
+        private readonly byte[] _selector = new byte[0x4652];
+        private readonly byte[] _selectorMtf = new byte[0x4652];
+        private readonly byte[] _seqToUnseq = new byte[0x100];
+        private int _storedBlockCrc;
+        private int _storedCombinedCrc;
+        private bool _streamEnd;
+        private int _tPos;
+        private int[] _tt;
+        private readonly byte[] _unseqToSeq = new byte[0x100];
+        private readonly int[] _unzftab = new int[0x100];
+        private byte _z;
 
         public BZip2InputStream(Stream stream)
         {
             for (int i = 0; i < 6; i++)
             {
-                limit[i] = new int[0x102];
-                baseArray[i] = new int[0x102];
-                perm[i] = new int[0x102];
+                _limit[i] = new int[0x102];
+                _baseArray[i] = new int[0x102];
+                _perm[i] = new int[0x102];
             }
             BsSetStream(stream);
             Initialize();
@@ -76,7 +76,7 @@ namespace ZipLib.Bzip
             return ((num << 8) | BsR(8));
         }
 
-        private int BsGetIntVS(int numBits)
+        private int BsGetIntVs(int numBits)
         {
             return BsR(numBits);
         }
@@ -88,41 +88,41 @@ namespace ZipLib.Bzip
 
         private int BsR(int n)
         {
-            while (bsLive < n)
+            while (_bsLive < n)
             {
                 FillBuffer();
             }
-            int num = (bsBuff >> (bsLive - n)) & ((1 << n) - 1);
-            bsLive -= n;
+            int num = (_bsBuff >> (_bsLive - n)) & ((1 << n) - 1);
+            _bsLive -= n;
             return num;
         }
 
         private void BsSetStream(Stream stream)
         {
-            baseStream = stream;
-            bsLive = 0;
-            bsBuff = 0;
+            _baseStream = stream;
+            _bsLive = 0;
+            _bsBuff = 0;
         }
 
         public override void Close()
         {
-            if (IsStreamOwner && (baseStream != null))
+            if (IsStreamOwner && (_baseStream != null))
             {
-                baseStream.Close();
+                _baseStream.Close();
             }
         }
 
         private void Complete()
         {
-            storedCombinedCRC = BsGetInt32();
-            if (storedCombinedCRC != computedCombinedCRC)
+            _storedCombinedCrc = BsGetInt32();
+            if (_storedCombinedCrc != _computedCombinedCrc)
             {
                 CrcError();
             }
-            streamEnd = true;
+            _streamEnd = true;
         }
 
-        private static void CompressedStreamEOF()
+        private static void CompressedStreamEof()
         {
             throw new EndOfStreamException("BZip2 input stream end of compressed stream");
         }
@@ -134,13 +134,13 @@ namespace ZipLib.Bzip
 
         private void EndBlock()
         {
-            computedBlockCRC = (int)mCrc.Value;
-            if (storedBlockCRC != computedBlockCRC)
+            _computedBlockCrc = (int)_mCrc.Value;
+            if (_storedBlockCrc != _computedBlockCrc)
             {
                 CrcError();
             }
-            computedCombinedCRC = ((computedCombinedCRC << 1) & uint.MaxValue) | (computedCombinedCRC >> 0x1f);
-            computedCombinedCRC ^= (uint)computedBlockCRC;
+            _computedCombinedCrc = ((_computedCombinedCrc << 1) & uint.MaxValue) | (_computedCombinedCrc >> 0x1f);
+            _computedCombinedCrc ^= (uint)_computedBlockCrc;
         }
 
         private void FillBuffer()
@@ -148,25 +148,25 @@ namespace ZipLib.Bzip
             int num = 0;
             try
             {
-                num = baseStream.ReadByte();
+                num = _baseStream.ReadByte();
             }
             catch (Exception)
             {
-                CompressedStreamEOF();
+                CompressedStreamEof();
             }
             if (num == -1)
             {
-                CompressedStreamEOF();
+                CompressedStreamEof();
             }
-            bsBuff = (bsBuff << 8) | (num & 0xff);
-            bsLive += 8;
+            _bsBuff = (_bsBuff << 8) | (num & 0xff);
+            _bsLive += 8;
         }
 
         public override void Flush()
         {
-            if (baseStream != null)
+            if (_baseStream != null)
             {
-                baseStream.Flush();
+                _baseStream.Flush();
             }
         }
 
@@ -174,50 +174,50 @@ namespace ZipLib.Bzip
         {
             int num11;
             byte[] buffer = new byte[0x100];
-            int num2 = 0x186a0 * blockSize100k;
-            origPtr = BsGetIntVS(0x18);
+            int num2 = 0x186a0 * _blockSize100K;
+            _origPtr = BsGetIntVs(0x18);
             RecvDecodingTables();
-            int num3 = nInUse + 1;
+            int num3 = _nInUse + 1;
             int index = -1;
             int num5 = 0;
             for (int i = 0; i <= 0xff; i++)
             {
-                unzftab[i] = 0;
+                _unzftab[i] = 0;
             }
             for (int j = 0; j <= 0xff; j++)
             {
                 buffer[j] = (byte)j;
             }
-            last = -1;
+            _last = -1;
             if (num5 == 0)
             {
                 index++;
                 num5 = 50;
             }
             num5--;
-            int num8 = selector[index];
-            int n = minLens[num8];
+            int num8 = _selector[index];
+            int n = _minLens[num8];
             int num10 = BsR(n);
-            while (num10 > limit[num8][n])
+            while (num10 > _limit[num8][n])
             {
                 if (n > 20)
                 {
                     throw new BZip2Exception("Bzip data error");
                 }
                 n++;
-                while (bsLive < 1)
+                while (_bsLive < 1)
                 {
                     FillBuffer();
                 }
-                num11 = (bsBuff >> (bsLive - 1)) & 1;
-                bsLive--;
+                num11 = (_bsBuff >> (_bsLive - 1)) & 1;
+                _bsLive--;
                 num10 = (num10 << 1) | num11;
             }
-            if (((num10 - baseArray[num8][n]) < 0) || ((num10 - baseArray[num8][n]) >= 0x102))
+            if (((num10 - _baseArray[num8][n]) < 0) || ((num10 - _baseArray[num8][n]) >= 0x102))
             {
                 throw new BZip2Exception("Bzip data error");
             }
-            int num = perm[num8][num10 - baseArray[num8][n]];
+            int num = _perm[num8][num10 - _baseArray[num8][n]];
         Label_0163:
             if (num == num3)
             {
@@ -225,14 +225,14 @@ namespace ZipLib.Bzip
             }
             if ((num != 0) && (num != 1))
             {
-                last++;
-                if (last >= num2)
+                _last++;
+                if (_last >= num2)
                 {
                     BlockOverrun();
                 }
                 byte num15 = buffer[num - 1];
-                unzftab[seqToUnseq[num15]]++;
-                ll8[last] = seqToUnseq[num15];
+                _unzftab[_seqToUnseq[num15]]++;
+                _ll8[_last] = _seqToUnseq[num15];
                 for (int k = num - 1; k > 0; k--)
                 {
                     buffer[k] = buffer[k - 1];
@@ -244,21 +244,21 @@ namespace ZipLib.Bzip
                     num5 = 50;
                 }
                 num5--;
-                num8 = selector[index];
-                n = minLens[num8];
+                num8 = _selector[index];
+                n = _minLens[num8];
                 num10 = BsR(n);
-                while (num10 > limit[num8][n])
+                while (num10 > _limit[num8][n])
                 {
                     n++;
-                    while (bsLive < 1)
+                    while (_bsLive < 1)
                     {
                         FillBuffer();
                     }
-                    num11 = (bsBuff >> (bsLive - 1)) & 1;
-                    bsLive--;
+                    num11 = (_bsBuff >> (_bsLive - 1)) & 1;
+                    _bsLive--;
                     num10 = (num10 << 1) | num11;
                 }
-                num = perm[num8][num10 - baseArray[num8][n]];
+                num = _perm[num8][num10 - _baseArray[num8][n]];
                 goto Label_0163;
             }
             int num12 = -1;
@@ -281,36 +281,36 @@ namespace ZipLib.Bzip
                 num5 = 50;
             }
             num5--;
-            num8 = selector[index];
-            n = minLens[num8];
+            num8 = _selector[index];
+            n = _minLens[num8];
             num10 = BsR(n);
-            while (num10 > limit[num8][n])
+            while (num10 > _limit[num8][n])
             {
                 n++;
-                while (bsLive < 1)
+                while (_bsLive < 1)
                 {
                     FillBuffer();
                 }
-                num11 = (bsBuff >> (bsLive - 1)) & 1;
-                bsLive--;
+                num11 = (_bsBuff >> (_bsLive - 1)) & 1;
+                _bsLive--;
                 num10 = (num10 << 1) | num11;
             }
-            switch (perm[num8][num10 - baseArray[num8][n]])
+            switch (_perm[num8][num10 - _baseArray[num8][n]])
             {
                 case 0:
                 case 1:
                     goto Label_0178;
             }
             num12++;
-            byte num14 = seqToUnseq[buffer[0]];
-            unzftab[num14] += num12;
+            byte num14 = _seqToUnseq[buffer[0]];
+            _unzftab[num14] += num12;
             while (num12 > 0)
             {
-                last++;
-                ll8[last] = num14;
+                _last++;
+                _ll8[_last] = num14;
                 num12--;
             }
-            if (last >= num2)
+            if (_last >= num2)
             {
                 BlockOverrun();
             }
@@ -363,57 +363,57 @@ namespace ZipLib.Bzip
         private void InitBlock()
         {
             char ch = BsGetUChar();
-            ch2 = BsGetUChar();
+            _ch2 = BsGetUChar();
             char ch3 = BsGetUChar();
             char ch4 = BsGetUChar();
             char ch5 = BsGetUChar();
             char ch6 = BsGetUChar();
-            if ((((ch == '\x0017') && (ch2 == 'r')) && ((ch3 == 'E') && (ch4 == '8'))) && ((ch5 == 'P') && (ch6 == '\x0090')))
+            if ((((ch == '\x0017') && (_ch2 == 'r')) && ((ch3 == 'E') && (ch4 == '8'))) && ((ch5 == 'P') && (ch6 == '\x0090')))
             {
                 Complete();
             }
-            else if ((((ch != '1') || (ch2 != 'A')) || ((ch3 != 'Y') || (ch4 != '&'))) || ((ch5 != 'S') || (ch6 != 'Y')))
+            else if ((((ch != '1') || (_ch2 != 'A')) || ((ch3 != 'Y') || (ch4 != '&'))) || ((ch5 != 'S') || (ch6 != 'Y')))
             {
                 BadBlockHeader();
-                streamEnd = true;
+                _streamEnd = true;
             }
             else
             {
-                storedBlockCRC = BsGetInt32();
-                blockRandomised = BsR(1) == 1;
+                _storedBlockCrc = BsGetInt32();
+                _blockRandomised = BsR(1) == 1;
                 GetAndMoveToFrontDecode();
-                mCrc.Reset();
-                currentState = 1;
+                _mCrc.Reset();
+                _currentState = 1;
             }
         }
 
         private void Initialize()
         {
             char ch = BsGetUChar();
-            ch2 = BsGetUChar();
+            _ch2 = BsGetUChar();
             char ch3 = BsGetUChar();
             char ch4 = BsGetUChar();
-            if (((ch != 'B') || (ch2 != 'Z')) || (((ch3 != 'h') || (ch4 < '1')) || (ch4 > '9')))
+            if (((ch != 'B') || (_ch2 != 'Z')) || (((ch3 != 'h') || (ch4 < '1')) || (ch4 > '9')))
             {
-                streamEnd = true;
+                _streamEnd = true;
             }
             else
             {
                 SetDecompressStructureSizes(ch4 - '0');
-                computedCombinedCRC = 0;
+                _computedCombinedCrc = 0;
             }
         }
 
         private void MakeMaps()
         {
-            nInUse = 0;
+            _nInUse = 0;
             for (int i = 0; i < 0x100; i++)
             {
-                if (inUse[i])
+                if (_inUse[i])
                 {
-                    seqToUnseq[nInUse] = (byte)i;
-                    unseqToSeq[i] = (byte)nInUse;
-                    nInUse++;
+                    _seqToUnseq[_nInUse] = (byte)i;
+                    _unseqToSeq[i] = (byte)_nInUse;
+                    _nInUse++;
                 }
             }
         }
@@ -438,35 +438,35 @@ namespace ZipLib.Bzip
 
         public override int ReadByte()
         {
-            if (streamEnd)
+            if (_streamEnd)
             {
                 return -1;
             }
 
-            switch (currentState)
+            switch (_currentState)
             {
                 case 1:
                 case 2:
                 case 5:
-                    return currentChar;
+                    return _currentChar;
 
                 case 3:
                     SetupRandPartB();
-                    return currentChar;
+                    return _currentChar;
 
                 case 4:
                     SetupRandPartC();
-                    return currentChar;
+                    return _currentChar;
 
                 case 6:
                     SetupNoRandPartB();
-                    return currentChar;
+                    return _currentChar;
 
                 case 7:
                     SetupNoRandPartC();
-                    return currentChar;
+                    return _currentChar;
             }
-            return currentChar;
+            return _currentChar;
         }
 
         private void RecvDecodingTables()
@@ -487,19 +487,19 @@ namespace ZipLib.Bzip
                 {
                     for (int num4 = 0; num4 < 0x10; num4++)
                     {
-                        inUse[(k * 0x10) + num4] = BsR(1) == 1;
+                        _inUse[(k * 0x10) + num4] = BsR(1) == 1;
                     }
                 }
                 else
                 {
                     for (int num5 = 0; num5 < 0x10; num5++)
                     {
-                        inUse[(k * 0x10) + num5] = false;
+                        _inUse[(k * 0x10) + num5] = false;
                     }
                 }
             }
             MakeMaps();
-            int alphaSize = nInUse + 2;
+            int alphaSize = _nInUse + 2;
             int num7 = BsR(3);
             int num8 = BsR(15);
             for (int m = 0; m < num8; m++)
@@ -509,7 +509,7 @@ namespace ZipLib.Bzip
                 {
                     num10++;
                 }
-                selectorMtf[m] = (byte)num10;
+                _selectorMtf[m] = (byte)num10;
             }
             byte[] buffer = new byte[6];
             for (int n = 0; n < num7; n++)
@@ -518,7 +518,7 @@ namespace ZipLib.Bzip
             }
             for (int num12 = 0; num12 < num8; num12++)
             {
-                int index = selectorMtf[num12];
+                int index = _selectorMtf[num12];
                 byte num14 = buffer[index];
                 while (index > 0)
                 {
@@ -526,7 +526,7 @@ namespace ZipLib.Bzip
                     index--;
                 }
                 buffer[0] = num14;
-                selector[num12] = num14;
+                _selector[num12] = num14;
             }
             for (int num15 = 0; num15 < num7; num15++)
             {
@@ -564,8 +564,8 @@ namespace ZipLib.Bzip
                     num20 = Math.Max(num20, chArray[num18][num21]);
                     num19 = Math.Min(num19, chArray[num18][num21]);
                 }
-                HbCreateDecodeTables(limit[num18], baseArray[num18], perm[num18], chArray[num18], num19, num20, alphaSize);
-                minLens[num18] = num19;
+                HbCreateDecodeTables(_limit[num18], _baseArray[num18], _perm[num18], chArray[num18], num19, num20, alphaSize);
+                _minLens[num18] = num19;
             }
         }
 
@@ -574,18 +574,18 @@ namespace ZipLib.Bzip
             throw new NotSupportedException("BZip2InputStream Seek not supported");
         }
 
-        private void SetDecompressStructureSizes(int newSize100k)
+        private void SetDecompressStructureSizes(int newSize100K)
         {
-            if (((0 > newSize100k) || (newSize100k > 9)) || ((0 > blockSize100k) || (blockSize100k > 9)))
+            if (((0 > newSize100K) || (newSize100K > 9)) || ((0 > _blockSize100K) || (_blockSize100K > 9)))
             {
                 throw new BZip2Exception("Invalid block size");
             }
-            blockSize100k = newSize100k;
-            if (newSize100k != 0)
+            _blockSize100K = newSize100K;
+            if (newSize100K != 0)
             {
-                int num = 0x186a0 * newSize100k;
-                ll8 = new byte[num];
-                tt = new int[num];
+                int num = 0x186a0 * newSize100K;
+                _ll8 = new byte[num];
+                _tt = new int[num];
             }
         }
 
@@ -598,25 +598,25 @@ namespace ZipLib.Bzip
         {
             int[] destinationArray = new int[0x101];
             destinationArray[0] = 0;
-            Array.Copy(unzftab, 0, destinationArray, 1, 0x100);
+            Array.Copy(_unzftab, 0, destinationArray, 1, 0x100);
             for (int i = 1; i <= 0x100; i++)
             {
                 destinationArray[i] += destinationArray[i - 1];
             }
-            for (int j = 0; j <= last; j++)
+            for (int j = 0; j <= _last; j++)
             {
-                byte index = ll8[j];
-                tt[destinationArray[index]] = j;
+                byte index = _ll8[j];
+                _tt[destinationArray[index]] = j;
                 destinationArray[index]++;
             }
-            tPos = tt[origPtr];
-            count = 0;
-            i2 = 0;
-            ch2 = 0x100;
-            if (blockRandomised)
+            _tPos = _tt[_origPtr];
+            _count = 0;
+            _i2 = 0;
+            _ch2 = 0x100;
+            if (_blockRandomised)
             {
-                rNToGo = 0;
-                rTPos = 0;
+                _rNToGo = 0;
+                _rTPos = 0;
                 SetupRandPartA();
             }
             else
@@ -627,15 +627,15 @@ namespace ZipLib.Bzip
 
         private void SetupNoRandPartA()
         {
-            if (i2 <= last)
+            if (_i2 <= _last)
             {
-                chPrev = ch2;
-                ch2 = ll8[tPos];
-                tPos = tt[tPos];
-                i2++;
-                currentChar = ch2;
-                currentState = 6;
-                mCrc.Update(ch2);
+                _chPrev = _ch2;
+                _ch2 = _ll8[_tPos];
+                _tPos = _tt[_tPos];
+                _i2++;
+                _currentChar = _ch2;
+                _currentState = 6;
+                _mCrc.Update(_ch2);
             }
             else
             {
@@ -647,26 +647,26 @@ namespace ZipLib.Bzip
 
         private void SetupNoRandPartB()
         {
-            if (ch2 != chPrev)
+            if (_ch2 != _chPrev)
             {
-                currentState = 5;
-                count = 1;
+                _currentState = 5;
+                _count = 1;
                 SetupNoRandPartA();
             }
             else
             {
-                count++;
-                if (count >= 4)
+                _count++;
+                if (_count >= 4)
                 {
-                    z = ll8[tPos];
-                    tPos = tt[tPos];
-                    currentState = 7;
-                    j2 = 0;
+                    _z = _ll8[_tPos];
+                    _tPos = _tt[_tPos];
+                    _currentState = 7;
+                    _j2 = 0;
                     SetupNoRandPartC();
                 }
                 else
                 {
-                    currentState = 5;
+                    _currentState = 5;
                     SetupNoRandPartA();
                 }
             }
@@ -674,43 +674,43 @@ namespace ZipLib.Bzip
 
         private void SetupNoRandPartC()
         {
-            if (j2 < z)
+            if (_j2 < _z)
             {
-                currentChar = ch2;
-                mCrc.Update(ch2);
-                j2++;
+                _currentChar = _ch2;
+                _mCrc.Update(_ch2);
+                _j2++;
             }
             else
             {
-                currentState = 5;
-                i2++;
-                count = 0;
+                _currentState = 5;
+                _i2++;
+                _count = 0;
                 SetupNoRandPartA();
             }
         }
 
         private void SetupRandPartA()
         {
-            if (i2 <= last)
+            if (_i2 <= _last)
             {
-                chPrev = ch2;
-                ch2 = ll8[tPos];
-                tPos = tt[tPos];
-                if (rNToGo == 0)
+                _chPrev = _ch2;
+                _ch2 = _ll8[_tPos];
+                _tPos = _tt[_tPos];
+                if (_rNToGo == 0)
                 {
-                    rNToGo = BZip2Constants.RandomNumbers[rTPos];
-                    rTPos++;
-                    if (rTPos == 0x200)
+                    _rNToGo = BZip2Constants.RandomNumbers[_rTPos];
+                    _rTPos++;
+                    if (_rTPos == 0x200)
                     {
-                        rTPos = 0;
+                        _rTPos = 0;
                     }
                 }
-                rNToGo--;
-                ch2 ^= (rNToGo == 1) ? 1 : 0;
-                i2++;
-                currentChar = ch2;
-                currentState = 3;
-                mCrc.Update(ch2);
+                _rNToGo--;
+                _ch2 ^= (_rNToGo == 1) ? 1 : 0;
+                _i2++;
+                _currentChar = _ch2;
+                _currentState = 3;
+                _mCrc.Update(_ch2);
             }
             else
             {
@@ -722,37 +722,37 @@ namespace ZipLib.Bzip
 
         private void SetupRandPartB()
         {
-            if (ch2 != chPrev)
+            if (_ch2 != _chPrev)
             {
-                currentState = 2;
-                count = 1;
+                _currentState = 2;
+                _count = 1;
                 SetupRandPartA();
             }
             else
             {
-                count++;
-                if (count >= 4)
+                _count++;
+                if (_count >= 4)
                 {
-                    z = ll8[tPos];
-                    tPos = tt[tPos];
-                    if (rNToGo == 0)
+                    _z = _ll8[_tPos];
+                    _tPos = _tt[_tPos];
+                    if (_rNToGo == 0)
                     {
-                        rNToGo = BZip2Constants.RandomNumbers[rTPos];
-                        rTPos++;
-                        if (rTPos == 0x200)
+                        _rNToGo = BZip2Constants.RandomNumbers[_rTPos];
+                        _rTPos++;
+                        if (_rTPos == 0x200)
                         {
-                            rTPos = 0;
+                            _rTPos = 0;
                         }
                     }
-                    rNToGo--;
-                    z = (byte)(z ^ ((rNToGo == 1) ? 1 : 0));
-                    j2 = 0;
-                    currentState = 4;
+                    _rNToGo--;
+                    _z = (byte)(_z ^ ((_rNToGo == 1) ? 1 : 0));
+                    _j2 = 0;
+                    _currentState = 4;
                     SetupRandPartC();
                 }
                 else
                 {
-                    currentState = 2;
+                    _currentState = 2;
                     SetupRandPartA();
                 }
             }
@@ -760,17 +760,17 @@ namespace ZipLib.Bzip
 
         private void SetupRandPartC()
         {
-            if (j2 < z)
+            if (_j2 < _z)
             {
-                currentChar = ch2;
-                mCrc.Update(ch2);
-                j2++;
+                _currentChar = _ch2;
+                _mCrc.Update(_ch2);
+                _j2++;
             }
             else
             {
-                currentState = 2;
-                i2++;
-                count = 0;
+                _currentState = 2;
+                _i2++;
+                _count = 0;
                 SetupRandPartA();
             }
         }
@@ -785,55 +785,31 @@ namespace ZipLib.Bzip
             throw new NotSupportedException("BZip2InputStream WriteByte not supported");
         }
 
-        public override bool CanRead
-        {
-            get
-            {
-                return baseStream.CanRead;
-            }
-        }
+        public override bool CanRead => _baseStream.CanRead;
 
-        public override bool CanSeek
-        {
-            get
-            {
-                return baseStream.CanSeek;
-            }
-        }
+        public override bool CanSeek => _baseStream.CanSeek;
 
-        public override bool CanWrite
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public override bool CanWrite => false;
 
         public bool IsStreamOwner
         {
             get
             {
-                return isStreamOwner;
+                return _isStreamOwner;
             }
             set
             {
-                isStreamOwner = value;
+                _isStreamOwner = value;
             }
         }
 
-        public override long Length
-        {
-            get
-            {
-                return baseStream.Length;
-            }
-        }
+        public override long Length => _baseStream.Length;
 
         public override long Position
         {
             get
             {
-                return baseStream.Position;
+                return _baseStream.Position;
             }
             set
             {

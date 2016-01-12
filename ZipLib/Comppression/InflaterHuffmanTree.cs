@@ -5,9 +5,9 @@ namespace ZipLib.Comppression
 {
     public class InflaterHuffmanTree
     {
-        public static InflaterHuffmanTree defDistTree;
-        public static InflaterHuffmanTree defLitLenTree;
-        private short[] tree;
+        public static readonly InflaterHuffmanTree DefDistTree;
+        public static readonly InflaterHuffmanTree DefLitLenTree;
+        private short[] _tree;
 
         static InflaterHuffmanTree()
         {
@@ -31,14 +31,14 @@ namespace ZipLib.Comppression
                 {
                     codeLengths[num++] = 8;
                 }
-                defLitLenTree = new InflaterHuffmanTree(codeLengths);
+                DefLitLenTree = new InflaterHuffmanTree(codeLengths);
                 codeLengths = new byte[0x20];
                 num = 0;
                 while (num < 0x20)
                 {
                     codeLengths[num++] = 5;
                 }
-                defDistTree = new InflaterHuffmanTree(codeLengths);
+                DefDistTree = new InflaterHuffmanTree(codeLengths);
             }
             catch (Exception)
             {
@@ -76,7 +76,7 @@ namespace ZipLib.Comppression
                     num4 += (num7 - num6) >> (0x10 - j);
                 }
             }
-            tree = new short[num4];
+            _tree = new short[num4];
             int num8 = 0x200;
             for (int k = 15; k >= 10; k--)
             {
@@ -85,7 +85,7 @@ namespace ZipLib.Comppression
                 int num11 = toReverse & 0x1ff80;
                 for (int n = num11; n < num10; n += 0x80)
                 {
-                    tree[DeflaterHuffman.BitReverse(n)] = (short)((-num8 << 4) | k);
+                    _tree[DeflaterHuffman.BitReverse(n)] = (short)((-num8 << 4) | k);
                     num8 += 1 << (k - 9);
                 }
             }
@@ -100,19 +100,19 @@ namespace ZipLib.Comppression
                     {
                         do
                         {
-                            tree[num15] = (short)((m << 4) | num14);
+                            _tree[num15] = (short)((m << 4) | num14);
                             num15 += 1 << num14;
                         }
                         while (num15 < 0x200);
                     }
                     else
                     {
-                        int num16 = tree[num15 & 0x1ff];
+                        int num16 = _tree[num15 & 0x1ff];
                         int num17 = 1 << (num16 & 15);
                         num16 = -(num16 >> 4);
                         do
                         {
-                            tree[num16 | (num15 >> 9)] = (short)((m << 4) | num14);
+                            _tree[num16 | (num15 >> 9)] = (short)((m << 4) | num14);
                             num15 += 1 << num14;
                         }
                         while (num15 < num17);
@@ -128,7 +128,7 @@ namespace ZipLib.Comppression
             int index = input.PeekBits(9);
             if (index >= 0)
             {
-                num2 = tree[index];
+                num2 = _tree[index];
                 if (num2 >= 0)
                 {
                     input.DropBits(num2 & 15);
@@ -139,13 +139,13 @@ namespace ZipLib.Comppression
                 index = input.PeekBits(bitCount);
                 if (index >= 0)
                 {
-                    num2 = tree[num3 | (index >> 9)];
+                    num2 = _tree[num3 | (index >> 9)];
                     input.DropBits(num2 & 15);
                     return (num2 >> 4);
                 }
                 int num5 = input.AvailableBits;
                 index = input.PeekBits(num5);
-                num2 = tree[num3 | (index >> 9)];
+                num2 = _tree[num3 | (index >> 9)];
                 if ((num2 & 15) <= num5)
                 {
                     input.DropBits(num2 & 15);
@@ -155,7 +155,7 @@ namespace ZipLib.Comppression
             }
             int availableBits = input.AvailableBits;
             index = input.PeekBits(availableBits);
-            num2 = tree[index];
+            num2 = _tree[index];
             if ((num2 >= 0) && ((num2 & 15) <= availableBits))
             {
                 input.DropBits(num2 & 15);

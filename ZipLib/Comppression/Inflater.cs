@@ -103,8 +103,8 @@ namespace ZipLib.Comppression
                                 goto Label_0134;
 
                             case 1:
-                                litlenTree = InflaterHuffmanTree.defLitLenTree;
-                                distTree = InflaterHuffmanTree.defDistTree;
+                                litlenTree = InflaterHuffmanTree.DefLitLenTree;
+                                distTree = InflaterHuffmanTree.DefDistTree;
                                 mode = 7;
                                 goto Label_0134;
 

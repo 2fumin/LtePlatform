@@ -11,14 +11,14 @@ namespace ZipLib.Streams
     public class DeflaterOutputStream : Stream
     {
         private static RNGCryptoServiceProvider _aesRnd;
-        protected byte[] AESAuthCode;
-        protected Stream baseOutputStream_;
-        private byte[] buffer_;
-        private ICryptoTransform cryptoTransform_;
-        protected Deflater deflater_;
-        private bool isClosed_;
-        private bool isStreamOwner_;
-        private string password;
+        protected byte[] AesAuthCode;
+        protected readonly Stream BaseOutputStream;
+        private readonly byte[] _buffer;
+        private ICryptoTransform _cryptoTransform;
+        protected readonly Deflater Deflater;
+        private bool _isClosed;
+        private bool _isStreamOwner;
+        private string _password;
 
         public DeflaterOutputStream(Stream baseOutputStream)
             : this(baseOutputStream, new Deflater())
@@ -27,7 +27,7 @@ namespace ZipLib.Streams
 
         public DeflaterOutputStream(Stream baseOutputStream, Deflater deflater, int bufferSize = 0x200)
         {
-            isStreamOwner_ = true;
+            _isStreamOwner = true;
             if (baseOutputStream == null)
             {
                 throw new ArgumentNullException("baseOutputStream");
@@ -44,9 +44,9 @@ namespace ZipLib.Streams
             {
                 throw new ArgumentOutOfRangeException("bufferSize");
             }
-            baseOutputStream_ = baseOutputStream;
-            buffer_ = new byte[bufferSize];
-            deflater_ = deflater;
+            BaseOutputStream = baseOutputStream;
+            _buffer = new byte[bufferSize];
+            Deflater = deflater;
         }
 
         public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
@@ -61,24 +61,24 @@ namespace ZipLib.Streams
 
         public override void Close()
         {
-            if (!isClosed_)
+            if (!_isClosed)
             {
-                isClosed_ = true;
+                _isClosed = true;
                 try
                 {
                     Finish();
-                    if (cryptoTransform_ != null)
+                    if (_cryptoTransform != null)
                     {
-                        GetAuthCodeIfAES();
-                        cryptoTransform_.Dispose();
-                        cryptoTransform_ = null;
+                        GetAuthCodeIfAes();
+                        _cryptoTransform.Dispose();
+                        _cryptoTransform = null;
                     }
                 }
                 finally
                 {
-                    if (isStreamOwner_)
+                    if (_isStreamOwner)
                     {
-                        baseOutputStream_.Close();
+                        BaseOutputStream.Close();
                     }
                 }
             }
@@ -86,20 +86,20 @@ namespace ZipLib.Streams
 
         protected void Deflate()
         {
-            while (!deflater_.IsNeedingInput)
+            while (!Deflater.IsNeedingInput)
             {
-                int length = deflater_.Deflate(buffer_, 0, buffer_.Length);
+                int length = Deflater.Deflate(_buffer, 0, _buffer.Length);
                 if (length <= 0)
                 {
                     break;
                 }
-                if (cryptoTransform_ != null)
+                if (_cryptoTransform != null)
                 {
-                    EncryptBlock(buffer_, 0, length);
+                    EncryptBlock(_buffer, 0, length);
                 }
-                baseOutputStream_.Write(buffer_, 0, length);
+                BaseOutputStream.Write(_buffer, 0, length);
             }
-            if (!deflater_.IsNeedingInput)
+            if (!Deflater.IsNeedingInput)
             {
                 throw new SharpZipBaseException("DeflaterOutputStream can't deflate all input?");
             }
@@ -107,58 +107,58 @@ namespace ZipLib.Streams
 
         protected void EncryptBlock(byte[] buffer, int offset, int length)
         {
-            cryptoTransform_.TransformBlock(buffer, 0, length, buffer, 0);
+            _cryptoTransform.TransformBlock(buffer, 0, length, buffer, 0);
         }
 
         public virtual void Finish()
         {
-            deflater_.Finish();
-            while (!deflater_.IsFinished)
+            Deflater.Finish();
+            while (!Deflater.IsFinished)
             {
-                int length = deflater_.Deflate(buffer_, 0, buffer_.Length);
+                int length = Deflater.Deflate(_buffer, 0, _buffer.Length);
                 if (length <= 0)
                 {
                     break;
                 }
-                if (cryptoTransform_ != null)
+                if (_cryptoTransform != null)
                 {
-                    EncryptBlock(buffer_, 0, length);
+                    EncryptBlock(_buffer, 0, length);
                 }
-                baseOutputStream_.Write(buffer_, 0, length);
+                BaseOutputStream.Write(_buffer, 0, length);
             }
-            if (!deflater_.IsFinished)
+            if (!Deflater.IsFinished)
             {
                 throw new SharpZipBaseException("Can't deflate all input?");
             }
-            baseOutputStream_.Flush();
-            if (cryptoTransform_ != null)
+            BaseOutputStream.Flush();
+            if (_cryptoTransform != null)
             {
-                ZipAESTransform transform = cryptoTransform_ as ZipAESTransform;
+                ZipAESTransform transform = _cryptoTransform as ZipAESTransform;
                 if (transform != null)
                 {
-                    AESAuthCode = transform.GetAuthCode();
+                    AesAuthCode = transform.GetAuthCode();
                 }
-                cryptoTransform_.Dispose();
-                cryptoTransform_ = null;
+                _cryptoTransform.Dispose();
+                _cryptoTransform = null;
             }
         }
 
         public override void Flush()
         {
-            deflater_.Flush();
+            Deflater.Flush();
             Deflate();
-            baseOutputStream_.Flush();
+            BaseOutputStream.Flush();
         }
 
-        private void GetAuthCodeIfAES()
+        private void GetAuthCodeIfAes()
         {
-            if (cryptoTransform_ is ZipAESTransform)
+            if (_cryptoTransform is ZipAESTransform)
             {
-                AESAuthCode = ((ZipAESTransform)cryptoTransform_).GetAuthCode();
+                AesAuthCode = ((ZipAESTransform)_cryptoTransform).GetAuthCode();
             }
         }
 
-        protected void InitializeAESPassword(ZipEntry entry, string rawPassword, out byte[] salt, out byte[] pwdVerifier)
+        protected void InitializeAesPassword(ZipEntry entry, string rawPassword, out byte[] salt, out byte[] pwdVerifier)
         {
             salt = new byte[entry.AesSaltLen];
             if (_aesRnd == null)
@@ -167,15 +167,15 @@ namespace ZipLib.Streams
             }
             _aesRnd.GetBytes(salt);
             int blockSize = entry.AesKeySize / 8;
-            cryptoTransform_ = new ZipAESTransform(rawPassword, salt, blockSize, true);
-            pwdVerifier = ((ZipAESTransform)cryptoTransform_).PwdVerifier;
+            _cryptoTransform = new ZipAESTransform(rawPassword, salt, blockSize, true);
+            pwdVerifier = ((ZipAESTransform)_cryptoTransform).PwdVerifier;
         }
 
         protected void InitializePassword(string pwd)
         {
             PkzipClassicManaged managed = new PkzipClassicManaged();
             byte[] rgbKey = PkzipClassic.GenerateKeys(ZipConstants.ConvertToArray(pwd));
-            cryptoTransform_ = managed.CreateEncryptor(rgbKey, null);
+            _cryptoTransform = managed.CreateEncryptor(rgbKey, null);
         }
 
         public override int Read(byte[] buffer, int offset, int count)
@@ -200,7 +200,7 @@ namespace ZipLib.Streams
 
         public override void Write(byte[] buffer, int off, int count)
         {
-            deflater_.SetInput(buffer, off, count);
+            Deflater.SetInput(buffer, off, count);
             Deflate();
         }
 
@@ -214,7 +214,7 @@ namespace ZipLib.Streams
         {
             get
             {
-                return baseOutputStream_.CanSeek;
+                return BaseOutputStream.CanSeek;
             }
         }
 
@@ -238,7 +238,7 @@ namespace ZipLib.Streams
         {
             get
             {
-                return baseOutputStream_.CanWrite;
+                return BaseOutputStream.CanWrite;
             }
         }
 
@@ -246,11 +246,11 @@ namespace ZipLib.Streams
         {
             get
             {
-                return isStreamOwner_;
+                return _isStreamOwner;
             }
             set
             {
-                isStreamOwner_ = value;
+                _isStreamOwner = value;
             }
         }
 
@@ -258,7 +258,7 @@ namespace ZipLib.Streams
         {
             get
             {
-                return baseOutputStream_.Length;
+                return BaseOutputStream.Length;
             }
         }
 
@@ -266,17 +266,17 @@ namespace ZipLib.Streams
         {
             get
             {
-                return password;
+                return _password;
             }
             set
             {
                 if ((value != null) && (value.Length == 0))
                 {
-                    password = null;
+                    _password = null;
                 }
                 else
                 {
-                    password = value;
+                    _password = value;
                 }
             }
         }
@@ -285,7 +285,7 @@ namespace ZipLib.Streams
         {
             get
             {
-                return baseOutputStream_.Position;
+                return BaseOutputStream.Position;
             }
             set
             {

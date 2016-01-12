@@ -4,8 +4,8 @@ namespace ZipLib.CheckSums
 {
     public sealed class Adler32 : IChecksum
     {
-        private const uint BASE = 0xfff1;
-        private uint checksum;
+        private const uint Base = 0xfff1;
+        private uint _checksum;
 
         public Adler32()
         {
@@ -14,23 +14,23 @@ namespace ZipLib.CheckSums
 
         public void Reset()
         {
-            checksum = 1;
+            _checksum = 1;
         }
 
         public void Update(int value)
         {
-            uint num = checksum & 0xffff;
-            uint num2 = checksum >> 0x10;
-            num = (uint)((num + (value & 0xff)) % BASE);
-            num2 = (num + num2) % BASE;
-            checksum = (num2 << 0x10) + num;
+            uint num = _checksum & 0xffff;
+            uint num2 = _checksum >> 0x10;
+            num = (uint)((num + (value & 0xff)) % Base);
+            num2 = (num + num2) % Base;
+            _checksum = (num2 << 0x10) + num;
         }
 
         public void Update(byte[] buffer)
         {
             if (buffer == null)
             {
-                throw new ArgumentNullException("buffer");
+                throw new ArgumentNullException(nameof(buffer));
             }
             Update(buffer, 0, buffer.Length);
         }
@@ -39,26 +39,26 @@ namespace ZipLib.CheckSums
         {
             if (buffer == null)
             {
-                throw new ArgumentNullException("buffer");
+                throw new ArgumentNullException(nameof(buffer));
             }
             if (offset < 0)
             {
-                throw new ArgumentOutOfRangeException("offset", "cannot be negative");
+                throw new ArgumentOutOfRangeException(nameof(offset), "cannot be negative");
             }
             if (count < 0)
             {
-                throw new ArgumentOutOfRangeException("count", "cannot be negative");
+                throw new ArgumentOutOfRangeException(nameof(count), "cannot be negative");
             }
             if (offset >= buffer.Length)
             {
-                throw new ArgumentOutOfRangeException("offset", "not a valid index into buffer");
+                throw new ArgumentOutOfRangeException(nameof(offset), "not a valid index into buffer");
             }
             if ((offset + count) > buffer.Length)
             {
-                throw new ArgumentOutOfRangeException("count", "exceeds buffer size");
+                throw new ArgumentOutOfRangeException(nameof(count), "exceeds buffer size");
             }
-            uint num = checksum & 0xffff;
-            uint num2 = checksum >> 0x10;
+            uint num = _checksum & 0xffff;
+            uint num2 = _checksum >> 0x10;
             while (count > 0)
             {
                 int num3 = 0xed8;
@@ -72,17 +72,17 @@ namespace ZipLib.CheckSums
                     num += (uint)(buffer[offset++] & 0xff);
                     num2 += num;
                 }
-                num = num % BASE;
-                num2 = num2 % BASE;
+                num = num % Base;
+                num2 = num2 % Base;
             }
-            checksum = (num2 << 0x10) | num;
+            _checksum = (num2 << 0x10) | num;
         }
 
         public long Value
         {
             get
             {
-                return checksum;
+                return _checksum;
             }
         }
     }
