@@ -75,6 +75,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoMapper\AutoMapper_Inheritance_Tests.cs" />
+    <Compile Include="AutoMapper\AutoMapping_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\EntityFrameworkConventionalRegisterer_Test.cs" />
     <Compile Include="Repositories\EntityFrameworkGenericRepositoryRegistrar_Tests.cs" />
