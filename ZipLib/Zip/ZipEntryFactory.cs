@@ -2,39 +2,39 @@
 using System.IO;
 using Lte.Domain.Lz4Net.Core;
 
-namespace Lte.Domain.ZipLib.Zip
+namespace ZipLib.Zip
 {
     public class ZipEntryFactory : IEntryFactory
     {
-        private DateTime fixedDateTime_;
-        private int getAttributes_;
-        private bool isUnicodeText_;
-        private INameTransform nameTransform_;
-        private int setAttributes_;
-        private TimeSetting timeSetting_;
+        private DateTime _fixedDateTime;
+        private int _getAttributes;
+        private bool _isUnicodeText;
+        private INameTransform _nameTransform;
+        private int _setAttributes;
+        private TimeSetting _timeSetting;
 
         public ZipEntryFactory()
         {
-            fixedDateTime_ = DateTime.Now;
-            getAttributes_ = -1;
-            nameTransform_ = new ZipNameTransform();
+            _fixedDateTime = DateTime.Now;
+            _getAttributes = -1;
+            _nameTransform = new ZipNameTransform();
         }
 
         public ZipEntryFactory(TimeSetting timeSetting)
         {
-            fixedDateTime_ = DateTime.Now;
-            getAttributes_ = -1;
-            timeSetting_ = timeSetting;
-            nameTransform_ = new ZipNameTransform();
+            _fixedDateTime = DateTime.Now;
+            _getAttributes = -1;
+            _timeSetting = timeSetting;
+            _nameTransform = new ZipNameTransform();
         }
 
         public ZipEntryFactory(DateTime time)
         {
-            fixedDateTime_ = DateTime.Now;
-            getAttributes_ = -1;
-            timeSetting_ = TimeSetting.Fixed;
+            _fixedDateTime = DateTime.Now;
+            _getAttributes = -1;
+            _timeSetting = TimeSetting.Fixed;
             FixedDateTime = time;
-            nameTransform_ = new ZipNameTransform();
+            _nameTransform = new ZipNameTransform();
         }
 
         public ZipEntry MakeDirectoryEntry(string directoryName)
@@ -44,9 +44,9 @@ namespace Lte.Domain.ZipLib.Zip
 
         public ZipEntry MakeDirectoryEntry(string directoryName, bool useFileSystem)
         {
-            ZipEntry entry = new ZipEntry(nameTransform_.TransformDirectory(directoryName))
+            ZipEntry entry = new ZipEntry(_nameTransform.TransformDirectory(directoryName))
             {
-                IsUnicodeText = isUnicodeText_,
+                IsUnicodeText = _isUnicodeText,
                 Size = 0L
             };
             int num = 0;
@@ -57,14 +57,14 @@ namespace Lte.Domain.ZipLib.Zip
             }
             if ((info == null) || !info.Exists)
             {
-                if (timeSetting_ == TimeSetting.Fixed)
+                if (_timeSetting == TimeSetting.Fixed)
                 {
-                    entry.DateTime = fixedDateTime_;
+                    entry.DateTime = _fixedDateTime;
                 }
             }
             else
             {
-                switch (timeSetting_)
+                switch (_timeSetting)
                 {
                     case TimeSetting.LastWriteTime:
                         entry.DateTime = info.LastWriteTime;
@@ -91,15 +91,15 @@ namespace Lte.Domain.ZipLib.Zip
                         break;
 
                     case TimeSetting.Fixed:
-                        entry.DateTime = fixedDateTime_;
+                        entry.DateTime = _fixedDateTime;
                         break;
 
                     default:
                         throw new ZipException("Unhandled time setting in MakeDirectoryEntry");
                 }
-                num = ((int)info.Attributes) & getAttributes_;
+                num = ((int)info.Attributes) & _getAttributes;
             }
-            num |= setAttributes_ | 0x10;
+            num |= _setAttributes | 0x10;
             entry.ExternalFileAttributes = num;
             return entry;
         }
@@ -111,12 +111,12 @@ namespace Lte.Domain.ZipLib.Zip
 
         public ZipEntry MakeFileEntry(string fileName, bool useFileSystem)
         {
-            ZipEntry entry = new ZipEntry(nameTransform_.TransformFile(fileName))
+            ZipEntry entry = new ZipEntry(_nameTransform.TransformFile(fileName))
             {
-                IsUnicodeText = isUnicodeText_
+                IsUnicodeText = _isUnicodeText
             };
             int num = 0;
-            bool flag = setAttributes_ != 0;
+            bool flag = _setAttributes != 0;
             FileInfo info = null;
             if (useFileSystem)
             {
@@ -124,14 +124,14 @@ namespace Lte.Domain.ZipLib.Zip
             }
             if ((info == null) || !info.Exists)
             {
-                if (timeSetting_ == TimeSetting.Fixed)
+                if (_timeSetting == TimeSetting.Fixed)
                 {
-                    entry.DateTime = fixedDateTime_;
+                    entry.DateTime = _fixedDateTime;
                 }
             }
             else
             {
-                switch (timeSetting_)
+                switch (_timeSetting)
                 {
                     case TimeSetting.LastWriteTime:
                         entry.DateTime = info.LastWriteTime;
@@ -158,7 +158,7 @@ namespace Lte.Domain.ZipLib.Zip
                         break;
 
                     case TimeSetting.Fixed:
-                        entry.DateTime = fixedDateTime_;
+                        entry.DateTime = _fixedDateTime;
                         break;
 
                     default:
@@ -166,11 +166,11 @@ namespace Lte.Domain.ZipLib.Zip
                 }
                 entry.Size = info.Length;
                 flag = true;
-                num = ((int)info.Attributes) & getAttributes_;
+                num = ((int)info.Attributes) & _getAttributes;
             }
             if (flag)
             {
-                num |= setAttributes_;
+                num |= _setAttributes;
                 entry.ExternalFileAttributes = num;
             }
             return entry;
@@ -180,7 +180,7 @@ namespace Lte.Domain.ZipLib.Zip
         {
             get
             {
-                return fixedDateTime_;
+                return _fixedDateTime;
             }
             set
             {
@@ -188,7 +188,7 @@ namespace Lte.Domain.ZipLib.Zip
                 {
                     throw new ArgumentException("Value is too old to be valid", "value");
                 }
-                fixedDateTime_ = value;
+                _fixedDateTime = value;
             }
         }
 
@@ -196,11 +196,11 @@ namespace Lte.Domain.ZipLib.Zip
         {
             get
             {
-                return getAttributes_;
+                return _getAttributes;
             }
             set
             {
-                getAttributes_ = value;
+                _getAttributes = value;
             }
         }
 
@@ -208,11 +208,11 @@ namespace Lte.Domain.ZipLib.Zip
         {
             get
             {
-                return isUnicodeText_;
+                return _isUnicodeText;
             }
             set
             {
-                isUnicodeText_ = value;
+                _isUnicodeText = value;
             }
         }
 
@@ -220,17 +220,17 @@ namespace Lte.Domain.ZipLib.Zip
         {
             get
             {
-                return nameTransform_;
+                return _nameTransform;
             }
             set
             {
                 if (value == null)
                 {
-                    nameTransform_ = new ZipNameTransform();
+                    _nameTransform = new ZipNameTransform();
                 }
                 else
                 {
-                    nameTransform_ = value;
+                    _nameTransform = value;
                 }
             }
         }
@@ -239,11 +239,11 @@ namespace Lte.Domain.ZipLib.Zip
         {
             get
             {
-                return setAttributes_;
+                return _setAttributes;
             }
             set
             {
-                setAttributes_ = value;
+                _setAttributes = value;
             }
         }
 
@@ -251,11 +251,11 @@ namespace Lte.Domain.ZipLib.Zip
         {
             get
             {
-                return timeSetting_;
+                return _timeSetting;
             }
             set
             {
-                timeSetting_ = value;
+                _timeSetting = value;
             }
         }
 

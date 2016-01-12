@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Lte.Domain.ZipLib.Gzip;
+using ZipLib.Gzip;
 
-namespace Lte.Domain.ZipLib
+namespace ZipLib
 {
     public class RarHelpper
     {

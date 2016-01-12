@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Lte.Domain.ZipLib.Zip
+namespace ZipLib.Zip
 {
     public sealed class ZipExtraData : IDisposable
     {
@@ -37,7 +37,7 @@ namespace Lte.Domain.ZipLib.Zip
         {
             if (data == null)
             {
-                throw new ArgumentNullException("data");
+                throw new ArgumentNullException(nameof(data));
             }
             _newEntry.Write(data, 0, data.Length);
         }
@@ -46,24 +46,24 @@ namespace Lte.Domain.ZipLib.Zip
         {
             if (taggedData == null)
             {
-                throw new ArgumentNullException("taggedData");
+                throw new ArgumentNullException(nameof(taggedData));
             }
             AddEntry(taggedData.TagID, taggedData.GetData());
         }
 
-        public void AddEntry(int headerID, byte[] fieldData)
+        public void AddEntry(int headerId, byte[] fieldData)
         {
-            if ((headerID > 0xffff) || (headerID < 0))
+            if ((headerId > 0xffff) || (headerId < 0))
             {
-                throw new ArgumentOutOfRangeException("headerID");
+                throw new ArgumentOutOfRangeException(nameof(headerId));
             }
-            int source = (fieldData == null) ? 0 : fieldData.Length;
+            int source = fieldData?.Length ?? 0;
             if (source > 0xffff)
             {
-                throw new ArgumentOutOfRangeException("fieldData", "exceeds maximum length");
+                throw new ArgumentOutOfRangeException(nameof(fieldData), "exceeds maximum length");
             }
             int num2 = (_data.Length + source) + 4;
-            if (Find(headerID))
+            if (Find(headerId))
             {
                 num2 -= ValueLength + 4;
             }
@@ -71,12 +71,12 @@ namespace Lte.Domain.ZipLib.Zip
             {
                 throw new ZipException("Data exceeds maximum length");
             }
-            Delete(headerID);
+            Delete(headerId);
             byte[] array = new byte[num2];
             _data.CopyTo(array, 0);
             int length = _data.Length;
             _data = array;
-            SetShort(ref length, headerID);
+            SetShort(ref length, headerId);
             SetShort(ref length, source);
             if (fieldData != null)
             {
@@ -162,23 +162,23 @@ namespace Lte.Domain.ZipLib.Zip
             }
         }
 
-        public bool Find(int headerID)
+        public bool Find(int headerId)
         {
             _readValueStart = _data.Length;
             _readValueLength = 0;
             _index = 0;
             int num = _readValueStart;
-            int num2 = headerID - 1;
-            while ((num2 != headerID) && (_index < (_data.Length - 3)))
+            int num2 = headerId - 1;
+            while ((num2 != headerId) && (_index < (_data.Length - 3)))
             {
                 num2 = ReadShortInternal();
                 num = ReadShortInternal();
-                if (num2 != headerID)
+                if (num2 != headerId)
                 {
                     _index += num;
                 }
             }
-            bool flag = (num2 == headerID) && ((_index + num) <= _data.Length);
+            bool flag = (num2 == headerId) && ((_index + num) <= _data.Length);
             if (flag)
             {
                 _readValueStart = _index;
@@ -284,21 +284,9 @@ namespace Lte.Domain.ZipLib.Zip
             _newEntry = new MemoryStream();
         }
 
-        public int CurrentReadIndex
-        {
-            get
-            {
-                return _index;
-            }
-        }
+        public int CurrentReadIndex => _index;
 
-        public int Length
-        {
-            get
-            {
-                return _data.Length;
-            }
-        }
+        public int Length => _data.Length;
 
         public int UnreadCount
         {
@@ -312,13 +300,7 @@ namespace Lte.Domain.ZipLib.Zip
             }
         }
 
-        public int ValueLength
-        {
-            get
-            {
-                return _readValueLength;
-            }
-        }
+        public int ValueLength => _readValueLength;
     }
 }
 

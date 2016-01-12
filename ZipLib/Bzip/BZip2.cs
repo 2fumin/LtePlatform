@@ -2,7 +2,7 @@
 using System.IO;
 using Lte.Domain.Lz4Net.Core;
 
-namespace Lte.Domain.ZipLib.Bzip
+namespace ZipLib.Bzip
 {
     public static class BZip2
     {

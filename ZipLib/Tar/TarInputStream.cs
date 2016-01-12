@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-namespace Lte.Domain.ZipLib.Tar
+namespace ZipLib.Tar
 {
     public class TarInputStream : Stream
     {

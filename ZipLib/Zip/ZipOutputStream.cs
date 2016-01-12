@@ -1,54 +1,54 @@
 ﻿using System;
 using System.Collections;
 using System.IO;
-using Lte.Domain.ZipLib.CheckSums;
-using Lte.Domain.ZipLib.Compression;
-using Lte.Domain.ZipLib.Streams;
+using ZipLib.CheckSums;
+using ZipLib.Comppression;
+using ZipLib.Streams;
 
-namespace Lte.Domain.ZipLib.Zip
+namespace ZipLib.Zip
 {
     public class ZipOutputStream : DeflaterOutputStream
     {
-        private Crc32 crc;
-        private long crcPatchPos;
-        private ZipEntry curEntry;
-        private CompressionMethod curMethod;
-        private int defaultCompressionLevel;
-        private ArrayList entries;
-        private long offset;
-        private bool patchEntryHeader;
-        private long size;
-        private long sizePatchPos;
-        private UseZip64 useZip64_;
-        private byte[] zipComment;
+        private readonly Crc32 _crc;
+        private long _crcPatchPos;
+        private ZipEntry _curEntry;
+        private CompressionMethod _curMethod;
+        private int _defaultCompressionLevel;
+        private ArrayList _entries;
+        private long _offset;
+        private bool _patchEntryHeader;
+        private long _size;
+        private long _sizePatchPos;
+        private UseZip64 _useZip64;
+        private byte[] _zipComment;
 
         public ZipOutputStream(Stream baseOutputStream)
             : base(baseOutputStream, new Deflater(-1, true))
         {
-            entries = new ArrayList();
-            crc = new Crc32();
-            defaultCompressionLevel = -1;
-            curMethod = CompressionMethod.Deflated;
-            zipComment = new byte[0];
-            crcPatchPos = -1L;
-            sizePatchPos = -1L;
-            useZip64_ = UseZip64.Dynamic;
+            _entries = new ArrayList();
+            _crc = new Crc32();
+            _defaultCompressionLevel = -1;
+            _curMethod = CompressionMethod.Deflated;
+            _zipComment = new byte[0];
+            _crcPatchPos = -1L;
+            _sizePatchPos = -1L;
+            _useZip64 = UseZip64.Dynamic;
         }
 
         public ZipOutputStream(Stream baseOutputStream, int bufferSize)
             : base(baseOutputStream, new Deflater(-1, true), bufferSize)
         {
-            entries = new ArrayList();
-            crc = new Crc32();
-            defaultCompressionLevel = -1;
-            curMethod = CompressionMethod.Deflated;
-            zipComment = new byte[0];
-            crcPatchPos = -1L;
-            sizePatchPos = -1L;
-            useZip64_ = UseZip64.Dynamic;
+            _entries = new ArrayList();
+            _crc = new Crc32();
+            _defaultCompressionLevel = -1;
+            _curMethod = CompressionMethod.Deflated;
+            _zipComment = new byte[0];
+            _crcPatchPos = -1L;
+            _sizePatchPos = -1L;
+            _useZip64 = UseZip64.Dynamic;
         }
 
-        private static void AddExtraDataAES(ZipEntry entry, ZipExtraData extraData)
+        private static void AddExtraDataAes(ZipEntry entry, ZipExtraData extraData)
         {
             extraData.StartNewEntry();
             extraData.AddLeShort(2);
@@ -60,14 +60,14 @@ namespace Lte.Domain.ZipLib.Zip
 
         public void CloseEntry()
         {
-            if (curEntry == null)
+            if (_curEntry == null)
             {
                 throw new InvalidOperationException("No open entry");
             }
-            long compressedSize = size;
-            if (curMethod == CompressionMethod.Deflated)
+            long compressedSize = _size;
+            if (_curMethod == CompressionMethod.Deflated)
             {
-                if (size >= 0L)
+                if (_size >= 0L)
                 {
                     Finish();
                     compressedSize = deflater_.TotalOut;
@@ -77,88 +77,88 @@ namespace Lte.Domain.ZipLib.Zip
                     deflater_.Reset();
                 }
             }
-            if (curEntry.AESKeySize > 0)
+            if (_curEntry.AESKeySize > 0)
             {
                 baseOutputStream_.Write(AESAuthCode, 0, 10);
             }
-            if (curEntry.Size < 0L)
+            if (_curEntry.Size < 0L)
             {
-                curEntry.Size = size;
+                _curEntry.Size = _size;
             }
-            else if (curEntry.Size != size)
+            else if (_curEntry.Size != _size)
             {
-                throw new ZipException(string.Concat(new object[] { "size was ", size, ", but I expected ", curEntry.Size }));
+                throw new ZipException(string.Concat("size was ", _size, ", but I expected ", _curEntry.Size));
             }
-            if (curEntry.CompressedSize < 0L)
+            if (_curEntry.CompressedSize < 0L)
             {
-                curEntry.CompressedSize = compressedSize;
+                _curEntry.CompressedSize = compressedSize;
             }
-            else if (curEntry.CompressedSize != compressedSize)
+            else if (_curEntry.CompressedSize != compressedSize)
             {
-                throw new ZipException(string.Concat(new object[] { "compressed size was ", compressedSize, ", but I expected ", curEntry.CompressedSize }));
+                throw new ZipException(string.Concat("compressed size was ", compressedSize, ", but I expected ", _curEntry.CompressedSize));
             }
-            if (curEntry.Crc < 0L)
+            if (_curEntry.Crc < 0L)
             {
-                curEntry.Crc = crc.Value;
+                _curEntry.Crc = _crc.Value;
             }
-            else if (curEntry.Crc != crc.Value)
+            else if (_curEntry.Crc != _crc.Value)
             {
-                throw new ZipException(string.Concat(new object[] { "crc was ", crc.Value, ", but I expected ", curEntry.Crc }));
+                throw new ZipException(string.Concat("crc was ", _crc.Value, ", but I expected ", _curEntry.Crc));
             }
-            offset += compressedSize;
-            if (curEntry.IsCrypted)
+            _offset += compressedSize;
+            if (_curEntry.IsCrypted)
             {
-                if (curEntry.AESKeySize > 0)
+                if (_curEntry.AESKeySize > 0)
                 {
-                    curEntry.CompressedSize += curEntry.AESOverheadSize;
+                    _curEntry.CompressedSize += _curEntry.AESOverheadSize;
                 }
                 else
                 {
-                    curEntry.CompressedSize += 12L;
+                    _curEntry.CompressedSize += 12L;
                 }
             }
-            if (patchEntryHeader)
+            if (_patchEntryHeader)
             {
-                patchEntryHeader = false;
+                _patchEntryHeader = false;
                 long position = baseOutputStream_.Position;
-                baseOutputStream_.Seek(crcPatchPos, SeekOrigin.Begin);
-                WriteLeInt((int)curEntry.Crc);
-                if (curEntry.LocalHeaderRequiresZip64)
+                baseOutputStream_.Seek(_crcPatchPos, SeekOrigin.Begin);
+                WriteLeInt((int)_curEntry.Crc);
+                if (_curEntry.LocalHeaderRequiresZip64)
                 {
-                    if (sizePatchPos == -1L)
+                    if (_sizePatchPos == -1L)
                     {
                         throw new ZipException("Entry requires zip64 but this has been turned off");
                     }
-                    baseOutputStream_.Seek(sizePatchPos, SeekOrigin.Begin);
-                    WriteLeLong(curEntry.Size);
-                    WriteLeLong(curEntry.CompressedSize);
+                    baseOutputStream_.Seek(_sizePatchPos, SeekOrigin.Begin);
+                    WriteLeLong(_curEntry.Size);
+                    WriteLeLong(_curEntry.CompressedSize);
                 }
                 else
                 {
-                    WriteLeInt((int)curEntry.CompressedSize);
-                    WriteLeInt((int)curEntry.Size);
+                    WriteLeInt((int)_curEntry.CompressedSize);
+                    WriteLeInt((int)_curEntry.Size);
                 }
                 baseOutputStream_.Seek(position, SeekOrigin.Begin);
             }
-            if ((curEntry.Flags & 8) != 0)
+            if ((_curEntry.Flags & 8) != 0)
             {
                 WriteLeInt(0x8074b50);
-                WriteLeInt((int)curEntry.Crc);
-                if (curEntry.LocalHeaderRequiresZip64)
+                WriteLeInt((int)_curEntry.Crc);
+                if (_curEntry.LocalHeaderRequiresZip64)
                 {
-                    WriteLeLong(curEntry.CompressedSize);
-                    WriteLeLong(curEntry.Size);
-                    offset += 0x18L;
+                    WriteLeLong(_curEntry.CompressedSize);
+                    WriteLeLong(_curEntry.Size);
+                    _offset += 0x18L;
                 }
                 else
                 {
-                    WriteLeInt((int)curEntry.CompressedSize);
-                    WriteLeInt((int)curEntry.Size);
-                    offset += 0x10L;
+                    WriteLeInt((int)_curEntry.CompressedSize);
+                    WriteLeInt((int)_curEntry.Size);
+                    _offset += 0x10L;
                 }
             }
-            entries.Add(curEntry);
-            curEntry = null;
+            _entries.Add(_curEntry);
+            _curEntry = null;
         }
 
         private void CopyAndEncrypt(byte[] buffer, int off, int count)
@@ -177,15 +177,15 @@ namespace Lte.Domain.ZipLib.Zip
 
         public override void Finish()
         {
-            if (entries != null)
+            if (_entries != null)
             {
-                if (curEntry != null)
+                if (_curEntry != null)
                 {
                     CloseEntry();
                 }
-                long count = entries.Count;
+                long count = _entries.Count;
                 long sizeEntries = 0L;
-                foreach (ZipEntry entry in entries)
+                foreach (ZipEntry entry in _entries)
                 {
                     WriteLeInt(0x2014b50);
                     WriteLeShort(0x33);
@@ -239,7 +239,7 @@ namespace Lte.Domain.ZipLib.Zip
                     }
                     if (entry.AESKeySize > 0)
                     {
-                        AddExtraDataAES(entry, extraData);
+                        AddExtraDataAes(entry, extraData);
                     }
                     byte[] entryData = extraData.GetEntryData();
                     byte[] buffer3 = (entry.Comment != null) ? ZipConstants.ConvertToArray(entry.Flags, entry.Comment) : new byte[0];
@@ -288,9 +288,9 @@ namespace Lte.Domain.ZipLib.Zip
                 }
                 using (ZipHelperStream stream = new ZipHelperStream(baseOutputStream_))
                 {
-                    stream.WriteEndOfCentralDirectory(count, sizeEntries, offset, zipComment);
+                    stream.WriteEndOfCentralDirectory(count, sizeEntries, _offset, _zipComment);
                 }
-                entries = null;
+                _entries = null;
             }
         }
 
@@ -304,24 +304,24 @@ namespace Lte.Domain.ZipLib.Zip
             bool hasCrc;
             if (entry == null)
             {
-                throw new ArgumentNullException("entry");
+                throw new ArgumentNullException(nameof(entry));
             }
-            if (entries == null)
+            if (_entries == null)
             {
                 throw new InvalidOperationException("ZipOutputStream was finished");
             }
-            if (curEntry != null)
+            if (_curEntry != null)
             {
                 CloseEntry();
             }
-            if (entries.Count == 0x7fffffff)
+            if (_entries.Count == 0x7fffffff)
             {
                 throw new ZipException("Too many entries for Zip file");
             }
             CompressionMethod compressionMethod = entry.CompressionMethod;
-            int compressionLevel = defaultCompressionLevel;
+            int compressionLevel = _defaultCompressionLevel;
             entry.Flags &= 0x800;
-            patchEntryHeader = false;
+            _patchEntryHeader = false;
             if (entry.Size == 0L)
             {
                 entry.CompressedSize = entry.Size;
@@ -357,7 +357,7 @@ namespace Lte.Domain.ZipLib.Zip
                 }
                 else
                 {
-                    patchEntryHeader = true;
+                    _patchEntryHeader = true;
                 }
             }
             if (Password != null)
@@ -368,11 +368,11 @@ namespace Lte.Domain.ZipLib.Zip
                     entry.Flags |= 8;
                 }
             }
-            entry.Offset = offset;
+            entry.Offset = _offset;
             entry.CompressionMethod = compressionMethod;
-            curMethod = compressionMethod;
-            sizePatchPos = -1L;
-            if ((useZip64_ == UseZip64.On) || ((entry.Size < 0L) && (useZip64_ == UseZip64.Dynamic)))
+            _curMethod = compressionMethod;
+            _sizePatchPos = -1L;
+            if ((_useZip64 == UseZip64.On) || ((entry.Size < 0L) && (_useZip64 == UseZip64.Dynamic)))
             {
                 entry.ForceZip64();
             }
@@ -397,16 +397,16 @@ namespace Lte.Domain.ZipLib.Zip
             }
             else
             {
-                if (patchEntryHeader)
+                if (_patchEntryHeader)
                 {
-                    crcPatchPos = baseOutputStream_.Position;
+                    _crcPatchPos = baseOutputStream_.Position;
                 }
                 WriteLeInt(0);
-                if (patchEntryHeader)
+                if (_patchEntryHeader)
                 {
-                    sizePatchPos = baseOutputStream_.Position;
+                    _sizePatchPos = baseOutputStream_.Position;
                 }
-                if (entry.LocalHeaderRequiresZip64 || patchEntryHeader)
+                if (entry.LocalHeaderRequiresZip64 || _patchEntryHeader)
                 {
                     WriteLeInt(-1);
                     WriteLeInt(-1);
@@ -441,9 +441,9 @@ namespace Lte.Domain.ZipLib.Zip
                 {
                     throw new ZipException("Internal error cant find extra data");
                 }
-                if (patchEntryHeader)
+                if (_patchEntryHeader)
                 {
-                    sizePatchPos = extraData.CurrentReadIndex;
+                    _sizePatchPos = extraData.CurrentReadIndex;
                 }
             }
             else
@@ -452,7 +452,7 @@ namespace Lte.Domain.ZipLib.Zip
             }
             if (entry.AESKeySize > 0)
             {
-                AddExtraDataAES(entry, extraData);
+                AddExtraDataAes(entry, extraData);
             }
             byte[] entryData = extraData.GetEntryData();
             WriteLeShort(buffer.Length);
@@ -461,32 +461,32 @@ namespace Lte.Domain.ZipLib.Zip
             {
                 baseOutputStream_.Write(buffer, 0, buffer.Length);
             }
-            if (entry.LocalHeaderRequiresZip64 && patchEntryHeader)
+            if (entry.LocalHeaderRequiresZip64 && _patchEntryHeader)
             {
-                sizePatchPos += baseOutputStream_.Position;
+                _sizePatchPos += baseOutputStream_.Position;
             }
             if (entryData.Length > 0)
             {
                 baseOutputStream_.Write(entryData, 0, entryData.Length);
             }
-            offset += (30 + buffer.Length) + entryData.Length;
+            _offset += (30 + buffer.Length) + entryData.Length;
             if (entry.AESKeySize > 0)
             {
-                offset += entry.AESOverheadSize;
+                _offset += entry.AESOverheadSize;
             }
-            curEntry = entry;
-            crc.Reset();
+            _curEntry = entry;
+            _crc.Reset();
             if (compressionMethod == CompressionMethod.Deflated)
             {
                 deflater_.Reset();
                 deflater_.SetLevel(compressionLevel);
             }
-            size = 0L;
+            _size = 0L;
             if (entry.IsCrypted)
             {
                 if (entry.AESKeySize > 0)
                 {
-                    WriteAESHeader(entry);
+                    WriteAesHeader(entry);
                 }
                 else if (entry.Crc < 0L)
                 {
@@ -504,42 +504,42 @@ namespace Lte.Domain.ZipLib.Zip
             byte[] buffer = ZipConstants.ConvertToArray(comment);
             if (buffer.Length > 0xffff)
             {
-                throw new ArgumentOutOfRangeException("comment");
+                throw new ArgumentOutOfRangeException(nameof(comment));
             }
-            zipComment = buffer;
+            _zipComment = buffer;
         }
 
         public void SetLevel(int level)
         {
             deflater_.SetLevel(level);
-            defaultCompressionLevel = level;
+            _defaultCompressionLevel = level;
         }
 
         public override void Write(byte[] buffer, int off, int count)
         {
-            if (curEntry == null)
+            if (_curEntry == null)
             {
                 throw new InvalidOperationException("No open entry.");
             }
             if (buffer == null)
             {
-                throw new ArgumentNullException("buffer");
+                throw new ArgumentNullException(nameof(buffer));
             }
             if (off < 0)
             {
-                throw new ArgumentOutOfRangeException("off", "Cannot be negative");
+                throw new ArgumentOutOfRangeException(nameof(off), "Cannot be negative");
             }
             if (count < 0)
             {
-                throw new ArgumentOutOfRangeException("count", "Cannot be negative");
+                throw new ArgumentOutOfRangeException(nameof(count), "Cannot be negative");
             }
             if ((buffer.Length - off) < count)
             {
                 throw new ArgumentException("Invalid offset/count combination");
             }
-            crc.Update(buffer, off, count);
-            size += count;
-            switch (curMethod)
+            _crc.Update(buffer, off, count);
+            _size += count;
+            switch (_curMethod)
             {
                 case CompressionMethod.Stored:
                     if (Password != null)
@@ -558,7 +558,7 @@ namespace Lte.Domain.ZipLib.Zip
             }
         }
 
-        private void WriteAESHeader(ZipEntry entry)
+        private void WriteAesHeader(ZipEntry entry)
         {
             byte[] buffer;
             byte[] buffer2;
@@ -569,7 +569,7 @@ namespace Lte.Domain.ZipLib.Zip
 
         private void WriteEncryptionHeader(long crcValue)
         {
-            offset += 12L;
+            _offset += 12L;
             InitializePassword(Password);
             byte[] buffer = new byte[12];
             new Random().NextBytes(buffer);
@@ -596,23 +596,17 @@ namespace Lte.Domain.ZipLib.Zip
             baseOutputStream_.WriteByte((byte)((value >> 8) & 0xff));
         }
 
-        public bool IsFinished
-        {
-            get
-            {
-                return (entries == null);
-            }
-        }
+        public bool IsFinished => (_entries == null);
 
         public UseZip64 UseZip64
         {
             get
             {
-                return useZip64_;
+                return _useZip64;
             }
             set
             {
-                useZip64_ = value;
+                _useZip64 = value;
             }
         }
     }

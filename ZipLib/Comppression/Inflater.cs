@@ -1,8 +1,8 @@
 ﻿using System;
-using Lte.Domain.ZipLib.CheckSums;
-using Lte.Domain.ZipLib.Streams;
+using ZipLib.CheckSums;
+using ZipLib.Streams;
 
-namespace Lte.Domain.ZipLib.Compression
+namespace ZipLib.Comppression
 {
     public class Inflater
     {

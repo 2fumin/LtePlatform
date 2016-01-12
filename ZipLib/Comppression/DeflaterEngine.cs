@@ -1,7 +1,7 @@
 ﻿using System;
-using Lte.Domain.ZipLib.CheckSums;
+using ZipLib.CheckSums;
 
-namespace Lte.Domain.ZipLib.Compression
+namespace ZipLib.Comppression
 {
     public class DeflaterEngine : DeflaterConstants
     {

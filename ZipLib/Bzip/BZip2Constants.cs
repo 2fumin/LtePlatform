@@ -1,4 +1,4 @@
-﻿namespace Lte.Domain.ZipLib.Bzip
+﻿namespace ZipLib.Bzip
 {
     internal static class BZip2Constants
     {

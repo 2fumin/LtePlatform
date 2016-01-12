@@ -1,7 +1,7 @@
 ﻿using System;
-using Lte.Domain.ZipLib.Streams;
+using ZipLib.Streams;
 
-namespace Lte.Domain.ZipLib.Compression
+namespace ZipLib.Comppression
 {
     internal class InflaterDynHeader
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Lte.Domain.ZipLib.Bzip
+namespace ZipLib.Bzip
 {
     [Serializable]
     public class BZip2Exception : SharpZipBaseException

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.Security.Cryptography;
-using Lte.Domain.ZipLib.Compression;
-using Lte.Domain.ZipLib.Zip;
+using ZipLib.Comppression;
+using ZipLib.Zip;
 
-namespace Lte.Domain.ZipLib.Streams
+namespace ZipLib.Streams
 {
     public class InflaterInputBuffer
     {

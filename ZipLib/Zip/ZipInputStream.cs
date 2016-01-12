@@ -1,11 +1,11 @@
 ﻿using System;
 using System.IO;
-using Lte.Domain.Lz4Net.Encryption;
-using Lte.Domain.ZipLib.CheckSums;
-using Lte.Domain.ZipLib.Compression;
-using Lte.Domain.ZipLib.Streams;
+using ZipLib.CheckSums;
+using ZipLib.Comppression;
+using ZipLib.Encryption;
+using ZipLib.Streams;
 
-namespace Lte.Domain.ZipLib.Zip
+namespace ZipLib.Zip
 {
     public class ZipInputStream : InflaterInputStream
     {
@@ -215,9 +215,11 @@ namespace Lte.Domain.ZipLib.Zip
             var buffer = new byte[num5];
             inputBuffer.ReadRawBuffer(buffer);
             var name = ZipConstants.ConvertToStringExt(_flags, buffer);
-            _entry = new ZipEntry(name, versionRequiredToExtract);
-            _entry.Flags = _flags;
-            _entry.CompressionMethod = (CompressionMethod)_method;
+            _entry = new ZipEntry(name, versionRequiredToExtract)
+            {
+                Flags = _flags,
+                CompressionMethod = (CompressionMethod) _method
+            };
             if ((_flags & 8) == 0)
             {
                 _entry.Crc = num4 & 0xffffffffL;
@@ -397,13 +399,7 @@ namespace Lte.Domain.ZipLib.Zip
             }
         }
 
-        public bool CanDecompressEntry
-        {
-            get
-            {
-                return ((_entry != null) && _entry.CanDecompress);
-            }
-        }
+        public bool CanDecompressEntry => ((_entry != null) && _entry.CanDecompress);
 
         public override long Length
         {

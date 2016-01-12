@@ -1,9 +1,9 @@
 ﻿using System.IO;
-using Lte.Domain.ZipLib.CheckSums;
-using Lte.Domain.ZipLib.Compression;
-using Lte.Domain.ZipLib.Streams;
+using ZipLib.CheckSums;
+using ZipLib.Comppression;
+using ZipLib.Streams;
 
-namespace Lte.Domain.ZipLib.Gzip
+namespace ZipLib.Gzip
 {
     public class GZipInputStream : InflaterInputStream
     {

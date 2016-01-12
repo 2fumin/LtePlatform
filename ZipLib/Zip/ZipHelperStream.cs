@@ -1,38 +1,38 @@
 ﻿using System;
 using System.IO;
 
-namespace Lte.Domain.ZipLib.Zip
+namespace ZipLib.Zip
 {
     internal class ZipHelperStream : Stream
     {
-        private bool isOwner_;
-        private Stream stream_;
+        private bool _isOwner;
+        private Stream _stream;
 
         public ZipHelperStream(Stream stream)
         {
-            stream_ = stream;
+            _stream = stream;
         }
 
         public ZipHelperStream(string name)
         {
-            stream_ = new FileStream(name, FileMode.Open, FileAccess.ReadWrite);
-            isOwner_ = true;
+            _stream = new FileStream(name, FileMode.Open, FileAccess.ReadWrite);
+            _isOwner = true;
         }
 
         public override void Close()
         {
-            Stream stream = stream_;
-            stream_ = null;
-            if (isOwner_ && (stream != null))
+            Stream stream = _stream;
+            _stream = null;
+            if (_isOwner && (stream != null))
             {
-                isOwner_ = false;
+                _isOwner = false;
                 stream.Close();
             }
         }
 
         public override void Flush()
         {
-            stream_.Flush();
+            _stream.Flush();
         }
 
         public long LocateBlockWithSignature(int signature, long endLocation, int minimumBlockSize, int maximumVariableData)
@@ -52,52 +52,52 @@ namespace Lte.Domain.ZipLib.Zip
                 offset -= 1L;
                 Seek(offset, SeekOrigin.Begin);
             }
-            while (ReadLEInt() != signature);
+            while (ReadLeInt() != signature);
             return Position;
         }
 
         public override int Read(byte[] buffer, int offset, int count)
         {
-            return stream_.Read(buffer, offset, count);
+            return _stream.Read(buffer, offset, count);
         }
 
         public void ReadDataDescriptor(bool zip64, DescriptorData data)
         {
-            if (ReadLEInt() != 0x8074b50)
+            if (ReadLeInt() != 0x8074b50)
             {
                 throw new ZipException("Data descriptor signature not found");
             }
-            data.Crc = ReadLEInt();
+            data.Crc = ReadLeInt();
             if (zip64)
             {
-                data.CompressedSize = ReadLELong();
-                data.Size = ReadLELong();
+                data.CompressedSize = ReadLeLong();
+                data.Size = ReadLeLong();
             }
             else
             {
-                data.CompressedSize = ReadLEInt();
-                data.Size = ReadLEInt();
+                data.CompressedSize = ReadLeInt();
+                data.Size = ReadLeInt();
             }
         }
 
-        public int ReadLEInt()
+        public int ReadLeInt()
         {
-            return (ReadLEShort() | (ReadLEShort() << 0x10));
+            return (ReadLeShort() | (ReadLeShort() << 0x10));
         }
 
-        public long ReadLELong()
+        public long ReadLeLong()
         {
-            return (((long)((ulong)ReadLEInt())) | (ReadLEInt() << 0x20));
+            return (((long)((ulong)ReadLeInt())) | (ReadLeInt() << 0x20));
         }
 
-        public int ReadLEShort()
+        public int ReadLeShort()
         {
-            int num = stream_.ReadByte();
+            int num = _stream.ReadByte();
             if (num < 0)
             {
                 throw new EndOfStreamException();
             }
-            int num2 = stream_.ReadByte();
+            int num2 = _stream.ReadByte();
             if (num2 < 0)
             {
                 throw new EndOfStreamException();
@@ -107,17 +107,17 @@ namespace Lte.Domain.ZipLib.Zip
 
         public override long Seek(long offset, SeekOrigin origin)
         {
-            return stream_.Seek(offset, origin);
+            return _stream.Seek(offset, origin);
         }
 
         public override void SetLength(long value)
         {
-            stream_.SetLength(value);
+            _stream.SetLength(value);
         }
 
         public override void Write(byte[] buffer, int offset, int count)
         {
-            stream_.Write(buffer, offset, count);
+            _stream.Write(buffer, offset, count);
         }
 
         public int WriteDataDescriptor(ZipEntry entry)
@@ -131,17 +131,17 @@ namespace Lte.Domain.ZipLib.Zip
             {
                 return num;
             }
-            WriteLEInt(0x8074b50);
-            WriteLEInt((int)entry.Crc);
+            WriteLeInt(0x8074b50);
+            WriteLeInt((int)entry.Crc);
             num += 8;
             if (entry.LocalHeaderRequiresZip64)
             {
-                WriteLELong(entry.CompressedSize);
-                WriteLELong(entry.Size);
+                WriteLeLong(entry.CompressedSize);
+                WriteLeLong(entry.Size);
                 return (num + 0x10);
             }
-            WriteLEInt((int)entry.CompressedSize);
-            WriteLEInt((int)entry.Size);
+            WriteLeInt((int)entry.CompressedSize);
+            WriteLeInt((int)entry.Size);
             return (num + 8);
         }
 
@@ -151,163 +151,133 @@ namespace Lte.Domain.ZipLib.Zip
             {
                 WriteZip64EndOfCentralDirectory(noOfEntries, sizeEntries, startOfCentralDirectory);
             }
-            WriteLEInt(0x6054b50);
-            WriteLEShort(0);
-            WriteLEShort(0);
+            WriteLeInt(0x6054b50);
+            WriteLeShort(0);
+            WriteLeShort(0);
             if (noOfEntries >= 0xffffL)
             {
-                WriteLEUshort(0xffff);
-                WriteLEUshort(0xffff);
+                WriteLeUshort(0xffff);
+                WriteLeUshort(0xffff);
             }
             else
             {
-                WriteLEShort((short)noOfEntries);
-                WriteLEShort((short)noOfEntries);
+                WriteLeShort((short)noOfEntries);
+                WriteLeShort((short)noOfEntries);
             }
             if (sizeEntries >= 0xffffffffL)
             {
-                WriteLEUint(uint.MaxValue);
+                WriteLeUint(uint.MaxValue);
             }
             else
             {
-                WriteLEInt((int)sizeEntries);
+                WriteLeInt((int)sizeEntries);
             }
             if (startOfCentralDirectory >= 0xffffffffL)
             {
-                WriteLEUint(uint.MaxValue);
+                WriteLeUint(uint.MaxValue);
             }
             else
             {
-                WriteLEInt((int)startOfCentralDirectory);
+                WriteLeInt((int)startOfCentralDirectory);
             }
             int num = (comment != null) ? comment.Length : 0;
             if (num > 0xffff)
             {
                 throw new ZipException(string.Format("Comment length({0}) is too long can only be 64K", num));
             }
-            WriteLEShort(num);
+            WriteLeShort(num);
             if (num > 0)
             {
                 if (comment != null) Write(comment, 0, comment.Length);
             }
         }
 
-        public void WriteLEInt(int value)
+        public void WriteLeInt(int value)
         {
-            WriteLEShort(value);
-            WriteLEShort(value >> 0x10);
+            WriteLeShort(value);
+            WriteLeShort(value >> 0x10);
         }
 
-        public void WriteLELong(long value)
+        public void WriteLeLong(long value)
         {
-            WriteLEInt((int)value);
-            WriteLEInt((int)(value >> 0x20));
+            WriteLeInt((int)value);
+            WriteLeInt((int)(value >> 0x20));
         }
 
-        public void WriteLEShort(int value)
+        public void WriteLeShort(int value)
         {
-            stream_.WriteByte((byte)(value & 0xff));
-            stream_.WriteByte((byte)((value >> 8) & 0xff));
+            _stream.WriteByte((byte)(value & 0xff));
+            _stream.WriteByte((byte)((value >> 8) & 0xff));
         }
 
-        public void WriteLEUint(uint value)
+        public void WriteLeUint(uint value)
         {
-            WriteLEUshort((ushort)(value & 0xffff));
-            WriteLEUshort((ushort)(value >> 0x10));
+            WriteLeUshort((ushort)(value & 0xffff));
+            WriteLeUshort((ushort)(value >> 0x10));
         }
 
-        public void WriteLEUlong(ulong value)
+        public void WriteLeUlong(ulong value)
         {
-            WriteLEUint((uint)(value & 0xffffffffL));
-            WriteLEUint((uint)(value >> 0x20));
+            WriteLeUint((uint)(value & 0xffffffffL));
+            WriteLeUint((uint)(value >> 0x20));
         }
 
-        public void WriteLEUshort(ushort value)
+        public void WriteLeUshort(ushort value)
         {
-            stream_.WriteByte((byte)(value & 0xff));
-            stream_.WriteByte((byte)(value >> 8));
+            _stream.WriteByte((byte)(value & 0xff));
+            _stream.WriteByte((byte)(value >> 8));
         }
 
         public void WriteZip64EndOfCentralDirectory(long noOfEntries, long sizeEntries, long centralDirOffset)
         {
-            long position = stream_.Position;
-            WriteLEInt(0x6064b50);
-            WriteLELong(0x2cL);
-            WriteLEShort(0x33);
-            WriteLEShort(0x2d);
-            WriteLEInt(0);
-            WriteLEInt(0);
-            WriteLELong(noOfEntries);
-            WriteLELong(noOfEntries);
-            WriteLELong(sizeEntries);
-            WriteLELong(centralDirOffset);
-            WriteLEInt(0x7064b50);
-            WriteLEInt(0);
-            WriteLELong(position);
-            WriteLEInt(1);
+            long position = _stream.Position;
+            WriteLeInt(0x6064b50);
+            WriteLeLong(0x2cL);
+            WriteLeShort(0x33);
+            WriteLeShort(0x2d);
+            WriteLeInt(0);
+            WriteLeInt(0);
+            WriteLeLong(noOfEntries);
+            WriteLeLong(noOfEntries);
+            WriteLeLong(sizeEntries);
+            WriteLeLong(centralDirOffset);
+            WriteLeInt(0x7064b50);
+            WriteLeInt(0);
+            WriteLeLong(position);
+            WriteLeInt(1);
         }
 
-        public override bool CanRead
-        {
-            get
-            {
-                return stream_.CanRead;
-            }
-        }
+        public override bool CanRead => _stream.CanRead;
 
-        public override bool CanSeek
-        {
-            get
-            {
-                return stream_.CanSeek;
-            }
-        }
+        public override bool CanSeek => _stream.CanSeek;
 
-        public override bool CanTimeout
-        {
-            get
-            {
-                return stream_.CanTimeout;
-            }
-        }
+        public override bool CanTimeout => _stream.CanTimeout;
 
-        public override bool CanWrite
-        {
-            get
-            {
-                return stream_.CanWrite;
-            }
-        }
+        public override bool CanWrite => _stream.CanWrite;
 
         public bool IsStreamOwner
         {
             get
             {
-                return isOwner_;
+                return _isOwner;
             }
             set
             {
-                isOwner_ = value;
+                _isOwner = value;
             }
         }
 
-        public override long Length
-        {
-            get
-            {
-                return stream_.Length;
-            }
-        }
+        public override long Length => _stream.Length;
 
         public override long Position
         {
             get
             {
-                return stream_.Position;
+                return _stream.Position;
             }
             set
             {
-                stream_.Position = value;
+                _stream.Position = value;
             }
         }
     }

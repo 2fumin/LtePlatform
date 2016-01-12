@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Lte.Domain.ZipLib.Zip
+namespace ZipLib.Zip
 {
     public abstract class BaseArchiveStorage : IArchiveStorage
     {

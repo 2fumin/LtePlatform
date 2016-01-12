@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lte.Domain.ZipLib.Compression
+namespace ZipLib.Comppression
 {
     public class DeflaterConstants
     {

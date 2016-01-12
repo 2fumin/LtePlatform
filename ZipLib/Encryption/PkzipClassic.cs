@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using Lte.Domain.ZipLib.CheckSums;
+using ZipLib.CheckSums;
 
-namespace Lte.Domain.Lz4Net.Encryption
+namespace ZipLib.Encryption
 {
     public abstract class PkzipClassic : SymmetricAlgorithm
     {
@@ -28,8 +24,15 @@ namespace Lte.Domain.Lz4Net.Encryption
                 numArray[1] = (numArray[1] * 0x8088405) + 1;
                 numArray[2] = Crc32.ComputeCrc32(numArray[2], (byte)(numArray[1] >> 0x18));
             }
-            return new[] { ((byte)(numArray[0] & 0xff)), ((byte)((numArray[0] >> 8) & 0xff)),
-                ((byte)((numArray[0] >> 0x10) & 0xff)), ((byte)((numArray[0] >> 0x18) & 0xff)), ((byte)(numArray[1] & 0xff)), ((byte)((numArray[1] >> 8) & 0xff)), ((byte)((numArray[1] >> 0x10) & 0xff)), ((byte)((numArray[1] >> 0x18) & 0xff)), ((byte)(numArray[2] & 0xff)), ((byte)((numArray[2] >> 8) & 0xff)), ((byte)((numArray[2] >> 0x10) & 0xff)), ((byte)((numArray[2] >> 0x18) & 0xff)) };
+            return new[]
+            {
+                ((byte) (numArray[0] & 0xff)), ((byte) ((numArray[0] >> 8) & 0xff)),
+                ((byte) ((numArray[0] >> 0x10) & 0xff)), ((byte) ((numArray[0] >> 0x18) & 0xff)),
+                ((byte) (numArray[1] & 0xff)), ((byte) ((numArray[1] >> 8) & 0xff)),
+                ((byte) ((numArray[1] >> 0x10) & 0xff)), ((byte) ((numArray[1] >> 0x18) & 0xff)),
+                ((byte) (numArray[2] & 0xff)), ((byte) ((numArray[2] >> 8) & 0xff)),
+                ((byte) ((numArray[2] >> 0x10) & 0xff)), ((byte) ((numArray[2] >> 0x18) & 0xff))
+            };
         }
     }
 }

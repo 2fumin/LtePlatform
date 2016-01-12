@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lte.Domain.ZipLib.Streams
+namespace ZipLib.Streams
 {
     public class OutputWindow
     {

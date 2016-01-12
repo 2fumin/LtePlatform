@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lte.Domain.ZipLib.CheckSums
+namespace ZipLib.CheckSums
 {
     public sealed class Crc32 : IChecksum
     {

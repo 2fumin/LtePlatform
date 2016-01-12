@@ -1,7 +1,7 @@
 ﻿using System;
-using Lte.Domain.ZipLib.CheckSums;
+using ZipLib.CheckSums;
 
-namespace Lte.Domain.Lz4Net.Encryption
+namespace ZipLib.Encryption
 {
     internal class PkzipClassicCryptoBase
     {

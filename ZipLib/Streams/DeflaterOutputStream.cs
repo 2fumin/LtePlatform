@@ -2,10 +2,11 @@
 using System.IO;
 using System.Security.Cryptography;
 using Lte.Domain.Lz4Net.Encryption;
-using Lte.Domain.ZipLib.Compression;
-using Lte.Domain.ZipLib.Zip;
+using ZipLib.Comppression;
+using ZipLib.Encryption;
+using ZipLib.Zip;
 
-namespace Lte.Domain.ZipLib.Streams
+namespace ZipLib.Streams
 {
     public class DeflaterOutputStream : Stream
     {

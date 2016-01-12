@@ -1,4 +1,4 @@
-﻿namespace Lte.Domain.ZipLib.Lzw
+﻿namespace ZipLib.Lzw
 {
     public static class LzwConstants
     {

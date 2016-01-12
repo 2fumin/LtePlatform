@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 
-namespace Lte.Domain.Lz4Net.Encryption
+namespace ZipLib.Encryption
 {
     public sealed class PkzipClassicManaged : PkzipClassic
     {
@@ -68,21 +68,9 @@ namespace Lte.Domain.Lz4Net.Encryption
             }
         }
 
-        public override KeySizes[] LegalBlockSizes
-        {
-            get
-            {
-                return new[] { new KeySizes(8, 8, 0) };
-            }
-        }
+        public override KeySizes[] LegalBlockSizes => new[] { new KeySizes(8, 8, 0) };
 
-        public override KeySizes[] LegalKeySizes
-        {
-            get
-            {
-                return new[] { new KeySizes(0x60, 0x60, 0) };
-            }
-        }
+        public override KeySizes[] LegalKeySizes => new[] { new KeySizes(0x60, 0x60, 0) };
     }
 }
 

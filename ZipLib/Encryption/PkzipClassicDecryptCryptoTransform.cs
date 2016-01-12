@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 
-namespace Lte.Domain.Lz4Net.Encryption
+namespace ZipLib.Encryption
 {
     internal class PkzipClassicDecryptCryptoTransform : PkzipClassicCryptoBase, ICryptoTransform, IDisposable
     {
@@ -33,37 +33,13 @@ namespace Lte.Domain.Lz4Net.Encryption
             return outputBuffer;
         }
 
-        public bool CanReuseTransform
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public bool CanReuseTransform => true;
 
-        public bool CanTransformMultipleBlocks
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public bool CanTransformMultipleBlocks => true;
 
-        public int InputBlockSize
-        {
-            get
-            {
-                return 1;
-            }
-        }
+        public int InputBlockSize => 1;
 
-        public int OutputBlockSize
-        {
-            get
-            {
-                return 1;
-            }
-        }
+        public int OutputBlockSize => 1;
     }
 }
 

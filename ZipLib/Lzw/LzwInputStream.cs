@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Lte.Domain.ZipLib.Lzw
+namespace ZipLib.Lzw
 {
     public class LzwInputStream : Stream
     {

@@ -1,4 +1,4 @@
-﻿namespace Lte.Domain.ZipLib.Zip
+﻿namespace ZipLib.Zip
 {
     internal class EntryPatchData
     {

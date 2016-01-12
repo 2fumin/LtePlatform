@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Lte.Domain.ZipLib.Zip
+namespace ZipLib.Zip
 {
     public class ExtendedUnixData : ITaggedData
     {
@@ -24,21 +24,21 @@ namespace Lte.Domain.ZipLib.Zip
                         DateTime time = new DateTime(0x7b2, 1, 1, 0, 0, 0);
                         TimeSpan span = _modificationTime.ToUniversalTime() - time.ToUniversalTime();
                         int totalSeconds = (int)span.TotalSeconds;
-                        stream2.WriteLEInt(totalSeconds);
+                        stream2.WriteLeInt(totalSeconds);
                     }
                     if (((byte)(_flags & Flags.AccessTime)) != 0)
                     {
                         DateTime time2 = new DateTime(0x7b2, 1, 1, 0, 0, 0);
                         TimeSpan span2 = _lastAccessTime.ToUniversalTime() - time2.ToUniversalTime();
                         int num2 = (int)span2.TotalSeconds;
-                        stream2.WriteLEInt(num2);
+                        stream2.WriteLeInt(num2);
                     }
                     if (((byte)(_flags & Flags.CreateTime)) != 0)
                     {
                         DateTime time3 = new DateTime(0x7b2, 1, 1, 0, 0, 0);
                         TimeSpan span3 = _createTime.ToUniversalTime() - time3.ToUniversalTime();
                         int num3 = (int)span3.TotalSeconds;
-                        stream2.WriteLEInt(num3);
+                        stream2.WriteLeInt(num3);
                     }
                     buffer = stream.ToArray();
                 }
@@ -64,19 +64,19 @@ namespace Lte.Domain.ZipLib.Zip
                     _flags = (Flags)((byte)stream2.ReadByte());
                     if ((((byte)(_flags & Flags.ModificationTime)) != 0) && (count >= 5))
                     {
-                        int seconds = stream2.ReadLEInt();
+                        int seconds = stream2.ReadLeInt();
                         DateTime time = new DateTime(0x7b2, 1, 1, 0, 0, 0);
                         _modificationTime = (time.ToUniversalTime() + new TimeSpan(0, 0, 0, seconds, 0)).ToLocalTime();
                     }
                     if (((byte)(_flags & Flags.AccessTime)) != 0)
                     {
-                        int num2 = stream2.ReadLEInt();
+                        int num2 = stream2.ReadLeInt();
                         DateTime time3 = new DateTime(0x7b2, 1, 1, 0, 0, 0);
                         _lastAccessTime = (time3.ToUniversalTime() + new TimeSpan(0, 0, 0, num2, 0)).ToLocalTime();
                     }
                     if (((byte)(_flags & Flags.CreateTime)) != 0)
                     {
-                        int num3 = stream2.ReadLEInt();
+                        int num3 = stream2.ReadLeInt();
                         DateTime time5 = new DateTime(0x7b2, 1, 1, 0, 0, 0);
                         _createTime = (time5.ToUniversalTime() + new TimeSpan(0, 0, 0, num3, 0)).ToLocalTime();
                     }

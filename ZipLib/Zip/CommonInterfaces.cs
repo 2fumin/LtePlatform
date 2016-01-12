@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Lte.Domain.Lz4Net.Core;
 
-namespace Lte.Domain.ZipLib.Zip
+namespace ZipLib.Zip
 {
     public interface IArchiveStorage
     {

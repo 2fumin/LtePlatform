@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Lte.Domain.ZipLib.Tar
+namespace ZipLib.Tar
 {
     public class TarOutputStream : Stream
     {

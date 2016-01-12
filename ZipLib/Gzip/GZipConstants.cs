@@ -1,4 +1,4 @@
-﻿namespace Lte.Domain.ZipLib.Gzip
+﻿namespace ZipLib.Gzip
 {
     public static class GZipConstants
     {

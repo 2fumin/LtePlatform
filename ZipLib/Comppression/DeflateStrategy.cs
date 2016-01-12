@@ -1,4 +1,4 @@
-﻿namespace Lte.Domain.ZipLib.Compression
+﻿namespace ZipLib.Comppression
 {
     public enum DeflateStrategy
     {

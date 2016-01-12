@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lte.Domain.ZipLib.Zip
+namespace ZipLib.Zip
 {
     public enum CompressionMethod
     {

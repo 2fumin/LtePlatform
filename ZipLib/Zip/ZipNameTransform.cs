@@ -3,13 +3,13 @@ using System.IO;
 using System.Text;
 using Lte.Domain.Lz4Net.Core;
 
-namespace Lte.Domain.ZipLib.Zip
+namespace ZipLib.Zip
 {
     public class ZipNameTransform : INameTransform
     {
         private static readonly char[] InvalidEntryChars;
         private static readonly char[] InvalidEntryCharsRelaxed;
-        private string trimPrefix_;
+        private string _trimPrefix;
 
         static ZipNameTransform()
         {
@@ -102,9 +102,9 @@ namespace Lte.Domain.ZipLib.Zip
             if (name != null)
             {
                 string str = name.ToLower();
-                if ((trimPrefix_ != null) && (str.IndexOf(trimPrefix_, StringComparison.Ordinal) == 0))
+                if ((_trimPrefix != null) && (str.IndexOf(_trimPrefix, StringComparison.Ordinal) == 0))
                 {
-                    name = name.Substring(trimPrefix_.Length);
+                    name = name.Substring(_trimPrefix.Length);
                 }
                 name = name.Replace(@"\", "/");
                 name = WindowsPathUtils.DropPathRoot(name);
@@ -132,15 +132,12 @@ namespace Lte.Domain.ZipLib.Zip
         {
             get
             {
-                return trimPrefix_;
+                return _trimPrefix;
             }
             set
             {
-                trimPrefix_ = value;
-                if (trimPrefix_ != null)
-                {
-                    trimPrefix_ = trimPrefix_.ToLower();
-                }
+                _trimPrefix = value;
+                _trimPrefix = _trimPrefix?.ToLower();
             }
         }
     }

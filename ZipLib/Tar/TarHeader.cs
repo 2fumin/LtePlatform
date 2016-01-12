@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace Lte.Domain.ZipLib.Tar
+namespace ZipLib.Tar
 {
     public class TarHeader : ICloneable
     {

@@ -1,4 +1,4 @@
-﻿namespace Lte.Domain.ZipLib.Zip
+﻿namespace ZipLib.Zip
 {
     public class TestStatus
     {

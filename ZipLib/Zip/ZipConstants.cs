@@ -2,7 +2,7 @@
 using System.Text;
 using System.Threading;
 
-namespace Lte.Domain.ZipLib.Zip
+namespace ZipLib.Zip
 {
     public static class ZipConstants
     {

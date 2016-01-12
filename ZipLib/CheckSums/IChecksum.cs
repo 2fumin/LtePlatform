@@ -1,4 +1,4 @@
-﻿namespace Lte.Domain.ZipLib.CheckSums
+﻿namespace ZipLib.CheckSums
 {
     public interface IChecksum
     {

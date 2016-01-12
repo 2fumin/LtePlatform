@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Lte.Domain.ZipLib.Tar
+namespace ZipLib.Tar
 {
     [Serializable]
     public class TarException : SharpZipBaseException

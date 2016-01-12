@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using Lte.Domain.Lz4Net.Core;
 
-namespace Lte.Domain.ZipLib.Zip
+namespace ZipLib.Zip
 {
     public class WindowsNameTransform : INameTransform
     {

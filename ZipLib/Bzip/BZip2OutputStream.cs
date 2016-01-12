@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.InteropServices;
-using Lte.Domain.ZipLib.CheckSums;
+using ZipLib.CheckSums;
 
-namespace Lte.Domain.ZipLib.Bzip
+namespace ZipLib.Bzip
 {
     public class BZip2OutputStream : Stream
     {
