@@ -9,35 +9,35 @@ namespace Lte.Domain.ZipLib.Zip
 {
     public class ZipInputStream : InflaterInputStream
     {
-        private Crc32 crc;
-        private ZipEntry entry;
-        private int flags;
-        private ReadDataHandler internalReader;
-        private int method;
-        private string password;
-        private long size;
+        private Crc32 _crc;
+        private ZipEntry _entry;
+        private int _flags;
+        private ReadDataHandler _internalReader;
+        private int _method;
+        private string _password;
+        private long _size;
 
         public ZipInputStream(Stream baseInputStream)
             : base(baseInputStream, new Inflater(true))
         {
-            crc = new Crc32();
-            internalReader = ReadingNotAvailable;
+            _crc = new Crc32();
+            _internalReader = ReadingNotAvailable;
         }
 
         public ZipInputStream(Stream baseInputStream, int bufferSize)
             : base(baseInputStream, new Inflater(true), bufferSize)
         {
-            crc = new Crc32();
-            internalReader = ReadingNotAvailable;
+            _crc = new Crc32();
+            _internalReader = ReadingNotAvailable;
         }
 
         private int BodyRead(byte[] buffer, int offset, int count)
         {
-            if (crc == null)
+            if (_crc == null)
             {
                 throw new InvalidOperationException("Closed");
             }
-            if ((entry == null) || (count <= 0))
+            if ((_entry == null) || (count <= 0))
             {
                 return 0;
             }
@@ -45,24 +45,24 @@ namespace Lte.Domain.ZipLib.Zip
             {
                 throw new ArgumentException("Offset + count exceeds buffer size");
             }
-            bool flag = false;
-            switch (method)
+            var flag = false;
+            switch (_method)
             {
                 case 0:
-                    if ((count > base.csize) && (base.csize >= 0L))
+                    if ((count > csize) && (csize >= 0L))
                     {
-                        count = (int)base.csize;
+                        count = (int)csize;
                     }
                     if (count > 0)
                     {
-                        count = base.inputBuffer.ReadClearTextBuffer(buffer, offset, count);
+                        count = inputBuffer.ReadClearTextBuffer(buffer, offset, count);
                         if (count > 0)
                         {
-                            base.csize -= count;
-                            size -= count;
+                            csize -= count;
+                            _size -= count;
                         }
                     }
-                    if (base.csize == 0L)
+                    if (csize == 0L)
                     {
                         flag = true;
                     }
@@ -81,18 +81,18 @@ namespace Lte.Domain.ZipLib.Zip
                             throw new ZipException("Inflater not finished!");
                         }
                         inputBuffer.Available = inf.RemainingInput;
-                        if (((flags & 8) == 0) && ((((base.inf.TotalIn != base.csize) && (base.csize != 0xffffffffL)) && (base.csize != -1L)) || (base.inf.TotalOut != size)))
+                        if (((_flags & 8) == 0) && ((((inf.TotalIn != csize) && (csize != 0xffffffffL)) && (csize != -1L)) || (inf.TotalOut != _size)))
                         {
-                            throw new ZipException(string.Concat(new object[] { "Size mismatch: ", base.csize, ";", size, " <-> ", base.inf.TotalIn, ";", base.inf.TotalOut }));
+                            throw new ZipException(string.Concat("Size mismatch: ", csize, ";", _size, " <-> ", inf.TotalIn, ";", inf.TotalOut));
                         }
-                        base.inf.Reset();
+                        inf.Reset();
                         flag = true;
                     }
                     break;
             }
             if (count > 0)
             {
-                crc.Update(buffer, offset, count);
+                _crc.Update(buffer, offset, count);
             }
             if (flag)
             {
@@ -103,86 +103,86 @@ namespace Lte.Domain.ZipLib.Zip
 
         public override void Close()
         {
-            internalReader = ReadingNotAvailable;
-            crc = null;
-            entry = null;
+            _internalReader = ReadingNotAvailable;
+            _crc = null;
+            _entry = null;
             base.Close();
         }
 
         public void CloseEntry()
         {
-            if (crc == null)
+            if (_crc == null)
             {
                 throw new InvalidOperationException("Closed");
             }
-            if (entry != null)
+            if (_entry != null)
             {
-                if (method == 8)
+                if (_method == 8)
                 {
-                    if ((flags & 8) != 0)
+                    if ((_flags & 8) != 0)
                     {
-                        byte[] buffer = new byte[0x1000];
+                        var buffer = new byte[0x1000];
                         while (Read(buffer, 0, buffer.Length) > 0)
                         {
                         }
                         return;
                     }
-                    base.csize -= base.inf.TotalIn;
-                    base.inputBuffer.Available += base.inf.RemainingInput;
+                    csize -= inf.TotalIn;
+                    inputBuffer.Available += inf.RemainingInput;
                 }
-                if ((base.inputBuffer.Available > base.csize) && (base.csize >= 0L))
+                if ((inputBuffer.Available > csize) && (csize >= 0L))
                 {
-                    base.inputBuffer.Available -= (int)base.csize;
+                    inputBuffer.Available -= (int)csize;
                 }
                 else
                 {
-                    base.csize -= base.inputBuffer.Available;
-                    base.inputBuffer.Available = 0;
-                    while (base.csize != 0L)
+                    csize -= inputBuffer.Available;
+                    inputBuffer.Available = 0;
+                    while (csize != 0L)
                     {
-                        long num = base.Skip(base.csize);
+                        var num = Skip(csize);
                         if (num <= 0L)
                         {
                             throw new ZipException("Zip archive ends early.");
                         }
-                        base.csize -= num;
+                        csize -= num;
                     }
                 }
-                CompleteCloseEntry(false);
+                CompleteCloseEntry();
             }
         }
 
-        private void CompleteCloseEntry(bool testCrc)
+        private void CompleteCloseEntry(bool testCrc = false)
         {
-            base.StopDecrypting();
-            if ((flags & 8) != 0)
+            StopDecrypting();
+            if ((_flags & 8) != 0)
             {
                 ReadDataDescriptor();
             }
-            size = 0L;
-            if ((testCrc && ((((ulong)crc.Value) & 0xffffffffL) != (ulong)entry.Crc)) && (entry.Crc != -1L))
+            _size = 0L;
+            if ((testCrc && ((((ulong)_crc.Value) & 0xffffffffL) != (ulong)_entry.Crc)) && (_entry.Crc != -1L))
             {
                 throw new ZipException("CRC mismatch");
             }
-            crc.Reset();
-            if (method == 8)
+            _crc.Reset();
+            if (_method == 8)
             {
-                base.inf.Reset();
+                inf.Reset();
             }
-            entry = null;
+            _entry = null;
         }
 
         public ZipEntry GetNextEntry()
         {
-            if (crc == null)
+            if (_crc == null)
             {
                 throw new InvalidOperationException("Closed.");
             }
-            if (entry != null)
+            if (_entry != null)
             {
                 CloseEntry();
             }
-            int num = base.inputBuffer.ReadLeInt();
+            var num = inputBuffer.ReadLeInt();
             switch (num)
             {
                 case 0x2014b50:
@@ -195,81 +195,81 @@ namespace Lte.Domain.ZipLib.Zip
 
                 case 0x30304b50:
                 case 0x8074b50:
-                    num = base.inputBuffer.ReadLeInt();
+                    num = inputBuffer.ReadLeInt();
                     break;
             }
             if (num != 0x4034b50)
             {
                 throw new ZipException("Wrong Local header signature: 0x" + string.Format("{0:X}", num));
             }
-            short versionRequiredToExtract = (short)base.inputBuffer.ReadLeShort();
-            flags = base.inputBuffer.ReadLeShort();
-            method = base.inputBuffer.ReadLeShort();
-            uint num3 = (uint)base.inputBuffer.ReadLeInt();
-            int num4 = base.inputBuffer.ReadLeInt();
-            base.csize = base.inputBuffer.ReadLeInt();
-            size = base.inputBuffer.ReadLeInt();
-            int num5 = base.inputBuffer.ReadLeShort();
-            int num6 = base.inputBuffer.ReadLeShort();
-            bool flag = (flags & 1) == 1;
-            byte[] buffer = new byte[num5];
-            base.inputBuffer.ReadRawBuffer(buffer);
-            string name = ZipConstants.ConvertToStringExt(flags, buffer);
-            entry = new ZipEntry(name, versionRequiredToExtract);
-            entry.Flags = flags;
-            entry.CompressionMethod = (CompressionMethod)method;
-            if ((flags & 8) == 0)
+            var versionRequiredToExtract = (short)inputBuffer.ReadLeShort();
+            _flags = inputBuffer.ReadLeShort();
+            _method = inputBuffer.ReadLeShort();
+            var num3 = (uint)inputBuffer.ReadLeInt();
+            var num4 = inputBuffer.ReadLeInt();
+            csize = inputBuffer.ReadLeInt();
+            _size = inputBuffer.ReadLeInt();
+            var num5 = inputBuffer.ReadLeShort();
+            var num6 = inputBuffer.ReadLeShort();
+            var flag = (_flags & 1) == 1;
+            var buffer = new byte[num5];
+            inputBuffer.ReadRawBuffer(buffer);
+            var name = ZipConstants.ConvertToStringExt(_flags, buffer);
+            _entry = new ZipEntry(name, versionRequiredToExtract);
+            _entry.Flags = _flags;
+            _entry.CompressionMethod = (CompressionMethod)_method;
+            if ((_flags & 8) == 0)
             {
-                entry.Crc = num4 & 0xffffffffL;
-                entry.Size = size & 0xffffffffL;
-                entry.CompressedSize = base.csize & 0xffffffffL;
-                entry.CryptoCheckValue = (byte)((num4 >> 0x18) & 0xff);
+                _entry.Crc = num4 & 0xffffffffL;
+                _entry.Size = _size & 0xffffffffL;
+                _entry.CompressedSize = csize & 0xffffffffL;
+                _entry.CryptoCheckValue = (byte)((num4 >> 0x18) & 0xff);
             }
             else
             {
                 if (num4 != 0)
                 {
-                    entry.Crc = num4 & 0xffffffffL;
+                    _entry.Crc = num4 & 0xffffffffL;
                 }
-                if (size != 0L)
+                if (_size != 0L)
                 {
-                    entry.Size = size & 0xffffffffL;
+                    _entry.Size = _size & 0xffffffffL;
                 }
                 if (csize != 0L)
                 {
-                    entry.CompressedSize = csize & 0xffffffffL;
+                    _entry.CompressedSize = csize & 0xffffffffL;
                 }
-                entry.CryptoCheckValue = (byte)((num3 >> 8) & 0xff);
+                _entry.CryptoCheckValue = (byte)((num3 >> 8) & 0xff);
             }
-            entry.DosTime = num3;
+            _entry.DosTime = num3;
             if (num6 > 0)
             {
-                byte[] buffer2 = new byte[num6];
+                var buffer2 = new byte[num6];
                 inputBuffer.ReadRawBuffer(buffer2);
-                entry.ExtraData = buffer2;
+                _entry.ExtraData = buffer2;
             }
-            entry.ProcessExtraData(true);
-            if (entry.CompressedSize >= 0L)
+            _entry.ProcessExtraData(true);
+            if (_entry.CompressedSize >= 0L)
             {
-                base.csize = entry.CompressedSize;
+                csize = _entry.CompressedSize;
             }
-            if (entry.Size >= 0L)
+            if (_entry.Size >= 0L)
             {
-                size = entry.Size;
+                _size = _entry.Size;
             }
-            if ((method == 0) && ((!flag && (base.csize != size)) || (flag && ((base.csize - 12L) != size))))
+            if ((_method == 0) && ((!flag && (csize != _size)) || (flag && ((csize - 12L) != _size))))
             {
                 throw new ZipException("Stored, but compressed != uncompressed");
             }
-            if (entry.IsCompressionMethodSupported())
+            if (_entry.IsCompressionMethodSupported())
             {
-                internalReader = InitialRead;
+                _internalReader = InitialRead;
             }
             else
             {
-                internalReader = ReadingNotSupported;
+                _internalReader = ReadingNotSupported;
             }
-            return entry;
+            return _entry;
         }
 
         private int InitialRead(byte[] destination, int offset, int count)
@@ -277,49 +277,49 @@ namespace Lte.Domain.ZipLib.Zip
             if (!CanDecompressEntry)
             {
                 throw new ZipException("Library cannot extract this entry. Version required is (" 
-                    + entry.Version.ToString() + ")");
+                    + _entry.Version + ")");
             }
-            if (entry.IsCrypted)
+            if (_entry.IsCrypted)
             {
-                if (password == null)
+                if (_password == null)
                 {
                     throw new ZipException("No password set.");
                 }
-                PkzipClassicManaged managed = new PkzipClassicManaged();
-                byte[] rgbKey = PkzipClassic.GenerateKeys(ZipConstants.ConvertToArray(password));
-                base.inputBuffer.CryptoTransform = managed.CreateDecryptor(rgbKey, null);
-                byte[] outBuffer = new byte[12];
-                base.inputBuffer.ReadClearTextBuffer(outBuffer, 0, 12);
-                if (outBuffer[11] != entry.CryptoCheckValue)
+                var managed = new PkzipClassicManaged();
+                var rgbKey = PkzipClassic.GenerateKeys(ZipConstants.ConvertToArray(_password));
+                inputBuffer.CryptoTransform = managed.CreateDecryptor(rgbKey, null);
+                var outBuffer = new byte[12];
+                inputBuffer.ReadClearTextBuffer(outBuffer, 0, 12);
+                if (outBuffer[11] != _entry.CryptoCheckValue)
                 {
                     throw new ZipException("Invalid password");
                 }
-                if (base.csize < 12L)
+                if (csize < 12L)
                 {
-                    if ((entry.Flags & 8) == 0)
+                    if ((_entry.Flags & 8) == 0)
                     {
-                        throw new ZipException(string.Format("Entry compressed size {0} too small for encryption", base.csize));
+                        throw new ZipException($"Entry compressed size {csize} too small for encryption");
                     }
                 }
                 else
                 {
-                    base.csize -= 12L;
+                    csize -= 12L;
                 }
             }
             else
             {
-                base.inputBuffer.CryptoTransform = null;
+                inputBuffer.CryptoTransform = null;
             }
-            if ((base.csize > 0L) || ((flags & 8) != 0))
+            if ((csize > 0L) || ((_flags & 8) != 0))
             {
-                if ((method == 8) && (base.inputBuffer.Available > 0))
+                if ((_method == 8) && (inputBuffer.Available > 0))
                 {
-                    base.inputBuffer.SetInflaterInput(base.inf);
+                    inputBuffer.SetInflaterInput(inf);
                 }
-                internalReader = BodyRead;
+                _internalReader = BodyRead;
                 return BodyRead(destination, offset, count);
             }
-            internalReader = ReadingNotAvailable;
+            _internalReader = ReadingNotAvailable;
             return 0;
         }
 
@@ -327,26 +327,26 @@ namespace Lte.Domain.ZipLib.Zip
         {
             if (buffer == null)
             {
-                throw new ArgumentNullException("buffer");
+                throw new ArgumentNullException(nameof(buffer));
             }
             if (offset < 0)
             {
-                throw new ArgumentOutOfRangeException("offset", "Cannot be negative");
+                throw new ArgumentOutOfRangeException(nameof(offset), "Cannot be negative");
             }
             if (count < 0)
             {
-                throw new ArgumentOutOfRangeException("count", "Cannot be negative");
+                throw new ArgumentOutOfRangeException(nameof(count), "Cannot be negative");
             }
             if ((buffer.Length - offset) < count)
             {
                 throw new ArgumentException("Invalid offset/count combination");
             }
-            return internalReader(buffer, offset, count);
+            return _internalReader(buffer, offset, count);
         }
 
         public override int ReadByte()
         {
-            byte[] buffer = new byte[1];
+            var buffer = new byte[1];
             if (Read(buffer, 0, 1) <= 0)
             {
                 return -1;
@@ -356,23 +356,23 @@ namespace Lte.Domain.ZipLib.Zip
 
         private void ReadDataDescriptor()
         {
-            if (base.inputBuffer.ReadLeInt() != 0x8074b50)
+            if (inputBuffer.ReadLeInt() != 0x8074b50)
             {
                 throw new ZipException("Data descriptor signature not found");
             }
-            entry.Crc = base.inputBuffer.ReadLeInt() & 0xffffffffL;
-            if (entry.LocalHeaderRequiresZip64)
+            _entry.Crc = inputBuffer.ReadLeInt() & 0xffffffffL;
+            if (_entry.LocalHeaderRequiresZip64)
             {
-                base.csize = base.inputBuffer.ReadLeLong();
-                size = base.inputBuffer.ReadLeLong();
+                csize = inputBuffer.ReadLeLong();
+                _size = inputBuffer.ReadLeLong();
             }
             else
             {
-                base.csize = base.inputBuffer.ReadLeInt();
-                size = base.inputBuffer.ReadLeInt();
+                csize = inputBuffer.ReadLeInt();
+                _size = inputBuffer.ReadLeInt();
             }
-            entry.CompressedSize = base.csize;
-            entry.Size = size;
+            _entry.CompressedSize = csize;
+            _entry.Size = _size;
         }
 
         private int ReadingNotAvailable(byte[] destination, int offset, int count)
@@ -389,7 +389,7 @@ namespace Lte.Domain.ZipLib.Zip
         {
             get
             {
-                if (entry == null)
+                if (_entry == null)
                 {
                     return 0;
                 }
@@ -401,7 +401,7 @@ namespace Lte.Domain.ZipLib.Zip
         {
             get
             {
-                return ((entry != null) && entry.CanDecompress);
+                return ((_entry != null) && _entry.CanDecompress);
             }
         }
 
@@ -409,15 +409,15 @@ namespace Lte.Domain.ZipLib.Zip
         {
             get
             {
-                if (entry == null)
+                if (_entry == null)
                 {
                     throw new InvalidOperationException("No current entry");
                 }
-                if (entry.Size < 0L)
+                if (_entry.Size < 0L)
                 {
                     throw new ZipException("Length not available for the current entry");
                 }
-                return entry.Size;
+                return _entry.Size;
             }
         }
 
@@ -425,11 +425,11 @@ namespace Lte.Domain.ZipLib.Zip
         {
             get
             {
-                return password;
+                return _password;
             }
             set
             {
-                password = value;
+                _password = value;
             }
         }
 

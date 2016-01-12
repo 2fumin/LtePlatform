@@ -651,7 +651,7 @@ namespace Lte.Domain.ZipLib.Zip
         {
             if (fileName == null)
             {
-                throw new ArgumentNullException("fileName");
+                throw new ArgumentNullException(nameof(fileName));
             }
             FileStream stream = File.Create(fileName);
             return new ZipFile { name_ = fileName, baseStream_ = stream, isStreamOwner = true };

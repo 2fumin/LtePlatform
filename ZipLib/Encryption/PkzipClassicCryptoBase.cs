@@ -18,7 +18,7 @@ namespace Lte.Domain.Lz4Net.Encryption
         {
             if (keyData == null)
             {
-                throw new ArgumentNullException("keyData");
+                throw new ArgumentNullException(nameof(keyData));
             }
             if (keyData.Length != 12)
             {

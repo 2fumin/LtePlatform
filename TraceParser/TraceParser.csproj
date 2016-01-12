@@ -342,6 +342,10 @@
       <Project>{adeef82d-6389-47c4-8f7c-d7f85c01d64e}</Project>
       <Name>Lte.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ZipLib\ZipLib.csproj">
+      <Project>{4e7a58a7-a693-43b3-b954-1df8215dfa74}</Project>
+      <Name>ZipLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

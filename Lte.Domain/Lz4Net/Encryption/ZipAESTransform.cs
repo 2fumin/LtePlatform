@@ -3,17 +3,16 @@ using System.Security.Cryptography;
 
 namespace Lte.Domain.Lz4Net.Encryption
 {
-    internal class ZipAESTransform : ICryptoTransform, IDisposable
+    public class ZipAESTransform : ICryptoTransform, IDisposable
     {
-        private int _blockSize;
+        private readonly int _blockSize;
         private readonly byte[] _counterNonce;
         private int _encrPos;
-        private byte[] _encryptBuffer;
-        private ICryptoTransform _encryptor;
+        private readonly byte[] _encryptBuffer;
+        private readonly ICryptoTransform _encryptor;
         private bool _finalised;
-        private HMACSHA1 _hmacsha1;
-        private byte[] _pwdVerifier;
-        private bool _writeMode;
+        private readonly HMACSHA1 _hmacsha1;
+        private readonly bool _writeMode;
         private const int ENCRYPT_BLOCK = 0x10;
         private const int KEY_ROUNDS = 0x3e8;
         private const int PWD_VER_LENGTH = 2;
@@ -40,7 +39,7 @@ namespace Lte.Domain.Lz4Net.Encryption
             byte[] rgbKey = bytes.GetBytes(_blockSize);
             byte[] rgbIV = bytes.GetBytes(_blockSize);
             _encryptor = managed.CreateEncryptor(rgbKey, rgbIV);
-            _pwdVerifier = bytes.GetBytes(2);
+            PwdVerifier = bytes.GetBytes(2);
             _hmacsha1 = new HMACSHA1(rgbIV);
             _writeMode = writeMode;
         }
@@ -91,44 +90,14 @@ namespace Lte.Domain.Lz4Net.Encryption
             throw new NotImplementedException("ZipAESTransform.TransformFinalBlock");
         }
 
-        public bool CanReuseTransform
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public bool CanReuseTransform => true;
 
-        public bool CanTransformMultipleBlocks
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public bool CanTransformMultipleBlocks => true;
 
-        public int InputBlockSize
-        {
-            get
-            {
-                return _blockSize;
-            }
-        }
+        public int InputBlockSize => _blockSize;
 
-        public int OutputBlockSize
-        {
-            get
-            {
-                return _blockSize;
-            }
-        }
+        public int OutputBlockSize => _blockSize;
 
-        public byte[] PwdVerifier
-        {
-            get
-            {
-                return _pwdVerifier;
-            }
-        }
+        public byte[] PwdVerifier { get; }
     }
 }

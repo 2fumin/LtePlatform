@@ -4,14 +4,14 @@ using System.Security.Cryptography;
 
 namespace Lte.Domain.Lz4Net.Encryption
 {
-    internal class ZipAESStream : CryptoStream
+    public class ZipAESStream : CryptoStream
     {
-        private int _blockAndAuth;
-        private byte[] _slideBuffer;
+        private readonly int _blockAndAuth;
+        private readonly byte[] _slideBuffer;
         private int _slideBufFreePos;
         private int _slideBufStartPos;
-        private Stream _stream;
-        private ZipAESTransform _transform;
+        private readonly Stream _stream;
+        private readonly ZipAESTransform _transform;
         private const int AUTH_CODE_LENGTH = 10;
         private const int CRYPTO_BLOCK_SIZE = 0x10;
 

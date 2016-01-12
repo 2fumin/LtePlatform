@@ -14,11 +14,11 @@ namespace Lte.Domain.Lz4Net.Encryption
         {
             if (seed == null)
             {
-                throw new ArgumentNullException("seed");
+                throw new ArgumentNullException(nameof(seed));
             }
             if (seed.Length == 0)
             {
-                throw new ArgumentException("Length is zero", "seed");
+                throw new ArgumentException("Length is zero", nameof(seed));
             }
             uint[] numArray = { 0x12345678, 0x23456789, 0x34567890 };
             for (int i = 0; i < seed.Length; i++)

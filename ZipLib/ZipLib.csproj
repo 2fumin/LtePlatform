@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4E7A58A7-A693-43B3-B954-1DF8215DFA74}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ZipLib</RootNamespace>
+    <AssemblyName>ZipLib</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bzip\BZip2.cs" />
+    <Compile Include="Bzip\BZip2Constants.cs" />
+    <Compile Include="Bzip\BZip2Exception.cs" />
+    <Compile Include="Bzip\BZip2InputStream.cs" />
+    <Compile Include="Bzip\BZip2OutputStream.cs" />
+    <Compile Include="CheckSums\Adler32.cs" />
+    <Compile Include="CheckSums\Crc32.cs" />
+    <Compile Include="CheckSums\IChecksum.cs" />
+    <Compile Include="CheckSums\StrangeCRC.cs" />
+    <Compile Include="Comppression\Deflater.cs" />
+    <Compile Include="Comppression\DeflaterConstants.cs" />
+    <Compile Include="Comppression\DeflaterEngine.cs" />
+    <Compile Include="Comppression\DeflaterHuffman.cs" />
+    <Compile Include="Comppression\DeflaterPending.cs" />
+    <Compile Include="Comppression\DeflateStrategy.cs" />
+    <Compile Include="Comppression\Inflater.cs" />
+    <Compile Include="Comppression\InflaterDynHeader.cs" />
+    <Compile Include="Comppression\InflaterHuffmanTree.cs" />
+    <Compile Include="Comppression\PendingBuffer.cs" />
+    <Compile Include="Encryption\PkzipClassic.cs" />
+    <Compile Include="Encryption\PkzipClassicCryptoBase.cs" />
+    <Compile Include="Encryption\PkzipClassicDecryptCryptoTransform.cs" />
+    <Compile Include="Encryption\PkzipClassicEncryptCryptoTransform.cs" />
+    <Compile Include="Encryption\PkzipClassicManaged.cs" />
+    <Compile Include="Gzip\GZipConstants.cs" />
+    <Compile Include="Gzip\GZipException.cs" />
+    <Compile Include="Gzip\GZipInputStream.cs" />
+    <Compile Include="Gzip\GZipOutputStream.cs" />
+    <Compile Include="Lzw\LzwConstants.cs" />
+    <Compile Include="Lzw\LzwException.cs" />
+    <Compile Include="Lzw\LzwInputStream.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RarHelpper.cs" />
+    <Compile Include="SharpZipBaseException.cs" />
+    <Compile Include="Streams\DeflaterOutputStream.cs" />
+    <Compile Include="Streams\InflaterInputBuffer.cs" />
+    <Compile Include="Streams\InflaterInputStream.cs" />
+    <Compile Include="Streams\OutputWindow.cs" />
+    <Compile Include="Streams\StreamManipulator.cs" />
+    <Compile Include="Tar\TarArchive.cs" />
+    <Compile Include="Tar\TarBuffer.cs" />
+    <Compile Include="Tar\TarEntry.cs" />
+    <Compile Include="Tar\TarException.cs" />
+    <Compile Include="Tar\TarHeader.cs" />
+    <Compile Include="Tar\TarInputStream.cs" />
+    <Compile Include="Tar\TarOutputStream.cs" />
+    <Compile Include="Zip\BaseArchiveStorage.cs" />
+    <Compile Include="Zip\CommonInterfaces.cs" />
+    <Compile Include="Zip\CommonTypes.cs" />
+    <Compile Include="Zip\DescriptorData.cs" />
+    <Compile Include="Zip\DiskArchiveStorage.cs" />
+    <Compile Include="Zip\DynamicDiskDataSource.cs" />
+    <Compile Include="Zip\EntryPatchData.cs" />
+    <Compile Include="Zip\ExtendedUnixData.cs" />
+    <Compile Include="Zip\FastZip.cs" />
+    <Compile Include="Zip\FastZipEvents.cs" />
+    <Compile Include="Zip\KeysRequiredEventArgs.cs" />
+    <Compile Include="Zip\MemoryArchiveStorage.cs" />
+    <Compile Include="Zip\NTTaggedData.cs" />
+    <Compile Include="Zip\RawTaggedData.cs" />
+    <Compile Include="Zip\TestStatus.cs" />
+    <Compile Include="Zip\WindowsNameTransform.cs" />
+    <Compile Include="Zip\ZipConstants.cs" />
+    <Compile Include="Zip\ZipEntry.cs" />
+    <Compile Include="Zip\ZipEntryFactory.cs" />
+    <Compile Include="Zip\ZipException.cs" />
+    <Compile Include="Zip\ZipExtraData.cs" />
+    <Compile Include="Zip\ZipFile.cs" />
+    <Compile Include="Zip\ZipHelperStream.cs" />
+    <Compile Include="Zip\ZipInputStream.cs" />
+    <Compile Include="Zip\ZipNameTransform.cs" />
+    <Compile Include="Zip\ZipOutputStream.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lte.Domain\Lte.Domain.csproj">
+      <Project>{adeef82d-6389-47c4-8f7c-d7f85c01d64e}</Project>
+      <Name>Lte.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

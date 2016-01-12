@@ -12,14 +12,14 @@ namespace TraceParser.Zte
 {
     public class ZteTraceParser
     {
-        private static List<ZteEvent> listZteEvents = ZteEvent.GetZtePmEvents();
-        private static XmlSerializer serializer = new XmlSerializer(typeof(ZteTraceCollecFile));
+        private static readonly List<ZteEvent> ListZteEvents = ZteEvent.GetZtePmEvents();
+        private static readonly XmlSerializer Serializer = new XmlSerializer(typeof(ZteTraceCollecFile));
 
         private static ZteEvent GetAsnParseClass(ZteTraceRecSession traceCollecFile)
         {
-            string function = traceCollecFile.msg.function;
-            string name = traceCollecFile.msg.name;
-            ZteEvent event2 = listZteEvents.FirstOrDefault(p => p.EventType.Equals(function) && p.EventName.Equals(name));
+            var function = traceCollecFile.msg.function;
+            var name = traceCollecFile.msg.name;
+            var event2 = ListZteEvents.FirstOrDefault(p => p.EventType.Equals(function) && p.EventName.Equals(name));
             try
             {
                 if (event2 != null)
@@ -31,7 +31,7 @@ namespace TraceParser.Zte
                     return null;
                 }
                 Func<ZteEvent, bool> predicate = p => p.EventType.Equals(function);
-                return listZteEvents.FirstOrDefault(predicate);
+                return ListZteEvents.FirstOrDefault(predicate);
             }
             catch (Exception exception)
             {
@@ -42,24 +42,24 @@ namespace TraceParser.Zte
 
         public static ZteTraceCollecFile ParseRaw(string zipPath)
         {
-            MemoryStream stream = UnzipToMemoryStream(zipPath);
+            var stream = UnzipToMemoryStream(zipPath);
             return ParseRaw(stream);
         }
 
         public static ZteTraceCollecFile ParseRaw(MemoryStream uzip)
         {
             uzip.Position = 0L;
-            return serializer.Deserialize(uzip) as ZteTraceCollecFile;
+            return Serializer.Deserialize(uzip) as ZteTraceCollecFile;
         }
 
         public static TraceResultList Parse(List<ZteTraceRecSession> sessions, bool isParseAsn)
         {
-            TraceResultList list = new TraceResultList();
-            foreach (ZteTraceRecSession session in sessions)
+            var list = new TraceResultList();
+            foreach (var session in sessions)
             {
                 if (session != null)
                 {
-                    ZteEvent asnParseClass = GetAsnParseClass(session);
+                    var asnParseClass = GetAsnParseClass(session);
                     if (asnParseClass == null)
                     {
                         Console.WriteLine("{0}:{1}", session.msg.function, session.msg.name);
@@ -87,15 +87,15 @@ namespace TraceParser.Zte
 
         public static MemoryStream UnzipToMemoryStream(string binfile)
         {
-            MemoryStream stream = new MemoryStream();
-            int count = 0x100000;
-            using (FileStream stream2 = File.OpenRead(binfile))
+            var stream = new MemoryStream();
+            var count = 0x100000;
+            using (var stream2 = File.OpenRead(binfile))
             {
                 using (ZipInputStream stream3 = new ZipInputStream(stream2))
                 {
                     while (stream3.GetNextEntry() != null)
                     {
-                        byte[] buffer = new byte[count];
+                        var buffer = new byte[count];
                         while (true)
                         {
                             count = stream3.Read(buffer, 0, buffer.Length);
