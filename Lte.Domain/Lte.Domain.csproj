@@ -97,6 +97,7 @@
     <Compile Include="Common\Wireless\AlarmTypeQueries.cs" />
     <Compile Include="Regular\IpAddress.cs" />
     <Compile Include="Regular\MapperOperations.cs" />
+    <Compile Include="Regular\TouTouRegex.cs" />
     <Compile Include="Regular\TransformEnum.cs" />
     <Compile Include="Lz4Net\Core\CoreHandlers.cs" />
     <Compile Include="Lz4Net\Core\DirectoryEventArgs.cs" />
