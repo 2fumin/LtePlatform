@@ -121,13 +121,7 @@ namespace ZipLib.Zip
             }
         }
 
-        public short TagID
-        {
-            get
-            {
-                return 10;
-            }
-        }
+        public short TagId => 10;
     }
 }
 

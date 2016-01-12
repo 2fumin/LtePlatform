@@ -6,16 +6,16 @@ namespace ZipLib.Tar
 {
     public class TarArchive : IDisposable
     {
-        private bool applyUserInfoOverrides;
-        private bool asciiTranslate;
+        private bool _applyUserInfoOverrides;
+        private bool _asciiTranslate;
         private int _groupId;
-        private string groupName;
-        private bool isDisposed;
-        private bool keepOldFiles;
-        private string pathPrefix;
-        private string rootPath;
-        private TarInputStream tarIn;
-        private TarOutputStream tarOut;
+        private string _groupName;
+        private bool _isDisposed;
+        private bool _keepOldFiles;
+        private string _pathPrefix;
+        private string _rootPath;
+        private readonly TarInputStream _tarIn;
+        private readonly TarOutputStream _tarOut;
         private int _userId;
         private string _userName;
 
@@ -24,29 +24,29 @@ namespace ZipLib.Tar
         protected TarArchive()
         {
             _userName = string.Empty;
-            groupName = string.Empty;
+            _groupName = string.Empty;
         }
 
         protected TarArchive(TarInputStream stream)
         {
             _userName = string.Empty;
-            groupName = string.Empty;
+            _groupName = string.Empty;
             if (stream == null)
             {
-                throw new ArgumentNullException("stream");
+                throw new ArgumentNullException(nameof(stream));
             }
-            tarIn = stream;
+            _tarIn = stream;
         }
 
         protected TarArchive(TarOutputStream stream)
         {
             _userName = string.Empty;
-            groupName = string.Empty;
+            _groupName = string.Empty;
             if (stream == null)
             {
-                throw new ArgumentNullException("stream");
+                throw new ArgumentNullException(nameof(stream));
             }
-            tarOut = stream;
+            _tarOut = stream;
         }
 
         public virtual void Close()
@@ -64,7 +64,7 @@ namespace ZipLib.Tar
         {
             if (inputStream == null)
             {
-                throw new ArgumentNullException("inputStream");
+                throw new ArgumentNullException(nameof(inputStream));
             }
             TarInputStream stream = inputStream as TarInputStream;
             if (stream != null)
@@ -78,7 +78,7 @@ namespace ZipLib.Tar
         {
             if (inputStream == null)
             {
-                throw new ArgumentNullException("inputStream");
+                throw new ArgumentNullException(nameof(inputStream));
             }
             if (inputStream is TarInputStream)
             {
@@ -91,7 +91,7 @@ namespace ZipLib.Tar
         {
             if (outputStream == null)
             {
-                throw new ArgumentNullException("outputStream");
+                throw new ArgumentNullException(nameof(outputStream));
             }
             TarOutputStream stream = outputStream as TarOutputStream;
             if (stream != null)
@@ -105,7 +105,7 @@ namespace ZipLib.Tar
         {
             if (outputStream == null)
             {
-                throw new ArgumentNullException("outputStream");
+                throw new ArgumentNullException(nameof(outputStream));
             }
             if (outputStream is TarOutputStream)
             {
@@ -122,19 +122,19 @@ namespace ZipLib.Tar
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!isDisposed)
+            if (!_isDisposed)
             {
-                isDisposed = true;
+                _isDisposed = true;
                 if (disposing)
                 {
-                    if (tarOut != null)
+                    if (_tarOut != null)
                     {
-                        tarOut.Flush();
-                        tarOut.Close();
+                        _tarOut.Flush();
+                        _tarOut.Close();
                     }
-                    if (tarIn != null)
+                    if (_tarIn != null)
                     {
-                        tarIn.Close();
+                        _tarIn.Close();
                     }
                 }
             }
@@ -157,13 +157,13 @@ namespace ZipLib.Tar
 
         public void ExtractContents(string destinationDirectory)
         {
-            if (isDisposed)
+            if (_isDisposed)
             {
                 throw new ObjectDisposedException("TarArchive");
             }
             while (true)
             {
-                TarEntry nextEntry = tarIn.GetNextEntry();
+                TarEntry nextEntry = _tarIn.GetNextEntry();
                 if (nextEntry == null)
                 {
                     return;
@@ -193,7 +193,7 @@ namespace ZipLib.Tar
             FileInfo info = new FileInfo(directoryName);
             if (info.Exists)
             {
-                if (keepOldFiles)
+                if (_keepOldFiles)
                 {
                     OnProgressMessageEvent(entry, "Destination file already exists");
                     flag = false;
@@ -210,7 +210,7 @@ namespace ZipLib.Tar
             }
             bool flag2 = false;
             Stream stream = File.Create(directoryName);
-            if (asciiTranslate)
+            if (_asciiTranslate)
             {
                 flag2 = !IsBinary(directoryName);
             }
@@ -221,7 +221,7 @@ namespace ZipLib.Tar
             }
             byte[] buffer = new byte[0x8000];
         Label_00DF:
-            num = tarIn.Read(buffer, 0, buffer.Length);
+            num = _tarIn.Read(buffer, 0, buffer.Length);
             if (num > 0)
             {
                 if (flag2)
@@ -279,13 +279,13 @@ namespace ZipLib.Tar
 
         public void ListContents()
         {
-            if (isDisposed)
+            if (_isDisposed)
             {
                 throw new ObjectDisposedException("TarArchive");
             }
             while (true)
             {
-                TarEntry nextEntry = tarIn.GetNextEntry();
+                TarEntry nextEntry = _tarIn.GetNextEntry();
                 if (nextEntry == null)
                 {
                     return;
@@ -306,42 +306,42 @@ namespace ZipLib.Tar
         [Obsolete("Use the AsciiTranslate property")]
         public void SetAsciiTranslation(bool translateAsciiFiles)
         {
-            if (isDisposed)
+            if (_isDisposed)
             {
                 throw new ObjectDisposedException("TarArchive");
             }
-            asciiTranslate = translateAsciiFiles;
+            _asciiTranslate = translateAsciiFiles;
         }
 
         public void SetKeepOldFiles(bool keepExistingFiles)
         {
-            if (isDisposed)
+            if (_isDisposed)
             {
                 throw new ObjectDisposedException("TarArchive");
             }
-            keepOldFiles = keepExistingFiles;
+            _keepOldFiles = keepExistingFiles;
         }
 
         public void SetUserInfo(int userId, string userName, int groupId, string _groupName)
         {
-            if (isDisposed)
+            if (_isDisposed)
             {
                 throw new ObjectDisposedException("TarArchive");
             }
             _userId = userId;
             _userName = userName;
             _groupId = groupId;
-            groupName = _groupName;
-            applyUserInfoOverrides = true;
+            this._groupName = _groupName;
+            _applyUserInfoOverrides = true;
         }
 
         public void WriteEntry(TarEntry sourceEntry, bool recurse)
         {
             if (sourceEntry == null)
             {
-                throw new ArgumentNullException("sourceEntry");
+                throw new ArgumentNullException(nameof(sourceEntry));
             }
-            if (isDisposed)
+            if (_isDisposed)
             {
                 throw new ObjectDisposedException("TarArchive");
             }
@@ -367,15 +367,15 @@ namespace ZipLib.Tar
             string path = null;
             string file = sourceEntry.File;
             TarEntry entry = (TarEntry)sourceEntry.Clone();
-            if (applyUserInfoOverrides)
+            if (_applyUserInfoOverrides)
             {
                 entry.GroupId = _groupId;
-                entry.GroupName = groupName;
+                entry.GroupName = _groupName;
                 entry.UserId = _userId;
                 entry.UserName = _userName;
             }
             OnProgressMessageEvent(entry, null);
-            if ((asciiTranslate && !entry.IsDirectory) && !IsBinary(file))
+            if ((_asciiTranslate && !entry.IsDirectory) && !IsBinary(file))
             {
                 path = Path.GetTempFileName();
                 using (StreamReader reader = File.OpenText(file))
@@ -398,27 +398,27 @@ namespace ZipLib.Tar
                 file = path;
             }
             string str4 = null;
-            if ((rootPath != null) && entry.Name.StartsWith(rootPath))
+            if ((_rootPath != null) && entry.Name.StartsWith(_rootPath))
             {
-                str4 = entry.Name.Substring(rootPath.Length + 1);
+                str4 = entry.Name.Substring(_rootPath.Length + 1);
             }
-            if (pathPrefix != null)
+            if (_pathPrefix != null)
             {
-                str4 = (str4 == null) ? (pathPrefix + "/" + entry.Name) : (pathPrefix + "/" + str4);
+                str4 = (str4 == null) ? (_pathPrefix + "/" + entry.Name) : (_pathPrefix + "/" + str4);
             }
             if (str4 != null)
             {
                 entry.Name = str4;
             }
-            tarOut.PutNextEntry(entry);
+            _tarOut.PutNextEntry(entry);
             if (entry.IsDirectory)
             {
                 if (recurse)
                 {
                     TarEntry[] directoryEntries = entry.GetDirectoryEntries();
-                    for (int i = 0; i < directoryEntries.Length; i++)
+                    foreach (TarEntry t in directoryEntries)
                     {
-                        WriteEntryCore(directoryEntries[i], true);
+                        WriteEntryCore(t, true);
                     }
                     return;
                 }
@@ -434,7 +434,7 @@ namespace ZipLib.Tar
                     {
                         goto Label_01F6;
                     }
-                    tarOut.Write(buffer, 0, count);
+                    _tarOut.Write(buffer, 0, count);
                 }
             }
         Label_01F6:
@@ -442,26 +442,26 @@ namespace ZipLib.Tar
             {
                 File.Delete(path);
             }
-            tarOut.CloseEntry();
+            _tarOut.CloseEntry();
         }
 
         public bool ApplyUserInfoOverrides
         {
             get
             {
-                if (isDisposed)
+                if (_isDisposed)
                 {
                     throw new ObjectDisposedException("TarArchive");
                 }
-                return applyUserInfoOverrides;
+                return _applyUserInfoOverrides;
             }
             set
             {
-                if (isDisposed)
+                if (_isDisposed)
                 {
                     throw new ObjectDisposedException("TarArchive");
                 }
-                applyUserInfoOverrides = value;
+                _applyUserInfoOverrides = value;
             }
         }
 
@@ -469,19 +469,19 @@ namespace ZipLib.Tar
         {
             get
             {
-                if (isDisposed)
+                if (_isDisposed)
                 {
                     throw new ObjectDisposedException("TarArchive");
                 }
-                return asciiTranslate;
+                return _asciiTranslate;
             }
             set
             {
-                if (isDisposed)
+                if (_isDisposed)
                 {
                     throw new ObjectDisposedException("TarArchive");
                 }
-                asciiTranslate = value;
+                _asciiTranslate = value;
             }
         }
 
@@ -489,7 +489,7 @@ namespace ZipLib.Tar
         {
             get
             {
-                if (isDisposed)
+                if (_isDisposed)
                 {
                     throw new ObjectDisposedException("TarArchive");
                 }
@@ -501,11 +501,11 @@ namespace ZipLib.Tar
         {
             get
             {
-                if (isDisposed)
+                if (_isDisposed)
                 {
                     throw new ObjectDisposedException("TarArchive");
                 }
-                return groupName;
+                return _groupName;
             }
         }
 
@@ -513,13 +513,13 @@ namespace ZipLib.Tar
         {
             set
             {
-                if (tarIn != null)
+                if (_tarIn != null)
                 {
-                    tarIn.IsStreamOwner = value;
+                    _tarIn.IsStreamOwner = value;
                 }
                 else
                 {
-                    tarOut.IsStreamOwner = value;
+                    _tarOut.IsStreamOwner = value;
                 }
             }
         }
@@ -528,19 +528,19 @@ namespace ZipLib.Tar
         {
             get
             {
-                if (isDisposed)
+                if (_isDisposed)
                 {
                     throw new ObjectDisposedException("TarArchive");
                 }
-                return pathPrefix;
+                return _pathPrefix;
             }
             set
             {
-                if (isDisposed)
+                if (_isDisposed)
                 {
                     throw new ObjectDisposedException("TarArchive");
                 }
-                pathPrefix = value;
+                _pathPrefix = value;
             }
         }
 
@@ -548,17 +548,17 @@ namespace ZipLib.Tar
         {
             get
             {
-                if (isDisposed)
+                if (_isDisposed)
                 {
                     throw new ObjectDisposedException("TarArchive");
                 }
-                if (tarIn != null)
+                if (_tarIn != null)
                 {
-                    return tarIn.RecordSize;
+                    return _tarIn.RecordSize;
                 }
-                if (tarOut != null)
+                if (_tarOut != null)
                 {
-                    return tarOut.RecordSize;
+                    return _tarOut.RecordSize;
                 }
                 return 0x2800;
             }
@@ -568,19 +568,19 @@ namespace ZipLib.Tar
         {
             get
             {
-                if (isDisposed)
+                if (_isDisposed)
                 {
                     throw new ObjectDisposedException("TarArchive");
                 }
-                return rootPath;
+                return _rootPath;
             }
             set
             {
-                if (isDisposed)
+                if (_isDisposed)
                 {
                     throw new ObjectDisposedException("TarArchive");
                 }
-                rootPath = value;
+                _rootPath = value;
             }
         }
 
@@ -588,7 +588,7 @@ namespace ZipLib.Tar
         {
             get
             {
-                if (isDisposed)
+                if (_isDisposed)
                 {
                     throw new ObjectDisposedException("TarArchive");
                 }
@@ -600,7 +600,7 @@ namespace ZipLib.Tar
         {
             get
             {
-                if (isDisposed)
+                if (_isDisposed)
                 {
                     throw new ObjectDisposedException("TarArchive");
                 }

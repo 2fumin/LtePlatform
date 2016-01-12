@@ -5,14 +5,14 @@ namespace ZipLib.Tar
 {
     public class TarOutputStream : Stream
     {
-        protected byte[] assemblyBuffer;
-        private int assemblyBufferLength;
-        protected byte[] blockBuffer;
-        protected TarBuffer buffer;
-        private long currBytes;
-        protected long currSize;
-        private bool isClosed;
-        protected Stream outputStream;
+        private readonly byte[] _assemblyBuffer;
+        private int _assemblyBufferLength;
+        private readonly byte[] _blockBuffer;
+        private readonly TarBuffer _buffer;
+        private long _currBytes;
+        private long _currSize;
+        private bool _isClosed;
+        private readonly Stream _outputStream;
 
         public TarOutputStream(Stream outputStream)
             : this(outputStream, 20)
@@ -23,36 +23,37 @@ namespace ZipLib.Tar
         {
             if (outputStream == null)
             {
-                throw new ArgumentNullException("outputStream");
+                throw new ArgumentNullException(nameof(outputStream));
             }
-            this.outputStream = outputStream;
-            buffer = TarBuffer.CreateOutputTarBuffer(outputStream, blockFactor);
-            assemblyBuffer = new byte[0x200];
-            blockBuffer = new byte[0x200];
+            this._outputStream = outputStream;
+            _buffer = TarBuffer.CreateOutputTarBuffer(outputStream, blockFactor);
+            _assemblyBuffer = new byte[0x200];
+            _blockBuffer = new byte[0x200];
         }
 
         public override void Close()
         {
-            if (!isClosed)
+            if (!_isClosed)
             {
-                isClosed = true;
+                _isClosed = true;
                 Finish();
-                buffer.Close();
+                _buffer.Close();
             }
         }
 
         public void CloseEntry()
         {
-            if (assemblyBufferLength > 0)
+            if (_assemblyBufferLength > 0)
             {
-                Array.Clear(assemblyBuffer, assemblyBufferLength, assemblyBuffer.Length - assemblyBufferLength);
-                buffer.WriteBlock(assemblyBuffer);
-                currBytes += assemblyBufferLength;
-                assemblyBufferLength = 0;
+                Array.Clear(_assemblyBuffer, _assemblyBufferLength, _assemblyBuffer.Length - _assemblyBufferLength);
+                _buffer.WriteBlock(_assemblyBuffer);
+                _currBytes += _assemblyBufferLength;
+                _assemblyBufferLength = 0;
             }
-            if (currBytes < currSize)
+            if (_currBytes < _currSize)
             {
-                throw new TarException(string.Format("Entry closed at '{0}' before the '{1}' bytes specified in the header were written", currBytes, currSize));
+                throw new TarException(
+                    $"Entry closed at '{_currBytes}' before the '{_currSize}' bytes specified in the header were written");
             }
         }
 
@@ -67,20 +68,20 @@ namespace ZipLib.Tar
 
         public override void Flush()
         {
-            outputStream.Flush();
+            _outputStream.Flush();
         }
 
         [Obsolete("Use RecordSize property instead")]
         public int GetRecordSize()
         {
-            return buffer.RecordSize;
+            return _buffer.RecordSize;
         }
 
         public void PutNextEntry(TarEntry entry)
         {
             if (entry == null)
             {
-                throw new ArgumentNullException("entry");
+                throw new ArgumentNullException(nameof(entry));
             }
             if (entry.TarHeader.Name.Length >= 100)
             {
@@ -94,52 +95,52 @@ namespace ZipLib.Tar
                     Size = entry.TarHeader.Name.Length
                 };
                 header.Name += "././@LongLink";
-                header.WriteHeader(blockBuffer);
-                buffer.WriteBlock(blockBuffer);
+                header.WriteHeader(_blockBuffer);
+                _buffer.WriteBlock(_blockBuffer);
                 int nameOffset = 0;
                 while (nameOffset < entry.TarHeader.Name.Length)
                 {
-                    Array.Clear(blockBuffer, 0, blockBuffer.Length);
-                    TarHeader.GetAsciiBytes(entry.TarHeader.Name, nameOffset, blockBuffer, 0, 0x200);
+                    Array.Clear(_blockBuffer, 0, _blockBuffer.Length);
+                    TarHeader.GetAsciiBytes(entry.TarHeader.Name, nameOffset, _blockBuffer, 0, 0x200);
                     nameOffset += 0x200;
-                    buffer.WriteBlock(blockBuffer);
+                    _buffer.WriteBlock(_blockBuffer);
                 }
             }
-            entry.WriteEntryHeader(blockBuffer);
-            buffer.WriteBlock(blockBuffer);
-            currBytes = 0L;
-            currSize = entry.IsDirectory ? 0L : entry.Size;
+            entry.WriteEntryHeader(_blockBuffer);
+            _buffer.WriteBlock(_blockBuffer);
+            _currBytes = 0L;
+            _currSize = entry.IsDirectory ? 0L : entry.Size;
         }
 
         public override int Read(byte[] buf, int offset, int count)
         {
-            return outputStream.Read(buf, offset, count);
+            return _outputStream.Read(buf, offset, count);
         }
 
         public override int ReadByte()
         {
-            return outputStream.ReadByte();
+            return _outputStream.ReadByte();
         }
 
         public override long Seek(long offset, SeekOrigin origin)
         {
-            return outputStream.Seek(offset, origin);
+            return _outputStream.Seek(offset, origin);
         }
 
         public override void SetLength(long value)
         {
-            outputStream.SetLength(value);
+            _outputStream.SetLength(value);
         }
 
         public override void Write(byte[] buf, int offset, int count)
         {
             if (buf == null)
             {
-                throw new ArgumentNullException("buf");
+                throw new ArgumentNullException(nameof(buf));
             }
             if (offset < 0)
             {
-                throw new ArgumentOutOfRangeException("offset", "Cannot be negative");
+                throw new ArgumentOutOfRangeException(nameof(offset), "Cannot be negative");
             }
             if ((buf.Length - offset) < count)
             {
@@ -147,47 +148,46 @@ namespace ZipLib.Tar
             }
             if (count < 0)
             {
-                throw new ArgumentOutOfRangeException("count", "Cannot be negative");
+                throw new ArgumentOutOfRangeException(nameof(count), "Cannot be negative");
             }
-            if ((currBytes + count) > currSize)
+            if ((_currBytes + count) > _currSize)
             {
                 string message 
-                    = string.Format("request to write '{0}' bytes exceeds size in header of '{1}' bytes", 
-                    count, currSize);
-                throw new ArgumentOutOfRangeException("count", message);
+                    = $"request to write '{count}' bytes exceeds size in header of '{_currSize}' bytes";
+                throw new ArgumentOutOfRangeException(nameof(count), message);
             }
-            if (assemblyBufferLength > 0)
+            if (_assemblyBufferLength > 0)
             {
-                if ((assemblyBufferLength + count) >= blockBuffer.Length)
+                if ((_assemblyBufferLength + count) >= _blockBuffer.Length)
                 {
-                    int length = blockBuffer.Length - assemblyBufferLength;
-                    Array.Copy(assemblyBuffer, 0, blockBuffer, 0, assemblyBufferLength);
-                    Array.Copy(buf, offset, blockBuffer, assemblyBufferLength, length);
-                    buffer.WriteBlock(blockBuffer);
-                    currBytes += blockBuffer.Length;
+                    int length = _blockBuffer.Length - _assemblyBufferLength;
+                    Array.Copy(_assemblyBuffer, 0, _blockBuffer, 0, _assemblyBufferLength);
+                    Array.Copy(buf, offset, _blockBuffer, _assemblyBufferLength, length);
+                    _buffer.WriteBlock(_blockBuffer);
+                    _currBytes += _blockBuffer.Length;
                     offset += length;
                     count -= length;
-                    assemblyBufferLength = 0;
+                    _assemblyBufferLength = 0;
                 }
                 else
                 {
-                    Array.Copy(buf, offset, assemblyBuffer, assemblyBufferLength, count);
+                    Array.Copy(buf, offset, _assemblyBuffer, _assemblyBufferLength, count);
                     offset += count;
-                    assemblyBufferLength += count;
+                    _assemblyBufferLength += count;
                     count -= count;
                 }
             }
             while (count > 0)
             {
-                if (count < blockBuffer.Length)
+                if (count < _blockBuffer.Length)
                 {
-                    Array.Copy(buf, offset, assemblyBuffer, assemblyBufferLength, count);
-                    assemblyBufferLength += count;
+                    Array.Copy(buf, offset, _assemblyBuffer, _assemblyBufferLength, count);
+                    _assemblyBufferLength += count;
                     return;
                 }
-                buffer.WriteBlock(buf, offset);
-                int num2 = blockBuffer.Length;
-                currBytes += num2;
+                _buffer.WriteBlock(buf, offset);
+                int num2 = _blockBuffer.Length;
+                _currBytes += num2;
                 count -= num2;
                 offset += num2;
             }
@@ -200,80 +200,44 @@ namespace ZipLib.Tar
 
         private void WriteEofBlock()
         {
-            Array.Clear(blockBuffer, 0, blockBuffer.Length);
-            buffer.WriteBlock(blockBuffer);
+            Array.Clear(_blockBuffer, 0, _blockBuffer.Length);
+            _buffer.WriteBlock(_blockBuffer);
         }
 
-        public override bool CanRead
-        {
-            get
-            {
-                return outputStream.CanRead;
-            }
-        }
+        public override bool CanRead => _outputStream.CanRead;
 
-        public override bool CanSeek
-        {
-            get
-            {
-                return outputStream.CanSeek;
-            }
-        }
+        public override bool CanSeek => _outputStream.CanSeek;
 
-        public override bool CanWrite
-        {
-            get
-            {
-                return outputStream.CanWrite;
-            }
-        }
+        public override bool CanWrite => _outputStream.CanWrite;
 
-        private bool IsEntryOpen
-        {
-            get
-            {
-                return (currBytes < currSize);
-            }
-        }
+        private bool IsEntryOpen => (_currBytes < _currSize);
 
         public bool IsStreamOwner
         {
             get
             {
-                return buffer.IsStreamOwner;
+                return _buffer.IsStreamOwner;
             }
             set
             {
-                buffer.IsStreamOwner = value;
+                _buffer.IsStreamOwner = value;
             }
         }
 
-        public override long Length
-        {
-            get
-            {
-                return outputStream.Length;
-            }
-        }
+        public override long Length => _outputStream.Length;
 
         public override long Position
         {
             get
             {
-                return outputStream.Position;
+                return _outputStream.Position;
             }
             set
             {
-                outputStream.Position = value;
+                _outputStream.Position = value;
             }
         }
 
-        public int RecordSize
-        {
-            get
-            {
-                return buffer.RecordSize;
-            }
-        }
+        public int RecordSize => _buffer.RecordSize;
     }
 }

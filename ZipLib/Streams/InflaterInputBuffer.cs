@@ -8,48 +8,48 @@ namespace ZipLib.Streams
 {
     public class InflaterInputBuffer
     {
-        private int available;
-        private byte[] clearText;
-        private int clearTextLength;
-        private ICryptoTransform cryptoTransform;
-        private Stream inputStream;
-        private byte[] internalClearText;
-        private byte[] rawData;
-        private int rawLength;
+        private int _available;
+        private byte[] _clearText;
+        private int _clearTextLength;
+        private ICryptoTransform _cryptoTransform;
+        private readonly Stream _inputStream;
+        private byte[] _internalClearText;
+        private readonly byte[] _rawData;
+        private int _rawLength;
 
         public InflaterInputBuffer(Stream stream, int bufferSize = 0x1000)
         {
-            inputStream = stream;
+            _inputStream = stream;
             if (bufferSize < 0x400)
             {
                 bufferSize = 0x400;
             }
-            rawData = new byte[bufferSize];
-            clearText = rawData;
+            _rawData = new byte[bufferSize];
+            _clearText = _rawData;
         }
 
         public void Fill()
         {
             int num2;
-            rawLength = 0;
-            for (int i = rawData.Length; i > 0; i -= num2)
+            _rawLength = 0;
+            for (int i = _rawData.Length; i > 0; i -= num2)
             {
-                num2 = inputStream.Read(rawData, rawLength, i);
+                num2 = _inputStream.Read(_rawData, _rawLength, i);
                 if (num2 <= 0)
                 {
                     break;
                 }
-                rawLength += num2;
+                _rawLength += num2;
             }
-            if (cryptoTransform != null)
+            if (_cryptoTransform != null)
             {
-                clearTextLength = cryptoTransform.TransformBlock(rawData, 0, rawLength, clearText, 0);
+                _clearTextLength = _cryptoTransform.TransformBlock(_rawData, 0, _rawLength, _clearText, 0);
             }
             else
             {
-                clearTextLength = rawLength;
+                _clearTextLength = _rawLength;
             }
-            available = clearTextLength;
+            _available = _clearTextLength;
         }
 
         public int ReadClearTextBuffer(byte[] outBuffer, int offset, int length)
@@ -62,35 +62,35 @@ namespace ZipLib.Streams
             int num2 = length;
             while (num2 > 0)
             {
-                if (available <= 0)
+                if (_available <= 0)
                 {
                     Fill();
-                    if (available <= 0)
+                    if (_available <= 0)
                     {
                         return 0;
                     }
                 }
-                int num3 = Math.Min(num2, available);
-                Array.Copy(clearText, clearTextLength - available, outBuffer, destinationIndex, num3);
+                int num3 = Math.Min(num2, _available);
+                Array.Copy(_clearText, _clearTextLength - _available, outBuffer, destinationIndex, num3);
                 destinationIndex += num3;
                 num2 -= num3;
-                available -= num3;
+                _available -= num3;
             }
             return length;
         }
 
         public int ReadLeByte()
         {
-            if (available <= 0)
+            if (_available <= 0)
             {
                 Fill();
-                if (available <= 0)
+                if (_available <= 0)
                 {
                     throw new ZipException("EOF in header");
                 }
             }
-            byte num = rawData[rawLength - available];
-            available--;
+            byte num = _rawData[_rawLength - _available];
+            _available--;
             return num;
         }
 
@@ -124,29 +124,29 @@ namespace ZipLib.Streams
             int num2 = length;
             while (num2 > 0)
             {
-                if (available <= 0)
+                if (_available <= 0)
                 {
                     Fill();
-                    if (available <= 0)
+                    if (_available <= 0)
                     {
                         return 0;
                     }
                 }
-                int num3 = Math.Min(num2, available);
-                Array.Copy(rawData, rawLength - available, outBuffer, destinationIndex, num3);
+                int num3 = Math.Min(num2, _available);
+                Array.Copy(_rawData, _rawLength - _available, outBuffer, destinationIndex, num3);
                 destinationIndex += num3;
                 num2 -= num3;
-                available -= num3;
+                _available -= num3;
             }
             return length;
         }
 
         public void SetInflaterInput(Inflater inflater)
         {
-            if (available > 0)
+            if (_available > 0)
             {
-                inflater.SetInput(clearText, clearTextLength - available, available);
-                available = 0;
+                inflater.SetInput(_clearText, _clearTextLength - _available, _available);
+                _available = 0;
             }
         }
 
@@ -154,11 +154,11 @@ namespace ZipLib.Streams
         {
             get
             {
-                return available;
+                return _available;
             }
             set
             {
-                available = value;
+                _available = value;
             }
         }
 
@@ -166,7 +166,7 @@ namespace ZipLib.Streams
         {
             get
             {
-                return clearText;
+                return _clearText;
             }
         }
 
@@ -174,7 +174,7 @@ namespace ZipLib.Streams
         {
             get
             {
-                return clearTextLength;
+                return _clearTextLength;
             }
         }
 
@@ -182,27 +182,27 @@ namespace ZipLib.Streams
         {
             set
             {
-                cryptoTransform = value;
-                if (cryptoTransform != null)
+                _cryptoTransform = value;
+                if (_cryptoTransform != null)
                 {
-                    if (rawData == clearText)
+                    if (_rawData == _clearText)
                     {
-                        if (internalClearText == null)
+                        if (_internalClearText == null)
                         {
-                            internalClearText = new byte[rawData.Length];
+                            _internalClearText = new byte[_rawData.Length];
                         }
-                        clearText = internalClearText;
+                        _clearText = _internalClearText;
                     }
-                    clearTextLength = rawLength;
-                    if (available > 0)
+                    _clearTextLength = _rawLength;
+                    if (_available > 0)
                     {
-                        cryptoTransform.TransformBlock(rawData, rawLength - available, available, clearText, rawLength - available);
+                        _cryptoTransform.TransformBlock(_rawData, _rawLength - _available, _available, _clearText, _rawLength - _available);
                     }
                 }
                 else
                 {
-                    clearText = rawData;
-                    clearTextLength = rawLength;
+                    _clearText = _rawData;
+                    _clearTextLength = _rawLength;
                 }
             }
         }
@@ -211,7 +211,7 @@ namespace ZipLib.Streams
         {
             get
             {
-                return rawData;
+                return _rawData;
             }
         }
 
@@ -219,7 +219,7 @@ namespace ZipLib.Streams
         {
             get
             {
-                return rawLength;
+                return _rawLength;
             }
         }
     }

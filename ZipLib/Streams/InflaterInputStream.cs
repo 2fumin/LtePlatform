@@ -7,12 +7,12 @@ namespace ZipLib.Streams
 {
     public class InflaterInputStream : Stream
     {
-        private Stream baseInputStream;
-        protected long csize;
-        protected Inflater inf;
-        protected InflaterInputBuffer inputBuffer;
-        private bool isClosed;
-        private bool isStreamOwner;
+        private readonly Stream _baseInputStream;
+        protected long Csize;
+        protected readonly Inflater Inf;
+        protected readonly InflaterInputBuffer InputBuffer;
+        private bool _isClosed;
+        private bool _isStreamOwner;
 
         public InflaterInputStream(Stream baseInputStream)
             : this(baseInputStream, new Inflater(), 0x1000)
@@ -26,22 +26,22 @@ namespace ZipLib.Streams
 
         public InflaterInputStream(Stream baseInputStream, Inflater inflater, int bufferSize)
         {
-            isStreamOwner = true;
+            _isStreamOwner = true;
             if (baseInputStream == null)
             {
-                throw new ArgumentNullException("baseInputStream");
+                throw new ArgumentNullException(nameof(baseInputStream));
             }
             if (inflater == null)
             {
-                throw new ArgumentNullException("inflater");
+                throw new ArgumentNullException(nameof(inflater));
             }
             if (bufferSize <= 0)
             {
-                throw new ArgumentOutOfRangeException("bufferSize");
+                throw new ArgumentOutOfRangeException(nameof(bufferSize));
             }
-            this.baseInputStream = baseInputStream;
-            inf = inflater;
-            inputBuffer = new InflaterInputBuffer(baseInputStream, bufferSize);
+            this._baseInputStream = baseInputStream;
+            Inf = inflater;
+            InputBuffer = new InflaterInputBuffer(baseInputStream, bufferSize);
         }
 
         public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
@@ -51,51 +51,51 @@ namespace ZipLib.Streams
 
         public override void Close()
         {
-            if (!isClosed)
+            if (!_isClosed)
             {
-                isClosed = true;
-                if (isStreamOwner)
+                _isClosed = true;
+                if (_isStreamOwner)
                 {
-                    baseInputStream.Close();
+                    _baseInputStream.Close();
                 }
             }
         }
 
         protected void Fill()
         {
-            if (inputBuffer.Available <= 0)
+            if (InputBuffer.Available <= 0)
             {
-                inputBuffer.Fill();
-                if (inputBuffer.Available <= 0)
+                InputBuffer.Fill();
+                if (InputBuffer.Available <= 0)
                 {
                     throw new SharpZipBaseException("Unexpected EOF");
                 }
             }
-            inputBuffer.SetInflaterInput(inf);
+            InputBuffer.SetInflaterInput(Inf);
         }
 
         public override void Flush()
         {
-            baseInputStream.Flush();
+            _baseInputStream.Flush();
         }
 
         public override int Read(byte[] buffer, int offset, int count)
         {
-            if (inf.IsNeedingDictionary)
+            if (Inf.IsNeedingDictionary)
             {
                 throw new SharpZipBaseException("Need a dictionary");
             }
             int num = count;
             while (true)
             {
-                int num2 = inf.Inflate(buffer, offset, num);
+                int num2 = Inf.Inflate(buffer, offset, num);
                 offset += num2;
                 num -= num2;
-                if ((num == 0) || inf.IsFinished)
+                if ((num == 0) || Inf.IsFinished)
                 {
                     return (count - num);
                 }
-                if (!inf.IsNeedingInput)
+                if (!Inf.IsNeedingInput)
                 {
                     if (num2 == 0)
                     {
@@ -123,11 +123,11 @@ namespace ZipLib.Streams
         {
             if (count <= 0L)
             {
-                throw new ArgumentOutOfRangeException("count");
+                throw new ArgumentOutOfRangeException(nameof(count));
             }
-            if (baseInputStream.CanSeek)
+            if (_baseInputStream.CanSeek)
             {
-                baseInputStream.Seek(count, SeekOrigin.Current);
+                _baseInputStream.Seek(count, SeekOrigin.Current);
                 return count;
             }
             int num = 0x800;
@@ -144,7 +144,7 @@ namespace ZipLib.Streams
                 {
                     num = (int)num3;
                 }
-                num2 = baseInputStream.Read(buffer, 0, num);
+                num2 = _baseInputStream.Read(buffer, 0, num);
                 num3 -= num2;
             }
             return (count - num3);
@@ -152,7 +152,7 @@ namespace ZipLib.Streams
 
         protected void StopDecrypting()
         {
-            inputBuffer.CryptoTransform = null;
+            InputBuffer.CryptoTransform = null;
         }
 
         public override void Write(byte[] buffer, int offset, int count)
@@ -169,7 +169,7 @@ namespace ZipLib.Streams
         {
             get
             {
-                if (!inf.IsFinished)
+                if (!Inf.IsFinished)
                 {
                     return 1;
                 }
@@ -181,7 +181,7 @@ namespace ZipLib.Streams
         {
             get
             {
-                return baseInputStream.CanRead;
+                return _baseInputStream.CanRead;
             }
         }
 
@@ -205,11 +205,11 @@ namespace ZipLib.Streams
         {
             get
             {
-                return isStreamOwner;
+                return _isStreamOwner;
             }
             set
             {
-                isStreamOwner = value;
+                _isStreamOwner = value;
             }
         }
 
@@ -217,7 +217,7 @@ namespace ZipLib.Streams
         {
             get
             {
-                return inputBuffer.RawLength;
+                return InputBuffer.RawLength;
             }
         }
 
@@ -225,7 +225,7 @@ namespace ZipLib.Streams
         {
             get
             {
-                return baseInputStream.Position;
+                return _baseInputStream.Position;
             }
             set
             {

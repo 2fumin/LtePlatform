@@ -39,7 +39,7 @@ namespace ZipLib.Zip
         byte[] GetData();
         void SetData(byte[] data, int offset, int count);
 
-        short TagID { get; }
+        short TagId { get; }
     }
 
     internal interface ITaggedDataFactory

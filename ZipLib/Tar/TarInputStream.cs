@@ -6,14 +6,14 @@ namespace ZipLib.Tar
 {
     public class TarInputStream : Stream
     {
-        private TarEntry currentEntry;
-        protected IEntryFactory entryFactory;
-        protected long entryOffset;
-        protected long entrySize;
-        protected bool hasHitEOF;
-        private readonly Stream inputStream;
-        protected byte[] readBuffer;
-        protected TarBuffer tarBuffer;
+        private TarEntry _currentEntry;
+        private IEntryFactory _entryFactory;
+        private long _entryOffset;
+        private long _entrySize;
+        private bool _hasHitEof;
+        private readonly Stream _inputStream;
+        private byte[] _readBuffer;
+        private readonly TarBuffer _tarBuffer;
 
         public TarInputStream(Stream inputStream)
             : this(inputStream, 20)
@@ -22,13 +22,13 @@ namespace ZipLib.Tar
 
         public TarInputStream(Stream inputStream, int blockFactor)
         {
-            this.inputStream = inputStream;
-            tarBuffer = TarBuffer.CreateInputTarBuffer(inputStream, blockFactor);
+            _inputStream = inputStream;
+            _tarBuffer = TarBuffer.CreateInputTarBuffer(inputStream, blockFactor);
         }
 
         public override void Close()
         {
-            tarBuffer.Close();
+            _tarBuffer.Close();
         }
 
         public void CopyEntryContents(Stream outputStream)
@@ -47,31 +47,31 @@ namespace ZipLib.Tar
 
         public override void Flush()
         {
-            inputStream.Flush();
+            _inputStream.Flush();
         }
 
         public TarEntry GetNextEntry()
         {
-            if (hasHitEOF)
+            if (_hasHitEof)
             {
                 return null;
             }
-            if (currentEntry != null)
+            if (_currentEntry != null)
             {
                 SkipToNextEntry();
             }
-            byte[] block = tarBuffer.ReadBlock();
+            byte[] block = _tarBuffer.ReadBlock();
             if (block == null)
             {
-                hasHitEOF = true;
+                _hasHitEof = true;
             }
             else if (TarBuffer.IsEndOfArchiveBlock(block))
             {
-                hasHitEOF = true;
+                _hasHitEof = true;
             }
-            if (hasHitEOF)
+            if (_hasHitEof)
             {
-                currentEntry = null;
+                _currentEntry = null;
             }
             else
             {
@@ -83,13 +83,13 @@ namespace ZipLib.Tar
                     {
                         throw new TarException("Header checksum is invalid");
                     }
-                    entryOffset = 0L;
-                    entrySize = header.Size;
+                    _entryOffset = 0L;
+                    _entrySize = header.Size;
                     StringBuilder builder = null;
                     if (header.TypeFlag == 0x4c)
                     {
                         byte[] buffer = new byte[0x200];
-                        long size = entrySize;
+                        long size = _entrySize;
                         builder = new StringBuilder();
                         while (size > 0L)
                         {
@@ -102,58 +102,58 @@ namespace ZipLib.Tar
                             size -= length;
                         }
                         SkipToNextEntry();
-                        block = tarBuffer.ReadBlock();
+                        block = _tarBuffer.ReadBlock();
                     }
                     else if (header.TypeFlag == 0x67)
                     {
                         SkipToNextEntry();
-                        block = tarBuffer.ReadBlock();
+                        block = _tarBuffer.ReadBlock();
                     }
                     else if (header.TypeFlag == 120)
                     {
                         SkipToNextEntry();
-                        block = tarBuffer.ReadBlock();
+                        block = _tarBuffer.ReadBlock();
                     }
                     else if (header.TypeFlag == 0x56)
                     {
                         SkipToNextEntry();
-                        block = tarBuffer.ReadBlock();
+                        block = _tarBuffer.ReadBlock();
                     }
                     else if (((header.TypeFlag != 0x30) && (header.TypeFlag != 0)) && (header.TypeFlag != 0x35))
                     {
                         SkipToNextEntry();
-                        block = tarBuffer.ReadBlock();
+                        block = _tarBuffer.ReadBlock();
                     }
-                    if (entryFactory == null)
+                    if (_entryFactory == null)
                     {
-                        currentEntry = new TarEntry(block);
+                        _currentEntry = new TarEntry(block);
                         if (builder != null)
                         {
-                            currentEntry.Name = builder.ToString();
+                            _currentEntry.Name = builder.ToString();
                         }
                     }
                     else
                     {
-                        currentEntry = entryFactory.CreateEntry(block);
+                        _currentEntry = _entryFactory.CreateEntry(block);
                     }
-                    entryOffset = 0L;
-                    entrySize = currentEntry.Size;
+                    _entryOffset = 0L;
+                    _entrySize = _currentEntry.Size;
                 }
                 catch (InvalidHeaderException exception)
                 {
-                    entrySize = 0L;
-                    entryOffset = 0L;
-                    currentEntry = null;
-                    throw new InvalidHeaderException(string.Format("Bad header in record {0} block {1} {2}", tarBuffer.CurrentRecord, tarBuffer.CurrentBlock, exception.Message));
+                    _entrySize = 0L;
+                    _entryOffset = 0L;
+                    _currentEntry = null;
+                    throw new InvalidHeaderException(string.Format("Bad header in record {0} block {1} {2}", _tarBuffer.CurrentRecord, _tarBuffer.CurrentBlock, exception.Message));
                 }
             }
-            return currentEntry;
+            return _currentEntry;
         }
 
         [Obsolete("Use RecordSize property instead")]
         public int GetRecordSize()
         {
-            return tarBuffer.RecordSize;
+            return _tarBuffer.RecordSize;
         }
 
         public void Mark(int markLimit)
@@ -167,29 +167,29 @@ namespace ZipLib.Tar
                 throw new ArgumentNullException("buffer");
             }
             int num = 0;
-            if (entryOffset >= entrySize)
+            if (_entryOffset >= _entrySize)
             {
                 return 0;
             }
             long num2 = count;
-            if ((num2 + entryOffset) > entrySize)
+            if ((num2 + _entryOffset) > _entrySize)
             {
-                num2 = entrySize - entryOffset;
+                num2 = _entrySize - _entryOffset;
             }
-            if (readBuffer != null)
+            if (_readBuffer != null)
             {
-                int length = (num2 > readBuffer.Length) ? readBuffer.Length : ((int)num2);
-                Array.Copy(readBuffer, 0, buffer, offset, length);
-                if (length >= readBuffer.Length)
+                int length = (num2 > _readBuffer.Length) ? _readBuffer.Length : ((int)num2);
+                Array.Copy(_readBuffer, 0, buffer, offset, length);
+                if (length >= _readBuffer.Length)
                 {
-                    readBuffer = null;
+                    _readBuffer = null;
                 }
                 else
                 {
-                    int num4 = readBuffer.Length - length;
+                    int num4 = _readBuffer.Length - length;
                     byte[] destinationArray = new byte[num4];
-                    Array.Copy(readBuffer, length, destinationArray, 0, num4);
-                    readBuffer = destinationArray;
+                    Array.Copy(_readBuffer, length, destinationArray, 0, num4);
+                    _readBuffer = destinationArray;
                 }
                 num += length;
                 num2 -= length;
@@ -197,7 +197,7 @@ namespace ZipLib.Tar
             }
             while (num2 > 0L)
             {
-                byte[] sourceArray = tarBuffer.ReadBlock();
+                byte[] sourceArray = _tarBuffer.ReadBlock();
                 if (sourceArray == null)
                 {
                     throw new TarException("unexpected EOF with " + num2 + " bytes unread");
@@ -207,8 +207,8 @@ namespace ZipLib.Tar
                 if (num6 > num5)
                 {
                     Array.Copy(sourceArray, 0, buffer, offset, num5);
-                    readBuffer = new byte[num6 - num5];
-                    Array.Copy(sourceArray, num5, readBuffer, 0, num6 - num5);
+                    _readBuffer = new byte[num6 - num5];
+                    Array.Copy(sourceArray, num5, _readBuffer, 0, num6 - num5);
                 }
                 else
                 {
@@ -219,7 +219,7 @@ namespace ZipLib.Tar
                 num2 -= num5;
                 offset += num5;
             }
-            entryOffset += num;
+            _entryOffset += num;
             return num;
         }
 
@@ -244,7 +244,7 @@ namespace ZipLib.Tar
 
         public void SetEntryFactory(IEntryFactory factory)
         {
-            entryFactory = factory;
+            _entryFactory = factory;
         }
 
         public override void SetLength(long value)
@@ -269,12 +269,12 @@ namespace ZipLib.Tar
 
         private void SkipToNextEntry()
         {
-            long skipCount = entrySize - entryOffset;
+            long skipCount = _entrySize - _entryOffset;
             if (skipCount > 0L)
             {
                 Skip(skipCount);
             }
-            readBuffer = null;
+            _readBuffer = null;
         }
 
         public override void Write(byte[] buffer, int offset, int count)
@@ -287,71 +287,35 @@ namespace ZipLib.Tar
             throw new NotSupportedException("TarInputStream WriteByte not supported");
         }
 
-        public long Available
-        {
-            get
-            {
-                return (entrySize - entryOffset);
-            }
-        }
+        public long Available => (_entrySize - _entryOffset);
 
-        public override bool CanRead
-        {
-            get
-            {
-                return inputStream.CanRead;
-            }
-        }
+        public override bool CanRead => _inputStream.CanRead;
 
-        public override bool CanSeek
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public override bool CanSeek => false;
 
-        public override bool CanWrite
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public override bool CanWrite => false;
 
-        public bool IsMarkSupported
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public bool IsMarkSupported => false;
 
         public bool IsStreamOwner
         {
             get
             {
-                return tarBuffer.IsStreamOwner;
+                return _tarBuffer.IsStreamOwner;
             }
             set
             {
-                tarBuffer.IsStreamOwner = value;
+                _tarBuffer.IsStreamOwner = value;
             }
         }
 
-        public override long Length
-        {
-            get
-            {
-                return inputStream.Length;
-            }
-        }
+        public override long Length => _inputStream.Length;
 
         public override long Position
         {
             get
             {
-                return inputStream.Position;
+                return _inputStream.Position;
             }
             set
             {
@@ -359,13 +323,7 @@ namespace ZipLib.Tar
             }
         }
 
-        public int RecordSize
-        {
-            get
-            {
-                return tarBuffer.RecordSize;
-            }
-        }
+        public int RecordSize => _tarBuffer.RecordSize;
 
         public class EntryFactoryAdapter : IEntryFactory
         {
@@ -388,7 +346,9 @@ namespace ZipLib.Tar
         public interface IEntryFactory
         {
             TarEntry CreateEntry(string name);
+
             TarEntry CreateEntry(byte[] headerBuffer);
+
             TarEntry CreateEntryFromFile(string fileName);
         }
     }

@@ -94,7 +94,7 @@ namespace ZipLib.Zip
             {
                 if (!IsValidValue(value))
                 {
-                    throw new ArgumentOutOfRangeException("value");
+                    throw new ArgumentOutOfRangeException(nameof(value));
                 }
                 _flags = (Flags)((byte)(_flags | Flags.AccessTime));
                 _lastAccessTime = value;
@@ -111,7 +111,7 @@ namespace ZipLib.Zip
             {
                 if (!IsValidValue(value))
                 {
-                    throw new ArgumentOutOfRangeException("value");
+                    throw new ArgumentOutOfRangeException(nameof(value));
                 }
                 _flags = (Flags)((byte)(_flags | Flags.CreateTime));
                 _createTime = value;
@@ -128,20 +128,14 @@ namespace ZipLib.Zip
             {
                 if (!IsValidValue(value))
                 {
-                    throw new ArgumentOutOfRangeException("value");
+                    throw new ArgumentOutOfRangeException(nameof(value));
                 }
                 _flags = (Flags)((byte)(_flags | Flags.ModificationTime));
                 _modificationTime = value;
             }
         }
 
-        public short TagID
-        {
-            get
-            {
-                return 0x5455;
-            }
-        }
+        public short TagId => 0x5455;
 
         [Flags]
         public enum Flags : byte

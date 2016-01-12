@@ -5,27 +5,27 @@ namespace ZipLib.Tar
 {
     public class TarEntry : ICloneable
     {
-        private string file;
-        private TarHeader header;
+        private string _file;
+        private TarHeader _header;
 
         private TarEntry()
         {
-            header = new TarHeader();
+            _header = new TarHeader();
         }
 
         public TarEntry(byte[] headerBuffer)
         {
-            header = new TarHeader();
-            header.ParseBuffer(headerBuffer);
+            _header = new TarHeader();
+            _header.ParseBuffer(headerBuffer);
         }
 
         public TarEntry(TarHeader header)
         {
             if (header == null)
             {
-                throw new ArgumentNullException("header");
+                throw new ArgumentNullException(nameof(header));
             }
-            this.header = (TarHeader)header.Clone();
+            this._header = (TarHeader)header.Clone();
         }
 
         public static void AdjustEntryName(byte[] buffer, string newName)
@@ -35,20 +35,20 @@ namespace ZipLib.Tar
 
         public object Clone()
         {
-            return new TarEntry { file = file, header = (TarHeader)header.Clone(), Name = Name };
+            return new TarEntry { _file = _file, _header = (TarHeader)_header.Clone(), Name = Name };
         }
 
         public static TarEntry CreateEntryFromFile(string fileName)
         {
             TarEntry entry = new TarEntry();
-            entry.GetFileTarHeader(entry.header, fileName);
+            entry.GetFileTarHeader(entry._header, fileName);
             return entry;
         }
 
         public static TarEntry CreateTarEntry(string name)
         {
             TarEntry entry = new TarEntry();
-            NameTarHeader(entry.header, name);
+            NameTarHeader(entry._header, name);
             return entry;
         }
 
@@ -60,11 +60,11 @@ namespace ZipLib.Tar
 
         public TarEntry[] GetDirectoryEntries()
         {
-            if ((file == null) || !Directory.Exists(file))
+            if ((_file == null) || !Directory.Exists(_file))
             {
                 return new TarEntry[0];
             }
-            string[] fileSystemEntries = Directory.GetFileSystemEntries(file);
+            string[] fileSystemEntries = Directory.GetFileSystemEntries(_file);
             TarEntry[] entryArray = new TarEntry[fileSystemEntries.Length];
             for (int i = 0; i < fileSystemEntries.Length; i++)
             {
@@ -77,13 +77,13 @@ namespace ZipLib.Tar
         {
             if (head == null)
             {
-                throw new ArgumentNullException("head");
+                throw new ArgumentNullException(nameof(head));
             }
             if (f == null)
             {
-                throw new ArgumentNullException("f");
+                throw new ArgumentNullException(nameof(f));
             }
-            file = f;
+            _file = f;
             string str = f;
             if (str.IndexOf(Environment.CurrentDirectory, StringComparison.Ordinal) == 0)
             {
@@ -126,7 +126,7 @@ namespace ZipLib.Tar
         {
             if (toTest == null)
             {
-                throw new ArgumentNullException("toTest");
+                throw new ArgumentNullException(nameof(toTest));
             }
             return toTest.Name.StartsWith(Name);
         }
@@ -135,11 +135,11 @@ namespace ZipLib.Tar
         {
             if (header == null)
             {
-                throw new ArgumentNullException("header");
+                throw new ArgumentNullException(nameof(header));
             }
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
             bool flag = name.EndsWith("/");
             header.Name = name;
@@ -170,26 +170,20 @@ namespace ZipLib.Tar
 
         public void WriteEntryHeader(byte[] outBuffer)
         {
-            header.WriteHeader(outBuffer);
+            _header.WriteHeader(outBuffer);
         }
 
-        public string File
-        {
-            get
-            {
-                return file;
-            }
-        }
+        public string File => _file;
 
         public int GroupId
         {
             get
             {
-                return header.GroupId;
+                return _header.GroupId;
             }
             set
             {
-                header.GroupId = value;
+                _header.GroupId = value;
             }
         }
 
@@ -197,11 +191,11 @@ namespace ZipLib.Tar
         {
             get
             {
-                return header.GroupName;
+                return _header.GroupName;
             }
             set
             {
-                header.GroupName = value;
+                _header.GroupName = value;
             }
         }
 
@@ -209,11 +203,11 @@ namespace ZipLib.Tar
         {
             get
             {
-                if (file != null)
+                if (_file != null)
                 {
-                    return Directory.Exists(file);
+                    return Directory.Exists(_file);
                 }
-                if ((header == null) || ((header.TypeFlag != 0x35) && !Name.EndsWith("/")))
+                if ((_header == null) || ((_header.TypeFlag != 0x35) && !Name.EndsWith("/")))
                 {
                     return false;
                 }
@@ -225,11 +219,11 @@ namespace ZipLib.Tar
         {
             get
             {
-                return header.ModTime;
+                return _header.ModTime;
             }
             set
             {
-                header.ModTime = value;
+                _header.ModTime = value;
             }
         }
 
@@ -237,11 +231,11 @@ namespace ZipLib.Tar
         {
             get
             {
-                return header.Name;
+                return _header.Name;
             }
             set
             {
-                header.Name = value;
+                _header.Name = value;
             }
         }
 
@@ -249,31 +243,25 @@ namespace ZipLib.Tar
         {
             get
             {
-                return header.Size;
+                return _header.Size;
             }
             set
             {
-                header.Size = value;
+                _header.Size = value;
             }
         }
 
-        public TarHeader TarHeader
-        {
-            get
-            {
-                return header;
-            }
-        }
+        public TarHeader TarHeader => _header;
 
         public int UserId
         {
             get
             {
-                return header.UserId;
+                return _header.UserId;
             }
             set
             {
-                header.UserId = value;
+                _header.UserId = value;
             }
         }
 
@@ -281,11 +269,11 @@ namespace ZipLib.Tar
         {
             get
             {
-                return header.UserName;
+                return _header.UserName;
             }
             set
             {
-                header.UserName = value;
+                _header.UserName = value;
             }
         }
     }

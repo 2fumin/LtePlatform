@@ -48,7 +48,7 @@ namespace ZipLib.Zip
             {
                 throw new ArgumentNullException(nameof(taggedData));
             }
-            AddEntry(taggedData.TagID, taggedData.GetData());
+            AddEntry(taggedData.TagId, taggedData.GetData());
         }
 
         public void AddEntry(int headerId, byte[] fieldData)
@@ -57,12 +57,12 @@ namespace ZipLib.Zip
             {
                 throw new ArgumentOutOfRangeException(nameof(headerId));
             }
-            int source = fieldData?.Length ?? 0;
+            var source = fieldData?.Length ?? 0;
             if (source > 0xffff)
             {
                 throw new ArgumentOutOfRangeException(nameof(fieldData), "exceeds maximum length");
             }
-            int num2 = (_data.Length + source) + 4;
+            var num2 = (_data.Length + source) + 4;
             if (Find(headerId))
             {
                 num2 -= ValueLength + 4;
@@ -72,16 +72,13 @@ namespace ZipLib.Zip
                 throw new ZipException("Data exceeds maximum length");
             }
             Delete(headerId);
-            byte[] array = new byte[num2];
+            var array = new byte[num2];
             _data.CopyTo(array, 0);
-            int length = _data.Length;
+            var length = _data.Length;
             _data = array;
             SetShort(ref length, headerId);
             SetShort(ref length, source);
-            if (fieldData != null)
-            {
-                fieldData.CopyTo(array, length);
-            }
+            fieldData?.CopyTo(array, length);
         }
 
         public void AddLeInt(int toAdd)
@@ -102,11 +99,11 @@ namespace ZipLib.Zip
             _newEntry.WriteByte((byte)(toAdd >> 8));
         }
 
-        public void AddNewEntry(int headerID)
+        public void AddNewEntry(int headerId)
         {
-            byte[] fieldData = _newEntry.ToArray();
+            var fieldData = _newEntry.ToArray();
             _newEntry = null;
-            AddEntry(headerID, fieldData);
+            AddEntry(headerId, fieldData);
         }
 
         public void Clear()
@@ -138,16 +135,16 @@ namespace ZipLib.Zip
             return data2;
         }
 
-        public bool Delete(int headerID)
+        public bool Delete(int headerId)
         {
-            bool flag = false;
-            if (Find(headerID))
+            var flag = false;
+            if (Find(headerId))
             {
                 flag = true;
-                int length = _readValueStart - 4;
-                byte[] destinationArray = new byte[_data.Length - (ValueLength + 4)];
+                var length = _readValueStart - 4;
+                var destinationArray = new byte[_data.Length - (ValueLength + 4)];
                 Array.Copy(_data, 0, destinationArray, 0, length);
-                int sourceIndex = (length + ValueLength) + 4;
+                var sourceIndex = (length + ValueLength) + 4;
                 Array.Copy(_data, sourceIndex, destinationArray, length, _data.Length - sourceIndex);
                 _data = destinationArray;
             }
@@ -156,10 +153,7 @@ namespace ZipLib.Zip
 
         public void Dispose()
         {
-            if (_newEntry != null)
-            {
-                _newEntry.Close();
-            }
+            _newEntry?.Close();
         }
 
         public bool Find(int headerId)
@@ -167,8 +161,8 @@ namespace ZipLib.Zip
             _readValueStart = _data.Length;
             _readValueLength = 0;
             _index = 0;
-            int num = _readValueStart;
-            int num2 = headerId - 1;
+            var num = _readValueStart;
+            var num2 = headerId - 1;
             while ((num2 != headerId) && (_index < (_data.Length - 3)))
             {
                 num2 = ReadShortInternal();
@@ -178,7 +172,7 @@ namespace ZipLib.Zip
                     _index += num;
                 }
             }
-            bool flag = (num2 == headerId) && ((_index + num) <= _data.Length);
+            var flag = (num2 == headerId) && ((_index + num) <= _data.Length);
             if (flag)
             {
                 _readValueStart = _index;
@@ -208,7 +202,7 @@ namespace ZipLib.Zip
 
         public int ReadByte()
         {
-            int num = -1;
+            var num = -1;
             if ((_index < _data.Length) && ((_readValueStart + _readValueLength) > _index))
             {
                 num = _data[_index];
@@ -236,7 +230,7 @@ namespace ZipLib.Zip
         public int ReadInt()
         {
             ReadCheck(4);
-            int num = ((_data[_index] + (_data[_index + 1] << 8)) + (_data[_index + 2] << 0x10)) + (_data[_index + 3] << 0x18);
+            var num = ((_data[_index] + (_data[_index + 1] << 8)) + (_data[_index + 2] << 0x10)) + (_data[_index + 3] << 0x18);
             _index += 4;
             return num;
         }
@@ -250,7 +244,7 @@ namespace ZipLib.Zip
         public int ReadShort()
         {
             ReadCheck(2);
-            int num = _data[_index] + (_data[_index + 1] << 8);
+            var num = _data[_index] + (_data[_index + 1] << 8);
             _index += 2;
             return num;
         }
@@ -261,7 +255,7 @@ namespace ZipLib.Zip
             {
                 throw new ZipException("End of extra data");
             }
-            int num = _data[_index] + (_data[_index + 1] << 8);
+            var num = _data[_index] + (_data[_index + 1] << 8);
             _index += 2;
             return num;
         }

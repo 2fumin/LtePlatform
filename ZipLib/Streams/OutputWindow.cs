@@ -4,17 +4,17 @@ namespace ZipLib.Streams
 {
     public class OutputWindow
     {
-        private byte[] window = new byte[0x8000];
-        private int windowEnd;
-        private int windowFilled;
+        private readonly byte[] _window = new byte[0x8000];
+        private int _windowEnd;
+        private int _windowFilled;
 
         public void CopyDict(byte[] dictionary, int offset, int length)
         {
             if (dictionary == null)
             {
-                throw new ArgumentNullException("dictionary");
+                throw new ArgumentNullException(nameof(dictionary));
             }
-            if (windowFilled > 0)
+            if (_windowFilled > 0)
             {
                 throw new InvalidOperationException();
             }
@@ -23,32 +23,32 @@ namespace ZipLib.Streams
                 offset += length - 0x8000;
                 length = 0x8000;
             }
-            Array.Copy(dictionary, offset, window, 0, length);
-            windowEnd = length & 0x7fff;
+            Array.Copy(dictionary, offset, _window, 0, length);
+            _windowEnd = length & 0x7fff;
         }
 
         public int CopyOutput(byte[] output, int offset, int len)
         {
-            int localEnd = windowEnd;
-            if (len > windowFilled)
+            int localEnd = _windowEnd;
+            if (len > _windowFilled)
             {
-                len = windowFilled;
+                len = _windowFilled;
             }
             else
             {
-                localEnd = ((windowEnd - windowFilled) + len) & 0x7fff;
+                localEnd = ((_windowEnd - _windowFilled) + len) & 0x7fff;
             }
             int num2 = len;
             int length = len - localEnd;
             if (length > 0)
             {
-                Array.Copy(window, 0x8000 - length, output, offset, length);
+                Array.Copy(_window, 0x8000 - length, output, offset, length);
                 offset += length;
                 len = localEnd;
             }
-            Array.Copy(window, localEnd - len, output, offset, len);
-            windowFilled -= num2;
-            if (windowFilled < 0)
+            Array.Copy(_window, localEnd - len, output, offset, len);
+            _windowFilled -= num2;
+            if (_windowFilled < 0)
             {
                 throw new InvalidOperationException();
             }
@@ -58,45 +58,45 @@ namespace ZipLib.Streams
         public int CopyStored(StreamManipulator input, int length)
         {
             int num;
-            length = Math.Min(Math.Min(length, 0x8000 - windowFilled), input.AvailableBytes);
-            int num2 = 0x8000 - windowEnd;
+            length = Math.Min(Math.Min(length, 0x8000 - _windowFilled), input.AvailableBytes);
+            int num2 = 0x8000 - _windowEnd;
             if (length > num2)
             {
-                num = input.CopyBytes(window, windowEnd, num2);
+                num = input.CopyBytes(_window, _windowEnd, num2);
                 if (num == num2)
                 {
-                    num += input.CopyBytes(window, 0, length - num2);
+                    num += input.CopyBytes(_window, 0, length - num2);
                 }
             }
             else
             {
-                num = input.CopyBytes(window, windowEnd, length);
+                num = input.CopyBytes(_window, _windowEnd, length);
             }
-            windowEnd = (windowEnd + num) & 0x7fff;
-            windowFilled += num;
+            _windowEnd = (_windowEnd + num) & 0x7fff;
+            _windowFilled += num;
             return num;
         }
 
         public int GetAvailable()
         {
-            return windowFilled;
+            return _windowFilled;
         }
 
         public int GetFreeSpace()
         {
-            return (0x8000 - windowFilled);
+            return (0x8000 - _windowFilled);
         }
 
         public void Repeat(int length, int distance)
         {
-            windowFilled += length;
-            if (windowFilled > 0x8000)
+            _windowFilled += length;
+            if (_windowFilled > 0x8000)
             {
                 throw new InvalidOperationException("Window full");
             }
-            int repStart = (windowEnd - distance) & 0x7fff;
+            int repStart = (_windowEnd - distance) & 0x7fff;
             int num2 = 0x8000 - length;
-            if ((repStart > num2) || (windowEnd >= num2))
+            if ((repStart > num2) || (_windowEnd >= num2))
             {
                 SlowRepeat(repStart, length);
             }
@@ -104,39 +104,39 @@ namespace ZipLib.Streams
             {
                 while (length-- > 0)
                 {
-                    window[windowEnd++] = window[repStart++];
+                    _window[_windowEnd++] = _window[repStart++];
                 }
             }
             else
             {
-                Array.Copy(window, repStart, window, windowEnd, length);
-                windowEnd += length;
+                Array.Copy(_window, repStart, _window, _windowEnd, length);
+                _windowEnd += length;
             }
         }
 
         public void Reset()
         {
-            windowFilled = windowEnd = 0;
+            _windowFilled = _windowEnd = 0;
         }
 
         private void SlowRepeat(int repStart, int length)
         {
             while (length-- > 0)
             {
-                window[windowEnd++] = window[repStart++];
-                windowEnd &= 0x7fff;
+                _window[_windowEnd++] = _window[repStart++];
+                _windowEnd &= 0x7fff;
                 repStart &= 0x7fff;
             }
         }
 
         public void Write(int value)
         {
-            if (windowFilled++ == 0x8000)
+            if (_windowFilled++ == 0x8000)
             {
                 throw new InvalidOperationException("Window full");
             }
-            window[windowEnd++] = (byte)value;
-            windowEnd &= 0x7fff;
+            _window[_windowEnd++] = (byte)value;
+            _windowEnd &= 0x7fff;
         }
     }
 }

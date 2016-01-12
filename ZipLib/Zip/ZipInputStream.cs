@@ -49,20 +49,20 @@ namespace ZipLib.Zip
             switch (_method)
             {
                 case 0:
-                    if ((count > csize) && (csize >= 0L))
+                    if ((count > Csize) && (Csize >= 0L))
                     {
-                        count = (int)csize;
+                        count = (int)Csize;
                     }
                     if (count > 0)
                     {
-                        count = inputBuffer.ReadClearTextBuffer(buffer, offset, count);
+                        count = InputBuffer.ReadClearTextBuffer(buffer, offset, count);
                         if (count > 0)
                         {
-                            csize -= count;
+                            Csize -= count;
                             _size -= count;
                         }
                     }
-                    if (csize == 0L)
+                    if (Csize == 0L)
                     {
                         flag = true;
                     }
@@ -76,16 +76,16 @@ namespace ZipLib.Zip
                     count = base.Read(buffer, offset, count);
                     if (count <= 0)
                     {
-                        if (!inf.IsFinished)
+                        if (!Inf.IsFinished)
                         {
                             throw new ZipException("Inflater not finished!");
                         }
-                        inputBuffer.Available = inf.RemainingInput;
-                        if (((_flags & 8) == 0) && ((((inf.TotalIn != csize) && (csize != 0xffffffffL)) && (csize != -1L)) || (inf.TotalOut != _size)))
+                        InputBuffer.Available = Inf.RemainingInput;
+                        if (((_flags & 8) == 0) && ((((Inf.TotalIn != Csize) && (Csize != 0xffffffffL)) && (Csize != -1L)) || (Inf.TotalOut != _size)))
                         {
-                            throw new ZipException(string.Concat("Size mismatch: ", csize, ";", _size, " <-> ", inf.TotalIn, ";", inf.TotalOut));
+                            throw new ZipException(string.Concat("Size mismatch: ", Csize, ";", _size, " <-> ", Inf.TotalIn, ";", Inf.TotalOut));
                         }
-                        inf.Reset();
+                        Inf.Reset();
                         flag = true;
                     }
                     break;
@@ -127,25 +127,25 @@ namespace ZipLib.Zip
                         }
                         return;
                     }
-                    csize -= inf.TotalIn;
-                    inputBuffer.Available += inf.RemainingInput;
+                    Csize -= Inf.TotalIn;
+                    InputBuffer.Available += Inf.RemainingInput;
                 }
-                if ((inputBuffer.Available > csize) && (csize >= 0L))
+                if ((InputBuffer.Available > Csize) && (Csize >= 0L))
                 {
-                    inputBuffer.Available -= (int)csize;
+                    InputBuffer.Available -= (int)Csize;
                 }
                 else
                 {
-                    csize -= inputBuffer.Available;
-                    inputBuffer.Available = 0;
-                    while (csize != 0L)
+                    Csize -= InputBuffer.Available;
+                    InputBuffer.Available = 0;
+                    while (Csize != 0L)
                     {
-                        var num = Skip(csize);
+                        var num = Skip(Csize);
                         if (num <= 0L)
                         {
                             throw new ZipException("Zip archive ends early.");
                         }
-                        csize -= num;
+                        Csize -= num;
                     }
                 }
                 CompleteCloseEntry();
@@ -167,7 +167,7 @@ namespace ZipLib.Zip
             _crc.Reset();
             if (_method == 8)
             {
-                inf.Reset();
+                Inf.Reset();
             }
             _entry = null;
         }
@@ -182,7 +182,7 @@ namespace ZipLib.Zip
             {
                 CloseEntry();
             }
-            var num = inputBuffer.ReadLeInt();
+            var num = InputBuffer.ReadLeInt();
             switch (num)
             {
                 case ZipConstants.CentralHeaderSignature:
@@ -195,25 +195,25 @@ namespace ZipLib.Zip
 
                 case 0x30304b50:
                 case ZipConstants.SpanningSignature:
-                    num = inputBuffer.ReadLeInt();
+                    num = InputBuffer.ReadLeInt();
                     break;
             }
             if (num != ZipConstants.LocalHeaderSignature)
             {
                 throw new ZipException("Wrong Local header signature: 0x" + $"{num:X}");
             }
-            var versionRequiredToExtract = (short)inputBuffer.ReadLeShort();
-            _flags = inputBuffer.ReadLeShort();
-            _method = inputBuffer.ReadLeShort();
-            var num3 = (uint)inputBuffer.ReadLeInt();
-            var num4 = inputBuffer.ReadLeInt();
-            csize = inputBuffer.ReadLeInt();
-            _size = inputBuffer.ReadLeInt();
-            var num5 = inputBuffer.ReadLeShort();
-            var num6 = inputBuffer.ReadLeShort();
+            var versionRequiredToExtract = (short)InputBuffer.ReadLeShort();
+            _flags = InputBuffer.ReadLeShort();
+            _method = InputBuffer.ReadLeShort();
+            var num3 = (uint)InputBuffer.ReadLeInt();
+            var num4 = InputBuffer.ReadLeInt();
+            Csize = InputBuffer.ReadLeInt();
+            _size = InputBuffer.ReadLeInt();
+            var num5 = InputBuffer.ReadLeShort();
+            var num6 = InputBuffer.ReadLeShort();
             var flag = (_flags & 1) == 1;
             var buffer = new byte[num5];
-            inputBuffer.ReadRawBuffer(buffer);
+            InputBuffer.ReadRawBuffer(buffer);
             var name = ZipConstants.ConvertToStringExt(_flags, buffer);
             _entry = new ZipEntry(name, versionRequiredToExtract)
             {
@@ -224,7 +224,7 @@ namespace ZipLib.Zip
             {
                 _entry.Crc = num4 & 0xffffffffL;
                 _entry.Size = _size & 0xffffffffL;
-                _entry.CompressedSize = csize & 0xffffffffL;
+                _entry.CompressedSize = Csize & 0xffffffffL;
                 _entry.CryptoCheckValue = (byte)((num4 >> 0x18) & 0xff);
             }
             else
@@ -237,9 +237,9 @@ namespace ZipLib.Zip
                 {
                     _entry.Size = _size & 0xffffffffL;
                 }
-                if (csize != 0L)
+                if (Csize != 0L)
                 {
-                    _entry.CompressedSize = csize & 0xffffffffL;
+                    _entry.CompressedSize = Csize & 0xffffffffL;
                 }
                 _entry.CryptoCheckValue = (byte)((num3 >> 8) & 0xff);
             }
@@ -247,19 +247,19 @@ namespace ZipLib.Zip
             if (num6 > 0)
             {
                 var buffer2 = new byte[num6];
-                inputBuffer.ReadRawBuffer(buffer2);
+                InputBuffer.ReadRawBuffer(buffer2);
                 _entry.ExtraData = buffer2;
             }
             _entry.ProcessExtraData(true);
             if (_entry.CompressedSize >= 0L)
             {
-                csize = _entry.CompressedSize;
+                Csize = _entry.CompressedSize;
             }
             if (_entry.Size >= 0L)
             {
                 _size = _entry.Size;
             }
-            if ((_method == 0) && ((!flag && (csize != _size)) || (flag && ((csize - 12L) != _size))))
+            if ((_method == 0) && ((!flag && (Csize != _size)) || (flag && ((Csize - 12L) != _size))))
             {
                 throw new ZipException("Stored, but compressed != uncompressed");
             }
@@ -289,34 +289,34 @@ namespace ZipLib.Zip
                 }
                 var managed = new PkzipClassicManaged();
                 var rgbKey = PkzipClassic.GenerateKeys(ZipConstants.ConvertToArray(_password));
-                inputBuffer.CryptoTransform = managed.CreateDecryptor(rgbKey, null);
+                InputBuffer.CryptoTransform = managed.CreateDecryptor(rgbKey, null);
                 var outBuffer = new byte[12];
-                inputBuffer.ReadClearTextBuffer(outBuffer, 0, 12);
+                InputBuffer.ReadClearTextBuffer(outBuffer, 0, 12);
                 if (outBuffer[11] != _entry.CryptoCheckValue)
                 {
                     throw new ZipException("Invalid password");
                 }
-                if (csize < 12L)
+                if (Csize < 12L)
                 {
                     if ((_entry.Flags & 8) == 0)
                     {
-                        throw new ZipException($"Entry compressed size {csize} too small for encryption");
+                        throw new ZipException($"Entry compressed size {Csize} too small for encryption");
                     }
                 }
                 else
                 {
-                    csize -= 12L;
+                    Csize -= 12L;
                 }
             }
             else
             {
-                inputBuffer.CryptoTransform = null;
+                InputBuffer.CryptoTransform = null;
             }
-            if ((csize > 0L) || ((_flags & 8) != 0))
+            if ((Csize > 0L) || ((_flags & 8) != 0))
             {
-                if ((_method == 8) && (inputBuffer.Available > 0))
+                if ((_method == 8) && (InputBuffer.Available > 0))
                 {
-                    inputBuffer.SetInflaterInput(inf);
+                    InputBuffer.SetInflaterInput(Inf);
                 }
                 _internalReader = BodyRead;
                 return BodyRead(destination, offset, count);
@@ -358,22 +358,22 @@ namespace ZipLib.Zip
 
         private void ReadDataDescriptor()
         {
-            if (inputBuffer.ReadLeInt() != ZipConstants.DataDescriptorSignature)
+            if (InputBuffer.ReadLeInt() != ZipConstants.DataDescriptorSignature)
             {
                 throw new ZipException("Data descriptor signature not found");
             }
-            _entry.Crc = inputBuffer.ReadLeInt() & 0xffffffffL;
+            _entry.Crc = InputBuffer.ReadLeInt() & 0xffffffffL;
             if (_entry.LocalHeaderRequiresZip64)
             {
-                csize = inputBuffer.ReadLeLong();
-                _size = inputBuffer.ReadLeLong();
+                Csize = InputBuffer.ReadLeLong();
+                _size = InputBuffer.ReadLeLong();
             }
             else
             {
-                csize = inputBuffer.ReadLeInt();
-                _size = inputBuffer.ReadLeInt();
+                Csize = InputBuffer.ReadLeInt();
+                _size = InputBuffer.ReadLeInt();
             }
-            _entry.CompressedSize = csize;
+            _entry.CompressedSize = Csize;
             _entry.Size = _size;
         }
 

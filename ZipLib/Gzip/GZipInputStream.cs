@@ -29,7 +29,7 @@ namespace ZipLib.Gzip
                 {
                     crc.Update(buffer, offset, num);
                 }
-                if (inf.IsFinished)
+                if (Inf.IsFinished)
                 {
                     ReadFooter();
                 }
@@ -42,12 +42,12 @@ namespace ZipLib.Gzip
         {
             int num3;
             byte[] outBuffer = new byte[8];
-            long num = inf.TotalOut & 0xffffffffL;
-            inputBuffer.Available += inf.RemainingInput;
-            inf.Reset();
+            long num = Inf.TotalOut & 0xffffffffL;
+            InputBuffer.Available += Inf.RemainingInput;
+            Inf.Reset();
             for (int i = 8; i > 0; i -= num3)
             {
-                num3 = inputBuffer.ReadClearTextBuffer(outBuffer, 8 - i, i);
+                num3 = InputBuffer.ReadClearTextBuffer(outBuffer, 8 - i, i);
                 if (num3 <= 0)
                 {
                     throw new EndOfStreamException("EOS reading GZIP footer");
@@ -75,16 +75,16 @@ namespace ZipLib.Gzip
         private bool ReadHeader()
         {
             crc = new Crc32();
-            if (inputBuffer.Available <= 0)
+            if (InputBuffer.Available <= 0)
             {
-                inputBuffer.Fill();
-                if (inputBuffer.Available <= 0)
+                InputBuffer.Fill();
+                if (InputBuffer.Available <= 0)
                 {
                     return false;
                 }
             }
             Crc32 crc32 = new Crc32();
-            int num = inputBuffer.ReadLeByte();
+            int num = InputBuffer.ReadLeByte();
             if (num < 0)
             {
                 throw new EndOfStreamException("EOS reading GZIP header");
@@ -94,7 +94,7 @@ namespace ZipLib.Gzip
             {
                 throw new GZipException("Error GZIP header, first magic byte doesn't match");
             }
-            num = inputBuffer.ReadLeByte();
+            num = InputBuffer.ReadLeByte();
             if (num < 0)
             {
                 throw new EndOfStreamException("EOS reading GZIP header");
@@ -104,7 +104,7 @@ namespace ZipLib.Gzip
                 throw new GZipException("Error GZIP header,  second magic byte doesn't match");
             }
             crc32.Update(num);
-            int num2 = inputBuffer.ReadLeByte();
+            int num2 = InputBuffer.ReadLeByte();
             if (num2 < 0)
             {
                 throw new EndOfStreamException("EOS reading GZIP header");
@@ -114,7 +114,7 @@ namespace ZipLib.Gzip
                 throw new GZipException("Error GZIP header, data not in deflate format");
             }
             crc32.Update(num2);
-            int num3 = inputBuffer.ReadLeByte();
+            int num3 = InputBuffer.ReadLeByte();
             if (num3 < 0)
             {
                 throw new EndOfStreamException("EOS reading GZIP header");
@@ -126,7 +126,7 @@ namespace ZipLib.Gzip
             }
             for (int i = 0; i < 6; i++)
             {
-                int num5 = inputBuffer.ReadLeByte();
+                int num5 = InputBuffer.ReadLeByte();
                 if (num5 < 0)
                 {
                     throw new EndOfStreamException("EOS reading GZIP header");
@@ -137,19 +137,19 @@ namespace ZipLib.Gzip
             {
                 for (int j = 0; j < 2; j++)
                 {
-                    int num7 = inputBuffer.ReadLeByte();
+                    int num7 = InputBuffer.ReadLeByte();
                     if (num7 < 0)
                     {
                         throw new EndOfStreamException("EOS reading GZIP header");
                     }
                     crc32.Update(num7);
                 }
-                if ((inputBuffer.ReadLeByte() < 0) || (inputBuffer.ReadLeByte() < 0))
+                if ((InputBuffer.ReadLeByte() < 0) || (InputBuffer.ReadLeByte() < 0))
                 {
                     throw new EndOfStreamException("EOS reading GZIP header");
                 }
-                int num8 = inputBuffer.ReadLeByte();
-                int num9 = inputBuffer.ReadLeByte();
+                int num8 = InputBuffer.ReadLeByte();
+                int num9 = InputBuffer.ReadLeByte();
                 if ((num8 < 0) || (num9 < 0))
                 {
                     throw new EndOfStreamException("EOS reading GZIP header");
@@ -159,7 +159,7 @@ namespace ZipLib.Gzip
                 int num10 = (num8 << 8) | num9;
                 for (int k = 0; k < num10; k++)
                 {
-                    int num12 = inputBuffer.ReadLeByte();
+                    int num12 = InputBuffer.ReadLeByte();
                     if (num12 < 0)
                     {
                         throw new EndOfStreamException("EOS reading GZIP header");
@@ -170,7 +170,7 @@ namespace ZipLib.Gzip
             if ((num3 & 8) != 0)
             {
                 int num13;
-                while ((num13 = inputBuffer.ReadLeByte()) > 0)
+                while ((num13 = InputBuffer.ReadLeByte()) > 0)
                 {
                     crc32.Update(num13);
                 }
@@ -183,7 +183,7 @@ namespace ZipLib.Gzip
             if ((num3 & GZipConstants.FCOMMENT) != 0)
             {
                 int num14;
-                while ((num14 = inputBuffer.ReadLeByte()) > 0)
+                while ((num14 = InputBuffer.ReadLeByte()) > 0)
                 {
                     crc32.Update(num14);
                 }
@@ -195,12 +195,12 @@ namespace ZipLib.Gzip
             }
             if ((num3 & 2) != 0)
             {
-                int num16 = inputBuffer.ReadLeByte();
+                int num16 = InputBuffer.ReadLeByte();
                 if (num16 < 0)
                 {
                     throw new EndOfStreamException("EOS reading GZIP header");
                 }
-                int num15 = inputBuffer.ReadLeByte();
+                int num15 = InputBuffer.ReadLeByte();
                 if (num15 < 0)
                 {
                     throw new EndOfStreamException("EOS reading GZIP header");

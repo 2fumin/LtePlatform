@@ -4,28 +4,28 @@ namespace ZipLib.Streams
 {
     public class StreamManipulator
     {
-        private int bitsInBuffer_;
-        private uint buffer_;
-        private byte[] window_;
-        private int windowEnd_;
-        private int windowStart_;
+        private int _bitsInBuffer;
+        private uint _buffer;
+        private byte[] _window;
+        private int _windowEnd;
+        private int _windowStart;
 
         public int CopyBytes(byte[] output, int offset, int length)
         {
             if (length < 0)
             {
-                throw new ArgumentOutOfRangeException("length");
+                throw new ArgumentOutOfRangeException(nameof(length));
             }
-            if ((bitsInBuffer_ & 7) != 0)
+            if ((_bitsInBuffer & 7) != 0)
             {
                 throw new InvalidOperationException("Bit buffer is not byte aligned!");
             }
             int num = 0;
-            while ((bitsInBuffer_ > 0) && (length > 0))
+            while ((_bitsInBuffer > 0) && (length > 0))
             {
-                output[offset++] = (byte)buffer_;
-                buffer_ = buffer_ >> 8;
-                bitsInBuffer_ -= 8;
+                output[offset++] = (byte)_buffer;
+                _buffer = _buffer >> 8;
+                _bitsInBuffer -= 8;
                 length--;
                 num++;
             }
@@ -33,25 +33,25 @@ namespace ZipLib.Streams
             {
                 return num;
             }
-            int num2 = windowEnd_ - windowStart_;
+            int num2 = _windowEnd - _windowStart;
             if (length > num2)
             {
                 length = num2;
             }
-            Array.Copy(window_, windowStart_, output, offset, length);
-            windowStart_ += length;
-            if (((windowStart_ - windowEnd_) & 1) != 0)
+            Array.Copy(_window, _windowStart, output, offset, length);
+            _windowStart += length;
+            if (((_windowStart - _windowEnd) & 1) != 0)
             {
-                buffer_ = (uint)(window_[windowStart_++] & 0xff);
-                bitsInBuffer_ = 8;
+                _buffer = (uint)(_window[_windowStart++] & 0xff);
+                _bitsInBuffer = 8;
             }
             return (num + length);
         }
 
         public void DropBits(int bitCount)
         {
-            buffer_ = buffer_ >> bitCount;
-            bitsInBuffer_ -= bitCount;
+            _buffer = _buffer >> bitCount;
+            _bitsInBuffer -= bitCount;
         }
 
         public int GetBits(int bitCount)
@@ -66,86 +66,68 @@ namespace ZipLib.Streams
 
         public int PeekBits(int bitCount)
         {
-            if (bitsInBuffer_ < bitCount)
+            if (_bitsInBuffer < bitCount)
             {
-                if (windowStart_ == windowEnd_)
+                if (_windowStart == _windowEnd)
                 {
                     return -1;
                 }
-                buffer_ |= (uint)(((window_[windowStart_++] & 0xff) | ((window_[windowStart_++] & 0xff) << 8)) << bitsInBuffer_);
-                bitsInBuffer_ += 0x10;
+                _buffer |= (uint)(((_window[_windowStart++] & 0xff) | ((_window[_windowStart++] & 0xff) << 8)) << _bitsInBuffer);
+                _bitsInBuffer += 0x10;
             }
-            return (((int)buffer_) & ((1 << bitCount) - 1));
+            return (((int)_buffer) & ((1 << bitCount) - 1));
         }
 
         public void Reset()
         {
-            buffer_ = 0;
-            windowStart_ = windowEnd_ = bitsInBuffer_ = 0;
+            _buffer = 0;
+            _windowStart = _windowEnd = _bitsInBuffer = 0;
         }
 
         public void SetInput(byte[] buffer, int offset, int count)
         {
             if (buffer == null)
             {
-                throw new ArgumentNullException("buffer");
+                throw new ArgumentNullException(nameof(buffer));
             }
             if (offset < 0)
             {
-                throw new ArgumentOutOfRangeException("offset", "Cannot be negative");
+                throw new ArgumentOutOfRangeException(nameof(offset), "Cannot be negative");
             }
             if (count < 0)
             {
-                throw new ArgumentOutOfRangeException("count", "Cannot be negative");
+                throw new ArgumentOutOfRangeException(nameof(count), "Cannot be negative");
             }
-            if (windowStart_ < windowEnd_)
+            if (_windowStart < _windowEnd)
             {
                 throw new InvalidOperationException("Old input was not completely processed");
             }
             int num = offset + count;
             if ((offset > num) || (num > buffer.Length))
             {
-                throw new ArgumentOutOfRangeException("count");
+                throw new ArgumentOutOfRangeException(nameof(count));
             }
             if ((count & 1) != 0)
             {
-                buffer_ |= (uint)((buffer[offset++] & 0xff) << bitsInBuffer_);
-                bitsInBuffer_ += 8;
+                _buffer |= (uint)((buffer[offset++] & 0xff) << _bitsInBuffer);
+                _bitsInBuffer += 8;
             }
-            window_ = buffer;
-            windowStart_ = offset;
-            windowEnd_ = num;
+            _window = buffer;
+            _windowStart = offset;
+            _windowEnd = num;
         }
 
         public void SkipToByteBoundary()
         {
-            buffer_ = buffer_ >> (bitsInBuffer_ & 7);
-            bitsInBuffer_ &= -8;
+            _buffer = _buffer >> (_bitsInBuffer & 7);
+            _bitsInBuffer &= -8;
         }
 
-        public int AvailableBits
-        {
-            get
-            {
-                return bitsInBuffer_;
-            }
-        }
+        public int AvailableBits => _bitsInBuffer;
 
-        public int AvailableBytes
-        {
-            get
-            {
-                return ((windowEnd_ - windowStart_) + (bitsInBuffer_ >> 3));
-            }
-        }
+        public int AvailableBytes => ((_windowEnd - _windowStart) + (_bitsInBuffer >> 3));
 
-        public bool IsNeedingInput
-        {
-            get
-            {
-                return (windowStart_ == windowEnd_);
-            }
-        }
+        public bool IsNeedingInput => (_windowStart == _windowEnd);
     }
 }
 

@@ -39,7 +39,7 @@ namespace ZipLib.Zip
             }
         }
 
-        public short TagID
+        public short TagId
         {
             get
             {

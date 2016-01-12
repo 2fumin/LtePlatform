@@ -49,7 +49,7 @@ namespace ZipLib.CheckSums
         {
             if (buffer == null)
             {
-                throw new ArgumentNullException("buffer");
+                throw new ArgumentNullException(nameof(buffer));
             }
             Update(buffer, 0, buffer.Length);
         }
@@ -58,19 +58,19 @@ namespace ZipLib.CheckSums
         {
             if (buffer == null)
             {
-                throw new ArgumentNullException("buffer");
+                throw new ArgumentNullException(nameof(buffer));
             }
             if (offset < 0)
             {
-                throw new ArgumentOutOfRangeException("offset", "cannot be less than zero");
+                throw new ArgumentOutOfRangeException(nameof(offset), "cannot be less than zero");
             }
             if (count < 0)
             {
-                throw new ArgumentOutOfRangeException("count", "cannot be less than zero");
+                throw new ArgumentOutOfRangeException(nameof(count), "cannot be less than zero");
             }
             if ((offset + count) > buffer.Length)
             {
-                throw new ArgumentOutOfRangeException("count");
+                throw new ArgumentOutOfRangeException(nameof(count));
             }
             for (int i = 0; i < count; i++)
             {
@@ -78,13 +78,7 @@ namespace ZipLib.CheckSums
             }
         }
 
-        public long Value
-        {
-            get
-            {
-                return ~globalCrc;
-            }
-        }
+        public long Value => ~globalCrc;
     }
 }
 
