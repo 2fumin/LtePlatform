@@ -215,7 +215,7 @@ namespace ZipLib.Zip
                         {
                             File.SetLastWriteTime(targetName, entry.DateTime);
                         }
-                        if ((RestoreAttributesOnExtract && entry.IsDOSEntry) && (entry.ExternalFileAttributes != -1))
+                        if ((RestoreAttributesOnExtract && entry.IsDosEntry) && (entry.ExternalFileAttributes != -1))
                         {
                             FileAttributes fileAttributes = ((FileAttributes)entry.ExternalFileAttributes) & (FileAttributes.Normal | FileAttributes.Archive | FileAttributes.Hidden | FileAttributes.ReadOnly);
                             File.SetAttributes(targetName, fileAttributes);

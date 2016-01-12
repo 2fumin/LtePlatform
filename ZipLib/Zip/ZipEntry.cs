@@ -6,53 +6,48 @@ namespace ZipLib.Zip
     public class ZipEntry : ICloneable
     {
         private int _aesEncryptionStrength;
-        private string comment;
-        private ulong compressedSize;
-        private uint crc;
-        private byte cryptoCheckValue_;
-        private uint dosTime;
-        private int externalFileAttributes;
-        private byte[] extra;
-        private int flags;
-        private bool forceZip64_;
-        private Known known;
-        private CompressionMethod method;
-        private string name;
-        private long offset;
-        private ulong size;
-        private ushort versionMadeBy;
-        private ushort versionToExtract;
-        private long zipFileIndex;
+        private string _comment;
+        private ulong _compressedSize;
+        private uint _crc;
+        private uint _dosTime;
+        private int _externalFileAttributes;
+        private byte[] _extra;
+        private bool _forceZip64;
+        private Known _known;
+        private CompressionMethod _method;
+        private ulong _size;
+        private ushort _versionMadeBy;
+        private ushort _versionToExtract;
 
         [Obsolete("Use Clone instead")]
         public ZipEntry(ZipEntry entry)
         {
-            externalFileAttributes = -1;
-            method = CompressionMethod.Deflated;
-            zipFileIndex = -1L;
+            _externalFileAttributes = -1;
+            _method = CompressionMethod.Deflated;
+            ZipFileIndex = -1L;
             if (entry == null)
             {
-                throw new ArgumentNullException("entry");
+                throw new ArgumentNullException(nameof(entry));
             }
-            known = entry.known;
-            name = entry.name;
-            size = entry.size;
-            compressedSize = entry.compressedSize;
-            crc = entry.crc;
-            dosTime = entry.dosTime;
-            method = entry.method;
-            comment = entry.comment;
-            versionToExtract = entry.versionToExtract;
-            versionMadeBy = entry.versionMadeBy;
-            externalFileAttributes = entry.externalFileAttributes;
-            flags = entry.flags;
-            zipFileIndex = entry.zipFileIndex;
-            offset = entry.offset;
-            forceZip64_ = entry.forceZip64_;
-            if (entry.extra != null)
+            _known = entry._known;
+            Name = entry.Name;
+            _size = entry._size;
+            _compressedSize = entry._compressedSize;
+            _crc = entry._crc;
+            _dosTime = entry._dosTime;
+            _method = entry._method;
+            _comment = entry._comment;
+            _versionToExtract = entry._versionToExtract;
+            _versionMadeBy = entry._versionMadeBy;
+            _externalFileAttributes = entry._externalFileAttributes;
+            Flags = entry.Flags;
+            ZipFileIndex = entry.ZipFileIndex;
+            Offset = entry.Offset;
+            _forceZip64 = entry._forceZip64;
+            if (entry._extra != null)
             {
-                extra = new byte[entry.extra.Length];
-                Array.Copy(entry.extra, 0, extra, 0, entry.extra.Length);
+                _extra = new byte[entry._extra.Length];
+                Array.Copy(entry._extra, 0, _extra, 0, entry._extra.Length);
             }
         }
 
@@ -64,26 +59,26 @@ namespace ZipLib.Zip
         internal ZipEntry(string name, int versionRequiredToExtract, int madeByInfo = 0x33, 
             CompressionMethod method = CompressionMethod.Deflated)
         {
-            externalFileAttributes = -1;
-            this.method = CompressionMethod.Deflated;
-            zipFileIndex = -1L;
+            _externalFileAttributes = -1;
+            this._method = CompressionMethod.Deflated;
+            ZipFileIndex = -1L;
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
             if (name.Length > 0xffff)
             {
-                throw new ArgumentException("Name is too long", "name");
+                throw new ArgumentException("Name is too long", nameof(name));
             }
             if ((versionRequiredToExtract != 0) && (versionRequiredToExtract < 10))
             {
-                throw new ArgumentOutOfRangeException("versionRequiredToExtract");
+                throw new ArgumentOutOfRangeException(nameof(versionRequiredToExtract));
             }
             DateTime = DateTime.Now;
-            this.name = name;
-            versionMadeBy = (ushort)madeByInfo;
-            versionToExtract = (ushort)versionRequiredToExtract;
-            this.method = method;
+            this.Name = name;
+            _versionMadeBy = (ushort)madeByInfo;
+            _versionToExtract = (ushort)versionRequiredToExtract;
+            this._method = method;
         }
 
         public static string CleanName(string name)
@@ -107,22 +102,22 @@ namespace ZipLib.Zip
         public object Clone()
         {
             ZipEntry entry = (ZipEntry)MemberwiseClone();
-            if (extra != null)
+            if (_extra != null)
             {
-                entry.extra = new byte[extra.Length];
-                Array.Copy(extra, 0, entry.extra, 0, extra.Length);
+                entry._extra = new byte[_extra.Length];
+                Array.Copy(_extra, 0, entry._extra, 0, _extra.Length);
             }
             return entry;
         }
 
         public void ForceZip64()
         {
-            forceZip64_ = true;
+            _forceZip64 = true;
         }
 
         private bool HasDosAttributes(int attributes)
         {
-            bool flag = ((((byte)(known & Known.ExternalAttributes)) != 0) && ((HostSystem == 0) || (HostSystem == 10))) 
+            bool flag = ((((byte)(_known & Known.ExternalAttributes)) != 0) && ((HostSystem == 0) || (HostSystem == 10))) 
                 && ((ExternalFileAttributes & attributes) == attributes);
             return flag;
         }
@@ -143,16 +138,16 @@ namespace ZipLib.Zip
 
         public bool IsZip64Forced()
         {
-            return forceZip64_;
+            return _forceZip64;
         }
 
-        private void ProcessAESExtraData(ZipExtraData extraData)
+        private void ProcessAesExtraData(ZipExtraData extraData)
         {
             if (!extraData.Find(0x9901))
             {
                 throw new ZipException("AES Extra Data missing");
             }
-            versionToExtract = 0x33;
+            _versionToExtract = 0x33;
             Flags |= 0x40;
             int valueLength = extraData.ValueLength;
             if (valueLength < 7)
@@ -164,33 +159,33 @@ namespace ZipLib.Zip
             int num3 = extraData.ReadByte();
             int num4 = extraData.ReadShort();
             _aesEncryptionStrength = num3;
-            method = (CompressionMethod)num4;
+            _method = (CompressionMethod)num4;
         }
 
         internal void ProcessExtraData(bool localHeader)
         {
-            ZipExtraData extraData = new ZipExtraData(extra);
+            ZipExtraData extraData = new ZipExtraData(_extra);
             if (extraData.Find(1))
             {
-                forceZip64_ = true;
+                _forceZip64 = true;
                 if (extraData.ValueLength < 4)
                 {
                     throw new ZipException("Extra data extended Zip64 information length is invalid");
                 }
-                if (localHeader || (size == 0xffffffffL))
+                if (localHeader || (_size == 0xffffffffL))
                 {
-                    size = (ulong)extraData.ReadLong();
+                    _size = (ulong)extraData.ReadLong();
                 }
-                if (localHeader || (compressedSize == 0xffffffffL))
+                if (localHeader || (_compressedSize == 0xffffffffL))
                 {
-                    compressedSize = (ulong)extraData.ReadLong();
+                    _compressedSize = (ulong)extraData.ReadLong();
                 }
-                if (!localHeader && (offset == 0xffffffffL))
+                if (!localHeader && (Offset == 0xffffffffL))
                 {
-                    offset = extraData.ReadLong();
+                    Offset = extraData.ReadLong();
                 }
             }
-            else if (((versionToExtract & 0xff) >= 0x2d) && ((size == 0xffffffffL) || (compressedSize == 0xffffffffL)))
+            else if (((_versionToExtract & 0xff) >= 0x2d) && ((_size == 0xffffffffL) || (_compressedSize == 0xffffffffL)))
             {
                 throw new ZipException("Zip64 Extended information required but is missing.");
             }
@@ -229,26 +224,20 @@ namespace ZipLib.Zip
                     DateTime = (time.ToUniversalTime() + new TimeSpan(0, 0, 0, seconds, 0)).ToLocalTime();
                 }
             }
-            if (method == CompressionMethod.WinZipAES)
+            if (_method == CompressionMethod.WinZipAES)
             {
-                ProcessAESExtraData(extraData);
+                ProcessAesExtraData(extraData);
             }
         }
 
         public override string ToString()
         {
-            return name;
+            return Name;
         }
 
-        internal byte AESEncryptionStrength
-        {
-            get
-            {
-                return (byte)_aesEncryptionStrength;
-            }
-        }
+        internal byte AesEncryptionStrength => (byte)_aesEncryptionStrength;
 
-        public int AESKeySize
+        public int AesKeySize
         {
             get
             {
@@ -288,21 +277,9 @@ namespace ZipLib.Zip
             }
         }
 
-        internal int AESOverheadSize
-        {
-            get
-            {
-                return (12 + AESSaltLen);
-            }
-        }
+        internal int AesOverheadSize => (12 + AesSaltLen);
 
-        internal int AESSaltLen
-        {
-            get
-            {
-                return (AESKeySize / 0x10);
-            }
-        }
+        internal int AesSaltLen => (AesKeySize / 0x10);
 
         public bool CanDecompress
         {
@@ -322,7 +299,7 @@ namespace ZipLib.Zip
             {
                 if (!LocalHeaderRequiresZip64)
                 {
-                    return (offset >= 0xffffffffL);
+                    return (Offset >= 0xffffffffL);
                 }
                 return true;
             }
@@ -332,15 +309,15 @@ namespace ZipLib.Zip
         {
             get
             {
-                return comment;
+                return _comment;
             }
             set
             {
                 if ((value != null) && (value.Length > 0xffff))
                 {
-                    throw new ArgumentOutOfRangeException("value", "cannot exceed 65535");
+                    throw new ArgumentOutOfRangeException(nameof(value), "cannot exceed 65535");
                 }
-                comment = value;
+                _comment = value;
             }
         }
 
@@ -348,16 +325,16 @@ namespace ZipLib.Zip
         {
             get
             {
-                if (((byte)(known & Known.CompressedSize)) == 0)
+                if (((byte)(_known & Known.CompressedSize)) == 0)
                 {
                     return -1L;
                 }
-                return (long)compressedSize;
+                return (long)_compressedSize;
             }
             set
             {
-                compressedSize = (ulong)value;
-                known = (Known)((byte)(known | Known.CompressedSize));
+                _compressedSize = (ulong)value;
+                _known = (Known)((byte)(_known | Known.CompressedSize));
             }
         }
 
@@ -365,7 +342,7 @@ namespace ZipLib.Zip
         {
             get
             {
-                return method;
+                return _method;
             }
             set
             {
@@ -373,7 +350,7 @@ namespace ZipLib.Zip
                 {
                     throw new NotSupportedException("Compression method not supported");
                 }
-                method = value;
+                _method = value;
             }
         }
 
@@ -381,9 +358,9 @@ namespace ZipLib.Zip
         {
             get
             {
-                if (AESKeySize <= 0)
+                if (AesKeySize <= 0)
                 {
-                    return method;
+                    return _method;
                 }
                 return CompressionMethod.WinZipAES;
             }
@@ -393,45 +370,35 @@ namespace ZipLib.Zip
         {
             get
             {
-                if (((byte)(known & Known.Crc)) == 0)
+                if (((byte)(_known & Known.Crc)) == 0)
                 {
                     return -1L;
                 }
-                return crc & 0xffffffffL;
+                return _crc & 0xffffffffL;
             }
             set
             {
-                if ((crc & 18446744069414584320L) != 0L)
+                if ((_crc & 18446744069414584320L) != 0L)
                 {
-                    throw new ArgumentOutOfRangeException("value");
+                    throw new ArgumentOutOfRangeException(nameof(value));
                 }
-                crc = (uint)value;
-                known = (Known)((byte)(known | Known.Crc));
+                _crc = (uint)value;
+                _known = (Known)((byte)(_known | Known.Crc));
             }
         }
 
-        internal byte CryptoCheckValue
-        {
-            get
-            {
-                return cryptoCheckValue_;
-            }
-            set
-            {
-                cryptoCheckValue_ = value;
-            }
-        }
+        internal byte CryptoCheckValue { get; set; }
 
         public DateTime DateTime
         {
             get
             {
-                uint num = Math.Min(0x3b, 2 * (dosTime & 0x1f));
-                uint num2 = Math.Min(0x3b, (dosTime >> 5) & 0x3f);
-                uint num3 = Math.Min(0x17, (dosTime >> 11) & 0x1f);
-                uint num4 = Math.Max(1, Math.Min(12, (dosTime >> 0x15) & 15));
-                uint num5 = ((dosTime >> 0x19) & 0x7f) + 0x7bc;
-                return new DateTime((int)num5, (int)num4, Math.Max(1, Math.Min(DateTime.DaysInMonth((int)num5, (int)num4), ((int)(dosTime >> 0x10)) & 0x1f)), (int)num3, (int)num2, (int)num);
+                uint num = Math.Min(0x3b, 2 * (_dosTime & 0x1f));
+                uint num2 = Math.Min(0x3b, (_dosTime >> 5) & 0x3f);
+                uint num3 = Math.Min(0x17, (_dosTime >> 11) & 0x1f);
+                uint num4 = Math.Max(1, Math.Min(12, (_dosTime >> 0x15) & 15));
+                uint num5 = ((_dosTime >> 0x19) & 0x7f) + 0x7bc;
+                return new DateTime((int)num5, (int)num4, Math.Max(1, Math.Min(DateTime.DaysInMonth((int)num5, (int)num4), ((int)(_dosTime >> 0x10)) & 0x1f)), (int)num3, (int)num2, (int)num);
             }
             set
             {
@@ -468,16 +435,16 @@ namespace ZipLib.Zip
         {
             get
             {
-                if (((byte)(known & (Known.None | Known.Time))) == 0)
+                if (((byte)(_known & (Known.None | Known.Time))) == 0)
                 {
                     return 0L;
                 }
-                return dosTime;
+                return _dosTime;
             }
             set
             {
-                dosTime = (uint)value;
-                known = (Known)((byte)(known | Known.None | Known.Time));
+                _dosTime = (uint)value;
+                _known = (Known)((byte)(_known | Known.None | Known.Time));
             }
         }
 
@@ -485,16 +452,16 @@ namespace ZipLib.Zip
         {
             get
             {
-                if (((byte)(known & Known.ExternalAttributes)) == 0)
+                if (((byte)(_known & Known.ExternalAttributes)) == 0)
                 {
                     return -1;
                 }
-                return externalFileAttributes;
+                return _externalFileAttributes;
             }
             set
             {
-                externalFileAttributes = value;
-                known = (Known)((byte)(known | Known.ExternalAttributes));
+                _externalFileAttributes = value;
+                _known = (Known)((byte)(_known | Known.ExternalAttributes));
             }
         }
 
@@ -502,56 +469,40 @@ namespace ZipLib.Zip
         {
             get
             {
-                return extra;
+                return _extra;
             }
             set
             {
                 if (value == null)
                 {
-                    extra = null;
+                    _extra = null;
                 }
                 else
                 {
                     if (value.Length > 0xffff)
                     {
-                        throw new ArgumentOutOfRangeException("value");
+                        throw new ArgumentOutOfRangeException(nameof(value));
                     }
-                    extra = new byte[value.Length];
-                    Array.Copy(value, 0, extra, 0, value.Length);
+                    _extra = new byte[value.Length];
+                    Array.Copy(value, 0, _extra, 0, value.Length);
                 }
             }
         }
 
-        public int Flags
-        {
-            get
-            {
-                return flags;
-            }
-            set
-            {
-                flags = value;
-            }
-        }
+        public int Flags { get; set; }
 
-        public bool HasCrc
-        {
-            get
-            {
-                return (((byte)(known & Known.Crc)) != 0);
-            }
-        }
+        public bool HasCrc => (((byte)(_known & Known.Crc)) != 0);
 
         public int HostSystem
         {
             get
             {
-                return ((versionMadeBy >> 8) & 0xff);
+                return ((_versionMadeBy >> 8) & 0xff);
             }
             set
             {
-                versionMadeBy = (ushort)(versionMadeBy & 0xff);
-                versionMadeBy = (ushort)(versionMadeBy | ((ushort)((value & 0xff) << 8)));
+                _versionMadeBy = (ushort)(_versionMadeBy & 0xff);
+                _versionMadeBy = (ushort)(_versionMadeBy | ((ushort)((value & 0xff) << 8)));
             }
         }
 
@@ -559,17 +510,17 @@ namespace ZipLib.Zip
         {
             get
             {
-                return ((flags & 1) != 0);
+                return ((Flags & 1) != 0);
             }
             set
             {
                 if (value)
                 {
-                    flags |= 1;
+                    Flags |= 1;
                 }
                 else
                 {
-                    flags &= -2;
+                    Flags &= -2;
                 }
             }
         }
@@ -578,12 +529,12 @@ namespace ZipLib.Zip
         {
             get
             {
-                int length = name.Length;
-                return (((length > 0) && ((name[length - 1] == '/') || (name[length - 1] == '\\'))) || HasDosAttributes(0x10));
+                int length = Name.Length;
+                return (((length > 0) && ((Name[length - 1] == '/') || (Name[length - 1] == '\\'))) || HasDosAttributes(0x10));
             }
         }
 
-        public bool IsDOSEntry
+        public bool IsDosEntry
         {
             get
             {
@@ -595,29 +546,23 @@ namespace ZipLib.Zip
             }
         }
 
-        public bool IsFile
-        {
-            get
-            {
-                return (!IsDirectory && !HasDosAttributes(8));
-            }
-        }
+        public bool IsFile => (!IsDirectory && !HasDosAttributes(8));
 
         public bool IsUnicodeText
         {
             get
             {
-                return ((flags & 0x800) != 0);
+                return ((Flags & 0x800) != 0);
             }
             set
             {
                 if (value)
                 {
-                    flags |= 0x800;
+                    Flags |= 0x800;
                 }
                 else
                 {
-                    flags &= -2049;
+                    Flags &= -2049;
                 }
             }
         }
@@ -626,54 +571,38 @@ namespace ZipLib.Zip
         {
             get
             {
-                bool flag = forceZip64_;
+                bool flag = _forceZip64;
                 if (flag)
                 {
                     return true;
                 }
-                if ((versionToExtract == 0) && IsCrypted)
+                if ((_versionToExtract == 0) && IsCrypted)
                 {
-                    compressedSize += 12L;
+                    _compressedSize += 12L;
                 }
-                return (((size >= 0xffffffffL) || (compressedSize >= 0xffffffffL)) && ((versionToExtract == 0) 
-                    || (versionToExtract >= 0x2d)));
+                return (((_size >= 0xffffffffL) || (_compressedSize >= 0xffffffffL)) && ((_versionToExtract == 0) 
+                    || (_versionToExtract >= 0x2d)));
             }
         }
 
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public string Name { get; }
 
-        public long Offset
-        {
-            get
-            {
-                return offset;
-            }
-            set
-            {
-                offset = value;
-            }
-        }
+        public long Offset { get; set; }
 
         public long Size
         {
             get
             {
-                if (((byte)(known & (Known.None | Known.Size))) == 0)
+                if (((byte)(_known & (Known.None | Known.Size))) == 0)
                 {
                     return -1L;
                 }
-                return (long)size;
+                return (long)_size;
             }
             set
             {
-                size = (ulong)value;
-                known = (Known)((byte)(known | Known.None | Known.Size));
+                _size = (ulong)value;
+                _known = (Known)((byte)(_known | Known.None | Known.Size));
             }
         }
 
@@ -681,12 +610,12 @@ namespace ZipLib.Zip
         {
             get
             {
-                if (versionToExtract != 0)
+                if (_versionToExtract != 0)
                 {
-                    return versionToExtract;
+                    return _versionToExtract;
                 }
                 int num = 10;
-                if (AESKeySize > 0)
+                if (AesKeySize > 0)
                 {
                     return 0x33;
                 }
@@ -694,7 +623,7 @@ namespace ZipLib.Zip
                 {
                     return 0x2d;
                 }
-                if (CompressionMethod.Deflated == method)
+                if (CompressionMethod.Deflated == _method)
                 {
                     return 20;
                 }
@@ -714,25 +643,9 @@ namespace ZipLib.Zip
             }
         }
 
-        public int VersionMadeBy
-        {
-            get
-            {
-                return (versionMadeBy & 0xff);
-            }
-        }
+        public int VersionMadeBy => (_versionMadeBy & 0xff);
 
-        public long ZipFileIndex
-        {
-            get
-            {
-                return zipFileIndex;
-            }
-            set
-            {
-                zipFileIndex = value;
-            }
-        }
+        public long ZipFileIndex { get; set; }
 
         [Flags]
         private enum Known : byte

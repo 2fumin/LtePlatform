@@ -678,7 +678,7 @@ namespace ZipLib.Zip
             {
                 throw new ZipException("No password available for AES encrypted stream");
             }
-            var aEsSaltLen = entry.AESSaltLen;
+            var aEsSaltLen = entry.AesSaltLen;
             var buffer = new byte[aEsSaltLen];
             var num2 = baseStream.Read(buffer, 0, aEsSaltLen);
             if (num2 != aEsSaltLen)
@@ -687,7 +687,7 @@ namespace ZipLib.Zip
             }
             var buffer2 = new byte[2];
             baseStream.Read(buffer2, 0, 2);
-            var blockSize = entry.AESKeySize / 8;
+            var blockSize = entry.AesKeySize / 8;
             var transform = new ZipAESTransform(_rawPassword, buffer, blockSize, false);
             var pwdVerifier = transform.PwdVerifier;
             if ((pwdVerifier[0] != buffer2[0]) || (pwdVerifier[1] != buffer2[1]))
@@ -1045,7 +1045,7 @@ namespace ZipLib.Zip
                 || (num5 == 0xffffL))) || ((num6 == 0xffffffffL) || (num7 == 0xffffffffL)))
             {
                 flag = true;
-                if (LocateBlockWithSignature(0x7064b50, endLocation, 0, DefaultBufferSize) < 0L)
+                if (LocateBlockWithSignature(ZipConstants.ArchiveExtraDataSignature, endLocation, 0, DefaultBufferSize) < 0L)
                 {
                     throw new ZipException("Cannot find Zip64 locator");
                 }
@@ -1513,7 +1513,10 @@ namespace ZipLib.Zip
                 }
                 if (flag)
                 {
-                    if (((((num <= 0x3f) && (num != 10)) && ((num != 11) && (num != 20))) && (((num != 0x15) && (num != 0x19)) && ((num != 0x1b) && (num != 0x2d)))) && ((((num != 0x2e) && (num != 50)) && ((num != 0x33) && (num != 0x34))) && (((num != 0x3d) && (num != 0x3e)) && (num != 0x3f))))
+                    if (((((num <= 0x3f) && (num != 10)) && ((num != 11) && (num != 20))) &&
+                         (((num != 0x15) && (num != 0x19)) && ((num != 0x1b) && (num != 0x2d)))) &&
+                        ((((num != ZipConstants.CentralHeaderBaseSize) && (num != 50)) && ((num != 0x33) && (num != 0x34))) &&
+                         (((num != 0x3d) && (num != 0x3e)) && (num != 0x3f))))
                     {
                         throw new ZipException($"Version required to extract this entry is invalid ({num})");
                     }

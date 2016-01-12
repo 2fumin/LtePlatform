@@ -53,7 +53,7 @@ namespace ZipLib.Zip
             extraData.StartNewEntry();
             extraData.AddLeShort(2);
             extraData.AddLeShort(0x4541);
-            extraData.AddData(entry.AESEncryptionStrength);
+            extraData.AddData(entry.AesEncryptionStrength);
             extraData.AddLeShort((int)entry.CompressionMethod);
             extraData.AddNewEntry(0x9901);
         }
@@ -77,7 +77,7 @@ namespace ZipLib.Zip
                     deflater_.Reset();
                 }
             }
-            if (_curEntry.AESKeySize > 0)
+            if (_curEntry.AesKeySize > 0)
             {
                 baseOutputStream_.Write(AESAuthCode, 0, 10);
             }
@@ -108,9 +108,9 @@ namespace ZipLib.Zip
             _offset += compressedSize;
             if (_curEntry.IsCrypted)
             {
-                if (_curEntry.AESKeySize > 0)
+                if (_curEntry.AesKeySize > 0)
                 {
-                    _curEntry.CompressedSize += _curEntry.AESOverheadSize;
+                    _curEntry.CompressedSize += _curEntry.AesOverheadSize;
                 }
                 else
                 {
@@ -237,7 +237,7 @@ namespace ZipLib.Zip
                     {
                         extraData.Delete(1);
                     }
-                    if (entry.AESKeySize > 0)
+                    if (entry.AesKeySize > 0)
                     {
                         AddExtraDataAes(entry, extraData);
                     }
@@ -284,7 +284,7 @@ namespace ZipLib.Zip
                     {
                         baseOutputStream_.Write(buffer3, 0, buffer3.Length);
                     }
-                    sizeEntries += ((0x2e + buffer.Length) + entryData.Length) + buffer3.Length;
+                    sizeEntries += ((ZipConstants.CentralHeaderBaseSize + buffer.Length) + entryData.Length) + buffer3.Length;
                 }
                 using (ZipHelperStream stream = new ZipHelperStream(baseOutputStream_))
                 {
@@ -450,7 +450,7 @@ namespace ZipLib.Zip
             {
                 extraData.Delete(1);
             }
-            if (entry.AESKeySize > 0)
+            if (entry.AesKeySize > 0)
             {
                 AddExtraDataAes(entry, extraData);
             }
@@ -470,9 +470,9 @@ namespace ZipLib.Zip
                 baseOutputStream_.Write(entryData, 0, entryData.Length);
             }
             _offset += (30 + buffer.Length) + entryData.Length;
-            if (entry.AESKeySize > 0)
+            if (entry.AesKeySize > 0)
             {
-                _offset += entry.AESOverheadSize;
+                _offset += entry.AesOverheadSize;
             }
             _curEntry = entry;
             _crc.Reset();
@@ -484,7 +484,7 @@ namespace ZipLib.Zip
             _size = 0L;
             if (entry.IsCrypted)
             {
-                if (entry.AESKeySize > 0)
+                if (entry.AesKeySize > 0)
                 {
                     WriteAesHeader(entry);
                 }

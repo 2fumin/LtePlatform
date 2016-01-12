@@ -241,7 +241,8 @@ namespace ZipLib.Zip
             WriteLeLong(noOfEntries);
             WriteLeLong(sizeEntries);
             WriteLeLong(centralDirOffset);
-            WriteLeInt(0x7064b50);
+
+            WriteLeInt(ZipConstants.Zip64CentralDirLocatorSignature);
             WriteLeInt(0);
             WriteLeLong(position);
             WriteLeInt(1);

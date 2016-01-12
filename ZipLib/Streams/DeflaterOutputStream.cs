@@ -160,13 +160,13 @@ namespace ZipLib.Streams
 
         protected void InitializeAESPassword(ZipEntry entry, string rawPassword, out byte[] salt, out byte[] pwdVerifier)
         {
-            salt = new byte[entry.AESSaltLen];
+            salt = new byte[entry.AesSaltLen];
             if (_aesRnd == null)
             {
                 _aesRnd = new RNGCryptoServiceProvider();
             }
             _aesRnd.GetBytes(salt);
-            int blockSize = entry.AESKeySize / 8;
+            int blockSize = entry.AesKeySize / 8;
             cryptoTransform_ = new ZipAESTransform(rawPassword, salt, blockSize, true);
             pwdVerifier = ((ZipAESTransform)cryptoTransform_).PwdVerifier;
         }

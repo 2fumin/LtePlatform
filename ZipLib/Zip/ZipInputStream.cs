@@ -187,8 +187,8 @@ namespace ZipLib.Zip
             {
                 case 0x2014b50:
                 case 0x6054b50:
-                case 0x5054b50:
-                case 0x7064b50:
+                case ZipConstants.CentralHeaderDigitalSignature:
+                case ZipConstants.ArchiveExtraDataSignature:
                 case 0x6064b50:
                     Close();
                     return null;

@@ -7,16 +7,23 @@ namespace ZipLib.Zip
     public static class ZipConstants
     {
         public const int ArchiveExtraDataSignature = 0x7064b50;
+
         [Obsolete("Use CentralHeaderDigitalSignaure instead")]
         public const int CENDIGITALSIG = 0x5054b50;
+
         [Obsolete("Use CentralHeaderBaseSize instead")]
         public const int CENHDR = 0x2e;
+
         [Obsolete("Use CentralHeaderSignature instead")]
         public const int CENSIG = 0x2014b50;
+
         [Obsolete("Use Zip64CentralFileHeaderSignature instead")]
         public const int CENSIG64 = 0x6064b50;
+
         public const int CentralHeaderBaseSize = 0x2e;
+
         public const int CentralHeaderDigitalSignature = 0x5054b50;
+
         public const int CentralHeaderSignature = 0x2014b50;
         [Obsolete("Use CryptoHeaderSize instead")]
         public const int CRYPTO_HEADER_SIZE = 12;
@@ -54,7 +61,9 @@ namespace ZipLib.Zip
         public const int VersionMadeBy = 0x33;
         public const int VersionStrongEncryption = 50;
         public const int VersionZip64 = 0x2d;
-        public const int Zip64CentralDirLocatorSignature = 0x7064b50;
+
+        public const int Zip64CentralDirLocatorSignature = ArchiveExtraDataSignature;
+
         public const int Zip64CentralFileHeaderSignature = 0x6064b50;
         public const int Zip64DataDescriptorSize = 0x18;
 
