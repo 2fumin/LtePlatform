@@ -110,6 +110,7 @@
     <Compile Include="LinqToExcel\UnSupportedMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Regular\CloneAttributeTest.cs" />
+    <Compile Include="Regular\ContainsStringTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AutoMapper\AutoMapper.csproj">

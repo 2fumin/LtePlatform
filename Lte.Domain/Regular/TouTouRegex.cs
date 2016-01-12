@@ -93,13 +93,8 @@ namespace Lte.Domain.Regular
         public static List<string> GetAllNumberByString(string source)
         {
             var reg = Regex.Matches(source, @"\d+");
-            List<string> list = new List<string>();
-            foreach (Match item in reg)
-            {
-                list.Add(item.Value);
-            }
 
-            return list;
+            return (from Match item in reg select item.Value).ToList();
         }
 
         /// <summary>
