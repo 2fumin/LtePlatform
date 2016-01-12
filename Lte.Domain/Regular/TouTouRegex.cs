@@ -31,7 +31,7 @@ namespace Lte.Domain.Regular
         /// <returns>true:匹配，反之不匹配</returns>
         public static bool CheckStringByReg(string source, string reg)
         {
-            Regex rg = new Regex(reg, RegexOptions.IgnoreCase);
+            var rg = new Regex(reg, RegexOptions.IgnoreCase);
             return rg.IsMatch(source);
         }
 
@@ -55,7 +55,7 @@ namespace Lte.Domain.Regular
         public static List<string> GetStringByReg(string source, string reg)
         {
             var regex = Regex.Matches(source, reg);
-            List<string> list = new List<string>();
+            var list = new List<string>();
             foreach (Match item in regex)
             {
                 list.Add(item.Value);
@@ -115,7 +115,7 @@ namespace Lte.Domain.Regular
         /// <returns>返回值</returns>
         public static bool CheckLengthByString(string source, int length)
         {
-            Regex rg = new Regex(@"^\d{" + length + "}$");
+            var rg = new Regex(@"^\d{" + length + "}$");
             return rg.IsMatch(source);
         }
 
@@ -128,7 +128,7 @@ namespace Lte.Domain.Regular
         /// <returns>中间字符串</returns>
         public static string Substring(string source, string startStr, string endStr)
         {
-            Regex rg = new Regex("(?<=(" + startStr + "))[.\\s\\S]*?(?=(" + endStr + "))", RegexOptions.Multiline | RegexOptions.Singleline);
+            var rg = new Regex("(?<=(" + startStr + "))[.\\s\\S]*?(?=(" + endStr + "))", RegexOptions.Multiline | RegexOptions.Singleline);
             return rg.Match(source).Value;
         }
 
@@ -139,7 +139,7 @@ namespace Lte.Domain.Regular
         /// <returns>匹配结果true是邮箱反之不是邮箱</returns>
         public static bool CheckEmailByString(string source)
         {
-            Regex rg = new Regex("^\\s*([A-Za-z0-9_-]+(\\.\\w+)*@(\\w+\\.)+\\w{2,5})\\s*$", RegexOptions.IgnoreCase);
+            var rg = new Regex("^\\s*([A-Za-z0-9_-]+(\\.\\w+)*@(\\w+\\.)+\\w{2,5})\\s*$", RegexOptions.IgnoreCase);
             return rg.IsMatch(source);
         }
 
@@ -150,7 +150,7 @@ namespace Lte.Domain.Regular
         /// <returns>匹配结果true是URL反之不是URL</returns>
         public static bool CheckURLByString(string source)
         {
-            Regex rg = new Regex(@"^(https?|s?ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$", RegexOptions.IgnoreCase);
+            var rg = new Regex(@"^(https?|s?ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$", RegexOptions.IgnoreCase);
             return rg.IsMatch(source);
         }
 
@@ -161,7 +161,7 @@ namespace Lte.Domain.Regular
         /// <returns>匹配结果true是日期反之不是日期</returns>
         public static bool CheckDateByString(string source)
         {
-            Regex rg = new Regex(@"^(\d{4}[\/\-](0?[1-9]|1[0-2])[\/\-]((0?[1-9])|((1|2)[0-9])|30|31))|((0?[1-9]|1[0-2])[\/\-]((0?[1-9])|((1|2)[0-9])|30|31)[\/\-]\d{4})$");
+            var rg = new Regex(@"^(\d{4}[\/\-](0?[1-9]|1[0-2])[\/\-]((0?[1-9])|((1|2)[0-9])|30|31))|((0?[1-9]|1[0-2])[\/\-]((0?[1-9])|((1|2)[0-9])|30|31)[\/\-]\d{4})$");
             return rg.IsMatch(source);
         }
 
@@ -193,7 +193,7 @@ namespace Lte.Domain.Regular
         /// <returns>密码复杂度是否达标true是达标反之不达标</returns>
         public static bool CheckPasswordByString(string source)
         {
-            Regex rg = new Regex(@"^(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{8,16}$");
+            var rg = new Regex(@"^(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{8,16}$");
             return rg.IsMatch(source);
         }
 
@@ -204,7 +204,7 @@ namespace Lte.Domain.Regular
         /// <returns>邮编合法返回true,反之不合法</returns>
         public static bool CheckPostcodeByString(string source)
         {
-            Regex rg = new Regex(@"^\d{6}$");
+            var rg = new Regex(@"^\d{6}$");
             return rg.IsMatch(source);
         }
 
@@ -215,7 +215,7 @@ namespace Lte.Domain.Regular
         /// <returns>电话号码合法返回true,反之不合法</returns>
         public static bool CheckTelephoneByString(string source)
         {
-            Regex rg = new Regex(@"^((\d{3,4}-)|\d{3.4}-)?\d{7,8}$");
+            var rg = new Regex(@"^((\d{3,4}-)|\d{3.4}-)?\d{7,8}$");
             return rg.IsMatch(source);
         }
 
@@ -236,7 +236,7 @@ namespace Lte.Domain.Regular
         /// <returns>手机号码合法返回true,反之不合法</returns>
         public static bool CheckMobilephoneByString(string source)
         {
-            Regex rg = new Regex(@"^[1]+[3,5]+\d{9}$");
+            var rg = new Regex(@"^[1]+[3,5]+\d{9}$");
             return rg.IsMatch(source);
         }
 
@@ -257,7 +257,7 @@ namespace Lte.Domain.Regular
         /// <returns>身份证号码合法返回true,反之不合法</returns>
         public static bool CheckIDCardByString(string source)
         {
-            Regex rg = new Regex(@"^(^\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$");
+            var rg = new Regex(@"^(^\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$");
             return rg.IsMatch(source);
         }
 
