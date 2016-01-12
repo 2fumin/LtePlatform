@@ -1,23 +1,19 @@
 ﻿function NeighborImportViewModel(app, dataModel) {
     var self = this;
 
-    self.initialize = ko.observable(true);
     self.totalDumpItems = ko.observable(0);
     self.totalSuccessItems = ko.observable(0);
     self.totalFailItems = ko.observable(0);
     
     Sammy(function () {
         this.get('#neighborImport', function () {
-            self.initialize(true);
         });
         this.post('#neighborZtePost', function () {
-            self.initialize(false);
             sendRequest(app.dataModel.dumpNeighborUrl, "GET", null, function (result) {
                 self.totalDumpItems(result);
             });
         });
         this.post('#neighborHwPost', function () {
-            self.initialize(false);
             sendRequest(app.dataModel.dumpNeighborUrl, "GET", null, function (result) {
                 self.totalDumpItems(result);
             });

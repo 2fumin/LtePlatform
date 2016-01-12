@@ -1,5 +1,5 @@
 ﻿<!-- ko with: neighborImport -->
-<div class="panel panel-info" data-bind="visible: initialize()!==true">
+<div class="panel panel-info">
     <div class="panel-heading">
         <h3 class="panel-title">
             邻区导入进度
@@ -7,7 +7,8 @@
     </div>
     <div class="panel-body">
         <p>
-            <button class="btn btn-primary" data-bind="click: dumpItems">一键导入</button>
+            <button class="btn btn-primary" data-bind="click: dumpItems, enable: totalDumpItems()>0">一键导入</button>
+            <button class="btn btn-danger" data-bind="click: clearItems">清除导入</button>
         </p>
         <p>
             总数：<span data-bind="text: totalDumpItems"></span>&nbsp;
