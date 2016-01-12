@@ -358,52 +358,7 @@ namespace TraceParser.X2ap
             }
         }
     }
-
-    [Serializable]
-    public class LAC
-    {
-        public class PerDecoder
-        {
-            public static readonly PerDecoder Instance = new PerDecoder();
-
-            public string Decode(BitArrayInputStream input)
-            {
-                input.skipUnreadedBits();
-                return input.readOctetString(2);
-            }
-        }
-    }
-
-    [Serializable]
-    public class MME_Code
-    {
-        public class PerDecoder
-        {
-            public static readonly PerDecoder Instance = new PerDecoder();
-
-            public string Decode(BitArrayInputStream input)
-            {
-                input.skipUnreadedBits();
-                return input.readOctetString(1);
-            }
-        }
-    }
-
-    [Serializable]
-    public class MME_Group_ID
-    {
-        public class PerDecoder
-        {
-            public static readonly PerDecoder Instance = new PerDecoder();
-
-            public string Decode(BitArrayInputStream input)
-            {
-                input.skipUnreadedBits();
-                return input.readOctetString(2);
-            }
-        }
-    }
-
+    
     [Serializable]
     public class PCI
     {

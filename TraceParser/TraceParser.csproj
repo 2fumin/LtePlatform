@@ -49,6 +49,9 @@
     <Compile Include="Common\EventS1.cs" />
     <Compile Include="Common\EventX2.cs" />
     <Compile Include="Common\ITraceMessage.cs" />
+    <Compile Include="Common\LAC.cs" />
+    <Compile Include="Common\MME_Code.cs" />
+    <Compile Include="Common\MME_Group_ID.cs" />
     <Compile Include="Common\TraceResultList.cs" />
     <Compile Include="Eric\EricEvent.cs" />
     <Compile Include="Eric\EricEventTypeList.cs" />
@@ -270,9 +273,10 @@
     <Compile Include="S1ap\InitialContext.cs" />
     <Compile Include="S1ap\InitiatingMessage.cs" />
     <Compile Include="S1ap\Kill.cs" />
-    <Compile Include="S1ap\LAC.cs" />
+    <Compile Include="S1ap\LAI.cs" />
     <Compile Include="S1ap\LastVisited.cs" />
     <Compile Include="S1ap\LocationReport.cs" />
+    <Compile Include="S1ap\LPPa_PDU.cs" />
     <Compile Include="S1ap\MMEConfiguration.cs" />
     <Compile Include="S1ap\MME_Code.cs" />
     <Compile Include="S1ap\NAS.cs" />

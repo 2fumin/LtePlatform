@@ -5,36 +5,6 @@ using Lte.Domain.Common;
 namespace TraceParser.S1ap
 {
     [Serializable]
-    public class MME_Code
-    {
-        public class PerDecoder
-        {
-            public static readonly PerDecoder Instance = new PerDecoder();
-
-            public string Decode(BitArrayInputStream input)
-            {
-                input.skipUnreadedBits();
-                return input.readOctetString(1);
-            }
-        }
-    }
-
-    [Serializable]
-    public class MME_Group_ID
-    {
-        public class PerDecoder
-        {
-            public static readonly PerDecoder Instance = new PerDecoder();
-
-            public string Decode(BitArrayInputStream input)
-            {
-                input.skipUnreadedBits();
-                return input.readOctetString(2);
-            }
-        }
-    }
-
-    [Serializable]
     public class MME_UE_S1AP_ID
     {
         public class PerDecoder

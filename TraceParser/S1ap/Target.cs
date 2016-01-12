@@ -259,7 +259,7 @@ namespace TraceParser.S1ap
                 BitMaskStream stream = (input.readBit() != 0)
                     ? new BitMaskStream(input, 3)
                     : new BitMaskStream(input, 3);
-                trnc_id.lAI = LAI.PerDecoder.Instance.Decode(input);
+                trnc_id.lAI = LAI.PerDecoder.Decode(input);
                 if (stream.Read())
                 {
                     input.skipUnreadedBits();

@@ -9,386 +9,384 @@ namespace TraceParser.S1ap
     {
         public static object Switcher(long unique, string membername, BitArrayInputStream input)
         {
-            long num = unique;
-            if ((num <= 0x9fL) && (num >= 0L))
+            var num = unique;
+            if ((num > 0x9fL) || (num < 0L)) return null;
+            switch (((int)num))
             {
-                switch (((int)num))
-                {
-                    case 0:
-                        return id_MME_UE_S1AP_IDClass.GetMemberObj(membername, input);
+                case 0:
+                    return id_MME_UE_S1AP_IDClass.GetMemberObj(membername, input);
 
-                    case 1:
-                        return id_HandoverTypeClass.GetMemberObj(membername, input);
+                case 1:
+                    return id_HandoverTypeClass.GetMemberObj(membername, input);
 
-                    case 2:
-                        return id_CauseClass.GetMemberObj(membername, input);
+                case 2:
+                    return id_CauseClass.GetMemberObj(membername, input);
 
-                    case 4:
-                        return id_TargetIDClass.GetMemberObj(membername, input);
+                case 4:
+                    return id_TargetIDClass.GetMemberObj(membername, input);
 
-                    case 8:
-                        return id_eNB_UE_S1AP_IDClass.GetMemberObj(membername, input);
+                case 8:
+                    return id_eNB_UE_S1AP_IDClass.GetMemberObj(membername, input);
 
-                    case 12:
-                        return id_E_RABSubjecttoDataForwardingListClass.GetMemberObj(membername, input);
+                case 12:
+                    return id_E_RABSubjecttoDataForwardingListClass.GetMemberObj(membername, input);
 
-                    case 13:
-                        return id_E_RABtoReleaseListHOCmdClass.GetMemberObj(membername, input);
+                case 13:
+                    return id_E_RABtoReleaseListHOCmdClass.GetMemberObj(membername, input);
 
-                    case 14:
-                        return id_E_RABDataForwardingItemClass.GetMemberObj(membername, input);
+                case 14:
+                    return id_E_RABDataForwardingItemClass.GetMemberObj(membername, input);
 
-                    case 15:
-                        return id_E_RABReleaseItemBearerRelCompClass.GetMemberObj(membername, input);
+                case 15:
+                    return id_E_RABReleaseItemBearerRelCompClass.GetMemberObj(membername, input);
 
-                    case 0x10:
-                        return id_E_RABToBeSetupListBearerSUReqClass.GetMemberObj(membername, input);
+                case 0x10:
+                    return id_E_RABToBeSetupListBearerSUReqClass.GetMemberObj(membername, input);
 
-                    case 0x11:
-                        return id_E_RABToBeSetupItemBearerSUReqClass.GetMemberObj(membername, input);
+                case 0x11:
+                    return id_E_RABToBeSetupItemBearerSUReqClass.GetMemberObj(membername, input);
 
-                    case 0x12:
-                        return id_E_RABAdmittedListClass.GetMemberObj(membername, input);
+                case 0x12:
+                    return id_E_RABAdmittedListClass.GetMemberObj(membername, input);
 
-                    case 0x13:
-                        return id_E_RABFailedToSetupListHOReqAckClass.GetMemberObj(membername, input);
+                case 0x13:
+                    return id_E_RABFailedToSetupListHOReqAckClass.GetMemberObj(membername, input);
 
-                    case 20:
-                        return id_E_RABAdmittedItemClass.GetMemberObj(membername, input);
+                case 20:
+                    return id_E_RABAdmittedItemClass.GetMemberObj(membername, input);
 
-                    case 0x15:
-                        return id_E_RABFailedtoSetupItemHOReqAckClass.GetMemberObj(membername, input);
+                case 0x15:
+                    return id_E_RABFailedtoSetupItemHOReqAckClass.GetMemberObj(membername, input);
 
-                    case 0x16:
-                        return id_E_RABToBeSwitchedDLListClass.GetMemberObj(membername, input);
+                case 0x16:
+                    return id_E_RABToBeSwitchedDLListClass.GetMemberObj(membername, input);
 
-                    case 0x17:
-                        return id_E_RABToBeSwitchedDLItemClass.GetMemberObj(membername, input);
+                case 0x17:
+                    return id_E_RABToBeSwitchedDLItemClass.GetMemberObj(membername, input);
 
-                    case 0x18:
-                        return id_E_RABToBeSetupListCtxtSUReqClass.GetMemberObj(membername, input);
+                case 0x18:
+                    return id_E_RABToBeSetupListCtxtSUReqClass.GetMemberObj(membername, input);
 
-                    case 0x19:
-                        return id_TraceActivationClass.GetMemberObj(membername, input);
+                case 0x19:
+                    return id_TraceActivationClass.GetMemberObj(membername, input);
 
-                    case 0x1a:
-                        return id_NAS_PDUClass.GetMemberObj(membername, input);
+                case 0x1a:
+                    return id_NAS_PDUClass.GetMemberObj(membername, input);
 
-                    case 0x1b:
-                        return id_E_RABToBeSetupItemHOReqClass.GetMemberObj(membername, input);
+                case 0x1b:
+                    return id_E_RABToBeSetupItemHOReqClass.GetMemberObj(membername, input);
 
-                    case 0x1c:
-                        return id_E_RABSetupListBearerSUResClass.GetMemberObj(membername, input);
+                case 0x1c:
+                    return id_E_RABSetupListBearerSUResClass.GetMemberObj(membername, input);
 
-                    case 0x1d:
-                        return id_E_RABFailedToSetupListBearerSUResClass.GetMemberObj(membername, input);
+                case 0x1d:
+                    return id_E_RABFailedToSetupListBearerSUResClass.GetMemberObj(membername, input);
 
-                    case 30:
-                        return id_E_RABToBeModifiedListBearerModReqClass.GetMemberObj(membername, input);
+                case 30:
+                    return id_E_RABToBeModifiedListBearerModReqClass.GetMemberObj(membername, input);
 
-                    case 0x1f:
-                        return id_E_RABModifyListBearerModResClass.GetMemberObj(membername, input);
+                case 0x1f:
+                    return id_E_RABModifyListBearerModResClass.GetMemberObj(membername, input);
 
-                    case 0x20:
-                        return id_E_RABFailedToModifyListClass.GetMemberObj(membername, input);
+                case 0x20:
+                    return id_E_RABFailedToModifyListClass.GetMemberObj(membername, input);
 
-                    case 0x21:
-                        return id_E_RABToBeReleasedListClass.GetMemberObj(membername, input);
+                case 0x21:
+                    return id_E_RABToBeReleasedListClass.GetMemberObj(membername, input);
 
-                    case 0x22:
-                        return id_E_RABFailedToReleaseListClass.GetMemberObj(membername, input);
+                case 0x22:
+                    return id_E_RABFailedToReleaseListClass.GetMemberObj(membername, input);
 
-                    case 0x23:
-                        return id_E_RABItemClass.GetMemberObj(membername, input);
+                case 0x23:
+                    return id_E_RABItemClass.GetMemberObj(membername, input);
 
-                    case 0x24:
-                        return id_E_RABToBeModifiedItemBearerModReqClass.GetMemberObj(membername, input);
+                case 0x24:
+                    return id_E_RABToBeModifiedItemBearerModReqClass.GetMemberObj(membername, input);
 
-                    case 0x25:
-                        return id_E_RABModifyItemBearerModResClass.GetMemberObj(membername, input);
+                case 0x25:
+                    return id_E_RABModifyItemBearerModResClass.GetMemberObj(membername, input);
 
-                    case 0x27:
-                        return id_E_RABSetupItemBearerSUResClass.GetMemberObj(membername, input);
+                case 0x27:
+                    return id_E_RABSetupItemBearerSUResClass.GetMemberObj(membername, input);
 
-                    case 40:
-                        return id_SecurityContextClass.GetMemberObj(membername, input);
+                case 40:
+                    return id_SecurityContextClass.GetMemberObj(membername, input);
 
-                    case 0x29:
-                        return id_HandoverRestrictionListClass.GetMemberObj(membername, input);
+                case 0x29:
+                    return id_HandoverRestrictionListClass.GetMemberObj(membername, input);
 
-                    case 0x2b:
-                        return id_UEPagingIDClass.GetMemberObj(membername, input);
+                case 0x2b:
+                    return id_UEPagingIDClass.GetMemberObj(membername, input);
 
-                    case 0x2c:
-                        return id_pagingDRXClass.GetMemberObj(membername, input);
+                case 0x2c:
+                    return id_pagingDRXClass.GetMemberObj(membername, input);
 
-                    case 0x2e:
-                        return id_TAIListClass.GetMemberObj(membername, input);
+                case 0x2e:
+                    return id_TAIListClass.GetMemberObj(membername, input);
 
-                    case 0x2f:
-                        return id_TAIItemClass.GetMemberObj(membername, input);
+                case 0x2f:
+                    return id_TAIItemClass.GetMemberObj(membername, input);
 
-                    case 0x30:
-                        return id_E_RABFailedToSetupListCtxtSUResClass.GetMemberObj(membername, input);
+                case 0x30:
+                    return id_E_RABFailedToSetupListCtxtSUResClass.GetMemberObj(membername, input);
 
-                    case 50:
-                        return id_E_RABSetupItemCtxtSUResClass.GetMemberObj(membername, input);
+                case 50:
+                    return id_E_RABSetupItemCtxtSUResClass.GetMemberObj(membername, input);
 
-                    case 0x33:
-                        return id_E_RABSetupListCtxtSUResClass.GetMemberObj(membername, input);
+                case 0x33:
+                    return id_E_RABSetupListCtxtSUResClass.GetMemberObj(membername, input);
 
-                    case 0x34:
-                        return id_E_RABToBeSetupItemCtxtSUReqClass.GetMemberObj(membername, input);
+                case 0x34:
+                    return id_E_RABToBeSetupItemCtxtSUReqClass.GetMemberObj(membername, input);
 
-                    case 0x35:
-                        return id_E_RABToBeSetupListHOReqClass.GetMemberObj(membername, input);
+                case 0x35:
+                    return id_E_RABToBeSetupListHOReqClass.GetMemberObj(membername, input);
 
-                    case 0x3a:
-                        return id_CriticalityDiagnosticsClass.GetMemberObj(membername, input);
+                case 0x3a:
+                    return id_CriticalityDiagnosticsClass.GetMemberObj(membername, input);
 
-                    case 0x3b:
-                        return id_Global_ENB_IDClass.GetMemberObj(membername, input);
+                case 0x3b:
+                    return id_Global_ENB_IDClass.GetMemberObj(membername, input);
 
-                    case 60:
-                        return id_eNBnameClass.GetMemberObj(membername, input);
+                case 60:
+                    return id_eNBnameClass.GetMemberObj(membername, input);
 
-                    case 0x3d:
-                        return id_MMEnameClass.GetMemberObj(membername, input);
+                case 0x3d:
+                    return id_MMEnameClass.GetMemberObj(membername, input);
 
-                    case 0x40:
-                        return id_SupportedTAsClass.GetMemberObj(membername, input);
+                case 0x40:
+                    return id_SupportedTAsClass.GetMemberObj(membername, input);
 
-                    case 0x41:
-                        return id_TimeToWaitClass.GetMemberObj(membername, input);
+                case 0x41:
+                    return id_TimeToWaitClass.GetMemberObj(membername, input);
 
-                    case 0x42:
-                        return id_uEaggregateMaximumBitrateClass.GetMemberObj(membername, input);
+                case 0x42:
+                    return id_uEaggregateMaximumBitrateClass.GetMemberObj(membername, input);
 
-                    case 0x43:
-                        return id_TAIClass.GetMemberObj(membername, input);
+                case 0x43:
+                    return id_TAIClass.GetMemberObj(membername, input);
 
-                    case 0x45:
-                        return id_E_RABReleaseListBearerRelCompClass.GetMemberObj(membername, input);
+                case 0x45:
+                    return id_E_RABReleaseListBearerRelCompClass.GetMemberObj(membername, input);
 
-                    case 70:
-                        return id_cdma2000PDUClass.GetMemberObj(membername, input);
+                case 70:
+                    return id_cdma2000PDUClass.GetMemberObj(membername, input);
 
-                    case 0x47:
-                        return id_cdma2000RATTypeClass.GetMemberObj(membername, input);
+                case 0x47:
+                    return id_cdma2000RATTypeClass.GetMemberObj(membername, input);
 
-                    case 0x48:
-                        return id_cdma2000SectorIDClass.GetMemberObj(membername, input);
+                case 0x48:
+                    return id_cdma2000SectorIDClass.GetMemberObj(membername, input);
 
-                    case 0x49:
-                        return id_SecurityKeyClass.GetMemberObj(membername, input);
+                case 0x49:
+                    return id_SecurityKeyClass.GetMemberObj(membername, input);
 
-                    case 0x4a:
-                        return id_UERadioCapabilityClass.GetMemberObj(membername, input);
+                case 0x4a:
+                    return id_UERadioCapabilityClass.GetMemberObj(membername, input);
 
-                    case 0x4b:
-                        return id_GUMMEI_IDClass.GetMemberObj(membername, input);
+                case 0x4b:
+                    return id_GUMMEI_IDClass.GetMemberObj(membername, input);
 
-                    case 0x4e:
-                        return id_E_RABInformationListItemClass.GetMemberObj(membername, input);
+                case 0x4e:
+                    return id_E_RABInformationListItemClass.GetMemberObj(membername, input);
 
-                    case 0x4f:
-                        return id_Direct_Forwarding_Path_AvailabilityClass.GetMemberObj(membername, input);
+                case 0x4f:
+                    return id_Direct_Forwarding_Path_AvailabilityClass.GetMemberObj(membername, input);
 
-                    case 80:
-                        return id_UEIdentityIndexValueClass.GetMemberObj(membername, input);
+                case 80:
+                    return id_UEIdentityIndexValueClass.GetMemberObj(membername, input);
 
-                    case 0x53:
-                        return id_cdma2000HOStatusClass.GetMemberObj(membername, input);
+                case 0x53:
+                    return id_cdma2000HOStatusClass.GetMemberObj(membername, input);
 
-                    case 0x54:
-                        return id_cdma2000HORequiredIndicationClass.GetMemberObj(membername, input);
+                case 0x54:
+                    return id_cdma2000HORequiredIndicationClass.GetMemberObj(membername, input);
 
-                    case 0x56:
-                        return id_E_UTRAN_Trace_IDClass.GetMemberObj(membername, input);
+                case 0x56:
+                    return id_E_UTRAN_Trace_IDClass.GetMemberObj(membername, input);
 
-                    case 0x57:
-                        return id_RelativeMMECapacityClass.GetMemberObj(membername, input);
+                case 0x57:
+                    return id_RelativeMMECapacityClass.GetMemberObj(membername, input);
 
-                    case 0x58:
-                        return id_SourceMME_UE_S1AP_IDClass.GetMemberObj(membername, input);
+                case 0x58:
+                    return id_SourceMME_UE_S1AP_IDClass.GetMemberObj(membername, input);
 
-                    case 0x59:
-                        return id_Bearers_SubjectToStatusTransfer_ItemClass.GetMemberObj(membername, input);
+                case 0x59:
+                    return id_Bearers_SubjectToStatusTransfer_ItemClass.GetMemberObj(membername, input);
 
-                    case 90:
-                        return id_eNB_StatusTransfer_TransparentContainerClass.GetMemberObj(membername, input);
+                case 90:
+                    return id_eNB_StatusTransfer_TransparentContainerClass.GetMemberObj(membername, input);
 
-                    case 0x5b:
-                        return id_UE_associatedLogicalS1_ConnectionItemClass.GetMemberObj(membername, input);
+                case 0x5b:
+                    return id_UE_associatedLogicalS1_ConnectionItemClass.GetMemberObj(membername, input);
 
-                    case 0x5c:
-                        return id_ResetTypeClass.GetMemberObj(membername, input);
+                case 0x5c:
+                    return id_ResetTypeClass.GetMemberObj(membername, input);
 
-                    case 0x5d:
-                        return id_UE_associatedLogicalS1_ConnectionListResAckClass.GetMemberObj(membername, input);
+                case 0x5d:
+                    return id_UE_associatedLogicalS1_ConnectionListResAckClass.GetMemberObj(membername, input);
 
-                    case 0x5e:
-                        return id_E_RABToBeSwitchedULItemClass.GetMemberObj(membername, input);
+                case 0x5e:
+                    return id_E_RABToBeSwitchedULItemClass.GetMemberObj(membername, input);
 
-                    case 0x5f:
-                        return id_E_RABToBeSwitchedULListClass.GetMemberObj(membername, input);
+                case 0x5f:
+                    return id_E_RABToBeSwitchedULListClass.GetMemberObj(membername, input);
 
-                    case 0x60:
-                        return id_S_TMSIClass.GetMemberObj(membername, input);
+                case 0x60:
+                    return id_S_TMSIClass.GetMemberObj(membername, input);
 
-                    case 0x61:
-                        return id_cdma2000OneXRANDClass.GetMemberObj(membername, input);
+                case 0x61:
+                    return id_cdma2000OneXRANDClass.GetMemberObj(membername, input);
 
-                    case 0x62:
-                        return id_RequestTypeClass.GetMemberObj(membername, input);
+                case 0x62:
+                    return id_RequestTypeClass.GetMemberObj(membername, input);
 
-                    case 0x63:
-                        return id_UE_S1AP_IDsClass.GetMemberObj(membername, input);
+                case 0x63:
+                    return id_UE_S1AP_IDsClass.GetMemberObj(membername, input);
 
-                    case 100:
-                        return id_EUTRAN_CGIClass.GetMemberObj(membername, input);
+                case 100:
+                    return id_EUTRAN_CGIClass.GetMemberObj(membername, input);
 
-                    case 0x65:
-                        return id_OverloadResponseClass.GetMemberObj(membername, input);
+                case 0x65:
+                    return id_OverloadResponseClass.GetMemberObj(membername, input);
 
-                    case 0x66:
-                        return id_cdma2000OneXSRVCCInfoClass.GetMemberObj(membername, input);
+                case 0x66:
+                    return id_cdma2000OneXSRVCCInfoClass.GetMemberObj(membername, input);
 
-                    case 0x68:
-                        return id_Source_ToTarget_TransparentContainerClass.GetMemberObj(membername, input);
+                case 0x68:
+                    return id_Source_ToTarget_TransparentContainerClass.GetMemberObj(membername, input);
 
-                    case 0x69:
-                        return id_ServedGUMMEIsClass.GetMemberObj(membername, input);
+                case 0x69:
+                    return id_ServedGUMMEIsClass.GetMemberObj(membername, input);
 
-                    case 0x6a:
-                        return id_SubscriberProfileIDforRFPClass.GetMemberObj(membername, input);
+                case 0x6a:
+                    return id_SubscriberProfileIDforRFPClass.GetMemberObj(membername, input);
 
-                    case 0x6b:
-                        return id_UESecurityCapabilitiesClass.GetMemberObj(membername, input);
+                case 0x6b:
+                    return id_UESecurityCapabilitiesClass.GetMemberObj(membername, input);
 
-                    case 0x6c:
-                        return id_CSFallbackIndicatorClass.GetMemberObj(membername, input);
+                case 0x6c:
+                    return id_CSFallbackIndicatorClass.GetMemberObj(membername, input);
 
-                    case 0x6d:
-                        return id_CNDomainClass.GetMemberObj(membername, input);
+                case 0x6d:
+                    return id_CNDomainClass.GetMemberObj(membername, input);
 
-                    case 110:
-                        return id_E_RABReleasedListClass.GetMemberObj(membername, input);
+                case 110:
+                    return id_E_RABReleasedListClass.GetMemberObj(membername, input);
 
-                    case 0x6f:
-                        return id_MessageIdentifierClass.GetMemberObj(membername, input);
+                case 0x6f:
+                    return id_MessageIdentifierClass.GetMemberObj(membername, input);
 
-                    case 0x70:
-                        return id_SerialNumberClass.GetMemberObj(membername, input);
+                case 0x70:
+                    return id_SerialNumberClass.GetMemberObj(membername, input);
 
-                    case 0x71:
-                        return id_WarningAreaListClass.GetMemberObj(membername, input);
+                case 0x71:
+                    return id_WarningAreaListClass.GetMemberObj(membername, input);
 
-                    case 0x72:
-                        return id_RepetitionPeriodClass.GetMemberObj(membername, input);
+                case 0x72:
+                    return id_RepetitionPeriodClass.GetMemberObj(membername, input);
 
-                    case 0x73:
-                        return id_NumberofBroadcastRequestClass.GetMemberObj(membername, input);
+                case 0x73:
+                    return id_NumberofBroadcastRequestClass.GetMemberObj(membername, input);
 
-                    case 0x74:
-                        return id_WarningTypeClass.GetMemberObj(membername, input);
+                case 0x74:
+                    return id_WarningTypeClass.GetMemberObj(membername, input);
 
-                    case 0x75:
-                        return id_WarningSecurityInfoClass.GetMemberObj(membername, input);
+                case 0x75:
+                    return id_WarningSecurityInfoClass.GetMemberObj(membername, input);
 
-                    case 0x76:
-                        return id_DataCodingSchemeClass.GetMemberObj(membername, input);
+                case 0x76:
+                    return id_DataCodingSchemeClass.GetMemberObj(membername, input);
 
-                    case 0x77:
-                        return id_WarningMessageContentsClass.GetMemberObj(membername, input);
+                case 0x77:
+                    return id_WarningMessageContentsClass.GetMemberObj(membername, input);
 
-                    case 120:
-                        return id_BroadcastCompletedAreaListClass.GetMemberObj(membername, input);
+                case 120:
+                    return id_BroadcastCompletedAreaListClass.GetMemberObj(membername, input);
 
-                    case 0x79:
-                        return id_Inter_SystemInformationTransferTypeEDTClass.GetMemberObj(membername, input);
+                case 0x79:
+                    return id_Inter_SystemInformationTransferTypeEDTClass.GetMemberObj(membername, input);
 
-                    case 0x7a:
-                        return id_Inter_SystemInformationTransferTypeMDTClass.GetMemberObj(membername, input);
+                case 0x7a:
+                    return id_Inter_SystemInformationTransferTypeMDTClass.GetMemberObj(membername, input);
 
-                    case 0x7b:
-                        return id_Target_ToSource_TransparentContainerClass.GetMemberObj(membername, input);
+                case 0x7b:
+                    return id_Target_ToSource_TransparentContainerClass.GetMemberObj(membername, input);
 
-                    case 0x7c:
-                        return id_SRVCCOperationPossibleClass.GetMemberObj(membername, input);
+                case 0x7c:
+                    return id_SRVCCOperationPossibleClass.GetMemberObj(membername, input);
 
-                    case 0x7d:
-                        return id_SRVCCHOIndicationClass.GetMemberObj(membername, input);
+                case 0x7d:
+                    return id_SRVCCHOIndicationClass.GetMemberObj(membername, input);
 
-                    case 0x7f:
-                        return id_CSG_IdClass.GetMemberObj(membername, input);
+                case 0x7f:
+                    return id_CSG_IdClass.GetMemberObj(membername, input);
 
-                    case 0x80:
-                        return id_CSG_IdListClass.GetMemberObj(membername, input);
+                case 0x80:
+                    return id_CSG_IdListClass.GetMemberObj(membername, input);
 
-                    case 0x81:
-                        return id_SONConfigurationTransferECTClass.GetMemberObj(membername, input);
+                case 0x81:
+                    return id_SONConfigurationTransferECTClass.GetMemberObj(membername, input);
 
-                    case 130:
-                        return id_SONConfigurationTransferMCTClass.GetMemberObj(membername, input);
+                case 130:
+                    return id_SONConfigurationTransferMCTClass.GetMemberObj(membername, input);
 
-                    case 0x83:
-                        return id_TraceCollectionEntityIPAddressClass.GetMemberObj(membername, input);
+                case 0x83:
+                    return id_TraceCollectionEntityIPAddressClass.GetMemberObj(membername, input);
 
-                    case 0x84:
-                        return id_MSClassmark2Class.GetMemberObj(membername, input);
+                case 0x84:
+                    return id_MSClassmark2Class.GetMemberObj(membername, input);
 
-                    case 0x85:
-                        return id_MSClassmark3Class.GetMemberObj(membername, input);
+                case 0x85:
+                    return id_MSClassmark3Class.GetMemberObj(membername, input);
 
-                    case 0x86:
-                        return id_RRC_Establishment_CauseClass.GetMemberObj(membername, input);
+                case 0x86:
+                    return id_RRC_Establishment_CauseClass.GetMemberObj(membername, input);
 
-                    case 0x87:
-                        return id_NASSecurityParametersfromE_UTRANClass.GetMemberObj(membername, input);
+                case 0x87:
+                    return id_NASSecurityParametersfromE_UTRANClass.GetMemberObj(membername, input);
 
-                    case 0x88:
-                        return id_NASSecurityParameterstoE_UTRANClass.GetMemberObj(membername, input);
+                case 0x88:
+                    return id_NASSecurityParameterstoE_UTRANClass.GetMemberObj(membername, input);
 
-                    case 0x89:
-                        return id_DefaultPagingDRXClass.GetMemberObj(membername, input);
+                case 0x89:
+                    return id_DefaultPagingDRXClass.GetMemberObj(membername, input);
 
-                    case 0x8a:
-                        return id_Source_ToTarget_TransparentContainer_SecondaryClass.GetMemberObj(membername, input);
+                case 0x8a:
+                    return id_Source_ToTarget_TransparentContainer_SecondaryClass.GetMemberObj(membername, input);
 
-                    case 0x8b:
-                        return id_Target_ToSource_TransparentContainer_SecondaryClass.GetMemberObj(membername, input);
+                case 0x8b:
+                    return id_Target_ToSource_TransparentContainer_SecondaryClass.GetMemberObj(membername, input);
 
-                    case 140:
-                        return id_EUTRANRoundTripDelayEstimationInfoClass.GetMemberObj(membername, input);
+                case 140:
+                    return id_EUTRANRoundTripDelayEstimationInfoClass.GetMemberObj(membername, input);
 
-                    case 0x8d:
-                        return id_BroadcastCancelledAreaListClass.GetMemberObj(membername, input);
+                case 0x8d:
+                    return id_BroadcastCancelledAreaListClass.GetMemberObj(membername, input);
 
-                    case 0x8e:
-                        return id_ConcurrentWarningMessageIndicatorClass.GetMemberObj(membername, input);
+                case 0x8e:
+                    return id_ConcurrentWarningMessageIndicatorClass.GetMemberObj(membername, input);
 
-                    case 0x90:
-                        return id_ExtendedRepetitionPeriodClass.GetMemberObj(membername, input);
+                case 0x90:
+                    return id_ExtendedRepetitionPeriodClass.GetMemberObj(membername, input);
 
-                    case 0x91:
-                        return id_CellAccessModeClass.GetMemberObj(membername, input);
+                case 0x91:
+                    return id_CellAccessModeClass.GetMemberObj(membername, input);
 
-                    case 0x92:
-                        return id_CSGMembershipStatusClass.GetMemberObj(membername, input);
+                case 0x92:
+                    return id_CSGMembershipStatusClass.GetMemberObj(membername, input);
 
-                    case 0x93:
-                        return id_LPPa_PDUClass.GetMemberObj(membername, input);
+                case 0x93:
+                    return id_LPPa_PDUClass.GetMemberObj(membername, input);
 
-                    case 0x94:
-                        return id_Routing_IDClass.GetMemberObj(membername, input);
+                case 0x94:
+                    return id_Routing_IDClass.GetMemberObj(membername, input);
 
-                    case 150:
-                        return id_PS_ServiceNotAvailableClass.GetMemberObj(membername, input);
+                case 150:
+                    return id_PS_ServiceNotAvailableClass.GetMemberObj(membername, input);
 
-                    case 0x9f:
-                        return id_RegisteredLAIClass.GetMemberObj(membername, input);
-                }
+                case 0x9f:
+                    return id_RegisteredLAIClass.GetMemberObj(membername, input);
             }
             return null;
         }
@@ -405,7 +403,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -423,7 +421,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -441,7 +439,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -459,7 +457,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -477,7 +475,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -496,7 +494,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -515,7 +513,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -533,7 +531,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -551,7 +549,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -569,7 +567,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -588,7 +586,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -606,7 +604,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -625,7 +623,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -644,7 +642,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -663,7 +661,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -681,7 +679,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -700,7 +698,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -718,7 +716,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -729,12 +727,12 @@ namespace TraceParser.S1ap
             public static List<CSG_IdList_Item> Value(BitArrayInputStream input)
             {
                 input.skipUnreadedBits();
-                List<CSG_IdList_Item> list = new List<CSG_IdList_Item>();
+                var list = new List<CSG_IdList_Item>();
                 const int nBits = 8;
-                int num2 = input.readBits(nBits) + 1;
-                for (int i = 0; i < num2; i++)
+                var num2 = input.readBits(nBits) + 1;
+                for (var i = 0; i < num2; i++)
                 {
-                    CSG_IdList_Item item = CSG_IdList_Item.PerDecoder.Instance.Decode(input);
+                    var item = CSG_IdList_Item.PerDecoder.Instance.Decode(input);
                     list.Add(item);
                 }
                 return list;
@@ -745,7 +743,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -764,7 +762,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -782,7 +780,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -792,7 +790,7 @@ namespace TraceParser.S1ap
 
             public static PagingDRX Value(BitArrayInputStream input)
             {
-                int nBits = (input.readBit() == 0) ? 2 : 2;
+                var nBits = (input.readBit() == 0) ? 2 : 2;
                 return (PagingDRX)input.readBits(nBits);
             }
         }
@@ -801,7 +799,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -820,7 +818,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -838,7 +836,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -849,12 +847,12 @@ namespace TraceParser.S1ap
             public static List<ProtocolIE_Field> Value(BitArrayInputStream input)
             {
                 input.skipUnreadedBits();
-                List<ProtocolIE_Field> list = new List<ProtocolIE_Field>();
+                var list = new List<ProtocolIE_Field>();
                 const int nBits = 0;
-                int num2 = input.readBits(nBits);
-                for (int i = 0; i < num2; i++)
+                var num2 = input.readBits(nBits);
+                for (var i = 0; i < num2; i++)
                 {
-                    ProtocolIE_Field item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
+                    var item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
                     list.Add(item);
                 }
                 return list;
@@ -865,7 +863,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -883,7 +881,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -894,12 +892,12 @@ namespace TraceParser.S1ap
             public static List<ProtocolIE_Field> Value(BitArrayInputStream input)
             {
                 input.skipUnreadedBits();
-                List<ProtocolIE_Field> list = new List<ProtocolIE_Field>();
+                var list = new List<ProtocolIE_Field>();
                 const int nBits = 8;
-                int num2 = input.readBits(nBits) + 1;
-                for (int i = 0; i < num2; i++)
+                var num2 = input.readBits(nBits) + 1;
+                for (var i = 0; i < num2; i++)
                 {
-                    ProtocolIE_Field item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
+                    var item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
                     list.Add(item);
                 }
                 return list;
@@ -910,7 +908,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -921,12 +919,12 @@ namespace TraceParser.S1ap
             public static List<ProtocolIE_Field> Value(BitArrayInputStream input)
             {
                 input.skipUnreadedBits();
-                List<ProtocolIE_Field> list = new List<ProtocolIE_Field>();
+                var list = new List<ProtocolIE_Field>();
                 const int nBits = 8;
-                int num2 = input.readBits(nBits) + 1;
-                for (int i = 0; i < num2; i++)
+                var num2 = input.readBits(nBits) + 1;
+                for (var i = 0; i < num2; i++)
                 {
-                    ProtocolIE_Field item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
+                    var item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
                     list.Add(item);
                 }
                 return list;
@@ -937,7 +935,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -955,7 +953,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -966,12 +964,12 @@ namespace TraceParser.S1ap
             public static List<ProtocolIE_Field> Value(BitArrayInputStream input)
             {
                 input.skipUnreadedBits();
-                List<ProtocolIE_Field> list = new List<ProtocolIE_Field>();
-                int nBits = 8;
-                int num2 = input.readBits(nBits) + 1;
-                for (int i = 0; i < num2; i++)
+                var list = new List<ProtocolIE_Field>();
+                var nBits = 8;
+                var num2 = input.readBits(nBits) + 1;
+                for (var i = 0; i < num2; i++)
                 {
-                    ProtocolIE_Field item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
+                    var item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
                     list.Add(item);
                 }
                 return list;
@@ -982,7 +980,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -993,12 +991,12 @@ namespace TraceParser.S1ap
             public static List<ProtocolIE_Field> Value(BitArrayInputStream input)
             {
                 input.skipUnreadedBits();
-                List<ProtocolIE_Field> list = new List<ProtocolIE_Field>();
-                int nBits = 8;
-                int num2 = input.readBits(nBits) + 1;
-                for (int i = 0; i < num2; i++)
+                var list = new List<ProtocolIE_Field>();
+                var nBits = 8;
+                var num2 = input.readBits(nBits) + 1;
+                for (var i = 0; i < num2; i++)
                 {
-                    ProtocolIE_Field item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
+                    var item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
                     list.Add(item);
                 }
                 return list;
@@ -1009,7 +1007,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1020,12 +1018,12 @@ namespace TraceParser.S1ap
             public static List<ProtocolIE_Field> Value(BitArrayInputStream input)
             {
                 input.skipUnreadedBits();
-                List<ProtocolIE_Field> list = new List<ProtocolIE_Field>();
-                int nBits = 0;
-                int num2 = input.readBits(nBits);
-                for (int i = 0; i < num2; i++)
+                var list = new List<ProtocolIE_Field>();
+                var nBits = 0;
+                var num2 = input.readBits(nBits);
+                for (var i = 0; i < num2; i++)
                 {
-                    ProtocolIE_Field item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
+                    var item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
                     list.Add(item);
                 }
                 return list;
@@ -1036,7 +1034,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1054,7 +1052,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1072,7 +1070,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1090,7 +1088,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1101,12 +1099,12 @@ namespace TraceParser.S1ap
             public static List<ProtocolIE_Field> Value(BitArrayInputStream input)
             {
                 input.skipUnreadedBits();
-                List<ProtocolIE_Field> list = new List<ProtocolIE_Field>();
-                int nBits = 8;
-                int num2 = input.readBits(nBits) + 1;
-                for (int i = 0; i < num2; i++)
+                var list = new List<ProtocolIE_Field>();
+                var nBits = 8;
+                var num2 = input.readBits(nBits) + 1;
+                for (var i = 0; i < num2; i++)
                 {
-                    ProtocolIE_Field item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
+                    var item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
                     list.Add(item);
                 }
                 return list;
@@ -1117,7 +1115,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1128,12 +1126,12 @@ namespace TraceParser.S1ap
             public static List<ProtocolIE_Field> Value(BitArrayInputStream input)
             {
                 input.skipUnreadedBits();
-                List<ProtocolIE_Field> list = new List<ProtocolIE_Field>();
-                int nBits = 8;
-                int num2 = input.readBits(nBits) + 1;
-                for (int i = 0; i < num2; i++)
+                var list = new List<ProtocolIE_Field>();
+                var nBits = 8;
+                var num2 = input.readBits(nBits) + 1;
+                for (var i = 0; i < num2; i++)
                 {
-                    ProtocolIE_Field item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
+                    var item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
                     list.Add(item);
                 }
                 return list;
@@ -1144,7 +1142,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1162,7 +1160,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1173,12 +1171,12 @@ namespace TraceParser.S1ap
             public static List<ProtocolIE_Field> Value(BitArrayInputStream input)
             {
                 input.skipUnreadedBits();
-                List<ProtocolIE_Field> list = new List<ProtocolIE_Field>();
-                int nBits = 8;
-                int num2 = input.readBits(nBits) + 1;
-                for (int i = 0; i < num2; i++)
+                var list = new List<ProtocolIE_Field>();
+                var nBits = 8;
+                var num2 = input.readBits(nBits) + 1;
+                for (var i = 0; i < num2; i++)
                 {
-                    ProtocolIE_Field item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
+                    var item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
                     list.Add(item);
                 }
                 return list;
@@ -1189,7 +1187,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1207,7 +1205,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1225,7 +1223,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1236,12 +1234,12 @@ namespace TraceParser.S1ap
             public static List<ProtocolIE_Field> Value(BitArrayInputStream input)
             {
                 input.skipUnreadedBits();
-                List<ProtocolIE_Field> list = new List<ProtocolIE_Field>();
-                int nBits = 8;
-                int num2 = input.readBits(nBits) + 1;
-                for (int i = 0; i < num2; i++)
+                var list = new List<ProtocolIE_Field>();
+                var nBits = 8;
+                var num2 = input.readBits(nBits) + 1;
+                for (var i = 0; i < num2; i++)
                 {
-                    ProtocolIE_Field item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
+                    var item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
                     list.Add(item);
                 }
                 return list;
@@ -1252,7 +1250,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1263,12 +1261,12 @@ namespace TraceParser.S1ap
             public static List<ProtocolIE_Field> Value(BitArrayInputStream input)
             {
                 input.skipUnreadedBits();
-                List<ProtocolIE_Field> list = new List<ProtocolIE_Field>();
-                int nBits = 8;
-                int num2 = input.readBits(nBits) + 1;
-                for (int i = 0; i < num2; i++)
+                var list = new List<ProtocolIE_Field>();
+                var nBits = 8;
+                var num2 = input.readBits(nBits) + 1;
+                for (var i = 0; i < num2; i++)
                 {
-                    ProtocolIE_Field item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
+                    var item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
                     list.Add(item);
                 }
                 return list;
@@ -1279,7 +1277,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1290,12 +1288,12 @@ namespace TraceParser.S1ap
             public static List<ProtocolIE_Field> Value(BitArrayInputStream input)
             {
                 input.skipUnreadedBits();
-                List<ProtocolIE_Field> list = new List<ProtocolIE_Field>();
-                int nBits = 0;
-                int num2 = input.readBits(nBits);
-                for (int i = 0; i < num2; i++)
+                var list = new List<ProtocolIE_Field>();
+                var nBits = 0;
+                var num2 = input.readBits(nBits);
+                for (var i = 0; i < num2; i++)
                 {
-                    ProtocolIE_Field item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
+                    var item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
                     list.Add(item);
                 }
                 return list;
@@ -1306,7 +1304,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1324,7 +1322,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1335,12 +1333,12 @@ namespace TraceParser.S1ap
             public static List<ProtocolIE_Field> Value(BitArrayInputStream input)
             {
                 input.skipUnreadedBits();
-                List<ProtocolIE_Field> list = new List<ProtocolIE_Field>();
-                int nBits = 8;
-                int num2 = input.readBits(nBits) + 1;
-                for (int i = 0; i < num2; i++)
+                var list = new List<ProtocolIE_Field>();
+                var nBits = 8;
+                var num2 = input.readBits(nBits) + 1;
+                for (var i = 0; i < num2; i++)
                 {
-                    ProtocolIE_Field item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
+                    var item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
                     list.Add(item);
                 }
                 return list;
@@ -1351,7 +1349,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1362,12 +1360,12 @@ namespace TraceParser.S1ap
             public static List<ProtocolIE_Field> Value(BitArrayInputStream input)
             {
                 input.skipUnreadedBits();
-                List<ProtocolIE_Field> list = new List<ProtocolIE_Field>();
-                int nBits = 8;
-                int num2 = input.readBits(nBits) + 1;
-                for (int i = 0; i < num2; i++)
+                var list = new List<ProtocolIE_Field>();
+                var nBits = 8;
+                var num2 = input.readBits(nBits) + 1;
+                for (var i = 0; i < num2; i++)
                 {
-                    ProtocolIE_Field item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
+                    var item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
                     list.Add(item);
                 }
                 return list;
@@ -1378,7 +1376,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1396,7 +1394,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1414,7 +1412,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1432,7 +1430,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1443,12 +1441,12 @@ namespace TraceParser.S1ap
             public static List<ProtocolIE_Field> Value(BitArrayInputStream input)
             {
                 input.skipUnreadedBits();
-                List<ProtocolIE_Field> list = new List<ProtocolIE_Field>();
-                int nBits = 8;
-                int num2 = input.readBits(nBits) + 1;
-                for (int i = 0; i < num2; i++)
+                var list = new List<ProtocolIE_Field>();
+                var nBits = 8;
+                var num2 = input.readBits(nBits) + 1;
+                for (var i = 0; i < num2; i++)
                 {
-                    ProtocolIE_Field item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
+                    var item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
                     list.Add(item);
                 }
                 return list;
@@ -1459,7 +1457,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1470,12 +1468,12 @@ namespace TraceParser.S1ap
             public static List<ProtocolIE_Field> Value(BitArrayInputStream input)
             {
                 input.skipUnreadedBits();
-                List<ProtocolIE_Field> list = new List<ProtocolIE_Field>();
-                int nBits = 8;
-                int num2 = input.readBits(nBits) + 1;
-                for (int i = 0; i < num2; i++)
+                var list = new List<ProtocolIE_Field>();
+                var nBits = 8;
+                var num2 = input.readBits(nBits) + 1;
+                for (var i = 0; i < num2; i++)
                 {
-                    ProtocolIE_Field item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
+                    var item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
                     list.Add(item);
                 }
                 return list;
@@ -1486,7 +1484,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1497,12 +1495,12 @@ namespace TraceParser.S1ap
             public static List<ProtocolIE_Field> Value(BitArrayInputStream input)
             {
                 input.skipUnreadedBits();
-                List<ProtocolIE_Field> list = new List<ProtocolIE_Field>();
-                int nBits = 0;
-                int num2 = input.readBits(nBits);
-                for (int i = 0; i < num2; i++)
+                var list = new List<ProtocolIE_Field>();
+                var nBits = 0;
+                var num2 = input.readBits(nBits);
+                for (var i = 0; i < num2; i++)
                 {
-                    ProtocolIE_Field item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
+                    var item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
                     list.Add(item);
                 }
                 return list;
@@ -1513,7 +1511,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1531,7 +1529,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1542,12 +1540,12 @@ namespace TraceParser.S1ap
             public static List<ProtocolIE_Field> Value(BitArrayInputStream input)
             {
                 input.skipUnreadedBits();
-                List<ProtocolIE_Field> list = new List<ProtocolIE_Field>();
-                int nBits = 0;
-                int num2 = input.readBits(nBits);
-                for (int i = 0; i < num2; i++)
+                var list = new List<ProtocolIE_Field>();
+                var nBits = 0;
+                var num2 = input.readBits(nBits);
+                for (var i = 0; i < num2; i++)
                 {
-                    ProtocolIE_Field item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
+                    var item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
                     list.Add(item);
                 }
                 return list;
@@ -1558,7 +1556,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1576,7 +1574,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1587,12 +1585,12 @@ namespace TraceParser.S1ap
             public static List<ProtocolIE_Field> Value(BitArrayInputStream input)
             {
                 input.skipUnreadedBits();
-                List<ProtocolIE_Field> list = new List<ProtocolIE_Field>();
-                int nBits = 0;
-                int num2 = input.readBits(nBits);
-                for (int i = 0; i < num2; i++)
+                var list = new List<ProtocolIE_Field>();
+                var nBits = 0;
+                var num2 = input.readBits(nBits);
+                for (var i = 0; i < num2; i++)
                 {
-                    ProtocolIE_Field item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
+                    var item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
                     list.Add(item);
                 }
                 return list;
@@ -1603,7 +1601,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1614,12 +1612,12 @@ namespace TraceParser.S1ap
             public static List<ProtocolIE_Field> Value(BitArrayInputStream input)
             {
                 input.skipUnreadedBits();
-                List<ProtocolIE_Field> list = new List<ProtocolIE_Field>();
-                int nBits = 8;
-                int num2 = input.readBits(nBits) + 1;
-                for (int i = 0; i < num2; i++)
+                var list = new List<ProtocolIE_Field>();
+                var nBits = 8;
+                var num2 = input.readBits(nBits) + 1;
+                for (var i = 0; i < num2; i++)
                 {
-                    ProtocolIE_Field item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
+                    var item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
                     list.Add(item);
                 }
                 return list;
@@ -1630,7 +1628,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1648,7 +1646,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1666,7 +1664,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1684,7 +1682,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1702,7 +1700,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1720,7 +1718,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1738,7 +1736,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1756,7 +1754,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1774,7 +1772,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1792,7 +1790,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1810,7 +1808,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1820,7 +1818,7 @@ namespace TraceParser.S1ap
 
             public static HandoverType Value(BitArrayInputStream input)
             {
-                int nBits = (input.readBit() == 0) ? 3 : 3;
+                var nBits = (input.readBit() == 0) ? 3 : 3;
                 return (HandoverType)input.readBits(nBits);
             }
         }
@@ -1829,7 +1827,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1847,7 +1845,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1865,7 +1863,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1883,7 +1881,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1901,7 +1899,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1919,7 +1917,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1937,7 +1935,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1955,7 +1953,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1973,7 +1971,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -1991,7 +1989,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2009,7 +2007,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2027,7 +2025,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2045,7 +2043,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2063,7 +2061,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2073,7 +2071,7 @@ namespace TraceParser.S1ap
 
             public static PagingDRX Value(BitArrayInputStream input)
             {
-                int nBits = (input.readBit() == 0) ? 2 : 2;
+                var nBits = (input.readBit() == 0) ? 2 : 2;
                 return (PagingDRX)input.readBits(nBits);
             }
         }
@@ -2082,7 +2080,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2092,7 +2090,7 @@ namespace TraceParser.S1ap
 
             public static PS_ServiceNotAvailable Value(BitArrayInputStream input)
             {
-                int nBits = 1;
+                var nBits = 1;
                 return (PS_ServiceNotAvailable)input.readBits(nBits);
             }
         }
@@ -2101,7 +2099,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2111,7 +2109,7 @@ namespace TraceParser.S1ap
 
             public static LAI Value(BitArrayInputStream input)
             {
-                return LAI.PerDecoder.Instance.Decode(input);
+                return LAI.PerDecoder.Decode(input);
             }
         }
 
@@ -2119,7 +2117,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2137,7 +2135,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2155,7 +2153,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2173,7 +2171,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2191,7 +2189,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2209,7 +2207,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2219,7 +2217,7 @@ namespace TraceParser.S1ap
 
             public static RRC_Establishment_Cause Value(BitArrayInputStream input)
             {
-                int nBits = (input.readBit() == 0) ? 3 : 3;
+                var nBits = (input.readBit() == 0) ? 3 : 3;
                 return (RRC_Establishment_Cause)input.readBits(nBits);
             }
         }
@@ -2228,7 +2226,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2246,7 +2244,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2264,7 +2262,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2282,7 +2280,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2300,7 +2298,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2310,12 +2308,12 @@ namespace TraceParser.S1ap
 
             public static List<ServedGUMMEIsItem> Value(BitArrayInputStream input)
             {
-                List<ServedGUMMEIsItem> list = new List<ServedGUMMEIsItem>();
-                int nBits = 3;
-                int num2 = input.readBits(nBits) + 1;
-                for (int i = 0; i < num2; i++)
+                var list = new List<ServedGUMMEIsItem>();
+                var nBits = 3;
+                var num2 = input.readBits(nBits) + 1;
+                for (var i = 0; i < num2; i++)
                 {
-                    ServedGUMMEIsItem item = ServedGUMMEIsItem.PerDecoder.Instance.Decode(input);
+                    var item = ServedGUMMEIsItem.PerDecoder.Instance.Decode(input);
                     list.Add(item);
                 }
                 return list;
@@ -2326,7 +2324,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2344,7 +2342,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2362,7 +2360,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2380,7 +2378,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2398,7 +2396,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2416,7 +2414,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2426,7 +2424,7 @@ namespace TraceParser.S1ap
 
             public static SRVCCHOIndication Value(BitArrayInputStream input)
             {
-                int nBits = 1;
+                var nBits = 1;
                 return (SRVCCHOIndication)input.readBits(nBits);
             }
         }
@@ -2435,7 +2433,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2445,7 +2443,7 @@ namespace TraceParser.S1ap
 
             public static SRVCCOperationPossible Value(BitArrayInputStream input)
             {
-                int nBits = 1;
+                var nBits = 1;
                 return (SRVCCOperationPossible)input.readBits(nBits);
             }
         }
@@ -2454,7 +2452,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2472,7 +2470,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2483,12 +2481,12 @@ namespace TraceParser.S1ap
             public static List<SupportedTAs_Item> Value(BitArrayInputStream input)
             {
                 input.skipUnreadedBits();
-                List<SupportedTAs_Item> list = new List<SupportedTAs_Item>();
-                int nBits = 8;
-                int num2 = input.readBits(nBits) + 1;
-                for (int i = 0; i < num2; i++)
+                var list = new List<SupportedTAs_Item>();
+                var nBits = 8;
+                var num2 = input.readBits(nBits) + 1;
+                for (var i = 0; i < num2; i++)
                 {
-                    SupportedTAs_Item item = SupportedTAs_Item.PerDecoder.Instance.Decode(input);
+                    var item = SupportedTAs_Item.PerDecoder.Instance.Decode(input);
                     list.Add(item);
                 }
                 return list;
@@ -2499,7 +2497,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2517,7 +2515,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2535,7 +2533,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2546,12 +2544,12 @@ namespace TraceParser.S1ap
             public static List<ProtocolIE_Field> Value(BitArrayInputStream input)
             {
                 input.skipUnreadedBits();
-                List<ProtocolIE_Field> list = new List<ProtocolIE_Field>();
-                int nBits = 8;
-                int num2 = input.readBits(nBits) + 1;
-                for (int i = 0; i < num2; i++)
+                var list = new List<ProtocolIE_Field>();
+                var nBits = 8;
+                var num2 = input.readBits(nBits) + 1;
+                for (var i = 0; i < num2; i++)
                 {
-                    ProtocolIE_Field item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
+                    var item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
                     list.Add(item);
                 }
                 return list;
@@ -2562,7 +2560,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2580,7 +2578,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2598,7 +2596,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2616,7 +2614,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2626,7 +2624,7 @@ namespace TraceParser.S1ap
 
             public static TimeToWait Value(BitArrayInputStream input)
             {
-                int nBits = (input.readBit() == 0) ? 3 : 3;
+                var nBits = (input.readBit() == 0) ? 3 : 3;
                 return (TimeToWait)input.readBits(nBits);
             }
         }
@@ -2635,7 +2633,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2653,7 +2651,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2671,7 +2669,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2689,7 +2687,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2700,12 +2698,12 @@ namespace TraceParser.S1ap
             public static List<ProtocolIE_Field> Value(BitArrayInputStream input)
             {
                 input.skipUnreadedBits();
-                List<ProtocolIE_Field> list = new List<ProtocolIE_Field>();
+                var list = new List<ProtocolIE_Field>();
                 const int nBits = 8;
-                int num2 = input.readBits(nBits) + 1;
-                for (int i = 0; i < num2; i++)
+                var num2 = input.readBits(nBits) + 1;
+                for (var i = 0; i < num2; i++)
                 {
-                    ProtocolIE_Field item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
+                    var item = ProtocolIE_Field.PerDecoder.Instance.Decode(input);
                     list.Add(item);
                 }
                 return list;
@@ -2716,7 +2714,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2734,7 +2732,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2752,7 +2750,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2770,7 +2768,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2788,7 +2786,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2806,7 +2804,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2824,7 +2822,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2842,7 +2840,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2860,7 +2858,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);
@@ -2878,7 +2876,7 @@ namespace TraceParser.S1ap
         {
             public static object GetMemberObj(string member, BitArrayInputStream input)
             {
-                string str = member;
+                var str = member;
                 if ((str != null) && (str == "Value"))
                 {
                     return Value(input);

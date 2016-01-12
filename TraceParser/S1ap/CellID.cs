@@ -137,7 +137,7 @@ namespace TraceParser.S1ap
                 GERAN_Cell_ID l_id = new GERAN_Cell_ID();
                 l_id.InitDefaults();
                 BitMaskStream stream = (input.readBit() != 0) ? new BitMaskStream(input, 1) : new BitMaskStream(input, 1);
-                l_id.lAI = LAI.PerDecoder.Instance.Decode(input);
+                l_id.lAI = LAI.PerDecoder.Decode(input);
                 input.skipUnreadedBits();
                 l_id.rAC = input.readOctetString(1);
                 input.skipUnreadedBits();
