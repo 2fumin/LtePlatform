@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Lte.Domain.Common;
+using TraceParser.Common;
 
 namespace TraceParser.X2ap
 {
@@ -876,9 +877,9 @@ namespace TraceParser.X2ap
                 return null;
             }
 
-            public static GlobalENB_ID Value(BitArrayInputStream input)
+            public static Global_ENB_ID Value(BitArrayInputStream input)
             {
-                return GlobalENB_ID.PerDecoder.Instance.Decode(input);
+                return Global_ENB_ID.PerDecoder.Instance.Decode(input);
             }
         }
 

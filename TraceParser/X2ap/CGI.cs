@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Lte.Domain.Common;
+using TraceParser.Common;
 
 namespace TraceParser.X2ap
 {
@@ -123,41 +124,6 @@ namespace TraceParser.X2ap
     }
 
     [Serializable]
-    public class ENB_ID
-    {
-        public void InitDefaults()
-        {
-        }
-
-        public string home_eNB_ID { get; set; }
-
-        public string macro_eNB_ID { get; set; }
-
-        public class PerDecoder
-        {
-            public static readonly PerDecoder Instance = new PerDecoder();
-
-            public ENB_ID Decode(BitArrayInputStream input)
-            {
-                ENB_ID enb_id = new ENB_ID();
-                enb_id.InitDefaults();
-                input.readBit();
-                switch (input.readBits(1))
-                {
-                    case 0:
-                        enb_id.macro_eNB_ID = input.readBitString(20);
-                        return enb_id;
-
-                    case 1:
-                        enb_id.home_eNB_ID = input.readBitString(0x1c);
-                        return enb_id;
-                }
-                throw new Exception(GetType().Name + ":NoChoice had been choose");
-            }
-        }
-    }
-
-    [Serializable]
     public class EPLMNs
     {
         public class PerDecoder
@@ -167,48 +133,6 @@ namespace TraceParser.X2ap
             public List<string> Decode(BitArrayInputStream input)
             {
                 return new List<string>();
-            }
-        }
-    }
-
-    [Serializable]
-    public class GlobalENB_ID
-    {
-        public void InitDefaults()
-        {
-        }
-
-        public ENB_ID eNB_ID { get; set; }
-
-        public List<ProtocolExtensionField> iE_Extensions { get; set; }
-
-        public string pLMN_Identity { get; set; }
-
-        public class PerDecoder
-        {
-            public static readonly PerDecoder Instance = new PerDecoder();
-
-            public GlobalENB_ID Decode(BitArrayInputStream input)
-            {
-                GlobalENB_ID lenb_id = new GlobalENB_ID();
-                lenb_id.InitDefaults();
-                BitMaskStream stream = (input.readBit() != 0) ? new BitMaskStream(input, 1) : new BitMaskStream(input, 1);
-                input.skipUnreadedBits();
-                lenb_id.pLMN_Identity = input.readOctetString(3);
-                lenb_id.eNB_ID = ENB_ID.PerDecoder.Instance.Decode(input);
-                if (stream.Read())
-                {
-                    input.skipUnreadedBits();
-                    lenb_id.iE_Extensions = new List<ProtocolExtensionField>();
-                    int nBits = 0x10;
-                    int num5 = input.readBits(nBits) + 1;
-                    for (int i = 0; i < num5; i++)
-                    {
-                        ProtocolExtensionField item = ProtocolExtensionField.PerDecoder.Instance.Decode(input);
-                        lenb_id.iE_Extensions.Add(item);
-                    }
-                }
-                return lenb_id;
             }
         }
     }

@@ -44,10 +44,12 @@
   <ItemGroup>
     <Compile Include="Common\AllTripObject.cs" />
     <Compile Include="Common\CommonTraceParser.cs" />
+    <Compile Include="Common\ENB_ID.cs" />
     <Compile Include="Common\EventItem.cs" />
     <Compile Include="Common\EventRRC.cs" />
     <Compile Include="Common\EventS1.cs" />
     <Compile Include="Common\EventX2.cs" />
+    <Compile Include="Common\Global_ENB_ID.cs" />
     <Compile Include="Common\ITraceMessage.cs" />
     <Compile Include="Common\LAC.cs" />
     <Compile Include="Common\MME_Code.cs" />
