@@ -25,32 +25,49 @@ namespace ZipLib.Zip
         public const int CentralHeaderDigitalSignature = 0x5054b50;
 
         public const int CentralHeaderSignature = 0x2014b50;
+
         [Obsolete("Use CryptoHeaderSize instead")]
         public const int CRYPTO_HEADER_SIZE = 12;
+
         public const int CryptoHeaderSize = 12;
+
         public const int DataDescriptorSignature = 0x8074b50;
+
         public const int DataDescriptorSize = 0x10;
+
         private static int defaultCodePage = Thread.CurrentThread.CurrentCulture.TextInfo.OEMCodePage;
+
         [Obsolete("Use EndOfCentralRecordBaseSize instead")]
         public const int ENDHDR = 0x16;
+
         public const int EndOfCentralDirectorySignature = 0x6054b50;
+
         public const int EndOfCentralRecordBaseSize = 0x16;
+
         [Obsolete("Use EndOfCentralDirectorySignature instead")]
         public const int ENDSIG = 0x6054b50;
+
         [Obsolete("Use DataDescriptorSize instead")]
         public const int EXTHDR = 0x10;
+
         [Obsolete("Use DataDescriptorSignature instead")]
         public const int EXTSIG = 0x8074b50;
+
         public const int LocalHeaderBaseSize = 30;
+
         public const int LocalHeaderSignature = 0x4034b50;
+
         [Obsolete("Use LocalHeaderBaseSize instead")]
         public const int LOCHDR = 30;
         [Obsolete("Use LocalHeaderSignature instead")]
         public const int LOCSIG = 0x4034b50;
         [Obsolete("Use SpanningSignature instead")]
         public const int SPANNINGSIG = 0x8074b50;
+
         public const int SpanningSignature = 0x8074b50;
+
         public const int SpanningTempSignature = 0x30304b50;
+
         [Obsolete("Use SpanningTempSignature instead")]
         public const int SPANTEMPSIG = 0x30304b50;
         public const int VERSION_AES = 0x33;

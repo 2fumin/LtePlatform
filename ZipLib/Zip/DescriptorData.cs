@@ -2,7 +2,7 @@
 {
     public class DescriptorData
     {
-        private long crc;
+        private long _crc;
 
         public long CompressedSize { get; set; }
 
@@ -10,11 +10,11 @@
         {
             get
             {
-                return crc;
+                return _crc;
             }
             set
             {
-                crc = value & 0xffffffffL;
+                _crc = value & 0xffffffffL;
             }
         }
 

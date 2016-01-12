@@ -63,7 +63,7 @@ namespace ZipLib.Zip
 
         public void ReadDataDescriptor(bool zip64, DescriptorData data)
         {
-            if (ReadLeInt() != 0x8074b50)
+            if (ReadLeInt() != ZipConstants.DataDescriptorSignature)
             {
                 throw new ZipException("Data descriptor signature not found");
             }
@@ -124,14 +124,14 @@ namespace ZipLib.Zip
         {
             if (entry == null)
             {
-                throw new ArgumentNullException("entry");
+                throw new ArgumentNullException(nameof(entry));
             }
             int num = 0;
             if ((entry.Flags & 8) == 0)
             {
                 return num;
             }
-            WriteLeInt(0x8074b50);
+            WriteLeInt(ZipConstants.DataDescriptorSignature);
             WriteLeInt((int)entry.Crc);
             num += 8;
             if (entry.LocalHeaderRequiresZip64)
@@ -151,7 +151,7 @@ namespace ZipLib.Zip
             {
                 WriteZip64EndOfCentralDirectory(noOfEntries, sizeEntries, startOfCentralDirectory);
             }
-            WriteLeInt(0x6054b50);
+            WriteLeInt(ZipConstants.EndOfCentralDirectorySignature);
             WriteLeShort(0);
             WriteLeShort(0);
             if (noOfEntries >= 0xffffL)

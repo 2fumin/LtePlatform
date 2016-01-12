@@ -8,7 +8,7 @@ namespace ZipLib.Zip
         Deflate64 = 9,
         Deflated = 8,
         Stored = 0,
-        WinZipAES = 0x63
+        WinZipAes = 0x63
     }
 
     public enum EncryptionAlgorithm
@@ -20,9 +20,9 @@ namespace ZipLib.Zip
         Des = 0x6601,
         None = 0,
         PkzipClassic = 1,
-        RC2 = 0x6602,
-        RC2Corrected = 0x6702,
-        RC4 = 0x6801,
+        Rc2 = 0x6602,
+        Rc2Corrected = 0x6702,
+        Rc4 = 0x6801,
         TripleDes112 = 0x6609,
         TripleDes168 = 0x6603,
         Twofish = 0x6721,
@@ -55,28 +55,28 @@ namespace ZipLib.Zip
         Unused9 = 0x200
     }
 
-    public enum HostSystemID
+    public enum HostSystemId
     {
         AcornRisc = 13,
         AlternateMvs = 15,
         Amiga = 1,
-        AtariST = 5,
-        BeOS = 0x10,
+        AtariSt = 5,
+        BeOs = 0x10,
         Cpm = 9,
         Macintosh = 7,
         Msdos = 0,
-        MVS = 11,
+        Mvs = 11,
         OpenVms = 2,
-        OS2 = 6,
-        OS400 = 0x12,
-        OSX = 0x13,
+        Os2 = 6,
+        Os400 = 0x12,
+        Osx = 0x13,
         Tandem = 0x11,
         Unix = 3,
         Vfat = 14,
-        VMCms = 4,
+        VmCms = 4,
         Vse = 12,
-        WindowsNT = 10,
-        WinZipAES = 0x63,
+        WindowsNt = 10,
+        WinZipAes = 0x63,
         ZSystem = 8
     }
 

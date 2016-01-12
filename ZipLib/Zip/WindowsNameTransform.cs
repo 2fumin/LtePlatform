@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using Lte.Domain.Lz4Net.Core;
 
@@ -149,12 +150,9 @@ namespace ZipLib.Zip
             }
             set
             {
-                for (int i = 0; i < InvalidEntryChars.Length; i++)
+                if (InvalidEntryChars.Any(t => t == value))
                 {
-                    if (InvalidEntryChars[i] == value)
-                    {
-                        throw new ArgumentException("invalid path character");
-                    }
+                    throw new ArgumentException("invalid path character");
                 }
                 if ((value == '\\') || (value == '/'))
                 {

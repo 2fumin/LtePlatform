@@ -12,9 +12,9 @@ namespace ZipLib.Zip
         public byte[] GetData()
         {
             byte[] buffer;
-            using (MemoryStream stream = new MemoryStream())
+            using (var stream = new MemoryStream())
             {
-                using (ZipHelperStream stream2 = new ZipHelperStream(stream))
+                using (var stream2 = new ZipHelperStream(stream))
                 {
                     stream2.IsStreamOwner = false;
                     stream2.WriteLeInt(0);
@@ -31,7 +31,7 @@ namespace ZipLib.Zip
 
         public static bool IsValidValue(DateTime value)
         {
-            bool flag = true;
+            var flag = true;
             try
             {
                 value.ToFileTimeUtc();
@@ -45,24 +45,24 @@ namespace ZipLib.Zip
 
         public void SetData(byte[] data, int index, int count)
         {
-            using (MemoryStream stream = new MemoryStream(data, index, count, false))
+            using (var stream = new MemoryStream(data, index, count, false))
             {
-                using (ZipHelperStream stream2 = new ZipHelperStream(stream))
+                using (var stream2 = new ZipHelperStream(stream))
                 {
                     stream2.ReadLeInt();
                     while (stream2.Position < stream2.Length)
                     {
-                        int num = stream2.ReadLeShort();
-                        int num2 = stream2.ReadLeShort();
+                        var num = stream2.ReadLeShort();
+                        var num2 = stream2.ReadLeShort();
                         if (num == 1)
                         {
                             if (num2 >= 0x18)
                             {
-                                long fileTime = stream2.ReadLeLong();
+                                var fileTime = stream2.ReadLeLong();
                                 _lastModificationTime = DateTime.FromFileTime(fileTime);
-                                long num4 = stream2.ReadLeLong();
+                                var num4 = stream2.ReadLeLong();
                                 _lastAccessTime = DateTime.FromFileTime(num4);
-                                long num5 = stream2.ReadLeLong();
+                                var num5 = stream2.ReadLeLong();
                                 _createTime = DateTime.FromFileTime(num5);
                             }
                             return;
@@ -83,7 +83,7 @@ namespace ZipLib.Zip
             {
                 if (!IsValidValue(value))
                 {
-                    throw new ArgumentOutOfRangeException("value");
+                    throw new ArgumentOutOfRangeException(nameof(value));
                 }
                 _createTime = value;
             }
@@ -99,7 +99,7 @@ namespace ZipLib.Zip
             {
                 if (!IsValidValue(value))
                 {
-                    throw new ArgumentOutOfRangeException("value");
+                    throw new ArgumentOutOfRangeException(nameof(value));
                 }
                 _lastAccessTime = value;
             }
@@ -115,7 +115,7 @@ namespace ZipLib.Zip
             {
                 if (!IsValidValue(value))
                 {
-                    throw new ArgumentOutOfRangeException("value");
+                    throw new ArgumentOutOfRangeException(nameof(value));
                 }
                 _lastModificationTime = value;
             }

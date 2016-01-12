@@ -12,7 +12,7 @@ namespace ZipLib.Zip
         public ProcessFileHandler ProcessFile { get; set; }
         public ProgressHandler Progress { get; set; }
 
-        private TimeSpan progressInterval_ = TimeSpan.FromSeconds(3.0);
+        private TimeSpan _progressInterval = TimeSpan.FromSeconds(3.0);
 
         public bool OnCompletedFile(string file)
         {
@@ -83,11 +83,11 @@ namespace ZipLib.Zip
         {
             get
             {
-                return progressInterval_;
+                return _progressInterval;
             }
             set
             {
-                progressInterval_ = value;
+                _progressInterval = value;
             }
         }
     }

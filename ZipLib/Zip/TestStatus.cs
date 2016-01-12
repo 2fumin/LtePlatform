@@ -2,46 +2,46 @@
 {
     public class TestStatus
     {
-        private long bytesTested_;
-        private ZipEntry entry_;
-        private bool entryValid_;
-        private int errorCount_;
-        private ZipFile file_;
-        private TestOperation operation_;
+        private long _bytesTested;
+        private ZipEntry _entry;
+        private bool _entryValid;
+        private int _errorCount;
+        private readonly ZipFile _file;
+        private TestOperation _operation;
 
         public TestStatus(ZipFile file)
         {
-            file_ = file;
+            _file = file;
         }
 
         internal void AddError()
         {
-            errorCount_++;
-            entryValid_ = false;
+            _errorCount++;
+            _entryValid = false;
         }
 
         internal void SetBytesTested(long value)
         {
-            bytesTested_ = value;
+            _bytesTested = value;
         }
 
         internal void SetEntry(ZipEntry entry)
         {
-            entry_ = entry;
-            entryValid_ = true;
-            bytesTested_ = 0L;
+            _entry = entry;
+            _entryValid = true;
+            _bytesTested = 0L;
         }
 
         internal void SetOperation(TestOperation operation)
         {
-            operation_ = operation;
+            _operation = operation;
         }
 
         public long BytesTested
         {
             get
             {
-                return bytesTested_;
+                return _bytesTested;
             }
         }
 
@@ -49,7 +49,7 @@
         {
             get
             {
-                return entry_;
+                return _entry;
             }
         }
 
@@ -57,7 +57,7 @@
         {
             get
             {
-                return entryValid_;
+                return _entryValid;
             }
         }
 
@@ -65,7 +65,7 @@
         {
             get
             {
-                return errorCount_;
+                return _errorCount;
             }
         }
 
@@ -73,7 +73,7 @@
         {
             get
             {
-                return file_;
+                return _file;
             }
         }
 
@@ -81,7 +81,7 @@
         {
             get
             {
-                return operation_;
+                return _operation;
             }
         }
     }

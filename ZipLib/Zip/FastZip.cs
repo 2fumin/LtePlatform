@@ -7,58 +7,58 @@ namespace ZipLib.Zip
 {
     public class FastZip
     {
-        private byte[] buffer_;
-        private ConfirmOverwriteDelegate confirmDelegate_;
-        private bool continueRunning_;
-        private bool createEmptyDirectories_;
-        private NameFilter directoryFilter_;
-        private IEntryFactory entryFactory_;
-        private FastZipEvents events_;
-        private INameTransform extractNameTransform_;
-        private NameFilter fileFilter_;
-        private ZipOutputStream outputStream_;
-        private Overwrite overwrite_;
-        private string password_;
-        private bool restoreAttributesOnExtract_;
-        private bool restoreDateTimeOnExtract_;
-        private string sourceDirectory_;
-        private UseZip64 useZip64_;
-        private ZipFile zipFile_;
+        private byte[] _buffer;
+        private ConfirmOverwriteDelegate _confirmDelegate;
+        private bool _continueRunning;
+        private bool _createEmptyDirectories;
+        private NameFilter _directoryFilter;
+        private IEntryFactory _entryFactory;
+        private readonly FastZipEvents _events;
+        private INameTransform _extractNameTransform;
+        private NameFilter _fileFilter;
+        private ZipOutputStream _outputStream;
+        private Overwrite _overwrite;
+        private string _password;
+        private bool _restoreAttributesOnExtract;
+        private bool _restoreDateTimeOnExtract;
+        private string _sourceDirectory;
+        private UseZip64 _useZip64;
+        private ZipFile _zipFile;
 
         public FastZip()
         {
-            entryFactory_ = new ZipEntryFactory();
-            useZip64_ = UseZip64.Dynamic;
+            _entryFactory = new ZipEntryFactory();
+            _useZip64 = UseZip64.Dynamic;
         }
 
         public FastZip(FastZipEvents events)
         {
-            entryFactory_ = new ZipEntryFactory();
-            useZip64_ = UseZip64.Dynamic;
-            events_ = events;
+            _entryFactory = new ZipEntryFactory();
+            _useZip64 = UseZip64.Dynamic;
+            _events = events;
         }
 
         private void AddFileContents(string name, Stream stream)
         {
             if (stream == null)
             {
-                throw new ArgumentNullException("stream");
+                throw new ArgumentNullException(nameof(stream));
             }
-            if (buffer_ == null)
+            if (_buffer == null)
             {
-                buffer_ = new byte[0x1000];
+                _buffer = new byte[0x1000];
             }
-            if ((events_ != null) && (events_.Progress != null))
+            if (_events?.Progress != null)
             {
-                StreamUtils.Copy(stream, outputStream_, buffer_, events_.Progress, events_.ProgressInterval, this, name);
+                StreamUtils.Copy(stream, _outputStream, _buffer, _events.Progress, _events.ProgressInterval, this, name);
             }
             else
             {
-                StreamUtils.Copy(stream, outputStream_, buffer_);
+                StreamUtils.Copy(stream, _outputStream, _buffer);
             }
-            if (events_ != null)
+            if (_events != null)
             {
-                continueRunning_ = events_.OnCompletedFile(name);
+                _continueRunning = _events.OnCompletedFile(name);
             }
         }
 
@@ -70,14 +70,14 @@ namespace ZipLib.Zip
         public void CreateZip(Stream outputStream, string sourceDirectory, bool recurse, string fileFilter, string directoryFilter)
         {
             NameTransform = new ZipNameTransform(sourceDirectory);
-            sourceDirectory_ = sourceDirectory;
-            using (outputStream_ = new ZipOutputStream(outputStream))
+            _sourceDirectory = sourceDirectory;
+            using (_outputStream = new ZipOutputStream(outputStream))
             {
-                if (password_ != null)
+                if (_password != null)
                 {
-                    outputStream_.Password = password_;
+                    _outputStream.Password = _password;
                 }
-                outputStream_.UseZip64 = UseZip64;
+                _outputStream.UseZip64 = UseZip64;
                 FileSystemScanner scanner = new FileSystemScanner(fileFilter, directoryFilter);
                 scanner.ProcessFile =
                     (ProcessFileHandler) Delegate.Combine(scanner.ProcessFile, new ProcessFileHandler(ProcessFile));
@@ -87,15 +87,15 @@ namespace ZipLib.Zip
                         = (ProcessDirectoryHandler)Delegate.Combine(scanner.ProcessDirectory, 
                         new ProcessDirectoryHandler(ProcessDirectory));
                 }
-                if (events_ != null)
+                if (_events != null)
                 {
-                    if (events_.FileFailure != null)
+                    if (_events.FileFailure != null)
                     {
-                        scanner.FileFailure = (FileFailureHandler)Delegate.Combine(scanner.FileFailure, events_.FileFailure);
+                        scanner.FileFailure = (FileFailureHandler)Delegate.Combine(scanner.FileFailure, _events.FileFailure);
                     }
-                    if (events_.DirectoryFailure != null)
+                    if (_events.DirectoryFailure != null)
                     {
-                        scanner.DirectoryFailure = (DirectoryFailureHandler)Delegate.Combine(scanner.DirectoryFailure, events_.DirectoryFailure);
+                        scanner.DirectoryFailure = (DirectoryFailureHandler)Delegate.Combine(scanner.DirectoryFailure, _events.DirectoryFailure);
                     }
                 }
                 scanner.Scan(sourceDirectory, recurse);
@@ -115,11 +115,11 @@ namespace ZipLib.Zip
             {
                 if (entry.IsFile)
                 {
-                    name = extractNameTransform_.TransformFile(name);
+                    name = _extractNameTransform.TransformFile(name);
                 }
                 else if (entry.IsDirectory)
                 {
-                    name = extractNameTransform_.TransformDirectory(name);
+                    name = _extractNameTransform.TransformDirectory(name);
                 }
                 flag = (name != null) && (name.Length != 0);
             }
@@ -144,20 +144,20 @@ namespace ZipLib.Zip
                 catch (Exception exception)
                 {
                     flag = false;
-                    if (events_ != null)
+                    if (_events != null)
                     {
                         if (entry.IsDirectory)
                         {
-                            continueRunning_ = events_.OnDirectoryFailure(name, exception);
+                            _continueRunning = _events.OnDirectoryFailure(name, exception);
                         }
                         else
                         {
-                            continueRunning_ = events_.OnFileFailure(name, exception);
+                            _continueRunning = _events.OnFileFailure(name, exception);
                         }
                     }
                     else
                     {
-                        continueRunning_ = false;
+                        _continueRunning = false;
                         throw;
                     }
                 }
@@ -171,11 +171,11 @@ namespace ZipLib.Zip
         private void ExtractFileEntry(ZipEntry entry, string targetName)
         {
             bool flag = true;
-            if ((overwrite_ != Overwrite.Always) && File.Exists(targetName))
+            if ((_overwrite != Overwrite.Always) && File.Exists(targetName))
             {
-                if ((overwrite_ == Overwrite.Prompt) && (confirmDelegate_ != null))
+                if ((_overwrite == Overwrite.Prompt) && (_confirmDelegate != null))
                 {
-                    flag = confirmDelegate_(targetName);
+                    flag = _confirmDelegate(targetName);
                 }
                 else
                 {
@@ -184,34 +184,34 @@ namespace ZipLib.Zip
             }
             if (flag)
             {
-                if (events_ != null)
+                if (_events != null)
                 {
-                    continueRunning_ = events_.OnProcessFile(entry.Name);
+                    _continueRunning = _events.OnProcessFile(entry.Name);
                 }
-                if (continueRunning_)
+                if (_continueRunning)
                 {
                     try
                     {
                         using (FileStream stream = File.Create(targetName))
                         {
-                            if (buffer_ == null)
+                            if (_buffer == null)
                             {
-                                buffer_ = new byte[0x1000];
+                                _buffer = new byte[0x1000];
                             }
-                            if ((events_ != null) && (events_.Progress != null))
+                            if ((_events != null) && (_events.Progress != null))
                             {
-                                StreamUtils.Copy(zipFile_.GetInputStream(entry), stream, buffer_, events_.Progress, events_.ProgressInterval, this, entry.Name, entry.Size);
+                                StreamUtils.Copy(_zipFile.GetInputStream(entry), stream, _buffer, _events.Progress, _events.ProgressInterval, this, entry.Name, entry.Size);
                             }
                             else
                             {
-                                StreamUtils.Copy(zipFile_.GetInputStream(entry), stream, buffer_);
+                                StreamUtils.Copy(_zipFile.GetInputStream(entry), stream, _buffer);
                             }
-                            if (events_ != null)
+                            if (_events != null)
                             {
-                                continueRunning_ = events_.OnCompletedFile(entry.Name);
+                                _continueRunning = _events.OnCompletedFile(entry.Name);
                             }
                         }
-                        if (restoreDateTimeOnExtract_)
+                        if (_restoreDateTimeOnExtract)
                         {
                             File.SetLastWriteTime(targetName, entry.DateTime);
                         }
@@ -223,12 +223,12 @@ namespace ZipLib.Zip
                     }
                     catch (Exception exception)
                     {
-                        if (events_ == null)
+                        if (_events == null)
                         {
-                            continueRunning_ = false;
+                            _continueRunning = false;
                             throw;
                         }
-                        continueRunning_ = events_.OnFileFailure(targetName, exception);
+                        _continueRunning = _events.OnFileFailure(targetName, exception);
                     }
                 }
             }
@@ -236,7 +236,7 @@ namespace ZipLib.Zip
 
         public void ExtractZip(string zipFileName, string targetDirectory, string fileFilter)
         {
-            ExtractZip(zipFileName, targetDirectory, Overwrite.Always, null, fileFilter, null, restoreDateTimeOnExtract_);
+            ExtractZip(zipFileName, targetDirectory, Overwrite.Always, null, fileFilter, null, _restoreDateTimeOnExtract);
         }
 
         public void ExtractZip(string zipFileName, string targetDirectory, Overwrite overwrite, ConfirmOverwriteDelegate confirmDelegate, string fileFilter, string directoryFilter, bool restoreDateTime)
@@ -249,34 +249,34 @@ namespace ZipLib.Zip
         {
             if ((overwrite == Overwrite.Prompt) && (confirmDelegate == null))
             {
-                throw new ArgumentNullException("confirmDelegate");
+                throw new ArgumentNullException(nameof(confirmDelegate));
             }
-            continueRunning_ = true;
-            overwrite_ = overwrite;
-            confirmDelegate_ = confirmDelegate;
-            extractNameTransform_ = new WindowsNameTransform(targetDirectory);
-            fileFilter_ = new NameFilter(fileFilter);
-            directoryFilter_ = new NameFilter(directoryFilter);
-            restoreDateTimeOnExtract_ = restoreDateTime;
-            using (zipFile_ = new ZipFile(inputStream))
+            _continueRunning = true;
+            _overwrite = overwrite;
+            _confirmDelegate = confirmDelegate;
+            _extractNameTransform = new WindowsNameTransform(targetDirectory);
+            _fileFilter = new NameFilter(fileFilter);
+            _directoryFilter = new NameFilter(directoryFilter);
+            _restoreDateTimeOnExtract = restoreDateTime;
+            using (_zipFile = new ZipFile(inputStream))
             {
-                if (password_ != null)
+                if (_password != null)
                 {
-                    zipFile_.Password = password_;
+                    _zipFile.Password = _password;
                 }
-                zipFile_.IsStreamOwner = isStreamOwner;
-                IEnumerator enumerator = zipFile_.GetEnumerator();
-                while (continueRunning_ && enumerator.MoveNext())
+                _zipFile.IsStreamOwner = isStreamOwner;
+                IEnumerator enumerator = _zipFile.GetEnumerator();
+                while (_continueRunning && enumerator.MoveNext())
                 {
                     ZipEntry current = (ZipEntry)enumerator.Current;
                     if (current.IsFile)
                     {
-                        if (directoryFilter_.IsMatch(Path.GetDirectoryName(current.Name)) && fileFilter_.IsMatch(current.Name))
+                        if (_directoryFilter.IsMatch(Path.GetDirectoryName(current.Name)) && _fileFilter.IsMatch(current.Name))
                         {
                             ExtractEntry(current);
                         }
                     }
-                    else if ((current.IsDirectory && directoryFilter_.IsMatch(current.Name)) && CreateEmptyDirectories)
+                    else if ((current.IsDirectory && _directoryFilter.IsMatch(current.Name)) && CreateEmptyDirectories)
                     {
                         ExtractEntry(current);
                     }
@@ -298,23 +298,23 @@ namespace ZipLib.Zip
         {
             if (!e.HasMatchingFiles && CreateEmptyDirectories)
             {
-                if (events_ != null)
+                if (_events != null)
                 {
-                    events_.OnProcessDirectory(e.Name, e.HasMatchingFiles);
+                    _events.OnProcessDirectory(e.Name, e.HasMatchingFiles);
                 }
-                if (e.ContinueRunning && (e.Name != sourceDirectory_))
+                if (e.ContinueRunning && (e.Name != _sourceDirectory))
                 {
-                    ZipEntry entry = entryFactory_.MakeDirectoryEntry(e.Name);
-                    outputStream_.PutNextEntry(entry);
+                    ZipEntry entry = _entryFactory.MakeDirectoryEntry(e.Name);
+                    _outputStream.PutNextEntry(entry);
                 }
             }
         }
 
         private void ProcessFile(object sender, ScanEventArgs e)
         {
-            if ((events_ != null) && (events_.ProcessFile != null))
+            if ((_events != null) && (_events.ProcessFile != null))
             {
-                events_.ProcessFile(sender, e);
+                _events.ProcessFile(sender, e);
             }
             if (e.ContinueRunning)
             {
@@ -322,19 +322,19 @@ namespace ZipLib.Zip
                 {
                     using (FileStream stream = File.Open(e.Name, FileMode.Open, FileAccess.Read, FileShare.Read))
                     {
-                        ZipEntry entry = entryFactory_.MakeFileEntry(e.Name);
-                        outputStream_.PutNextEntry(entry);
+                        ZipEntry entry = _entryFactory.MakeFileEntry(e.Name);
+                        _outputStream.PutNextEntry(entry);
                         AddFileContents(e.Name, stream);
                     }
                 }
                 catch (Exception exception)
                 {
-                    if (events_ == null)
+                    if (_events == null)
                     {
-                        continueRunning_ = false;
+                        _continueRunning = false;
                         throw;
                     }
-                    continueRunning_ = events_.OnFileFailure(e.Name, exception);
+                    _continueRunning = _events.OnFileFailure(e.Name, exception);
                 }
             }
         }
@@ -343,11 +343,11 @@ namespace ZipLib.Zip
         {
             get
             {
-                return createEmptyDirectories_;
+                return _createEmptyDirectories;
             }
             set
             {
-                createEmptyDirectories_ = value;
+                _createEmptyDirectories = value;
             }
         }
 
@@ -355,17 +355,17 @@ namespace ZipLib.Zip
         {
             get
             {
-                return entryFactory_;
+                return _entryFactory;
             }
             set
             {
                 if (value == null)
                 {
-                    entryFactory_ = new ZipEntryFactory();
+                    _entryFactory = new ZipEntryFactory();
                 }
                 else
                 {
-                    entryFactory_ = value;
+                    _entryFactory = value;
                 }
             }
         }
@@ -374,11 +374,11 @@ namespace ZipLib.Zip
         {
             get
             {
-                return entryFactory_.NameTransform;
+                return _entryFactory.NameTransform;
             }
             set
             {
-                entryFactory_.NameTransform = value;
+                _entryFactory.NameTransform = value;
             }
         }
 
@@ -386,11 +386,11 @@ namespace ZipLib.Zip
         {
             get
             {
-                return password_;
+                return _password;
             }
             set
             {
-                password_ = value;
+                _password = value;
             }
         }
 
@@ -398,11 +398,11 @@ namespace ZipLib.Zip
         {
             get
             {
-                return restoreAttributesOnExtract_;
+                return _restoreAttributesOnExtract;
             }
             set
             {
-                restoreAttributesOnExtract_ = value;
+                _restoreAttributesOnExtract = value;
             }
         }
 
@@ -410,11 +410,11 @@ namespace ZipLib.Zip
         {
             get
             {
-                return restoreDateTimeOnExtract_;
+                return _restoreDateTimeOnExtract;
             }
             set
             {
-                restoreDateTimeOnExtract_ = value;
+                _restoreDateTimeOnExtract = value;
             }
         }
 
@@ -422,11 +422,11 @@ namespace ZipLib.Zip
         {
             get
             {
-                return useZip64_;
+                return _useZip64;
             }
             set
             {
-                useZip64_ = value;
+                _useZip64 = value;
             }
         }
 

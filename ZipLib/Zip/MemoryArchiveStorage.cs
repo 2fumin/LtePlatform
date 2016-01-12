@@ -5,8 +5,8 @@ namespace ZipLib.Zip
 {
     public class MemoryArchiveStorage : BaseArchiveStorage
     {
-        private MemoryStream finalStream_;
-        private MemoryStream temporaryStream_;
+        private MemoryStream _finalStream;
+        private MemoryStream _temporaryStream;
 
         public MemoryArchiveStorage()
             : base(FileUpdateMode.Direct)
@@ -20,34 +20,34 @@ namespace ZipLib.Zip
 
         public override Stream ConvertTemporaryToFinal()
         {
-            if (temporaryStream_ == null)
+            if (_temporaryStream == null)
             {
                 throw new ZipException("No temporary stream has been created");
             }
-            finalStream_ = new MemoryStream(temporaryStream_.ToArray());
-            return finalStream_;
+            _finalStream = new MemoryStream(_temporaryStream.ToArray());
+            return _finalStream;
         }
 
         public override void Dispose()
         {
-            if (temporaryStream_ != null)
+            if (_temporaryStream != null)
             {
-                temporaryStream_.Close();
+                _temporaryStream.Close();
             }
         }
 
         public override Stream GetTemporaryOutput()
         {
-            temporaryStream_ = new MemoryStream();
-            return temporaryStream_;
+            _temporaryStream = new MemoryStream();
+            return _temporaryStream;
         }
 
         public override Stream MakeTemporaryCopy(Stream stream)
         {
-            temporaryStream_ = new MemoryStream();
+            _temporaryStream = new MemoryStream();
             stream.Position = 0L;
-            StreamUtils.Copy(stream, temporaryStream_, new byte[0x1000]);
-            return temporaryStream_;
+            StreamUtils.Copy(stream, _temporaryStream, new byte[0x1000]);
+            return _temporaryStream;
         }
 
         public override Stream OpenForDirectUpdate(Stream stream)
@@ -70,7 +70,7 @@ namespace ZipLib.Zip
         {
             get
             {
-                return finalStream_;
+                return _finalStream;
             }
         }
     }

@@ -1018,7 +1018,8 @@ namespace ZipLib.Zip
             {
                 throw new ZipException("ZipFile stream must be seekable");
             }
-            var endLocation = LocateBlockWithSignature(0x6054b50, _baseStream.Length, 0x16, 0xffff);
+            var endLocation = LocateBlockWithSignature(ZipConstants.EndOfCentralDirectorySignature, _baseStream.Length,
+                0x16, 0xffff);
             if (endLocation < 0L)
             {
                 throw new ZipException("Cannot find central directory");
@@ -1080,7 +1081,7 @@ namespace ZipLib.Zip
             _baseStream.Seek(_offsetOfFirstEntry + num7, SeekOrigin.Begin);
             for (ulong i = 0L; i < num4; i += (ulong)1L)
             {
-                if (ReadLeUint() != 0x2014b50)
+                if (ReadLeUint() != ZipConstants.CentralHeaderSignature)
                 {
                     throw new ZipException("Wrong Central Directory signature");
                 }
@@ -1457,7 +1458,7 @@ namespace ZipLib.Zip
                 var flag = (tests & HeaderTest.Header) != 0;
                 var flag2 = (tests & HeaderTest.Extract) != 0;
                 _baseStream.Seek(_offsetOfFirstEntry + entry.Offset, SeekOrigin.Begin);
-                if (ReadLeUint() != 0x4034b50)
+                if (ReadLeUint() != ZipConstants.LocalHeaderSignature)
                 {
                     throw new ZipException($"Wrong local header signature @{_offsetOfFirstEntry + entry.Offset:X}");
                 }
@@ -1649,7 +1650,8 @@ namespace ZipLib.Zip
             }
             using (stream)
             {
-                if (stream.LocateBlockWithSignature(0x6054b50, length, 0x16, 0xffff) < 0L)
+                if (stream.LocateBlockWithSignature(ZipConstants.EndOfCentralDirectorySignature, length, 0x16, 0xffff) <
+                    0L)
                 {
                     throw new ZipException("Cannot find central directory");
                 }
@@ -1683,7 +1685,7 @@ namespace ZipLib.Zip
             {
                 throw new ZipException("Attempt to write central directory entry with unknown crc");
             }
-            WriteLeInt(0x2014b50);
+            WriteLeInt(ZipConstants.CentralHeaderSignature);
             WriteLeShort(0x33);
             WriteLeShort(entry.Version);
             WriteLeShort(entry.Flags);
@@ -1864,7 +1866,7 @@ namespace ZipLib.Zip
                         break;
                 }
             }
-            WriteLeInt(0x4034b50);
+            WriteLeInt(ZipConstants.LocalHeaderSignature);
             WriteLeShort(outEntry.Version);
             WriteLeShort(outEntry.Flags);
             WriteLeShort((byte)outEntry.CompressionMethod);

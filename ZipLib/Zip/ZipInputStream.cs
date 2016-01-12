@@ -185,8 +185,8 @@ namespace ZipLib.Zip
             var num = inputBuffer.ReadLeInt();
             switch (num)
             {
-                case 0x2014b50:
-                case 0x6054b50:
+                case ZipConstants.CentralHeaderSignature:
+                case ZipConstants.EndOfCentralDirectorySignature:
                 case ZipConstants.CentralHeaderDigitalSignature:
                 case ZipConstants.ArchiveExtraDataSignature:
                 case 0x6064b50:
@@ -194,13 +194,13 @@ namespace ZipLib.Zip
                     return null;
 
                 case 0x30304b50:
-                case 0x8074b50:
+                case ZipConstants.SpanningSignature:
                     num = inputBuffer.ReadLeInt();
                     break;
             }
-            if (num != 0x4034b50)
+            if (num != ZipConstants.LocalHeaderSignature)
             {
-                throw new ZipException("Wrong Local header signature: 0x" + string.Format("{0:X}", num));
+                throw new ZipException("Wrong Local header signature: 0x" + $"{num:X}");
             }
             var versionRequiredToExtract = (short)inputBuffer.ReadLeShort();
             _flags = inputBuffer.ReadLeShort();
@@ -358,7 +358,7 @@ namespace ZipLib.Zip
 
         private void ReadDataDescriptor()
         {
-            if (inputBuffer.ReadLeInt() != 0x8074b50)
+            if (inputBuffer.ReadLeInt() != ZipConstants.DataDescriptorSignature)
             {
                 throw new ZipException("Data descriptor signature not found");
             }

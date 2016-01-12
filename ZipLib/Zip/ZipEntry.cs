@@ -224,7 +224,7 @@ namespace ZipLib.Zip
                     DateTime = (time.ToUniversalTime() + new TimeSpan(0, 0, 0, seconds, 0)).ToLocalTime();
                 }
             }
-            if (_method == CompressionMethod.WinZipAES)
+            if (_method == CompressionMethod.WinZipAes)
             {
                 ProcessAesExtraData(extraData);
             }
@@ -362,7 +362,7 @@ namespace ZipLib.Zip
                 {
                     return _method;
                 }
-                return CompressionMethod.WinZipAES;
+                return CompressionMethod.WinZipAes;
             }
         }
 

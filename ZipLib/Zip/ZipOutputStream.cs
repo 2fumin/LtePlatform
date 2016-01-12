@@ -142,7 +142,7 @@ namespace ZipLib.Zip
             }
             if ((_curEntry.Flags & 8) != 0)
             {
-                WriteLeInt(0x8074b50);
+                WriteLeInt(ZipConstants.DataDescriptorSignature);
                 WriteLeInt((int)_curEntry.Crc);
                 if (_curEntry.LocalHeaderRequiresZip64)
                 {
@@ -187,7 +187,7 @@ namespace ZipLib.Zip
                 long sizeEntries = 0L;
                 foreach (ZipEntry entry in _entries)
                 {
-                    WriteLeInt(0x2014b50);
+                    WriteLeInt(ZipConstants.CentralHeaderSignature);
                     WriteLeShort(0x33);
                     WriteLeShort(entry.Version);
                     WriteLeShort(entry.Flags);
@@ -376,7 +376,7 @@ namespace ZipLib.Zip
             {
                 entry.ForceZip64();
             }
-            WriteLeInt(0x4034b50);
+            WriteLeInt(ZipConstants.LocalHeaderSignature);
             WriteLeShort(entry.Version);
             WriteLeShort(entry.Flags);
             WriteLeShort((byte)entry.CompressionMethodForHeader);
