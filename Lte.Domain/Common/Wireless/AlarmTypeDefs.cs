@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Lte.Domain.Common
+﻿namespace Lte.Domain.Common.Wireless
 {
     public enum AlarmType : short
     {

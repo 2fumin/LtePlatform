@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Lte.Domain.LinqToCsv.Description;
 using Lte.Domain.Regular;
+using Lte.Domain.Regular.Attributes;
 
 namespace Lte.Domain.LinqToCsv.Mapper
 {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using Lte.Domain.Regular;
+using Lte.Domain.Regular.Attributes;
 
 namespace Lte.Domain.LinqToCsv
 {

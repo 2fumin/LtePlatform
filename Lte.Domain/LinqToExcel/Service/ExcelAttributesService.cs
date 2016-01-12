@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Reflection;
 using Lte.Domain.LinqToExcel.Entities;
 using Lte.Domain.Regular;
+using Lte.Domain.Regular.Attributes;
 
 namespace Lte.Domain.LinqToExcel.Service
 {

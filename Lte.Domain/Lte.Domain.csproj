@@ -52,7 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\AlarmTypeDefs.cs" />
+    <Compile Include="Common\Wireless\AlarmTypeDefs.cs" />
     <Compile Include="Common\BigEndianBinaryReader.cs" />
     <Compile Include="Common\BitArrayInputStream.cs" />
     <Compile Include="Common\BitMaskStream.cs" />
@@ -94,7 +94,7 @@
     <Compile Include="LinqToExcel\Service\ExcelAttributesService.cs" />
     <Compile Include="Lz4Net\Lz4CompressionStreamBase.cs" />
     <Compile Include="Lz4Net\Lz4DecompressionStreamBase.cs" />
-    <Compile Include="Regular\AlarmTypeQueries.cs" />
+    <Compile Include="Common\Wireless\AlarmTypeQueries.cs" />
     <Compile Include="Regular\IpAddress.cs" />
     <Compile Include="Regular\MapperOperations.cs" />
     <Compile Include="Regular\TransformEnum.cs" />
@@ -125,8 +125,8 @@
     <Compile Include="Lz4Net\Lz4DecompressionStream.cs" />
     <Compile Include="Lz4Net\Lz4Mode.cs" />
     <Compile Include="Regular\BigEndianBitConverter.cs" />
-    <Compile Include="Regular\ColumnAttribute.cs" />
-    <Compile Include="Regular\ExcelColumnAttribute.cs" />
+    <Compile Include="Regular\Attributes\ColumnAttribute.cs" />
+    <Compile Include="Regular\Attributes\ExcelColumnAttribute.cs" />
     <Compile Include="LinqToExcel\Entities\ExcelDomain.cs" />
     <Compile Include="LinqToExcel\Entities\ExcelQuery.cs" />
     <Compile Include="LinqToExcel\Entities\SqlGeneratorQueryModelVisitor.cs" />
@@ -137,14 +137,14 @@
     <Compile Include="LinqToExcel\Service\ExcelQueryExecutor.cs" />
     <Compile Include="LinqToExcel\Service\ExcelUtilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Regular\CloneProtectionAttribute.cs" />
+    <Compile Include="Regular\Attributes\CloneProtectionAttribute.cs" />
     <Compile Include="Regular\HexOperations.cs" />
     <Compile Include="Regular\IOOperations.cs" />
     <Compile Include="Regular\LittleEndianBitConverter.cs" />
-    <Compile Include="Regular\RowAttribute.cs" />
+    <Compile Include="Regular\Attributes\RowAttribute.cs" />
     <Compile Include="Regular\SecureConversion.cs" />
     <Compile Include="Regular\SecureValue.cs" />
-    <Compile Include="Regular\TypeDocAttribute.cs" />
+    <Compile Include="Regular\Attributes\TypeDocAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AutoMapper\AutoMapper.csproj">

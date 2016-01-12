@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Lte.Domain.Regular;
+using Lte.Domain.Regular.Attributes;
 using Lte.Parameters.Entities;
 
 namespace Lte.Evaluations.DataService.Dump

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Lte.Domain.Common;
+using Lte.Domain.Common.Wireless;
 using Lte.Evaluations.DataService;
 using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.Test.DataService.Queries;

@@ -8,6 +8,7 @@ using Abp.Domain.Entities;
 using System.Runtime.Serialization;
 using Lte.Domain.Common;
 using Lte.Domain.Regular;
+using Lte.Domain.Regular.Attributes;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities.ExcelCsv;
 

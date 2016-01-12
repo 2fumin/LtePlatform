@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Lte.Domain.Regular;
+using Lte.Domain.Regular.Attributes;
 
 namespace Lte.Domain.Common
 {

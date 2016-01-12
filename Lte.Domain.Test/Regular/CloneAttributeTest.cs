@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Lte.Domain.Regular;
+using Lte.Domain.Regular.Attributes;
 using NUnit.Framework;
 
 namespace Lte.Domain.Test.Regular

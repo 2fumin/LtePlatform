@@ -8,6 +8,7 @@ using Abp.Domain.Entities;
 using AutoMapper;
 using Lte.Domain.Common.Geo;
 using Lte.Domain.Regular;
+using Lte.Domain.Regular.Attributes;
 using Lte.Parameters.Abstract;
 
 namespace Lte.Parameters.Entities

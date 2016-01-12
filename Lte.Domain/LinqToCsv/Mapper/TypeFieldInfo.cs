@@ -4,6 +4,7 @@ using System.Reflection;
 using System.ComponentModel;
 using Lte.Domain.Regular;
 using Lte.Domain.Common;
+using Lte.Domain.Regular.Attributes;
 
 namespace Lte.Domain.LinqToCsv.Mapper
 {

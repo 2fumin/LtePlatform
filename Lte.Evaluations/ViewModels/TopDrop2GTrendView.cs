@@ -1,4 +1,5 @@
 ﻿using Lte.Domain.Regular;
+using Lte.Domain.Regular.Attributes;
 
 namespace Lte.Evaluations.ViewModels
 {

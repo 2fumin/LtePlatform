@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AutoMapper.Should;
 using Lte.Domain.LinqToExcel;
 using Lte.Domain.Regular;
+using Lte.Domain.Regular.Attributes;
 using Lte.Domain.Test.LinqToExcel;
 using Lte.Parameters.Entities;
 using NUnit.Framework;

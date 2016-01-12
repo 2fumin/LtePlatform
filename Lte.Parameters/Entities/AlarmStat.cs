@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Abp.Domain.Entities;
 using AutoMapper;
 using Lte.Domain.Common;
+using Lte.Domain.Common.Wireless;
 using Lte.Domain.Regular;
 
 namespace Lte.Parameters.Entities

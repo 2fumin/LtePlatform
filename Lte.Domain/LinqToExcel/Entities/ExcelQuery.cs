@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using Lte.Domain.LinqToExcel.Service;
 using Lte.Domain.Regular;
+using Lte.Domain.Regular.Attributes;
 using Remotion.Data.Linq;
 using Remotion.Data.Linq.Clauses;
 
