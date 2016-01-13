@@ -41,5 +41,12 @@ namespace Lte.Domain.Regular
             return (from Match item in all select item.Value).ToList();
         }
 
+        public static string GetStrictDateByString(this string source)
+        {
+            return
+                Regex.Match(source,
+                    @"([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8])))")
+                    .Groups[0].Value;
+        }
     }
 }
