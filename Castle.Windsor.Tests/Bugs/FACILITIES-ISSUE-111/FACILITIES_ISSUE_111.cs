@@ -20,7 +20,6 @@ namespace Castle.Windsor.Tests.Bugs.FACILITIES_ISSUE_111
 
 	using NUnit.Framework;
 
-	[TestFixture]
 	public class FACILITIES_ISSUE_111
 	{
 		private IResource setupResource;

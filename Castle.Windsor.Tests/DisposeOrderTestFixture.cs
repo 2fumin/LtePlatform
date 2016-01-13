@@ -21,8 +21,7 @@ namespace Castle.Windsor.Tests
 	using Castle.MicroKernel.Registration;
 
 	using NUnit.Framework;
-
-	[TestFixture]
+    
 	public class DisposeOrderTestFixture
 	{
 		[Test]

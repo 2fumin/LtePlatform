@@ -150,38 +150,6 @@ namespace Lte.Domain.Regular
         }
 
         /// <summary>
-        /// 匹配日期是否合法
-        /// </summary>
-        /// <param name="source">待匹配字符串</param>
-        /// <returns>匹配结果true是日期反之不是日期</returns>
-        public static bool CheckDateByString(string source)
-        {
-            var rg = new Regex(@"^(\d{4}[\/\-](0?[1-9]|1[0-2])[\/\-]((0?[1-9])|((1|2)[0-9])|30|31))|((0?[1-9]|1[0-2])[\/\-]((0?[1-9])|((1|2)[0-9])|30|31)[\/\-]\d{4})$");
-            return rg.IsMatch(source);
-        }
-
-        /// <summary>
-        /// 从字符串中获取第一个日期
-        /// </summary>
-        /// <param name="source">源字符串</param>
-        /// <returns>源字符串中的第一个日期</returns>
-        public static string GetFirstDateByString(string source)
-        {
-            return Regex.Match(source, @"(\d{4}[\/\-](0?[1-9]|1[0-2])[\/\-]((0?[1-9])|((1|2)[0-9])|30|31))|((0?[1-9]|1[0-2])[\/\-]((0?[1-9])|((1|2)[0-9])|30|31)[\/\-]\d{4})").Groups[0].Value;
-        }
-
-        /// <summary>
-        /// 从字符串中获取所有的日期
-        /// </summary>
-        /// <param name="source">源字符串</param>
-        /// <returns>源字符串中的所有日期</returns>
-        public static List<string> GetAllDateByString(string source)
-        {
-            var all = Regex.Matches(source, @"(\d{4}[\/\-](0?[1-9]|1[0-2])[\/\-]((0?[1-9])|((1|2)[0-9])|30|31))|((0?[1-9]|1[0-2])[\/\-]((0?[1-9])|((1|2)[0-9])|30|31)[\/\-]\d{4})");
-            return (from Match item in all select item.Value).ToList();
-        }
-
-        /// <summary>
         /// 检测密码复杂度是否达标：密码中必须包含字母、数字、特称字符，至少8个字符，最多16个字符。
         /// </summary>
         /// <param name="source">待匹配字符串</param>

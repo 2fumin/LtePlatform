@@ -109,7 +109,6 @@ namespace Castle.Windsor.Tests
 		}
 	}
 
-	[TestFixture]
 	public class ContainerProblem2
 	{
 		[Test]

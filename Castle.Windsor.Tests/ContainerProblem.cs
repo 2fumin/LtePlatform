@@ -21,7 +21,6 @@ namespace Castle.Windsor.Tests
 
 	using NUnit.Framework;
 
-	[TestFixture]
 	public class ContainerProblem
 	{
 		[Test]

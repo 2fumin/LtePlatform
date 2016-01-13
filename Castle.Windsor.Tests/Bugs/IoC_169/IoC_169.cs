@@ -62,8 +62,7 @@ namespace Castle.Windsor.Tests.Bugs.IoC_169
 	public interface IServiceWithoutImplementation
 	{
 	}
-
-	[TestFixture]
+    
 	public class IoC_169
 	{
 		[Test]

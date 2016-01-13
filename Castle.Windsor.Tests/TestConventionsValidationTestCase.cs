@@ -33,7 +33,10 @@ namespace CastleTests
 				.Except(new[] { typeof(AbstractContainerTestCase) })
 				.ToArray();
 
-			var illNamedTestCases = testCases.Where(t => t.Name.EndsWith("TestCase") == false).ToArray();
+		    var illNamedTestCases =
+		        testCases.Where(
+		            t => t.Name.EndsWith("TestCase") == false && t.Name.EndsWith("Tests") == false && t.Name.EndsWith("Test") == false)
+		            .ToArray();
 			Assert.IsEmpty(illNamedTestCases, string.Join<Type>(Environment.NewLine, illNamedTestCases));
 		}
 

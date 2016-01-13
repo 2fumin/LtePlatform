@@ -21,8 +21,7 @@ namespace Castle.Windsor.Tests.Bugs.IoC_78
 
 	using NUnit.Framework;
 
-	[TestFixture]
-	public class IoC78 : AbstractContainerTestCase
+	public class IoC78TestCase : AbstractContainerTestCase
 	{
 		[Test]
 		public void Will_Ignore_Components_Already_in_Dependency_Tracker_Constructor()

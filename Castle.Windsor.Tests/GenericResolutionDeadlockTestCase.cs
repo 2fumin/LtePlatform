@@ -92,7 +92,7 @@
 			IEnumerable<IMapMember<TSource, TDestination>> Members { get; }
 		}
 
-		public interface IMapper<TSource, TDestination>
+		public interface IMapper<in TSource, in TDestination>
 		{
 			void Map(TSource source, TDestination destination);
 		}

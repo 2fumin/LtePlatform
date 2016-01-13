@@ -21,7 +21,7 @@ namespace Castle.MicroKernel.Tests.Bugs
 	using NUnit.Framework;
 
 	[TestFixture]
-	public class IoC_117TestCAse
+	public class IoC_117TestCase
 	{
 		[Test]
 		public void Public_property_with_Protected_setter_causes_Object_Reference_exception()

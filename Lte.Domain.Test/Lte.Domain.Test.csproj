@@ -111,6 +111,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Regular\CloneAttributeTest.cs" />
     <Compile Include="Regular\ContainsStringTest.cs" />
+    <Compile Include="Regular\DateTimeRegexTest.cs" />
     <Compile Include="Regular\EmailAndUrlTest.cs" />
   </ItemGroup>
   <ItemGroup>
