@@ -55,13 +55,8 @@ namespace Lte.Domain.Regular
         public static List<string> GetStringByReg(string source, string reg)
         {
             var regex = Regex.Matches(source, reg);
-            var list = new List<string>();
-            foreach (Match item in regex)
-            {
-                list.Add(item.Value);
-            }
 
-            return list;
+            return (from Match item in regex select item.Value).ToList();
         }
 
         /// <summary>
@@ -128,7 +123,7 @@ namespace Lte.Domain.Regular
         /// <returns>中间字符串</returns>
         public static string Substring(string source, string startStr, string endStr)
         {
-            var rg = new Regex("(?<=(" + startStr + "))[.\\s\\S]*?(?=(" + endStr + "))", RegexOptions.Multiline | RegexOptions.Singleline);
+            var rg = new Regex("(?=(" + startStr + "))[.\\s\\S]*?(?=(" + endStr + "))", RegexOptions.Multiline | RegexOptions.Singleline);
             return rg.Match(source).Value;
         }
 

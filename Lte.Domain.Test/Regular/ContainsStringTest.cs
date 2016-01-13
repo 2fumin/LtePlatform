@@ -62,5 +62,11 @@ namespace Lte.Domain.Test.Regular
         {
             Assert.IsTrue(TouTouRegex.CheckLengthByString(source, length));
         }
+
+        [TestCase("maaat", "m", "t", "maaa")]
+        public void Test_Substring(string source, string startStr, string endStr, string result)
+        {
+            Assert.AreEqual(TouTouRegex.Substring(source, startStr, endStr), result);
+        }
     }
 }
