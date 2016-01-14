@@ -59,14 +59,15 @@ namespace Lte.Evaluations.DataService
             var item =
                 _repository.FirstOrDefault(
                     x =>
-                        x.CellId == stat.CellId && x.SectorId == stat.SectorId && x.NearestCellId == stat.NearestCellId &&
-                        x.NearestSectorId == stat.NearestSectorId);
+                        x.CellId == stat.CellId && x.SectorId == stat.SectorId && x.Pci == stat.Pci);
             if (item == null)
             {
                 await _repository.InsertAsync(stat);
             }
             else if (stat.TotalTimes > 0)
             {
+                item.NearestSectorId = stat.NearestSectorId;
+                item.NearestCellId = stat.NearestCellId;
                 item.TotalTimes = stat.TotalTimes;
                 await _repository.UpdateAsync(item);
             }
