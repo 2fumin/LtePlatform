@@ -169,6 +169,7 @@
     <Compile Include="Entities\ENodeb.cs" />
     <Compile Include="Entities\ExcelCsv\ENodebExcel.cs" />
     <Compile Include="Entities\ENodebPhoto.cs" />
+    <Compile Include="Entities\ExcelCsv\InterferenceMatrixCsv.cs" />
     <Compile Include="Entities\FileRecord2G.cs" />
     <Compile Include="Entities\FileRecord3G.cs" />
     <Compile Include="Entities\FileRecord4G.cs" />
