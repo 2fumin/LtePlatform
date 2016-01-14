@@ -47,5 +47,11 @@ namespace Lte.Domain.Test.Regular
         {
             Assert.AreEqual(source.GetPersistentDateTimeString(), result);
         }
+
+        [TestCase("20160110221500小区干扰矩阵.txt", "2016/1/10 22:15:00")]
+        public void Test_GetDateTimeFromFileName(string source, string result)
+        {
+            Assert.AreEqual(source.GetDateTimeFromFileName().ToString(), result);
+        }
     }
 }

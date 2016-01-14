@@ -56,6 +56,19 @@ namespace Lte.Domain.Regular
                     @"([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})(((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02(0[1-9]|[1][0-9]|2[0-8])))(([01][0-9])|(2[0-3]))([0-5][0-9])([0-5][0-9])")
                     .Groups[0].Value;
         }
-        
+
+        public static DateTime? GetDateTimeFromFileName(this string fileName)
+        {
+            var dateTimeString = fileName.GetPersistentDateTimeString();
+            if (string.IsNullOrEmpty(dateTimeString)) return null;
+            var year = dateTimeString.Substring(0, 4);
+            var month = dateTimeString.Substring(4, 2);
+            var day = dateTimeString.Substring(6, 2);
+            var hour = dateTimeString.Substring(8, 2);
+            var minute = dateTimeString.Substring(10, 2);
+            var second = dateTimeString.Substring(12, 2);
+            return new DateTime(year.ConvertToInt(2015), month.ConvertToInt(1), day.ConvertToInt(1),
+                hour.ConvertToInt(12), minute.ConvertToInt(0), second.ConvertToInt(0));
+        }
     }
 }
