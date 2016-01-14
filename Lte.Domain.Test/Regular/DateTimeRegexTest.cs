@@ -33,5 +33,19 @@ namespace Lte.Domain.Test.Regular
         {
             Assert.AreEqual(source.GetFirstDateByString(), result);
         }
+
+        [TestCase("2012-12-12", "2012-12-12")]
+        [TestCase("2011-11-1", "")]
+        public void Test_GetStrictDateByString(string source, string result)
+        {
+            Assert.AreEqual(source.GetStrictDateByString(), result);
+        }
+
+        [TestCase("20160111121300", "20160111121300")]
+        [TestCase("20160111001300", "20160111001300")]
+        public void Test_GetPersistentDateTimeString(string source, string result)
+        {
+            Assert.AreEqual(source.GetPersistentDateTimeString(), result);
+        }
     }
 }
