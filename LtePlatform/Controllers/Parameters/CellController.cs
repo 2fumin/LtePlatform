@@ -46,6 +46,18 @@ namespace LtePlatform.Controllers.Parameters
         }
 
         [HttpGet]
+        [ApiDoc("给定基站编号和扇区编号查询LTE小区")]
+        [ApiParameterDoc("eNodebId", "基站编号")]
+        [ApiParameterDoc("sectorId", "扇区编号（模糊匹配）")]
+        [ApiResponse("LTE小区，如果找不到则会返回错误")]
+        public IHttpActionResult GetLocal(int eNodebId, byte localSector)
+        {
+            var item = _service.GetCell(eNodebId, localSector);
+            if (item == null) item = _service.GetCell(eNodebId, (byte)(localSector + 48));
+            return item == null ? (IHttpActionResult)BadRequest("The cell cannot be found!") : Ok(item);
+        }
+
+        [HttpGet]
         [ApiDoc("给定基站名对应的小区扇区编号列表")]
         [ApiParameterDoc("eNodebName", "基站名")]
         [ApiResponse("对应的小区扇区编号列表，如果找不到则会返回错误")]

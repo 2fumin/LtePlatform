@@ -107,7 +107,7 @@
             self.detailsView("lteCell");
             sendRequest(app.dataModel.cellUrl, "GET", {
                 eNodebId: eNodebId,
-                sectorId: sectorId
+                localSector: sectorId
             }, function(result) {
                 self.lteCellDetails(result);
             });
