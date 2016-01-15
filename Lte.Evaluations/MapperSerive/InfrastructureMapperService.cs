@@ -26,6 +26,7 @@ namespace Lte.Evaluations.MapperSerive
             Mapper.CreateMap<Cell, CellView>()
                 .ForMember(d => d.Indoor, opt => opt.MapFrom(s => s.IsOutdoor ? "室外" : "室内"))
                 .ForMember(d => d.DownTilt, opt => opt.MapFrom(s => s.ETilt + s.MTilt));
+            Mapper.CreateMap<Cell, PciCell>();
         }
 
         public static void MapENodeb()

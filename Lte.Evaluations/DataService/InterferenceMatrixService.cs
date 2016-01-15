@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Lte.Evaluations.MapperSerive;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.ExcelCsv;
@@ -16,6 +17,8 @@ namespace Lte.Evaluations.DataService
         private readonly ICellRepository _cellRepository;
 
         private static Stack<InterferenceMatrixStat> InterferenceMatrixStats { get; set; }
+
+        private static List<PciCell> PciCellList { get; set; }
 
         public InterferenceMatrixService(IInterferenceMatrixRepository repository, ICellRepository cellRepository)
         {
