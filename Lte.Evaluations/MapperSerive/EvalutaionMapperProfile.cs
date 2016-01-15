@@ -20,6 +20,7 @@ namespace Lte.Evaluations.MapperSerive
             StatMapperService.MapTopConnection3G();
             StatMapperService.MapTopDrop2G();
             StatMapperService.MapWorkItem();
+            StatMapperService.MapInterferenceMatrix();
 
             ParametersDumpMapperService.MapFromENodebContainerService();
             ParametersDumpMapperService.MapFromBtsContainerService();
