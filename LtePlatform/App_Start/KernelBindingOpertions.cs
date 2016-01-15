@@ -65,6 +65,8 @@ namespace LtePlatform
 
             ninjectKernel.Bind<IWorkItemRepository>().To<EFWorkItemRepository>();
 
+            ninjectKernel.Bind<IInterferenceMatrixRepository>().To<EFInterferenceMatrixRepository>();
+
             ninjectKernel.Bind<CdmaRegionStatService>().ToSelf();
 
             ninjectKernel.Bind<CollegeStatService>().ToSelf();
@@ -132,6 +134,8 @@ namespace LtePlatform
             ninjectKernel.Bind<NearestPciCellService>().ToSelf();
 
             ninjectKernel.Bind<WorkItemService>().ToSelf();
+
+            ninjectKernel.Bind<InterferenceMatrixService>().ToSelf();
         }
     }
 }

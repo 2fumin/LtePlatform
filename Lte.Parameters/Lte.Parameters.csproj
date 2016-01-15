@@ -213,6 +213,10 @@
     <Compile Include="Migrations\201601150350069_Add_Interference_Matrix_Database_20160115.Designer.cs">
       <DependentUpon>201601150350069_Add_Interference_Matrix_Database_20160115.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601150734100_Modify_Interence_Matrix_2016_0115.cs" />
+    <Compile Include="Migrations\201601150734100_Modify_Interence_Matrix_2016_0115.Designer.cs">
+      <DependentUpon>201601150734100_Modify_Interence_Matrix_2016_0115.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MockOperations\AlarmMapperService.cs" />
     <Compile Include="MockOperations\CoreMapperService.cs" />
@@ -265,6 +269,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601150350069_Add_Interference_Matrix_Database_20160115.resx">
       <DependentUpon>201601150350069_Add_Interference_Matrix_Database_20160115.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601150734100_Modify_Interence_Matrix_2016_0115.resx">
+      <DependentUpon>201601150734100_Modify_Interence_Matrix_2016_0115.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

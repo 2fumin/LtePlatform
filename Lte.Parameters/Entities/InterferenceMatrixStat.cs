@@ -9,6 +9,8 @@ namespace Lte.Parameters.Entities
 {
     public class InterferenceMatrixStat : Entity
     {
+        public DateTime RecordTime { get; set; }
+
         public int ENodebId { get; set; }
 
         public byte SectorId { get; set; }
