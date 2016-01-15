@@ -27,6 +27,11 @@ namespace Lte.Parameters.Concrete
             return FirstOrDefault(x => x.ENodebId == eNodebId && x.SectorId == sectorId);
         }
 
+        public Cell GetByFrequency(int eNodebId, int frequency)
+        {
+            return FirstOrDefault(x => x.ENodebId == eNodebId && x.Frequency == frequency);
+        }
+
         public List<Cell> GetAllList(int eNodebId)
         {
             return GetAll().Where(x => x.ENodebId == eNodebId).ToList();

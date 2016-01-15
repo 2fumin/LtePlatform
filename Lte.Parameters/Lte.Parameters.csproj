@@ -220,6 +220,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MockOperations\AlarmMapperService.cs" />
     <Compile Include="MockOperations\CoreMapperService.cs" />
+    <Compile Include="MockOperations\InterferenceMatrixCsvContainer.cs" />
     <Compile Include="MockOperations\MockItemsAudited.cs" />
     <Compile Include="MockOperations\MockItemsRepository.cs" />
     <Compile Include="MockOperations\StatMapperService.cs" />

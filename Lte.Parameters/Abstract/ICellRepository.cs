@@ -14,6 +14,8 @@ namespace Lte.Parameters.Abstract
 
         Cell GetBySectorId(int eNodebId, byte sectorId);
 
+        Cell GetByFrequency(int eNodebId, int frequency);
+
         List<Cell> GetAllList(int eNodebId);
 
         List<Cell> GetAllList(double west, double east, double south, double north);

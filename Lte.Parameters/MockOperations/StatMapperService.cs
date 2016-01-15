@@ -64,6 +64,7 @@ namespace Lte.Parameters.MockOperations
                     opt => opt.MapFrom(s => s.CellRelation.GetSplittedFields('_')[2].ConvertToShort(0)))
                 .ForMember(d => d.Frequency,
                     opt => opt.MapFrom(s => s.CellRelation.GetSplittedFields('_')[3].ConvertToInt(100)));
+            Mapper.CreateMap<InterferenceMatrixPci, InterferenceMatrixStat>();
         }
     }
 }

@@ -8,6 +8,7 @@ using Lte.Domain.LinqToCsv;
 using Lte.Domain.LinqToCsv.Context;
 using Lte.Domain.LinqToCsv.Description;
 using Lte.Domain.Regular;
+using Lte.Parameters.MockOperations;
 
 namespace Lte.Parameters.Entities.ExcelCsv
 {
@@ -31,13 +32,18 @@ namespace Lte.Parameters.Entities.ExcelCsv
         [CsvColumn(Name = "干扰值只有同频")]
         public double InterferenceLevel { get; set; }
 
-        public static List<InterferenceMatrixCsv> ReadInterferenceMatrixCsvs(string path)
+        public static InterferenceMatrixCsvContainer ReadInterferenceMatrixCsvs(string path)
         {
             var time = path.GetDateTimeFromFileName();
             if (time != null)
             {
                 var reader = new StreamReader(path, Encoding.GetEncoding("GB2312"));
-                return CsvContext.Read<InterferenceMatrixCsv>(reader, CsvFileDescription.CommaDescription).ToList();
+                return new InterferenceMatrixCsvContainer
+                {
+                    InterferenceMatrixCsvs =
+                        CsvContext.Read<InterferenceMatrixCsv>(reader, CsvFileDescription.CommaDescription).ToList(),
+                    RecordTime = (DateTime) time
+                };
             }
             return null;
         } 
