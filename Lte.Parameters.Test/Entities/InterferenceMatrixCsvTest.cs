@@ -25,6 +25,7 @@ namespace Lte.Parameters.Test.Entities
             var infos = CsvContext.Read<InterferenceMatrixCsv>(reader, CsvFileDescription.CommaDescription).ToList();
             Assert.AreEqual(infos.Count, 23);
             Assert.AreEqual(infos[0].InterferenceLevel, 14.32);
+            Assert.AreEqual(infos[2].OverInterferences10Db, 0);
         }
     }
 }

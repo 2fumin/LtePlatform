@@ -57,5 +57,7 @@ namespace Lte.Parameters.Concrete
         public DbSet<NearestPciCell> NearestPciCells { get; set; }
 
         public DbSet<WorkItem> WorkItems { get; set; }
+
+        public DbSet<InterferenceMatrixStat> InterferenceMatrices { get; set; }
     }
 }

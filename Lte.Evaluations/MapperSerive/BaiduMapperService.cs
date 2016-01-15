@@ -20,7 +20,7 @@ namespace Lte.Evaluations.MapperSerive
                         opt.MapFrom(
                             s =>
                                 "PCI: " + s.Pci + "; PRACH: " + s.Prach + "; RS Power(dBm): " + s.RsPower + "; TAC: " +
-                                s.Tac));
+                                s.Tac + "; ENodebId: " + s.ENodebId));
         }
 
         public static void MapCdmaCellView()
@@ -32,7 +32,7 @@ namespace Lte.Evaluations.MapperSerive
                         opt.MapFrom(
                             s =>
                                 "Cell Type: " + s.CellType + "; Cell ID: " + s.CellId + "; LAC: " + s.Lac + "; PN: " +
-                                s.Pn + "; Frequency List: " + s.FrequencyList));
+                                s.Pn + "; Frequency List: " + s.FrequencyList + "; BtsId: " + s.BtsId));
         }
 
         public static void MapDtViews()
