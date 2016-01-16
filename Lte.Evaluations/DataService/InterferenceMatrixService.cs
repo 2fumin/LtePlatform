@@ -26,6 +26,8 @@ namespace Lte.Evaluations.DataService
             _cellRepository = cellRepository;
             if (InterferenceMatrixStats == null)
                 InterferenceMatrixStats = new Stack<InterferenceMatrixStat>();
+            if (PciCellList == null)
+                PciCellList = Mapper.Map<List<Cell>, List<PciCell>>(_cellRepository.GetAllList());
         }
 
         public void UploadInterferenceStats(string path)
@@ -33,18 +35,31 @@ namespace Lte.Evaluations.DataService
             var container = InterferenceMatrixCsv.ReadInterferenceMatrixCsvs(path);
             if (container == null) return;
             var time = container.RecordTime;
-            var pcis =
-                Mapper.Map<List<InterferenceMatrixCsv>, List<InterferenceMatrixPci>>(container.InterferenceMatrixCsvs);
+            var pcis = from info in
+                Mapper.Map<List<InterferenceMatrixCsv>, List<InterferenceMatrixPci>>(container.InterferenceMatrixCsvs)
+                join cell in PciCellList on new
+                {
+                    info.ENodebId,
+                    Pci = info.SourcePci,
+                    info.Frequency
+                }
+                    equals new
+                    {
+                        cell.ENodebId,
+                        cell.Pci,
+                        cell.Frequency
+                    }
+                select new
+                {
+                    Info = info,
+                    cell.SectorId
+                };
             foreach (var matrixPci in pcis)
             {
-                var cell = _cellRepository.GetByFrequency(matrixPci.ENodebId, matrixPci.Frequency);
-                if (cell != null)
-                {
-                    var stat = Mapper.Map<InterferenceMatrixPci, InterferenceMatrixStat>(matrixPci);
-                    stat.RecordTime = time;
-                    stat.SectorId = cell.SectorId;
-                    InterferenceMatrixStats.Push(stat);
-                }
+                var stat = Mapper.Map<InterferenceMatrixPci, InterferenceMatrixStat>(matrixPci.Info);
+                stat.RecordTime = time;
+                stat.SectorId = matrixPci.SectorId;
+                InterferenceMatrixStats.Push(stat);
             }
         }
     }
