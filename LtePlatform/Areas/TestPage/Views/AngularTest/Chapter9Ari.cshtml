@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "第 9 章　内置指令";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        @{
+            Html.RenderPartial("_QUnitTestContents");
+        }
+    </div>
+    <div class="col-md-8">
+        <h2>@ViewBag.Title</h2>
+        <div ng-app="onewayDomainApp">
+            <h3>在指令中使用子作用域 ng-controller</h3>
+            <span>由于原型继承的关系，修改父级对象中的someBareValue会同时修改子对象中的值，但反之则不行。</span>
+            <div ng-controller="SomeController">
+                {{ someBareValue }}
+                <button ng-click="someAction()">Communicate to child</button>
+                <div ng-controller="ChildController">
+                    {{ someBareValue }}
+                    <button ng-click="childAction()">Communicate to parent</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Areas/TestPage/Scripts/angular/oneway.domain.app.js"></script>
+}
+

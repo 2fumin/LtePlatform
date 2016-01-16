@@ -23,5 +23,25 @@ namespace LtePlatform.Areas.TestPage.Controllers
         {
             return View();
         }
+
+        public ActionResult Chapter9Ari()
+        {
+            return View();
+        }
+
+        public ActionResult Chapter10Ari()
+        {
+            return View();
+        }
+
+        public ActionResult Chapter11Ari()
+        {
+            return View();
+        }
+
+        public ActionResult Chapter12Ari()
+        {
+            return View();
+        }
     }
 }
