@@ -36,13 +36,62 @@
                     {{ someModel.someValue }}
                     <button ng-click="childAction()">Communicate to parent</button>
                 </div>
+                <br />
+                <input type="text" ng-model="person.name" />
+                <div ng-switch on="person.name">
+                    <p ng-switch-default>And the winner is</p>
+                    <h1 ng-switch-when="Ari">{{ person.name }}</h1>
+                </div>
             </div>
+            <ul ng-controller="PeopleController">
+                <li ng-repeat="person in people" ng-class="{even: !$even, odd: !$odd}">
+                    {{person.name}} lives in {{person.city}}
+                </li>
+            </ul>
+            <form name="signup_form"
+                  ng-controller="FormController"
+                  ng-submit="submitForm()" novalidate>
+                <div ng-repeat="field in fields"
+                     ng-form="signup_form_input">
+                    <input type="text"
+                           name="dynamic_input"
+                           ng-required="field.isRequired"
+                           ng-model="field.name"
+                           placeholder="{{field.placeholder}}" />
+                    <div ng-show="signup_form_input.dynamic_input.$dirty && signup_form_input.dynamic_input.$invalid">
+                        <span class="error"
+                              ng-show="signup_form_input.dynamic_input.$error.required">
+                            The field is required.
+                        </span>
+                    </div>
+                </div>
+                <button type="submit"
+                        ng-disabled="signup_form.$invalid">
+                    Submit All
+                </button>
+            </form>
         </div>
     </div>
 </div>
 
 @section Scripts
 {
+    <style>
+        .odd {
+            background-color: blue;
+        }
+        .even {
+            background-color: red;
+        }
+
+        input.ng-invalid {
+            border: 1px solid red;
+        }
+
+        input.ng-valid {
+            border: 1px solid green;
+        }
+    </style>
     <script src="~/Scripts/angular.js"></script>
     <script type="text/javascript">
         var app = angular.module("onewayDomainApp", []);

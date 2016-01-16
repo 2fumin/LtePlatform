@@ -17,4 +17,20 @@
         $scope.someBareValue = 'hello human, from child';
         $scope.someModel.someValue = 'hello human, from child 2';
     };
+})
+.controller('PeopleController', function ($scope) {
+    $scope.people = [
+        { name: "Ari", city: "San Francisco" },
+        { name: "Erik", city: "Seattle" }
+    ];
+})
+.controller('FormController', function ($scope) {
+    $scope.fields = [
+        { placeholder: 'Username', isRequired: true },
+        { placeholder: 'Password', isRequired: true },
+        { placeholder: 'Email (optional)', isRequired: false }
+    ];
+    $scope.submitForm = function () {
+        alert("it works!");
+    };
 });
