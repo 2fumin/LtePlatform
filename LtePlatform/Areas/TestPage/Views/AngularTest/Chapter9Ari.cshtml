@@ -16,9 +16,24 @@
             <span>由于原型继承的关系，修改父级对象中的someBareValue会同时修改子对象中的值，但反之则不行。</span>
             <div ng-controller="SomeController">
                 {{ someBareValue }}
+                {{ someModel.someValue }}
                 <button ng-click="someAction()">Communicate to child</button>
                 <div ng-controller="ChildController">
                     {{ someBareValue }}
+                    {{ someModel.someValue }}
+                    <button ng-click="childAction()">Communicate to parent</button>
+                </div>
+            </div>
+            <h3>在指令中使用子作用域 ng-controller 正确的做法</h3>
+            <span>
+                如果将模型对象的某个属性设置为字符串，它会通过引用进行共享，因此在子$scope中修改属性也会修改
+                父$scope中的这个属性。下面的例子展示了正确的做法
+            </span>
+            <div ng-controller="OtherController">
+                {{ someModel.someValue }}
+                <button ng-click="someAction()">Communicate to child</button>
+                <div ng-controller="OtherChildController">
+                    {{ someModel.someValue }}
                     <button ng-click="childAction()">Communicate to parent</button>
                 </div>
             </div>
@@ -29,6 +44,10 @@
 @section Scripts
 {
     <script src="~/Scripts/angular.js"></script>
+    <script type="text/javascript">
+        var app = angular.module("onewayDomainApp", []);
+    </script>
     <script src="~/Areas/TestPage/Scripts/angular/oneway.domain.app.js"></script>
+    <script src="~/Areas/TestPage/Scripts/angular/twoway.domain.app.js"></script>
 }
 

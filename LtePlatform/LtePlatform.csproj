@@ -399,6 +399,7 @@
     <Content Include="Areas\TestPage\Scripts\angular\oneway.domain.app.js" />
     <Content Include="Areas\TestPage\Scripts\angular\root.property.js" />
     <Content Include="Areas\TestPage\Scripts\angular\submit.form.js" />
+    <Content Include="Areas\TestPage\Scripts\angular\twoway.domain.app.js" />
     <Content Include="Areas\TestPage\Scripts\autostart.js" />
     <Content Include="Areas\TestPage\Scripts\basicpost.viewmodel.js" />
     <Content Include="Areas\TestPage\Scripts\diff.js" />
