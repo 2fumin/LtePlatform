@@ -292,6 +292,7 @@
     <Compile Include="Areas\TestPage\Models\SimpleTypeClass.cs" />
     <Compile Include="Areas\TestPage\TestPageAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Account\ApplicationRolesController.cs" />
     <Compile Include="Controllers\Account\ApplicationUsersController.cs" />
     <Compile Include="Controllers\AdminitrativeRegion\CityListController.cs" />
     <Compile Include="Controllers\CollegeController.cs" />
@@ -373,6 +374,7 @@
     <Compile Include="Models\MeViewModels.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\ResetPasswordViewModel.cs" />
+    <Compile Include="Models\RoleUsersDto.cs" />
     <Compile Include="Models\SendCodeViewModel.cs" />
     <Compile Include="Models\VerifyCodeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
