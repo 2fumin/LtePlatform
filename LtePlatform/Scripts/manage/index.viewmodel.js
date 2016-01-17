@@ -2,6 +2,7 @@
     var self = this;
 
     self.manageUsers = ko.observableArray([]);
+    self.manageRoles = ko.observableArray([]);
     
     Sammy(function () {
         this.get('#index', function () {
@@ -14,6 +15,17 @@
                 },
                 success: function(data) {
                     self.manageUsers(data);
+                }
+            });
+            $.ajax({
+                method: 'get',
+                url: app.dataModel.applicationRolesUrl,
+                contentType: "application/json; charset=utf-8",
+                headers: {
+                    'Authorization': 'Bearer ' + app.dataModel.getAccessToken()
+                },
+                success: function (data) {
+                    self.manageRoles(data);
                 }
             });
         });
