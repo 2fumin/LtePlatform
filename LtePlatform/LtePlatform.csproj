@@ -245,6 +245,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\ApplicationRoleManager.cs" />
+    <Compile Include="App_Start\ApplicationUserManager.cs" />
     <Compile Include="App_Start\AutoMapperWebConfiguration.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -358,8 +360,13 @@
     <Compile Include="Migrations\201511010036147_AddHometown20151101.Designer.cs">
       <DependentUpon>201511010036147_AddHometown20151101.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601170936073_Update_ApplicationDbContext_20160117.cs" />
+    <Compile Include="Migrations\201601170936073_Update_ApplicationDbContext_20160117.Designer.cs">
+      <DependentUpon>201601170936073_Update_ApplicationDbContext_20160117.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\ApplicationRole.cs" />
     <Compile Include="Models\ApplicationUserViewModel.cs" />
     <Compile Include="Models\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="Models\ApiDocAttribute.cs" />
@@ -875,6 +882,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201511010036147_AddHometown20151101.resx">
       <DependentUpon>201511010036147_AddHometown20151101.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601170936073_Update_ApplicationDbContext_20160117.resx">
+      <DependentUpon>201601170936073_Update_ApplicationDbContext_20160117.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
