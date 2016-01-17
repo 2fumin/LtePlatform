@@ -14,7 +14,6 @@ namespace Lte.Evaluations.DataService
     public class InterferenceMatrixService
     {
         private readonly IInterferenceMatrixRepository _repository;
-        private readonly ICellRepository _cellRepository;
 
         private static Stack<InterferenceMatrixStat> InterferenceMatrixStats { get; set; }
 
@@ -23,11 +22,10 @@ namespace Lte.Evaluations.DataService
         public InterferenceMatrixService(IInterferenceMatrixRepository repository, ICellRepository cellRepository)
         {
             _repository = repository;
-            _cellRepository = cellRepository;
             if (InterferenceMatrixStats == null)
                 InterferenceMatrixStats = new Stack<InterferenceMatrixStat>();
             if (PciCellList == null)
-                PciCellList = Mapper.Map<List<Cell>, List<PciCell>>(_cellRepository.GetAllList());
+                PciCellList = Mapper.Map<List<Cell>, List<PciCell>>(cellRepository.GetAllList());
         }
 
         public void UploadInterferenceStats(string path)
@@ -61,6 +59,32 @@ namespace Lte.Evaluations.DataService
                 stat.SectorId = matrixPci.SectorId;
                 InterferenceMatrixStats.Push(stat);
             }
+        }
+
+        public async Task<bool> DumpOneStat()
+        {
+            var stat = InterferenceMatrixStats.Pop();
+            if (stat == null) return false;
+            var item =
+                _repository.FirstOrDefault(
+                    x =>
+                        x.ENodebId == stat.ENodebId && x.SectorId == stat.SectorId && x.DestPci == stat.DestPci && x.RecordTime == stat.RecordTime);
+            if (item == null)
+            {
+                await _repository.InsertAsync(stat);
+            }
+            _repository.SaveChanges();
+            return true;
+        }
+
+        public int GetStatsToBeDump()
+        {
+            return InterferenceMatrixStats.Count;
+        }
+
+        public void ClearStats()
+        {
+            InterferenceMatrixStats.Clear();
         }
     }
 }
