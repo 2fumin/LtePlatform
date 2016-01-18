@@ -34,17 +34,30 @@
             管理角色
         </h3>
     </div>
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="col-md-4 control-label">角色名称：</label>
+            <div class="col-md-5">
+                <input class="form-control" data-bind="value: roleName"/>
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-primary" data-bind="click: addRole">新增</button>
+            </div>
+        </div>
+    </div>
     <div class="panel-body">
         <table class="table-hover">
             <thead>
             <tr>
                 <th>角色名称</th>
+                <th>角色编号</th>
                 <th>查询操作</th>
             </tr>
             </thead>
             <tbody data-bind="foreach: manageRoles">
             <tr>
-                <td></td>
+                <td data-bind="text: name"></td>
+                <td data-bind="text: roleId"></td>
                 <td></td>
             </tr>
             </tbody>

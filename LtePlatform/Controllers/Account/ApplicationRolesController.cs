@@ -10,14 +10,19 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace LtePlatform.Controllers.Account
 {
+    [Authorize]
     public class ApplicationRolesController : ApiController
     {
         [HttpGet]
-        public IEnumerable<ApplicationRole> Get()
+        public IEnumerable<ApplicationRoleViewModel> Get()
         {
             var context = ApplicationDbContext.Create();
             var roleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(context));
-            return roleManager.Roles;
+            return roleManager.Roles.Select(x=>new ApplicationRoleViewModel
+            {
+                Name = x.Name,
+                RoleId = x.Id
+            });
         }
 
         [HttpPost]
@@ -38,8 +43,8 @@ namespace LtePlatform.Controllers.Account
             }
         }
 
-        [HttpPut]
-        public bool Put(string roleName)
+        [HttpGet]
+        public bool Get(string roleName)
         {
             var context = ApplicationDbContext.Create();
             var roleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(context));
