@@ -1,18 +1,44 @@
-﻿@model dynamic
-
-@{
-    Layout = null;
+﻿@{
+    ViewBag.Title = "干扰矩阵数据导入";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>title</title>
-</head>
-<body>
-<div>
-      
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h2 class="panel-title">
+            <strong>@ViewBag.Title</strong>
+        </h2>
+    </div>
+    <p>
+        @{
+            Html.RenderPartial("_KpiMenu");
+        }
+    </p>
 </div>
-</body>
-</html>
+
+<div class="row">
+    <div class="col-md-6">
+        @{
+            Html.RenderPartial("_AlertPanel");
+            using (Html.BeginForm("InterferencePost", "Kpi",
+                FormMethod.Post, new {enctype = "multipart/form-data", @class = "form-horizontal", role = "form"}))
+            {
+                <div class="form-group">
+                    <label class="col-md-4 control-label">干扰矩阵数据导入：</label>
+                    <div class="col-md-6">
+                        <input name="files" class="form-control" type="file" multiple accept=".txt"/>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-save"></span>导入
+                        </button>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+    <div class="col-md-6">
+        @{
+            Html.RenderPartial("_InterferenceImport");
+        }
+    </div>
+</div>
