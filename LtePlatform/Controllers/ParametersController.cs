@@ -37,13 +37,12 @@ namespace LtePlatform.Controllers
         [HttpPost]
         public ActionResult ZteAlarmPost(HttpPostedFileBase[] alarmZte)
         {
-            if (alarmZte != null && alarmZte.Length > 0 && !string.IsNullOrEmpty(alarmZte[0]?.FileName))
+            if (alarmZte == null || alarmZte.Length <= 0 || string.IsNullOrEmpty(alarmZte[0]?.FileName))
+                return View("AlarmImport");
+            ViewBag.Message = "共上传中兴告警信息文件" + alarmZte.Length + "个！";
+            foreach (var file in alarmZte)
             {
-                ViewBag.Message = "共上传中兴告警信息文件" + alarmZte.Length + "个！";
-                foreach (var file in alarmZte)
-                {
-                    _alarmsService.UploadZteAlarms(new StreamReader(file.InputStream, Encoding.GetEncoding("GB2312")));
-                }
+                _alarmsService.UploadZteAlarms(new StreamReader(file.InputStream, Encoding.GetEncoding("GB2312")));
             }
             return View("AlarmImport");
         }
@@ -51,13 +50,12 @@ namespace LtePlatform.Controllers
         [HttpPost]
         public ActionResult HwAlarmPost(HttpPostedFileBase[] alarmHw)
         {
-            if (alarmHw != null && alarmHw.Length > 0 && !string.IsNullOrEmpty(alarmHw[0]?.FileName))
+            if (alarmHw == null || alarmHw.Length <= 0 || string.IsNullOrEmpty(alarmHw[0]?.FileName))
+                return View("AlarmImport");
+            ViewBag.Message = "共上传华为告警信息文件" + alarmHw.Length + "个！";
+            foreach (var file in alarmHw)
             {
-                ViewBag.Message = "共上传华为告警信息文件" + alarmHw.Length + "个！";
-                foreach (var file in alarmHw)
-                {
-                    _alarmsService.UploadHwAlarms(new StreamReader(file.InputStream, Encoding.GetEncoding("GB2312")));
-                }
+                _alarmsService.UploadHwAlarms(new StreamReader(file.InputStream, Encoding.GetEncoding("GB2312")));
             }
             return View("AlarmImport");
         }

@@ -17,14 +17,17 @@ namespace LtePlatform.Controllers
         private readonly KpiImportService _importService;
         private readonly PreciseImportService _preciseImportService;
         private readonly WorkItemService _workItemService;
+        private readonly InterferenceMatrixService _interferenceMatrix;
 
         public KpiController(TownQueryService townService, KpiImportService importService,
-            PreciseImportService preciseImportService, WorkItemService workItemService)
+            PreciseImportService preciseImportService, WorkItemService workItemService,
+            InterferenceMatrixService interferenceMatrix)
         {
             _townService = townService;
             _importService = importService;
             _preciseImportService = preciseImportService;
             _workItemService = workItemService;
+            _interferenceMatrix = interferenceMatrix;
         }
 
         public ActionResult Index()
@@ -137,6 +140,25 @@ namespace LtePlatform.Controllers
                 ViewBag.Message = _workItemService.ImportExcelFiles(path);
             }
             return View("WorkItemImport");
+        }
+
+        public ActionResult InterferenceImport()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult InterferencePost(HttpPostedFileBase[] files)
+        {
+            if (files == null || files.Length <= 0 || string.IsNullOrEmpty(files[0]?.FileName))
+                return View("InterferenceImport");
+            ViewBag.Message = "共上传干扰矩阵信息文件" + files.Length + "个！";
+            foreach (var file in files)
+            {
+                _interferenceMatrix.UploadInterferenceStats(
+                    new StreamReader(file.InputStream, Encoding.GetEncoding("GB2312")), file.FileName);
+            }
+            return View("InterferenceImport");
         }
     }
 }

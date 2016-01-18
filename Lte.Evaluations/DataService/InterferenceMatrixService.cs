@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,9 +29,9 @@ namespace Lte.Evaluations.DataService
                 PciCellList = Mapper.Map<List<Cell>, List<PciCell>>(cellRepository.GetAllList());
         }
 
-        public void UploadInterferenceStats(string path)
+        public void UploadInterferenceStats(StreamReader reader, string path)
         {
-            var container = InterferenceMatrixCsv.ReadInterferenceMatrixCsvs(path);
+            var container = InterferenceMatrixCsv.ReadInterferenceMatrixCsvs(reader, path);
             if (container == null) return;
             var time = container.RecordTime;
             var pcis = from info in
