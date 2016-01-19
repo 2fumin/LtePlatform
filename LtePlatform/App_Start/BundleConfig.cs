@@ -123,6 +123,15 @@ namespace LtePlatform
                 "~/Scripts/kpi/preciseimport.viewmodel.js",
                 "~/Scripts/app/_run.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/parametersNeighborImport").Include(
+                "~/Scripts/sammy-{version}.js",
+                "~/Scripts/app/common.js",
+                "~/Scripts/app/app.datamodel.js",
+                "~/Scripts/app/app.viewmodel.js",
+                "~/Scripts/kpi/common.controller.js",
+                "~/Scripts/kpi/interferenceimport.viewmodel.js",
+                "~/Scripts/app/_run.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/kpiPreciseTop").Include(
                 "~/Scripts/sammy-{version}.js",
                 "~/Scripts/app/common.js",
