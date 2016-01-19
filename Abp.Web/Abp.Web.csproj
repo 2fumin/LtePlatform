@@ -41,6 +41,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +55,7 @@
   <ItemGroup>
     <Compile Include="AbpWebApplication.cs" />
     <Compile Include="AbpWebModule.cs" />
+    <Compile Include="Application\Services\Dto\ComboboxItemDtoExtensions.cs" />
     <Compile Include="Authorization\AuthorizationScriptManager.cs" />
     <Compile Include="Authorization\IAuthorizationScriptManager.cs" />
     <Compile Include="Configuration\AbpWebModuleConfiguration.cs" />
@@ -72,17 +77,25 @@
     <Compile Include="MultiTenancy\IMultiTenancyScriptManager.cs" />
     <Compile Include="MultiTenancy\MultiTenancyScriptManager.cs" />
     <Compile Include="Mvc\AbpWebMvcModule.cs" />
+    <Compile Include="Mvc\Authorization\AbpMvcAuthorizeAttribute.cs" />
     <Compile Include="Mvc\Controllers\AbpAppViewController.cs" />
     <Compile Include="Mvc\Controllers\AbpController.cs" />
     <Compile Include="Mvc\Controllers\AbpHandleErrorAttribute.cs" />
     <Compile Include="Mvc\Controllers\AbpScriptsController.cs" />
     <Compile Include="Mvc\Controllers\ControllerConventionalRegistrar.cs" />
+    <Compile Include="Mvc\Controllers\Localization\AbpLocalizationController.cs" />
     <Compile Include="Mvc\Controllers\Results\AbpJsonResult.cs" />
     <Compile Include="Mvc\Controllers\WindsorControllerFactory.cs" />
+    <Compile Include="Mvc\Extensions\HtmlHelperResourceExtensions.cs" />
     <Compile Include="Mvc\Models\ErrorViewModel.cs" />
     <Compile Include="Mvc\Models\ModelStateExtensions.cs" />
     <Compile Include="Mvc\Models\MvcAjaxResponse.cs" />
     <Compile Include="Mvc\Models\MvcAjaxResponseOfTResult.cs" />
+    <Compile Include="Mvc\Resources\Embedded\Handlers\EmbeddedResourceHttpHandler.cs" />
+    <Compile Include="Mvc\Resources\Embedded\Handlers\EmbeddedResourceRouteHandler.cs" />
+    <Compile Include="Mvc\Resources\WebResourceHelper.cs" />
+    <Compile Include="Mvc\Views\AbpWebViewPage.cs" />
+    <Compile Include="Mvc\Views\AbpWebViewPageOfTModel.cs" />
     <Compile Include="Navigation\INavigationScriptManager.cs" />
     <Compile Include="Navigation\NavigationScriptManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -90,7 +103,9 @@
     <Compile Include="Sessions\SessionScriptManager.cs" />
     <Compile Include="Settings\ISettingScriptManager.cs" />
     <Compile Include="Settings\SettingScriptManager.cs" />
+    <Compile Include="Startup\AbpWebConfigurationExtensions.cs" />
     <Compile Include="WebAssemblyFinder.cs" />
+    <Compile Include="WebAuditInfoProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Abp\Abp.csproj">
