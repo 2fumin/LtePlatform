@@ -9,7 +9,7 @@
         this.get('#interferenceImport', function () {
         });
         this.post('#interferencePost', function () {
-            sendRequest(app.dataModel.dumpNeighborUrl, "GET", null, function (result) {
+            sendRequest(app.dataModel.dumpInterferenceUrl, "GET", null, function (result) {
                 self.totalDumpItems(result);
             });
         });
@@ -18,7 +18,7 @@
     });
 
     self.dumpItems = function () {
-        dumpProgressItems(self, app.dataModel.dumpNeighborUrl);
+        dumpProgressItems(self, app.dataModel.dumpInterferenceUrl);
     };
 
     self.updateHistoryItems = function () {
@@ -26,7 +26,7 @@
     };
 
     self.clearItems = function () {
-        sendRequest(app.dataModel.dumpNeighborUrl, "DELETE", null, function () {
+        sendRequest(app.dataModel.dumpInterferenceUrl, "DELETE", null, function () {
             self.totalDumpItems(0);
             self.totalFailItems(0);
             self.totalSuccessItems(0);
