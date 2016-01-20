@@ -14,7 +14,7 @@ app.controller('ChildController', function ($scope) {
     $scope.fullSentenceFromChild = 'Same $scope: We can access: ' +
         $scope.rootProperty + ' and ' +
         $scope.parentProperty + ' and ' +
-        $scope.childProperty
+        $scope.childProperty;
 });
 
 app.directive('myDirective', function () {
