@@ -906,10 +906,12 @@
     <Content Include="Views\Shared\_DtKpiSelection.cshtml" />
     <Content Include="Views\Shared\_KnockoutPaging.cshtml" />
     <None Include="Views\Parameters\_NeighborImport.cshtml" />
+    <Content Include="Views\Rutrace\_RutraceMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\HelpPage\Views\Shared\" />
+    <Folder Include="Scripts\rutrace\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

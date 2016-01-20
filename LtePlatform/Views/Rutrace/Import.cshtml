@@ -1,7 +1,19 @@
-﻿
-@{
-    ViewBag.Title = "Import";
+﻿@section SPAViews
+{
+    <div ng-model="myApp" ng-class="importController">
+        @{
+            Html.RenderPartial("_RutraceMenu");
+        }
+    </div>
 }
 
-<h2>Import</h2>
+@section Scripts
+{
+    @Scripts.Render("~/bundles/angularJS")
+    <script>
+        (function() {
+            var app = angular.module('myApp', []);
+        })();
+    </script>
+}
 
