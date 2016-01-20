@@ -2,6 +2,7 @@
 using System.Linq;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.College;
 
 namespace Lte.Evaluations.DataService.College
 {

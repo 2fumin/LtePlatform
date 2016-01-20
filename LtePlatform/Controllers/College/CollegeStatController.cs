@@ -8,9 +8,12 @@ using Lte.Evaluations.DataService;
 using Lte.Evaluations.DataService.College;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.College;
+using LtePlatform.Models;
 
 namespace LtePlatform.Controllers.College
 {
+    [ApiControl("统计校园网信息控制器")]
     public class CollegeStatController : ApiController
     {
         private readonly CollegeStatService _service;
@@ -21,6 +24,9 @@ namespace LtePlatform.Controllers.College
         }
 
         [HttpGet]
+        [ApiDoc("根据校园编号查询校园网统计信息")]
+        [ApiParameterDoc("id", "校园编号")]
+        [ApiResponse("校园网统计信息， 若查不到则会返回错误信息")]
         public IHttpActionResult Get(int id)
         {
             var stat = _service.QueryStat(id);
@@ -28,6 +34,8 @@ namespace LtePlatform.Controllers.College
         }
 
         [HttpGet]
+        [ApiDoc("查询所有校园网统计信息")]
+        [ApiResponse("所有校园网统计信息")]
         public IEnumerable<CollegeStat> Get()
         {
             return _service.QueryStats();
