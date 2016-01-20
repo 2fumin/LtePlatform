@@ -1,0 +1,18 @@
+﻿@section SPAViews
+{
+    <div ng-app="myApp" ng-controller="rutrace.coverage">
+        @{
+            Html.RenderPartial("_RutraceMenu");
+        }
+    </div>
+}
+
+@section Scripts
+{
+    <script src="~/Scripts/angular.js"></script>
+    <script>
+        var app = angular.module('myApp', []);
+    </script>
+    <script src="~/Scripts/rutrace/coverage.controller.js"></script>
+    <script src="~/Scripts/rutrace/menu.controller.js"></script>
+}
