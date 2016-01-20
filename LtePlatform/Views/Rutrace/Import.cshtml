@@ -1,6 +1,6 @@
 ﻿@section SPAViews
 {
-    <div ng-model="myApp" ng-class="importController">
+    <div ng-app="myApp" ng-controller="rutrace.import">
         @{
             Html.RenderPartial("_RutraceMenu");
         }
@@ -9,11 +9,11 @@
 
 @section Scripts
 {
-    @Scripts.Render("~/bundles/angularJS")
+    <script src="~/Scripts/angular.js"></script>
     <script>
-        (function() {
-            var app = angular.module('myApp', []);
-        })();
+        var app = angular.module('myApp', []);
     </script>
+    <script src="~/Scripts/rutrace/import.controller.js"></script>
+    <script src="~/Scripts/rutrace/menu.controller.js"></script>
 }
 

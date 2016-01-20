@@ -87,3 +87,14 @@ uploads/
 /LtePlatform.Tests/bin/Release/xunit.execution.desktop.xml
 /LtePlatform.Tests/bin/Release/xunit.core.xml
 /LtePlatform.Tests/bin/Release/xunit.assert.xml
+/Abp/bin/Release/Abp.xml
+/Abp.EntityFramework/bin/Release/Abp.xml
+/Abp.EntityFramework.Tests/bin/Release/Abp.xml
+/Lte.Evaluations.Test/bin/Release/Abp.xml
+/Lte.Parameters/bin/Release/Abp.xml
+/Lte.Parameters.Test/bin/Release/Abp.xml
+/LtePlatform/bin/Abp.xml
+/LtePlatform.Tests/bin/Release/Abp.xml
+/Abp.Tests/bin/Release/Abp.xml
+/Lte.Evaluations/bin/Release/Abp.xml
+/Abp.Web/bin/Release/Abp.xml

@@ -16,16 +16,7 @@ namespace LtePlatform
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                 "~/Scripts/jquery.unobtrusive*",
                 "~/Scripts/jquery.validate*"));
-
-            bundles.Add(new ScriptBundle("~/bundles/angularJS").Include(
-                "~/Scripts/angular.min.js",
-                "~/Scripts/angular-animate.min.js",
-                "~/Scripts/angular-sanitize.min.js",
-                "~/Scripts/angular-ui-router.min.js",
-                "~/Scripts/angular-ui/ui-bootstrap.min.js",
-                "~/Scripts/angular-ui/ui-bootstrap-tpls.min.js",
-                "~/Scripts/angular-ui/ui-utils.min.js"));
-
+            
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                 "~/Scripts/jquery-ui-{version}.js"));
 

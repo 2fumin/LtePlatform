@@ -13,5 +13,10 @@ namespace LtePlatform.Controllers
         {
             return View();
         }
+
+        public ActionResult Interference()
+        {
+            return View();
+        }
     }
 }
