@@ -1,18 +1,18 @@
-﻿@model dynamic
-
-@{
-    Layout = null;
+﻿@section SPAViews
+{
+    <div ng-app="myApp" ng-controller="rutrace.interference">
+        @{
+            Html.RenderPartial("_RutraceMenu");
+        }
+    </div>
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>title</title>
-</head>
-<body>
-<div>
-      
-</div>
-</body>
-</html>
+@section Scripts
+{
+    <script src="~/Scripts/angular.js"></script>
+    <script>
+        var app = angular.module('myApp', []);
+    </script>
+    <script src="~/Scripts/rutrace/interference.controller.js"></script>
+    <script src="~/Scripts/rutrace/menu.controller.js"></script>
+}

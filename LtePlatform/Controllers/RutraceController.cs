@@ -18,5 +18,15 @@ namespace LtePlatform.Controllers
         {
             return View();
         }
+
+        public ActionResult Coverage()
+        {
+            return View();
+        }
+
+        public ActionResult WorkItem()
+        {
+            return View();
+        }
     }
 }

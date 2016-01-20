@@ -766,8 +766,11 @@
     <Content Include="Scripts\parameters\querymap.viewmodel.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\rutrace\coverage.controller.js" />
     <Content Include="Scripts\rutrace\import.controller.js" />
+    <Content Include="Scripts\rutrace\interference.controller.js" />
     <Content Include="Scripts\rutrace\menu.controller.js" />
+    <Content Include="Scripts\rutrace\workitem.controller.js" />
     <Content Include="Scripts\sammy-0.7.5.js" />
     <Content Include="Scripts\sammy-0.7.5.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -909,7 +912,9 @@
     <Content Include="Views\Shared\_KnockoutPaging.cshtml" />
     <None Include="Views\Parameters\_NeighborImport.cshtml" />
     <Content Include="Views\Rutrace\_RutraceMenu.cshtml" />
+    <None Include="Views\Rutrace\Coverage.cshtml" />
     <None Include="Views\Rutrace\Interference.cshtml" />
+    <None Include="Views\Rutrace\WorkItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
