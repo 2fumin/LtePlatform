@@ -21,7 +21,7 @@ namespace Abp.EntityFramework.Dependency
                     .Configure(c => c.DynamicParameters(
                         (kernel, dynamicParams) =>
                         {
-                            var connectionString = context.IocManager.GetNameOrConnectionStringOrNull();
+                            var connectionString = GetNameOrConnectionStringOrNull(context.IocManager);
                             if (!string.IsNullOrWhiteSpace(connectionString))
                             {
                                 dynamicParams["nameOrConnectionString"] = connectionString;
@@ -29,5 +29,23 @@ namespace Abp.EntityFramework.Dependency
                         })));
         }
 
+        private static string GetNameOrConnectionStringOrNull(IIocResolver iocResolver)
+        {
+            if (iocResolver.IsRegistered<IAbpStartupConfiguration>())
+            {
+                var defaultConnectionString = iocResolver.Resolve<IAbpStartupConfiguration>().DefaultNameOrConnectionString;
+                if (!string.IsNullOrWhiteSpace(defaultConnectionString))
+                {
+                    return defaultConnectionString;
+                }
+            }
+
+            if (ConfigurationManager.ConnectionStrings["Default"] != null)
+            {
+                return "Default";
+            }
+
+            return null;
+        }
     }
 }

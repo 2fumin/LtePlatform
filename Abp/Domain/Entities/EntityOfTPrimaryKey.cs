@@ -28,7 +28,7 @@ namespace Abp.Domain.Entities
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (!(obj is Entity<TPrimaryKey>))
+            if (obj == null || !(obj is Entity<TPrimaryKey>))
             {
                 return false;
             }
@@ -66,7 +66,12 @@ namespace Abp.Domain.Entities
         /// <inheritdoc/>
         public static bool operator ==(Entity<TPrimaryKey> left, Entity<TPrimaryKey> right)
         {
-            return Equals(left, null) ? Equals(right, null) : left.Equals(right);
+            if (Equals(left, null))
+            {
+                return Equals(right, null);
+            }
+
+            return left.Equals(right);
         }
 
         /// <inheritdoc/>
@@ -78,7 +83,7 @@ namespace Abp.Domain.Entities
         /// <inheritdoc/>
         public override string ToString()
         {
-            return $"[{GetType().Name} {Id}]";
+            return string.Format("[{0} {1}]", GetType().Name, Id);
         }
     }
 }

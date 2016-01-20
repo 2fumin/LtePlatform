@@ -22,12 +22,12 @@ namespace Abp.EntityFramework.Repositories
         /// <summary>
         /// Gets EF DbContext object.
         /// </summary>
-        protected virtual TDbContext Context => _dbContextProvider.DbContext;
+        protected virtual TDbContext Context { get { return _dbContextProvider.DbContext; } }
 
         /// <summary>
         /// Gets DbSet for given entity.
         /// </summary>
-        protected virtual DbSet<TEntity> Table => Context.Set<TEntity>();
+        protected virtual DbSet<TEntity> Table { get { return Context.Set<TEntity>(); } }
 
         private readonly IDbContextProvider<TDbContext> _dbContextProvider;
 
@@ -146,10 +146,9 @@ namespace Abp.EntityFramework.Repositories
         {
             AttachIfNot(entity);
 
-            var softDelete = entity as ISoftDelete;
-            if (softDelete != null)
+            if (entity is ISoftDelete)
             {
-                softDelete.IsDeleted = true;
+                (entity as ISoftDelete).IsDeleted = true;
             }
             else
             {

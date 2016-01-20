@@ -12,15 +12,15 @@ namespace Abp.Tests.Net.Mail
         {
             var configuration = Substitute.For<ISmtpEmailSenderConfiguration>();
 
-            configuration.DefaultFromAddress.Returns("smtp.189.cn");
-            configuration.DefaultFromDisplayName.Returns("Ouyang Hui");
+            configuration.DefaultFromAddress.Returns("...");
+            configuration.DefaultFromDisplayName.Returns("...");
 
-            configuration.Host.Returns("smtp.189.cn");
+            configuration.Host.Returns("...");
             configuration.Port.Returns(25);
 
             //configuration.Domain.Returns("...");
-            configuration.UserName.Returns("ouyh18");
-            configuration.Password.Returns("md@287965");
+            configuration.UserName.Returns("...");
+            configuration.Password.Returns("...");
 
             //configuration.EnableSsl.Returns(false);
             //configuration.UseDefaultCredentials.Returns(false);
@@ -28,15 +28,13 @@ namespace Abp.Tests.Net.Mail
             _smtpEmailSender = new SmtpEmailSender(configuration);
         }
 
-        [Fact] //Need to set configuration before executing this test
+        //[Fact] //Need to set configuration before executing this test
         public void Test_Send_Email()
         {
             _smtpEmailSender.Send(
-                "ouyh18@189.cn",
-                "ouyh19@189.cn",
+                "...", 
                 "Test email", 
-                "An email body",
-                true
+                "An email body"
                 );
         }
     }

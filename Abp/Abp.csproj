@@ -89,10 +89,16 @@
     <Compile Include="Application\Features\IFeatureDependencyContext.cs" />
     <Compile Include="Application\Features\IFeatureManager.cs" />
     <Compile Include="Application\Features\IFeatureValueStore.cs" />
+    <Compile Include="Domain\Entities\Auditing\IHasDeletionTime.cs" />
+    <Compile Include="Domain\Entities\Auditing\IHasModificationTime.cs" />
     <Compile Include="Events\Bus\Entities\EntityChangingEventData.cs" />
     <Compile Include="Events\Bus\Entities\EntityCreatingEventData.cs" />
     <Compile Include="Events\Bus\Entities\EntityDeletingEventData.cs" />
     <Compile Include="Events\Bus\Entities\EntityUpdatingEventData.cs" />
+    <Compile Include="Localization\Dictionaries\Json\JsonEmbeddedFileLocalizationDictionaryProvider.cs" />
+    <Compile Include="Localization\Dictionaries\Json\JsonFileLocalizationDictionaryProvider.cs" />
+    <Compile Include="Localization\Dictionaries\Json\JsonLocalizationDictionary.cs" />
+    <Compile Include="Localization\Dictionaries\Json\JsonLocalizationFile.cs" />
     <Compile Include="Localization\LocalizationManagerExtensions.cs" />
     <Compile Include="Localization\LocalizationSettingNames.cs" />
     <Compile Include="Localization\LocalizationSettingProvider.cs" />
@@ -476,6 +482,8 @@
     <Compile Include="IO\Extensions\StreamExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Reflection\Extensions\MemberInfoExtensions.cs" />
+    <Compile Include="Web\Models\DontWrapResultAttribute.cs" />
+    <Compile Include="Web\Models\WrapResultAttribute.cs" />
     <Compile Include="Xml\Extensions\XmlExtensions.cs" />
     <Compile Include="Localization\GlobalizationHelper.cs" />
     <Compile Include="IO\DirectoryHelper.cs" />
@@ -511,6 +519,9 @@
       <Project>{73fb5b0b-5796-41dc-a5a6-743d585f6b5b}</Project>
       <Name>Castle.Windsor</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Localization\Sources\AbpXmlSource\Abp-lt.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

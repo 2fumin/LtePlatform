@@ -71,8 +71,6 @@
     <Compile Include="Repositories\EfRepositoryBaseOfTEntityAndTPrimaryKey.cs" />
     <Compile Include="Repositories\EntityFrameworkGenericRepositoryRegistrar.cs" />
     <Compile Include="SimpleDbContextProvider.cs" />
-    <Compile Include="SoftDeleting\SoftDeleteInterceptor.cs" />
-    <Compile Include="SoftDeleting\SoftDeleteQueryVisitor.cs" />
     <Compile Include="Uow\EfUnitOfWork.cs" />
     <Compile Include="Uow\UnitOfWorkDbContextProvider.cs" />
     <Compile Include="Uow\UnitOfWorkExtensions.cs" />

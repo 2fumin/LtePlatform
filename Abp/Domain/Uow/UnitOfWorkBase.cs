@@ -289,8 +289,6 @@ namespace Abp.Domain.Uow
         /// Should not call base method since it throws <see cref="NotImplementedException"/>.
         /// </summary>
         /// <param name="filterName">Filter name</param>
-        /// <param name="parameterName">Parameter name</param>
-        /// <param name="value">value</param>
         protected virtual void ApplyFilterParameterValue(string filterName, string parameterName, object value)
         {
             throw new NotImplementedException("SetFilterParameterValue is not implemented for " + GetType().FullName);

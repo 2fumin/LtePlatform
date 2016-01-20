@@ -36,8 +36,8 @@ namespace Abp.Tests.Domain.Uow
                            {
                                using (var uow = new InnerUnitOfWorkCompleteHandle())
                                {
-                                   uow.Complete();
                                    throw new Exception("My inner exception!");
+                                   uow.Complete();
                                }
                            })).Message.ShouldBe("My inner exception!");
         }

@@ -70,13 +70,19 @@ namespace Abp.EntityFramework.Uow
         protected override void CompleteUow()
         {
             SaveChanges();
-            CurrentTransaction?.Complete();
+            if (CurrentTransaction != null)
+            {
+                CurrentTransaction.Complete();
+            }
         }
 
         protected override async Task CompleteUowAsync()
         {
             await SaveChangesAsync();
-            CurrentTransaction?.Complete();
+            if (CurrentTransaction != null)
+            {
+                CurrentTransaction.Complete();
+            }
         }
 
         protected override void ApplyDisableFilter(string filterName)
@@ -114,34 +120,36 @@ namespace Abp.EntityFramework.Uow
             where TDbContext : DbContext
         {
             DbContext dbContext;
-            if (ActiveDbContexts.TryGetValue(typeof (TDbContext), out dbContext)) return (TDbContext) dbContext;
-            dbContext = Resolve<TDbContext>();
-
-            foreach (var filter in Filters)
+            if (!ActiveDbContexts.TryGetValue(typeof(TDbContext), out dbContext))
             {
-                if (filter.IsEnabled)
-                {
-                    dbContext.EnableFilter(filter.FilterName);
-                }
-                else
-                {
-                    dbContext.DisableFilter(filter.FilterName);
-                }
+                dbContext = Resolve<TDbContext>();
 
-                foreach (var filterParameter in filter.FilterParameters)
+                foreach (var filter in Filters)
                 {
-                    if (TypeHelper.IsFunc<object>(filterParameter.Value))
+                    if (filter.IsEnabled)
                     {
-                        dbContext.SetFilterScopedParameterValue(filter.FilterName, filterParameter.Key, (Func<object>)filterParameter.Value);
+                        dbContext.EnableFilter(filter.FilterName);
                     }
                     else
                     {
-                        dbContext.SetFilterScopedParameterValue(filter.FilterName, filterParameter.Key, filterParameter.Value);
+                        dbContext.DisableFilter(filter.FilterName);
+                    }
+
+                    foreach (var filterParameter in filter.FilterParameters)
+                    {
+                        if (TypeHelper.IsFunc<object>(filterParameter.Value))
+                        {
+                            dbContext.SetFilterScopedParameterValue(filter.FilterName, filterParameter.Key, (Func<object>)filterParameter.Value);
+                        }
+                        else
+                        {
+                            dbContext.SetFilterScopedParameterValue(filter.FilterName, filterParameter.Key, filterParameter.Value);
+                        }
                     }
                 }
-            }
 
-            ActiveDbContexts[typeof(TDbContext)] = dbContext;
+                ActiveDbContexts[typeof(TDbContext)] = dbContext;
+            }
 
             return (TDbContext)dbContext;
         }
@@ -150,7 +158,10 @@ namespace Abp.EntityFramework.Uow
         {
             ActiveDbContexts.Values.ForEach(Release);
 
-            CurrentTransaction?.Dispose();
+            if (CurrentTransaction != null)
+            {
+                CurrentTransaction.Dispose();
+            }
         }
 
         protected virtual void SaveChangesInDbContext(DbContext dbContext)

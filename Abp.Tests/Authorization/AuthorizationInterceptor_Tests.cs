@@ -14,7 +14,7 @@ namespace Abp.Tests.Authorization
     {
         private readonly MyTestClassToBeAuthorized_Sync _syncObj;
         private readonly MyTestClassToBeAuthorized_Async _asyncObj;
-        
+
         public AuthorizationInterceptor_Tests()
         {
             //SUT: AuthorizationInterceptor and AuthorizeAttributeHelper

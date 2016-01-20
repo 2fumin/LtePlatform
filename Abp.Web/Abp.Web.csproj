@@ -82,6 +82,7 @@
     <Compile Include="Mvc\Controllers\AbpController.cs" />
     <Compile Include="Mvc\Controllers\AbpHandleErrorAttribute.cs" />
     <Compile Include="Mvc\Controllers\AbpScriptsController.cs" />
+    <Compile Include="Mvc\Controllers\ActionDescriptorHelper.cs" />
     <Compile Include="Mvc\Controllers\ControllerConventionalRegistrar.cs" />
     <Compile Include="Mvc\Controllers\Localization\AbpLocalizationController.cs" />
     <Compile Include="Mvc\Controllers\Results\AbpJsonResult.cs" />
@@ -123,6 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Localization\AbpWebXmlSource\AbpWeb-de.xml" />
+    <Content Include="Localization\AbpWebXmlSource\AbpWeb-lt.xml" />
     <Content Include="Localization\AbpWebXmlSource\AbpWeb-pt-BR.xml" />
     <Content Include="Localization\AbpWebXmlSource\AbpWeb-tr.xml" />
     <Content Include="Localization\AbpWebXmlSource\AbpWeb-zh-CN.xml" />
