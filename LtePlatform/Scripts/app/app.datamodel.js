@@ -47,6 +47,8 @@
     self.dumpBtsExcelUrl = "/api/DumpBtsExcel";
     self.dumpCdmaCellExcelUrl = "/api/DumpCdmaCellExcel";
     self.workItemUrl = "/api/WorkItem";
+    self.lteNeighborCellUrl = "/api/LteNeighborCell";
+    self.nearestPciCellUrl = "/api/NearestPciCell";
 
     self.areaTestDateUrl = "/api/AreaTestDate";
     self.csvFileInfoUrl = "/api/CsvFileInfo";

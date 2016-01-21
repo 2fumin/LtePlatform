@@ -10,6 +10,9 @@
     };
     $scope.topCells = [];
     $scope.dataModel = new AppDataModel();
+    $scope.currentCellName = "";
+    $scope.neighborCells = [];
+
     $('.form_date').datetimepicker({
         language: 'zh-CN',
         weekStart: 1,
@@ -20,6 +23,7 @@
         minView: 2,
         forceParse: 0
     });
+
     $scope.query = function () {
         $scope.topCells = [];
         $http({
@@ -33,6 +37,20 @@
             }
         }).success(function(result) {
             $scope.topCells = result;
+        });
+    };
+    $scope.showNeighbors = function(cell) {
+        $scope.currentCellName = cell.eNodebName + "-" + cell.sectorId;
+        $scope.neighborCells = [];
+        $http({
+            method: 'GET',
+            url: $scope.dataModel.nearestPciCellUrl,
+            params: {
+                'cellId': cell.cellId,
+                'sectorId': cell.sectorId
+            }
+        }).success(function(result) {
+            $scope.neighborCells = result;
         });
     };
 
