@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Lte.Evaluations.ViewModels;
+﻿using System.Collections.Generic;
+using Lte.Evaluations.ViewModels.Precise;
 using Lte.Parameters.Entities;
 
 namespace Lte.Evaluations.MapperSerive

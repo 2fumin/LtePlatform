@@ -1,6 +1,6 @@
 ﻿using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.Test.MockItems;
-using Lte.Evaluations.ViewModels;
+using Lte.Evaluations.ViewModels.Precise;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 using Moq;

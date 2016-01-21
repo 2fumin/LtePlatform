@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.Policy;
-using Lte.Evaluations.ViewModels;
+using Lte.Evaluations.ViewModels.Precise;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 

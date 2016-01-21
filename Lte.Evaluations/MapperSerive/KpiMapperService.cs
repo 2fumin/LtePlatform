@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using Lte.Domain.Common;
+﻿using AutoMapper;
 using Lte.Domain.Common.Wireless;
-using Lte.Domain.Regular;
 using Lte.Evaluations.ViewModels;
+using Lte.Evaluations.ViewModels.Precise;
 using Lte.Evaluations.ViewModels.RegionKpi;
 using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.Work;

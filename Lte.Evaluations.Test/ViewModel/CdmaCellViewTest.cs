@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Lte.Evaluations.MapperSerive;
+﻿using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.Test.MockItems;
-using Lte.Evaluations.ViewModels;
+using Lte.Evaluations.ViewModels.Basic;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 using Moq;
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
 
 namespace Lte.Evaluations.Test.ViewModel
 {

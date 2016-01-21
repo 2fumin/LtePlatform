@@ -33,13 +33,10 @@ namespace Lte.Parameters.Entities
     }
 
     [Table("dbo.LteNeighborCells")]
-    [TypeDoc("包含PCI的LTE邻区关系定义")]
     public class NearestPciCell : LteNeighborCell
     {
-        [MemberDoc("PCI，便于查询邻区")]
         public short Pci { get; set; }
-
-        [MemberDoc("切换次数，仅供参考")]
+        
         public int TotalTimes { get; set; }
 
         public static NearestPciCell ConstructCell(NeighborCellHwCsv info, ICellRepository cellRepository)

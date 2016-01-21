@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Lte.Domain.LinqToCsv.Context;
 using Lte.Domain.LinqToCsv.Description;
+using Lte.Evaluations.ViewModels;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.ExcelCsv;
@@ -16,20 +17,23 @@ namespace Lte.Evaluations.DataService
     {
         private readonly INearestPciCellRepository _repository;
         private readonly ICellRepository _cellRepository;
+        private readonly IENodebRepository _eNodebRepository;
 
         private static Stack<NearestPciCell> NearestCells { get; set; } 
 
-        public NearestPciCellService(INearestPciCellRepository repository, ICellRepository cellRepository)
+        public NearestPciCellService(INearestPciCellRepository repository, ICellRepository cellRepository,
+            IENodebRepository eNodebRepository)
         {
             _repository = repository;
             _cellRepository = cellRepository;
+            _eNodebRepository = eNodebRepository;
             if (NearestCells == null)
                 NearestCells = new Stack<NearestPciCell>();
         }
 
-        public List<NearestPciCell> QueryCells(int cellId, byte sectorId)
+        public List<NearestPciCellView> QueryCells(int cellId, byte sectorId)
         {
-            return _repository.GetAllList(cellId, sectorId);
+            return _repository.GetAllList(cellId, sectorId).Select(x=>NearestPciCellView.ConstructView(x, _eNodebRepository)).ToList();
         }
 
         public void UploadZteNeighbors(StreamReader reader)
