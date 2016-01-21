@@ -31,9 +31,12 @@
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
-                            <input type="hidden" id="end-date" value="" /><br />
+                            <input type="hidden" id="end-date" value=""/><br/>
+                            <button class="btn btn-primary" ng-click="query()">查询</button>
                         </div>
-                        <p>{{beginDate.value}}&nbsp;{{endDate.value}}</p>
+                        @{
+                            Html.RenderPartial("_TopPreciseTable");
+                        }
                     </div>
                 </div>
             </div>
@@ -49,6 +52,8 @@
     <link href="~/Content/themes/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
     <script src="~/Scripts/angular-ui/bootstrap-datetimepicker.min.js"></script>
     <script src="~/Scripts/angular-ui/local/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="~/Scripts/app/common.js"></script>
+    <script src="~/Scripts/app/app.datamodel.js"></script>
     <script>
         var app = angular.module('myApp', []);
     </script>

@@ -2,12 +2,14 @@
     $scope.pageTitle = "TOP小区导入设置";
     $scope.beginDate = {
         title: "开始日期",
-        value: "2016-01-04"
+        value: (new Date()).getDateFromToday(-7).Format("yyyy-MM-dd")
     };
     $scope.endDate = {
         title: "结束日期",
-        value: "2016-01-14"
+        value: (new Date()).Format("yyyy-MM-dd")
     };
+    $scope.topCells = [];
+    $scope.dataModel = new AppDataModel();
     $('.form_date').datetimepicker({
         language: 'zh-CN',
         weekStart: 1,
@@ -18,4 +20,15 @@
         minView: 2,
         forceParse: 0
     });
+    $scope.query = function() {
+        $scope.topCells = [];
+        sendRequest($scope.dataModel.preciseStatUrl, "GET", {
+            begin: $scope.beginDate.value,
+            end: $scope.endDate.value,
+            topCount: 20,
+            orderSelection: "按照精确覆盖率升序"
+        }, function (result) {
+            $scope.topCells = result;
+        });
+    };
 });
