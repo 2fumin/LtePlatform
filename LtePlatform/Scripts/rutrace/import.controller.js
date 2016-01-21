@@ -1,4 +1,4 @@
-﻿app.controller("rutrace.import", function ($scope) {
+﻿app.controller("rutrace.import", function ($scope, $http) {
     $scope.pageTitle = "TOP小区导入设置";
     $scope.beginDate = {
         title: "开始日期",
@@ -20,15 +20,21 @@
         minView: 2,
         forceParse: 0
     });
-    $scope.query = function() {
+    $scope.query = function () {
         $scope.topCells = [];
-        sendRequest($scope.dataModel.preciseStatUrl, "GET", {
-            begin: $scope.beginDate.value,
-            end: $scope.endDate.value,
-            topCount: 20,
-            orderSelection: "按照精确覆盖率升序"
-        }, function (result) {
+        $http({
+            method: 'GET',
+            url: $scope.dataModel.preciseStatUrl,
+            params: {
+                'begin': $scope.beginDate.value,
+                'end': $scope.endDate.value,
+                'topCount': 20,
+                'orderSelection': "按照精确覆盖率升序"
+            }
+        }).success(function(result) {
             $scope.topCells = result;
         });
     };
+
+    $scope.query();
 });
