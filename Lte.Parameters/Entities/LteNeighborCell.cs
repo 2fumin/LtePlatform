@@ -53,10 +53,10 @@ namespace Lte.Parameters.Entities
             return new NearestPciCell
             {
                 CellId = cellId,
-                SectorId = sectorId,
+                SectorId = (neighborSectorId > 30 && sectorId < 30) ? (byte)(sectorId + 48) : sectorId,
                 NearestCellId = neighborCellId,
                 NearestSectorId = neighborSectorId,
-                Pci = neiborCell?.Pci ?? (short) -1,
+                Pci = neiborCell?.Pci ?? -1,
                 TotalTimes = info.TotalTimes
             };
         }
