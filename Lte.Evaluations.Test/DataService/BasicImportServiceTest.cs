@@ -93,6 +93,44 @@ namespace Lte.Evaluations.Test.DataService
             results.Select(x => x.SectorId).ToArray().ShouldEqual(outputSectorIds);
         }
 
+        [TestCase(new[] { 1, 2, 3, 4 }, new byte[] { 1, 2, 3, 4 }, new short[] { 111, 111, 111, 111},
+            new[] { 4 }, new byte[] { 4 })]
+        [TestCase(new[] { 1, 2, 3, 4 }, new byte[] { 1, 2, 3, 4 }, new short[] { 110, 111, 111, 111 },
+            new[] { 1, 4 }, new byte[] { 1, 4 })]
+        [TestCase(new[] { 1, 2, 3, 4 }, new byte[] { 1, 2, 3, 3 }, new short[] { 111, 111, 111, 111 },
+            new[] { 4 }, new byte[] { 3 })]
+        [TestCase(new[] { 1, 2, 3, 4 }, new byte[] { 1, 2, 3, 3 }, new short[] { 111, 109, 111, 111 },
+            new[] { 2, 4 }, new byte[] { 2, 3 })]
+        [TestCase(new[] { 1, 2, 3, 4 }, new byte[] { 1, 2, 3, 4 }, new short[] { 111, 111, 111, 111 },
+            new[] { 4 }, new byte[] { 4 })]
+        [TestCase(new[] { 1, 2, 3, 3 }, new byte[] { 1, 2, 3, 4 }, new short[] { 111, 111, 111, 111 },
+            new[] { 3 }, new byte[] { 4 })]
+        [TestCase(new[] { 1, 2, 3, 2 }, new byte[] { 1, 2, 3, 4 }, new short[] { 111, 111, 111, 111 },
+            new[] { 2 }, new byte[] { 4 })]
+        [TestCase(new[] { 1, 2, 3, 4 }, new byte[] { 1, 2, 3, 1 }, new short[] { 111, 111, 111, 111 },
+            new[] { 4 }, new byte[] { 1 })]
+        [TestCase(new[] { 1, 2 }, new byte[] { 1, 2 }, new short[] { 111, 111 },
+            new int[] { }, new byte[] { })]
+        [TestCase(new[] { 1, 2, 4 }, new byte[] { 1, 2, 4 }, new short[] { 111, 111, 111 },
+            new[] { 4 }, new byte[] { 4 })]
+        [TestCase(new[] { 1, 2, 3, 4, 5 }, new byte[] { 1, 2, 3, 4, 5 }, new short[] { 111, 111, 111, 111, 111 },
+            new[] { 4, 5 }, new byte[] { 4, 5 })]
+        [TestCase(new[] { 1, 1, 3, 1, 5 }, new byte[] { 1, 1, 3, 4, 5 }, new short[] { 111, 111, 111, 111, 111 },
+            new[] { 1, 5 }, new byte[] { 4, 5 })]
+        public void Test_GetNewCellExcels_PciConsidered(int[] inputENodebIds, byte[] inputSectorIds, short[] inputPcis,
+            int[] outputENodebIds, byte[] outputSectorIds)
+        {
+            BasicImportService.CellExcels = inputENodebIds.Select((t, i) => new CellExcel
+            {
+                ENodebId = t,
+                SectorId = inputSectorIds[i],
+                Pci = inputPcis[i]
+            }).ToList();
+            var results = _service.GetNewCellExcels().ToArray();
+            results.Select(x => x.ENodebId).ToArray().ShouldEqual(outputENodebIds);
+            results.Select(x => x.SectorId).ToArray().ShouldEqual(outputSectorIds);
+        }
+
         [TestCase(new[] { 1, 2, 3, 4 }, new byte[] { 1, 2, 3, 4 }, new[] { 4 }, new byte[] { 4 })]
         [TestCase(new[] { 1, 2, 3, 4 }, new byte[] { 1, 2, 3, 3 }, new[] { 4 }, new byte[] { 3 })]
         [TestCase(new[] { 1, 2, 3, 4 }, new byte[] { 1, 2, 3, 4 }, new[] { 4 }, new byte[] { 4 })]
@@ -111,7 +149,7 @@ namespace Lte.Evaluations.Test.DataService
                 BtsId = t,
                 SectorId = inputSectorIds[i]
             }).ToList();
-            var results = _service.GetNewCdmaCellExcels();
+            var results = _service.GetNewCdmaCellExcels().ToArray();
             results.Select(x => x.BtsId).ToArray().ShouldEqual(outputBtsIds);
             results.Select(x => x.SectorId).ToArray().ShouldEqual(outputSectorIds);
         }

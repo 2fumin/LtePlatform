@@ -21,6 +21,9 @@ namespace Lte.Evaluations.Test.MockItems
 
             repository.Setup(x => x.GetByName(It.IsAny<string>()))
                 .Returns<string>(name => repository.Object.GetAll().FirstOrDefault(x => x.Name == name));
+
+            repository.Setup(x => x.GetAllInUseList())
+                .Returns(repository.Object.GetAll().Where(x => x.IsInUse).ToList());
         }
 
         public static void MockThreeENodebs(this Mock<IENodebRepository> repository)

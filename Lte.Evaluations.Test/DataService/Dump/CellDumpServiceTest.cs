@@ -28,7 +28,6 @@ namespace Lte.Evaluations.Test.DataService.Dump
             _service = new CellDumpService(_btsRepository.Object, _cellRepository.Object);
             _btsRepository.MockOperation();
             _btsRepository.MockThreeBtss();
-            _cellRepository.MockOperations();
             _cellRepository.MockRepositorySaveItems<Cell,ICellRepository>();
             CoreMapperService.MapCell();
             ParametersDumpMapperService.MapENodebBtsIdService();
@@ -38,6 +37,7 @@ namespace Lte.Evaluations.Test.DataService.Dump
         public void Setup()
         {
             _cellRepository.MockSixCells();
+            _cellRepository.MockOperations();
         }
 
         [TestCase(1, 2)]
