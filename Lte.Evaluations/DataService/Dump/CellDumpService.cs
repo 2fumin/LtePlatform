@@ -30,8 +30,18 @@ namespace Lte.Evaluations.DataService.Dump
             var count = 0;
             foreach (var cell in cellList)
             {
-                if (_cellRepository.Insert(cell) != null)
+                var item = _cellRepository.GetBySectorId(cell.ENodebId, cell.SectorId);
+                if (item == null)
+                {
+                    if (_cellRepository.Insert(cell) != null) count++;
+                }
+                else
+                {
+                    item.Pci = cell.Pci;
+                    item.IsInUse = true;
+                    _cellRepository.Update(item);
                     count++;
+                }
             }
             return count;
         }
@@ -55,21 +65,23 @@ namespace Lte.Evaluations.DataService.Dump
 
         public bool DumpSingleCellExcel(CellExcel info)
         {
-            var cell = Cell.ConstructItem(info);
-            var fields = info.ShareCdmaInfo.GetSplittedFields('_');
-            var btsId = (fields.Length > 2) ? fields[1].ConvertToInt(-1) : -1;
-            if (btsId > 0)
+            var cell = _cellRepository.GetBySectorId(info.ENodebId, info.SectorId);
+            if (cell == null)
             {
-                var bts = _btsRepository.GetByBtsId(btsId);
-                if (bts != null)
+                cell = Cell.ConstructItem(info);
+                var fields = info.ShareCdmaInfo.GetSplittedFields('_');
+                var btsId = (fields.Length > 2) ? fields[1].ConvertToInt(-1) : -1;
+                if (btsId > 0)
                 {
-                    bts.ENodebId = info.ENodebId;
-                    _btsRepository.Update(bts);
+                    var bts = _btsRepository.GetByBtsId(btsId);
+                    if (bts != null)
+                    {
+                        bts.ENodebId = info.ENodebId;
+                        _btsRepository.Update(bts);
+                    }
                 }
-            }
-            var result = _cellRepository.Insert(cell);
-            if (result != null)
-            {
+                var result = _cellRepository.Insert(cell);
+                if (result == null) return false;
                 var item =
                     BasicImportService.CellExcels.FirstOrDefault(
                         x => x.ENodebId == info.ENodebId && x.SectorId == info.SectorId);
@@ -79,7 +91,10 @@ namespace Lte.Evaluations.DataService.Dump
                 }
                 return true;
             }
-            return false;
+            cell.Pci = info.Pci;
+            cell.IsInUse = true;
+            _cellRepository.Update(cell);
+            return true;
         }
 
         public void VanishCells(CellIdsContainer container)

@@ -20,21 +20,24 @@ namespace Lte.Evaluations.Test.MockItems
                 .Returns<int, byte>(
                     (eNodebId, sectorId) =>
                         repository.Object.GetAll().FirstOrDefault(x => x.ENodebId == eNodebId && x.SectorId == sectorId));
+
+            repository.Setup(x => x.GetAllInUseList())
+                .Returns(repository.Object.GetAll().Where(x => x.IsInUse).ToList());
         }
 
-        public static void MockSixCells(this Mock<ICellRepository> repository, double lon = 113.01, double lat = 23.01)
+        public static void MockSixCells(this Mock<ICellRepository> repository, double lon = 113.01, double lat = 23.01, short pci = 111)
         {
-            repository.MockCells(GenerateCells(lon, lat));
+            repository.MockCells(GenerateCells(lon, lat, pci));
         }
 
         public static void MockRangeCells(this Mock<ICellRepository> repository)
         {
             repository.Setup(
                 x => x.GetAllList(It.IsAny<double>(), It.IsAny<double>(), It.IsAny<double>(), It.IsAny<double>()))
-                .Returns(GenerateCells(113, 23));
+                .Returns(GenerateCells(113, 23, 111));
         }
 
-        private static List<Cell> GenerateCells(double lon, double lat)
+        private static List<Cell> GenerateCells(double lon, double lat, short pci)
         {
             return new List<Cell>
             {
@@ -50,7 +53,9 @@ namespace Lte.Evaluations.Test.MockItems
                     ETilt = 2.2,
                     Azimuth = 30,
                     Longtitute = lon,
-                    Lattitute = lat
+                    Lattitute = lat,
+                    Pci = pci,
+                    IsInUse = true
                 },
                 new Cell
                 {
@@ -64,7 +69,9 @@ namespace Lte.Evaluations.Test.MockItems
                     ETilt = 2.2,
                     Azimuth = 60,
                     Longtitute = lon,
-                    Lattitute = lat
+                    Lattitute = lat,
+                    Pci = pci,
+                    IsInUse = true
                 },
                 new Cell
                 {
@@ -78,7 +85,9 @@ namespace Lte.Evaluations.Test.MockItems
                     ETilt = 2.2,
                     Azimuth = 90,
                     Longtitute = lon,
-                    Lattitute = lat
+                    Lattitute = lat,
+                    Pci = pci,
+                    IsInUse = true
                 },
                 new Cell
                 {
@@ -92,7 +101,9 @@ namespace Lte.Evaluations.Test.MockItems
                     ETilt = 2.2,
                     Azimuth = 150,
                     Longtitute = lon,
-                    Lattitute = lat
+                    Lattitute = lat,
+                    Pci = pci,
+                    IsInUse = true
                 },
                 new Cell
                 {
@@ -106,7 +117,9 @@ namespace Lte.Evaluations.Test.MockItems
                     ETilt = 2.2,
                     Azimuth = 210,
                     Longtitute = lon,
-                    Lattitute = lat
+                    Lattitute = lat,
+                    Pci = pci,
+                    IsInUse = true
                 },
                 new Cell
                 {
@@ -120,7 +133,9 @@ namespace Lte.Evaluations.Test.MockItems
                     ETilt = 2.2,
                     Azimuth = 270,
                     Longtitute = lon,
-                    Lattitute = lat
+                    Lattitute = lat,
+                    Pci = pci,
+                    IsInUse = true
                 }
             };
         }

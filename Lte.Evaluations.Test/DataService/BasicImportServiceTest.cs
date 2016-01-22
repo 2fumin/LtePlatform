@@ -84,9 +84,10 @@ namespace Lte.Evaluations.Test.DataService
             BasicImportService.CellExcels = inputENodebIds.Select((t, i) => new CellExcel
             {
                 ENodebId = t,
-                SectorId = inputSectorIds[i]
+                SectorId = inputSectorIds[i],
+                Pci = 111
             }).ToList();
-            var results = _service.GetNewCellExcels();
+            var results = _service.GetNewCellExcels().ToArray();
             results.Select(x => x.ENodebId).ToArray().ShouldEqual(outputENodebIds);
             results.Select(x => x.SectorId).ToArray().ShouldEqual(outputSectorIds);
         }

@@ -81,7 +81,8 @@ namespace Lte.Evaluations.DataService
             if (!CellExcels.Any()) return new List<CellExcel>();
             return from info in CellExcels
                 join cell in _cellRepository.GetAllInUseList()
-                    on new {info.ENodebId, info.SectorId} equals new {cell.ENodebId, cell.SectorId} into cellQuery
+                    on new {info.ENodebId, info.SectorId, info.Pci} equals 
+                    new {cell.ENodebId, cell.SectorId, cell.Pci} into cellQuery
                 from cq in cellQuery.DefaultIfEmpty()
                 where cq == null
                 select info;
