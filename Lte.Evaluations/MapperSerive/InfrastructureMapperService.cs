@@ -25,12 +25,7 @@ namespace Lte.Evaluations.MapperSerive
             Mapper.CreateMap<Cell, PciCell>();
             Mapper.CreateMap<NearestPciCell, NearestPciCellView>();
         }
-
-        public static void MapENodeb()
-        {
-            Mapper.CreateMap<ENodeb, ENodebView>();
-        }
-
+        
         public static void MapBts()
         {
             Mapper.CreateMap<CdmaBts, CdmaBtsView>();

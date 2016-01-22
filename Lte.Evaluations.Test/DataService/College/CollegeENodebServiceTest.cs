@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Abp.EntityFramework.AutoMapper;
 using AutoMapper.Should;
 using Lte.Evaluations.DataService.College;
-using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.Test.MockItems;
 using Lte.Evaluations.Test.TestService;
+using Lte.Evaluations.ViewModels.Basic;
 using Lte.Parameters.Abstract;
 using Moq;
 using NUnit.Framework;
@@ -25,7 +26,7 @@ namespace Lte.Evaluations.Test.DataService.College
         public void TestFixtureSetup()
         {
             _service = new CollegeENodebService(_repository.Object, _eNodebRepository.Object, _alarmRepository.Object);
-            InfrastructureMapperService.MapENodeb();
+            AutoMapperHelper.CreateMap(typeof(ENodebView));
             _eNodebRepository.MockOperations();
             _eNodebRepository.MockThreeENodebs();
             _repository.MockOperations();

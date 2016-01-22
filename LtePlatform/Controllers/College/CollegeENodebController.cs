@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using Lte.Evaluations.DataService;
 using Lte.Evaluations.DataService.College;
-using Lte.Evaluations.ViewModels;
-using Lte.Parameters.Abstract;
+using Lte.Evaluations.ViewModels.Basic;
 using LtePlatform.Models;
 
 namespace LtePlatform.Controllers.College

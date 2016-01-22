@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using Abp.EntityFramework.AutoMapper;
+using AutoMapper;
+using Lte.Evaluations.ViewModels.Basic;
 using Lte.Parameters.MockOperations;
 
 namespace Lte.Evaluations.MapperSerive
@@ -25,8 +27,7 @@ namespace Lte.Evaluations.MapperSerive
             ParametersDumpMapperService.MapFromENodebContainerService();
             ParametersDumpMapperService.MapFromBtsContainerService();
             ParametersDumpMapperService.MapENodebBtsIdService();
-            
-            InfrastructureMapperService.MapENodeb();
+
             InfrastructureMapperService.MapBts();
             InfrastructureMapperService.MapCdmaCell();
             InfrastructureMapperService.MapCell();
@@ -47,6 +48,8 @@ namespace Lte.Evaluations.MapperSerive
             BaiduMapperService.MapCdmaCellView();
             BaiduMapperService.MapCellView();
             BaiduMapperService.MapDtViews();
+
+            AutoMapperHelper.CreateMap(typeof(ENodebView));
         }
     }
 }

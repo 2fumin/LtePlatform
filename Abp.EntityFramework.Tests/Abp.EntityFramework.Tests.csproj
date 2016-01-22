@@ -78,6 +78,7 @@
   <ItemGroup>
     <Compile Include="AutoMapper\AutoMapper_Inheritance_Tests.cs" />
     <Compile Include="AutoMapper\AutoMapping_Tests.cs" />
+    <Compile Include="AutoMapper\ENodebViewMapperTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\EntityFrameworkConventionalRegisterer_Test.cs" />
     <Compile Include="Repositories\EntityFrameworkGenericRepositoryRegistrar_Tests.cs" />
@@ -103,6 +104,18 @@
     <ProjectReference Include="..\Castle.Windsor\Castle.Windsor.csproj">
       <Project>{73fb5b0b-5796-41dc-a5a6-743d585f6b5b}</Project>
       <Name>Castle.Windsor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lte.Domain\Lte.Domain.csproj">
+      <Project>{adeef82d-6389-47c4-8f7c-d7f85c01d64e}</Project>
+      <Name>Lte.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lte.Evaluations\Lte.Evaluations.csproj">
+      <Project>{c166940a-6bd2-4f42-8156-8024d9e320c9}</Project>
+      <Name>Lte.Evaluations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lte.Parameters\Lte.Parameters.csproj">
+      <Project>{25b6ccb6-4b12-4df2-b4c9-2d30ae6bd254}</Project>
+      <Name>Lte.Parameters</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

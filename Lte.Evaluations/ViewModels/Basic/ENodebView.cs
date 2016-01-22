@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Abp.EntityFramework.AutoMapper;
 using AutoMapper;
 using Lte.Domain.Common.Geo;
-using Lte.Domain.Regular;
 using Lte.Parameters.Entities;
 
-namespace Lte.Evaluations.ViewModels
+namespace Lte.Evaluations.ViewModels.Basic
 {
+    [AutoMapFrom(typeof(ENodeb))]
     public class ENodebView : IGeoPointReadonly<double>
     {
         public int ENodebId { get; set; }

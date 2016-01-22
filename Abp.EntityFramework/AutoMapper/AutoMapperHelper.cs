@@ -5,7 +5,7 @@ using AutoMapper;
 
 namespace Abp.EntityFramework.AutoMapper
 {
-    internal static class AutoMapperHelper
+    public static class AutoMapperHelper
     {
         public static void CreateMap(Type type)
         {

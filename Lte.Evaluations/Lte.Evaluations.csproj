@@ -161,6 +161,10 @@
     <Compile Include="ViewModels\WorkItemView.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Abp.EntityFramework\Abp.EntityFramework.csproj">
+      <Project>{8e0c8a21-369e-4d30-8e1d-a51ec5ca934f}</Project>
+      <Name>Abp.EntityFramework</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AutoMapper\AutoMapper.csproj">
       <Project>{75c9d4b5-2117-4b06-a6b1-70afcd6b3bfc}</Project>
       <Name>AutoMapper</Name>
