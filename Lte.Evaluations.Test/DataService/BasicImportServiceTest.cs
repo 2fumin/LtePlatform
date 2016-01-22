@@ -28,14 +28,15 @@ namespace Lte.Evaluations.Test.DataService
         {
             _service = new BasicImportService(_eNodebRepository.Object, _cellRepository.Object, _btsRepository.Object,
                 _cdmaCellRepository.Object);
-            _eNodebRepository.MockOperations();
-            _btsRepository.MockOperation();
-            _cellRepository.MockOperations();
-            _cdmaCellRepository.MockOperations();
             _eNodebRepository.MockThreeENodebs();
             _btsRepository.MockThreeBtss();
             _cellRepository.MockSixCells();
             _cdmaCellRepository.MockSixCells();
+
+            _eNodebRepository.MockOperations();
+            _btsRepository.MockOperation();
+            _cellRepository.MockOperations();
+            _cdmaCellRepository.MockOperations();
         }
 
         [TestCase(new[] { 1, 2, 3, 4 }, new[] { 4 })]

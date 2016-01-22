@@ -12,18 +12,18 @@ namespace Lte.Evaluations.Test.MockItems.Validation
     [TestFixture]
     public class MockBtsServiceTest
     {
-        private readonly Mock<IBtsRepository> btsRepository = new Mock<IBtsRepository>();
+        private readonly Mock<IBtsRepository> _btsRepository = new Mock<IBtsRepository>();
 
         [TestFixtureSetUp]
         public void TestFixtureSetup()
         {
-            btsRepository.MockOperation();
+            _btsRepository.MockOperation();
         }
 
         [SetUp]
         public void Setup()
         {
-            btsRepository.MockThreeBtss();
+            _btsRepository.MockThreeBtss();
         }
 
         [TestCase("kdjowi")]
@@ -31,8 +31,8 @@ namespace Lte.Evaluations.Test.MockItems.Validation
         [TestCase("kokwu43982ui")]
         public void TestUpdateFirstItem(string name)
         {
-            btsRepository.Object.GetByBtsId(1).Name = name;
-            Assert.AreEqual(btsRepository.Object.GetByBtsId(1).Name, name);
+            _btsRepository.Object.GetByBtsId(1).Name = name;
+            Assert.AreEqual(_btsRepository.Object.GetByBtsId(1).Name, name);
         }
     }
 }
