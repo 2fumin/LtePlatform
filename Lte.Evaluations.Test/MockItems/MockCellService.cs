@@ -25,9 +25,10 @@ namespace Lte.Evaluations.Test.MockItems
                 .Returns(repository.Object.GetAll().Where(x => x.IsInUse).ToList());
         }
 
-        public static void MockSixCells(this Mock<ICellRepository> repository, double lon = 113.01, double lat = 23.01, short pci = 111)
+        public static void MockSixCells(this Mock<ICellRepository> repository, double lon = 113.01, double lat = 23.01,
+            short pci = 111, bool isInUse = true)
         {
-            repository.MockCells(GenerateCells(lon, lat, pci));
+            repository.MockCells(GenerateCells(lon, lat, pci, isInUse));
         }
 
         public static void MockRangeCells(this Mock<ICellRepository> repository)
@@ -37,7 +38,7 @@ namespace Lte.Evaluations.Test.MockItems
                 .Returns(GenerateCells(113, 23, 111));
         }
 
-        private static List<Cell> GenerateCells(double lon, double lat, short pci)
+        private static List<Cell> GenerateCells(double lon, double lat, short pci, bool isInUse = true)
         {
             return new List<Cell>
             {
@@ -55,7 +56,7 @@ namespace Lte.Evaluations.Test.MockItems
                     Longtitute = lon,
                     Lattitute = lat,
                     Pci = pci,
-                    IsInUse = true
+                    IsInUse = isInUse
                 },
                 new Cell
                 {
@@ -71,7 +72,7 @@ namespace Lte.Evaluations.Test.MockItems
                     Longtitute = lon,
                     Lattitute = lat,
                     Pci = pci,
-                    IsInUse = true
+                    IsInUse = isInUse
                 },
                 new Cell
                 {
@@ -87,7 +88,7 @@ namespace Lte.Evaluations.Test.MockItems
                     Longtitute = lon,
                     Lattitute = lat,
                     Pci = pci,
-                    IsInUse = true
+                    IsInUse = isInUse
                 },
                 new Cell
                 {
@@ -103,7 +104,7 @@ namespace Lte.Evaluations.Test.MockItems
                     Longtitute = lon,
                     Lattitute = lat,
                     Pci = pci,
-                    IsInUse = true
+                    IsInUse = isInUse
                 },
                 new Cell
                 {
@@ -119,7 +120,7 @@ namespace Lte.Evaluations.Test.MockItems
                     Longtitute = lon,
                     Lattitute = lat,
                     Pci = pci,
-                    IsInUse = true
+                    IsInUse = isInUse
                 },
                 new Cell
                 {
@@ -135,7 +136,7 @@ namespace Lte.Evaluations.Test.MockItems
                     Longtitute = lon,
                     Lattitute = lat,
                     Pci = pci,
-                    IsInUse = true
+                    IsInUse = isInUse
                 }
             };
         }
