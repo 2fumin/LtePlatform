@@ -18,6 +18,11 @@ namespace Lte.Parameters.Concrete
             return GetAll().Where(x => x.BtsId == btsId).ToList();
         }
 
+        public List<CdmaCell> GetAllInUseList()
+        {
+            return GetAll().Where(x => x.IsInUse).ToList();
+        }
+
         public CdmaCell GetBySectorId(int btsId, byte sectorId)
         {
             return FirstOrDefault(x => x.BtsId == btsId && x.SectorId == sectorId);

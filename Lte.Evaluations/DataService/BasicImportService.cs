@@ -80,7 +80,7 @@ namespace Lte.Evaluations.DataService
         {
             if (!CellExcels.Any()) return new List<CellExcel>();
             return from info in CellExcels
-                join cell in _cellRepository.GetAllList()
+                join cell in _cellRepository.GetAllInUseList()
                     on new {info.ENodebId, info.SectorId} equals new {cell.ENodebId, cell.SectorId} into cellQuery
                 from cq in cellQuery.DefaultIfEmpty()
                 where cq == null

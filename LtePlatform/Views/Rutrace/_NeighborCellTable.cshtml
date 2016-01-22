@@ -11,7 +11,7 @@
                 <th>小区编号</th>
                 <th>扇区编号</th>
                 <th>邻区小区编号</th>
-                <th>邻区扇区编号</th>
+                <th>邻区小区名称</th>
                 <th>PCI</th>
                 <th>切换次数</th>
             </tr>
@@ -21,7 +21,7 @@
                 <td>{{neighbor.cellId}}</td>
                 <td>{{neighbor.sectorId}}</td>
                 <td>{{neighbor.nearestCellId}}</td>
-                <td>{{neighbor.nearestSectorId}}</td>
+                <td>{{neighbor.nearestENodebName}}-{{neighbor.nearestSectorId}}</td>
                 <td>{{neighbor.pci}}</td>
                 <td>{{neighbor.totalTimes}}</td>
             </tr>

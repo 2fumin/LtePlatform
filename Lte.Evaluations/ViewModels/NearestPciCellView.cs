@@ -31,14 +31,14 @@ namespace Lte.Evaluations.ViewModels
         [MemberDoc("切换次数，仅供参考")]
         public int TotalTimes { get; set; }
 
-        [MemberDoc("基站名称")]
-        public string ENodebName { get; set; }
+        [MemberDoc("邻区基站名称")]
+        public string NearestENodebName { get; set; }
 
         public static NearestPciCellView ConstructView(NearestPciCell stat, IENodebRepository repository)
         {
             var view = Mapper.Map<NearestPciCell, NearestPciCellView>(stat);
-            var eNodeb = repository.GetByENodebId(stat.CellId);
-            view.ENodebName = eNodeb == null ? "Undefined" : eNodeb.Name;
+            var eNodeb = repository.GetByENodebId(stat.NearestCellId);
+            view.NearestENodebName = eNodeb == null ? "Undefined" : eNodeb.Name;
             return view;
         }
     }

@@ -11,5 +11,7 @@ namespace Lte.Parameters.Abstract
         CdmaCell GetBySectorIdAndCellType(int btsId, byte sectorId, string cellType);
 
         List<CdmaCell> GetAllList(int btsId);
+
+        List<CdmaCell> GetAllInUseList();
     }
 }
