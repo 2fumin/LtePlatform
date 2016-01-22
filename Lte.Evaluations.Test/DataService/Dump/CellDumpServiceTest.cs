@@ -16,28 +16,13 @@ using NUnit.Framework;
 namespace Lte.Evaluations.Test.DataService.Dump
 {
     [TestFixture]
-    public class CellDumpServiceTest
+    public class CellDumpServiceTest : CellDumpServiceTestBase
     {
-        private readonly Mock<IBtsRepository> _btsRepository = new Mock<IBtsRepository>();
-        private readonly Mock<ICellRepository> _cellRepository = new Mock<ICellRepository>();
-        private CellDumpService _service;
-
-        [TestFixtureSetUp]
-        public void TestFixtureSetup()
-        {
-            _service = new CellDumpService(_btsRepository.Object, _cellRepository.Object);
-            _btsRepository.MockOperation();
-            _btsRepository.MockThreeBtss();
-            _cellRepository.MockRepositorySaveItems<Cell,ICellRepository>();
-            CoreMapperService.MapCell();
-            ParametersDumpMapperService.MapENodebBtsIdService();
-        }
-
         [SetUp]
         public void Setup()
         {
-            _cellRepository.MockSixCells();
-            _cellRepository.MockOperations();
+            CellRepository.MockSixCells();
+            CellRepository.MockOperations();
         }
 
         [TestCase(1, 2)]
@@ -53,9 +38,27 @@ namespace Lte.Evaluations.Test.DataService.Dump
                     SectorId = sectorId
                 }
             };
-            _service.DumpNewCellExcels(cellExcels);
-            _cellRepository.Object.Count().ShouldEqual(7);
-            var lastObject = _cellRepository.Object.GetAllList()[6];
+            Service.DumpNewCellExcels(cellExcels);
+            CellRepository.Object.Count().ShouldEqual(7);
+            var lastObject = CellRepository.Object.GetAllList()[6];
+            lastObject.ENodebId.ShouldEqual(eNodebId);
+            lastObject.SectorId.ShouldEqual(sectorId);
+        }
+
+        [TestCase(1, 2)]
+        [TestCase(3, 4)]
+        [TestCase(5, 6)]
+        public void Test_DumpSingleExcel(int eNodebId, byte sectorId)
+        {
+            var cellExcel = new CellExcel
+            {
+                ENodebId = eNodebId,
+                SectorId = sectorId,
+                ShareCdmaInfo = "1"
+            };
+            Assert.IsTrue(Service.DumpSingleCellExcel(cellExcel));
+            CellRepository.Object.Count().ShouldEqual(7);
+            var lastObject = CellRepository.Object.GetAllList()[6];
             lastObject.ENodebId.ShouldEqual(eNodebId);
             lastObject.SectorId.ShouldEqual(sectorId);
         }
@@ -75,10 +78,10 @@ namespace Lte.Evaluations.Test.DataService.Dump
                     ShareCdmaInfo = shareInfo
                 }
             };
-            _service.UpdateENodebBtsIds(cellExcels);
+            Service.UpdateENodebBtsIds(cellExcels);
             if (btsId > 0)
             {
-                _btsRepository.Object.GetByBtsId(btsId).ENodebId.ShouldEqual(eNodebId);
+                BtsRepository.Object.GetByBtsId(btsId).ENodebId.ShouldEqual(eNodebId);
             }
         }
     }

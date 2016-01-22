@@ -30,21 +30,7 @@ namespace Lte.Parameters.MockOperations
             repository.Setup(x => x.GetAll()).Returns(items);
             repository.SynchronizeValues<T, TRepository>();
         }
-
-        public static void MockRepositorySaveItems<T, TRepository>(
-            this Mock<TRepository> repository, IEnumerable<T> items)
-            where T : Entity
-            where TRepository : class, IRepository<T>
-        {
-            repository.Setup(x => x.Insert(It.IsAny<T>())).Callback<T>(
-                e =>
-                {
-                    repository.Setup(x => x.GetAll()).Returns(
-                        items.Concat(new List<T> { e }).AsQueryable());
-                    SynchronizeValues<T, TRepository>(repository);
-                });
-        }
-
+        
         public static void MockRepositorySaveItems<T, TRepository>(
             this Mock<TRepository> repository)
             where T : Entity
@@ -57,7 +43,7 @@ namespace Lte.Parameters.MockOperations
                     repository.Setup(x => x.GetAll()).Returns(
                         btss.Concat(new List<T> { e }).AsQueryable());
                     SynchronizeValues<T, TRepository>(repository);
-                });
+                }).Returns<T>(e => e);
             repository.Setup(x => x.InsertAsync(It.IsAny<T>())).Callback<T>(e => repository.Object.Insert(e));
         }
 
