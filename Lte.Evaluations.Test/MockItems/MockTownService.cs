@@ -17,6 +17,11 @@ namespace Lte.Evaluations.Test.MockItems
                 .Returns<int>(id => repository.Object.GetAll().FirstOrDefault(x => x.Id == id));
             repository.Setup(x => x.GetAll(It.IsAny<string>()))
                 .Returns<string>(city => repository.Object.GetAll().Where(x => x.CityName == city).ToList());
+            repository.Setup(x => x.QueryTown(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+                .Returns<string, string, string>(
+                    (city, district, town) =>
+                        repository.Object.GetAll()
+                            .FirstOrDefault(x => x.CityName == city && x.DistrictName == district && x.TownName == town));
         }
 
         public static void MockSixTowns(this Mock<ITownRepository> repository)

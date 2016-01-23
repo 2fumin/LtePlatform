@@ -84,6 +84,7 @@
   <ItemGroup>
     <Compile Include="DataService\AlarmsServiceTest.cs" />
     <Compile Include="DataService\AlarmUploadTest.cs" />
+    <Compile Include="DataService\BtsQueryServiceTest.cs" />
     <Compile Include="DataService\Dump\BtsDumpServiceTest.cs" />
     <Compile Include="DataService\Dump\CdmaCellDumpServiceTest.cs" />
     <Compile Include="DataService\Dump\CellDumpServiceTest.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="MockItems\MockTownService.cs" />
     <Compile Include="MockItems\Validation\MockBtsServiceTest.cs" />
     <Compile Include="MockItems\Validation\MockCellServiceTest.cs" />
+    <Compile Include="MockItems\Validation\MockTwonServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestService\CdmaRegionStatTestService.cs" />
     <Compile Include="TestService\CellViewTestService.cs" />

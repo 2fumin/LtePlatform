@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Abp.EntityFramework.AutoMapper;
 using AutoMapper;
 using Lte.Domain.Regular;
 using Lte.Evaluations.ViewModels.Basic;
@@ -22,13 +23,10 @@ namespace Lte.Evaluations.DataService
 
         public IEnumerable<CdmaBtsView> GetByTownNames(string city, string district, string town)
         {
-            var townItem =
-                _townRepository.FirstOrDefault(
-                    x => x.CityName == city && x.DistrictName == district && x.TownName == town);
+            var townItem = _townRepository.QueryTown(city, district, town);
             return townItem == null
                 ? null
-                : Mapper.Map<List<CdmaBts>, IEnumerable<CdmaBtsView>>(
-                    _btsRepository.GetAll().Where(x => x.TownId == townItem.Id).ToList());
+                : _btsRepository.GetAll().Where(x => x.TownId == townItem.Id).ToList().MapTo<IEnumerable<CdmaBtsView>>();
         }
 
         public IEnumerable<CdmaBtsView> GetByGeneralName(string name)
