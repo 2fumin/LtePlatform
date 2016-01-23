@@ -73,5 +73,16 @@ namespace Lte.Evaluations.Test.DataService
             var btsList = _service.GetByGeneralName(queryString);
             Assert.AreEqual(btsList.Count(), count);
         }
+
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(3)]
+        public void Test_GetByBtsId(int id)
+        {
+            _btsRepository.MockThreeBtss();
+            _btsRepository.MockOperation();
+            var bts = _service.GetByBtsId(id);
+            Assert.AreEqual(bts.Name, "Bts-" + id);
+        }
     }
 }

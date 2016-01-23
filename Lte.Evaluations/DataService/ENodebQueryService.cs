@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Abp.EntityFramework.AutoMapper;
 using AutoMapper;
 using Lte.Domain.Regular;
 using Lte.Evaluations.ViewModels.Basic;
@@ -22,13 +23,10 @@ namespace Lte.Evaluations.DataService
 
         public IEnumerable<ENodebView> GetByTownNames(string city, string district, string town)
         {
-            var townItem =
-                _townRepository.FirstOrDefault(
-                    x => x.CityName == city && x.DistrictName == district && x.TownName == town);
+            var townItem = _townRepository.QueryTown(city, district, town);
             return townItem == null
                 ? null
-                : Mapper.Map<List<ENodeb>, IEnumerable<ENodebView>>(
-                    _eNodebRepository.GetAll().Where(x => x.TownId == townItem.Id).ToList());
+                : _eNodebRepository.GetAll().Where(x => x.TownId == townItem.Id).ToList().MapTo<IEnumerable<ENodebView>>();
         }
 
         public IEnumerable<ENodebView> GetByGeneralName(string name)
@@ -41,8 +39,7 @@ namespace Lte.Evaluations.DataService
             if (eNodebId > 0)
             {
                 items = _eNodebRepository.GetAll().Where(x => x.ENodebId == eNodebId).ToArray();
-                if (items.Any())
-                    return Mapper.Map<IEnumerable<ENodeb>, IEnumerable<ENodebView>>(items);
+                if (items.Any()) return items.MapTo<IEnumerable<ENodebView>>();
             }
             items =
                 _eNodebRepository.GetAllList()
@@ -51,15 +48,13 @@ namespace Lte.Evaluations.DataService
                             x.Address.IndexOf(name.Trim(), StringComparison.Ordinal) >= 0 ||
                             x.PlanNum.IndexOf(name.Trim(), StringComparison.Ordinal) >= 0)
                     .ToArray();
-            if (items.Any())
-                return Mapper.Map<IEnumerable<ENodeb>, IEnumerable<ENodebView>>(items);
-            return null;
+            return items.Any() ? items.MapTo<IEnumerable<ENodebView>>() : null;
         }
 
         public ENodebView GetByENodebId(int eNodebId)
         {
             var item = _eNodebRepository.GetByENodebId(eNodebId);
-            return item == null ? null : Mapper.Map<ENodeb, ENodebView>(item);
+            return item?.MapTo<ENodebView>();
         }
     }
 }

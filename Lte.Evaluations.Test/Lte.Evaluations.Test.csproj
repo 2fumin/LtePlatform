@@ -90,6 +90,7 @@
     <Compile Include="DataService\Dump\CellDumpServiceTest.cs" />
     <Compile Include="DataService\Dump\CellDumpServiceTestBase.cs" />
     <Compile Include="DataService\Dump\PciCellDumpServiceTest.cs" />
+    <Compile Include="DataService\ENodebQueryServiceTest.cs" />
     <Compile Include="DataService\Queries\AlarmsServiceTestQueries.cs" />
     <Compile Include="DataService\BasicImportServiceTest.cs" />
     <Compile Include="DataService\College\CdmaRegionStatServiceTest.cs" />
