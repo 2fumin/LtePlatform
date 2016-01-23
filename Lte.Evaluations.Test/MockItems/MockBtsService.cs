@@ -15,9 +15,19 @@ namespace Lte.Evaluations.Test.MockItems
         {
             repository.MockBtss(new List<CdmaBts>
             {
-                new CdmaBts {Id = 1, BtsId = 1, Name = "Bts-1"},
-                new CdmaBts {Id = 2, BtsId = 2, Name = "Bts-2"},
-                new CdmaBts {Id = 3, BtsId = 3, Name = "Bts-3"}
+                new CdmaBts {Id = 1, BtsId = 1, Name = "Bts-1", Address = "Address-1", TownId = 1 },
+                new CdmaBts {Id = 2, BtsId = 2, Name = "Bts-2", Address = "Address-2", TownId = 2 },
+                new CdmaBts {Id = 3, BtsId = 3, Name = "Bts-3", Address = "Address-3", TownId = 3 }
+            });
+        }
+
+        public static void MockThreeBtss(this Mock<IBtsRepository> repository, int[] townIds)
+        {
+            repository.MockBtss(new List<CdmaBts>
+            {
+                new CdmaBts {Id = 1, BtsId = 1, Name = "Bts-1", TownId = townIds[0] },
+                new CdmaBts {Id = 2, BtsId = 2, Name = "Bts-2", TownId = townIds[1] },
+                new CdmaBts {Id = 3, BtsId = 3, Name = "Bts-3", TownId = townIds[2] }
             });
         }
 

@@ -33,14 +33,12 @@ namespace Lte.Evaluations.DataService
         {
             var items =
                 _btsRepository.GetAllList().Where(x => x.Name.IndexOf(name.Trim(), StringComparison.Ordinal) >= 0).ToArray();
-            if (items.Any())
-                return Mapper.Map<IEnumerable<CdmaBts>, IEnumerable<CdmaBtsView>>(items);
+            if (items.Any()) return items.MapTo<IEnumerable<CdmaBtsView>>();
             var btsId = name.Trim().ConvertToInt(0);
             if (btsId > 0)
             {
                 items = _btsRepository.GetAll().Where(x => x.BtsId == btsId).ToArray();
-                if (items.Any())
-                    return Mapper.Map<IEnumerable<CdmaBts>, IEnumerable<CdmaBtsView>>(items);
+                if (items.Any()) return items.MapTo<IEnumerable<CdmaBtsView>>();
             }
             items =
                 _btsRepository.GetAllList()
@@ -48,15 +46,13 @@ namespace Lte.Evaluations.DataService
                         x =>
                             x.Address.IndexOf(name.Trim(), StringComparison.Ordinal) >= 0)
                     .ToArray();
-            if (items.Any())
-                return Mapper.Map<IEnumerable<CdmaBts>, IEnumerable<CdmaBtsView>>(items);
-            return null;
+            return items.Any() ? items.MapTo<IEnumerable<CdmaBtsView>>() : null;
         }
 
         public CdmaBtsView GetByBtsId(int btsId)
         {
             var item = _btsRepository.GetByBtsId(btsId);
-            return item == null ? null : Mapper.Map<CdmaBts, CdmaBtsView>(item);
+            return item?.MapTo<CdmaBtsView>();
         }
     }
 }

@@ -25,9 +25,7 @@ namespace Lte.Evaluations.Test.DataService
         {
             _service = new BtsQueryService(_townRepository.Object, _btsRepository.Object);
             _townRepository.MockSixTowns();
-            _btsRepository.MockThreeBtss();
             _townRepository.MockOpertion();
-            _btsRepository.MockOperation();
             AutoMapperHelper.CreateMap(typeof(CdmaBtsView));
         }
 
@@ -40,7 +38,39 @@ namespace Lte.Evaluations.Test.DataService
         [TestCase(24, 0)]
         public void Test_GetByTownNames(int townId, int count)
         {
+            _btsRepository.MockThreeBtss();
+            _btsRepository.MockOperation();
             var btsList = _service.GetByTownNames("city-" + townId, "district-" + townId, "town-" + townId) ?? new List<CdmaBtsView>();
+            Assert.AreEqual(btsList.Count(), count);
+        }
+
+        [TestCase(1, 1, new[] {1, 2, 3})]
+        [TestCase(1, 2, new[] { 1, 1, 3 })]
+        [TestCase(2, 1, new[] { 1, 2, 3 })]
+        [TestCase(2, 3, new[] { 2, 2, 2 })]
+        [TestCase(3, 1, new[] { 1, 2, 3 })]
+        [TestCase(4, 0, new[] { 1, 2, 3 })]
+        [TestCase(6, 0, new[] { 1, 2, 3 })]
+        [TestCase(13, 0, new[] { 1, 2, 3 })]
+        [TestCase(24, 0, new[] { 1, 2, 3 })]
+        public void Test_GetByTownNames_TownIdAssigned(int townId, int count, int[] assighedTownIds)
+        {
+            _btsRepository.MockThreeBtss(assighedTownIds);
+            _btsRepository.MockOperation();
+            var btsList = _service.GetByTownNames("city-" + townId, "district-" + townId, "town-" + townId) ?? new List<CdmaBtsView>();
+            Assert.AreEqual(btsList.Count(), count);
+        }
+
+        [TestCase("Bts", 3)]
+        [TestCase("1", 1)]
+        [TestCase("2", 1)]
+        [TestCase("3", 1)]
+        [TestCase("Address", 3)]
+        public void Test_GetByGeneralName(string queryString, int count)
+        {
+            _btsRepository.MockThreeBtss();
+            _btsRepository.MockOperation();
+            var btsList = _service.GetByGeneralName(queryString);
             Assert.AreEqual(btsList.Count(), count);
         }
     }
