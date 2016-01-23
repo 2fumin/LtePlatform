@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Linq;
+using Abp.EntityFramework.AutoMapper;
 using Lte.Evaluations.DataService.College;
-using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.Test.MockItems;
+using Lte.Evaluations.ViewModels;
 using Lte.Parameters.Abstract;
 using Moq;
 using NUnit.Framework;
@@ -23,7 +24,7 @@ namespace Lte.Evaluations.Test.DataService.College
             _collegeRepository.MockThreeColleges();
             _collegeRepository.MockOpertions();
             _repository.MockOperations();
-            CollegeMapperService.MapCollegeKpi();
+            AutoMapperHelper.CreateMap(typeof(CollegeKpiView));
         }
 
         [TestCase(1, "2015-10-10", 4, 1.5)]

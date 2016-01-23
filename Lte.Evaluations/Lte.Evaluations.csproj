@@ -113,7 +113,6 @@
     <Compile Include="DataService\WorkItemService.cs" />
     <Compile Include="MapperSerive\BaiduMapperService.cs" />
     <Compile Include="MapperSerive\BtsExcelWithTownIdContainer.cs" />
-    <Compile Include="MapperSerive\CollegeMapperService.cs" />
     <Compile Include="MapperSerive\ENodebBtsIdPair.cs" />
     <Compile Include="MapperSerive\ENodebExcelWithTownIdContainer.cs" />
     <Compile Include="MapperSerive\EvalutaionMapperProfile.cs" />

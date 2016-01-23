@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AutoMapper;
+using Abp.EntityFramework.AutoMapper;
 using Lte.Domain.Regular;
 using Lte.Parameters.Entities;
 
 namespace Lte.Evaluations.ViewModels
 {
+    [AutoMapFrom(typeof(College3GTestResults))]
     public class College3GTestView
     {
         public DateTime TestTime { get; set; }
@@ -24,10 +25,5 @@ namespace Lte.Evaluations.ViewModels
         public double MaxRssi { get; set; }
 
         public double Vswr { get; set; }
-
-        public static College3GTestView ConstructView(College3GTestResults results)
-        {
-            return Mapper.Map<College3GTestResults, College3GTestView>(results);
-        }
     }
 }

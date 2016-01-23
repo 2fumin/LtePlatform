@@ -1,5 +1,6 @@
 ﻿using Abp.EntityFramework.AutoMapper;
 using AutoMapper;
+using Lte.Evaluations.ViewModels;
 using Lte.Evaluations.ViewModels.Basic;
 using Lte.Parameters.MockOperations;
 
@@ -30,9 +31,6 @@ namespace Lte.Evaluations.MapperSerive
             
             InfrastructureMapperService.MapCdmaCell();
             InfrastructureMapperService.MapCell();
-            CollegeMapperService.MapCollege3GTest();
-            CollegeMapperService.MapCollege4GTest();
-            CollegeMapperService.MapCollegeKpi();
 
             KpiMapperService.MapCdmaRegionStat();
             KpiMapperService.MapCellPrecise();
@@ -48,8 +46,11 @@ namespace Lte.Evaluations.MapperSerive
             BaiduMapperService.MapCellView();
             BaiduMapperService.MapDtViews();
 
-            AutoMapperHelper.CreateMap(typeof(ENodebView));
-            AutoMapperHelper.CreateMap(typeof(CdmaBtsView));
+            AutoMapperHelper.CreateMap(typeof (ENodebView));
+            AutoMapperHelper.CreateMap(typeof (CdmaBtsView));
+            AutoMapperHelper.CreateMap(typeof (College3GTestView));
+            AutoMapperHelper.CreateMap(typeof (College4GTestView));
+            AutoMapperHelper.CreateMap(typeof (CollegeKpiView));
         }
     }
 }

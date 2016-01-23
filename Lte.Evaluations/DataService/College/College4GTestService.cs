@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Abp.EntityFramework.AutoMapper;
 using AutoMapper;
 using Lte.Evaluations.ViewModels;
 using Lte.Parameters.Abstract;
@@ -37,7 +38,7 @@ namespace Lte.Evaluations.DataService.College
                 var cell = eNodeb == null
                     ? null
                     : _cellRepository.GetBySectorId(x.ENodebId, x.SectorId);
-                var view = Mapper.Map<College4GTestResults, College4GTestView>(x);
+                var view = x.MapTo<College4GTestView>();
                 view.CollegeName = college?.Name;
                 view.CellName = eNodeb?.Name + "-" + x.SectorId;
                 view.Pci = cell?.Pci ?? -1;

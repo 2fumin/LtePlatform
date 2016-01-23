@@ -4,15 +4,15 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Abp.EntityFramework;
+using Abp.EntityFramework.Repositories;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 
 namespace Lte.Parameters.Concrete
 {
-    public class EFTownRepository : LightWeightRepositroyBase<Town>, ITownRepository
+    public class EFTownRepository : EfRepositoryBase<EFParametersContext, Town>, ITownRepository
     {
-        protected override DbSet<Town> Entities => context.Towns;
-
         public IEnumerable<Town> QueryTowns(string city, string district, string town)
         {
             const string flag = "=All=";
@@ -38,6 +38,10 @@ namespace Lte.Parameters.Concrete
         public List<Town> GetAll(string city)
         {
             return GetAllList(x => x.CityName == city);
+        }
+
+        public EFTownRepository(IDbContextProvider<EFParametersContext> dbContextProvider) : base(dbContextProvider)
+        {
         }
     }
 }

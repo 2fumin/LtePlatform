@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AutoMapper;
+using Abp.EntityFramework.AutoMapper;
 using Lte.Domain.Regular;
 using Lte.Domain.Regular.Attributes;
 using Lte.Parameters.Entities;
 
 namespace Lte.Evaluations.ViewModels
 {
+    [AutoMapFrom(typeof(College4GTestResults))]
     [TypeDoc("记录校园网4G测试记录视图的类")]
     public class College4GTestView
     {
@@ -45,10 +46,5 @@ namespace Lte.Evaluations.ViewModels
 
         [MemberDoc("SINR")]
         public double Sinr { get; set; }
-
-        public static College4GTestView ConstructView(College4GTestResults results)
-        {
-            return Mapper.Map<College4GTestResults, College4GTestView>(results);
-        }
     }
 }

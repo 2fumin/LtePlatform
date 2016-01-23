@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Abp.EntityFramework.AutoMapper;
 using Lte.Evaluations.DataService.College;
 using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.Test.MockItems;
+using Lte.Evaluations.ViewModels;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 using Lte.Parameters.MockOperations;
@@ -33,7 +35,7 @@ namespace Lte.Evaluations.Test.DataService.College
                     Id = id,
                     Name = "college-1"
                 });
-            CollegeMapperService.MapCollege4GTest();
+            AutoMapperHelper.CreateMap(typeof(College4GTestView));
         }
 
         [Test]

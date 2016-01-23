@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AutoMapper;
+using Abp.EntityFramework.AutoMapper;
 using Lte.Domain.Regular;
 using Lte.Parameters.Entities;
 
 namespace Lte.Evaluations.ViewModels
 {
+    [AutoMapFrom(typeof(CollegeKpi))]
     public class CollegeKpiView
     {
         public DateTime TestTime { get; set; }
@@ -36,10 +37,5 @@ namespace Lte.Evaluations.ViewModels
         public double Drop3G { get; set; }
 
         public double Flow3G { get; set; }
-
-        public static CollegeKpiView ConstructView(CollegeKpi stat)
-        {
-            return Mapper.Map<CollegeKpi, CollegeKpiView>(stat);
-        }
     }
 }

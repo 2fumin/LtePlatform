@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Abp.EntityFramework.AutoMapper;
 using AutoMapper;
 using Lte.Evaluations.ViewModels;
 using Lte.Parameters.Abstract;
@@ -28,7 +29,7 @@ namespace Lte.Evaluations.DataService.College
             return results.Select(x =>
             {
                 var college = _collegeRepository.Get(x.CollegeId);
-                var view = Mapper.Map<College3GTestResults, College3GTestView>(x);
+                var view = x.MapTo<College3GTestView>();
                 view.CollegeName = college?.Name;
                 return view;
             });
