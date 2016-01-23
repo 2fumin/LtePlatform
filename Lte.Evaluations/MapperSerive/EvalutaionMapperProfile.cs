@@ -27,8 +27,7 @@ namespace Lte.Evaluations.MapperSerive
             ParametersDumpMapperService.MapFromENodebContainerService();
             ParametersDumpMapperService.MapFromBtsContainerService();
             ParametersDumpMapperService.MapENodebBtsIdService();
-
-            InfrastructureMapperService.MapBts();
+            
             InfrastructureMapperService.MapCdmaCell();
             InfrastructureMapperService.MapCell();
             CollegeMapperService.MapCollege3GTest();
@@ -50,6 +49,7 @@ namespace Lte.Evaluations.MapperSerive
             BaiduMapperService.MapDtViews();
 
             AutoMapperHelper.CreateMap(typeof(ENodebView));
+            AutoMapperHelper.CreateMap(typeof(CdmaBtsView));
         }
     }
 }

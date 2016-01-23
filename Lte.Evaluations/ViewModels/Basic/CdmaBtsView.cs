@@ -1,9 +1,11 @@
-﻿using AutoMapper;
+﻿using Abp.EntityFramework.AutoMapper;
+using AutoMapper;
 using Lte.Domain.Common.Geo;
 using Lte.Parameters.Entities;
 
 namespace Lte.Evaluations.ViewModels.Basic
 {
+    [AutoMapFrom(typeof(CdmaBts))]
     public class CdmaBtsView
     {
         public string Name { get; set; }
@@ -26,7 +28,7 @@ namespace Lte.Evaluations.ViewModels.Basic
 
         public static CdmaBtsView ConstructView(CdmaBts bts)
         {
-            return Mapper.Map<CdmaBts, CdmaBtsView>(bts);
+            return bts.MapTo<CdmaBtsView>();
         }
     }
 }
