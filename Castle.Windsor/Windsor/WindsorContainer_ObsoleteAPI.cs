@@ -25,7 +25,7 @@ namespace Castle.Windsor
 	{
 		[Obsolete("Use Resolve(key, new Arguments()) or Resolve<TService>(key) instead.")]
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public virtual object this[String key]
+		public virtual object this[string key]
 		{
 			get { return Resolve<object>(key); }
 		}
@@ -39,7 +39,7 @@ namespace Castle.Windsor
 
 		[Obsolete("Use Register(Component.For(classType).Named(key)) or generic version instead.")]
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public virtual IWindsorContainer AddComponent(String key, Type classType)
+		public virtual IWindsorContainer AddComponent(string key, Type classType)
 		{
 			kernel.AddComponent(key, classType);
 			return this;
@@ -47,7 +47,7 @@ namespace Castle.Windsor
 
 		[Obsolete("Use Register(Component.For(serviceType).ImplementedBy(classType).Named(key)) or generic version instead.")]
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public virtual IWindsorContainer AddComponent(String key, Type serviceType, Type classType)
+		public virtual IWindsorContainer AddComponent(string key, Type serviceType, Type classType)
 		{
 			kernel.AddComponent(key, serviceType, classType);
 			return this;
@@ -199,7 +199,7 @@ namespace Castle.Windsor
 		/// <param name = "facility"></param>
 		[Obsolete("Use AddFacility(IFacility) instead.")]
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public virtual IWindsorContainer AddFacility(String idInConfiguration, IFacility facility)
+		public virtual IWindsorContainer AddFacility(string idInConfiguration, IFacility facility)
 		{
 			kernel.AddFacility(idInConfiguration, facility);
 			return this;
@@ -213,7 +213,7 @@ namespace Castle.Windsor
 		/// <returns></returns>
 		[Obsolete("Use AddFacility<TFacility>() instead.")]
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public IWindsorContainer AddFacility<T>(String idInConfiguration) where T : IFacility, new()
+		public IWindsorContainer AddFacility<T>(string idInConfiguration) where T : IFacility, new()
 		{
 			kernel.AddFacility<T>(idInConfiguration);
 			return this;
@@ -228,7 +228,7 @@ namespace Castle.Windsor
 		/// <returns></returns>
 		[Obsolete("Use AddFacility<TFacility>(Action<TFacility>) instead.")]
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public IWindsorContainer AddFacility<T>(String idInConfiguration, Action<T> configureFacility)
+		public IWindsorContainer AddFacility<T>(string idInConfiguration, Action<T> configureFacility)
 			where T : IFacility, new()
 		{
 			kernel.AddFacility(idInConfiguration, configureFacility);
@@ -243,7 +243,7 @@ namespace Castle.Windsor
 		/// <returns></returns>
 		[Obsolete("Use Resolve<object>(key, arguments) instead.")]
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public virtual object Resolve(String key, IDictionary arguments)
+		public virtual object Resolve(string key, IDictionary arguments)
 		{
 			return kernel.Resolve<object>(key, arguments);
 		}
@@ -256,7 +256,7 @@ namespace Castle.Windsor
 		/// <returns></returns>
 		[Obsolete("Use Resolve<object>(key, argumentsAsAnonymousType) instead.")]
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public virtual object Resolve(String key, object argumentsAsAnonymousType)
+		public virtual object Resolve(string key, object argumentsAsAnonymousType)
 		{
 			return Resolve<object>(key, new ReflectionBasedDictionaryAdapter(argumentsAsAnonymousType));
 		}

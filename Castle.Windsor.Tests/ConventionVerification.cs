@@ -115,6 +115,14 @@ namespace CastleTests
 
 			Assert.IsEmpty(message.ToString(), message.ToString());
 		}
+
+        [Test]
+	    public void Test_KernelMap_WindsorContainer()
+	    {
+            var kernelMap = typeof(WindsorContainer).GetInterfaceMap(typeof(IWindsorContainer));
+	        Assert.AreEqual(kernelMap.InterfaceMethods.Length, 56);
+            Assert.AreEqual(kernelMap.TargetMethods.Length, 56);
+	    }
 	}
 }
 
