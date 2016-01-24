@@ -1,18 +1,53 @@
-﻿@model dynamic
-
+﻿
 @{
-    Layout = null;
+    ViewBag.Title = "第 10 章　指令详解";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>title</title>
-</head>
-<body>
-<div>
-      
+<div class="row">
+    <div class="col-md-4">
+        @{
+            Html.RenderPartial("_QUnitTestContents");
+        }
+    </div>
+    <div class="col-md-8">
+        <h2>@ViewBag.Title</h2>
+        <div ng-app="myApp">
+            <div sidebox title="Links">
+                <ul>
+                    <li>First link</li>
+                    <li>Second link</li>
+                </ul>
+            </div>
+            <div sidebox title="TagCloud">
+                <div class="tagcloud">
+                    <a href="">Graphics</a>
+                    <a href="">AngularJS</a>
+                    <a href="">D3</a>
+                    <a href="">Front-end</a>
+                    <a href="">Startup</a>
+                </div>
+            </div>
+            <div ng-controller="datetimeTest">
+                开始日期{{beginDate.value}}
+                <div datetimepicker ng-model="beginDate.value"></div>&nbsp;
+                结束日期{{endDate.value}}
+                <div datetimepicker ng-model="endDate.value"></div>
+            </div>
+        </div>
+    </div>
 </div>
-</body>
-</html>
+
+@section Scripts
+{
+    <script src="~/Scripts/angular.js"></script>
+    <link href="~/Content/themes/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <script src="~/Scripts/angular-ui/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/Scripts/angular-ui/local/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="~/Scripts/app/common.js"></script>
+    <script type="text/javascript">
+        var app = angular.module("myApp", []);
+    </script>
+    <script src="~/Areas/TestPage/Scripts/angular/datetime.test.controller.js"></script>
+    <script src="~/Areas/TestPage/Scripts/angular/sidebox.directive.js"></script>
+    <script src="~/Scripts/angular-ui/customize/directive.datetimepicker.js"></script>
+}

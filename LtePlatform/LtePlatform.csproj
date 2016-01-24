@@ -407,8 +407,10 @@
     <Content Include="Areas\TestPage\Scripts\5ch5\Player.js">
       <DependentUpon>Player.coffee</DependentUpon>
     </Content>
+    <Content Include="Areas\TestPage\Scripts\angular\datetime.test.controller.js" />
     <Content Include="Areas\TestPage\Scripts\angular\oneway.domain.app.js" />
     <Content Include="Areas\TestPage\Scripts\angular\root.property.js" />
+    <Content Include="Areas\TestPage\Scripts\angular\sidebox.directive.js" />
     <Content Include="Areas\TestPage\Scripts\angular\submit.form.js" />
     <Content Include="Areas\TestPage\Scripts\angular\twoway.domain.app.js" />
     <Content Include="Areas\TestPage\Scripts\autostart.js" />
@@ -540,6 +542,7 @@
     <Content Include="Scripts\angular-ui-router.min.js" />
     <Content Include="Scripts\angular-ui\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\angular-ui\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\angular-ui\customize\directive.datetimepicker.js" />
     <Content Include="Scripts\angular-ui\local\bootstrap-datetimepicker.ar.js" />
     <Content Include="Scripts\angular-ui\local\bootstrap-datetimepicker.bg.js" />
     <Content Include="Scripts\angular-ui\local\bootstrap-datetimepicker.ca.js" />
