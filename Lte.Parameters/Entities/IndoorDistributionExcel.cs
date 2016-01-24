@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Abp.EntityFramework.AutoMapper;
 using Lte.Domain.Regular;
 using Lte.Domain.Regular.Attributes;
 
 namespace Lte.Parameters.Entities
 {
+    [AutoMapTo(typeof(IndoorDistribution))]
     public class IndoorDistributionExcel
     {
         [ExcelColumn("室分名称")]

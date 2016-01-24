@@ -80,6 +80,7 @@
     <Compile Include="AutoMapper\AutoMapping_Tests.cs" />
     <Compile Include="AutoMapper\BtsViewMapperTest.cs" />
     <Compile Include="AutoMapper\ENodebViewMapperTest.cs" />
+    <Compile Include="AutoMapper\IndoorDistributionMapperTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\EntityFrameworkConventionalRegisterer_Test.cs" />
     <Compile Include="Repositories\EntityFrameworkGenericRepositoryRegistrar_Tests.cs" />

@@ -2,6 +2,7 @@
 using AutoMapper;
 using Lte.Evaluations.ViewModels;
 using Lte.Evaluations.ViewModels.Basic;
+using Lte.Parameters.Entities;
 using Lte.Parameters.MockOperations;
 
 namespace Lte.Evaluations.MapperSerive
@@ -14,7 +15,6 @@ namespace Lte.Evaluations.MapperSerive
             CoreMapperService.MapCell();
             CoreMapperService.MapENodeb();
             CoreMapperService.MapBts();
-            CoreMapperService.MapIndoorDistribution();
             CoreMapperService.MapDtItems();
 
             AlarmMapperService.MapAlarms();
@@ -51,6 +51,7 @@ namespace Lte.Evaluations.MapperSerive
             AutoMapperHelper.CreateMap(typeof (College3GTestView));
             AutoMapperHelper.CreateMap(typeof (College4GTestView));
             AutoMapperHelper.CreateMap(typeof (CollegeKpiView));
+            AutoMapperHelper.CreateMap(typeof(IndoorDistributionExcel));
         }
     }
 }

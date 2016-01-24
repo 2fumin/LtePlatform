@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Abp.EntityFramework.AutoMapper;
 using Lte.Domain.Common.Geo;
 using Lte.Parameters.Entities;
-using Lte.Parameters.MockOperations;
 using NUnit.Framework;
 
 namespace Lte.Parameters.Test.Entities
@@ -16,7 +11,7 @@ namespace Lte.Parameters.Test.Entities
         [TestFixtureSetUp]
         public void TestFixtureSetup()
         {
-            CoreMapperService.MapIndoorDistribution();
+            AutoMapperHelper.CreateMap(typeof(IndoorDistributionExcel));
         }
 
         [TestCase("adkdj", 113.44, 23.11)]
