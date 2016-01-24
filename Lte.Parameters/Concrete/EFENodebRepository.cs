@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Lte.Domain.Common.Geo;
+using Abp.EntityFramework;
+using Abp.EntityFramework.Repositories;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 
 namespace Lte.Parameters.Concrete
 {
-    public class EFENodebRepository : LightWeightRepositroyBase<ENodeb>, IENodebRepository
-    {        
-        protected override DbSet<ENodeb> Entities => context.ENodebs;
-
+    public class EFENodebRepository : EfRepositoryBase<EFParametersContext, ENodeb>, IENodebRepository
+    {   
         public ENodeb GetByENodebId(int eNodebId)
         {
             return FirstOrDefault(x => x.ENodebId == eNodebId);
@@ -28,5 +23,15 @@ namespace Lte.Parameters.Concrete
         {
             return GetAll().Where(x => x.IsInUse).ToList();
         }
+
+        public EFENodebRepository(IDbContextProvider<EFParametersContext> dbContextProvider) : base(dbContextProvider)
+        {
+        }
+
+        public int SaveChanges()
+        {
+            return Context.SaveChanges();
+        }
+
     }
 }

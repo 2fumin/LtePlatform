@@ -16,5 +16,7 @@ namespace Lte.Parameters.Abstract
         ENodeb GetByName(string name);
 
         List<ENodeb> GetAllInUseList();
+
+        int SaveChanges();
     }
 }

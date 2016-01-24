@@ -43,6 +43,7 @@ namespace Lte.Evaluations.DataService.Dump
                     count++;
                 }
             }
+            _cellRepository.SaveChanges();
             return count;
         }
 
@@ -89,25 +90,28 @@ namespace Lte.Evaluations.DataService.Dump
                 {
                     BasicImportService.CellExcels.Remove(item);
                 }
+                _cellRepository.SaveChanges();
                 return true;
             }
             cell.Pci = info.Pci;
             cell.IsInUse = true;
             _cellRepository.Update(cell);
+            _cellRepository.SaveChanges();
             return true;
         }
 
         public void VanishCells(CellIdsContainer container)
         {
-            foreach (var cellIdPair in container.CellIdPairs)
+            foreach (
+                var cell in
+                    container.CellIdPairs.Select(
+                        cellIdPair => _cellRepository.GetBySectorId(cellIdPair.CellId, cellIdPair.SectorId))
+                        .Where(cell => cell != null))
             {
-                var cell = _cellRepository.GetBySectorId(cellIdPair.CellId, cellIdPair.SectorId);
-                if (cell != null)
-                {
-                    cell.IsInUse = false;
-                    _cellRepository.Update(cell);
-                }
+                cell.IsInUse = false;
+                _cellRepository.Update(cell);
             }
+            _cellRepository.SaveChanges();
         }
     }
 }

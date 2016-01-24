@@ -53,6 +53,7 @@ namespace Lte.Evaluations.DataService.Dump
                     _eNodebRepository.Update(item);
                 }
             }
+            _eNodebRepository.SaveChanges();
             return count;
         }
 
@@ -63,37 +64,32 @@ namespace Lte.Evaluations.DataService.Dump
             {
                 eNodeb = ENodeb.ConstructENodeb(info, _townRepository);
                 var result = _eNodebRepository.Insert(eNodeb);
-                if (result != null)
+                if (result == null) return false;
+                var item = BasicImportService.ENodebExcels.FirstOrDefault(x => x.ENodebId == info.ENodebId);
+                if (item != null)
                 {
-                    var item = BasicImportService.ENodebExcels.FirstOrDefault(x => x.ENodebId == info.ENodebId);
-                    if (item != null)
-                    {
-                        BasicImportService.ENodebExcels.Remove(item);
-                    }
-                    return true;
+                    BasicImportService.ENodebExcels.Remove(item);
                 }
-            }
-            else
-            {
-                eNodeb.IsInUse = true;
-                _eNodebRepository.Update(eNodeb);
+                _eNodebRepository.SaveChanges();
                 return true;
             }
-
-            return false;
+            eNodeb.IsInUse = true;
+            _eNodebRepository.Update(eNodeb);
+            _eNodebRepository.SaveChanges();
+            return true;
         }
 
         public void VanishENodebs(ENodebIdsContainer container)
         {
-            foreach (var eNodebId in container.ENodebIds)
+            foreach (
+                var eNodeb in
+                    container.ENodebIds.Select(eNodebId => _eNodebRepository.GetByENodebId(eNodebId))
+                        .Where(eNodeb => eNodeb != null))
             {
-                var eNodeb = _eNodebRepository.GetByENodebId(eNodebId);
-                if (eNodeb != null)
-                {
-                    eNodeb.IsInUse = false;
-                    _eNodebRepository.Update(eNodeb);
-                }
+                eNodeb.IsInUse = false;
+                _eNodebRepository.Update(eNodeb);
             }
+            _eNodebRepository.SaveChanges();
         }
     }
 }

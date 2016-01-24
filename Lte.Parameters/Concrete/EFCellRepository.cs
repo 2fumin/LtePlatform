@@ -4,16 +4,16 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Abp.EntityFramework;
+using Abp.EntityFramework.Repositories;
 using Lte.Domain.Common.Geo;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 
 namespace Lte.Parameters.Concrete
 {
-    public class EFCellRepository : LightWeightRepositroyBase<Cell>, ICellRepository
+    public class EFCellRepository : EfRepositoryBase<EFParametersContext, Cell>, ICellRepository
     {
-        protected override DbSet<Cell> Entities => context.Cells;
-
         public void AddCells(IEnumerable<Cell> cells)
         {
             foreach (var cell in cells)
@@ -50,5 +50,15 @@ namespace Lte.Parameters.Concrete
         {
             return GetAll().Where(x => x.IsInUse).ToList();
         }
+
+        public EFCellRepository(IDbContextProvider<EFParametersContext> dbContextProvider) : base(dbContextProvider)
+        {
+        }
+
+        public int SaveChanges()
+        {
+            return Context.SaveChanges();
+        }
+
     }
 }
