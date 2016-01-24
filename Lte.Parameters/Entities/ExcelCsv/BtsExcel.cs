@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Abp.EntityFramework.AutoMapper;
 using Lte.Domain.Regular;
 using Lte.Domain.Regular.Attributes;
 
-namespace Lte.Parameters.Entities
+namespace Lte.Parameters.Entities.ExcelCsv
 {
-    /// <summary>
-    /// 定义记录CDMA基站信息的Excel导出数据项
-    /// </summary>
-    /// <remarks>需要定义与CdmaBts之间的映射关系。</remarks>
+    [AutoMapTo(typeof(CdmaBts))]
+    [TypeDoc("定义记录CDMA基站信息的Excel导出数据项，需要定义与CdmaBts之间的映射关系。")]
     public class BtsExcel
     {
         [ExcelColumn("基站名称")]

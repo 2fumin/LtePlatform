@@ -8,6 +8,7 @@ using Abp.Domain.Entities;
 using AutoMapper;
 using Lte.Domain.Common.Geo;
 using Lte.Parameters.Abstract;
+using Lte.Parameters.Entities.ExcelCsv;
 
 namespace Lte.Parameters.Entities
 {

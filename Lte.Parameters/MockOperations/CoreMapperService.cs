@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Lte.Domain.Common.Wireless;
 using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.ExcelCsv;
 
 namespace Lte.Parameters.MockOperations
 {
@@ -33,12 +34,7 @@ namespace Lte.Parameters.MockOperations
                 .ForMember(d => d.Gateway, opt => opt.MapFrom(s => s.Gateway.AddressValue))
                 .ForMember(d => d.SubIp, opt => opt.MapFrom(s => s.Ip.IpByte4));
         }
-
-        public static void MapBts()
-        {
-            Mapper.CreateMap<BtsExcel, CdmaBts>();
-        }
-
+        
         public static void MapDtItems()
         {
             Mapper.CreateMap<FileRecord2G, FileRecordCoverage2G>()
