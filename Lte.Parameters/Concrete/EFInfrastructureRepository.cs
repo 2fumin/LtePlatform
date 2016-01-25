@@ -56,6 +56,16 @@ namespace Lte.Parameters.Concrete
                 ).Select(x => x.InfrastructureId).ToList();
         }
 
+        public InfrastructureInfo GetTopPreciseMonitor(int id)
+        {
+            return FirstOrDefault(x => x.InfrastructureId == id && x.HotspotType == HotspotType.TopPrecise);
+        }
+
+        public int SaveChanges()
+        {
+            return Context.SaveChanges();
+        }
+
         public EFInfrastructureRepository(IDbContextProvider<EFParametersContext> dbContextProvider) : base(dbContextProvider)
         {
         }

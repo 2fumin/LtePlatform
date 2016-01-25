@@ -21,5 +21,9 @@ namespace Lte.Parameters.Abstract
         IEnumerable<int> GetLteDistributionIds(string collegeName);
 
         IEnumerable<int> GetCdmaDistributionIds(string collegeName);
+
+        InfrastructureInfo GetTopPreciseMonitor(int id);
+
+        int SaveChanges();
     }
 }

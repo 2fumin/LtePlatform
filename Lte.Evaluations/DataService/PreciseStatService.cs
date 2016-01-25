@@ -13,14 +13,18 @@ namespace Lte.Evaluations.DataService
     {
         private readonly IPreciseCoverage4GRepository _repository;
         private readonly IENodebRepository _eNodebRepository;
+        private readonly ICellRepository _cellRepository;
+        private readonly IInfrastructureRepository _infrastructureRepository;
 
         public static int TotalMrsThreshold { get; } = 3000;
 
-        public PreciseStatService(IPreciseCoverage4GRepository repository,
-            IENodebRepository eNodebRepository)
+        public PreciseStatService(IPreciseCoverage4GRepository repository, IENodebRepository eNodebRepository,
+            ICellRepository cellRepository, IInfrastructureRepository infrastructureRepository)
         {
             _repository = repository;
             _eNodebRepository = eNodebRepository;
+            _cellRepository = cellRepository;
+            _infrastructureRepository = infrastructureRepository;
         }
 
         public IEnumerable<Precise4GView> GetTopCountViews(DateTime begin, DateTime end, int topCount,
@@ -28,6 +32,19 @@ namespace Lte.Evaluations.DataService
         {
             if (topCount <= 0)
                 return new List<Precise4GView>();
+            var orderResult = GetTopCountStats(begin, end, topCount, policy);
+            return orderResult.Select(x =>
+            {
+                var view = Precise4GView.ConstructView(x.PreciseCoverage4G, _eNodebRepository, _infrastructureRepository,
+                    _cellRepository);
+                view.TopDates = x.TopDates;
+                return view;
+            });
+        }
+
+        public List<TopPrecise4GContainer> GetTopCountStats(DateTime begin, DateTime end, int topCount,
+            OrderPreciseStatService.OrderPreciseStatPolicy policy)
+        {
             var query =
                 _repository.GetAll()
                     .Where(x => x.StatTime >= begin && x.StatTime < end && x.TotalMrs > TotalMrsThreshold);
@@ -38,7 +55,7 @@ namespace Lte.Evaluations.DataService
                     q.CellId,
                     q.SectorId
                 }
-                    into g
+                into g
                 select new TopPrecise4GContainer
                 {
                     PreciseCoverage4G = new PreciseCoverage4G
@@ -51,15 +68,10 @@ namespace Lte.Evaluations.DataService
                         TotalMrs = g.Sum(q => q.TotalMrs)
                     },
                     TopDates = g.Count()
-                }; 
+                };
 
             var orderResult = result.Order(policy, topCount);
-            return orderResult.Select(x =>
-            {
-                var view = Precise4GView.ConstructView(x.PreciseCoverage4G, _eNodebRepository);
-                view.TopDates = x.TopDates;
-                return view;
-            });
+            return orderResult;
         }
 
         public IEnumerable<PreciseCoverage4G> GetOneWeekStats(int cellId, byte sectorId, DateTime date)

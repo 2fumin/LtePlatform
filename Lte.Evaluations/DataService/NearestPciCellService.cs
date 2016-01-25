@@ -33,7 +33,10 @@ namespace Lte.Evaluations.DataService
 
         public List<NearestPciCellView> QueryCells(int cellId, byte sectorId)
         {
-            return _repository.GetAllList(cellId, sectorId).Select(x=>NearestPciCellView.ConstructView(x, _eNodebRepository)).ToList();
+            return
+                _repository.GetAllList(cellId, sectorId)
+                    .Select(x => NearestPciCellView.ConstructView(x, _eNodebRepository))
+                    .ToList();
         }
 
         public int UpdateNeighborPcis(int cellId, byte sectorId)

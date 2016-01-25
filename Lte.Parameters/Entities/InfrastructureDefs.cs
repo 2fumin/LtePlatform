@@ -13,7 +13,7 @@ namespace Lte.Parameters.Entities
         ShoppingMall,
         Building,
         Transportation,
-        TopPreciseNeighbor
+        TopPrecise
     }
 
     public enum InfrastructureType : byte
