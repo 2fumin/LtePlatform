@@ -12,6 +12,7 @@
     $scope.dataModel = new AppDataModel();
     $scope.currentCell = {};
     $scope.neighborCells = [];
+    $scope.updateCounts = 0;
 
     $('.form_date').datetimepicker({
         language: 'zh-CN',
@@ -55,7 +56,7 @@
     };
     $scope.updatePci = function(cell) {
         $http.post($scope.dataModel.nearestPciCellUrl, cell).success(function(result) {
-            console.log(result);
+            $scope.updateCounts = result;
             $scope.showNeighbors(cell);
         });
     };

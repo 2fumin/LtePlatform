@@ -1,4 +1,7 @@
-﻿<div class="panel panel-info">
+﻿<div class="alert alert-success" ng-if="updateCounts>0">
+    共完成{{updateCounts}}条邻区信息导入
+</div>
+<div class="panel panel-info">
     <div class="panel-heading">
         <h3 class="panel-title">
             {{currentCell.eNodebName + "-" + currentCell.sectorId}}小区邻区列表

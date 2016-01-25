@@ -12,7 +12,8 @@ namespace Lte.Parameters.Entities
         Hospital,
         ShoppingMall,
         Building,
-        Transportation
+        Transportation,
+        TopPrecise
     }
 
     public enum InfrastructureType : byte
