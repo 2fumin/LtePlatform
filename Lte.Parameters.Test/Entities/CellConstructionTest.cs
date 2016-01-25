@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Lte.Domain.Common.Wireless;
+﻿using Lte.Domain.Common.Wireless;
 using Lte.Parameters.Entities;
 using Lte.Parameters.MockOperations;
 using NUnit.Framework;

@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Abp.Domain.Entities;
 using AutoMapper;
-using Lte.Domain.Regular;
 
-namespace Lte.Parameters.Entities
+namespace Lte.Parameters.Entities.Basic
 {
     public class CdmaRegionStat : Entity
     {

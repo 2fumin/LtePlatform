@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Lte.Evaluations.MapperSerive;
+﻿using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.Test.MockItems;
 using Lte.Evaluations.ViewModels;
 using Lte.Parameters.Abstract;

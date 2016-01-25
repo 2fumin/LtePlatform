@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Lte.Evaluations.MapperSerive;
-using Lte.Evaluations.ViewModels;
 using Lte.Evaluations.ViewModels.RegionKpi;
-using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Basic;
 using NUnit.Framework;
 
 namespace Lte.Evaluations.Test.ViewModel

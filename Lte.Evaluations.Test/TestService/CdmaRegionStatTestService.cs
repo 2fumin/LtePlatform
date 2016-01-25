@@ -9,6 +9,7 @@ using Lte.Evaluations.ViewModels;
 using Lte.Evaluations.ViewModels.RegionKpi;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Basic;
 using Moq;
 
 namespace Lte.Evaluations.Test.TestService

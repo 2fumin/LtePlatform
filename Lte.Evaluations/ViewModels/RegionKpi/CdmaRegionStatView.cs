@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Basic;
 
 namespace Lte.Evaluations.ViewModels.RegionKpi
 {

@@ -4,6 +4,7 @@ using Lte.Evaluations.ViewModels;
 using Lte.Evaluations.ViewModels.Precise;
 using Lte.Evaluations.ViewModels.RegionKpi;
 using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Basic;
 using Lte.Parameters.Entities.Work;
 
 namespace Lte.Evaluations.MapperSerive
