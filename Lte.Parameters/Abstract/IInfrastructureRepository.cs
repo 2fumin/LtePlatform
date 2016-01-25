@@ -24,6 +24,8 @@ namespace Lte.Parameters.Abstract
 
         InfrastructureInfo GetTopPreciseMonitor(int id);
 
+        List<InfrastructureInfo> GetAllPreciseMonitor(); 
+
         int SaveChanges();
     }
 }

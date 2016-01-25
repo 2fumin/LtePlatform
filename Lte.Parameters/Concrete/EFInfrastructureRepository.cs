@@ -61,6 +61,11 @@ namespace Lte.Parameters.Concrete
             return FirstOrDefault(x => x.InfrastructureId == id && x.HotspotType == HotspotType.TopPrecise);
         }
 
+        public List<InfrastructureInfo> GetAllPreciseMonitor()
+        {
+            return GetAll().Where(x => x.HotspotType == HotspotType.TopPrecise).ToList();
+        }
+
         public int SaveChanges()
         {
             return Context.SaveChanges();

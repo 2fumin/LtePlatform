@@ -20,13 +20,20 @@ namespace Lte.Evaluations.DataService
 
         private static List<PciCell> PciCellList { get; set; }
 
-        public InterferenceMatrixService(IInterferenceMatrixRepository repository, ICellRepository cellRepository)
+        public InterferenceMatrixService(IInterferenceMatrixRepository repository, ICellRepository cellRepository,
+            IInfrastructureRepository infrastructureRepository)
         {
             _repository = repository;
             if (InterferenceMatrixStats == null)
                 InterferenceMatrixStats = new Stack<InterferenceMatrixStat>();
             if (PciCellList == null)
-                PciCellList = Mapper.Map<List<Cell>, List<PciCell>>(cellRepository.GetAllList());
+            {
+                var cells = from cell in cellRepository.GetAllList()
+                    join moinitor in infrastructureRepository.GetAllPreciseMonitor() on cell.Id equals
+                        moinitor.InfrastructureId
+                    select cell;
+                PciCellList = Mapper.Map<IEnumerable<Cell>, List<PciCell>>(cells);
+            }
         }
 
         public void UploadInterferenceStats(StreamReader reader, string path)
