@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Globalization;
 using Abp.Domain.Entities;
 using AutoMapper;
-using Lte.Domain.Regular;
 using Lte.Domain.Common.Wireless;
 
-namespace Lte.Parameters.Entities
+namespace Lte.Parameters.Entities.Basic
 {
     /// <summary>
     /// 定义CDMA小区数据库中对应的ORM对象。

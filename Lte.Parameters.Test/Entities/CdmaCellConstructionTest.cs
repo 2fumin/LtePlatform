@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using Lte.Parameters.Entities;
 using Lte.Domain.Common.Wireless;
+using Lte.Parameters.Entities.Basic;
 using Lte.Parameters.MockOperations;
 
 namespace Lte.Parameters.Test.Entities

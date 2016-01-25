@@ -8,6 +8,7 @@ using Lte.Evaluations.DataService.Dump;
 using Lte.Evaluations.Test.MockItems;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Basic;
 using Lte.Parameters.MockOperations;
 using Moq;
 using NUnit.Framework;
