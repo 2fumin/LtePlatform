@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using Lte.Parameters.Abstract;
+using Lte.Parameters.Abstract.College;
 using Lte.Parameters.Entities;
 
 namespace Lte.Parameters.Concrete

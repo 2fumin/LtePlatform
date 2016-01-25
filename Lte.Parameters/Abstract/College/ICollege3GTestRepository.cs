@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Abp.Domain.Repositories;
 using Lte.Parameters.Entities;
 
-namespace Lte.Parameters.Abstract
+namespace Lte.Parameters.Abstract.College
 {
     public interface ICollege3GTestRepository : IRepository<College3GTestResults>
     {

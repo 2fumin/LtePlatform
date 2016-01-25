@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Web.Http;
-using Lte.Parameters.Abstract;
+using Lte.Parameters.Abstract.College;
 using Lte.Parameters.Entities;
 
 namespace LtePlatform.Controllers.College

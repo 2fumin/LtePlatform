@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Abp.Domain.Repositories;
 using Lte.Parameters.Entities;
 
-namespace Lte.Parameters.Abstract
+namespace Lte.Parameters.Abstract.College
 {
     public interface ICollegeKpiRepository : IRepository<CollegeKpi>
     {

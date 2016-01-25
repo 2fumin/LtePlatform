@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Lte.Parameters.Abstract;
+using Lte.Parameters.Abstract.College;
 using Lte.Parameters.Entities;
 using Lte.Parameters.MockOperations;
 using Moq;

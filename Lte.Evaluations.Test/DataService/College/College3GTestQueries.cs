@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Lte.Evaluations.ViewModels;
-using Lte.Parameters.Abstract;
+using Lte.Parameters.Abstract.College;
 using Lte.Parameters.Entities;
 using Lte.Parameters.MockOperations;
 using Moq;

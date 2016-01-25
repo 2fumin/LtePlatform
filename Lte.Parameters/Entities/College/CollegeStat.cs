@@ -1,5 +1,6 @@
 ﻿using Lte.Domain.Regular.Attributes;
 using Lte.Parameters.Abstract;
+using Lte.Parameters.Abstract.College;
 
 namespace Lte.Parameters.Entities.College
 {

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Abp.EntityFramework.AutoMapper;
 using Lte.Evaluations.ViewModels;
 using Lte.Parameters.Abstract;
+using Lte.Parameters.Abstract.College;
 using Lte.Parameters.Entities;
 
 namespace Lte.Evaluations.DataService.College

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Abp.EntityFramework;
 using Abp.EntityFramework.Repositories;
 using Lte.Parameters.Abstract;
+using Lte.Parameters.Abstract.College;
 using Lte.Parameters.Entities;
 
 namespace Lte.Parameters.Concrete
