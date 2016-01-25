@@ -9,6 +9,7 @@ using Abp.EntityFramework.Repositories;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Abstract.College;
 using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.College;
 
 namespace Lte.Parameters.Concrete
 {

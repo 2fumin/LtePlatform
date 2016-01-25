@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Abp.Domain.Repositories;
 using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.College;
 
 namespace Lte.Parameters.Abstract.College
 {

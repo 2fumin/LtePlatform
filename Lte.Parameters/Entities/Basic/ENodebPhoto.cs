@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Abp.Domain.Entities;
+﻿using Abp.Domain.Entities;
 
-namespace Lte.Parameters.Entities
+namespace Lte.Parameters.Entities.Basic
 {
     public class ENodebPhoto : Entity
     {

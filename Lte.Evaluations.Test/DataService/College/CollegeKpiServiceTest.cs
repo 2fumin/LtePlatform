@@ -4,7 +4,6 @@ using Abp.EntityFramework.AutoMapper;
 using Lte.Evaluations.DataService.College;
 using Lte.Evaluations.Test.MockItems;
 using Lte.Evaluations.ViewModels;
-using Lte.Parameters.Abstract;
 using Lte.Parameters.Abstract.College;
 using Moq;
 using NUnit.Framework;
