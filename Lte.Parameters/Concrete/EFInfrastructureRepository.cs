@@ -4,15 +4,15 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Abp.EntityFramework;
+using Abp.EntityFramework.Repositories;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 
 namespace Lte.Parameters.Concrete
 {
-    public class EFInfrastructureRepository : LightWeightRepositroyBase<InfrastructureInfo>, IInfrastructureRepository
+    public class EFInfrastructureRepository : EfRepositoryBase<EFParametersContext, InfrastructureInfo>, IInfrastructureRepository
     {
-        protected override DbSet<InfrastructureInfo> Entities => context.InfrastructureInfos;
-
         public IEnumerable<int> GetENodebIds(string collegeName)
         {
             return GetAll().Where(x =>
@@ -54,6 +54,10 @@ namespace Lte.Parameters.Concrete
             return GetAll().Where(x =>
                 x.HotspotName == collegeName && x.InfrastructureType == InfrastructureType.CdmaIndoor
                 ).Select(x => x.InfrastructureId).ToList();
+        }
+
+        public EFInfrastructureRepository(IDbContextProvider<EFParametersContext> dbContextProvider) : base(dbContextProvider)
+        {
         }
     }
 }
