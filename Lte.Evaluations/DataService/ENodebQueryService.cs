@@ -7,6 +7,7 @@ using Lte.Domain.Regular;
 using Lte.Evaluations.ViewModels.Basic;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Basic;
 
 namespace Lte.Evaluations.DataService
 {

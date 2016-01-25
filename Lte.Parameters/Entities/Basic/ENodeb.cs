@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Abp.Domain.Entities;
 using AutoMapper;
 using Lte.Domain.Common.Geo;
@@ -11,7 +7,7 @@ using Lte.Domain.Regular;
 using Lte.Domain.Regular.Attributes;
 using Lte.Parameters.Abstract;
 
-namespace Lte.Parameters.Entities
+namespace Lte.Parameters.Entities.Basic
 {
     /// <summary>
     /// 定义LTE基站数据库表对应的ORM对象

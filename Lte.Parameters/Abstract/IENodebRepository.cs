@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Abp.Domain.Repositories;
 using Lte.Domain.Common.Geo;
 using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Basic;
 
 namespace Lte.Parameters.Abstract
 {

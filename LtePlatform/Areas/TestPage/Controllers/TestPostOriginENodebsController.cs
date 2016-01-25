@@ -9,6 +9,7 @@ using Lte.Evaluations.DataService.Dump;
 using Lte.Evaluations.MapperSerive;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Basic;
 using LtePlatform.Models;
 
 namespace LtePlatform.Areas.TestPage.Controllers

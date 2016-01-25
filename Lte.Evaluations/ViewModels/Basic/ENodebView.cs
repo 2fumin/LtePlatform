@@ -5,6 +5,7 @@ using Abp.EntityFramework.AutoMapper;
 using AutoMapper;
 using Lte.Domain.Common.Geo;
 using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Basic;
 
 namespace Lte.Evaluations.ViewModels.Basic
 {
