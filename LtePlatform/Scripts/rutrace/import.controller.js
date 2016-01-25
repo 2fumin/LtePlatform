@@ -60,6 +60,19 @@
             $scope.showNeighbors(cell);
         });
     };
+    $scope.addMonitor = function(cell) {
+        $http.post($scope.dataModel.neighborMonitorUrl, cell).success(function(result) {
+            cell.isMonitored = true;
+        });
+    };
+    $scope.monitorAll = function() {
+        for (var i = 0; i < $scope.topCells.length; i++) {
+            var cell = $scope.topCells[i];
+            if (cell.isMonitored === false) {
+                $scope.addMonitor(cell);
+            }
+        }
+    };
 
     $scope.query();
 });

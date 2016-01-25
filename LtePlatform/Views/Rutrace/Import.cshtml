@@ -16,7 +16,8 @@
                         <div class="form-group">
                             <label class="col-md-2 control-label">{{beginDate.title}}</label>
                             <div datetimepicker ng-model="beginDate.value"></div>
-                        </div><br />
+                            <button class="btn btn-warning" ng-click="monitorAll()">全部监控</button>
+                        </div>
                         <div class="form-group">
                             <label class="col-md-2 control-label">{{endDate.title}}</label>
                             <div datetimepicker ng-model="endDate.value"></div>

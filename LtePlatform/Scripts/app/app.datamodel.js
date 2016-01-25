@@ -49,6 +49,7 @@
     self.workItemUrl = "/api/WorkItem";
     self.lteNeighborCellUrl = "/api/LteNeighborCell";
     self.nearestPciCellUrl = "/api/NearestPciCell";
+    self.neighborMonitorUrl = "/api/NeighborMonitor";
 
     self.areaTestDateUrl = "/api/AreaTestDate";
     self.csvFileInfoUrl = "/api/CsvFileInfo";

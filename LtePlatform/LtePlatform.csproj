@@ -335,6 +335,7 @@
     <Compile Include="Controllers\Kpi\WorkItemController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MeController.cs" />
+    <Compile Include="Controllers\Mr\NeighborMonitorController.cs" />
     <Compile Include="Controllers\ParametersController.cs" />
     <Compile Include="Controllers\Parameters\BtsController.cs" />
     <Compile Include="Controllers\Parameters\CdmaCellController.cs" />
