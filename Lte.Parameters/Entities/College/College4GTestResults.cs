@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Abp.Domain.Entities;
-using Lte.Domain.Regular;
 using Lte.Domain.Regular.Attributes;
 
-namespace Lte.Parameters.Entities
+namespace Lte.Parameters.Entities.College
 {
     [TypeDoc("校园网4G测试结果")]
     public class College4GTestResults : Entity

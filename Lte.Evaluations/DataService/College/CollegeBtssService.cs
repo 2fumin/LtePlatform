@@ -3,7 +3,6 @@ using System.Linq;
 using AutoMapper;
 using Lte.Evaluations.ViewModels.Basic;
 using Lte.Parameters.Abstract;
-using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.Basic;
 
 namespace Lte.Evaluations.DataService.College
