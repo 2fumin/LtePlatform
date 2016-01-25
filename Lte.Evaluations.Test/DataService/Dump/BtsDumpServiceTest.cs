@@ -6,7 +6,6 @@ using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.Test.DataService.Queries;
 using Lte.Evaluations.Test.MockItems;
 using Lte.Parameters.Abstract;
-using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.Basic;
 using Lte.Parameters.Entities.ExcelCsv;
 using Lte.Parameters.MockOperations;

@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using AutoMapper.Should;
-using Lte.Evaluations.DataService.Dump;
-using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.Test.MockItems;
-using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
-using Lte.Parameters.MockOperations;
-using Moq;
 using NUnit.Framework;
 
 namespace Lte.Evaluations.Test.DataService.Dump

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.Should;
-using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using Lte.Domain.Regular;
 using Lte.Evaluations.MapperSerive;
 using Lte.Parameters.Entities;

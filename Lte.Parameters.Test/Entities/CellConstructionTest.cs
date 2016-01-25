@@ -1,5 +1,6 @@
 ﻿using Lte.Domain.Common.Wireless;
 using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Basic;
 using Lte.Parameters.MockOperations;
 using NUnit.Framework;
 

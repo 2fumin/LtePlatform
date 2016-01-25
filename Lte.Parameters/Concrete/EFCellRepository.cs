@@ -9,6 +9,7 @@ using Abp.EntityFramework.Repositories;
 using Lte.Domain.Common.Geo;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Basic;
 
 namespace Lte.Parameters.Concrete
 {

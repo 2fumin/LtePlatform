@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Basic;
 using Moq;
 
 namespace Lte.Evaluations.Test.MockItems

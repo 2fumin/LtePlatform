@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Lte.Evaluations.DataService;
 using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.Test.MockItems;
 using Lte.Parameters.Abstract;
-using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Basic;
 using Moq;
 using NUnit.Framework;
 

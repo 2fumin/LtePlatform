@@ -5,6 +5,7 @@ using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.ViewModels;
 using Lte.Evaluations.ViewModels.Precise;
 using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Basic;
 using LtePlatform.Models;
 
 namespace LtePlatform.Controllers.Parameters
