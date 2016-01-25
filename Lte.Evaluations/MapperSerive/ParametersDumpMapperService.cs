@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Lte.Domain.Regular;
 using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Basic;
 using Lte.Parameters.Entities.ExcelCsv;
 
 namespace Lte.Evaluations.MapperSerive

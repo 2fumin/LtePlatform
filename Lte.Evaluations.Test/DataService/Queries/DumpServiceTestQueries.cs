@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper.Should;
 using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Basic;
 
 namespace Lte.Evaluations.Test.DataService.Queries
 {

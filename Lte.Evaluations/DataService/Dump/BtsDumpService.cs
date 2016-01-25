@@ -3,7 +3,7 @@ using System.Linq;
 using AutoMapper;
 using Lte.Evaluations.MapperSerive;
 using Lte.Parameters.Abstract;
-using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Basic;
 using Lte.Parameters.Entities.ExcelCsv;
 
 namespace Lte.Evaluations.DataService.Dump

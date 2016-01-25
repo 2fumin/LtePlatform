@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 using Abp.Domain.Entities;
 using AutoMapper;
-using Lte.Domain.Common.Geo;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities.ExcelCsv;
 
-namespace Lte.Parameters.Entities
+namespace Lte.Parameters.Entities.Basic
 {
     /// <summary>
     /// 定义CDMA基站的数据库对应的ORM对象。

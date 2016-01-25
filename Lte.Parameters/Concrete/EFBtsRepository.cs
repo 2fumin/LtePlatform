@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Basic;
 
 namespace Lte.Parameters.Concrete
 {

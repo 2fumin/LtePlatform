@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Abp.EntityFramework;
 using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Basic;
 using Lte.Parameters.Entities.Work;
 
 namespace Lte.Parameters.Concrete

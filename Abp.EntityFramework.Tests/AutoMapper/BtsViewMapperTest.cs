@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Abp.EntityFramework.AutoMapper;
 using Lte.Evaluations.ViewModels.Basic;
 using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Basic;
 using NUnit.Framework;
 using Shouldly;
 

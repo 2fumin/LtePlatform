@@ -1,6 +1,7 @@
 ﻿using Abp.EntityFramework.AutoMapper;
 using Lte.Domain.Regular;
 using Lte.Domain.Regular.Attributes;
+using Lte.Parameters.Entities.Basic;
 
 namespace Lte.Parameters.Entities.ExcelCsv
 {
