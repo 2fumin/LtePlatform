@@ -2,6 +2,7 @@
 using System.Web.Http;
 using Lte.Parameters.Abstract.College;
 using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.College;
 
 namespace LtePlatform.Controllers.College
 {

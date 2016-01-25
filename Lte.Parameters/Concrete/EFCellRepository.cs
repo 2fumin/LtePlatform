@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Abp.EntityFramework;
 using Abp.EntityFramework.Repositories;
 using Lte.Domain.Common.Geo;
 using Lte.Parameters.Abstract;
-using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.Basic;
 
 namespace Lte.Parameters.Concrete

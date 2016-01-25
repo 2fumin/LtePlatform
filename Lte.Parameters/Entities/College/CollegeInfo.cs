@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Abp.Domain.Entities.Auditing;
 using Lte.Domain.Regular;
 
-namespace Lte.Parameters.Entities
+namespace Lte.Parameters.Entities.College
 {
     public class CollegeInfo : AuditedEntity
     {
