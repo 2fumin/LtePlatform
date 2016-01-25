@@ -10,7 +10,7 @@
     };
     $scope.topCells = [];
     $scope.dataModel = new AppDataModel();
-    $scope.currentCellName = "";
+    $scope.currentCell = {};
     $scope.neighborCells = [];
 
     $('.form_date').datetimepicker({
@@ -40,7 +40,7 @@
         });
     };
     $scope.showNeighbors = function(cell) {
-        $scope.currentCellName = cell.eNodebName + "-" + cell.sectorId;
+        $scope.currentCell = cell;
         $scope.neighborCells = [];
         $http({
             method: 'GET',
