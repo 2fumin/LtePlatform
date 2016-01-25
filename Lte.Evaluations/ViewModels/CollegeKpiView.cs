@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Abp.EntityFramework.AutoMapper;
 using Lte.Domain.Regular;
 using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.College;
 
 namespace Lte.Evaluations.ViewModels
 {
