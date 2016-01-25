@@ -7,7 +7,7 @@
     <div class="panel-body">
         <p>
             <div class="btn-group" style="float: right">
-                <button class="btn btn-primary">更新PCI</button>
+                <button class="btn btn-primary" ng-if="neighborCells.length" ng-click="updatePci(currentCell)">更新PCI</button>
                 <button class="btn btn-warning">加入监控</button>
             </div>
         </p>

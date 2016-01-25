@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Lte.Evaluations.DataService;
 using Lte.Evaluations.ViewModels;
+using Lte.Evaluations.ViewModels.Precise;
 using Lte.Parameters.Entities;
 using LtePlatform.Models;
 
@@ -29,6 +30,15 @@ namespace LtePlatform.Controllers.Parameters
         public List<NearestPciCellView> Get(int cellId, byte sectorId)
         {
             return _service.QueryCells(cellId, sectorId);
+        }
+
+        [HttpPost]
+        [ApiDoc("更新精确覆盖率统计项内邻区列表的PCI定义")]
+        [ApiParameterDoc("view", "精确覆盖率统计项")]
+        [ApiResponse("更新结果")]
+        public int Post(Precise4GView view)
+        {
+            return _service.UpdateNeighborPcis(view.CellId, view.SectorId);
         }
     }
 }

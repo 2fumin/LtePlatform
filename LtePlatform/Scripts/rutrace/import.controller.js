@@ -53,6 +53,12 @@
             $scope.neighborCells = result;
         });
     };
+    $scope.updatePci = function(cell) {
+        $http.post($scope.dataModel.nearestPciCellUrl, cell).success(function(result) {
+            console.log(result);
+            $scope.showNeighbors(cell);
+        });
+    };
 
     $scope.query();
 });

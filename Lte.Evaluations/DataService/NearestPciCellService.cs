@@ -36,6 +36,19 @@ namespace Lte.Evaluations.DataService
             return _repository.GetAllList(cellId, sectorId).Select(x=>NearestPciCellView.ConstructView(x, _eNodebRepository)).ToList();
         }
 
+        public int UpdateNeighborPcis(int cellId, byte sectorId)
+        {
+            var neighborList = _repository.GetAllList(cellId, sectorId);
+            foreach (var pciCell in neighborList)
+            {
+                var cell = _cellRepository.GetBySectorId(pciCell.NearestCellId, pciCell.NearestSectorId);
+                if (cell == null || pciCell.Pci == cell.Pci) continue;
+                pciCell.Pci = cell.Pci;
+                _repository.Update(pciCell);
+            }
+            return _repository.SaveChanges();
+        }
+
         public void UploadZteNeighbors(StreamReader reader)
         {
             var groupInfos = NeighborCellZteCsv.ReadNeighborCellZteCsvs(reader);
