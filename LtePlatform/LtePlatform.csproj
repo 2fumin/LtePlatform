@@ -818,6 +818,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\rutrace\coverage.controller.js" />
+    <Content Include="Scripts\rutrace\directive.show.cell.info.js" />
     <Content Include="Scripts\rutrace\import.controller.js" />
     <Content Include="Scripts\rutrace\interference.controller.js" />
     <Content Include="Scripts\rutrace\menu.controller.js" />
