@@ -16,6 +16,9 @@
                 <button class="btn btn-warning" ng-if="neighborCells.length && !currentCell.isMonitored" ng-click="addMonitor(currentCell)">
                     加入监控
                 </button>
+                <button class="btn btn-success" ng-if="neighborCells.length" ng-click="monitorNeighbors()">
+                    监控邻区
+                </button>
             </div>
         </p>
         <table class="table table-hover">
@@ -27,6 +30,7 @@
                 <th>邻区小区名称</th>
                 <th>PCI</th>
                 <th>切换次数</th>
+                <th>是否监控</th>
             </tr>
             </thead>
             <tbody>
@@ -37,6 +41,10 @@
                 <td>{{neighbor.nearestENodebName}}-{{neighbor.nearestSectorId}}</td>
                 <td>{{neighbor.pci}}</td>
                 <td>{{neighbor.totalTimes}}</td>
+                <td>
+                    <span ng-if="neighbor.isMonitored">已监控</span>
+                    <span ng-if="!neighbor.isMonitored">未监控</span>
+                </td>
             </tr>
             </tbody>
         </table>

@@ -34,11 +34,19 @@ namespace Lte.Evaluations.ViewModels
         [MemberDoc("邻区基站名称")]
         public string NearestENodebName { get; set; }
 
-        public static NearestPciCellView ConstructView(NearestPciCell stat, IENodebRepository repository)
+        [MemberDoc("是否已被监控")]
+        public bool IsMonitored { get; set; }
+
+        public static NearestPciCellView ConstructView(NearestPciCell stat, IENodebRepository repository,
+            ICellRepository cellRepository, IInfrastructureRepository infrastructureRepository)
         {
             var view = Mapper.Map<NearestPciCell, NearestPciCellView>(stat);
             var eNodeb = repository.GetByENodebId(stat.NearestCellId);
             view.NearestENodebName = eNodeb == null ? "Undefined" : eNodeb.Name;
+            var cell = cellRepository.GetBySectorId(stat.NearestCellId, stat.NearestSectorId);
+            if (cell == null) return view;
+            var infrastructure = infrastructureRepository.GetTopPreciseMonitor(cell.Id);
+            if (infrastructure != null) view.IsMonitored = true;
             return view;
         }
     }

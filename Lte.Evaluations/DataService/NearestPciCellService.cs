@@ -18,15 +18,17 @@ namespace Lte.Evaluations.DataService
         private readonly INearestPciCellRepository _repository;
         private readonly ICellRepository _cellRepository;
         private readonly IENodebRepository _eNodebRepository;
+        private readonly IInfrastructureRepository _infrastructureRepository;
 
         private static Stack<NearestPciCell> NearestCells { get; set; } 
 
         public NearestPciCellService(INearestPciCellRepository repository, ICellRepository cellRepository,
-            IENodebRepository eNodebRepository)
+            IENodebRepository eNodebRepository, IInfrastructureRepository infrastructureRepository)
         {
             _repository = repository;
             _cellRepository = cellRepository;
             _eNodebRepository = eNodebRepository;
+            _infrastructureRepository = infrastructureRepository;
             if (NearestCells == null)
                 NearestCells = new Stack<NearestPciCell>();
         }
@@ -35,7 +37,10 @@ namespace Lte.Evaluations.DataService
         {
             return
                 _repository.GetAllList(cellId, sectorId)
-                    .Select(x => NearestPciCellView.ConstructView(x, _eNodebRepository))
+                    .Select(
+                        x =>
+                            NearestPciCellView.ConstructView(x, _eNodebRepository, _cellRepository,
+                                _infrastructureRepository))
                     .ToList();
         }
 

@@ -68,11 +68,27 @@
             cell.isMonitored = true;
         });
     };
+    $scope.addNeighborMonitor = function (cell) {
+        $http.post($scope.dataModel.neighborMonitorUrl, {
+            cellId: cell.nearestCellId,
+            sectorId: cell.nearestSectorId
+        }).success(function () {
+            cell.isMonitored = true;
+        });
+    };
     $scope.monitorAll = function() {
         for (var i = 0; i < $scope.topCells.length; i++) {
             var cell = $scope.topCells[i];
             if (cell.isMonitored === false) {
                 $scope.addMonitor(cell);
+            }
+        }
+    };
+    $scope.monitorNeighbors = function() {
+        for (var i = 0; i < $scope.neighborCells.length; i++) {
+            var cell = $scope.neighborCells[i];
+            if (cell.isMonitored === false) {
+                $scope.addNeighborMonitor(cell);
             }
         }
     };
