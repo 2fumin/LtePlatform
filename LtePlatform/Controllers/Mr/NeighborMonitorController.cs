@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
+﻿using System.Web.Http;
 using Lte.Evaluations.DataService;
-using Lte.Evaluations.ViewModels.Precise;
+using Lte.Evaluations.MapperSerive;
 using LtePlatform.Models;
 
 namespace LtePlatform.Controllers.Mr
@@ -24,7 +19,7 @@ namespace LtePlatform.Controllers.Mr
         [ApiDoc("将小区信息加入邻区监控列表")]
         [ApiParameterDoc("view", "小区信息")]
         [ApiResponse("更新结果")]
-        public int Post(Precise4GView view)
+        public int Post(CellSectorIdPair view)
         {
             return _service.AddOneMonitor(view.CellId, view.SectorId);
         }

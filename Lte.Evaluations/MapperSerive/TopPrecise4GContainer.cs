@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using Lte.Evaluations.ViewModels.Precise;
-using Lte.Parameters.Entities;
+﻿using Lte.Parameters.Entities;
 
 namespace Lte.Evaluations.MapperSerive
 {
@@ -9,10 +7,5 @@ namespace Lte.Evaluations.MapperSerive
         public PreciseCoverage4G PreciseCoverage4G { get; set; }
 
         public int TopDates { get; set; }
-    }
-
-    public class TopPreciseViewContainer
-    {
-        public IEnumerable<Precise4GView> Views { get; set; } 
     }
 }

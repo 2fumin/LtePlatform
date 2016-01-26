@@ -179,6 +179,7 @@
     <Compile Include="Entities\InterferenceMatrixPci.cs" />
     <Compile Include="Entities\InterferenceMatrixStat.cs" />
     <Compile Include="Entities\LteNeighborCell.cs" />
+    <Compile Include="Entities\NearestPciCell.cs" />
     <Compile Include="Entities\OptimizeRegion.cs" />
     <Compile Include="Entities\PreciseCoverage4G.cs" />
     <Compile Include="Entities\PreciseCoverage4GCsv.cs" />

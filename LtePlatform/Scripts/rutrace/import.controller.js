@@ -61,7 +61,10 @@
         });
     };
     $scope.addMonitor = function(cell) {
-        $http.post($scope.dataModel.neighborMonitorUrl, cell).success(function(result) {
+        $http.post($scope.dataModel.neighborMonitorUrl, {
+            cellId: cell.cellId,
+            sectorId: cell.sectorId
+        }).success(function() {
             cell.isMonitored = true;
         });
     };

@@ -53,6 +53,7 @@ namespace Lte.Evaluations.MapperSerive
             AutoMapperHelper.CreateMap(typeof (CollegeKpiView));
             AutoMapperHelper.CreateMap(typeof(IndoorDistributionExcel));
             AutoMapperHelper.CreateMap(typeof(BtsExcel));
+            AutoMapperHelper.CreateMap(typeof(CellSectorIdPair));
         }
     }
 }
