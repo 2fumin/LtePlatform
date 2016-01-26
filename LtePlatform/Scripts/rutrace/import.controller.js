@@ -13,6 +13,9 @@
     $scope.currentCell = {};
     $scope.neighborCells = [];
     $scope.updateCounts = 0;
+    $scope.showinfo = {
+        title: "邻区"
+    };
 
     $('.form_date').datetimepicker({
         language: 'zh-CN',
@@ -53,6 +56,9 @@
         }).success(function(result) {
             $scope.neighborCells = result;
         });
+    };
+    $scope.showInfo = function(cell) {
+        $scope.showNeighbors(cell);
     };
     $scope.updatePci = function(cell) {
         $http.post($scope.dataModel.nearestPciCellUrl, cell).success(function(result) {
