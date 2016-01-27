@@ -968,6 +968,7 @@
     <None Include="Views\Rutrace\Coverage.cshtml" />
     <None Include="Views\Rutrace\Interference.cshtml" />
     <None Include="Views\Rutrace\WorkItem.cshtml" />
+    <None Include="Views\Rutrace\_InterferenceTable.cshtml" />
     <None Include="Views\Rutrace\_NeighborCellTable.cshtml" />
     <None Include="Views\Rutrace\_TopPreciseTable.cshtml" />
   </ItemGroup>

@@ -101,6 +101,7 @@
     <Compile Include="DataService\Dump\NewENodebListContainer.cs" />
     <Compile Include="DataService\Basic\ENodebQueryService.cs" />
     <Compile Include="DataService\InterferenceMatrixService.cs" />
+    <Compile Include="DataService\InterferenceMatrixView.cs" />
     <Compile Include="DataService\InterferenceNeighborService.cs" />
     <Compile Include="DataService\KpiImportService.cs" />
     <Compile Include="DataService\LteNeighborCellService.cs" />

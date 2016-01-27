@@ -50,6 +50,7 @@
     self.lteNeighborCellUrl = "/api/LteNeighborCell";
     self.nearestPciCellUrl = "/api/NearestPciCell";
     self.neighborMonitorUrl = "/api/NeighborMonitor";
+    self.interferenceNeighborUrl = "/api/InterferenceNeighbor";
 
     self.areaTestDateUrl = "/api/AreaTestDate";
     self.csvFileInfoUrl = "/api/CsvFileInfo";

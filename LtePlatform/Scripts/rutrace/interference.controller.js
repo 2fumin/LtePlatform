@@ -12,6 +12,7 @@
         title: "干扰分析"
     };
     $scope.dataModel = new AppDataModel();
+    $scope.currentCell = {};
 
     $('.form_date').datetimepicker({
         language: 'zh-CN',
@@ -38,6 +39,12 @@
         }).success(function (result) {
             $scope.topCells = result;
         });
+    };
+    $scope.showInterference = function(cell) {
+        $scope.currentCell = cell;
+    };
+    $scope.showInfo = function(cell) {
+        $scope.showInterference(cell);
     };
 
     $scope.query();

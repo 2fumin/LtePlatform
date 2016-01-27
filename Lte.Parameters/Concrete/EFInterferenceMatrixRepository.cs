@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Abp.EntityFramework;
 using Abp.EntityFramework.Repositories;
 using EntityFramework.Extensions;
@@ -30,6 +32,17 @@ namespace Lte.Parameters.Concrete
                             DestENodebId = destENodebId,
                             DestSectorId = destSectorId
                         });
+        }
+
+        public List<InterferenceMatrixStat> GetAllList(DateTime begin, DateTime end, int cellId, byte sectorId)
+        {
+            return
+                GetAll()
+                    .Where(
+                        x =>
+                            x.RecordTime >= begin && x.RecordTime < end && x.ENodebId == cellId &&
+                            x.SectorId == sectorId)
+                    .ToList();
         }
     }
 }

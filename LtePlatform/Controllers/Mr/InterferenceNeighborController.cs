@@ -22,5 +22,11 @@ namespace LtePlatform.Controllers.Mr
         {
             return _service.UpdateNeighbors(cellId, sectorId);
         }
+
+        [HttpGet]
+        public IEnumerable<InterferenceMatrixView> Get(DateTime begin, DateTime end, int cellId, byte sectorId)
+        {
+            return _service.QueryViews(begin, end, cellId, sectorId);
+        }
     }
 }
