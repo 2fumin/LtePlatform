@@ -11,9 +11,12 @@ using Microsoft.AspNet.Identity.EntityFramework;
 namespace LtePlatform.Controllers.Account
 {
     [Authorize]
+    [ApiControl("用户角色管理控制器")]
     public class ApplicationRolesController : ApiController
     {
         [HttpGet]
+        [ApiDoc("获取所有角色定义视图")]
+        [ApiResponse("所有角色定义视图")]
         public IEnumerable<ApplicationRoleViewModel> Get()
         {
             var context = ApplicationDbContext.Create();
@@ -26,6 +29,8 @@ namespace LtePlatform.Controllers.Account
         }
 
         [HttpPost]
+        [ApiDoc("批量向用户添加某个角色")]
+        [ApiParameterDoc("dto", "角色添加信息，包含角色名称和待添加的用户列表")]
         public void Post(RoleUsersDto dto)
         {
             var context = ApplicationDbContext.Create();
@@ -44,6 +49,9 @@ namespace LtePlatform.Controllers.Account
         }
 
         [HttpGet]
+        [ApiDoc("新增一个角色")]
+        [ApiParameterDoc("roleName", "角色名称")]
+        [ApiResponse("添加是否成功")]
         public bool Get(string roleName)
         {
             var context = ApplicationDbContext.Create();
