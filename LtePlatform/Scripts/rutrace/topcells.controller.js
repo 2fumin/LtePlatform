@@ -1,5 +1,5 @@
-﻿app.controller("rutrace.interference", function ($scope, $http) {
-    $scope.pageTitle = "干扰矩阵分析";
+﻿app.controller("topcells", function ($scope, $http) {
+    $scope.topCells = [];
     $scope.beginDate = {
         title: "开始日期",
         value: (new Date()).getDateFromToday(-7).Format("yyyy-MM-dd")
@@ -8,12 +8,9 @@
         title: "结束日期",
         value: (new Date()).Format("yyyy-MM-dd")
     };
-    $scope.topCells = [];
-    $scope.dataModel = new AppDataModel();
     $scope.showinfo = {
-        title: "干扰分析"
+        title: "邻区列表"
     };
-
     $('.form_date').datetimepicker({
         language: 'zh-CN',
         weekStart: 1,

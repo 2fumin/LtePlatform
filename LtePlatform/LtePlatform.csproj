@@ -821,6 +821,7 @@
     <Content Include="Scripts\rutrace\import.controller.js" />
     <Content Include="Scripts\rutrace\interference.controller.js" />
     <Content Include="Scripts\rutrace\menu.controller.js" />
+    <Content Include="Scripts\rutrace\topcells.controller.js" />
     <Content Include="Scripts\rutrace\workitem.controller.js" />
     <Content Include="Scripts\sammy-0.7.5.js" />
     <Content Include="Scripts\sammy-0.7.5.min.js" />

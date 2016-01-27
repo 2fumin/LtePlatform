@@ -12,12 +12,11 @@
                             TOP指标查询
                         </h3>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body" ng-controller="topcells">
                         <div class="form-group">
                             <label class="col-md-2 control-label">{{beginDate.title}}</label>
                             <div datetimepicker ng-model="beginDate.value"></div>
-                            <button class="btn btn-warning" ng-click="monitorAll()">全部监控</button>
-                        </div>
+                        </div><br />
                         <div class="form-group">
                             <label class="col-md-2 control-label">{{endDate.title}}</label>
                             <div datetimepicker ng-model="endDate.value"></div>
@@ -37,9 +36,16 @@
 @section Scripts
 {
     <script src="~/Scripts/angular.js"></script>
+    <link href="~/Content/themes/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <script src="~/Scripts/angular-ui/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/Scripts/angular-ui/local/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="~/Scripts/app/common.js"></script>
+    <script src="~/Scripts/app/app.datamodel.js"></script>
     <script>
         var app = angular.module('myApp', []);
     </script>
     <script src="~/Scripts/rutrace/interference.controller.js"></script>
+    <script src="~/Scripts/rutrace/topcells.controller.js"></script>
     <script src="~/Scripts/rutrace/menu.controller.js"></script>
+    <script src="~/Scripts/angular-ui/customize/directive.datetimepicker.js"></script>
 }
