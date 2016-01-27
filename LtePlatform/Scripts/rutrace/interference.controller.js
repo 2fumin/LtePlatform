@@ -13,6 +13,7 @@
     };
     $scope.dataModel = new AppDataModel();
     $scope.currentCell = {};
+    $scope.interferenceCells = [];
 
     $('.form_date').datetimepicker({
         language: 'zh-CN',
@@ -42,6 +43,28 @@
     };
     $scope.showInterference = function(cell) {
         $scope.currentCell = cell;
+        $scope.interferenceCells = [];
+        $http({
+            method: 'GET',
+            url: $scope.dataModel.interferenceNeighborUrl,
+            params: {
+                'cellId': cell.cellId,
+                'sectorId': cell.sectorId
+            }
+        }).success(function () {
+            $http({
+                method: 'GET',
+                url: $scope.dataModel.interferenceNeighborUrl,
+                params: {
+                    'begin': $scope.beginDate.value,
+                    'end': $scope.endDate.value,
+                    'cellId': cell.cellId,
+                    'sectorId': cell.sectorId
+                }
+            }).success(function (result) {
+                $scope.interferenceCells = result;
+            });
+        });
     };
     $scope.showInfo = function(cell) {
         $scope.showInterference(cell);

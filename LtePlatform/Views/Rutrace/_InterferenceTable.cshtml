@@ -8,9 +8,26 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th></th>
+                <th>邻小区名称</th>
+                <th>邻小区PCI</th>
+                <th>模3干扰数</th>
+                <th>模6干扰数</th>
+                <th>6dB干扰数</th>
+                <th>0dB干扰数</th>
+                <th>总干扰水平</th>
             </tr>
             </thead>
+            <tbody>
+            <tr ng-repeat="cell in interferenceCells">
+                <td>{{cell.neighborCellName}}</td>
+                <td>{{cell.destPci}}</td>
+                <td>{{cell.mod3Interferences}}</td>
+                <td>{{cell.mod6Interferences}}</td>
+                <td>{{cell.overInterferences6Db}}</td>
+                <td>{{cell.overInterferences10Db}}</td>
+                <td>{{cell.interferenceLevel}}</td>
+            </tr>
+            </tbody>
         </table>
     </div>
 </div>
