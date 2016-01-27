@@ -8,11 +8,10 @@
         title: "结束日期",
         value: (new Date()).Format("yyyy-MM-dd")
     };
-    $scope.topCells = [];
-    $scope.dataModel = new AppDataModel();
     $scope.showinfo = {
         title: "干扰分析"
     };
+    $scope.dataModel = new AppDataModel();
 
     $('.form_date').datetimepicker({
         language: 'zh-CN',

@@ -11,5 +11,7 @@ namespace Lte.Parameters.Abstract
     public interface IInterferenceMatrixRepository : IRepository<InterferenceMatrixStat>
     {
         int SaveChanges();
+
+        void UpdateItems(int eNodebId, byte sectorId, short destPci, int destENodebId, byte destSectorId);
     }
 }

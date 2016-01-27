@@ -74,11 +74,11 @@
     <Compile Include="CellTrace\ZteTraceRecord.cs" />
     <Compile Include="DataService\AlarmsService.cs" />
     <Compile Include="DataService\AreaTestDateService.cs" />
-    <Compile Include="DataService\BasicImportService.cs" />
-    <Compile Include="DataService\BtsQueryService.cs" />
-    <Compile Include="DataService\CdmaCellService.cs" />
+    <Compile Include="DataService\Basic\BasicImportService.cs" />
+    <Compile Include="DataService\Basic\BtsQueryService.cs" />
+    <Compile Include="DataService\Basic\CdmaCellService.cs" />
     <Compile Include="DataService\CdmaRegionStatService.cs" />
-    <Compile Include="DataService\CellService.cs" />
+    <Compile Include="DataService\Basic\CellService.cs" />
     <Compile Include="DataService\College\College3GTestService.cs" />
     <Compile Include="DataService\College\College4GTestService.cs" />
     <Compile Include="DataService\College\CollegeAlarmService.cs" />
@@ -99,8 +99,9 @@
     <Compile Include="DataService\Dump\NewCdmaCellListContainer.cs" />
     <Compile Include="DataService\Dump\NewCellListContainer.cs" />
     <Compile Include="DataService\Dump\NewENodebListContainer.cs" />
-    <Compile Include="DataService\ENodebQueryService.cs" />
+    <Compile Include="DataService\Basic\ENodebQueryService.cs" />
     <Compile Include="DataService\InterferenceMatrixService.cs" />
+    <Compile Include="DataService\InterferenceNeighborService.cs" />
     <Compile Include="DataService\KpiImportService.cs" />
     <Compile Include="DataService\LteNeighborCellService.cs" />
     <Compile Include="DataService\NearestPciCellService.cs" />
