@@ -218,12 +218,22 @@ namespace Abp.Tests.Configuration
 
             public async Task DeleteAsync(SettingInfo setting)
             {
-                _settings.RemoveAll(s => s.TenantId == setting.TenantId && s.UserId == setting.UserId && s.Name == setting.Name);
+                await Task.Run(
+                    () =>
+                    {
+                        _settings.RemoveAll(
+                            s => s.TenantId == setting.TenantId && s.UserId == setting.UserId && s.Name == setting.Name);
+                    });
+
             }
 
             public async Task CreateAsync(SettingInfo setting)
             {
-                _settings.Add(setting);
+                await Task.Run(() =>
+                {
+                    _settings.Add(setting);
+                });
+
             }
 
             public async Task UpdateAsync(SettingInfo setting)

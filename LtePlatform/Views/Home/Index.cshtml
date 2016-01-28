@@ -1,7 +1,24 @@
-﻿@section SPAViews {
+﻿<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h2 class="panel-title">
+            <strong>专题优化</strong>
+            <small>——提供专题规划和优化工具</small>
+        </h2>
+    </div>
+    <p class="panel-body text-success">
+        在这里，我们提供<em>专题优化精品化</em>的功能，更多精彩内容请点击以下各个菜单项。
+    </p>
+</div>
+
+@section SPAViews {
     @Html.Partial("_Home")
 }
 @section Scripts{
-    @Scripts.Render("~/bundles/knockout")
-    @Scripts.Render("~/bundles/app")
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/app/common.js"></script>
+    <script src="~/Scripts/app/app.datamodel.js"></script>
+    <script>
+        var app = angular.module('myApp', []);
+    </script>
+    <script src="~/Scripts/app/home.viewmodel.js"></script>
 }
