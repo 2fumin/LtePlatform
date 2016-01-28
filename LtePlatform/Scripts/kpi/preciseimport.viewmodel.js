@@ -39,6 +39,7 @@
             views: self.townPreciseViews()
         }, function () {
             self.townPreciseViews([]);
+            updateDumpHistory(self);
         });
     };
 

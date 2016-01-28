@@ -21,11 +21,11 @@
             <tr ng-repeat="cell in interferenceCells">
                 <td>{{cell.neighborCellName}}</td>
                 <td>{{cell.destPci}}</td>
-                <td>{{cell.mod3Interferences}}</td>
-                <td>{{cell.mod6Interferences}}</td>
-                <td>{{cell.overInterferences6Db}}</td>
-                <td>{{cell.overInterferences10Db}}</td>
-                <td>{{cell.interferenceLevel}}</td>
+                <td>{{cell.mod3Interferences | number:1}}</td>
+                <td>{{cell.mod6Interferences | number:1}}</td>
+                <td>{{cell.overInterferences6Db | number:1}}</td>
+                <td>{{cell.overInterferences10Db | number:1}}</td>
+                <td>{{cell.interferenceLevel | number:2}}</td>
             </tr>
             </tbody>
         </table>
