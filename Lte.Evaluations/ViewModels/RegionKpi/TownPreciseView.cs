@@ -33,8 +33,8 @@ namespace Lte.Evaluations.ViewModels.RegionKpi
 
         public static TownPreciseView ConstructView(TownPreciseCoverage4GStat stat, ITownRepository repository)
         {
+            var town = stat.TownId == -1 ? null : repository.Get(stat.TownId);
             var view = Mapper.Map<TownPreciseCoverage4GStat, TownPreciseView>(stat);
-            var town = repository.Get(stat.TownId);
             view.City = town?.CityName;
             view.District = town?.DistrictName;
             view.Town = town?.TownName;

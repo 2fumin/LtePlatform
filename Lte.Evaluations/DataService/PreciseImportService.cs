@@ -20,7 +20,7 @@ namespace Lte.Evaluations.DataService
         private readonly IENodebRepository _eNodebRepository;
         private readonly ITownRepository _townRepository;
 
-        private static Stack<PreciseCoverage4G> PreciseCoverage4Gs { get; set; } 
+        public static Stack<PreciseCoverage4G> PreciseCoverage4Gs { get; set; } 
 
         public static List<TownPreciseView> TownPreciseViews { get; set; }
 
@@ -43,38 +43,15 @@ namespace Lte.Evaluations.DataService
             try
             {
                 var items = CsvContext.Read<PreciseCoverage4GCsv>(reader, CsvFileDescription.CommaDescription).ToList();
+                var statTime = items[0].StatTime;
                 var stats = Mapper.Map<List<PreciseCoverage4GCsv>, List<PreciseCoverage4G>>(items);
-                var query = from stat in stats
-                    join eNodeb in _eNodebRepository.GetAllList() on stat.CellId equals eNodeb.ENodebId
-                    select
-                        new
-                        {
-                            Stat = stat,
-                            eNodeb.TownId
-                        };
                 foreach (var stat in stats)
                 {
                     PreciseCoverage4Gs.Push(stat);
                 }
-                var townStats = query.Select(x =>
-                {
-                    var townStat = Mapper.Map<PreciseCoverage4G, TownPreciseCoverage4GStat>(x.Stat);
-                    townStat.TownId = x.TownId;
-                    return townStat;
-                });
-                var statTime = items[0].StatTime;
-                var mergeStats = from stat in townStats
-                    group stat by stat.TownId
-                    into g
-                    select new TownPreciseCoverage4GStat
-                    {
-                        TownId = g.Key,
-                        FirstNeighbors = g.Sum(x => x.FirstNeighbors),
-                        SecondNeighbors = g.Sum(x => x.SecondNeighbors),
-                        ThirdNeighbors = g.Sum(x => x.ThirdNeighbors),
-                        TotalMrs = g.Sum(x => x.TotalMrs),
-                        StatTime = statTime
-                    };
+
+                var townStats = GetTownStats(stats);
+                var mergeStats = GetMergeStats(townStats, statTime);
                 TownPreciseViews = mergeStats.Select(x => TownPreciseView.ConstructView(x, _townRepository)).ToList();
             }
             catch
@@ -83,7 +60,43 @@ namespace Lte.Evaluations.DataService
                 TownPreciseViews = new List<TownPreciseView>();
             }
         }
-        
+
+        public IEnumerable<TownPreciseCoverage4GStat> GetMergeStats(IEnumerable<TownPreciseCoverage4GStat> townStats, DateTime statTime)
+        {
+            var mergeStats = from stat in townStats
+                group stat by stat.TownId
+                into g
+                select new TownPreciseCoverage4GStat
+                {
+                    TownId = g.Key,
+                    FirstNeighbors = g.Sum(x => x.FirstNeighbors),
+                    SecondNeighbors = g.Sum(x => x.SecondNeighbors),
+                    ThirdNeighbors = g.Sum(x => x.ThirdNeighbors),
+                    TotalMrs = g.Sum(x => x.TotalMrs),
+                    StatTime = statTime
+                };
+            return mergeStats;
+        }
+
+        public IEnumerable<TownPreciseCoverage4GStat> GetTownStats(List<PreciseCoverage4G> stats)
+        {
+            var query = from stat in stats
+                join eNodeb in _eNodebRepository.GetAllList() on stat.CellId equals eNodeb.ENodebId
+                select
+                    new
+                    {
+                        Stat = stat,
+                        eNodeb.TownId
+                    };
+            var townStats = query.Select(x =>
+            {
+                var townStat = Mapper.Map<PreciseCoverage4G, TownPreciseCoverage4GStat>(x.Stat);
+                townStat.TownId = x.TownId;
+                return townStat;
+            });
+            return townStats;
+        }
+
         public void DumpTownStats(TownPreciseViewContainer container)
         {
             var stats = Mapper.Map<IEnumerable<TownPreciseView>, IEnumerable<TownPreciseCoverage4GStat>>(container.Views);
