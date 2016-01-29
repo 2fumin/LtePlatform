@@ -23,9 +23,10 @@
 }
 
 @section Scripts{
-    @Styles.Render("~/Content/themes/base/css")
-    @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/highcharts")
-    @Scripts.Render("~/bundles/knockout")
-    @Scripts.Render("~/bundles/parametersList")
+    <script src="~/Scripts/angular.min.js"></script>
+    <script>
+        var app = angular.module('myApp', []);
+    </script>
+    <script src="~/Scripts/parameters/list.viewmodel.js"></script>
 }
