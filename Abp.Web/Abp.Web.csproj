@@ -118,7 +118,7 @@
       <Name>Castle.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Castle.Windsor\Castle.Windsor.csproj">
-      <Project>{73fb5b0b-5796-41dc-a5a6-743d585f6b5b}</Project>
+      <Project>{ee27e11c-6c25-4d85-ad17-e0801d7e83d7}</Project>
       <Name>Castle.Windsor</Name>
     </ProjectReference>
   </ItemGroup>

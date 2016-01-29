@@ -33,6 +33,7 @@
     }];
 
     $scope.dataModel = new AppDataModel();
+    $scope.dataModel.initializeAuthorization();
     $http({
         method: 'get',
         url: $scope.dataModel.userInfoUrl,
