@@ -23,10 +23,11 @@
 }
 
 @section Scripts{
-    @Scripts.Render("~/bundles/highcharts")
     <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/highcharts/highstock.src.js"></script>
+    <script src="~/Scripts/highcharts/highcharts-ng.js"></script>
     <script>
-        var app = angular.module('myApp', []);
+        var app = angular.module('myApp', ["highcharts-ng"]);
     </script>
     <script src="~/Scripts/parameters/list.viewmodel.js"></script>
 }

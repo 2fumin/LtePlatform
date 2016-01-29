@@ -723,6 +723,10 @@
     <Content Include="Scripts\dt\list.viewmodel.js" />
     <Content Include="Scripts\highcharts\adapters\standalone-framework.js" />
     <Content Include="Scripts\highcharts\adapters\standalone-framework.src.js" />
+    <Content Include="Scripts\highcharts\highcharts-ng.js" />
+    <Content Include="Scripts\highcharts\highstock-all.js" />
+    <Content Include="Scripts\highcharts\highstock.js" />
+    <Content Include="Scripts\highcharts\highstock.src.js" />
     <Content Include="Scripts\highcharts\themes\dark-blue.js" />
     <Content Include="Scripts\highcharts\themes\dark-green.js" />
     <Content Include="Scripts\highcharts\themes\dark-unica.js" />
