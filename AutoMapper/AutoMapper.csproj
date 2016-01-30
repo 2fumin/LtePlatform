@@ -194,7 +194,6 @@
     <Compile Include="Should\Core\Assertions\CustomizeAssert.cs" />
     <Compile Include="Should\Core\Assertions\AssertComparer.cs" />
     <Compile Include="Should\Core\Assertions\AssertEqualityComparer.cs" />
-    <Compile Include="Should\Core\Assertions\CustomizeAssertions.cs" />
     <Compile Include="Should\Core\Assertions\EnumerableEqualityComparer.cs" />
     <Compile Include="Should\Core\Assertions\Record.cs" />
     <Compile Include="Should\Core\DatePrecision.cs" />

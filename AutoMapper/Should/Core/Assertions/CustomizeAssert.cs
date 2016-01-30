@@ -720,63 +720,6 @@ namespace AutoMapper.Should.Core.Assertions
         }
 
         /// <summary>
-        /// Verifies that the given collection contains only a single
-        /// element of the given type.
-        /// </summary>
-        /// <param name="collection">The collection.</param>
-        /// <returns>The single item in the collection.</returns>
-        /// <exception cref="SingleException">Thrown when the collection does not contain
-        /// exactly one element.</exception>
-        public static object Single(IEnumerable collection)
-        {
-            if (collection == null)
-                throw new ArgumentNullException(nameof(collection));
-
-            var count = 0;
-            object result = null;
-
-            foreach (var item in collection)
-            {
-                result = item;
-                ++count;
-            }
-
-            if (count != 1)
-                throw new SingleException(count);
-
-            return result;
-        }
-
-        /// <summary>
-        /// Verifies that the given collection contains only a single
-        /// element of the given type.
-        /// </summary>
-        /// <typeparam name="T">The collection type.</typeparam>
-        /// <param name="collection">The collection.</param>
-        /// <returns>The single item in the collection.</returns>
-        /// <exception cref="SingleException">Thrown when the collection does not contain
-        /// exactly one element.</exception>
-        public static T Single<T>(IEnumerable<T> collection)
-        {
-            if (collection == null)
-                throw new ArgumentNullException(nameof(collection));
-
-            var count = 0;
-            var result = default(T);
-
-            foreach (var item in collection)
-            {
-                result = item;
-                ++count;
-            }
-
-            if (count != 1)
-                throw new SingleException(count);
-
-            return result;
-        }
-
-        /// <summary>
         /// Verifies that the exact exception is thrown (and not a derived exception type).
         /// </summary>
         /// <typeparam name="T">The type of the exception expected to be thrown</typeparam>
@@ -799,36 +742,6 @@ namespace AutoMapper.Should.Core.Assertions
         /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception of the incorrect type is thrown</exception>
         public static T Throws<T>(string userMessage,
                                   ThrowsDelegate testCode)
-            where T : Exception
-        {
-            return (T)Throws(typeof(T), testCode);
-        }
-
-        /// <summary>
-        /// Verifies that the exact exception is thrown (and not a derived exception type).
-        /// Generally used to test property accessors.
-        /// </summary>
-        /// <typeparam name="T">The type of the exception expected to be thrown</typeparam>
-        /// <param name="testCode">A delegate to the code to be tested</param>
-        /// <returns>The exception that was thrown, when successful</returns>
-        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception of the incorrect type is thrown</exception>
-        public static T Throws<T>(ThrowsDelegateWithReturn testCode)
-            where T : Exception
-        {
-            return (T)Throws(typeof(T), testCode);
-        }
-
-        /// <summary>
-        /// Verifies that the exact exception is thrown (and not a derived exception type).
-        /// Generally used to test property accessors.
-        /// </summary>
-        /// <typeparam name="T">The type of the exception expected to be thrown</typeparam>
-        /// <param name="userMessage">The message to be shown if the test fails</param>
-        /// <param name="testCode">A delegate to the code to be tested</param>
-        /// <returns>The exception that was thrown, when successful</returns>
-        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception of the incorrect type is thrown</exception>
-        public static T Throws<T>(string userMessage,
-                                  ThrowsDelegateWithReturn testCode)
             where T : Exception
         {
             return (T)Throws(typeof(T), testCode);

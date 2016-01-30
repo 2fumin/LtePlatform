@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using AutoMapper.Should;
+using Shouldly;
 using NUnit.Framework;
 
 namespace AutoMapper.Test.Bug
@@ -58,7 +58,7 @@ namespace AutoMapper.Test.Bug
                 src.Value.Add(new SubSource {SubValue = "x"});
                 var destination = Mapper.Map<Source, Destination>(src);
 
-                destination.Value.ShouldEqual("x");
+                destination.Value.ShouldBe("x");
             }
         }
 
@@ -91,7 +91,7 @@ namespace AutoMapper.Test.Bug
             {
                 var dest = Mapper.Map<Source, Destination>(new Source());
 
-                dest.Value.ShouldEqual(0);
+                dest.Value.ShouldBe(0);
             }
         }
     }
@@ -144,7 +144,7 @@ namespace AutoMapper.Test.Bug
                 var src = new Source();
                 var dest = Mapper.Map<Source, Destination>(src);
 
-                dest.BasePrice.ShouldEqual(0);
+                dest.BasePrice.ShouldBe(0);
             }
 
             [Test]
@@ -153,7 +153,7 @@ namespace AutoMapper.Test.Bug
                 var src = new Source {BasePrice = 15};
                 var dest = Mapper.Map<Source, Destination>(src);
 
-                dest.BasePrice.ShouldEqual(src.BasePrice);
+                dest.BasePrice.ShouldBe(src.BasePrice);
             }
         }
     }
@@ -185,7 +185,7 @@ namespace AutoMapper.Test.Bug
             {
                 var destination = new Dest();
                 Mapper.Map(new Source {Value = 5}, destination);
-                destination.Value.ShouldEqual(5);
+                destination.Value.ShouldBe(5);
             }
 
             [Test]
@@ -193,7 +193,7 @@ namespace AutoMapper.Test.Bug
             {
                 var destination = new Dest { Value = 6};
                 Mapper.Map(new Source {Value = 5}, destination);
-                destination.Value.ShouldEqual(6);
+                destination.Value.ShouldBe(6);
             }
         }
     }

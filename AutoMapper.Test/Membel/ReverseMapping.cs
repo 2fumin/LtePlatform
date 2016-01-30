@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
-using AutoMapper.Should;
+using Shouldly;
 using NUnit.Framework;
 
 namespace AutoMapper.Test.Membel
@@ -73,8 +73,8 @@ namespace AutoMapper.Test.Membel
             public void Should_apply_the_convention_in_reverse()
             {
                 _destination.Enabled.ShouldBeTrue();
-                _destination.End_Date.ShouldEqual(_endDate);
-                _destination.Start_Date.ShouldEqual(_startDate);
+                _destination.End_Date.ShouldBe(_endDate);
+                _destination.Start_Date.ShouldBe(_startDate);
             }
         }
 
@@ -114,7 +114,7 @@ namespace AutoMapper.Test.Membel
             [Test]
             public void Should_create_a_map_with_the_reverse_items()
             {
-                _source.Value.ShouldEqual(10);
+                _source.Value.ShouldBe(10);
             }
         }
 
@@ -145,7 +145,7 @@ namespace AutoMapper.Test.Membel
             {
                 var typeMap = Mapper.FindTypeMapFor<Source, Destination>();
 
-                typeMap.GetPropertyMaps().Count().ShouldEqual(1);
+                typeMap.GetPropertyMaps().Count().ShouldBe(1);
             }
 
             [Test]
@@ -306,7 +306,7 @@ namespace AutoMapper.Test.Membel
                 //Act
                 var unmappedPropertyNames = typeMap.GetUnmappedPropertyNames();
                 //Assert
-                unmappedPropertyNames[0].ShouldEqual("Boo");
+                unmappedPropertyNames[0].ShouldBe("Boo");
             }
 
             [Test]
@@ -319,7 +319,7 @@ namespace AutoMapper.Test.Membel
                 //Act
                 var unmappedPropertyNames = typeMap.GetUnmappedPropertyNames();
                 //Assert
-                unmappedPropertyNames[0].ShouldEqual("Boo");
+                unmappedPropertyNames[0].ShouldBe("Boo");
             }
 
             [Test]

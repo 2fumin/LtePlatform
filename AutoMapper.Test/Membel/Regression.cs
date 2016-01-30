@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using AutoMapper.Should;
+using Shouldly;
 using NUnit.Framework;
 
 namespace AutoMapper.Test.Membel
@@ -50,7 +50,7 @@ namespace AutoMapper.Test.Membel
 
 				var dtos = Mapper.Map<IEnumerable<ITestDomainItem>, TestDtoItem[]>(domainItems);
 
-				domainItems[0].ItemId.ShouldEqual(dtos[0].Id);
+				domainItems[0].ItemId.ShouldBe(dtos[0].Id);
 			}
 		}
 
@@ -98,7 +98,7 @@ namespace AutoMapper.Test.Membel
 			[Test]
 			public void Should_map_a_date_with_a_value()
 			{
-				_result.SomeDate.Day.ShouldEqual(1);
+				_result.SomeDate.Day.ShouldBe(1);
 			}
 
 			[Test]
@@ -147,8 +147,8 @@ namespace AutoMapper.Test.Membel
 				var destinationProduct = new Product();
 				destinationProduct = Mapper.Map(sourceProduct, destinationProduct);
 
-				sourceProduct.ProductName.ShouldEqual(destinationProduct.ProductName);
-				sourceProduct.ShouldNotEqual(destinationProduct);
+				sourceProduct.ProductName.ShouldBe(destinationProduct.ProductName);
+				sourceProduct.ShouldNotBe(destinationProduct);
 			}
 		}
 
@@ -180,10 +180,7 @@ namespace AutoMapper.Test.Membel
 				}
 				public IEnumerator GetEnumerator()
 				{
-					foreach (var person in people)
-					{
-						yield return person;
-					}
+				    return people.GetEnumerator();
 				}
 			}
 
