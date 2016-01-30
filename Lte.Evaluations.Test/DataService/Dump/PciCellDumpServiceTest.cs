@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using AutoMapper.Should;
+using Shouldly;
 using Lte.Evaluations.Test.MockItems;
 using Lte.Parameters.Entities;
 using NUnit.Framework;
@@ -29,11 +29,11 @@ namespace Lte.Evaluations.Test.DataService.Dump
                 }
             };
             Service.DumpNewCellExcels(cellExcels);
-            CellRepository.Object.Count().ShouldEqual(6);
+            CellRepository.Object.Count().ShouldBe(6);
             var results = CellRepository.Object.GetAllList();
-            for (int i = 0; i < 6; i++)
+            for (var i = 0; i < 6; i++)
             {
-                results[i].Pci.ShouldEqual(i == index ? modifiedPci : originPci);
+                results[i].Pci.ShouldBe(i == index ? modifiedPci : originPci);
             }
         }
 
@@ -58,18 +58,18 @@ namespace Lte.Evaluations.Test.DataService.Dump
                 }
             };
             Service.DumpNewCellExcels(cellExcels);
-            CellRepository.Object.Count().ShouldEqual(6);
+            CellRepository.Object.Count().ShouldBe(6);
             var results = CellRepository.Object.GetAllList();
             for (int i = 0; i < 6; i++)
             {
                 if (i == index)
                 {
-                    results[i].Pci.ShouldEqual(modifiedPci);
+                    results[i].Pci.ShouldBe(modifiedPci);
                     results[i].IsInUse.ShouldBeTrue();
                 }
                 else
                 {
-                    results[i].Pci.ShouldEqual(originPci);
+                    results[i].Pci.ShouldBe(originPci);
                     results[i].IsInUse.ShouldBeFalse();
                 }
             }
@@ -92,11 +92,11 @@ namespace Lte.Evaluations.Test.DataService.Dump
                 Pci = modifiedPci
             };
             Service.DumpSingleCellExcel(cellExcel);
-            CellRepository.Object.Count().ShouldEqual(6);
+            CellRepository.Object.Count().ShouldBe(6);
             var results = CellRepository.Object.GetAllList();
             for (int i = 0; i < 6; i++)
             {
-                results[i].Pci.ShouldEqual(i == index ? modifiedPci : originPci);
+                results[i].Pci.ShouldBe(i == index ? modifiedPci : originPci);
             }
         }
     }

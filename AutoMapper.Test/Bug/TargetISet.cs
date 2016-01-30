@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using AutoMapper.Should;
+using Shouldly;
 using NUnit.Framework;
 
 namespace AutoMapper.Test.Bug

@@ -30,17 +30,7 @@ namespace AutoMapper.Should
         {
             CustomizeAssert.False(condition, userMessage);
         }
-
-        /// <summary>
-        /// Verifies that an expression is true.
-        /// </summary>
-        /// <param name="condition">The condition to be inspected</param>
-        /// <exception cref="TrueException">Thrown when the condition is false</exception>
-        public static void ShouldBeTrue(this bool condition)
-        {
-            CustomizeAssert.True(condition);
-        }
-
+        
         /// <summary>
         /// Verifies that an expression is true.
         /// </summary>

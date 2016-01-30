@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using AutoMapper.Should;
+using Shouldly;
 using NUnit.Framework;
 
 namespace AutoMapper.Test.Core
@@ -96,7 +96,7 @@ namespace AutoMapper.Test.Core
 			[Test]
 			public void Should_map_the_dto_value()
 			{
-				_result.SomeValue.ShouldEqual("Some value");
+				_result.SomeValue.ShouldBe("Some value");
 			}
 		}
 

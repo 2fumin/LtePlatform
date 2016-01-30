@@ -59,18 +59,6 @@ namespace AutoMapper.Should.Core.Assertions
         }
 
         /// <summary>
-        /// Verifies that a string contains a given sub-string, using the current culture.
-        /// </summary>
-        /// <param name="expectedSubString">The sub-string expected to be in the string</param>
-        /// <param name="actualString">The string to be inspected</param>
-        /// <exception cref="ContainsException">Thrown when the sub-string is not present inside the string</exception>
-        public static int Contains(string expectedSubString,
-                                    string actualString)
-        {
-            return Contains(expectedSubString, actualString, StringComparison.CurrentCulture);
-        }
-
-        /// <summary>
         /// Verifies that a string contains a given sub-string, using the given comparison type.
         /// </summary>
         /// <param name="expectedSubString">The sub-string expected to be in the string</param>
@@ -79,7 +67,7 @@ namespace AutoMapper.Should.Core.Assertions
         /// <exception cref="ContainsException">Thrown when the sub-string is not present inside the string</exception>
         public static int Contains(string expectedSubString,
                                     string actualString,
-                                    StringComparison comparisonType)
+                                    StringComparison comparisonType = StringComparison.CurrentCulture)
         {
             var indexOf = actualString.IndexOf(expectedSubString, comparisonType);
 
@@ -887,18 +875,6 @@ namespace AutoMapper.Should.Core.Assertions
                 throw new ThrowsException(exceptionType, exception);
 
             return exception;
-        }
-
-        /// <summary>
-        /// Verifies that a block of code does not throw any exceptions.
-        /// </summary>
-        /// <param name="testCode">A delegate to the code to be tested</param>
-        public static void DoesNotThrow(ThrowsDelegate testCode)
-        {
-            var ex = Record.Exception(testCode);
-
-            if (ex != null)
-                throw new DoesNotThrowException(ex);
         }
 
         /// <summary>

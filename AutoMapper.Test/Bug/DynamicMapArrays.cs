@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using AutoMapper.Should;
+using Shouldly;
 using NUnit.Framework;
 
 namespace AutoMapper.Test.Bug
@@ -37,7 +37,7 @@ namespace AutoMapper.Test.Bug
         [Test]
         public void Should_dynamic_map_the_array()
         {
-            destination.Length.ShouldEqual(source.Length);
+            destination.Length.ShouldBe(source.Length);
             Array.TrueForAll(source, s => s.Value == destination[s.Value].Value).ShouldBeTrue(); 
         }
     }
