@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Membel
 {
@@ -42,10 +43,9 @@ namespace AutoMapper.Test.Membel
 
 			protected override void Establish_context()
 			{
-				var model = new ModelObject();
-				model.Sub = null;
+			    var model = new ModelObject {Sub = null};
 
-				Mapper.AllowNullDestinationValues = false;
+			    Mapper.AllowNullDestinationValues = false;
 				Mapper.CreateMap<ModelObject, ModelDto>();
 				Mapper.CreateMap<ModelSubObject, ModelSubDto>();
 

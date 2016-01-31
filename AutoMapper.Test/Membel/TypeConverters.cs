@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Reflection;
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Membel
 {

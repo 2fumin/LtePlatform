@@ -89,11 +89,6 @@ namespace AutoMapper.Should
         {
             CustomizeAssert.DoesNotContain(expected, collection, comparer);
         }
-
-        public static void ShouldBeOfLength<T>(this IEnumerable<T> collection, int length)
-        {
-            collection.ShouldNotBeNull();
-            collection.Count().ShouldEqual(length);
-        }
+        
     }
 }
