@@ -171,43 +171,7 @@ namespace AutoMapper.Should
         {
             CustomizeAssert.NotInRange(actual, low, high, comparer);
         }
-
-        /// <summary>
-        /// Verifies that an object reference is not null.
-        /// </summary>
-        /// <param name="object">The object to be validated</param>
-        /// <exception cref="NotNullException">Thrown when the object is not null</exception>
-        public static T ShouldNotBeNull<T>(this T @object) where T : class
-        {
-            CustomizeAssert.NotNull(@object);
-            return @object;
-        }
-
-        /// <summary>
-        /// Verifies that an object reference is not null.
-        /// </summary>
-        /// <param name="object">The object to be validated</param>
-        /// <param name="message">The message to show on failure</param>
-        /// <exception cref="NotNullException">Thrown when the object reference is null</exception>
-        public static T ShouldNotBeNull<T>(this T @object, string message) where T : class
-        {
-            CustomizeAssert.NotNull(@object, message);
-            return @object;
-        }
-
-
-        /// <summary>
-        /// Verifies that two objects are not the same instance.
-        /// </summary>
-        /// <param name="actual">The actual object instance</param>
-        /// <param name="expected">The expected object instance</param>
-        /// <exception cref="NotSameException">Thrown when the objects are the same instance</exception>
-        public static void ShouldNotBeSameAs(this object actual,
-                                             object expected)
-        {
-            CustomizeAssert.NotSame(expected, actual);
-        }
-
+        
         /// <summary>
         /// Verifies that an object is not exactly the given type.
         /// </summary>

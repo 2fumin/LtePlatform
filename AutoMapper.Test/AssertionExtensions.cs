@@ -3,6 +3,7 @@ using System.Collections;
 using System.Linq;
 using AutoMapper.Should;
 using AutoMapper.Should.Core.Exceptions;
+using Shouldly;
 
 namespace AutoMapper.Test
 {
