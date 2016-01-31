@@ -142,66 +142,6 @@ namespace AutoMapper.Should.Core.Assertions
                 throw new NotEqualException(precision.Truncate(actual), precision.Truncate(actual));
         }
 
-        static IEqualityComparer<T> GetEqualityComparer<T>()
-        {
-            return new AssertEqualityComparer<T>();
-        }
-
-        /// <summary>
-        /// Verifies that an object is exactly the given type (and not a derived type).
-        /// </summary>
-        /// <typeparam name="T">The type the object should be</typeparam>
-        /// <param name="object">The object to be evaluated</param>
-        /// <returns>The object, casted to type T when successful</returns>
-        /// <exception cref="IsTypeException">Thrown when the object is not the given type</exception>
-        public static T IsType<T>(object @object)
-        {
-            IsType(typeof(T), @object);
-            return (T)@object;
-        }
-
-        /// <summary>
-        /// Verifies that an object is exactly the given type (and not a derived type).
-        /// </summary>
-        /// <param name="expectedType">The type the object should be</param>
-        /// <param name="object">The object to be evaluated</param>
-        /// <exception cref="IsTypeException">Thrown when the object is not the given type</exception>
-        public static void IsType(Type expectedType,
-                                  object @object)
-        {
-            if (@object == null || !(expectedType == @object.GetType()))
-                throw new IsTypeException(expectedType, @object);
-        }
-
-        /// <summary>
-        /// Verifies that two objects are not equal, using a default comparer.
-        /// </summary>
-        /// <typeparam name="T">The type of the objects to be compared</typeparam>
-        /// <param name="expected">The expected object</param>
-        /// <param name="actual">The actual object</param>
-        /// <exception cref="NotEqualException">Thrown when the objects are equal</exception>
-        public static void NotEqual<T>(T expected,
-                                       T actual)
-        {
-            NotEqual(expected, actual, GetEqualityComparer<T>());
-        }
-
-        /// <summary>
-        /// Verifies that two objects are not equal, using a custom comparer.
-        /// </summary>
-        /// <typeparam name="T">The type of the objects to be compared</typeparam>
-        /// <param name="expected">The expected object</param>
-        /// <param name="actual">The actual object</param>
-        /// <param name="comparer">The comparer used to examine the objects</param>
-        /// <exception cref="NotEqualException">Thrown when the objects are equal</exception>
-        public static void NotEqual<T>(T expected,
-                                       T actual,
-                                       IEqualityComparer<T> comparer)
-        {
-            if (comparer.Equals(expected, actual))
-                throw new NotEqualException(expected, actual);
-        }
-
         /// <summary>
         /// Verifies that the exact exception is thrown (and not a derived exception type).
         /// </summary>

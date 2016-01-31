@@ -122,7 +122,7 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_not_derive_from_INotifyPropertyChanged()
             {
-                _result.ShouldNotBeInstanceOf<INotifyPropertyChanged>();    
+                _result.ShouldNotBeAssignableTo<INotifyPropertyChanged>();    
             }
         }
 

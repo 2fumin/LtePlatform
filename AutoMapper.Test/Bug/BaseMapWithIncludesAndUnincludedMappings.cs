@@ -1,5 +1,6 @@
 ﻿using AutoMapper.Should.Core.Assertions;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Bug
 {
@@ -86,7 +87,7 @@ namespace AutoMapper.Test.Bug
             });
 
             var mapped = Mapper.Map<Container, Container2>(new Container() { Item = new ProxyOfSubA() { Name = "Martin", Description = "Hello" } });
-            CustomizeAssert.IsType<SubB>(mapped.Item);
+            mapped.Item.ShouldBeOfType<SubB>();
 
         }
 
@@ -100,7 +101,7 @@ namespace AutoMapper.Test.Bug
             });
 
             var mapped = Mapper.Map<BaseA, SubB>(new ProxyOfSubA() { Name = "Martin", Description = "Hello" });
-            CustomizeAssert.IsType<SubB>(mapped);
+            mapped.ShouldBeOfType<SubB>();
 
         }
 
@@ -115,7 +116,7 @@ namespace AutoMapper.Test.Bug
             });
 
             var mapped = Mapper.Map<Container, Container2>(new Container() { Item = new ProxyOfSubA() { Name = "Martin", Description = "Hello" } });
-            CustomizeAssert.IsType<SubB>(mapped.Item);
+            mapped.Item.ShouldBeOfType<SubB>();
 
         }
     }
