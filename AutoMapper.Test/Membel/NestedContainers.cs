@@ -1,5 +1,6 @@
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Membel
 {
@@ -69,13 +70,13 @@ namespace AutoMapper.Test.Membel
             [Test]
             public void Should_use_the_new_ctor()
             {
-                _dest.Value.ShouldEqual(7);
+                _dest.Value.ShouldBe(7);
             }
 
             [Test]
             public void Should_use_the_existing_ctor_for_non_overridden_ctors()
             {
-                _dest.Value2.ShouldEqual(7);
+                _dest.Value2.ShouldBe(7);
             }
         }
 
@@ -138,8 +139,8 @@ namespace AutoMapper.Test.Membel
             [Test]
             public void Should_use_the_new_ctor()
             {
-                _dest.Value.ShouldEqual(7);
-                _dest.Value2.ShouldEqual(8);
+                _dest.Value.ShouldBe(7);
+                _dest.Value2.ShouldBe(8);
             }
 
         }

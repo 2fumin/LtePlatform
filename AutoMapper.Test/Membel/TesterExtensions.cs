@@ -10,7 +10,7 @@ namespace AutoMapper.Test.Membel
 		public static void ShouldBeOfLength<T>(this IEnumerable<T> collection, int length)
 		{
 			collection.ShouldNotBeNull();
-			collection.Count().ShouldEqual(length);
+			collection.Count().ShouldBe(length);
 		}
 	}
 }

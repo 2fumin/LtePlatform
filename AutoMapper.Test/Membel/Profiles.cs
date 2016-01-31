@@ -1,6 +1,7 @@
 using System;
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Membel
 {
@@ -46,7 +47,7 @@ namespace AutoMapper.Test.Membel
 			[Test]
 			public void Should_not_include_default_profile_configuration_with_profiled_maps()
 			{
-				_result.Value.ShouldEqual("5");
+				_result.Value.ShouldBe("5");
 			}
 		}
 
@@ -105,13 +106,13 @@ namespace AutoMapper.Test.Membel
 		    [Test]
 		    public void Should_default_the_custom_profile_name_to_the_type_name()
 		    {
-                _customProfile.ProfileName.ShouldEqual(typeof(CustomProfile1).FullName);
+                _customProfile.ProfileName.ShouldBe(typeof(CustomProfile1).FullName);
 		    }
 
 			[Test]
 			public void Should_use_the_overridden_configuration_method_to_configure()
 			{
-				_result.FooValue.ShouldEqual("5");
+				_result.FooValue.ShouldBe("5");
 			}
 		}
 

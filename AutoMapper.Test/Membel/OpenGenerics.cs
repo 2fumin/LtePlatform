@@ -1,5 +1,6 @@
 ﻿using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Membel
 {
@@ -30,7 +31,7 @@ namespace AutoMapper.Test.Membel
 
             var dest = Mapper.Map<Source<int>, Dest<int>>(source);
 
-            dest.Value.ShouldEqual(5);
+            dest.Value.ShouldBe(5);
         }
 
         [Test]
@@ -45,7 +46,7 @@ namespace AutoMapper.Test.Membel
 
             var dest = Mapper.Map<Source<int>, Dest<int>>(source);
 
-            dest.A.ShouldEqual(5);
+            dest.A.ShouldBe(5);
         }
 
         [Test]
@@ -68,7 +69,7 @@ namespace AutoMapper.Test.Membel
 
             var dest = Mapper.Map<Source<Source<int>>, Dest<Dest<double>>>(source);
 
-            dest.Value.Value.ShouldEqual(5);
+            dest.Value.Value.ShouldBe(5);
         }
     }
 }

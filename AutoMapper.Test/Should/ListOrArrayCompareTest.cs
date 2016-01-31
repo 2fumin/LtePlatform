@@ -1,5 +1,6 @@
 ﻿using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Should
 {
@@ -11,7 +12,7 @@ namespace AutoMapper.Test.Should
         {
             var a = new[] {1, 2, 3};
             var b = a;
-            a.ShouldEqual(b);
+            a.ShouldBe(b);
         }
 
         [Test]
@@ -19,7 +20,7 @@ namespace AutoMapper.Test.Should
         {
             var a = new[] { 1, 2, 3 };
             var b = new[] { 1, 2, 3 };
-            a.ShouldEqual(b);
+            a.ShouldBe(b);
         }
 
         [Test]
@@ -27,7 +28,7 @@ namespace AutoMapper.Test.Should
         {
             var a = new[] { 1, 2, 3 };
             var b = new[] { 1, 4, 3 };
-            a.ShouldNotEqual(b);
+            a.ShouldNotBe(b);
         }
 
         [Test]
@@ -35,7 +36,7 @@ namespace AutoMapper.Test.Should
         {
             var a = new int[] {};
             var b = new int[] { };
-            a.ShouldEqual(b);
+            a.ShouldBe(b);
         }
     }
 }

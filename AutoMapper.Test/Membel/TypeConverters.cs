@@ -69,13 +69,13 @@ namespace AutoMapper.Test.Membel
 			[Test]
 			public void Should_convert_type_using_expression()
 			{
-				_result.Value1.ShouldEqual(5);
+				_result.Value1.ShouldBe(5);
 			}
 
 			[Test]
 			public void Should_convert_type_using_instance()
 			{
-				_result.Value2.ShouldEqual(new DateTime(2000, 1, 1));
+				_result.Value2.ShouldBe(new DateTime(2000, 1, 1));
 			}
 
 			[Test]
@@ -126,7 +126,7 @@ namespace AutoMapper.Test.Membel
 			[Test]
 			public void Should_convert_type_using_expression()
 			{
-                _result.Value.Type.ShouldEqual(5);
+                _result.Value.Type.ShouldBe(5);
 			}
 		}
 
@@ -186,7 +186,7 @@ namespace AutoMapper.Test.Membel
 			    };
 				var destination = Mapper.Map<Source, Destination>(source);
 
-				destination.OtherValue.ShouldEqual(0);
+				destination.OtherValue.ShouldBe(0);
 			}
 
 			[Test]
@@ -198,7 +198,7 @@ namespace AutoMapper.Test.Membel
 				};
 				var destination = Mapper.Map<Destination, Source>(source);
 
-				destination.Value.ShouldEqual(0);
+				destination.Value.ShouldBe(0);
 			}
 		}
 
@@ -241,7 +241,7 @@ namespace AutoMapper.Test.Membel
 			[Test]
 			public void Should_use_converter_specified()
 			{
-				_result.OtherValue.ShouldEqual(15);
+				_result.OtherValue.ShouldBe(15);
 			}
 
 			[Test]
@@ -290,7 +290,7 @@ namespace AutoMapper.Test.Membel
 			[Test]
 			public void Should_use_converter_specified()
 			{
-				_result.OtherValue.ShouldEqual(15);
+				_result.OtherValue.ShouldBe(15);
 			}
 
 			[Test]

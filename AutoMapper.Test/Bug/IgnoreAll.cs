@@ -80,7 +80,7 @@ namespace AutoMapper.Test.Bug
         public void Should_only_apply_source_value_when_not_null()
         {
             _destination.Value1.ShouldNotBeNull();
-            _destination.Value2.ShouldNotEqual(null);
+            _destination.Value2.ShouldNotBeNull();
             _destination.Unmapped.ShouldNotBeNull();
         }
     }
