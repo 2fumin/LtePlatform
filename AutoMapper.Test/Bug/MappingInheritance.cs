@@ -1,6 +1,7 @@
 ﻿
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Bug
 {
@@ -35,9 +36,9 @@ namespace AutoMapper.Test.Bug
         [Test]
 		public void AutoMapper_should_map_derived_types_properly()
 		{
-            testEntity.Value1.ShouldEqual(testModel.Value2);
-            testEntity.Value2.ShouldEqual(testModel.Value1);
-            (testEntity.Value1 + testEntity.Value2).ShouldEqual(testModel.Value3);
+            testEntity.Value1.ShouldBe(testModel.Value2);
+            testEntity.Value2.ShouldBe(testModel.Value1);
+            (testEntity.Value1 + testEntity.Value2).ShouldBe(testModel.Value3);
         }
 
         public class Entity
@@ -80,7 +81,7 @@ namespace AutoMapper.Test.Bug
             var mailOrder = new MailOrder() { NewId = 1 };
             var mapped = Mapper.Map<OrderDto>(mailOrder);
 
-            mapped.ShouldBeType<MailOrderDto>();
+            mapped.ShouldBeOfType<MailOrderDto>();
         }
 
         public abstract class Base<T>

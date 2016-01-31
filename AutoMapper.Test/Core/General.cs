@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using AutoMapper.Should;
+using Shouldly;
 using NUnit.Framework;
 
 namespace AutoMapper.Test.Core
@@ -96,7 +96,7 @@ namespace AutoMapper.Test.Core
 			[Test]
 			public void Should_map_the_dto_value()
 			{
-				_result.SomeValue.ShouldEqual("Some value");
+				_result.SomeValue.ShouldBe("Some value");
 			}
 		}
 
@@ -131,7 +131,7 @@ namespace AutoMapper.Test.Core
 			[Test]
 			public void Should_use_the_ToString_value_of_the_unmatched_type()
 			{
-				_result.NotAString.ShouldEqual("5");
+				_result.NotAString.ShouldBe("5");
 			}
 		}
 
@@ -166,9 +166,9 @@ namespace AutoMapper.Test.Core
 			[Test]
 			public void Should_map_the_collection_of_items_in_the_input_to_the_array()
 			{
-				_result.SomeCoolValues[0].ShouldEqual("4");
-				_result.SomeCoolValues[1].ShouldEqual("5");
-				_result.SomeCoolValues[2].ShouldEqual("6");
+				_result.SomeCoolValues[0].ShouldBe("4");
+				_result.SomeCoolValues[1].ShouldBe("5");
+				_result.SomeCoolValues[2].ShouldBe("6");
 			}
 		}
 
@@ -227,7 +227,7 @@ namespace AutoMapper.Test.Core
 			[Test]
 			public void Should_create_an_array_of_ModelDto_objects()
 			{
-				_dto.Length.ShouldEqual(2);
+				_dto.Length.ShouldBe(2);
 			}
 
 			[Test]
@@ -265,7 +265,7 @@ namespace AutoMapper.Test.Core
 			[Test]
 			public void Should_create_an_array_of_ModelDto_objects()
 			{
-				_dto.Length.ShouldEqual(2);
+				_dto.Length.ShouldBe(2);
 			}
 
 			[Test]
@@ -308,13 +308,13 @@ namespace AutoMapper.Test.Core
 			[Test]
 			public void Should_map_value_if_has_value()
 			{
-				_dto.SomeValue.ShouldEqual(2);
+				_dto.SomeValue.ShouldBe(2);
 			}
 
 			[Test]
 			public void Should_not_set_value_if_null()
 			{
-				_dto.SomeNullableValue.ShouldEqual(0);
+				_dto.SomeNullableValue.ShouldBe(0);
 			}
 		}
 
@@ -351,13 +351,13 @@ namespace AutoMapper.Test.Core
 			[Test]
 			public void Should_map_value_if_has_value()
 			{
-				_dto.SomeValue.ShouldEqual(2);
+				_dto.SomeValue.ShouldBe(2);
 			}
 
 			[Test]
 			public void Should_not_set_value_if_null()
 			{
-				_dto.SomeOtherValue.ShouldEqual(0);
+				_dto.SomeOtherValue.ShouldBe(0);
 			}
 
 		}
@@ -439,8 +439,8 @@ namespace AutoMapper.Test.Core
 	        public void Should_map_tuple()
 	        {
 	            _dest.Value.ShouldNotBeNull();
-                _dest.Value.Item1.ShouldEqual(10);
-                _dest.Value.Item2.ShouldEqual(11);
+                _dest.Value.Item1.ShouldBe(10);
+                _dest.Value.Item2.ShouldBe(11);
 	        }
 	    }
     }

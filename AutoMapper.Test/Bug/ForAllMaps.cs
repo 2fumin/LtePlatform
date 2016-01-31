@@ -1,5 +1,5 @@
-﻿using AutoMapper.Should;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Bug
 {
@@ -66,9 +66,9 @@ namespace AutoMapper.Test.Bug
         [Test]
         public void Should_configure_all_maps()
         {
-            _destination.Number.ShouldEqual(-1);
-            _destination1.Number.ShouldEqual(-1);
-            _destination2.Number.ShouldEqual(-1);
+            _destination.Number.ShouldBe(-1);
+            _destination1.Number.ShouldBe(-1);
+            _destination2.Number.ShouldBe(-1);
         }
     }
 }

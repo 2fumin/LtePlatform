@@ -34,6 +34,9 @@
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="Shouldly">
+      <HintPath>..\packages\Shouldly.2.6.0\lib\net40\Shouldly.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -77,6 +80,7 @@
     <Compile Include="Bug\ExistingArrays.cs" />
     <Compile Include="Bug\ExpressionMapping.cs" />
     <Compile Include="Bug\ForAllMaps.cs" />
+    <Compile Include="Bug\GenericTestExtensionMethods.cs" />
     <Compile Include="Bug\GenericTypeConverter.cs" />
     <Compile Include="Bug\IgnoreAll.cs" />
     <Compile Include="Bug\InheritanceIssue.cs" />

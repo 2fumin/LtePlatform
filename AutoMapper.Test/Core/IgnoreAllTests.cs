@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Core
 {
@@ -63,8 +64,8 @@ namespace AutoMapper.Test.Core
 			});
 
             Destination destination = Mapper.Map<Source, Destination>(new Source { ShouldBeMapped = "true" });
-            destination.StartingWith_ShouldBeNullAfterwards.ShouldEqual(null);
-            destination.StartingWith_ShouldNotBeMapped.ShouldEqual(null);
+            destination.StartingWith_ShouldBeNullAfterwards.ShouldBe(null);
+            destination.StartingWith_ShouldNotBeMapped.ShouldBe(null);
         }
 
         [Test]
@@ -78,8 +79,8 @@ namespace AutoMapper.Test.Core
 			});
 
             Destination destination = Mapper.Map<Source, Destination>(new Source { ShouldBeMapped = "true" });
-            destination.AnotherString_ShouldBeNullAfterwards.ShouldEqual(null);
-            destination.StartingWith_ShouldNotBeMapped.ShouldEqual(null);
+            destination.AnotherString_ShouldBeNullAfterwards.ShouldBe(null);
+            destination.StartingWith_ShouldNotBeMapped.ShouldBe(null);
         }
     }
 
@@ -112,7 +113,7 @@ namespace AutoMapper.Test.Core
 			};
 
 			Destination destination = Mapper.Map<Source, Destination>(source);
-            destination.ShouldNotBeMapped.ShouldEqual(null);
+            destination.ShouldNotBeMapped.ShouldBe(null);
 		}
 	}
 
@@ -146,7 +147,7 @@ namespace AutoMapper.Test.Core
             };
 
             Source destination = Mapper.Map<Destination, Source>(source);
-            destination.ShouldNotBeMapped.ShouldEqual(null);
+            destination.ShouldNotBeMapped.ShouldBe(null);
 
         }
     }

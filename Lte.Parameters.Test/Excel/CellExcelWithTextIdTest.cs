@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AutoMapper.Should;
+using Shouldly;
 using Lte.Domain.LinqToExcel;
 using Lte.Domain.Regular;
 using Lte.Domain.Regular.Attributes;
@@ -40,7 +40,7 @@ namespace Lte.Parameters.Test.Excel
 
             Assert.IsNotNull(info);
             Assert.AreEqual(info.Count, 10);
-            info[0].ENodebIdText.ShouldEqual("502575");
+            info[0].ENodebIdText.ShouldBe("502575");
         }
 
         [Test]
@@ -52,7 +52,7 @@ namespace Lte.Parameters.Test.Excel
 
             Assert.IsNotNull(info);
             Assert.AreEqual(info.Count, 10);
-            info[0].ENodebId.ShouldEqual(502575);
+            info[0].ENodebId.ShouldBe(502575);
         }
 
         [Test]
@@ -67,7 +67,7 @@ namespace Lte.Parameters.Test.Excel
 
             Assert.IsNotNull(info);
             Assert.AreEqual(info.Count, 7);
-            info[3].ENodebIdText.ShouldEqual("502573");
+            info[3].ENodebIdText.ShouldBe("502573");
         }
 
         [Test]
@@ -83,7 +83,7 @@ namespace Lte.Parameters.Test.Excel
 
             Assert.IsNotNull(info);
             Assert.AreEqual(info.Count, 22);
-            info[3].ENodebIdText.ShouldEqual("500843");
+            info[3].ENodebIdText.ShouldBe("500843");
             info[8].ENodebIdText.ShouldBeNull();
         }
 

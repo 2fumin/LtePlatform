@@ -1,5 +1,6 @@
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Bug
 {
@@ -34,19 +35,19 @@ namespace AutoMapper.Test.Bug
             [Test]
             public void Should_recognize_a_full_prefix()
             {
-                _dest.IdCodeKey.ShouldEqual(_source.Id);
+                _dest.IdCodeKey.ShouldBe(_source.Id);
             }
 
             [Test]
             public void Should_recognize_a_partial_prefix()
             {
-                _dest.NameKey.ShouldEqual(_source.Name);
+                _dest.NameKey.ShouldBe(_source.Name);
             }
 
             [Test]
             public void Should_recognize_a_partial_match_prefix()
             {
-                _dest.RankCodeKey.ShouldEqual(_source.RankCode);
+                _dest.RankCodeKey.ShouldBe(_source.RankCode);
             }
 
             public class Stuff

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Abp.EntityFramework.AutoMapper;
-using AutoMapper.Should;
 using Lte.Evaluations.DataService.College;
 using Lte.Evaluations.Test.MockItems;
 using Lte.Evaluations.Test.TestService;
@@ -10,6 +9,7 @@ using Lte.Evaluations.ViewModels.Basic;
 using Lte.Parameters.Abstract;
 using Moq;
 using NUnit.Framework;
+using Shouldly;
 
 namespace Lte.Evaluations.Test.DataService.College
 {
@@ -118,7 +118,7 @@ namespace Lte.Evaluations.Test.DataService.College
                 {collegeName, eNodebIds }
             });
             var views = _service.QueryCollegeENodebs(new List<string> {collegeName});
-            views.Count().ShouldEqual(resultCounts);
+            views.Count().ShouldBe(resultCounts);
         }
 
         [TestCase("aaa", "bbb", new[] { 1 }, new[] { 2 }, 2)]
@@ -140,7 +140,7 @@ namespace Lte.Evaluations.Test.DataService.College
                 collegeName1,
                 collegeName2
             });
-            views.Count().ShouldEqual(resultCounts);
+            views.Count().ShouldBe(resultCounts);
         }
 
         [TestCase("aaa", "bbb", "cccc", new[] { 1 }, new[] { 2 }, new[] { 3 }, 3)]
@@ -160,7 +160,7 @@ namespace Lte.Evaluations.Test.DataService.College
                 collegeName2,
                 collegeName3
             });
-            views.Count().ShouldEqual(resultCounts);
+            views.Count().ShouldBe(resultCounts);
         }
     }
 }

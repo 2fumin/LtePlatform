@@ -1,6 +1,7 @@
 using System;
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Membel
 {
@@ -33,13 +34,13 @@ namespace AutoMapper.Test.Membel
 			[Test]
 			public void Should_map_property_value()
 			{
-				_destination.Value1.ShouldEqual(4);
+				_destination.Value1.ShouldBe(4);
 			}
 
 			[Test]
 			public void Should_map_field_value()
 			{
-				_destination.Value2.ShouldEqual("hello");
+				_destination.Value2.ShouldBe("hello");
 			}
 		}
 
@@ -75,13 +76,13 @@ namespace AutoMapper.Test.Membel
             [Test]
             public void Should_use_map_registered_for_underlying_type()
             {
-                _destination.Value2.ShouldEqual(20);
+                _destination.Value2.ShouldBe(20);
             }
 
             [Test]
             public void Should_still_map_value_type()
             {
-                _destination.Value1.ShouldEqual(10);
+                _destination.Value1.ShouldBe(10);
             }
 
 

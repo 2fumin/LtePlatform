@@ -11,6 +11,7 @@ using Lte.Evaluations.Test.TestService;
 using Lte.Parameters.Abstract;
 using Moq;
 using NUnit.Framework;
+using Shouldly;
 
 namespace Lte.Evaluations.Test.DataService
 {
@@ -66,7 +67,7 @@ namespace Lte.Evaluations.Test.DataService
         {
             _testService.ImportOneStat(btsId, sectorId, drops, assignmentSuccess);
             var views = _service.GetTrendViews(DateTime.Parse("2014-12-31"), DateTime.Parse("2015-1-2"), "Foshan");
-            views.Count().ShouldEqual(1);
+            views.Count().ShouldBe(1);
             views.ElementAt(0).AssertEqual(drops, assignmentSuccess, eNodebName, cellName, 1);
         }
     }

@@ -2,6 +2,7 @@
 using AutoMapper.QueryableExtensions;
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Bug
 {
@@ -47,7 +48,7 @@ namespace AutoMapper.Test.Bug
         [Test]
         public void Should_project_constructor_parameter_mappings()
         {
-            _dest.Value.ShouldEqual(SomeValue);
+            _dest.Value.ShouldBe(SomeValue);
         }
     }
 }

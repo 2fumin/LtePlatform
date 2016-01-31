@@ -1,6 +1,7 @@
 using System.Linq;
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Core
 {
@@ -33,7 +34,7 @@ namespace AutoMapper.Test.Core
             {
                 var destination = Mapper.Map<Source, Destination>(new Source {Value = -1});
 
-                destination.Value.ShouldEqual(0);
+                destination.Value.ShouldBe(0);
             }
 
             [Test]
@@ -41,7 +42,7 @@ namespace AutoMapper.Test.Core
             {
                 var destination = Mapper.Map<Source, Destination>(new Source { Value = 7 });
 
-                destination.Value.ShouldEqual(7);
+                destination.Value.ShouldBe(7);
             }
         }
 
@@ -76,13 +77,13 @@ namespace AutoMapper.Test.Core
             {
                 var destination = Mapper.Map<Source, Destination>(new Source { Value = -1 });
 
-                destination.Value.ShouldEqual(0);
+                destination.Value.ShouldBe(0);
             }
 
             [Test]
             public void Should_execute_the_mapping_when_the_condition_is_false()
             {
-                Mapper.Map<Source, Destination>(new Source { Value = 7 }).Value.ShouldEqual(10);
+                Mapper.Map<Source, Destination>(new Source { Value = 7 }).Value.ShouldBe(10);
             }
         }
 
@@ -127,13 +128,13 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_include_the_normal_members_by_default()
             {
-                _destination.Value.ShouldEqual(5);
+                _destination.Value.ShouldBe(5);
             }
 
             [Test]
             public void Should_skip_any_members_based_on_the_skip_condition()
             {
-                _destination.Value2.ShouldEqual(default(int));
+                _destination.Value2.ShouldBe(default(int));
             }
 
             public class SkipAttribute : System.Attribute { }
@@ -196,7 +197,7 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_map_a_property_with_an_inaccessible_setter_if_a_specific_mapping_is_configured_after_the_ignore_method()
             {
-                _destination.Nickname.ShouldEqual("Jimmy");
+                _destination.Nickname.ShouldBe("Jimmy");
             }
 
             [Test]
@@ -280,25 +281,25 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_forward_and_reverse_map_a_property_that_is_accessible_on_both_source_and_destination()
             {
-                _source.Name.ShouldEqual("Bob");
+                _source.Name.ShouldBe("Bob");
             }
 
             [Test]
             public void Should_forward_and_reverse_map_an_inaccessible_destination_property_if_a_mapping_is_defined()
             {
-                _source.Force.ShouldEqual("With You");
+                _source.Force.ShouldBe("With You");
             }
 
             [Test]
             public void Should_forward_and_reverse_map_an_inaccessible_source_property_if_a_mapping_is_defined()
             {
-                _source.ReverseForce.ShouldEqual("You With");
+                _source.ReverseForce.ShouldBe("You With");
             }
 
             [Test]
             public void Should_forward_and_reverse_map_an_inaccessible_source_property_even_if_a_mapping_is_not_defined()
             {
-                _source.Respect.ShouldEqual("R-E-S-P-E-C-T"); // justification: if the mapping works one way, it should work in reverse
+                _source.Respect.ShouldBe("R-E-S-P-E-C-T"); // justification: if the mapping works one way, it should work in reverse
             }
         }
     }

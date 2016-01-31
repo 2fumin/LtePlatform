@@ -4,6 +4,7 @@ using System.Reflection;
 using AutoMapper.Mappers;
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Core
 {
@@ -39,12 +40,12 @@ namespace AutoMapper.Test.Core
             });
 
             var a2 = Mapper.Map<ClientDto>(new Client() { Value= "Test", Transval = "test"});
-            a2.ValueTransfer.ShouldEqual("Test");
-            a2.val.ShouldEqual("test");
+            a2.ValueTransfer.ShouldBe("Test");
+            a2.val.ShouldBe("test");
 
             var a = Mapper.Map<Client>(new ClientDto() { ValueTransfer = "TestTransfer", val = "testTransfer"});
-            a.Value.ShouldEqual("TestTransfer");
-            a.Transval.ShouldEqual("testTransfer");
+            a.Value.ShouldBe("TestTransfer");
+            a.Transval.ShouldBe("testTransfer");
 
             var clients = Mapper.Map<Client[]>(new[] { new ClientDto() });
             Expression<Func<Client, bool>> expr = c => c.ID < 5;
@@ -95,12 +96,12 @@ namespace AutoMapper.Test.Core
             });
 
             var a2 = Mapper.Map<ClientDto>(new Client() { Value = "Test", Transval = "test" });
-            a2.ValueTransfer.ShouldEqual("Test");
-            a2.val.ShouldEqual("test");
+            a2.ValueTransfer.ShouldBe("Test");
+            a2.val.ShouldBe("test");
 
             var a = Mapper.Map<Client>(new ClientDto() { ValueTransfer = "TestTransfer", val = "testTransfer" });
-            a.Value.ShouldEqual("TestTransfer");
-            a.Transval.ShouldEqual("testTransfer");
+            a.Value.ShouldBe("TestTransfer");
+            a.Transval.ShouldBe("testTransfer");
 
             var clients = Mapper.Map<Client[]>(new[] { new ClientDto() });
             Expression<Func<Client, bool>> expr = c => c.ID < 5;
@@ -117,12 +118,12 @@ namespace AutoMapper.Test.Core
             });
 
             var a2 = Mapper.Map<ClientDto>(new Client() { Value = "Test", Transval = "test" });
-            a2.ValueTransfer.ShouldEqual("Test");
-            a2.val.ShouldEqual("test");
+            a2.ValueTransfer.ShouldBe("Test");
+            a2.val.ShouldBe("test");
 
             var a = Mapper.Map<Client>(new ClientDto() { ValueTransfer = "TestTransfer", val = "testTransfer" });
-            a.Value.ShouldEqual("TestTransfer");
-            a.Transval.ShouldEqual("testTransfer");
+            a.Value.ShouldBe("TestTransfer");
+            a.Transval.ShouldBe("testTransfer");
 
             var clients = Mapper.Map<Client[]>(new[] { new ClientDto() });
             Expression<Func<Client, bool>> expr = c => c.ID < 5;

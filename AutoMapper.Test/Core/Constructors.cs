@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Core
 {
@@ -47,13 +48,13 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_map_the_constructor_argument()
             {
-                _dest.Foo.ShouldEqual(5);
+                _dest.Foo.ShouldBe(5);
             }
 
             [Test]
             public void Should_map_the_existing_properties()
             {
-                _dest.Bar.ShouldEqual(10);
+                _dest.Bar.ShouldBe(10);
             }
         }
 
@@ -90,7 +91,7 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_map_the_constructor_argument()
             {
-                _dest.Foo.ShouldEqual(5);
+                _dest.Foo.ShouldBe(5);
             }
         }
 
@@ -144,7 +145,7 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_map_with_the_custom_constructor()
             {
-                _dest.Foo.ShouldEqual(10);
+                _dest.Foo.ShouldBe(10);
             }
         }
 
@@ -198,7 +199,7 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_map_with_the_custom_constructor()
             {
-                _dest.Foo.ShouldEqual(11);
+                _dest.Foo.ShouldBe(11);
             }
         }
 
@@ -245,8 +246,8 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_map_the_existing_properties()
             {
-                _dest.Foo.ShouldEqual(5);
-                _dest.Bar.ShouldEqual(10);
+                _dest.Foo.ShouldBe(5);
+                _dest.Bar.ShouldBe(10);
             }
         }
 
@@ -265,7 +266,7 @@ namespace AutoMapper.Test.Core
 
                 var destinationFoo = Mapper.Map<DestinationFoo>(sourceFoo);
 
-                destinationFoo.Bar.FooBar.ShouldEqual(sourceBar.FooBar);
+                destinationFoo.Bar.FooBar.ShouldBe(sourceBar.FooBar);
             }
 
 
@@ -325,7 +326,7 @@ namespace AutoMapper.Test.Core
                 var destinationFoo = Mapper.Map<DestinationFoo>(sourceFoo);
 
                 destinationFoo.Bar.ShouldBeNull();
-                destinationFoo.Str.ShouldEqual("hello");
+                destinationFoo.Str.ShouldBe("hello");
             }
 
 
@@ -444,9 +445,9 @@ namespace AutoMapper.Test.Core
 
                 var destinationFoo = Mapper.Map<DestinationFoo>(sourceFoo);
 
-                destinationFoo.A.ShouldEqual("a");
-                destinationFoo.B.ShouldEqual("b");
-                destinationFoo.C.ShouldEqual(3);
+                destinationFoo.A.ShouldBe("a");
+                destinationFoo.B.ShouldBe("b");
+                destinationFoo.C.ShouldBe(3);
             }
 
 
@@ -528,7 +529,7 @@ namespace AutoMapper.Test.Core
             {
                 var dest = Mapper.Map<Source, Dest>(new Source {Value = 5});
 
-                dest.Value1.ShouldEqual(5);
+                dest.Value1.ShouldBe(5);
             }
         }
     }

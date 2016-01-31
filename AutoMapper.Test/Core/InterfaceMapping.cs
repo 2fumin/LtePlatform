@@ -1,10 +1,10 @@
 using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Core
 {
@@ -71,13 +71,13 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_map_Child_to_SubDtoChildObject_type()
             {
-                _result.Child.ShouldBeType(typeof (SubDtoChildObject));
+                _result.Child.ShouldBeOfType(typeof (SubDtoChildObject));
             }
 
             [Test]
             public void Should_map_ChildProperty_to_child_property_value()
             {
-                _result.Child.ChildProperty.ShouldEqual("child property value");
+                _result.Child.ChildProperty.ShouldBe("child property value");
             }
         }
 
@@ -116,13 +116,13 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_create_an_implementation_of_the_interface()
             {
-                _result.Value.ShouldEqual(5);
+                _result.Value.ShouldBe(5);
             }
 
             [Test]
             public void Should_not_derive_from_INotifyPropertyChanged()
             {
-                _result.ShouldNotBeInstanceOf<INotifyPropertyChanged>();    
+                _result.ShouldNotBeAssignableTo<INotifyPropertyChanged>();    
             }
         }
 
@@ -173,7 +173,7 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_create_an_implementation_of_the_interface()
             {
-                _result.Value.ShouldEqual(5);
+                _result.Value.ShouldBe(5);
             }
 
             [Test]
@@ -190,28 +190,28 @@ namespace AutoMapper.Test.Core
                 _result.PropertyChanged += (o, e) => {
                     count++;
                     o.ShouldBeSameAs(_result); 
-                    e.PropertyName.ShouldEqual("Value");
+                    e.PropertyName.ShouldBe("Value");
                 };
 
                 _result.Value = 42;
-                count.ShouldEqual(1);
-                _result.Value.ShouldEqual(42);
+                count.ShouldBe(1);
+                _result.Value.ShouldBe(42);
             }
 
             [Test]
             public void Should_detach_event_handler()
             {
                 _result.PropertyChanged += MyHandler;
-                _count.ShouldEqual(0);
+                _count.ShouldBe(0);
 
                 _result.Value = 56;
-                _count.ShouldEqual(1);
+                _count.ShouldBe(1);
 
                 _result.PropertyChanged -= MyHandler;
-                _count.ShouldEqual(1);
+                _count.ShouldBe(1);
 
                 _result.Value = 75;
-                _count.ShouldEqual(1);
+                _count.ShouldBe(1);
             }
 
             private void MyHandler(object sender, PropertyChangedEventArgs e) {
@@ -264,13 +264,13 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_map_base_interface_property()
             {
-                _result.Id.ShouldEqual(7);
+                _result.Id.ShouldBe(7);
             }
 
             [Test]
             public void Should_map_derived_interface_property()
             {
-                _result.SecondId.ShouldEqual(42);
+                _result.SecondId.ShouldBe(42);
             }
 
             [Test]
@@ -335,13 +335,13 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_map_base_interface_property()
             {
-                _result.Id.ShouldEqual(7);
+                _result.Id.ShouldBe(7);
             }
 
             [Test]
             public void Should_map_derived_interface_property()
             {
-                _result.SecondId.ShouldEqual(42);
+                _result.SecondId.ShouldBe(42);
             }
 
             [Test]
@@ -385,7 +385,7 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_ignore_interface_members_for_mapping()
             {
-                _destination.Value.ShouldEqual(10);
+                _destination.Value.ShouldBe(10);
             }
 
             [Test]
@@ -427,7 +427,7 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_use_the_derived_type_map()
             {
-                _baseDtos.First().ShouldBeType<DerivedDto>();
+                _baseDtos.First().ShouldBeOfType<DerivedDto>();
             }
 
         }
@@ -520,17 +520,17 @@ namespace AutoMapper.Test.Core
                 Mapper.Map<Dto, DomainInterface>(dtoCollection[1], domainInstance2);
                 Mapper.Map<Dto, DomainInterface>(dtoCollection[2], domainInstance3);
 
-                dtoCollection[0].Id.ShouldEqual(domainInstance1.Id);
-                dtoCollection[1].Id.ShouldEqual(domainInstance2.Id);
-                dtoCollection[2].Id.ShouldEqual(domainInstance3.Id);
+                dtoCollection[0].Id.ShouldBe(domainInstance1.Id);
+                dtoCollection[1].Id.ShouldBe(domainInstance2.Id);
+                dtoCollection[2].Id.ShouldBe(domainInstance3.Id);
 
-                dtoCollection[0].DecimalValue.ShouldEqual(domainInstance1.Nested.DecimalValue);
-                dtoCollection[1].DecimalValue.ShouldEqual(domainInstance2.Nested.DecimalValue);
-                dtoCollection[2].DecimalValue.ShouldEqual(domainInstance3.Nested.DecimalValue);
+                dtoCollection[0].DecimalValue.ShouldBe(domainInstance1.Nested.DecimalValue);
+                dtoCollection[1].DecimalValue.ShouldBe(domainInstance2.Nested.DecimalValue);
+                dtoCollection[2].DecimalValue.ShouldBe(domainInstance3.Nested.DecimalValue);
 
-                dtoCollection[0].Name.ShouldEqual(domainInstance1.Nested.Name);
-                dtoCollection[1].Name.ShouldEqual(domainInstance2.Nested.Name);
-                dtoCollection[2].Name.ShouldEqual(domainInstance3.Nested.Name);
+                dtoCollection[0].Name.ShouldBe(domainInstance1.Nested.Name);
+                dtoCollection[1].Name.ShouldBe(domainInstance2.Nested.Name);
+                dtoCollection[2].Name.ShouldBe(domainInstance3.Nested.Name);
             }
         }
     }

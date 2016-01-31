@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using AutoMapper.Should;
+using Shouldly;
 using NUnit.Framework;
 
 namespace AutoMapper.Test.Membel
@@ -57,16 +57,16 @@ namespace AutoMapper.Test.Membel
 			[Test]
 			public void Should_map_both_the_base_and_sub_objects()
 			{
-				_result.Length.ShouldEqual(2);
-				_result[0].BaseString.ShouldEqual("Base1");
-				_result[1].BaseString.ShouldEqual("Base2");
+				_result.Length.ShouldBe(2);
+				_result[0].BaseString.ShouldBe("Base1");
+				_result[1].BaseString.ShouldBe("Base2");
 			}
 
 			[Test]
 			public void Should_map_to_the_correct_respective_dto_types()
 			{
-				_result[0].ShouldBeType(typeof (DtoObject));
-				_result[1].ShouldBeType(typeof (DtoSubObject));
+				_result[0].ShouldBeOfType(typeof (DtoObject));
+				_result[1].ShouldBeOfType(typeof (DtoSubObject));
 			}
 		}
 
@@ -116,7 +116,7 @@ namespace AutoMapper.Test.Membel
 			[Test]
 			public void Should_map_to_the_correct_dto_types()
 			{
-                _result.ShouldBeType(typeof(DtoSubObject));
+                _result.ShouldBeOfType(typeof(DtoSubObject));
 			}
 		}
 
@@ -169,15 +169,15 @@ namespace AutoMapper.Test.Membel
 			[Test]
 			public void Should_map_both_the_base_and_sub_objects()
 			{
-				_result.Length.ShouldEqual(1);
-				_result[0].BaseString.ShouldEqual("Base2");
+				_result.Length.ShouldBe(1);
+				_result[0].BaseString.ShouldBe("Base2");
 			}
 
 			[Test]
 			public void Should_map_to_the_correct_respective_dto_types()
 			{
-				_result[0].ShouldBeType(typeof (DtoSubObject));
-				((DtoSubObject) _result[0]).SubString.ShouldEqual("Sub2");
+				_result[0].ShouldBeOfType(typeof (DtoSubObject));
+				((DtoSubObject) _result[0]).SubString.ShouldBe("Sub2");
 			}
 		}
 
@@ -240,10 +240,10 @@ namespace AutoMapper.Test.Membel
 
 				_result = Mapper.Map<Model, DtoModel>(model);
 				_result.Object.ShouldNotBeNull();
-				_result.Object.ShouldBeType<DtoSubObject>();
-				_result.Object.ShouldBeType<DtoSubObject>();
-				_result.Object.BaseString.ShouldEqual("Base2");
-				((DtoSubObject) _result.Object).SubString.ShouldEqual("Sub2");
+				_result.Object.ShouldBeOfType<DtoSubObject>();
+				_result.Object.ShouldBeOfType<DtoSubObject>();
+				_result.Object.BaseString.ShouldBe("Base2");
+				((DtoSubObject) _result.Object).SubString.ShouldBe("Sub2");
 			}
 		}
 
@@ -318,31 +318,31 @@ namespace AutoMapper.Test.Membel
 			[Test]
 			public void Should_map_item_in_first_level_of_hierarchy()
 			{
-				_result.BaseDate.ShouldEqual(new DateTime(2007, 4, 5));
+				_result.BaseDate.ShouldBe(new DateTime(2007, 4, 5));
 			}
 
 			[Test]
 			public void Should_map_a_member_with_a_number()
 			{
-				_result.Sub2ProperName.ShouldEqual("Sub 2 name");
+				_result.Sub2ProperName.ShouldBe("Sub 2 name");
 			}
 
 			[Test]
 			public void Should_map_item_in_second_level_of_hierarchy()
 			{
-				_result.SubProperName.ShouldEqual("Some name");
+				_result.SubProperName.ShouldBe("Some name");
 			}
 
 			[Test]
 			public void Should_map_item_with_more_items_in_property_name()
 			{
-				_result.SubWithExtraNameProperName.ShouldEqual("Some other name");
+				_result.SubWithExtraNameProperName.ShouldBe("Some other name");
 			}
 
 			[Test]
 			public void Should_map_item_in_any_level_of_depth_in_the_hierarchy()
 			{
-				_result.SubSubSubIAmACoolProperty.ShouldEqual("Cool daddy-o");
+				_result.SubSubSubIAmACoolProperty.ShouldBe("Cool daddy-o");
 			}
 		}
 
@@ -417,31 +417,31 @@ namespace AutoMapper.Test.Membel
             [Test]
             public void Should_map_item_in_first_level_of_hierarchy()
             {
-                _result.BaseDate.ShouldEqual(new DateTime(2007, 4, 5));
+                _result.BaseDate.ShouldBe(new DateTime(2007, 4, 5));
             }
 
             [Test]
             public void Should_map_a_member_with_a_number()
             {
-                _result.Sub2ProperName.ShouldEqual("Sub 2 name");
+                _result.Sub2ProperName.ShouldBe("Sub 2 name");
             }
 
             [Test]
             public void Should_map_item_in_second_level_of_hierarchy()
             {
-                _result.SubProperName.ShouldEqual("Some name");
+                _result.SubProperName.ShouldBe("Some name");
             }
 
             [Test]
             public void Should_map_item_with_more_items_in_property_name()
             {
-                _result.SubWithExtraNameProperName.ShouldEqual("Some other name");
+                _result.SubWithExtraNameProperName.ShouldBe("Some other name");
             }
 
             [Test]
             public void Should_map_item_in_any_level_of_depth_in_the_hierarchy()
             {
-                _result.SubSubSubIAmACoolProperty.ShouldEqual("Cool daddy-o");
+                _result.SubSubSubIAmACoolProperty.ShouldBe("Cool daddy-o");
             }
         }
 
@@ -522,31 +522,31 @@ namespace AutoMapper.Test.Membel
             [Test]
             public void Should_map_item_in_first_level_of_hierarchy()
             {
-                _result.BaseDate.ShouldEqual(new DateTime(2007, 4, 5));
+                _result.BaseDate.ShouldBe(new DateTime(2007, 4, 5));
             }
 
             [Test]
             public void Should_map_a_member_with_a_number()
             {
-                _result.Sub2ProperName.ShouldEqual("Sub 2 name");
+                _result.Sub2ProperName.ShouldBe("Sub 2 name");
             }
 
             [Test]
             public void Should_map_item_in_second_level_of_hierarchy()
             {
-                _result.SubProperName.ShouldEqual("Some name");
+                _result.SubProperName.ShouldBe("Some name");
             }
 
             [Test]
             public void Should_map_item_with_more_items_in_property_name()
             {
-                _result.SubWithExtraNameProperName.ShouldEqual("Some other name");
+                _result.SubWithExtraNameProperName.ShouldBe("Some other name");
             }
 
             [Test]
             public void Should_map_item_in_any_level_of_depth_in_the_hierarchy()
             {
-                _result.SubSubSubIAmACoolProperty.ShouldEqual("Cool daddy-o");
+                _result.SubSubSubIAmACoolProperty.ShouldBe("Cool daddy-o");
             }
         }
 
@@ -578,7 +578,7 @@ namespace AutoMapper.Test.Membel
 			public void Should_map_successfully()
 			{
 				var destination = Mapper.Map<Source, Destination>(_source);
-				destination.Value.ShouldEqual("foo");
+				destination.Value.ShouldBe("foo");
 				destination.Ignored.ShouldBeTrue();
 			}
 
@@ -641,13 +641,13 @@ namespace AutoMapper.Test.Membel
 			[Test]
 			public void Should_map_base_method_value()
 			{
-				_result.SomeCoolValue.ShouldEqual("Cool value");
+				_result.SomeCoolValue.ShouldBe("Cool value");
 			}
 
 			[Test]
 			public void Should_map_second_level_method_value_off_of_property()
 			{
-				_result.SubSomeOtherCoolValue.ShouldEqual("Even cooler");
+				_result.SubSomeOtherCoolValue.ShouldBe("Even cooler");
 			}
 		}
 
@@ -695,13 +695,13 @@ namespace AutoMapper.Test.Membel
 			[Test]
 			public void Should_map_base_method_value()
 			{
-				_result.SomeCoolValue.ShouldEqual("Cool value");
+				_result.SomeCoolValue.ShouldBe("Cool value");
 			}
 
 			[Test]
 			public void Should_map_second_level_method_value_off_of_property()
 			{
-				_result.SubSomeOtherCoolValue.ShouldEqual("Even cooler");
+				_result.SubSomeOtherCoolValue.ShouldBe("Even cooler");
 			}
 		}
 
@@ -750,7 +750,7 @@ namespace AutoMapper.Test.Membel
 			public void Should_map_the_model_sub_type_to_the_dto_sub_type()
 			{
 				_result.Sub.ShouldNotBeNull();
-				_result.Sub.SomeValue.ShouldEqual("Some value");
+				_result.Sub.SomeValue.ShouldBe("Some value");
 			}
 		}
 
@@ -791,7 +791,7 @@ namespace AutoMapper.Test.Membel
 			[Test]
 			public void Should_map_the_get_method_to_the_dto()
 			{
-				_result.SomeValue.ShouldEqual(46);
+				_result.SomeValue.ShouldBe(46);
 			}
 		}
 
@@ -888,61 +888,61 @@ namespace AutoMapper.Test.Membel
 			[Test]
 			public void Should_preserve_the_existing_mapping()
 			{
-				_result.SomeValue.ShouldEqual("Some value");
+				_result.SomeValue.ShouldBe("Some value");
 			}
 
 			[Test]
 			public void Should_map_top_level_properties()
 			{
-				_result.Splorg.ShouldEqual(10);
+				_result.Splorg.ShouldBe(10);
 			}
 
 			[Test]
 			public void Should_map_methods_results()
 			{
-				_result.SomeMethod.ShouldEqual("I am some method");
+				_result.SomeMethod.ShouldBe("I am some method");
 			}
 
 			[Test]
 			public void Should_map_children_properties()
 			{
-				_result.SubNarf.ShouldEqual(5);
+				_result.SubNarf.ShouldBe(5);
 			}
 
 			[Test]
 			public void Should_map_children_methods()
 			{
-				_result.SubValue.ShouldEqual("I am some sub value");
+				_result.SubValue.ShouldBe("I am some sub value");
 			}
 
 			[Test]
 			public void Should_map_grandchildren_properties()
 			{
-				_result.GrandChildInt.ShouldEqual(15);
+				_result.GrandChildInt.ShouldBe(15);
 			}
 
 			[Test]
 			public void Should_map_grandchildren_methods()
 			{
-				_result.GrandChildString.ShouldEqual("I am some sub sub value");
+				_result.GrandChildString.ShouldBe("I am some sub sub value");
 			}
 
 			[Test]
 			public void Should_map_blarg_plus_three_using_extension_method()
 			{
-				_result.BlargPlus3.ShouldEqual(13);
+				_result.BlargPlus3.ShouldBe(13);
 			}
 
 			[Test]
 			public void Should_map_blarg_minus_2_using_lambda()
 			{
-				_result.BlargMinus2.ShouldEqual(8);
+				_result.BlargMinus2.ShouldBe(8);
 			}
 
 			[Test]
 			public void Should_override_existing_matches_for_new_mappings()
 			{
-				_result.MoreBlarg.ShouldEqual(45);
+				_result.MoreBlarg.ShouldBe(45);
 			}
 		}
 
@@ -1025,31 +1025,31 @@ namespace AutoMapper.Test.Membel
             [Test]
             public void Should_preserve_existing_mapping()
             {
-                _result.Id.ShouldEqual(7);
+                _result.Id.ShouldBe(7);
             }
 
             [Test]
             public void Should_support_custom_source_member()
             {
-                _result.CurrentState.ShouldEqual("Pending");
+                _result.CurrentState.ShouldBe("Pending");
             }
 
             [Test]
             public void Should_support_custom_resolver_on_custom_source_member()
             {
-                _result.Contact.ShouldEqual("BUSTER");
+                _result.Contact.ShouldBe("BUSTER");
             }
 
             [Test]
             public void Should_support_custom_resolver_by_type_on_custom_source_member()
             {
-                _result.Tracking.ShouldEqual("abcxy23");
+                _result.Tracking.ShouldBe("abcxy23");
             }
 
             [Test]
             public void Should_support_custom_resolver_by_generic_type_with_constructor_on_custom_source_member()
             {
-                _result.Postal.ShouldEqual("   XYZ");
+                _result.Postal.ShouldBe("   XYZ");
             }
 
         }
@@ -1083,7 +1083,7 @@ namespace AutoMapper.Test.Membel
 			[Test]
 			public void Should_match_to_PascalCased_source_member()
 			{
-				_result.someValueWithPascalName.ShouldEqual(5);
+				_result.someValueWithPascalName.ShouldBe(5);
 			}
 
 			[Test]
@@ -1149,10 +1149,10 @@ namespace AutoMapper.Test.Membel
             [Test]
             public void Should_resolve_any_level_of_hierarchies()
             {
-                _result.Name.ShouldEqual("Grandparent");
-                _result.Children.Length.ShouldEqual(2);
-                _result.Children[0].Children.Length.ShouldEqual(3);
-                _result.Children[1].Children.Length.ShouldEqual(4);
+                _result.Name.ShouldBe("Grandparent");
+                _result.Children.Length.ShouldBe(2);
+                _result.Children[0].Children.Length.ShouldBe(3);
+                _result.Children[1].Children.Length.ShouldBe(4);
             }
         }
 	
@@ -1184,7 +1184,7 @@ namespace AutoMapper.Test.Membel
 			[Test]
 			public void Should_allow_for_basic_mapping()
 			{
-				_result.Value.ShouldEqual(5);
+				_result.Value.ShouldBe(5);
 			}
 		}
 
@@ -1226,7 +1226,7 @@ namespace AutoMapper.Test.Membel
 			[Test]
 			public void Should_use_underscores_as_tokenizers_to_flatten()
 			{
-				_destination.some_source_value.ShouldEqual(8);
+				_destination.some_source_value.ShouldBe(8);
 			}
 		}
 
@@ -1267,13 +1267,13 @@ namespace AutoMapper.Test.Membel
 			[Test]
 			public void Registered_prefixes_ignored()
 			{
-				_destination.Value.ShouldEqual(5);
+				_destination.Value.ShouldBe(5);
 			}
 
 			[Test]
 			public void Default_prefix_included()
 			{
-				_destination.OtherValue.ShouldEqual(10);
+				_destination.OtherValue.ShouldBe(10);
 			}
 		}
 
@@ -1315,13 +1315,13 @@ namespace AutoMapper.Test.Membel
 			[Test]
 			public void Registered_prefixes_ignored()
 			{
-				_destination.Value.ShouldEqual(5);
+				_destination.Value.ShouldBe(5);
 			}
 
 			[Test]
 			public void Default_prefix_included()
 			{
-				_destination.OtherValue.ShouldEqual(10);
+				_destination.OtherValue.ShouldBe(10);
 			}
 		}
 
@@ -1349,7 +1349,7 @@ namespace AutoMapper.Test.Membel
 			[Test]
 			public void Should_match_based_on_name()
 			{
-				_destination.I_amaCraAZZEE____Name.ShouldEqual(5);
+				_destination.I_amaCraAZZEE____Name.ShouldBe(5);
 			}
 		}
 
@@ -1385,7 +1385,7 @@ namespace AutoMapper.Test.Membel
 			[Test]
 			public void Members_that_match_alias_should_be_matched()
 			{
-				_destination.Bar.ShouldEqual(5);
+				_destination.Bar.ShouldBe(5);
 			}
 		}
 
@@ -1423,8 +1423,8 @@ namespace AutoMapper.Test.Membel
             [Test]
             public void Registered_prefixes_ignored()
             {
-                _destination.FooValue.ShouldEqual(5);
-                _destination.BarValue2.ShouldEqual(10);
+                _destination.FooValue.ShouldBe(5);
+                _destination.BarValue2.ShouldBe(10);
             }
         }
 
@@ -1473,7 +1473,7 @@ namespace AutoMapper.Test.Membel
 		[Test]
 		public void Should_use_private_accessors_and_constructors()
 		{
-			_destination.Value.ShouldEqual(5);
+			_destination.Value.ShouldBe(5);
 		}
 	}
 #endif

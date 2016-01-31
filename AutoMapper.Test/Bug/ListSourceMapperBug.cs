@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Bug
 {
@@ -40,7 +41,7 @@ namespace AutoMapper.Test.Bug
 
             var dests = Mapper.Map<CustomCollection<Source>, CustomCollection<Dest>>(source);
 
-            dests.Count.ShouldEqual(1);
+            dests.Count.ShouldBe(1);
         }
     }
 }

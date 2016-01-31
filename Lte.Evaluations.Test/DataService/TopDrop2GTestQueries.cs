@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper.Should;
 using Lte.Evaluations.ViewModels;
 using NUnit.Framework;
+using Shouldly;
 
 namespace Lte.Evaluations.Test.DataService
 {
@@ -24,11 +25,11 @@ namespace Lte.Evaluations.Test.DataService
         public static void AssertEqual(this TopDrop2GTrendView view, int drops, int assignmentSuccess, string eNodebName,
             string cellName, int topDates)
         {
-            view.TotalDrops.ShouldEqual(drops);
-            view.TotalCallAttempst.ShouldEqual(assignmentSuccess);
-            view.TopDates.ShouldEqual(topDates);
-            view.ENodebName.ShouldEqual(eNodebName);
-            view.CellName.ShouldEqual(cellName);
+            view.TotalDrops.ShouldBe(drops);
+            view.TotalCallAttempst.ShouldBe(assignmentSuccess);
+            view.TopDates.ShouldBe(topDates);
+            view.ENodebName.ShouldBe(eNodebName);
+            view.CellName.ShouldBe(cellName);
         }
     }
 }

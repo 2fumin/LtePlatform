@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using AutoMapper.Should;
+using Shouldly;
 using NUnit.Framework;
 
 namespace AutoMapper.Test.Core
@@ -48,8 +48,8 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Before_and_After_for_the_parent_should_be_called_once()
             {
-                _beforeMapCount.ShouldEqual(1);
-                _afterMapCount.ShouldEqual(1);
+                _beforeMapCount.ShouldBe(1);
+                _afterMapCount.ShouldBe(1);
             }
 
             public class ParentModel
@@ -237,7 +237,7 @@ namespace AutoMapper.Test.Core
 			[Test]
 			public void Should_preserve_the_parent_child_relationship_on_the_destination()
 			{
-				_dto.Children[0].Parent.ID.ShouldEqual(_dto.ID);
+				_dto.Children[0].Parent.ID.ShouldBe(_dto.ID);
 			}
 
 			public class ChildIdToParentDtoConverter : ITypeConverter<int, ParentDto>
@@ -379,11 +379,11 @@ namespace AutoMapper.Test.Core
 			[Test]
 			public void Should_not_preserve_identity_when_destinations_are_incompatible()
 			{
-				_dto.ShouldBeType<FooContainerModel>();
-				_dto.Input.ShouldBeType<FooInputModel>();
-				_dto.Screen.ShouldBeType<FooScreenModel>();
-				_dto.Input.Id.ShouldEqual(3);
-				_dto.Screen.Id.ShouldEqual("3");
+				_dto.ShouldBeOfType<FooContainerModel>();
+				_dto.Input.ShouldBeOfType<FooInputModel>();
+				_dto.Screen.ShouldBeOfType<FooScreenModel>();
+				_dto.Input.Id.ShouldBe(3);
+				_dto.Screen.Id.ShouldBe("3");
 			}
 
 			public class FooContainerModel
@@ -599,9 +599,9 @@ namespace AutoMapper.Test.Core
                 Mapper.CreateMap<Tag, Tag>().ForMember(dest => dest.ChildTags, opt => opt.MapFrom(src => src.ChildTags));
                 var result = Mapper.Map<IList<Tag>, IList<Tag>>(tags, opt => opt.DisableCache = true);
 
-                result[1].ChildTags.Count().ShouldEqual(0);
-                result[2].ChildTags.Count().ShouldEqual(1);
-                result[2].ChildTags.First().Id.ShouldEqual(4);
+                result[1].ChildTags.Count().ShouldBe(0);
+                result[2].ChildTags.Count().ShouldBe(1);
+                result[2].ChildTags.First().Id.ShouldBe(4);
             }
 	    }
     }

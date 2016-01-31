@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Core
 {
@@ -23,8 +24,8 @@ namespace AutoMapper.Test.Core
 
 			public class Destination
 			{
-				public IEnumerable Values { get; set; }
-				public IEnumerable Values2 { get; set; }
+				public IEnumerable<int> Values { get; set; }
+				public IEnumerable<int> Values2 { get; set; }
 			}
 
 			protected override void Establish_context()
@@ -122,8 +123,8 @@ namespace AutoMapper.Test.Core
 
 			public class Destination
 			{
-				public ICollection Values { get; set; }
-				public ICollection Values2 { get; set; }
+				public ICollection<int> Values { get; set; }
+				public ICollection<int> Values2 { get; set; }
 			}
 
 			protected override void Establish_context()
@@ -206,7 +207,7 @@ namespace AutoMapper.Test.Core
 
 			public class Destination
 			{
-				public IList Values { get; set; }
+				public IList<int> Values { get; set; }
 			}
 
 			protected override void Establish_context()
@@ -301,7 +302,7 @@ namespace AutoMapper.Test.Core
 			[Test]
 			public void Should_assign_the_value_directly()
 			{
-				_source.Values.ShouldEqual(_destination.Values);
+				_source.Values.ShouldBe(_destination.Values);
 			}
 		}
 
@@ -408,9 +409,9 @@ namespace AutoMapper.Test.Core
 			[Test]
 			public void Should_assign_the_value_directly()
 			{
-				_destination.Values.Count.ShouldEqual(2);
-				_destination.Values[0].Value.ShouldEqual(5);
-				_destination.Values[1].Value.ShouldEqual(10);
+				_destination.Values.Count.ShouldBe(2);
+				_destination.Values[0].Value.ShouldBe(5);
+				_destination.Values[1].Value.ShouldBe(10);
 			}
 		}
 
@@ -458,7 +459,7 @@ namespace AutoMapper.Test.Core
 			[Test]
 			public void Should_clear_the_list_before_mapping()
 			{
-				_destination.Values.Count.ShouldEqual(2);
+				_destination.Values.Count.ShouldBe(2);
 			}
 		}
 
@@ -488,7 +489,7 @@ namespace AutoMapper.Test.Core
 			public void Should_map_correctly()
 			{
 				_mappedStrings.ShouldNotBeNull();
-				_mappedStrings.Count.ShouldEqual(1);
+				_mappedStrings.Count.ShouldBe(1);
 				_mappedStrings[0].ShouldBeNull();
 			}
 		}
@@ -547,7 +548,7 @@ namespace AutoMapper.Test.Core
 			public void Should_use_the_underlying_list_to_add_values()
 			{
 				_destination = Mapper.Map<Source, Destination>(new Source { Values = new[] { 1, 2, 3 } });
-				_destination.Values.Count().ShouldEqual(3);
+				_destination.Values.Count().ShouldBe(3);
 			}
 		}
 	}

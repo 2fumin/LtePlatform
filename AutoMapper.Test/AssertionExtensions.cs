@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using AutoMapper.Should;
 using AutoMapper.Should.Core.Exceptions;
+using Shouldly;
 
 namespace AutoMapper.Test
 {
@@ -25,9 +27,9 @@ namespace AutoMapper.Test
 			}
 		}
 
-        public static void ShouldContain(this IEnumerable items, object item)
+        public static void ShouldContain<T>(this IEnumerable<T> items, T item)
         {
-            CollectionAssertExtensions.ShouldContain(items.Cast<object>(), item);
+            item.ShouldBeOneOf(items.ToArray());
         }
 
         public static void ShouldBeThrownBy(this Type exceptionType, ThrowingAction action)
@@ -44,12 +46,8 @@ namespace AutoMapper.Test
             }
 
             e.ShouldNotBeNull();
-            e.ShouldBeType(exceptionType);
+            e.ShouldBeOfType(exceptionType);
         }
-
-        public static void ShouldNotBeInstanceOf<TExpectedType>(this object actual)
-        {
-            actual.ShouldNotBeType<TExpectedType>();
-        }
+        
 	}
 }

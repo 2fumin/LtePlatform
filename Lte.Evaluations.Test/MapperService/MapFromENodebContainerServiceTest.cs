@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using AutoMapper.Should;
 using Lte.Domain.Regular;
 using Lte.Evaluations.MapperSerive;
 using Lte.Parameters.Entities;
 using Lte.Parameters.MockOperations;
 using NUnit.Framework;
+using Shouldly;
 
 namespace Lte.Evaluations.Test.MapperService
 {
@@ -39,12 +39,12 @@ namespace Lte.Evaluations.Test.MapperService
             };
             var item = Mapper.Map<ENodebExcelWithTownIdContainer, ENodebWithTownIdContainer>(container);
 
-            item.ENodeb.ENodebId.ShouldEqual(eNodebId);
-            item.ENodeb.Name.ShouldEqual(name);
-            item.ENodeb.Address.ShouldEqual(address);
-            item.TownId.ShouldEqual(townId);
-            item.ENodeb.Ip.AddressString.ShouldEqual(ipAddress);
-            item.ENodeb.GatewayIp.AddressString.ShouldEqual(gatewayAddress);
+            item.ENodeb.ENodebId.ShouldBe(eNodebId);
+            item.ENodeb.Name.ShouldBe(name);
+            item.ENodeb.Address.ShouldBe(address);
+            item.TownId.ShouldBe(townId);
+            item.ENodeb.Ip.AddressString.ShouldBe(ipAddress);
+            item.ENodeb.GatewayIp.AddressString.ShouldBe(gatewayAddress);
         }
 
         [TestCase(new [] { "abc"}, new [] { "ieowue"}, new [] { 1}, new [] { 2})]
@@ -67,10 +67,10 @@ namespace Lte.Evaluations.Test.MapperService
                 Mapper.Map<IEnumerable<ENodebExcelWithTownIdContainer>, List<ENodebWithTownIdContainer>>(containers);
             items.ForEach(x=> { x.ENodeb.TownId = x.TownId; });
             var results = items.Select(x => x.ENodeb);
-            results.Select(x => x.ENodebId).ToArray().ShouldEqual(eNodebIds);
-            results.Select(x => x.Name).ToArray().ShouldEqual(names);
-            results.Select(x => x.Address).ToArray().ShouldEqual(addresses);
-            results.Select(x => x.TownId).ToArray().ShouldEqual(townIds);
+            results.Select(x => x.ENodebId).ToArray().ShouldBe(eNodebIds);
+            results.Select(x => x.Name).ToArray().ShouldBe(names);
+            results.Select(x => x.Address).ToArray().ShouldBe(addresses);
+            results.Select(x => x.TownId).ToArray().ShouldBe(townIds);
         }
     }
 

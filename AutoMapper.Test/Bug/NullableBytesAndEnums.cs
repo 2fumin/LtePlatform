@@ -1,5 +1,6 @@
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Bug
 {
@@ -36,7 +37,7 @@ namespace AutoMapper.Test.Bug
 		public void Should_map_the_byte_to_the_enum_with_the_same_value()
 		{
 			_destination = Mapper.Map<Source, Destination>(new Source {Value = 2});
-			_destination.Value.ShouldEqual(Foo.Splorg);
+			_destination.Value.ShouldBe(Foo.Splorg);
 		}
 	}
 
@@ -68,7 +69,7 @@ namespace AutoMapper.Test.Bug
         public void Should_map_the_byte_to_the_enum_with_the_same_value()
         {
             _destination = Mapper.Map<Source, Destination>(new Source { Value = 2 });
-            _destination.Value.ShouldEqual(2);
+            _destination.Value.ShouldBe(2);
         }
     }
 }

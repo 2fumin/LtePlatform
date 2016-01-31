@@ -1,5 +1,6 @@
 ﻿using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Membel
 {
@@ -43,7 +44,7 @@ namespace AutoMapper.Test.Membel
         public void Should_map_child_property()
         {
             _dest.Child.ShouldNotBeNull();
-            _dest.Child.Foo.ShouldEqual(5);
+            _dest.Child.Foo.ShouldBe(5);
         }
     }
 }

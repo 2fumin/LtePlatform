@@ -1,5 +1,6 @@
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.IMappingExpression
 {
@@ -41,9 +42,9 @@ namespace AutoMapper.Test.IMappingExpression
 
 		    var dest = Mapper.Map<Source, Destination>(src);
 
-		    dest.Value1.ShouldEqual("5");
-		    dest.Value2.ShouldEqual(string.Empty);
-		    dest.Value3.ShouldEqual(string.Empty);
+		    dest.Value1.ShouldBe("5");
+		    dest.Value2.ShouldBe(string.Empty);
+		    dest.Value3.ShouldBe(string.Empty);
 		}
 	}
 }

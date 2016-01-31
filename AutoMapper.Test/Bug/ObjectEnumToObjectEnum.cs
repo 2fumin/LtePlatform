@@ -1,6 +1,6 @@
 ﻿using AutoMapper.Mappers;
-using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Bug
 {
@@ -48,7 +48,7 @@ namespace AutoMapper.Test.Bug
         [Test]
         public void Should_be_enum()
         {
-            _target.Value.ShouldBeType<TargetEnumValue>();
+            _target.Value.ShouldBeOfType<TargetEnumValue>();
         }
     }
 }

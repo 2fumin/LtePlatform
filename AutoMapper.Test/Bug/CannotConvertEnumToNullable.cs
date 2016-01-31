@@ -1,5 +1,5 @@
-﻿using AutoMapper.Should;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Bug
 {
@@ -31,7 +31,7 @@ namespace AutoMapper.Test.Bug
 
             var destination = Mapper.Map<DummySource, DummyDestination>(src);
 
-            destination.Dummy.ShouldEqual((int)DummyTypes.Bar);
+            destination.Dummy.ShouldBe((int)DummyTypes.Bar);
         }
     }
 }

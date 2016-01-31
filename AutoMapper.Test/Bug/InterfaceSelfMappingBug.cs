@@ -1,5 +1,5 @@
-﻿using AutoMapper.Should;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Bug
 {
@@ -42,7 +42,7 @@ namespace AutoMapper.Test.Bug
 
             Mapper.Map(bar, baz);
 
-            baz.Value.ShouldEqual(5);
+            baz.Value.ShouldBe(5);
         }
     }
 }

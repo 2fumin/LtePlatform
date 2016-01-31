@@ -1,5 +1,5 @@
 using System;
-using AutoMapper.Should;
+using Shouldly;
 using NUnit.Framework;
 
 namespace AutoMapper.Test.Core
@@ -70,8 +70,8 @@ namespace AutoMapper.Test.Core
 
             Mapper.Map<Source, Destination>(_src);
 
-            beforeMapCount.ShouldEqual(2);
-            afterMapCount.ShouldEqual(2);
+            beforeMapCount.ShouldBe(2);
+            afterMapCount.ShouldBe(2);
         }
 
     }
@@ -138,7 +138,7 @@ namespace AutoMapper.Test.Core
 		[Test]
 		public void Should_use_global_constructor_for_building_mapping_actions()
 		{
-			_destination.Value.ShouldEqual(10);
+			_destination.Value.ShouldBe(10);
 		}
 	}
 
@@ -175,7 +175,7 @@ namespace AutoMapper.Test.Core
         [Test]
         public void Should_execute_typemap_and_scoped_beforemap()
         {
-            _dest.Value.ShouldEqual(25);
+            _dest.Value.ShouldBe(25);
         }
     }
 
@@ -211,7 +211,7 @@ namespace AutoMapper.Test.Core
         [Test]
         public void Should_execute_typemap_and_scoped_aftermap()
         {
-            _dest.Value.ShouldEqual(25);
+            _dest.Value.ShouldBe(25);
         }
     }
 

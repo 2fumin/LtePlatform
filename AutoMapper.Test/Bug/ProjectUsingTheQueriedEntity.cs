@@ -2,6 +2,7 @@
 using AutoMapper.QueryableExtensions;
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Bug
 {
@@ -35,7 +36,7 @@ namespace AutoMapper.Test.Bug
         [Test]
         public void Should_handle_projectusing_with_the_queried_entity()
         {
-            _destination.Number.ShouldEqual(23);
+            _destination.Number.ShouldBe(23);
         }
     }
 }

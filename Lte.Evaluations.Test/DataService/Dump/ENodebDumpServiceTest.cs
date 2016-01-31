@@ -11,6 +11,7 @@ using Lte.Parameters.Entities.Basic;
 using Lte.Parameters.MockOperations;
 using Moq;
 using NUnit.Framework;
+using Shouldly;
 
 namespace Lte.Evaluations.Test.DataService.Dump
 {
@@ -59,8 +60,8 @@ namespace Lte.Evaluations.Test.DataService.Dump
                 }
             };
             _service.DumpNewEnodebExcels(infos);
-            _eNodebRepository.Object.Count().ShouldEqual(4);
-            _eNodebRepository.Object.GetAllList()[3].ShouldEqual(name,address,townId,eNodebId,gatewayAddress,ipAddress);
+            _eNodebRepository.Object.Count().ShouldBe(4);
+            _eNodebRepository.Object.GetAllList()[3].ShouldBe(name,address,townId,eNodebId,gatewayAddress,ipAddress);
         }
     }
 }

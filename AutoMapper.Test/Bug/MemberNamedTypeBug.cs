@@ -1,6 +1,7 @@
 ﻿using System;
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Bug
 {
@@ -58,7 +59,7 @@ namespace AutoMapper.Test.Bug
             };
 
             var result = Mapper.Map<DestinationClass>(source);
-            result.Type.ShouldEqual(source.Type);
+            result.Type.ShouldBe(source.Type);
         }
     }
 }

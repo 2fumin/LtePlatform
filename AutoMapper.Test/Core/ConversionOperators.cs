@@ -1,5 +1,6 @@
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Core
 {
@@ -39,7 +40,7 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_use_the_implicit_conversion_operator()
             {
-                _bar.OtherValue.ShouldEqual("Hello");
+                _bar.OtherValue.ShouldBe("Hello");
             }
         }
         
@@ -82,7 +83,7 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_use_the_implicit_conversion_operator()
             {
-                _bar.OtherValue.ShouldEqual("Hello");
+                _bar.OtherValue.ShouldBe("Hello");
             }
         }
 
@@ -117,7 +118,7 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_use_the_explicit_conversion_operator()
             {
-                _bar.OtherValue.ShouldEqual("Hello");
+                _bar.OtherValue.ShouldBe("Hello");
             }
         }
 
@@ -152,7 +153,7 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_use_the_explicit_conversion_operator()
             {
-                _bar.OtherValue.ShouldEqual("Hello");
+                _bar.OtherValue.ShouldBe("Hello");
             }
         }
     }

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using AutoMapper.Should;
+using Shouldly;
 using NUnit.Framework;
 
 namespace AutoMapper.Test.Bug
@@ -69,13 +69,13 @@ namespace AutoMapper.Test.Bug
 				var result = Mapper.Map<PersonOne, PersonTwo>(source);
 
 				// These are ok.
-				source.Name.ShouldEqual(result.Name);
+				source.Name.ShouldBe(result.Name);
 				result.Addresses.ShouldNotBeNull();
 				(result.Addresses.Count == 1).ShouldBeTrue();
-				source.Addresses[0].Street.ShouldEqual(result.Addresses[0].Street);
+				source.Addresses[0].Street.ShouldBe(result.Addresses[0].Street);
 
 				// This is what I can't get to pass:
-				result.Addresses[0].ShouldBeType<AddressTwo>();
+				result.Addresses[0].ShouldBeOfType<AddressTwo>();
 
 				// Expected: instance of <AutomapperTest.AddressTwo>
 				// But was:  <AutomapperTest.AddressOne>
@@ -142,8 +142,8 @@ namespace AutoMapper.Test.Bug
                 destination.Images.Add("test");
 
                 // assert
-                destination.Images.Count.ShouldEqual(1);
-                source.Images.Count.ShouldEqual(0); // in 3.1.0 source.Images.Count is 1
+                destination.Images.Count.ShouldBe(1);
+                source.Images.Count.ShouldBe(0); // in 3.1.0 source.Images.Count is 1
             }
         }
 

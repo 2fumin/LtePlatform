@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Membel
 {
@@ -42,10 +43,9 @@ namespace AutoMapper.Test.Membel
 
 			protected override void Establish_context()
 			{
-				var model = new ModelObject();
-				model.Sub = null;
+			    var model = new ModelObject {Sub = null};
 
-				Mapper.AllowNullDestinationValues = false;
+			    Mapper.AllowNullDestinationValues = false;
 				Mapper.CreateMap<ModelObject, ModelDto>();
 				Mapper.CreateMap<ModelSubObject, ModelSubDto>();
 
@@ -67,13 +67,13 @@ namespace AutoMapper.Test.Membel
 			[Test]
 			public void Should_return_default_value_of_property_in_the_chain()
 			{
-				_result.SubSomething.ShouldEqual(0);
+				_result.SubSomething.ShouldBe(0);
 			}
 	
             [Test]
 			public void Default_value_for_string_should_be_empty()
 			{
-				_result.NullString.ShouldEqual(string.Empty);
+				_result.NullString.ShouldBe(string.Empty);
 			}
         }
 
@@ -132,7 +132,7 @@ namespace AutoMapper.Test.Membel
 			[Test]
 			public void Should_map_primitive_items_as_default()
 			{
-				_result.SubSomething.ShouldEqual(0);
+				_result.SubSomething.ShouldBe(0);
 			}
 
 			[Test]
@@ -238,7 +238,7 @@ namespace AutoMapper.Test.Membel
 			[Test]
 			public void Should_perform_the_translation()
 			{
-				_dest.Name.ShouldEqual("jon");
+				_dest.Name.ShouldBe("jon");
 			}
 		}
 
@@ -277,7 +277,7 @@ namespace AutoMapper.Test.Membel
 	        [Test]
 	        public void Should_map_to_null_on_destination_values()
 	        {
-	            _dest.OtherValue.ShouldEqual(0);
+	            _dest.OtherValue.ShouldBe(0);
 	        }
 	    }
 
@@ -330,7 +330,7 @@ namespace AutoMapper.Test.Membel
 	        [Test]
 	        public void Should_allow_the_resolver_to_handle_null_values()
 	        {
-                _result.IsFooBarred.ShouldEqual("(n/a)");
+                _result.IsFooBarred.ShouldBe("(n/a)");
             }
 	    }
 

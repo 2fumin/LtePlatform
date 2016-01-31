@@ -7,6 +7,7 @@ using AutoMapper.QueryableExtensions;
 using AutoMapper.Should;
 using AutoMapper.Test.Core.ConditionalMapping;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Core
 {
@@ -176,17 +177,17 @@ namespace AutoMapper.Test.Core
             {
 
 
-                _simpleProducts.Count.ShouldEqual(1);
-                _simpleProducts[0].Name.ShouldEqual("Foo");
-                _simpleProducts[0].ProductSubcategoryName.ShouldEqual("Bar");
-                _simpleProducts[0].CategoryName.ShouldEqual("Baz");
+                _simpleProducts.Count.ShouldBe(1);
+                _simpleProducts[0].Name.ShouldBe("Foo");
+                _simpleProducts[0].ProductSubcategoryName.ShouldBe("Bar");
+                _simpleProducts[0].CategoryName.ShouldBe("Baz");
 
-                _extendedProducts.Count.ShouldEqual(1);
-                _extendedProducts[0].Name.ShouldEqual("Foo");
-                _extendedProducts[0].ProductSubcategoryName.ShouldEqual("Bar");
-                _extendedProducts[0].CategoryName.ShouldEqual("Baz");
-                _extendedProducts[0].BOM.Count.ShouldEqual(1);
-                _extendedProducts[0].BOM[0].BillOfMaterialsID.ShouldEqual(5);
+                _extendedProducts.Count.ShouldBe(1);
+                _extendedProducts[0].Name.ShouldBe("Foo");
+                _extendedProducts[0].ProductSubcategoryName.ShouldBe("Bar");
+                _extendedProducts[0].CategoryName.ShouldBe("Baz");
+                _extendedProducts[0].BOM.Count.ShouldBe(1);
+                _extendedProducts[0].BOM[0].BillOfMaterialsID.ShouldBe(5);
             }
            
             [Test]
@@ -198,26 +199,26 @@ namespace AutoMapper.Test.Core
 
                 var simpleProducts = queryable.ProjectTo<SimpleProductDto>().ToList();
 
-                simpleProducts.Count.ShouldEqual(1);
-                simpleProducts[0].Name.ShouldEqual("Foo");
-                simpleProducts[0].ProductSubcategoryName.ShouldEqual("Bar");
-                simpleProducts[0].CategoryName.ShouldEqual("Baz");
+                simpleProducts.Count.ShouldBe(1);
+                simpleProducts[0].Name.ShouldBe("Foo");
+                simpleProducts[0].ProductSubcategoryName.ShouldBe("Bar");
+                simpleProducts[0].CategoryName.ShouldBe("Baz");
 
                 var extendedProducts = queryable.ProjectTo<ExtendedProductDto>().ToList();
 
-                extendedProducts.Count.ShouldEqual(1);
-                extendedProducts[0].Name.ShouldEqual("Foo");
-                extendedProducts[0].ProductSubcategoryName.ShouldEqual("Bar");
-                extendedProducts[0].CategoryName.ShouldEqual("Baz");
-                extendedProducts[0].BOM.Count.ShouldEqual(1);
-                extendedProducts[0].BOM[0].BillOfMaterialsID.ShouldEqual(5);
+                extendedProducts.Count.ShouldBe(1);
+                extendedProducts[0].Name.ShouldBe("Foo");
+                extendedProducts[0].ProductSubcategoryName.ShouldBe("Bar");
+                extendedProducts[0].CategoryName.ShouldBe("Baz");
+                extendedProducts[0].BOM.Count.ShouldBe(1);
+                extendedProducts[0].BOM[0].BillOfMaterialsID.ShouldBe(5);
 
                 var complexProducts = queryable.ProjectTo<ComplexProductDto>().ToList();
 
-                complexProducts.Count.ShouldEqual(1);
-                complexProducts[0].Name.ShouldEqual("Foo");
-                complexProducts[0].ProductSubcategory.Name.ShouldEqual("Bar");
-                complexProducts[0].ProductSubcategory.ProductCategory.Name.ShouldEqual("Baz");
+                complexProducts.Count.ShouldBe(1);
+                complexProducts[0].Name.ShouldBe("Foo");
+                complexProducts[0].ProductSubcategory.Name.ShouldBe("Bar");
+                complexProducts[0].ProductSubcategory.ProductCategory.Name.ShouldBe("Baz");
             }
 #if !SILVERLIGHT
             [Test]
@@ -225,16 +226,16 @@ namespace AutoMapper.Test.Core
             public void List_of_abstract_should_be_mapped()
             {
                 var mapped = Mapper.Map<AbstractProductDto>(_products[0]);
-                mapped.Types.Count.ShouldEqual(3);
+                mapped.Types.Count.ShouldBe(3);
 
                 var queryable = _products.AsQueryable();
 
                 var abstractProducts = queryable.ProjectTo<AbstractProductDto>().ToList();
 
-                abstractProducts[0].Types.Count.ShouldEqual(3);
-                abstractProducts[0].Types[0].GetType().ShouldEqual(typeof (ProdTypeA));
-                abstractProducts[0].Types[1].GetType().ShouldEqual(typeof (ProdTypeB));
-                abstractProducts[0].Types[2].GetType().ShouldEqual(typeof (ProdTypeA));
+                abstractProducts[0].Types.Count.ShouldBe(3);
+                abstractProducts[0].Types[0].GetType().ShouldBe(typeof (ProdTypeA));
+                abstractProducts[0].Types[1].GetType().ShouldBe(typeof (ProdTypeB));
+                abstractProducts[0].Types[2].GetType().ShouldBe(typeof (ProdTypeA));
             }
 #endif
         }

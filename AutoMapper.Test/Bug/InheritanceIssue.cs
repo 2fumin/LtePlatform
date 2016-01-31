@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Bug
 {
@@ -20,7 +21,7 @@ namespace AutoMapper.Test.Bug
 
             public ComplexPropertyDTO()
             {
-                this.Properties = new Dictionary<string, object>();
+                Properties = new Dictionary<string, object>();
             }
         }
 
@@ -179,13 +180,13 @@ namespace AutoMapper.Test.Bug
 
                 var targetEntity = Mapper.Map<Entity, EntityDTO>(entity);
 
-                targetEntity.Components.Count.ShouldEqual(2);
+                targetEntity.Components.Count.ShouldBe(2);
 
-                targetEntity.Components.Last().Value.Name.ShouldEqual("PhysicalLocation");
+                targetEntity.Components.Last().Value.Name.ShouldBe("PhysicalLocation");
 
-                targetEntity.Components.First().Value.ShouldBeType<HealthDTO>();
+                targetEntity.Components.First().Value.ShouldBeOfType<HealthDTO>();
 
-                targetEntity.Components.Last().Value.ShouldBeType<PhysicalLocationDTO>();
+                targetEntity.Components.Last().Value.ShouldBeOfType<PhysicalLocationDTO>();
             }
         }
     }

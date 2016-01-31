@@ -1,6 +1,7 @@
 using System.Linq;
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.IMappingExpression
 {
@@ -40,7 +41,7 @@ namespace AutoMapper.Test.IMappingExpression
             [Test]
             public void Should_create_a_map_with_the_reverse_items()
             {
-                _source.Value.ShouldEqual(10);
+                _source.Value.ShouldBe(10);
             }
         }
 
@@ -100,7 +101,7 @@ namespace AutoMapper.Test.IMappingExpression
                 //Act
                 var unmappedPropertyNames = typeMap.GetUnmappedPropertyNames();
                 //Assert
-                unmappedPropertyNames[0].ShouldEqual("Boo");
+                unmappedPropertyNames[0].ShouldBe("Boo");
             }
 
             [Test]
@@ -116,7 +117,7 @@ namespace AutoMapper.Test.IMappingExpression
                 Assert.AreEqual(unmappedPropertyNames.Length, 1);
                 Assert.IsNotNull(unmappedPropertyNames[0]);
                 //Assert
-                unmappedPropertyNames[0].ShouldEqual("Boo");
+                unmappedPropertyNames[0].ShouldBe("Boo");
             }
 
             [Test]

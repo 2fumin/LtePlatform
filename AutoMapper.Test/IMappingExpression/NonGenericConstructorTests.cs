@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using AutoMapper.QueryableExtensions;
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.IMappingExpression
 {
@@ -55,7 +56,7 @@ namespace AutoMapper.Test.IMappingExpression
         [Test]
         public void Should_construct_correctly()
         {
-            _dest[0].Other.ShouldEqual(15);
+            _dest[0].Other.ShouldBe(15);
         }
     }
 }

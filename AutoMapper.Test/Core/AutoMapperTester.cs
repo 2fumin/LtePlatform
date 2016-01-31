@@ -1,6 +1,7 @@
 using System;
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Core
 {
@@ -15,8 +16,8 @@ namespace AutoMapper.Test.Core
 
 			var destination = (DtoType[])Mapper.Map(source, typeof(ModelType[]), typeof(DtoType[]));
 
-			destination[0].TheProperty.ShouldEqual("Foo");
-			destination[1].TheProperty.ShouldEqual("Bar");
+			destination[0].TheProperty.ShouldBe("Foo");
+			destination[1].TheProperty.ShouldBe("Bar");
 		}
 
 		public void Dispose()

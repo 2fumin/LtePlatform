@@ -1,5 +1,6 @@
 ﻿using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Bug
 {
@@ -106,7 +107,7 @@ namespace AutoMapper.Test.Bug
             [Test]
             public void Should_use_correct_resolver()
             {
-                _dest.field.ShouldEqual(DestEnum.a);
+                _dest.field.ShouldBe(DestEnum.a);
             }
         }
     }

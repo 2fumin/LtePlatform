@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Core
 {
@@ -72,24 +73,24 @@ namespace AutoMapper.Test.Core
         public void Test_plane_case()
         {
             _destination = Mapper.Map<Destination, Destination>(_source.Destination);
-            _destination.Foo1.ShouldEqual(11);
-            _destination.Foo2.ShouldEqual(22);
+            _destination.Foo1.ShouldBe(11);
+            _destination.Foo2.ShouldBe(22);
         }
 
         [Test]
         public void Test_cascade_case()
         {
             _cascadeDestination = Mapper.Map<Source, CascadeDestination>(_source);
-            _cascadeDestination.Destination.Foo1.ShouldEqual(11);
-            _cascadeDestination.Destination.Foo2.ShouldEqual(22);
+            _cascadeDestination.Destination.Foo1.ShouldBe(11);
+            _cascadeDestination.Destination.Foo2.ShouldBe(22);
         }
 
         [Test]
         public void Test_extended_cascade_case()
         {
             var extended = Mapper.Map<Source, ExtendedCascadeDestination>(_source);
-            extended.ExtendedDestination.Foo1.ShouldEqual(11);
-            extended.ExtendedDestination.Foo2.ShouldEqual(22);
+            extended.ExtendedDestination.Foo1.ShouldBe(11);
+            extended.ExtendedDestination.Foo2.ShouldBe(22);
         }
 
         [Test]
@@ -100,8 +101,8 @@ namespace AutoMapper.Test.Core
                 _source
             };
             var extended = Mapper.Map<List<Source>, IEnumerable<ExtendedCascadeDestination>>(sources);
-            extended.ElementAt(0).ExtendedDestination.Foo1.ShouldEqual(11);
-            extended.ElementAt(0).ExtendedDestination.Foo2.ShouldEqual(22);
+            extended.ElementAt(0).ExtendedDestination.Foo1.ShouldBe(11);
+            extended.ElementAt(0).ExtendedDestination.Foo2.ShouldBe(22);
         }
     }
 }

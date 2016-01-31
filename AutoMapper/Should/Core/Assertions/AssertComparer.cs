@@ -76,7 +76,8 @@ namespace AutoMapper.Should.Core.Assertions
                 }
             }
 
-            throw new InvalidOperationException(string.Format("Cannot compare objects of type {0} and {1} because neither implements IComparable or IComparable<T> nor overloads comparaison operators.", x.GetType().Name, y.GetType().Name));
+            throw new InvalidOperationException(
+                $"Cannot compare objects of type {x.GetType().Name} and {y.GetType().Name} because neither implements IComparable or IComparable<T> nor overloads comparaison operators.");
         }
 
         //Note: Handles edge case of a class where operators are overloaded but niether IComparable or IComparable<T> are implemented

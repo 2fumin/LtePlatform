@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using AutoMapper.Should;
 using Lte.Evaluations.Test.MockItems;
 using Lte.Parameters.Entities;
 using NUnit.Framework;
+using Shouldly;
 
 namespace Lte.Evaluations.Test.DataService.Dump
 {
@@ -30,10 +30,10 @@ namespace Lte.Evaluations.Test.DataService.Dump
                 }
             };
             Service.DumpNewCellExcels(cellExcels);
-            CellRepository.Object.Count().ShouldEqual(7);
+            CellRepository.Object.Count().ShouldBe(7);
             var lastObject = CellRepository.Object.GetAllList()[6];
-            lastObject.ENodebId.ShouldEqual(eNodebId);
-            lastObject.SectorId.ShouldEqual(sectorId);
+            lastObject.ENodebId.ShouldBe(eNodebId);
+            lastObject.SectorId.ShouldBe(sectorId);
         }
 
         [TestCase(1, 2)]
@@ -48,10 +48,10 @@ namespace Lte.Evaluations.Test.DataService.Dump
                 ShareCdmaInfo = "1"
             };
             Assert.IsTrue(Service.DumpSingleCellExcel(cellExcel));
-            CellRepository.Object.Count().ShouldEqual(7);
+            CellRepository.Object.Count().ShouldBe(7);
             var lastObject = CellRepository.Object.GetAllList()[6];
-            lastObject.ENodebId.ShouldEqual(eNodebId);
-            lastObject.SectorId.ShouldEqual(sectorId);
+            lastObject.ENodebId.ShouldBe(eNodebId);
+            lastObject.SectorId.ShouldBe(sectorId);
         }
 
         [TestCase(1, 2, "1_2_2", 2)]
@@ -72,7 +72,7 @@ namespace Lte.Evaluations.Test.DataService.Dump
             Service.UpdateENodebBtsIds(cellExcels);
             if (btsId > 0)
             {
-                BtsRepository.Object.GetByBtsId(btsId).ENodebId.ShouldEqual(eNodebId);
+                BtsRepository.Object.GetByBtsId(btsId).ENodebId.ShouldBe(eNodebId);
             }
         }
     }

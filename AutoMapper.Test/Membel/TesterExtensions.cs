@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper.Should;
+using Shouldly;
 
 namespace AutoMapper.Test.Membel
 {
@@ -9,7 +10,7 @@ namespace AutoMapper.Test.Membel
 		public static void ShouldBeOfLength<T>(this IEnumerable<T> collection, int length)
 		{
 			collection.ShouldNotBeNull();
-			collection.Count().ShouldEqual(length);
+			collection.Count().ShouldBe(length);
 		}
 	}
 }

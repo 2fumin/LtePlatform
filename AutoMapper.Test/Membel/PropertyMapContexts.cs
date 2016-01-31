@@ -1,6 +1,7 @@
 ﻿using System;
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Membel
 {
@@ -68,8 +69,8 @@ namespace AutoMapper.Test.Membel
 
             var dest = Mapper.Map<Source, DestinationDto>(src);
 
-            dest.CodeValue1.Title.ShouldEqual("lookup value for Value1==1");
-            dest.CodeValue2.Title.ShouldEqual("lookup value for Value2==1");
+            dest.CodeValue1.Title.ShouldBe("lookup value for Value1==1");
+            dest.CodeValue2.Title.ShouldBe("lookup value for Value2==1");
         }
     }
 }

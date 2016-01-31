@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Bug
 {
@@ -11,6 +12,7 @@ namespace AutoMapper.Test.Bug
     public class ReadOnlyCollectionMappingBug
     {
         class Source { public int X { get; set; } }
+
         class Target { public int X { get; set; } }
 
         [Test]
@@ -21,8 +23,8 @@ namespace AutoMapper.Test.Bug
             var source = new List<Source> { new Source { X = 42 } };
             var target = Mapper.Map<ReadOnlyCollection<Target>>(source);
 
-            target.Count.ShouldEqual(source.Count);
-            target[0].X.ShouldEqual(source[0].X);
+            target.Count.ShouldBe(source.Count);
+            target[0].X.ShouldBe(source[0].X);
         }
     }
 }

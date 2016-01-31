@@ -1,6 +1,7 @@
 ﻿using AutoMapper.Mappers;
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Core
 {
@@ -41,8 +42,8 @@ namespace AutoMapper.Test.Core
             };
 
             CategoryDto result = Mapper.Map<CategoryDto>(category);
-            result.Id.ShouldEqual("3");
-            result.MyValueProperty.ShouldEqual("MyKey");
+            result.Id.ShouldBe("3");
+            result.MyValueProperty.ShouldBe("MyKey");
         }
     }
 }

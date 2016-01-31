@@ -1,6 +1,7 @@
 using System;
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Core
 {
@@ -35,7 +36,7 @@ namespace AutoMapper.Test.Core
 			[Test]
 			public void Should_ignore_indexers_and_map_successfully()
 			{
-				_result.Value.ShouldEqual("Bob");
+				_result.Value.ShouldBe("Bob");
 			}
 
 			[Test]

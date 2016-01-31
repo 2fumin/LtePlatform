@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper.Should;
 using Lte.Domain.LinqToExcel;
 using Lte.Domain.Test.LinqToExcel;
 using Lte.Parameters.Entities;
 using NUnit.Framework;
+using Shouldly;
 
 namespace Lte.Parameters.Test.Excel
 {
@@ -44,9 +41,9 @@ namespace Lte.Parameters.Test.Excel
 
             Assert.IsNotNull(info);
             Assert.AreEqual(info.Count, 5);
-            info[0].ENodebId.ShouldEqual(499773);
-            info[1].SectorId.ShouldEqual((byte)1);
-            info[2].AntennaInfo.ShouldEqual("6端口三频C/F/T");
+            info[0].ENodebId.ShouldBe(499773);
+            info[1].SectorId.ShouldBe((byte)1);
+            info[2].AntennaInfo.ShouldBe("6端口三频C/F/T");
         }
     }
 }

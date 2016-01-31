@@ -1,6 +1,7 @@
 using System.CodeDom;
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Core
 {
@@ -31,8 +32,8 @@ namespace AutoMapper.Test.Core
 			[Test]
 			public void Should_dynamically_map_the_two_types()
 			{
-				_resultWithGenerics.Value.ShouldEqual(5);
-				_resultWithoutGenerics.Value.ShouldEqual(5);
+				_resultWithGenerics.Value.ShouldBe(5);
+				_resultWithoutGenerics.Value.ShouldBe(5);
 			}
 		}
 
@@ -79,13 +80,13 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_dynamically_map_the_two_types()
             {
-                _resultWithGenerics.Value.ShouldEqual(5);
+                _resultWithGenerics.Value.ShouldBe(5);
             }
 
             [Test]
             public void Should_dynamically_map_the_children()
             {
-                _resultWithGenerics.Child.Value2.ShouldEqual("foo");
+                _resultWithGenerics.Child.Value2.ShouldBe("foo");
             }
         }
 
@@ -107,7 +108,7 @@ namespace AutoMapper.Test.Core
 			{
 				var destination = Mapper.DynamicMap<Source, Destination>(new Source {Value = 5});
 
-				destination.Valuefff.ShouldEqual(0);
+				destination.Valuefff.ShouldBe(0);
 			}
 
 			[Test]
@@ -143,13 +144,13 @@ namespace AutoMapper.Test.Core
 			[Test]
 			public void Should_preserve_existing_values()
 			{
-				_destination.Valuefff.ShouldEqual(7);
+				_destination.Valuefff.ShouldBe(7);
 			}
 
 			[Test]
 			public void Should_map_new_values()
 			{
-				_destination.Value2.ShouldEqual(3);
+				_destination.Value2.ShouldBe(3);
 			}
 		}
 
@@ -167,7 +168,7 @@ namespace AutoMapper.Test.Core
 			public void Should_allow_dynamic_mapping()
 			{
 				_result = Mapper.DynamicMap<IDestination>(new {Value = 5});
-				_result.Value.ShouldEqual(5);
+				_result.Value.ShouldBe(5);
 			}
 		}
 	}

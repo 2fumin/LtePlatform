@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Core
 {
@@ -45,7 +46,7 @@ namespace AutoMapper.Test.Core
                 new Source {Value = 15}
             };
 
-            items.AsQueryable().Where(mapped).Count().ShouldEqual(2);
+            items.AsQueryable().Where(mapped).Count().ShouldBe(2);
         }
 
         [Test]
@@ -64,7 +65,7 @@ namespace AutoMapper.Test.Core
                 new Source {Child = new ChildSrc {Value = 15}}
             };
 
-            items.AsQueryable().Where(mapped).Count().ShouldEqual(2);
+            items.AsQueryable().Where(mapped).Count().ShouldBe(2);
         }
 
         [Test]
@@ -83,7 +84,7 @@ namespace AutoMapper.Test.Core
                 new Source {Foo = 15}
             };
 
-            items.AsQueryable().Where(mapped).Count().ShouldEqual(2);
+            items.AsQueryable().Where(mapped).Count().ShouldBe(2);
         }
 
         [Test]

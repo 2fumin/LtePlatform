@@ -1,6 +1,6 @@
 ﻿using System;
-using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Membel
 {
@@ -56,7 +56,7 @@ namespace AutoMapper.Test.Membel
             [Test]
             public void Should_substitute_correct_object()
             {
-                _animalDto.ShouldBeType<CatDto>();
+                _animalDto.ShouldBeOfType<CatDto>();
             }
 
             private static object CastToEntity(Animal entity)

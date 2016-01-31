@@ -1,5 +1,5 @@
-﻿using AutoMapper.Should;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Bug
 {
@@ -37,7 +37,7 @@ namespace AutoMapper.Test.Bug
         [Test]
         public void Should_map_int_to_nullable_decimal()
         {
-            _destination.Number.ShouldEqual(23);
+            _destination.Number.ShouldBe(23);
         }
     }
 }
