@@ -11,18 +11,6 @@ namespace AutoMapper.Should
     public static class ObjectAssertExtensions
     {
         /// <summary>
-        /// Verifies that two objects are the same instance.
-        /// </summary>
-        /// <param name="actual">The actual object instance</param>
-        /// <param name="expected">The expected object instance</param>
-        /// <exception cref="SameException">Thrown when the objects are not the same instance</exception>
-        public static void ShouldBeSameAs(this object actual,
-                                          object expected)
-        {
-            CustomizeAssert.Same(expected, actual);
-        }
-
-        /// <summary>
         /// Verifies that an object is exactly the given type (and not a derived type).
         /// </summary>
         /// <typeparam name="T">The type the object should be</typeparam>
