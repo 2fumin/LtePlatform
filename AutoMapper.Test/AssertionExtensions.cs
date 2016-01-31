@@ -46,7 +46,7 @@ namespace AutoMapper.Test
             }
 
             e.ShouldNotBeNull();
-            e.ShouldBeType(exceptionType);
+            e.ShouldBeOfType(exceptionType);
         }
 
         public static void ShouldNotBeInstanceOf<TExpectedType>(this object actual)

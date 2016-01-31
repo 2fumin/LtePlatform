@@ -228,7 +228,6 @@
     <Compile Include="Should\Core\Exceptions\TrueException.cs" />
     <Compile Include="Should\DateAssertionExtensions.cs" />
     <Compile Include="Should\DoubleAssertionExtensions.cs" />
-    <Compile Include="Should\ObjectAssertExtensions.cs" />
     <Compile Include="SourceMemberConfig.cs" />
     <Compile Include="ThreadSafeList.cs" />
     <Compile Include="TypeConverter.cs" />

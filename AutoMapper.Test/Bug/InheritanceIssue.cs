@@ -184,9 +184,9 @@ namespace AutoMapper.Test.Bug
 
                 targetEntity.Components.Last().Value.Name.ShouldBe("PhysicalLocation");
 
-                targetEntity.Components.First().Value.ShouldBeType<HealthDTO>();
+                targetEntity.Components.First().Value.ShouldBeOfType<HealthDTO>();
 
-                targetEntity.Components.Last().Value.ShouldBeType<PhysicalLocationDTO>();
+                targetEntity.Components.Last().Value.ShouldBeOfType<PhysicalLocationDTO>();
             }
         }
     }

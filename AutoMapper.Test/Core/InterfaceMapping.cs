@@ -71,7 +71,7 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_map_Child_to_SubDtoChildObject_type()
             {
-                _result.Child.ShouldBeType(typeof (SubDtoChildObject));
+                _result.Child.ShouldBeOfType(typeof (SubDtoChildObject));
             }
 
             [Test]
@@ -427,7 +427,7 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_use_the_derived_type_map()
             {
-                _baseDtos.First().ShouldBeType<DerivedDto>();
+                _baseDtos.First().ShouldBeOfType<DerivedDto>();
             }
 
         }

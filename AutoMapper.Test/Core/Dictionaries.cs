@@ -200,7 +200,7 @@ namespace AutoMapper.Test.Core
 			public void Should_fill_the_destination_with_an_empty_dictionary()
 			{
 				_result.Bar["lol"].Bar.ShouldNotBeNull();
-				_result.Bar["lol"].Bar.ShouldBeType<Dictionary<string, FooDto>>();
+				_result.Bar["lol"].Bar.ShouldBeOfType<Dictionary<string, FooDto>>();
 			}
 		}
 

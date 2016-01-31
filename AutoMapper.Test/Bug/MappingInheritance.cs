@@ -81,7 +81,7 @@ namespace AutoMapper.Test.Bug
             var mailOrder = new MailOrder() { NewId = 1 };
             var mapped = Mapper.Map<OrderDto>(mailOrder);
 
-            mapped.ShouldBeType<MailOrderDto>();
+            mapped.ShouldBeOfType<MailOrderDto>();
         }
 
         public abstract class Base<T>
