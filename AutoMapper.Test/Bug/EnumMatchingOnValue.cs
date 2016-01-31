@@ -1,5 +1,5 @@
-using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Bug
 {
@@ -45,7 +45,7 @@ namespace AutoMapper.Test.Bug
                 EnumValue = FirstEnum.NamedEnum
             };
             _result = Mapper.Map<FirstClass, SecondClass>(source);
-            _result.EnumValue.ShouldEqual(SecondEnum.DifferentNamedEnum);
+            _result.EnumValue.ShouldBe(SecondEnum.DifferentNamedEnum);
         }
     }
 }

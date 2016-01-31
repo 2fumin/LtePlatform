@@ -1,5 +1,5 @@
-﻿using AutoMapper.Should;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Bug
 {
@@ -28,8 +28,8 @@ namespace AutoMapper.Test.Bug
         {
             var source = new Source {ParentProperty = "ParentProperty", ChildProperty = 1};
             var target = Mapper.Map<Source, Child>(source);
-            target.ParentProperty.ShouldEqual(source.ParentProperty);
-            target.ChildProperty.ShouldEqual(source.ChildProperty);
+            target.ParentProperty.ShouldBe(source.ParentProperty);
+            target.ChildProperty.ShouldBe(source.ChildProperty);
         }
 
         
@@ -38,8 +38,8 @@ namespace AutoMapper.Test.Bug
         {
             var source = new Source {ParentProperty = "ParentProperty", ChildProperty = 1};
             var target = Mapper.Map<Source, GrandChild>(source);
-            target.ParentProperty.ShouldEqual(source.ParentProperty);
-            target.ChildProperty.ShouldEqual(source.ChildProperty);
+            target.ParentProperty.ShouldBe(source.ParentProperty);
+            target.ChildProperty.ShouldBe(source.ChildProperty);
         }
 
         [Test]
@@ -47,8 +47,8 @@ namespace AutoMapper.Test.Bug
         {
             var source = new Source {ParentProperty = "ParentProperty", ChildProperty = 1};
             var target = Mapper.Map<Source, GrandGrandChild>(source);
-            target.ParentProperty.ShouldEqual(source.ParentProperty);
-            target.ChildProperty.ShouldEqual(source.ChildProperty);
+            target.ParentProperty.ShouldBe(source.ParentProperty);
+            target.ChildProperty.ShouldBe(source.ChildProperty);
         }
 
         [Test]
@@ -62,8 +62,8 @@ namespace AutoMapper.Test.Bug
         {
             var source = new Source {ParentProperty = "ParentProperty", ChildProperty = 1};
             var target = Mapper.Map<Source, ChildPrivate>(source);
-            target.ParentProperty.ShouldEqual(source.ParentProperty);
-            target.ChildProperty.ShouldEqual(source.ChildProperty);
+            target.ParentProperty.ShouldBe(source.ParentProperty);
+            target.ChildProperty.ShouldBe(source.ChildProperty);
         }
 
         [Test]
@@ -71,8 +71,8 @@ namespace AutoMapper.Test.Bug
         {
             var source = new Source {ParentProperty = "ParentProperty", ChildProperty = 1};
             var target = Mapper.Map<Source, GrandChildPrivate>(source);
-            target.ParentProperty.ShouldEqual(source.ParentProperty);
-            target.ChildProperty.ShouldEqual(source.ChildProperty);
+            target.ParentProperty.ShouldBe(source.ParentProperty);
+            target.ChildProperty.ShouldBe(source.ChildProperty);
         }
 
         [Test]
@@ -80,8 +80,8 @@ namespace AutoMapper.Test.Bug
         {
             var source = new Source {ParentProperty = "ParentProperty", ChildProperty = 1};
             var target = Mapper.Map<Source, GrandGrandChildPrivate>(source);
-            target.ParentProperty.ShouldEqual(source.ParentProperty);
-            target.ChildProperty.ShouldEqual(source.ChildProperty);
+            target.ParentProperty.ShouldBe(source.ParentProperty);
+            target.ChildProperty.ShouldBe(source.ChildProperty);
         }
     }
 

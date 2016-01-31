@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper.Should;
 using Lte.Domain.LinqToExcel;
-using Lte.Domain.Regular;
 using Lte.Domain.Test.LinqToExcel;
 using Lte.Parameters.Entities;
 using NUnit.Framework;
+using Shouldly;
 
 namespace Lte.Parameters.Test.Excel
 {
@@ -44,11 +40,11 @@ namespace Lte.Parameters.Test.Excel
 
             Assert.IsNotNull(info);
             Assert.AreEqual(info.Count, 5);
-            info[0].Name.ShouldEqual("大良东苑");
-            info[0].Ip.AddressString.ShouldEqual("8.142.15.4");
-            info[2].Address.ShouldEqual("佛山市顺德区大良镇锦岩路六巷5号");
-            info[3].OpenDate.ShouldEqual(DateTime.Parse("2013/8/30"));
-            info[4].Gateway.AddressString.ShouldEqual("8.142.15.1");
+            info[0].Name.ShouldBe("大良东苑");
+            info[0].Ip.AddressString.ShouldBe("8.142.15.4");
+            info[2].Address.ShouldBe("佛山市顺德区大良镇锦岩路六巷5号");
+            info[3].OpenDate.ShouldBe(DateTime.Parse("2013/8/30"));
+            info[4].Gateway.AddressString.ShouldBe("8.142.15.1");
         }
 
     }

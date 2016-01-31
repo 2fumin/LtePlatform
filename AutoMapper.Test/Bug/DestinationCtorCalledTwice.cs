@@ -1,5 +1,5 @@
-﻿using AutoMapper.Should;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Bug
 {
@@ -14,19 +14,18 @@ namespace AutoMapper.Test.Bug
             }
             public class Destination
             {
-                private static int _callCount = 0;
-                
                 public Destination()
                 {
-                    _callCount++;
+                    CallCount++;
                 }
 
                 public int Value { get; set; }
-                public static int CallCount { get { return _callCount; } }
+
+                public static int CallCount { get; private set; }
 
                 public static void Reset()
                 {
-                    _callCount = 0;
+                    CallCount = 0;
                 }
             }
 
@@ -43,7 +42,7 @@ namespace AutoMapper.Test.Bug
 
                 Mapper.Map(source, dest, opt => opt.CreateMissingTypeMaps = true);
 
-                Destination.CallCount.ShouldEqual(1);
+                Destination.CallCount.ShouldBe(1);
             }
         }
     }

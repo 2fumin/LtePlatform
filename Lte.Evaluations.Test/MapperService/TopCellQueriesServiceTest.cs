@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using AutoMapper.Should;
 using Lte.Evaluations.MapperSerive;
 using Lte.Parameters.Entities;
 using NUnit.Framework;
+using Shouldly;
 
 namespace Lte.Evaluations.Test.MapperService
 {
@@ -28,11 +28,11 @@ namespace Lte.Evaluations.Test.MapperService
             var trends = stats.QueryTrends();
             Assert.AreEqual(trends.Count(), 1);
             var trend = trends.ElementAt(0);
-            trend.BtsId.ShouldEqual(1);
-            trend.SectorId.ShouldEqual((byte)2);
-            trend.TopDates.ShouldEqual(1);
-            trend.TotalDrops.ShouldEqual(100);
-            trend.TotalCallAttempst.ShouldEqual(1200);
+            trend.BtsId.ShouldBe(1);
+            trend.SectorId.ShouldBe((byte)2);
+            trend.TopDates.ShouldBe(1);
+            trend.TotalDrops.ShouldBe(100);
+            trend.TotalCallAttempst.ShouldBe(1200);
         }
 
         [TestCase(1, 1, new[] {1, 200}, new[] {2100, 291})]
@@ -51,11 +51,11 @@ namespace Lte.Evaluations.Test.MapperService
             var trends = stats.QueryTrends();
             Assert.AreEqual(trends.Count(), 1);
             var trend = trends.ElementAt(0);
-            trend.BtsId.ShouldEqual(btsId);
-            trend.SectorId.ShouldEqual(sectorId);
-            trend.TopDates.ShouldEqual(drops.Length);
-            trend.TotalDrops.ShouldEqual(drops.Sum());
-            trend.TotalCallAttempst.ShouldEqual(calls.Sum());
+            trend.BtsId.ShouldBe(btsId);
+            trend.SectorId.ShouldBe(sectorId);
+            trend.TopDates.ShouldBe(drops.Length);
+            trend.TotalDrops.ShouldBe(drops.Sum());
+            trend.TotalCallAttempst.ShouldBe(calls.Sum());
         }
         
         [TestCase(new[] {1, 1}, new byte[] {2, 3}, new[] { 1, 200 }, new[] { 2100, 291 })]
@@ -72,15 +72,15 @@ namespace Lte.Evaluations.Test.MapperService
                 TrafficAssignmentSuccess = calls[i]
             });
             var trends = stats.QueryTrends();
-            trends.Count().ShouldEqual(btsIds.Length);
+            trends.Count().ShouldBe(btsIds.Length);
             for (var i = 0; i < btsIds.Length; i++)
             {
                 var trend = trends.ElementAt(i);
-                trend.BtsId.ShouldEqual(btsIds[i]);
-                trend.SectorId.ShouldEqual(sectorIds[i]);
-                trend.TopDates.ShouldEqual(1);
-                trend.TotalDrops.ShouldEqual(drops[i]);
-                trend.TotalCallAttempst.ShouldEqual(calls[i]);
+                trend.BtsId.ShouldBe(btsIds[i]);
+                trend.SectorId.ShouldBe(sectorIds[i]);
+                trend.TopDates.ShouldBe(1);
+                trend.TotalDrops.ShouldBe(drops[i]);
+                trend.TotalCallAttempst.ShouldBe(calls[i]);
             }
         }
     }

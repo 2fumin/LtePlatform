@@ -1,5 +1,5 @@
-﻿using AutoMapper.Should;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Bug
 {
@@ -48,13 +48,13 @@ namespace AutoMapper.Test.Bug
             [Test]
             public void Should_map_the_null_value()
             {
-                _destination.Value2.ShouldEqual(4);
+                _destination.Value2.ShouldBe(4);
             }
 
             [Test]
             public void Should_leave_the_non_null_value_alone()
             {
-                _destination.Value.ShouldEqual(5);
+                _destination.Value.ShouldBe(5);
             }
         }
     }

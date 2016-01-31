@@ -1,5 +1,5 @@
-﻿using AutoMapper.Should;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Bug
 {
@@ -51,7 +51,7 @@ namespace AutoMapper.Test.Bug
         [Test]
         public void Should_keep_existing_ip_address()
         {
-            _destination.ClientIPAddress.ShouldEqual("192.22.2.1");
+            _destination.ClientIPAddress.ShouldBe("192.22.2.1");
         }
     }
 }

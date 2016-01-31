@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper.Should;
 using Lte.Domain.LinqToExcel;
 using Lte.Domain.Test.LinqToExcel;
 using Lte.Parameters.Entities;
 using NUnit.Framework;
+using Shouldly;
 
 namespace Lte.Parameters.Test.Excel
 {
@@ -44,7 +41,7 @@ namespace Lte.Parameters.Test.Excel
             Assert.IsNotNull(info);
             Assert.AreEqual(info.Count, 14999);
             var longtitutes = info.Select(x => x.Longtitute).Where(x => x > 112 && x < 114);
-            longtitutes.Count().ShouldEqual(14999);
+            longtitutes.Count().ShouldBe(14999);
         }
     }
 }

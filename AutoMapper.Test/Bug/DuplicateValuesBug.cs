@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using AutoMapper.Should;
 using NUnit.Framework;
 using Shouldly;
 
@@ -65,8 +64,8 @@ namespace AutoMapper.Test.Bug
 				var dest1 = new DestObject();
 				Mapper.Map(sourceList, destList);
 
-				destList.Count.ShouldEqual(2);
-				destList[0].Children.Count.ShouldEqual(1);
+				destList.Count.ShouldBe(2);
+				destList[0].Children.Count.ShouldBe(1);
 				destList[0].Children[0].ShouldBeSameAs(destList[1]);
 			}
 		}

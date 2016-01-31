@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Bug
 {
@@ -57,7 +57,7 @@ namespace AutoMapper.Test.Bug
         [Test]
         public void Should_map_collection_items()
         {
-            _dest.Children.Count.ShouldEqual(2);
+            _dest.Children.Count.ShouldBe(2);
         }
     }
 }
