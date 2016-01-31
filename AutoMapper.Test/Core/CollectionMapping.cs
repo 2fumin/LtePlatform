@@ -99,7 +99,7 @@ namespace AutoMapper.Test.Core
             Mapper.Map(dto, master);
 
             originalCollection.ShouldBeSameAs(master.Details);
-            originalCollection.Count.ShouldEqual(master.Details.Count);
+            originalCollection.Count.ShouldBe(master.Details.Count);
         }
 
         [Test]
@@ -125,7 +125,7 @@ namespace AutoMapper.Test.Core
             Mapper.Map(dto, master);
 
             originalCollection.ShouldBeSameAs(master.Details);
-            originalCollection.Count.ShouldEqual(master.Details.Count);
+            originalCollection.Count.ShouldBe(master.Details.Count);
         }
 
         [Test]
@@ -152,7 +152,7 @@ namespace AutoMapper.Test.Core
             Mapper.Map(dto, master);
 
             originalCollection.ShouldBeSameAs(master.Details);
-            originalCollection.Count.ShouldEqual(master.Details.Count);
+            originalCollection.Count.ShouldBe(master.Details.Count);
         }
 
         [Test]
@@ -178,7 +178,7 @@ namespace AutoMapper.Test.Core
             Mapper.Map(dto, master);
 
             originalCollection.ShouldBeSameAs(master.Details);
-            originalCollection.Count.ShouldEqual(master.Details.Count);
+            originalCollection.Count.ShouldBe(master.Details.Count);
         }
 
         [Test]
@@ -223,7 +223,7 @@ namespace AutoMapper.Test.Core
 
             var master = Mapper.Map<MasterDto, MasterWithNoExistingCollection>(dto);
 
-            master.Details.Count.ShouldEqual(2);
+            master.Details.Count.ShouldBe(2);
         }
 
         [Test]
