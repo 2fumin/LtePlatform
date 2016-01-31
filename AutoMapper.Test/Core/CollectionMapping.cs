@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Core
 {
@@ -13,6 +14,8 @@ namespace AutoMapper.Test.Core
         {
             SetUp();
         }
+
+        [SetUp]
         public void SetUp()
         {
             Mapper.Reset();

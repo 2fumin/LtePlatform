@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using AutoMapper.Should;
 using AutoMapper.Should.Core.Assertions;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.IMappingExpression
 {

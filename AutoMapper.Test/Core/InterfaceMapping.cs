@@ -1,10 +1,10 @@
 using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Core
 {

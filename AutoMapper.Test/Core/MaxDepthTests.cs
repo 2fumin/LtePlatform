@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Core
 {
