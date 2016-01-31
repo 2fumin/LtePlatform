@@ -75,31 +75,31 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_ignore_the_mapping_for_normal_members()
             {
-                _result.Value3.ShouldEqual(42);
+                _result.Value3.ShouldBe(42);
             }
 
             [Test]
             public void Should_use_the_custom_generic_mapping_for_custom_dto_members()
             {
-                _result.Value.ShouldEqual(43);
+                _result.Value.ShouldBe(43);
             }
 
             [Test]
             public void Should_use_the_instance_based_mapping_for_custom_dto_members()
             {
-                _result.Value2.ShouldEqual(44);
+                _result.Value2.ShouldBe(44);
             }
 
             [Test]
             public void Should_use_the_type_object_based_mapping_for_custom_dto_members()
             {
-                _result.Value4.ShouldEqual(46);
+                _result.Value4.ShouldBe(46);
             }
 
             [Test]
             public void Should_use_the_func_based_mapping_for_custom_dto_members()
             {
-                _result.Value5.ShouldEqual(47);
+                _result.Value5.ShouldBe(47);
             }
         }
 
@@ -150,7 +150,7 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_use_the_specified_model_member_to_resolve_from()
             {
-                _result.SomeValue.ShouldEqual(47);
+                _result.SomeValue.ShouldBe(47);
             }
         }
 
@@ -195,7 +195,7 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_override_the_existing_match_to_the_new_custom_resolved_member()
             {
-                _result.SomeValue.ShouldEqual(58);
+                _result.SomeValue.ShouldBe(58);
             }
         }
 
@@ -238,7 +238,7 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_override_the_existing_match_to_the_new_custom_resolved_member()
             {
-                _result.Type.ShouldEqual(5);
+                _result.Type.ShouldBe(5);
             }
         }
 
@@ -300,7 +300,7 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_use_the_custom_constructor()
             {
-                _dest.Value.ShouldEqual(25);
+                _dest.Value.ShouldBe(25);
             }
         }
 
@@ -363,7 +363,7 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_use_the_custom_constructor()
             {
-                _dest.Value.ShouldEqual(25);
+                _dest.Value.ShouldBe(25);
             }
         }
 
@@ -402,7 +402,7 @@ namespace AutoMapper.Test.Core
                     .ConvertUsing(s => new Destination { Value = s.Value + 10 });
 
                 _dest = Mapper.Map<Source, Destination>(_source);
-                _dest.Value.ShouldEqual(20);
+                _dest.Value.ShouldBe(20);
             }
 
             [Test]
@@ -413,7 +413,7 @@ namespace AutoMapper.Test.Core
                     .ConvertUsing(s => new Destination { Value = s.Value + 10 });
 
                 _dest = Mapper.Map<Source, Destination>(_source);
-                _dest.Value.ShouldEqual(20);
+                _dest.Value.ShouldBe(20);
             }
         }
 
@@ -452,7 +452,7 @@ namespace AutoMapper.Test.Core
                     .ProjectUsing(s => new Destination { Value = s.Value + 10 });
 
                 _dest = Mapper.Map<Source, Destination>(_source);
-                _dest.Value.ShouldEqual(20);
+                _dest.Value.ShouldBe(20);
             }
 
             [Test]
@@ -463,7 +463,7 @@ namespace AutoMapper.Test.Core
                     .ProjectUsing(s => new Destination { Value = s.Value + 10 });
 
                 _dest = Mapper.Map<Source, Destination>(_source);
-                _dest.Value.ShouldEqual(20);
+                _dest.Value.ShouldBe(20);
             }
         }
 
@@ -507,7 +507,7 @@ namespace AutoMapper.Test.Core
                     .ConvertUsing(s => new Destination { Value = s.Value + 10 });
 
                 _dest = Mapper.Map(_source, _dest);
-                _dest.Value.ShouldEqual(20);
+                _dest.Value.ShouldBe(20);
             }
 
             [Test]
@@ -518,7 +518,7 @@ namespace AutoMapper.Test.Core
                     .ConvertUsing(s => new Destination { Value = s.Value + 10 });
 
                 _dest = Mapper.Map(_source, _dest);
-                _dest.Value.ShouldEqual(20);
+                _dest.Value.ShouldBe(20);
             }
         }
 
@@ -565,7 +565,7 @@ namespace AutoMapper.Test.Core
                     .ConvertUsing<Converter>();
 
                 _dest = Mapper.Map<Source, Destination>(_source);
-                _dest.Value.ShouldEqual(20);
+                _dest.Value.ShouldBe(20);
             }
 
             [Test]
@@ -576,7 +576,7 @@ namespace AutoMapper.Test.Core
                     .ConvertUsing(s => new Destination { Value = s.Value + 10 });
 
                 _dest = Mapper.Map<Source, Destination>(_source);
-                _dest.Value.ShouldEqual(20);
+                _dest.Value.ShouldBe(20);
             }
         }
 
@@ -630,7 +630,7 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_use_the_custom_constructor_function()
             {
-                _result.Value.ShouldEqual(15);
+                _result.Value.ShouldBe(15);
             }
         }
 
@@ -719,7 +719,7 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_use_the_specified_constructor()
             {
-                _result.Value.ShouldEqual(10);
+                _result.Value.ShouldBe(10);
             }
         }
 
@@ -760,7 +760,7 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_not_overwrite_destination_value()
             {
-                _result.Value.ShouldEqual(55);
+                _result.Value.ShouldBe(55);
             }
         }
 
@@ -807,7 +807,7 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_translate_the_property()
             {
-                _result.DestinationValue.ShouldEqual(10);
+                _result.DestinationValue.ShouldBe(10);
             }
         }
 
@@ -877,7 +877,7 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_perform_the_translation()
             {
-                _dest.Name.ShouldEqual("jon");
+                _dest.Name.ShouldBe("jon");
             }
         }
 
@@ -926,25 +926,25 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_copy_to_properties_that_have_setters()
             {
-                _dest.Value.ShouldEqual("value");
+                _dest.Value.ShouldBe("value");
             }
 
             [Test]
             public void Should_not_attempt_to_translate_to_properties_that_do_not_have_a_setter()
             {
-                _dest.Today.ShouldEqual(DateTime.Today);
+                _dest.Today.ShouldBe(DateTime.Today);
             }
 
             [Test]
             public void Should_translate_to_properties_that_have_a_private_setters()
             {
-                _dest.Name.ShouldEqual("jon");
+                _dest.Name.ShouldBe("jon");
             }
 
             [Test]
             public void Should_translate_to_properties_that_have_a_protected_setters()
             {
-                _dest.Foo.ShouldEqual("bar");
+                _dest.Foo.ShouldBe("bar");
             }
         }
 
@@ -1019,13 +1019,13 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_translate_to_properties_that_doesnt_have_a_getter()
             {
-                _dest.GetValue().ShouldEqual("jon");
+                _dest.GetValue().ShouldBe("jon");
             }
 
             [Test]
             public void Should_translate_to_enumerable_properties_that_doesnt_have_a_getter()
             {
-                new[] { 1, 2 }.ShouldEqual(_destWithList.GetSomeList());
+                new[] { 1, 2 }.ShouldBe(_destWithList.GetSomeList());
             }
         }
 
@@ -1065,13 +1065,13 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_use_supplied_constructor_to_map()
             {
-                _destination.OtherValue.ShouldEqual(9);
+                _destination.OtherValue.ShouldBe(9);
             }
 
             [Test]
             public void Should_map_other_members()
             {
-                _destination.Value.ShouldEqual(5);
+                _destination.Value.ShouldBe(5);
             }
         }
 
@@ -1104,7 +1104,7 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_map_from_that_constant_value()
             {
-                _dest.Value.ShouldEqual(5);
+                _dest.Value.ShouldBe(5);
             }
         }
 
@@ -1194,7 +1194,7 @@ namespace AutoMapper.Test.Core
         [Test]
         public void Should_use_member_configuration()
         {
-            _dest.Value.ShouldEqual(1);
+            _dest.Value.ShouldBe(1);
         }
 
         private static int ParseValue(string value)
