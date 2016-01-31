@@ -13,6 +13,7 @@ using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 using Moq;
 using NUnit.Framework;
+using Shouldly;
 
 namespace Lte.Evaluations.Test.DataService
 {
@@ -133,7 +134,7 @@ namespace Lte.Evaluations.Test.DataService
                 StatTime = DateTime.Parse(x)
             }).ToList());
             var stats = _service.GetTimeSpanStats(1, 1, DateTime.Parse(beginDate), DateTime.Parse(endDate));
-            stats.Select(x => x.StatTime).ShouldEqual(resultDates.Select(DateTime.Parse));
+            stats.Select(x => x.StatTime).ShouldBe(resultDates.Select(DateTime.Parse));
         }
     }
 }

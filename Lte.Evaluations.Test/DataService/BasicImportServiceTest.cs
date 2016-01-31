@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using AutoMapper.Should;
 using Lte.Evaluations.DataService;
 using Lte.Evaluations.Test.MockItems;
 using Lte.Parameters.Abstract;
@@ -7,6 +6,7 @@ using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.ExcelCsv;
 using Moq;
 using NUnit.Framework;
+using Shouldly;
 
 namespace Lte.Evaluations.Test.DataService
 {
@@ -48,7 +48,7 @@ namespace Lte.Evaluations.Test.DataService
                 Name = "ENodeb-" + x
             }).ToList();
             var results = _service.GetNewENodebExcels();
-            results.Select(x => x.ENodebId).ToArray().ShouldEqual(outputENodebIds);
+            results.Select(x => x.ENodebId).ToArray().ShouldBe(outputENodebIds);
         }
 
         [TestCase(new[] { 1, 2, 3, 4 }, new[] { 4 })]
@@ -63,7 +63,7 @@ namespace Lte.Evaluations.Test.DataService
                 Name = "Bts-" + x
             }).ToList();
             var results = _service.GetNewBtsExcels();
-            results.Select(x => x.BtsId).ToArray().ShouldEqual(outputBtsIds);
+            results.Select(x => x.BtsId).ToArray().ShouldBe(outputBtsIds);
         }
 
         [TestCase(new[] { 1, 2, 3, 4 }, new byte[] { 1, 2, 3, 4 }, new[] { 4 }, new byte[] { 4 })]
@@ -86,8 +86,8 @@ namespace Lte.Evaluations.Test.DataService
                 Pci = 111
             }).ToList();
             var results = _service.GetNewCellExcels().ToArray();
-            results.Select(x => x.ENodebId).ToArray().ShouldEqual(outputENodebIds);
-            results.Select(x => x.SectorId).ToArray().ShouldEqual(outputSectorIds);
+            results.Select(x => x.ENodebId).ToArray().ShouldBe(outputENodebIds);
+            results.Select(x => x.SectorId).ToArray().ShouldBe(outputSectorIds);
         }
 
         [TestCase(new[] { 1, 2, 3, 4 }, new byte[] { 1, 2, 3, 4 }, new short[] { 111, 111, 111, 111},
@@ -124,8 +124,8 @@ namespace Lte.Evaluations.Test.DataService
                 Pci = inputPcis[i]
             }).ToList();
             var results = _service.GetNewCellExcels().ToArray();
-            results.Select(x => x.ENodebId).ToArray().ShouldEqual(outputENodebIds);
-            results.Select(x => x.SectorId).ToArray().ShouldEqual(outputSectorIds);
+            results.Select(x => x.ENodebId).ToArray().ShouldBe(outputENodebIds);
+            results.Select(x => x.SectorId).ToArray().ShouldBe(outputSectorIds);
         }
 
         [TestCase(new[] { 1, 2, 3, 4 }, new byte[] { 1, 2, 3, 4 }, new[] { 4 }, new byte[] { 4 })]
@@ -147,8 +147,8 @@ namespace Lte.Evaluations.Test.DataService
                 SectorId = inputSectorIds[i]
             }).ToList();
             var results = _service.GetNewCdmaCellExcels().ToArray();
-            results.Select(x => x.BtsId).ToArray().ShouldEqual(outputBtsIds);
-            results.Select(x => x.SectorId).ToArray().ShouldEqual(outputSectorIds);
+            results.Select(x => x.BtsId).ToArray().ShouldBe(outputBtsIds);
+            results.Select(x => x.SectorId).ToArray().ShouldBe(outputSectorIds);
         }
     }
 }

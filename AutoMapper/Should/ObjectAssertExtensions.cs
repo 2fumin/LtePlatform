@@ -32,20 +32,7 @@ namespace AutoMapper.Should
         {
             CustomizeAssert.IsType(expectedType, @object);
         }
-
-        /// <summary>
-        /// Verifies that two objects are equal, using a default comparer.
-        /// </summary>
-        /// <typeparam name="T">The type of the objects to be compared</typeparam>
-        /// <param name="actual">The value to be compared against</param>
-        /// <param name="expected">The expected value</param>
-        /// <exception cref="EqualException">Thrown when the objects are not equal</exception>
-        public static void ShouldEqual<T>(this T actual,
-                                          T expected)
-        {
-            CustomizeAssert.Equal(expected, actual);
-        }
-
+        
         /// <summary>
         /// Verifies that two objects are not equal, using a default comparer.
         /// </summary>

@@ -1,7 +1,5 @@
 ﻿using System.Linq;
 using AutoMapper.QueryableExtensions;
-using AutoMapper.Should;
-using AutoMapper.Should.Core.Assertions;
 using NUnit.Framework;
 using Shouldly;
 
@@ -67,7 +65,7 @@ namespace AutoMapper.Test.IMappingExpression
 
             var projected = Mapper.Map<CustomerDto[]>(customers);
             projected.ShouldNotBeNull();
-            CustomizeAssert.Equal(customers.Single().CustomerType.ToString().ToUpper(), projected.Single().CustomerType);
+            customers.Single().CustomerType.ToString().ToUpper().ShouldBe(projected.Single().CustomerType);
         }
 
         public class Customer

@@ -21,19 +21,6 @@ namespace AutoMapper.Should.Core.Assertions
         public delegate object ThrowsDelegateWithReturn();
         
         /// <summary>
-        /// Verifies that two objects are equal, using a default comparer.
-        /// </summary>
-        /// <typeparam name="T">The type of the objects to be compared</typeparam>
-        /// <param name="expected">The expected value</param>
-        /// <param name="actual">The value to be compared against</param>
-        /// <exception cref="EqualException">Thrown when the objects are not equal</exception>
-        public static void Equal<T>(T expected,
-                                    T actual)
-        {
-            Equal(expected, actual, GetEqualityComparer<T>());
-        }
-
-        /// <summary>
         /// Verifies that two objects are equal, using a custom comparer.
         /// </summary>
         /// <typeparam name="T">The type of the objects to be compared</typeparam>

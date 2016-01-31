@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using AutoMapper.Should;
 using Lte.Evaluations.DataService.Dump;
 using Lte.Evaluations.Test.MockItems;
 using Lte.Parameters.Abstract;
@@ -8,6 +7,7 @@ using Lte.Parameters.Entities.Basic;
 using Lte.Parameters.MockOperations;
 using Moq;
 using NUnit.Framework;
+using Shouldly;
 
 namespace Lte.Evaluations.Test.DataService.Dump
 {
@@ -46,10 +46,10 @@ namespace Lte.Evaluations.Test.DataService.Dump
                 }
             };
             _service.DumpNewCellExcels(cellExcels);
-            _cellRepository.Object.Count().ShouldEqual(7);
+            _cellRepository.Object.Count().ShouldBe(7);
             var lastObject = _cellRepository.Object.GetAllList()[6];
-            lastObject.BtsId.ShouldEqual(btsId);
-            lastObject.SectorId.ShouldEqual(sectorId);
+            lastObject.BtsId.ShouldBe(btsId);
+            lastObject.SectorId.ShouldBe(sectorId);
         }
     }
 }

@@ -11,6 +11,7 @@ using Lte.Parameters.Entities.ExcelCsv;
 using Lte.Parameters.MockOperations;
 using Moq;
 using NUnit.Framework;
+using Shouldly;
 
 namespace Lte.Evaluations.Test.DataService.Dump
 {
@@ -57,8 +58,8 @@ namespace Lte.Evaluations.Test.DataService.Dump
                 }
             };
             _service.DumpBtsExcels(infos);
-            _btsRepository.Object.Count().ShouldEqual(4);
-            _btsRepository.Object.GetAllList()[3].ShouldEqual(name, address, townId, btsId, longtitute, lattitute);
+            _btsRepository.Object.Count().ShouldBe(4);
+            _btsRepository.Object.GetAllList()[3].ShouldBe(name, address, townId, btsId, longtitute, lattitute);
         }
     }
 }
