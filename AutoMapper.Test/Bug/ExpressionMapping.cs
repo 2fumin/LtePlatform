@@ -6,27 +6,10 @@ using System.Linq.Expressions;
 using AutoMapper.QueryableExtensions;
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Bug
 {
-    public static class GenericTestExtensionMethods
-    {
-        public static bool Any<T>(this IEnumerable<T> self, Func<T,int,bool> func)
-        {
-            return self.Where(func).Any();
-        }
-
-        public static bool AnyParamReverse<T>(this IEnumerable<T> self, Func<T, T, bool> func)
-        {
-            return self.Any(t => func(t,t));
-        }
-
-        public static bool Lambda<T>(this T self, Func<T, bool> func)
-        {
-            return func(self);
-        }
-    }
-
     [TestFixture]
     public class ExpressionMapping : NonValidatingSpecBase
     {
@@ -115,7 +98,7 @@ namespace AutoMapper.Test.Bug
         {
             var expression = Mapper.Map<Expression<Func<Parent, bool>>>(_predicateExpression);
             var items = new[] {_valid}.AsQueryable();
-            items.Where(expression).ShouldContain(_valid);
+            _valid.ShouldBeOneOf(items.Where(expression).ToArray());
             var items2 = items.UseAsDataSource().For<ParentDTO>().Where(_predicateExpression);
             //var a = items2.ToList();
             items2.Count().ShouldEqual(1);

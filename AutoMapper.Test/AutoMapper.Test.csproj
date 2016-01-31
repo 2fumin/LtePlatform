@@ -80,6 +80,7 @@
     <Compile Include="Bug\ExistingArrays.cs" />
     <Compile Include="Bug\ExpressionMapping.cs" />
     <Compile Include="Bug\ForAllMaps.cs" />
+    <Compile Include="Bug\GenericTestExtensionMethods.cs" />
     <Compile Include="Bug\GenericTypeConverter.cs" />
     <Compile Include="Bug\IgnoreAll.cs" />
     <Compile Include="Bug\InheritanceIssue.cs" />

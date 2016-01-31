@@ -25,12 +25,7 @@ namespace AutoMapper.Test
 				}
 			}
 		}
-
-        public static void ShouldContain(this IEnumerable items, object item)
-        {
-            CollectionAssertExtensions.ShouldContain(items.Cast<object>(), item);
-        }
-
+        
         public static void ShouldBeThrownBy(this Type exceptionType, ThrowingAction action)
         {
             Exception e = null;
@@ -50,7 +45,7 @@ namespace AutoMapper.Test
 
         public static void ShouldNotBeInstanceOf<TExpectedType>(this object actual)
         {
-            actual.ShouldNotBeType<TExpectedType>();
+            actual.ShouldNotBeOfType<TExpectedType>();
         }
 	}
 }

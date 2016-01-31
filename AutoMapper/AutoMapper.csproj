@@ -189,7 +189,6 @@
     <Compile Include="ResolutionContext.cs" />
     <Compile Include="ResolutionResult.cs" />
     <Compile Include="Should\ActionAssertionExtensions.cs" />
-    <Compile Include="Should\BooleanAssertionExtensions.cs" />
     <Compile Include="Should\CollectionAssertionExtensions.cs" />
     <Compile Include="Should\Core\Assertions\CustomizeAssert.cs" />
     <Compile Include="Should\Core\Assertions\AssertComparer.cs" />
