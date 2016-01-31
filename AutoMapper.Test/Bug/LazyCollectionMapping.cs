@@ -2,8 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Bug
 {
@@ -59,7 +59,7 @@ namespace AutoMapper.Test.Bug
 		{
 			var enumerable = Create(new[] {"one", "two", "three"});
 			
-			enumerable.Count().ShouldEqual(3);
+			enumerable.Count().ShouldBe(3);
 
 			typeof (NotSupportedException).ShouldBeThrownBy(() => enumerable.Count());
 		}
@@ -72,7 +72,7 @@ namespace AutoMapper.Test.Bug
 			var source = new Source {Collection = Create(new[] {"one", "two", "three"})};
 			var enumerable = Mapper.Map(source, new Destination());
 
-			enumerable.Collection.Count().ShouldEqual(3);
+			enumerable.Collection.Count().ShouldBe(3);
 		}
 
 		public static IEnumerable<T> Create<T>(IEnumerable<T> inner)

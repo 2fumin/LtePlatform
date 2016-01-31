@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Bug
 {
@@ -69,10 +69,10 @@ namespace AutoMapper.Test.Bug
         public void Should_map_dictionary_with_non_KeyValuePair_enumerable()
         {
             var json = (JObject)_destination.Json;
-            json.Count.ShouldEqual(3);
-            json["1"].ShouldEqual("one");
-            json["2"].ShouldEqual("two");
-            json["3"].ShouldEqual("three");
+            json.Count.ShouldBe(3);
+            json["1"].ShouldBe("one");
+            json["2"].ShouldBe("two");
+            json["3"].ShouldBe("three");
         }
     }
 }
