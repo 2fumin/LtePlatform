@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Core
 {
@@ -43,13 +44,13 @@ namespace AutoMapper.Test.Core
 			[Test]
 			public void Should_use_extension_method()
 			{
-				_destination.Value2.ShouldEqual("hello from extension");
+				_destination.Value2.ShouldBe("hello from extension");
 			}
 
 			[Test]
 			public void Should_still_map_value_type()
 			{
-				_destination.Value1.ShouldEqual(3);
+				_destination.Value1.ShouldBe(3);
 			}
 		}
 
@@ -96,13 +97,13 @@ namespace AutoMapper.Test.Core
 			[Test]
 			public void Should_flatten_using_extension_method()
 			{
-				_destination.InsideThingProperty.ShouldEqual(17);
+				_destination.InsideThingProperty.ShouldBe(17);
 			}
 
 			[Test]
 			public void Should_still_map_value_type()
 			{
-				_destination.Value1.ShouldEqual(7);
+				_destination.Value1.ShouldBe(7);
 			}
 		}
 
@@ -134,7 +135,7 @@ namespace AutoMapper.Test.Core
 	        [Test]
 	        public void Should_resolve_LINQ_method_automatically()
 	        {
-	            _destination.ValuesCount.ShouldEqual(10);
+	            _destination.ValuesCount.ShouldBe(10);
 	        }
 	    }
 	}

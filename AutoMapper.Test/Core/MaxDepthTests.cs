@@ -79,9 +79,9 @@ namespace AutoMapper.Test.Core
             var destination = Mapper.Map<Source, Destination>(_source);
             foreach (var child in destination.Children)
             {
-                2.ShouldEqual(child.Level);
+                2.ShouldBe(child.Level);
                 child.ShouldNotBeNull();
-                destination.ShouldEqual(child.Parent);
+                destination.ShouldBe(child.Parent);
             }
         }
 
@@ -110,9 +110,9 @@ namespace AutoMapper.Test.Core
                 child.Children.ShouldNotBeNull();
                 foreach (var subChild in child.Children)
                 {
-                    3.ShouldEqual(subChild.Level);
+                    3.ShouldBe(subChild.Level);
                     subChild.Children.ShouldNotBeNull();
-                    child.ShouldEqual(subChild.Parent);
+                    child.ShouldBe(subChild.Parent);
                 }
             }
         }

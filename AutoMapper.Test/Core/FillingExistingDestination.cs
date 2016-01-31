@@ -44,7 +44,7 @@ namespace AutoMapper.Test.Core
 			[Test]
 			public void Should_do_the_translation()
 			{
-				_dest.Value.ShouldEqual(10);
+				_dest.Value.ShouldBe(10);
 			}
 
 			[Test]
@@ -122,15 +122,15 @@ namespace AutoMapper.Test.Core
             [Test]
             public void Should_do_the_translation()
             {
-                _dest.Value.ShouldEqual(10);
-                _dest.Child.Value.ShouldEqual(20);
+                _dest.Value.ShouldBe(10);
+                _dest.Child.Value.ShouldBe(20);
             }
 
             [Test]
             public void Should_return_the_destination_object_that_was_passed_in()
             {
-                _dest.Name.ShouldEqual("foo");
-                _dest.Child.Name.ShouldEqual("bar");
+                _dest.Name.ShouldBe("foo");
+                _dest.Child.Name.ShouldBe("bar");
             }
         }
 
@@ -154,7 +154,7 @@ namespace AutoMapper.Test.Core
 			[Test]
 			public void Should_return_the_enum_as_a_string()
 			{
-				_result.ShouldEqual("Two");
+				_result.ShouldBe("Two");
 			}
 		}
 	}
