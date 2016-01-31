@@ -1,5 +1,6 @@
 ﻿using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Bug
 {
@@ -17,11 +18,11 @@ namespace AutoMapper.Test.Bug
             Mapper.CreateMap<DisplayModel, SomeViewModel>();
 
             Mapper.Map(displayModel, vm);
-            ((SomeViewModel)vm).Radius.ShouldEqual(300); // fails
+            ((SomeViewModel)vm).Radius.ShouldBe(300); // fails
 
             var vm2 = new SomeViewModel();
             Mapper.Map(displayModel, vm2);
-            vm2.Radius.ShouldEqual(300); // succeeds
+            vm2.Radius.ShouldBe(300); // succeeds
         }
 
         public class SomeViewModel

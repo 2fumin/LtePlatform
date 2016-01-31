@@ -1,6 +1,7 @@
 ﻿using System;
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Bug
 {
@@ -21,7 +22,7 @@ namespace AutoMapper.Test.Bug
         {
             Mapper.Initialize(c=>c.CreateMap<Source, Destination>());
             new Action(Mapper.AssertConfigurationIsValid).ShouldThrow<AutoMapperConfigurationException>(
-                ex=>ex.Errors[0].UnmappedPropertyNames[0].ShouldEqual("Type"));
+                ex=>ex.Errors[0].UnmappedPropertyNames[0].ShouldBe("Type"));
         }
     }
 }

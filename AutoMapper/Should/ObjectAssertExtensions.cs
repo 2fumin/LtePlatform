@@ -32,7 +32,7 @@ namespace AutoMapper.Should
         {
             CustomizeAssert.IsType(expectedType, @object);
         }
-        
+
         /// <summary>
         /// Verifies that two objects are not equal, using a default comparer.
         /// </summary>

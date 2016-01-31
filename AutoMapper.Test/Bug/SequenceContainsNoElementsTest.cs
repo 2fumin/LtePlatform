@@ -26,7 +26,7 @@ namespace AutoMapper.Test.Bug
 			var people = new People(personArr);
 			var pmc = Mapper.Map<People, List<PersonModel>>(people);
 		    pmc.ShouldNotBeNull();
-            pmc.Count.ShouldEqual(0);
+            pmc.Count.ShouldBe(0);
 		}
 	}
 

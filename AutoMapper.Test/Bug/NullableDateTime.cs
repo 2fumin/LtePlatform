@@ -1,6 +1,7 @@
 ﻿using System;
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Bug
 {
@@ -33,7 +34,7 @@ namespace AutoMapper.Test.Bug
         public void Should_map_as_usual()
         {
             _destination = Mapper.Map<Destination>(new Source { Value = _date });
-            _destination.Value.ShouldEqual(_date);
+            _destination.Value.ShouldBe(_date);
         }
     }
 }

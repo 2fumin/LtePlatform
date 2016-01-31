@@ -1,5 +1,6 @@
 using AutoMapper.Should;
 using NUnit.Framework;
+using Shouldly;
 
 namespace AutoMapper.Test.Bug
 {
@@ -52,7 +53,7 @@ namespace AutoMapper.Test.Bug
         [Test]
         public void Should_map_successfully()
         {
-            _thingDto.Items.Length.ShouldEqual(1);
+            _thingDto.Items.Length.ShouldBe(1);
         }
     }
 }
