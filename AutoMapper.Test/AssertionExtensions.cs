@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using AutoMapper.Should;
 using AutoMapper.Should.Core.Exceptions;
@@ -25,7 +26,12 @@ namespace AutoMapper.Test
 				}
 			}
 		}
-        
+
+        public static void ShouldContain<T>(this IEnumerable<T> items, T item)
+        {
+            item.ShouldBeOneOf(items.ToArray());
+        }
+
         public static void ShouldBeThrownBy(this Type exceptionType, ThrowingAction action)
         {
             Exception e = null;

@@ -1,5 +1,4 @@
 using System.Collections.ObjectModel;
-using AutoMapper.Should;
 using AutoMapper.Test.Membel;
 using NUnit.Framework;
 using Shouldly;

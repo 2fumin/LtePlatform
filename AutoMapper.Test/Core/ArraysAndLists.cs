@@ -24,8 +24,8 @@ namespace AutoMapper.Test.Core
 
 			public class Destination
 			{
-				public IEnumerable Values { get; set; }
-				public IEnumerable Values2 { get; set; }
+				public IEnumerable<int> Values { get; set; }
+				public IEnumerable<int> Values2 { get; set; }
 			}
 
 			protected override void Establish_context()
@@ -123,8 +123,8 @@ namespace AutoMapper.Test.Core
 
 			public class Destination
 			{
-				public ICollection Values { get; set; }
-				public ICollection Values2 { get; set; }
+				public ICollection<int> Values { get; set; }
+				public ICollection<int> Values2 { get; set; }
 			}
 
 			protected override void Establish_context()
@@ -207,7 +207,7 @@ namespace AutoMapper.Test.Core
 
 			public class Destination
 			{
-				public IList Values { get; set; }
+				public IList<int> Values { get; set; }
 			}
 
 			protected override void Establish_context()

@@ -100,7 +100,7 @@ namespace AutoMapper.Test.Bug
             var items = new[] {_valid}.AsQueryable();
             _valid.ShouldBeOneOf(items.Where(expression).ToArray());
             var items2 = items.UseAsDataSource().For<ParentDTO>().Where(_predicateExpression);
-            //var a = items2.ToList();
+
             items2.Count().ShouldEqual(1);
         }
 
@@ -110,7 +110,7 @@ namespace AutoMapper.Test.Bug
             Expression<Func<GrandParentDTO, bool>> _predicateExpression = gp => gp.Parent.Children.Any(c => c.ID2 == 3);
             var expression = Mapper.Map<Expression<Func<GrandParent, bool>>>(_predicateExpression);
             var items = new[] {new GrandParent(){Parent = new Parent(){Children = new[]{new Child(){ID2 = 3}}, Child = new Child(){ID2 = 3}}}}.AsQueryable();
-            items.Where(expression).ShouldContain(items.First());
+            items.First().ShouldBeOneOf(items.Where(expression).ToArray());
             var items2 = items.UseAsDataSource().For<GrandParentDTO>().Where(_predicateExpression);
             items2.Count().ShouldEqual(1);
             When_Use_Outside_Class_Method_Call();

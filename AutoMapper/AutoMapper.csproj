@@ -189,7 +189,6 @@
     <Compile Include="ResolutionContext.cs" />
     <Compile Include="ResolutionResult.cs" />
     <Compile Include="Should\ActionAssertionExtensions.cs" />
-    <Compile Include="Should\CollectionAssertionExtensions.cs" />
     <Compile Include="Should\Core\Assertions\CustomizeAssert.cs" />
     <Compile Include="Should\Core\Assertions\AssertComparer.cs" />
     <Compile Include="Should\Core\Assertions\AssertEqualityComparer.cs" />
@@ -230,7 +229,6 @@
     <Compile Include="Should\DateAssertionExtensions.cs" />
     <Compile Include="Should\DoubleAssertionExtensions.cs" />
     <Compile Include="Should\ObjectAssertExtensions.cs" />
-    <Compile Include="Should\StringAssertionExtensions.cs" />
     <Compile Include="SourceMemberConfig.cs" />
     <Compile Include="ThreadSafeList.cs" />
     <Compile Include="TypeConverter.cs" />

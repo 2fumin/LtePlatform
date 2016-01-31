@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using AutoMapper.Should.Core.Exceptions;
 
 namespace AutoMapper.Should.Core.Assertions
@@ -21,148 +19,7 @@ namespace AutoMapper.Should.Core.Assertions
         /// Used by the Throws and DoesNotThrow methods.
         /// </summary>
         public delegate object ThrowsDelegateWithReturn();
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CustomizeAssert"/> class.
-        /// </summary>
-        protected CustomizeAssert() { }
-
-        /// <summary>
-        /// Verifies that a collection contains a given object.
-        /// </summary>
-        /// <typeparam name="T">The type of the object to be verified</typeparam>
-        /// <param name="expected">The object expected to be in the collection</param>
-        /// <param name="collection">The collection to be inspected</param>
-        /// <exception cref="ContainsException">Thrown when the object is not present in the collection</exception>
-        public static void Contains<T>(T expected,
-                                       IEnumerable<T> collection)
-        {
-            Contains(expected, collection, GetEqualityComparer<T>());
-        }
-
-        /// <summary>
-        /// Verifies that a collection contains a given object, using an equality comparer.
-        /// </summary>
-        /// <typeparam name="T">The type of the object to be verified</typeparam>
-        /// <param name="expected">The object expected to be in the collection</param>
-        /// <param name="collection">The collection to be inspected</param>
-        /// <param name="comparer">The comparer used to equate objects in the collection with the expected object</param>
-        /// <exception cref="ContainsException">Thrown when the object is not present in the collection</exception>
-        public static void Contains<T>(T expected, IEnumerable<T> collection, IEqualityComparer<T> comparer)
-        {
-            if (collection.Any(item => comparer.Equals(expected, item)))
-            {
-                return;
-            }
-
-            throw new ContainsException(expected);
-        }
-
-        /// <summary>
-        /// Verifies that a string contains a given sub-string, using the given comparison type.
-        /// </summary>
-        /// <param name="expectedSubString">The sub-string expected to be in the string</param>
-        /// <param name="actualString">The string to be inspected</param>
-        /// <param name="comparisonType">The type of string comparison to perform</param>
-        /// <exception cref="ContainsException">Thrown when the sub-string is not present inside the string</exception>
-        public static int Contains(string expectedSubString,
-                                    string actualString,
-                                    StringComparison comparisonType = StringComparison.CurrentCulture)
-        {
-            var indexOf = actualString.IndexOf(expectedSubString, comparisonType);
-
-            if (indexOf < 0)
-                throw new ContainsException(expectedSubString);
-
-            return indexOf;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="expectedStartString"></param>
-        /// <param name="actualString"></param>
-        /// <exception cref="StartsWithException">Thrown when the sub-string is not present at the start of the string</exception>
-        public static void StartsWith(string expectedStartString, string actualString)
-        {
-            if (actualString.StartsWith(expectedStartString) == false)
-                throw new StartsWithException(expectedStartString, actualString);
-        }
-
-        /// <summary>
-        /// Verifies that a collection does not contain a given object.
-        /// </summary>
-        /// <typeparam name="T">The type of the object to be compared</typeparam>
-        /// <param name="expected">The object that is expected not to be in the collection</param>
-        /// <param name="collection">The collection to be inspected</param>
-        /// <exception cref="DoesNotContainException">Thrown when the object is present inside the container</exception>
-        public static void DoesNotContain<T>(T expected,
-                                             IEnumerable<T> collection)
-        {
-            DoesNotContain(expected, collection, GetEqualityComparer<T>());
-        }
-
-        /// <summary>
-        /// Verifies that a collection does not contain a given object, using an equality comparer.
-        /// </summary>
-        /// <typeparam name="T">The type of the object to be compared</typeparam>
-        /// <param name="expected">The object that is expected not to be in the collection</param>
-        /// <param name="collection">The collection to be inspected</param>
-        /// <param name="comparer">The comparer used to equate objects in the collection with the expected object</param>
-        /// <exception cref="DoesNotContainException">Thrown when the object is present inside the container</exception>
-        public static void DoesNotContain<T>(T expected, IEnumerable<T> collection, IEqualityComparer<T> comparer)
-        {
-            if (collection.Any(item => comparer.Equals(expected, item)))
-            {
-                throw new DoesNotContainException(expected);
-            }
-        }
-
-        /// <summary>
-        /// Verifies that a string does not contain a given sub-string, using the current culture.
-        /// </summary>
-        /// <param name="expectedSubString">The sub-string which is expected not to be in the string</param>
-        /// <param name="actualString">The string to be inspected</param>
-        /// <param name="comparisonType">The type of string comparison to perform</param>
-        /// <exception cref="DoesNotContainException">Thrown when the sub-string is present inside the given string</exception>
-        public static void DoesNotContain(string expectedSubString,
-                                          string actualString,
-                                          StringComparison comparisonType = StringComparison.CurrentCulture)
-        {
-            if (actualString.IndexOf(expectedSubString, comparisonType) >= 0)
-                throw new DoesNotContainException(expectedSubString);
-        }
-
-        ///// <summary>
-        ///// Verifies that a block of code does not throw any exceptions.
-        ///// </summary>
-        ///// <param name="testCode">A delegate to the code to be tested</param>
-        //public static void DoesNotThrow(ThrowsDelegate testCode)
-        //{
-        //    Exception ex = Record.Exception(testCode);
-
-        //    if (ex != null)
-        //        throw new DoesNotThrowException(ex);
-        //}
-
-        /// <summary>
-        /// Verifies that a collection is empty.
-        /// </summary>
-        /// <param name="collection">The collection to be inspected</param>
-        /// <exception cref="ArgumentNullException">Thrown when the collection is null</exception>
-        /// <exception cref="EmptyException">Thrown when the collection is not empty</exception>
-        public static void Empty(IEnumerable collection)
-        {
-            if (collection == null) throw new ArgumentNullException("collection", "cannot be null");
-
-#pragma warning disable 168
-            if (collection.Cast<object>().Any())
-            {
-                throw new EmptyException();
-            }
-#pragma warning restore 168
-        }
-
+        
         /// <summary>
         /// Verifies that two objects are equal, using a default comparer.
         /// </summary>
@@ -174,21 +31,6 @@ namespace AutoMapper.Should.Core.Assertions
                                     T actual)
         {
             Equal(expected, actual, GetEqualityComparer<T>());
-        }
-
-        /// <summary>
-        /// Verifies that two objects are equal, using a default comparer.
-        /// </summary>
-        /// <typeparam name="T">The type of the objects to be compared</typeparam>
-        /// <param name="expected">The expected value</param>
-        /// <param name="actual">The value to be compared against</param>
-        /// <param name="userMessage">The user message to be shown on failure</param>
-        /// <exception cref="EqualException">Thrown when the objects are not equal</exception>
-        public static void Equal<T>(T expected,
-                                    T actual,
-                                    string userMessage)
-        {
-            Equal(expected, actual, GetEqualityComparer<T>(), userMessage);
         }
 
         /// <summary>
@@ -205,24 +47,6 @@ namespace AutoMapper.Should.Core.Assertions
         {
             if (!comparer.Equals(expected, actual))
                 throw new EqualException(expected, actual);
-        }
-
-        /// <summary>
-        /// Verifies that two objects are equal, using a custom comparer.
-        /// </summary>
-        /// <typeparam name="T">The type of the objects to be compared</typeparam>
-        /// <param name="expected">The expected value</param>
-        /// <param name="actual">The value to be compared against</param>
-        /// <param name="comparer">The comparer used to compare the two objects</param>
-        /// <param name="userMessage"></param>
-        /// <exception cref="EqualException">Thrown when the objects are not equal</exception>
-        public static void Equal<T>(T expected,
-                                    T actual,
-                                    IEqualityComparer<T> comparer,
-                                    string userMessage)
-        {
-            if (!comparer.Equals(expected, actual))
-                throw new EqualException(expected, actual, userMessage);
         }
 
         /// <summary>
@@ -331,184 +155,9 @@ namespace AutoMapper.Should.Core.Assertions
                 throw new NotEqualException(precision.Truncate(actual), precision.Truncate(actual));
         }
 
-        /// <summary>Do not call this method.</summary>
-        [Obsolete("This is an override of Object.Equals(). Call CustomizeAssert.Equal() instead.", true)]
-        public new static bool Equals(object a,
-                                      object b)
-        {
-            throw new InvalidOperationException("CustomizeAssert.Equals should not be used");
-        }
-
-        /// <summary>
-        /// Verifies that the condition is false.
-        /// </summary>
-        /// <param name="condition">The condition to be tested</param>
-        /// <param name="userMessage">The message to show when the condition is not false</param>
-        /// <exception cref="FalseException">Thrown if the condition is not false</exception>
-        public static void False(bool condition,
-                                 string userMessage = null)
-        {
-            if (condition)
-                throw new FalseException(userMessage);
-        }
-
         static IEqualityComparer<T> GetEqualityComparer<T>()
         {
             return new AssertEqualityComparer<T>();
-        }
-
-        static IComparer<T> GetComparer<T>()
-        {
-            return new AssertComparer<T>();
-        }
-
-        /// <summary>Verifies that an object is greater than the exclusive minimum value.</summary>
-        /// <typeparam name="T">The type of the objects to be compared.</typeparam>
-        /// <param name="left">The object to be evaluated.</param>
-        /// <param name="right">An object representing the exclusive minimum value of paramref name="value"/>.</param>
-        public static void GreaterThan<T>(T left, T right)
-        {
-            GreaterThan(left, right, GetComparer<T>());
-        }
-
-        /// <summary>Verifies that an object is greater than the exclusive minimum value.</summary>
-        /// <typeparam name="T">The type of the objects to be compared.</typeparam>
-        /// <param name="left">The object to be evaluated.</param>
-        /// <param name="right">An object representing the exclusive minimum value of paramref name="value"/>.</param>
-        /// <param name="comparer">An <see cref="IComparer{T}"/> used to compare the objects.</param>
-        public static void GreaterThan<T>(T left, T right, IComparer<T> comparer)
-        {
-            if (comparer.Compare(left, right) <= 0)
-                throw new GreaterThanException(left, right);
-        }
-
-        /// <summary>Verifies that an object is greater than the inclusive minimum value.</summary>
-        /// <typeparam name="T">The type of the objects to be compared.</typeparam>
-        /// <param name="left">The object to be evaluated.</param>
-        /// <param name="right">An object representing the inclusive minimum value of paramref name="value"/>.</param>
-        public static void GreaterThanOrEqual<T>(T left, T right)
-        {
-            GreaterThanOrEqual(left, right, GetComparer<T>());
-        }
-
-        /// <summary>Verifies that an object is greater than the inclusive minimum value.</summary>
-        /// <typeparam name="T">The type of the objects to be compared.</typeparam>
-        /// <param name="left">The object to be evaluated.</param>
-        /// <param name="right">An object representing the inclusive minimum value of paramref name="value"/>.</param>
-        /// <param name="comparer">An <see cref="IComparer{T}"/> used to compare the objects.</param>
-        public static void GreaterThanOrEqual<T>(T left, T right, IComparer<T> comparer)
-        {
-            if (comparer.Compare(left, right) < 0)
-                throw new GreaterThanOrEqualException(left, right);
-        }
-
-        /// <summary>
-        /// Verifies that a value is within a given range.
-        /// </summary>
-        /// <typeparam name="T">The type of the value to be compared</typeparam>
-        /// <param name="actual">The actual value to be evaluated</param>
-        /// <param name="low">The (inclusive) low value of the range</param>
-        /// <param name="high">The (inclusive) high value of the range</param>
-        /// <exception cref="InRangeException">Thrown when the value is not in the given range</exception>
-        public static void InRange<T>(T actual,
-                                      T low,
-                                      T high)
-        {
-            InRange(actual, low, high, GetComparer<T>());
-        }
-
-        /// <summary>
-        /// Verifies that a value is within a given range, using a comparer.
-        /// </summary>
-        /// <typeparam name="T">The type of the value to be compared</typeparam>
-        /// <param name="actual">The actual value to be evaluated</param>
-        /// <param name="low">The (inclusive) low value of the range</param>
-        /// <param name="high">The (inclusive) high value of the range</param>
-        /// <param name="comparer">The comparer used to evaluate the value's range</param>
-        /// <exception cref="InRangeException">Thrown when the value is not in the given range</exception>
-        public static void InRange<T>(T actual,
-                                      T low,
-                                      T high,
-                                      IComparer<T> comparer)
-        {
-            if (comparer.Compare(low, actual) > 0 || comparer.Compare(actual, high) > 0)
-                throw new InRangeException(actual, low, high);
-        }
-
-        /// <summary>
-        /// Verifies that an object is of the given type or a derived type.
-        /// </summary>
-        /// <typeparam name="T">The type the object should be</typeparam>
-        /// <param name="object">The object to be evaluated</param>
-        /// <returns>The object, casted to type T when successful</returns>
-        /// <exception cref="IsAssignableFromException">Thrown when the object is not the given type</exception>
-        public static T IsAssignableFrom<T>(object @object)
-        {
-            IsAssignableFrom(typeof(T), @object);
-            return (T)@object;
-        }
-
-        /// <summary>
-        /// Verifies that an object is of the given type or a derived type.
-        /// </summary>
-        /// <param name="expectedType">The type the object should be</param>
-        /// <param name="object">The object to be evaluated</param>
-        /// <exception cref="IsAssignableFromException">Thrown when the object is not the given type</exception>
-        public static void IsAssignableFrom(Type expectedType, object @object)
-        {
-            if (@object == null || !expectedType.IsInstanceOfType(@object))
-                throw new IsAssignableFromException(expectedType, @object);
-        }
-
-        /// <summary>
-        /// Verifies that an object is of the given type or a derived type.
-        /// </summary>
-        /// <typeparam name="T">The type the object should be</typeparam>
-        /// <param name="object">The object to be evaluated</param>
-        /// <param name="userMessage">The user message to show on failure</param>
-        /// <returns>The object, casted to type T when successful</returns>
-        /// <exception cref="IsAssignableFromException">Thrown when the object is not the given type</exception>
-        public static T IsAssignableFrom<T>(object @object, string userMessage)
-        {
-            IsAssignableFrom(typeof(T), @object, userMessage);
-            return (T)@object;
-        }
-
-        /// <summary>
-        /// Verifies that an object is of the given type or a derived type.
-        /// </summary>
-        /// <param name="expectedType">The type the object should be</param>
-        /// <param name="userMessage">The user message to show on failure</param>
-        /// <param name="object">The object to be evaluated</param>
-        /// <exception cref="IsAssignableFromException">Thrown when the object is not the given type</exception>
-        public static void IsAssignableFrom(Type expectedType, object @object, string userMessage)
-        {
-            if (@object == null || !expectedType.IsInstanceOfType(@object))
-                throw new IsAssignableFromException(expectedType, @object, userMessage);
-        }
-
-        /// <summary>        
-        /// Verifies that an object is not exactly the given type.
-        /// </summary>
-        /// <typeparam name="T">The type the object should not be</typeparam>
-        /// <param name="object">The object to be evaluated</param>
-        /// <exception cref="IsNotTypeException">Thrown when the object is the given type</exception>
-        public static void IsNotType<T>(object @object)
-        {
-            IsNotType(typeof(T), @object);
-        }
-
-        /// <summary>
-        /// Verifies that an object is not exactly the given type.
-        /// </summary>
-        /// <param name="expectedType">The type the object should not be</param>
-        /// <param name="object">The object to be evaluated</param>
-        /// <exception cref="IsNotTypeException">Thrown when the object is the given type</exception>
-        public static void IsNotType(Type expectedType,
-                                     object @object)
-        {
-            if (expectedType == @object.GetType())
-                throw new IsNotTypeException(expectedType, @object);
         }
 
         /// <summary>
@@ -535,66 +184,6 @@ namespace AutoMapper.Should.Core.Assertions
         {
             if (@object == null || !(expectedType == @object.GetType()))
                 throw new IsTypeException(expectedType, @object);
-        }
-
-        /// <summary>Verifies that an object is less than the exclusive maximum value.</summary>
-        /// <typeparam name="T">The type of the objects to be compared.</typeparam>
-        /// <param name="left">The object to be evaluated.</param>
-        /// <param name="right">An object representing the exclusive maximum value of paramref name="value"/>.</param>
-        public static void LessThan<T>(T left, T right)
-        {
-            LessThan(left, right, GetComparer<T>());
-        }
-
-        /// <summary>Verifies that an object is less than the exclusive maximum value.</summary>
-        /// <typeparam name="T">The type of the objects to be compared.</typeparam>
-        /// <param name="left">The object to be evaluated.</param>
-        /// <param name="right">An object representing the exclusive maximum value of paramref name="value"/>.</param>
-        /// <param name="comparer">An <see cref="IComparer{T}"/> used to compare the objects.</param>
-        public static void LessThan<T>(T left, T right, IComparer<T> comparer)
-        {
-            if (comparer.Compare(left, right) >= 0)
-                throw new LessThanException(left, right);
-        }
-
-        /// <summary>Verifies that an object is less than the inclusive maximum value.</summary>
-        /// <typeparam name="T">The type of the objects to be compared.</typeparam>
-        /// <param name="left">The object to be evaluated.</param>
-        /// <param name="right">An object representing the inclusive maximum value of paramref name="value"/>.</param>
-        public static void LessThanOrEqual<T>(T left, T right)
-        {
-            LessThanOrEqual(left, right, GetComparer<T>());
-        }
-
-        /// <summary>Verifies that an object is less than the inclusive maximum value.</summary>
-        /// <typeparam name="T">The type of the objects to be compared.</typeparam>
-        /// <param name="left">The object to be evaluated.</param>
-        /// <param name="right">An object representing the inclusive maximum value of paramref name="value"/>.</param>
-        /// <param name="comparer">An <see cref="IComparer{T}"/> used to compare the objects.</param>
-        public static void LessThanOrEqual<T>(T left, T right, IComparer<T> comparer)
-        {
-            if (comparer.Compare(left, right) > 0)
-                throw new LessThanOrEqualException(left, right);
-        }
-
-        /// <summary>
-        /// Verifies that a collection is not empty.
-        /// </summary>
-        /// <param name="collection">The collection to be inspected</param>
-        /// <exception cref="ArgumentNullException">Thrown when a null collection is passed</exception>
-        /// <exception cref="NotEmptyException">Thrown when the collection is empty</exception>
-        public static void NotEmpty(IEnumerable collection)
-        {
-            if (collection == null) throw new ArgumentNullException(nameof(collection), "cannot be null");
-
-#pragma warning disable 168
-            if (collection.Cast<object>().Any())
-            {
-                return;
-            }
-#pragma warning restore 168
-
-            throw new NotEmptyException();
         }
 
         /// <summary>
@@ -624,39 +213,6 @@ namespace AutoMapper.Should.Core.Assertions
         {
             if (comparer.Equals(expected, actual))
                 throw new NotEqualException(expected, actual);
-        }
-
-        /// <summary>
-        /// Verifies that a value is not within a given range, using the default comparer.
-        /// </summary>
-        /// <typeparam name="T">The type of the value to be compared</typeparam>
-        /// <param name="actual">The actual value to be evaluated</param>
-        /// <param name="low">The (inclusive) low value of the range</param>
-        /// <param name="high">The (inclusive) high value of the range</param>
-        /// <exception cref="NotInRangeException">Thrown when the value is in the given range</exception>
-        public static void NotInRange<T>(T actual,
-                                         T low,
-                                         T high)
-        {
-            NotInRange(actual, low, high, GetComparer<T>());
-        }
-
-        /// <summary>
-        /// Verifies that a value is not within a given range, using a comparer.
-        /// </summary>
-        /// <typeparam name="T">The type of the value to be compared</typeparam>
-        /// <param name="actual">The actual value to be evaluated</param>
-        /// <param name="low">The (inclusive) low value of the range</param>
-        /// <param name="high">The (inclusive) high value of the range</param>
-        /// <param name="comparer">The comparer used to evaluate the value's range</param>
-        /// <exception cref="NotInRangeException">Thrown when the value is in the given range</exception>
-        public static void NotInRange<T>(T actual,
-                                         T low,
-                                         T high,
-                                         IComparer<T> comparer)
-        {
-            if (comparer.Compare(low, actual) <= 0 && comparer.Compare(actual, high) <= 0)
-                throw new NotInRangeException(actual, low, high);
         }
 
         /// <summary>
