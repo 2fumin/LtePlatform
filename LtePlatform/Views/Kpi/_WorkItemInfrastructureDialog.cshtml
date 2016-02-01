@@ -9,109 +9,75 @@
                 <h4 class="modal-title text-primary">工单网元信息</h4>
             </div>
             <div class="modal-body">
+                <div workitem-enodeb ng-if="detailsView==='eNodeb'"></div>
+                <div workitem-bts ng-if="detailsView==='bts'"></div>
                 <table class="table table-hover">
-                    <tbody data-bind="visible: $root.workItemList().detailsView()==='eNodeb', with: $root.workItemList().eNodebDetails">
-                        <tr>
-                            <td>基站名称</td>
-                            <td data-bind="text: name"></td>
-                            <td>厂家</td>
-                            <td data-bind="text: factory"></td>
-                            <td>规划编码</td>
-                            <td data-bind="text: planNum"></td>
-                        </tr>
-                        <tr>
-                            <td>经度</td>
-                            <td data-bind="text: longtitute"></td>
-                            <td>纬度</td>
-                            <td data-bind="text: lattitute"></td>
-                            <td>开通日期</td>
-                            <td data-bind="text: openDate"></td>
-                        </tr>
-                        <tr>
-                            <td>基站地址</td>
-                            <td colspan="5" data-bind="text: address"></td>
-                        </tr>
-                    </tbody>
-                    <tbody data-bind="visible: $root.workItemList().detailsView()==='bts', with: $root.workItemList().btsDetails">
-                        <tr>
-                            <td>基站名称</td>
-                            <td data-bind="text: name"></td>
-                            <td>经度</td>
-                            <td data-bind="text: longtitute"></td>
-                            <td>纬度</td>
-                            <td data-bind="text: lattitute"></td>
-                        </tr>
-                        <tr>
-                            <td>基站地址</td>
-                            <td colspan="5" data-bind="text: address"></td>
-                        </tr>
-                    </tbody>
-                    <tbody data-bind="visible: $root.workItemList().detailsView()==='lteCell', with: $root.workItemList().lteCellDetails">
+                    <tbody ng-if="detailsView==='lteCell'">
                         <tr>
                             <td>频点</td>
-                            <td data-bind="text: frequency"></td>
+                            <td>{{lteCellDetails.frequency}}</td>
                             <td>经度</td>
-                            <td data-bind="text: longtitute"></td>
+                            <td>{{lteCellDetails.longtitute}}</td>
                             <td>纬度</td>
-                            <td data-bind="text: lattitute"></td>
+                            <td>{{lteCellDetails.lattitute}}</td>
                         </tr>
                         <tr>
                             <td>挂高</td>
-                            <td data-bind="text: height"></td>
+                            <td>{{lteCellDetails.height}}</td>
                             <td>方位角</td>
-                            <td data-bind="text: azimuth"></td>
+                            <td>{{lteCellDetails.azimuth}}</td>
                             <td>下倾角</td>
-                            <td data-bind="text: downTilt"></td>
+                            <td>{{lteCellDetails.downTilt}}</td>
                         </tr>
                         <tr>
                             <td>室内外</td>
-                            <td data-bind="text: indoor"></td>
+                            <td>{{lteCellDetails.indoor}}</td>
                             <td>天线增益</td>
-                            <td data-bind="text: antennaGain"></td>
+                            <td>{{lteCellDetails.antennaGain}}</td>
                             <td>RS功率</td>
-                            <td data-bind="text: rsPower"></td>
+                            <td>{{lteCellDetails.rsPower}}</td>
                         </tr>
                         <tr>
                             <td>PCI</td>
-                            <td data-bind="text: pci"></td>
+                            <td>{{lteCellDetails.pci}}</td>
                             <td>PRACH</td>
-                            <td data-bind="text: prach"></td>
+                            <td>{{lteCellDetails.prach}}</td>
                             <td>TAC</td>
-                            <td data-bind="text: tac"></td>
+                            <td>{{lteCellDetails.tac}}</td>
                         </tr>
                     </tbody>
-                    <tbody data-bind="visible: $root.workItemList().detailsView()==='cdmaCell', with: $root.workItemList().cdmaCellDetails">
+                    <tbody ng-if="detailsView==='cdmaCell'">
                         <tr>
                             <td>小区编号</td>
-                            <td data-bind="text: cellId"></td>
+                            <td>{{cdmaCellDetails.cellId}}</td>
                             <td>经度</td>
-                            <td data-bind="text: longtitute"></td>
+                            <td>{{cdmaCellDetails.longtitute}}</td>
                             <td>纬度</td>
-                            <td data-bind="text: lattitute"></td>
+                            <td>{{cdmaCellDetails.lattitute}}</td>
                         </tr>
                         <tr>
                             <td>挂高</td>
-                            <td data-bind="text: height"></td>
+                            <td>{{cdmaCellDetails.height}}</td>
                             <td>方位角</td>
-                            <td data-bind="text: azimuth"></td>
+                            <td>{{cdmaCellDetails.azimuth}}</td>
                             <td>下倾角</td>
-                            <td data-bind="text: downTilt"></td>
+                            <td>{{cdmaCellDetails.downTilt}}</td>
                         </tr>
                         <tr>
                             <td>室内外</td>
-                            <td data-bind="text: indoor"></td>
+                            <td>{{cdmaCellDetails.indoor}}</td>
                             <td>天线增益</td>
-                            <td data-bind="text: antennaGain"></td>
+                            <td>{{cdmaCellDetails.antennaGain}}</td>
                             <td>PN</td>
-                            <td data-bind="text: pn"></td>
+                            <td>{{cdmaCellDetails.pn}}</td>
                         </tr>
                         <tr>
                             <td>1X频点</td>
-                            <td data-bind="text: onexFrequencyList"></td>
+                            <td>{{cdmaCellDetails.onexFrequencyList}}</td>
                             <td>DO频点</td>
-                            <td data-bind="text: evdoFrequencyList"></td>
+                            <td>{{cdmaCellDetails.evdoFrequencyList}}</td>
                             <td>LAC</td>
-                            <td data-bind="text: lac"></td>
+                            <td>{{cdmaCellDetails.lac}}</td>
                         </tr>
                     </tbody>
                 </table>
