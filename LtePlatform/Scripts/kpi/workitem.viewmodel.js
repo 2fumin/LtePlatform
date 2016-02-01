@@ -98,7 +98,7 @@
         if (newValue === oldValue) {
             return;
         }
-        $scope.updateWorkItemTable(items);
+        $scope.updateWorkItemTable($scope.itemsPerPage.value);
     });
 
     $scope.$watch('currentState', function(newValue, oldValue) {

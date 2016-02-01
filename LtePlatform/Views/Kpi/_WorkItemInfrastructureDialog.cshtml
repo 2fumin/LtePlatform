@@ -1,22 +1,6 @@
-﻿<div class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"
-                        aria-hidden="true">
-                    &times;
-                </button>
-                <h4 class="modal-title text-primary">工单网元信息</h4>
-            </div>
-            <div class="modal-body">
-                <div workitem-enodeb ng-if="detailsView==='eNodeb'"></div>
-                <div workitem-bts ng-if="detailsView==='bts'"></div>
-                <div workitem-cell ng-if="detailsView==='lteCell'"></div>
-                <div workitem-cdma ng-if="detailsView==='cdmaCell'"></div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-default" data-dismiss="modal">关闭</button>
-            </div>
-        </div>
-    </div>
+﻿<div dialog>
+    <div workitem-enodeb ng-if="detailsView==='eNodeb'"></div>
+    <div workitem-bts ng-if="detailsView==='bts'"></div>
+    <div workitem-cell ng-if="detailsView==='lteCell'"></div>
+    <div workitem-cdma ng-if="detailsView==='cdmaCell'"></div>
 </div>

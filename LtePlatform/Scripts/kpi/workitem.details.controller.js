@@ -4,6 +4,7 @@
     $scope.btsDetails = {};
     $scope.lteCellDetails = {};
     $scope.cdmaCellDetails = {};
+    $scope.dialogTitle = "工单网元信息";
 
     $scope.queryBtsInfo = function () {
         var eNodebId = $scope.currentView.eNodebId;
@@ -17,6 +18,7 @@
                 }
             }).success(function (result) {
                 $scope.eNodebDetails = result;
+                $scope.dialogTitle = "工单网元信息:" + result.name;
             });
         } else {
             $scope.detailsView = "bts";
@@ -28,6 +30,7 @@
                 }
             }).success(function (result) {
                 $scope.btsDetails = result;
+                $scope.dialogTitle = "工单网元信息:" + result.name;
             });
         }
         $(".modal").modal("show");
@@ -47,6 +50,7 @@
                 }
             }).success(function (result) {
                 $scope.lteCellDetails = result;
+                $scope.dialogTitle = "工单网元信息:" + result.eNodebName + "-" + result.sectorId;
             });
         } else {
             $scope.detailsView = "cdmaCell";
@@ -59,6 +63,7 @@
                 }
             }).success(function (result) {
                 $scope.cdmaCellDetails = result;
+                $scope.dialogTitle = "工单网元信息:" + result.btsName + "-" + result.sectorId;
             });
         }
         $(".modal").modal("show");
