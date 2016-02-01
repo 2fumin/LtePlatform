@@ -77,7 +77,7 @@ namespace Lte.Evaluations.ViewModels
                 var eNodeb = eNodebRepository.GetByENodebId(ENodebId);
                 if (eNodeb != null)
                 {
-                    var town = townRepository.Get(eNodeb.TownId);
+                    var town = eNodeb.TownId == -1 ? null : townRepository.Get(eNodeb.TownId);
                     if (town != null)
                     {
                         City = town.CityName;
@@ -90,7 +90,7 @@ namespace Lte.Evaluations.ViewModels
             var bts = btsRepository.GetByBtsId(ENodebId);
             if (bts != null)
             {
-                var town = townRepository.Get(bts.TownId);
+                var town = bts.TownId == -1 ? null : townRepository.Get(bts.TownId);
                 if (town != null)
                 {
                     City = town.CityName;

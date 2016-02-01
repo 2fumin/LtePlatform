@@ -1,54 +1,54 @@
-﻿<!-- ko with: workItemList -->
-@{
-    Html.RenderPartial("_WorkItemInfrastructureDialog");
-}
-<div class="row">
-    <div class="col-md-7">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title">
-                    工单监控
-                </h3>
-            </div>
-            <div class="panel-body">
-                <p>
-                    工单状态：
-                    <select data-bind="value: currentState, options: states"></select>&nbsp;
-                    工单分类：
-                    <select data-bind="value: currentType, options: types"></select>&nbsp;
-                    <button class="btn btn-success" data-bind="click: showCharts">图表</button>
-                </p>
-                @{
-                    Html.RenderPartial("_KnockoutPaging");
-                    Html.RenderPartial("_WorkItemTable");
-                }
-            </div>
-        </div>
-    </div>
-    <div class="col-md-5">
-        <div class="panel panel-info" data-bind="with: currentView, visible: chartView()=='details'">
-            <div class="panel-heading">
-                <h3 class="panel-title">
-                    工单编号<span data-bind="text: serialNumber"></span>信息
-                </h3>
-            </div>
-            <div class="panel-body">
-                @{
-                    Html.RenderPartial("_WorkItemDetailsTable");
-                }
-            </div>
-        </div>
-        <div class="panel panel-info" data-bind="visible: chartView()=='chart'">
-            <div class="panel-heading">
-                <div class="panel-title">
-                    工单统计图表
+﻿<div ng-app="myApp" ng-controller="kpi.workitem">
+    @{
+        Html.RenderPartial("_WorkItemInfrastructureDialog");
+    }
+    <div class="row">
+        <div class="col-md-7">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        工单监控
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        工单状态：
+                        <select ng-model="currentState" ng-options="state.name for state in states"></select>&nbsp;
+                        工单分类：
+                        <select ng-model="currentType" ng-options="type.name for type in types"></select>&nbsp;
+                        <button class="btn btn-success" ng-click="showCharts()">图表</button>
+                    </p>
+                    @{
+                        Html.RenderPartial("_KnockoutPaging");
+                        Html.RenderPartial("_WorkItemTable");
+                    }
                 </div>
             </div>
-            <div class="panel-body">
-                <div id="type-chart" style="min-height: 400px"></div>
-                <div id="state-chart" style="min-height: 400px"></div>
+        </div>
+        <div class="col-md-5">
+            <div class="panel panel-info" data-bind="with: currentView, visible: chartView()=='details'">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        工单编号<span data-bind="text: serialNumber"></span>信息
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    @{
+                        Html.RenderPartial("_WorkItemDetailsTable");
+                    }
+                </div>
+            </div>
+            <div class="panel panel-info" data-bind="visible: chartView()=='chart'">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        工单统计图表
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div id="type-chart" style="min-height: 400px"></div>
+                    <div id="state-chart" style="min-height: 400px"></div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-<!-- /ko -->

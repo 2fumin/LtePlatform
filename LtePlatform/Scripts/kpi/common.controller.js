@@ -38,17 +38,3 @@ var dumpProgressItems = function (viewModel, actionUrl) {
         }
     });
 };
-
-var updateWorkItemTable = function(viewModel, items) {
-    sendRequest(app.dataModel.workItemUrl, "GET", {
-        statCondition: viewModel.currentState(),
-        typeCondition: viewModel.currentType(),
-        itemsPerPage: items
-    }, function(result) {
-        viewModel.totalPages(result);
-        if (viewModel.currentPage() > result) {
-            viewModel.currentPage(result);
-        }
-        viewModel.query();
-    });
-};

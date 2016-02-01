@@ -1,104 +1,172 @@
-﻿function WorkItemViewModel(app, dataModel) {
-    var self = this;
+﻿app.controller("kpi.workitem", function($scope, $http) {
+    $scope.states = [
+    {
+        name: '未完成'
+    }, {
+        name: '全部'
+    }];
+    $scope.currentState = '未完成';
+    $scope.types = [
+    {
+        name: '全部'
+    }, {
+        name: '2/3G'
+    }, {
+        name: '4G'
+    }];
+    $scope.currentType = '全部';
 
-    self.states = ko.observableArray(['未完成', '全部']);
-    self.currentState = ko.observable('未完成');
-    self.types = ko.observableArray(['全部', '2/3G', '4G']);
-    self.currentType = ko.observable('全部');
-    self.totalPages = ko.observable(0);
-    self.currentPage = ko.observable(1);
-    self.itemsPerPage = ko.observable(20);
-    self.pageSizeSelection = ko.observableArray([10, 15, 20, 30, 50]);
-    self.workItemViews = ko.observableArray([]);
-    self.canGotoCurrentPage = ko.observable(false);
-    self.currentView = ko.observable();
-    self.eNodebDetails = ko.observable();
-    self.btsDetails = ko.observable();
-    self.lteCellDetails = ko.observable();
-    self.cdmaCellDetails = ko.observable();
+    $scope.totalPages = 0;
+    $scope.currentPage = 1;
+    $scope.itemsPerPage = 20;
+    $scope.pageSizeSelection = [
+    {
+        value: 10
+    }, {
+        value: 15
+    }, {
+        value: 20
+    }, {
+        value: 30
+    }, {
+        value: 50
+    }];
+    $scope.workItemViews = [];
+    $scope.canGotoCurrentPage = false;
+    $scope.currentView = {};
+    $scope.eNodebDetails = {};
+    $scope.btsDetails = {};
+    $scope.lteCellDetails = {};
+    $scope.cdmaCellDetails = {};
 
-    self.chartView = ko.observable("initial");
-    self.detailsView = ko.observable("none");
+    $scope.chartView = "initial";
+    $scope.detailsView = "none";
+    $scope.dataModel = new AppDataModel();
 
-    self.currentPage.subscribe(function(page) {
-        if (page >= 1 && page <= self.totalPages()) {
-            self.canGotoCurrentPage(true);
-        } else {
-            self.canGotoCurrentPage(false);
-            self.currentPage(1);
-        }
-    });
-
-    self.itemsPerPage.subscribe(function(items) {
-        updateWorkItemTable(self, items);
-    });
-
-    self.currentState.subscribe(function() {
-        updateWorkItemTable(self, self.itemsPerPage());
-    });
-
-    self.currentType.subscribe(function() {
-        updateWorkItemTable(self, self.itemsPerPage());
-    });
-
-    Sammy(function () {
-        this.get('#workItem', function () {
-            updateWorkItemTable(self, self.itemsPerPage());
+    $scope.updateWorkItemTable = function (items) {
+        $http({
+            method: 'GET',
+            url: $scope.dataModel.workItemUrl,
+            params: {
+                'statCondition': $scope.currentState,
+                'typeCondition': $scope.currentType,
+                'itemsPerPage': items
+            }
+        }).success(function (result) {
+            $scope.totalPages = result;
+            if ($scope.currentPage > result) {
+                $scope.currentPage = result;
+            }
+            $scope.query();
         });
-        this.get('/Kpi/TopDrop2GDaily', function () { this.app.runRoute('get', '#workItem'); });
-    });
+    };
 
-    self.query = function() {
-        sendRequest(app.dataModel.workItemUrl, "GET", {
-            statCondition: self.currentState(),
-            typeCondition: self.currentType(),
-            itemsPerPage: self.itemsPerPage(),
-            page: self.currentPage()
-        }, function(result) {
-            self.workItemViews(result);
+    $scope.query = function () {
+        $http({
+            method: 'GET',
+            url: $scope.dataModel.workItemUrl,
+            params: {
+                'statCondition': $scope.currentState,
+                'typeCondition': $scope.currentType,
+                'itemsPerPage': $scope.itemsPerPage,
+                'page': $scope.currentPage
+            }
+        }).success(function (result) {
+            $scope.workItemViews = result;
         });
     };
 
-    self.queryFirstPage = function() {
-        self.currentPage(1);
-        self.query();
-    };
-
-    self.queryPrevPage = function() {
-        self.currentPage(self.currentPage() - 1);
-        self.query();
-    };
-
-    self.queryNextPage = function() {
-        self.currentPage(self.currentPage() + 1);
-        self.query();
-    };
-
-    self.queryLastPage = function() {
-        self.currentPage(self.totalPages());
-        self.query();
-    };
-
-    self.showDetails = function (data) {
-        self.chartView("details");
-        self.currentView(data);
-    };
-
-    self.queryBtsInfo = function() {
-        var eNodebId = self.currentView().eNodebId;
+    $scope.queryBtsInfo = function () {
+        var eNodebId = $scope.currentView.eNodebId;
         if (eNodebId > 10000) {
-            self.detailsView("eNodeb");
-            sendRequest(app.dataModel.eNodebUrl, "GET", { eNodebId: eNodebId }, function(result) {
-                self.eNodebDetails(result);
+            $scope.detailsView = "eNodeb";
+            $http({
+                method: 'GET',
+                url: $scope.dataModel.eNodebUrl,
+                params: {
+                    'eNodebId': eNodebId
+                }
+            }).success(function (result) {
+                $scope.eNodebDetails = result;
             });
         } else {
-            self.detailsView("bts");
-            sendRequest(app.dataModel.btsUrl, "GET", { btsId: eNodebId }, function(result) {
-                self.btsDetails(result);
+            $scope.detailsView = "bts";
+            $http({
+                method: 'GET',
+                url: $scope.dataModel.btsUrl,
+                params: {
+                    'btsId': eNodebId
+                }
+            }).success(function (result) {
+                $scope.btsDetails = result;
             });
         }
         $(".modal").modal("show");
     };
+
+    $scope.$watch('currentPage', function(newValue, oldValue) {
+        if (newValue === oldValue) {
+            return;
+        }
+        if (newValue >= 1 && newValue <= $scope.totalPages) {
+            $scope.canGotoCurrentPage = true;
+        } else {
+            $scope.canGotoCurrentPage = false;
+            $scope.currentPage = 1;
+        }
+    });
+
+    $scope.$watch('itemsPerPage', function(newValue, oldValue) {
+        if (newValue === oldValue) {
+            return;
+        }
+        $scope.updateWorkItemTable(items);
+    });
+
+    $scope.$watch('currentState', function(newValue, oldValue) {
+        if (newValue === oldValue) {
+            return;
+        }
+        $scope.updateWorkItemTable($scope.itemsPerPage);
+    });
+
+    $scope.$watch('currentType', function(newValue, oldValue) {
+        if (newValue === oldValue) {
+            return;
+        }
+        $scope.updateWorkItemTable($scope.itemsPerPage);
+    });
+
+    $scope.queryFirstPage = function () {
+        $scope.currentPage = 1;
+        $scope.query();
+    };
+
+    $scope.queryPrevPage = function () {
+        $scope.currentPage = $scope.currentPage - 1;
+        $scope.query();
+    };
+
+    $scope.queryNextPage = function () {
+        $scope.currentPage = $scope.currentPage + 1;
+        $scope.query();
+    };
+
+    $scope.queryLastPage = function () {
+        $scope.currentPage = $scope.totalPages;
+        $scope.query();
+    };
+
+    $scope.showDetails = function (data) {
+        $scope.chartView = "details";
+        $scope.currentView = data;
+    };
+
+});
+
+
+function WorkItemViewModel(app, dataModel) {
+    var self = this;
 
     self.queryCellInfo = function() {
         var eNodebId = self.currentView().eNodebId;
@@ -136,9 +204,3 @@
 
     return self;
 }
-
-app.addViewModel({
-    name: "WorkItem",
-    bindingMemberName: "workItemList",
-    factory: WorkItemViewModel
-});

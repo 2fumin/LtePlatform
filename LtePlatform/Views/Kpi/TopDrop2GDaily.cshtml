@@ -22,7 +22,14 @@
 }
 
 @section Scripts{
-    @Scripts.Render("~/bundles/knockout")
     @Scripts.Render("~/bundles/highcharts")
-    @Scripts.Render("~/bundles/kpiWorkItem")
+    <script src="~/Scripts/app/common.js"></script>
+    <script src="~/Scripts/mycharts/drilldown.chart.js"></script>
+    <script src="~/Scripts/mycharts/drilldownPie.js"></script>
+    <script src="~/Scripts/app/app.datamodel.js"></script>
+    <script src="~/Scripts/kpi/workitem.controller.js"></script>
+    <script>
+        var app = angular.module('myApp', []);
+    </script>
+    <script src="~/Scripts/kpi/workitem.viewmodel.js"></script>
 }
