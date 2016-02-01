@@ -19,7 +19,7 @@
             <td>
                 {{currentView.eNodebId}}
                 <button class="btn btn-primary btn-xs" style="float: right" ng-click="queryBtsInfo()"
-                        ng-if="eNodebId > 0">
+                        ng-if="currentView.eNodebId > 0">
                     基站信息
                 </button>
             </td>
@@ -29,7 +29,7 @@
             <td>
                 {{currentView.sectorId}}
                 <button class="btn btn-primary btn-xs" style="float: right" ng-click="queryCellInfo()"
-                        ng-if="eNodebId > 0">
+                        ng-if="currentView.eNodebId > 0">
                     小区信息
                 </button>
             </td>

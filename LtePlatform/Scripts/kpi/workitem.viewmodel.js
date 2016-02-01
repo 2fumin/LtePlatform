@@ -5,7 +5,7 @@
     }, {
         name: '全部'
     }];
-    $scope.currentState = '未完成';
+    $scope.currentState = $scope.states[0];
     $scope.types = [
     {
         name: '全部'
@@ -14,11 +14,10 @@
     }, {
         name: '4G'
     }];
-    $scope.currentType = '全部';
+    $scope.currentType = $scope.types[0];
 
     $scope.totalPages = 0;
     $scope.currentPage = 1;
-    $scope.itemsPerPage = 20;
     $scope.pageSizeSelection = [
     {
         value: 10
@@ -31,6 +30,7 @@
     }, {
         value: 50
     }];
+    $scope.itemsPerPage = $scope.pageSizeSelection[1];
     $scope.workItemViews = [];
     $scope.canGotoCurrentPage = false;
     $scope.currentView = {};
@@ -48,8 +48,8 @@
             method: 'GET',
             url: $scope.dataModel.workItemUrl,
             params: {
-                'statCondition': $scope.currentState,
-                'typeCondition': $scope.currentType,
+                'statCondition': $scope.currentState.name,
+                'typeCondition': $scope.currentType.name,
                 'itemsPerPage': items
             }
         }).success(function (result) {
@@ -66,9 +66,9 @@
             method: 'GET',
             url: $scope.dataModel.workItemUrl,
             params: {
-                'statCondition': $scope.currentState,
-                'typeCondition': $scope.currentType,
-                'itemsPerPage': $scope.itemsPerPage,
+                'statCondition': $scope.currentState.name,
+                'typeCondition': $scope.currentType.name,
+                'itemsPerPage': $scope.itemsPerPage.value,
                 'page': $scope.currentPage
             }
         }).success(function (result) {
@@ -169,14 +169,14 @@
         if (newValue === oldValue) {
             return;
         }
-        $scope.updateWorkItemTable($scope.itemsPerPage);
+        $scope.updateWorkItemTable($scope.itemsPerPage.value);
     });
 
     $scope.$watch('currentType', function(newValue, oldValue) {
         if (newValue === oldValue) {
             return;
         }
-        $scope.updateWorkItemTable($scope.itemsPerPage);
+        $scope.updateWorkItemTable($scope.itemsPerPage.value);
     });
 
     $scope.queryFirstPage = function () {
@@ -204,4 +204,5 @@
         $scope.currentView = data;
     };
 
+    $scope.updateWorkItemTable($scope.itemsPerPage.value);
 });

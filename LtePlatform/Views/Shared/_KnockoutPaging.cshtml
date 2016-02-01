@@ -25,10 +25,10 @@
         <button class="btn btn-default" disabled>
             /{{ totalPages }}页
         </button>
-        <button type="button" class="btn btn-success" ng-if="currentPage()<totalPages()" ng-click="queryNextPage()">
+        <button type="button" class="btn btn-success" ng-if="currentPage < totalPages" ng-click="queryNextPage()">
             <span class="glyphicon glyphicon-chevron-right"></span>
         </button>
-        <button type="button" class="btn btn-primary" ng-if="currentPage()<totalPages()" ng-click="queryLastPage()">
+        <button type="button" class="btn btn-primary" ng-if="currentPage < totalPages" ng-click="queryLastPage()">
             <span class="glyphicon glyphicon-step-forward"></span>
         </button>
     </div>
