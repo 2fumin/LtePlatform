@@ -792,6 +792,7 @@
     <Content Include="Scripts\kpi\preciseimport.viewmodel.js" />
     <Content Include="Scripts\kpi\top.drop2G.viewmodel.js" />
     <Content Include="Scripts\kpi\workitem.controller.js" />
+    <Content Include="Scripts\kpi\workitem.details.controller.js" />
     <Content Include="Scripts\kpi\workitem.viewmodel.js" />
     <Content Include="Scripts\manage\index.viewmodel.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />

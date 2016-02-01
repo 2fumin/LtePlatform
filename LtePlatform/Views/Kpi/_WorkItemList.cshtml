@@ -1,7 +1,4 @@
 ﻿<div ng-app="myApp" ng-controller="kpi.workitem">
-    @{
-        Html.RenderPartial("_WorkItemInfrastructureDialog");
-    }
     <div class="row">
         <div class="col-md-7">
             <div class="panel panel-primary">
@@ -32,9 +29,10 @@
                         工单编号{{serialNumber}}信息
                     </h3>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body" ng-controller="kpi.workitem.details">
                     @{
                         Html.RenderPartial("_WorkItemDetailsTable");
+                        Html.RenderPartial("_WorkItemInfrastructureDialog");
                     }
                 </div>
             </div>
