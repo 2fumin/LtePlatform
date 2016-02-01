@@ -104,6 +104,48 @@
         $(".modal").modal("show");
     };
 
+    $scope.queryCellInfo = function () {
+        var eNodebId = $scope.currentView.eNodebId;
+        var sectorId = $scope.currentView.sectorId;
+        if (eNodebId > 10000) {
+            $scope.detailsView = "lteCell";
+            $http({
+                method: 'GET',
+                url: $scope.dataModel.cellUrl,
+                params: {
+                    'eNodebId': eNodebId,
+                    'localSector': sectorId
+                }
+            }).success(function (result) {
+                $scope.lteCellDetails = result;
+            });
+        } else {
+            $scope.detailsView = "cdmaCell";
+            $http({
+                method: 'GET',
+                url: $scope.dataModel.cdmaCellUrl,
+                params: {
+                    'btsId': eNodebId,
+                    'sectorId': sectorId
+                }
+            }).success(function (result) {
+                $scope.cdmaCellDetails = result;
+            });
+        }
+        $(".modal").modal("show");
+    };
+
+    $scope.showCharts = function () {
+        if ($scope.chartView === 'initial') {
+            $http.get($scope.dataModel.workItemUrl).success(function (result) {
+                showTypePieChart(result, "#type-chart");
+                showStatePieChart(result, "#state-chart");
+            });
+        }
+
+        $scope.chartView = "chart";
+    };
+
     $scope.$watch('currentPage', function(newValue, oldValue) {
         if (newValue === oldValue) {
             return;
@@ -163,44 +205,3 @@
     };
 
 });
-
-
-function WorkItemViewModel(app, dataModel) {
-    var self = this;
-
-    self.queryCellInfo = function() {
-        var eNodebId = self.currentView().eNodebId;
-        var sectorId = self.currentView().sectorId;
-        if (eNodebId > 10000) {
-            self.detailsView("lteCell");
-            sendRequest(app.dataModel.cellUrl, "GET", {
-                eNodebId: eNodebId,
-                localSector: sectorId
-            }, function(result) {
-                self.lteCellDetails(result);
-            });
-        } else {
-            self.detailsView("cdmaCell");
-            sendRequest(app.dataModel.cdmaCellUrl, "GET", {
-                btsId: eNodebId,
-                sectorId: sectorId
-            }, function(result) {
-                self.cdmaCellDetails(result);
-            });
-        }
-        $(".modal").modal("show");
-    };
-
-    self.showCharts = function () {
-        if (self.chartView() === 'initial') {
-            sendRequest(app.dataModel.workItemUrl, "GET", null, function(result) {
-                showTypePieChart(result, "#type-chart");
-                showStatePieChart(result, "#state-chart");
-            });
-        }
-
-        self.chartView("chart");
-    };
-
-    return self;
-}

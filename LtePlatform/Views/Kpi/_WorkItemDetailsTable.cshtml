@@ -8,18 +8,18 @@
     <tbody>
         <tr>
             <td>工单类型</td>
-            <td data-bind="text: workItemType"></td>
+            <td>{{currentView.workItemType}}</td>
         </tr>
         <tr>
             <td>工单子类型</td>
-            <td data-bind="text: workItemSubType"></td>
+            <td>{{currentView.workItemSubType}}</td>
         </tr>
         <tr>
             <td>基站编号</td>
             <td>
-                <span data-bind="text: eNodebId"></span>
-                <button class="btn btn-primary btn-xs" style="float: right" 
-                        data-bind="visible: eNodebId > 0, click: $root.workItemList().queryBtsInfo">
+                {{currentView.eNodebId}}
+                <button class="btn btn-primary btn-xs" style="float: right" ng-click="queryBtsInfo()"
+                        ng-if="eNodebId > 0">
                     基站信息
                 </button>
             </td>
@@ -27,9 +27,9 @@
         <tr>
             <td>扇区编号</td>
             <td>
-                <span data-bind="text: sectorId"></span>
-                <button class="btn btn-primary btn-xs" style="float: right" 
-                        data-bind="visible: eNodebId > 0, click: $root.workItemList().queryCellInfo">
+                {{currentView.sectorId}}
+                <button class="btn btn-primary btn-xs" style="float: right" ng-click="queryCellInfo()"
+                        ng-if="eNodebId > 0">
                     小区信息
                 </button>
             </td>
@@ -37,55 +37,53 @@
         <tr>
             <td>区域信息</td>
             <td>
-                <span data-bind="text: city"></span>
-                <span data-bind="text: district"></span>
-                <span data-bind="text: town"></span>
+                {{currentView.city}}
+                {{currentView.district}}
+                {{currentView.town}}
             </td>
         </tr>
         <tr>
             <td>派单时间</td>
-            <td data-bind="text: beginTime"></td>
+            <td>{{currentView.beginTime}}</td>
         </tr>
         <tr>
             <td>回单期限</td>
-            <td data-bind="text: deadline"></td>
+            <td>{{currentView.deadline}}</td>
         </tr>
         <tr>
             <td>重复信息</td>
             <td>
-                重复派单次数：
-                <span data-bind="text: repeatTimes"></span>
-                ；驳回次数：
-                <span data-bind="text: repeatTimes"></span>
+                重复派单次数：{{currentView.repeatTimes}}
+                ；驳回次数：{{currentView.repeatTimes}}
             </td>
         </tr>
         <tr>
             <td>责任人</td>
-            <td data-bind="text: staffName"></td>
+            <td>{{currentView.staffName}}</td>
         </tr>
         <tr>
             <td>反馈时间</td>
-            <td data-bind="text: feedbackTime"></td>
+            <td>{{currentView.feedbackTime}}</td>
         </tr>
         <tr>
             <td>完成时间</td>
-            <td data-bind="text: finishTime"></td>
+            <td>{{currentView.finishTime}}</td>
         </tr>
         <tr>
             <td>定位原因</td>
-            <td data-bind="text: workItemCause"></td>
+            <td>{{currentView.workItemCause}}</td>
         </tr>
         <tr>
             <td>工单状态</td>
-            <td data-bind="text: workItemState"></td>
+            <td>{{currentView.workItemState}}</td>
         </tr>
         <tr>
             <td>平台信息</td>
-            <td data-bind="text: comments"></td>
+            <td>{{currentView.comments}}</td>
         </tr>
         <tr>
             <td>反馈信息</td>
-            <td data-bind="text: feedbackContents"></td>
+            <td>{{currentView.feedbackContents}}</td>
         </tr>
     </tbody>
 </table>
