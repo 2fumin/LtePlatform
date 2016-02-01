@@ -12,6 +12,7 @@
         title: "干扰分析"
     };
     $scope.dataModel = new AppDataModel();
+    $scope.dataModel.initializeAuthorization();
     $scope.currentCell = {};
     $scope.interferenceCells = [];
 
@@ -50,6 +51,9 @@
             params: {
                 'cellId': cell.cellId,
                 'sectorId': cell.sectorId
+            },
+            headers: {
+                'Authorization': 'Bearer ' + $scope.dataModel.getAccessToken()
             }
         }).success(function () {
             $http({
@@ -60,6 +64,9 @@
                     'end': $scope.endDate.value,
                     'cellId': cell.cellId,
                     'sectorId': cell.sectorId
+                },
+                headers: {
+                    'Authorization': 'Bearer ' + $scope.dataModel.getAccessToken()
                 }
             }).success(function (result) {
                 $scope.interferenceCells = result;
