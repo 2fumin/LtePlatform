@@ -1,5 +1,6 @@
 ﻿using Abp.EntityFramework;
 using Lte.Evaluations.DataService;
+using Lte.Evaluations.DataService.Basic;
 using Lte.Evaluations.DataService.College;
 using Lte.Evaluations.DataService.Dump;
 using Lte.Parameters.Abstract;

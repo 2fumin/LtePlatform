@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
 using Lte.Evaluations.DataService;
+using Lte.Evaluations.DataService.Basic;
 using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.ViewModels;
+using Lte.Evaluations.ViewModels.Basic;
 using Lte.Evaluations.ViewModels.Precise;
 using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.Basic;
@@ -41,6 +43,17 @@ namespace LtePlatform.Controllers.Parameters
         {
             var item = _service.GetCell(eNodebId, sectorId);
             return item == null ? (IHttpActionResult) BadRequest("The cell cannot be found!") : Ok(item);
+        }
+
+        [HttpGet]
+        [ApiDoc("给定基站编号和扇区编号、邻区PCI查询LTE可能的邻区")]
+        [ApiParameterDoc("eNodebId", "基站编号")]
+        [ApiParameterDoc("sectorId", "扇区编号")]
+        [ApiParameterDoc("pci", "邻区PCI")]
+        [ApiResponse("LTE可能的邻区")]
+        public IEnumerable<CellView> Get(int eNodebId, byte sectorId, short pci)
+        {
+            return _service.GetNearbyCellsWithPci(eNodebId, sectorId, pci);
         }
 
         [HttpGet]

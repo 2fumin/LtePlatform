@@ -3,12 +3,12 @@ using System.Linq;
 using AutoMapper;
 using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.ViewModels;
+using Lte.Evaluations.ViewModels.Basic;
 using Lte.Evaluations.ViewModels.Precise;
 using Lte.Parameters.Abstract;
-using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.Basic;
 
-namespace Lte.Evaluations.DataService
+namespace Lte.Evaluations.DataService.Basic
 {
     public class CellService
     {
@@ -30,6 +30,15 @@ namespace Lte.Evaluations.DataService
         public IEnumerable<Cell> GetCells(double west, double east, double south, double north)
         {
             return _repository.GetAllList(west, east, south, north);
+        }
+
+        public IEnumerable<CellView> GetNearbyCellsWithPci(int eNodebId, byte sectorId, short pci)
+        {
+            var cell = _repository.GetBySectorId(eNodebId, sectorId);
+            if (cell==null) return new List<CellView>();
+            return
+                GetCells(cell.Longtitute - 0.2, cell.Longtitute + 0.2, cell.Lattitute - 0.2, cell.Lattitute + 0.2)
+                    .Where(x => x.Pci == pci).Select(x => CellView.ConstructView(x, _eNodebRepository));
         }
 
         public List<byte> GetSectorIds(string eNodebName)

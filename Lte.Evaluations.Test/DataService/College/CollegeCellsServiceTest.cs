@@ -5,6 +5,7 @@ using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.Test.MockItems;
 using Lte.Evaluations.Test.TestService;
 using Lte.Evaluations.ViewModels;
+using Lte.Evaluations.ViewModels.Basic;
 using Lte.Parameters.Abstract;
 using Moq;
 using NUnit.Framework;

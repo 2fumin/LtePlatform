@@ -15,6 +15,7 @@
                 <th>6dB干扰数</th>
                 <th>0dB干扰数</th>
                 <th>总干扰水平</th>
+                <th>操作</th>
             </tr>
             </thead>
             <tbody>
@@ -26,6 +27,11 @@
                 <td>{{cell.overInterferences6Db | number:1}}</td>
                 <td>{{cell.overInterferences10Db | number:1}}</td>
                 <td>{{cell.interferenceLevel | number:2}}</td>
+                <td>
+                    <button class="btn btn-sm btn-warning" ng-if="cell.neighborCellName==='未匹配小区'">
+                        匹配
+                    </button>
+                </td>
             </tr>
             </tbody>
         </table>

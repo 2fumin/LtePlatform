@@ -2,6 +2,7 @@
 using System.Web.Http;
 using Lte.Evaluations.DataService.College;
 using Lte.Evaluations.ViewModels;
+using Lte.Evaluations.ViewModels.Basic;
 using LtePlatform.Models;
 
 namespace LtePlatform.Controllers.College
