@@ -48,6 +48,18 @@
         $scope.currentCell = cell;
         $scope.interferenceCells = [];
         $scope.interferencePanelTitle = cell.eNodebName + "-" + cell.sectorId + "干扰小区列表";
+
+        $http({
+            method: 'GET',
+            url: $scope.dataModel.cellUrl,
+            params: {
+                'eNodebId': cell.cellId,
+                'sectorId': cell.sectorId
+            }
+        }).success(function(result) {
+            $scope.currentCell.longtitute = result.longtitute;
+            $scope.currentCell.lattitute = result.lattitute;
+        });
         
         $http({
             method: 'GET',
@@ -90,9 +102,14 @@
                 'pci': cell.destPci
             }
         }).success(function(result) {
-            $scope.pciNeighbors = result;
+            $scope.pciNeighbors = [];
             $scope.dialogTitle = $scope.currentCell.eNodebName + "-" + $scope.currentCell.sectorId + "的邻区PCI=" + cell.destPci + "的可能小区";
             $(".modal").modal("show");
+            for (var i = 0; i < result.length; i++) {
+                var neighbor = result[i];
+                neighbor.distance = getDistance($scope.currentCell.lattitute, $scope.currentCell.longtitute, neighbor.lattitute, neighbor.longtitute);
+                $scope.pciNeighbors.push(neighbor);
+            }
         });
     };
 

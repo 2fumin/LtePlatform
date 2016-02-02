@@ -12,16 +12,21 @@
                             TOP指标查询
                         </h3>
                     </div>
-                    <div class="panel-body" ng-controller="topcells">
+                    <div class="panel-body" ng-controller="rutrace.topcells">
                         <div class="form-group">
-                            <label class="col-md-2 control-label">{{beginDate.title}}</label>
-                            <div datetimepicker ng-model="beginDate.value"></div>
-                            <button class="btn btn-warning" ng-click="monitorAll()">全部监控</button>
+                            <label class="col-md-3 control-label">{{beginDate.title}}</label>
+                            <div datetimepicker ng-model="beginDate.value" class="col-md-7"></div>
+                            <div class="col-md-2">
+                                <button class="btn btn-warning" ng-click="monitorAll()">全部监控</button>
+                            </div>
+                            
                         </div>
                         <div class="form-group">
-                            <label class="col-md-2 control-label">{{endDate.title}}</label>
-                            <div datetimepicker ng-model="endDate.value"></div>
-                            <button class="btn btn-primary" ng-click="query()">查询</button>
+                            <label class="col-md-3 control-label">{{endDate.title}}</label>
+                            <div datetimepicker ng-model="endDate.value" class="col-md-7"></div>
+                            <div class="col-md-2">
+                                <button class="btn btn-primary" ng-click="query()">查询</button>
+                            </div>
                         </div>
                         @{
                             Html.RenderPartial("_TopPreciseTable");

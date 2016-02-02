@@ -1,5 +1,5 @@
 ﻿
-var GetDistance = function(p1Lat, p1Lng, p2Lat, p2Lng) {
+var getDistance = function(p1Lat, p1Lng, p2Lat, p2Lng) {
     var earthRadiusKm = 6378.137;
     var dLat1InRad = p1Lat * (Math.PI / 180);
     var dLong1InRad = p1Lng * (Math.PI / 180);
@@ -14,8 +14,8 @@ var GetDistance = function(p1Lat, p1Lng, p2Lat, p2Lng) {
 };
 
 var getLonLat = function(centre, x, y) {
-    var lat = centre.lat + y / GetDistance(centre.lat, centre.lng, centre.lat + 1, centre.lng);
-    var lng = centre.lng + x / GetDistance(centre.lat, centre.lng, centre.lat, centre.lng + 1);
+    var lat = centre.lat + y / getDistance(centre.lat, centre.lng, centre.lat + 1, centre.lng);
+    var lng = centre.lng + x / getDistance(centre.lat, centre.lng, centre.lat, centre.lng + 1);
     return new BMap.Point(lng, lat);
 };
 
