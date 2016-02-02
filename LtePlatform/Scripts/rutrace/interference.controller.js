@@ -16,6 +16,8 @@
     $scope.currentCell = {};
     $scope.interferenceCells = [];
     $scope.pciNeighbors = [];
+    $scope.distanceOrder = "distance";
+    $scope.interferenceLevelOrder = "interferenceLevel";
     $scope.interferencePanelTitle = "干扰小区列表";
 
     $('.form_date').datetimepicker({

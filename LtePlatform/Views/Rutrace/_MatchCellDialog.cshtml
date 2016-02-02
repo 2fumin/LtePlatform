@@ -10,7 +10,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="neighbor in pciNeighbors">
+        <tr ng-repeat="neighbor in pciNeighbors | orderBy: distanceOrder">
             <td>{{neighbor.eNodebName}}-{{neighbor.sectorId}}</td>
             <td>{{neighbor.azimuth}}</td>
             <td>{{neighbor.height}}</td>

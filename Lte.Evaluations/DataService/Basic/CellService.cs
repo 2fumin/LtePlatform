@@ -38,7 +38,8 @@ namespace Lte.Evaluations.DataService.Basic
             if (cell==null) return new List<CellView>();
             return
                 GetCells(cell.Longtitute - 0.2, cell.Longtitute + 0.2, cell.Lattitute - 0.2, cell.Lattitute + 0.2)
-                    .Where(x => x.Pci == pci).Select(x => CellView.ConstructView(x, _eNodebRepository));
+                    .Where(x => x.Pci == pci && sectorId < x.SectorId + 16 && x.SectorId < sectorId + 16)
+                    .Select(x => CellView.ConstructView(x, _eNodebRepository));
         }
 
         public List<byte> GetSectorIds(string eNodebName)
