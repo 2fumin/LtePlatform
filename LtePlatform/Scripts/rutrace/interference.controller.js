@@ -16,6 +16,7 @@
     $scope.currentCell = {};
     $scope.interferenceCells = [];
     $scope.pciNeighbors = [];
+    $scope.interferencePanelTitle = "干扰小区列表";
 
     $('.form_date').datetimepicker({
         language: 'zh-CN',
@@ -46,6 +47,8 @@
     $scope.showInterference = function(cell) {
         $scope.currentCell = cell;
         $scope.interferenceCells = [];
+        $scope.interferencePanelTitle = cell.eNodebName + "-" + cell.sectorId + "干扰小区列表";
+        
         $http({
             method: 'GET',
             url: $scope.dataModel.interferenceNeighborUrl,

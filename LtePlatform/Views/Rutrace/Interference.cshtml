@@ -5,27 +5,23 @@
             Html.RenderPartial("_RutraceMenu");
         }
         <div class="row">
-            <div class="col-md-6">
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            TOP指标查询
-                        </h3>
+            <div class="col-md-6" ng-controller="rutrace.topcells">
+                <div panel-primary panel-title="cellPanelTitle">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">{{beginDate.title}}</label>
+                        <div datetimepicker ng-model="beginDate.value" class="col-md-7"></div>
+                        <div class="col-md-2"></div>
                     </div>
-                    <div class="panel-body" ng-controller="topcells">
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">{{beginDate.title}}</label>
-                            <div datetimepicker ng-model="beginDate.value"></div>
-                        </div><br />
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">{{endDate.title}}</label>
-                            <div datetimepicker ng-model="endDate.value"></div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">{{endDate.title}}</label>
+                        <div datetimepicker ng-model="endDate.value" class="col-md-7"></div>
+                        <div class="col-md-2">
                             <button class="btn btn-primary" ng-click="query()">查询</button>
                         </div>
-                        @{
-                            Html.RenderPartial("_TopPreciseTable");
-                        }
                     </div>
+                    @{
+                        Html.RenderPartial("_TopPreciseTable");
+                    }
                 </div>
             </div>
             <div class="col-md-6">
@@ -54,4 +50,5 @@
     <script src="~/Scripts/rutrace/menu.controller.js"></script>
     <script src="~/Scripts/angular-ui/customize/directive.datetimepicker.js"></script>
     <script src="~/Scripts/angular-ui/customize/directive.dialog.js"></script>
+    <script src="~/Scripts/angular-ui/customize/directive.panel.js"></script>
 }

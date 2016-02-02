@@ -1,5 +1,7 @@
-﻿app.controller("topcells", function ($scope, $http) {
+﻿app.controller("rutrace.topcells", function ($scope, $http) {
     $scope.topCells = [];
+    $scope.cellPanelTitle = "TOP指标查询";
+
     $('.form_date').datetimepicker({
         language: 'zh-CN',
         weekStart: 1,
