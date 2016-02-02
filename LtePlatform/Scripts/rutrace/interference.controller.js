@@ -15,6 +15,7 @@
     $scope.dataModel.initializeAuthorization();
     $scope.currentCell = {};
     $scope.interferenceCells = [];
+    $scope.pciNeighbors = [];
 
     $('.form_date').datetimepicker({
         language: 'zh-CN',
@@ -75,6 +76,21 @@
     };
     $scope.showInfo = function(cell) {
         $scope.showInterference(cell);
+    };
+    $scope.match = function(cell) {
+        $http({
+            method: 'GET',
+            url: $scope.dataModel.cellUrl,
+            params: {
+                'eNodebId': $scope.currentCell.cellId,
+                'sectorId': $scope.currentCell.sectorId,
+                'pci': cell.destPci
+            }
+        }).success(function(result) {
+            $scope.pciNeighbors = result;
+            $scope.dialogTitle = $scope.currentCell.eNodebName + "-" + $scope.currentCell.sectorId + "的邻区PCI=" + cell.destPci + "的可能小区";
+            $(".modal").modal("show");
+        });
     };
 
     $scope.query();

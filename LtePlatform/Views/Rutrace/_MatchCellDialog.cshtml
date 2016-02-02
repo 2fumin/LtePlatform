@@ -1,0 +1,27 @@
+﻿<div dialog>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>小区名称</th>
+            <th>经度</th>
+            <th>纬度</th>
+            <th>方位角</th>
+            <th>天线挂高</th>
+            <th>室内外</th>
+            <th>与中心小区距离</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="neighbor in pciNeighbors">
+            <td>{{neighbor.eNodebName}}-{{neighbor.sectorId}}</td>
+            <td>{{neighbor.longtitute}}</td>
+            <td>{{neighbor.lattitute}}</td>
+            <td>{{neighbor.azimuth}}</td>
+            <td>{{neighbor.height}}</td>
+            <td>{{neighbor.indoor}}</td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
