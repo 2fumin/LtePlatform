@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="ExpectedErrorMessage.cs" />
     <Compile Include="LegacyTestConfiguration.cs" />
+    <Compile Include="MrMongoTestHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

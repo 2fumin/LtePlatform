@@ -60,11 +60,11 @@ namespace MongoDB.Driver.Builders
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
             if (values == null)
             {
-                throw new ArgumentNullException("values");
+                throw new ArgumentNullException(nameof(values));
             }
 
             var condition = new BsonDocument("$all", new BsonArray(values));
@@ -80,11 +80,11 @@ namespace MongoDB.Driver.Builders
         {
             if (queries == null)
             {
-                throw new ArgumentNullException("queries");
+                throw new ArgumentNullException(nameof(queries));
             }
             if (!queries.Any())
             {
-                throw new ArgumentOutOfRangeException("queries", "And cannot be called with zero queries.");
+                throw new ArgumentOutOfRangeException(nameof(queries), "And cannot be called with zero queries.");
             }
 
             var queryDocument = new BsonDocument();
@@ -92,7 +92,7 @@ namespace MongoDB.Driver.Builders
             {
                 if (query == null)
                 {
-                    throw new ArgumentOutOfRangeException("queries", "One of the queries is null.");
+                    throw new ArgumentOutOfRangeException(nameof(queries), "One of the queries is null.");
                 }
                 foreach (var clause in query.ToBsonDocument())
                 {
@@ -188,11 +188,11 @@ namespace MongoDB.Driver.Builders
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
             if (query == null)
             {
-                throw new ArgumentNullException("query");
+                throw new ArgumentNullException(nameof(query));
             }
 
             var condition = new BsonDocument("$elemMatch", query.ToBsonDocument());
@@ -209,11 +209,11 @@ namespace MongoDB.Driver.Builders
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
             if (value == null)
             {
-                throw new ArgumentNullException("value");
+                throw new ArgumentNullException(nameof(value));
             }
 
             return Query.Create(name, value);
@@ -228,7 +228,7 @@ namespace MongoDB.Driver.Builders
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
 
             return Query.Create(name, new BsonDocument("$exists", true));
@@ -246,11 +246,11 @@ namespace MongoDB.Driver.Builders
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
             if (geometry == null)
             {
-                throw new ArgumentNullException("geometry");
+                throw new ArgumentNullException(nameof(geometry));
             }
 
             var geoDoc = new BsonDocument("$geometry", BsonDocumentWrapper.Create(geometry));
@@ -269,11 +269,11 @@ namespace MongoDB.Driver.Builders
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
             if (value == null)
             {
-                throw new ArgumentNullException("value");
+                throw new ArgumentNullException(nameof(value));
             }
 
             return Query.Create(name, new BsonDocument("$gt", value));
@@ -289,11 +289,11 @@ namespace MongoDB.Driver.Builders
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
             if (value == null)
             {
-                throw new ArgumentNullException("value");
+                throw new ArgumentNullException(nameof(value));
             }
 
             return Query.Create(name, new BsonDocument("$gte", value));
@@ -309,11 +309,11 @@ namespace MongoDB.Driver.Builders
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
             if (values == null)
             {
-                throw new ArgumentNullException("values");
+                throw new ArgumentNullException(nameof(values));
             }
 
             return Query.Create(name, new BsonDocument("$in", new BsonArray(values)));
@@ -329,11 +329,11 @@ namespace MongoDB.Driver.Builders
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
             if (value == null)
             {
-                throw new ArgumentNullException("value");
+                throw new ArgumentNullException(nameof(value));
             }
 
             return Query.Create(name, new BsonDocument("$lt", value));
@@ -349,11 +349,11 @@ namespace MongoDB.Driver.Builders
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
             if (value == null)
             {
-                throw new ArgumentNullException("value");
+                throw new ArgumentNullException(nameof(value));
             }
 
             return Query.Create(name, new BsonDocument("$lte", value));
@@ -369,11 +369,11 @@ namespace MongoDB.Driver.Builders
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
             if (regex == null)
             {
-                throw new ArgumentNullException("regex");
+                throw new ArgumentNullException(nameof(regex));
             }
 
             return Query.Create(name, regex);
@@ -390,7 +390,7 @@ namespace MongoDB.Driver.Builders
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
 
             BsonDocument condition;
@@ -447,11 +447,11 @@ namespace MongoDB.Driver.Builders
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
             if (point == null)
             {
-                throw new ArgumentNullException("point");
+                throw new ArgumentNullException(nameof(point));
             }
 
             var op = spherical ? "$nearSphere" : "$near";
@@ -503,7 +503,7 @@ namespace MongoDB.Driver.Builders
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
 
             var op = spherical ? "$nearSphere" : "$near";
@@ -525,7 +525,7 @@ namespace MongoDB.Driver.Builders
         {
             if (query == null)
             {
-                throw new ArgumentNullException("query");
+                throw new ArgumentNullException(nameof(query));
             }
 
             return NegateQuery(query.ToBsonDocument());
@@ -541,11 +541,11 @@ namespace MongoDB.Driver.Builders
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
             if (value == null)
             {
-                throw new ArgumentNullException("value");
+                throw new ArgumentNullException(nameof(value));
             }
 
             return Query.Create(name, new BsonDocument("$ne", value));
@@ -560,7 +560,7 @@ namespace MongoDB.Driver.Builders
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
 
             return Query.Create(name, new BsonDocument("$exists", false));
@@ -576,11 +576,11 @@ namespace MongoDB.Driver.Builders
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
             if (values == null)
             {
-                throw new ArgumentNullException("values");
+                throw new ArgumentNullException(nameof(values));
             }
 
             return Query.Create(name, new BsonDocument("$nin", new BsonArray(values)));
@@ -595,11 +595,11 @@ namespace MongoDB.Driver.Builders
         {
             if (queries == null)
             {
-                throw new ArgumentNullException("queries");
+                throw new ArgumentNullException(nameof(queries));
             }
             if (!queries.Any())
             {
-                throw new ArgumentOutOfRangeException("queries", "Or cannot be called with zero queries.");
+                throw new ArgumentOutOfRangeException(nameof(queries), "Or cannot be called with zero queries.");
             }
 
             var queryArray = new BsonArray();
@@ -607,7 +607,7 @@ namespace MongoDB.Driver.Builders
             {
                 if (query == null)
                 {
-                    throw new ArgumentOutOfRangeException("queries", "One of the queries is null.");
+                    throw new ArgumentOutOfRangeException(nameof(queries), "One of the queries is null.");
                 }
 
                 // flatten out nested $or
@@ -664,7 +664,7 @@ namespace MongoDB.Driver.Builders
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
 
             var condition = new BsonDocument("$size", size);
@@ -681,7 +681,7 @@ namespace MongoDB.Driver.Builders
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
 
             var elementName = string.Format("{0}.{1}", name, size);
@@ -699,7 +699,7 @@ namespace MongoDB.Driver.Builders
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
 
             var elementName = string.Format("{0}.{1}", name, size - 1);
@@ -717,7 +717,7 @@ namespace MongoDB.Driver.Builders
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
 
             var elementName = string.Format("{0}.{1}", name, size - 1);
@@ -735,7 +735,7 @@ namespace MongoDB.Driver.Builders
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
 
             var elementName = string.Format("{0}.{1}", name, size);
@@ -753,7 +753,7 @@ namespace MongoDB.Driver.Builders
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
 
             var condition = new BsonDocument("$type", (int)type);
@@ -770,11 +770,11 @@ namespace MongoDB.Driver.Builders
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
             if (type == null)
             {
-                throw new ArgumentNullException("type");
+                throw new ArgumentNullException(nameof(type));
             }
 
             var condition = new BsonDocument("$type", type);
@@ -790,7 +790,7 @@ namespace MongoDB.Driver.Builders
         {
             if (javascript == null)
             {
-                throw new ArgumentNullException("javascript");
+                throw new ArgumentNullException(nameof(javascript));
             }
 
             return Query.Create("$where", javascript);
@@ -808,11 +808,11 @@ namespace MongoDB.Driver.Builders
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
             if (polygon == null)
             {
-                throw new ArgumentNullException("polygon");
+                throw new ArgumentNullException(nameof(polygon));
             }
 
             var geoDoc = new BsonDocument("$geometry", BsonDocumentWrapper.Create(polygon));
@@ -847,7 +847,7 @@ namespace MongoDB.Driver.Builders
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
 
             var shape = spherical ? "$centerSphere" : "$center";
@@ -865,16 +865,16 @@ namespace MongoDB.Driver.Builders
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
             if (points == null)
             {
-                throw new ArgumentNullException("points");
+                throw new ArgumentNullException(nameof(points));
             }
             if (points.GetLength(1) != 2)
             {
                 var message = string.Format("The second dimension of the points array must be of length 2, not {0}.", points.GetLength(1));
-                throw new ArgumentOutOfRangeException("points", message);
+                throw new ArgumentOutOfRangeException(nameof(points), message);
             }
 
             var arrayOfPoints = new BsonArray(points.GetLength(0));
@@ -900,7 +900,7 @@ namespace MongoDB.Driver.Builders
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
 
             var condition = new BsonDocument("$within", new BsonDocument("$box", new BsonArray { new BsonArray { lowerLeftX, lowerLeftY }, new BsonArray { upperRightX, upperRightY } }));
@@ -928,7 +928,7 @@ namespace MongoDB.Driver.Builders
         {
             if (searchString == null)
             {
-                throw new ArgumentNullException("searchString");
+                throw new ArgumentNullException(nameof(searchString));
             }
             var options = new TextSearchOptions { Language = language };
             return Text(searchString, options);
@@ -945,7 +945,7 @@ namespace MongoDB.Driver.Builders
         {
             if (options == null)
             {
-                throw new ArgumentNullException("options");
+                throw new ArgumentNullException(nameof(options));
             }
             var condition = new BsonDocument
             {
@@ -1747,11 +1747,11 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
             if (values == null)
             {
-                throw new ArgumentNullException("values");
+                throw new ArgumentNullException(nameof(values));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -1790,7 +1790,7 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -1807,7 +1807,7 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -1824,7 +1824,7 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -1841,7 +1841,7 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -1859,11 +1859,11 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
             if (elementQueryBuilderFunction == null)
             {
-                throw new ArgumentNullException("elementQueryBuilderFunction");
+                throw new ArgumentNullException(nameof(elementQueryBuilderFunction));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -1884,7 +1884,7 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -1903,7 +1903,7 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -1922,7 +1922,7 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -1942,11 +1942,11 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
             if (geometry == null)
             {
-                throw new ArgumentNullException("geometry");
+                throw new ArgumentNullException(nameof(geometry));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -1964,7 +1964,7 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -1983,7 +1983,7 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -2003,7 +2003,7 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -2022,7 +2022,7 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -2042,11 +2042,11 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
             if (values == null)
             {
-                throw new ArgumentNullException("values");
+                throw new ArgumentNullException(nameof(values));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -2065,11 +2065,11 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
             if (values == null)
             {
-                throw new ArgumentNullException("values");
+                throw new ArgumentNullException(nameof(values));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -2089,7 +2089,7 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -2108,7 +2108,7 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -2128,7 +2128,7 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -2147,7 +2147,7 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -2168,11 +2168,11 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
             if (regex == null)
             {
-                throw new ArgumentNullException("regex");
+                throw new ArgumentNullException(nameof(regex));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -2191,11 +2191,11 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
             if (regex == null)
             {
-                throw new ArgumentNullException("regex");
+                throw new ArgumentNullException(nameof(regex));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -2213,7 +2213,7 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -2231,7 +2231,7 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -2251,11 +2251,11 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
             if (point == null)
             {
-                throw new ArgumentNullException("point");
+                throw new ArgumentNullException(nameof(point));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -2276,11 +2276,11 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
             if (point == null)
             {
-                throw new ArgumentNullException("point");
+                throw new ArgumentNullException(nameof(point));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -2302,11 +2302,11 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
             if (point == null)
             {
-                throw new ArgumentNullException("point");
+                throw new ArgumentNullException(nameof(point));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -2354,7 +2354,7 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -2382,7 +2382,7 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -2401,7 +2401,7 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -2420,7 +2420,7 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -2438,11 +2438,11 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
             if (values == null)
             {
-                throw new ArgumentNullException("values");
+                throw new ArgumentNullException(nameof(values));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -2461,11 +2461,11 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
             if (values == null)
             {
-                throw new ArgumentNullException("values");
+                throw new ArgumentNullException(nameof(values));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -2509,7 +2509,7 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -2527,7 +2527,7 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -2545,7 +2545,7 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -2563,7 +2563,7 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -2581,7 +2581,7 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -2597,7 +2597,7 @@ namespace MongoDB.Driver.Builders
         {
             if (expression == null)
             {
-                throw new ArgumentNullException("expression");
+                throw new ArgumentNullException(nameof(expression));
             }
 
             var evaluatedExpression = PartialEvaluator.Evaluate(expression.Body);
@@ -2617,11 +2617,11 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
             if (polygon == null)
             {
-                throw new ArgumentNullException("polygon");
+                throw new ArgumentNullException(nameof(polygon));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -2656,7 +2656,7 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -2674,7 +2674,7 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);
@@ -2695,7 +2695,7 @@ namespace MongoDB.Driver.Builders
         {
             if (memberExpression == null)
             {
-                throw new ArgumentNullException("memberExpression");
+                throw new ArgumentNullException(nameof(memberExpression));
             }
 
             var serializationInfo = _serializationInfoHelper.GetSerializationInfo(memberExpression);

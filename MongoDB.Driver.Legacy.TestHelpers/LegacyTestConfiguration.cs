@@ -27,7 +27,6 @@ namespace MongoDB.Driver.Tests
         private static MongoServer __server;
         private static MongoDatabase __database;
         private static MongoCollection<BsonDocument> __collection;
-        private static bool __isReplicaSet;
 
         // static constructor
         static LegacyTestConfiguration()
@@ -44,7 +43,7 @@ namespace MongoDB.Driver.Tests
             BsonValue setName = null;
             if (isMasterResult.TryGetValue("setName", out setName))
             {
-                __isReplicaSet = true;
+                IsReplicaSet = true;
             }
         }
 
@@ -52,34 +51,22 @@ namespace MongoDB.Driver.Tests
         /// <summary>
         /// Gets the test collection.
         /// </summary>
-        public static MongoCollection<BsonDocument> Collection
-        {
-            get { return __collection; }
-        }
+        public static MongoCollection<BsonDocument> Collection => __collection;
 
         /// <summary>
         /// Gets the test database.
         /// </summary>
-        public static MongoDatabase Database
-        {
-            get { return __database; }
-        }
+        public static MongoDatabase Database => __database;
 
         /// <summary>
         /// Gets the test server.
         /// </summary>
-        public static MongoServer Server
-        {
-            get { return __server; }
-        }
+        public static MongoServer Server => __server;
 
         /// <summary>
         /// Gets whether the tage MongoDB is a replica set.
         /// </summary>
-        public static bool IsReplicaSet
-        {
-            get { return __isReplicaSet; }
-        }
+        public static bool IsReplicaSet { get; }
 
         // public static methods
         /// <summary>
