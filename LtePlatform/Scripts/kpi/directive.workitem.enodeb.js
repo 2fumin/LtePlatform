@@ -22,7 +22,7 @@
                         </tr>\
                         <tr>\
                             <td>基站地址</td>\
-                            <td colspan="5">>{{eNodebDetails.address}}</td>\
+                            <td colspan="5">{{eNodebDetails.address}}</td>\
                         </tr>\
                     </tbody>\
         </table>'
