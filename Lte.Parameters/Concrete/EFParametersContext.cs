@@ -3,6 +3,7 @@ using Abp.EntityFramework;
 using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.Basic;
 using Lte.Parameters.Entities.College;
+using Lte.Parameters.Entities.Mr;
 using Lte.Parameters.Entities.Work;
 
 namespace Lte.Parameters.Concrete

@@ -5,7 +5,7 @@ using Abp.EntityFramework;
 using Abp.EntityFramework.Repositories;
 using EntityFramework.Extensions;
 using Lte.Parameters.Abstract;
-using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Mr;
 
 namespace Lte.Parameters.Concrete
 {

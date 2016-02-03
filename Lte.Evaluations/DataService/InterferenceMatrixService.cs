@@ -10,6 +10,7 @@ using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.Basic;
 using Lte.Parameters.Entities.ExcelCsv;
+using Lte.Parameters.Entities.Mr;
 
 namespace Lte.Evaluations.DataService
 {

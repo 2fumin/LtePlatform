@@ -180,8 +180,8 @@
     <Compile Include="Entities\InfrastructureDefs.cs" />
     <Compile Include="Entities\InfrastructureInfo.cs" />
     <Compile Include="Entities\ExcelCsv\LteCellRelationCsv.cs" />
-    <Compile Include="Entities\InterferenceMatrixPci.cs" />
-    <Compile Include="Entities\InterferenceMatrixStat.cs" />
+    <Compile Include="Entities\Mr\InterferenceMatrixPci.cs" />
+    <Compile Include="Entities\Mr\InterferenceMatrixStat.cs" />
     <Compile Include="Entities\LteNeighborCell.cs" />
     <Compile Include="Entities\NearestPciCell.cs" />
     <Compile Include="Entities\OptimizeRegion.cs" />
@@ -247,6 +247,10 @@
     <ProjectReference Include="..\Lte.Domain\Lte.Domain.csproj">
       <Project>{adeef82d-6389-47c4-8f7c-d7f85c01d64e}</Project>
       <Name>Lte.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MongoDB.Bson\MongoDB.Bson.csproj">
+      <Project>{0e9a3a2a-49cd-4f6c-847c-dc79b4b65ce6}</Project>
+      <Name>MongoDB.Bson</Name>
     </ProjectReference>
     <ProjectReference Include="..\Moq\Moq.csproj">
       <Project>{6f20d7bc-4870-465f-a10a-b3100b4a0254}</Project>
