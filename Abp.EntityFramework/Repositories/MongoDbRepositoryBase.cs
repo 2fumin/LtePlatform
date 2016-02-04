@@ -35,7 +35,9 @@ namespace Abp.MongoDb.Repositories
 
         protected MongoDatabase Database => _databaseProvider.Database;
 
-        protected MongoCollection<TEntity> Collection => _databaseProvider.Database.GetCollection<TEntity>(typeof(TEntity).Name);
+        protected string CollectionName { get; set; } = typeof (TEntity).Name;
+
+        protected MongoCollection<TEntity> Collection => _databaseProvider.Database.GetCollection<TEntity>(CollectionName);
 
         public MongoDbRepositoryBase(IMongoDatabaseProvider databaseProvider)
         {

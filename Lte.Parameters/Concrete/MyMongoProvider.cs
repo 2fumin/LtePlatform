@@ -15,13 +15,11 @@ namespace Lte.Parameters.Concrete
 
         public MyMongoProvider(string databaseString)
         {
-            if (_database == null)
-            {
+            if (_database != null) return;
 #pragma warning disable 618
-                var server = Client.GetServer();
+            var server = Client.GetServer();
 #pragma warning restore 618
-                _database = server.GetDatabase(databaseString);
-            }
+            _database = server.GetDatabase(databaseString);
         }
 
         public MongoDatabase Database => _database;
