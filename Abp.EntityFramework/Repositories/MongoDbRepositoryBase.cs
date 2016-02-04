@@ -33,18 +33,9 @@ namespace Abp.MongoDb.Repositories
     {
         private readonly IMongoDatabaseProvider _databaseProvider;
 
-        protected MongoDatabase Database
-        {
-            get { return _databaseProvider.Database; }
-        }
+        protected MongoDatabase Database => _databaseProvider.Database;
 
-        protected MongoCollection<TEntity> Collection
-        {
-            get
-            {
-                return _databaseProvider.Database.GetCollection<TEntity>(typeof(TEntity).Name);
-            }
-        }
+        protected MongoCollection<TEntity> Collection => _databaseProvider.Database.GetCollection<TEntity>(typeof(TEntity).Name);
 
         public MongoDbRepositoryBase(IMongoDatabaseProvider databaseProvider)
         {

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MongoDB.Driver.Legacy.TestHelpers;
 using NUnit.Framework;
+using Shouldly;
 
 namespace MongoDB.Driver.Legacy.Tests.Samples
 {
@@ -26,6 +27,20 @@ namespace MongoDB.Driver.Legacy.Tests.Samples
             Assert.AreEqual(results[0]["OVERCOVER_COFREQ_10DB"].AsDouble, 2);
             Assert.AreEqual(results[0]["OVERCOVER_COFREQ_6DB"].AsInt32, 2);
             Assert.AreEqual(results[0]["MOD6_COUNT"].AsInt32, 0);
+        }
+
+        [Test]
+        public async void Test_GetMongoInfos_First()
+        {
+            var results = await _helper.GetMongoInfos("522409_304_241_1825");
+            Assert.IsNotNull(results);
+            Assert.AreEqual(results.Count, 274);
+            Assert.AreEqual((double)results[0].INTERF_ONLY_COFREQ, 11.88, 1E-7);
+            results[0].current_date.ShouldBe("201512301530");
+            results[0].MOD3_COUNT.ShouldBe(2);
+            results[0].MOD6_COUNT.ShouldBe(0);
+            results[0].OVERCOVER_COFREQ_6DB.ShouldBe(2);
+            results[0].OVERCOVER_COFREQ_10DB.ShouldBe(2);
         }
 
         [Test]

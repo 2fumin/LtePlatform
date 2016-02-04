@@ -180,6 +180,7 @@
     <Compile Include="Entities\InfrastructureDefs.cs" />
     <Compile Include="Entities\InfrastructureInfo.cs" />
     <Compile Include="Entities\ExcelCsv\LteCellRelationCsv.cs" />
+    <Compile Include="Entities\Mr\InterferenceMatrixMongo.cs" />
     <Compile Include="Entities\Mr\InterferenceMatrixPci.cs" />
     <Compile Include="Entities\Mr\InterferenceMatrixStat.cs" />
     <Compile Include="Entities\LteNeighborCell.cs" />
