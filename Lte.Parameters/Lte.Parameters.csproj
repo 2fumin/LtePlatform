@@ -150,6 +150,8 @@
     <Compile Include="Concrete\MasterCsvFileInfoRepository.cs" />
     <Compile Include="Concrete\MasterRasterInfoRepository.cs" />
     <Compile Include="Concrete\MasterTestContext.cs" />
+    <Compile Include="Concrete\Mr\InterferenceMongoRepository.cs" />
+    <Compile Include="Concrete\MyMongoProvider.cs" />
     <Compile Include="Entities\AlarmStat.cs" />
     <Compile Include="Entities\ExcelCsv\AlarmStatCsv.cs" />
     <Compile Include="Entities\ExcelCsv\AlarmStatHuawei.cs" />
@@ -253,6 +255,18 @@
     <ProjectReference Include="..\MongoDB.Bson\MongoDB.Bson.csproj">
       <Project>{0e9a3a2a-49cd-4f6c-847c-dc79b4b65ce6}</Project>
       <Name>MongoDB.Bson</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MongoDB.Driver.Core\MongoDB.Driver.Core.csproj">
+      <Project>{da56482a-5d8f-41e0-85e6-1f22b310f91b}</Project>
+      <Name>MongoDB.Driver.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MongoDB.Driver.Legacy\MongoDB.Driver.Legacy.csproj">
+      <Project>{97962946-aa1e-4308-b7a7-6ad92bdbc358}</Project>
+      <Name>MongoDB.Driver.Legacy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MongoDB.Driver\MongoDB.Driver.csproj">
+      <Project>{ae5166cd-76b0-4911-bd80-ced9521f37a1}</Project>
+      <Name>MongoDB.Driver</Name>
     </ProjectReference>
     <ProjectReference Include="..\Moq\Moq.csproj">
       <Project>{6f20d7bc-4870-465f-a10a-b3100b4a0254}</Project>

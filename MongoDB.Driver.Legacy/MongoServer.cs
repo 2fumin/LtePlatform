@@ -64,15 +64,14 @@ namespace MongoDB.Driver
         private readonly static Dictionary<MongoServerSettings, MongoServer> __servers = new Dictionary<MongoServerSettings, MongoServer>();
         private static int __nextSequentialId;
         private static int __maxServerCount = 100;
-        private static HashSet<char> __invalidDatabaseNameChars;
+        private static readonly HashSet<char> __invalidDatabaseNameChars;
         [ThreadStatic]
         private static Request __threadStaticRequest;
 
         // private fields
-        private ICluster _cluster;
+        private readonly ICluster _cluster;
         private readonly object _serverLock = new object();
         private readonly MongoServerSettings _settings;
-        private readonly int _sequentialId;
         private readonly List<MongoServerInstance> _serverInstances = new List<MongoServerInstance>();
 
         // static constructor
@@ -94,7 +93,7 @@ namespace MongoDB.Driver
         public MongoServer(MongoServerSettings settings)
         {
             _settings = settings.FrozenCopy();
-            _sequentialId = Interlocked.Increment(ref __nextSequentialId);
+            SequentialId = Interlocked.Increment(ref __nextSequentialId);
             // Console.WriteLine("MongoServer[{0}]: {1}", sequentialId, settings);
 
             _cluster = ClusterRegistry.Instance.GetOrCreateCluster(_settings.ToClusterKey());
@@ -119,7 +118,8 @@ namespace MongoDB.Driver
                 {
                     if (__servers.Count >= __maxServerCount)
                     {
-                        var message = string.Format("MongoServer.Create has already created {0} servers which is the maximum number of servers allowed.", __maxServerCount);
+                        var message =
+                            $"MongoServer.Create has already created {__maxServerCount} servers which is the maximum number of servers allowed.";
                         throw new MongoException(message);
                     }
                     server = new MongoServer(settings);
@@ -186,21 +186,12 @@ namespace MongoDB.Driver
         /// <summary>
         /// Gets the build info of the server.
         /// </summary>
-        public virtual MongoServerBuildInfo BuildInfo
-        {
-            get
-            {
-                return Primary.BuildInfo;
-            }
-        }
+        public virtual MongoServerBuildInfo BuildInfo => Primary.BuildInfo;
 
         /// <summary>
         /// Gets the cluster.
         /// </summary>
-        internal ICluster Cluster
-        {
-            get { return _cluster; }
-        }
+        internal ICluster Cluster => _cluster;
 
         /// <summary>
         /// Gets the one and only instance for this server.
@@ -238,13 +229,7 @@ namespace MongoDB.Driver
         /// Gets the passive instances.
         /// </summary>
         [Obsolete("Passives are treated the same as secondaries.")]
-        public virtual MongoServerInstance[] Passives
-        {
-            get
-            {
-                return new MongoServerInstance[0];
-            }
-        }
+        public virtual MongoServerInstance[] Passives => new MongoServerInstance[0];
 
         /// <summary>
         /// Gets the primary instance (null if there is no primary).
@@ -260,9 +245,9 @@ namespace MongoDB.Driver
                         case ClusterType.Standalone:
                             return _serverInstances.First();
                         case ClusterType.ReplicaSet:
-                            return _serverInstances.Where(i => i.IsPrimary).SingleOrDefault();
+                            return _serverInstances.SingleOrDefault(i => i.IsPrimary);
                         case ClusterType.Sharded:
-                            return _serverInstances.Where(i => i.State == MongoServerState.Connected).FirstOrDefault();
+                            return _serverInstances.FirstOrDefault(i => i.State == MongoServerState.Connected);
                         default:
                             return null;
                     }
@@ -284,16 +269,8 @@ namespace MongoDB.Driver
                 }
 
                 var primary = _cluster.Description.Servers.FirstOrDefault(s => s.Type == ServerType.ReplicaSetPrimary);
-                if (primary != null)
-                {
-                    var replicaSetConfig = primary.ReplicaSetConfig;
-                    if (replicaSetConfig != null)
-                    {
-                        return replicaSetConfig.Name;
-                    }
-                }
-
-                return null;
+                var replicaSetConfig = primary?.ReplicaSetConfig;
+                return replicaSetConfig?.Name;
             }
         }
 
@@ -305,14 +282,7 @@ namespace MongoDB.Driver
             get
             {
                 var request = __threadStaticRequest;
-                if (request != null)
-                {
-                    return request.ConnectionId;
-                }
-                else
-                {
-                    return null;
-                }
+                return request?.ConnectionId;
             }
         }
 
@@ -324,14 +294,7 @@ namespace MongoDB.Driver
             get
             {
                 var request = __threadStaticRequest;
-                if (request != null)
-                {
-                    return request.ServerInstance;
-                }
-                else
-                {
-                    return null;
-                }
+                return request?.ServerInstance;
             }
         }
 
@@ -343,14 +306,7 @@ namespace MongoDB.Driver
             get
             {
                 var request = __threadStaticRequest;
-                if (request != null)
-                {
-                    return request.NestingLevel;
-                }
-                else
-                {
-                    return 0;
-                }
+                return request?.NestingLevel ?? 0;
             }
         }
 
@@ -371,18 +327,12 @@ namespace MongoDB.Driver
         /// <summary>
         /// Gets the unique sequential Id for this server.
         /// </summary>
-        public virtual int SequentialId
-        {
-            get { return _sequentialId; }
-        }
+        public virtual int SequentialId { get; }
 
         /// <summary>
         /// Gets the settings for this server.
         /// </summary>
-        public virtual MongoServerSettings Settings
-        {
-            get { return _settings; }
-        }
+        public virtual MongoServerSettings Settings => _settings;
 
         /// <summary>
         /// Gets the current state of this server (as of the last operation, not updated until another operation is performed).
@@ -413,10 +363,7 @@ namespace MongoDB.Driver
         /// <param name="databaseName">The name of the database.</param>
         /// <returns>A new or existing instance of MongoDatabase.</returns>
         [Obsolete("Use GetDatabase instead.")]
-        public virtual MongoDatabase this[string databaseName]
-        {
-            get { return GetDatabase(databaseName); }
-        }
+        public virtual MongoDatabase this[string databaseName] => GetDatabase(databaseName);
 
         /// <summary>
         /// Gets a MongoDatabase instance representing a database on this server.
@@ -425,10 +372,7 @@ namespace MongoDB.Driver
         /// <param name="writeConcern">The write concern to use with this database.</param>
         /// <returns>A new or existing instance of MongoDatabase.</returns>
         [Obsolete("Use GetDatabase instead.")]
-        public virtual MongoDatabase this[string databaseName, WriteConcern writeConcern]
-        {
-            get { return GetDatabase(databaseName, writeConcern); }
-        }
+        public virtual MongoDatabase this[string databaseName, WriteConcern writeConcern] => GetDatabase(databaseName, writeConcern);
 
         // public static methods
         /// <summary>
@@ -590,7 +534,7 @@ namespace MongoDB.Driver
         {
             if (writeConcern == null)
             {
-                throw new ArgumentNullException("writeConcern");
+                throw new ArgumentNullException(nameof(writeConcern));
             }
             var databaseSettings = new MongoDatabaseSettings { WriteConcern = writeConcern };
             return GetDatabase(databaseName, databaseSettings);
@@ -606,11 +550,11 @@ namespace MongoDB.Driver
         {
             if (databaseName == null)
             {
-                throw new ArgumentNullException("databaseName");
+                throw new ArgumentNullException(nameof(databaseName));
             }
             if (databaseSettings == null)
             {
-                throw new ArgumentNullException("databaseSettings");
+                throw new ArgumentNullException(nameof(databaseSettings));
             }
             return new MongoDatabase(this, databaseName, databaseSettings);
         }
@@ -652,7 +596,7 @@ namespace MongoDB.Driver
 
             if (databaseName == null)
             {
-                throw new ArgumentNullException("databaseName");
+                throw new ArgumentNullException(nameof(databaseName));
             }
 
             if (databaseName == "")
@@ -673,14 +617,15 @@ namespace MongoDB.Driver
                 {
                     var bytes = new byte[] { (byte)((int)c >> 8), (byte)((int)c & 255) };
                     var hex = BsonUtils.ToHexString(bytes);
-                    message = string.Format("Database name '{0}' is not valid. The character 0x{1} '{2}' is not allowed in database names.", databaseName, hex, c);
+                    message =
+                        $"Database name '{databaseName}' is not valid. The character 0x{hex} '{c}' is not allowed in database names.";
                     return false;
                 }
             }
 
             if (Encoding.UTF8.GetBytes(databaseName).Length > 64)
             {
-                message = string.Format("Database name '{0}' exceeds 64 bytes (after encoding to UTF8).", databaseName);
+                message = $"Database name '{databaseName}' exceeds 64 bytes (after encoding to UTF8).";
                 return false;
             }
 
@@ -917,8 +862,8 @@ namespace MongoDB.Driver
             }
             else
             {
-                var message = string.Format("MongoServer does not support end points of type '{0}'.", endPoint.GetType().Name);
-                throw new ArgumentException(message, "endPoint");
+                var message = $"MongoServer does not support end points of type '{endPoint.GetType().Name}'.";
+                throw new ArgumentException(message, nameof(endPoint));
             }
         }
 
@@ -968,20 +913,11 @@ namespace MongoDB.Driver
             }
 
             // public properties
-            public IReadBindingHandle Binding
-            {
-                get { return _binding; }
-            }
+            public IReadBindingHandle Binding => _binding;
 
-            public ConnectionId ConnectionId
-            {
-                get { return _connectionId; }
-            }
+            public ConnectionId ConnectionId => _connectionId;
 
-            public MongoServerInstance ServerInstance
-            {
-                get { return _serverInstance; }
-            }
+            public MongoServerInstance ServerInstance => _serverInstance;
 
             public int NestingLevel
             {
@@ -989,16 +925,13 @@ namespace MongoDB.Driver
                 set { _nestingLevel = value; }
             }
 
-            public ServerDescription ServerDescription
-            {
-                get { return _serverDescription; }
-            }
+            public ServerDescription ServerDescription => _serverDescription;
         }
 
         private class RequestStartResult : IDisposable
         {
             // private fields
-            private MongoServer _server;
+            private readonly MongoServer _server;
 
             // constructors
             public RequestStartResult(MongoServer server)

@@ -52,20 +52,20 @@ namespace MongoDB.Driver
         {
             if (server == null)
             {
-                throw new ArgumentNullException("server");
+                throw new ArgumentNullException(nameof(server));
             }
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
             if (settings == null)
             {
-                throw new ArgumentNullException("settings");
+                throw new ArgumentNullException(nameof(settings));
             }
             string message;
             if (!server.IsDatabaseNameValid(name, out message))
             {
-                throw new ArgumentOutOfRangeException("name", message);
+                throw new ArgumentOutOfRangeException(nameof(name), message);
             }
 
             settings = settings.Clone();
@@ -95,34 +95,22 @@ namespace MongoDB.Driver
         /// Gets the default GridFS instance for this database. The default GridFS instance uses default GridFS
         /// settings. See also GetGridFS if you need to use GridFS with custom settings.
         /// </summary>
-        public virtual MongoGridFS GridFS
-        {
-            get { return GetGridFS(new MongoGridFSSettings()); }
-        }
+        public virtual MongoGridFS GridFS => GetGridFS(new MongoGridFSSettings());
 
         /// <summary>
         /// Gets the name of this database.
         /// </summary>
-        public virtual string Name
-        {
-            get { return _namespace.DatabaseName; }
-        }
+        public virtual string Name => _namespace.DatabaseName;
 
         /// <summary>
         /// Gets the server that contains this database.
         /// </summary>
-        public virtual MongoServer Server
-        {
-            get { return _server; }
-        }
+        public virtual MongoServer Server => _server;
 
         /// <summary>
         /// Gets the settings being used to access this database.
         /// </summary>
-        public virtual MongoDatabaseSettings Settings
-        {
-            get { return _settings; }
-        }
+        public virtual MongoDatabaseSettings Settings => _settings;
 
         // public indexers
         /// <summary>
@@ -132,10 +120,7 @@ namespace MongoDB.Driver
         /// <param name="collectionName">The name of the collection.</param>
         /// <returns>An instance of MongoCollection.</returns>
         [Obsolete("Use GetCollection instead.")]
-        public virtual MongoCollection<BsonDocument> this[string collectionName]
-        {
-            get { return GetCollection(collectionName); }
-        }
+        public virtual MongoCollection<BsonDocument> this[string collectionName] => GetCollection(collectionName);
 
         /// <summary>
         /// Gets a MongoCollection instance representing a collection on this database
@@ -145,10 +130,7 @@ namespace MongoDB.Driver
         /// <param name="writeConcern">The write concern to use when accessing this collection.</param>
         /// <returns>An instance of MongoCollection.</returns>
         [Obsolete("Use GetCollection instead.")]
-        public virtual MongoCollection<BsonDocument> this[string collectionName, WriteConcern writeConcern]
-        {
-            get { return GetCollection(collectionName, writeConcern); }
-        }
+        public virtual MongoCollection<BsonDocument> this[string collectionName, WriteConcern writeConcern] => GetCollection(collectionName, writeConcern);
 
         // public methods
         /// <summary>
@@ -199,7 +181,7 @@ namespace MongoDB.Driver
         {
             if (collectionName == null)
             {
-                throw new ArgumentNullException("collectionName");
+                throw new ArgumentNullException(nameof(collectionName));
             }
 
             var collectionNamespace = new CollectionNamespace(_namespace, collectionName);
@@ -340,8 +322,8 @@ namespace MongoDB.Driver
         /// <returns>The result of evaluating the code.</returns>
         public virtual BsonValue Eval(EvalArgs args)
         {
-            if (args == null) { throw new ArgumentNullException("args"); }
-            if (args.Code == null) { throw new ArgumentException("Code is null.", "args"); }
+            if (args == null) { throw new ArgumentNullException(nameof(args)); }
+            if (args.Code == null) { throw new ArgumentException("Code is null.", nameof(args)); }
 
             var operation = new EvalOperation(_namespace, args.Code, GetMessageEncoderSettings())
             {
@@ -635,7 +617,7 @@ namespace MongoDB.Driver
         {
             if (collectionName == null)
             {
-                throw new ArgumentNullException("collectionName");
+                throw new ArgumentNullException(nameof(collectionName));
             }
 
             if (collectionName == "")
@@ -705,16 +687,16 @@ namespace MongoDB.Driver
         {
             if (oldCollectionName == null)
             {
-                throw new ArgumentNullException("oldCollectionName");
+                throw new ArgumentNullException(nameof(oldCollectionName));
             }
             if (newCollectionName == null)
             {
-                throw new ArgumentNullException("newCollectionName");
+                throw new ArgumentNullException(nameof(newCollectionName));
             }
             string message;
             if (!IsCollectionNameValid(newCollectionName, out message))
             {
-                throw new ArgumentOutOfRangeException("newCollectionName", message);
+                throw new ArgumentOutOfRangeException(nameof(newCollectionName), message);
             }
 
             var oldCollectionNamespace = new CollectionNamespace(_namespace, oldCollectionName);

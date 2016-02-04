@@ -70,6 +70,8 @@ namespace LtePlatform
 
             ninjectKernel.Bind<IInterferenceMatrixRepository>().To<EFInterferenceMatrixRepository>();
 
+            ninjectKernel.Bind<IInterferenceMongoRepository>().To<InterferenceMongoRepository>();
+
             ninjectKernel.Bind<CdmaRegionStatService>().ToSelf();
 
             ninjectKernel.Bind<CollegeStatService>().ToSelf();
