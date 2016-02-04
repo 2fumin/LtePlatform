@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using Abp.EntityFramework.AutoMapper;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.Basic;
@@ -20,7 +21,7 @@ namespace Lte.Parameters.Concrete
                 where info == null
                 select stat)
             {
-                Insert(CdmaRegionStat.ConstructStat(stat));
+                Insert(stat.MapTo<CdmaRegionStat>());
                 count++;
             }
             return count;

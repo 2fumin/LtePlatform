@@ -1,9 +1,11 @@
 ﻿using System;
 using Abp.Domain.Entities;
+using Abp.EntityFramework.AutoMapper;
 using AutoMapper;
 
 namespace Lte.Parameters.Entities.Basic
 {
+    [AutoMapFrom(typeof(CdmaRegionStatExcel))]
     public class CdmaRegionStat : Entity
     {
         public string Region { get; set; }
@@ -77,10 +79,5 @@ namespace Lte.Parameters.Entities.Basic
         public int Utility3GDem { get; set; }
 
         public double Utility3GRate => Utility3GDem == 0 ? 0 : (double)Utility3GNum / Utility3GDem;
-
-        public static CdmaRegionStat ConstructStat(CdmaRegionStatExcel item)
-        {
-            return Mapper.Map<CdmaRegionStatExcel, CdmaRegionStat>(item);
-        }
     }
 }

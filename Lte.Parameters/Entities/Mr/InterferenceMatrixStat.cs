@@ -1,8 +1,10 @@
 ﻿using System;
 using Abp.Domain.Entities;
+using Abp.EntityFramework.AutoMapper;
 
 namespace Lte.Parameters.Entities.Mr
 {
+    [AutoMapFrom(typeof(InterferenceMatrixPci))]
     public class InterferenceMatrixStat : Entity
     {
         public DateTime RecordTime { get; set; }

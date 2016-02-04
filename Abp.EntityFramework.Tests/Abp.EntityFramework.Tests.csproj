@@ -80,6 +80,7 @@
     <Compile Include="AutoMapper\AutoMapping_Tests.cs" />
     <Compile Include="AutoMapper\BtsExcelMapperTest.cs" />
     <Compile Include="AutoMapper\BtsViewMapperTest.cs" />
+    <Compile Include="AutoMapper\CdmaRegionMapperTest.cs" />
     <Compile Include="AutoMapper\ENodebViewMapperTest.cs" />
     <Compile Include="AutoMapper\IndoorDistributionMapperTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

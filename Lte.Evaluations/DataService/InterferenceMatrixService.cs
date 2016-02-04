@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Abp.EntityFramework.AutoMapper;
 using AutoMapper;
 using Lte.Evaluations.MapperSerive;
 using Lte.Parameters.Abstract;
@@ -64,7 +65,7 @@ namespace Lte.Evaluations.DataService
                 };
             foreach (var matrixPci in pcis)
             {
-                var stat = Mapper.Map<InterferenceMatrixPci, InterferenceMatrixStat>(matrixPci.Info);
+                var stat = matrixPci.Info.MapTo<InterferenceMatrixStat>();
                 stat.RecordTime = time;
                 stat.SectorId = matrixPci.SectorId;
                 InterferenceMatrixStats.Push(stat);

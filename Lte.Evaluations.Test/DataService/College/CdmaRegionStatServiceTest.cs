@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Abp.EntityFramework.AutoMapper;
 using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.Test.DataService.Queries;
 using Lte.Evaluations.Test.MockItems;
 using Lte.Evaluations.Test.TestService;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Basic;
 using Lte.Parameters.MockOperations;
 using Moq;
 using NUnit.Framework;
@@ -28,7 +30,7 @@ namespace Lte.Evaluations.Test.DataService.College
             _statRepository.MockOperation();
             _regionRepository.MockOperation();
             KpiMapperService.MapCdmaRegionStat();
-            StatMapperService.MapCdmaRegionStat();
+            AutoMapperHelper.CreateMap(typeof(CdmaRegionStat));
         }
 
         [SetUp]

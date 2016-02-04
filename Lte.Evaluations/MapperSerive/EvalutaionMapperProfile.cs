@@ -3,7 +3,9 @@ using AutoMapper;
 using Lte.Evaluations.ViewModels;
 using Lte.Evaluations.ViewModels.Basic;
 using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Basic;
 using Lte.Parameters.Entities.ExcelCsv;
+using Lte.Parameters.Entities.Mr;
 using Lte.Parameters.MockOperations;
 
 namespace Lte.Evaluations.MapperSerive
@@ -18,7 +20,6 @@ namespace Lte.Evaluations.MapperSerive
             CoreMapperService.MapDtItems();
 
             AlarmMapperService.MapAlarms();
-            StatMapperService.MapCdmaRegionStat();
             StatMapperService.MapPreciseCoverage();
             StatMapperService.MapTopConnection3G();
             StatMapperService.MapTopDrop2G();
@@ -54,6 +55,8 @@ namespace Lte.Evaluations.MapperSerive
             AutoMapperHelper.CreateMap(typeof(IndoorDistributionExcel));
             AutoMapperHelper.CreateMap(typeof(BtsExcel));
             AutoMapperHelper.CreateMap(typeof(CellSectorIdPair));
+            AutoMapperHelper.CreateMap(typeof(CdmaRegionStat));
+            AutoMapperHelper.CreateMap(typeof(InterferenceMatrixStat));
         }
     }
 }
