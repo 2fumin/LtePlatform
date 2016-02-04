@@ -7,7 +7,7 @@ using EntityFramework.Extensions;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities.Mr;
 
-namespace Lte.Parameters.Concrete
+namespace Lte.Parameters.Concrete.Mr
 {
     public class EFInterferenceMatrixRepository : EfRepositoryBase<EFParametersContext, InterferenceMatrixStat>, IInterferenceMatrixRepository
     {

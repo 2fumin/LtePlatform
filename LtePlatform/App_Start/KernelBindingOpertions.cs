@@ -6,6 +6,7 @@ using Lte.Evaluations.DataService.Dump;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Abstract.College;
 using Lte.Parameters.Concrete;
+using Lte.Parameters.Concrete.Mr;
 using Ninject;
 
 namespace LtePlatform

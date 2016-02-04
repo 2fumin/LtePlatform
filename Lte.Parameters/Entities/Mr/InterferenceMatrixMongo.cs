@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Abp.Domain.Entities;
 using MongoDB.Bson;
 
 namespace Lte.Parameters.Entities.Mr
 {
-    public class InterferenceMatrixMongo
+    public class InterferenceMatrixMongo : IEntity<ObjectId>
     {
-        public ObjectId _id { get; set; }
+        public ObjectId Id { get; set; }
+        
+        public bool IsTransient()
+        {
+            return false;
+        }
 
         public double? INTERF_ONLY_COFREQ { get; set; }
 

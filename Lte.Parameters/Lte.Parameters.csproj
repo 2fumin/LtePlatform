@@ -111,6 +111,7 @@
     <Compile Include="Abstract\IIndoorDistributioinRepository.cs" />
     <Compile Include="Abstract\IInfrastructureRepository.cs" />
     <Compile Include="Abstract\IInterferenceMatrixRepository.cs" />
+    <Compile Include="Abstract\IInterferenceMongoRepository.cs" />
     <Compile Include="Abstract\ILteNeighborCellRepository.cs" />
     <Compile Include="Abstract\IPagingRepository.cs" />
     <Compile Include="Abstract\IPreciseCoverage4GRepository.cs" />
@@ -135,7 +136,7 @@
     <Compile Include="Concrete\EFENodebRepository.cs" />
     <Compile Include="Concrete\EFIndoorDistributionRepository.cs" />
     <Compile Include="Concrete\EFInfrastructureRepository.cs" />
-    <Compile Include="Concrete\EFInterferenceMatrixRepository.cs" />
+    <Compile Include="Concrete\Mr\EFInterferenceMatrixRepository.cs" />
     <Compile Include="Concrete\EFLteNeighborCellRepository.cs" />
     <Compile Include="Concrete\EFParametersContext.cs" />
     <Compile Include="Concrete\EFPreciseCoverage4GRepository.cs" />
