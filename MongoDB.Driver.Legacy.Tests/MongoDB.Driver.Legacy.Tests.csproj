@@ -163,6 +163,7 @@
     <Compile Include="Operations\CurrentOpUsingFindOperationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Samples\MagicDiscriminatorTests.cs" />
+    <Compile Include="Samples\MrMongoTests.cs" />
     <Compile Include="SystemProfileInfoTests.cs" />
   </ItemGroup>
   <ItemGroup>
