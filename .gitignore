@@ -114,3 +114,11 @@ uploads/
 /MongoDB.Bson.Tests/bin/Release
 /MongoDB.Bson.TestHelpers/bin/Release
 /MongoDB.Bson/bin/Release
+/Abp.EntityFramework/bin/Release
+/Abp.EntityFramework.Tests/bin/Release
+/Lte.Evaluations/bin/Release
+/Lte.Evaluations.Test/bin/Release
+/Lte.Parameters/bin/Release
+/Lte.Parameters.Test/bin/Release
+/LtePlatform/bin
+/LtePlatform.Tests/bin/Release
