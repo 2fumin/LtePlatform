@@ -37,5 +37,22 @@ namespace Lte.Parameters.Concrete.Mr
                     e => e.ENODEBID_PCI_NPCI_NFREQ == eNodebInfo && e.current_date == timeString);
             return Collection.FindOne(query);
         }
+
+        public List<InterferenceMatrixMongo> GetList(int eNodebId, short pci)
+        {
+            var query =
+                MongoDB.Driver.Builders.Query<InterferenceMatrixMongo>.Where(
+                    e => e.ENODEBID_PCI_NPCI_NFREQ.StartsWith(eNodebId + "_" + pci));
+            return Collection.Find(query).AsQueryable().ToList();
+        }
+
+        public List<InterferenceMatrixMongo> GetList(int eNodebId, short pci, DateTime time)
+        {
+            var timeString = time.ToString("yyyyMMddHHmm");
+            var query =
+                MongoDB.Driver.Builders.Query<InterferenceMatrixMongo>.Where(
+                    e => e.ENODEBID_PCI_NPCI_NFREQ.StartsWith(eNodebId + "_" + pci) && e.current_date == timeString);
+            return Collection.Find(query).AsQueryable().ToList();
+        }
     }
 }

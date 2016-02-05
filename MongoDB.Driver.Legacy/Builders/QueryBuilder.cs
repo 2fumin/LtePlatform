@@ -407,19 +407,6 @@ namespace MongoDB.Driver.Builders
         }
 
         /// <summary>
-        /// Tests that the value of the named element is near a point (see $near).
-        /// </summary>
-        /// <typeparam name="TCoordinates">The type of the coordinates.</typeparam>
-        /// <param name="name">The name of the element to test.</param>
-        /// <param name="point">The point.</param>
-        /// <returns>An IMongoQuery.</returns>
-        public static IMongoQuery Near<TCoordinates>(string name, GeoJsonPoint<TCoordinates> point)
-            where TCoordinates : GeoJsonCoordinates
-        {
-            return Near(name, point, double.MaxValue);
-        }
-
-        /// <summary>
         /// Tests that the value of the named element is near some location (see $near).
         /// </summary>
         /// <typeparam name="TCoordinates">The type of the coordinates.</typeparam>
@@ -427,7 +414,7 @@ namespace MongoDB.Driver.Builders
         /// <param name="point">The point.</param>
         /// <param name="maxDistance">The max distance.</param>
         /// <returns>An IMongoQuery.</returns>
-        public static IMongoQuery Near<TCoordinates>(string name, GeoJsonPoint<TCoordinates> point, double maxDistance)
+        public static IMongoQuery Near<TCoordinates>(string name, GeoJsonPoint<TCoordinates> point, double maxDistance = double.MaxValue)
             where TCoordinates : GeoJsonCoordinates
         {
             return Near(name, point, maxDistance, false);
@@ -471,21 +458,9 @@ namespace MongoDB.Driver.Builders
         /// <param name="name">The name of the element to test.</param>
         /// <param name="x">The x value of the origin.</param>
         /// <param name="y">The y value of the origin.</param>
-        /// <returns>An IMongoQuery.</returns>
-        public static IMongoQuery Near(string name, double x, double y)
-        {
-            return Near(name, x, y, double.MaxValue);
-        }
-
-        /// <summary>
-        /// Tests that the value of the named element is near some location (see $near).
-        /// </summary>
-        /// <param name="name">The name of the element to test.</param>
-        /// <param name="x">The x value of the origin.</param>
-        /// <param name="y">The y value of the origin.</param>
         /// <param name="maxDistance">The max distance.</param>
         /// <returns>An IMongoQuery.</returns>
-        public static IMongoQuery Near(string name, double x, double y, double maxDistance)
+        public static IMongoQuery Near(string name, double x, double y, double maxDistance = double.MaxValue)
         {
             return Near(name, x, y, maxDistance, false);
         }
@@ -684,7 +659,7 @@ namespace MongoDB.Driver.Builders
                 throw new ArgumentNullException(nameof(name));
             }
 
-            var elementName = string.Format("{0}.{1}", name, size);
+            var elementName = $"{name}.{size}";
             var condition = new BsonDocument("$exists", true);
             return Query.Create(elementName, condition);
         }
@@ -702,7 +677,7 @@ namespace MongoDB.Driver.Builders
                 throw new ArgumentNullException(nameof(name));
             }
 
-            var elementName = string.Format("{0}.{1}", name, size - 1);
+            var elementName = $"{name}.{size - 1}";
             var condition = new BsonDocument("$exists", true);
             return Query.Create(elementName, condition);
         }
@@ -720,7 +695,7 @@ namespace MongoDB.Driver.Builders
                 throw new ArgumentNullException(nameof(name));
             }
 
-            var elementName = string.Format("{0}.{1}", name, size - 1);
+            var elementName = $"{name}.{size - 1}";
             var condition = new BsonDocument("$exists", false);
             return Query.Create(elementName, condition);
         }
@@ -738,7 +713,7 @@ namespace MongoDB.Driver.Builders
                 throw new ArgumentNullException(nameof(name));
             }
 
-            var elementName = string.Format("{0}.{1}", name, size);
+            var elementName = $"{name}.{size}";
             var condition = new BsonDocument("$exists", false);
             return Query.Create(elementName, condition);
         }
@@ -1068,26 +1043,13 @@ namespace MongoDB.Driver.Builders
         private static IMongoQuery NegateSingleFieldQuery(BsonDocument query, string fieldName, BsonValue selector)
         {
             var selectorDocument = selector as BsonDocument;
-            if (selectorDocument != null)
-            {
-                if (selectorDocument.ElementCount >= 1)
-                {
-                    var operatorName = selectorDocument.GetElement(0).Name;
-                    if (operatorName[0] == '$' && operatorName != "$ref")
-                    {
-                        if (selectorDocument.ElementCount == 1)
-                        {
-                            return NegateSingleFieldOperatorQuery(query, fieldName, operatorName, selectorDocument[0]);
-                        }
-                        else
-                        {
-                            return NegateArbitraryQuery(query);
-                        }
-                    }
-                }
-            }
-
-            return NegateSingleFieldValueQuery(query, fieldName, selector);
+            if (!(selectorDocument?.ElementCount >= 1)) return NegateSingleFieldValueQuery(query, fieldName, selector);
+            var operatorName = selectorDocument.GetElement(0).Name;
+            if (operatorName[0] != '$' || operatorName == "$ref")
+                return NegateSingleFieldValueQuery(query, fieldName, selector);
+            return selectorDocument.ElementCount == 1
+                ? NegateSingleFieldOperatorQuery(query, fieldName, operatorName, selectorDocument[0])
+                : NegateArbitraryQuery(query);
         }
 
         private static IMongoQuery NegateSingleFieldValueQuery(BsonDocument query, string fieldName, BsonValue value)

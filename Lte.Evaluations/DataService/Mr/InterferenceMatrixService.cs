@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -42,6 +43,19 @@ namespace Lte.Evaluations.DataService.Mr
         {
             var mongoStat = _mongoRepository.GetOne(eNodebInfo, timeString);
             return mongoStat == null ? null : Mapper.Map<InterferenceMatrixMongo, InterferenceMatrixStat>(mongoStat);
+        }
+
+        public List<InterferenceMatrixStat> QueryStats(int eNodebId, short pci, DateTime time)
+        {
+            var statList = _mongoRepository.GetList(eNodebId, pci, time);
+            if (!statList.Any()) return new List<InterferenceMatrixStat>();
+            var results = Mapper.Map<List<InterferenceMatrixMongo>, List<InterferenceMatrixStat>>(statList);
+            results.ForEach(x =>
+            {
+                x.RecordTime = time;
+                x.ENodebId = eNodebId;
+            });
+            return results;
         }
 
         public void UploadInterferenceStats(StreamReader reader, string path)

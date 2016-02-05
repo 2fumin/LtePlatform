@@ -37,7 +37,7 @@ namespace MongoDB.Bson
         {
             if (pattern == null)
             {
-                throw new ArgumentNullException("pattern");
+                throw new ArgumentNullException(nameof(pattern));
             }
             if (pattern.Length > 0 && pattern[0] == '/')
             {
@@ -63,7 +63,7 @@ namespace MongoDB.Bson
         {
             if (pattern == null)
             {
-                throw new ArgumentNullException("pattern");
+                throw new ArgumentNullException(nameof(pattern));
             }
             _pattern = pattern;
             _options = options ?? "";

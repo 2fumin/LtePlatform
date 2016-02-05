@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Http;
 using Lte.Evaluations.DataService.Mr;
 using Lte.Parameters.Entities.Mr;
@@ -42,6 +44,17 @@ namespace LtePlatform.Controllers.Kpi
             return _service.QueryStat(eNodebInfo, timeString);
         }
 
+        [HttpGet]
+        [ApiDoc("根据小区信息和时间戳信息从MongoDB数据库中获取统计信息")]
+        [ApiParameterDoc("eNodebId", "基站编号")]
+        [ApiParameterDoc("pci", "PCI")]
+        [ApiParameterDoc("time", "时间戳信息")]
+        [ApiResponse("统计信息")]
+        public List<InterferenceMatrixStat> Get(int eNodebId, short pci, DateTime time)
+        {
+            return _service.QueryStats(eNodebId, pci, time);
+        }
+            
         [HttpDelete]
         [ApiDoc("清除已上传干扰信息记录（未写入数据库）")]
         public void Delete()
