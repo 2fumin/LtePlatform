@@ -101,7 +101,7 @@
     <Compile Include="DataService\Dump\NewENodebListContainer.cs" />
     <Compile Include="DataService\Basic\ENodebQueryService.cs" />
     <Compile Include="DataService\InterferenceMatrixService.cs" />
-    <Compile Include="DataService\InterferenceMatrixView.cs" />
+    <Compile Include="ViewModels\Mr\InterferenceMatrixView.cs" />
     <Compile Include="DataService\InterferenceNeighborService.cs" />
     <Compile Include="DataService\KpiImportService.cs" />
     <Compile Include="DataService\LteNeighborCellService.cs" />
@@ -140,7 +140,7 @@
     <Compile Include="ViewModels\Basic\CdmaBtsView.cs" />
     <Compile Include="ViewModels\Basic\CdmaCellView.cs" />
     <Compile Include="ViewModels\Basic\CdmaCompoundCellView.cs" />
-    <Compile Include="ViewModels\NearestPciCellView.cs" />
+    <Compile Include="ViewModels\Mr\NearestPciCellView.cs" />
     <Compile Include="ViewModels\Precise\Precise4GSector.cs" />
     <Compile Include="ViewModels\RegionKpi\CdmaRegionDateView.cs" />
     <Compile Include="ViewModels\RegionKpi\CdmaRegionStatDetails.cs" />

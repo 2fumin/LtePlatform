@@ -21,7 +21,21 @@ namespace Lte.Parameters.Test.Mr
         {
             var results = _repository.GetByENodebInfo("522409_304_241_1825");
             Assert.IsNotNull(results);
-            Assert.AreEqual(results.Count, 274);
+            Assert.AreEqual(results.Count, 302);
+            Assert.AreEqual((double)results[0].INTERF_ONLY_COFREQ, 11.88, 1E-7);
+            results[0].current_date.ShouldBe("201512301530");
+            results[0].MOD3_COUNT.ShouldBe(2);
+            results[0].MOD6_COUNT.ShouldBe(0);
+            results[0].OVERCOVER_COFREQ_6DB.ShouldBe(2);
+            results[0].OVERCOVER_COFREQ_10DB.ShouldBe(2);
+        }
+
+        [Test]
+        public void Test_GetByENodebInfoAndTime()
+        {
+            var results = _repository.GetByENodebInfoAndTime("522409_304_241_1825", "201512301530");
+            Assert.IsNotNull(results);
+            Assert.AreEqual(results.Count, 1);
             Assert.AreEqual((double)results[0].INTERF_ONLY_COFREQ, 11.88, 1E-7);
             results[0].current_date.ShouldBe("201512301530");
             results[0].MOD3_COUNT.ShouldBe(2);

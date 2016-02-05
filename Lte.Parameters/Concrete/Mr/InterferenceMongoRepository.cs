@@ -29,5 +29,13 @@ namespace Lte.Parameters.Concrete.Mr
             var query = MongoDB.Driver.Builders.Query<InterferenceMatrixMongo>.EQ(e => e.ENODEBID_PCI_NPCI_NFREQ, eNodebInfo);
             return Collection.Find(query).AsQueryable().ToList();
         }
+
+        public List<InterferenceMatrixMongo> GetByENodebInfoAndTime(string eNodebInfo, string timeString)
+        {
+            var query =
+                MongoDB.Driver.Builders.Query<InterferenceMatrixMongo>.Where(
+                    e => e.ENODEBID_PCI_NPCI_NFREQ == eNodebInfo && e.current_date == timeString);
+            return Collection.Find(query).AsQueryable().ToList();
+        }
     }
 }

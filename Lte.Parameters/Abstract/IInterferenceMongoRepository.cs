@@ -12,5 +12,7 @@ namespace Lte.Parameters.Abstract
     public interface IInterferenceMongoRepository : IRepository<InterferenceMatrixMongo, ObjectId>
     {
         List<InterferenceMatrixMongo> GetByENodebInfo(string eNodebInfo);
+
+        List<InterferenceMatrixMongo> GetByENodebInfoAndTime(string eNodebInfo, string timeString);
     }
 }

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Lte.Domain.LinqToCsv.Context;
-using Lte.Domain.LinqToCsv.Description;
-using Lte.Evaluations.ViewModels;
+using Lte.Evaluations.ViewModels.Mr;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.ExcelCsv;

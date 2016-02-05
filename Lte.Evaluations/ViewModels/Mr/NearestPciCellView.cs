@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Lte.Domain.Regular.Attributes;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 
-namespace Lte.Evaluations.ViewModels
+namespace Lte.Evaluations.ViewModels.Mr
 {
     [TypeDoc("包含PCI的LTE邻区关系视图")]
     public class NearestPciCellView
