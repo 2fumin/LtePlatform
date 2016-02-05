@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Lte.Evaluations.DataService;
+using Lte.Evaluations.DataService.Basic;
 using Lte.Evaluations.ViewModels;
 using Lte.Parameters.Entities.Work;
 using LtePlatform.Models;
@@ -51,6 +52,14 @@ namespace LtePlatform.Controllers.Kpi
             int page)
         {
             return _service.QueryViews(statCondition, typeCondition, itemsPerPage, page);
+        }
+
+        [HttpPut]
+        [ApiDoc("更新LTE扇区编号")]
+        [ApiResponse("更新扇区编号数")]
+        public int Put()
+        {
+            return _service.UpdateLteSectorIds();
         }
     }
 }

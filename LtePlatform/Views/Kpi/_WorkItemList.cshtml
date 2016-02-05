@@ -13,7 +13,13 @@
                         <select ng-model="currentState" ng-options="state.name for state in states"></select>&nbsp;
                         工单分类：
                         <select ng-model="currentType" ng-options="type.name for type in types"></select>&nbsp;
-                        <button class="btn btn-success" ng-click="showCharts()">图表</button>
+                        <div class="btn-group">
+                            <button class="btn btn-success" ng-click="showCharts()">图表</button>
+                            <button class="btn btn-warning" ng-click="updateSectorIds()">
+                                更新扇区编号
+                                <span class="badge pull-right" ng-if="updateNums">{{updateNums}}</span>
+                            </button>
+                        </div>
                     </p>
                     @{
                         Html.RenderPartial("_KnockoutPaging");

@@ -34,6 +34,7 @@
     $scope.workItemViews = [];
     $scope.canGotoCurrentPage = false;
     $scope.currentView = {};
+    $scope.updateNums = 0;
 
     $scope.chartView = "initial";
     $scope.dataModel = new AppDataModel();
@@ -80,6 +81,12 @@
         }
 
         $scope.chartView = "chart";
+    };
+
+    $scope.updateSectorIds = function() {
+        $http.put($scope.dataModel.workItemUrl).success(function(result) {
+            $scope.updateNums = result;
+        });
     };
 
     $scope.$watch('currentPage', function(newValue, oldValue) {

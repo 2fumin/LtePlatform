@@ -19,19 +19,40 @@ namespace Lte.Evaluations.DataService
         private readonly IENodebRepository _eNodebRepository;
         private readonly IBtsRepository _btsRepository;
         private readonly ITownRepository _townRepository;
+        private readonly ICellRepository _cellRepository;
 
         public WorkItemService(IWorkItemRepository repository, IENodebRepository eNodebRepository,
-            IBtsRepository btsRepository, ITownRepository townRepository)
+            IBtsRepository btsRepository, ITownRepository townRepository, ICellRepository cellRepository)
         {
             _repository = repository;
             _eNodebRepository = eNodebRepository;
             _btsRepository = btsRepository;
             _townRepository = townRepository;
+            _cellRepository = cellRepository;
         }
 
         public List<WorkItem> QueryAllList()
         {
             return _repository.GetAllList();
+        }
+
+        public int UpdateLteSectorIds()
+        {
+            var items = _repository.GetAllList(x => x.ENodebId > 10000);
+            int count = 0;
+            foreach (var item in items)
+            {
+                var cell = _cellRepository.GetBySectorId(item.ENodebId, item.SectorId);
+                if (cell != null) continue;
+                cell = _cellRepository.GetBySectorId(item.ENodebId, (byte) (item.SectorId + 48));
+                if (cell != null)
+                {
+                    item.SectorId += 48;
+                    _repository.Update(item);
+                    count++;
+                }
+            }
+            return count;
         }
 
         public string ImportExcelFiles(string path)

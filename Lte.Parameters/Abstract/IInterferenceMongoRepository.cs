@@ -13,6 +13,6 @@ namespace Lte.Parameters.Abstract
     {
         List<InterferenceMatrixMongo> GetByENodebInfo(string eNodebInfo);
 
-        List<InterferenceMatrixMongo> GetByENodebInfoAndTime(string eNodebInfo, string timeString);
+        InterferenceMatrixMongo GetOne(string eNodebInfo, string timeString);
     }
 }
