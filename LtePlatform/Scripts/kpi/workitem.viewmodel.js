@@ -1,4 +1,4 @@
-﻿app.controller("kpi.workitem", function($scope, $http) {
+﻿app.controller("kpi.workitem", function ($scope, $http, showPieChart) {
     $scope.states = [
     {
         name: '未完成'
@@ -75,8 +75,8 @@
     $scope.showCharts = function () {
         if ($scope.chartView === 'initial') {
             $http.get($scope.dataModel.workItemUrl).success(function (result) {
-                showTypePieChart(result, "#type-chart");
-                showStatePieChart(result, "#state-chart");
+                showPieChart.type(result, "#type-chart");
+                showPieChart.state(result, "#state-chart");
             });
         }
 
