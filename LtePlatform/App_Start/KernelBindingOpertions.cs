@@ -3,6 +3,7 @@ using Lte.Evaluations.DataService;
 using Lte.Evaluations.DataService.Basic;
 using Lte.Evaluations.DataService.College;
 using Lte.Evaluations.DataService.Dump;
+using Lte.Evaluations.DataService.Mr;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Abstract.College;
 using Lte.Parameters.Concrete;

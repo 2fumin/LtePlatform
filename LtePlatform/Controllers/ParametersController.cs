@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using Lte.Evaluations.DataService;
+using Lte.Evaluations.DataService.Mr;
 using LtePlatform.Models;
 
 namespace LtePlatform.Controllers

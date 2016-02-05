@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Abp.EntityFramework.AutoMapper;
 using AutoMapper;
 using Lte.Evaluations.MapperSerive;
 using Lte.Parameters.Abstract;
-using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.Basic;
 using Lte.Parameters.Entities.ExcelCsv;
 using Lte.Parameters.Entities.Mr;
 
-namespace Lte.Evaluations.DataService
+namespace Lte.Evaluations.DataService.Mr
 {
     public class InterferenceMatrixService
     {

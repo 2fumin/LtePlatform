@@ -7,7 +7,7 @@ using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.ExcelCsv;
 
-namespace Lte.Evaluations.DataService
+namespace Lte.Evaluations.DataService.Mr
 {
     public class NearestPciCellService
     {
