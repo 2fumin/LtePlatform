@@ -68,7 +68,8 @@ namespace Lte.Parameters.MockOperations
                 .ForMember(d => d.Mod3Interferences, opt => opt.MapFrom(s => s.MOD3_COUNT ?? 0))
                 .ForMember(d => d.Mod6Interferences, opt => opt.MapFrom(s => s.MOD6_COUNT ?? 0))
                 .ForMember(d => d.OverInterferences10Db, opt => opt.MapFrom(s => s.OVERCOVER_COFREQ_10DB ?? 0))
-                .ForMember(d => d.OverInterferences6Db, opt => opt.MapFrom(s => s.OVERCOVER_COFREQ_6DB));
+                .ForMember(d => d.OverInterferences6Db, opt => opt.MapFrom(s => s.OVERCOVER_COFREQ_6DB))
+                .ForMember(d => d.Id, opt => opt.Ignore());
         }
     }
 }

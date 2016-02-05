@@ -15,15 +15,17 @@ namespace Lte.Evaluations.DataService.Mr
     public class InterferenceMatrixService
     {
         private readonly IInterferenceMatrixRepository _repository;
+        private readonly IInterferenceMongoRepository _mongoRepository;
 
         private static Stack<InterferenceMatrixStat> InterferenceMatrixStats { get; set; }
 
         private static List<PciCell> PciCellList { get; set; }
 
         public InterferenceMatrixService(IInterferenceMatrixRepository repository, ICellRepository cellRepository,
-            IInfrastructureRepository infrastructureRepository)
+            IInfrastructureRepository infrastructureRepository, IInterferenceMongoRepository mongoRepository)
         {
             _repository = repository;
+            _mongoRepository = mongoRepository;
             if (InterferenceMatrixStats == null)
                 InterferenceMatrixStats = new Stack<InterferenceMatrixStat>();
             if (PciCellList == null)
@@ -34,6 +36,12 @@ namespace Lte.Evaluations.DataService.Mr
                     select cell;
                 PciCellList = Mapper.Map<IEnumerable<Cell>, List<PciCell>>(cells);
             }
+        }
+
+        public InterferenceMatrixStat QueryStat(string eNodebInfo, string timeString)
+        {
+            var mongoStat = _mongoRepository.GetOne(eNodebInfo, timeString);
+            return mongoStat == null ? null : Mapper.Map<InterferenceMatrixMongo, InterferenceMatrixStat>(mongoStat);
         }
 
         public void UploadInterferenceStats(StreamReader reader, string path)
