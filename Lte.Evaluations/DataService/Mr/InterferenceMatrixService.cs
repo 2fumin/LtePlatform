@@ -21,6 +21,7 @@ namespace Lte.Evaluations.DataService.Mr
         private static Stack<InterferenceMatrixStat> InterferenceMatrixStats { get; set; }
 
         private static List<PciCell> PciCellList { get; set; }
+        private static List<PciCellPair> PciCellPairList { get; set; } 
 
         public InterferenceMatrixService(IInterferenceMatrixRepository repository, ICellRepository cellRepository,
             IInfrastructureRepository infrastructureRepository, IInterferenceMongoRepository mongoRepository)
@@ -35,7 +36,9 @@ namespace Lte.Evaluations.DataService.Mr
                     join moinitor in infrastructureRepository.GetAllPreciseMonitor() on cell.Id equals
                         moinitor.InfrastructureId
                     select cell;
-                PciCellList = Mapper.Map<IEnumerable<Cell>, List<PciCell>>(cells);
+                PciCellList = cells.MapTo<List<PciCell>>();
+                PciCellPairList =
+                    PciCellList.MapTo<IEnumerable<PciCellPair>>().Distinct(new PciCellPairComparer()).ToList();
             }
         }
 

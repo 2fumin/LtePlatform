@@ -55,6 +55,7 @@ namespace Lte.Evaluations.MapperSerive
             AutoMapperHelper.CreateMap(typeof(IndoorDistributionExcel));
             AutoMapperHelper.CreateMap(typeof(BtsExcel));
             AutoMapperHelper.CreateMap(typeof(CellSectorIdPair));
+            AutoMapperHelper.CreateMap(typeof(PciCellPair));
             AutoMapperHelper.CreateMap(typeof(CdmaRegionStat));
             AutoMapperHelper.CreateMap(typeof(InterferenceMatrixStat));
         }
