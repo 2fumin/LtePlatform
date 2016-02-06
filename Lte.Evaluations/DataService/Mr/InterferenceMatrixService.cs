@@ -20,9 +20,8 @@ namespace Lte.Evaluations.DataService.Mr
 
         private static Stack<InterferenceMatrixStat> InterferenceMatrixStats { get; set; }
 
-        private static List<PciCell> PciCellList { get; set; }
-        private static List<PciCellPair> PciCellPairList { get; set; } 
-
+        public static List<PciCell> PciCellList { get; set; }
+        
         public InterferenceMatrixService(IInterferenceMatrixRepository repository, ICellRepository cellRepository,
             IInfrastructureRepository infrastructureRepository, IInterferenceMongoRepository mongoRepository)
         {
@@ -37,9 +36,30 @@ namespace Lte.Evaluations.DataService.Mr
                         moinitor.InfrastructureId
                     select cell;
                 PciCellList = cells.MapTo<List<PciCell>>();
-                PciCellPairList =
-                    PciCellList.MapTo<IEnumerable<PciCellPair>>().Distinct(new PciCellPairComparer()).ToList();
             }
+        }
+        
+        public int DumpMongoStats(PciCell cellInfo, DateTime begin, DateTime end)
+        {
+            var statTime = begin;
+            while (statTime < end)
+            {
+                var time = statTime;
+                statTime = statTime.AddMinutes(15);
+                var existedStats =
+                    _repository.GetAllList(
+                        x =>
+                            x.ENodebId == cellInfo.ENodebId && x.SectorId == cellInfo.SectorId &&
+                            x.RecordTime == time);
+                if (existedStats.Any()) continue;
+                var mongoStats = QueryStats(cellInfo.ENodebId, cellInfo.Pci, statTime);
+                foreach (var mongoStat in mongoStats)
+                {
+                    mongoStat.SectorId = cellInfo.SectorId;
+                    _repository.Insert(mongoStat);
+                }
+            }
+            return _repository.SaveChanges();
         }
 
         public InterferenceMatrixStat QueryStat(string eNodebInfo, string timeString)
