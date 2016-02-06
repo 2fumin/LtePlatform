@@ -1,43 +1,50 @@
-﻿function InterferenceImportViewModel(app, dataModel) {
-    var self = this;
+﻿app.controller("interference.import", function($scope, $http) {
+    $scope.totalDumpItems = 0;
+    $scope.totalSuccessItems = 0;
+    $scope.totalFailItems = 0;
+    $scope.dataModel = new AppDataModel();
 
-    self.totalDumpItems = ko.observable(0);
-    self.totalSuccessItems = ko.observable(0);
-    self.totalFailItems = ko.observable(0);
-
-    Sammy(function () {
-        this.get('#interferenceImport', function () {
+    $scope.clearItems = function () {
+        $http.delete($scope.dataModel.dumpInterferenceUrl).success(function() {
+            $scope.totalDumpItems = 0;
+            $scope.totalSuccessItems = 0;
+            $scope.totalFailItems = 0;
         });
-        this.post('#interferencePost', function () {
-            sendRequest(app.dataModel.dumpInterferenceUrl, "GET", null, function (result) {
-                self.totalDumpItems(result);
-            });
-        });
-        this.get('/Kpi/InterferenceImport', function () { this.app.runRoute('get', '#interferenceImport'); });
-        this.get('/Kpi/InterferencePost', function () { this.app.runRoute('post', '#interferencePost'); });
-    });
-
-    self.dumpItems = function () {
-        dumpProgressItems(self, app.dataModel.dumpInterferenceUrl);
     };
+
+    $scope.dumpItems = function() {
+        sendRequest(actionUrl, "PUT", null, function(result) {
+            if (result === true) {
+                viewModel.totalSuccessItems(viewModel.totalSuccessItems() + 1);
+            } else {
+                viewModel.totalFailItems(viewModel.totalFailItems() + 1);
+            }
+            if (viewModel.totalSuccessItems() + viewModel.totalFailItems() < viewModel.totalDumpItems()) {
+                viewModel.dumpItems();
+            } else {
+                viewModel.updateHistoryItems();
+            }
+        }, function() {
+            viewModel.totalFailItems(viewModel.totalFailItems() + 1);
+            if (viewModel.totalSuccessItems() + viewModel.totalFailItems() < viewModel.totalDumpItems()) {
+                viewModel.dumpItems();
+            } else {
+                viewModel.updateHistoryItems();
+            }
+        });
+    };
+
+    $http.get($scope.dataModel.dumpInterferenceUrl).success(function(result) {
+        $scope.totalDumpItems = result;
+    });
+});
+
+function InterferenceImportViewModel(app, dataModel) {
+    var self = this;
 
     self.updateHistoryItems = function () {
         self.clearItems();
     };
 
-    self.clearItems = function () {
-        sendRequest(app.dataModel.dumpInterferenceUrl, "DELETE", null, function () {
-            self.totalDumpItems(0);
-            self.totalFailItems(0);
-            self.totalSuccessItems(0);
-        });
-    };
-
     return self;
 }
-
-app.addViewModel({
-    name: "InterferenceImport",
-    bindingMemberName: "interferenceImport",
-    factory: InterferenceImportViewModel
-});

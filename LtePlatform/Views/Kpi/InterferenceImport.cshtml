@@ -44,6 +44,11 @@
 </div>
 
 @section Scripts{
-    @Scripts.Render("~/bundles/knockout")
-    @Scripts.Render("~/bundles/kpiInterferenceImport")
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/app/common.js"></script>
+    <script src="~/Scripts/app/app.datamodel.js"></script>
+    <script>
+        var app = angular.module('myApp', []);
+    </script>
+    <script src="~/Scripts/kpi/interferenceimport.viewmodel.js"></script>
 }
