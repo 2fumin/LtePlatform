@@ -1,50 +1,20 @@
-﻿app.controller("interference.import", function($scope, $http) {
-    $scope.totalDumpItems = 0;
-    $scope.totalSuccessItems = 0;
-    $scope.totalFailItems = 0;
+﻿app.controller("interference.import", function($scope, $http, dumpProgress) {
     $scope.dataModel = new AppDataModel();
+    $scope.progressInfo = {
+        totalDumpItems: 0,
+        totalSuccessItems: 0,
+        totalFailItems: 0
+    };
 
     $scope.clearItems = function () {
-        $http.delete($scope.dataModel.dumpInterferenceUrl).success(function() {
-            $scope.totalDumpItems = 0;
-            $scope.totalSuccessItems = 0;
-            $scope.totalFailItems = 0;
-        });
+        dumpProgress.clear($scope.dataModel.dumpInterferenceUrl, $scope.progressInfo);
     };
 
     $scope.dumpItems = function() {
-        sendRequest(actionUrl, "PUT", null, function(result) {
-            if (result === true) {
-                viewModel.totalSuccessItems(viewModel.totalSuccessItems() + 1);
-            } else {
-                viewModel.totalFailItems(viewModel.totalFailItems() + 1);
-            }
-            if (viewModel.totalSuccessItems() + viewModel.totalFailItems() < viewModel.totalDumpItems()) {
-                viewModel.dumpItems();
-            } else {
-                viewModel.updateHistoryItems();
-            }
-        }, function() {
-            viewModel.totalFailItems(viewModel.totalFailItems() + 1);
-            if (viewModel.totalSuccessItems() + viewModel.totalFailItems() < viewModel.totalDumpItems()) {
-                viewModel.dumpItems();
-            } else {
-                viewModel.updateHistoryItems();
-            }
-        });
+        dumpProgress.dump($scope.dataModel.dumpInterferenceUrl, $scope.progressInfo);
     };
 
     $http.get($scope.dataModel.dumpInterferenceUrl).success(function(result) {
-        $scope.totalDumpItems = result;
+        $scope.progressInfo.totalDumpItems = result;
     });
 });
-
-function InterferenceImportViewModel(app, dataModel) {
-    var self = this;
-
-    self.updateHistoryItems = function () {
-        self.clearItems();
-    };
-
-    return self;
-}

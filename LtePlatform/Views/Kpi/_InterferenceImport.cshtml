@@ -1,4 +1,4 @@
-﻿<div class="panel panel-info" ng-app="myApp" ng-controller="interference.import">
+﻿<div class="panel panel-info" ng-controller="interference.import">
     <div class="panel-heading">
         <h3 class="panel-title">
             从数据文件导入
@@ -6,17 +6,22 @@
     </div>
     <div class="panel-body">
         <p>
-            <button class="btn btn-primary" data-bind="click: dumpItems, enable: totalDumpItems()>0">一键导入</button>
-            <button class="btn btn-danger" data-bind="click: clearItems">清除导入</button>
+            <button class="btn btn-primary" ng-if="progressInfo.totalDumpItems > 0" ng-click="dumpItems()">
+                一键导入
+            </button>
+            <button class="btn btn-danger" ng-click="clearItems()">
+                清除导入
+            </button>
         </p>
         <p>
-            总数：<span data-bind="text: totalDumpItems"></span>&nbsp;
-            成功数：<span data-bind="text: totalSuccessItems"></span>&nbsp;
-            失败数：<span data-bind="text: totalFailItems"></span>
+            总数：{{progressInfo.totalDumpItems}}&nbsp;
+            成功数：{{progressInfo.totalSuccessItems}}&nbsp;
+            失败数：{{progressInfo.totalFailItems}}
         </p>
-        <div class="progress" data-bind="visible: totalDumpItems()>0">
+        <div class="progress" ng-if="progressInfo.totalDumpItems > 0">
             <div class="progress-bar" role="progressbar" aria-valuemax="100" aria-valuemin="0"
-                 data-bind="style:{width: 100*(totalSuccessItems()+totalFailItems())/totalDumpItems()+'%'}"></div>
+                 ng-style="{width: 100*(progressInfo.totalSuccessItems+progressInfo.totalFailItems)/progressInfo.totalDumpItems+'%'}">
+            </div>
         </div>
     </div>
 </div>

@@ -36,7 +36,7 @@
             }
         }
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6" ng-app="myApp">
         @{
             Html.RenderPartial("_InterferenceImport");
         }
@@ -48,7 +48,8 @@
     <script src="~/Scripts/app/common.js"></script>
     <script src="~/Scripts/app/app.datamodel.js"></script>
     <script>
-        var app = angular.module('myApp', []);
+        var app = angular.module('myApp', ['myApp.Services']);
     </script>
+    <script src="~/Scripts/angular-ui/customize/dump.progress.factory.js"></script>
     <script src="~/Scripts/kpi/interferenceimport.viewmodel.js"></script>
 }

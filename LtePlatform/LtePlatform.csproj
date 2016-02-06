@@ -548,6 +548,7 @@
     <Content Include="Scripts\angular-ui\customize\directive.datetimepicker.js" />
     <Content Include="Scripts\angular-ui\customize\directive.dialog.js" />
     <Content Include="Scripts\angular-ui\customize\directive.panel.js" />
+    <Content Include="Scripts\angular-ui\customize\dump.progress.factory.js" />
     <Content Include="Scripts\angular-ui\local\bootstrap-datetimepicker.ar.js" />
     <Content Include="Scripts\angular-ui\local\bootstrap-datetimepicker.bg.js" />
     <Content Include="Scripts\angular-ui\local\bootstrap-datetimepicker.ca.js" />
