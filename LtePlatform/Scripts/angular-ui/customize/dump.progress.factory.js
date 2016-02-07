@@ -32,5 +32,20 @@
                 }
             });
         };
+
+        serviceInstance.dumpMongo=function(actionUrl, progressInfo, begin, end) {
+            var self = serviceInstance;
+            if (progressInfo.dumpCells.length === 0) return;
+            var index = 0;
+            var cell = progressInfo.dumpCells[index];
+            $http.post(actionUrl, {
+                pciCell: cell,
+                begin: begin,
+                end: end
+            }).success(function(result) {
+                progressInfo.cellInfo = cell.eNodebId + '-' + cell.sectorId + '-' + cell.pci + ': ' + result;
+            })
+        }
+
         return serviceInstance;
     });

@@ -1,10 +1,27 @@
-﻿<div class="panel panel-info">
-    <div class="panel-heading">
-        <h3 class="panel-title">
-            从MongoDB导入
-        </h3>
+﻿<div panel-info panel-title="panelTitle">
+    <div class="form-group">
+        <label class="col-md-3 control-label">{{beginDate.title}}</label>
+        <div datetimepicker ng-model="beginDate.value" class="col-md-7"></div>
+        <div class="col-md-2">
+            <button class="btn btn-warning" ng-click="reset()">重置</button>
+        </div>
     </div>
-    <div class="panel-body">
-        
+    <div class="form-group">
+        <label class="col-md-3 control-label">{{endDate.title}}</label>
+        <div datetimepicker ng-model="endDate.value" class="col-md-7"></div>
+        <div class="col-md-2">
+            <button class="btn btn-primary" ng-click="dump()">导入</button>
+        </div>
+    </div>
+    <p>
+        总数：{{progressInfo.dumpCells.length}}&nbsp;
+        成功数：{{progressInfo.totalSuccessItems}}&nbsp;
+        失败数：{{progressInfo.totalFailItems}}&nbsp;
+        小区信息：{{progressInfo.cellInfo}}
+    </p>
+    <div class="progress" ng-if="progressInfo.dumpCells.length > 0">
+        <div class="progress-bar" role="progressbar" aria-valuemax="100" aria-valuemin="0"
+             ng-style="{width: 100*(progressInfo.totalSuccessItems+progressInfo.totalFailItems)/progressInfo.dumpCells.length+'%'}">
+        </div>
     </div>
 </div>
