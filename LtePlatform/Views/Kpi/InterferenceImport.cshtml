@@ -15,7 +15,7 @@
     </p>
 </div>
 
-<div class="row">
+<div class="row" ng-app="myApp">
     <div class="col-md-6">
         @{
             Html.RenderPartial("_AlertPanel");
@@ -36,11 +36,9 @@
             }
         }
     </div>
-    <div class="col-md-6" ng-app="myApp">
-        @{
-            Html.RenderPartial("_InterferenceImport");
-        }
-    </div>
+    @{
+        Html.RenderPartial("_InterferenceImport");
+    }
 </div>
 
 @section Scripts{
