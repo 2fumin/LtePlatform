@@ -64,13 +64,15 @@ app.controller('interference.mongo', function ($scope, $http, dumpProgress) {
                 'end': $scope.endDate.value
             }
         }).success(function(result) {
-            $scope.progressInfo.cellInfo = result;
+            $scope.progressInfo.dumpCells = result;
             $scope.progressInfo.totalFailItems = 0;
             $scope.progressInfo.totalSuccessItems = 0;
         });
     };
 
     $scope.dump = function() {
-
+        dumpProgress.dumpMongo($scope.dataModel.dumpInterferenceUrl, $scope.progressInfo, $scope.beginDate.value, $scope.endDate.value, 0);
     };
+
+    $scope.reset();
 });
