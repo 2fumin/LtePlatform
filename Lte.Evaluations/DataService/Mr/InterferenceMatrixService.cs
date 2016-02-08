@@ -43,24 +43,43 @@ namespace Lte.Evaluations.DataService.Mr
         {
             if (_mongoRepository.GetOne(cellInfo.ENodebId, cellInfo.Pci) == null) return 0;
             var statTime = begin;
+            var count = 0;
             while (statTime < end)
             {
                 var time = statTime;
-                statTime = statTime.AddMinutes(15);
-                var existedStat =
-                    _repository.FirstOrDefault(
-                        x =>
-                            x.ENodebId == cellInfo.ENodebId && x.SectorId == cellInfo.SectorId &&
-                            x.RecordTime == time);
-                if (existedStat != null) continue;
-                var mongoStats = QueryStats(cellInfo.ENodebId, cellInfo.Pci, statTime);
-                foreach (var mongoStat in mongoStats)
+                if (_mongoRepository.GetOne(cellInfo.ENodebId, cellInfo.Pci, time.ToString("yyyyMMdd")) == null)
                 {
-                    mongoStat.SectorId = cellInfo.SectorId;
-                    _repository.Insert(mongoStat);
+                    statTime = statTime.AddDays(1);
+                    continue;
+                }
+                for (var i = 0; i < 24; i++)
+                {
+                    if (_mongoRepository.GetOne(cellInfo.ENodebId, cellInfo.Pci, time.ToString("yyyyMMddHH")) == null)
+                    {
+                        statTime = statTime.AddHours(1);
+                        continue;
+                    }
+                    for (var j = 0; j < 4; j++)
+                    {
+                        statTime = statTime.AddMinutes(15);
+                        var existedStat =
+                            _repository.FirstOrDefault(
+                                x =>
+                                    x.ENodebId == cellInfo.ENodebId && x.SectorId == cellInfo.SectorId &&
+                                    x.RecordTime == time);
+                        if (existedStat != null) continue;
+                        var mongoStats = QueryStats(cellInfo.ENodebId, cellInfo.Pci, time);
+                        foreach (var mongoStat in mongoStats)
+                        {
+                            mongoStat.SectorId = cellInfo.SectorId;
+                            _repository.Insert(mongoStat);
+                        }
+                    }
+
+                    count += _repository.SaveChanges();
                 }
             }
-            return _repository.SaveChanges();
+            return count;
         }
 
         public InterferenceMatrixStat QueryStat(string eNodebInfo, string timeString)
@@ -72,6 +91,11 @@ namespace Lte.Evaluations.DataService.Mr
         public InterferenceMatrixMongo QueryMongo(int eNodebId, short pci)
         {
             return _mongoRepository.GetOne(eNodebId, pci);
+        }
+
+        public InterferenceMatrixMongo QueryMongo(int eNodebId, short pci, DateTime date)
+        {
+            return _mongoRepository.GetOne(eNodebId, pci, date.ToString("yyyyMMdd"));
         }
 
         public List<InterferenceMatrixStat> QueryStats(int eNodebId, short pci, DateTime time)

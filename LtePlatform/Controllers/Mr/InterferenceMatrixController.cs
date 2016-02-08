@@ -34,11 +34,11 @@ namespace LtePlatform.Controllers.Mr
         [ApiDoc("根据小区信息和时间戳信息从MongoDB数据库中获取统计信息")]
         [ApiParameterDoc("eNodebId", "基站编号")]
         [ApiParameterDoc("pci", "PCI")]
-        [ApiParameterDoc("time", "时间戳信息")]
+        [ApiParameterDoc("date", "时间戳信息")]
         [ApiResponse("统计信息")]
-        public List<InterferenceMatrixStat> Get(int eNodebId, short pci, DateTime time)
+        public InterferenceMatrixMongo Get(int eNodebId, short pci, DateTime date)
         {
-            return _service.QueryStats(eNodebId, pci, time);
+            return _service.QueryMongo(eNodebId, pci, date);
         }
 
         [HttpGet]
