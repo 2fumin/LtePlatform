@@ -41,17 +41,18 @@ namespace Lte.Evaluations.DataService.Mr
         
         public int DumpMongoStats(PciCell cellInfo, DateTime begin, DateTime end)
         {
+            if (_mongoRepository.GetOne(cellInfo.ENodebId, cellInfo.Pci) == null) return 0;
             var statTime = begin;
             while (statTime < end)
             {
                 var time = statTime;
                 statTime = statTime.AddMinutes(15);
-                var existedStats =
-                    _repository.GetAllList(
+                var existedStat =
+                    _repository.FirstOrDefault(
                         x =>
                             x.ENodebId == cellInfo.ENodebId && x.SectorId == cellInfo.SectorId &&
                             x.RecordTime == time);
-                if (existedStats.Any()) continue;
+                if (existedStat != null) continue;
                 var mongoStats = QueryStats(cellInfo.ENodebId, cellInfo.Pci, statTime);
                 foreach (var mongoStat in mongoStats)
                 {
@@ -66,6 +67,11 @@ namespace Lte.Evaluations.DataService.Mr
         {
             var mongoStat = _mongoRepository.GetOne(eNodebInfo, timeString);
             return mongoStat == null ? null : Mapper.Map<InterferenceMatrixMongo, InterferenceMatrixStat>(mongoStat);
+        }
+
+        public InterferenceMatrixMongo QueryMongo(int eNodebId, short pci)
+        {
+            return _mongoRepository.GetOne(eNodebId, pci);
         }
 
         public List<InterferenceMatrixStat> QueryStats(int eNodebId, short pci, DateTime time)

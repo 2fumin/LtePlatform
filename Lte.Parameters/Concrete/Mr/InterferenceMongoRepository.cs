@@ -38,6 +38,14 @@ namespace Lte.Parameters.Concrete.Mr
             return Collection.FindOne(query);
         }
 
+        public InterferenceMatrixMongo GetOne(int eNodebId, short pci)
+        {
+            var query =
+                MongoDB.Driver.Builders.Query<InterferenceMatrixMongo>.Where(
+                    e => e.ENODEBID_PCI_NPCI_NFREQ.StartsWith(eNodebId + "_" + pci));
+            return Collection.FindOne(query);
+        }
+
         public List<InterferenceMatrixMongo> GetList(int eNodebId, short pci)
         {
             var query =

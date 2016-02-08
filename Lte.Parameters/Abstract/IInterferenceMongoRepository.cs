@@ -15,6 +15,8 @@ namespace Lte.Parameters.Abstract
 
         InterferenceMatrixMongo GetOne(string eNodebInfo, string timeString);
 
+        InterferenceMatrixMongo GetOne(int eNodebId, short pci);
+
         List<InterferenceMatrixMongo> GetList(int eNodebId, short pci);
 
         List<InterferenceMatrixMongo> GetList(int eNodebId, short pci, DateTime time);

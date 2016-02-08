@@ -44,23 +44,23 @@
             }).success(function(result) {
                 progressInfo.cellInfo = cell.eNodebId + '-' + cell.sectorId + '-' + cell.pci + ': ' + result;
                 progressInfo.totalSuccessItems = progressInfo.totalSuccessItems + 1;
-                self.dumpNextMongo(actionUrl, progressInfo, begin, end, index);
+                if (progressInfo.totalSuccessItems + progressInfo.totalFailItems < progressInfo.dumpCells.length) {
+                    self.dumpMongo(actionUrl, progressInfo, begin, end, index + 1);
+                } else {
+                    progressInfo.totalSuccessItems = 0;
+                    progressInfo.totalFailItems = 0;
+                }
             }).error(function() {
                 progressInfo.totalFailItems = progressInfo.totalFailItems + 1;
                 progressInfo.cellInfo = cell.eNodebId + '-' + cell.sectorId + '-' + cell.pci + ': Fail!!!';
-                self.dumpNextMongo(actionUrl, progressInfo, begin, end, index);
+                if (progressInfo.totalSuccessItems + progressInfo.totalFailItems < progressInfo.dumpCells.length) {
+                    self.dumpMongo(actionUrl, progressInfo, begin, end, index + 1);
+                } else {
+                    progressInfo.totalSuccessItems = 0;
+                    progressInfo.totalFailItems = 0;
+                }
             });
         };
-
-        serviceInstance.dumpNextMongo = function (actionUrl, progressInfo, begin, end) {
-            var self = serviceInstance;
-            if (progressInfo.totalSuccessItems + progressInfo.totalFailItems < progressInfo.totalDumpItems) {
-                self.dump(actionUrl, progressInfo, begin, end, index + 1);
-            } else {
-                progressInfo.totalSuccessItems = 0;
-                progressInfo.totalFailItems = 0;
-            }
-        }
 
         return serviceInstance;
     });
