@@ -15,27 +15,7 @@
     </p>
 </div>
 
-<div class="row" ng-app="myApp">
-    <div class="col-md-6">
-        @{
-            Html.RenderPartial("_AlertPanel");
-            using (Html.BeginForm("InterferencePost", "Kpi",
-                FormMethod.Post, new {enctype = "multipart/form-data", @class = "form-horizontal", role = "form"}))
-            {
-                <div class="form-group">
-                    <label class="col-md-4 control-label">干扰矩阵数据导入：</label>
-                    <div class="col-md-6">
-                        <input name="files" class="form-control" type="file" multiple accept=".txt"/>
-                    </div>
-                    <div class="col-md-2">
-                        <button type="submit" class="btn btn-primary">
-                            <span class="glyphicon glyphicon-save"></span>导入
-                        </button>
-                    </div>
-                </div>
-            }
-        }
-    </div>
+<div class="row" ng-app="myApp" ng-controller="interference.root">
     @{
         Html.RenderPartial("_InterferenceImport");
     }
@@ -52,8 +32,8 @@
     <script>
         var app = angular.module('myApp', ['ngRoute', 'myApp.Services']);
     </script>
+    <script src="~/Scripts/angular-ui/customize/directive.datetimepicker.js"></script>
     <script src="~/Scripts/angular-ui/customize/dump.progress.factory.js"></script>
     <script src="~/Scripts/angular-ui/customize/directive.panel.js"></script>
-    <script src="~/Scripts/angular-ui/customize/directive.datetimepicker.js"></script>
     <script src="~/Scripts/kpi/interferenceimport.viewmodel.js"></script>
 }

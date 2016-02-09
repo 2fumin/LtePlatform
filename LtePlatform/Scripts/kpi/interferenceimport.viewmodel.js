@@ -15,8 +15,21 @@
     }
 ]);
 
-app.controller("interference.import", function ($scope, $http, dumpProgress) {
+app.controller("interference.root", function($scope) {
     $scope.dataModel = new AppDataModel();
+    $scope.progressInfo = {};
+    $scope.beginDate = {
+        title: "开始日期",
+        value: (new Date()).getDateFromToday(-7).Format("yyyy-MM-dd")
+    };
+    $scope.endDate = {
+        title: "结束日期",
+        value: (new Date()).Format("yyyy-MM-dd")
+    };
+    $(".form_date").datetimepicker("yyyy-MM-dd");
+});
+
+app.controller("interference.import", function ($scope, $http, dumpProgress) {
     $scope.progressInfo = {
         totalDumpItems: 0,
         totalSuccessItems: 0,
@@ -46,14 +59,6 @@ app.controller('interference.mongo', function ($scope, $http, dumpProgress) {
         cellInfo: ""
     };
     $scope.panelTitle = "从MongoDB导入";
-    $scope.beginDate = {
-        title: "开始日期",
-        value: (new Date()).getDateFromToday(-7).Format("yyyy-MM-dd")
-    };
-    $scope.endDate = {
-        title: "结束日期",
-        value: (new Date()).Format("yyyy-MM-dd")
-    };
 
     $scope.reset = function() {
         $http({

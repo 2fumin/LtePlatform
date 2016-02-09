@@ -7,19 +7,9 @@
         </div>
     </div>
     <div class="panel-body">
-        <div class="form-group">
-            <label class="col-md-3 control-label">{{beginDate.title}}</label>
-            <div datetimepicker ng-model="beginDate.value" class="col-md-7"></div>
-            <div class="col-md-2">
-                <button class="btn btn-warning" ng-click="reset()">重置</button>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-3 control-label">{{endDate.title}}</label>
-            <div datetimepicker ng-model="endDate.value" class="col-md-7"></div>
-            <div class="col-md-2">
-                <button class="btn btn-primary" ng-click="dump()">导入</button>
-            </div>
+        <div class="btn-group">
+            <button class="btn btn-warning" ng-click="reset()">重置</button>
+            <button class="btn btn-primary" ng-click="dump()">导入</button>
         </div>
         <p>
             总数：{{progressInfo.dumpCells.length}}&nbsp;
