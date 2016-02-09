@@ -9,7 +9,7 @@
                 templateUrl: '/appViews/Manage/AllUsers.html',
                 controller: 'manage.all'
             })
-            .when('/accounts', {
+            .when('/roles', {
                 templateUrl: '/appViews/Manage/Roles.html',
                 controller: 'manage.roles'
             })
@@ -25,10 +25,11 @@ app.controller("manage.root", function($scope) {
 });
 
 app.controller("manage.current", function($scope) {
-
+    $scope.panelTitle = "本用户权限";
 });
 
-app.controller('manage.all', function($scope, $http) {
+app.controller('manage.all', function ($scope, $http) {
+    $scope.panelTitle = "所有用户管理";
     $scope.manageUsers = [];
     $http({
         method: 'GET',
@@ -37,11 +38,12 @@ app.controller('manage.all', function($scope, $http) {
             'Authorization': 'Bearer ' + $scope.dataModel.getAccessToken()
         }
     }).success(function(result) {
-        $scope.manageRoles = result;
+        $scope.manageUsers = result;
     });
 });
 
-app.controller('manage.roles', function($scope, $http) {
+app.controller('manage.roles', function ($scope, $http) {
+    $scope.panelTitle = "角色权限管理";
     $scope.manageRoles = [];
     $scope.roleName = "";
     $scope.updateRoleList = function () {
@@ -53,7 +55,7 @@ app.controller('manage.roles', function($scope, $http) {
             }
         }).success(function(result) {
             $scope.manageRoles = result;
-            $scope.roleName = "New role " + data.length;
+            $scope.roleName = "New role " + result.length;
         });
     };
     $scope.addRole = function () {

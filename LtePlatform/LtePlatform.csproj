@@ -396,6 +396,9 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="appViews\Manage\AllUsers.html" />
+    <Content Include="appViews\Manage\CurrentUser.html" />
+    <Content Include="appViews\Manage\Roles.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Areas\TestPage\Scripts\5ch5\Dictionary.js">
@@ -950,7 +953,6 @@
     <Content Include="Views\Kpi\_WorkItemInfrastructureDialog.cshtml" />
     <None Include="Views\Kpi\_WorkItemList.cshtml" />
     <None Include="Views\Kpi\_WorkItemTable.cshtml" />
-    <None Include="Views\Manage\_ManageUsers.cshtml" />
     <None Include="Views\Parameters\AlarmImport.cshtml" />
     <Content Include="Views\Shared\_AlertPanel.cshtml" />
     <Content Include="Views\Shared\_ENodebTable.cshtml" />
