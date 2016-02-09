@@ -42,9 +42,9 @@ namespace Lte.Evaluations.DataService.Mr
         public int DumpMongoStats(PciCell cellInfo, DateTime begin, DateTime end)
         {
             if (_mongoRepository.GetOne(cellInfo.ENodebId, cellInfo.Pci) == null) return 0;
-            var statTime = begin;
+            var statTime = begin.Date;
             var count = 0;
-            while (statTime < end)
+            while (statTime < end.Date)
             {
                 var time = statTime;
                 if (_mongoRepository.GetOne(cellInfo.ENodebId, cellInfo.Pci, time.ToString("yyyyMMdd")) == null)
