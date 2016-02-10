@@ -89,7 +89,7 @@ namespace Microsoft.Owin.Security.Infrastructure
             {
                 throw new ArgumentNullException("properties");
             }
-            string key = ".AspNet.Correlation." + BaseOptions.AuthenticationType;
+            string key = Constants.CorrelationPrefix + BaseOptions.AuthenticationType;
             byte[] data = new byte[0x20];
             Random.GetBytes(data);
             string str2 = TextEncodings.Base64Url.Encode(data);
@@ -137,7 +137,7 @@ namespace Microsoft.Owin.Security.Infrastructure
             {
                 throw new ArgumentNullException("properties");
             }
-            string key = ".AspNet.Correlation." + BaseOptions.AuthenticationType;
+            string key = Constants.CorrelationPrefix + BaseOptions.AuthenticationType;
             string str2 = Request.Cookies[key];
             if (string.IsNullOrWhiteSpace(str2))
             {
@@ -164,13 +164,7 @@ namespace Microsoft.Owin.Security.Infrastructure
             return true;
         }
 
-        internal AuthenticationOptions BaseOptions
-        {
-            get
-            {
-                return _baseOptions;
-            }
-        }
+        internal AuthenticationOptions BaseOptions => _baseOptions;
 
         protected IOwinContext Context { get; private set; }
 
@@ -178,22 +172,26 @@ namespace Microsoft.Owin.Security.Infrastructure
 
         protected SecurityHelper Helper { get; private set; }
 
-        protected IOwinRequest Request
-        {
-            get
-            {
-                return Context.Request;
-            }
-        }
+        protected IOwinRequest Request => Context.Request;
 
         protected PathString RequestPathBase { get; private set; }
 
-        protected IOwinResponse Response
-        {
-            get
-            {
-                return Context.Response;
-            }
-        }
+        protected IOwinResponse Response => Context.Response;
     }
+
+    public abstract class AuthenticationHandler<TOptions> : AuthenticationHandler where TOptions : AuthenticationOptions
+    {
+        protected AuthenticationHandler()
+        {
+        }
+
+        internal Task Initialize(TOptions options, IOwinContext context)
+        {
+            this.Options = options;
+            return base.BaseInitializeAsync(options, context);
+        }
+
+        protected TOptions Options { get; private set; }
+    }
+
 }
