@@ -56,7 +56,7 @@ namespace Microsoft.Owin
         public virtual void Redirect(string location)
         {
             StatusCode = 0x12e;
-            OwinHelpers.SetHeader(RawHeaders, "Location", location);
+            OwinHelpers.SetHeader(RawHeaders, Constants.Headers.Location, location);
         }
 
         public virtual IOwinResponse Set<T>(string key, T value)
@@ -122,17 +122,20 @@ namespace Microsoft.Owin
             get
             {
                 long num;
-                return long.TryParse(OwinHelpers.GetHeader(RawHeaders, "Content-Length"), out num) ? new long?(num) : null;
+                return long.TryParse(OwinHelpers.GetHeader(RawHeaders, Constants.Headers.ContentLength), out num)
+                    ? new long?(num)
+                    : null;
             }
             set
             {
                 if (value.HasValue)
                 {
-                    OwinHelpers.SetHeader(RawHeaders, "Content-Length", value.Value.ToString(CultureInfo.InvariantCulture));
+                    OwinHelpers.SetHeader(RawHeaders, Constants.Headers.ContentLength,
+                        value.Value.ToString(CultureInfo.InvariantCulture));
                 }
                 else
                 {
-                    RawHeaders.Remove("Content-Length");
+                    RawHeaders.Remove(Constants.Headers.ContentLength);
                 }
             }
         }
@@ -141,11 +144,11 @@ namespace Microsoft.Owin
         {
             get
             {
-                return OwinHelpers.GetHeader(RawHeaders, "Content-Type");
+                return OwinHelpers.GetHeader(RawHeaders, Constants.Headers.ContentType);
             }
             set
             {
-                OwinHelpers.SetHeader(RawHeaders, "Content-Type", value);
+                OwinHelpers.SetHeader(RawHeaders, Constants.Headers.ContentType, value);
             }
         }
 
@@ -159,11 +162,11 @@ namespace Microsoft.Owin
         {
             get
             {
-                return OwinHelpers.GetHeader(RawHeaders, "ETag");
+                return OwinHelpers.GetHeader(RawHeaders, Constants.Headers.ETag);
             }
             set
             {
-                OwinHelpers.SetHeader(RawHeaders, "ETag", value);
+                OwinHelpers.SetHeader(RawHeaders, Constants.Headers.ETag, value);
             }
         }
 
@@ -172,7 +175,8 @@ namespace Microsoft.Owin
             get
             {
                 DateTimeOffset offset;
-                if (DateTimeOffset.TryParse(OwinHelpers.GetHeader(RawHeaders, "Expires"), CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out offset))
+                if (DateTimeOffset.TryParse(OwinHelpers.GetHeader(RawHeaders, Constants.Headers.Expires),
+                    CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out offset))
                 {
                     return offset;
                 }
@@ -182,11 +186,12 @@ namespace Microsoft.Owin
             {
                 if (value.HasValue)
                 {
-                    OwinHelpers.SetHeader(RawHeaders, "Expires", value.Value.ToString("r", CultureInfo.InvariantCulture));
+                    OwinHelpers.SetHeader(RawHeaders, Constants.Headers.Expires,
+                        value.Value.ToString(Constants.HttpDateFormat, CultureInfo.InvariantCulture));
                 }
                 else
                 {
-                    RawHeaders.Remove("Expires");
+                    RawHeaders.Remove(Constants.Headers.Expires);
                 }
             }
         }
@@ -205,7 +210,8 @@ namespace Microsoft.Owin
             }
         }
 
-        private IDictionary<string, string[]> RawHeaders => Get<IDictionary<string, string[]>>(OwinConstants.ResponseHeaders);
+        private IDictionary<string, string[]> RawHeaders
+            => Get<IDictionary<string, string[]>>(OwinConstants.ResponseHeaders);
 
         public virtual string ReasonPhrase
         {

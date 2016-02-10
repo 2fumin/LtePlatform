@@ -16,8 +16,8 @@ namespace Microsoft.Owin
         public OwinRequest()
         {
             IDictionary<string, object> dictionary = new Dictionary<string, object>(StringComparer.Ordinal);
-            dictionary["owin.RequestHeaders"] = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase);
-            dictionary["owin.ResponseHeaders"] = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase);
+            dictionary[OwinConstants.RequestHeaders] = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase);
+            dictionary[OwinConstants.ResponseHeaders] = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase);
             Environment = dictionary;
         }
 
@@ -64,11 +64,11 @@ namespace Microsoft.Owin
         {
             get
             {
-                return OwinHelpers.GetHeader(RawHeaders, "Accept");
+                return OwinHelpers.GetHeader(RawHeaders, Constants.Headers.Accept);
             }
             set
             {
-                OwinHelpers.SetHeader(RawHeaders, "Accept", value);
+                OwinHelpers.SetHeader(RawHeaders, Constants.Headers.Accept, value);
             }
         }
 
@@ -76,11 +76,11 @@ namespace Microsoft.Owin
         {
             get
             {
-                return Get<Stream>("owin.RequestBody");
+                return Get<Stream>(OwinConstants.RequestBody);
             }
             set
             {
-                Set("owin.RequestBody", value);
+                Set(OwinConstants.RequestBody, value);
             }
         }
 
@@ -88,11 +88,11 @@ namespace Microsoft.Owin
         {
             get
             {
-                return OwinHelpers.GetHeader(RawHeaders, "Cache-Control");
+                return OwinHelpers.GetHeader(RawHeaders, Constants.Headers.CacheControl);
             }
             set
             {
-                OwinHelpers.SetHeader(RawHeaders, "Cache-Control", value);
+                OwinHelpers.SetHeader(RawHeaders, Constants.Headers.CacheControl, value);
             }
         }
 
@@ -100,11 +100,11 @@ namespace Microsoft.Owin
         {
             get
             {
-                return Get<CancellationToken>("owin.CallCancelled");
+                return Get<CancellationToken>(OwinConstants.CallCancelled);
             }
             set
             {
-                Set("owin.CallCancelled", value);
+                Set(OwinConstants.CallCancelled, value);
             }
         }
 
@@ -112,11 +112,11 @@ namespace Microsoft.Owin
         {
             get
             {
-                return OwinHelpers.GetHeader(RawHeaders, "Content-Type");
+                return OwinHelpers.GetHeader(RawHeaders, Constants.Headers.ContentType);
             }
             set
             {
-                OwinHelpers.SetHeader(RawHeaders, "Content-Type", value);
+                OwinHelpers.SetHeader(RawHeaders, Constants.Headers.ContentType, value);
             }
         }
 
@@ -136,21 +136,21 @@ namespace Microsoft.Owin
             }
             set
             {
-                OwinHelpers.SetHeader(RawHeaders, "Host", value.Value);
+                OwinHelpers.SetHeader(RawHeaders, Constants.Headers.Host, value.Value);
             }
         }
 
-        public virtual bool IsSecure => string.Equals(Scheme, "HTTPS", StringComparison.OrdinalIgnoreCase);
+        public virtual bool IsSecure => string.Equals(Scheme, Constants.Https, StringComparison.OrdinalIgnoreCase);
 
         public virtual string LocalIpAddress
         {
             get
             {
-                return Get<string>("server.LocalIpAddress");
+                return Get<string>(OwinConstants.CommonKeys.LocalIpAddress);
             }
             set
             {
-                Set("server.LocalIpAddress", value);
+                Set(OwinConstants.CommonKeys.LocalIpAddress, value);
             }
         }
 
@@ -169,7 +169,7 @@ namespace Microsoft.Owin
                 }
                 else
                 {
-                    Environment.Remove("server.LocalPort");
+                    Environment.Remove(OwinConstants.CommonKeys.LocalPort);
                 }
             }
         }
@@ -178,11 +178,11 @@ namespace Microsoft.Owin
         {
             get
             {
-                return Get<string>("server.LocalPort");
+                return Get<string>(OwinConstants.CommonKeys.LocalPort);
             }
             set
             {
-                Set("server.LocalPort", value);
+                Set(OwinConstants.CommonKeys.LocalPort, value);
             }
         }
 
@@ -190,11 +190,11 @@ namespace Microsoft.Owin
         {
             get
             {
-                return OwinHelpers.GetHeader(RawHeaders, "Media-Type");
+                return OwinHelpers.GetHeader(RawHeaders, Constants.Headers.MediaType);
             }
             set
             {
-                OwinHelpers.SetHeader(RawHeaders, "Media-Type", value);
+                OwinHelpers.SetHeader(RawHeaders, Constants.Headers.MediaType, value);
             }
         }
 
@@ -202,11 +202,11 @@ namespace Microsoft.Owin
         {
             get
             {
-                return Get<string>("owin.RequestMethod");
+                return Get<string>(OwinConstants.RequestMethod);
             }
             set
             {
-                Set("owin.RequestMethod", value);
+                Set(OwinConstants.RequestMethod, value);
             }
         }
 
@@ -214,11 +214,11 @@ namespace Microsoft.Owin
         {
             get
             {
-                return new PathString(Get<string>("owin.RequestPath"));
+                return new PathString(Get<string>(OwinConstants.RequestPath));
             }
             set
             {
-                Set("owin.RequestPath", value.Value);
+                Set(OwinConstants.RequestPath, value.Value);
             }
         }
 
@@ -226,11 +226,11 @@ namespace Microsoft.Owin
         {
             get
             {
-                return new PathString(Get<string>("owin.RequestPathBase"));
+                return new PathString(Get<string>(OwinConstants.RequestPathBase));
             }
             set
             {
-                Set("owin.RequestPathBase", value.Value);
+                Set(OwinConstants.RequestPathBase, value.Value);
             }
         }
 
@@ -238,11 +238,11 @@ namespace Microsoft.Owin
         {
             get
             {
-                return Get<string>("owin.RequestProtocol");
+                return Get<string>(OwinConstants.RequestProtocol);
             }
             set
             {
-                Set("owin.RequestProtocol", value);
+                Set(OwinConstants.RequestProtocol, value);
             }
         }
 
@@ -252,25 +252,26 @@ namespace Microsoft.Owin
         {
             get
             {
-                return new QueryString(Get<string>("owin.RequestQueryString"));
+                return new QueryString(Get<string>(OwinConstants.RequestQueryString));
             }
             set
             {
-                Set("owin.RequestQueryString", value.Value);
+                Set(OwinConstants.RequestQueryString, value.Value);
             }
         }
 
-        private IDictionary<string, string[]> RawHeaders => Get<IDictionary<string, string[]>>("owin.RequestHeaders");
+        private IDictionary<string, string[]> RawHeaders
+            => Get<IDictionary<string, string[]>>(OwinConstants.RequestHeaders);
 
         public virtual string RemoteIpAddress
         {
             get
             {
-                return Get<string>("server.RemoteIpAddress");
+                return Get<string>(OwinConstants.CommonKeys.RemoteIpAddress);
             }
             set
             {
-                Set("server.RemoteIpAddress", value);
+                Set(OwinConstants.CommonKeys.RemoteIpAddress, value);
             }
         }
 
@@ -289,7 +290,7 @@ namespace Microsoft.Owin
                 }
                 else
                 {
-                    Environment.Remove("server.RemotePort");
+                    Environment.Remove(OwinConstants.CommonKeys.RemotePort);
                 }
             }
         }
@@ -298,11 +299,11 @@ namespace Microsoft.Owin
         {
             get
             {
-                return Get<string>("server.RemotePort");
+                return Get<string>(OwinConstants.CommonKeys.RemotePort);
             }
             set
             {
-                Set("server.RemotePort", value);
+                Set(OwinConstants.CommonKeys.RemotePort, value);
             }
         }
 
@@ -310,11 +311,11 @@ namespace Microsoft.Owin
         {
             get
             {
-                return Get<string>("owin.RequestScheme");
+                return Get<string>(OwinConstants.RequestScheme);
             }
             set
             {
-                Set("owin.RequestScheme", value);
+                Set(OwinConstants.RequestScheme, value);
             }
         }
 
@@ -324,11 +325,11 @@ namespace Microsoft.Owin
         {
             get
             {
-                return Get<IPrincipal>("server.User");
+                return Get<IPrincipal>(OwinConstants.Security.User);
             }
             set
             {
-                Set("server.User", value);
+                Set(OwinConstants.Security.User, value);
             }
         }
         

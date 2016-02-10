@@ -17,11 +17,11 @@ namespace Microsoft.Owin.BuilderProperties
         {
             get
             {
-                return Get<string>("sendfile.Version");
+                return Get<string>(OwinConstants.SendFiles.Version);
             }
             set
             {
-                Set("sendfile.Version", value);
+                Set(OwinConstants.SendFiles.Version, value);
             }
         }
 
@@ -29,11 +29,11 @@ namespace Microsoft.Owin.BuilderProperties
         {
             get
             {
-                return Get<string>("websocket.Version");
+                return Get<string>(OwinConstants.WebSocket.Version);
             }
             set
             {
-                Set("websocket.Version", value);
+                Set(OwinConstants.WebSocket.Version, value);
             }
         }
         public static Capabilities Create()

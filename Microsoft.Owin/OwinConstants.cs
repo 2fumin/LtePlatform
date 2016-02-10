@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Microsoft.Owin
+﻿namespace Microsoft.Owin
 {
-    using System;
-
     internal static class OwinConstants
     {
         public const string CallCancelled = "owin.CallCancelled";

@@ -19,11 +19,11 @@ namespace Microsoft.Owin.BuilderProperties
         {
             get
             {
-                return Get<string>("owin.Version");
+                return Get<string>(OwinConstants.OwinVersion);
             }
             set
             {
-                Set("owin.Version", value);
+                Set(OwinConstants.OwinVersion, value);
             }
         }
 
@@ -31,11 +31,11 @@ namespace Microsoft.Owin.BuilderProperties
         {
             get
             {
-                return Get<Func<IDictionary<string, object>, Task>>("builder.DefaultApp");
+                return Get<Func<IDictionary<string, object>, Task>>(OwinConstants.Builder.DefaultApp);
             }
             set
             {
-                Set("builder.DefaultApp", value);
+                Set(OwinConstants.Builder.DefaultApp, value);
             }
         }
 
@@ -43,11 +43,11 @@ namespace Microsoft.Owin.BuilderProperties
         {
             get
             {
-                return Get<Action<Delegate>>("builder.AddSignatureConversion");
+                return Get<Action<Delegate>>(OwinConstants.Builder.AddSignatureConversion);
             }
             set
             {
-                Set("builder.AddSignatureConversion", value);
+                Set(OwinConstants.Builder.AddSignatureConversion, value);
             }
         }
 
@@ -55,11 +55,11 @@ namespace Microsoft.Owin.BuilderProperties
         {
             get
             {
-                return Get<string>("host.AppName");
+                return Get<string>(OwinConstants.CommonKeys.AppName);
             }
             set
             {
-                Set("host.AppName", value);
+                Set(OwinConstants.CommonKeys.AppName, value);
             }
         }
 
@@ -67,11 +67,11 @@ namespace Microsoft.Owin.BuilderProperties
         {
             get
             {
-                return Get<TextWriter>("host.TraceOutput");
+                return Get<TextWriter>(OwinConstants.CommonKeys.TraceOutput);
             }
             set
             {
-                Set("host.TraceOutput", value);
+                Set(OwinConstants.CommonKeys.TraceOutput, value);
             }
         }
 
@@ -79,11 +79,11 @@ namespace Microsoft.Owin.BuilderProperties
         {
             get
             {
-                return Get<CancellationToken>("host.OnAppDisposing");
+                return Get<CancellationToken>(OwinConstants.CommonKeys.OnAppDisposing);
             }
             set
             {
-                Set("host.OnAppDisposing", value);
+                Set(OwinConstants.CommonKeys.OnAppDisposing, value);
             }
         }
 
@@ -91,11 +91,11 @@ namespace Microsoft.Owin.BuilderProperties
         {
             get
             {
-                return new AddressCollection(Get<IList<IDictionary<string, object>>>("host.Addresses"));
+                return new AddressCollection(Get<IList<IDictionary<string, object>>>(OwinConstants.CommonKeys.Addresses));
             }
             set
             {
-                Set("host.Addresses", value.List);
+                Set(OwinConstants.CommonKeys.Addresses, value.List);
             }
         }
 
@@ -103,11 +103,11 @@ namespace Microsoft.Owin.BuilderProperties
         {
             get
             {
-                return new Capabilities(Get<IDictionary<string, object>>("server.Capabilities"));
+                return new Capabilities(Get<IDictionary<string, object>>(OwinConstants.CommonKeys.Capabilities));
             }
             set
             {
-                Set("server.Capabilities", value.Dictionary);
+                Set(OwinConstants.CommonKeys.Capabilities, value.Dictionary);
             }
         }
 
