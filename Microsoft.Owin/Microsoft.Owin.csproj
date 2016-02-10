@@ -43,9 +43,15 @@
     <Compile Include="CookieOptions.cs" />
     <Compile Include="FormCollection.cs" />
     <Compile Include="IAppBuilder.cs" />
+    <Compile Include="IFormCollection.cs" />
     <Compile Include="Infrastructure\OwinHelpers.cs" />
+    <Compile Include="IOwinContext.cs" />
+    <Compile Include="IOwinRequest.cs" />
+    <Compile Include="IReadableStringCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadableStringCollection.cs" />
+    <Compile Include="Security\AuthenticateResult.cs" />
+    <Compile Include="Security\IAuthenticationManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
