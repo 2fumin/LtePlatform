@@ -1,27 +1,32 @@
+ï»¿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace LtePlatform.Models
 {
     public class ResetPasswordViewModel
     {
         [Required]
-        [Display(Name = "ÓÃ»§Ãû")]
+        [Display(Name = "ç”¨æˆ·å")]
         public string UserName { get; set; }
 
         [Required]
         [EmailAddress]
-        [Display(Name = "µç×ÓÓÊ¼ş")]
+        [Display(Name = "ç”µå­é‚®ä»¶")]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "{0} ±ØĞëÖÁÉÙ°üº¬ {2} ¸ö×Ö·û¡£", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "{0} å¿…é¡»è‡³å°‘åŒ…å« {2} ä¸ªå­—ç¬¦ã€‚", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "ÃÜÂë")]
+        [Display(Name = "å¯†ç ")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "È·ÈÏÃÜÂë")]
-        [Compare("Password", ErrorMessage = "ÃÜÂëºÍÈ·ÈÏÃÜÂë²»Æ¥Åä¡£")]
+        [Display(Name = "ç¡®è®¤å¯†ç ")]
+        [Compare("Password", ErrorMessage = "å¯†ç å’Œç¡®è®¤å¯†ç ä¸åŒ¹é…ã€‚")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
