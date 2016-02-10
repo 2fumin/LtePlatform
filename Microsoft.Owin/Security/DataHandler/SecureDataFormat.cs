@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Owin.Security.DataHandler.Encoder;
+using Microsoft.Owin.Security.DataHandler.Serializer;
+using Microsoft.Owin.Security.DataProtection;
 
 namespace Microsoft.Owin.Security.DataHandler
 {
-    using Microsoft.Owin.Security;
-    using Microsoft.Owin.Security.DataHandler.Encoder;
-    using Microsoft.Owin.Security.DataHandler.Serializer;
-    using Microsoft.Owin.Security.DataProtection;
-    using System;
-
     public class SecureDataFormat<TData> : ISecureDataFormat<TData>
     {
         private readonly ITextEncoder _encoder;
@@ -20,16 +12,16 @@ namespace Microsoft.Owin.Security.DataHandler
 
         public SecureDataFormat(IDataSerializer<TData> serializer, IDataProtector protector, ITextEncoder encoder)
         {
-            this._serializer = serializer;
-            this._protector = protector;
-            this._encoder = encoder;
+            _serializer = serializer;
+            _protector = protector;
+            _encoder = encoder;
         }
 
         public string Protect(TData data)
         {
-            byte[] userData = this._serializer.Serialize(data);
-            byte[] buffer2 = this._protector.Protect(userData);
-            return this._encoder.Encode(buffer2);
+            var userData = _serializer.Serialize(data);
+            var buffer2 = _protector.Protect(userData);
+            return _encoder.Encode(buffer2);
         }
 
         public TData Unprotect(string protectedText)
@@ -40,17 +32,13 @@ namespace Microsoft.Owin.Security.DataHandler
                 {
                     return default(TData);
                 }
-                byte[] protectedData = this._encoder.Decode(protectedText);
+                var protectedData = _encoder.Decode(protectedText);
                 if (protectedData == null)
                 {
                     return default(TData);
                 }
-                byte[] data = this._protector.Unprotect(protectedData);
-                if (data == null)
-                {
-                    return default(TData);
-                }
-                return this._serializer.Deserialize(data);
+                var data = _protector.Unprotect(protectedData);
+                return data == null ? default(TData) : _serializer.Deserialize(data);
             }
             catch
             {

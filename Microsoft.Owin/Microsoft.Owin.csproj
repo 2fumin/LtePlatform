@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IdentityModel" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -123,9 +124,15 @@
     <Compile Include="Security\CertificateThumbprintValidator.cs" />
     <Compile Include="Security\Constants.cs" />
     <Compile Include="Security\DataHandler\Encoder\Base64TextEncoder.cs" />
+    <Compile Include="Security\DataHandler\Encoder\Base64UrlTextEncoder.cs" />
     <Compile Include="Security\DataHandler\Encoder\ITextEncoder.cs" />
+    <Compile Include="Security\DataHandler\Encoder\TextEncodings.cs" />
     <Compile Include="Security\DataHandler\PropertiesDataFormat.cs" />
     <Compile Include="Security\DataHandler\SecureDataFormat.cs" />
+    <Compile Include="Security\DataHandler\Serializer\DataSerializers.cs" />
+    <Compile Include="Security\DataHandler\Serializer\IDataSerializer.cs" />
+    <Compile Include="Security\DataHandler\Serializer\PropertiesSerializer.cs" />
+    <Compile Include="Security\DataHandler\Serializer\TicketSerializer.cs" />
     <Compile Include="Security\DataProtection\AppBuilderExtensions.cs" />
     <Compile Include="Security\DataProtection\DpapiDataProtectionProvider.cs" />
     <Compile Include="Security\DataProtection\DpapiDataProtector.cs" />
@@ -133,6 +140,7 @@
     <Compile Include="Security\DataProtection\IDataProtector.cs" />
     <Compile Include="Security\IAuthenticationManager.cs" />
     <Compile Include="Security\ICertificateValidator.cs" />
+    <Compile Include="Security\Infrastructure\AuthenticationHandler.cs" />
     <Compile Include="Security\SubjectPublicKeyInfoAlgorithm.cs" />
     <Compile Include="Win32\NativeMethods.cs" />
   </ItemGroup>
