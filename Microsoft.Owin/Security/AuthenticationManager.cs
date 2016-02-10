@@ -193,22 +193,13 @@ namespace Microsoft.Owin.Security
             get
             {
                 var challengeEntry = ChallengeEntry;
-                if (challengeEntry == null)
-                {
-                    return null;
-                }
-                return new AuthenticationResponseChallenge(challengeEntry.Item1, new AuthenticationProperties(challengeEntry.Item2));
+                return challengeEntry == null
+                    ? null
+                    : new AuthenticationResponseChallenge(challengeEntry.Item1,
+                        new AuthenticationProperties(challengeEntry.Item2));
             }
-            set
-            {
-                if (value == null)
-                {
-                    ChallengeEntry = null;
-                }
-                else
-                {
-                    ChallengeEntry = Tuple.Create(value.AuthenticationTypes, value.Properties.Dictionary);
-                }
+            set {
+                ChallengeEntry = value == null ? null : Tuple.Create(value.AuthenticationTypes, value.Properties.Dictionary);
             }
         }
 

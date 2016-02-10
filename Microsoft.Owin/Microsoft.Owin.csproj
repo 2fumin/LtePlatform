@@ -105,15 +105,18 @@
     <Compile Include="QueryString.cs" />
     <Compile Include="ReadableStringCollection.cs" />
     <Compile Include="RequestCookieCollection.cs" />
-    <Compile Include="Resources.cs" />
     <Compile Include="ResponseCookieCollection.cs" />
+    <Compile Include="Security\AppBuilderSecurityExtensions.cs" />
     <Compile Include="Security\AuthenticateResult.cs" />
     <Compile Include="Security\AuthenticationDescription.cs" />
     <Compile Include="Security\AuthenticationManager.cs" />
+    <Compile Include="Security\AuthenticationMode.cs" />
+    <Compile Include="Security\AuthenticationOptions.cs" />
     <Compile Include="Security\AuthenticationProperties.cs" />
     <Compile Include="Security\AuthenticationResponseChallenge.cs" />
     <Compile Include="Security\AuthenticationResponseGrant.cs" />
     <Compile Include="Security\AuthenticationResponseRevoke.cs" />
+    <Compile Include="Security\Constants.cs" />
     <Compile Include="Security\IAuthenticationManager.cs" />
   </ItemGroup>
   <ItemGroup>

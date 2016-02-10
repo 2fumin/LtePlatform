@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Runtime.InteropServices;
+using Microsoft.Owin.Properties;
 
 namespace Microsoft.Owin
 {

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Owin.Infrastructure;
+using Microsoft.Owin.Properties;
 
 namespace Microsoft.Owin
 {

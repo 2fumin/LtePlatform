@@ -61,6 +61,15 @@ namespace Microsoft.Owin.Properties {
         }
         
         /// <summary>
+        ///   查找类似 The AuthenticationTokenProvider&apos;s required synchronous events have not been registered. 的本地化字符串。
+        /// </summary>
+        internal static string Exception_AuthenticationTokenDoesNotProvideSyncMethods {
+            get {
+                return ResourceManager.GetString("Exception_AuthenticationTokenDoesNotProvideSyncMethods", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Conversion delegate must take one parameter. 的本地化字符串。
         /// </summary>
         internal static string Exception_ConversionTakesOneParameter {
@@ -79,6 +88,15 @@ namespace Microsoft.Owin.Properties {
         }
         
         /// <summary>
+        ///   查找类似 The default data protection provider may only be used when the IAppBuilder.Properties contains an appropriate &apos;host.AppName&apos; key. 的本地化字符串。
+        /// </summary>
+        internal static string Exception_DefaultDpapiRequiresAppNameKey {
+            get {
+                return ResourceManager.GetString("Exception_DefaultDpapiRequiresAppNameKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 The chunked cookie is incomplete. Only {0} of the expected {1} chunks were found, totaling {2} characters. A client size limit may have been exceeded. 的本地化字符串。
         /// </summary>
         internal static string Exception_ImcompleteChunkedCookie {
@@ -93,6 +111,15 @@ namespace Microsoft.Owin.Properties {
         internal static string Exception_MiddlewareNotSupported {
             get {
                 return ResourceManager.GetString("Exception_MiddlewareNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 A default value for SignInAsAuthenticationType was not found in IAppBuilder Properties. This can happen if your authentication middleware are added in the wrong order, or if one is missing. 的本地化字符串。
+        /// </summary>
+        internal static string Exception_MissingDefaultSignInAsAuthenticationType {
+            get {
+                return ResourceManager.GetString("Exception_MissingDefaultSignInAsAuthenticationType", resourceCulture);
             }
         }
         
@@ -156,6 +183,15 @@ namespace Microsoft.Owin.Properties {
         internal static string Exception_QueryStringMustStartWithDelimiter {
             get {
                 return ResourceManager.GetString("Exception_QueryStringMustStartWithDelimiter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 The state passed to UnhookAuthentication may only be the return value from HookAuthentication. 的本地化字符串。
+        /// </summary>
+        internal static string Exception_UnhookAuthenticationStateType {
+            get {
+                return ResourceManager.GetString("Exception_UnhookAuthenticationStateType", resourceCulture);
             }
         }
     }

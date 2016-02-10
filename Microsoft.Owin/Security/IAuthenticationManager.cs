@@ -31,7 +31,7 @@ namespace Microsoft.Owin.Security
 
         AuthenticationResponseGrant AuthenticationResponseGrant { get; set; }
 
-        Security.AuthenticationResponseRevoke AuthenticationResponseRevoke { get; set; }
+        AuthenticationResponseRevoke AuthenticationResponseRevoke { get; set; }
 
         ClaimsPrincipal User { get; set; }
     }

@@ -117,17 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Exception_AuthenticationTokenDoesNotProvideSyncMethods" xml:space="preserve">
+    <value>The AuthenticationTokenProvider's required synchronous events have not been registered.</value>
+  </data>
   <data name="Exception_ConversionTakesOneParameter" xml:space="preserve">
     <value>Conversion delegate must take one parameter.</value>
   </data>
   <data name="Exception_CookieLimitTooSmall" xml:space="preserve">
     <value>The cookie key and options are larger than ChunksSize, leaving no room for data.</value>
   </data>
+  <data name="Exception_DefaultDpapiRequiresAppNameKey" xml:space="preserve">
+    <value>The default data protection provider may only be used when the IAppBuilder.Properties contains an appropriate 'host.AppName' key.</value>
+  </data>
   <data name="Exception_ImcompleteChunkedCookie" xml:space="preserve">
     <value>The chunked cookie is incomplete. Only {0} of the expected {1} chunks were found, totaling {2} characters. A client size limit may have been exceeded.</value>
   </data>
   <data name="Exception_MiddlewareNotSupported" xml:space="preserve">
     <value>The type '{0}' does not match any known middleware pattern.</value>
+  </data>
+  <data name="Exception_MissingDefaultSignInAsAuthenticationType" xml:space="preserve">
+    <value>A default value for SignInAsAuthenticationType was not found in IAppBuilder Properties. This can happen if your authentication middleware are added in the wrong order, or if one is missing.</value>
   </data>
   <data name="Exception_MissingOnSendingHeaders" xml:space="preserve">
     <value>The OWIN key 'server.OnSendingHeaders' is not available for this request.</value>
@@ -149,5 +158,8 @@
   </data>
   <data name="Exception_QueryStringMustStartWithDelimiter" xml:space="preserve">
     <value>The query string must start with a '?' unless null or empty.</value>
+  </data>
+  <data name="Exception_UnhookAuthenticationStateType" xml:space="preserve">
+    <value>The state passed to UnhookAuthentication may only be the return value from HookAuthentication.</value>
   </data>
 </root>

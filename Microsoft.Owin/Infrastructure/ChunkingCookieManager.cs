@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Microsoft.Owin.Properties;
 
 namespace Microsoft.Owin.Infrastructure
 {
