@@ -15,7 +15,6 @@
 
 using System;
 using System.IO;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MongoDB.Bson;
@@ -58,16 +57,10 @@ namespace MongoDB.Driver.GridFS
 
         // properties
         /// <inheritdoc />
-        public IMongoDatabase Database
-        {
-            get { return _database; }
-        }
+        public IMongoDatabase Database => _database;
 
         /// <inheritdoc />
-        public ImmutableGridFSBucketOptions Options
-        {
-            get { return _options; }
-        }
+        public ImmutableGridFSBucketOptions Options => _options;
 
         // methods
         /// <summary>

@@ -163,13 +163,13 @@ namespace Microsoft.Owin.Infrastructure
 
         internal static string GetHost(IOwinRequest request)
         {
-            var header = GetHeader(request.Headers, "Host");
+            var header = GetHeader(request.Headers, Constants.Headers.Host);
             if (!string.IsNullOrWhiteSpace(header))
             {
                 return header;
             }
             var str2 = request.LocalIpAddress ?? "localhost";
-            var str3 = request.Get<string>("server.LocalPort");
+            var str3 = request.Get<string>(OwinConstants.CommonKeys.LocalPort);
             if (!string.IsNullOrWhiteSpace(str3))
             {
                 return (str2 + ":" + str3);

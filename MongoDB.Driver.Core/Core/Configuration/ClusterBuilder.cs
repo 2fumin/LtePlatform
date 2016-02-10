@@ -14,8 +14,6 @@
 */
 
 using System;
-using System.Linq;
-using System.Reflection;
 using MongoDB.Driver.Core.Clusters;
 using MongoDB.Driver.Core.ConnectionPools;
 using MongoDB.Driver.Core.Connections;
