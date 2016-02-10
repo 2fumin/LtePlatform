@@ -1,59 +1,45 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Owin.Infrastructure;
 
 namespace Microsoft.Owin
 {
-    using Microsoft.Owin.Infrastructure;
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
-
-    public class ReadableStringCollection : IReadableStringCollection, IEnumerable<KeyValuePair<string, string[]>>, IEnumerable
+    public class ReadableStringCollection : IReadableStringCollection, IEnumerable
     {
         public ReadableStringCollection(IDictionary<string, string[]> store)
         {
             if (store == null)
             {
-                throw new ArgumentNullException("store");
+                throw new ArgumentNullException(nameof(store));
             }
-            this.Store = store;
+            Store = store;
         }
 
         public string Get(string key)
         {
-            return OwinHelpers.GetJoinedValue(this.Store, key);
+            return OwinHelpers.GetJoinedValue(Store, key);
         }
 
         public IEnumerator<KeyValuePair<string, string[]>> GetEnumerator()
         {
-            return this.Store.GetEnumerator();
+            return Store.GetEnumerator();
         }
 
         public IList<string> GetValues(string key)
         {
             string[] strArray;
-            this.Store.TryGetValue(key, out strArray);
+            Store.TryGetValue(key, out strArray);
             return strArray;
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return this.GetEnumerator();
+            return GetEnumerator();
         }
 
-        public string this[string key]
-        {
-            get
-            {
-                return this.Get(key);
-            }
-        }
+        public string this[string key] => Get(key);
 
-        private IDictionary<string, string[]> Store { get; set; }
+        private IDictionary<string, string[]> Store { get; }
     }
 }
