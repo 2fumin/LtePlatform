@@ -60,6 +60,7 @@
             public const string SignOut = "security.SignOut";
             public const string SignOutProperties = "security.SignOutProperties";
             public const string User = "server.User";
+            public const string DataProtectionProvider = "security.DataProtectionProvider";
         }
 
         internal static class SendFiles

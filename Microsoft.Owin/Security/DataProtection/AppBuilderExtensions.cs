@@ -1,29 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Owin.Properties;
 
 namespace Microsoft.Owin.Security.DataProtection
 {
-    using Microsoft.Owin.Security;
-    using Owin;
-    using System;
-    using System.Runtime.CompilerServices;
-
     public static class AppBuilderExtensions
     {
         public static IDataProtector CreateDataProtector(this IAppBuilder app, params string[] purposes)
         {
             if (app == null)
             {
-                throw new ArgumentNullException("app");
+                throw new ArgumentNullException(nameof(app));
             }
-            IDataProtectionProvider dataProtectionProvider = app.GetDataProtectionProvider();
-            if (dataProtectionProvider == null)
-            {
-                dataProtectionProvider = FallbackDataProtectionProvider(app);
-            }
+            var dataProtectionProvider = app.GetDataProtectionProvider() ?? FallbackDataProtectionProvider(app);
             return dataProtectionProvider.Create(purposes);
         }
 
@@ -35,13 +23,12 @@ namespace Microsoft.Owin.Security.DataProtection
         private static string GetAppName(IAppBuilder app)
         {
             object obj2;
-            if (app.Properties.TryGetValue("host.AppName", out obj2))
+            if (!app.Properties.TryGetValue(OwinConstants.CommonKeys.AppName, out obj2))
+                throw new NotSupportedException(Resources.Exception_DefaultDpapiRequiresAppNameKey);
+            var str = obj2 as string;
+            if (!string.IsNullOrEmpty(str))
             {
-                string str = obj2 as string;
-                if (!string.IsNullOrEmpty(str))
-                {
-                    return str;
-                }
+                return str;
             }
             throw new NotSupportedException(Resources.Exception_DefaultDpapiRequiresAppNameKey);
         }
@@ -51,40 +38,31 @@ namespace Microsoft.Owin.Security.DataProtection
             object obj2;
             if (app == null)
             {
-                throw new ArgumentNullException("app");
+                throw new ArgumentNullException(nameof(app));
             }
-            if (app.Properties.TryGetValue("security.DataProtectionProvider", out obj2))
-            {
-                Func<string[], Tuple<Func<byte[], byte[]>, Func<byte[], byte[]>>> create = obj2 as Func<string[], Tuple<Func<byte[], byte[]>, Func<byte[], byte[]>>>;
-                if (create != null)
-                {
-                    return new CallDataProtectionProvider(create);
-                }
-            }
-            return null;
+            if (!app.Properties.TryGetValue(OwinConstants.Security.DataProtectionProvider, out obj2)) return null;
+            var create = obj2 as Func<string[], Tuple<Func<byte[], byte[]>, Func<byte[], byte[]>>>;
+            return create != null ? new CallDataProtectionProvider(create) : null;
         }
 
         public static void SetDataProtectionProvider(this IAppBuilder app, IDataProtectionProvider dataProtectionProvider)
         {
-            Func<string[], Tuple<Func<byte[], byte[]>, Func<byte[], byte[]>>> func = null;
             if (app == null)
             {
-                throw new ArgumentNullException("app");
+                throw new ArgumentNullException(nameof(app));
             }
             if (dataProtectionProvider == null)
             {
-                app.Properties.Remove("security.DataProtectionProvider");
+                app.Properties.Remove(OwinConstants.Security.DataProtectionProvider);
             }
             else
             {
-                if (func == null)
+                Func<string[], Tuple<Func<byte[], byte[]>, Func<byte[], byte[]>>> func = delegate(string[] purposes)
                 {
-                    func = delegate (string[] purposes) {
-                        IDataProtector protector = dataProtectionProvider.Create(purposes);
-                        return new Tuple<Func<byte[], byte[]>, Func<byte[], byte[]>>(new Func<byte[], byte[]>(protector.Protect), new Func<byte[], byte[]>(protector.Unprotect));
-                    };
-                }
-                app.Properties["security.DataProtectionProvider"] = func;
+                    var protector = dataProtectionProvider.Create(purposes);
+                    return new Tuple<Func<byte[], byte[]>, Func<byte[], byte[]>>(protector.Protect, protector.Unprotect);
+                };
+                app.Properties[OwinConstants.Security.DataProtectionProvider] = func;
             }
         }
 
@@ -94,12 +72,12 @@ namespace Microsoft.Owin.Security.DataProtection
 
             public CallDataProtectionProvider(Func<string[], Tuple<Func<byte[], byte[]>, Func<byte[], byte[]>>> create)
             {
-                this._create = create;
+                _create = create;
             }
 
             public IDataProtector Create(params string[] purposes)
             {
-                Tuple<Func<byte[], byte[]>, Func<byte[], byte[]>> tuple = this._create(purposes);
+                var tuple = _create(purposes);
                 return new CallDataProtection(tuple.Item1, tuple.Item2);
             }
 
@@ -110,18 +88,18 @@ namespace Microsoft.Owin.Security.DataProtection
 
                 public CallDataProtection(Func<byte[], byte[]> protect, Func<byte[], byte[]> unprotect)
                 {
-                    this._protect = protect;
-                    this._unprotect = unprotect;
+                    _protect = protect;
+                    _unprotect = unprotect;
                 }
 
                 public byte[] Protect(byte[] userData)
                 {
-                    return this._protect(userData);
+                    return _protect(userData);
                 }
 
                 public byte[] Unprotect(byte[] protectedData)
                 {
-                    return this._unprotect(protectedData);
+                    return _unprotect(protectedData);
                 }
             }
         }
