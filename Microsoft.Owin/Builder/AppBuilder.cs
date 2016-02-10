@@ -129,11 +129,7 @@ namespace Microsoft.Owin.Builder
         private static Type GetParameterType(Delegate function)
         {
             var parameters = function.Method.GetParameters();
-            if (parameters.Length < 1)
-            {
-                return null;
-            }
-            return parameters[0].ParameterType;
+            return parameters.Length < 1 ? null : parameters[0].ParameterType;
         }
 
         public IAppBuilder New()
