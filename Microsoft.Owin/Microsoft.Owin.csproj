@@ -51,6 +51,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadableStringCollection.cs" />
     <Compile Include="Security\AuthenticateResult.cs" />
+    <Compile Include="Security\AuthenticationDescription.cs" />
+    <Compile Include="Security\AuthenticationProperties.cs" />
     <Compile Include="Security\IAuthenticationManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

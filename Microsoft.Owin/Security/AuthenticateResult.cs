@@ -10,18 +10,18 @@ namespace Microsoft.Owin.Security
         {
             if (properties == null)
             {
-                throw new ArgumentNullException("properties");
+                throw new ArgumentNullException(nameof(properties));
             }
             if (description == null)
             {
-                throw new ArgumentNullException("description");
+                throw new ArgumentNullException(nameof(description));
             }
             if (identity != null)
             {
-                this.Identity = (identity as ClaimsIdentity) ?? new ClaimsIdentity(identity);
+                Identity = (identity as ClaimsIdentity) ?? new ClaimsIdentity(identity);
             }
-            this.Properties = properties;
-            this.Description = description;
+            Properties = properties;
+            Description = description;
         }
 
         public AuthenticationDescription Description { get; private set; }
