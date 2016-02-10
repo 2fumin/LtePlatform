@@ -1,4 +1,9 @@
+ï»¿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace LtePlatform.Models
 {
@@ -8,11 +13,11 @@ namespace LtePlatform.Models
         public string Provider { get; set; }
 
         [Required]
-        [Display(Name = "´úÂë")]
+        [Display(Name = "ä»£ç ")]
         public string Code { get; set; }
         public string ReturnUrl { get; set; }
 
-        [Display(Name = "¼Ç×¡´Ëä¯ÀÀÆ÷?")]
+        [Display(Name = "è®°ä½æ­¤æµè§ˆå™¨?")]
         public bool RememberBrowser { get; set; }
 
         public bool RememberMe { get; set; }
