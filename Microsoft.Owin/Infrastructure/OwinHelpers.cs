@@ -22,7 +22,7 @@ namespace Microsoft.Owin.Infrastructure
                     dictionary.Add(name, value);
                 }
             };
-            SemicolonAndComma = new char[] { ';', ',' };
+            SemicolonAndComma = new[] { ';', ',' };
             AppendItemCallback = delegate (string name, string value, object state) {
                 List<string> list;
                 IDictionary<string, List<string>> dictionary = (IDictionary<string, List<string>>)state;
@@ -35,7 +35,7 @@ namespace Microsoft.Owin.Infrastructure
                     list.Add(value);
                 }
             };
-            AmpersandAndSemicolon = new char[] { '&', ';' };
+            AmpersandAndSemicolon = new[] { '&', ';' };
         }
 
         public static void AppendHeader(IDictionary<string, string[]> headers, string key, string values)
@@ -49,7 +49,7 @@ namespace Microsoft.Owin.Infrastructure
                 }
                 else
                 {
-                    headers[key] = new string[] { header + "," + values };
+                    headers[key] = new[] { header + "," + values };
                 }
             }
         }
@@ -65,7 +65,7 @@ namespace Microsoft.Owin.Infrastructure
                 }
                 else
                 {
-                    headers[key] = new string[] { header + "," + string.Join(",", (IEnumerable<string>)(from value in values select QuoteIfNeeded(value))) };
+                    headers[key] = new[] { header + "," + string.Join(",", (IEnumerable<string>)(from value in values select QuoteIfNeeded(value))) };
                 }
             }
         }
@@ -81,7 +81,7 @@ namespace Microsoft.Owin.Infrastructure
                 }
                 else
                 {
-                    SetHeaderUnmodified(headers, key, headerUnmodified.Concat<string>(values));
+                    SetHeaderUnmodified(headers, key, headerUnmodified.Concat(values));
                 }
             }
         }
@@ -101,15 +101,13 @@ namespace Microsoft.Owin.Infrastructure
             if (dictionary == null)
             {
                 dictionary = new Dictionary<string, string>(StringComparer.Ordinal);
-                request.Set<IDictionary<string, string>>("Microsoft.Owin.Cookies#dictionary", dictionary);
+                request.Set("Microsoft.Owin.Cookies#dictionary", dictionary);
             }
             string header = GetHeader(request.Headers, "Cookie");
-            if (request.Get<string>("Microsoft.Owin.Cookies#text") != header)
-            {
-                dictionary.Clear();
-                ParseDelimited(header, SemicolonAndComma, AddCookieCallback, dictionary);
-                request.Set<string>("Microsoft.Owin.Cookies#text", header);
-            }
+            if (request.Get<string>("Microsoft.Owin.Cookies#text") == header) return dictionary;
+            dictionary.Clear();
+            ParseDelimited(header, SemicolonAndComma, AddCookieCallback, dictionary);
+            request.Set("Microsoft.Owin.Cookies#text", header);
             return dictionary;
         }
 
@@ -117,7 +115,7 @@ namespace Microsoft.Owin.Infrastructure
         {
             IDictionary<string, string[]> store = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase);
             Dictionary<string, List<string>> state = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase);
-            ParseDelimited(text, new char[] { '&' }, AppendItemCallback, state);
+            ParseDelimited(text, new[] { '&' }, AppendItemCallback, state);
             foreach (KeyValuePair<string, List<string>> pair in state)
             {
                 store.Add(pair.Key, pair.Value.ToArray());
@@ -202,7 +200,7 @@ namespace Microsoft.Owin.Infrastructure
             if (dictionary == null)
             {
                 dictionary = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase);
-                request.Set<IDictionary<string, string[]>>("Microsoft.Owin.Query#dictionary", dictionary);
+                request.Set("Microsoft.Owin.Query#dictionary", dictionary);
             }
             string text = request.QueryString.Value;
             if (request.Get<string>("Microsoft.Owin.Query#text") != text)
@@ -214,7 +212,7 @@ namespace Microsoft.Owin.Infrastructure
                 {
                     dictionary.Add(pair.Key, pair.Value.ToArray());
                 }
-                request.Set<string>("Microsoft.Owin.Query#text", text);
+                request.Set("Microsoft.Owin.Query#text", text);
             }
             return dictionary;
         }
@@ -269,7 +267,7 @@ namespace Microsoft.Owin.Infrastructure
 
         private static string QuoteIfNeeded(string value)
         {
-            if ((!string.IsNullOrWhiteSpace(value) && value.Contains<char>(',')) && ((value[0] != '"') || (value[value.Length - 1] != '"')))
+            if ((!string.IsNullOrWhiteSpace(value) && value.Contains(',')) && ((value[0] != '"') || (value[value.Length - 1] != '"')))
             {
                 value = '"' + value + '"';
             }
@@ -292,7 +290,7 @@ namespace Microsoft.Owin.Infrastructure
             }
             else
             {
-                headers[key] = new string[] { value };
+                headers[key] = new[] { value };
             }
         }
 
@@ -312,7 +310,7 @@ namespace Microsoft.Owin.Infrastructure
             }
             else
             {
-                headers[key] = new string[] { string.Join(",", (IEnumerable<string>)(from value in values select QuoteIfNeeded(value))) };
+                headers[key] = new[] { string.Join(",", (IEnumerable<string>)(from value in values select QuoteIfNeeded(value))) };
             }
         }
 
@@ -322,7 +320,7 @@ namespace Microsoft.Owin.Infrastructure
             {
                 throw new ArgumentNullException("headers");
             }
-            headers[key] = values.ToArray<string>();
+            headers[key] = values.ToArray();
         }
 
         public static void SetHeaderUnmodified(IDictionary<string, string[]> headers, string key, params string[] values)
