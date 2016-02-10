@@ -27,9 +27,9 @@ namespace Microsoft.Owin.Security
 
         void SignOut(AuthenticationProperties properties, params string[] authenticationTypes);
 
-        Security.AuthenticationResponseChallenge AuthenticationResponseChallenge { get; set; }
+        AuthenticationResponseChallenge AuthenticationResponseChallenge { get; set; }
 
-        Security.AuthenticationResponseGrant AuthenticationResponseGrant { get; set; }
+        AuthenticationResponseGrant AuthenticationResponseGrant { get; set; }
 
         Security.AuthenticationResponseRevoke AuthenticationResponseRevoke { get; set; }
 

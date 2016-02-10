@@ -47,12 +47,16 @@
     <Compile Include="Infrastructure\OwinHelpers.cs" />
     <Compile Include="IOwinContext.cs" />
     <Compile Include="IOwinRequest.cs" />
+    <Compile Include="IOwinResponse.cs" />
     <Compile Include="IReadableStringCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadableStringCollection.cs" />
     <Compile Include="Security\AuthenticateResult.cs" />
     <Compile Include="Security\AuthenticationDescription.cs" />
     <Compile Include="Security\AuthenticationProperties.cs" />
+    <Compile Include="Security\AuthenticationResponseChallenge.cs" />
+    <Compile Include="Security\AuthenticationResponseGrant.cs" />
+    <Compile Include="Security\AuthenticationResponseRevoke.cs" />
     <Compile Include="Security\IAuthenticationManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
