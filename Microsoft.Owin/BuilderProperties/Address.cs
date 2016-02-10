@@ -25,44 +25,44 @@ namespace Microsoft.Owin.BuilderProperties
         {
             get
             {
-                return Get<string>("scheme");
+                return Get<string>(OwinConstants.CommonKeys.Scheme);
             }
             set
             {
-                Set("scheme", value);
+                Set(OwinConstants.CommonKeys.Scheme, value);
             }
         }
         public string Host
         {
             get
             {
-                return Get<string>("host");
+                return Get<string>(OwinConstants.CommonKeys.Host);
             }
             set
             {
-                Set("host", value);
+                Set(OwinConstants.CommonKeys.Host, value);
             }
         }
         public string Port
         {
             get
             {
-                return Get<string>("port");
+                return Get<string>(OwinConstants.CommonKeys.Port);
             }
             set
             {
-                Set("port", value);
+                Set(OwinConstants.CommonKeys.Port, value);
             }
         }
         public string Path
         {
             get
             {
-                return Get<string>("path");
+                return Get<string>(OwinConstants.CommonKeys.Path);
             }
             set
             {
-                Set("path", value);
+                Set(OwinConstants.CommonKeys.Path, value);
             }
         }
         public static Address Create()

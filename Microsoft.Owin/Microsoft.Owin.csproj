@@ -116,8 +116,19 @@
     <Compile Include="Security\AuthenticationResponseChallenge.cs" />
     <Compile Include="Security\AuthenticationResponseGrant.cs" />
     <Compile Include="Security\AuthenticationResponseRevoke.cs" />
+    <Compile Include="Security\AuthenticationTicket.cs" />
+    <Compile Include="Security\CertificateSubjectKeyIdentifierValidator.cs" />
+    <Compile Include="Security\CertificateSubjectPublicKeyInfoValidator.cs" />
+    <Compile Include="Security\CertificateThumbprintValidator.cs" />
     <Compile Include="Security\Constants.cs" />
+    <Compile Include="Security\DataHandler\PropertiesDataFormat.cs" />
+    <Compile Include="Security\DataProtection\AppBuilderExtensions.cs" />
+    <Compile Include="Security\DataProtection\IDataProtectionProvider.cs" />
+    <Compile Include="Security\DataProtection\IDataProtector.cs" />
     <Compile Include="Security\IAuthenticationManager.cs" />
+    <Compile Include="Security\ICertificateValidator.cs" />
+    <Compile Include="Security\SubjectPublicKeyInfoAlgorithm.cs" />
+    <Compile Include="Win32\NativeMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
