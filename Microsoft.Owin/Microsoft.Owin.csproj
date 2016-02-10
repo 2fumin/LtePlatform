@@ -149,7 +149,16 @@
     <Compile Include="Security\Infrastructure\IAuthenticationTokenProvider.cs" />
     <Compile Include="Security\Infrastructure\OwinRequestExtensions.cs" />
     <Compile Include="Security\Infrastructure\SecurityHelper.cs" />
+    <Compile Include="Security\Notifications\AuthenticationFailedNotification.cs" />
+    <Compile Include="Security\Notifications\BaseNotification.cs" />
+    <Compile Include="Security\Notifications\MessageReceivedNotification.cs" />
+    <Compile Include="Security\Notifications\NotificationResultState.cs" />
+    <Compile Include="Security\Notifications\RedirectToIdentityProviderNotification.cs" />
+    <Compile Include="Security\Notifications\SecurityTokenReceivedNotification.cs" />
+    <Compile Include="Security\Notifications\SecurityTokenValidatedNotification.cs" />
     <Compile Include="Security\Provider\BaseContext.cs" />
+    <Compile Include="Security\Provider\EndpointContext.cs" />
+    <Compile Include="Security\Provider\ReturnEndpointContext.cs" />
     <Compile Include="Security\SubjectPublicKeyInfoAlgorithm.cs" />
     <Compile Include="Win32\NativeMethods.cs" />
   </ItemGroup>
