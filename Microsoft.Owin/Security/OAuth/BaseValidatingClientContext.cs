@@ -2,9 +2,10 @@
 {
     public abstract class BaseValidatingClientContext : BaseValidatingContext<OAuthAuthorizationServerOptions>
     {
-        protected BaseValidatingClientContext(IOwinContext context, OAuthAuthorizationServerOptions options, string clientId) : base(context, options)
+        protected BaseValidatingClientContext(IOwinContext context, OAuthAuthorizationServerOptions options, 
+            string clientId) : base(context, options)
         {
-            this.ClientId = clientId;
+            ClientId = clientId;
         }
 
         public string ClientId { get; protected set; }

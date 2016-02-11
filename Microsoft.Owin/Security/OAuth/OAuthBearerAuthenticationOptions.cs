@@ -1,22 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Owin.Infrastructure;
+using Microsoft.Owin.Security.Infrastructure;
 
 namespace Microsoft.Owin.Security.OAuth
 {
-    using Microsoft.Owin.Infrastructure;
-    using Microsoft.Owin.Security;
-    using Microsoft.Owin.Security.Infrastructure;
-    using System;
-    using System.Runtime.CompilerServices;
-
     public class OAuthBearerAuthenticationOptions : AuthenticationOptions
     {
         public OAuthBearerAuthenticationOptions() : base("Bearer")
         {
-            this.SystemClock = new Microsoft.Owin.Infrastructure.SystemClock();
+            this.SystemClock = new SystemClock();
         }
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; set; }
