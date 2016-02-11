@@ -43,11 +43,17 @@
   <ItemGroup>
     <Compile Include="AsyncHelper.cs" />
     <Compile Include="ClaimsIdentityFactory.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Crypto.cs" />
+    <Compile Include="DefaultAuthenticationTypes.cs" />
+    <Compile Include="EmailTokenProvider.cs" />
     <Compile Include="IClaimsIdentityFactory.cs" />
+    <Compile Include="IdentityMessage.cs" />
     <Compile Include="IdentityResult.cs" />
+    <Compile Include="IIdentityMessageService.cs" />
     <Compile Include="IIdentityValidator.cs" />
     <Compile Include="IPasswordHasher.cs" />
+    <Compile Include="IQueryableUserStore.cs" />
     <Compile Include="IUser.cs" />
     <Compile Include="IUserClaimStore.cs" />
     <Compile Include="IUserEmailStore.cs" />
@@ -61,7 +67,9 @@
     <Compile Include="IUserTokenProvider.cs" />
     <Compile Include="MinimumLengthValidator.cs" />
     <Compile Include="PasswordHasher.cs" />
+    <Compile Include="PasswordValidator.cs" />
     <Compile Include="PasswordVerificationResult.cs" />
+    <Compile Include="PhoneNumberTokenProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -69,8 +77,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Rfc6238AuthenticationService.cs" />
+    <Compile Include="RoleManager.cs" />
     <Compile Include="SecurityToken.cs" />
     <Compile Include="TaskExtensions.cs" />
+    <Compile Include="TotpSecurityStampBasedTokenProvider.cs" />
     <Compile Include="UserLoginInfo.cs" />
     <Compile Include="UserManager.cs" />
     <Compile Include="UserValidator.cs" />
