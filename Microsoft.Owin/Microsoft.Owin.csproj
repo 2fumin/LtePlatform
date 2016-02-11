@@ -64,7 +64,19 @@
     <Compile Include="HeaderDictionary.cs" />
     <Compile Include="Helpers\WebHelpers.cs" />
     <Compile Include="HostString.cs" />
+    <Compile Include="Host\SystemWeb\CallEnvironment\AspNetDictionary.cs" />
     <Compile Include="Host\SystemWeb\HttpContextItemKeys.cs" />
+    <Compile Include="Host\SystemWeb\Infrastructure\DefaultTrace.cs" />
+    <Compile Include="Host\SystemWeb\Infrastructure\DefaultTraceFactory.cs" />
+    <Compile Include="Host\SystemWeb\Infrastructure\ErrorState.cs" />
+    <Compile Include="Host\SystemWeb\Infrastructure\ITrace.cs" />
+    <Compile Include="Host\SystemWeb\Infrastructure\ITraceFactory.cs" />
+    <Compile Include="Host\SystemWeb\Infrastructure\ReferencedAssembliesWrapper.cs" />
+    <Compile Include="Host\SystemWeb\Infrastructure\TraceExtensions.cs" />
+    <Compile Include="Host\SystemWeb\Infrastructure\TraceFactory.cs" />
+    <Compile Include="Host\SystemWeb\OwinAppContext.cs" />
+    <Compile Include="Host\SystemWeb\OwinCallContext.cs" />
+    <Compile Include="Host\SystemWeb\OwinRoute.cs" />
     <Compile Include="IAppBuilder.cs" />
     <Compile Include="IFormCollection.cs" />
     <Compile Include="IHeaderDictionary.cs" />
@@ -91,6 +103,7 @@
     <Compile Include="Loader\HttpContextBaseExtensions.cs" />
     <Compile Include="Loader\HttpContextExtensions.cs" />
     <Compile Include="Loader\NullLoader.cs" />
+    <Compile Include="Loader\RouteCollectionExtensions.cs" />
     <Compile Include="Logging\AppBuilderLoggerExtensions.cs" />
     <Compile Include="Logging\DiagnosticsLogger.cs" />
     <Compile Include="Logging\DiagnosticsLoggerFactory.cs" />
@@ -238,7 +251,10 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Host\SystemWeb\CallHeaders\" />
+    <Folder Include="Host\SystemWeb\DataProtection\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
