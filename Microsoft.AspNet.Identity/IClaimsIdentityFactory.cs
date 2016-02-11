@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Microsoft.AspNet.Identity
 {
-    using System;
-    using System.Threading.Tasks;
-
     public interface IClaimsIdentityFactory<TUser> where TUser : class, IUser
     {
         Task<ClaimsIdentity> CreateAsync(UserManager<TUser> manager, TUser user, string authenticationType);
