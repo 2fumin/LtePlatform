@@ -54,6 +54,9 @@
     <Compile Include="IUserLockoutStore.cs" />
     <Compile Include="IUserLoginStore.cs" />
     <Compile Include="IUserPasswordStore.cs" />
+    <Compile Include="IUserPhoneNumberStore.cs" />
+    <Compile Include="IUserRoleStore.cs" />
+    <Compile Include="IUserSecurityStampStore.cs" />
     <Compile Include="IUserStore.cs" />
     <Compile Include="IUserTokenProvider.cs" />
     <Compile Include="MinimumLengthValidator.cs" />
@@ -65,6 +68,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Rfc6238AuthenticationService.cs" />
+    <Compile Include="SecurityToken.cs" />
     <Compile Include="TaskExtensions.cs" />
     <Compile Include="UserLoginInfo.cs" />
     <Compile Include="UserManager.cs" />

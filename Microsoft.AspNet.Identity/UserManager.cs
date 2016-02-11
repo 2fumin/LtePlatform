@@ -138,14 +138,14 @@ namespace Microsoft.AspNet.Identity
         public async virtual Task<IdentityResult> AddToRoleAsync(TKey userId, string role)
         {
             IdentityResult result;
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            IUserRoleStore<TUser, TKey> userRoleStore = ((UserManager<TUser, TKey>)this).GetUserRoleStore();
-            var user = await ((UserManager<TUser, TKey>)this).FindByIdAsync(userId).WithCurrentCulture();
+            ThrowIfDisposed();
+            var userRoleStore = GetUserRoleStore();
+            var user = await FindByIdAsync(userId).WithCurrentCulture();
             if (user == null)
             {
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.UserIdNotFound, userId));
             }
-            IList<string> userRoles = await userRoleStore.GetRolesAsync(user).WithCurrentCulture<IList<string>>();
+            var userRoles = await userRoleStore.GetRolesAsync(user).WithCurrentCulture();
             if (userRoles.Contains(role))
             {
                 result = new IdentityResult(Resources.UserAlreadyInRole);
@@ -153,45 +153,32 @@ namespace Microsoft.AspNet.Identity
             else
             {
                 await userRoleStore.AddToRoleAsync(user, role).WithCurrentCulture();
-                result = await ((UserManager<TUser, TKey>)this).UpdateAsync(user).WithCurrentCulture();
+                result = await UpdateAsync(user).WithCurrentCulture();
             }
             return result;
         }
-
-        [AsyncStateMachine(typeof(< AddToRolesAsync > d__8c)), DebuggerStepThrough]
-        public virtual Task<IdentityResult> AddToRolesAsync(TKey userId, params string[] roles)
-        {
-            < AddToRolesAsync > d__8c < TUser, TKey > d__c;
-            d__c.<> 4__this = (UserManager<TUser, TKey>)this;
-            d__c.userId = userId;
-            d__c.roles = roles;
-            d__c.<> t__builder = AsyncTaskMethodBuilder<IdentityResult>.Create();
-            d__c.<> 1__state = -1;
-            d__c.<> t__builder.Start << AddToRolesAsync > d__8c < TUser, TKey >> (ref d__c);
-            return d__c.<> t__builder.Task;
-        }
-
+        
         public async virtual Task<IdentityResult> ChangePasswordAsync(TKey userId, string currentPassword, string newPassword)
         {
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            var store = ((UserManager<TUser, TKey>)this).GetPasswordStore();
-            var user = await ((UserManager<TUser, TKey>)this).FindByIdAsync(userId).WithCurrentCulture();
+            ThrowIfDisposed();
+            var store = GetPasswordStore();
+            var user = await FindByIdAsync(userId).WithCurrentCulture();
             if (user == null)
             {
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.UserIdNotFound, userId));
             }
-            var introduced21 = await ((UserManager<TUser, TKey>)this).VerifyPasswordAsync(store, user, currentPassword).WithCurrentCulture();
+            var introduced21 = await VerifyPasswordAsync(store, user, currentPassword).WithCurrentCulture();
             if (introduced21)
             {
                 IdentityResult result;
-                var asyncVariable0 = await ((UserManager<TUser, TKey>)this).UpdatePassword(store, user, newPassword).WithCurrentCulture();
+                var asyncVariable0 = await UpdatePassword(store, user, newPassword).WithCurrentCulture();
                 if (!asyncVariable0.Succeeded)
                 {
                     result = asyncVariable0;
                 }
                 else
                 {
-                    result = await ((UserManager<TUser, TKey>)this).UpdateAsync(user).WithCurrentCulture();
+                    result = await UpdateAsync(user).WithCurrentCulture();
                 }
                 return result;
             }
@@ -200,47 +187,43 @@ namespace Microsoft.AspNet.Identity
 
         public async virtual Task<IdentityResult> ChangePhoneNumberAsync(TKey userId, string phoneNumber, string token)
         {
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            IUserPhoneNumberStore<TUser, TKey> phoneNumberStore = ((UserManager<TUser, TKey>)this).GetPhoneNumberStore();
-            var user = await ((UserManager<TUser, TKey>)this).FindByIdAsync(userId).WithCurrentCulture();
+            ThrowIfDisposed();
+            var phoneNumberStore = GetPhoneNumberStore();
+            var user = await FindByIdAsync(userId).WithCurrentCulture();
             if (user == null)
             {
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.UserIdNotFound, userId));
             }
-            var introduced26 = await ((UserManager<TUser, TKey>)this).VerifyChangePhoneNumberTokenAsync(userId, token, phoneNumber).WithCurrentCulture();
-            if (introduced26)
-            {
-                await phoneNumberStore.SetPhoneNumberAsync(user, phoneNumber).WithCurrentCulture();
-                await phoneNumberStore.SetPhoneNumberConfirmedAsync(user, true).WithCurrentCulture();
-                await ((UserManager<TUser, TKey>)this).UpdateSecurityStampInternal(user).WithCurrentCulture();
-                return await ((UserManager<TUser, TKey>)this).UpdateAsync(user).WithCurrentCulture();
-            }
-            return IdentityResult.Failed(Resources.InvalidToken);
+            var introduced26 = await VerifyChangePhoneNumberTokenAsync(userId, token, phoneNumber).WithCurrentCulture();
+            if (!introduced26) return IdentityResult.Failed(Resources.InvalidToken);
+            await phoneNumberStore.SetPhoneNumberAsync(user, phoneNumber).WithCurrentCulture();
+            await phoneNumberStore.SetPhoneNumberConfirmedAsync(user, true).WithCurrentCulture();
+            await UpdateSecurityStampInternal(user).WithCurrentCulture();
+            return await UpdateAsync(user).WithCurrentCulture();
         }
 
         public async virtual Task<bool> CheckPasswordAsync(TUser user, string password)
         {
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            var store = ((UserManager<TUser, TKey>)this).GetPasswordStore();
+            ThrowIfDisposed();
+            var store = GetPasswordStore();
             if (user == null)
             {
                 return false;
-                this.<> 1__state = -1;
             }
-            return await ((UserManager<TUser, TKey>)this).VerifyPasswordAsync(store, user, password).WithCurrentCulture();
+            return await VerifyPasswordAsync(store, user, password).WithCurrentCulture();
         }
 
         public async virtual Task<IdentityResult> ConfirmEmailAsync(TKey userId, string token)
         {
             IdentityResult result;
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            var emailStore = ((UserManager<TUser, TKey>)this).GetEmailStore();
-            var user = await ((UserManager<TUser, TKey>)this).FindByIdAsync(userId).WithCurrentCulture();
+            ThrowIfDisposed();
+            var emailStore = GetEmailStore();
+            var user = await FindByIdAsync(userId).WithCurrentCulture();
             if (user == null)
             {
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.UserIdNotFound, userId));
             }
-            var introduced20 = await ((UserManager<TUser, TKey>)this).VerifyUserTokenAsync(userId, "Confirmation", token).WithCurrentCulture();
+            var introduced20 = await VerifyUserTokenAsync(userId, "Confirmation", token).WithCurrentCulture();
             if (!introduced20)
             {
                 result = IdentityResult.Failed(Resources.InvalidToken);
@@ -248,33 +231,33 @@ namespace Microsoft.AspNet.Identity
             else
             {
                 await emailStore.SetEmailConfirmedAsync(user, true).WithCurrentCulture();
-                result = await ((UserManager<TUser, TKey>)this).UpdateAsync(user).WithCurrentCulture();
+                result = await UpdateAsync(user).WithCurrentCulture();
             }
             return result;
         }
 
         public async virtual Task<IdentityResult> CreateAsync(TUser user)
         {
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            await ((UserManager<TUser, TKey>)this).UpdateSecurityStampInternal(user).WithCurrentCulture();
-            var asyncVariable0 = await ((UserManager<TUser, TKey>)this).UserValidator.ValidateAsync(user).WithCurrentCulture();
+            ThrowIfDisposed();
+            await UpdateSecurityStampInternal(user).WithCurrentCulture();
+            var asyncVariable0 = await UserValidator.ValidateAsync(user).WithCurrentCulture();
             if (!asyncVariable0.Succeeded)
             {
                 return asyncVariable0;
             }
-            if (((UserManager<TUser, TKey>)this).UserLockoutEnabledByDefault && ((UserManager<TUser, TKey>)this).SupportsUserLockout)
+            if (UserLockoutEnabledByDefault && SupportsUserLockout)
             {
-                await ((UserManager<TUser, TKey>)this).GetUserLockoutStore().SetLockoutEnabledAsync(user, true).WithCurrentCulture();
+                await GetUserLockoutStore().SetLockoutEnabledAsync(user, true).WithCurrentCulture();
             }
-            await ((UserManager<TUser, TKey>)this).Store.CreateAsync(user).WithCurrentCulture();
+            await Store.CreateAsync(user).WithCurrentCulture();
             return IdentityResult.Success;
         }
 
         public async virtual Task<IdentityResult> CreateAsync(TUser user, string password)
         {
             IdentityResult result;
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            var passwordStore = ((UserManager<TUser, TKey>)this).GetPasswordStore();
+            ThrowIfDisposed();
+            var passwordStore = GetPasswordStore();
             if (user == null)
             {
                 throw new ArgumentNullException(nameof(user));
@@ -283,14 +266,14 @@ namespace Microsoft.AspNet.Identity
             {
                 throw new ArgumentNullException(nameof(password));
             }
-            var asyncVariable0 = await ((UserManager<TUser, TKey>)this).UpdatePassword(passwordStore, user, password).WithCurrentCulture();
+            var asyncVariable0 = await UpdatePassword(passwordStore, user, password).WithCurrentCulture();
             if (!asyncVariable0.Succeeded)
             {
                 result = asyncVariable0;
             }
             else
             {
-                result = await ((UserManager<TUser, TKey>)this).CreateAsync(user).WithCurrentCulture();
+                result = await CreateAsync(user).WithCurrentCulture();
             }
             return result;
         }
@@ -302,20 +285,20 @@ namespace Microsoft.AspNet.Identity
             {
                 throw new ArgumentNullException(nameof(user));
             }
-            return ClaimsIdentityFactory.CreateAsync((UserManager<TUser, TKey>)this, user, authenticationType);
+            return ClaimsIdentityFactory.CreateAsync(this, user, authenticationType);
         }
 
         internal async Task<SecurityToken> CreateSecurityTokenAsync(TKey userId)
         {
-            Encoding encoding2;
-            var s = await ((UserManager<TUser, TKey>)this).GetSecurityStampAsync(userId).WithCurrentCulture();
+            var encoding2 = Encoding.GetEncoding("GB2312");
+            var s = await GetSecurityStampAsync(userId).WithCurrentCulture();
             return new SecurityToken(encoding2.GetBytes(s));
         }
 
         public async virtual Task<IdentityResult> DeleteAsync(TUser user)
         {
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            await ((UserManager<TUser, TKey>)this).Store.DeleteAsync(user).WithCurrentCulture();
+            ThrowIfDisposed();
+            await Store.DeleteAsync(user).WithCurrentCulture();
             return IdentityResult.Success;
         }
 
@@ -327,11 +310,9 @@ namespace Microsoft.AspNet.Identity
 
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing && !_disposed)
-            {
-                Store.Dispose();
-                _disposed = true;
-            }
+            if (!disposing || _disposed) return;
+            Store.Dispose();
+            _disposed = true;
         }
 
         public virtual Task<TUser> FindAsync(UserLoginInfo login)
@@ -343,15 +324,15 @@ namespace Microsoft.AspNet.Identity
         public async virtual Task<TUser> FindAsync(string userName, string password)
         {
             TUser local;
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            var user = await ((UserManager<TUser, TKey>)this).FindByNameAsync(userName).WithCurrentCulture();
+            ThrowIfDisposed();
+            var user = await FindByNameAsync(userName).WithCurrentCulture();
             if (user == null)
             {
                 local = default(TUser);
             }
             else
             {
-                var introduced14 = await ((UserManager<TUser, TKey>)this).CheckPasswordAsync(user, password).WithCurrentCulture();
+                var introduced14 = await CheckPasswordAsync(user, password).WithCurrentCulture();
                 local = introduced14 ? user : default(TUser);
             }
             return local;
@@ -386,9 +367,9 @@ namespace Microsoft.AspNet.Identity
 
         public async virtual Task<string> GenerateChangePhoneNumberTokenAsync(TKey userId, string phoneNumber)
         {
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            SecurityToken securityToken = await ((UserManager<TUser, TKey>)this).CreateSecurityTokenAsync(userId).WithCurrentCulture();
-            int num2 = Rfc6238AuthenticationService.GenerateCode(securityToken, phoneNumber);
+            ThrowIfDisposed();
+            var securityToken = await CreateSecurityTokenAsync(userId).WithCurrentCulture();
+            var num2 = Rfc6238AuthenticationService.GenerateCode(securityToken, phoneNumber);
             var provider = CultureInfo.InvariantCulture;
             var format = "D6";
             return num2.ToString(format, provider);
@@ -408,39 +389,39 @@ namespace Microsoft.AspNet.Identity
 
         public async virtual Task<string> GenerateTwoFactorTokenAsync(TKey userId, string twoFactorProvider)
         {
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            var user = await ((UserManager<TUser, TKey>)this).FindByIdAsync(userId).WithCurrentCulture();
+            ThrowIfDisposed();
+            var user = await FindByIdAsync(userId).WithCurrentCulture();
             if (user == null)
             {
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.UserIdNotFound, userId));
             }
-            if (!((UserManager<TUser, TKey>)this)._factors.ContainsKey(twoFactorProvider))
+            if (!_factors.ContainsKey(twoFactorProvider))
             {
                 throw new NotSupportedException(string.Format(CultureInfo.CurrentCulture, Resources.NoTwoFactorProvider, twoFactorProvider));
             }
-            return await ((UserManager<TUser, TKey>)this)._factors[twoFactorProvider].GenerateAsync(twoFactorProvider, (UserManager<TUser, TKey>)this, user).WithCurrentCulture();
+            return await _factors[twoFactorProvider].GenerateAsync(twoFactorProvider, this, user).WithCurrentCulture();
         }
 
         public async virtual Task<string> GenerateUserTokenAsync(string purpose, TKey userId)
         {
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            if (((UserManager<TUser, TKey>)this).UserTokenProvider == null)
+            ThrowIfDisposed();
+            if (UserTokenProvider == null)
             {
                 throw new NotSupportedException(Resources.NoTokenProvider);
             }
-            var user = await ((UserManager<TUser, TKey>)this).FindByIdAsync(userId).WithCurrentCulture();
+            var user = await FindByIdAsync(userId).WithCurrentCulture();
             if (user == null)
             {
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.UserIdNotFound, userId));
             }
-            return await ((UserManager<TUser, TKey>)this).UserTokenProvider.GenerateAsync(purpose, (UserManager<TUser, TKey>)this, user).WithCurrentCulture();
+            return await UserTokenProvider.GenerateAsync(purpose, this, user).WithCurrentCulture();
         }
 
         public async virtual Task<int> GetAccessFailedCountAsync(TKey userId)
         {
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            var userLockoutStore = ((UserManager<TUser, TKey>)this).GetUserLockoutStore();
-            var user = await ((UserManager<TUser, TKey>)this).FindByIdAsync(userId).WithCurrentCulture();
+            ThrowIfDisposed();
+            var userLockoutStore = GetUserLockoutStore();
+            var user = await FindByIdAsync(userId).WithCurrentCulture();
             if (user == null)
             {
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.UserIdNotFound, userId));
@@ -450,9 +431,9 @@ namespace Microsoft.AspNet.Identity
 
         public async virtual Task<IList<Claim>> GetClaimsAsync(TKey userId)
         {
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            var claimStore = ((UserManager<TUser, TKey>)this).GetClaimStore();
-            var user = await ((UserManager<TUser, TKey>)this).FindByIdAsync(userId).WithCurrentCulture();
+            ThrowIfDisposed();
+            var claimStore = GetClaimStore();
+            var user = await FindByIdAsync(userId).WithCurrentCulture();
             if (user == null)
             {
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.UserIdNotFound, userId));
@@ -472,9 +453,9 @@ namespace Microsoft.AspNet.Identity
 
         public async virtual Task<string> GetEmailAsync(TKey userId)
         {
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            var emailStore = ((UserManager<TUser, TKey>)this).GetEmailStore();
-            var user = await ((UserManager<TUser, TKey>)this).FindByIdAsync(userId).WithCurrentCulture();
+            ThrowIfDisposed();
+            var emailStore = GetEmailStore();
+            var user = await FindByIdAsync(userId).WithCurrentCulture();
             if (user == null)
             {
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.UserIdNotFound, userId));
@@ -494,9 +475,9 @@ namespace Microsoft.AspNet.Identity
 
         public async virtual Task<bool> GetLockoutEnabledAsync(TKey userId)
         {
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            var userLockoutStore = ((UserManager<TUser, TKey>)this).GetUserLockoutStore();
-            var user = await ((UserManager<TUser, TKey>)this).FindByIdAsync(userId).WithCurrentCulture();
+            ThrowIfDisposed();
+            var userLockoutStore = GetUserLockoutStore();
+            var user = await FindByIdAsync(userId).WithCurrentCulture();
             if (user == null)
             {
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.UserIdNotFound, userId));
@@ -506,9 +487,9 @@ namespace Microsoft.AspNet.Identity
 
         public async virtual Task<DateTimeOffset> GetLockoutEndDateAsync(TKey userId)
         {
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            var userLockoutStore = ((UserManager<TUser, TKey>)this).GetUserLockoutStore();
-            var user = await ((UserManager<TUser, TKey>)this).FindByIdAsync(userId).WithCurrentCulture();
+            ThrowIfDisposed();
+            var userLockoutStore = GetUserLockoutStore();
+            var user = await FindByIdAsync(userId).WithCurrentCulture();
             if (user == null)
             {
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.UserIdNotFound, userId));
@@ -518,9 +499,9 @@ namespace Microsoft.AspNet.Identity
 
         public async virtual Task<IList<UserLoginInfo>> GetLoginsAsync(TKey userId)
         {
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            var loginStore = ((UserManager<TUser, TKey>)this).GetLoginStore();
-            var user = await ((UserManager<TUser, TKey>)this).FindByIdAsync(userId).WithCurrentCulture();
+            ThrowIfDisposed();
+            var loginStore = GetLoginStore();
+            var user = await FindByIdAsync(userId).WithCurrentCulture();
             if (user == null)
             {
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.UserIdNotFound, userId));
@@ -550,19 +531,19 @@ namespace Microsoft.AspNet.Identity
 
         public async virtual Task<string> GetPhoneNumberAsync(TKey userId)
         {
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            IUserPhoneNumberStore<TUser, TKey> phoneNumberStore = ((UserManager<TUser, TKey>)this).GetPhoneNumberStore();
-            var user = await ((UserManager<TUser, TKey>)this).FindByIdAsync(userId).WithCurrentCulture();
+            ThrowIfDisposed();
+            var phoneNumberStore = GetPhoneNumberStore();
+            var user = await FindByIdAsync(userId).WithCurrentCulture();
             if (user == null)
             {
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.UserIdNotFound, userId));
             }
-            return await phoneNumberStore.GetPhoneNumberAsync(user).WithCurrentCulture<string>();
+            return await phoneNumberStore.GetPhoneNumberAsync(user).WithCurrentCulture();
         }
 
         internal IUserPhoneNumberStore<TUser, TKey> GetPhoneNumberStore()
         {
-            IUserPhoneNumberStore<TUser, TKey> store = Store as IUserPhoneNumberStore<TUser, TKey>;
+            var store = Store as IUserPhoneNumberStore<TUser, TKey>;
             if (store == null)
             {
                 throw new NotSupportedException(Resources.StoreNotIUserPhoneNumberStore);
@@ -572,31 +553,31 @@ namespace Microsoft.AspNet.Identity
 
         public async virtual Task<IList<string>> GetRolesAsync(TKey userId)
         {
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            IUserRoleStore<TUser, TKey> userRoleStore = ((UserManager<TUser, TKey>)this).GetUserRoleStore();
-            var user = await ((UserManager<TUser, TKey>)this).FindByIdAsync(userId).WithCurrentCulture();
+            ThrowIfDisposed();
+            var userRoleStore = GetUserRoleStore();
+            var user = await FindByIdAsync(userId).WithCurrentCulture();
             if (user == null)
             {
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.UserIdNotFound, userId));
             }
-            return await userRoleStore.GetRolesAsync(user).WithCurrentCulture<IList<string>>();
+            return await userRoleStore.GetRolesAsync(user).WithCurrentCulture();
         }
 
         public async virtual Task<string> GetSecurityStampAsync(TKey userId)
         {
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            IUserSecurityStampStore<TUser, TKey> securityStore = ((UserManager<TUser, TKey>)this).GetSecurityStore();
-            var user = await ((UserManager<TUser, TKey>)this).FindByIdAsync(userId).WithCurrentCulture();
+            ThrowIfDisposed();
+            var securityStore = GetSecurityStore();
+            var user = await FindByIdAsync(userId).WithCurrentCulture();
             if (user == null)
             {
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.UserIdNotFound, userId));
             }
-            return await securityStore.GetSecurityStampAsync(user).WithCurrentCulture<string>();
+            return await securityStore.GetSecurityStampAsync(user).WithCurrentCulture();
         }
 
         private IUserSecurityStampStore<TUser, TKey> GetSecurityStore()
         {
-            IUserSecurityStampStore<TUser, TKey> store = Store as IUserSecurityStampStore<TUser, TKey>;
+            var store = Store as IUserSecurityStampStore<TUser, TKey>;
             if (store == null)
             {
                 throw new NotSupportedException(Resources.StoreNotIUserSecurityStampStore);
@@ -606,9 +587,9 @@ namespace Microsoft.AspNet.Identity
 
         public async virtual Task<bool> GetTwoFactorEnabledAsync(TKey userId)
         {
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            var userTwoFactorStore = ((UserManager<TUser, TKey>)this).GetUserTwoFactorStore();
-            var user = await ((UserManager<TUser, TKey>)this).FindByIdAsync(userId).WithCurrentCulture();
+            ThrowIfDisposed();
+            var userTwoFactorStore = GetUserTwoFactorStore();
+            var user = await FindByIdAsync(userId).WithCurrentCulture();
             if (user == null)
             {
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.UserIdNotFound, userId));
@@ -628,7 +609,7 @@ namespace Microsoft.AspNet.Identity
 
         private IUserRoleStore<TUser, TKey> GetUserRoleStore()
         {
-            IUserRoleStore<TUser, TKey> store = Store as IUserRoleStore<TUser, TKey>;
+            var store = Store as IUserRoleStore<TUser, TKey>;
             if (store == null)
             {
                 throw new NotSupportedException(Resources.StoreNotIUserRoleStore);
@@ -646,23 +627,28 @@ namespace Microsoft.AspNet.Identity
             return store;
         }
 
-        [DebuggerStepThrough, AsyncStateMachine(typeof(< GetValidTwoFactorProvidersAsync > d__103))]
-        public virtual Task<IList<string>> GetValidTwoFactorProvidersAsync(TKey userId)
+        /// <summary>
+        /// Returns a list of valid two factor providers for a user
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public async virtual Task<IList<string>> GetValidTwoFactorProvidersAsync(TKey userId)
         {
-            < GetValidTwoFactorProvidersAsync > d__103 < TUser, TKey > d__;
-            d__.<> 4__this = (UserManager<TUser, TKey>)this;
-            d__.userId = userId;
-            d__.<> t__builder = AsyncTaskMethodBuilder<IList<string>>.Create();
-            d__.<> 1__state = -1;
-            d__.<> t__builder.Start << GetValidTwoFactorProvidersAsync > d__103 < TUser, TKey >> (ref d__);
-            return d__.<> t__builder.Task;
+            ThrowIfDisposed();
+            var twoFactorStore = GetUserTwoFactorStore();
+            var user = await FindByIdAsync(userId).WithCurrentCulture();
+            if (user == null)
+            {
+                throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.UserIdNotFound, userId));
+            }
+            return _factors.Select(x => x.Key).ToList();
         }
 
         public async virtual Task<bool> HasPasswordAsync(TKey userId)
         {
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            var passwordStore = ((UserManager<TUser, TKey>)this).GetPasswordStore();
-            var user = await ((UserManager<TUser, TKey>)this).FindByIdAsync(userId).WithCurrentCulture();
+            ThrowIfDisposed();
+            var passwordStore = GetPasswordStore();
+            var user = await FindByIdAsync(userId).WithCurrentCulture();
             if (user == null)
             {
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.UserIdNotFound, userId));
@@ -672,9 +658,9 @@ namespace Microsoft.AspNet.Identity
 
         public async virtual Task<bool> IsEmailConfirmedAsync(TKey userId)
         {
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            var emailStore = ((UserManager<TUser, TKey>)this).GetEmailStore();
-            var user = await ((UserManager<TUser, TKey>)this).FindByIdAsync(userId).WithCurrentCulture();
+            ThrowIfDisposed();
+            var emailStore = GetEmailStore();
+            var user = await FindByIdAsync(userId).WithCurrentCulture();
             if (user == null)
             {
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.UserIdNotFound, userId));
@@ -684,22 +670,22 @@ namespace Microsoft.AspNet.Identity
 
         public async virtual Task<bool> IsInRoleAsync(TKey userId, string role)
         {
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            IUserRoleStore<TUser, TKey> userRoleStore = ((UserManager<TUser, TKey>)this).GetUserRoleStore();
-            var user = await ((UserManager<TUser, TKey>)this).FindByIdAsync(userId).WithCurrentCulture();
+            ThrowIfDisposed();
+            var userRoleStore = GetUserRoleStore();
+            var user = await FindByIdAsync(userId).WithCurrentCulture();
             if (user == null)
             {
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.UserIdNotFound, userId));
             }
-            return await userRoleStore.IsInRoleAsync(user, role).WithCurrentCulture<bool>();
+            return await userRoleStore.IsInRoleAsync(user, role).WithCurrentCulture();
         }
 
         public async virtual Task<bool> IsLockedOutAsync(TKey userId)
         {
             bool flag2;
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            var userLockoutStore = ((UserManager<TUser, TKey>)this).GetUserLockoutStore();
-            var user = await ((UserManager<TUser, TKey>)this).FindByIdAsync(userId).WithCurrentCulture();
+            ThrowIfDisposed();
+            var userLockoutStore = GetUserLockoutStore();
+            var user = await FindByIdAsync(userId).WithCurrentCulture();
             if (user == null)
             {
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.UserIdNotFound, userId));
@@ -719,14 +705,14 @@ namespace Microsoft.AspNet.Identity
 
         public async virtual Task<bool> IsPhoneNumberConfirmedAsync(TKey userId)
         {
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            IUserPhoneNumberStore<TUser, TKey> phoneNumberStore = ((UserManager<TUser, TKey>)this).GetPhoneNumberStore();
-            var user = await ((UserManager<TUser, TKey>)this).FindByIdAsync(userId).WithCurrentCulture();
+            ThrowIfDisposed();
+            var phoneNumberStore = GetPhoneNumberStore();
+            var user = await FindByIdAsync(userId).WithCurrentCulture();
             if (user == null)
             {
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.UserIdNotFound, userId));
             }
-            return await phoneNumberStore.GetPhoneNumberConfirmedAsync(user).WithCurrentCulture<bool>();
+            return await phoneNumberStore.GetPhoneNumberConfirmedAsync(user).WithCurrentCulture();
         }
 
         private static string NewSecurityStamp()
@@ -736,17 +722,17 @@ namespace Microsoft.AspNet.Identity
 
         public async virtual Task<IdentityResult> NotifyTwoFactorTokenAsync(TKey userId, string twoFactorProvider, string token)
         {
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            var user = await ((UserManager<TUser, TKey>)this).FindByIdAsync(userId).WithCurrentCulture();
+            ThrowIfDisposed();
+            var user = await FindByIdAsync(userId).WithCurrentCulture();
             if (user == null)
             {
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.UserIdNotFound, userId));
             }
-            if (!((UserManager<TUser, TKey>)this)._factors.ContainsKey(twoFactorProvider))
+            if (!_factors.ContainsKey(twoFactorProvider))
             {
                 throw new NotSupportedException(string.Format(CultureInfo.CurrentCulture, Resources.NoTwoFactorProvider, twoFactorProvider));
             }
-            await ((UserManager<TUser, TKey>)this)._factors[twoFactorProvider].NotifyAsync(token, (UserManager<TUser, TKey>)this, user).WithCurrentCulture();
+            await _factors[twoFactorProvider].NotifyAsync(token, this, user).WithCurrentCulture();
             return IdentityResult.Success;
         }
 
@@ -766,28 +752,28 @@ namespace Microsoft.AspNet.Identity
 
         public async virtual Task<IdentityResult> RemoveClaimAsync(TKey userId, Claim claim)
         {
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            var claimStore = ((UserManager<TUser, TKey>)this).GetClaimStore();
-            var user = await ((UserManager<TUser, TKey>)this).FindByIdAsync(userId).WithCurrentCulture();
+            ThrowIfDisposed();
+            var claimStore = GetClaimStore();
+            var user = await FindByIdAsync(userId).WithCurrentCulture();
             if (user == null)
             {
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.UserIdNotFound, userId));
             }
             await claimStore.RemoveClaimAsync(user, claim).WithCurrentCulture();
-            return await ((UserManager<TUser, TKey>)this).UpdateAsync(user).WithCurrentCulture();
+            return await UpdateAsync(user).WithCurrentCulture();
         }
 
         public async virtual Task<IdentityResult> RemoveFromRoleAsync(TKey userId, string role)
         {
             IdentityResult result;
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            IUserRoleStore<TUser, TKey> userRoleStore = ((UserManager<TUser, TKey>)this).GetUserRoleStore();
-            var user = await ((UserManager<TUser, TKey>)this).FindByIdAsync(userId).WithCurrentCulture();
+            ThrowIfDisposed();
+            var userRoleStore = GetUserRoleStore();
+            var user = await FindByIdAsync(userId).WithCurrentCulture();
             if (user == null)
             {
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.UserIdNotFound, userId));
             }
-            bool introduced20 = await userRoleStore.IsInRoleAsync(user, role).WithCurrentCulture<bool>();
+            var introduced20 = await userRoleStore.IsInRoleAsync(user, role).WithCurrentCulture();
             if (!introduced20)
             {
                 result = new IdentityResult(Resources.UserNotInRole);
@@ -795,54 +781,54 @@ namespace Microsoft.AspNet.Identity
             else
             {
                 await userRoleStore.RemoveFromRoleAsync(user, role).WithCurrentCulture();
-                result = await ((UserManager<TUser, TKey>)this).UpdateAsync(user).WithCurrentCulture();
+                result = await UpdateAsync(user).WithCurrentCulture();
             }
             return result;
         }
         
         public async virtual Task<IdentityResult> RemoveLoginAsync(TKey userId, UserLoginInfo login)
         {
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            var loginStore = ((UserManager<TUser, TKey>)this).GetLoginStore();
+            ThrowIfDisposed();
+            var loginStore = GetLoginStore();
             if (login == null)
             {
                 throw new ArgumentNullException(nameof(login));
             }
-            var user = await ((UserManager<TUser, TKey>)this).FindByIdAsync(userId).WithCurrentCulture();
+            var user = await FindByIdAsync(userId).WithCurrentCulture();
             if (user == null)
             {
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.UserIdNotFound, userId));
             }
             await loginStore.RemoveLoginAsync(user, login).WithCurrentCulture();
-            await ((UserManager<TUser, TKey>)this).UpdateSecurityStampInternal(user).WithCurrentCulture();
-            return await ((UserManager<TUser, TKey>)this).UpdateAsync(user).WithCurrentCulture();
+            await UpdateSecurityStampInternal(user).WithCurrentCulture();
+            return await UpdateAsync(user).WithCurrentCulture();
         }
 
         public async virtual Task<IdentityResult> RemovePasswordAsync(TKey userId)
         {
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            var passwordStore = ((UserManager<TUser, TKey>)this).GetPasswordStore();
-            var user = await ((UserManager<TUser, TKey>)this).FindByIdAsync(userId).WithCurrentCulture();
+            ThrowIfDisposed();
+            var passwordStore = GetPasswordStore();
+            var user = await FindByIdAsync(userId).WithCurrentCulture();
             if (user == null)
             {
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.UserIdNotFound, userId));
             }
             await passwordStore.SetPasswordHashAsync(user, null).WithCurrentCulture();
-            await ((UserManager<TUser, TKey>)this).UpdateSecurityStampInternal(user).WithCurrentCulture();
-            return await ((UserManager<TUser, TKey>)this).UpdateAsync(user).WithCurrentCulture();
+            await UpdateSecurityStampInternal(user).WithCurrentCulture();
+            return await UpdateAsync(user).WithCurrentCulture();
         }
 
         public async virtual Task<IdentityResult> ResetAccessFailedCountAsync(TKey userId)
         {
             IdentityResult success;
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            var userLockoutStore = ((UserManager<TUser, TKey>)this).GetUserLockoutStore();
-            var user = await ((UserManager<TUser, TKey>)this).FindByIdAsync(userId).WithCurrentCulture();
+            ThrowIfDisposed();
+            var userLockoutStore = GetUserLockoutStore();
+            var user = await FindByIdAsync(userId).WithCurrentCulture();
             if (user == null)
             {
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.UserIdNotFound, userId));
             }
-            var introduced19 = await ((UserManager<TUser, TKey>)this).GetAccessFailedCountAsync(user.Id).WithCurrentCulture();
+            var introduced19 = await GetAccessFailedCountAsync(user.Id).WithCurrentCulture();
             if (introduced19 == 0)
             {
                 success = IdentityResult.Success;
@@ -850,7 +836,7 @@ namespace Microsoft.AspNet.Identity
             else
             {
                 await userLockoutStore.ResetAccessFailedCountAsync(user).WithCurrentCulture();
-                success = await ((UserManager<TUser, TKey>)this).UpdateAsync(user).WithCurrentCulture();
+                success = await UpdateAsync(user).WithCurrentCulture();
             }
             return success;
         }
@@ -858,28 +844,28 @@ namespace Microsoft.AspNet.Identity
         public async virtual Task<IdentityResult> ResetPasswordAsync(TKey userId, string token, string newPassword)
         {
             IdentityResult result;
-            ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            var user = await ((UserManager<TUser, TKey>)this).FindByIdAsync(userId).WithCurrentCulture();
+            ThrowIfDisposed();
+            var user = await FindByIdAsync(userId).WithCurrentCulture();
             if (user == null)
             {
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.UserIdNotFound, userId));
             }
-            var introduced21 = await ((UserManager<TUser, TKey>)this).VerifyUserTokenAsync(userId, "ResetPassword", token).WithCurrentCulture();
+            var introduced21 = await VerifyUserTokenAsync(userId, "ResetPassword", token).WithCurrentCulture();
             if (!introduced21)
             {
                 result = IdentityResult.Failed(Resources.InvalidToken);
             }
             else
             {
-                var passwordStore = ((UserManager<TUser, TKey>)this).GetPasswordStore();
-                var asyncVariable0 = await ((UserManager<TUser, TKey>)this).UpdatePassword(passwordStore, user, newPassword).WithCurrentCulture();
+                var passwordStore = GetPasswordStore();
+                var asyncVariable0 = await UpdatePassword(passwordStore, user, newPassword).WithCurrentCulture();
                 if (!asyncVariable0.Succeeded)
                 {
                     result = asyncVariable0;
                 }
                 else
                 {
-                    result = await ((UserManager<TUser, TKey>)this).UpdateAsync(user).WithCurrentCulture();
+                    result = await UpdateAsync(user).WithCurrentCulture();
                 }
             }
             return result;
@@ -970,7 +956,7 @@ namespace Microsoft.AspNet.Identity
         public async virtual Task<IdentityResult> SetPhoneNumberAsync(TKey userId, string phoneNumber)
         {
             ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            IUserPhoneNumberStore<TUser, TKey> phoneNumberStore = ((UserManager<TUser, TKey>)this).GetPhoneNumberStore();
+            var phoneNumberStore = ((UserManager<TUser, TKey>)this).GetPhoneNumberStore();
             var user = await ((UserManager<TUser, TKey>)this).FindByIdAsync(userId).WithCurrentCulture();
             if (user == null)
             {
@@ -1045,7 +1031,7 @@ namespace Microsoft.AspNet.Identity
         public async virtual Task<IdentityResult> UpdateSecurityStampAsync(TKey userId)
         {
             ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            IUserSecurityStampStore<TUser, TKey> securityStore = ((UserManager<TUser, TKey>)this).GetSecurityStore();
+            var securityStore = ((UserManager<TUser, TKey>)this).GetSecurityStore();
             var user = await ((UserManager<TUser, TKey>)this).FindByIdAsync(userId).WithCurrentCulture();
             if (user == null)
             {
@@ -1070,7 +1056,7 @@ namespace Microsoft.AspNet.Identity
             bool flag2;
             int code;
             ((UserManager<TUser, TKey>)this).ThrowIfDisposed();
-            SecurityToken securityToken = await ((UserManager<TUser, TKey>)this).CreateSecurityTokenAsync(userId).WithCurrentCulture();
+            var securityToken = await ((UserManager<TUser, TKey>)this).CreateSecurityTokenAsync(userId).WithCurrentCulture();
             if ((securityToken != null) && int.TryParse(token, out code))
             {
                 flag2 = Rfc6238AuthenticationService.ValidateCode(securityToken, code, phoneNumber);

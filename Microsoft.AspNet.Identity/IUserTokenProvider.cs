@@ -17,6 +17,7 @@ namespace Microsoft.AspNet.Identity
     public interface IUserTwoFactorStore<TUser, in TKey> : IUserStore<TUser, TKey>, IDisposable where TUser : class, IUser<TKey>
     {
         Task<bool> GetTwoFactorEnabledAsync(TUser user);
+
         Task SetTwoFactorEnabledAsync(TUser user, bool enabled);
     }
 
