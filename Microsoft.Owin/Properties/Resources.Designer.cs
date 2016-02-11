@@ -61,6 +61,33 @@ namespace Microsoft.Owin.Properties {
         }
         
         /// <summary>
+        ///   查找类似 For the app startup parameter value &apos;{0}&apos;, the assembly &apos;{1}&apos; was not found. 的本地化字符串。
+        /// </summary>
+        internal static string AssemblyNotFound {
+            get {
+                return ResourceManager.GetString("AssemblyNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 For the app startup parameter value &apos;{0}&apos;, the class &apos;{1}&apos; was not found in assembly &apos;{2}&apos;. 的本地化字符串。
+        /// </summary>
+        internal static string ClassNotFoundInAssembly {
+            get {
+                return ResourceManager.GetString("ClassNotFoundInAssembly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 The OwinStartup attribute discovered in assembly &apos;{0}&apos; referencing startup type &apos;{1}&apos; conflicts with the attribute in assembly &apos;{2}&apos; referencing startup type &apos;{3}&apos; because they have the same FriendlyName &apos;{4}&apos;. Remove or rename one of the attributes, or reference the desired type directly. 的本地化字符串。
+        /// </summary>
+        internal static string Exception_AttributeNameConflict {
+            get {
+                return ResourceManager.GetString("Exception_AttributeNameConflict", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 The AuthenticationTokenProvider&apos;s required synchronous events have not been registered. 的本地化字符串。
         /// </summary>
         internal static string Exception_AuthenticationTokenDoesNotProvideSyncMethods {
@@ -187,11 +214,101 @@ namespace Microsoft.Owin.Properties {
         }
         
         /// <summary>
+        ///   查找类似 The discovered startup type &apos;{0}&apos; conflicts with the type &apos;{1}&apos;. Remove or rename one of the types, or reference the desired type directly. 的本地化字符串。
+        /// </summary>
+        internal static string Exception_StartupTypeConflict {
+            get {
+                return ResourceManager.GetString("Exception_StartupTypeConflict", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 The state passed to UnhookAuthentication may only be the return value from HookAuthentication. 的本地化字符串。
         /// </summary>
         internal static string Exception_UnhookAuthenticationStateType {
             get {
                 return ResourceManager.GetString("Exception_UnhookAuthenticationStateType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 The OwinStartupAttribute.FriendlyName value &apos;{0}&apos; does not match the given value &apos;{1}&apos; in Assembly &apos;{2}&apos;. 的本地化字符串。
+        /// </summary>
+        internal static string FriendlyNameMismatch {
+            get {
+                return ResourceManager.GetString("FriendlyNameMismatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 No owin.Environment item was found in the context. 的本地化字符串。
+        /// </summary>
+        internal static string HttpContext_OwinEnvironmentNotFound {
+            get {
+                return ResourceManager.GetString("HttpContext_OwinEnvironmentNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 No &apos;{0}&apos; method was found in class &apos;{1}&apos;. 的本地化字符串。
+        /// </summary>
+        internal static string MethodNotFoundInClass {
+            get {
+                return ResourceManager.GetString("MethodNotFoundInClass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 No assembly found containing a Startup or [AssemblyName].Startup class. 的本地化字符串。
+        /// </summary>
+        internal static string NoAssemblyWithStartupClass {
+            get {
+                return ResourceManager.GetString("NoAssemblyWithStartupClass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 No assembly found containing an OwinStartupAttribute. 的本地化字符串。
+        /// </summary>
+        internal static string NoOwinStartupAttribute {
+            get {
+                return ResourceManager.GetString("NoOwinStartupAttribute", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 The OwinStartupAttribute.StartupType value is empty in Assembly &apos;{0}&apos;. 的本地化字符串。
+        /// </summary>
+        internal static string StartupTypePropertyEmpty {
+            get {
+                return ResourceManager.GetString("StartupTypePropertyEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 The type &apos;{0}&apos; referenced from assembly &apos;{1}&apos; does not define a property &apos;StartupType&apos; of type &apos;Type&apos;. 的本地化字符串。
+        /// </summary>
+        internal static string StartupTypePropertyMissing {
+            get {
+                return ResourceManager.GetString("StartupTypePropertyMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 The given type or method &apos;{0}&apos; was not found. Try specifying the Assembly. 的本地化字符串。
+        /// </summary>
+        internal static string TypeOrMethodNotFound {
+            get {
+                return ResourceManager.GetString("TypeOrMethodNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 The &apos;{0}&apos; method on class &apos;{1}&apos; does not have the expected signature &apos;void {0}(IAppBuilder)&apos;. 的本地化字符串。
+        /// </summary>
+        internal static string UnexpectedMethodSignature {
+            get {
+                return ResourceManager.GetString("UnexpectedMethodSignature", resourceCulture);
             }
         }
     }

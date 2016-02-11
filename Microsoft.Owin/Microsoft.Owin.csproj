@@ -38,6 +38,7 @@
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,6 +64,7 @@
     <Compile Include="HeaderDictionary.cs" />
     <Compile Include="Helpers\WebHelpers.cs" />
     <Compile Include="HostString.cs" />
+    <Compile Include="Host\SystemWeb\HttpContextItemKeys.cs" />
     <Compile Include="IAppBuilder.cs" />
     <Compile Include="IFormCollection.cs" />
     <Compile Include="IHeaderDictionary.cs" />
@@ -83,6 +85,12 @@
     <Compile Include="IOwinRequest.cs" />
     <Compile Include="IOwinResponse.cs" />
     <Compile Include="IReadableStringCollection.cs" />
+    <Compile Include="Loader\Constants.cs" />
+    <Compile Include="Loader\DefaultLoader.cs" />
+    <Compile Include="Loader\DictionaryExtensions.cs" />
+    <Compile Include="Loader\HttpContextBaseExtensions.cs" />
+    <Compile Include="Loader\HttpContextExtensions.cs" />
+    <Compile Include="Loader\NullLoader.cs" />
     <Compile Include="Logging\AppBuilderLoggerExtensions.cs" />
     <Compile Include="Logging\DiagnosticsLogger.cs" />
     <Compile Include="Logging\DiagnosticsLoggerFactory.cs" />
@@ -230,6 +238,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
