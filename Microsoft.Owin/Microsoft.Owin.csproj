@@ -177,9 +177,23 @@
     <Compile Include="Security\Notifications\SecurityTokenValidatedNotification.cs" />
     <Compile Include="Security\OAuth\BaseValidatingClientContext.cs" />
     <Compile Include="Security\OAuth\BaseValidatingContext.cs" />
+    <Compile Include="Security\OAuth\BaseValidatingTicketContext.cs" />
     <Compile Include="Security\OAuth\IOAuthAuthorizationServerProvider.cs" />
+    <Compile Include="Security\OAuth\Messages\AuthorizeEndpointRequest.cs" />
+    <Compile Include="Security\OAuth\Messages\TokenEndpointRequest.cs" />
+    <Compile Include="Security\OAuth\Messages\TokenEndpointRequestAuthorizationCode.cs" />
+    <Compile Include="Security\OAuth\Messages\TokenEndpointRequestClientCredentials.cs" />
+    <Compile Include="Security\OAuth\Messages\TokenEndpointRequestCustomExtension.cs" />
     <Compile Include="Security\OAuth\OAuthAuthorizationEndpointResponseContext.cs" />
     <Compile Include="Security\OAuth\OAuthAuthorizationServerOptions.cs" />
+    <Compile Include="Security\OAuth\OAuthAuthorizeEndpointContext.cs" />
+    <Compile Include="Security\OAuth\OAuthGrantAuthorizationCodeContext.cs" />
+    <Compile Include="Security\OAuth\OAuthGrantClientCredentialsContext.cs" />
+    <Compile Include="Security\OAuth\OAuthGrantCustomExtensionContext.cs" />
+    <Compile Include="Security\OAuth\OAuthGrantRefreshTokenContext.cs" />
+    <Compile Include="Security\OAuth\OAuthGrantResourceOwnerCredentialsContext.cs" />
+    <Compile Include="Security\OAuth\OAuthMatchEndpointContext.cs" />
+    <Compile Include="Security\OAuth\OAuthTokenEndpointContext.cs" />
     <Compile Include="Security\Provider\BaseContext.cs" />
     <Compile Include="Security\Provider\EndpointContext.cs" />
     <Compile Include="Security\Provider\ReturnEndpointContext.cs" />
@@ -192,9 +206,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Security\OAuth\Messages\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
