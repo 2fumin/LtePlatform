@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Microsoft.Owin.Security.OAuth.Messages
 {
-    using Owin;
-    using System;
-    using System.Runtime.CompilerServices;
-
     public class TokenEndpointRequest
     {
         public TokenEndpointRequest(IReadableStringCollection parameters)
@@ -35,7 +27,7 @@ namespace Microsoft.Owin.Security.OAuth.Messages
             {
                 TokenEndpointRequestClientCredentials credentials = new TokenEndpointRequestClientCredentials
                 {
-                    Scope = (func("scope") ?? string.Empty).Split(new char[] { ' ' })
+                    Scope = (func("scope") ?? string.Empty).Split(' ')
                 };
                 ClientCredentialsGrant = credentials;
             }
@@ -44,7 +36,7 @@ namespace Microsoft.Owin.Security.OAuth.Messages
                 TokenEndpointRequestRefreshToken token = new TokenEndpointRequestRefreshToken
                 {
                     RefreshToken = func("refresh_token"),
-                    Scope = (func("scope") ?? string.Empty).Split(new char[] { ' ' })
+                    Scope = (func("scope") ?? string.Empty).Split(' ')
                 };
                 RefreshTokenGrant = token;
             }
@@ -54,7 +46,7 @@ namespace Microsoft.Owin.Security.OAuth.Messages
                 {
                     UserName = func("username"),
                     Password = func("password"),
-                    Scope = (func("scope") ?? string.Empty).Split(new char[] { ' ' })
+                    Scope = (func("scope") ?? string.Empty).Split(' ')
                 };
                 ResourceOwnerPasswordCredentialsGrant = credentials2;
             }
@@ -78,45 +70,15 @@ namespace Microsoft.Owin.Security.OAuth.Messages
 
         public string GrantType { get; }
 
-        public bool IsAuthorizationCodeGrantType
-        {
-            get
-            {
-                return (AuthorizationCodeGrant != null);
-            }
-        }
+        public bool IsAuthorizationCodeGrantType => (AuthorizationCodeGrant != null);
 
-        public bool IsClientCredentialsGrantType
-        {
-            get
-            {
-                return (ClientCredentialsGrant != null);
-            }
-        }
+        public bool IsClientCredentialsGrantType => (ClientCredentialsGrant != null);
 
-        public bool IsCustomExtensionGrantType
-        {
-            get
-            {
-                return (CustomExtensionGrant != null);
-            }
-        }
+        public bool IsCustomExtensionGrantType => (CustomExtensionGrant != null);
 
-        public bool IsRefreshTokenGrantType
-        {
-            get
-            {
-                return (RefreshTokenGrant != null);
-            }
-        }
+        public bool IsRefreshTokenGrantType => (RefreshTokenGrant != null);
 
-        public bool IsResourceOwnerPasswordCredentialsGrantType
-        {
-            get
-            {
-                return (ResourceOwnerPasswordCredentialsGrant != null);
-            }
-        }
+        public bool IsResourceOwnerPasswordCredentialsGrantType => (ResourceOwnerPasswordCredentialsGrant != null);
 
         public IReadableStringCollection Parameters { get; private set; }
 

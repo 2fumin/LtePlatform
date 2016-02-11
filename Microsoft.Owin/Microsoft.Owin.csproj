@@ -179,11 +179,18 @@
     <Compile Include="Security\OAuth\BaseValidatingContext.cs" />
     <Compile Include="Security\OAuth\BaseValidatingTicketContext.cs" />
     <Compile Include="Security\OAuth\IOAuthAuthorizationServerProvider.cs" />
+    <Compile Include="Security\OAuth\IOAuthBearerAuthenticationProvider.cs" />
     <Compile Include="Security\OAuth\Messages\AuthorizeEndpointRequest.cs" />
+    <Compile Include="Security\OAuth\OAuthBearerAuthenticationOptions.cs" />
+    <Compile Include="Security\OAuth\OAuthChallengeContext.cs" />
+    <Compile Include="Security\OAuth\OAuthRequestTokenContext.cs" />
+    <Compile Include="Security\OAuth\OAuthTokenEndpointResponseContext.cs" />
     <Compile Include="Security\OAuth\Messages\TokenEndpointRequest.cs" />
     <Compile Include="Security\OAuth\Messages\TokenEndpointRequestAuthorizationCode.cs" />
     <Compile Include="Security\OAuth\Messages\TokenEndpointRequestClientCredentials.cs" />
     <Compile Include="Security\OAuth\Messages\TokenEndpointRequestCustomExtension.cs" />
+    <Compile Include="Security\OAuth\Messages\TokenEndpointRequestRefreshToken.cs" />
+    <Compile Include="Security\OAuth\Messages\TokenEndpointRequestResourceOwnerPasswordCredentials.cs" />
     <Compile Include="Security\OAuth\OAuthAuthorizationEndpointResponseContext.cs" />
     <Compile Include="Security\OAuth\OAuthAuthorizationServerOptions.cs" />
     <Compile Include="Security\OAuth\OAuthAuthorizeEndpointContext.cs" />
@@ -194,6 +201,11 @@
     <Compile Include="Security\OAuth\OAuthGrantResourceOwnerCredentialsContext.cs" />
     <Compile Include="Security\OAuth\OAuthMatchEndpointContext.cs" />
     <Compile Include="Security\OAuth\OAuthTokenEndpointContext.cs" />
+    <Compile Include="Security\OAuth\OAuthValidateAuthorizeRequestContext.cs" />
+    <Compile Include="Security\OAuth\OAuthValidateClientAuthenticationContext.cs" />
+    <Compile Include="Security\OAuth\OAuthValidateClientRedirectUriContext.cs" />
+    <Compile Include="Security\OAuth\OAuthValidateIdentityContext.cs" />
+    <Compile Include="Security\OAuth\OAuthValidateTokenRequestContext.cs" />
     <Compile Include="Security\Provider\BaseContext.cs" />
     <Compile Include="Security\Provider\EndpointContext.cs" />
     <Compile Include="Security\Provider\ReturnEndpointContext.cs" />
@@ -206,7 +218,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

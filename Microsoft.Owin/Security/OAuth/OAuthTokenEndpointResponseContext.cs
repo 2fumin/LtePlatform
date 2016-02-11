@@ -6,10 +6,11 @@ using Microsoft.Owin.Security.Provider;
 
 namespace Microsoft.Owin.Security.OAuth
 {
-    public class OAuthTokenEndpointContext : EndpointContext<OAuthAuthorizationServerOptions>
+    public class OAuthTokenEndpointResponseContext : EndpointContext<OAuthAuthorizationServerOptions>
     {
-        public OAuthTokenEndpointContext(IOwinContext context, OAuthAuthorizationServerOptions options, 
-            AuthenticationTicket ticket, TokenEndpointRequest tokenEndpointRequest) : base(context, options)
+        public OAuthTokenEndpointResponseContext(IOwinContext context, OAuthAuthorizationServerOptions options, 
+            AuthenticationTicket ticket, TokenEndpointRequest tokenEndpointRequest, string accessToken, 
+            IDictionary<string, object> additionalResponseParameters) : base(context, options)
         {
             if (ticket == null)
             {
@@ -20,6 +21,8 @@ namespace Microsoft.Owin.Security.OAuth
             TokenEndpointRequest = tokenEndpointRequest;
             AdditionalResponseParameters = new Dictionary<string, object>(StringComparer.Ordinal);
             TokenIssued = Identity != null;
+            AccessToken = accessToken;
+            AdditionalResponseParameters = additionalResponseParameters;
         }
 
         public void Issue(ClaimsIdentity identity, AuthenticationProperties properties)
@@ -28,6 +31,8 @@ namespace Microsoft.Owin.Security.OAuth
             Properties = properties;
             TokenIssued = true;
         }
+
+        public string AccessToken { get; private set; }
 
         public IDictionary<string, object> AdditionalResponseParameters { get; private set; }
 
