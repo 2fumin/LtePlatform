@@ -133,7 +133,8 @@
     <value>A user with that external login already exists.</value>
   </data>
   <data name="IdentityV1SchemaError" xml:space="preserve">
-    <value>The model backing the 'ApplicationDbContext' context has changed since the database was created. This could have happened because the model used by ASP.NET Identity Framework has changed or the model being used in your application has changed. To resolve this issue, you need to update your database. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=301867).  Before you update your database using Code First Migrations, please disable the schema consistency check for ASP.NET Identity by setting throwIfV1Schema = false in the constructor of your ApplicationDbContext in your application.\n        public ApplicationDbContext() : base("ApplicationServices", throwIfV1Schema:false)</value>
+    <value>The model backing the 'ApplicationDbContext' context has changed since the database was created. This could have happened because the model used by ASP.NET Identity Framework has changed or the model being used in your application has changed. To resolve this issue, you need to update your database. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=301867).  Before you update your database using Code First Migrations, please disable the schema consistency check for ASP.NET Identity by setting throwIfV1Schema = false in the constructor of your ApplicationDbContext in your application.
+\n        public ApplicationDbContext() : base("ApplicationServices", throwIfV1Schema:false)</value>
   </data>
   <data name="InvalidEmail" xml:space="preserve">
     <value>Email '{0}' is invalid.</value>

@@ -157,7 +157,35 @@ namespace Microsoft.AspNet.Identity
             }
             return result;
         }
-        
+
+        public async virtual Task<IdentityResult> AddToRolesAsync(TKey userId, string[] roles)
+        {
+            var result = new IdentityResult();
+            ThrowIfDisposed();
+            var userRoleStore = GetUserRoleStore();
+            var user = await FindByIdAsync(userId).WithCurrentCulture();
+            if (user == null)
+            {
+                throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.UserIdNotFound, userId));
+            }
+            var userRoles = await userRoleStore.GetRolesAsync(user).WithCurrentCulture();
+            foreach (var role in roles)
+            {
+                if (userRoles.Contains(role))
+                {
+                    result.Merge(new IdentityResult(Resources.UserAlreadyInRole));
+                }
+                else
+                {
+                    await userRoleStore.AddToRoleAsync(user, role).WithCurrentCulture();
+                    var currentResult = await UpdateAsync(user).WithCurrentCulture();
+                    result.Merge(currentResult);
+                }
+            }
+            return result;
+        }
+
+
         public async virtual Task<IdentityResult> ChangePasswordAsync(TKey userId, string currentPassword, string newPassword)
         {
             ThrowIfDisposed();
@@ -784,7 +812,35 @@ namespace Microsoft.AspNet.Identity
             }
             return result;
         }
-        
+
+        public async virtual Task<IdentityResult> RemoveFromRolesAsync(TKey userId, string[] roles)
+        {
+            IdentityResult result = new IdentityResult();
+            ThrowIfDisposed();
+            var userRoleStore = GetUserRoleStore();
+            var user = await FindByIdAsync(userId).WithCurrentCulture();
+            if (user == null)
+            {
+                throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.UserIdNotFound, userId));
+            }
+            foreach (var role in roles)
+            {
+                var introduced20 = await userRoleStore.IsInRoleAsync(user, role).WithCurrentCulture();
+                if (!introduced20)
+                {
+                    result.Merge(new IdentityResult(Resources.UserNotInRole));
+                }
+                else
+                {
+                    await userRoleStore.RemoveFromRoleAsync(user, role).WithCurrentCulture();
+                    var currentResult = await UpdateAsync(user).WithCurrentCulture();
+                    result.Merge(currentResult);
+                }
+            }
+            return result;
+        }
+
+
         public async virtual Task<IdentityResult> RemoveLoginAsync(TKey userId, UserLoginInfo login)
         {
             ThrowIfDisposed();

@@ -82,6 +82,7 @@
     <Compile Include="IUserStore.cs" />
     <Compile Include="IUserTokenProvider.cs" />
     <Compile Include="MinimumLengthValidator.cs" />
+    <Compile Include="Owin\AppBuilderExtensions.cs" />
     <Compile Include="Owin\AuthenticationManagerExtensions.cs" />
     <Compile Include="Owin\DataProtectorTokenProvider.cs" />
     <Compile Include="Owin\ExternalLoginInfo.cs" />
@@ -114,12 +115,14 @@
     <Compile Include="TotpSecurityStampBasedTokenProvider.cs" />
     <Compile Include="UserLoginInfo.cs" />
     <Compile Include="UserManager.cs" />
+    <Compile Include="UserManagerExtensions.cs" />
     <Compile Include="UserValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

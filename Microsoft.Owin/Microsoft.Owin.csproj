@@ -194,6 +194,7 @@
     <Compile Include="Security\OAuth\OAuthBearerAuthenticationOptions.cs" />
     <Compile Include="Security\OAuth\OAuthBearerAuthenticationProvider.cs" />
     <Compile Include="Security\OAuth\OAuthChallengeContext.cs" />
+    <Compile Include="Security\OAuth\OAuthDefaults.cs" />
     <Compile Include="Security\OAuth\OAuthRequestTokenContext.cs" />
     <Compile Include="Security\OAuth\OAuthTokenEndpointResponseContext.cs" />
     <Compile Include="Security\OAuth\Messages\TokenEndpointRequest.cs" />

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNet.Identity.Properties;
 
 namespace Microsoft.AspNet.Identity
@@ -25,6 +26,12 @@ namespace Microsoft.AspNet.Identity
             Errors = new string[0];
         }
 
+        public IdentityResult()
+        {
+            Succeeded = false;
+            Errors = new string[0];
+        }
+
         public static IdentityResult Failed(params string[] errors)
         {
             return new IdentityResult(errors);
@@ -35,5 +42,11 @@ namespace Microsoft.AspNet.Identity
         public bool Succeeded { get; private set; }
 
         public static IdentityResult Success { get; } = new IdentityResult(true);
+
+        public void Merge(IdentityResult other)
+        {
+            Succeeded = Succeeded || other.Succeeded;
+            Errors = Errors.Concat(other.Errors);
+        }
     }
 }
