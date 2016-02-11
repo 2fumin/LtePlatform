@@ -53,7 +53,10 @@
     <Compile Include="IIdentityMessageService.cs" />
     <Compile Include="IIdentityValidator.cs" />
     <Compile Include="IPasswordHasher.cs" />
+    <Compile Include="IQueryableRoleStore.cs" />
     <Compile Include="IQueryableUserStore.cs" />
+    <Compile Include="IRole.cs" />
+    <Compile Include="IRoleStore.cs" />
     <Compile Include="IUser.cs" />
     <Compile Include="IUserClaimStore.cs" />
     <Compile Include="IUserEmailStore.cs" />
@@ -78,6 +81,8 @@
     </Compile>
     <Compile Include="Rfc6238AuthenticationService.cs" />
     <Compile Include="RoleManager.cs" />
+    <Compile Include="RoleManagerExtensions.cs" />
+    <Compile Include="RoleValidator.cs" />
     <Compile Include="SecurityToken.cs" />
     <Compile Include="TaskExtensions.cs" />
     <Compile Include="TotpSecurityStampBasedTokenProvider.cs" />

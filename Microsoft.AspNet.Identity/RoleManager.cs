@@ -21,28 +21,28 @@ namespace Microsoft.AspNet.Identity
         {
             if (store == null)
             {
-                throw new ArgumentNullException("store");
+                throw new ArgumentNullException(nameof(store));
             }
-            this.Store = store;
-            this.RoleValidator = new RoleValidator<TRole, TKey>((RoleManager<TRole, TKey>)this);
+            Store = store;
+            RoleValidator = new RoleValidator<TRole, TKey>(this);
         }
 
         public async virtual Task<IdentityResult> CreateAsync(TRole role)
         {
             IdentityResult success;
-            ((RoleManager<TRole, TKey>)this).ThrowIfDisposed();
+            ThrowIfDisposed();
             if (role == null)
             {
-                throw new ArgumentNullException("role");
+                throw new ArgumentNullException(nameof(role));
             }
-            IdentityResult asyncVariable0 = await ((RoleManager<TRole, TKey>)this).RoleValidator.ValidateAsync(role).WithCurrentCulture<IdentityResult>();
+            var asyncVariable0 = await RoleValidator.ValidateAsync(role).WithCurrentCulture();
             if (!asyncVariable0.Succeeded)
             {
                 success = asyncVariable0;
             }
             else
             {
-                await ((RoleManager<TRole, TKey>)this).Store.CreateAsync(role).WithCurrentCulture();
+                await Store.CreateAsync(role).WithCurrentCulture();
                 success = IdentityResult.Success;
             }
             return success;
@@ -50,81 +50,81 @@ namespace Microsoft.AspNet.Identity
 
         public async virtual Task<IdentityResult> DeleteAsync(TRole role)
         {
-            ((RoleManager<TRole, TKey>)this).ThrowIfDisposed();
+            ThrowIfDisposed();
             if (role == null)
             {
-                throw new ArgumentNullException("role");
+                throw new ArgumentNullException(nameof(role));
             }
-            await ((RoleManager<TRole, TKey>)this).Store.DeleteAsync(role).WithCurrentCulture();
+            await Store.DeleteAsync(role).WithCurrentCulture();
             return IdentityResult.Success;
         }
 
         public void Dispose()
         {
-            this.Dispose(true);
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
 
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing && !this._disposed)
+            if (disposing && !_disposed)
             {
-                this.Store.Dispose();
+                Store.Dispose();
             }
-            this._disposed = true;
+            _disposed = true;
         }
 
         public async virtual Task<TRole> FindByIdAsync(TKey roleId)
         {
-            ((RoleManager<TRole, TKey>)this).ThrowIfDisposed();
-            return await ((RoleManager<TRole, TKey>)this).Store.FindByIdAsync(roleId).WithCurrentCulture<TRole>();
+            ThrowIfDisposed();
+            return await Store.FindByIdAsync(roleId).WithCurrentCulture();
         }
 
         public async virtual Task<TRole> FindByNameAsync(string roleName)
         {
-            ((RoleManager<TRole, TKey>)this).ThrowIfDisposed();
+            ThrowIfDisposed();
             if (roleName == null)
             {
-                throw new ArgumentNullException("roleName");
+                throw new ArgumentNullException(nameof(roleName));
             }
-            return await ((RoleManager<TRole, TKey>)this).Store.FindByNameAsync(roleName).WithCurrentCulture<TRole>();
+            return await Store.FindByNameAsync(roleName).WithCurrentCulture();
         }
 
         public async virtual Task<bool> RoleExistsAsync(string roleName)
         {
-            ((RoleManager<TRole, TKey>)this).ThrowIfDisposed();
+            ThrowIfDisposed();
             if (roleName == null)
             {
-                throw new ArgumentNullException("roleName");
+                throw new ArgumentNullException(nameof(roleName));
             }
-            TRole result = await ((RoleManager<TRole, TKey>)this).FindByNameAsync(roleName).WithCurrentCulture<TRole>();
+            var result = await FindByNameAsync(roleName).WithCurrentCulture();
             return (result != null);
         }
 
         private void ThrowIfDisposed()
         {
-            if (this._disposed)
+            if (_disposed)
             {
-                throw new ObjectDisposedException(base.GetType().Name);
+                throw new ObjectDisposedException(GetType().Name);
             }
         }
 
         public async virtual Task<IdentityResult> UpdateAsync(TRole role)
         {
             IdentityResult success;
-            ((RoleManager<TRole, TKey>)this).ThrowIfDisposed();
+            ThrowIfDisposed();
             if (role == null)
             {
-                throw new ArgumentNullException("role");
+                throw new ArgumentNullException(nameof(role));
             }
-            IdentityResult asyncVariable0 = await ((RoleManager<TRole, TKey>)this).RoleValidator.ValidateAsync(role).WithCurrentCulture<IdentityResult>();
+            var asyncVariable0 = await RoleValidator.ValidateAsync(role).WithCurrentCulture();
             if (!asyncVariable0.Succeeded)
             {
                 success = asyncVariable0;
             }
             else
             {
-                await ((RoleManager<TRole, TKey>)this).Store.UpdateAsync(role).WithCurrentCulture();
+                await Store.UpdateAsync(role).WithCurrentCulture();
                 success = IdentityResult.Success;
             }
             return success;
@@ -134,7 +134,7 @@ namespace Microsoft.AspNet.Identity
         {
             get
             {
-                IQueryableRoleStore<TRole, TKey> store = this.Store as IQueryableRoleStore<TRole, TKey>;
+                var store = Store as IQueryableRoleStore<TRole, TKey>;
                 if (store == null)
                 {
                     throw new NotSupportedException(Resources.StoreNotIQueryableRoleStore);
@@ -147,19 +147,19 @@ namespace Microsoft.AspNet.Identity
         {
             get
             {
-                return this._roleValidator;
+                return _roleValidator;
             }
             set
             {
                 if (value == null)
                 {
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
                 }
-                this._roleValidator = value;
+                _roleValidator = value;
             }
         }
 
-        protected IRoleStore<TRole, TKey> Store { get; private set; }
+        protected IRoleStore<TRole, TKey> Store { get; }
         
     }
 }
