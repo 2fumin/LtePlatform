@@ -69,6 +69,12 @@
     <Compile Include="IUserStore.cs" />
     <Compile Include="IUserTokenProvider.cs" />
     <Compile Include="MinimumLengthValidator.cs" />
+    <Compile Include="Owin\AuthenticationManagerExtensions.cs" />
+    <Compile Include="Owin\ExternalLoginInfo.cs" />
+    <Compile Include="Owin\OwinContextExtensions.cs" />
+    <Compile Include="Owin\SignInManager.cs" />
+    <Compile Include="Owin\SignInManagerExtensions.cs" />
+    <Compile Include="Owin\SignInStatus.cs" />
     <Compile Include="PasswordHasher.cs" />
     <Compile Include="PasswordValidator.cs" />
     <Compile Include="PasswordVerificationResult.cs" />
@@ -95,6 +101,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.Owin\Microsoft.Owin.csproj">
+      <Project>{2812859c-7399-4a99-876a-62bc5471bb8a}</Project>
+      <Name>Microsoft.Owin</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
