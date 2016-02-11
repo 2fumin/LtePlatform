@@ -61,8 +61,14 @@ namespace Microsoft.Owin.Security
             }
             var name = result.Identity.Name;
             name = name?.Replace(" ", "");
-            string str2 = result.Identity.FindFirstValue("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress");
-            return new ExternalLoginInfo { ExternalIdentity = result.Identity, Login = new UserLoginInfo(claim.Issuer, claim.Value), DefaultUserName = name, Email = str2 };
+            var str2 = result.Identity.FindFirstValue("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress");
+            return new ExternalLoginInfo
+            {
+                ExternalIdentity = result.Identity,
+                Login = new UserLoginInfo(claim.Issuer, claim.Value),
+                DefaultUserName = name,
+                Email = str2
+            };
         }
 
         public static ExternalLoginInfo GetExternalLoginInfo(this IAuthenticationManager manager)
@@ -71,9 +77,9 @@ namespace Microsoft.Owin.Security
             {
                 throw new ArgumentNullException(nameof(manager));
             }
-            return AsyncHelper.RunSync(new Func<Task<ExternalLoginInfo>>(AuthenticationManagerExtensions.GetExternalLoginInfoAsync));
+            return AsyncHelper.RunSync(manager.GetExternalLoginInfoAsync);
         }
-
+        
         public static ExternalLoginInfo GetExternalLoginInfo(this IAuthenticationManager manager, string xsrfKey, string expectedValue)
         {
             if (manager == null)
@@ -101,7 +107,8 @@ namespace Microsoft.Owin.Security
                 throw new ArgumentNullException(nameof(manager));
             }
             var result = await manager.AuthenticateAsync("ExternalCookie").WithCurrentCulture();
-            if ((((result != null) && (result.Properties != null)) && ((result.Properties.Dictionary != null) && result.Properties.Dictionary.ContainsKey(xsrfKey))) && (result.Properties.Dictionary[xsrfKey] == expectedValue))
+            if (result?.Properties?.Dictionary != null && result.Properties.Dictionary.ContainsKey(xsrfKey) 
+                && (result.Properties.Dictionary[xsrfKey] == expectedValue))
             {
                 externalLoginInfo = GetExternalLoginInfo(result);
             }
@@ -128,7 +135,7 @@ namespace Microsoft.Owin.Security
                 throw new ArgumentNullException(nameof(manager));
             }
             var asyncVariable0 = await manager.AuthenticateAsync("TwoFactorRememberBrowser").WithCurrentCulture();
-            return (((asyncVariable0 != null) && (asyncVariable0.Identity != null)) && (asyncVariable0.Identity.GetUserId() == userId));
+            return (asyncVariable0?.Identity != null && (asyncVariable0.Identity.GetUserId() == userId));
         }
         
     }

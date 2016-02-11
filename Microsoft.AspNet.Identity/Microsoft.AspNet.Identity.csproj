@@ -48,6 +48,7 @@
     <Compile Include="DefaultAuthenticationTypes.cs" />
     <Compile Include="EmailTokenProvider.cs" />
     <Compile Include="IClaimsIdentityFactory.cs" />
+    <Compile Include="IdentityExtensions.cs" />
     <Compile Include="IdentityMessage.cs" />
     <Compile Include="IdentityResult.cs" />
     <Compile Include="IIdentityMessageService.cs" />
@@ -70,11 +71,17 @@
     <Compile Include="IUserTokenProvider.cs" />
     <Compile Include="MinimumLengthValidator.cs" />
     <Compile Include="Owin\AuthenticationManagerExtensions.cs" />
+    <Compile Include="Owin\DataProtectorTokenProvider.cs" />
     <Compile Include="Owin\ExternalLoginInfo.cs" />
+    <Compile Include="Owin\IdentityFactoryMiddleware.cs" />
+    <Compile Include="Owin\IdentityFactoryOptions.cs" />
+    <Compile Include="Owin\IdentityFactoryProvider.cs" />
+    <Compile Include="Owin\IIdentityFactoryProvider.cs" />
     <Compile Include="Owin\OwinContextExtensions.cs" />
     <Compile Include="Owin\SignInManager.cs" />
     <Compile Include="Owin\SignInManagerExtensions.cs" />
     <Compile Include="Owin\SignInStatus.cs" />
+    <Compile Include="Owin\StreamExtensions.cs" />
     <Compile Include="PasswordHasher.cs" />
     <Compile Include="PasswordValidator.cs" />
     <Compile Include="PasswordVerificationResult.cs" />
