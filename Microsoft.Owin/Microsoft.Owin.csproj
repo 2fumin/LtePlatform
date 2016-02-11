@@ -93,6 +93,7 @@
     <Compile Include="Mapping\MapWhenMiddleware.cs" />
     <Compile Include="Mapping\MapWhenOptions.cs" />
     <Compile Include="MapWhenExtensions.cs" />
+    <Compile Include="OAuthAuthorizationServerExtensions.cs" />
     <Compile Include="OwinConstants.cs" />
     <Compile Include="OwinContext.cs" />
     <Compile Include="OwinMiddleware.cs" />
@@ -174,6 +175,11 @@
     <Compile Include="Security\Notifications\RedirectToIdentityProviderNotification.cs" />
     <Compile Include="Security\Notifications\SecurityTokenReceivedNotification.cs" />
     <Compile Include="Security\Notifications\SecurityTokenValidatedNotification.cs" />
+    <Compile Include="Security\OAuth\BaseValidatingClientContext.cs" />
+    <Compile Include="Security\OAuth\BaseValidatingContext.cs" />
+    <Compile Include="Security\OAuth\IOAuthAuthorizationServerProvider.cs" />
+    <Compile Include="Security\OAuth\OAuthAuthorizationEndpointResponseContext.cs" />
+    <Compile Include="Security\OAuth\OAuthAuthorizationServerOptions.cs" />
     <Compile Include="Security\Provider\BaseContext.cs" />
     <Compile Include="Security\Provider\EndpointContext.cs" />
     <Compile Include="Security\Provider\ReturnEndpointContext.cs" />
@@ -185,6 +191,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Security\OAuth\Messages\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
