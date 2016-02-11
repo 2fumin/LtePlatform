@@ -74,7 +74,7 @@ namespace Microsoft.Owin.Logging
             logger.WriteCore(TraceEventType.Verbose, 0, data, null, TheMessage);
         }
 
-        public static void WriteWarning(this ILogger logger, string message, params object[] args)
+        public static void WriteWarning(this ILogger logger, string message, params string[][] args)
         {
             if (logger == null)
             {

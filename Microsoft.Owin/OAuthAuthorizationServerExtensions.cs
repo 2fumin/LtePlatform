@@ -1,23 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Owin;
+using Microsoft.Owin.Security.OAuth;
 
-namespace Owin
+namespace Microsoft.Owin
 {
-    using Microsoft.Owin.Security.OAuth;
-    using System;
-    using System.Runtime.CompilerServices;
-
     public static class OAuthAuthorizationServerExtensions
     {
         public static IAppBuilder UseOAuthAuthorizationServer(this IAppBuilder app, OAuthAuthorizationServerOptions options)
         {
             if (app == null)
             {
-                throw new ArgumentNullException("app");
+                throw new ArgumentNullException(nameof(app));
             }
             app.Use(typeof(OAuthAuthorizationServerMiddleware), new object[] { app, options });
             return app;

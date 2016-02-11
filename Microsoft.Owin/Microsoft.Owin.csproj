@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.IdentityModel" />
@@ -94,6 +97,7 @@
     <Compile Include="Mapping\MapWhenOptions.cs" />
     <Compile Include="MapWhenExtensions.cs" />
     <Compile Include="OAuthAuthorizationServerExtensions.cs" />
+    <Compile Include="OAuthBearerAuthenticationExtensions.cs" />
     <Compile Include="OwinConstants.cs" />
     <Compile Include="OwinContext.cs" />
     <Compile Include="OwinMiddleware.cs" />
@@ -178,12 +182,17 @@
     <Compile Include="Security\OAuth\BaseValidatingClientContext.cs" />
     <Compile Include="Security\OAuth\BaseValidatingContext.cs" />
     <Compile Include="Security\OAuth\BaseValidatingTicketContext.cs" />
+    <Compile Include="Security\OAuth\DefaultBehavior.cs" />
     <Compile Include="Security\OAuth\IOAuthAuthorizationServerProvider.cs" />
     <Compile Include="Security\OAuth\IOAuthBearerAuthenticationProvider.cs" />
     <Compile Include="Security\OAuth\Messages\AuthorizeEndpointRequest.cs" />
+    <Compile Include="Security\OAuth\OAuthAuthorizationServerHandler.cs" />
     <Compile Include="Security\OAuth\OAuthAuthorizationServerMiddleware.cs" />
     <Compile Include="Security\OAuth\OAuthAuthorizationServerProvider.cs" />
+    <Compile Include="Security\OAuth\OAuthBearerAuthenticationHandler.cs" />
+    <Compile Include="Security\OAuth\OAuthBearerAuthenticationMiddleware.cs" />
     <Compile Include="Security\OAuth\OAuthBearerAuthenticationOptions.cs" />
+    <Compile Include="Security\OAuth\OAuthBearerAuthenticationProvider.cs" />
     <Compile Include="Security\OAuth\OAuthChallengeContext.cs" />
     <Compile Include="Security\OAuth\OAuthRequestTokenContext.cs" />
     <Compile Include="Security\OAuth\OAuthTokenEndpointResponseContext.cs" />
