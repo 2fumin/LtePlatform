@@ -51,6 +51,7 @@
     <Compile Include="Builder\AppBuilderExtensions.cs" />
     <Compile Include="Builder\Constants.cs" />
     <Compile Include="Builder\NotFound.cs" />
+    <Compile Include="CookieAuthenticationExtensions.cs" />
     <Compile Include="CookieOptions.cs" />
     <Compile Include="Extensions\IntegratedPipelineExtensions.cs" />
     <Compile Include="Extensions\UseHandlerMiddleware.cs" />
@@ -123,6 +124,17 @@
     <Compile Include="Security\CertificateSubjectPublicKeyInfoValidator.cs" />
     <Compile Include="Security\CertificateThumbprintValidator.cs" />
     <Compile Include="Security\Constants.cs" />
+    <Compile Include="Security\Cookies\CookieApplyRedirectContext.cs" />
+    <Compile Include="Security\Cookies\CookieAuthenticationDefaults.cs" />
+    <Compile Include="Security\Cookies\CookieAuthenticationHandler.cs" />
+    <Compile Include="Security\Cookies\CookieAuthenticationMiddleware.cs" />
+    <Compile Include="Security\Cookies\CookieAuthenticationOptions.cs" />
+    <Compile Include="Security\Cookies\CookieAuthenticationProvider.cs" />
+    <Compile Include="Security\Cookies\CookieExceptionContext.cs" />
+    <Compile Include="Security\Cookies\CookieResponseSignedInContext.cs" />
+    <Compile Include="Security\Cookies\CookieResponseSignInContext.cs" />
+    <Compile Include="Security\Cookies\CookieSecureOption.cs" />
+    <Compile Include="Security\Cookies\ICookieAuthenticationProvider.cs" />
     <Compile Include="Security\DataHandler\Encoder\Base64TextEncoder.cs" />
     <Compile Include="Security\DataHandler\Encoder\Base64UrlTextEncoder.cs" />
     <Compile Include="Security\DataHandler\Encoder\ITextEncoder.cs" />
