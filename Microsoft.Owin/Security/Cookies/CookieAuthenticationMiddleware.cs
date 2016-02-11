@@ -1,5 +1,6 @@
 ﻿using Microsoft.Owin.Infrastructure;
 using Microsoft.Owin.Logging;
+using Microsoft.Owin.Security.DataHandler;
 using Microsoft.Owin.Security.DataProtection;
 using Microsoft.Owin.Security.Infrastructure;
 
@@ -9,31 +10,33 @@ namespace Microsoft.Owin.Security.Cookies
     {
         private readonly ILogger _logger;
 
-        public CookieAuthenticationMiddleware(OwinMiddleware next, IAppBuilder app, CookieAuthenticationOptions options) : base(next, options)
+        public CookieAuthenticationMiddleware(OwinMiddleware next, IAppBuilder app, 
+            CookieAuthenticationOptions options) : base(next, options)
         {
-            if (base.Options.Provider == null)
+            if (Options.Provider == null)
             {
-                base.Options.Provider = new CookieAuthenticationProvider();
+                Options.Provider = new CookieAuthenticationProvider();
             }
-            if (string.IsNullOrEmpty(base.Options.CookieName))
+            if (string.IsNullOrEmpty(Options.CookieName))
             {
-                base.Options.CookieName = ".AspNet." + base.Options.AuthenticationType;
+                Options.CookieName = ".AspNet." + Options.AuthenticationType;
             }
-            this._logger = app.CreateLogger<CookieAuthenticationMiddleware>();
-            if (base.Options.TicketDataFormat == null)
+            _logger = app.CreateLogger<CookieAuthenticationMiddleware>();
+            if (Options.TicketDataFormat == null)
             {
-                IDataProtector protector = app.CreateDataProtector(new string[] { typeof(CookieAuthenticationMiddleware).FullName, base.Options.AuthenticationType, "v1" });
-                base.Options.TicketDataFormat = new TicketDataFormat(protector);
+                var protector = app.CreateDataProtector(typeof (CookieAuthenticationMiddleware).FullName,
+                    Options.AuthenticationType, "v1");
+                Options.TicketDataFormat = new TicketDataFormat(protector);
             }
-            if (base.Options.CookieManager == null)
+            if (Options.CookieManager == null)
             {
-                base.Options.CookieManager = new ChunkingCookieManager();
+                Options.CookieManager = new ChunkingCookieManager();
             }
         }
 
         protected override AuthenticationHandler<CookieAuthenticationOptions> CreateHandler()
         {
-            return new CookieAuthenticationHandler(this._logger);
+            return new CookieAuthenticationHandler(_logger);
         }
     }
 }

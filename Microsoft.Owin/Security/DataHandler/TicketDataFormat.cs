@@ -4,10 +4,10 @@ using Microsoft.Owin.Security.DataProtection;
 
 namespace Microsoft.Owin.Security.DataHandler
 {
-    public class PropertiesDataFormat : SecureDataFormat<AuthenticationProperties>
+    public class TicketDataFormat : SecureDataFormat<AuthenticationTicket>
     {
-        public PropertiesDataFormat(IDataProtector protector) 
-            : base(DataSerializers.Properties, protector, TextEncodings.Base64Url)
+        public TicketDataFormat(IDataProtector protector) 
+            : base(DataSerializers.Ticket, protector, TextEncodings.Base64Url)
         {
         }
     }

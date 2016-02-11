@@ -33,6 +33,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -133,7 +134,11 @@
     <Compile Include="Security\Cookies\CookieExceptionContext.cs" />
     <Compile Include="Security\Cookies\CookieResponseSignedInContext.cs" />
     <Compile Include="Security\Cookies\CookieResponseSignInContext.cs" />
+    <Compile Include="Security\Cookies\CookieResponseSignOutContext.cs" />
     <Compile Include="Security\Cookies\CookieSecureOption.cs" />
+    <Compile Include="Security\Cookies\CookieValidateIdentityContext.cs" />
+    <Compile Include="Security\Cookies\DefaultBehavior.cs" />
+    <Compile Include="Security\Cookies\IAuthenticationSessionStore.cs" />
     <Compile Include="Security\Cookies\ICookieAuthenticationProvider.cs" />
     <Compile Include="Security\DataHandler\Encoder\Base64TextEncoder.cs" />
     <Compile Include="Security\DataHandler\Encoder\Base64UrlTextEncoder.cs" />
@@ -145,6 +150,7 @@
     <Compile Include="Security\DataHandler\Serializer\IDataSerializer.cs" />
     <Compile Include="Security\DataHandler\Serializer\PropertiesSerializer.cs" />
     <Compile Include="Security\DataHandler\Serializer\TicketSerializer.cs" />
+    <Compile Include="Security\DataHandler\TicketDataFormat.cs" />
     <Compile Include="Security\DataProtection\AppBuilderExtensions.cs" />
     <Compile Include="Security\DataProtection\DpapiDataProtectionProvider.cs" />
     <Compile Include="Security\DataProtection\DpapiDataProtector.cs" />

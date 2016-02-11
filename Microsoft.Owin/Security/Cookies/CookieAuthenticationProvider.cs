@@ -7,46 +7,46 @@ namespace Microsoft.Owin.Security.Cookies
     {
         public CookieAuthenticationProvider()
         {
-            this.OnValidateIdentity = context => Task.FromResult<object>(null);
-            this.OnResponseSignIn = delegate (CookieResponseSignInContext context) {
+            OnValidateIdentity = context => Task.FromResult<object>(null);
+            OnResponseSignIn = delegate {
             };
-            this.OnResponseSignedIn = delegate (CookieResponseSignedInContext context) {
+            OnResponseSignedIn = delegate {
             };
-            this.OnResponseSignOut = delegate (CookieResponseSignOutContext context) {
+            OnResponseSignOut = delegate {
             };
-            this.OnApplyRedirect = DefaultBehavior.ApplyRedirect;
-            this.OnException = delegate (CookieExceptionContext context) {
+            OnApplyRedirect = DefaultBehavior.ApplyRedirect;
+            OnException = delegate {
             };
         }
 
         public virtual void ApplyRedirect(CookieApplyRedirectContext context)
         {
-            this.OnApplyRedirect(context);
+            OnApplyRedirect(context);
         }
 
         public virtual void Exception(CookieExceptionContext context)
         {
-            this.OnException(context);
+            OnException(context);
         }
 
         public virtual void ResponseSignedIn(CookieResponseSignedInContext context)
         {
-            this.OnResponseSignedIn(context);
+            OnResponseSignedIn(context);
         }
 
         public virtual void ResponseSignIn(CookieResponseSignInContext context)
         {
-            this.OnResponseSignIn(context);
+            OnResponseSignIn(context);
         }
 
         public virtual void ResponseSignOut(CookieResponseSignOutContext context)
         {
-            this.OnResponseSignOut(context);
+            OnResponseSignOut(context);
         }
 
         public virtual Task ValidateIdentity(CookieValidateIdentityContext context)
         {
-            return this.OnValidateIdentity(context);
+            return OnValidateIdentity(context);
         }
 
         public Action<CookieApplyRedirectContext> OnApplyRedirect { get; set; }

@@ -7,16 +7,16 @@ namespace Microsoft.Owin.Security.Cookies
     {
         private string _cookieName;
 
-        public CookieAuthenticationOptions() : base("Cookies")
+        public CookieAuthenticationOptions() : base(CookieAuthenticationDefaults.AuthenticationType)
         {
-            this.ReturnUrlParameter = "ReturnUrl";
-            this.CookiePath = "/";
-            this.ExpireTimeSpan = TimeSpan.FromDays(14.0);
-            this.SlidingExpiration = true;
-            this.CookieHttpOnly = true;
-            this.CookieSecure = CookieSecureOption.SameAsRequest;
-            this.SystemClock = new SystemClock();
-            this.Provider = new CookieAuthenticationProvider();
+            ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+            CookiePath = "/";
+            ExpireTimeSpan = TimeSpan.FromDays(14.0);
+            SlidingExpiration = true;
+            CookieHttpOnly = true;
+            CookieSecure = CookieSecureOption.SameAsRequest;
+            SystemClock = new SystemClock();
+            Provider = new CookieAuthenticationProvider();
         }
 
         public string CookieDomain { get; set; }
@@ -29,15 +29,15 @@ namespace Microsoft.Owin.Security.Cookies
         {
             get
             {
-                return this._cookieName;
+                return _cookieName;
             }
             set
             {
                 if (value == null)
                 {
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
                 }
-                this._cookieName = value;
+                _cookieName = value;
             }
         }
 
