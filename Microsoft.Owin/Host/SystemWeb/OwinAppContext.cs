@@ -93,7 +93,7 @@ namespace Microsoft.Owin.Host.SystemWeb
             var section = (CompilationSection)ConfigurationManager.GetSection("system.web/compilation");
             if (section.Debug)
             {
-                builder.Properties[Constants.HostAppModeKey] = "development";
+                builder.Properties[Constants.HostAppModeKey] = Constants.AppModeDevelopment;
             }
             DetectWebSocketSupportStageOne();
             try

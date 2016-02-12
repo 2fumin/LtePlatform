@@ -575,7 +575,7 @@ namespace Microsoft.Owin.Host.SystemWeb
         internal bool TryRelayExceptionToIntegratedPipeline(bool sync, Exception ex)
         {
             object obj2;
-            if (Environment.TryGetValue("integratedpipeline.Context", out obj2))
+            if (Environment.TryGetValue(Constants.IntegratedPipelineContext, out obj2))
             {
                 var context = obj2 as IntegratedPipelineContext;
                 if (context != null)

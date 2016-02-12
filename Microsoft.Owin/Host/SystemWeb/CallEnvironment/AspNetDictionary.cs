@@ -281,7 +281,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                     return true;
 
                 case 0x1a:
-                    if (((_flag1 & 4) == 0) || !string.Equals(key, "integratedpipeline.Context", StringComparison.Ordinal))
+                    if (((_flag1 & 4) == 0) || !string.Equals(key, Constants.IntegratedPipelineContext, StringComparison.Ordinal))
                     {
                         if (((_flag1 & 0x20) != 0) && string.Equals(key, "System.Web.HttpContextBase", StringComparison.Ordinal))
                         {
@@ -301,7 +301,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                 case 0x1f:
                     if (((_flag0 & 0x10000) == 0) || !string.Equals(key, "server.DisableResponseBuffering", StringComparison.Ordinal))
                     {
-                        if (((_flag1 & 8) == 0) || !string.Equals(key, "integratedpipeline.CurrentStage", StringComparison.Ordinal))
+                        if (((_flag1 & 8) == 0) || !string.Equals(key, Constants.IntegratedPipelineCurrentStage, StringComparison.Ordinal))
                         {
                             break;
                         }
@@ -466,11 +466,11 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
             }
             if ((_flag1 & 4) != 0)
             {
-                yield return new KeyValuePair<string, object>("integratedpipeline.Context", IntegratedPipelineContext);
+                yield return new KeyValuePair<string, object>(Constants.IntegratedPipelineContext, IntegratedPipelineContext);
             }
             if ((_flag1 & 8) != 0)
             {
-                yield return new KeyValuePair<string, object>("integratedpipeline.CurrentStage", IntegratedPipelineStage);
+                yield return new KeyValuePair<string, object>(Constants.IntegratedPipelineCurrentStage, IntegratedPipelineStage);
             }
             if ((_flag1 & 0x10) != 0)
             {
@@ -622,11 +622,11 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
             }
             if ((_flag1 & 4) != 0)
             {
-                yield return "integratedpipeline.Context";
+                yield return Constants.IntegratedPipelineContext;
             }
             if ((_flag1 & 8) != 0)
             {
-                yield return "integratedpipeline.CurrentStage";
+                yield return Constants.IntegratedPipelineCurrentStage;
             }
             if ((_flag1 & 0x10) != 0)
             {
@@ -854,7 +854,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                     return true;
 
                 case 0x1a:
-                    if (((_flag1 & 4) == 0) || !string.Equals(key, "integratedpipeline.Context", StringComparison.Ordinal))
+                    if (((_flag1 & 4) == 0) || !string.Equals(key, Constants.IntegratedPipelineContext, StringComparison.Ordinal))
                     {
                         if (((_flag1 & 0x20) != 0) && string.Equals(key, "System.Web.HttpContextBase", StringComparison.Ordinal))
                         {
@@ -882,7 +882,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                 case 0x1f:
                     if (((_flag0 & 0x10000) == 0) || !string.Equals(key, "server.DisableResponseBuffering", StringComparison.Ordinal))
                     {
-                        if (((_flag1 & 8) == 0) || !string.Equals(key, "integratedpipeline.CurrentStage", StringComparison.Ordinal))
+                        if (((_flag1 & 8) == 0) || !string.Equals(key, Constants.IntegratedPipelineCurrentStage, StringComparison.Ordinal))
                         {
                             break;
                         }
@@ -1150,7 +1150,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                     return true;
 
                 case 0x1a:
-                    if (((_flag1 & 4) == 0) || !string.Equals(key, "integratedpipeline.Context", StringComparison.Ordinal))
+                    if (((_flag1 & 4) == 0) || !string.Equals(key, Constants.IntegratedPipelineContext, StringComparison.Ordinal))
                     {
                         if (((_flag1 & 0x20) != 0) && string.Equals(key, "System.Web.HttpContextBase", StringComparison.Ordinal))
                         {
@@ -1177,7 +1177,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                 case 0x1f:
                     if (((_flag0 & 0x10000) == 0) || !string.Equals(key, "server.DisableResponseBuffering", StringComparison.Ordinal))
                     {
-                        if (((_flag1 & 8) == 0) || !string.Equals(key, "integratedpipeline.CurrentStage", StringComparison.Ordinal))
+                        if (((_flag1 & 8) == 0) || !string.Equals(key, Constants.IntegratedPipelineCurrentStage, StringComparison.Ordinal))
                         {
                             break;
                         }
@@ -1407,7 +1407,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                     return true;
 
                 case 0x1a:
-                    if (!string.Equals(key, "integratedpipeline.Context", StringComparison.Ordinal))
+                    if (!string.Equals(key, Constants.IntegratedPipelineContext, StringComparison.Ordinal))
                     {
                         if (string.Equals(key, "System.Web.HttpContextBase", StringComparison.Ordinal))
                         {
@@ -1430,7 +1430,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                 case 0x1f:
                     if (!string.Equals(key, "server.DisableResponseBuffering", StringComparison.Ordinal))
                     {
-                        if (!string.Equals(key, "integratedpipeline.CurrentStage", StringComparison.Ordinal))
+                        if (!string.Equals(key, Constants.IntegratedPipelineCurrentStage, StringComparison.Ordinal))
                         {
                             break;
                         }

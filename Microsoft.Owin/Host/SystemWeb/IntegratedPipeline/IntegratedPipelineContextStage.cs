@@ -50,7 +50,7 @@ namespace Microsoft.Owin.Host.SystemWeb.IntegratedPipeline
                 }
             });
             _result = result2;
-            environment["integratedpipeline.CurrentStage"] = _stage.Name;
+            environment[Constants.IntegratedPipelineCurrentStage] = _stage.Name;
             await RunApp(entryPoint, environment, tcs, result2);
             result2.InitialThreadReturning();
             return result2;

@@ -5,7 +5,6 @@ using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
 using System.Web;
-using Microsoft.Owin.Infrastructure;
 using Microsoft.Owin.Properties;
 
 namespace Microsoft.Owin.Host.SystemWeb.CallHeaders
@@ -67,7 +66,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallHeaders
 
         public bool ContainsKey(string key)
         {
-            if (Constants.Headers.ContentType.Equals(key, StringComparison.OrdinalIgnoreCase))
+            if (Constants.ContentType.Equals(key, StringComparison.OrdinalIgnoreCase))
             {
                 return !string.IsNullOrEmpty(_response.ContentType);
             }
@@ -92,7 +91,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallHeaders
 
         private string[] Get(string key)
         {
-            if (!Constants.Headers.ContentType.Equals(key, StringComparison.OrdinalIgnoreCase))
+            if (!Constants.ContentType.Equals(key, StringComparison.OrdinalIgnoreCase))
             {
                 return _headers.GetValues(key);
             }
@@ -105,12 +104,12 @@ namespace Microsoft.Owin.Host.SystemWeb.CallHeaders
             if (!string.IsNullOrEmpty(_response.ContentType))
             {
                 yield return
-                    new KeyValuePair<string, string[]>(Constants.Headers.ContentType, new[] {_response.ContentType});
+                    new KeyValuePair<string, string[]>(Constants.ContentType, new[] {_response.ContentType});
             }
             for (var i = 0; i < _headers.Count; i++)
             {
                 var iteratorVariable1 = _headers.Keys[i];
-                if (!Constants.Headers.ContentType.Equals(iteratorVariable1, StringComparison.OrdinalIgnoreCase))
+                if (!Constants.ContentType.Equals(iteratorVariable1, StringComparison.OrdinalIgnoreCase))
                 {
                     yield return new KeyValuePair<string, string[]>(iteratorVariable1, _headers.GetValues(i));
                 }
@@ -131,8 +130,8 @@ namespace Microsoft.Owin.Host.SystemWeb.CallHeaders
 
         private void Set(string key, string[] values)
         {
-            if (Constants.Headers.ContentType.Equals(key, StringComparison.OrdinalIgnoreCase) ||
-                Constants.Headers.CacheControl.Equals(key, StringComparison.OrdinalIgnoreCase))
+            if (Constants.ContentType.Equals(key, StringComparison.OrdinalIgnoreCase) ||
+                Constants.CacheControl.Equals(key, StringComparison.OrdinalIgnoreCase))
             {
                 _headers.Remove(key);
                 if (values != null)

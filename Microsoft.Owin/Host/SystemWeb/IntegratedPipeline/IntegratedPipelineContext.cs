@@ -55,7 +55,7 @@ namespace Microsoft.Owin.Host.SystemWeb.IntegratedPipeline
         public static Task DefaultAppInvoked(IDictionary<string, object> env)
         {
             object obj2;
-            if (!env.TryGetValue("integratedpipeline.Context", out obj2))
+            if (!env.TryGetValue(Constants.IntegratedPipelineContext, out obj2))
             {
                 throw new InvalidOperationException();
             }
@@ -88,7 +88,7 @@ namespace Microsoft.Owin.Host.SystemWeb.IntegratedPipeline
         public static Task ExitPointInvoked(IDictionary<string, object> env)
         {
             object obj2;
-            if (!env.TryGetValue("integratedpipeline.Context", out obj2))
+            if (!env.TryGetValue(Constants.IntegratedPipelineContext, out obj2))
             {
                 throw new InvalidOperationException();
             }
