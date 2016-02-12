@@ -97,6 +97,15 @@ namespace Microsoft.Owin.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Cannot register for &apos;OnSendingHeaders&apos; event after response headers have been sent. 的本地化字符串。
+        /// </summary>
+        internal static string Exception_CannotRegisterAfterHeadersSent {
+            get {
+                return ResourceManager.GetString("Exception_CannotRegisterAfterHeadersSent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Conversion delegate must take one parameter. 的本地化字符串。
         /// </summary>
         internal static string Exception_ConversionTakesOneParameter {
@@ -309,6 +318,15 @@ namespace Microsoft.Owin.Properties {
         internal static string Trace_OwinCallContextCallbackException {
             get {
                 return ResourceManager.GetString("Trace_OwinCallContextCallbackException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 The application threw one or more exceptions when notified of a client disconnect: 的本地化字符串。
+        /// </summary>
+        internal static string Trace_RequestDisconnectCallbackExceptions {
+            get {
+                return ResourceManager.GetString("Trace_RequestDisconnectCallbackExceptions", resourceCulture);
             }
         }
         

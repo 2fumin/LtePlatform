@@ -91,9 +91,9 @@ namespace Microsoft.Owin.Host.SystemWeb
         {
             this.Capabilities = new ConcurrentDictionary<string, object>();
             AppBuilder builder = new AppBuilder();
-            builder.Properties["owin.Version"] = "1.0";
+            builder.Properties[OwinConstants.OwinVersion] = "1.0";
             builder.Properties["host.TraceOutput"] = TraceTextWriter.Instance;
-            builder.Properties["host.AppName"] = this.AppName;
+            builder.Properties[OwinConstants.CommonKeys.AppName] = this.AppName;
             builder.Properties["host.OnAppDisposing"] = OwinApplication.ShutdownToken;
             builder.Properties["host.ReferencedAssemblies"] = new ReferencedAssembliesWrapper();
             builder.Properties["server.Capabilities"] = this.Capabilities;
@@ -103,7 +103,7 @@ namespace Microsoft.Owin.Host.SystemWeb
             CompilationSection section = (CompilationSection)ConfigurationManager.GetSection("system.web/compilation");
             if (section.Debug)
             {
-                builder.Properties["host.AppMode"] = "development";
+                builder.Properties[OwinConstants.CommonKeys.AppMode] = "development";
             }
             this.DetectWebSocketSupportStageOne();
             try

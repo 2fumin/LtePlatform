@@ -130,17 +130,17 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
             switch (key.Length)
             {
                 case 11:
-                    if (((_flag0 & 0x400000) == 0) || !string.Equals(key, "server.User", StringComparison.Ordinal))
+                    if (((_flag0 & 0x400000) == 0) || !string.Equals(key, OwinConstants.Security.User, StringComparison.Ordinal))
                     {
                         break;
                     }
                     return true;
 
                 case 12:
-                    if (((_flag0 & 1) == 0) || !string.Equals(key, "owin.Version", StringComparison.Ordinal))
+                    if (((_flag0 & 1) == 0) || !string.Equals(key, OwinConstants.OwinVersion, StringComparison.Ordinal))
                     {
-                        if ((((_flag0 & 0x40000) == 0) || !string.Equals(key, "host.AppName", StringComparison.Ordinal)) &&
-                            ((((_flag0 & 0x80000) == 0) || !string.Equals(key, "host.AppMode", StringComparison.Ordinal)) ||
+                        if ((((_flag0 & 0x40000) == 0) || !string.Equals(key, OwinConstants.CommonKeys.AppName, StringComparison.Ordinal)) &&
+                            ((((_flag0 & 0x80000) == 0) || !string.Equals(key, OwinConstants.CommonKeys.AppMode, StringComparison.Ordinal)) ||
                              (((_initFlag0 & 0x80000) != 0) && !InitPropertyHostAppMode())))
                         {
                             break;
@@ -150,9 +150,9 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                     return true;
 
                 case 14:
-                    if (((_flag0 & 0x400) == 0) || !string.Equals(key, "owin.RequestId", StringComparison.Ordinal))
+                    if (((_flag0 & 0x400) == 0) || !string.Equals(key, OwinConstants.RequestId, StringComparison.Ordinal))
                     {
-                        if (((_flag0 & 0x20000000) == 0) || !string.Equals(key, "server.IsLocal", StringComparison.Ordinal))
+                        if (((_flag0 & 0x20000000) == 0) || !string.Equals(key, OwinConstants.CommonKeys.IsLocal, StringComparison.Ordinal))
                         {
                             break;
                         }
@@ -161,9 +161,9 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                     return true;
 
                 case 0x10:
-                    if (((_flag0 & 0x40) == 0) || !string.Equals(key, "owin.RequestPath", StringComparison.Ordinal))
+                    if (((_flag0 & 0x40) == 0) || !string.Equals(key, OwinConstants.RequestPath, StringComparison.Ordinal))
                     {
-                        if (((_flag0 & 0x200) == 0) || !string.Equals(key, "owin.RequestBody", StringComparison.Ordinal))
+                        if (((_flag0 & 0x200) == 0) || !string.Equals(key, OwinConstants.RequestBody, StringComparison.Ordinal))
                         {
                             if (((_flag0 & 0x20000) != 0) && string.Equals(key, "host.TraceOutput", StringComparison.Ordinal))
                             {
@@ -173,7 +173,9 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                             {
                                 return true;
                             }
-                            if ((((_flag1 & 2) == 0) || !string.Equals(key, "websocket.Accept", StringComparison.Ordinal)) || (((_initFlag1 & 2) != 0) && !InitPropertyWebSocketAccept()))
+                            if ((((_flag1 & 2) == 0) ||
+                                 !string.Equals(key, "websocket.Accept", StringComparison.Ordinal)) ||
+                                (((_initFlag1 & 2) != 0) && !InitPropertyWebSocketAccept()))
                             {
                                 break;
                             }
@@ -196,25 +198,27 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                 case 0x12:
                     if (((_flag0 & 2) == 0) || !string.Equals(key, "owin.CallCancelled", StringComparison.Ordinal))
                     {
-                        if (((_flag0 & 8) == 0) || !string.Equals(key, "owin.RequestMethod", StringComparison.Ordinal))
+                        if (((_flag0 & 8) != 0) &&
+                            string.Equals(key, OwinConstants.RequestMethod, StringComparison.Ordinal)) return true;
+                        if (((_flag0 & 0x10) != 0) && string.Equals(key, "owin.RequestScheme", StringComparison.Ordinal))
                         {
-                            if (((_flag0 & 0x10) != 0) && string.Equals(key, "owin.RequestScheme", StringComparison.Ordinal))
-                            {
-                                return true;
-                            }
-                            if (((_flag1 & 1) == 0) || !string.Equals(key, "sendfile.SendAsync", StringComparison.Ordinal))
-                            {
-                                break;
-                            }
+                            return true;
+                        }
+                        if (((_flag1 & 1) == 0) || !string.Equals(key, "sendfile.SendAsync", StringComparison.Ordinal))
+                        {
+                            break;
                         }
                         return true;
                     }
                     return true;
 
                 case 0x13:
-                    if (((_flag0 & 0x100) == 0) || !string.Equals(key, "owin.RequestHeaders", StringComparison.Ordinal))
+                    if (((_flag0 & 0x100) == 0) || !string.Equals(key, OwinConstants.RequestHeaders, StringComparison.Ordinal))
                     {
-                        if ((((_flag0 & 0x100000) == 0) || !string.Equals(key, "host.OnAppDisposing", StringComparison.Ordinal)) && (((_flag0 & 0x1000000) == 0) || !string.Equals(key, "server.Capabilities", StringComparison.Ordinal)))
+                        if ((((_flag0 & 0x100000) == 0) ||
+                             !string.Equals(key, "host.OnAppDisposing", StringComparison.Ordinal)) &&
+                            (((_flag0 & 0x1000000) == 0) ||
+                             !string.Equals(key, "server.Capabilities", StringComparison.Ordinal)))
                         {
                             break;
                         }
@@ -223,7 +227,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                     return true;
 
                 case 20:
-                    if (((_flag0 & 4) == 0) || !string.Equals(key, "owin.RequestProtocol", StringComparison.Ordinal))
+                    if (((_flag0 & 4) == 0) || !string.Equals(key, OwinConstants.RequestProtocol, StringComparison.Ordinal))
                     {
                         if ((((_flag0 & 0x20) == 0) || !string.Equals(key, "owin.RequestPathBase", StringComparison.Ordinal)) && (((_flag0 & 0x4000) == 0) || !string.Equals(key, "owin.ResponseHeaders", StringComparison.Ordinal)))
                         {
@@ -326,7 +330,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
         {
             if ((_flag0 & 1) != 0)
             {
-                yield return new KeyValuePair<string, object>("owin.Version", OwinVersion);
+                yield return new KeyValuePair<string, object>(OwinConstants.OwinVersion, OwinVersion);
             }
             if ((_flag0 & 2) != 0)
             {
@@ -334,11 +338,11 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
             }
             if ((_flag0 & 4) != 0)
             {
-                yield return new KeyValuePair<string, object>("owin.RequestProtocol", RequestProtocol);
+                yield return new KeyValuePair<string, object>(OwinConstants.RequestProtocol, RequestProtocol);
             }
             if ((_flag0 & 8) != 0)
             {
-                yield return new KeyValuePair<string, object>("owin.RequestMethod", RequestMethod);
+                yield return new KeyValuePair<string, object>(OwinConstants.RequestMethod, RequestMethod);
             }
             if ((_flag0 & 0x10) != 0)
             {
@@ -350,7 +354,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
             }
             if ((_flag0 & 0x40) != 0)
             {
-                yield return new KeyValuePair<string, object>("owin.RequestPath", RequestPath);
+                yield return new KeyValuePair<string, object>(OwinConstants.RequestPath, RequestPath);
             }
             if ((_flag0 & 0x80) != 0)
             {
@@ -358,15 +362,15 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
             }
             if ((_flag0 & 0x100) != 0)
             {
-                yield return new KeyValuePair<string, object>("owin.RequestHeaders", RequestHeaders);
+                yield return new KeyValuePair<string, object>(OwinConstants.RequestHeaders, RequestHeaders);
             }
             if ((_flag0 & 0x200) != 0)
             {
-                yield return new KeyValuePair<string, object>("owin.RequestBody", RequestBody);
+                yield return new KeyValuePair<string, object>(OwinConstants.RequestBody, RequestBody);
             }
             if ((_flag0 & 0x400) != 0)
             {
-                yield return new KeyValuePair<string, object>("owin.RequestId", RequestId);
+                yield return new KeyValuePair<string, object>(OwinConstants.RequestId, RequestId);
             }
             if (((_flag0 & 0x800) != 0) && (((_initFlag0 & 0x800) == 0) || InitPropertyDisableRequestBuffering()))
             {
@@ -398,11 +402,11 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
             }
             if ((_flag0 & 0x40000) != 0)
             {
-                yield return new KeyValuePair<string, object>("host.AppName", HostAppName);
+                yield return new KeyValuePair<string, object>(OwinConstants.CommonKeys.AppName, HostAppName);
             }
             if (((_flag0 & 0x80000) != 0) && (((_initFlag0 & 0x80000) == 0) || InitPropertyHostAppMode()))
             {
-                yield return new KeyValuePair<string, object>("host.AppMode", HostAppMode);
+                yield return new KeyValuePair<string, object>(OwinConstants.CommonKeys.AppMode, HostAppMode);
             }
             if ((_flag0 & 0x100000) != 0)
             {
@@ -414,7 +418,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
             }
             if ((_flag0 & 0x400000) != 0)
             {
-                yield return new KeyValuePair<string, object>("server.User", ServerUser);
+                yield return new KeyValuePair<string, object>(OwinConstants.Security.User, ServerUser);
             }
             if ((_flag0 & 0x800000) != 0)
             {
@@ -442,7 +446,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
             }
             if ((_flag0 & 0x20000000) != 0)
             {
-                yield return new KeyValuePair<string, object>("server.IsLocal", ServerIsLocal);
+                yield return new KeyValuePair<string, object>(OwinConstants.CommonKeys.IsLocal, ServerIsLocal);
             }
             if (((_flag0 & 0x40000000) != 0) && (((_initFlag0 & 0x40000000) == 0) || InitPropertyClientCert()))
             {
@@ -482,7 +486,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
         {
             if ((_flag0 & 1) != 0)
             {
-                yield return "owin.Version";
+                yield return OwinConstants.OwinVersion;
             }
             if ((_flag0 & 2) != 0)
             {
@@ -490,11 +494,11 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
             }
             if ((_flag0 & 4) != 0)
             {
-                yield return "owin.RequestProtocol";
+                yield return OwinConstants.RequestProtocol;
             }
             if ((_flag0 & 8) != 0)
             {
-                yield return "owin.RequestMethod";
+                yield return OwinConstants.RequestMethod;
             }
             if ((_flag0 & 0x10) != 0)
             {
@@ -506,7 +510,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
             }
             if ((_flag0 & 0x40) != 0)
             {
-                yield return "owin.RequestPath";
+                yield return OwinConstants.RequestPath;
             }
             if ((_flag0 & 0x80) != 0)
             {
@@ -514,15 +518,15 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
             }
             if ((_flag0 & 0x100) != 0)
             {
-                yield return "owin.RequestHeaders";
+                yield return OwinConstants.RequestHeaders;
             }
             if ((_flag0 & 0x200) != 0)
             {
-                yield return "owin.RequestBody";
+                yield return OwinConstants.RequestBody;
             }
             if ((_flag0 & 0x400) != 0)
             {
-                yield return "owin.RequestId";
+                yield return OwinConstants.RequestId;
             }
             if (((_flag0 & 0x800) != 0) && (((_initFlag0 & 0x800) == 0) || InitPropertyDisableRequestBuffering()))
             {
@@ -554,11 +558,11 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
             }
             if ((_flag0 & 0x40000) != 0)
             {
-                yield return "host.AppName";
+                yield return OwinConstants.CommonKeys.AppName;
             }
             if (((_flag0 & 0x80000) != 0) && (((_initFlag0 & 0x80000) == 0) || InitPropertyHostAppMode()))
             {
-                yield return "host.AppMode";
+                yield return OwinConstants.CommonKeys.AppMode;
             }
             if ((_flag0 & 0x100000) != 0)
             {
@@ -570,7 +574,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
             }
             if ((_flag0 & 0x400000) != 0)
             {
-                yield return "server.User";
+                yield return OwinConstants.Security.User;
             }
             if ((_flag0 & 0x800000) != 0)
             {
@@ -598,7 +602,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
             }
             if ((_flag0 & 0x20000000) != 0)
             {
-                yield return "server.IsLocal";
+                yield return OwinConstants.CommonKeys.IsLocal;
             }
             if (((_flag0 & 0x40000000) != 0) && (((_initFlag0 & 0x40000000) == 0) || InitPropertyClientCert()))
             {
@@ -639,7 +643,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
             switch (key.Length)
             {
                 case 11:
-                    if (((_flag0 & 0x400000) == 0) || !string.Equals(key, "server.User", StringComparison.Ordinal))
+                    if (((_flag0 & 0x400000) == 0) || !string.Equals(key, OwinConstants.Security.User, StringComparison.Ordinal))
                     {
                         break;
                     }
@@ -647,14 +651,14 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                     return true;
 
                 case 12:
-                    if (((_flag0 & 1) == 0) || !string.Equals(key, "owin.Version", StringComparison.Ordinal))
+                    if (((_flag0 & 1) == 0) || !string.Equals(key, OwinConstants.OwinVersion, StringComparison.Ordinal))
                     {
-                        if (((_flag0 & 0x40000) != 0) && string.Equals(key, "host.AppName", StringComparison.Ordinal))
+                        if (((_flag0 & 0x40000) != 0) && string.Equals(key, OwinConstants.CommonKeys.AppName, StringComparison.Ordinal))
                         {
                             value = HostAppName;
                             return true;
                         }
-                        if (((_flag0 & 0x80000) == 0) || !string.Equals(key, "host.AppMode", StringComparison.Ordinal))
+                        if (((_flag0 & 0x80000) == 0) || !string.Equals(key, OwinConstants.CommonKeys.AppMode, StringComparison.Ordinal))
                         {
                             break;
                         }
@@ -670,9 +674,9 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                     return true;
 
                 case 14:
-                    if (((_flag0 & 0x400) == 0) || !string.Equals(key, "owin.RequestId", StringComparison.Ordinal))
+                    if (((_flag0 & 0x400) == 0) || !string.Equals(key, OwinConstants.RequestId, StringComparison.Ordinal))
                     {
-                        if (((_flag0 & 0x20000000) == 0) || !string.Equals(key, "server.IsLocal", StringComparison.Ordinal))
+                        if (((_flag0 & 0x20000000) == 0) || !string.Equals(key, OwinConstants.CommonKeys.IsLocal, StringComparison.Ordinal))
                         {
                             break;
                         }
@@ -683,9 +687,9 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                     return true;
 
                 case 0x10:
-                    if (((_flag0 & 0x40) == 0) || !string.Equals(key, "owin.RequestPath", StringComparison.Ordinal))
+                    if (((_flag0 & 0x40) == 0) || !string.Equals(key, OwinConstants.RequestPath, StringComparison.Ordinal))
                     {
-                        if (((_flag0 & 0x200) != 0) && string.Equals(key, "owin.RequestBody", StringComparison.Ordinal))
+                        if (((_flag0 & 0x200) != 0) && string.Equals(key, OwinConstants.RequestBody, StringComparison.Ordinal))
                         {
                             value = RequestBody;
                             return true;
@@ -731,7 +735,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                 case 0x12:
                     if (((_flag0 & 2) == 0) || !string.Equals(key, "owin.CallCancelled", StringComparison.Ordinal))
                     {
-                        if (((_flag0 & 8) != 0) && string.Equals(key, "owin.RequestMethod", StringComparison.Ordinal))
+                        if (((_flag0 & 8) != 0) && string.Equals(key, OwinConstants.RequestMethod, StringComparison.Ordinal))
                         {
                             value = RequestMethod;
                             return true;
@@ -752,7 +756,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                     return true;
 
                 case 0x13:
-                    if (((_flag0 & 0x100) == 0) || !string.Equals(key, "owin.RequestHeaders", StringComparison.Ordinal))
+                    if (((_flag0 & 0x100) == 0) || !string.Equals(key, OwinConstants.RequestHeaders, StringComparison.Ordinal))
                     {
                         if (((_flag0 & 0x100000) != 0) && string.Equals(key, "host.OnAppDisposing", StringComparison.Ordinal))
                         {
@@ -770,7 +774,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                     return true;
 
                 case 20:
-                    if (((_flag0 & 4) == 0) || !string.Equals(key, "owin.RequestProtocol", StringComparison.Ordinal))
+                    if (((_flag0 & 4) == 0) || !string.Equals(key, OwinConstants.RequestProtocol, StringComparison.Ordinal))
                     {
                         if (((_flag0 & 0x20) != 0) && string.Equals(key, "owin.RequestPathBase", StringComparison.Ordinal))
                         {
@@ -913,22 +917,22 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
             switch (key.Length)
             {
                 case 11:
-                    if (((_flag0 & 0x400000) == 0) || !string.Equals(key, "server.User", StringComparison.Ordinal))
+                    if (((_flag0 & 0x400000) == 0) || !string.Equals(key, OwinConstants.Security.User, StringComparison.Ordinal))
                     {
                         break;
                     }
                     return true;
 
                 case 12:
-                    if (((_flag0 & 1) == 0) || !string.Equals(key, "owin.Version", StringComparison.Ordinal))
+                    if (((_flag0 & 1) == 0) || !string.Equals(key, OwinConstants.OwinVersion, StringComparison.Ordinal))
                     {
-                        if (((_flag0 & 0x40000) != 0) && string.Equals(key, "host.AppName", StringComparison.Ordinal))
+                        if (((_flag0 & 0x40000) != 0) && string.Equals(key, OwinConstants.CommonKeys.AppName, StringComparison.Ordinal))
                         {
                             _flag0 &= 0xfffbffff;
                             _HostAppName = null;
                             return true;
                         }
-                        if (((_flag0 & 0x80000) == 0) || !string.Equals(key, "host.AppMode", StringComparison.Ordinal))
+                        if (((_flag0 & 0x80000) == 0) || !string.Equals(key, OwinConstants.CommonKeys.AppMode, StringComparison.Ordinal))
                         {
                             break;
                         }
@@ -942,9 +946,9 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                     return true;
 
                 case 14:
-                    if (((_flag0 & 0x400) == 0) || !string.Equals(key, "owin.RequestId", StringComparison.Ordinal))
+                    if (((_flag0 & 0x400) == 0) || !string.Equals(key, OwinConstants.RequestId, StringComparison.Ordinal))
                     {
-                        if (((_flag0 & 0x20000000) == 0) || !string.Equals(key, "server.IsLocal", StringComparison.Ordinal))
+                        if (((_flag0 & 0x20000000) == 0) || !string.Equals(key, OwinConstants.CommonKeys.IsLocal, StringComparison.Ordinal))
                         {
                             break;
                         }
@@ -959,9 +963,9 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                     return true;
 
                 case 0x10:
-                    if (((_flag0 & 0x40) == 0) || !string.Equals(key, "owin.RequestPath", StringComparison.Ordinal))
+                    if (((_flag0 & 0x40) == 0) || !string.Equals(key, OwinConstants.RequestPath, StringComparison.Ordinal))
                     {
-                        if (((_flag0 & 0x200) != 0) && string.Equals(key, "owin.RequestBody", StringComparison.Ordinal))
+                        if (((_flag0 & 0x200) != 0) && string.Equals(key, OwinConstants.RequestBody, StringComparison.Ordinal))
                         {
                             _initFlag0 &= 0xfffffdff;
                             _flag0 &= 0xfffffdff;
@@ -1014,7 +1018,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                 case 0x12:
                     if (((_flag0 & 2) == 0) || !string.Equals(key, "owin.CallCancelled", StringComparison.Ordinal))
                     {
-                        if (((_flag0 & 8) != 0) && string.Equals(key, "owin.RequestMethod", StringComparison.Ordinal))
+                        if (((_flag0 & 8) != 0) && string.Equals(key, OwinConstants.RequestMethod, StringComparison.Ordinal))
                         {
                             _flag0 &= 0xfffffff7;
                             _RequestMethod = null;
@@ -1042,7 +1046,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                     return true;
 
                 case 0x13:
-                    if (((_flag0 & 0x100) == 0) || !string.Equals(key, "owin.RequestHeaders", StringComparison.Ordinal))
+                    if (((_flag0 & 0x100) == 0) || !string.Equals(key, OwinConstants.RequestHeaders, StringComparison.Ordinal))
                     {
                         if (((_flag0 & 0x100000) != 0) && string.Equals(key, "host.OnAppDisposing", StringComparison.Ordinal))
                         {
@@ -1064,7 +1068,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                     return true;
 
                 case 20:
-                    if (((_flag0 & 4) == 0) || !string.Equals(key, "owin.RequestProtocol", StringComparison.Ordinal))
+                    if (((_flag0 & 4) == 0) || !string.Equals(key, OwinConstants.RequestProtocol, StringComparison.Ordinal))
                     {
                         if (((_flag0 & 0x20) != 0) && string.Equals(key, "owin.RequestPathBase", StringComparison.Ordinal))
                         {
@@ -1212,7 +1216,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
             switch (key.Length)
             {
                 case 11:
-                    if (!string.Equals(key, "server.User", StringComparison.Ordinal))
+                    if (!string.Equals(key, OwinConstants.Security.User, StringComparison.Ordinal))
                     {
                         break;
                     }
@@ -1220,14 +1224,14 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                     return true;
 
                 case 12:
-                    if (!string.Equals(key, "owin.Version", StringComparison.Ordinal))
+                    if (!string.Equals(key, OwinConstants.OwinVersion, StringComparison.Ordinal))
                     {
-                        if (string.Equals(key, "host.AppName", StringComparison.Ordinal))
+                        if (string.Equals(key, OwinConstants.CommonKeys.AppName, StringComparison.Ordinal))
                         {
                             HostAppName = (string)value;
                             return true;
                         }
-                        if (!string.Equals(key, "host.AppMode", StringComparison.Ordinal))
+                        if (!string.Equals(key, OwinConstants.CommonKeys.AppMode, StringComparison.Ordinal))
                         {
                             break;
                         }
@@ -1238,9 +1242,9 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                     return true;
 
                 case 14:
-                    if (!string.Equals(key, "owin.RequestId", StringComparison.Ordinal))
+                    if (!string.Equals(key, OwinConstants.RequestId, StringComparison.Ordinal))
                     {
-                        if (!string.Equals(key, "server.IsLocal", StringComparison.Ordinal))
+                        if (!string.Equals(key, OwinConstants.CommonKeys.IsLocal, StringComparison.Ordinal))
                         {
                             break;
                         }
@@ -1251,9 +1255,9 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                     return true;
 
                 case 0x10:
-                    if (!string.Equals(key, "owin.RequestPath", StringComparison.Ordinal))
+                    if (!string.Equals(key, OwinConstants.RequestPath, StringComparison.Ordinal))
                     {
-                        if (string.Equals(key, "owin.RequestBody", StringComparison.Ordinal))
+                        if (string.Equals(key, OwinConstants.RequestBody, StringComparison.Ordinal))
                         {
                             RequestBody = (Stream)value;
                             return true;
@@ -1294,7 +1298,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                 case 0x12:
                     if (!string.Equals(key, "owin.CallCancelled", StringComparison.Ordinal))
                     {
-                        if (string.Equals(key, "owin.RequestMethod", StringComparison.Ordinal))
+                        if (string.Equals(key, OwinConstants.RequestMethod, StringComparison.Ordinal))
                         {
                             RequestMethod = (string)value;
                             return true;
@@ -1315,7 +1319,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                     return true;
 
                 case 0x13:
-                    if (!string.Equals(key, "owin.RequestHeaders", StringComparison.Ordinal))
+                    if (!string.Equals(key, OwinConstants.RequestHeaders, StringComparison.Ordinal))
                     {
                         if (string.Equals(key, "host.OnAppDisposing", StringComparison.Ordinal))
                         {
@@ -1333,7 +1337,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                     return true;
 
                 case 20:
-                    if (!string.Equals(key, "owin.RequestProtocol", StringComparison.Ordinal))
+                    if (!string.Equals(key, OwinConstants.RequestProtocol, StringComparison.Ordinal))
                     {
                         if (string.Equals(key, "owin.RequestPathBase", StringComparison.Ordinal))
                         {
@@ -1633,7 +1637,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
 
         void ICollection<KeyValuePair<string, object>>.CopyTo(KeyValuePair<string, object>[] array, int arrayIndex)
         {
-            PropertiesEnumerable().Concat<KeyValuePair<string, object>>(Extra).ToArray<KeyValuePair<string, object>>().CopyTo(array, arrayIndex);
+            PropertiesEnumerable().Concat(Extra).ToArray().CopyTo(array, arrayIndex);
         }
 
         bool ICollection<KeyValuePair<string, object>>.Remove(KeyValuePair<string, object> item)
@@ -1669,7 +1673,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
 
         IEnumerator<KeyValuePair<string, object>> IEnumerable<KeyValuePair<string, object>>.GetEnumerator()
         {
-            return PropertiesEnumerable().Concat<KeyValuePair<string, object>>(Extra).GetEnumerator();
+            return PropertiesEnumerable().Concat(Extra).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -2288,7 +2292,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
             {
                 if (_extra == WeakNilEnvironment)
                 {
-                    Interlocked.CompareExchange<IDictionary<string, object>>(ref _extra, new Dictionary<string, object>(), WeakNilEnvironment);
+                    Interlocked.CompareExchange(ref _extra, new Dictionary<string, object>(), WeakNilEnvironment);
                 }
                 return _extra;
             }
@@ -2298,7 +2302,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
         {
             get
             {
-                return (PropertiesKeys().Count<string>() + Extra.Count);
+                return (PropertiesKeys().Count() + Extra.Count);
             }
         }
 
@@ -2334,7 +2338,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
         {
             get
             {
-                return PropertiesKeys().Concat<string>(Extra.Keys).ToArray<string>();
+                return PropertiesKeys().Concat(Extra.Keys).ToArray();
             }
         }
 
@@ -2342,7 +2346,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
         {
             get
             {
-                return PropertiesValues().Concat<object>(Extra.Values).ToArray<object>();
+                return PropertiesValues().Concat(Extra.Values).ToArray();
             }
         }
 

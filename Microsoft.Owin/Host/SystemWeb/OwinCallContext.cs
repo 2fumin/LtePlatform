@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Microsoft.Owin.Host.SystemWeb
 {
-    using Microsoft.Owin.Host.SystemWeb.CallEnvironment;
-    using Microsoft.Owin.Host.SystemWeb.CallHeaders;
-    using Microsoft.Owin.Host.SystemWeb.CallStreams;
-    using Microsoft.Owin.Host.SystemWeb.Infrastructure;
-    using Microsoft.Owin.Host.SystemWeb.IntegratedPipeline;
-    using Microsoft.Owin.Host.SystemWeb.WebSockets;
+    using CallEnvironment;
+    using CallHeaders;
+    using SystemWeb.CallStreams;
+    using Infrastructure;
+    using IntegratedPipeline;
+    using SystemWeb.WebSockets;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
@@ -33,7 +33,7 @@ namespace Microsoft.Owin.Host.SystemWeb
         private readonly OwinAppContext _appContext;
         private int _completedSynchronouslyThreadId;
         private bool _compressionDisabled;
-        private DisconnectWatcher _disconnectWatcher;
+        private readonly DisconnectWatcher _disconnectWatcher;
         private AspNetDictionary _env;
         private bool _headersSent;
         private readonly HttpContextBase _httpContext;
@@ -47,44 +47,38 @@ namespace Microsoft.Owin.Host.SystemWeb
         private Exception _startException;
         private object _startLock = new object();
         private Func<IDictionary<string, object>, Task> _webSocketFunc;
-        private static readonly MethodInfo CheckHeadersWritten = ((HeadersWrittenProperty != null) ? HeadersWrittenProperty.GetMethod : null);
         private static readonly PropertyInfo HeadersWrittenProperty = typeof(HttpResponseBase).GetProperty("HeadersWritten");
-        private static readonly Lazy<RemoveHeaderDel> IIS7RemoveHeader = new Lazy<RemoveHeaderDel>(new Func<RemoveHeaderDel>(OwinCallContext.GetRemoveHeaderDelegate));
+        private static readonly MethodInfo CheckHeadersWritten = HeadersWrittenProperty?.GetMethod;
+        private static readonly Lazy<RemoveHeaderDel> IIS7RemoveHeader = new Lazy<RemoveHeaderDel>(GetRemoveHeaderDelegate);
         private const string IIS7WorkerRequestTypeName = "System.Web.Hosting.IIS7WorkerRequest";
         private static readonly MethodInfo OnSendingHeadersRegister = typeof(HttpResponseBase).GetMethod("AddOnSendingHeaders");
-        private static readonly MethodInfo PushPromiseMethod = typeof(HttpResponseBase).GetMethods().FirstOrDefault<MethodInfo>(info => info.Name.Equals("PushPromise"));
-        private static readonly ITrace Trace = TraceFactory.Create("Microsoft.Owin.Host.SystemWeb.OwinCallContext");
+        private static readonly MethodInfo PushPromiseMethod = typeof(HttpResponseBase).GetMethods().FirstOrDefault(info => info.Name.Equals("PushPromise"));
         private const string TraceName = "Microsoft.Owin.Host.SystemWeb.OwinCallContext";
+        private static readonly ITrace Trace = TraceFactory.Create(TraceName);
 
         internal OwinCallContext(OwinAppContext appContext, RequestContext requestContext, string requestPathBase, string requestPath, AsyncCallback cb, object extraData)
         {
-            this._appContext = appContext;
-            this._requestContext = requestContext;
-            this._requestPathBase = requestPathBase;
-            this._requestPath = requestPath;
-            this.AsyncResult = new CallContextAsyncResult(this, cb, extraData);
-            this._httpContext = this._requestContext.HttpContext;
-            this._httpRequest = this._httpContext.Request;
-            this._httpResponse = this._httpContext.Response;
-            this._disconnectWatcher = new DisconnectWatcher(this._httpResponse);
-            this.RegisterForOnSendingHeaders();
+            _appContext = appContext;
+            _requestContext = requestContext;
+            _requestPathBase = requestPathBase;
+            _requestPath = requestPath;
+            AsyncResult = new CallContextAsyncResult(this, cb, extraData);
+            _httpContext = _requestContext.HttpContext;
+            _httpRequest = _httpContext.Request;
+            _httpResponse = _httpContext.Response;
+            _disconnectWatcher = new DisconnectWatcher(_httpResponse);
+            RegisterForOnSendingHeaders();
         }
-
-        [CompilerGenerated]
-        private static bool <.cctor>b__12(MethodInfo info)
-        {
-            return info.Name.Equals("PushPromise");
-        }
-
+        
         internal void AbortIfHeaderSent()
         {
             if (CheckHeadersWritten != null)
             {
                 try
                 {
-                    if ((bool)CheckHeadersWritten.Invoke(this._httpResponse, null))
+                    if ((bool)CheckHeadersWritten.Invoke(_httpResponse, null))
                     {
-                        this._httpRequest.Abort();
+                        _httpRequest.Abort();
                     }
                     return;
                 }
@@ -92,9 +86,9 @@ namespace Microsoft.Owin.Host.SystemWeb
                 {
                 }
             }
-            if (this._headersSent)
+            if (_headersSent)
             {
-                this._httpRequest.Abort();
+                _httpRequest.Abort();
             }
         }
 
@@ -104,7 +98,7 @@ namespace Microsoft.Owin.Host.SystemWeb
             try
             {
                 wrapper = new OwinWebSocketWrapper(webSocketContext);
-                await this._webSocketFunc(wrapper.Environment);
+                await _webSocketFunc(wrapper.Environment);
                 wrapper.Dispose();
             }
             catch (Exception exception)
@@ -121,67 +115,67 @@ namespace Microsoft.Owin.Host.SystemWeb
 
         private void Complete()
         {
-            this.AsyncResult.Complete(this._completedSynchronouslyThreadId == Thread.CurrentThread.ManagedThreadId, null);
+            AsyncResult.Complete(_completedSynchronouslyThreadId == Thread.CurrentThread.ManagedThreadId, null);
         }
 
         private void Complete(ErrorState errorState)
         {
-            this.Complete(this._completedSynchronouslyThreadId == Thread.CurrentThread.ManagedThreadId, errorState);
+            Complete(_completedSynchronouslyThreadId == Thread.CurrentThread.ManagedThreadId, errorState);
         }
 
         internal void Complete(bool sync, ErrorState errorState)
         {
-            this.AbortIfHeaderSent();
-            this.AsyncResult.Complete(sync, errorState);
+            AbortIfHeaderSent();
+            AsyncResult.Complete(sync, errorState);
         }
 
         public void CreateEnvironment()
         {
-            if (this._httpContext.Items.Contains(HttpContextItemKeys.OwinEnvironmentKey))
+            if (_httpContext.Items.Contains(HttpContextItemKeys.OwinEnvironmentKey))
             {
-                this._env = this._httpContext.Items[HttpContextItemKeys.OwinEnvironmentKey] as AspNetDictionary;
+                _env = _httpContext.Items[HttpContextItemKeys.OwinEnvironmentKey] as AspNetDictionary;
             }
             else
             {
-                this._env = new AspNetDictionary(this);
-                this._env.OwinVersion = "1.0";
-                this._env.RequestPathBase = this._requestPathBase;
-                this._env.RequestPath = this._requestPath;
-                this._env.RequestMethod = this._httpRequest.HttpMethod;
-                this._env.RequestHeaders = new AspNetRequestHeaders(this._httpRequest);
-                this._env.ResponseHeaders = new AspNetResponseHeaders(this._httpResponse);
-                this._env.OnSendingHeaders = new Action<Action<object>, object>(this._sendingHeadersEvent.Register);
-                this._env.HostTraceOutput = TraceTextWriter.Instance;
-                this._env.HostAppName = this._appContext.AppName;
-                this._env.DisableResponseCompression = new Action(this.DisableResponseCompression);
-                this._env.ServerCapabilities = this._appContext.Capabilities;
-                this._env.RequestContext = this._requestContext;
-                this._env.HttpContextBase = this._httpContext;
-                this._httpContext.Items[HttpContextItemKeys.OwinEnvironmentKey] = this._env;
+                _env = new AspNetDictionary(this);
+                _env.OwinVersion = "1.0";
+                _env.RequestPathBase = _requestPathBase;
+                _env.RequestPath = _requestPath;
+                _env.RequestMethod = _httpRequest.HttpMethod;
+                _env.RequestHeaders = new AspNetRequestHeaders(_httpRequest);
+                _env.ResponseHeaders = new AspNetResponseHeaders(_httpResponse);
+                _env.OnSendingHeaders = _sendingHeadersEvent.Register;
+                _env.HostTraceOutput = TraceTextWriter.Instance;
+                _env.HostAppName = _appContext.AppName;
+                _env.DisableResponseCompression = DisableResponseCompression;
+                _env.ServerCapabilities = _appContext.Capabilities;
+                _env.RequestContext = _requestContext;
+                _env.HttpContextBase = _httpContext;
+                _httpContext.Items[HttpContextItemKeys.OwinEnvironmentKey] = _env;
             }
         }
 
         private void DisableResponseCompression()
         {
-            if (!this._compressionDisabled)
+            if (!_compressionDisabled)
             {
-                this.RemoveAcceptEncoding();
-                this._httpResponse.CacheControl = "no-cache";
-                this._httpResponse.AddHeader("Connection", "keep-alive");
-                this._compressionDisabled = true;
+                RemoveAcceptEncoding();
+                _httpResponse.CacheControl = "no-cache";
+                _httpResponse.AddHeader("Connection", "keep-alive");
+                _compressionDisabled = true;
             }
         }
 
         public void Dispose()
         {
-            this.Dispose(true);
+            Dispose(true);
         }
 
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
             {
-                this._disconnectWatcher.Dispose();
+                _disconnectWatcher.Dispose();
             }
         }
 
@@ -191,21 +185,21 @@ namespace Microsoft.Owin.Host.SystemWeb
             {
                 throw new ArgumentNullException("webSocketFunc");
             }
-            this._env.ResponseStatusCode = 0x65;
-            this._webSocketFunc = webSocketFunc;
+            _env.ResponseStatusCode = 0x65;
+            _webSocketFunc = webSocketFunc;
             AspNetWebSocketOptions options = new AspNetWebSocketOptions
             {
-                SubProtocol = GetWebSocketSubProtocol(this._env, acceptOptions)
+                SubProtocol = GetWebSocketSubProtocol(_env, acceptOptions)
             };
-            this.OnStart();
-            this._httpContext.AcceptWebSocketRequest(new Func<AspNetWebSocketContext, Task>(this.AcceptCallback), options);
+            OnStart();
+            _httpContext.AcceptWebSocketRequest(AcceptCallback, options);
         }
 
         internal void Execute()
         {
             Action<Task> continuationAction = null;
-            this.CreateEnvironment();
-            this._completedSynchronouslyThreadId = Thread.CurrentThread.ManagedThreadId;
+            CreateEnvironment();
+            _completedSynchronouslyThreadId = Thread.CurrentThread.ManagedThreadId;
             try
             {
                 if (continuationAction == null)
@@ -232,7 +226,7 @@ namespace Microsoft.Owin.Host.SystemWeb
                         }
                     };
                 }
-                this._appContext.AppFunc(this._env).ContinueWith(continuationAction);
+                _appContext.AppFunc(_env).ContinueWith(continuationAction);
             }
             catch (Exception)
             {
@@ -240,7 +234,7 @@ namespace Microsoft.Owin.Host.SystemWeb
             }
             finally
             {
-                this._completedSynchronouslyThreadId = -2147483648;
+                _completedSynchronouslyThreadId = -2147483648;
             }
         }
 
@@ -248,7 +242,7 @@ namespace Microsoft.Owin.Host.SystemWeb
         {
             try
             {
-                Type type = typeof(HttpContext).Assembly.GetType("System.Web.Hosting.IIS7WorkerRequest");
+                Type type = typeof(HttpContext).Assembly.GetType(IIS7WorkerRequestTypeName);
                 MethodInfo method = type.GetMethod("SetKnownRequestHeader", BindingFlags.NonPublic | BindingFlags.Instance);
                 ParameterExpression expression = Expression.Parameter(typeof(HttpWorkerRequest));
                 return Expression.Lambda<RemoveHeaderDel>(Expression.Call(Expression.Convert(expression, type), method, Expression.Constant(0x16), Expression.Constant(null, typeof(string)), Expression.Constant(false)), new ParameterExpression[] { expression }).Compile();
@@ -278,13 +272,13 @@ namespace Microsoft.Owin.Host.SystemWeb
 
         private X509Certificate LoadClientCert()
         {
-            if (this._httpContext.Request.IsSecureConnection)
+            if (_httpContext.Request.IsSecureConnection)
             {
                 try
                 {
-                    if ((this._httpContext.Request.ClientCertificate != null) && this._httpContext.Request.ClientCertificate.IsPresent)
+                    if ((_httpContext.Request.ClientCertificate != null) && _httpContext.Request.ClientCertificate.IsPresent)
                     {
-                        return new X509Certificate2(this._httpContext.Request.ClientCertificate.Certificate);
+                        return new X509Certificate2(_httpContext.Request.ClientCertificate.Certificate);
                     }
                 }
                 catch (CryptographicException exception)
@@ -299,21 +293,21 @@ namespace Microsoft.Owin.Host.SystemWeb
         {
             try
             {
-                if ((this._httpContext.Request.ClientCertificate != null) && this._httpContext.Request.ClientCertificate.IsPresent)
+                if ((_httpContext.Request.ClientCertificate != null) && _httpContext.Request.ClientCertificate.IsPresent)
                 {
-                    this._env.ClientCert = new X509Certificate2(this._httpContext.Request.ClientCertificate.Certificate);
+                    _env.ClientCert = new X509Certificate2(_httpContext.Request.ClientCertificate.Certificate);
                 }
             }
             catch (CryptographicException exception)
             {
                 Trace.WriteError(Resources.Trace_ClientCertException, exception);
             }
-            return Microsoft.Owin.Host.SystemWeb.Utils.CompletedTask;
+            return SystemWeb.Utils.CompletedTask;
         }
 
         CancellationToken AspNetDictionary.IPropertySource.GetCallCancelled()
         {
-            return this._disconnectWatcher.BindDisconnectNotification();
+            return _disconnectWatcher.BindDisconnectNotification();
         }
 
         Action AspNetDictionary.IPropertySource.GetDisableResponseBuffering()
@@ -330,12 +324,12 @@ namespace Microsoft.Owin.Host.SystemWeb
 
         Stream AspNetDictionary.IPropertySource.GetRequestBody()
         {
-            return new InputStream(this._httpRequest);
+            return new InputStream(_httpRequest);
         }
 
         string AspNetDictionary.IPropertySource.GetRequestId()
         {
-            HttpWorkerRequest service = (HttpWorkerRequest)this._httpContext.GetService(typeof(HttpWorkerRequest));
+            HttpWorkerRequest service = (HttpWorkerRequest)_httpContext.GetService(typeof(HttpWorkerRequest));
             if (service != null)
             {
                 return service.RequestTraceIdentifier.ToString();
@@ -345,13 +339,13 @@ namespace Microsoft.Owin.Host.SystemWeb
 
         string AspNetDictionary.IPropertySource.GetRequestProtocol()
         {
-            return this._httpRequest.ServerVariables["SERVER_PROTOCOL"];
+            return _httpRequest.ServerVariables["SERVER_PROTOCOL"];
         }
 
         string AspNetDictionary.IPropertySource.GetRequestQueryString()
         {
             string str = string.Empty;
-            Uri url = this._httpRequest.Url;
+            Uri url = _httpRequest.Url;
             if (url != null)
             {
                 string str2 = url.Query + url.Fragment;
@@ -365,7 +359,7 @@ namespace Microsoft.Owin.Host.SystemWeb
 
         string AspNetDictionary.IPropertySource.GetRequestScheme()
         {
-            if (!this._httpRequest.IsSecureConnection)
+            if (!_httpRequest.IsSecureConnection)
             {
                 return Uri.UriSchemeHttp;
             }
@@ -374,86 +368,86 @@ namespace Microsoft.Owin.Host.SystemWeb
 
         Stream AspNetDictionary.IPropertySource.GetResponseBody()
         {
-            return new OutputStream(this._httpResponse, this._httpResponse.OutputStream, new Action(this.OnStart), new Action(this._disconnectWatcher.OnFaulted));
+            return new OutputStream(_httpResponse, _httpResponse.OutputStream, new Action(OnStart), new Action(_disconnectWatcher.OnFaulted));
         }
 
         string AspNetDictionary.IPropertySource.GetResponseReasonPhrase()
         {
-            return this._httpResponse.StatusDescription;
+            return _httpResponse.StatusDescription;
         }
 
         int AspNetDictionary.IPropertySource.GetResponseStatusCode()
         {
-            return this._httpResponse.StatusCode;
+            return _httpResponse.StatusCode;
         }
 
         Func<string, long, long?, CancellationToken, Task> AspNetDictionary.IPropertySource.GetSendFileAsync()
         {
-            return new Func<string, long, long?, CancellationToken, Task>(this.SendFileAsync);
+            return SendFileAsync;
         }
 
         bool AspNetDictionary.IPropertySource.GetServerIsLocal()
         {
-            return this._httpRequest.IsLocal;
+            return _httpRequest.IsLocal;
         }
 
         string AspNetDictionary.IPropertySource.GetServerLocalIpAddress()
         {
-            return this._httpRequest.ServerVariables["LOCAL_ADDR"];
+            return _httpRequest.ServerVariables["LOCAL_ADDR"];
         }
 
         string AspNetDictionary.IPropertySource.GetServerLocalPort()
         {
-            return this._httpRequest.ServerVariables["SERVER_PORT"];
+            return _httpRequest.ServerVariables["SERVER_PORT"];
         }
 
         string AspNetDictionary.IPropertySource.GetServerRemoteIpAddress()
         {
-            return this._httpRequest.ServerVariables["REMOTE_ADDR"];
+            return _httpRequest.ServerVariables["REMOTE_ADDR"];
         }
 
         string AspNetDictionary.IPropertySource.GetServerRemotePort()
         {
-            return this._httpRequest.ServerVariables["REMOTE_PORT"];
+            return _httpRequest.ServerVariables["REMOTE_PORT"];
         }
 
         IPrincipal AspNetDictionary.IPropertySource.GetServerUser()
         {
-            return this._httpContext.User;
+            return _httpContext.User;
         }
 
         void AspNetDictionary.IPropertySource.SetResponseReasonPhrase(string value)
         {
-            this._httpResponse.StatusDescription = value;
+            _httpResponse.StatusDescription = value;
         }
 
         void AspNetDictionary.IPropertySource.SetResponseStatusCode(int value)
         {
-            this._httpResponse.StatusCode = value;
+            _httpResponse.StatusCode = value;
             if (value >= 400)
             {
-                this._httpResponse.TrySkipIisCustomErrors = true;
+                _httpResponse.TrySkipIisCustomErrors = true;
             }
         }
 
         void AspNetDictionary.IPropertySource.SetServerUser(IPrincipal value)
         {
-            this._httpContext.User = value;
+            _httpContext.User = value;
             Thread.CurrentPrincipal = value;
         }
 
         bool AspNetDictionary.IPropertySource.TryGetClientCert(ref X509Certificate value)
         {
-            value = this.LoadClientCert();
+            value = LoadClientCert();
             return (value != null);
         }
 
         bool AspNetDictionary.IPropertySource.TryGetDisableRequestBuffering(ref Action action)
         {
-            InputStream requestBody = this.Environment.RequestBody as InputStream;
+            InputStream requestBody = Environment.RequestBody as InputStream;
             if (requestBody != null)
             {
-                action = new Action(requestBody.DisableBuffering);
+                action = requestBody.DisableBuffering;
                 return true;
             }
             action = null;
@@ -462,7 +456,7 @@ namespace Microsoft.Owin.Host.SystemWeb
 
         bool AspNetDictionary.IPropertySource.TryGetHostAppMode(ref string value)
         {
-            if (this._httpContext.IsDebuggingEnabled)
+            if (_httpContext.IsDebuggingEnabled)
             {
                 value = "development";
                 return true;
@@ -472,9 +466,9 @@ namespace Microsoft.Owin.Host.SystemWeb
 
         bool AspNetDictionary.IPropertySource.TryGetLoadClientCert(ref Func<Task> value)
         {
-            if (this._httpContext.Request.IsSecureConnection)
+            if (_httpContext.Request.IsSecureConnection)
             {
-                value = new Func<Task>(this.LoadClientCertAsync);
+                value = LoadClientCertAsync;
                 return true;
             }
             return false;
@@ -482,9 +476,9 @@ namespace Microsoft.Owin.Host.SystemWeb
 
         bool AspNetDictionary.IPropertySource.TryGetWebSocketAccept(ref Action<IDictionary<string, object>, Func<IDictionary<string, object>, Task>> value)
         {
-            if (this._appContext.WebSocketSupport && this._httpContext.IsWebSocketRequest)
+            if (_appContext.WebSocketSupport && _httpContext.IsWebSocketRequest)
             {
-                value = new Action<IDictionary<string, object>, Func<IDictionary<string, object>, Task>>(this.DoWebSocketUpgrade);
+                value = DoWebSocketUpgrade;
                 return true;
             }
             return false;
@@ -494,19 +488,19 @@ namespace Microsoft.Owin.Host.SystemWeb
         {
             try
             {
-                this.OnStart();
+                OnStart();
             }
             catch (Exception exception)
             {
-                this.Complete(ErrorState.Capture(exception));
+                Complete(ErrorState.Capture(exception));
                 return;
             }
-            this.Complete();
+            Complete();
         }
 
         public void OnStart()
         {
-            Exception innerException = LazyInitializer.EnsureInitialized<Exception>(ref this._startException, ref this._startCalled, ref this._startLock, new Func<Exception>(this.StartOnce));
+            Exception innerException = LazyInitializer.EnsureInitialized(ref _startException, ref _startCalled, ref _startLock, StartOnce);
             if (innerException != null)
             {
                 throw new InvalidOperationException(string.Empty, innerException);
@@ -523,10 +517,10 @@ namespace Microsoft.Owin.Host.SystemWeb
                     object[] parameters = new object[1];
                     if (action == null)
                     {
-                        action = _ => this.OnStart();
+                        action = _ => OnStart();
                     }
                     parameters[0] = action;
-                    OnSendingHeadersRegister.Invoke(this._httpResponse, parameters);
+                    OnSendingHeadersRegister.Invoke(_httpResponse, parameters);
                 }
                 catch (TargetInvocationException)
                 {
@@ -538,7 +532,7 @@ namespace Microsoft.Owin.Host.SystemWeb
         {
             try
             {
-                HttpWorkerRequest service = (HttpWorkerRequest)this._httpContext.GetService(typeof(HttpWorkerRequest));
+                HttpWorkerRequest service = (HttpWorkerRequest)_httpContext.GetService(typeof(HttpWorkerRequest));
                 if (HttpRuntime.UsingIntegratedPipeline && (IIS7RemoveHeader.Value != null))
                 {
                     IIS7RemoveHeader.Value(service);
@@ -547,7 +541,7 @@ namespace Microsoft.Owin.Host.SystemWeb
                 {
                     try
                     {
-                        this._httpRequest.Headers.Remove("Accept-Encoding");
+                        _httpRequest.Headers.Remove("Accept-Encoding");
                     }
                     catch (PlatformNotSupportedException)
                     {
@@ -563,18 +557,18 @@ namespace Microsoft.Owin.Host.SystemWeb
         {
             if (cancel.IsCancellationRequested)
             {
-                return Microsoft.Owin.Host.SystemWeb.Utils.CancelledTask;
+                return SystemWeb.Utils.CancelledTask;
             }
             try
             {
-                this.OnStart();
+                OnStart();
                 long? nullable = count;
-                this._httpContext.Response.TransmitFile(name, offset, nullable.HasValue ? nullable.GetValueOrDefault() : -1L);
-                return Microsoft.Owin.Host.SystemWeb.Utils.CompletedTask;
+                _httpContext.Response.TransmitFile(name, offset, nullable.HasValue ? nullable.GetValueOrDefault() : -1L);
+                return SystemWeb.Utils.CompletedTask;
             }
             catch (Exception exception)
             {
-                return Microsoft.Owin.Host.SystemWeb.Utils.CreateFaultedTask(exception);
+                return SystemWeb.Utils.CreateFaultedTask(exception);
             }
         }
 
@@ -582,8 +576,8 @@ namespace Microsoft.Owin.Host.SystemWeb
         {
             try
             {
-                this._sendingHeadersEvent.Fire();
-                this._headersSent = true;
+                _sendingHeadersEvent.Fire();
+                _headersSent = true;
             }
             catch (Exception exception)
             {
@@ -595,26 +589,26 @@ namespace Microsoft.Owin.Host.SystemWeb
         internal bool TryRelayExceptionToIntegratedPipeline(bool sync, Exception ex)
         {
             object obj2;
-            if (this.Environment.TryGetValue("integratedpipeline.Context", out obj2))
+            if (Environment.TryGetValue("integratedpipeline.Context", out obj2))
             {
                 IntegratedPipelineContext context = obj2 as IntegratedPipelineContext;
                 if (context != null)
                 {
                     context.TakeLastCompletionSource().TrySetException(ex);
-                    this.AsyncResult.Complete(sync, null);
+                    AsyncResult.Complete(sync, null);
                     return true;
                 }
             }
             return false;
         }
 
-        internal CallContextAsyncResult AsyncResult { get; private set; }
+        internal CallContextAsyncResult AsyncResult { get; }
 
         internal AspNetDictionary Environment
         {
             get
             {
-                return this._env;
+                return _env;
             }
         }
         

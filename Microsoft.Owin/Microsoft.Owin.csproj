@@ -66,6 +66,8 @@
     <Compile Include="HostString.cs" />
     <Compile Include="Host\SystemWeb\CallContextAsyncResult.cs" />
     <Compile Include="Host\SystemWeb\CallEnvironment\NilDictionary.cs" />
+    <Compile Include="Host\SystemWeb\CallHeaders\SendingHeadersEvent.cs" />
+    <Compile Include="Host\SystemWeb\DisconnectWatcher.cs" />
     <Compile Include="Host\SystemWeb\IntegratedPipeline\IntegratedPipelineBlueprint.cs" />
     <Compile Include="Host\SystemWeb\IntegratedPipeline\IntegratedPipelineBlueprintStage.cs" />
     <Compile Include="Host\SystemWeb\IntegratedPipeline\IntegratedPipelineContext.cs" />
@@ -84,6 +86,7 @@
     <Compile Include="Host\SystemWeb\OwinAppContext.cs" />
     <Compile Include="Host\SystemWeb\OwinCallContext.cs" />
     <Compile Include="Host\SystemWeb\OwinRoute.cs" />
+    <Compile Include="Host\SystemWeb\WebSockets\OwinWebSocketWrapper.cs" />
     <Compile Include="IAppBuilder.cs" />
     <Compile Include="IFormCollection.cs" />
     <Compile Include="IHeaderDictionary.cs" />
@@ -259,7 +262,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Host\SystemWeb\CallHeaders\" />
     <Folder Include="Host\SystemWeb\DataProtection\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

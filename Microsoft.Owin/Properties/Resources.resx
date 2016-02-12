@@ -129,6 +129,9 @@
   <data name="Exception_AuthenticationTokenDoesNotProvideSyncMethods" xml:space="preserve">
     <value>The AuthenticationTokenProvider's required synchronous events have not been registered.</value>
   </data>
+  <data name="Exception_CannotRegisterAfterHeadersSent" xml:space="preserve">
+    <value>Cannot register for 'OnSendingHeaders' event after response headers have been sent.</value>
+  </data>
   <data name="Exception_ConversionTakesOneParameter" xml:space="preserve">
     <value>Conversion delegate must take one parameter.</value>
   </data>
@@ -200,6 +203,9 @@
   </data>
   <data name="Trace_OwinCallContextCallbackException" xml:space="preserve">
     <value>The IAsyncResult callback for OwinCallHandler threw an exception:</value>
+  </data>
+  <data name="Trace_RequestDisconnectCallbackExceptions" xml:space="preserve">
+    <value>The application threw one or more exceptions when notified of a client disconnect:</value>
   </data>
   <data name="TypeOrMethodNotFound" xml:space="preserve">
     <value>The given type or method '{0}' was not found. Try specifying the Assembly.</value>

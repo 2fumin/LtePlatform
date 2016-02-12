@@ -6,6 +6,7 @@
         public const string OwinVersion = "owin.Version";
         public const string RequestBody = "owin.RequestBody";
         public const string RequestHeaders = "owin.RequestHeaders";
+        public const string RequestId = "owin.RequestId";
         public const string RequestMethod = "owin.RequestMethod";
         public const string RequestPath = "owin.RequestPath";
         public const string RequestPathBase = "owin.RequestPathBase";
@@ -28,6 +29,7 @@
         {
             public const string Addresses = "host.Addresses";
             public const string AppName = "host.AppName";
+            public const string AppMode = "host.AppMode";
             public const string Capabilities = "server.Capabilities";
             public const string ClientCertificate = "ssl.ClientCertificate";
             public const string Host = "host";
