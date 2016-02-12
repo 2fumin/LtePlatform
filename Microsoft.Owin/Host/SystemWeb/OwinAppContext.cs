@@ -1,30 +1,23 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Configuration;
+using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
+using System.Web.Configuration;
+using System.Web.Hosting;
+using System.Web.Routing;
+using Microsoft.Owin.Builder;
+using Microsoft.Owin.Host.SystemWeb.CallEnvironment;
+using Microsoft.Owin.Host.SystemWeb.DataProtection;
+using Microsoft.Owin.Host.SystemWeb.Infrastructure;
+using Microsoft.Owin.Logging;
 using Microsoft.Owin.Properties;
 
 namespace Microsoft.Owin.Host.SystemWeb
 {
-    using Builder;
-    using CallEnvironment;
-    using SystemWeb.DataProtection;
-    using Infrastructure;
-    using Logging;
-    using Owin;
-    using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Configuration;
-    using System.Diagnostics;
-    using System.Runtime.CompilerServices;
-    using System.Threading;
-    using System.Web;
-    using System.Web.Configuration;
-    using System.Web.Hosting;
-    using System.Web.Routing;
-
     internal class OwinAppContext
     {
         private bool _detectWebSocketSupportStageTwoExecuted;
@@ -88,24 +81,24 @@ namespace Microsoft.Owin.Host.SystemWeb
         {
             Capabilities = new ConcurrentDictionary<string, object>();
             var builder = new AppBuilder();
-            builder.Properties[OwinConstants.OwinVersion] = "1.0";
-            builder.Properties["host.TraceOutput"] = TraceTextWriter.Instance;
-            builder.Properties[OwinConstants.CommonKeys.AppName] = AppName;
-            builder.Properties["host.OnAppDisposing"] = OwinApplication.ShutdownToken;
-            builder.Properties["host.ReferencedAssemblies"] = new ReferencedAssembliesWrapper();
-            builder.Properties["server.Capabilities"] = Capabilities;
-            builder.Properties["security.DataProtectionProvider"] = new MachineKeyDataProtectionProvider().ToOwinFunction();
-            AppBuilderLoggerExtensions.SetLoggerFactory((IAppBuilder)builder, new DiagnosticsLoggerFactory());
-            Capabilities["sendfile.Version"] = "1.0";
+            builder.Properties[Constants.OwinVersionKey] = Constants.OwinVersion;
+            builder.Properties[Constants.HostTraceOutputKey] = TraceTextWriter.Instance;
+            builder.Properties[Constants.HostAppNameKey] = AppName;
+            builder.Properties[Constants.HostOnAppDisposingKey] = OwinApplication.ShutdownToken;
+            builder.Properties[Constants.HostReferencedAssemblies] = new ReferencedAssembliesWrapper();
+            builder.Properties[Constants.ServerCapabilitiesKey] = Capabilities;
+            builder.Properties[Constants.SecurityDataProtectionProvider] = new MachineKeyDataProtectionProvider().ToOwinFunction();
+            builder.SetLoggerFactory(new DiagnosticsLoggerFactory());
+            Capabilities[Constants.SendFileVersionKey] = Constants.SendFileVersion;
             var section = (CompilationSection)ConfigurationManager.GetSection("system.web/compilation");
             if (section.Debug)
             {
-                builder.Properties[OwinConstants.CommonKeys.AppMode] = "development";
+                builder.Properties[Constants.HostAppModeKey] = "development";
             }
             DetectWebSocketSupportStageOne();
             try
             {
-                startup((IAppBuilder)builder);
+                startup(builder);
             }
             catch (Exception exception)
             {

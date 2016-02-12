@@ -358,6 +358,15 @@ namespace Microsoft.Owin.Properties {
         }
         
         /// <summary>
+        ///   查找类似 The OWIN entry point threw an exception: 的本地化字符串。
+        /// </summary>
+        internal static string Trace_EntryPointException {
+            get {
+                return ResourceManager.GetString("Trace_EntryPointException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 The IAsyncResult callback for OwinCallHandler threw an exception: 的本地化字符串。
         /// </summary>
         internal static string Trace_OwinCallContextCallbackException {

@@ -216,6 +216,9 @@
   <data name="Trace_ClientCertException" xml:space="preserve">
     <value>An exception was thrown while trying to load the client certificate:</value>
   </data>
+  <data name="Trace_EntryPointException" xml:space="preserve">
+    <value>The OWIN entry point threw an exception:</value>
+  </data>
   <data name="Trace_OwinCallContextCallbackException" xml:space="preserve">
     <value>The IAsyncResult callback for OwinCallHandler threw an exception:</value>
   </data>

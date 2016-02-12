@@ -35,7 +35,7 @@ namespace Microsoft.Owin.Host.SystemWeb
 
         internal static Action<IAppBuilder> GetAppStartup()
         {
-            var str = ConfigurationManager.AppSettings["owin:AppStartup"];
+            var str = ConfigurationManager.AppSettings[Constants.OwinAppStartup];
             var loader = new DefaultLoader(new ReferencedAssembliesWrapper());
             IList<string> errorDetails = new List<string>();
             var action = loader.Load(str ?? string.Empty, errorDetails);

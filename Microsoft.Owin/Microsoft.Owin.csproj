@@ -97,7 +97,10 @@
     <Compile Include="Host\SystemWeb\OwinApplication.cs" />
     <Compile Include="Host\SystemWeb\OwinBuilder.cs" />
     <Compile Include="Host\SystemWeb\OwinCallContext.cs" />
+    <Compile Include="Host\SystemWeb\OwinHttpHandler.cs" />
+    <Compile Include="Host\SystemWeb\OwinHttpModule.cs" />
     <Compile Include="Host\SystemWeb\OwinRoute.cs" />
+    <Compile Include="Host\SystemWeb\OwinRouteHandler.cs" />
     <Compile Include="Host\SystemWeb\ShutdownDetector.cs" />
     <Compile Include="Host\SystemWeb\UnsafeIISMethods.cs" />
     <Compile Include="Host\SystemWeb\Utils.cs" />
