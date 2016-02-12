@@ -232,6 +232,15 @@ namespace Microsoft.Owin.Properties {
         }
         
         /// <summary>
+        ///   查找类似 The given stage &apos;{0}&apos; is not supported. 的本地化字符串。
+        /// </summary>
+        internal static string Exception_UnsupportedPipelineStage {
+            get {
+                return ResourceManager.GetString("Exception_UnsupportedPipelineStage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 The OwinStartupAttribute.FriendlyName value &apos;{0}&apos; does not match the given value &apos;{1}&apos; in Assembly &apos;{2}&apos;. 的本地化字符串。
         /// </summary>
         internal static string FriendlyNameMismatch {
@@ -291,6 +300,15 @@ namespace Microsoft.Owin.Properties {
         internal static string StartupTypePropertyMissing {
             get {
                 return ResourceManager.GetString("StartupTypePropertyMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 The IAsyncResult callback for OwinCallHandler threw an exception: 的本地化字符串。
+        /// </summary>
+        internal static string Trace_OwinCallContextCallbackException {
+            get {
+                return ResourceManager.GetString("Trace_OwinCallContextCallbackException", resourceCulture);
             }
         }
         

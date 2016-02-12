@@ -64,6 +64,11 @@
     <Compile Include="HeaderDictionary.cs" />
     <Compile Include="Helpers\WebHelpers.cs" />
     <Compile Include="HostString.cs" />
+    <Compile Include="Host\SystemWeb\CallContextAsyncResult.cs" />
+    <Compile Include="Host\SystemWeb\CallEnvironment\NilDictionary.cs" />
+    <Compile Include="Host\SystemWeb\IntegratedPipeline\IntegratedPipelineBlueprint.cs" />
+    <Compile Include="Host\SystemWeb\IntegratedPipeline\IntegratedPipelineBlueprintStage.cs" />
+    <Compile Include="Host\SystemWeb\IntegratedPipeline\IntegratedPipelineContext.cs" />
     <Compile Include="Host\SystemWeb\CallEnvironment\AspNetDictionary.cs" />
     <Compile Include="Host\SystemWeb\HttpContextItemKeys.cs" />
     <Compile Include="Host\SystemWeb\Infrastructure\DefaultTrace.cs" />
@@ -74,6 +79,8 @@
     <Compile Include="Host\SystemWeb\Infrastructure\ReferencedAssembliesWrapper.cs" />
     <Compile Include="Host\SystemWeb\Infrastructure\TraceExtensions.cs" />
     <Compile Include="Host\SystemWeb\Infrastructure\TraceFactory.cs" />
+    <Compile Include="Host\SystemWeb\IntegratedPipeline\IntegratedPipelineContextStage.cs" />
+    <Compile Include="Host\SystemWeb\IntegratedPipeline\StageAsyncResult.cs" />
     <Compile Include="Host\SystemWeb\OwinAppContext.cs" />
     <Compile Include="Host\SystemWeb\OwinCallContext.cs" />
     <Compile Include="Host\SystemWeb\OwinRoute.cs" />

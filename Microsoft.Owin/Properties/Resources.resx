@@ -174,6 +174,9 @@
   <data name="Exception_UnhookAuthenticationStateType" xml:space="preserve">
     <value>The state passed to UnhookAuthentication may only be the return value from HookAuthentication.</value>
   </data>
+  <data name="Exception_UnsupportedPipelineStage" xml:space="preserve">
+    <value>The given stage '{0}' is not supported.</value>
+  </data>
   <data name="FriendlyNameMismatch" xml:space="preserve">
     <value>The OwinStartupAttribute.FriendlyName value '{0}' does not match the given value '{1}' in Assembly '{2}'.</value>
   </data>
@@ -194,6 +197,9 @@
   </data>
   <data name="StartupTypePropertyMissing" xml:space="preserve">
     <value>The type '{0}' referenced from assembly '{1}' does not define a property 'StartupType' of type 'Type'.</value>
+  </data>
+  <data name="Trace_OwinCallContextCallbackException" xml:space="preserve">
+    <value>The IAsyncResult callback for OwinCallHandler threw an exception:</value>
   </data>
   <data name="TypeOrMethodNotFound" xml:space="preserve">
     <value>The given type or method '{0}' was not found. Try specifying the Assembly.</value>
