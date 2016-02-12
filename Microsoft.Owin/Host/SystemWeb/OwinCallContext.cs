@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Owin.Properties;
 
 namespace Microsoft.Owin.Host.SystemWeb
 {
@@ -137,33 +138,33 @@ namespace Microsoft.Owin.Host.SystemWeb
             }
             else
             {
-                _env = new AspNetDictionary(this);
-                _env.OwinVersion = "1.0";
-                _env.RequestPathBase = _requestPathBase;
-                _env.RequestPath = _requestPath;
-                _env.RequestMethod = _httpRequest.HttpMethod;
-                _env.RequestHeaders = new AspNetRequestHeaders(_httpRequest);
-                _env.ResponseHeaders = new AspNetResponseHeaders(_httpResponse);
-                _env.OnSendingHeaders = _sendingHeadersEvent.Register;
-                _env.HostTraceOutput = TraceTextWriter.Instance;
-                _env.HostAppName = _appContext.AppName;
-                _env.DisableResponseCompression = DisableResponseCompression;
-                _env.ServerCapabilities = _appContext.Capabilities;
-                _env.RequestContext = _requestContext;
-                _env.HttpContextBase = _httpContext;
+                _env = new AspNetDictionary(this)
+                {
+                    OwinVersion = Constants.OwinVersion,
+                    RequestPathBase = _requestPathBase,
+                    RequestPath = _requestPath,
+                    RequestMethod = _httpRequest.HttpMethod,
+                    RequestHeaders = new AspNetRequestHeaders(_httpRequest),
+                    ResponseHeaders = new AspNetResponseHeaders(_httpResponse),
+                    OnSendingHeaders = _sendingHeadersEvent.Register,
+                    HostTraceOutput = TraceTextWriter.Instance,
+                    HostAppName = _appContext.AppName,
+                    DisableResponseCompression = DisableResponseCompression,
+                    ServerCapabilities = _appContext.Capabilities,
+                    RequestContext = _requestContext,
+                    HttpContextBase = _httpContext
+                };
                 _httpContext.Items[HttpContextItemKeys.OwinEnvironmentKey] = _env;
             }
         }
 
         private void DisableResponseCompression()
         {
-            if (!_compressionDisabled)
-            {
-                RemoveAcceptEncoding();
-                _httpResponse.CacheControl = "no-cache";
-                _httpResponse.AddHeader("Connection", "keep-alive");
-                _compressionDisabled = true;
-            }
+            if (_compressionDisabled) return;
+            RemoveAcceptEncoding();
+            _httpResponse.CacheControl = "no-cache";
+            _httpResponse.AddHeader("Connection", "keep-alive");
+            _compressionDisabled = true;
         }
 
         public void Dispose()
@@ -179,15 +180,16 @@ namespace Microsoft.Owin.Host.SystemWeb
             }
         }
 
-        private void DoWebSocketUpgrade(IDictionary<string, object> acceptOptions, Func<IDictionary<string, object>, Task> webSocketFunc)
+        private void DoWebSocketUpgrade(IDictionary<string, object> acceptOptions, 
+            Func<IDictionary<string, object>, Task> webSocketFunc)
         {
             if (webSocketFunc == null)
             {
-                throw new ArgumentNullException("webSocketFunc");
+                throw new ArgumentNullException(nameof(webSocketFunc));
             }
             _env.ResponseStatusCode = 0x65;
             _webSocketFunc = webSocketFunc;
-            AspNetWebSocketOptions options = new AspNetWebSocketOptions
+            var options = new AspNetWebSocketOptions
             {
                 SubProtocol = GetWebSocketSubProtocol(_env, acceptOptions)
             };
@@ -197,40 +199,34 @@ namespace Microsoft.Owin.Host.SystemWeb
 
         internal void Execute()
         {
-            Action<Task> continuationAction = null;
             CreateEnvironment();
             _completedSynchronouslyThreadId = Thread.CurrentThread.ManagedThreadId;
             try
             {
-                if (continuationAction == null)
-                {
-                    continuationAction = delegate (Task appTask) {
+                Action<Task> continuationAction
+                    = delegate(Task appTask)
+                    {
                         if (appTask.IsFaulted)
                         {
-                            if (!this.TryRelayExceptionToIntegratedPipeline(false, appTask.Exception))
+                            if (!TryRelayExceptionToIntegratedPipeline(false, appTask.Exception))
                             {
-                                this.Complete(ErrorState.Capture(appTask.Exception));
+                                Complete(ErrorState.Capture(appTask.Exception));
                             }
                         }
                         else if (appTask.IsCanceled)
                         {
                             Exception ex = new TaskCanceledException(appTask);
-                            if (!this.TryRelayExceptionToIntegratedPipeline(false, ex))
+                            if (!TryRelayExceptionToIntegratedPipeline(false, ex))
                             {
-                                this.Complete(ErrorState.Capture(ex));
+                                Complete(ErrorState.Capture(ex));
                             }
                         }
                         else
                         {
-                            this.OnEnd();
+                            OnEnd();
                         }
                     };
-                }
                 _appContext.AppFunc(_env).ContinueWith(continuationAction);
-            }
-            catch (Exception)
-            {
-                throw;
             }
             finally
             {
@@ -242,10 +238,16 @@ namespace Microsoft.Owin.Host.SystemWeb
         {
             try
             {
-                Type type = typeof(HttpContext).Assembly.GetType(IIS7WorkerRequestTypeName);
-                MethodInfo method = type.GetMethod("SetKnownRequestHeader", BindingFlags.NonPublic | BindingFlags.Instance);
-                ParameterExpression expression = Expression.Parameter(typeof(HttpWorkerRequest));
-                return Expression.Lambda<RemoveHeaderDel>(Expression.Call(Expression.Convert(expression, type), method, Expression.Constant(0x16), Expression.Constant(null, typeof(string)), Expression.Constant(false)), new ParameterExpression[] { expression }).Compile();
+                var type = typeof(HttpContext).Assembly.GetType(IIS7WorkerRequestTypeName);
+                var method = type.GetMethod("SetKnownRequestHeader", BindingFlags.NonPublic | BindingFlags.Instance);
+                var expression = Expression.Parameter(typeof(HttpWorkerRequest));
+                return Expression.Lambda<RemoveHeaderDel>(Expression.Call(
+                    Expression.Convert(expression, type), method, 
+                    Expression.Constant(0x16), 
+                    Expression.Constant(null, 
+                    typeof(string)), 
+                    Expression.Constant(false)), 
+                    expression).Compile();
             }
             catch (Exception)
             {
@@ -256,35 +258,33 @@ namespace Microsoft.Owin.Host.SystemWeb
         private static string GetWebSocketSubProtocol(AspNetDictionary env, IDictionary<string, object> accpetOptions)
         {
             string[] strArray;
-            IDictionary<string, string[]> responseHeaders = env.ResponseHeaders;
+            var responseHeaders = env.ResponseHeaders;
             string str = null;
             if (responseHeaders.TryGetValue("Sec-WebSocket-Protocol", out strArray) && (strArray.Length > 0))
             {
                 str = strArray[0];
                 responseHeaders.Remove("Sec-WebSocket-Protocol");
             }
-            if ((accpetOptions != null) && accpetOptions.ContainsKey("websocket.SubProtocol"))
+            if ((accpetOptions != null) && accpetOptions.ContainsKey(Constants.WebSocketSubProtocolKey))
             {
-                str = accpetOptions.Get<string>("websocket.SubProtocol", null);
+                str = accpetOptions.Get<string>(Constants.WebSocketSubProtocolKey);
             }
             return str;
         }
 
         private X509Certificate LoadClientCert()
         {
-            if (_httpContext.Request.IsSecureConnection)
+            if (!_httpContext.Request.IsSecureConnection) return null;
+            try
             {
-                try
+                if ((_httpContext.Request.ClientCertificate != null) && _httpContext.Request.ClientCertificate.IsPresent)
                 {
-                    if ((_httpContext.Request.ClientCertificate != null) && _httpContext.Request.ClientCertificate.IsPresent)
-                    {
-                        return new X509Certificate2(_httpContext.Request.ClientCertificate.Certificate);
-                    }
+                    return new X509Certificate2(_httpContext.Request.ClientCertificate.Certificate);
                 }
-                catch (CryptographicException exception)
-                {
-                    Trace.WriteError(Resources.Trace_ClientCertException, exception);
-                }
+            }
+            catch (CryptographicException exception)
+            {
+                Trace.WriteError(Resources.Trace_ClientCertException, exception);
             }
             return null;
         }
@@ -313,7 +313,7 @@ namespace Microsoft.Owin.Host.SystemWeb
         Action AspNetDictionary.IPropertySource.GetDisableResponseBuffering()
         {
             return delegate {
-                this._httpResponse.BufferOutput = false;
+                _httpResponse.BufferOutput = false;
             };
         }
 
@@ -329,7 +329,7 @@ namespace Microsoft.Owin.Host.SystemWeb
 
         string AspNetDictionary.IPropertySource.GetRequestId()
         {
-            HttpWorkerRequest service = (HttpWorkerRequest)_httpContext.GetService(typeof(HttpWorkerRequest));
+            var service = (HttpWorkerRequest)_httpContext.GetService(typeof(HttpWorkerRequest));
             if (service != null)
             {
                 return service.RequestTraceIdentifier.ToString();
@@ -344,11 +344,11 @@ namespace Microsoft.Owin.Host.SystemWeb
 
         string AspNetDictionary.IPropertySource.GetRequestQueryString()
         {
-            string str = string.Empty;
-            Uri url = _httpRequest.Url;
+            var str = string.Empty;
+            var url = _httpRequest.Url;
             if (url != null)
             {
-                string str2 = url.Query + url.Fragment;
+                var str2 = url.Query + url.Fragment;
                 if (str2.Length > 1)
                 {
                     str = str2.Substring(1);
@@ -500,7 +500,7 @@ namespace Microsoft.Owin.Host.SystemWeb
 
         public void OnStart()
         {
-            Exception innerException = LazyInitializer.EnsureInitialized(ref _startException, ref _startCalled, ref _startLock, StartOnce);
+            var innerException = LazyInitializer.EnsureInitialized(ref _startException, ref _startCalled, ref _startLock, StartOnce);
             if (innerException != null)
             {
                 throw new InvalidOperationException(string.Empty, innerException);
@@ -514,7 +514,7 @@ namespace Microsoft.Owin.Host.SystemWeb
             {
                 try
                 {
-                    object[] parameters = new object[1];
+                    var parameters = new object[1];
                     if (action == null)
                     {
                         action = _ => OnStart();
@@ -532,7 +532,7 @@ namespace Microsoft.Owin.Host.SystemWeb
         {
             try
             {
-                HttpWorkerRequest service = (HttpWorkerRequest)_httpContext.GetService(typeof(HttpWorkerRequest));
+                var service = (HttpWorkerRequest)_httpContext.GetService(typeof(HttpWorkerRequest));
                 if (HttpRuntime.UsingIntegratedPipeline && (IIS7RemoveHeader.Value != null))
                 {
                     IIS7RemoveHeader.Value(service);
@@ -562,7 +562,7 @@ namespace Microsoft.Owin.Host.SystemWeb
             try
             {
                 OnStart();
-                long? nullable = count;
+                var nullable = count;
                 _httpContext.Response.TransmitFile(name, offset, nullable.HasValue ? nullable.GetValueOrDefault() : -1L);
                 return SystemWeb.Utils.CompletedTask;
             }
@@ -591,7 +591,7 @@ namespace Microsoft.Owin.Host.SystemWeb
             object obj2;
             if (Environment.TryGetValue("integratedpipeline.Context", out obj2))
             {
-                IntegratedPipelineContext context = obj2 as IntegratedPipelineContext;
+                var context = obj2 as IntegratedPipelineContext;
                 if (context != null)
                 {
                     context.TakeLastCompletionSource().TrySetException(ex);

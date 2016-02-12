@@ -14,7 +14,6 @@ namespace Microsoft.Owin.Host.SystemWeb.WebSockets
     {
         private readonly CancellationTokenSource _cancellationTokenSource;
         private readonly WebSocketContext _context;
-        private readonly IDictionary<string, object> _environment;
 
         private const string TraceName = "Microsoft.Owin.Host.SystemWeb.WebSockets.OwinWebSocketWrapper";
         private readonly ITrace _trace = TraceFactory.Create(TraceName);
@@ -24,7 +23,7 @@ namespace Microsoft.Owin.Host.SystemWeb.WebSockets
         {
             _context = context;
             _cancellationTokenSource = new CancellationTokenSource();
-            _environment = new ConcurrentDictionary<string, object>
+            Environment = new ConcurrentDictionary<string, object>
             {
                 [OwinConstants.WebSocket.SendAsync] = new Func<ArraySegment<byte>, int, bool, CancellationToken, Task>(SendAsync),
                 [OwinConstants.WebSocket.ReceiveAsync] =
@@ -108,10 +107,10 @@ namespace Microsoft.Owin.Host.SystemWeb.WebSockets
                 return new Tuple<int, bool, int>(EnumToOpCode(nativeResult.MessageType), nativeResult.EndOfMessage,
                     nativeResult.Count);
             var closeStatus = nativeResult.CloseStatus;
-            _environment[OwinConstants.WebSocket.ClientCloseStatus] = closeStatus.HasValue
+            Environment[OwinConstants.WebSocket.ClientCloseStatus] = closeStatus.HasValue
                 ? ((int) closeStatus.GetValueOrDefault())
                 : 0x3e8;
-            _environment[OwinConstants.WebSocket.ClientCloseDescription] = nativeResult.CloseStatusDescription ??
+            Environment[OwinConstants.WebSocket.ClientCloseDescription] = nativeResult.CloseStatusDescription ??
                                                                            string.Empty;
             return new Tuple<int, bool, int>(EnumToOpCode(nativeResult.MessageType), nativeResult.EndOfMessage,
                 nativeResult.Count);
@@ -145,15 +144,8 @@ namespace Microsoft.Owin.Host.SystemWeb.WebSockets
             return Utils.CompletedTask;
         }
 
-        internal IDictionary<string, object> Environment
-        {
-            get { return _environment; }
-        }
+        internal IDictionary<string, object> Environment { get; }
 
-        private WebSocket WebSocket
-        {
-            get { return _context.WebSocket; }
-        }
-
+        private WebSocket WebSocket => _context.WebSocket;
     }
 }

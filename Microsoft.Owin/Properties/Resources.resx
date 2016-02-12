@@ -141,6 +141,9 @@
   <data name="Exception_DefaultDpapiRequiresAppNameKey" xml:space="preserve">
     <value>The default data protection provider may only be used when the IAppBuilder.Properties contains an appropriate 'host.AppName' key.</value>
   </data>
+  <data name="Exception_DuplicateKey" xml:space="preserve">
+    <value>The key '{0}' is already present in the dictionary.</value>
+  </data>
   <data name="Exception_ImcompleteChunkedCookie" xml:space="preserve">
     <value>The chunked cookie is incomplete. Only {0} of the expected {1} chunks were found, totaling {2} characters. A client size limit may have been exceeded.</value>
   </data>
@@ -201,11 +204,20 @@
   <data name="StartupTypePropertyMissing" xml:space="preserve">
     <value>The type '{0}' referenced from assembly '{1}' does not define a property 'StartupType' of type 'Type'.</value>
   </data>
+  <data name="Trace_ClientCertException" xml:space="preserve">
+    <value>An exception was thrown while trying to load the client certificate:</value>
+  </data>
   <data name="Trace_OwinCallContextCallbackException" xml:space="preserve">
     <value>The IAsyncResult callback for OwinCallHandler threw an exception:</value>
   </data>
   <data name="Trace_RequestDisconnectCallbackExceptions" xml:space="preserve">
     <value>The application threw one or more exceptions when notified of a client disconnect:</value>
+  </data>
+  <data name="Trace_ShutdownDetectionSetupException" xml:space="preserve">
+    <value>Shutdown detection setup failed:</value>
+  </data>
+  <data name="Trace_ShutdownException" xml:space="preserve">
+    <value>One or more exceptions were thrown during app pool shutdown:</value>
   </data>
   <data name="Trace_WebSocketException" xml:space="preserve">
     <value>An exception was thrown while processing the WebSocket:</value>

@@ -66,7 +66,11 @@
     <Compile Include="HostString.cs" />
     <Compile Include="Host\SystemWeb\CallContextAsyncResult.cs" />
     <Compile Include="Host\SystemWeb\CallEnvironment\NilDictionary.cs" />
+    <Compile Include="Host\SystemWeb\CallEnvironment\TraceTextWriter.cs" />
+    <Compile Include="Host\SystemWeb\CallHeaders\AspNetRequestHeaders.cs" />
+    <Compile Include="Host\SystemWeb\CallHeaders\AspNetResponseHeaders.cs" />
     <Compile Include="Host\SystemWeb\CallHeaders\SendingHeadersEvent.cs" />
+    <Compile Include="Host\SystemWeb\Constants.cs" />
     <Compile Include="Host\SystemWeb\DisconnectWatcher.cs" />
     <Compile Include="Host\SystemWeb\IntegratedPipeline\IntegratedPipelineBlueprint.cs" />
     <Compile Include="Host\SystemWeb\IntegratedPipeline\IntegratedPipelineBlueprintStage.cs" />
@@ -84,8 +88,12 @@
     <Compile Include="Host\SystemWeb\IntegratedPipeline\IntegratedPipelineContextStage.cs" />
     <Compile Include="Host\SystemWeb\IntegratedPipeline\StageAsyncResult.cs" />
     <Compile Include="Host\SystemWeb\OwinAppContext.cs" />
+    <Compile Include="Host\SystemWeb\OwinApplication.cs" />
     <Compile Include="Host\SystemWeb\OwinCallContext.cs" />
     <Compile Include="Host\SystemWeb\OwinRoute.cs" />
+    <Compile Include="Host\SystemWeb\ShutdownDetector.cs" />
+    <Compile Include="Host\SystemWeb\UnsafeIISMethods.cs" />
+    <Compile Include="Host\SystemWeb\Utils.cs" />
     <Compile Include="Host\SystemWeb\WebSockets\OwinWebSocketWrapper.cs" />
     <Compile Include="IAppBuilder.cs" />
     <Compile Include="IFormCollection.cs" />

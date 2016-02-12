@@ -133,6 +133,15 @@ namespace Microsoft.Owin.Properties {
         }
         
         /// <summary>
+        ///   查找类似 The key &apos;{0}&apos; is already present in the dictionary. 的本地化字符串。
+        /// </summary>
+        internal static string Exception_DuplicateKey {
+            get {
+                return ResourceManager.GetString("Exception_DuplicateKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 The chunked cookie is incomplete. Only {0} of the expected {1} chunks were found, totaling {2} characters. A client size limit may have been exceeded. 的本地化字符串。
         /// </summary>
         internal static string Exception_ImcompleteChunkedCookie {
@@ -313,6 +322,15 @@ namespace Microsoft.Owin.Properties {
         }
         
         /// <summary>
+        ///   查找类似 An exception was thrown while trying to load the client certificate: 的本地化字符串。
+        /// </summary>
+        internal static string Trace_ClientCertException {
+            get {
+                return ResourceManager.GetString("Trace_ClientCertException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 The IAsyncResult callback for OwinCallHandler threw an exception: 的本地化字符串。
         /// </summary>
         internal static string Trace_OwinCallContextCallbackException {
@@ -327,6 +345,24 @@ namespace Microsoft.Owin.Properties {
         internal static string Trace_RequestDisconnectCallbackExceptions {
             get {
                 return ResourceManager.GetString("Trace_RequestDisconnectCallbackExceptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Shutdown detection setup failed: 的本地化字符串。
+        /// </summary>
+        internal static string Trace_ShutdownDetectionSetupException {
+            get {
+                return ResourceManager.GetString("Trace_ShutdownDetectionSetupException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 One or more exceptions were thrown during app pool shutdown: 的本地化字符串。
+        /// </summary>
+        internal static string Trace_ShutdownException {
+            get {
+                return ResourceManager.GetString("Trace_ShutdownException", resourceCulture);
             }
         }
         
