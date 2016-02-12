@@ -154,6 +154,7 @@
     <Compile Include="OwinMiddleware.cs" />
     <Compile Include="OwinRequest.cs" />
     <Compile Include="OwinResponse.cs" />
+    <Compile Include="OwinStartupAttribute.cs" />
     <Compile Include="PathString.cs" />
     <Compile Include="PipelineStage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
