@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Owin.Properties;
+using Owin;
 
 namespace Microsoft.Owin.Security.DataProtection
 {

@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.Owin.Infrastructure;
 using Microsoft.Owin.Properties;
+using Owin;
 
 namespace Microsoft.Owin.Builder
 {

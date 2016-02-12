@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
+using System.Web;
+using System.Web.Routing;
+using Owin;
 
 namespace Microsoft.Owin.Host.SystemWeb
 {
-    using System;
-    using System.Threading;
-    using System.Web;
-    using System.Web.Routing;
-
     public class OwinRouteHandler : IRouteHandler
     {
         private readonly Func<OwinAppContext> _appAccessor;

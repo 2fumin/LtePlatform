@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using Owin;
 
 namespace Microsoft.Owin.Logging
 {
@@ -35,15 +36,9 @@ namespace Microsoft.Owin.Logging
             {
                 throw new ArgumentNullException(nameof(app));
             }
-            if (app.Properties.TryGetValue("server.LoggerFactory", out obj2))
-            {
-                Func<string, Func<TraceEventType, int, object, Exception, Func<object, Exception, string>, bool>> create = obj2 as Func<string, Func<TraceEventType, int, object, Exception, Func<object, Exception, string>, bool>>;
-                if (create != null)
-                {
-                    return new WrapLoggerFactory(create);
-                }
-            }
-            return null;
+            if (!app.Properties.TryGetValue("server.LoggerFactory", out obj2)) return null;
+            var create = obj2 as Func<string, Func<TraceEventType, int, object, Exception, Func<object, Exception, string>, bool>>;
+            return create != null ? new WrapLoggerFactory(create) : null;
         }
 
         public static void SetLoggerFactory(this IAppBuilder app, ILoggerFactory loggerFactory)
@@ -65,12 +60,12 @@ namespace Microsoft.Owin.Logging
                 {
                     throw new ArgumentNullException(nameof(create));
                 }
-                this._create = create;
+                _create = create;
             }
 
             public ILogger Create(string name)
             {
-                return new WrappingLogger(this._create(name));
+                return new WrappingLogger(_create(name));
             }
         }
 
@@ -84,12 +79,12 @@ namespace Microsoft.Owin.Logging
                 {
                     throw new ArgumentNullException(nameof(write));
                 }
-                this._write = write;
+                _write = write;
             }
 
             public bool WriteCore(TraceEventType eventType, int eventId, object state, Exception exception, Func<object, Exception, string> message)
             {
-                return this._write(eventType, eventId, state, exception, message);
+                return _write(eventType, eventId, state, exception, message);
             }
         }
     }

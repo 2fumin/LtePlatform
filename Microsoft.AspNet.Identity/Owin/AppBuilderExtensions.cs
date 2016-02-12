@@ -7,6 +7,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.DataProtection;
 using Microsoft.Owin.Security.OAuth;
+using Owin;
 
 namespace Microsoft.AspNet.Identity.Owin
 {
@@ -16,7 +17,7 @@ namespace Microsoft.AspNet.Identity.Owin
 
         public static IAppBuilder CreatePerOwinContext<T>(this IAppBuilder app, Func<T> createCallback) where T : class, IDisposable
         {
-            return app.CreatePerOwinContext<T>(((Func<IdentityFactoryOptions<T>, IOwinContext, T>)((options, context) => createCallback())));
+            return app.CreatePerOwinContext<T>((options, context) => createCallback());
         }
 
         public static IAppBuilder CreatePerOwinContext<T>(this IAppBuilder app, Func<IdentityFactoryOptions<T>, IOwinContext, T> createCallback) where T : class, IDisposable
@@ -25,7 +26,7 @@ namespace Microsoft.AspNet.Identity.Owin
             {
                 throw new ArgumentNullException(nameof(app));
             }
-            return app.CreatePerOwinContext<T>(createCallback, delegate (IdentityFactoryOptions<T> options, T instance) {
+            return app.CreatePerOwinContext(createCallback, delegate (IdentityFactoryOptions<T> options, T instance) {
                 instance.Dispose();
             });
         }
@@ -156,7 +157,7 @@ namespace Microsoft.AspNet.Identity.Owin
                 {
                     throw new ArgumentNullException(nameof(context));
                 }
-                if (context.Ticket.Identity.Claims.Any<Claim>(c => c.Issuer != "LOCAL AUTHORITY"))
+                if (context.Ticket.Identity.Claims.Any(c => c.Issuer != "LOCAL AUTHORITY"))
                 {
                     context.Rejected();
                 }
@@ -172,11 +173,11 @@ namespace Microsoft.AspNet.Identity.Owin
                 {
                     throw new ArgumentNullException(nameof(context));
                 }
-                if (context.Ticket.Identity.Claims.Count<Claim>() == 0)
+                if (context.Ticket.Identity.Claims.Count() == 0)
                 {
                     context.Rejected();
                 }
-                else if (context.Ticket.Identity.Claims.All<Claim>(c => c.Issuer == "LOCAL AUTHORITY"))
+                else if (context.Ticket.Identity.Claims.All(c => c.Issuer == "LOCAL AUTHORITY"))
                 {
                     context.Rejected();
                 }

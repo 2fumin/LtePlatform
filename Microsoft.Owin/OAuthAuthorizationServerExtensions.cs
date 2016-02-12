@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Owin.Security.OAuth;
+using Owin;
 
 namespace Microsoft.Owin
 {
@@ -11,7 +12,7 @@ namespace Microsoft.Owin
             {
                 throw new ArgumentNullException(nameof(app));
             }
-            app.Use(typeof(OAuthAuthorizationServerMiddleware), new object[] { app, options });
+            app.Use(typeof(OAuthAuthorizationServerMiddleware), app, options);
             return app;
         }
     }

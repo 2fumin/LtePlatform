@@ -15,6 +15,7 @@ using Microsoft.Owin.Host.SystemWeb.DataProtection;
 using Microsoft.Owin.Host.SystemWeb.Infrastructure;
 using Microsoft.Owin.Logging;
 using Microsoft.Owin.Properties;
+using Owin;
 
 namespace Microsoft.Owin.Host.SystemWeb
 {

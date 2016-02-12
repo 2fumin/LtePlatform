@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.Owin.Host.SystemWeb.Infrastructure;
 using Microsoft.Owin.Loader;
 using Microsoft.Owin.Properties;
+using Owin;
 
 namespace Microsoft.Owin.Host.SystemWeb
 {

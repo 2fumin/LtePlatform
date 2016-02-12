@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Owin.Mapping;
+using Owin;
 
 namespace Microsoft.Owin
 {

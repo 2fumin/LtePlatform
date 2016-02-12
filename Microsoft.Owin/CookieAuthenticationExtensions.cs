@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Owin.Extensions;
 using Microsoft.Owin.Security.Cookies;
+using Owin;
 
 namespace Microsoft.Owin
 {

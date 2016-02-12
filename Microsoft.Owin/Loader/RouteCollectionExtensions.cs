@@ -1,5 +1,5 @@
-﻿using Microsoft.Owin;
-using Microsoft.Owin.Host.SystemWeb;
+﻿using Microsoft.Owin.Host.SystemWeb;
+using Owin;
 
 namespace System.Web.Routing
 {

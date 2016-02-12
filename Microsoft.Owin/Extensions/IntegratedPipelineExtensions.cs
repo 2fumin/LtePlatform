@@ -1,4 +1,5 @@
 ﻿using System;
+using Owin;
 
 namespace Microsoft.Owin.Extensions
 {
@@ -18,7 +19,7 @@ namespace Microsoft.Owin.Extensions
             {
                 throw new ArgumentNullException(nameof(app));
             }
-            if (app.Properties.TryGetValue("integratedpipeline.StageMarker", out obj2))
+            if (app.Properties.TryGetValue(IntegratedPipelineStageMarker, out obj2))
             {
                 Action<IAppBuilder, string> action = (Action<IAppBuilder, string>)obj2;
                 action(app, stageName);
