@@ -16,17 +16,17 @@ namespace Microsoft.Owin.Host.SystemWeb.IntegratedPipeline
         private State _state;
         private static readonly IList<string> StageNames = new[]
         {
-            "Authenticate",
-            "PostAuthenticate",
-            "Authorize",
-            "PostAuthorize",
-            "ResolveCache",
-            "PostResolveCache",
-            "MapHandler",
-            "PostMapHandler",
-            "AcquireState",
-            "PostAcquireState",
-            "PreHandlerExecute"
+            Constants.StageAuthenticate,
+            Constants.StagePostAuthenticate,
+            Constants.StageAuthorize,
+            Constants.StagePostAuthorize,
+            Constants.StageResolveCache,
+            Constants.StagePostResolveCache,
+            Constants.StageMapHandler,
+            Constants.StagePostMapHandler,
+            Constants.StageAcquireState,
+            Constants.StagePostAcquireState,
+            Constants.StagePreHandlerExecute
         };
 
         public IntegratedPipelineContext(IntegratedPipelineBlueprint blueprint)
@@ -122,47 +122,47 @@ namespace Microsoft.Owin.Host.SystemWeb.IntegratedPipeline
                 var stage2 = new IntegratedPipelineContextStage(this, stage);
                 switch (stage.Name)
                 {
-                    case "Authenticate":
+                    case Constants.StageAuthenticate:
                         application.AddOnAuthenticateRequestAsync(stage2.BeginEvent, stage2.EndEvent);
                         break;
 
-                    case "PostAuthenticate":
+                    case Constants.StagePostAuthenticate:
                         application.AddOnPostAuthenticateRequestAsync(stage2.BeginEvent, stage2.EndEvent);
                         break;
 
-                    case "Authorize":
+                    case Constants.StageAuthorize:
                         application.AddOnAuthorizeRequestAsync(stage2.BeginEvent, stage2.EndEvent);
                         break;
 
-                    case "PostAuthorize":
+                    case Constants.StagePostAuthorize:
                         application.AddOnPostAuthorizeRequestAsync(stage2.BeginEvent, stage2.EndEvent);
                         break;
 
-                    case "ResolveCache":
+                    case Constants.StageResolveCache:
                         application.AddOnResolveRequestCacheAsync(stage2.BeginEvent, stage2.EndEvent);
                         break;
 
-                    case "PostResolveCache":
+                    case Constants.StagePostResolveCache:
                         application.AddOnPostResolveRequestCacheAsync(stage2.BeginEvent, stage2.EndEvent);
                         break;
 
-                    case "MapHandler":
+                    case Constants.StageMapHandler:
                         application.AddOnMapRequestHandlerAsync(stage2.BeginEvent, stage2.EndEvent);
                         break;
 
-                    case "PostMapHandler":
+                    case Constants.StagePostMapHandler:
                         application.AddOnPostMapRequestHandlerAsync(stage2.BeginEvent, stage2.EndEvent);
                         break;
 
-                    case "AcquireState":
+                    case Constants.StageAcquireState:
                         application.AddOnAcquireRequestStateAsync(stage2.BeginEvent, stage2.EndEvent);
                         break;
 
-                    case "PostAcquireState":
+                    case Constants.StagePostAcquireState:
                         application.AddOnPostAcquireRequestStateAsync(stage2.BeginEvent, stage2.EndEvent);
                         break;
 
-                    case "PreHandlerExecute":
+                    case Constants.StagePreHandlerExecute:
                         application.AddOnPreRequestHandlerExecuteAsync(stage2.BeginEvent, stage2.EndEvent);
                         break;
 

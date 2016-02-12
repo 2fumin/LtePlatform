@@ -56,7 +56,7 @@ namespace Microsoft.Owin.Host.SystemWeb
         {
             get
             {
-                var str = ConfigurationManager.AppSettings["owin:AutomaticAppStartup"];
+                var str = ConfigurationManager.AppSettings[Constants.OwinAutomaticAppStartup];
                 return string.IsNullOrWhiteSpace(str) || string.Equals("true", str, StringComparison.OrdinalIgnoreCase);
             }
         }

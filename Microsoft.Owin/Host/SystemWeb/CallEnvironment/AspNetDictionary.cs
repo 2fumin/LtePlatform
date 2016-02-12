@@ -258,13 +258,14 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                 case 0x17:
                     if (((_flag0 & 0x80) == 0) || !string.Equals(key, "owin.RequestQueryString", StringComparison.Ordinal))
                     {
-                        if (((_flag0 & 0x1000) == 0) || !string.Equals(key, "owin.ResponseStatusCode", StringComparison.Ordinal))
+                        if (((_flag0 & 0x1000) == 0) || !string.Equals(key, Constants.OwinResponseStatusCodeKey, StringComparison.Ordinal))
                         {
                             if (((_flag0 & 0x800000) != 0) && string.Equals(key, "server.OnSendingHeaders", StringComparison.Ordinal))
                             {
                                 return true;
                             }
-                            if ((((_flag0 & 0x80000000) == 0) || !string.Equals(key, "ssl.LoadClientCertAsync", StringComparison.Ordinal)) || (((_initFlag0 & 0x80000000) != 0) && !InitPropertyLoadClientCert()))
+                            if ((((_flag0 & 0x80000000) == 0) || !string.Equals(key, "ssl.LoadClientCertAsync", StringComparison.Ordinal)) 
+                                || (((_initFlag0 & 0x80000000) != 0) && !InitPropertyLoadClientCert()))
                             {
                                 break;
                             }
@@ -378,7 +379,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
             }
             if ((_flag0 & 0x1000) != 0)
             {
-                yield return new KeyValuePair<string, object>("owin.ResponseStatusCode", ResponseStatusCode);
+                yield return new KeyValuePair<string, object>(Constants.OwinResponseStatusCodeKey, ResponseStatusCode);
             }
             if ((_flag0 & 0x2000) != 0)
             {
@@ -534,7 +535,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
             }
             if ((_flag0 & 0x1000) != 0)
             {
-                yield return "owin.ResponseStatusCode";
+                yield return Constants.OwinResponseStatusCodeKey;
             }
             if ((_flag0 & 0x2000) != 0)
             {
@@ -820,7 +821,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                 case 0x17:
                     if (((_flag0 & 0x80) == 0) || !string.Equals(key, "owin.RequestQueryString", StringComparison.Ordinal))
                     {
-                        if (((_flag0 & 0x1000) != 0) && string.Equals(key, "owin.ResponseStatusCode", StringComparison.Ordinal))
+                        if (((_flag0 & 0x1000) != 0) && string.Equals(key, Constants.OwinResponseStatusCodeKey, StringComparison.Ordinal))
                         {
                             value = ResponseStatusCode;
                             return true;
@@ -1119,7 +1120,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                 case 0x17:
                     if (((_flag0 & 0x80) == 0) || !string.Equals(key, "owin.RequestQueryString", StringComparison.Ordinal))
                     {
-                        if (((_flag0 & 0x1000) == 0) || !string.Equals(key, "owin.ResponseStatusCode", StringComparison.Ordinal))
+                        if (((_flag0 & 0x1000) == 0) || !string.Equals(key, Constants.OwinResponseStatusCodeKey, StringComparison.Ordinal))
                         {
                             if (((_flag0 & 0x800000) != 0) && string.Equals(key, "server.OnSendingHeaders", StringComparison.Ordinal))
                             {
@@ -1378,7 +1379,7 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
                 case 0x17:
                     if (!string.Equals(key, "owin.RequestQueryString", StringComparison.Ordinal))
                     {
-                        if (string.Equals(key, "owin.ResponseStatusCode", StringComparison.Ordinal))
+                        if (string.Equals(key, Constants.OwinResponseStatusCodeKey, StringComparison.Ordinal))
                         {
                             ResponseStatusCode = (int)value;
                             return true;
