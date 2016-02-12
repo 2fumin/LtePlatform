@@ -207,6 +207,9 @@
   <data name="Trace_RequestDisconnectCallbackExceptions" xml:space="preserve">
     <value>The application threw one or more exceptions when notified of a client disconnect:</value>
   </data>
+  <data name="Trace_WebSocketException" xml:space="preserve">
+    <value>An exception was thrown while processing the WebSocket:</value>
+  </data>
   <data name="TypeOrMethodNotFound" xml:space="preserve">
     <value>The given type or method '{0}' was not found. Try specifying the Assembly.</value>
   </data>

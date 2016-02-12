@@ -14,7 +14,7 @@ namespace Microsoft.Owin.Host.SystemWeb.IntegratedPipeline
     {
         private readonly IntegratedPipelineBlueprint _blueprint;
         private State _state;
-        private static readonly IList<string> StageNames = new string[]
+        private static readonly IList<string> StageNames = new[]
         {
             "Authenticate",
             "PostAuthenticate",

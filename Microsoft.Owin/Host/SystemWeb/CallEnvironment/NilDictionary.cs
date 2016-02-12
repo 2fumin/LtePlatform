@@ -8,7 +8,9 @@ namespace Microsoft.Owin.Host.SystemWeb.CallEnvironment
     internal class NilDictionary : IDictionary<string, object>
     {
         private static readonly string[] EmptyKeys = new string[0];
-        private static readonly IEnumerable<KeyValuePair<string, object>> EmptyKeyValuePairs = Enumerable.Empty<KeyValuePair<string, object>>();
+
+        private static readonly IEnumerable<KeyValuePair<string, object>> EmptyKeyValuePairs =
+            Enumerable.Empty<KeyValuePair<string, object>>();
         private static readonly object[] EmptyValues = new object[0];
 
         public void Add(KeyValuePair<string, object> item)

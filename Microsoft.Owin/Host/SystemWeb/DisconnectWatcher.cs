@@ -11,11 +11,14 @@ namespace Microsoft.Owin.Host.SystemWeb
         private CancellationTokenSource _callCancelledSource;
         private IDisposable _connectionCheckTimer;
         private readonly HttpResponseBase _httpResponse;
-        private static readonly TimerCallback ConnectionTimerCallback = CheckIsClientConnected;
-        private static readonly bool IsClientDisconnectedTokenAvailable = CheckIsClientDisconnectedTokenAvailable();
-        private static readonly bool IsSystemWebVersion451OrGreater = CheckIsSystemWebVersion451OrGreater();
-        private static readonly ITrace Trace = TraceFactory.Create(TraceName);
+        private static readonly TimerCallback ConnectionTimerCallback 
+            = CheckIsClientConnected;
+        private static readonly bool IsClientDisconnectedTokenAvailable 
+            = CheckIsClientDisconnectedTokenAvailable();
+        private static readonly bool IsSystemWebVersion451OrGreater 
+            = CheckIsSystemWebVersion451OrGreater();
         private const string TraceName = "Microsoft.Owin.Host.SystemWeb.DisconnectWatcher";
+        private static readonly ITrace Trace = TraceFactory.Create(TraceName);
 
         internal DisconnectWatcher(HttpResponseBase httpResponse)
         {

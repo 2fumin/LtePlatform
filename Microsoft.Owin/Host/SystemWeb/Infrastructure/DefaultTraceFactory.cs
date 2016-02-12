@@ -7,8 +7,8 @@ namespace Microsoft.Owin.Host.SystemWeb.Infrastructure
     internal class DefaultTraceFactory : ITraceFactory
     {
         private readonly ConcurrentDictionary<string, TraceSource> _sources = new ConcurrentDictionary<string, TraceSource>(StringComparer.OrdinalIgnoreCase);
-        private readonly SourceSwitch _switch = new SourceSwitch("Microsoft.Owin.Host.SystemWeb");
         private const string RootTraceName = "Microsoft.Owin.Host.SystemWeb";
+        private readonly SourceSwitch _switch = new SourceSwitch(RootTraceName);
 
         public ITrace Create(string name)
         {

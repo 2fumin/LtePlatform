@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Owin.Host.SystemWeb.Infrastructure;
+using Microsoft.Owin.Properties;
 
 namespace Microsoft.Owin.Host.SystemWeb.WebSockets
 {
@@ -15,56 +16,56 @@ namespace Microsoft.Owin.Host.SystemWeb.WebSockets
         private readonly WebSocketContext _context;
         private readonly IDictionary<string, object> _environment;
 
-        private readonly ITrace _trace =
-            TraceFactory.Create("Microsoft.Owin.Host.SystemWeb.WebSockets.OwinWebSocketWrapper");
-
         private const string TraceName = "Microsoft.Owin.Host.SystemWeb.WebSockets.OwinWebSocketWrapper";
+        private readonly ITrace _trace = TraceFactory.Create(TraceName);
+
 
         internal OwinWebSocketWrapper(WebSocketContext context)
         {
-            this._context = context;
-            this._cancellationTokenSource = new CancellationTokenSource();
-            this._environment = new ConcurrentDictionary<string, object>();
-            this._environment["websocket.SendAsync"] =
-                new Func<ArraySegment<byte>, int, bool, CancellationToken, Task>(this.SendAsync);
-            this._environment["websocket.ReceiveAsync"] =
-                new Func<ArraySegment<byte>, CancellationToken, Task<Tuple<int, bool, int>>>(this.ReceiveAsync);
-            this._environment["websocket.CloseAsync"] = new Func<int, string, CancellationToken, Task>(this.CloseAsync);
-            this._environment["websocket.CallCancelled"] = this._cancellationTokenSource.Token;
-            this._environment["websocket.Version"] = "1.0";
-            this._environment[typeof (WebSocketContext).FullName] = this._context;
+            _context = context;
+            _cancellationTokenSource = new CancellationTokenSource();
+            _environment = new ConcurrentDictionary<string, object>
+            {
+                [OwinConstants.WebSocket.SendAsync] = new Func<ArraySegment<byte>, int, bool, CancellationToken, Task>(SendAsync),
+                [OwinConstants.WebSocket.ReceiveAsync] =
+                    new Func<ArraySegment<byte>, CancellationToken, Task<Tuple<int, bool, int>>>(ReceiveAsync),
+                [OwinConstants.WebSocket.CloseAsync] = new Func<int, string, CancellationToken, Task>(CloseAsync),
+                [OwinConstants.WebSocket.CallCancelled] = _cancellationTokenSource.Token,
+                [OwinConstants.WebSocket.Version] = "1.0",
+                [typeof (WebSocketContext).FullName] = _context
+            };
         }
 
         internal void Cancel()
         {
             try
             {
-                this._cancellationTokenSource.Cancel(false);
+                _cancellationTokenSource.Cancel(false);
             }
             catch (ObjectDisposedException)
             {
             }
             catch (AggregateException exception)
             {
-                this._trace.WriteError(Resources.Trace_WebSocketException, exception);
+                _trace.WriteError(Resources.Trace_WebSocketException, exception);
             }
         }
 
         internal Task CloseAsync(int status, string description, CancellationToken cancel)
         {
-            return this.WebSocket.CloseOutputAsync((WebSocketCloseStatus) status, description, cancel);
+            return WebSocket.CloseOutputAsync((WebSocketCloseStatus) status, description, cancel);
         }
 
         public void Dispose()
         {
-            this.Dispose(true);
+            Dispose(true);
         }
 
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
             {
-                this._cancellationTokenSource.Dispose();
+                _cancellationTokenSource.Dispose();
             }
         }
 
@@ -81,7 +82,7 @@ namespace Microsoft.Owin.Host.SystemWeb.WebSockets
                 case WebSocketMessageType.Close:
                     return 8;
             }
-            throw new ArgumentOutOfRangeException("webSocketMessageType", webSocketMessageType, string.Empty);
+            throw new ArgumentOutOfRangeException(nameof(webSocketMessageType), webSocketMessageType, string.Empty);
         }
 
         private static WebSocketMessageType OpCodeToEnum(int messageType)
@@ -97,21 +98,21 @@ namespace Microsoft.Owin.Host.SystemWeb.WebSockets
                 case 8:
                     return WebSocketMessageType.Close;
             }
-            throw new ArgumentOutOfRangeException("messageType", messageType, string.Empty);
+            throw new ArgumentOutOfRangeException(nameof(messageType), messageType, string.Empty);
         }
 
         internal async Task<Tuple<int, bool, int>> ReceiveAsync(ArraySegment<byte> buffer, CancellationToken cancel)
         {
-            WebSocketReceiveResult nativeResult = await this.WebSocket.ReceiveAsync(buffer, cancel);
-            if (nativeResult.MessageType == WebSocketMessageType.Close)
-            {
-                WebSocketCloseStatus? closeStatus = nativeResult.CloseStatus;
-                this._environment["websocket.ClientCloseStatus"] = closeStatus.HasValue
-                    ? ((int) closeStatus.GetValueOrDefault())
-                    : 0x3e8;
-                this._environment["websocket.ClientCloseDescription"] = nativeResult.CloseStatusDescription ??
-                                                                        string.Empty;
-            }
+            var nativeResult = await WebSocket.ReceiveAsync(buffer, cancel);
+            if (nativeResult.MessageType != WebSocketMessageType.Close)
+                return new Tuple<int, bool, int>(EnumToOpCode(nativeResult.MessageType), nativeResult.EndOfMessage,
+                    nativeResult.Count);
+            var closeStatus = nativeResult.CloseStatus;
+            _environment[OwinConstants.WebSocket.ClientCloseStatus] = closeStatus.HasValue
+                ? ((int) closeStatus.GetValueOrDefault())
+                : 0x3e8;
+            _environment[OwinConstants.WebSocket.ClientCloseDescription] = nativeResult.CloseStatusDescription ??
+                                                                           string.Empty;
             return new Tuple<int, bool, int>(EnumToOpCode(nativeResult.MessageType), nativeResult.EndOfMessage,
                 nativeResult.Count);
         }
@@ -120,38 +121,38 @@ namespace Microsoft.Owin.Host.SystemWeb.WebSockets
         {
             if ((buffer.Array == null) || (buffer.Count == 0))
             {
-                return this.CloseAsync(0x3e8, string.Empty, cancel);
+                return CloseAsync(0x3e8, string.Empty, cancel);
             }
             if (buffer.Count < 2)
             {
-                throw new ArgumentOutOfRangeException("buffer");
+                throw new ArgumentOutOfRangeException(nameof(buffer));
             }
-            int status = (buffer.Array[buffer.Offset] << 8) | buffer.Array[buffer.Offset + 1];
-            string description = Encoding.UTF8.GetString(buffer.Array, buffer.Offset + 2, buffer.Count - 2);
-            return this.CloseAsync(status, description, cancel);
+            var status = (buffer.Array[buffer.Offset] << 8) | buffer.Array[buffer.Offset + 1];
+            var description = Encoding.UTF8.GetString(buffer.Array, buffer.Offset + 2, buffer.Count - 2);
+            return CloseAsync(status, description, cancel);
         }
 
         internal Task SendAsync(ArraySegment<byte> buffer, int messageType, bool endOfMessage, CancellationToken cancel)
         {
             if (messageType == 8)
             {
-                return this.RedirectSendToCloseAsync(buffer, cancel);
+                return RedirectSendToCloseAsync(buffer, cancel);
             }
             if ((messageType != 9) && (messageType != 10))
             {
-                return this.WebSocket.SendAsync(buffer, OpCodeToEnum(messageType), endOfMessage, cancel);
+                return WebSocket.SendAsync(buffer, OpCodeToEnum(messageType), endOfMessage, cancel);
             }
             return Utils.CompletedTask;
         }
 
         internal IDictionary<string, object> Environment
         {
-            get { return this._environment; }
+            get { return _environment; }
         }
 
         private WebSocket WebSocket
         {
-            get { return this._context.WebSocket; }
+            get { return _context.WebSocket; }
         }
 
     }

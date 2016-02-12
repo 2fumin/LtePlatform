@@ -24,7 +24,7 @@ namespace Microsoft.Owin
             {
                 throw new ArgumentNullException(nameof(handler));
             }
-            app.Use<UseHandlerMiddleware>(new object[] { handler });
+            app.Use<UseHandlerMiddleware>(handler);
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Microsoft.Owin
             {
                 throw new ArgumentNullException(nameof(handler));
             }
-            return app.Use<UseHandlerMiddleware>(new object[] { handler });
+            return app.Use<UseHandlerMiddleware>(handler);
         }
 
         /// <summary>

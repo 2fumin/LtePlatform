@@ -15,8 +15,8 @@ namespace Microsoft.Owin.Host.SystemWeb
         };
         private static readonly AsyncCallback SecondAsyncCallback = delegate {
         };
-        private static readonly ITrace Trace = TraceFactory.Create(TraceName);
         private const string TraceName = "Microsoft.Owin.Host.SystemWeb.CallContextAsyncResult";
+        private static readonly ITrace Trace = TraceFactory.Create(TraceName);
 
         internal CallContextAsyncResult(IDisposable cleanup, AsyncCallback callback, object extraData)
         {

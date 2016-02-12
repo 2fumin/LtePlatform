@@ -331,6 +331,15 @@ namespace Microsoft.Owin.Properties {
         }
         
         /// <summary>
+        ///   查找类似 An exception was thrown while processing the WebSocket: 的本地化字符串。
+        /// </summary>
+        internal static string Trace_WebSocketException {
+            get {
+                return ResourceManager.GetString("Trace_WebSocketException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 The given type or method &apos;{0}&apos; was not found. Try specifying the Assembly. 的本地化字符串。
         /// </summary>
         internal static string TypeOrMethodNotFound {
