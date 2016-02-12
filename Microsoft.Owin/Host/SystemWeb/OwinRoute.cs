@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
+using System.Web.Routing;
 
 namespace Microsoft.Owin.Host.SystemWeb
 {
-    using System;
-    using System.Web;
-    using System.Web.Routing;
-
     internal sealed class OwinRoute : RouteBase
     {
         private readonly Func<OwinAppContext> _appAccessor;
@@ -17,19 +11,19 @@ namespace Microsoft.Owin.Host.SystemWeb
 
         internal OwinRoute(string pathBase, Func<OwinAppContext> appAccessor)
         {
-            this._pathBase = Utils.NormalizePath(HttpRuntime.AppDomainAppVirtualPath) + Utils.NormalizePath(pathBase);
-            this._appAccessor = appAccessor;
+            _pathBase = Utils.NormalizePath(HttpRuntime.AppDomainAppVirtualPath) + Utils.NormalizePath(pathBase);
+            _appAccessor = appAccessor;
         }
 
         public override RouteData GetRouteData(HttpContextBase httpContext)
         {
             if (httpContext == null)
             {
-                throw new ArgumentNullException("httpContext");
+                throw new ArgumentNullException(nameof(httpContext));
             }
-            string str = httpContext.Request.CurrentExecutionFilePath + httpContext.Request.PathInfo;
-            int length = str.Length;
-            int startIndex = this._pathBase.Length;
+            var str = httpContext.Request.CurrentExecutionFilePath + httpContext.Request.PathInfo;
+            var length = str.Length;
+            var startIndex = _pathBase.Length;
             if (length < startIndex)
             {
                 return null;
@@ -38,11 +32,9 @@ namespace Microsoft.Owin.Host.SystemWeb
             {
                 return null;
             }
-            if (!str.StartsWith(this._pathBase, StringComparison.OrdinalIgnoreCase))
-            {
-                return null;
-            }
-            return new RouteData(this, new OwinRouteHandler(this._pathBase, str.Substring(startIndex), this._appAccessor));
+            return !str.StartsWith(_pathBase, StringComparison.OrdinalIgnoreCase)
+                ? null
+                : new RouteData(this, new OwinRouteHandler(_pathBase, str.Substring(startIndex), _appAccessor));
         }
 
         public override VirtualPathData GetVirtualPath(RequestContext requestContext, RouteValueDictionary values)

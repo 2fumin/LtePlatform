@@ -25,13 +25,13 @@ namespace Microsoft.Owin.Host.SystemWeb.WebSockets
             _cancellationTokenSource = new CancellationTokenSource();
             Environment = new ConcurrentDictionary<string, object>
             {
-                [OwinConstants.WebSocket.SendAsync] = new Func<ArraySegment<byte>, int, bool, CancellationToken, Task>(SendAsync),
-                [OwinConstants.WebSocket.ReceiveAsync] =
+                [WebSocketConstants.WebSocketSendAsyncKey] = new Func<ArraySegment<byte>, int, bool, CancellationToken, Task>(SendAsync),
+                [WebSocketConstants.WebSocketReceiveAyncKey] =
                     new Func<ArraySegment<byte>, CancellationToken, Task<Tuple<int, bool, int>>>(ReceiveAsync),
-                [OwinConstants.WebSocket.CloseAsync] = new Func<int, string, CancellationToken, Task>(CloseAsync),
-                [OwinConstants.WebSocket.CallCancelled] = _cancellationTokenSource.Token,
-                [OwinConstants.WebSocket.Version] = "1.0",
-                [typeof (WebSocketContext).FullName] = _context
+                [WebSocketConstants.WebSocketCloseAsyncKey] = new Func<int, string, CancellationToken, Task>(CloseAsync),
+                [WebSocketConstants.WebSocketCallCancelledKey] = _cancellationTokenSource.Token,
+                [WebSocketConstants.WebSocketVersionKey] = WebSocketConstants.WebSocketVersion,
+                [(typeof (WebSocketContext)).FullName] = _context
             };
         }
 
@@ -107,10 +107,10 @@ namespace Microsoft.Owin.Host.SystemWeb.WebSockets
                 return new Tuple<int, bool, int>(EnumToOpCode(nativeResult.MessageType), nativeResult.EndOfMessage,
                     nativeResult.Count);
             var closeStatus = nativeResult.CloseStatus;
-            Environment[OwinConstants.WebSocket.ClientCloseStatus] = closeStatus.HasValue
+            Environment[WebSocketConstants.WebSocketCloseStatusKey] = closeStatus.HasValue
                 ? ((int) closeStatus.GetValueOrDefault())
                 : 0x3e8;
-            Environment[OwinConstants.WebSocket.ClientCloseDescription] = nativeResult.CloseStatusDescription ??
+            Environment[WebSocketConstants.WebSocketCloseDescriptionKey] = nativeResult.CloseStatusDescription ??
                                                                            string.Empty;
             return new Tuple<int, bool, int>(EnumToOpCode(nativeResult.MessageType), nativeResult.EndOfMessage,
                 nativeResult.Count);

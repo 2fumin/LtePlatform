@@ -376,6 +376,15 @@ namespace Microsoft.Owin.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Trace_RegisterModuleException=Failed to register the OWIN module: 的本地化字符串。
+        /// </summary>
+        internal static string Trace_RegisterModuleException {
+            get {
+                return ResourceManager.GetString("Trace_RegisterModuleException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 The application threw one or more exceptions when notified of a client disconnect: 的本地化字符串。
         /// </summary>
         internal static string Trace_RequestDisconnectCallbackExceptions {

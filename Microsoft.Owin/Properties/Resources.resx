@@ -222,6 +222,9 @@
   <data name="Trace_OwinCallContextCallbackException" xml:space="preserve">
     <value>The IAsyncResult callback for OwinCallHandler threw an exception:</value>
   </data>
+  <data name="Trace_RegisterModuleException" xml:space="preserve">
+    <value>Trace_RegisterModuleException=Failed to register the OWIN module:</value>
+  </data>
   <data name="Trace_RequestDisconnectCallbackExceptions" xml:space="preserve">
     <value>The application threw one or more exceptions when notified of a client disconnect:</value>
   </data>

@@ -101,10 +101,12 @@
     <Compile Include="Host\SystemWeb\OwinHttpModule.cs" />
     <Compile Include="Host\SystemWeb\OwinRoute.cs" />
     <Compile Include="Host\SystemWeb\OwinRouteHandler.cs" />
+    <Compile Include="Host\SystemWeb\PreApplicationStart.cs" />
     <Compile Include="Host\SystemWeb\ShutdownDetector.cs" />
     <Compile Include="Host\SystemWeb\UnsafeIISMethods.cs" />
     <Compile Include="Host\SystemWeb\Utils.cs" />
     <Compile Include="Host\SystemWeb\WebSockets\OwinWebSocketWrapper.cs" />
+    <Compile Include="Host\SystemWeb\WebSockets\WebSocketConstants.cs" />
     <Compile Include="IAppBuilder.cs" />
     <Compile Include="IFormCollection.cs" />
     <Compile Include="IHeaderDictionary.cs" />
