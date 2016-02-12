@@ -7,11 +7,11 @@ using Microsoft.Owin.Properties;
 
 namespace Microsoft.Owin.Host.SystemWeb
 {
-    using Microsoft.Owin.Builder;
-    using Microsoft.Owin.Host.SystemWeb.CallEnvironment;
-    using Microsoft.Owin.Host.SystemWeb.DataProtection;
-    using Microsoft.Owin.Host.SystemWeb.Infrastructure;
-    using Microsoft.Owin.Logging;
+    using Builder;
+    using CallEnvironment;
+    using SystemWeb.DataProtection;
+    using Infrastructure;
+    using Logging;
     using Owin;
     using System;
     using System.Collections.Concurrent;
@@ -29,21 +29,22 @@ namespace Microsoft.Owin.Host.SystemWeb
     {
         private bool _detectWebSocketSupportStageTwoExecuted;
         private object _detectWebSocketSupportStageTwoLock;
-        private readonly ITrace _trace = TraceFactory.Create("Microsoft.Owin.Host.SystemWeb.OwinAppContext");
         private const string TraceName = "Microsoft.Owin.Host.SystemWeb.OwinAppContext";
+        private readonly ITrace _trace = TraceFactory.Create(TraceName);
 
         public OwinAppContext()
         {
-            this.AppName = HostingEnvironment.SiteName + HostingEnvironment.ApplicationID;
-            if (string.IsNullOrWhiteSpace(this.AppName))
+            AppName = HostingEnvironment.SiteName + HostingEnvironment.ApplicationID;
+            if (string.IsNullOrWhiteSpace(AppName))
             {
-                this.AppName = Guid.NewGuid().ToString();
+                AppName = Guid.NewGuid().ToString();
             }
         }
 
-        public OwinCallContext CreateCallContext(RequestContext requestContext, string requestPathBase, string requestPath, AsyncCallback callback, object extraData)
+        public OwinCallContext CreateCallContext(RequestContext requestContext, string requestPathBase, string requestPath, 
+            AsyncCallback callback, object extraData)
         {
-            this.DetectWebSocketSupportStageTwo(requestContext);
+            DetectWebSocketSupportStageTwo(requestContext);
             return new OwinCallContext(this, requestContext, requestPathBase, requestPath, callback, extraData);
         }
 
@@ -51,76 +52,72 @@ namespace Microsoft.Owin.Host.SystemWeb
         {
             if ((HttpRuntime.IISVersion != null) && (HttpRuntime.IISVersion.Major >= 8))
             {
-                this.WebSocketSupport = true;
-                this.Capabilities["websocket.Version"] = "1.0";
+                WebSocketSupport = true;
+                Capabilities[Constants.WebSocketVersionKey] = Constants.WebSocketVersion;
             }
             else
             {
-                this._trace.Write(TraceEventType.Information, Resources.Trace_WebSocketsSupportNotDetected, new object[0]);
+                _trace.Write(TraceEventType.Information, Resources.Trace_WebSocketsSupportNotDetected);
             }
         }
 
         private void DetectWebSocketSupportStageTwo(RequestContext requestContext)
         {
-            Func<object> valueFactory = null;
             object target = null;
-            if (this.WebSocketSupport)
+            if (!WebSocketSupport) return;
+            Func<object> valueFactory = delegate
             {
-                if (valueFactory == null)
+                var str = requestContext.HttpContext.Request.ServerVariables["WEBSOCKET_VERSION"];
+                if (string.IsNullOrEmpty(str))
                 {
-                    valueFactory = delegate {
-                        string str = requestContext.HttpContext.Request.ServerVariables["WEBSOCKET_VERSION"];
-                        if (string.IsNullOrEmpty(str))
-                        {
-                            this.Capabilities.Remove("websocket.Version");
-                            this.WebSocketSupport = false;
-                            this._trace.Write(TraceEventType.Information, Resources.Trace_WebSocketsSupportNotDetected, new object[0]);
-                        }
-                        else
-                        {
-                            this._trace.Write(TraceEventType.Information, Resources.Trace_WebSocketsSupportDetected, new object[0]);
-                        }
-                        return null;
-                    };
+                    Capabilities.Remove(Constants.WebSocketVersionKey);
+                    WebSocketSupport = false;
+                    _trace.Write(TraceEventType.Information, Resources.Trace_WebSocketsSupportNotDetected);
                 }
-                LazyInitializer.EnsureInitialized<object>(ref target, ref this._detectWebSocketSupportStageTwoExecuted, ref this._detectWebSocketSupportStageTwoLock, valueFactory);
-            }
+                else
+                {
+                    _trace.Write(TraceEventType.Information, Resources.Trace_WebSocketsSupportDetected);
+                }
+                return null;
+            };
+            LazyInitializer.EnsureInitialized(ref target, ref _detectWebSocketSupportStageTwoExecuted, 
+                ref _detectWebSocketSupportStageTwoLock, valueFactory);
         }
 
         internal void Initialize(Action<IAppBuilder> startup)
         {
-            this.Capabilities = new ConcurrentDictionary<string, object>();
-            AppBuilder builder = new AppBuilder();
+            Capabilities = new ConcurrentDictionary<string, object>();
+            var builder = new AppBuilder();
             builder.Properties[OwinConstants.OwinVersion] = "1.0";
             builder.Properties["host.TraceOutput"] = TraceTextWriter.Instance;
-            builder.Properties[OwinConstants.CommonKeys.AppName] = this.AppName;
+            builder.Properties[OwinConstants.CommonKeys.AppName] = AppName;
             builder.Properties["host.OnAppDisposing"] = OwinApplication.ShutdownToken;
             builder.Properties["host.ReferencedAssemblies"] = new ReferencedAssembliesWrapper();
-            builder.Properties["server.Capabilities"] = this.Capabilities;
+            builder.Properties["server.Capabilities"] = Capabilities;
             builder.Properties["security.DataProtectionProvider"] = new MachineKeyDataProtectionProvider().ToOwinFunction();
             AppBuilderLoggerExtensions.SetLoggerFactory((IAppBuilder)builder, new DiagnosticsLoggerFactory());
-            this.Capabilities["sendfile.Version"] = "1.0";
-            CompilationSection section = (CompilationSection)ConfigurationManager.GetSection("system.web/compilation");
+            Capabilities["sendfile.Version"] = "1.0";
+            var section = (CompilationSection)ConfigurationManager.GetSection("system.web/compilation");
             if (section.Debug)
             {
                 builder.Properties[OwinConstants.CommonKeys.AppMode] = "development";
             }
-            this.DetectWebSocketSupportStageOne();
+            DetectWebSocketSupportStageOne();
             try
             {
                 startup((IAppBuilder)builder);
             }
             catch (Exception exception)
             {
-                this._trace.WriteError(Resources.Trace_EntryPointException, exception);
+                _trace.WriteError(Resources.Trace_EntryPointException, exception);
                 throw;
             }
-            this.AppFunc = (Func<IDictionary<string, object>, Task>)builder.Build(typeof(Func<IDictionary<string, object>, Task>));
+            AppFunc = (Func<IDictionary<string, object>, Task>)builder.Build(typeof(Func<IDictionary<string, object>, Task>));
         }
 
         internal Func<IDictionary<string, object>, Task> AppFunc { get; set; }
 
-        internal string AppName { get; private set; }
+        internal string AppName { get; }
 
         internal IDictionary<string, object> Capabilities { get; private set; }
 

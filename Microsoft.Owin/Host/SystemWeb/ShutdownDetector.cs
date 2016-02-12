@@ -33,7 +33,7 @@ namespace Microsoft.Owin.Host.SystemWeb
 
         private void CheckForAppDomainRestart(object state)
         {
-            if (SystemWeb.UnsafeIISMethods.RequestedAppDomainRestart)
+            if (UnsafeIISMethods.RequestedAppDomainRestart)
             {
                 Cancel();
             }
@@ -46,14 +46,9 @@ namespace Microsoft.Owin.Host.SystemWeb
 
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                _cts.Dispose();
-                if (_checkAppPoolTimer != null)
-                {
-                    _checkAppPoolTimer.Dispose();
-                }
-            }
+            if (!disposing) return;
+            _cts.Dispose();
+            _checkAppPoolTimer?.Dispose();
         }
 
         internal void Initialize()
@@ -61,9 +56,9 @@ namespace Microsoft.Owin.Host.SystemWeb
             try
             {
                 HostingEnvironment.RegisterObject(this);
-                if ((HttpRuntime.UsingIntegratedPipeline && !RegisterForStopListeningEvent()) && SystemWeb.UnsafeIISMethods.CanDetectAppDomainRestart)
+                if ((HttpRuntime.UsingIntegratedPipeline && !RegisterForStopListeningEvent()) && UnsafeIISMethods.CanDetectAppDomainRestart)
                 {
-                    _checkAppPoolTimer = new Timer(new TimerCallback(CheckForAppDomainRestart), null, TimeSpan.FromSeconds(10.0), TimeSpan.FromSeconds(10.0));
+                    _checkAppPoolTimer = new Timer(CheckForAppDomainRestart, null, TimeSpan.FromSeconds(10.0), TimeSpan.FromSeconds(10.0));
                 }
             }
             catch (Exception exception)
@@ -74,7 +69,7 @@ namespace Microsoft.Owin.Host.SystemWeb
 
         private bool RegisterForStopListeningEvent()
         {
-            EventInfo info = typeof(HostingEnvironment).GetEvent("StopListening");
+            var info = typeof(HostingEnvironment).GetEvent("StopListening");
             if (info == null)
             {
                 return false;
@@ -94,12 +89,6 @@ namespace Microsoft.Owin.Host.SystemWeb
             Cancel();
         }
 
-        internal CancellationToken Token
-        {
-            get
-            {
-                return _cts.Token;
-            }
-        }
+        internal CancellationToken Token => _cts.Token;
     }
 }

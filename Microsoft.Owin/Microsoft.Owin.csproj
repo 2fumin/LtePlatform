@@ -34,6 +34,7 @@
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.Runtime.Serialization" />
@@ -70,7 +71,12 @@
     <Compile Include="Host\SystemWeb\CallHeaders\AspNetRequestHeaders.cs" />
     <Compile Include="Host\SystemWeb\CallHeaders\AspNetResponseHeaders.cs" />
     <Compile Include="Host\SystemWeb\CallHeaders\SendingHeadersEvent.cs" />
+    <Compile Include="Host\SystemWeb\CallStreams\DelegatingStream.cs" />
+    <Compile Include="Host\SystemWeb\CallStreams\InputStream.cs" />
+    <Compile Include="Host\SystemWeb\CallStreams\OutputStream.cs" />
     <Compile Include="Host\SystemWeb\Constants.cs" />
+    <Compile Include="Host\SystemWeb\DataProtection\MachineKeyDataProtectionProvider.cs" />
+    <Compile Include="Host\SystemWeb\DataProtection\MachineKeyDataProtector.cs" />
     <Compile Include="Host\SystemWeb\DisconnectWatcher.cs" />
     <Compile Include="Host\SystemWeb\IntegratedPipeline\IntegratedPipelineBlueprint.cs" />
     <Compile Include="Host\SystemWeb\IntegratedPipeline\IntegratedPipelineBlueprintStage.cs" />
@@ -89,6 +95,7 @@
     <Compile Include="Host\SystemWeb\IntegratedPipeline\StageAsyncResult.cs" />
     <Compile Include="Host\SystemWeb\OwinAppContext.cs" />
     <Compile Include="Host\SystemWeb\OwinApplication.cs" />
+    <Compile Include="Host\SystemWeb\OwinBuilder.cs" />
     <Compile Include="Host\SystemWeb\OwinCallContext.cs" />
     <Compile Include="Host\SystemWeb\OwinRoute.cs" />
     <Compile Include="Host\SystemWeb\ShutdownDetector.cs" />
@@ -269,9 +276,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Host\SystemWeb\DataProtection\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

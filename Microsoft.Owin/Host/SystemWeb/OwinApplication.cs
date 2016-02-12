@@ -1,22 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace Microsoft.Owin.Host.SystemWeb
 {
-    using System;
-    using System.Threading;
-
     internal static class OwinApplication
     {
         private static ShutdownDetector _detector;
-        private static Lazy<OwinAppContext> _instance = new Lazy<OwinAppContext>(new Func<OwinAppContext>(OwinBuilder.Build));
+        private static Lazy<OwinAppContext> _instance = new Lazy<OwinAppContext>(OwinBuilder.Build);
 
         private static ShutdownDetector InitShutdownDetector()
         {
-            ShutdownDetector detector = new ShutdownDetector();
+            var detector = new ShutdownDetector();
             detector.Initialize();
             return detector;
         }
@@ -46,11 +40,6 @@ namespace Microsoft.Owin.Host.SystemWeb
         }
 
         internal static CancellationToken ShutdownToken
-        {
-            get
-            {
-                return LazyInitializer.EnsureInitialized<ShutdownDetector>(ref _detector, new Func<ShutdownDetector>(OwinApplication.InitShutdownDetector)).Token;
-            }
-        }
+            => LazyInitializer.EnsureInitialized(ref _detector, InitShutdownDetector).Token;
     }
 }

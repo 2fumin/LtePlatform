@@ -79,6 +79,15 @@ namespace Microsoft.Owin.Properties {
         }
         
         /// <summary>
+        ///   查找类似 The following errors occurred while attempting to load the app. 的本地化字符串。
+        /// </summary>
+        internal static string Exception_AppLoderFailure {
+            get {
+                return ResourceManager.GetString("Exception_AppLoderFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 The OwinStartup attribute discovered in assembly &apos;{0}&apos; referencing startup type &apos;{1}&apos; conflicts with the attribute in assembly &apos;{2}&apos; referencing startup type &apos;{3}&apos; because they have the same FriendlyName &apos;{4}&apos;. Remove or rename one of the attributes, or reference the desired type directly. 的本地化字符串。
         /// </summary>
         internal static string Exception_AttributeNameConflict {
@@ -138,6 +147,24 @@ namespace Microsoft.Owin.Properties {
         internal static string Exception_DuplicateKey {
             get {
                 return ResourceManager.GetString("Exception_DuplicateKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 To disable OWIN startup discovery, add the appSetting owin:AutomaticAppStartup with a value of &quot;false&quot; in your web.config. 的本地化字符串。
+        /// </summary>
+        internal static string Exception_HowToDisableAutoAppStartup {
+            get {
+                return ResourceManager.GetString("Exception_HowToDisableAutoAppStartup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 To specify the OWIN startup Assembly, Class, or Method, add the appSetting owin:AppStartup with the fully qualified startup class or configuration method name in your web.config. 的本地化字符串。
+        /// </summary>
+        internal static string Exception_HowToSpecifyAppStartup {
+            get {
+                return ResourceManager.GetString("Exception_HowToSpecifyAppStartup", resourceCulture);
             }
         }
         
@@ -372,6 +399,24 @@ namespace Microsoft.Owin.Properties {
         internal static string Trace_WebSocketException {
             get {
                 return ResourceManager.GetString("Trace_WebSocketException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Support for WebSockets has been detected. 的本地化字符串。
+        /// </summary>
+        internal static string Trace_WebSocketsSupportDetected {
+            get {
+                return ResourceManager.GetString("Trace_WebSocketsSupportDetected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 No support for WebSockets has been detected. 的本地化字符串。
+        /// </summary>
+        internal static string Trace_WebSocketsSupportNotDetected {
+            get {
+                return ResourceManager.GetString("Trace_WebSocketsSupportNotDetected", resourceCulture);
             }
         }
         

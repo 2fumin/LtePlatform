@@ -123,6 +123,9 @@
   <data name="ClassNotFoundInAssembly" xml:space="preserve">
     <value>For the app startup parameter value '{0}', the class '{1}' was not found in assembly '{2}'.</value>
   </data>
+  <data name="Exception_AppLoderFailure" xml:space="preserve">
+    <value>The following errors occurred while attempting to load the app.</value>
+  </data>
   <data name="Exception_AttributeNameConflict" xml:space="preserve">
     <value>The OwinStartup attribute discovered in assembly '{0}' referencing startup type '{1}' conflicts with the attribute in assembly '{2}' referencing startup type '{3}' because they have the same FriendlyName '{4}'. Remove or rename one of the attributes, or reference the desired type directly.</value>
   </data>
@@ -143,6 +146,12 @@
   </data>
   <data name="Exception_DuplicateKey" xml:space="preserve">
     <value>The key '{0}' is already present in the dictionary.</value>
+  </data>
+  <data name="Exception_HowToDisableAutoAppStartup" xml:space="preserve">
+    <value>To disable OWIN startup discovery, add the appSetting owin:AutomaticAppStartup with a value of "false" in your web.config.</value>
+  </data>
+  <data name="Exception_HowToSpecifyAppStartup" xml:space="preserve">
+    <value>To specify the OWIN startup Assembly, Class, or Method, add the appSetting owin:AppStartup with the fully qualified startup class or configuration method name in your web.config.</value>
   </data>
   <data name="Exception_ImcompleteChunkedCookie" xml:space="preserve">
     <value>The chunked cookie is incomplete. Only {0} of the expected {1} chunks were found, totaling {2} characters. A client size limit may have been exceeded.</value>
@@ -221,6 +230,12 @@
   </data>
   <data name="Trace_WebSocketException" xml:space="preserve">
     <value>An exception was thrown while processing the WebSocket:</value>
+  </data>
+  <data name="Trace_WebSocketsSupportDetected" xml:space="preserve">
+    <value>Support for WebSockets has been detected.</value>
+  </data>
+  <data name="Trace_WebSocketsSupportNotDetected" xml:space="preserve">
+    <value>No support for WebSockets has been detected.</value>
   </data>
   <data name="TypeOrMethodNotFound" xml:space="preserve">
     <value>The given type or method '{0}' was not found. Try specifying the Assembly.</value>
