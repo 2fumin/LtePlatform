@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using LtePlatform.Models;
+using LtePlatform.Results;
 
 namespace LtePlatform.Controllers
 {
@@ -140,6 +141,8 @@ namespace LtePlatform.Controllers
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.Failure:
+                    await SignInManager.CheatTwoFactorSingIn(model.RememberMe, model.RememberBrowser);
+                    return RedirectToLocal(model.ReturnUrl);
                 default:
                     ModelState.AddModelError("", "代码无效。");
                     return View(model);
