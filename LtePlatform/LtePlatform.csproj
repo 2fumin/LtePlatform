@@ -697,6 +697,7 @@
     <Content Include="Areas\TestPage\Views\WebApiTest\BasicPost.cshtml" />
     <Content Include="Areas\TestPage\Views\WebApiTest\Html5Test.cshtml" />
     <Content Include="Areas\TestPage\Views\WebApiTest\Html5PostTest.cshtml" />
+    <Content Include="Areas\TestPage\Views\Shared\_AngularJSMenu.cshtml" />
     <None Include="Areas\TestPage\Views\WebApiTest\SimpleType.cshtml" />
     <Content Include="Areas\TestPage\Views\WebApiTest\_BasicPost.cshtml" />
     <Content Include="Content\themes\datetimepicker.less" />

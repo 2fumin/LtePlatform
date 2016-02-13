@@ -6,12 +6,12 @@
 <div class="row">
     <div class="col-md-4">
         @{ 
-            Html.RenderPartial("_QUnitTestContents");
+            Html.RenderPartial("_AngularJSMenu");
         }
     </div>
     <div class="col-md-8">
         <h2>@ViewBag.Title</h2>
-        <div data-ng-app="simpleAngular">
+        <div ng-app="simpleAngular">
             <h3>简单类型测试</h3>
             <div ng-controller="SimpleTypeController">
                 A={{simpleA}}&nbsp;
