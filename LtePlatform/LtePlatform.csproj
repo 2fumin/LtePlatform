@@ -389,6 +389,7 @@
     <Content Include="appViews\Manage\AllUsers.html" />
     <Content Include="appViews\Manage\CurrentUser.html" />
     <Content Include="appViews\Manage\Roles.html" />
+    <Content Include="appViews\Manage\RoleUser.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Areas\TestPage\Scripts\5ch5\Dictionary.js">
@@ -793,6 +794,7 @@
     <Content Include="Scripts\kpi\workitem.viewmodel.js" />
     <Content Include="Scripts\manage\index.viewmodel.js" />
     <Content Include="Scripts\manage\manage.all.js" />
+    <Content Include="Scripts\manage\manage.role.user.js" />
     <Content Include="Scripts\manage\manage.roles.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\mycharts\comboChart.js" />

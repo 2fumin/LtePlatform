@@ -16,16 +16,32 @@ app.controller('manage.roles', function ($scope, $http) {
             $scope.roleName = "New role " + result.length;
         });
     };
-    $scope.addRole = function () {
+    $scope.addRole = function (name) {
         $http({
             method: 'GET',
             url: $scope.dataModel.applicationRolesUrl,
             headers: {
                 'Authorization': 'Bearer ' + $scope.dataModel.getAccessToken()
             },
-            data: {
-                roleName: $scope.roleName,
+            params: {
+                roleName: name,
                 action: "create"
+            }
+        }).success(function(result) {
+            $scope.updateRoleList();
+            $scope.message = result;
+        });
+    };
+    $scope.deleteRole = function(name) {
+        $http({
+            method: 'GET',
+            url: $scope.dataModel.applicationRolesUrl,
+            headers: {
+                'Authorization': 'Bearer ' + $scope.dataModel.getAccessToken()
+            },
+            params: {
+                roleName: name,
+                action: "delete"
             }
         }).success(function(result) {
             $scope.updateRoleList();

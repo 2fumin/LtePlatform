@@ -13,6 +13,10 @@
                 templateUrl: '/appViews/Manage/Roles.html',
                 controller: 'manage.roles'
             })
+            .when('/roleUser/:name', {
+                templateUrl: '/appViews/Manage/RoleUser.html',
+                controller: 'manage.roleUser'
+            })
             .otherwise({
                 redirectTo: '/'
             });
