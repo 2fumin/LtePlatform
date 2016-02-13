@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
+using System.Web.Http.Owin;
 
 namespace System.Web.Http
 {
-    using System;
-    using System.ComponentModel;
-    using System.Runtime.CompilerServices;
-    using System.Web.Http.Owin;
-
     [EditorBrowsable(EditorBrowsableState.Never)]
     public static class OwinHttpConfigurationExtensions
     {
@@ -18,7 +10,7 @@ namespace System.Web.Http
         {
             if (configuration == null)
             {
-                throw new ArgumentNullException("configuration");
+                throw new ArgumentNullException(nameof(configuration));
             }
             configuration.MessageHandlers.Insert(0, new PassiveAuthenticationMessageHandler());
         }

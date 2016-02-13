@@ -63,6 +63,7 @@
     <Compile Include="General\OwinHttpConfigurationExtensions.cs" />
     <Compile Include="General\OwinHttpRequestMessageExtensions.cs" />
     <Compile Include="General\TaskHelpers.cs" />
+    <Compile Include="General\TaskHelpersExtensions.cs" />
     <Compile Include="General\WebApiAppBuilderExtensions.cs" />
     <Compile Include="HttpMessageHandlerAdapter.cs" />
     <Compile Include="HttpMessageHandlerOptions.cs" />

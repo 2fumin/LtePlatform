@@ -18,7 +18,7 @@ namespace System.Web.Http.Owin
         {
             if (request == null)
             {
-                throw new ArgumentNullException("request");
+                throw new ArgumentNullException(nameof(request));
             }
             SetCurrentPrincipalToAnonymous(request);
             HttpResponseMessage response = await base.SendAsync(request, cancellationToken);
@@ -31,7 +31,7 @@ namespace System.Web.Http.Owin
             HttpRequestContext requestContext = request.GetRequestContext();
             if (requestContext == null)
             {
-                throw new ArgumentException(Properties.Resources.Request_RequestContextMustNotBeNull, "request");
+                throw new ArgumentException(Properties.Resources.Request_RequestContextMustNotBeNull, nameof(request));
             }
             requestContext.Principal = _anonymousPrincipal.Value;
         }
