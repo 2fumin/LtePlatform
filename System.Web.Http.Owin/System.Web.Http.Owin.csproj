@@ -53,10 +53,15 @@
   <ItemGroup>
     <Compile Include="ExceptionHandling\DefaultExceptionHandler.cs" />
     <Compile Include="ExceptionHandling\EmptyExceptionLogger.cs" />
+    <Compile Include="General\CollectionExtensions.cs" />
     <Compile Include="General\DictionaryExtensions.cs" />
     <Compile Include="General\Error.cs" />
+    <Compile Include="General\HostAuthenticationAttribute.cs" />
+    <Compile Include="General\HostAuthenticationFilter.cs" />
+    <Compile Include="General\ListWrapperCollection.cs" />
     <Compile Include="General\NonOwnedStream.cs" />
     <Compile Include="General\OwinHttpConfigurationExtensions.cs" />
+    <Compile Include="General\OwinHttpRequestMessageExtensions.cs" />
     <Compile Include="General\TaskHelpers.cs" />
     <Compile Include="General\WebApiAppBuilderExtensions.cs" />
     <Compile Include="HttpMessageHandlerAdapter.cs" />
@@ -64,7 +69,9 @@
     <Compile Include="OwinBufferPolicySelector.cs" />
     <Compile Include="OwinConstants.cs" />
     <Compile Include="OwinExceptionCatchBlocks.cs" />
+    <Compile Include="OwinHttpRequestContext.cs" />
     <Compile Include="OwinRequestExtensions.cs" />
+    <Compile Include="OwinResponseExtensions.cs" />
     <Compile Include="PassiveAuthenticationMessageHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

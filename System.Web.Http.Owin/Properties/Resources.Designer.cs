@@ -115,6 +115,24 @@ namespace System.Web.Http.Owin.Properties {
         }
         
         /// <summary>
+        ///   查找类似 HttpAuthenticationChallengeContext.Request must not be null. 的本地化字符串。
+        /// </summary>
+        internal static string HttpAuthenticationChallengeContext_RequestMustNotBeNull {
+            get {
+                return ResourceManager.GetString("HttpAuthenticationChallengeContext_RequestMustNotBeNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 HttpAuthenticationContext.Request must not be null. 的本地化字符串。
+        /// </summary>
+        internal static string HttpAuthenticationContext_RequestMustNotBeNull {
+            get {
+                return ResourceManager.GetString("HttpAuthenticationContext_RequestMustNotBeNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 No OWIN authentication manager is associated with the request. 的本地化字符串。
         /// </summary>
         internal static string IAuthenticationManagerNotAvailable {
@@ -124,11 +142,38 @@ namespace System.Web.Http.Owin.Properties {
         }
         
         /// <summary>
+        ///   查找类似 The OWIN context&apos;s Request property must not be null. 的本地化字符串。
+        /// </summary>
+        internal static string OwinContext_NullRequest {
+            get {
+                return ResourceManager.GetString("OwinContext_NullRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 The OWIN context&apos;s Response property must not be null. 的本地化字符串。
+        /// </summary>
+        internal static string OwinContext_NullResponse {
+            get {
+                return ResourceManager.GetString("OwinContext_NullResponse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 The request must have a request context. 的本地化字符串。
         /// </summary>
         internal static string Request_RequestContextMustNotBeNull {
             get {
                 return ResourceManager.GetString("Request_RequestContextMustNotBeNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 The message handler did not return a response message. 的本地化字符串。
+        /// </summary>
+        internal static string SendAsync_ReturnedNull {
+            get {
+                return ResourceManager.GetString("SendAsync_ReturnedNull", resourceCulture);
             }
         }
         

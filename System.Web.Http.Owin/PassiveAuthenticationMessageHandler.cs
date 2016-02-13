@@ -1,23 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Net.Http;
+using System.Security.Claims;
+using System.Security.Principal;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Web.Http.Controllers;
+using Microsoft.Owin.Security;
 
 namespace System.Web.Http.Owin
 {
-    using Microsoft.Owin.Security;
-    using System;
-    using System.Diagnostics;
-    using System.Net.Http;
-    using System.Runtime.CompilerServices;
-    using System.Security.Claims;
-    using System.Security.Principal;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using System.Web.Http.Controllers;
-    using System.Web.Http.Owin.Properties;
-
     public class PassiveAuthenticationMessageHandler : DelegatingHandler
     {
         private static readonly Lazy<IPrincipal> _anonymousPrincipal =
@@ -41,7 +31,7 @@ namespace System.Web.Http.Owin
             HttpRequestContext requestContext = request.GetRequestContext();
             if (requestContext == null)
             {
-                throw new ArgumentException(Resources.Request_RequestContextMustNotBeNull, "request");
+                throw new ArgumentException(Properties.Resources.Request_RequestContextMustNotBeNull, "request");
             }
             requestContext.Principal = _anonymousPrincipal.Value;
         }
@@ -51,7 +41,7 @@ namespace System.Web.Http.Owin
             IAuthenticationManager authenticationManager = request.GetAuthenticationManager();
             if (authenticationManager == null)
             {
-                throw new InvalidOperationException(Resources.IAuthenticationManagerNotAvailable);
+                throw new InvalidOperationException(Properties.Resources.IAuthenticationManagerNotAvailable);
             }
             AuthenticationResponseChallenge authenticationResponseChallenge =
                 authenticationManager.AuthenticationResponseChallenge;

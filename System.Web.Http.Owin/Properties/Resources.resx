@@ -135,11 +135,26 @@
   <data name="ArgumentUriHasQueryOrFragment" xml:space="preserve">
     <value>URI must not contain a query component or a fragment identifier.</value>
   </data>
+  <data name="HttpAuthenticationChallengeContext_RequestMustNotBeNull" xml:space="preserve">
+    <value>HttpAuthenticationChallengeContext.Request must not be null.</value>
+  </data>
+  <data name="HttpAuthenticationContext_RequestMustNotBeNull" xml:space="preserve">
+    <value>HttpAuthenticationContext.Request must not be null.</value>
+  </data>
   <data name="IAuthenticationManagerNotAvailable" xml:space="preserve">
     <value>No OWIN authentication manager is associated with the request.</value>
   </data>
+  <data name="OwinContext_NullRequest" xml:space="preserve">
+    <value>The OWIN context's Request property must not be null.</value>
+  </data>
+  <data name="OwinContext_NullResponse" xml:space="preserve">
+    <value>The OWIN context's Response property must not be null.</value>
+  </data>
   <data name="Request_RequestContextMustNotBeNull" xml:space="preserve">
     <value>The request must have a request context.</value>
+  </data>
+  <data name="SendAsync_ReturnedNull" xml:space="preserve">
+    <value>The message handler did not return a response message.</value>
   </data>
   <data name="TypePropertyMustNotBeNull" xml:space="preserve">
     <value>{0}.{1} must not be null.</value>
