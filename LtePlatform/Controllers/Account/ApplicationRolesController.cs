@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Http;
 using LtePlatform.Models;
 using Microsoft.AspNet.Identity;
@@ -11,6 +12,9 @@ namespace LtePlatform.Controllers.Account
     [ApiControl("用户角色管理控制器")]
     public class ApplicationRolesController : ApiController
     {
+        private const string createAction = "create";
+        private const string deleteAction = "delete";
+
         [HttpGet]
         [ApiDoc("获取所有角色定义视图")]
         [ApiResponse("所有角色定义视图")]
@@ -43,19 +47,39 @@ namespace LtePlatform.Controllers.Account
             {
                 userManager.AddToRole(user.Id, dto.RoleName);
             }
+            foreach (
+                var user in 
+                    dto.UserNames.Select(userName => userManager.FindByName(userName))
+                        .Where(user => user != null)
+                        .Where(user => userManager.IsInRole(user.Id, dto.RoleName)))
+            {
+                userManager.RemoveFromRole(user.Id, dto.RoleName);
+            }
         }
 
         [HttpGet]
-        [ApiDoc("新增一个角色")]
+        [ApiDoc("新增或删除一个角色")]
         [ApiParameterDoc("roleName", "角色名称")]
-        [ApiResponse("添加是否成功")]
-        public bool Get(string roleName)
+        [ApiResponse("添加或删除是否成功")]
+        public async Task<string> Get(string roleName, string action)
         {
             var context = ApplicationDbContext.Create();
             var roleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(context));
-            if (roleManager.RoleExists(roleName)) return false;
-            roleManager.Create(new ApplicationRole(roleName));
-            return true;
+            switch (action)
+            {
+                case createAction:
+                    if (roleManager.RoleExists(roleName)) return "新增角色失败，该角色名称已存在";
+                    await roleManager.CreateAsync(new ApplicationRole(roleName));
+                    return "新增角色成功";
+                case deleteAction:
+                    if (!roleManager.RoleExists(roleName)) return "删除角色失败，该角色名称不存在";
+                    var role = roleManager.FindByName(roleName);
+                    await roleManager.DeleteAsync(role);
+                    return "删除角色成功";
+                default:
+                    return "无效的操作指令";
+            }
+
         }
     }
 }
