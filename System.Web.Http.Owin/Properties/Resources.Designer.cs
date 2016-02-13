@@ -61,6 +61,60 @@ namespace System.Web.Http.Owin.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Relative URI values are not supported: &apos;{0}&apos;. The URI must be absolute. 的本地化字符串。
+        /// </summary>
+        internal static string ArgumentInvalidAbsoluteUri {
+            get {
+                return ResourceManager.GetString("ArgumentInvalidAbsoluteUri", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Unsupported URI scheme: &apos;{0}&apos;. The URI scheme must be either &apos;{1}&apos; or &apos;{2}&apos;. 的本地化字符串。
+        /// </summary>
+        internal static string ArgumentInvalidHttpUriScheme {
+            get {
+                return ResourceManager.GetString("ArgumentInvalidHttpUriScheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Value must be greater than or equal to {0}. 的本地化字符串。
+        /// </summary>
+        internal static string ArgumentMustBeGreaterThanOrEqualTo {
+            get {
+                return ResourceManager.GetString("ArgumentMustBeGreaterThanOrEqualTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Value must be less than or equal to {0}. 的本地化字符串。
+        /// </summary>
+        internal static string ArgumentMustBeLessThanOrEqualTo {
+            get {
+                return ResourceManager.GetString("ArgumentMustBeLessThanOrEqualTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 The argument &apos;{0}&apos; is null or empty. 的本地化字符串。
+        /// </summary>
+        internal static string ArgumentNullOrEmpty {
+            get {
+                return ResourceManager.GetString("ArgumentNullOrEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 URI must not contain a query component or a fragment identifier. 的本地化字符串。
+        /// </summary>
+        internal static string ArgumentUriHasQueryOrFragment {
+            get {
+                return ResourceManager.GetString("ArgumentUriHasQueryOrFragment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 No OWIN authentication manager is associated with the request. 的本地化字符串。
         /// </summary>
         internal static string IAuthenticationManagerNotAvailable {
@@ -75,6 +129,15 @@ namespace System.Web.Http.Owin.Properties {
         internal static string Request_RequestContextMustNotBeNull {
             get {
                 return ResourceManager.GetString("Request_RequestContextMustNotBeNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 {0}.{1} must not be null. 的本地化字符串。
+        /// </summary>
+        internal static string TypePropertyMustNotBeNull {
+            get {
+                return ResourceManager.GetString("TypePropertyMustNotBeNull", resourceCulture);
             }
         }
     }

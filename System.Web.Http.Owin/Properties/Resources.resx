@@ -117,10 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ArgumentInvalidAbsoluteUri" xml:space="preserve">
+    <value>Relative URI values are not supported: '{0}'. The URI must be absolute.</value>
+  </data>
+  <data name="ArgumentInvalidHttpUriScheme" xml:space="preserve">
+    <value>Unsupported URI scheme: '{0}'. The URI scheme must be either '{1}' or '{2}'.</value>
+  </data>
+  <data name="ArgumentMustBeGreaterThanOrEqualTo" xml:space="preserve">
+    <value>Value must be greater than or equal to {0}.</value>
+  </data>
+  <data name="ArgumentMustBeLessThanOrEqualTo" xml:space="preserve">
+    <value>Value must be less than or equal to {0}.</value>
+  </data>
+  <data name="ArgumentNullOrEmpty" xml:space="preserve">
+    <value>The argument '{0}' is null or empty.</value>
+  </data>
+  <data name="ArgumentUriHasQueryOrFragment" xml:space="preserve">
+    <value>URI must not contain a query component or a fragment identifier.</value>
+  </data>
   <data name="IAuthenticationManagerNotAvailable" xml:space="preserve">
     <value>No OWIN authentication manager is associated with the request.</value>
   </data>
   <data name="Request_RequestContextMustNotBeNull" xml:space="preserve">
     <value>The request must have a request context.</value>
+  </data>
+  <data name="TypePropertyMustNotBeNull" xml:space="preserve">
+    <value>{0}.{1} must not be null.</value>
   </data>
 </root>

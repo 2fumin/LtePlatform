@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -48,9 +51,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExceptionHandling\DefaultExceptionHandler.cs" />
+    <Compile Include="ExceptionHandling\EmptyExceptionLogger.cs" />
+    <Compile Include="General\DictionaryExtensions.cs" />
+    <Compile Include="General\Error.cs" />
+    <Compile Include="General\NonOwnedStream.cs" />
     <Compile Include="General\OwinHttpConfigurationExtensions.cs" />
+    <Compile Include="General\TaskHelpers.cs" />
+    <Compile Include="General\WebApiAppBuilderExtensions.cs" />
     <Compile Include="HttpMessageHandlerAdapter.cs" />
     <Compile Include="HttpMessageHandlerOptions.cs" />
+    <Compile Include="OwinBufferPolicySelector.cs" />
+    <Compile Include="OwinConstants.cs" />
+    <Compile Include="OwinExceptionCatchBlocks.cs" />
+    <Compile Include="OwinRequestExtensions.cs" />
     <Compile Include="PassiveAuthenticationMessageHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
