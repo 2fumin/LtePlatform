@@ -1,4 +1,8 @@
 ﻿<div dialog>
+    <p>
+        <input type="checkbox" ng-checked="indoorConsidered" ng-model="indoorConsidered">考虑室内小区
+        <button class="btn btn-warning" ng-click="matchNearest()">自动匹配最近小区</button>
+    </p>
     <table class="table table-striped">
         <thead>
         <tr>

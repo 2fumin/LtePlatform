@@ -3,6 +3,7 @@ using System.Web.Http;
 using Lte.Evaluations.DataService.Mr;
 using Lte.Evaluations.ViewModels.Mr;
 using Lte.Evaluations.ViewModels.Precise;
+using Lte.Parameters.Entities;
 using LtePlatform.Models;
 
 namespace LtePlatform.Controllers.Parameters
@@ -34,6 +35,14 @@ namespace LtePlatform.Controllers.Parameters
         public int Post(Precise4GView view)
         {
             return _service.UpdateNeighborPcis(view.CellId, view.SectorId);
+        }
+
+        [HttpPut]
+        [ApiDoc("更新单条邻区定义")]
+        [ApiParameterDoc("cell", "待更新的邻区信息")]
+        public void Put(NearestPciCell cell)
+        {
+            _service.UpdateNeighborCell(cell);
         }
     }
 }

@@ -53,6 +53,23 @@ namespace Lte.Evaluations.DataService.Mr
             return _repository.SaveChanges();
         }
 
+        public void UpdateNeighborCell(NearestPciCell cell)
+        {
+            var item = _repository.GetNearestPciCell(cell.CellId, cell.SectorId, cell.Pci);
+            if (item != null)
+            {
+                item.NearestCellId = cell.NearestCellId;
+                item.NearestSectorId = cell.NearestSectorId;
+                _repository.Update(item);
+            }
+            else
+            {
+                cell.TotalTimes = 98;
+                _repository.Insert(cell);
+            }
+            _repository.SaveChanges();
+        }
+
         public void UploadZteNeighbors(StreamReader reader)
         {
             var groupInfos = NeighborCellZteCsv.ReadNeighborCellZteCsvs(reader);

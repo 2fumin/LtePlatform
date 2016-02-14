@@ -17,6 +17,8 @@ namespace Lte.Parameters.Abstract
     {
         List<NearestPciCell> GetAllList(int cellId, byte sectorId);
 
+        NearestPciCell GetNearestPciCell(int cellId, byte sectorId, short pci);
+
         int SaveChanges();
     }
 }

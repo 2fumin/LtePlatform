@@ -15,8 +15,6 @@
     $scope.dataModel.initializeAuthorization();
     $scope.currentCell = {};
     $scope.interferenceCells = [];
-    $scope.pciNeighbors = [];
-    $scope.distanceOrder = "distance";
     $scope.interferenceLevelOrder = "interferenceLevel";
     $scope.interferencePanelTitle = "干扰小区列表";
 
@@ -31,21 +29,6 @@
         forceParse: 0
     });
 
-    $scope.query = function () {
-        $scope.topCells = [];
-        $http({
-            method: 'GET',
-            url: $scope.dataModel.preciseStatUrl,
-            params: {
-                'begin': $scope.beginDate.value,
-                'end': $scope.endDate.value,
-                'topCount': 20,
-                'orderSelection': "按照精确覆盖率升序"
-            }
-        }).success(function (result) {
-            $scope.topCells = result;
-        });
-    };
     $scope.showInterference = function(cell) {
         $scope.currentCell = cell;
         $scope.interferenceCells = [];
@@ -94,26 +77,4 @@
     $scope.showInfo = function(cell) {
         $scope.showInterference(cell);
     };
-    $scope.match = function(cell) {
-        $http({
-            method: 'GET',
-            url: $scope.dataModel.cellUrl,
-            params: {
-                'eNodebId': $scope.currentCell.cellId,
-                'sectorId': $scope.currentCell.sectorId,
-                'pci': cell.destPci
-            }
-        }).success(function(result) {
-            $scope.pciNeighbors = [];
-            $scope.dialogTitle = $scope.currentCell.eNodebName + "-" + $scope.currentCell.sectorId + "的邻区PCI=" + cell.destPci + "的可能小区";
-            $(".modal").modal("show");
-            for (var i = 0; i < result.length; i++) {
-                var neighbor = result[i];
-                neighbor.distance = getDistance($scope.currentCell.lattitute, $scope.currentCell.longtitute, neighbor.lattitute, neighbor.longtitute);
-                $scope.pciNeighbors.push(neighbor);
-            }
-        });
-    };
-
-    $scope.query();
 });
