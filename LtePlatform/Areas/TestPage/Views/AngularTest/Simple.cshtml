@@ -3,7 +3,7 @@
     ViewBag.Title = "Simple AngularJS Test";
 }
 
-<div class="row">
+<div class="row" ng-app="simpleAngular" ng-controller="simple.root">
     <div class="col-md-4">
         @{ 
             Html.RenderPartial("_AngularJSMenu");
@@ -11,7 +11,7 @@
     </div>
     <div class="col-md-8">
         <h2>@ViewBag.Title</h2>
-        <div ng-app="simpleAngular">
+        <div>
             <h3>简单类型测试</h3>
             <div ng-controller="SimpleTypeController">
                 A={{simpleA}}&nbsp;
@@ -48,53 +48,9 @@
 {
     <script src="~/Scripts/angular.js"></script>
     <script>
-        (function () {
-            var app = angular.module("simpleAngular", []);
-            var SimpleTypeController = function ($scope) {
-                $scope.simpleA = 1;
-                $scope.simpleB = 2;
-            }
-            app.controller("SimpleTypeController", SimpleTypeController);
-
-            var ClockController = function ($scope, $timeout) {
-                var updateClock = function () {
-                    $scope.clock = new Date();
-                    $timeout(function () {
-                        updateClock();
-                    }, 1000);
-                };
-                updateClock();
-            };
-            app.controller("ClockController", ClockController);
-
-            var AddController = function ($scope) {
-                $scope.counter = 0;
-                $scope.add = function (amount) { $scope.counter += amount; };
-                $scope.subtract = function (amount) { $scope.counter -= amount; };
-            };
-            app.controller("AddController", AddController);
-
-            var ParseController = function ($scope, $parse) {
-                $scope.$watch('expr', function (newVal, oldVal, scope) {
-                    if (newVal !== oldVal) {
-                        var parseFun = $parse(newVal);
-                        $scope.parsedValue = parseFun(scope);
-                    }
-                });
-            };
-            app.controller("ParseController", ParseController);
-
-            var InterpolateController = function ($scope, $interpolate) {
-                // 设置监听
-                $scope.$watch('emailBody', function (body) {
-                    if (body) {
-                        var template = $interpolate(body);
-                        $scope.previewText = template({ to: $scope.to });
-                    }
-                });
-            };
-            app.controller("InterpolateController", InterpolateController);
-        }());
+        var app = angular.module("simpleAngular", []);
     </script>
+    <script src="~/Areas/TestPage/Scripts/angular/simple.controller.js"></script>
+    <script src="~/Areas/TestPage/Scripts/angular/menu.controller.js"></script>
 }
 

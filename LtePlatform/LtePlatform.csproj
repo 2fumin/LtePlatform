@@ -406,9 +406,11 @@
       <DependentUpon>Player.coffee</DependentUpon>
     </Content>
     <Content Include="Areas\TestPage\Scripts\angular\datetime.test.controller.js" />
+    <Content Include="Areas\TestPage\Scripts\angular\menu.controller.js" />
     <Content Include="Areas\TestPage\Scripts\angular\oneway.domain.app.js" />
     <Content Include="Areas\TestPage\Scripts\angular\root.property.js" />
     <Content Include="Areas\TestPage\Scripts\angular\sidebox.directive.js" />
+    <Content Include="Areas\TestPage\Scripts\angular\simple.controller.js" />
     <Content Include="Areas\TestPage\Scripts\angular\submit.form.js" />
     <Content Include="Areas\TestPage\Scripts\angular\twoway.domain.app.js" />
     <Content Include="Areas\TestPage\Scripts\autostart.js" />
