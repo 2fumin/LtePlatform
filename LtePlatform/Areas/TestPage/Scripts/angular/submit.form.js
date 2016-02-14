@@ -1,5 +1,4 @@
-﻿var app = angular.module('myApp', []);
-app.directive('ngFocus', [function () {
+﻿app.directive('ngFocus', [function () {
     var FOCUS_CLASS = "ng-focused";
     return {
         restrict: 'A',
@@ -20,6 +19,9 @@ app.directive('ngFocus', [function () {
         }
     };
 }]);
+app.controller("submit.form", function($scope) {
+    $scope.pageTitle = "SubmitForm";
+});
 app.controller('signupController', ['$scope', function ($scope) {
     $scope.submitted = false;
     $scope.signupForm = function () {
