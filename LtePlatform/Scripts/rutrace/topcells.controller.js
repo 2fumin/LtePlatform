@@ -1,6 +1,6 @@
 ﻿app.controller("rutrace.topcells", function ($scope, $http) {
-    $scope.topCells = [];
     $scope.cellPanelTitle = "TOP指标查询";
+    $scope.topCells = [];
 
     $('.form_date').datetimepicker({
         language: 'zh-CN',
@@ -27,6 +27,14 @@
         }).success(function (result) {
             $scope.topCells = result;
         });
+    };
+    $scope.monitorAll = function () {
+        for (var i = 0; i < $scope.topCells.length; i++) {
+            var cell = $scope.topCells[i];
+            if (cell.isMonitored === false) {
+                $scope.addMonitor(cell);
+            }
+        }
     };
 
     $scope.query();

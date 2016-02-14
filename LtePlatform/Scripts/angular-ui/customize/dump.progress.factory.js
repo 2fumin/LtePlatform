@@ -33,9 +33,9 @@
             });
         };
 
-        serviceInstance.dumpMongo = function (actionUrl, progressInfo, begin, end, index) {
+        serviceInstance.dumpMongo = function (actionUrl, progressInfo, begin, end, index, step) {
             var self = serviceInstance;
-            if (progressInfo.dumpCells.length === 0) return;
+            if (progressInfo.dumpCells.length < index + 1) return;
             var cell = progressInfo.dumpCells[index];
             $http.post(actionUrl, {
                 pciCell: cell,
@@ -45,7 +45,7 @@
                 progressInfo.cellInfo = cell.eNodebId + '-' + cell.sectorId + '-' + cell.pci + ': ' + result;
                 progressInfo.totalSuccessItems = progressInfo.totalSuccessItems + 1;
                 if (progressInfo.totalSuccessItems + progressInfo.totalFailItems < progressInfo.dumpCells.length) {
-                    self.dumpMongo(actionUrl, progressInfo, begin, end, index + 1);
+                    self.dumpMongo(actionUrl, progressInfo, begin, end, index + step, step);
                 } else {
                     progressInfo.totalSuccessItems = 0;
                     progressInfo.totalFailItems = 0;
@@ -54,7 +54,7 @@
                 progressInfo.totalFailItems = progressInfo.totalFailItems + 1;
                 progressInfo.cellInfo = cell.eNodebId + '-' + cell.sectorId + '-' + cell.pci + ': Fail!!!';
                 if (progressInfo.totalSuccessItems + progressInfo.totalFailItems < progressInfo.dumpCells.length) {
-                    self.dumpMongo(actionUrl, progressInfo, begin, end, index + 1);
+                    self.dumpMongo(actionUrl, progressInfo, begin, end, index + step, step);
                 } else {
                     progressInfo.totalSuccessItems = 0;
                     progressInfo.totalFailItems = 0;

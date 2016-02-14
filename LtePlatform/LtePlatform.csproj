@@ -782,6 +782,8 @@
     <Content Include="Scripts\kpi\directive.workitem.cdma.js" />
     <Content Include="Scripts\kpi\directive.workitem.cell.js" />
     <Content Include="Scripts\kpi\directive.workitem.enodeb.js" />
+    <Content Include="Scripts\kpi\interference.import.controller.js" />
+    <Content Include="Scripts\kpi\interference.mongo.controller.js" />
     <Content Include="Scripts\kpi\interferenceimport.viewmodel.js" />
     <Content Include="Scripts\kpi\precise.controller.js" />
     <Content Include="Scripts\kpi\precise.top.viewmodel.js" />
