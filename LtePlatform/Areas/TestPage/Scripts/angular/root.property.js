@@ -1,7 +1,9 @@
-﻿var app = angular.module('myApp', []);
-app.run(function ($rootScope) {
+﻿app.run(function ($rootScope) {
     // 使用.run访问$rootScope
     $rootScope.rootProperty = 'root scope';
+});
+app.controller("root.property", function ($scope) {
+    $scope.pageTitle = "RootProperty";
 });
 app.controller('ParentController', function ($scope) {
     // 使用.controller访问`ng-controller`内部的属性

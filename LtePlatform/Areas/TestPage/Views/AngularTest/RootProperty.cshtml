@@ -3,7 +3,7 @@
     ViewBag.Title = "Root Property AngularJS Test";
 }
 
-<div class="row">
+<div class="row" ng-app="myApp" ng-controller="root.property">
     <div class="col-md-4">
         @{
             Html.RenderPartial("_AngularJSMenu");
@@ -11,7 +11,7 @@
     </div>
     <div class="col-md-8">
         <h2>@ViewBag.Title</h2>
-        <div ng-app="myApp">
+        <div>
             <p>We can access: {{ rootProperty }}</p>
             <div ng-controller="ParentController">
                 <p>
@@ -82,6 +82,10 @@
 @section Scripts
 {
     <script src="~/Scripts/angular.js"></script>
+    <script>
+        var app = angular.module('myApp', []);
+    </script>
+    <script src="~/Areas/TestPage/Scripts/angular/menu.controller.js"></script>
     <script src="~/Areas/TestPage/Scripts/angular/root.property.js"></script>
 }
 
