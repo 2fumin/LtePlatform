@@ -1,4 +1,5 @@
-﻿app.controller("datetimeTest", function ($scope) {
+﻿app.controller("DateController", function ($scope) {
+    $scope.sectionTitle = "Date";
     $scope.beginDate = {
         title: "开始日期",
         value: (new Date()).getDateFromToday(-7).Format("yyyy-MM-dd")

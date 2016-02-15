@@ -390,6 +390,8 @@
     <Content Include="appViews\Manage\CurrentUser.html" />
     <Content Include="appViews\Manage\Roles.html" />
     <Content Include="appViews\Manage\RoleUser.html" />
+    <Content Include="appViews\Test\Chapter10\DateTimeTest.html" />
+    <Content Include="appViews\Test\Chapter10\Links.html" />
     <Content Include="appViews\Test\Simple\Add.html" />
     <Content Include="appViews\Test\Simple\Clock.html" />
     <Content Include="appViews\Test\Simple\Interpolate.html" />
@@ -410,6 +412,7 @@
     <Content Include="Areas\TestPage\Scripts\5ch5\Player.js">
       <DependentUpon>Player.coffee</DependentUpon>
     </Content>
+    <Content Include="Areas\TestPage\Scripts\angular\chap10.viewmodel.js" />
     <Content Include="Areas\TestPage\Scripts\angular\datetime.test.controller.js" />
     <Content Include="Areas\TestPage\Scripts\angular\menu.controller.js" />
     <Content Include="Areas\TestPage\Scripts\angular\oneway.domain.app.js" />
