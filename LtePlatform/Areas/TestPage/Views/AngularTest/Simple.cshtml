@@ -11,44 +11,23 @@
     </div>
     <div class="col-md-8">
         <h2>@ViewBag.Title</h2>
-        <div>
-            <h3>简单类型测试</h3>
-            <div ng-controller="SimpleTypeController">
-                A={{simpleA}}&nbsp;
-                B={{simpleB}}
-            </div>  
-            <h3>时钟控制器</h3>  
-            <div ng-controller="ClockController">
-                <span>Hello {{clock}}</span>
-            </div>  
-            <h3>简单加减法</h3>  
-            <div ng-controller="AddController">
-                <button ng-click="add(1)" class="btn btn-primary">加1</button>
-                <button ng-click="subtract(1)" class="btn btn-danger">减1</button>
-                <h4>Current count: {{ counter }}</h4>
-            </div>
-            <h3>表达式解析测试</h3> 
-            <div ng-controller="ParseController">
-                表达式：<input ng-model="expr" type="text" placeholder="Enter an expression" />&nbsp;
-                表达式解析结果：<span>{{parsedValue}}</span>
-            </div>  
-            <h3>插值字符串测试</h3> 
-            <div ng-controller="InterpolateController">
-                <input ng-model="to"
-                       type="email"
-                       placeholder="Recipient" />
-                <textarea ng-model="emailBody"></textarea>
-                <pre>{{ previewText }}</pre>
-            </div>
-        </div>
+        <p>
+            <ul class="nav nav-pills">
+                <li ng-repeat="sectionItem in sectionItems" ng-class="{active: sectionTitle == sectionItem.name}">
+                    <a ng-href="{{sectionItem.url}}">{{sectionItem.displayName}}</a>
+                </li>
+            </ul>
+        </p>
+        <div ng-view></div>
     </div>
 </div>
 
 @section Scripts
 {
     <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/angular-route.min.js"></script>
     <script>
-        var app = angular.module("simpleAngular", []);
+        var app = angular.module("simpleAngular", ['ngRoute']);
     </script>
     <script src="~/Areas/TestPage/Scripts/angular/simple.controller.js"></script>
     <script src="~/Areas/TestPage/Scripts/angular/menu.controller.js"></script>

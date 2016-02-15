@@ -390,6 +390,11 @@
     <Content Include="appViews\Manage\CurrentUser.html" />
     <Content Include="appViews\Manage\Roles.html" />
     <Content Include="appViews\Manage\RoleUser.html" />
+    <Content Include="appViews\Test\Simple\Add.html" />
+    <Content Include="appViews\Test\Simple\Clock.html" />
+    <Content Include="appViews\Test\Simple\Interpolate.html" />
+    <Content Include="appViews\Test\Simple\Parse.html" />
+    <Content Include="appViews\Test\Simple\SimpleType.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Areas\TestPage\Scripts\5ch5\Dictionary.js">
