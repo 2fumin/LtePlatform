@@ -5,10 +5,63 @@
  * Version: 0.14.3 - 2015-10-23
  * License: MIT
  */
-angular.module("ui.bootstrap", ["ui.bootstrap.tpls", "ui.bootstrap.collapse","ui.bootstrap.accordion","ui.bootstrap.alert","ui.bootstrap.buttons","ui.bootstrap.carousel","ui.bootstrap.dateparser","ui.bootstrap.position","ui.bootstrap.datepicker","ui.bootstrap.dropdown","ui.bootstrap.stackedMap","ui.bootstrap.modal","ui.bootstrap.pagination","ui.bootstrap.tooltip","ui.bootstrap.popover","ui.bootstrap.progressbar","ui.bootstrap.rating","ui.bootstrap.tabs","ui.bootstrap.timepicker","ui.bootstrap.typeahead"]);
-angular.module("ui.bootstrap.tpls", ["template/accordion/accordion-group.html","template/accordion/accordion.html","template/alert/alert.html","template/carousel/carousel.html","template/carousel/slide.html","template/datepicker/datepicker.html","template/datepicker/day.html","template/datepicker/month.html","template/datepicker/popup.html","template/datepicker/year.html","template/modal/backdrop.html","template/modal/window.html","template/pagination/pager.html","template/pagination/pagination.html","template/tooltip/tooltip-html-popup.html","template/tooltip/tooltip-popup.html","template/tooltip/tooltip-template-popup.html","template/popover/popover-html.html","template/popover/popover-template.html","template/popover/popover.html","template/progressbar/bar.html","template/progressbar/progress.html","template/progressbar/progressbar.html","template/rating/rating.html","template/tabs/tab.html","template/tabs/tabset.html","template/timepicker/timepicker.html","template/typeahead/typeahead-match.html","template/typeahead/typeahead-popup.html"]);
-angular.module('ui.bootstrap.collapse', [])
 
+angular.module("ui.bootstrap", [
+    "ui.bootstrap.tpls",
+    "ui.bootstrap.collapse",
+    "ui.bootstrap.accordion",
+    "ui.bootstrap.alert",
+    "ui.bootstrap.buttons",
+    "ui.bootstrap.carousel",
+    "ui.bootstrap.dateparser",
+    "ui.bootstrap.position",
+    "ui.bootstrap.datepicker",
+    "ui.bootstrap.dropdown",
+    "ui.bootstrap.stackedMap",
+    "ui.bootstrap.modal",
+    "ui.bootstrap.pagination",
+    "ui.bootstrap.tooltip",
+    "ui.bootstrap.popover",
+    "ui.bootstrap.progressbar",
+    "ui.bootstrap.rating",
+    "ui.bootstrap.tabs",
+    "ui.bootstrap.timepicker",
+    "ui.bootstrap.typeahead"
+]);
+
+angular.module("ui.bootstrap.tpls", [
+    "template/accordion/accordion-group.html",
+    "template/accordion/accordion.html",
+    "template/alert/alert.html",
+    "template/carousel/carousel.html",
+    "template/carousel/slide.html",
+    "template/datepicker/datepicker.html",
+    "template/datepicker/day.html",
+    "template/datepicker/month.html",
+    "template/datepicker/popup.html",
+    "template/datepicker/year.html",
+    "template/modal/backdrop.html",
+    "template/modal/window.html",
+    "template/pagination/pager.html",
+    "template/pagination/pagination.html",
+    "template/tooltip/tooltip-html-popup.html",
+    "template/tooltip/tooltip-popup.html",
+    "template/tooltip/tooltip-template-popup.html",
+    "template/popover/popover-html.html",
+    "template/popover/popover-template.html",
+    "template/popover/popover.html",
+    "template/progressbar/bar.html",
+    "template/progressbar/progress.html",
+    "template/progressbar/progressbar.html",
+    "template/rating/rating.html",
+    "template/tabs/tab.html",
+    "template/tabs/tabset.html",
+    "template/timepicker/timepicker.html",
+    "template/typeahead/typeahead-match.html",
+    "template/typeahead/typeahead-popup.html"
+]);
+
+angular.module('ui.bootstrap.collapse', [])
   .directive('uibCollapse', ['$animate', '$injector', function($animate, $injector) {
     var $animateCss = $injector.has('$animateCss') ? $injector.get('$animateCss') : null;
     return {
@@ -87,9 +140,7 @@ angular.module('ui.bootstrap.collapse', [])
 /* Deprecated collapse below */
 
 angular.module('ui.bootstrap.collapse')
-
   .value('$collapseSuppressWarning', false)
-
   .directive('collapse', ['$animate', '$injector', '$log', '$collapseSuppressWarning', function($animate, $injector, $log, $collapseSuppressWarning) {
     var $animateCss = $injector.has('$animateCss') ? $injector.get('$animateCss') : null;
     return {
@@ -168,11 +219,9 @@ angular.module('ui.bootstrap.collapse')
   }]);
 
 angular.module('ui.bootstrap.accordion', ['ui.bootstrap.collapse'])
-
 .constant('uibAccordionConfig', {
   closeOthers: true
 })
-
 .controller('UibAccordionController', ['$scope', '$attrs', 'uibAccordionConfig', function($scope, $attrs, accordionConfig) {
   // This array keeps track of the accordion groups
   this.groups = [];
@@ -3482,6 +3531,7 @@ angular.module('ui.bootstrap.stackedMap', [])
       }
     };
   });
+
 angular.module('ui.bootstrap.modal', ['ui.bootstrap.stackedMap'])
 /**
  * A helper, internal data structure that stores all references attached to key
