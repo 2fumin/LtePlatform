@@ -13,3 +13,5 @@ function AlertDemoCtrl($scope) {
   };
 
 }
+
+app.controller("AlertDemoCtrl", AlertDemoCtrl);

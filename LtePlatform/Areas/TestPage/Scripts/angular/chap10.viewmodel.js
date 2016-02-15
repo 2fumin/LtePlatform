@@ -10,13 +10,13 @@
                 templateUrl: viewDir + "DateTimeTest.html",
                 controller: "DateController"
             })
-            .when('/clock', {
-                templateUrl: viewDir + "Clock.html",
-                controller: "ClockController"
+            .when('/accordion', {
+                templateUrl: viewDir + "demo.accordion.html",
+                controller: "AccordionDemoCtrl"
             })
-            .when('/interpolate', {
-                templateUrl: viewDir + "Interpolate.html",
-                controller: "InterpolateController"
+            .when('/alert', {
+                templateUrl: viewDir + "demo.alert.html",
+                controller: "AlertDemoCtrl"
             })
             .when('/parse', {
                 templateUrl: viewDir + "Parse.html",
@@ -41,9 +41,15 @@ app.controller("chap10.root", function ($scope) {
         displayName: "日期控件",
         url: rootPath + "/date"
     }, {
-        name: "Clock",
-        displayName: "时钟控制器",
-        url: rootPath + "/clock"
+        displayName: "控件实例I",
+        items: [
+        {
+            url: rootPath + "/accordion",
+            displayName: "手风琴"
+        }, {
+            url: rootPath + "/alert",
+            displayName: "警告框"
+        }]
     }, {
         name: "Interpolate",
         displayName: "插值字符串测试",

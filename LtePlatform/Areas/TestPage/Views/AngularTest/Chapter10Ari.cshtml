@@ -14,7 +14,17 @@
         <p>
             <ul class="nav nav-pills">
                 <li ng-repeat="sectionItem in sectionItems" ng-class="{active: sectionTitle == sectionItem.name}">
-                    <a ng-href="{{sectionItem.url}}">{{sectionItem.displayName}}</a>
+                    <a ng-href="{{sectionItem.url}}" ng-if="!sectionItem.items.length">
+                        {{sectionItem.displayName}}
+                    </a>
+                    <a href="" ng-if="sectionItem.items.length" data-toggle="dropdown">
+                        {{sectionItem.displayName}}
+                    </a>
+                    <ul ng-if="sectionItem.items.length" class="dropdown-menu">
+                        <li ng-repeat="menuSubItem in sectionItem.items">
+                            <a ng-href="{{menuSubItem.url}}">{{menuSubItem.displayName}}</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </p>
@@ -31,13 +41,16 @@
     <link href="~/Content/themes/bootstrap-datetimepicker.min.css" rel="stylesheet" />
     <script src="~/Scripts/angular-ui/bootstrap-datetimepicker.min.js"></script>
     <script src="~/Scripts/angular-ui/local/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="~/Scripts/angular-ui/ui-bootstrap.js"></script>
     <script src="~/Scripts/app/common.js"></script>
     <script type="text/javascript">
-        var app = angular.module("myApp", ['ngRoute']);
+        var app = angular.module("myApp", ['ngRoute', "ui.bootstrap"]);
     </script>
     <script src="~/Areas/TestPage/Scripts/angular/chap10.viewmodel.js"></script>
     <script src="~/Areas/TestPage/Scripts/angular/datetime.test.controller.js"></script>
     <script src="~/Areas/TestPage/Scripts/angular/menu.controller.js"></script>
     <script src="~/Areas/TestPage/Scripts/angular/sidebox.directive.js"></script>
+    <script src="~/Areas/TestPage/Scripts/angular/demo.accordion.js"></script>
+    <script src="~/Areas/TestPage/Scripts/angular/demo.alert.js"></script>
     <script src="~/Scripts/angular-ui/customize/directive.datetimepicker.js"></script>
 }

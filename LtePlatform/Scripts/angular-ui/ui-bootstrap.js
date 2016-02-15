@@ -217,7 +217,7 @@ angular.module('ui.bootstrap.accordion', ['ui.bootstrap.collapse'])
     controllerAs: 'accordion',
     transclude: true,
     templateUrl: function(element, attrs) {
-      return attrs.templateUrl || 'template/accordion/accordion.html';
+      return attrs.templateUrl || '/template/accordion/accordion.html';
     }
   };
 })
@@ -229,7 +229,7 @@ angular.module('ui.bootstrap.accordion', ['ui.bootstrap.collapse'])
     transclude: true,              // It transcludes the contents of the directive into the template
     replace: true,                // The element containing the directive will be replaced with the template
     templateUrl: function(element, attrs) {
-      return attrs.templateUrl || 'template/accordion/accordion-group.html';
+      return attrs.templateUrl || '/template/accordion/accordion-group.html';
     },
     scope: {
       heading: '@',               // Interpolate the heading attribute onto this scope
@@ -322,7 +322,7 @@ angular.module('ui.bootstrap.accordion')
       transclude: true,
       replace: false,
       templateUrl: function(element, attrs) {
-        return attrs.templateUrl || 'template/accordion/accordion.html';
+        return attrs.templateUrl || '/template/accordion/accordion.html';
       },
       link: function() {
         if (!$accordionSuppressWarning) {
@@ -339,7 +339,7 @@ angular.module('ui.bootstrap.accordion')
       transclude: true,              // It transcludes the contents of the directive into the template
       replace: true,                // The element containing the directive will be replaced with the template
       templateUrl: function(element, attrs) {
-        return attrs.templateUrl || 'template/accordion/accordion-group.html';
+        return attrs.templateUrl || '/template/accordion/accordion-group.html';
       },
       scope: {
         heading: '@',               // Interpolate the heading attribute onto this scope
@@ -436,7 +436,7 @@ angular.module('ui.bootstrap.alert', [])
     controller: 'UibAlertController',
     controllerAs: 'alert',
     templateUrl: function(element, attrs) {
-      return attrs.templateUrl || 'template/alert/alert.html';
+      return attrs.templateUrl || '/template/alert/alert.html';
     },
     transclude: true,
     replace: true,
@@ -469,7 +469,7 @@ angular.module('ui.bootstrap.alert')
       controller: 'AlertController',
       controllerAs: 'alert',
       templateUrl: function(element, attrs) {
-        return attrs.templateUrl || 'template/alert/alert.html';
+        return attrs.templateUrl || '/template/alert/alert.html';
       },
       transclude: true,
       replace: true,

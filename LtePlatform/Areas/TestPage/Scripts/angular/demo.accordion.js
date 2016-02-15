@@ -19,3 +19,5 @@ function AccordionDemoCtrl($scope) {
     $scope.items.push('Item ' + newItemNo);
   };
 }
+
+app.controller("AccordionDemoCtrl", AccordionDemoCtrl);
