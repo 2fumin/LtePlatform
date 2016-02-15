@@ -12,5 +12,7 @@ namespace Lte.Parameters.Abstract
         void UpdateItems(int eNodebId, byte sectorId, short destPci, int destENodebId, byte destSectorId);
 
         List<InterferenceMatrixStat> GetAllList(DateTime begin, DateTime end, int cellId, byte sectorId);
+
+        List<InterferenceMatrixStat> GetAllVictims(DateTime begin, DateTime end, int cellId, byte sectorId);
     }
 }

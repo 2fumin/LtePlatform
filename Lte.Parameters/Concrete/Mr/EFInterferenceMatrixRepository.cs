@@ -44,5 +44,16 @@ namespace Lte.Parameters.Concrete.Mr
                             x.SectorId == sectorId)
                     .ToList();
         }
+
+        public List<InterferenceMatrixStat> GetAllVictims(DateTime begin, DateTime end, int cellId, byte sectorId)
+        {
+            return
+                GetAll()
+                    .Where(
+                        x =>
+                            x.RecordTime >= begin && x.RecordTime < end && x.DestENodebId == cellId &&
+                            x.DestSectorId == sectorId)
+                    .ToList();
+        }
     }
 }

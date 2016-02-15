@@ -55,6 +55,33 @@ namespace Lte.Evaluations.DataService.Mr
                 result.NeighborCellName = eNodeb?.Name + "-" + result.DestSectorId;
             }
             return views;
-        } 
+        }
+
+        public IEnumerable<InterferenceVictimView> QueryVictimViews(DateTime begin, DateTime end, int cellId,
+            byte sectorId)
+        {
+            var statList = _repository.GetAllVictims(begin, end, cellId, sectorId);
+            var results = from stat in statList
+                          group stat by new { stat.ENodebId, stat.SectorId, stat.DestPci, stat.DestENodebId, stat.DestSectorId }
+                into g
+                          select new InterferenceVictimView
+                          {
+                              VictimENodebId = g.Key.ENodebId,
+                              VictimSectorId = g.Key.SectorId,
+                              Mod3Interferences = g.Average(x => x.Mod3Interferences),
+                              Mod6Interferences = g.Average(x => x.Mod6Interferences),
+                              OverInterferences10Db = g.Average(x => x.OverInterferences10Db),
+                              OverInterferences6Db = g.Average(x => x.OverInterferences6Db),
+                              InterferenceLevel = g.Average(x => x.InterferenceLevel),
+                              VictimCellName = "未匹配小区"
+                          };
+            var victims = results as InterferenceVictimView[] ?? results.ToArray();
+            foreach (var victim in victims)
+            {
+                var eNodeb = _eNodebRepository.GetByENodebId(victim.VictimENodebId);
+                victim.VictimCellName = eNodeb?.Name + "-" + victim.VictimSectorId;
+            }
+            return victims;
+        }
     }
 }

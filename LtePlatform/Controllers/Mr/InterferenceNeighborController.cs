@@ -40,4 +40,27 @@ namespace LtePlatform.Controllers.Mr
             return _service.QueryViews(begin, end, cellId, sectorId);
         }
     }
+
+    [ApiControl("被干扰小区查询控制器")]
+    public class InterferenceVictimController : ApiController
+    {
+        private readonly InterferenceNeighborService _service;
+
+        public InterferenceVictimController(InterferenceNeighborService service)
+        {
+            _service = service;
+        }
+
+        [HttpGet]
+        [ApiDoc("查询指定时间段和小区的被干扰小区记录")]
+        [ApiParameterDoc("cellId", "基站编号")]
+        [ApiParameterDoc("sectorId", "扇区编号")]
+        [ApiParameterDoc("begin", "开始日期")]
+        [ApiParameterDoc("end", "结束日期")]
+        [ApiResponse("被干扰小区记录列表")]
+        public IEnumerable<InterferenceVictimView> Get(DateTime begin, DateTime end, int cellId, byte sectorId)
+        {
+            return _service.QueryVictimViews(begin, end, cellId, sectorId);
+        }
+    }
 }

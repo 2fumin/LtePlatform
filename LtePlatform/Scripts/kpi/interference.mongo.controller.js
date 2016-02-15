@@ -25,10 +25,9 @@ app.controller('interference.mongo', function ($scope, $http, dumpProgress) {
     };
 
     $scope.dump = function () {
-        dumpProgress.dumpMongo($scope.dataModel.dumpInterferenceUrl, $scope.progressInfo, $scope.beginDate.value, $scope.endDate.value, 0, 4);
-        dumpProgress.dumpMongo($scope.dataModel.dumpInterferenceUrl, $scope.progressInfo, $scope.beginDate.value, $scope.endDate.value, 1, 4);
-        dumpProgress.dumpMongo($scope.dataModel.dumpInterferenceUrl, $scope.progressInfo, $scope.beginDate.value, $scope.endDate.value, 2, 4);
-        dumpProgress.dumpMongo($scope.dataModel.dumpInterferenceUrl, $scope.progressInfo, $scope.beginDate.value, $scope.endDate.value, 3, 4);
+        for (var i = 0; i < 16; i++) {
+            dumpProgress.dumpMongo($scope.dataModel.dumpInterferenceUrl, $scope.progressInfo, $scope.beginDate.value, $scope.endDate.value, i, 16);
+        }
     };
 
     $scope.reset();
