@@ -10,3 +10,5 @@ var ButtonsCtrl = function ($scope) {
     right: false
   };
 };
+
+app.controller("ButtonsCtrl", ButtonsCtrl);

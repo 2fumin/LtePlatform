@@ -18,9 +18,9 @@
                 templateUrl: viewDir + "demo.alert.html",
                 controller: "AlertDemoCtrl"
             })
-            .when('/parse', {
-                templateUrl: viewDir + "Parse.html",
-                controller: "ParseController"
+            .when('/buttons', {
+                templateUrl: viewDir + "demo.buttons.html",
+                controller: "ButtonsCtrl"
             })
             .otherwise({
                 redirectTo: '/'
@@ -49,6 +49,9 @@ app.controller("chap10.root", function ($scope) {
         }, {
             url: rootPath + "/alert",
             displayName: "警告框"
+        }, {
+            url: rootPath + "/buttons",
+            displayName: "按钮"
         }]
     }, {
         name: "Interpolate",

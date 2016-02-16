@@ -1,4 +1,4 @@
-<div ng-controller="ButtonsCtrl">
+<div>
     <h4>Single toggle</h4>
     <pre>{{singleModel}}</pre>
     <button type="button" class="btn btn-primary" ng-model="singleModel" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
@@ -7,15 +7,33 @@
     <h4>Checkbox</h4>
     <pre>{{checkModel}}</pre>
     <div class="btn-group">
-        <button type="button" class="btn btn-primary" ng-model="checkModel.left" btn-checkbox>Left</button>
-        <button type="button" class="btn btn-primary" ng-model="checkModel.middle" btn-checkbox>Middle</button>
-        <button type="button" class="btn btn-primary" ng-model="checkModel.right" btn-checkbox>Right</button>
+        <button type="button" class="btn" ng-class="{ 'btn-primary': checkModel.left, 'btn-default': !checkModel.left}"
+                ng-model="checkModel.left" btn-checkbox>
+            Left
+        </button>
+        <button type="button" class="btn" ng-class="{ 'btn-primary': checkModel.middle, 'btn-default': !checkModel.middle}"
+                ng-model="checkModel.middle" btn-checkbox>
+            Middle
+        </button>
+        <button type="button" class="btn" ng-class="{ 'btn-primary': checkModel.right, 'btn-default': !checkModel.right}"
+                ng-model="checkModel.right" btn-checkbox>
+            Right
+        </button>
     </div>
     <h4>Radio</h4>
     <pre>{{radioModel}}</pre>
     <div class="btn-group">
-        <button type="button" class="btn btn-primary" ng-model="radioModel" btn-radio="'Left'">Left</button>
-        <button type="button" class="btn btn-primary" ng-model="radioModel" btn-radio="'Middle'">Middle</button>
-        <button type="button" class="btn btn-primary" ng-model="radioModel" btn-radio="'Right'">Right</button>
+        <button type="button" class="btn" ng-class="{ 'btn-primary': radioModel==='Left', 'btn-default': radioModel!=='Left'}"
+                ng-model="radioModel" btn-radio="'Left'">
+            Left
+        </button>
+        <button type="button" class="btn" ng-class="{ 'btn-primary': radioModel==='Middle', 'btn-default': radioModel!=='Middle'}"
+                ng-model="radioModel" btn-radio="'Middle'">
+            Middle
+        </button>
+        <button type="button" class="btn" ng-class="{ 'btn-primary': radioModel==='Right', 'btn-default': radioModel!=='Right'}"
+                ng-model="radioModel" btn-radio="'Right'">
+            Right
+        </button>
     </div>
 </div>
