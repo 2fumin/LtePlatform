@@ -33,6 +33,7 @@
     $scope.showInterference = function(cell) {
         $scope.currentCell = cell;
         $scope.interferenceCells = [];
+        $scope.updateNeighborCounts = 0;
         $scope.interferencePanelTitle = cell.eNodebName + "-" + cell.sectorId + "干扰小区列表";
 
         $http({
