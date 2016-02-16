@@ -36,4 +36,18 @@
             Right
         </button>
     </div>
+    <div class="btn-group">
+        <a class="btn" ng-class="{ 'btn-success': radioModel==='Left', 'btn-default': radioModel!=='Left'}"
+                ng-model="radioModel" btn-radio="'Left'" href="">
+            Left
+        </a>
+        <a class="btn" ng-class="{ 'btn-success': radioModel==='Middle', 'btn-default': radioModel!=='Middle'}"
+                ng-model="radioModel" btn-radio="'Middle'" href="">
+            Middle
+        </a>
+        <a class="btn" ng-class="{ 'btn-success': radioModel==='Right', 'btn-default': radioModel!=='Right'}"
+                ng-model="radioModel" btn-radio="'Right'" href="">
+            Right
+        </a>
+    </div>
 </div>

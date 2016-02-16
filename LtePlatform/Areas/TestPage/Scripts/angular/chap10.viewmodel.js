@@ -22,6 +22,10 @@
                 templateUrl: viewDir + "demo.buttons.html",
                 controller: "ButtonsCtrl"
             })
+            .when('/carousel', {
+                templateUrl: viewDir + "demo.carousel.html",
+                controller: "CarouselDemoCtrl"
+            })
             .otherwise({
                 redirectTo: '/'
             });
@@ -54,9 +58,11 @@ app.controller("chap10.root", function ($scope) {
             displayName: "按钮"
         }]
     }, {
-        name: "Interpolate",
-        displayName: "插值字符串测试",
-        url: rootPath + "/interpolate"
+        displayName: "控件实例II",
+        items: [{
+            url: rootPath + "/carousel",
+            displayName: "轮播"
+        }]
     }, {
         name: "Parse",
         displayName: "表达式解析测试",

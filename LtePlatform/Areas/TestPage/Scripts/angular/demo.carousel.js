@@ -13,3 +13,5 @@ function CarouselDemoCtrl($scope) {
     $scope.addSlide();
   }
 }
+
+app.controller("CarouselDemoCtrl", CarouselDemoCtrl);

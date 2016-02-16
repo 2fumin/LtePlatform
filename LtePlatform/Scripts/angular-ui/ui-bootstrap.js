@@ -946,7 +946,7 @@ angular.module('ui.bootstrap.carousel', [])
     controllerAs: 'carousel',
     require: 'carousel',
     templateUrl: function(element, attrs) {
-      return attrs.templateUrl || 'template/carousel/carousel.html';
+      return attrs.templateUrl || '/template/carousel/carousel.html';
     },
     scope: {
       interval: '=',
@@ -1006,7 +1006,7 @@ function CarouselDemoCtrl($scope) {
     transclude: true,
     replace: true,
     templateUrl: function(element, attrs) {
-      return attrs.templateUrl || 'template/carousel/slide.html';
+      return attrs.templateUrl || '/template/carousel/slide.html';
     },
     scope: {
       active: '=?',
@@ -1133,7 +1133,7 @@ angular.module('ui.bootstrap.carousel')
     controllerAs: 'carousel',
     require: 'carousel',
     templateUrl: function(element, attrs) {
-      return attrs.templateUrl || 'template/carousel/carousel.html';
+      return attrs.templateUrl || '/template/carousel/carousel.html';
     },
     scope: {
       interval: '=',
@@ -1155,7 +1155,7 @@ angular.module('ui.bootstrap.carousel')
     transclude: true,
     replace: true,
     templateUrl: function(element, attrs) {
-      return attrs.templateUrl || 'template/carousel/slide.html';
+      return attrs.templateUrl || '/template/carousel/slide.html';
     },
     scope: {
       active: '=?',
