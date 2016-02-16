@@ -390,6 +390,8 @@
     <Content Include="appViews\Manage\CurrentUser.html" />
     <Content Include="appViews\Manage\Roles.html" />
     <Content Include="appViews\Manage\RoleUser.html" />
+    <Content Include="appViews\Rutrace\Interference\Source.html" />
+    <Content Include="appViews\Rutrace\Interference\Victim.html" />
     <Content Include="appViews\Test\Chapter10\DateTimeTest.html" />
     <Content Include="appViews\Test\Chapter10\demo.accordion.html" />
     <Content Include="appViews\Test\Chapter10\demo.alert.html" />
@@ -629,6 +631,7 @@
     <Content Include="Scripts\angular-ui\local\bootstrap-datetimepicker.uk.js" />
     <Content Include="Scripts\angular-ui\local\bootstrap-datetimepicker.zh-CN.js" />
     <Content Include="Scripts\angular-ui\local\bootstrap-datetimepicker.zh-TW.js" />
+    <Content Include="Scripts\rutrace\interference.route.js" />
     <Content Include="template\accordion\accordion-group.html" />
     <Content Include="template\accordion\accordion.html" />
     <Content Include="template\alert\alert.html" />

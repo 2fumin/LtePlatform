@@ -1,5 +1,4 @@
 ﻿app.controller("rutrace.interference", function ($scope, $http) {
-    $scope.pageTitle = "干扰矩阵分析";
     $scope.beginDate = {
         title: "开始日期",
         value: (new Date()).getDateFromToday(-7).Format("yyyy-MM-dd")
@@ -11,12 +10,10 @@
     $scope.showinfo = {
         title: "干扰分析"
     };
-    $scope.dataModel = new AppDataModel();
-    $scope.dataModel.initializeAuthorization();
     $scope.currentCell = {};
     $scope.interferenceCells = [];
+    $scope.victimCells = [];
     $scope.interferenceLevelOrder = "interferenceLevel";
-    $scope.interferencePanelTitle = "干扰小区列表";
     $scope.updateNeighborCounts = 0;
 
     $('.form_date').datetimepicker({
@@ -33,6 +30,7 @@
     $scope.showInterference = function(cell) {
         $scope.currentCell = cell;
         $scope.interferenceCells = [];
+        $scope.victimCells = [];
         $scope.updateNeighborCounts = 0;
         $scope.interferencePanelTitle = cell.eNodebName + "-" + cell.sectorId + "干扰小区列表";
 
@@ -78,6 +76,22 @@
 
         $http({
             method: 'GET',
+            url: $scope.dataModel.interferenceVictimUrl,
+            params: {
+                'begin': $scope.beginDate.value,
+                'end': $scope.endDate.value,
+                'cellId': cell.cellId,
+                'sectorId': cell.sectorId
+            },
+            headers: {
+                'Authorization': 'Bearer ' + $scope.dataModel.getAccessToken()
+            }
+        }).success(function(result) {
+            $scope.victimCells = result;
+        });
+
+        $http({
+            method: 'GET',
             url: $scope.dataModel.interferenceNeighborUrl,
             params: {
                 neighborCellId: cell.cellId,
@@ -86,11 +100,14 @@
             headers: {
                 'Authorization': 'Bearer ' + $scope.dataModel.getAccessToken()
             }
-        }).success(function(result) {
-            $scope.updateNeighborCounts = result;
+        }).success(function(message) {
+            $scope.updateNeighborCounts = message;
         });
     };
     $scope.showInfo = function(cell) {
         $scope.showInterference(cell);
+    };
+    $scope.refreshTopic = function (topic) {
+        $scope.currentTopic = topic;
     };
 });

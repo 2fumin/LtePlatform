@@ -44,6 +44,7 @@
 @section Scripts
 {
     <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/angular-route.min.js"></script>
     <link href="~/Content/themes/bootstrap-datetimepicker.min.css" rel="stylesheet" />
     <script src="~/Scripts/angular-ui/bootstrap-datetimepicker.min.js"></script>
     <script src="~/Scripts/angular-ui/local/bootstrap-datetimepicker.zh-CN.js"></script>
@@ -51,8 +52,9 @@
     <script src="~/Scripts/app/app.datamodel.js"></script>
     <script src="~/Scripts/baidu/cloud/geography.map.js"></script>
     <script>
-        var app = angular.module('myApp', []);
+        var app = angular.module('myApp', ['ngRoute']);
     </script>
+    <script src="~/Scripts/rutrace/interference.route.js"></script>
     <script src="~/Scripts/rutrace/interference.controller.js"></script>
     <script src="~/Scripts/rutrace/topcells.controller.js"></script>
     <script src="~/Scripts/rutrace/interference.neighbors.controller.js"></script>

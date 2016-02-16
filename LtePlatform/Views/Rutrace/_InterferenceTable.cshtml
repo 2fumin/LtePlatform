@@ -2,34 +2,12 @@
     更新邻区信息{{updateNeighborCounts}}条
 </div>
 <div panel-info panel-title="interferencePanelTitle">
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>邻小区名称</th>
-                <th>邻小区PCI</th>
-                <th>模3干扰数</th>
-                <th>模6干扰数</th>
-                <th>6dB干扰数</th>
-                <th>10dB干扰数</th>
-                <th>总干扰水平</th>
-                <th>操作</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="cell in interferenceCells | orderBy: interferenceLevelOrder: true">
-                <td>{{cell.neighborCellName}}</td>
-                <td>{{cell.destPci}}</td>
-                <td>{{cell.mod3Interferences | number:1}}</td>
-                <td>{{cell.mod6Interferences | number:1}}</td>
-                <td>{{cell.overInterferences6Db | number:1}}</td>
-                <td>{{cell.overInterferences10Db | number:1}}</td>
-                <td>{{cell.interferenceLevel | number:2}}</td>
-                <td>
-                    <button class="btn btn-sm btn-warning" ng-if="cell.neighborCellName==='未匹配小区'" ng-click="match(cell)">
-                        匹配
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="btn-group">
+        <a ng-repeat="routeInfo in routeInfos" href="{{routeInfo.url}}"
+           class="btn" ng-class="{ 'btn-primary': routeInfo.topic===currentTopic, 'btn-default': routeInfo.topic!==currentTopic}"
+           ng-click="refreshTopic(routeInfo.topic)">
+            {{routeInfo.displayName}}
+        </a>
+    </div>
+    <div ng-view></div>
 </div>
