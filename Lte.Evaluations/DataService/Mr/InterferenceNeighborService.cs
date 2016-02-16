@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Lte.Evaluations.ViewModels.Mr;
 using Lte.Parameters.Abstract;
 
@@ -20,14 +21,15 @@ namespace Lte.Evaluations.DataService.Mr
             _eNodebRepository = eNodebRepository;
         }
 
-        public int UpdateNeighbors(int cellId, byte sectorId)
+        public async Task<int> UpdateNeighbors(int cellId, byte sectorId)
         {
+            var count = 0;
             var neighborList = _neighborRepository.GetAllList(cellId, sectorId);
             foreach (var cell in neighborList)
             {
-                _repository.UpdateItems(cellId, sectorId, cell.Pci, cell.NearestCellId, cell.NearestSectorId);
+                count+= await _repository.UpdateItemsAsync(cellId, sectorId, cell.Pci, cell.NearestCellId, cell.NearestSectorId);
             }
-            return _repository.SaveChanges();
+            return _repository.SaveChanges() + count;
         }
 
         public IEnumerable<InterferenceMatrixView> QueryViews(DateTime begin, DateTime end, int cellId, byte sectorId)

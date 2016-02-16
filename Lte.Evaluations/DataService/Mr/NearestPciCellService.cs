@@ -40,6 +40,11 @@ namespace Lte.Evaluations.DataService.Mr
                     .ToList();
         }
 
+        public List<NearestPciCell> QueryNeighbors(int cellId, byte sectorId)
+        {
+            return _repository.GetAllList(cellId, sectorId);
+        } 
+
         public int UpdateNeighborPcis(int cellId, byte sectorId)
         {
             var neighborList = _repository.GetAllList(cellId, sectorId);
@@ -49,6 +54,14 @@ namespace Lte.Evaluations.DataService.Mr
                 if (cell == null || pciCell.Pci == cell.Pci) continue;
                 pciCell.Pci = cell.Pci;
                 _repository.Update(pciCell);
+                neighborList = _repository.GetAllList(pciCell.NearestCellId, pciCell.NearestSectorId);
+                foreach (var nearestPciCell in neighborList)
+                {
+                    cell = _cellRepository.GetBySectorId(nearestPciCell.NearestCellId, nearestPciCell.NearestSectorId);
+                    if (cell==null||nearestPciCell.Pci==cell.Pci) continue;
+                    nearestPciCell.Pci = cell.Pci;
+                    _repository.Update(nearestPciCell);
+                }
             }
             return _repository.SaveChanges();
         }

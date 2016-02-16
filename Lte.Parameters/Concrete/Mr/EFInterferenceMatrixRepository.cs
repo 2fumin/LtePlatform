@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Abp.EntityFramework;
 using Abp.EntityFramework.Repositories;
 using EntityFramework.Extensions;
@@ -20,12 +21,12 @@ namespace Lte.Parameters.Concrete.Mr
             return Context.SaveChanges();
         }
 
-        public void UpdateItems(int eNodebId, byte sectorId, short destPci, int destENodebId, byte destSectorId)
+        public Task<int> UpdateItemsAsync(int eNodebId, byte sectorId, short destPci, int destENodebId, byte destSectorId)
         {
-            GetAll()
+            return GetAll()
                 .Where(
                     x => x.ENodebId == eNodebId && x.SectorId == sectorId && x.DestPci == destPci && x.DestENodebId == 0)
-                .Update(
+                .UpdateAsync(
                     t =>
                         new InterferenceMatrixStat
                         {

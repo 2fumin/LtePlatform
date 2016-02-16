@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Http;
 using Lte.Evaluations.DataService.Mr;
 using Lte.Evaluations.ViewModels.Mr;
@@ -12,20 +13,39 @@ namespace LtePlatform.Controllers.Mr
     public class InterferenceNeighborController : ApiController
     {
         private readonly InterferenceNeighborService _service;
+        private readonly NearestPciCellService _neighborService;
 
-        public InterferenceNeighborController(InterferenceNeighborService service)
+        public InterferenceNeighborController(InterferenceNeighborService service, 
+            NearestPciCellService neighborService)
         {
             _service = service;
+            _neighborService = neighborService;
         }
 
         [HttpGet]
-        [ApiDoc("更新指定小区的邻区干扰记录")]
+        [ApiDoc("更新指定小区的邻区干扰记录（匹配小区编号和扇区编号）")]
         [ApiParameterDoc("cellId", "基站编号")]
         [ApiParameterDoc("sectorId", "扇区编号")]
         [ApiResponse("更新结果")]
-        public int Get(int cellId, byte sectorId)
+        public async Task<int> Get(int cellId, byte sectorId)
         {
-            return _service.UpdateNeighbors(cellId, sectorId);
+            return await _service.UpdateNeighbors(cellId, sectorId);
+        }
+
+        [HttpGet]
+        [ApiDoc("更新指定小区的邻区的邻区干扰记录（匹配小区编号和扇区编号）")]
+        [ApiParameterDoc("cellId", "基站编号")]
+        [ApiParameterDoc("sectorId", "扇区编号")]
+        [ApiResponse("更新结果")]
+        public async Task<int> GetNeighbor(int neighborCellId, byte neighborSectorId)
+        {
+            var count = 0;
+            var neighbors = _neighborService.QueryNeighbors(neighborCellId, neighborSectorId);
+            foreach (var neighbor in neighbors)
+            {
+                count+= await _service.UpdateNeighbors(neighbor.NearestCellId, neighbor.SectorId);
+            }
+            return count;
         }
 
         [HttpGet]

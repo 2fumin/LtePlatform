@@ -17,6 +17,7 @@
     $scope.interferenceCells = [];
     $scope.interferenceLevelOrder = "interferenceLevel";
     $scope.interferencePanelTitle = "干扰小区列表";
+    $scope.updateNeighborCounts = 0;
 
     $('.form_date').datetimepicker({
         language: 'zh-CN',
@@ -72,6 +73,20 @@
             }).success(function (result) {
                 $scope.interferenceCells = result;
             });
+        });
+
+        $http({
+            method: 'GET',
+            url: $scope.dataModel.interferenceNeighborUrl,
+            params: {
+                neighborCellId: cell.cellId,
+                neighborSectorId: cell.sectorId
+            },
+            headers: {
+                'Authorization': 'Bearer ' + $scope.dataModel.getAccessToken()
+            }
+        }).success(function(result) {
+            $scope.updateNeighborCounts = result;
         });
     };
     $scope.showInfo = function(cell) {
