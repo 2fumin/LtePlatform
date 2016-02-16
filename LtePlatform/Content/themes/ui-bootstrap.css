@@ -1,0 +1,4 @@
+﻿.ng-animate.item:not(.left):not(.right) {
+  -webkit-transition: 0s ease-in-out left;
+  transition: 0s ease-in-out left
+}

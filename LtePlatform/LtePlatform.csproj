@@ -568,6 +568,7 @@
     <Content Include="Content\themes\map\cloudmap.css" />
     <Content Include="Content\themes\map\timecontrol.css" />
     <Content Include="Content\themes\qtestcsv.css" />
+    <Content Include="Content\themes\ui-bootstrap.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -585,6 +586,7 @@
     <Content Include="Scripts\angular-ui-router.min.js" />
     <Content Include="Scripts\angular-ui\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\angular-ui\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\angular-ui\uib\carousel.js" />
     <Content Include="Scripts\angular-ui\customize\directive.datetimepicker.js" />
     <Content Include="Scripts\angular-ui\customize\directive.dialog.js" />
     <Content Include="Scripts\angular-ui\customize\directive.panel.js" />
@@ -652,8 +654,6 @@
     <Content Include="template\tooltip\tooltip-popup.html" />
     <Content Include="template\typeahead\typeahead-match.html" />
     <Content Include="template\typeahead\typeahead-popup.html" />
-    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
-    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.min.js" />
     <Content Include="Scripts\angular-ui\ui-bootstrap.js" />
     <Content Include="Scripts\angular-ui\ui-bootstrap.min.js" />
     <Content Include="Scripts\angular-ui\ui-utils-ieshiv.js" />
