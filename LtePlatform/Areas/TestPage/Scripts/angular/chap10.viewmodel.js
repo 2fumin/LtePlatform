@@ -54,6 +54,14 @@
                 templateUrl: viewDir + "demo.pagination.html",
                 controller: "PaginationDemoCtrl"
             })
+            .when('/popover', {
+                templateUrl: viewDir + "demo.popover.html",
+                controller: "PopoverDemoCtrl"
+            })
+            .when('/progress', {
+                templateUrl: viewDir + "demo.progress.html",
+                controller: "ProgressDemoCtrl"
+            })
             .otherwise({
                 redirectTo: '/'
             });
@@ -96,6 +104,9 @@ app.controller("chap10.root", function ($scope) {
         }, {
             url: rootPath + "/collapse",
             displayName: "折叠"
+        }, {
+            url: rootPath + "/progress",
+            displayName: "进度条"
         }]
     }, {
         displayName: "控件实例II",
@@ -118,8 +129,8 @@ app.controller("chap10.root", function ($scope) {
             url: rootPath + "/modal",
             displayName: "模态框"
         }, {
-            url: rootPath + "/dropdown",
-            displayName: "下拉列表"
+            url: rootPath + "/popover",
+            displayName: "弹出"
         }]
     }];
 });

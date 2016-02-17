@@ -400,14 +400,14 @@
     <Content Include="appViews\Test\Chapter10\demo.collapse.html" />
     <Content Include="appViews\Test\Chapter10\demo.datepicker.html" />
     <Content Include="appViews\Test\Chapter10\demo.dropdown.html" />
+    <Content Include="appViews\Test\Chapter10\demo.progress.html" />
+    <Content Include="appViews\Test\Chapter10\demo.popover.html" />
     <Content Include="appViews\Test\Chapter10\demo.pager.html" />
     <Content Include="appViews\Test\Chapter10\demo.typeahead.html" />
     <Content Include="appViews\Test\Chapter10\demo.tooltip.html" />
     <Content Include="appViews\Test\Chapter10\demo.timepicker.html" />
     <Content Include="appViews\Test\Chapter10\demo.tabs.html" />
     <Content Include="appViews\Test\Chapter10\demo.rating.html" />
-    <Content Include="appViews\Test\Chapter10\demo.progress.html" />
-    <Content Include="appViews\Test\Chapter10\demo.popover.html" />
     <Content Include="appViews\Test\Chapter10\demo.pagination.html" />
     <Content Include="appViews\Test\Chapter10\demo.modal.html" />
     <Content Include="appViews\Test\Chapter10\Links.html" />
@@ -434,6 +434,8 @@
     <Content Include="Areas\TestPage\Scripts\angular\demo.dateparser.js" />
     <Content Include="Areas\TestPage\Scripts\angular\demo.datepicker.js" />
     <Content Include="Areas\TestPage\Scripts\angular\demo.dropdown.js" />
+    <Content Include="Areas\TestPage\Scripts\angular\demo.progress.js" />
+    <Content Include="Areas\TestPage\Scripts\angular\demo.popover.js" />
     <Content Include="Areas\TestPage\Scripts\angular\demo.pager.js" />
     <Content Include="Scripts\angular-ui\uib\alert.js" />
     <Content Include="Areas\TestPage\Scripts\angular\chap10.viewmodel.js" />
@@ -448,8 +450,6 @@
     <Content Include="Areas\TestPage\Scripts\angular\demo.timepicker.js" />
     <Content Include="Areas\TestPage\Scripts\angular\demo.tabs.js" />
     <Content Include="Areas\TestPage\Scripts\angular\demo.rating.js" />
-    <Content Include="Areas\TestPage\Scripts\angular\demo.progress.js" />
-    <Content Include="Areas\TestPage\Scripts\angular\demo.popover.js" />
     <Content Include="Areas\TestPage\Scripts\angular\demo.pagination.js" />
     <Content Include="Areas\TestPage\Scripts\angular\demo.modal.js" />
     <Content Include="Areas\TestPage\Scripts\angular\demodatepicker.js" />
@@ -647,7 +647,9 @@
     <Content Include="Scripts\angular-ui\uib\pager.js" />
     <Content Include="Scripts\angular-ui\uib\pagination.js" />
     <Content Include="Scripts\angular-ui\uib\paging.js" />
+    <Content Include="Scripts\angular-ui\uib\popover.js" />
     <Content Include="Scripts\angular-ui\uib\position.js" />
+    <Content Include="Scripts\angular-ui\uib\progressbar.js" />
     <Content Include="Scripts\angular-ui\uib\stackedMap.js" />
     <Content Include="Scripts\angular-ui\uib\tooltip.js" />
     <Content Include="Scripts\rutrace\interference.route.js" />
@@ -666,9 +668,12 @@
     <Content Include="template\modal\window.html" />
     <Content Include="template\pager\pager.html" />
     <Content Include="template\pagination\pagination.html" />
+    <Content Include="template\popover\popover-html.html" />
+    <Content Include="template\popover\popover-template.html" />
     <Content Include="template\popover\popover.html" />
     <Content Include="template\progressbar\bar.html" />
     <Content Include="template\progressbar\progress.html" />
+    <Content Include="template\progressbar\progressbar.html" />
     <Content Include="template\rating\rating.html" />
     <Content Include="template\tabs\tab.html" />
     <Content Include="template\tabs\tabset.html" />

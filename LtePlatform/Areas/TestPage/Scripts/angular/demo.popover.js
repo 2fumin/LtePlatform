@@ -1,5 +1,25 @@
-var PopoverDemoCtrl = function ($scope) {
-  $scope.dynamicPopover = "Hello, World!";
-  $scope.dynamicPopoverText = "dynamic";
-  $scope.dynamicPopoverTitle = "Title";
-};
+app.controller('PopoverDemoCtrl', function ($scope) {
+  $scope.dynamicPopover = {
+    content: 'Hello, World!',
+    templateUrl: 'myPopoverTemplate.html',
+    title: 'Title'
+  };
+
+  $scope.placement = {
+    options: [
+      'top',
+      'top-left',
+      'top-right',
+      'bottom',
+      'bottom-left',
+      'bottom-right',
+      'left',
+      'left-top',
+      'left-bottom',
+      'right',
+      'right-top',
+      'right-bottom'
+    ],
+    selected: 'top'
+  };
+});
