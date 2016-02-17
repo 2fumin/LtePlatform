@@ -62,6 +62,10 @@
                 templateUrl: viewDir + "demo.progress.html",
                 controller: "ProgressDemoCtrl"
             })
+            .when('/rating', {
+                templateUrl: viewDir + "demo.rating.html",
+                controller: "RatingDemoCtrl"
+            })
             .otherwise({
                 redirectTo: '/'
             });
@@ -131,6 +135,9 @@ app.controller("chap10.root", function ($scope) {
         }, {
             url: rootPath + "/popover",
             displayName: "弹出"
+        }, {
+            url: rootPath + "/rating",
+            displayName: "星级"
         }]
     }];
 });
