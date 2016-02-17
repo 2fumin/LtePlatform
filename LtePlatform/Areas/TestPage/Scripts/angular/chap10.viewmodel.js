@@ -46,6 +46,10 @@
                 templateUrl: viewDir + "demo.modal.html",
                 controller: "ModalDemoCtrl"
             })
+            .when('/pager', {
+                templateUrl: viewDir + "demo.pager.html",
+                controller: "PagerDemoCtrl"
+            })
             .otherwise({
                 redirectTo: '/'
             });
@@ -97,6 +101,9 @@ app.controller("chap10.root", function ($scope) {
         }, {
             url: rootPath + "/dropdown",
             displayName: "下拉列表"
+        }, {
+            url: rootPath + "/pager",
+            displayName: "分页符"
         }]
     }, {
         displayName: "控件实例III",

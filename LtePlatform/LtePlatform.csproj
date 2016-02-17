@@ -400,6 +400,7 @@
     <Content Include="appViews\Test\Chapter10\demo.collapse.html" />
     <Content Include="appViews\Test\Chapter10\demo.datepicker.html" />
     <Content Include="appViews\Test\Chapter10\demo.dropdown.html" />
+    <Content Include="appViews\Test\Chapter10\demo.pager.html" />
     <Content Include="appViews\Test\Chapter10\demo.typeahead.html" />
     <Content Include="appViews\Test\Chapter10\demo.tooltip.html" />
     <Content Include="appViews\Test\Chapter10\demo.timepicker.html" />
@@ -433,6 +434,7 @@
     <Content Include="Areas\TestPage\Scripts\angular\demo.dateparser.js" />
     <Content Include="Areas\TestPage\Scripts\angular\demo.datepicker.js" />
     <Content Include="Areas\TestPage\Scripts\angular\demo.dropdown.js" />
+    <Content Include="Areas\TestPage\Scripts\angular\demo.pager.js" />
     <Content Include="Scripts\angular-ui\uib\alert.js" />
     <Content Include="Areas\TestPage\Scripts\angular\chap10.viewmodel.js" />
     <Content Include="Areas\TestPage\Scripts\angular\datetime.test.controller.js" />
@@ -642,6 +644,9 @@
     <Content Include="Scripts\angular-ui\uib\dropdown.js" />
     <Content Include="Scripts\angular-ui\uib\isClass.js" />
     <Content Include="Scripts\angular-ui\uib\modal.js" />
+    <Content Include="Scripts\angular-ui\uib\pager.js" />
+    <Content Include="Scripts\angular-ui\uib\pagination.js" />
+    <Content Include="Scripts\angular-ui\uib\paging.js" />
     <Content Include="Scripts\angular-ui\uib\position.js" />
     <Content Include="Scripts\angular-ui\uib\stackedMap.js" />
     <Content Include="Scripts\angular-ui\uib\tooltip.js" />
@@ -659,7 +664,7 @@
     <Content Include="template\dialog\message.html" />
     <Content Include="template\modal\backdrop.html" />
     <Content Include="template\modal\window.html" />
-    <Content Include="template\pagination\pager.html" />
+    <Content Include="template\pager\pager.html" />
     <Content Include="template\pagination\pagination.html" />
     <Content Include="template\popover\popover.html" />
     <Content Include="template\progressbar\bar.html" />
