@@ -42,6 +42,10 @@
                 templateUrl: viewDir + "demo.dropdown.html",
                 controller: "DropdownCtrl"
             })
+            .when('/modal', {
+                templateUrl: viewDir + "demo.modal.html",
+                controller: "ModalDemoCtrl"
+            })
             .otherwise({
                 redirectTo: '/'
             });
@@ -95,9 +99,14 @@ app.controller("chap10.root", function ($scope) {
             displayName: "下拉列表"
         }]
     }, {
-        name: "Parse",
-        displayName: "表达式解析测试",
-        url: rootPath + "/parse"
+        displayName: "控件实例III",
+        items: [{
+            url: rootPath + "/modal",
+            displayName: "模态框"
+        }, {
+            url: rootPath + "/dropdown",
+            displayName: "下拉列表"
+        }]
     }];
 });
 

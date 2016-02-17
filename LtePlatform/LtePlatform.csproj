@@ -641,7 +641,9 @@
     <Content Include="Scripts\angular-ui\uib\datepicker.js" />
     <Content Include="Scripts\angular-ui\uib\dropdown.js" />
     <Content Include="Scripts\angular-ui\uib\isClass.js" />
+    <Content Include="Scripts\angular-ui\uib\modal.js" />
     <Content Include="Scripts\angular-ui\uib\position.js" />
+    <Content Include="Scripts\angular-ui\uib\stackedMap.js" />
     <Content Include="Scripts\angular-ui\uib\tooltip.js" />
     <Content Include="Scripts\rutrace\interference.route.js" />
     <Content Include="template\accordion\accordion-group.html" />
@@ -655,6 +657,8 @@
     <Content Include="template\datepicker\popup.html" />
     <Content Include="template\datepicker\year.html" />
     <Content Include="template\dialog\message.html" />
+    <Content Include="template\modal\backdrop.html" />
+    <Content Include="template\modal\window.html" />
     <Content Include="template\pagination\pager.html" />
     <Content Include="template\pagination\pagination.html" />
     <Content Include="template\popover\popover.html" />
