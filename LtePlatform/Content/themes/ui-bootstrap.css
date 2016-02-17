@@ -1,4 +1,13 @@
-﻿.ng-animate.item:not(.left):not(.right) {
+﻿/*!
+ * Datetimepicker for Bootstrap
+ *
+ * Copyright 2012 Stefan Petre
+ * Improvements by Andrew Rowls
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ */
+.ng-animate .item:not(.left):not(.right) {
   -webkit-transition: 0s ease-in-out left;
   transition: 0s ease-in-out left
 }

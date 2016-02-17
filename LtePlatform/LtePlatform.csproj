@@ -442,6 +442,7 @@
     <Content Include="Areas\TestPage\Scripts\angular\demo.progress.js" />
     <Content Include="Areas\TestPage\Scripts\angular\demo.popover.js" />
     <Content Include="Areas\TestPage\Scripts\angular\demo.pager.js" />
+    <Content Include="Content\themes\ui-bootstrap.css" />
     <Content Include="Scripts\angular-ui\uib\alert.js" />
     <Content Include="Areas\TestPage\Scripts\angular\chap10.viewmodel.js" />
     <Content Include="Areas\TestPage\Scripts\angular\datetime.test.controller.js" />
@@ -570,7 +571,6 @@
     <Content Include="Content\themes\map\cloudmap.css" />
     <Content Include="Content\themes\map\timecontrol.css" />
     <Content Include="Content\themes\qtestcsv.css" />
-    <Content Include="Content\themes\ui-bootstrap.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
