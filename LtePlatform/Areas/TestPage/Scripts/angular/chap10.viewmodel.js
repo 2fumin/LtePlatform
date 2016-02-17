@@ -50,6 +50,10 @@
                 templateUrl: viewDir + "demo.pager.html",
                 controller: "PagerDemoCtrl"
             })
+            .when('/pagination', {
+                templateUrl: viewDir + "demo.pagination.html",
+                controller: "PaginationDemoCtrl"
+            })
             .otherwise({
                 redirectTo: '/'
             });
@@ -104,6 +108,9 @@ app.controller("chap10.root", function ($scope) {
         }, {
             url: rootPath + "/pager",
             displayName: "分页符"
+        }, {
+            url: rootPath + "/pagination",
+            displayName: "分页"
         }]
     }, {
         displayName: "控件实例III",
