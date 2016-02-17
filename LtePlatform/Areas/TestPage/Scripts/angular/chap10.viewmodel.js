@@ -38,6 +38,10 @@
                 templateUrl: viewDir + "demo.collapse.html",
                 controller: "CollapseDemoCtrl"
             })
+            .when('/dropdown', {
+                templateUrl: viewDir + "demo.dropdown.html",
+                controller: "DropdownCtrl"
+            })
             .otherwise({
                 redirectTo: '/'
             });
@@ -86,6 +90,9 @@ app.controller("chap10.root", function ($scope) {
         items: [{
             url: rootPath + "/carousel",
             displayName: "轮播"
+        }, {
+            url: rootPath + "/dropdown",
+            displayName: "下拉列表"
         }]
     }, {
         name: "Parse",

@@ -399,8 +399,7 @@
     <Content Include="appViews\Test\Chapter10\demo.carousel.html" />
     <Content Include="appViews\Test\Chapter10\demo.collapse.html" />
     <Content Include="appViews\Test\Chapter10\demo.datepicker.html" />
-    <Content Include="appViews\Test\Chapter10\demo.dialog.html" />
-    <Content Include="appViews\Test\Chapter10\demo.dropdowntoggle.html" />
+    <Content Include="appViews\Test\Chapter10\demo.dropdown.html" />
     <Content Include="appViews\Test\Chapter10\demo.typeahead.html" />
     <Content Include="appViews\Test\Chapter10\demo.tooltip.html" />
     <Content Include="appViews\Test\Chapter10\demo.timepicker.html" />
@@ -433,6 +432,7 @@
     </Content>
     <Content Include="Areas\TestPage\Scripts\angular\demo.dateparser.js" />
     <Content Include="Areas\TestPage\Scripts\angular\demo.datepicker.js" />
+    <Content Include="Areas\TestPage\Scripts\angular\demo.dropdown.js" />
     <Content Include="Scripts\angular-ui\uib\alert.js" />
     <Content Include="Areas\TestPage\Scripts\angular\chap10.viewmodel.js" />
     <Content Include="Areas\TestPage\Scripts\angular\datetime.test.controller.js" />
@@ -441,8 +441,6 @@
     <Content Include="Areas\TestPage\Scripts\angular\demo.buttons.js" />
     <Content Include="Areas\TestPage\Scripts\angular\demo.carousel.js" />
     <Content Include="Areas\TestPage\Scripts\angular\demo.collapse.js" />
-    <Content Include="Areas\TestPage\Scripts\angular\demo.dialog.js" />
-    <Content Include="Areas\TestPage\Scripts\angular\demo.dropdowntoggle.js" />
     <Content Include="Areas\TestPage\Scripts\angular\demo.typeahead.js" />
     <Content Include="Areas\TestPage\Scripts\angular\demo.tooltip.js" />
     <Content Include="Areas\TestPage\Scripts\angular\demo.timepicker.js" />
@@ -641,6 +639,7 @@
     <Content Include="Scripts\angular-ui\uib\collapse.js" />
     <Content Include="Scripts\angular-ui\uib\dateparser.js" />
     <Content Include="Scripts\angular-ui\uib\datepicker.js" />
+    <Content Include="Scripts\angular-ui\uib\dropdown.js" />
     <Content Include="Scripts\angular-ui\uib\isClass.js" />
     <Content Include="Scripts\angular-ui\uib\position.js" />
     <Content Include="Scripts\angular-ui\uib\tooltip.js" />
