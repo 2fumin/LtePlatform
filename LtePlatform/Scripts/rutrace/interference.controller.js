@@ -1,4 +1,4 @@
-﻿app.controller("rutrace.interference", function ($scope, $http) {
+﻿app.controller("rutrace.interference", function ($scope, $http, appUrlService) {
     $scope.beginDate = {
         title: "开始日期",
         value: (new Date()).getDateFromToday(-7).Format("yyyy-MM-dd")
@@ -36,7 +36,7 @@
 
         $http({
             method: 'GET',
-            url: $scope.dataModel.cellUrl,
+            url: appUrlService.getApiUrl('Cell'),
             params: {
                 'eNodebId': cell.cellId,
                 'sectorId': cell.sectorId
@@ -48,18 +48,18 @@
         
         $http({
             method: 'GET',
-            url: $scope.dataModel.interferenceNeighborUrl,
+            url: appUrlService.getApiUrl('InterferenceNeighbor'),
             params: {
                 'cellId': cell.cellId,
                 'sectorId': cell.sectorId
             },
             headers: {
-                'Authorization': 'Bearer ' + $scope.dataModel.getAccessToken()
+                'Authorization': 'Bearer ' + appUrlService.getAccessToken()
             }
         }).success(function () {
             $http({
                 method: 'GET',
-                url: $scope.dataModel.interferenceNeighborUrl,
+                url: appUrlService.getApiUrl('InterferenceNeighbor'),
                 params: {
                     'begin': $scope.beginDate.value,
                     'end': $scope.endDate.value,
@@ -67,7 +67,7 @@
                     'sectorId': cell.sectorId
                 },
                 headers: {
-                    'Authorization': 'Bearer ' + $scope.dataModel.getAccessToken()
+                    'Authorization': 'Bearer ' + appUrlService.getAccessToken()
                 }
             }).success(function (result) {
                 $scope.interferenceCells = result;
@@ -76,7 +76,7 @@
 
         $http({
             method: 'GET',
-            url: $scope.dataModel.interferenceVictimUrl,
+            url: appUrlService.getApiUrl('InterferenceVictim'),
             params: {
                 'begin': $scope.beginDate.value,
                 'end': $scope.endDate.value,
@@ -84,7 +84,7 @@
                 'sectorId': cell.sectorId
             },
             headers: {
-                'Authorization': 'Bearer ' + $scope.dataModel.getAccessToken()
+                'Authorization': 'Bearer ' + appUrlService.getAccessToken()
             }
         }).success(function(result) {
             $scope.victimCells = result;
@@ -92,13 +92,13 @@
 
         $http({
             method: 'GET',
-            url: $scope.dataModel.interferenceNeighborUrl,
+            url: appUrlService.getApiUrl('InterferenceNeighbor'),
             params: {
                 neighborCellId: cell.cellId,
                 neighborSectorId: cell.sectorId
             },
             headers: {
-                'Authorization': 'Bearer ' + $scope.dataModel.getAccessToken()
+                'Authorization': 'Bearer ' + appUrlService.getAccessToken()
             }
         }).success(function(message) {
             $scope.updateNeighborCounts = message;

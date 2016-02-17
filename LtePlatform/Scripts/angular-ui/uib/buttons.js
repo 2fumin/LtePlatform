@@ -61,7 +61,11 @@ angular.module('ui.bootstrap.buttons', [])
 
       element.find('input').css({display: 'none'});
 
-      function getTrueValue() {
+        function getCheckboxValue(attribute, defaultValue) {
+            return angular.isDefined(attribute) ? scope.$eval(attribute) : defaultValue;
+        }
+
+        function getTrueValue() {
         return getCheckboxValue(attrs.btnCheckboxTrue, true);
       }
 
@@ -69,11 +73,7 @@ angular.module('ui.bootstrap.buttons', [])
         return getCheckboxValue(attrs.btnCheckboxFalse, false);
       }
 
-      function getCheckboxValue(attribute, defaultValue) {
-        return angular.isDefined(attribute) ? scope.$eval(attribute) : defaultValue;
-      }
-
-      //model -> UI
+        //model -> UI
       ngModelCtrl.$render = function() {
         element.toggleClass(buttonsCtrl.activeClass, angular.equals(ngModelCtrl.$modelValue, getTrueValue()));
       };

@@ -1,4 +1,4 @@
-﻿app.controller("rutrace.topcells", function ($scope, $http) {
+﻿app.controller("rutrace.topcells", function ($scope, $http, appUrlService) {
     $scope.cellPanelTitle = "TOP指标查询";
     $scope.topCells = [];
 
@@ -17,7 +17,7 @@
         $scope.topCells = [];
         $http({
             method: 'GET',
-            url: $scope.dataModel.preciseStatUrl,
+            url: appUrlService.getApiUrl('PreciseStat'),
             params: {
                 'begin': $scope.beginDate.value,
                 'end': $scope.endDate.value,

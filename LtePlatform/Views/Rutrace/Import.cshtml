@@ -51,9 +51,9 @@
     <script src="~/Scripts/angular-ui/bootstrap-datetimepicker.min.js"></script>
     <script src="~/Scripts/angular-ui/local/bootstrap-datetimepicker.zh-CN.js"></script>
     <script src="~/Scripts/app/common.js"></script>
-    <script src="~/Scripts/app/app.datamodel.js"></script>
+    <script src="~/Scripts/service/app.url.service.js"></script>
     <script>
-        var app = angular.module('myApp', []);
+        var app = angular.module('myApp', ['myApp.Services']);
     </script>
     <script src="~/Scripts/rutrace/import.controller.js"></script>
     <script src="~/Scripts/rutrace/topcells.controller.js"></script>

@@ -1,4 +1,4 @@
-﻿app.controller("rutrace.import", function ($scope, $http) {
+﻿app.controller("rutrace.import", function ($scope, $http, appUrlService) {
     $scope.pageTitle = "TOP小区导入设置";
     $scope.beginDate = {
         title: "开始日期",
@@ -21,7 +21,7 @@
         $scope.neighborCells = [];
         $http({
             method: 'GET',
-            url: $scope.dataModel.nearestPciCellUrl,
+            url: appUrlService.getApiUrl('NearestPciCell'),
             params: {
                 'cellId': cell.cellId,
                 'sectorId': cell.sectorId
@@ -34,13 +34,13 @@
         $scope.showNeighbors(cell);
     };
     $scope.updatePci = function(cell) {
-        $http.post($scope.dataModel.nearestPciCellUrl, cell).success(function(result) {
+        $http.post(appUrlService.getApiUrl('NearestPciCell'), cell).success(function (result) {
             $scope.updateCounts = result;
             $scope.showNeighbors(cell);
         });
     };
     $scope.addMonitor = function(cell) {
-        $http.post($scope.dataModel.neighborMonitorUrl, {
+        $http.post(appUrlService.getApiUrl('NeighborMonitor'), {
             cellId: cell.cellId,
             sectorId: cell.sectorId
         }).success(function() {
@@ -48,7 +48,7 @@
         });
     };
     $scope.addNeighborMonitor = function (cell) {
-        $http.post($scope.dataModel.neighborMonitorUrl, {
+        $http.post(appUrlService.getApiUrl('NeighborMonitor'), {
             cellId: cell.nearestCellId,
             sectorId: cell.nearestSectorId
         }).success(function () {

@@ -1,4 +1,4 @@
-﻿app.controller("rutrace.interference.neighbors", function ($scope, $http) {
+﻿app.controller("rutrace.interference.neighbors", function ($scope, $http, appUrlService) {
 	$scope.pciNeighbors = [];
 	$scope.distanceOrder = "distance";
 	$scope.indoorConsidered = false;
@@ -8,7 +8,7 @@
     $scope.match = function (cell) {
 		$http({
 			method: 'GET',
-			url: $scope.dataModel.cellUrl,
+			url: appUrlService.getApiUrl('Cell'),
 			params: {
 				'eNodebId': $scope.currentCell.cellId,
 				'sectorId': $scope.currentCell.sectorId,
@@ -35,7 +35,7 @@
     $scope.matchNearest = function() {
     	
     	$(".modal").modal("hide");
-        $http.put($scope.dataModel.nearestPciCellUrl, {
+        $http.put(appUrlService.getApiUrl('NearestPciCell'), {
             cellId: $scope.currentCell.cellId,
             sectorId: $scope.currentCell.sectorId,
             pci: $scope.currentNeighbor.destPci,
