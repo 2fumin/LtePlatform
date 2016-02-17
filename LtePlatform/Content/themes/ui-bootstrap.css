@@ -31,3 +31,7 @@
 .uib-time input {
   width: 50px;
 }
+
+[uib-typeahead-popup].dropdown-menu {
+  display: block;
+}

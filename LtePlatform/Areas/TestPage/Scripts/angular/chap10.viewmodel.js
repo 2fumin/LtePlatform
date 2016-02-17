@@ -78,6 +78,10 @@
                 templateUrl: viewDir + "demo.tooltip.html",
                 controller: "TooltipDemoCtrl"
             })
+            .when('/typeahead', {
+                templateUrl: viewDir + "demo.typeahead.html",
+                controller: "TypeaheadCtrl"
+            })
             .otherwise({
                 redirectTo: '/'
             });
@@ -159,6 +163,9 @@ app.controller("chap10.root", function ($scope) {
         }, {
             url: rootPath + "/tooltip",
             displayName: "提示"
+        }, {
+            url: rootPath + "/typeahead",
+            displayName: "自动补全"
         }]
     }];
 });
