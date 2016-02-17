@@ -66,6 +66,10 @@
                 templateUrl: viewDir + "demo.rating.html",
                 controller: "RatingDemoCtrl"
             })
+            .when('/tabs', {
+                templateUrl: viewDir + "demo.tabs.html",
+                controller: "TabsDemoCtrl"
+            })
             .otherwise({
                 redirectTo: '/'
             });
@@ -126,6 +130,9 @@ app.controller("chap10.root", function ($scope) {
         }, {
             url: rootPath + "/pagination",
             displayName: "分页"
+        }, {
+            url: rootPath + "/tabs",
+            displayName: "标签"
         }]
     }, {
         displayName: "控件实例III",
