@@ -1,3 +1,3 @@
-function CollapseDemoCtrl($scope) {
-  $scope.isCollapsed = false;
-}
+app.controller('CollapseDemoCtrl', function ($scope) {
+    $scope.isCollapsed = false;
+});
