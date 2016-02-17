@@ -431,6 +431,8 @@
     <Content Include="Areas\TestPage\Scripts\5ch5\Player.js">
       <DependentUpon>Player.coffee</DependentUpon>
     </Content>
+    <Content Include="Areas\TestPage\Scripts\angular\demo.dateparser.js" />
+    <Content Include="Areas\TestPage\Scripts\angular\demo.datepicker.js" />
     <Content Include="Scripts\angular-ui\uib\alert.js" />
     <Content Include="Areas\TestPage\Scripts\angular\chap10.viewmodel.js" />
     <Content Include="Areas\TestPage\Scripts\angular\datetime.test.controller.js" />
@@ -637,6 +639,11 @@
     <Content Include="Scripts\angular-ui\local\bootstrap-datetimepicker.zh-CN.js" />
     <Content Include="Scripts\angular-ui\local\bootstrap-datetimepicker.zh-TW.js" />
     <Content Include="Scripts\angular-ui\uib\collapse.js" />
+    <Content Include="Scripts\angular-ui\uib\dateparser.js" />
+    <Content Include="Scripts\angular-ui\uib\datepicker.js" />
+    <Content Include="Scripts\angular-ui\uib\isClass.js" />
+    <Content Include="Scripts\angular-ui\uib\position.js" />
+    <Content Include="Scripts\angular-ui\uib\tooltip.js" />
     <Content Include="Scripts\rutrace\interference.route.js" />
     <Content Include="template\accordion\accordion-group.html" />
     <Content Include="template\accordion\accordion.html" />
@@ -644,6 +651,10 @@
     <Content Include="template\carousel\carousel.html" />
     <Content Include="template\carousel\slide.html" />
     <Content Include="template\datepicker\datepicker.html" />
+    <Content Include="template\datepicker\day.html" />
+    <Content Include="template\datepicker\month.html" />
+    <Content Include="template\datepicker\popup.html" />
+    <Content Include="template\datepicker\year.html" />
     <Content Include="template\dialog\message.html" />
     <Content Include="template\pagination\pager.html" />
     <Content Include="template\pagination\pagination.html" />
@@ -654,8 +665,9 @@
     <Content Include="template\tabs\tab.html" />
     <Content Include="template\tabs\tabset.html" />
     <Content Include="template\timepicker\timepicker.html" />
-    <Content Include="template\tooltip\tooltip-html-unsafe-popup.html" />
+    <Content Include="template\tooltip\tooltip-html-popup.html" />
     <Content Include="template\tooltip\tooltip-popup.html" />
+    <Content Include="template\tooltip\tooltip-template-popup.html" />
     <Content Include="template\typeahead\typeahead-match.html" />
     <Content Include="template\typeahead\typeahead-popup.html" />
     <Content Include="Scripts\angular-ui\ui-bootstrap.js" />
@@ -761,6 +773,7 @@
     <Content Include="Areas\TestPage\Views\AngularTest\Chapter10Ari.cshtml" />
     <Content Include="Areas\TestPage\Views\AngularTest\Chapter11Ari.cshtml" />
     <Content Include="Areas\TestPage\Views\AngularTest\Chapter12Ari.cshtml" />
+    <Content Include="appViews\Test\Chapter10\demo.dateparser.html" />
     <None Include="Areas\TestPage\Views\QUnitTest\NoQUnitMarkup.cshtml" />
     <Content Include="Areas\TestPage\Views\QUnitTest\Only.cshtml" />
     <None Include="Areas\TestPage\Views\QUnitTest\SingleTestId.cshtml" />

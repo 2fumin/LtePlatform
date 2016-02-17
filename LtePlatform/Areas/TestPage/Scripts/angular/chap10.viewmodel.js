@@ -10,6 +10,14 @@
                 templateUrl: viewDir + "DateTimeTest.html",
                 controller: "DateController"
             })
+            .when('/dateparser', {
+                templateUrl: viewDir + "demo.dateparser.html",
+                controller: "DateParserDemoCtrl"
+            })
+            .when('/datepicker', {
+                templateUrl: viewDir + "demo.datepicker.html",
+                controller: "DatepickerDemoCtrl"
+            })
             .when('/accordion', {
                 templateUrl: viewDir + "demo.accordion.html",
                 controller: "AccordionDemoCtrl"
@@ -45,9 +53,18 @@ app.controller("chap10.root", function ($scope) {
         displayName: "指令测试",
         url: rootPath + '/'
     }, {
-        name: "Date",
         displayName: "日期控件",
-        url: rootPath + "/date"
+        items: [
+        {
+            url: rootPath + "/date",
+            displayName: "自定义"
+        }, {
+            url: rootPath + "/dateparser",
+            displayName: "日期解析"
+        }, {
+            url: rootPath + "/datepicker",
+            displayName: "复杂控件"
+        }]
     }, {
         displayName: "控件实例I",
         items: [
