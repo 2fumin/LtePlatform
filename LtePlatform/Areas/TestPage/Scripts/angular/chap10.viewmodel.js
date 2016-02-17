@@ -70,6 +70,10 @@
                 templateUrl: viewDir + "demo.tabs.html",
                 controller: "TabsDemoCtrl"
             })
+            .when('/timepicker', {
+                templateUrl: viewDir + "demo.timepicker.html",
+                controller: "TimepickerDemoCtrl"
+            })
             .otherwise({
                 redirectTo: '/'
             });
@@ -96,6 +100,9 @@ app.controller("chap10.root", function ($scope) {
         }, {
             url: rootPath + "/datepicker",
             displayName: "复杂控件"
+        }, {
+            url: rootPath + "/timepicker",
+            displayName: "时间控件"
         }]
     }, {
         displayName: "控件实例I",

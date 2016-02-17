@@ -1,4 +1,4 @@
-var TimepickerDemoCtrl = function ($scope) {
+app.controller('TimepickerDemoCtrl', function ($scope, $log) {
   $scope.mytime = new Date();
 
   $scope.hstep = 1;
@@ -21,7 +21,11 @@ var TimepickerDemoCtrl = function ($scope) {
     $scope.mytime = d;
   };
 
+  $scope.changed = function () {
+    $log.log('Time changed to: ' + $scope.mytime);
+  };
+
   $scope.clear = function() {
     $scope.mytime = null;
   };
-};
+});

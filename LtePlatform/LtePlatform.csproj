@@ -400,6 +400,7 @@
     <Content Include="appViews\Test\Chapter10\demo.collapse.html" />
     <Content Include="appViews\Test\Chapter10\demo.datepicker.html" />
     <Content Include="appViews\Test\Chapter10\demo.dropdown.html" />
+    <Content Include="appViews\Test\Chapter10\demo.timepicker.html" />
     <Content Include="appViews\Test\Chapter10\demo.tabs.html" />
     <Content Include="appViews\Test\Chapter10\demo.rating.html" />
     <Content Include="appViews\Test\Chapter10\demo.progress.html" />
@@ -407,7 +408,6 @@
     <Content Include="appViews\Test\Chapter10\demo.pager.html" />
     <Content Include="appViews\Test\Chapter10\demo.typeahead.html" />
     <Content Include="appViews\Test\Chapter10\demo.tooltip.html" />
-    <Content Include="appViews\Test\Chapter10\demo.timepicker.html" />
     <Content Include="appViews\Test\Chapter10\demo.pagination.html" />
     <Content Include="appViews\Test\Chapter10\demo.modal.html" />
     <Content Include="appViews\Test\Chapter10\Links.html" />
@@ -434,6 +434,7 @@
     <Content Include="Areas\TestPage\Scripts\angular\demo.dateparser.js" />
     <Content Include="Areas\TestPage\Scripts\angular\demo.datepicker.js" />
     <Content Include="Areas\TestPage\Scripts\angular\demo.dropdown.js" />
+    <Content Include="Areas\TestPage\Scripts\angular\demo.timepicker.js" />
     <Content Include="Areas\TestPage\Scripts\angular\demo.tabs.js" />
     <Content Include="Areas\TestPage\Scripts\angular\demo.rating.js" />
     <Content Include="Areas\TestPage\Scripts\angular\demo.progress.js" />
@@ -449,10 +450,8 @@
     <Content Include="Areas\TestPage\Scripts\angular\demo.collapse.js" />
     <Content Include="Areas\TestPage\Scripts\angular\demo.typeahead.js" />
     <Content Include="Areas\TestPage\Scripts\angular\demo.tooltip.js" />
-    <Content Include="Areas\TestPage\Scripts\angular\demo.timepicker.js" />
     <Content Include="Areas\TestPage\Scripts\angular\demo.pagination.js" />
     <Content Include="Areas\TestPage\Scripts\angular\demo.modal.js" />
-    <Content Include="Areas\TestPage\Scripts\angular\demodatepicker.js" />
     <Content Include="Areas\TestPage\Scripts\angular\menu.controller.js" />
     <Content Include="Areas\TestPage\Scripts\angular\oneway.domain.app.js" />
     <Content Include="Areas\TestPage\Scripts\angular\root.property.js" />
@@ -653,6 +652,7 @@
     <Content Include="Scripts\angular-ui\uib\rating.js" />
     <Content Include="Scripts\angular-ui\uib\stackedMap.js" />
     <Content Include="Scripts\angular-ui\uib\tabs.js" />
+    <Content Include="Scripts\angular-ui\uib\timepicker.js" />
     <Content Include="Scripts\angular-ui\uib\tooltip.js" />
     <Content Include="Scripts\rutrace\interference.route.js" />
     <Content Include="template\accordion\accordion-group.html" />
