@@ -74,6 +74,10 @@
                 templateUrl: viewDir + "demo.timepicker.html",
                 controller: "TimepickerDemoCtrl"
             })
+            .when('/tooltip', {
+                templateUrl: viewDir + "demo.tooltip.html",
+                controller: "TooltipDemoCtrl"
+            })
             .otherwise({
                 redirectTo: '/'
             });
@@ -152,6 +156,9 @@ app.controller("chap10.root", function ($scope) {
         }, {
             url: rootPath + "/rating",
             displayName: "星级"
+        }, {
+            url: rootPath + "/tooltip",
+            displayName: "提示"
         }]
     }];
 });
