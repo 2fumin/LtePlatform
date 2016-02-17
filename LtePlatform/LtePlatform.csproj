@@ -431,6 +431,7 @@
     <Content Include="Areas\TestPage\Scripts\5ch5\Player.js">
       <DependentUpon>Player.coffee</DependentUpon>
     </Content>
+    <Content Include="Scripts\angular-ui\uib\alert.js" />
     <Content Include="Areas\TestPage\Scripts\angular\chap10.viewmodel.js" />
     <Content Include="Areas\TestPage\Scripts\angular\datetime.test.controller.js" />
     <Content Include="Areas\TestPage\Scripts\angular\demo.accordion.js" />
