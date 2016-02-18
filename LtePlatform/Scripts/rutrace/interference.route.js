@@ -27,8 +27,6 @@
 app.run(function ($rootScope) {
     // 使用.run访问$rootScope
     $rootScope.pageTitle = "干扰矩阵分析";
-    $rootScope.dataModel = new AppDataModel();
-    $rootScope.dataModel.initializeAuthorization();
     $rootScope.interferencePanelTitle = "干扰小区列表";
     $rootScope.currentTopic = "Source";
 

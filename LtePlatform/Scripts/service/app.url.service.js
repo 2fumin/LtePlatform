@@ -37,15 +37,13 @@
             }
         };
         var initializeAuthorization = function () {
-            if (!self.getAccessToken()) {
-                // The following code looks for a fragment in the URL to get the access token which will be
-                // used to call the protected Web API resource
+            if (!sessionStorage.getItem("accessToken")) {
                 var fragment = getFragment();
 
                 if (fragment.access_token) {
                     // returning with access token, restore old hash, or at least hide token
                     window.location.hash = fragment.state || '';
-                    self.setAccessToken(fragment.access_token);
+                    sessionStorage.setItem("accessToken", fragment.access_token);
                 } else {
                     // no token - so bounce to Authorize endpoint in AccountController to sign in or register
                     window.location = "/Account/Authorize?client_id=web&response_type=token&state=" + encodeURIComponent(window.location.hash);

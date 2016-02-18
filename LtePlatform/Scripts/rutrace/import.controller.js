@@ -14,7 +14,6 @@
     $scope.currentCell = {};
     $scope.neighborCells = [];
     $scope.updateCounts = 0;
-    $scope.dataModel = new AppDataModel();
 
     $scope.showNeighbors = function(cell) {
         $scope.currentCell = cell;
