@@ -2,17 +2,6 @@
     $scope.cellPanelTitle = "TOP指标查询";
     $scope.topCells = [];
 
-    $('.form_date').datetimepicker({
-        language: 'zh-CN',
-        weekStart: 1,
-        todayBtn: 1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 2,
-        minView: 2,
-        forceParse: 0
-    });
-
     $scope.query = function () {
         $scope.topCells = [];
         $http({

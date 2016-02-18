@@ -1,5 +1,5 @@
-﻿<div class="alert alert-success" ng-if="updateCounts>0">
-    共完成{{updateCounts}}条邻区信息导入
+﻿<div uib-alert ng-repeat="message in updateMessages" type="success" close="closeAlert($index)">
+    {{message.cellName}}共完成{{messge.counts}}条邻区信息导入
 </div>
 <div class="panel panel-info">
     <div class="panel-heading">
