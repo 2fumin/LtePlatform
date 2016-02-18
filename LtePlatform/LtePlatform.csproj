@@ -390,8 +390,10 @@
     <Content Include="appViews\Manage\CurrentUser.html" />
     <Content Include="appViews\Manage\Roles.html" />
     <Content Include="appViews\Manage\RoleUser.html" />
+    <Content Include="appViews\Rutrace\Index.html" />
     <Content Include="appViews\Rutrace\Interference\Source.html" />
     <Content Include="appViews\Rutrace\Interference\Victim.html" />
+    <Content Include="appViews\Rutrace\Trend.html" />
     <Content Include="appViews\Test\Chapter10\DateTimeTest.html" />
     <Content Include="appViews\Test\Chapter10\demo.accordion.html" />
     <Content Include="appViews\Test\Chapter10\demo.alert.html" />
@@ -1082,6 +1084,7 @@
     <None Include="Views\Parameters\_NeighborImport.cshtml" />
     <Content Include="Views\Rutrace\_RutraceMenu.cshtml" />
     <None Include="Views\Rutrace\Coverage.cshtml" />
+    <None Include="Views\Rutrace\Index.cshtml" />
     <None Include="Views\Rutrace\Interference.cshtml" />
     <None Include="Views\Rutrace\WorkItem.cshtml" />
     <None Include="Views\Rutrace\_InterferenceTable.cshtml" />

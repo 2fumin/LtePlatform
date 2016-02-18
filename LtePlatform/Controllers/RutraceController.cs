@@ -9,22 +9,7 @@ namespace LtePlatform.Controllers
     public class RutraceController : Controller
     {
         // GET: Rutrace
-        public ActionResult Import()
-        {
-            return View();
-        }
-
-        public ActionResult Interference()
-        {
-            return View();
-        }
-
-        public ActionResult Coverage()
-        {
-            return View();
-        }
-
-        public ActionResult WorkItem()
+        public ActionResult Index()
         {
             return View();
         }
