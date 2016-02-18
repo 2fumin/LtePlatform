@@ -1,11 +1,27 @@
-﻿城市：
-<select ng-model="city.selected" ng-options="c as city in city.options"></select>
-日期：
-<input id="StatDate" data-bind="value: statDate" />
-<button type="button" class="btn btn-success" ng-click="showKpi()">
-    <span class="glyphicon glyphicon-search"></span>
-    统计结果
-</button>
+﻿<div class="row">
+    <div class="col-md-6">
+        <label>城市：</label>
+        <div class="input-group">
+            <select class="form-control" ng-model="city.selected" ng-options="c as city for city in city.options"></select>
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-success" ng-click="showKpi()">
+                    <i class="glyphicon glyphicon-search"></i>
+                    统计结果
+                </button>
+            </span>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label>日期：</label>
+        <div class="input-group">
+            <input type="text" class="form-control" uib-datepicker-popup ng-model="statDate.value" is-open="statDate.opened" ng-required="true" close-text="Close" />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="statDate.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </div>
+    </div>
+</div>
+
 <h4 class="text-center text-primary">
     分区指标统计
 </h4>
@@ -35,19 +51,19 @@
                 </button>
             </td>
         </tr>
-        <tr data-bind="with: cityStat">
-            <td data-bind="text: $data.city"></td>
-            <td data-bind="text: $data.district"></td>
-            <td data-bind="text: $data.totalMrs"></td>
-            <td data-bind="text: $data.preciseRate.toFixed(2)"></td>
-            <td data-bind="text: $data.firstRate.toFixed(2)"></td>
+        <tr>
+            <td>{{cityStat.city}}</td>
+            <td>{{cityStat.district}}</td>
+            <td>{{cityStat.totalMrs}}</td>
+            <td>{{cityStat.preciseRate | number: 2}}</td>
+            <td>{{cityStat.firstRate | number: 2}}</td>
             <td>-</td>
         </tr>
     </tbody>
 </table>
 
 <h4 class="text-primary text-center">
-    <span data-bind="text: currentDistrict"></span>详细统计信息
+    {{currentDistrict}}详细统计信息
 </h4>
 
 <table class="table table-hover">
@@ -60,13 +76,13 @@
             <th>第三邻区精确覆盖率</th>
         </tr>
     </thead>
-    <tbody data-bind="foreach: townStats">
-        <tr>
-            <td data-bind="text: $data.town, visible: $data.district == $root.precise().currentDistrict()"></td>
-            <td data-bind="text: $data.totalMrs, visible: $data.district == $root.precise().currentDistrict()"></td>
-            <td data-bind="text: $data.preciseRate.toFixed(2), visible: $data.district == $root.precise().currentDistrict()"></td>
-            <td data-bind="text: $data.firstRate.toFixed(2), visible: $data.district == $root.precise().currentDistrict()"></td>
-            <td data-bind="text: $data.thirdRate.toFixed(2), visible: $data.district == $root.precise().currentDistrict()"></td>
+    <tbody>
+        <tr ng-repeat="stat in townStats | filter: {district: currentDistrict}">
+            <td>{{stat.town}}</td>
+            <td>{{stat.totalMrs}}</td>
+            <td>{{cityStat.preciseRate | number: 2}}</td>
+            <td>{{cityStat.firstRate | number: 2}}</td>
+            <td>{{cityStat.thirdRate | number: 2}}</td>
         </tr>
     </tbody>
 </table>

@@ -38,6 +38,14 @@ app.controller("rutrace.root", function($scope) {
 
 app.controller("rutrace.index", function($scope) {
     $scope.page.title = "指标总体情况";
+    $scope.statDate = {
+        value: new Date() - 1,
+        opened: false
+    };
+    $scope.city = {
+        sekected: "佛山",
+        options: ["佛山", "广州"]
+    };
 });
 
 app.controller("rutrace.trend", function($scope) {
