@@ -2,7 +2,7 @@
     <div class="col-md-6">
         <label>城市：</label>
         <div class="input-group">
-            <select class="form-control" ng-model="city.selected" ng-options="c as city for city in city.options"></select>
+            <select class="form-control" ng-model="city.selected" ng-options="c as c for c in city.options"></select>
             <span class="input-group-btn">
                 <button type="button" class="btn btn-success" ng-click="showKpi()">
                     <i class="glyphicon glyphicon-search"></i>

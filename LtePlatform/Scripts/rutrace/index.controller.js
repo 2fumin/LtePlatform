@@ -1,5 +1,5 @@
 ﻿
-app.controller("rutrace.index", function ($scope) {
+app.controller("rutrace.index", function ($scope, appRegionService) {
     $scope.page.title = "指标总体情况";
     var yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
@@ -8,7 +8,12 @@ app.controller("rutrace.index", function ($scope) {
         opened: false
     };
     $scope.city = {
-        sekected: "佛山",
-        options: ["佛山", "广州"]
+        selected: "",
+        options: []
     };
+    $scope.showKpi = function() {
+        console.log($scope.city);
+    };
+    appRegionService.initializeCities($scope.city);
+    
 });
