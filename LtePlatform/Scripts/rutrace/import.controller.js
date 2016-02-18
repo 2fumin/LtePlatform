@@ -13,7 +13,7 @@
     };
     $scope.currentCell = {};
     $scope.neighborCells = [];
-    $scope.updateCounts = 0;
+    $scope.updateMessages = [];
 
     $scope.showNeighbors = function(cell) {
         $scope.currentCell = cell;
@@ -34,10 +34,16 @@
     };
     $scope.updatePci = function(cell) {
         $http.post(appUrlService.getApiUrl('NearestPciCell'), cell).success(function (result) {
-            $scope.updateCounts = result;
+            $scope.updateMessages.push({
+                cellName: cell.eNodebName + '-' + cell.sectorId,
+                counts: result
+            });
             $scope.showNeighbors(cell);
         });
     };
+    $scope.closeAlert = function (index) {
+        $scope.updateMessages.splice(index, 1);
+    }
     $scope.addMonitor = function(cell) {
         $http.post(appUrlService.getApiUrl('NeighborMonitor'), {
             cellId: cell.cellId,

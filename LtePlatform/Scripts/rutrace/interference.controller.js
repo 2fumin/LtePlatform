@@ -14,24 +14,12 @@
     $scope.interferenceCells = [];
     $scope.victimCells = [];
     $scope.interferenceLevelOrder = "interferenceLevel";
-    $scope.updateNeighborCounts = 0;
-
-    $('.form_date').datetimepicker({
-        language: 'zh-CN',
-        weekStart: 1,
-        todayBtn: 1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 2,
-        minView: 2,
-        forceParse: 0
-    });
+    $scope.updateMessages = [];
 
     $scope.showInterference = function(cell) {
         $scope.currentCell = cell;
         $scope.interferenceCells = [];
         $scope.victimCells = [];
-        $scope.updateNeighborCounts = 0;
         $scope.interferencePanelTitle = cell.eNodebName + "-" + cell.sectorId + "干扰小区列表";
 
         $http({
@@ -100,10 +88,16 @@
             headers: {
                 'Authorization': 'Bearer ' + appUrlService.getAccessToken()
             }
-        }).success(function(message) {
-            $scope.updateNeighborCounts = message;
+        }).success(function(result) {
+            $scope.updateMessages.push({
+                cellName: cell.eNodebName + '-' + cell.sectorId,
+                counts: result
+            });
         });
     };
+    $scope.closeAlert = function (index) {
+        $scope.updateMessages.splice(index, 1);
+    }
     $scope.showInfo = function(cell) {
         $scope.showInterference(cell);
     };
