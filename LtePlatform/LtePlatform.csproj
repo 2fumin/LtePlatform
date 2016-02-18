@@ -658,6 +658,7 @@
     <Content Include="Scripts\angular-ui\uib\timepicker.js" />
     <Content Include="Scripts\angular-ui\uib\tooltip.js" />
     <Content Include="Scripts\angular-ui\uib\typeahead.js" />
+    <Content Include="Scripts\rutrace\index.controller.js" />
     <Content Include="Scripts\rutrace\interference.route.js" />
     <Content Include="Scripts\service\app.url.service.js" />
     <Content Include="template\accordion\accordion-group.html" />
