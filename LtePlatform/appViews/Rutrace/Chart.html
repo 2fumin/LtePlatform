@@ -2,26 +2,15 @@
     <div class="panel-heading">
         <h3 class="panel-title">
             {{overallStat.dateString}}精确覆盖率指标
+            <button class="btn btn-primary" style="float: right" ng-click="showCharts()">显示</button>
         </h3>
     </div>
     <div class="panel-body">
-        <ul class="nav nav-tabs">
-            <li class="active">
-                <a href="#/chart#mr-tab"data-toggle="tab">
-                    测量报告数分布
-                </a>
-            </li>
-            <li>
-                <a href="#/chart#precise-tab" data-toggle="tab">
-                    精确覆盖率
-                </a>
-            </li>
-        </ul>
-        <div class="tab-content" active="active">
-            <div class="tab-pane fade in active" id="mr-tab">
+        <div uib-tabset active="active">
+            <div uib-tab index="0" heading="测量报告数">
                 <div style="min-height: 500px" id="mr-pie"></div>
             </div>
-            <div class="tab-pane fade" id="precise-tab">
+            <div uib-tab index="1" heading="精确覆盖率">
                 <div style="min-height: 500px" id="precise"></div>
             </div>
         </div>

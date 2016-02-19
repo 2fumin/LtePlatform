@@ -50,9 +50,12 @@ app.controller("rutrace.root", function($scope) {
 
 app.controller("rutrace.chart", function ($scope, $location, appKpiService) {
     if ($scope.overallStat.districtStats.length === 0) $location.path($scope.rootPath);
-    
-    $("#mr-pie").highcharts(appKpiService.getMrPieOptions($scope.overallStat.districtStats,
-        $scope.overallStat.townStats));
+
+    $scope.showCharts = function() {
+        $("#mr-pie").highcharts(appKpiService.getMrPieOptions($scope.overallStat.districtStats,
+            $scope.overallStat.townStats));
+    };
+
 });
 
 app.controller("rutrace.trend", function($scope) {
