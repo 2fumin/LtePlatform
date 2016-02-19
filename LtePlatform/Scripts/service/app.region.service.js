@@ -1,5 +1,5 @@
 ﻿angular.module('myApp.region', ['myApp.url'])
-    .factory('appRegionService', function($q, $http, appUrlService) {
+    .factory('appRegionService', function ($q, $http, appUrlService) {
         return {
             initializeCities: function () {
                 var deferred = $q.defer();

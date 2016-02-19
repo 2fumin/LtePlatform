@@ -17,6 +17,8 @@ app.controller("rutrace.index", function ($scope, appRegionService, appKpiServic
                 $scope.statDate.value = appFormatService.getDate(result.statDate);
                 $scope.overallStat.districtStats = result.districtPreciseViews;
                 $scope.overallStat.townStats = result.townPreciseViews;
+                $scope.overallStat.currentDistrict = result.districtPreciseViews[0].district;
+                $scope.overallStat.cityStat = appKpiService.getCityStat($scope.overallStat.districtStats, $scope.city.selected);
             });
     };
     appRegionService.initializeCities()
