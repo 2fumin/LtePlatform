@@ -1,17 +1,24 @@
 ﻿angular.module('myApp.region', ['myApp.url'])
-    .factory('appRegionService', function($http, appUrlService) {
+    .factory('appRegionService', function($q, $http, appUrlService) {
         return {
-        	initializeCities: function (city) {
+            initializeCities: function () {
+                var deferred = $q.defer();
                 $http({
                     method: 'GET',
                     url: appUrlService.getApiUrl('CityList'),
                     headers: {
                         'Authorization': 'Bearer ' + appUrlService.getAccessToken()
                     }
-                }).success(function(result) {
-                    city.options = result;
-                    city.selected = result[0];
+                }).success(function (result) {
+                    deferred.resolve({
+                        options: result,
+                        selected: result[0]
+                    });
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
                 });
+                return deferred.promise;
             }
         };
     });

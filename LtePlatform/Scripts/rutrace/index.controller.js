@@ -14,6 +14,9 @@ app.controller("rutrace.index", function ($scope, appRegionService) {
     $scope.showKpi = function() {
         console.log($scope.city);
     };
-    appRegionService.initializeCities($scope.city);
-    
+    appRegionService.initializeCities()
+        .then(function(result) {
+            $scope.city = result;
+        });
+
 });
