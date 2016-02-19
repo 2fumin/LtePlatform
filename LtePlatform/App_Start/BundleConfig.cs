@@ -86,18 +86,6 @@ namespace LtePlatform
                 "~/Scripts/kpi/top.drop2G.viewmodel.js",
                 "~/Scripts/app/_run.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/kpiPrecise").Include(
-                "~/Scripts/sammy-{version}.js",
-                "~/Scripts/app/common.js",
-                "~/Scripts/mycharts/drilldown.chart.js",
-                "~/Scripts/mycharts/drilldownPie.js",
-                "~/Scripts/app/app.datamodel.js",
-                "~/Scripts/app/app.viewmodel.js",
-                "~/Scripts/kpi/common.controller.js",
-                "~/Scripts/kpi/precise.controller.js",
-                "~/Scripts/kpi/precise.viewmodel.js",
-                "~/Scripts/app/_run.js"));
-
             bundles.Add(new ScriptBundle("~/bundles/kpiPreciseTrend").Include(
                 "~/Scripts/sammy-{version}.js",
                 "~/Scripts/app/common.js",

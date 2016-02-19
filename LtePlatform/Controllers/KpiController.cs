@@ -34,12 +34,7 @@ namespace LtePlatform.Controllers
         {
             return View();
         }
-
-        public ActionResult Precise4G()
-        {
-            return View();
-        }
-
+        
         public ActionResult PreciseTrend()
         {
             return View();

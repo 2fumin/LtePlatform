@@ -997,7 +997,6 @@
     <Content Include="Views\Parameters\List.cshtml" />
     <Content Include="Views\Dt\List.cshtml" />
     <Content Include="Views\Kpi\_KpiMenu.cshtml" />
-    <Content Include="Views\Kpi\Precise4G.cshtml" />
     <Content Include="Views\Kpi\TopDrop2G.cshtml" />
     <Content Include="Views\Kpi\TopDrop2GDaily.cshtml" />
     <Content Include="Views\Kpi\TopConnection3G.cshtml" />
@@ -1024,8 +1023,6 @@
     <Content Include="Views\College\_PreciseKpi.cshtml" />
     <Content Include="Views\Kpi\PreciseTrend.cshtml" />
     <Content Include="Views\Kpi\PreciseTop.cshtml" />
-    <Content Include="Views\Kpi\_Precise4G.cshtml" />
-    <Content Include="Views\Kpi\_CityPreciseTable.cshtml" />
     <Content Include="Views\Kpi\_PreciseTrend.cshtml" />
     <Content Include="Views\Kpi\_PreciseTrendTable.cshtml" />
     <Content Include="Views\College\_Infrastructure.cshtml" />
