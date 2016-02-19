@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
+﻿using System.Linq;
+using Abp.EntityFramework.AutoMapper;
 using Lte.Evaluations.DataService;
-using Lte.Evaluations.MapperSerive;
-using Lte.Evaluations.ViewModels;
 using Lte.Evaluations.ViewModels.RegionKpi;
 using NUnit.Framework;
 
@@ -18,7 +12,7 @@ namespace Lte.Evaluations.Test.TestService
         [TestFixtureSetUp]
         public void TestFixtureSetup()
         {
-            KpiMapperService.MapDistrictPrecise();
+            AutoMapperHelper.CreateMap(typeof(DistrictPreciseView));
         }
 
         [TestCase("Foshan", "Chancheng", new[] {"town-1", "town-2"}, 

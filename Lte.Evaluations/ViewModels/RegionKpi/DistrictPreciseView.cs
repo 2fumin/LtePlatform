@@ -2,7 +2,7 @@
 
 namespace Lte.Evaluations.ViewModels.RegionKpi
 {
-    [AutoMapFrom(typeof(TownBtsStatView))]
+    [AutoMapFrom(typeof(TownPreciseView))]
     public class DistrictPreciseView
     {
         public string City { get; set; } = "-";

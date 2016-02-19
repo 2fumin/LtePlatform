@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Abp.EntityFramework.AutoMapper;
 using Castle.Core.Internal;
 using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.Test.MockItems;
@@ -31,7 +32,7 @@ namespace Lte.Evaluations.Test.DataService
             _statRepository.MockOperation();
             _townRepository.MockOpertion();
             KpiMapperService.MapTownPrecise();
-            KpiMapperService.MapDistrictPrecise();
+            AutoMapperHelper.CreateMap(typeof(DistrictPreciseView));
         }
 
         [SetUp]

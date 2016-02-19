@@ -16,11 +16,6 @@ namespace Lte.Evaluations.MapperSerive
             Mapper.CreateMap<CdmaRegionStat, CdmaRegionStatView>();
         }
 
-        public static void MapDistrictPrecise()
-        {
-            Mapper.CreateMap<TownPreciseView, DistrictPreciseView>();
-        }
-
         public static void MapTownPrecise()
         {
             Mapper.CreateMap<TownPreciseCoverage4GStat, TownPreciseView>();

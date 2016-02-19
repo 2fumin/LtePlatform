@@ -2,6 +2,7 @@
 using AutoMapper;
 using Lte.Evaluations.ViewModels;
 using Lte.Evaluations.ViewModels.Basic;
+using Lte.Evaluations.ViewModels.RegionKpi;
 using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.Basic;
 using Lte.Parameters.Entities.ExcelCsv;
@@ -35,7 +36,6 @@ namespace Lte.Evaluations.MapperSerive
 
             KpiMapperService.MapCdmaRegionStat();
             KpiMapperService.MapCellPrecise();
-            KpiMapperService.MapDistrictPrecise();
             KpiMapperService.MapTownPrecise();
             KpiMapperService.MapAlarmStat();
             KpiMapperService.MapTopDrop2G();
@@ -58,6 +58,7 @@ namespace Lte.Evaluations.MapperSerive
             AutoMapperHelper.CreateMap(typeof(PciCellPair));
             AutoMapperHelper.CreateMap(typeof(CdmaRegionStat));
             AutoMapperHelper.CreateMap(typeof(InterferenceMatrixStat));
+            AutoMapperHelper.CreateMap(typeof (DistrictPreciseView));
         }
     }
 }
