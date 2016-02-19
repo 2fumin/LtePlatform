@@ -38,7 +38,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="stat in districtStats">
+        <tr ng-repeat="stat in overallStat.districtStats">
             <td>{{stat.city}}</td>
             <td>{{stat.district}}</td>
             <td>{{stat.totalMrs}}</td>
@@ -77,7 +77,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="stat in townStats | filter: {district: currentDistrict}">
+        <tr ng-repeat="stat in overallStat.townStats | filter: {district: overallStat.currentDistrict}">
             <td>{{stat.town}}</td>
             <td>{{stat.totalMrs}}</td>
             <td>{{cityStat.preciseRate | number: 2}}</td>

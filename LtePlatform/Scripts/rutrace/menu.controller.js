@@ -33,7 +33,13 @@
     });
 
 app.controller("rutrace.root", function($scope) {
-    $scope.page ={ title: "指标总体情况"};
+    $scope.page = { title: "指标总体情况" };
+    $scope.overallStat = {
+        currentDistrict: "",
+        districtStats: [],
+        townStats: [],
+        cityStat: {}
+    };
 });
 
 app.controller("rutrace.trend", function($scope) {

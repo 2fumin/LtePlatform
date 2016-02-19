@@ -40,7 +40,7 @@ namespace Lte.Evaluations.DataService
                     .ToList();
             return new PreciseRegionDateView
             {
-                StatDate = maxDate.ToShortDateString(),
+                StatDate = maxDate,
                 TownPreciseViews = townViews,
                 DistrictPreciseViews = Merge(townViews)
             };
@@ -58,7 +58,7 @@ namespace Lte.Evaluations.DataService
                    group view by view.StatTime into g
                    select new PreciseRegionDateView
                    {
-                       StatDate = g.Key.ToShortDateString(),
+                       StatDate = g.Key,
                        TownPreciseViews = g.Select(x => x),
                        DistrictPreciseViews = Merge(g.Select(x => x))
                    };
@@ -66,13 +66,14 @@ namespace Lte.Evaluations.DataService
 
         public static IEnumerable<DistrictPreciseView> Merge(IEnumerable<TownPreciseView> townPreciseViews)
         {
-            if (!townPreciseViews.Any()) return null;
-            var districts = townPreciseViews.Select(x => x.District).Distinct();
-            var city = townPreciseViews.ElementAt(0).City;
+            var preciseViews = townPreciseViews as TownPreciseView[] ?? townPreciseViews.ToArray();
+            if (!preciseViews.Any()) return null;
+            var districts = preciseViews.Select(x => x.District).Distinct();
+            var city = preciseViews.ElementAt(0).City;
             return districts.Select(district =>
             {
                 var view =
-                    DistrictPreciseView.ConstructView(townPreciseViews.Where(x => x.District == district).ArraySum());
+                    DistrictPreciseView.ConstructView(preciseViews.Where(x => x.District == district).ArraySum());
                 view.City = city;
                 view.District = district;
                 return view;

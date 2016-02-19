@@ -55,7 +55,7 @@ namespace Lte.Evaluations.Test.DataService
             _testService.ImportPreciseRecord(townId, statDate, totalMrs, firstNeighbors, secondNeighbors, thirdNeighbors);
             var result = _testService.QueryLastDateStat(initialDate, "city");
             Assert.IsNotNull(result);
-            Assert.AreEqual(DateTime.Parse(result.StatDate), DateTime.Parse(statDate));
+            Assert.AreEqual(result.StatDate, DateTime.Parse(statDate));
             Assert.AreEqual(result.TownPreciseViews.Count(), 1);
             PreciseViewTestService.AssertEqual(result.TownPreciseViews.ElementAt(0), new TownPreciseView
             {
@@ -93,7 +93,7 @@ namespace Lte.Evaluations.Test.DataService
                 thirdNeighbors);
             var result = _testService.QueryLastDateStat(initialDate, "city");
             Assert.IsNotNull(result);
-            Assert.AreEqual(DateTime.Parse(result.StatDate), DateTime.Parse(resultDate));
+            Assert.AreEqual(result.StatDate, DateTime.Parse(resultDate));
             Assert.AreEqual(result.TownPreciseViews.Count(), 1);
             PreciseViewTestService.AssertEqual(result.TownPreciseViews.ElementAt(0), new TownPreciseView
             {
@@ -137,7 +137,7 @@ namespace Lte.Evaluations.Test.DataService
                 thirdNeighbors);
             var result = _testService.QueryLastDateStat(initialDate, "city");
             Assert.IsNotNull(result);
-            Assert.AreEqual(DateTime.Parse(result.StatDate), DateTime.Parse(resultDate));
+            Assert.AreEqual(result.StatDate, DateTime.Parse(resultDate));
             for (var i = 0; i < resultTownId.Length; i++)
             {
                 PreciseViewTestService.AssertEqual(result.TownPreciseViews.ElementAt(i), new TownPreciseView

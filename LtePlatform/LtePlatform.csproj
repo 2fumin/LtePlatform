@@ -660,6 +660,7 @@
     <Content Include="Scripts\angular-ui\uib\typeahead.js" />
     <Content Include="Scripts\rutrace\index.controller.js" />
     <Content Include="Scripts\rutrace\interference.route.js" />
+    <Content Include="Scripts\service\app.kpi.service.js" />
     <Content Include="Scripts\service\app.url.service.js" />
     <Content Include="template\accordion\accordion-group.html" />
     <Content Include="template\accordion\accordion.html" />
