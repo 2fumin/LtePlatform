@@ -891,7 +891,6 @@
     <Content Include="Scripts\kpi\precise.controller.js" />
     <Content Include="Scripts\kpi\precise.top.viewmodel.js" />
     <Content Include="Scripts\kpi\precise.trend.viewmodel.js" />
-    <Content Include="Scripts\kpi\precise.viewmodel.js" />
     <Content Include="Scripts\kpi\preciseimport.controller.js" />
     <Content Include="Scripts\kpi\preciseimport.viewmodel.js" />
     <Content Include="Scripts\kpi\top.drop2G.viewmodel.js" />

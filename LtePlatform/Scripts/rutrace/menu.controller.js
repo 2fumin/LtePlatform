@@ -43,13 +43,16 @@ app.controller("rutrace.root", function($scope) {
         currentDistrict: "",
         districtStats: [],
         townStats: [],
-        cityStat: {}
+        cityStat: {},
+        dateString: ""
     };
 });
 
 app.controller("rutrace.chart", function ($scope, $location, appKpiService) {
     if ($scope.overallStat.districtStats.length === 0) $location.path($scope.rootPath);
-    $("#mr-pie").highcharts(appKpiService.getMrPieOptions($scope.overallStat.districtStats, $scope.overallStat.townStats));
+    
+    $("#mr-pie").highcharts(appKpiService.getMrPieOptions($scope.overallStat.districtStats,
+        $scope.overallStat.townStats));
 });
 
 app.controller("rutrace.trend", function($scope) {

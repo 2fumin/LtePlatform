@@ -1,10 +1,29 @@
 ﻿<div class="panel panel-info">
     <div class="panel-heading">
         <h3 class="panel-title">
-            {{statDate}}各区测量报告数分布
+            {{overallStat.dateString}}精确覆盖率指标
         </h3>
     </div>
     <div class="panel-body">
-        <div style="min-height: 500px" id="mr-pie"></div>
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#/chart#mr-tab"data-toggle="tab">
+                    测量报告数分布
+                </a>
+            </li>
+            <li>
+                <a href="#/chart#precise-tab" data-toggle="tab">
+                    精确覆盖率
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content" active="active">
+            <div class="tab-pane fade in active" id="mr-tab">
+                <div style="min-height: 500px" id="mr-pie"></div>
+            </div>
+            <div class="tab-pane fade" id="precise-tab">
+                <div style="min-height: 500px" id="precise"></div>
+            </div>
+        </div>
     </div>
 </div>
