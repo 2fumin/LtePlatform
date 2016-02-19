@@ -9,6 +9,7 @@
         var calculateDistrictRates = function (districtStat) {
             districtStat.firstRate = 100 - 100 * districtStat.firstNeighbors / districtStat.totalMrs;
             districtStat.preciseRate = 100 - 100 * districtStat.secondNeighbors / districtStat.totalMrs;
+            districtStat.thirdRate = 100 - 100 * districtStat.thirdNeighbors / districtStat.totalMrs;
             return districtStat;
         };
 
@@ -65,6 +66,25 @@
                         }
                     }
                     chart.addOneSeries(district, districtMr, subData);
+                }
+                return chart.options;
+            },
+            getPreciseRateOptions: function(districtStats, townStats) {
+                var chart = new DrilldownColumn();
+                chart.title.text = "分镇区精确覆盖率分布图";
+                chart.series[0].data = [];
+                chart.drilldown.series = [];
+                chart.series[0].name = "区域";
+                for (var i = 0; i < districtStats.length; i++) {
+                    var subData = [];
+                    var district = districtStats[i].district;
+                    var districtRate = districtStats[i].preciseRate;
+                    for (var j = 0; j < townStats.length; j++) {
+                        if (townStats[j].district === district) {
+                            subData.push([townStats[j].town, townStats[j].preciseRate]);
+                        }
+                    }
+                    chart.addOneSeries(district, districtRate, subData);
                 }
                 return chart.options;
             }

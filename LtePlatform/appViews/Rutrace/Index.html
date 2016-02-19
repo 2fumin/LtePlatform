@@ -35,6 +35,7 @@
             <th>MR总数</th>
             <th>精确覆盖率</th>
             <th>第一邻区精确覆盖率</th>
+            <th>第三邻区精确覆盖率</th>
             <th></th>
         </tr>
     </thead>
@@ -45,6 +46,7 @@
             <td>{{stat.totalMrs}}</td>
             <td>{{stat.preciseRate | number: 2}}</td>
             <td>{{stat.firstRate | number: 2}}</td>
+            <td>{{stat.thirdRate | number: 2}}</td>
             <td>
                 <button class="btn btn-primary" ng-click="overallStat.currentDistrict = stat.district">
                     详细
@@ -57,6 +59,7 @@
             <td>{{overallStat.cityStat.totalMrs}}</td>
             <td>{{overallStat.cityStat.preciseRate | number: 2}}</td>
             <td>{{overallStat.cityStat.firstRate | number: 2}}</td>
+            <td>{{overallStat.cityStat.thirdRate | number: 2}}</td>
             <td>-</td>
         </tr>
     </tbody>
