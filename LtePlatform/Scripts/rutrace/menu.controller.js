@@ -14,6 +14,10 @@
                     templateUrl: viewDir + "Top.html",
                     controller: "rutrace.top"
                 })
+                .when('/chart', {
+                    templateUrl: viewDir + "Chart.html",
+                    controller: "rutrace.chart"
+                })
                 .otherwise({
                     redirectTo: '/'
                 });
@@ -30,6 +34,7 @@
                 url: rootUrl + "/trend"
             }
         ];
+        $rootScope.rootPath = rootUrl + "/";
     });
 
 app.controller("rutrace.root", function($scope) {
@@ -40,6 +45,11 @@ app.controller("rutrace.root", function($scope) {
         townStats: [],
         cityStat: {}
     };
+});
+
+app.controller("rutrace.chart", function ($scope, $location, appKpiService) {
+    if ($scope.overallStat.districtStats.length === 0) $location.path($scope.rootPath);
+    $("#mr-pie").highcharts(appKpiService.getMrPieOptions($scope.overallStat.districtStats, $scope.overallStat.townStats));
 });
 
 app.controller("rutrace.trend", function($scope) {

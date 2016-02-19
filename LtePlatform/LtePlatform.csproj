@@ -390,6 +390,7 @@
     <Content Include="appViews\Manage\CurrentUser.html" />
     <Content Include="appViews\Manage\Roles.html" />
     <Content Include="appViews\Manage\RoleUser.html" />
+    <Content Include="appViews\Rutrace\Chart.html" />
     <Content Include="appViews\Rutrace\Index.html" />
     <Content Include="appViews\Rutrace\Interference\Source.html" />
     <Content Include="appViews\Rutrace\Interference\Victim.html" />
