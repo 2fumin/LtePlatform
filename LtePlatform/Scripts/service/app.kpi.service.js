@@ -114,6 +114,62 @@
                 }
                 return chart.options;
             },
+            getMrsDistrictOptions: function(mrStats, districts){
+                var chart = new ComboChart();
+                chart.title.text = "MR总数变化趋势图";
+                var statDates = [];
+                var districtStats = [];
+                for (var i = 0; i < mrStats.length; i++) {
+                    var stat = mrStats[i];
+                    statDates.push(stat.statDate);
+                    for (var j = 0; j < districts.length ; j++) {
+                        if (i == 0) {
+                            districtStats.push([stat.values[j]]);
+                        } else {
+                            districtStats[j].push(stat.values[j]);
+                        }
+                    }
+                }
+                chart.xAxis[0].categories = statDates;
+                chart.yAxis[0].title.text = "MR总数";
+                chart.xAxis[0].title.text = '日期';
+                for (j = 0; j < districts.length; j++) {
+                    chart.series.push({
+                        type: j === districts.length - 1 ? "spline" : "column",
+                        name: districts[j],
+                        data: districtStats[j]
+                    });
+                }
+                return chart.options;
+            },
+            getPreciseDistrictOptions: function(preciseStats, districts){
+                var chart = new ComboChart();
+                chart.title.text = "精确覆盖率变化趋势图";
+                var statDates = [];
+                var districtStats = [];
+                for (var i = 0; i < preciseStats.length; i++) {
+                    var stat = preciseStats[i];
+                    statDates.push(stat.statDate);
+                    for (var j = 0; j < districts.length ; j++) {
+                        if (i == 0) {
+                            districtStats.push([stat.values[j]]);
+                        } else {
+                            districtStats[j].push(stat.values[j]);
+                        }
+                    }
+                }
+                chart.xAxis[0].categories = statDates;
+                chart.yAxis[0].title.text = "精确覆盖率";
+                chart.xAxis[0].title.text = '日期';
+                for (j = 0; j < districts.length; j++) {
+                    chart.series.push({
+                        type: j === districts.length - 1 ? "spline" : "line",
+                        name: districts[j],
+                        data: districtStats[j]
+                    });
+                }
+                return chart.options;
+            },
             generateDistrictStats: function (trendStat, districts, result) {
                 for (var i = 0; i < result.length; i++) {
                     var districtViews = result[i].districtPreciseViews;

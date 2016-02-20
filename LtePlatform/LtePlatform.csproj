@@ -890,9 +890,7 @@
     <Content Include="Scripts\kpi\interference.import.controller.js" />
     <Content Include="Scripts\kpi\interference.mongo.controller.js" />
     <Content Include="Scripts\kpi\interferenceimport.viewmodel.js" />
-    <Content Include="Scripts\kpi\precise.controller.js" />
     <Content Include="Scripts\kpi\precise.top.viewmodel.js" />
-    <Content Include="Scripts\kpi\precise.trend.viewmodel.js" />
     <Content Include="Scripts\kpi\preciseimport.controller.js" />
     <Content Include="Scripts\kpi\preciseimport.viewmodel.js" />
     <Content Include="Scripts\kpi\top.drop2G.viewmodel.js" />
@@ -1022,10 +1020,7 @@
     <Content Include="Views\College\_KpiReport.cshtml" />
     <Content Include="Views\College\_EditKpi.cshtml" />
     <Content Include="Views\College\_PreciseKpi.cshtml" />
-    <Content Include="Views\Kpi\PreciseTrend.cshtml" />
     <Content Include="Views\Kpi\PreciseTop.cshtml" />
-    <Content Include="Views\Kpi\_PreciseTrend.cshtml" />
-    <Content Include="Views\Kpi\_PreciseTrendTable.cshtml" />
     <Content Include="Views\College\_Infrastructure.cshtml" />
     <Content Include="Views\College\_CollegeStatTable.cshtml" />
     <Content Include="Views\Dt\_List.cshtml" />
