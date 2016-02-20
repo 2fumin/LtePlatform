@@ -11,12 +11,22 @@ app.controller("rutrace.trend", function ($scope, appRegionService, appKpiServic
         value: new Date(),
         opened: false
     };
+    $scope.districts = [];
+    $scope.mrStats = [];
+    $scope.preciseStats = [];
+
     $scope.showTrend = function() {
 
     };
     appRegionService.initializeCities()
         .then(function (result) {
             $scope.city = result;
-            $scope.showTrend();
+            var city = $scope.city.selected;
+            appRegionService.queryDistricts(city)
+                .then(function (districts) {
+                    districts.push(city);
+                    $scope.districts = districts;
+            });
         });
+    $scope.showTrend();
 })

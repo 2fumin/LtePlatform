@@ -19,6 +19,25 @@
                     deferred.reject(reason);
                 });
                 return deferred.promise;
+            },
+            queryDistricts: function (cityName) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('CityList'),
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                    },
+                    params: {
+                        city: cityName
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
             }
         };
     })
