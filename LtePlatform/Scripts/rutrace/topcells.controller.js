@@ -1,5 +1,5 @@
-﻿app.controller("rutrace.topcells", function ($scope, $http, appUrlService) {
-    $scope.cellPanelTitle = "TOP指标查询";
+﻿app.controller("rutrace.top", function ($scope, $http, appUrlService) {
+    $scope.page.title = "TOP指标分析";
     $scope.topCells = [];
 
     $scope.query = function () {

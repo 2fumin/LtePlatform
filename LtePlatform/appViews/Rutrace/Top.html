@@ -1,0 +1,49 @@
+﻿<div class="row">
+    <div class="col-md-6">
+        <div>
+            <label>开始日期：</label>
+            <div class="input-group">
+                <input type="text" class="form-control" uib-datepicker-popup ng-model="beginDate.value"
+                       is-open="beginDate.opened" ng-required="true" close-text="Close" />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="beginDate.opened = true">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                </span>
+            </div>
+        </div>
+
+        <div>
+            <label>结束日期：</label>
+            <div class="input-group">
+                <input type="text" class="form-control" uib-datepicker-popup ng-model="endDate.value"
+                       is-open="endDate.opened" ng-required="true" close-text="Close" />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="endDate.opened = true">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label>排序依据：</label>
+        <div class="input-group">
+            <select class="form-control" ng-model="orderPolicy.selected" ng-options="p as p for p in orderPolicy.options"></select>
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-success" ng-click="showTop()">
+                    <i class="glyphicon glyphicon-search" title="统计数据"></i>
+                </button>
+            </span>            
+        </div>
+        <label>TOP个数：</label>
+        <div class="input-group">
+            <select class="form-control" ng-model="topCount.selected" ng-options="c as c for c in topCount.options"></select>            
+            <div class="input-group-btn">
+                <a class="btn btn-primary" ng-href="{{rootPath}}trendchart">
+                    <i class="glyphicon glyphicon-globe" title="地理化显示"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

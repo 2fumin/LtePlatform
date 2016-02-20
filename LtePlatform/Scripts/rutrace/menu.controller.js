@@ -22,6 +22,10 @@
                     templateUrl: viewDir + "TrendChart.html",
                     controller: "rutrace.trendchart"
                 })
+                .when('/top', {
+                    templateUrl: viewDir + "Top.html",
+                    controller: "rutrace.top"
+                })
                 .otherwise({
                     redirectTo: '/'
                 });
@@ -36,6 +40,9 @@
             }, {
                 displayName: "指标变化趋势",
                 url: rootUrl + "/trend"
+            }, {
+                displayName: "TOP指标分析",
+                url: rootUrl + "/top"
             }
         ];
         $rootScope.rootPath = rootUrl + "/";
