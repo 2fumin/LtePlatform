@@ -15,9 +15,11 @@
         <div>
             <label>开始日期：</label>
             <div class="input-group">
-                <input type="text" class="form-control" uib-datepicker-popup ng-model="beginDate.value" is-open="beginDate.opened" ng-required="true" close-text="Close"/>
+                <input type="text" class="form-control" uib-datepicker-popup ng-model="beginDate.value" 
+                       is-open="beginDate.opened" ng-required="true" close-text="Close"/>
                 <span class="input-group-btn">
-                    <button type="button" class="btn btn-default" ng-click="beginDate.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
+                    <button type="button" class="btn btn-default" ng-click="beginDate.opened = true">
+                    <i class="glyphicon glyphicon-calendar"></i></button>
                 </span>
             </div>
         </div>
@@ -25,9 +27,11 @@
         <div>
             <label>结束日期：</label>
             <div class="input-group">
-                <input type="text" class="form-control" uib-datepicker-popup ng-model="endDate.value" is-open="endDate.opened" ng-required="true" close-text="Close"/>
+                <input type="text" class="form-control" uib-datepicker-popup ng-model="endDate.value" 
+                       is-open="endDate.opened" ng-required="true" close-text="Close"/>
                 <span class="input-group-btn">
-                    <button type="button" class="btn btn-default" ng-click="endDate.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
+                    <button type="button" class="btn btn-default" ng-click="endDate.opened = true">
+                    <i class="glyphicon glyphicon-calendar"></i></button>
                 </span>
             </div>
         </div>
@@ -42,8 +46,8 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="stat in mrStats">
-            <td>{{stat.statDate}}</td>
+        <tr ng-repeat="stat in trendStat.mrStats">
+            <td>{{stat.statDate | date: 'yyyy-MM-dd'}}</td>
             <td ng-repeat="value in stat.values">{{value}}</td>
         </tr>
     </tbody>
@@ -57,9 +61,8 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="stat in preciseStats">
-            <td data-bind="text: $data.statDate"></td>
-            <td>{{stat.statDate}}</td>
+        <tr ng-repeat="stat in trendStat.preciseStats">
+            <td>{{stat.statDate | date: 'yyyy-MM-dd'}}</td>
             <td ng-repeat="value in stat.values">{{value | number: 2}}</td>
         </tr>
     </tbody>

@@ -46,6 +46,10 @@ app.controller("rutrace.root", function($scope) {
         cityStat: {},
         dateString: ""
     };
+    $scope.trendStat = {
+        mrStats: [],
+        preciseStats: []
+    };
 });
 
 app.controller("rutrace.chart", function ($scope, $location, appKpiService) {

@@ -14,7 +14,7 @@
         };
 
         return {
-            getRecentPreciseRegionKpi: function(city, initialDate) {
+            getRecentPreciseRegionKpi: function (city, initialDate) {
                 var deferred = $q.defer();
                 $http({
                     method: 'GET',
@@ -25,6 +25,27 @@
                     params: {
                         city: city,
                         statDate: initialDate
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
+            },
+            getDateSpanPreciseRegionKpi: function (city, beginDate, endDate) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('PreciseRegion'),
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                    },
+                    params: {
+                        city: city,
+                        begin: beginDate,
+                        end: endDate
                     }
                 }).success(function (result) {
                     deferred.resolve(result);
@@ -50,7 +71,7 @@
                 }
                 return calculateDistrictRates(stat);
             },
-            getMrPieOptions: function(districtStats, townStats) {
+            getMrPieOptions: function (districtStats, townStats) {
                 var chart = new DrilldownPie();
                 chart.title.text = "分镇区测量报告数分布图";
                 chart.series[0].data = [];
@@ -69,7 +90,7 @@
                 }
                 return chart.options;
             },
-            getPreciseRateOptions: function(districtStats, townStats) {
+            getPreciseRateOptions: function (districtStats, townStats) {
                 var chart = new DrilldownColumn();
                 chart.title.text = "分镇区精确覆盖率分布图";
                 chart.series[0].data = [];
@@ -87,6 +108,42 @@
                     chart.addOneSeries(district, districtRate, subData);
                 }
                 return chart.options;
+            },
+            generateDistrictStats: function (trendStat, districts, result) {
+                for (var i = 0; i < result.length; i++) {
+                    var districtViews = result[i].districtPreciseViews;
+                    var statDate = result[i].statDate;
+                    var totalMrs = 0;
+                    var totalSecondNeighbors = 0;
+                    var districtMrStats = [];
+                    var districtPreciseRates = [];
+                    for (var j = 0; j < districts.length - 1; j++) {
+                        var currentDistrictMrs = 0;
+                        var currentPreciseRate = 0;
+                        for (var k = 0; k < districtViews.length; k++) {
+                            var view = districtViews[k];
+                            if (view.district === districts[j]) {
+                                currentDistrictMrs = view.totalMrs;
+                                currentPreciseRate = view.preciseRate;
+                                totalMrs += currentDistrictMrs;
+                                totalSecondNeighbors += view.secondNeighbors;
+                                break;
+                            }
+                        }
+                        districtMrStats.push(currentDistrictMrs);
+                        districtPreciseRates.push(currentPreciseRate);
+                    }
+                    districtMrStats.push(totalMrs);
+                    districtPreciseRates.push(100 - 100 * totalSecondNeighbors / totalMrs);
+                    trendStat.mrStats.push({
+                        statDate: statDate,
+                        values: districtMrStats
+                    });
+                    trendStat.preciseStats.push({
+                        statDate: statDate,
+                        values: districtPreciseRates
+                    });
+                }
             }
         }
     });
