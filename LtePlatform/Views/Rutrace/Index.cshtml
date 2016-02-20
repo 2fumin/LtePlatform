@@ -1,4 +1,7 @@
-﻿<div class="row" ng-app="myApp" ng-controller="rutrace.root">
+﻿@{
+    ViewBag.Title = "精确覆盖率";
+}
+<div class="row" ng-app="myApp" ng-controller="rutrace.root">
     <div class="col-md-4">
         @{
             Html.RenderPartial("_RutraceMenu");
@@ -26,4 +29,5 @@
     </script>
     <script src="~/Scripts/rutrace/menu.controller.js"></script>
     <script src="~/Scripts/rutrace/index.controller.js"></script>
+    <script src="~/Scripts/rutrace/trend.controller.js"></script>
 }

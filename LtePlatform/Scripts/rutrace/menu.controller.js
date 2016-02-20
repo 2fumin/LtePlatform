@@ -59,7 +59,3 @@ app.controller("rutrace.chart", function ($scope, $location, appKpiService) {
     };
 
 });
-
-app.controller("rutrace.trend", function($scope) {
-    $scope.page.title = "指标变化趋势";
-})
