@@ -12,6 +12,11 @@
             districtStat.thirdRate = 100 - 100 * districtStat.thirdNeighbors / districtStat.totalMrs;
             return districtStat;
         };
+        var calculateTownRates = function (townStat) {
+            townStat.firstRate = 100 - 100 * townStat.firstNeighbors / townStat.totalMrs;
+            townStat.preciseRate = 100 - 100 * townStat.secondNeighbors / townStat.totalMrs;
+            townStat.thirdRate = 100 - 100 * townStat.thirdNeighbors / townStat.totalMrs;
+        };
 
         return {
             getRecentPreciseRegionKpi: function (city, initialDate) {
@@ -143,6 +148,45 @@
                         statDate: statDate,
                         values: districtPreciseRates
                     });
+                }
+            },
+            generateTrendStatsForPie: function (trendStat, result) {
+                trendStat.districtStats = result[0].districtPreciseViews;
+                trendStat.townStats = result[0].townPreciseViews;
+                for (var i = 1; i < result.length; i++) {
+                    for (var j = 0; j < result[i].districtPreciseViews.length; j++) {
+                        var currentDistrictStat = result[i].districtPreciseViews[j];
+                        for (var k = 0; k < trendStat.districtStats.length; k++) {
+                            if (trendStat.districtStats[k].city === currentDistrictStat.city
+                                && trendStat.districtStats[k].district === currentDistrictStat.district) {
+                                accumulatePreciseStat(trendStat.districtStats[k], currentDistrictStat);
+                                break;
+                            }
+                        }
+                        if (k === trendStat.districtStats.length) {
+                            trendStat.districtStats.push(currentDistrictStat);
+                        }
+                    }
+                    for (j = 0; j < result[i].townPreciseViews.length; j++) {
+                        var currentTownStat = result[i].townPreciseViews[j];
+                        for (k = 0; k < trendStat.townStats.length; k++) {
+                            if (trendStat.townStats[k].city === currentTownStat.city
+                                && trendStat.townStats[k].district === currentTownStat.district
+                                && trendStat.townStats[k].town === currentTownStat.town) {
+                                accumulatePreciseStat(trendStat.townStats[k], currentTownStat);
+                                break;
+                            }
+                        }
+                        if (k === trendStat.townStats.length) {
+                            trendStat.townStats.push(currentTownStat);
+                        }
+                    }
+                }
+                for (k = 0; k < trendStat.districtStats.length; k++) {
+                    calculateDistrictRates(trendStat.districtStats[k]);
+                }
+                for (k = 0; k < trendStat.townStats.length; k++) {
+                    calculateTownRates(trendStat.townStats[k]);
                 }
             }
         }

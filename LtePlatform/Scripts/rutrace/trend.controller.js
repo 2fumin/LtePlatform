@@ -19,6 +19,9 @@ app.controller("rutrace.trend", function ($scope, appRegionService, appKpiServic
         appKpiService.getDateSpanPreciseRegionKpi($scope.city.selected, $scope.beginDate.value, $scope.endDate.value)
             .then(function (result) {
                 appKpiService.generateDistrictStats($scope.trendStat, $scope.districts, result);
+                if (result.length > 0) {
+                    appKpiService.generateTrendStatsForPie($scope.trendStat, result);
+                }
             });
     };
     appRegionService.initializeCities()

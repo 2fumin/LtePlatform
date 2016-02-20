@@ -18,6 +18,10 @@
                     templateUrl: viewDir + "Chart.html",
                     controller: "rutrace.chart"
                 })
+                .when('/trendchart', {
+                    templateUrl: viewDir + "TrendChart.html",
+                    controller: "rutrace.trendchart"
+                })
                 .otherwise({
                     redirectTo: '/'
                 });
@@ -48,7 +52,9 @@ app.controller("rutrace.root", function($scope) {
     };
     $scope.trendStat = {
         mrStats: [],
-        preciseStats: []
+        preciseStats: [],
+        districtStats: [],
+        townStats: []
     };
 });
 
@@ -61,5 +67,12 @@ app.controller("rutrace.chart", function ($scope, $location, appKpiService) {
         $("#precise").highcharts(appKpiService.getPreciseRateOptions($scope.overallStat.districtStats,
             $scope.overallStat.townStats));
     };
+});
 
+app.controller("rutrace.trendchart", function ($scope, $location, appKpiService){
+    if ($scope.trendStat.mrStats.length === 0) $location.path($scope.rootPath);
+
+    $scope.showCharts = function(){
+
+    }
 });
