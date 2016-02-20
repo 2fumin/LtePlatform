@@ -22,6 +22,8 @@ app.controller("rutrace.trend", function ($scope, appRegionService, appKpiServic
                 if (result.length > 0) {
                     appKpiService.generateTrendStatsForPie($scope.trendStat, result);
                 }
+                $scope.trendStat.beginDateString = appFormatService.getDateString($scope.beginDate.value, "yyyy年MM月dd日");
+                $scope.trendStat.endDateString = appFormatService.getDateString($scope.endDate.value, "yyyy年MM月dd日");
             });
     };
     appRegionService.initializeCities()

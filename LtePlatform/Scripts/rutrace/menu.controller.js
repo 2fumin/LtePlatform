@@ -54,7 +54,9 @@ app.controller("rutrace.root", function($scope) {
         mrStats: [],
         preciseStats: [],
         districtStats: [],
-        townStats: []
+        townStats: [],
+        beginDateString: "",
+        endDateString: ""
     };
 });
 
