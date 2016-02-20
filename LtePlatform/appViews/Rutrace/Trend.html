@@ -1,1 +1,66 @@
-﻿aaaaaaaaaaa
+﻿<div class="row">
+    <div class="col-md-6">
+        <label>城市：</label>
+        <div class="input-group">
+            <select class="form-control" ng-model="city.selected" ng-options="c as c for c in city.options"></select>
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-success" ng-click="showTrend()">
+                    <i class="glyphicon glyphicon-search"></i>
+                    查询
+                </button>
+            </span>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div>
+            <label>开始日期：</label>
+            <div class="input-group">
+                <input type="text" class="form-control" uib-datepicker-popup ng-model="beginDate.value" is-open="statDate.opened" ng-required="true" close-text="Close"/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="beginDate.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+
+        <div>
+            <label>结束日期：</label>
+            <div class="input-group">
+                <input type="text" class="form-control" uib-datepicker-popup ng-model="endDate.value" is-open="statDate.opened" ng-required="true" close-text="Close"/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="endDate.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<h4 class="text-center text-primary">测量报告数统计</h4>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>日期</th>
+            <th ng-repeat="district in districts">{{district}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="stat in mrStats">
+            <td>{{stat.statDate}}</td>
+            <td ng-repeat="value in stat.values">{{value}}</td>
+        </tr>
+    </tbody>
+</table>
+<h4 class="text-center text-primary">精确覆盖率统计</h4>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>日期</th>
+            <th ng-repeat="district in districts">{{district}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="stat in preciseStats">
+            <td data-bind="text: $data.statDate"></td>
+            <td>{{stat.statDate}}</td>
+            <td ng-repeat="value in stat.values">{{value | number: 2}}</td>
+        </tr>
+    </tbody>
+</table>
