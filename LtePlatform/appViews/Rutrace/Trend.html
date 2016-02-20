@@ -5,9 +5,11 @@
             <select class="form-control" ng-model="city.selected" ng-options="c as c for c in city.options"></select>
             <span class="input-group-btn">
                 <button type="button" class="btn btn-success" ng-click="showTrend()">
-                    <i class="glyphicon glyphicon-search"></i>
-                    查询
+                    <i class="glyphicon glyphicon-search" title="统计数据"></i>
                 </button>
+                <a class="btn btn-primary" ng-href="{{rootPath}}trendchart">
+                    <i class="glyphicon glyphicon-picture" title="查看趋势图"></i>
+                </a>
             </span>
         </div>
     </div>
@@ -19,7 +21,8 @@
                        is-open="beginDate.opened" ng-required="true" close-text="Close"/>
                 <span class="input-group-btn">
                     <button type="button" class="btn btn-default" ng-click="beginDate.opened = true">
-                    <i class="glyphicon glyphicon-calendar"></i></button>
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </button>
                 </span>
             </div>
         </div>
@@ -31,7 +34,8 @@
                        is-open="endDate.opened" ng-required="true" close-text="Close"/>
                 <span class="input-group-btn">
                     <button type="button" class="btn btn-default" ng-click="endDate.opened = true">
-                    <i class="glyphicon glyphicon-calendar"></i></button>
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </button>
                 </span>
             </div>
         </div>

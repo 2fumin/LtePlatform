@@ -5,8 +5,7 @@
             <select class="form-control" ng-model="city.selected" ng-options="c as c for c in city.options"></select>
             <span class="input-group-btn">
                 <button type="button" class="btn btn-success" ng-click="showKpi()">
-                    <i class="glyphicon glyphicon-search"></i>
-                    统计结果
+                    <i class="glyphicon glyphicon-search" title="统计结果"></i>                    
                 </button>
             </span>
         </div>
@@ -16,8 +15,12 @@
         <div class="input-group">
             <input type="text" class="form-control" uib-datepicker-popup ng-model="statDate.value" is-open="statDate.opened" ng-required="true" close-text="Close" />
             <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="statDate.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
-                <a class="btn btn-primary" ng-href="{{rootPath}}chart">图表</a>
+                <button type="button" class="btn btn-default" ng-click="statDate.opened = true">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                </button>
+                <a class="btn btn-primary" ng-href="{{rootPath}}chart">
+                    <i class="glyphicon glyphicon-picture" title="统计图表"></i> 
+                </a>
             </span>
         </div>
     </div>
