@@ -286,6 +286,14 @@
                     deferred.reject(reason);
                 });
                 return deferred.promise;
+            },
+            addMonitor: function(cell) {
+                $http.post(appUrlService.getApiUrl('NeighborMonitor'), {
+                    cellId: cell.cellId,
+                    sectorId: cell.sectorId
+                }).success(function() {
+                    cell.isMonitored = true;
+                });
             }
         };
     });

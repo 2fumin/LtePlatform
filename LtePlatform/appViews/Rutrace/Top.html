@@ -31,7 +31,7 @@
         <div class="input-group">
             <select class="form-control" ng-model="orderPolicy.selected" ng-options="p as p for p in orderPolicy.options"></select>
             <span class="input-group-btn">
-                <button type="button" class="btn btn-warning" ng-click="showTop()">
+                <button type="button" class="btn btn-warning" ng-click="monitorAll()">
                     <i class="glyphicon glyphicon-search" title="全部监控"></i>
                 </button>
             </span>            
@@ -83,7 +83,7 @@
                     <a class="btn btn-primary" ng-href="{{rootPath}}baidumap">
                         <i class="glyphicon glyphicon-globe" title="地理化显示"></i>
                     </a>
-                    <a class="btn btn-default" ng-href="{{rootPath}}monitor">
+                    <a class="btn btn-default" ng-href="{{rootPath}}import">
                         <i class="glyphicon glyphicon-cloud-download" title="监控导入"></i>
                     </a>
                 </div>

@@ -44,14 +44,7 @@
     $scope.closeAlert = function (index) {
         $scope.updateMessages.splice(index, 1);
     }
-    $scope.addMonitor = function(cell) {
-        $http.post(appUrlService.getApiUrl('NeighborMonitor'), {
-            cellId: cell.cellId,
-            sectorId: cell.sectorId
-        }).success(function() {
-            cell.isMonitored = true;
-        });
-    };
+    
     $scope.addNeighborMonitor = function (cell) {
         $http.post(appUrlService.getApiUrl('NeighborMonitor'), {
             cellId: cell.nearestCellId,

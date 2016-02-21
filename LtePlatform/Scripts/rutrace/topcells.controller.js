@@ -31,12 +31,12 @@
         for (var i = 0; i < $scope.topCells.length; i++) {
             var cell = $scope.topCells[i];
             if (cell.isMonitored === false) {
-                $scope.addMonitor(cell);
+                topPreciseService.addMonitor(cell);
             }
         }
     };
     $scope.updateInfo = function(cell) {
-        console.log(cell.eNodebName + '-' + cell.sectorId);
+        $scope.topStat.current = cell;
     };
 
     topPreciseService.getOrderSelection().then(function (result) {
