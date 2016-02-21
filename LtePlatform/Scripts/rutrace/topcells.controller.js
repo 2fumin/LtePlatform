@@ -35,6 +35,9 @@
             }
         }
     };
+    $scope.updateInfo = function(cell) {
+        console.log(cell.eNodebName + '-' + cell.sectorId);
+    };
 
     topPreciseService.getOrderSelection().then(function (result) {
         $scope.orderPolicy.options = result;

@@ -66,6 +66,12 @@ app.controller("rutrace.root", function($scope) {
         beginDateString: "",
         endDateString: ""
     };
+    $scope.topStat = {
+        current: {},
+        interference: {},
+        victims: {},
+        coverages: {}
+    };
 });
 
 app.controller("rutrace.chart", function ($scope, $location, appKpiService) {

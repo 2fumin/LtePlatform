@@ -31,19 +31,19 @@
         <div class="input-group">
             <select class="form-control" ng-model="orderPolicy.selected" ng-options="p as p for p in orderPolicy.options"></select>
             <span class="input-group-btn">
-                <button type="button" class="btn btn-success" ng-click="showTop()">
-                    <i class="glyphicon glyphicon-search" title="统计数据"></i>
+                <button type="button" class="btn btn-warning" ng-click="showTop()">
+                    <i class="glyphicon glyphicon-search" title="全部监控"></i>
                 </button>
             </span>            
         </div>
         <label>TOP个数：</label>
         <div class="input-group">
-            <select class="form-control" ng-model="topCount.selected" ng-options="c as c for c in topCount.options"></select>            
-            <div class="input-group-btn">
-                <a class="btn btn-primary" ng-href="{{rootPath}}trendchart">
-                    <i class="glyphicon glyphicon-globe" title="地理化显示"></i>
-                </a>
-            </div>
+            <select class="form-control" ng-model="topCount.selected" ng-options="c as c for c in topCount.options"></select>
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-success" ng-click="showTop()">
+                    <i class="glyphicon glyphicon-stats" title="统计数据"></i>
+                </button>
+            </span>
         </div>
     </div>
 </div>
@@ -73,7 +73,20 @@
                 <span ng-if="!cell.isMonitored">未监控</span>
             </td>
             <td>
-                <button class="btn btn-sm btn-success" ng-click="showInfo(cell)">详细信息</button>
+                <div style="min-width: 160px" class="input-group" ng-click="updateInfo(cell)">
+                    <a class="btn btn-warning" ng-href="{{rootPath}}interference">
+                        <i class="glyphicon glyphicon-fullscreen" title="干扰信息"></i>
+                    </a>
+                    <a class="btn btn-success" ng-href="{{rootPath}}coverage">
+                        <i class="glyphicon glyphicon-tree-conifer" title="覆盖信息"></i>
+                    </a>
+                    <a class="btn btn-primary" ng-href="{{rootPath}}baidumap">
+                        <i class="glyphicon glyphicon-globe" title="地理化显示"></i>
+                    </a>
+                    <a class="btn btn-default" ng-href="{{rootPath}}monitor">
+                        <i class="glyphicon glyphicon-cloud-download" title="监控导入"></i>
+                    </a>
+                </div>
             </td>
         </tr>
     </tbody>
