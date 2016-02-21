@@ -1088,7 +1088,6 @@
     <None Include="Views\Rutrace\_InterferenceTable.cshtml" />
     <None Include="Views\Rutrace\_MatchCellDialog.cshtml" />
     <None Include="Views\Rutrace\_NeighborCellTable.cshtml" />
-    <None Include="Views\Rutrace\_TopPreciseTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

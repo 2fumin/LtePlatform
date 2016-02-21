@@ -22,18 +22,10 @@
 
     $scope.query = function () {
         $scope.topCells = [];
-        $http({
-            method: 'GET',
-            url: appUrlService.getApiUrl('PreciseStat'),
-            params: {
-                'begin': $scope.beginDate.value,
-                'end': $scope.endDate.value,
-                'topCount': 20,
-                'orderSelection': "按照精确覆盖率升序"
-            }
-        }).success(function (result) {
-            $scope.topCells = result;
-        });
+        topPreciseService.queryTopKpis($scope.beginDate.value, $scope.endDate.value, $scope.topCount.selected,
+            $scope.orderPolicy.selected).then(function (result) {
+                $scope.topCells = result;
+            });
     };
     $scope.monitorAll = function () {
         for (var i = 0; i < $scope.topCells.length; i++) {

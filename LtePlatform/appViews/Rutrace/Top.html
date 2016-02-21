@@ -47,3 +47,34 @@
         </div>
     </div>
 </div>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>小区名称</th>
+            <th>MR总数</th>
+            <th>第一邻区精确覆盖率</th>
+            <th>第二邻区精确覆盖率</th>
+            <th>第三邻区精确覆盖率</th>
+            <th>TOP天数</th>
+            <th>是否监控</th>
+            <th>查询操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="cell in topCells">
+            <td>{{cell.eNodebName}}-{{cell.sectorId}}</td>
+            <td>{{cell.totalMrs}}</td>
+            <td>{{100 - cell.firstRate | number:2}}</td>
+            <td>{{100 - cell.secondRate | number:2}}</td>
+            <td>{{100 - cell.thirdRate | number:2}}</td>
+            <td>{{cell.topDates}}</td>
+            <td>
+                <span ng-if="cell.isMonitored">已监控</span>
+                <span ng-if="!cell.isMonitored">未监控</span>
+            </td>
+            <td>
+                <button class="btn btn-sm btn-success" ng-click="showInfo(cell)">详细信息</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

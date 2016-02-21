@@ -264,6 +264,28 @@
                     deferred.reject(reason);
                 });
                 return deferred.promise;
+            },
+            queryTopKpis: function (begin, end, topCount, orderSelection) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('PreciseStat'),
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                    },
+                    params: {
+                        'begin': begin,
+                        'end': end,
+                        'topCount': topCount,
+                        'orderSelection': orderSelection
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
             }
         };
     });
