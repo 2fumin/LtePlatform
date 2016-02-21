@@ -26,6 +26,10 @@
                     templateUrl: viewDir + "Top.html",
                     controller: "rutrace.top"
                 })
+                .when('/import', {
+                    templateUrl: viewDir + "Import.html",
+                    controller: "rutrace.import"
+                })
                 .otherwise({
                     redirectTo: '/'
                 });

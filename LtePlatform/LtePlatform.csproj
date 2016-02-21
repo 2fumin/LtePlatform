@@ -991,7 +991,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Evaluation\RegionDef.cshtml" />
-    <Content Include="Views\Rutrace\Import.cshtml" />
     <Content Include="Views\College\Map.cshtml" />
     <Content Include="Views\Kpi\Index.cshtml" />
     <Content Include="Views\Parameters\List.cshtml" />
@@ -1087,7 +1086,7 @@
     <None Include="Views\Rutrace\WorkItem.cshtml" />
     <None Include="Views\Rutrace\_InterferenceTable.cshtml" />
     <None Include="Views\Rutrace\_MatchCellDialog.cshtml" />
-    <None Include="Views\Rutrace\_NeighborCellTable.cshtml" />
+    <Content Include="appViews\Rutrace\Import.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

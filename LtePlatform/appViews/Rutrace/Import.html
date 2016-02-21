@@ -4,7 +4,7 @@
 <div class="panel panel-info">
     <div class="panel-heading">
         <h3 class="panel-title">
-            {{currentCell.eNodebName + "-" + currentCell.sectorId}}小区邻区列表
+            {{topStat.current.eNodebName + "-" + topStat.current.sectorId}}小区邻区列表
         </h3>
     </div>
     <div class="panel-body">
@@ -13,7 +13,7 @@
                 <button class="btn btn-primary" ng-if="neighborCells.length" ng-click="updatePci(currentCell)">
                     更新PCI
                 </button>
-                <button class="btn btn-warning" ng-if="neighborCells.length && !currentCell.isMonitored" ng-click="addMonitor(currentCell)">
+                <button class="btn btn-warning" ng-if="neighborCells.length && !topStat.current.isMonitored" ng-click="addMonitor(currentCell)">
                     加入监控
                 </button>
                 <button class="btn btn-success" ng-if="neighborCells.length" ng-click="monitorNeighbors()">
