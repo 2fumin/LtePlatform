@@ -44,7 +44,7 @@
                 <td>{{neighbor.totalTimes}}</td>
                 <td>
                     <span ng-if="neighbor.isMonitored">已监控</span>
-                    <span ng-if="!neighbor.isMonitored">未监控</span>
+                    <span ng-if="!neighbor.isMonitored" style="color: red">未监控</span>
                 </td>
             </tr>
             </tbody>
