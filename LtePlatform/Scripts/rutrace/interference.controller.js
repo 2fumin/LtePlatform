@@ -1,4 +1,4 @@
-﻿app.controller("rutrace.interference", function ($scope, $http, $location, appUrlService) {
+﻿app.controller("rutrace.interference", function ($scope, $http, $location, networkElementService) {
     
     $scope.page.title = "TOP指标干扰分析: " + $scope.topStat.current.eNodebName + "-" + $scope.topStat.current.sectorId;
     $scope.oneAtATime = false;
@@ -11,17 +11,10 @@
         var cell = $scope.topStat.current;
         $scope.interferenceCells = [];
         $scope.victimCells = [];
-        $scope.interferencePanelTitle = cell.eNodebName + "-" + cell.sectorId + "干扰小区列表";
-        $http({
-            method: 'GET',
-            url: appUrlService.getApiUrl('Cell'),
-            params: {
-                'eNodebId': cell.cellId,
-                'sectorId': cell.sectorId
-            }
-        }).success(function(result) {
-            $scope.currentCell.longtitute = result.longtitute;
-            $scope.currentCell.lattitute = result.lattitute;
+
+        networkElementService.queryCellInfo(cell.cellId, cell.sectorId).then(function(result) {
+            cell.longtitute = result.longtitute;
+            cell.lattitute = result.lattitute;
         });
         
         $http({

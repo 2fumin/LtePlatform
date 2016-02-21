@@ -47,4 +47,28 @@
                 return deferred.promise;
             }
         };
+    })
+    .factory('networkElementService', function($q, $http, appUrlService) {
+        return {
+            queryCellInfo: function(cellId, sectorId) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('NearestPciCell'),
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                    },
+                    params: {
+                        'cellId': cellId,
+                        'sectorId': sectorId
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
+            }
+        };
     });
