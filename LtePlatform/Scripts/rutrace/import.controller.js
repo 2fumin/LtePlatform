@@ -1,42 +1,33 @@
-﻿app.controller("rutrace.import", function ($scope, $http, appUrlService) {
+﻿app.controller("rutrace.import", function ($scope, $http, $location, neighborService, topPreciseService) {
     $scope.neighborCells = [];
     $scope.updateMessages = [];
 
-    $scope.showNeighbors = function(cell) {
-        $scope.currentCell = cell;
+    $scope.showNeighbors = function() {
+        var cell = $scope.topStat.current;
         $scope.neighborCells = [];
-        $http({
-            method: 'GET',
-            url: appUrlService.getApiUrl('NearestPciCell'),
-            params: {
-                'cellId': cell.cellId,
-                'sectorId': cell.sectorId
-            }
-        }).success(function(result) {
+        neighborService.queryCellNeighbors(cell).then(function(result) {
             $scope.neighborCells = result;
         });
     };
-    $scope.showInfo = function(cell) {
-        $scope.showNeighbors(cell);
-    };
-    $scope.updatePci = function(cell) {
-        $http.post(appUrlService.getApiUrl('NearestPciCell'), cell).success(function (result) {
+    $scope.updatePci = function () {
+        var cell = $scope.topStat.current;
+        neighborService.updateCellPci(cell).then(function(result) {
             $scope.updateMessages.push({
                 cellName: cell.eNodebName + '-' + cell.sectorId,
                 counts: result
             });
-            $scope.showNeighbors(cell);
+            $scope.showNeighbors();
         });
     };
     $scope.closeAlert = function (index) {
         $scope.updateMessages.splice(index, 1);
     }
-    
+    $scope.addMonitor = function() {
+        var cell = $scope.topStat.current;
+        topPreciseService.addMonitor(cell);
+    };
     $scope.addNeighborMonitor = function (cell) {
-        $http.post(appUrlService.getApiUrl('NeighborMonitor'), {
-            cellId: cell.nearestCellId,
-            sectorId: cell.nearestSectorId
-        }).success(function () {
+        neighborService.monitorNeighbors(cell).then(function() {
             cell.isMonitored = true;
         });
     };
@@ -48,4 +39,11 @@
             }
         }
     };
+
+    if ($scope.topStat.current.eNodebName === undefined || $scope.topStat.current.eNodebName === "")
+        $location.path($scope.rootPath + "top");
+    else {
+        $scope.showNeighbors();
+    }
+        
 });
