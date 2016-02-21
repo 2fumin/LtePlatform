@@ -1,17 +1,17 @@
-﻿app.controller("rutrace.interference", function ($scope, $http, appUrlService) {
-    $scope.page.title = "TOP指标干扰分析";
-    $scope.currentCell = {};
+﻿app.controller("rutrace.interference", function ($scope, $http, $location, appUrlService) {
+    
+    $scope.page.title = "TOP指标干扰分析: " + $scope.topStat.current.eNodebName + "-" + $scope.topStat.current.sectorId;
+    $scope.oneAtATime = false;
     $scope.interferenceCells = [];
     $scope.victimCells = [];
     $scope.interferenceLevelOrder = "interferenceLevel";
     $scope.updateMessages = [];
 
-    $scope.showInterference = function(cell) {
-        $scope.currentCell = cell;
+    $scope.showInterference = function() {
+        var cell = $scope.topStat.current;
         $scope.interferenceCells = [];
         $scope.victimCells = [];
         $scope.interferencePanelTitle = cell.eNodebName + "-" + cell.sectorId + "干扰小区列表";
-
         $http({
             method: 'GET',
             url: appUrlService.getApiUrl('Cell'),
@@ -88,10 +88,9 @@
     $scope.closeAlert = function (index) {
         $scope.updateMessages.splice(index, 1);
     }
-    $scope.showInfo = function(cell) {
-        $scope.showInterference(cell);
-    };
-    $scope.refreshTopic = function (topic) {
-        $scope.currentTopic = topic;
-    };
+    if ($scope.topStat.current.eNodebName === undefined || $scope.topStat.current.eNodebName === "")
+        $location.path($scope.rootPath + "top");
+    else {
+        $scope.showInterference();
+    }
 });
