@@ -1,0 +1,6 @@
+﻿<div uib-alert ng-repeat="message in updateMessages" type="success" dismiss-on-timeout="2000" close="closeAlert($index)">
+    {{message.cellName}}更新干扰小区信息{{message.counts}}条
+</div>
+
+<div ng-include="'/appViews/Rutrace/Interference/Source.html'"></div>
+<div ng-include="'/appViews/Rutrace/Interference/Victim.html'"></div>

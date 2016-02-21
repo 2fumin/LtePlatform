@@ -30,6 +30,10 @@
                     templateUrl: viewDir + "Import.html",
                     controller: "rutrace.import"
                 })
+                .when('/interference', {
+                    templateUrl: viewDir + "Interference/Index.html",
+                    controller: "rutrace.interference"
+                })
                 .otherwise({
                     redirectTo: '/'
                 });

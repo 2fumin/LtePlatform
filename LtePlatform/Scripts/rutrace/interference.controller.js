@@ -1,15 +1,5 @@
 ﻿app.controller("rutrace.interference", function ($scope, $http, appUrlService) {
-    $scope.beginDate = {
-        title: "开始日期",
-        value: (new Date()).getDateFromToday(-7).Format("yyyy-MM-dd")
-    };
-    $scope.endDate = {
-        title: "结束日期",
-        value: (new Date()).Format("yyyy-MM-dd")
-    };
-    $scope.showinfo = {
-        title: "干扰分析"
-    };
+    $scope.page.title = "TOP指标干扰分析";
     $scope.currentCell = {};
     $scope.interferenceCells = [];
     $scope.victimCells = [];
