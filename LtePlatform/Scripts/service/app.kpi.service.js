@@ -294,6 +294,90 @@
                 }).success(function() {
                     cell.isMonitored = true;
                 });
+            },
+            updateInterferenceNeighbor: function(cellId, sectorId) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('InterferenceNeighbor'),
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                    },
+                    params: {
+                        'cellId': cellId,
+                        'sectorId': sectorId
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
+            },
+            queryInterferenceNeighbor: function (begin, end, cellId, sectorId) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('InterferenceNeighbor'),
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                    },
+                    params: {
+                        'begin': begin,
+                        'end': end,
+                        'cellId': cellId,
+                        'sectorId': sectorId
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
+            },
+            updateInterferenceVictim: function (cellId, sectorId) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('InterferenceNeighbor'),
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                    },
+                    params: {
+                        neighborCellId: cellId,
+                        neighborSectorId: sectorId
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
+            },
+            queryInterferenceVictim: function (begin, end, cellId, sectorId) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('InterferenceVictim'),
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                    },
+                    params: {
+                        'begin': begin,
+                        'end': end,
+                        'cellId': cellId,
+                        'sectorId': sectorId
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
             }
         };
     });

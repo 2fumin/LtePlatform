@@ -78,6 +78,8 @@ app.controller("rutrace.root", function($scope) {
         current: {},
         interference: {},
         victims: {},
-        coverages: {}
+        coverages: {},
+        updateInteferenceProgress: {},
+        updateVictimProgress: {}
     };
 });

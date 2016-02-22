@@ -1,5 +1,45 @@
 ﻿<div uib-alert ng-repeat="message in updateMessages" type="success" dismiss-on-timeout="2000" close="closeAlert($index)">
-    {{message.cellName}}更新干扰小区信息{{message.counts}}条
+    {{message.cellName}}更新{{message.topic}}小区信息{{message.counts}}条
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div>
+            <label>开始日期：</label>
+            <div class="input-group">
+                <input type="text" class="form-control" uib-datepicker-popup ng-model="beginDate.value"
+                       is-open="beginDate.opened" ng-required="true" close-text="Close"/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="beginDate.opened = true">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                </span>
+            </div>
+        </div>
+
+        <div>
+            <label>结束日期：</label>
+            <div class="input-group">
+                <input type="text" class="form-control" uib-datepicker-popup ng-model="endDate.value"
+                       is-open="endDate.opened" ng-required="true" close-text="Close"/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="endDate.opened = true">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label>排序依据：</label>
+        <div class="input-group">
+            <select class="form-control" ng-model="orderPolicy.selected" ng-options="name as p.name for p in orderPolicy.options"></select>
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-warning" ng-click="showInterference()">
+                    <i class="glyphicon glyphicon-search" title="统计干扰"></i>
+                </button>
+            </span>
+        </div>
+    </div>
 </div>
 <div uib-accordion close-others="oneAtATime">
     <div uib-accordion-group heading="干扰源分析" panel-class="panel-warning">

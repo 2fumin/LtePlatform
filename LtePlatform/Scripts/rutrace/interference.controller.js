@@ -1,10 +1,36 @@
-﻿app.controller("rutrace.interference", function ($scope, $http, $location, networkElementService) {
-    
-    $scope.page.title = "TOP指标干扰分析: " + $scope.topStat.current.eNodebName + "-" + $scope.topStat.current.sectorId;
+﻿app.controller("rutrace.interference", function ($scope, $http, $location, networkElementService, topPreciseService) {
+    $scope.currentCellName = $scope.topStat.current.eNodebName + "-" + $scope.topStat.current.sectorId;
+    $scope.page.title = "TOP指标干扰分析: " + $scope.currentCellName;
     $scope.oneAtATime = false;
-    $scope.interferenceCells = [];
-    $scope.victimCells = [];
-    $scope.interferenceLevelOrder = "interferenceLevel";
+    var lastWeek = new Date();
+    lastWeek.setDate(lastWeek.getDate() - 7);
+    $scope.beginDate = {
+        value: lastWeek,
+        opened: false
+    };
+    $scope.endDate = {
+        value: new Date(),
+        opened: false
+    };
+    $scope.orderPolicy = {
+        options: [{
+            name: "模3干扰数",
+            value: "mod3Interferences"
+        }, {
+            name: "模6干扰数",
+            value: "mod6Interferences"
+        }, {
+            name: "6dB干扰数",
+            value: "overInterferences6Db"
+        }, {
+            name: "10dB干扰数",
+            value: "overInterferences10Db"
+        }],
+        selected: {
+            name: "总干扰水平",
+            value: "interferenceLevel"
+        }
+    };
     $scope.updateMessages = [];
 
     $scope.showInterference = function() {
@@ -13,77 +39,62 @@
         $scope.victimCells = [];
 
         networkElementService.queryCellInfo(cell.cellId, cell.sectorId).then(function(result) {
-            cell.longtitute = result.longtitute;
-            cell.lattitute = result.lattitute;
-        });
-        
-        $http({
-            method: 'GET',
-            url: appUrlService.getApiUrl('InterferenceNeighbor'),
-            params: {
-                'cellId': cell.cellId,
-                'sectorId': cell.sectorId
-            },
-            headers: {
-                'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-            }
-        }).success(function () {
-            $http({
-                method: 'GET',
-                url: appUrlService.getApiUrl('InterferenceNeighbor'),
-                params: {
-                    'begin': $scope.beginDate.value,
-                    'end': $scope.endDate.value,
-                    'cellId': cell.cellId,
-                    'sectorId': cell.sectorId
-                },
-                headers: {
-                    'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                }
-            }).success(function (result) {
-                $scope.interferenceCells = result;
-            });
+            $scope.topStat.current.longtitute = result.longtitute;
+            $scope.topStat.current.lattitute = result.lattitute;
         });
 
-        $http({
-            method: 'GET',
-            url: appUrlService.getApiUrl('InterferenceVictim'),
-            params: {
-                'begin': $scope.beginDate.value,
-                'end': $scope.endDate.value,
-                'cellId': cell.cellId,
-                'sectorId': cell.sectorId
-            },
-            headers: {
-                'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-            }
-        }).success(function(result) {
-            $scope.victimCells = result;
+        if ($scope.topStat.updateInteferenceProgress[$scope.currentCellName] !== true) {
+            $scope.topStat.updateInteferenceProgress[$scope.currentCellName] = true;
+            topPreciseService.updateInterferenceNeighbor(cell.cellId, cell.sectorId).then(function(result) {
+                $scope.updateMessages.push({
+                    cellName: $scope.currentCellName,
+                    counts: result,
+                    type: "干扰"
+                });
+                $scope.topStat.updateInteferenceProgress[$scope.currentCellName] = false;
+            });
+        }
+
+        if ($scope.topStat.updateVictimProgress[$scope.currentCellName] !== true) {
+            $scope.topStat.updateVictimProgress[$scope.currentCellName] = true;
+            topPreciseService.updateInterferenceVictim(cell.cellId, cell.sectorId).then(function(result) {
+                $scope.updateMessages.push({
+                    cellName: $scope.currentCellName,
+                    counts: result,
+                    type: "被干扰"
+                });
+                $scope.topStat.updateVictimProgress[$scope.currentCellName] = false;
+            });
+        }
+
+
+        topPreciseService.queryInterferenceNeighbor($scope.beginDate.value, $scope.endDate.value,
+            cell.cellId, cell.sectorId).then(function(result) {
+            $scope.interferenceCells = result;
+            $scope.topStat.interference[$scope.currentCellName] = result;
+            console.log($scope.topStat);
         });
 
-        $http({
-            method: 'GET',
-            url: appUrlService.getApiUrl('InterferenceNeighbor'),
-            params: {
-                neighborCellId: cell.cellId,
-                neighborSectorId: cell.sectorId
-            },
-            headers: {
-                'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-            }
-        }).success(function(result) {
-            $scope.updateMessages.push({
-                cellName: cell.eNodebName + '-' + cell.sectorId,
-                counts: result
+        topPreciseService.queryInterferenceVictim($scope.beginDate.value, $scope.endDate.value,
+            cell.cellId, cell.sectorId).then(function (result) {
+                $scope.victimCells = result;
+                $scope.topStat.victims[$scope.currentCellName] = result;
             });
-        });
+
     };
-    $scope.closeAlert = function (index) {
+
+    $scope.closeAlert = function(index) {
         $scope.updateMessages.splice(index, 1);
-    }
+    };
+
     if ($scope.topStat.current.eNodebName === undefined || $scope.topStat.current.eNodebName === "")
         $location.path($scope.rootPath + "top");
     else {
-        $scope.showInterference();
+        if ($scope.topStat.interference[$scope.currentCellName] === undefined) {
+            $scope.showInterference();
+        } else {
+            $scope.interferenceCells = $scope.topStat.interference[$scope.currentCellName];
+            $scope.victimCells = $scope.topStat.victims[$scope.currentCellName];
+        }
     }
 });
