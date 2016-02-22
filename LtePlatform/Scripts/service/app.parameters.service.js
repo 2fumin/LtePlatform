@@ -50,7 +50,7 @@
                 var deferred = $q.defer();
                 $http({
                     method: 'GET',
-                    url: appUrlService.getApiUrl('NearestPciCell'),
+                    url: appUrlService.getApiUrl('Cell'),
                     headers: {
                         'Authorization': 'Bearer ' + appUrlService.getAccessToken()
                     },
@@ -65,6 +65,23 @@
                 .error(function (reason) {
                     deferred.reject(reason);
                 });
+                return deferred.promise;
+            },
+            updateNeighbors: function(cellId, sectorId, pci, nearestCellId, nearestSectorId) {
+                var deferred = $q.defer();
+                $http.put(appUrlService.getApiUrl('NearestPciCell'), {
+                    cellId: cellId,
+                    sectorId: sectorId,
+                    pci: pci,
+                    nearestCellId: nearestCellId,
+                    nearestSectorId: nearestSectorId
+                })
+                    .success(function (result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
                 return deferred.promise;
             }
         };

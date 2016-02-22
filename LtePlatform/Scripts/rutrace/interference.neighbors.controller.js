@@ -1,16 +1,7 @@
-﻿app.controller("rutrace.interference.neighbors", function ($scope, $http, $uibModal, $log, neighborService) {
+﻿app.controller("rutrace.interference.neighbors", function ($scope, $uibModal, $log, neighborService) {
     $scope.match = function (candidate) {
         var center = $scope.topStat.current;
-        neighborService.
-        $http({
-            method: 'GET',
-            url: appUrlService.getApiUrl('Cell'),
-            params: {
-                'eNodebId': center.cellId,
-                'sectorId': center.sectorId,
-                'pci': candidate.destPci
-            }
-        }).success(function(result) {
+        neighborService.queryNearestCells(center.cellId, center.sectorId, candidate.destPci).then(function(result) {
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: '/appViews/Rutrace/Interference/MatchCellDialog.html',
@@ -40,13 +31,8 @@
     };
 
     $scope.matchNearest = function (nearestCell, currentNeighbor, center) {
-        $http.put(appUrlService.getApiUrl('NearestPciCell'), {
-            cellId: center.cellId,
-            sectorId: center.sectorId,
-            pci: currentNeighbor.destPci,
-            nearestCellId: nearestCell.eNodebId,
-            nearestSectorId: nearestCell.sectorId
-        }).success(function() {
+        neighborService.updateNeighbors(center.cellId, center.sectorId, currentNeighbor.destPci, 
+            nearestCell.eNodebId, nearestCell.sectorId).then(function() {
             currentNeighbor.neighborCellName = nearestCell.eNodebName + "-" + nearestCell.sectorId;
         });
     };
