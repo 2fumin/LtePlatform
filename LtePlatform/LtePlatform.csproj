@@ -663,7 +663,6 @@
     <Content Include="Scripts\angular-ui\uib\tooltip.js" />
     <Content Include="Scripts\angular-ui\uib\typeahead.js" />
     <Content Include="Scripts\rutrace\index.controller.js" />
-    <Content Include="Scripts\rutrace\interference.route.js" />
     <Content Include="Scripts\rutrace\precise.chart.controller.js" />
     <Content Include="Scripts\rutrace\trend.chart.controller.js" />
     <Content Include="Scripts\rutrace\trend.controller.js" />
@@ -1087,7 +1086,7 @@
     <None Include="Views\Rutrace\Coverage.cshtml" />
     <None Include="Views\Rutrace\Index.cshtml" />
     <None Include="Views\Rutrace\WorkItem.cshtml" />
-    <None Include="Views\Rutrace\_MatchCellDialog.cshtml" />
+    <Content Include="appViews\Rutrace\Interference\MatchCellDialog.html" />
     <Content Include="appViews\Rutrace\Import.html" />
   </ItemGroup>
   <ItemGroup>

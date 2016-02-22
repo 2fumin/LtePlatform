@@ -45,6 +45,27 @@
                         deferred.reject(reason);
                     });
                 return deferred.promise;
+            },
+            queryNearestCells: function(eNodebId, sectorId, pci) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('NearestPciCell'),
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                    },
+                    params: {
+                        'eNodebId': eNodebId,
+                        'sectorId': sectorId,
+                        'pci': pci
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
             }
         };
     })
@@ -54,13 +75,13 @@
                 var deferred = $q.defer();
                 $http({
                     method: 'GET',
-                    url: appUrlService.getApiUrl('NearestPciCell'),
+                    url: appUrlService.getApiUrl('Cell'),
                     headers: {
                         'Authorization': 'Bearer ' + appUrlService.getAccessToken()
                     },
                     params: {
-                        'cellId': cellId,
-                        'sectorId': sectorId
+                        eNodebId: cellId,
+                        sectorId: sectorId
                     }
                 }).success(function (result) {
                     deferred.resolve(result);

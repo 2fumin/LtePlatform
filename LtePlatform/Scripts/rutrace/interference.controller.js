@@ -41,9 +41,15 @@
         $scope.interferenceCells = [];
         $scope.victimCells = [];
 
-        networkElementService.queryCellInfo(cell.cellId, cell.sectorId).then(function(result) {
-            $scope.topStat.current.longtitute = result.longtitute;
-            $scope.topStat.current.lattitute = result.lattitute;
+        networkElementService.queryCellInfo(cell.cellId, cell.sectorId).then(function(info) {
+            cell.longtitute = info.longtitute;
+            cell.lattitute = info.lattitute;
+            topPreciseService.queryInterferenceNeighbor($scope.beginDate.value, $scope.endDate.value,
+                cell.cellId, cell.sectorId).then(function(result) {
+                $scope.interferenceCells = result;
+                $scope.topStat.interference[$scope.currentCellName] = result;
+            });
+
         });
 
         if ($scope.topStat.updateInteferenceProgress[$scope.currentCellName] !== true) {
@@ -69,13 +75,6 @@
                 $scope.topStat.updateVictimProgress[$scope.currentCellName] = false;
             });
         }
-
-
-        topPreciseService.queryInterferenceNeighbor($scope.beginDate.value, $scope.endDate.value,
-            cell.cellId, cell.sectorId).then(function(result) {
-            $scope.interferenceCells = result;
-            $scope.topStat.interference[$scope.currentCellName] = result;
-        });
 
         topPreciseService.queryInterferenceVictim($scope.beginDate.value, $scope.endDate.value,
             cell.cellId, cell.sectorId).then(function(result) {
