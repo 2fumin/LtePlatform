@@ -9,18 +9,7 @@
             <li>@Html.ActionLink("TOP 3G连接", "TopConnection3G")</li>
         </ul>
     </li>
-    <li>
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            4G指标<span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-            <li>@Html.ActionLink("总体指标", "Precise4G")</li>
-            <li>@Html.ActionLink("变化趋势", "PreciseTrend")</li>
-            <li>@Html.ActionLink("TOP小区", "PreciseTop")</li>
-            <li></li>
-            <li></li>
-        </ul>        
-    </li>
+    <li>@Html.ActionLink("工参导入", "BasicImport", "Parameters")</li>
     <li>@Html.ActionLink("工单监控", "TopDrop2GDaily")</li>
     <li>
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
