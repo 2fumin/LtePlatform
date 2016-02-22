@@ -14,8 +14,10 @@
 </div>
 
 @section Scripts{
+    <link rel="stylesheet" href="~/Content/themes/baidu/InfoWindow.css"/>
     <script src="~/Scripts/angular.js"></script>
     <script src="~/Scripts/angular-route.min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=OeWDTDlnolWHBNP1GSkDph34"></script>
     @Scripts.Render("~/bundles/highcharts")
     <script src="~/Scripts/highcharts/highcharts-ng.js"></script>
     <script src="~/Scripts/service/app.url.service.js"></script>
@@ -40,4 +42,5 @@
     <script src="~/Scripts/rutrace/trend.chart.controller.js"></script>
     <script src="~/Scripts/rutrace/interference.controller.js"></script>
     <script src="~/Scripts/rutrace/interference.neighbors.controller.js"></script>
+    <script src="~/Scripts/rutrace/map.controller.js"></script>
 }

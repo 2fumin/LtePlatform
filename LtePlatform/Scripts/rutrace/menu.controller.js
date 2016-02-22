@@ -34,6 +34,10 @@
                     templateUrl: viewDir + "Interference/Index.html",
                     controller: "rutrace.interference"
                 })
+                .when('/baidumap', {
+                    templateUrl: viewDir + "Map/Index.html",
+                    controller: "rutrace.map"
+                })
                 .otherwise({
                     redirectTo: '/'
                 });

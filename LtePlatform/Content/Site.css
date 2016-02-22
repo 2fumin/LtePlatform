@@ -28,6 +28,15 @@ textarea {
     padding-top: 20px;
 }
 
+.map-control-group {
+    position: absolute;
+    z-index: 1001;
+    bottom: auto;
+    right: 30px;
+    top: 100px;
+    left: auto;
+}
+
 @media only screen and (max-width: 767px) {
     .nofloat {
         float: none;

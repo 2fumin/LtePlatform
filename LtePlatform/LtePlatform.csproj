@@ -395,6 +395,7 @@
     <Content Include="appViews\Rutrace\Interference\Index.html" />
     <Content Include="appViews\Rutrace\Interference\Source.html" />
     <Content Include="appViews\Rutrace\Interference\Victim.html" />
+    <Content Include="appViews\Rutrace\Map\Index.html" />
     <Content Include="appViews\Rutrace\Top.html" />
     <Content Include="appViews\Rutrace\Trend.html" />
     <Content Include="appViews\Rutrace\TrendChart.html" />
@@ -663,6 +664,7 @@
     <Content Include="Scripts\angular-ui\uib\tooltip.js" />
     <Content Include="Scripts\angular-ui\uib\typeahead.js" />
     <Content Include="Scripts\rutrace\index.controller.js" />
+    <Content Include="Scripts\rutrace\map.controller.js" />
     <Content Include="Scripts\rutrace\precise.chart.controller.js" />
     <Content Include="Scripts\rutrace\trend.chart.controller.js" />
     <Content Include="Scripts\rutrace\trend.controller.js" />
@@ -1031,7 +1033,7 @@
     <Content Include="Views\College\_CollegeMapInfoBox.cshtml" />
     <Content Include="Views\Kpi\_PreciseTop.cshtml" />
     <Content Include="Views\Kpi\_PreciseTopTable.cshtml" />
-    <Content Include="Views\Kpi\_PreciseSectorMapInfoBox.cshtml" />
+    <Content Include="appViews\Rutrace\Map\PreciseSectorMapInfoBox.html" />
     <Content Include="Views\College\_DistributionMapInfoBox.cshtml" />
     <Content Include="Views\College\_Coverage.cshtml" />
     <Content Include="Views\College\_CoverageMap.cshtml" />
@@ -1043,7 +1045,7 @@
     <Content Include="Views\Kpi\_PreciseImport.cshtml" />
     <Content Include="Views\Kpi\_PreciseHistoryTable.cshtml" />
     <Content Include="Views\Kpi\WorkItemImport.cshtml" />
-    <Content Include="Views\Kpi\_NeighborMapInfoBox.cshtml" />
+    <Content Include="appViews\Rutrace\Map\NeighborMapInfoBox.html" />
     <Content Include="Views\Kpi\_InterferenceImport.cshtml" />
     <None Include="Views\Kpi\_TopDrop2G.cshtml" />
     <None Include="Views\Kpi\_TopDrop2GTable.cshtml" />
