@@ -10,7 +10,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="cell in victimCells | orderBy: orderPolicy.selected.value: true">
+        <tr ng-repeat="cell in victimCells | orderBy: orderPolicy.selected: true">
             <td>{{cell.victimCellName}}</td>
             <td>{{cell.mod3Interferences | number:1}}</td>
             <td>{{cell.mod6Interferences | number:1}}</td>

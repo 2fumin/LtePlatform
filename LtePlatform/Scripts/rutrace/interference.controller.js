@@ -12,8 +12,8 @@
         value: new Date(),
         opened: false
     };
-    $scope.orderPolicy = {
-        options: [{
+    var options = [
+        {
             name: "模3干扰数",
             value: "mod3Interferences"
         }, {
@@ -25,11 +25,14 @@
         }, {
             name: "10dB干扰数",
             value: "overInterferences10Db"
-        }],
-        selected: {
+        }, {
             name: "总干扰水平",
             value: "interferenceLevel"
         }
+    ];
+    $scope.orderPolicy = {
+        options: options,
+        selected: options[4].value
     };
     $scope.updateMessages = [];
 
@@ -72,14 +75,13 @@
             cell.cellId, cell.sectorId).then(function(result) {
             $scope.interferenceCells = result;
             $scope.topStat.interference[$scope.currentCellName] = result;
-            console.log($scope.topStat);
         });
 
         topPreciseService.queryInterferenceVictim($scope.beginDate.value, $scope.endDate.value,
-            cell.cellId, cell.sectorId).then(function (result) {
-                $scope.victimCells = result;
-                $scope.topStat.victims[$scope.currentCellName] = result;
-            });
+            cell.cellId, cell.sectorId).then(function(result) {
+            $scope.victimCells = result;
+            $scope.topStat.victims[$scope.currentCellName] = result;
+        });
 
     };
 

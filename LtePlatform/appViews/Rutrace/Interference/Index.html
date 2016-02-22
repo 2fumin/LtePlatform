@@ -32,20 +32,25 @@
     <div class="col-md-6">
         <label>排序依据：</label>
         <div class="input-group">
-            <select class="form-control" ng-model="orderPolicy.selected" ng-options="name as p.name for p in orderPolicy.options"></select>
+            <select class="form-control" ng-model="orderPolicy.selected">
+                <option ng-repeat="p in orderPolicy.options" label="{{p.name}}" value="{{p.value}}">{{p.name}}</option>
+            </select>
             <span class="input-group-btn">
                 <button type="button" class="btn btn-warning" ng-click="showInterference()">
                     <i class="glyphicon glyphicon-search" title="统计干扰"></i>
+                </button>
+                <button type="button" class="btn btn-success" ng-click="showInterference()">
+                    <i class="glyphicon glyphicon-log-out" title="返回TOP统计"></i>
                 </button>
             </span>
         </div>
     </div>
 </div>
 <div uib-accordion close-others="oneAtATime">
-    <div uib-accordion-group heading="干扰源分析" panel-class="panel-warning">
+    <div uib-accordion-group heading="干扰源分析({{interferenceCells.length}})" panel-class="panel-warning">
         <div ng-include="'/appViews/Rutrace/Interference/Source.html'"></div>
     </div>
-    <div uib-accordion-group heading="被干扰小区" panel-class="panel-success">
+    <div uib-accordion-group heading="被干扰小区({{victimCells.length}})" panel-class="panel-success">
         <div ng-include="'/appViews/Rutrace/Interference/Victim.html'"></div>
     </div>
 </div>
