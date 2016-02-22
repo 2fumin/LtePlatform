@@ -1,0 +1,78 @@
+﻿<div class="col-md-8">
+    <div uib-alert ng-repeat="message in updateMessages" type="{{message.type}}" dismiss-on-timeout="2000" close="closeAlert($index)">
+        {{message.contents}}
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                工参读取结果及操作平台
+            </h3>
+        </div>
+        <div class="panel-body">
+            <p>
+                <button class="btn btn-primary" ng-click="postAll()" ng-disabled="!canDump">一键导入</button>
+            </p>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>项目</th>
+                    <th>新增数量</th>
+                    <th>消亡数量</th>
+                    <th>查看调整</th>
+                    <th>导入选择</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>LTE基站</td>
+                    <td>{{newENodebs.length}}</td>
+                    <td>{{vanishedENodebIds.length}}</td>
+                    <td>
+                        <div class="btn-group" ng-if="newENodebs.length">
+                            <button class="btn btn-warning" ng-click="checkENodebsLonLat()">检查经纬度</button>
+                            <button class="btn btn-warning" ng-click="postSingleENodeb()">逐个导入</button>
+                        </div>
+                    </td>
+                    <td><input type="checkbox" ng-model="newENodebsImport"/></td>
+                </tr>
+                <tr>
+                    <td>LTE小区</td>
+                    <td>{{newCells.length}}</td>
+                    <td>{{vanishedCellIds.length}}</td>
+                    <td>
+                        <div class="btn-group" ng-if="newCells.length">
+                            <button class="btn btn-warning" ng-click="checkCellsLonLat()">检查经纬度</button>
+                            <button class="btn btn-warning" ng-click="postSingleCell()">逐个导入</button>
+                        </div>
+                    </td>
+                    <td><input type="checkbox" ng-model="newCellsImport"/></td>
+                </tr>
+                <tr>
+                    <td>CDMA基站</td>
+                    <td>{{newBtss.length}}</td>
+                    <td></td>
+                    <td>
+                        <div class="btn-group" ng-if="newBtss.length">
+                            <button class="btn btn-warning" ng-click="checkBtssLonLat()">检查经纬度</button>
+                            <button class="btn btn-warning" ng-click="postSingleBts()">逐个导入</button>
+                        </div>
+                    </td>
+                    <td><input type="checkbox" ng-model="newBtssImport"/></td>
+                </tr>
+                <tr>
+                    <td>CDMA小区</td>
+                    <td>{{newCdmaCells.length}}</td>
+                    <td></td>
+                    <td>
+                        <div class="btn-group" ng-if="newCdmaCells.length">
+                            <button class="btn btn-warning" ng-click="checkCdmaCellsLonLat()">检查经纬度</button>
+                            <button class="btn btn-warning" ng-click="postSingleCdmaCell()">逐个导入</button>
+                        </div>
+                    </td>
+                    <td><input type="checkbox" ng-model="newCdmaCellsImport"/></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

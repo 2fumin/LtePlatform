@@ -1067,7 +1067,7 @@
     <None Include="Views\Parameters\NeighborImport.cshtml" />
     <Content Include="Views\Parameters\QueryMap.cshtml" />
     <None Include="Views\Parameters\_AlarmImport.cshtml" />
-    <None Include="Views\Parameters\_BasicImport.cshtml" />
+    <Content Include="appViews\Parameters\Import\Index.html" />
     <Content Include="Views\Parameters\_ENodebLonLatTable.cshtml" />
     <Content Include="Views\Parameters\_CellLonLatTable.cshtml" />
     <Content Include="Views\Parameters\_BtsLonLatTable.cshtml" />
