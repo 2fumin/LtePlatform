@@ -1076,7 +1076,7 @@
     <Content Include="Views\Parameters\_CellLonLatTable.cshtml" />
     <Content Include="Views\Parameters\_BtsLonLatTable.cshtml" />
     <Content Include="Views\Parameters\_CdmaCellLonLatTable.cshtml" />
-    <Content Include="Views\Parameters\_EditENodebExcel.cshtml" />
+    <Content Include="appViews\Parameters\Import\EditENodebDialog.html" />
     <Content Include="Views\Parameters\_EditCellExcel.cshtml" />
     <Content Include="Views\Parameters\_EditBtsExcel.cshtml" />
     <Content Include="Views\Parameters\_EditCdmaCellExcel.cshtml" />

@@ -5,61 +5,98 @@
     <thead>
         <tr>
             <th>项目</th>
-            <th>新增数量</th>
-            <th>消亡数量</th>
-            <th>查看调整</th>
-            <th>导入选择</th>
+            <th>新增</th>
+            <th>消亡</th>
+            <th>批量导入</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>LTE基站</td>
-            <td>{{importData.newENodebs.length}}</td>
-            <td>{{importData.vanishedENodebIds.length}}</td>
             <td>
-                <div class="btn-group" ng-if="importData.newENodebs.length">
-                    <button class="btn btn-warning" ng-click="checkENodebsLonLat()">检查经纬度</button>
-                    <a class="btn btn-warning" ng-href="{{rootPath}}eNodebInfos">
+                <div class="btn-group">
+                    <button class="btn btn-default" ng-click="checkENodebsLonLat()">检查经纬度</button>
+                    <a class="btn btn-default" ng-href="{{rootPath}}eNodebInfos">
                         <i class="glyphicon glyphicon-edit" title="详细信息"></i>
+                        <span class="badge">{{importData.newENodebs.length}}</span>
                     </a>
+                    <button class="btn btn-warning" ng-disabled="importData.newENodebs.length===0">
+                        <i class="glyphicon glyphicon-save" title="批量导入"></i>
+                    </button>
+                </div>
+            </td>
+            <td>
+                <div class="btn-group">
+                    <a class="btn btn-default" ng-href="{{rootPath}}vanishedENodebInfos">
+                        <i class="glyphicon glyphicon-edit" title="详细信息"></i>
+                        <span class="badge">{{importData.vanishedENodebIds.length}}</span>
+                    </a>
+                    <button class="btn btn-warning" ng-disabled="importData.vanishedENodebIds.length===0">
+                        <i class="glyphicon glyphicon-save" title="导入"></i>
+                    </button>
                 </div>
             </td>
             <td><input type="checkbox" ng-model="newENodebsImport" /></td>
         </tr>
         <tr>
             <td>LTE小区</td>
-            <td>{{importData.newCells.length}}</td>
-            <td>{{importData.vanishedCellIds.length}}</td>
             <td>
-                <div class="btn-group" ng-if="importData.newCells.length">
-                    <button class="btn btn-warning" ng-click="checkCellsLonLat()">检查经纬度</button>
-                    <button class="btn btn-warning" ng-click="postSingleCell()">逐个导入</button>
+                <div class="btn-group">
+                    <button class="btn btn-default" ng-click="checkCellsLonLat()">检查经纬度</button>
+                    <a class="btn btn-default" ng-href="{{rootPath}}cellInfos">
+                        <i class="glyphicon glyphicon-edit" title="详细信息"></i>
+                        <span class="badge">{{importData.newCells.length}}</span>
+                    </a>
+                    <button class="btn btn-warning" ng-disabled="importData.newCells.length===0">
+                        <i class="glyphicon glyphicon-save" title="批量导入"></i>
+                    </button>
+                </div>
+            </td>
+            <td>
+                <div class="btn-group">
+                    <a class="btn btn-default" ng-href="{{rootPath}}vanishedCellInfos">
+                        <i class="glyphicon glyphicon-edit" title="详细信息"></i>
+                        <span class="badge">{{importData.vanishedCellIds.length}}</span>
+                    </a>
+                    <button class="btn btn-warning" ng-disabled="importData.vanishedCellIds.length===0">
+                        <i class="glyphicon glyphicon-save" title="导入"></i>
+                    </button>
                 </div>
             </td>
             <td><input type="checkbox" ng-model="newCellsImport" /></td>
         </tr>
         <tr>
             <td>CDMA基站</td>
-            <td>{{importData.newBtss.length}}</td>
-            <td></td>
             <td>
-                <div class="btn-group" ng-if="importData.newBtss.length">
-                    <button class="btn btn-warning" ng-click="checkBtssLonLat()">检查经纬度</button>
-                    <button class="btn btn-warning" ng-click="postSingleBts()">逐个导入</button>
+                <div class="btn-group">
+                    <button class="btn btn-default" ng-click="checkBtssLonLat()">检查经纬度</button>
+                    <a class="btn btn-default" ng-click="postSingleBts()">
+                        <i class="glyphicon glyphicon-edit" title="详细信息"></i>
+                        <span class="badge">{{importData.newBtss.length}}</span>
+                    </a>
+                    <button class="btn btn-warning" ng-disabled="importData.newBtss.length===0">
+                        <i class="glyphicon glyphicon-save" title="批量导入"></i>
+                    </button>
                 </div>
             </td>
+            <td></td>
             <td><input type="checkbox" ng-model="newBtssImport" /></td>
         </tr>
         <tr>
             <td>CDMA小区</td>
-            <td>{{importData.newCdmaCells.length}}</td>
-            <td></td>
             <td>
-                <div class="btn-group" ng-if="importData.newCdmaCells.length">
-                    <button class="btn btn-warning" ng-click="checkCdmaCellsLonLat()">检查经纬度</button>
-                    <button class="btn btn-warning" ng-click="postSingleCdmaCell()">逐个导入</button>
+                <div class="btn-group">
+                    <button class="btn btn-default" ng-click="checkCdmaCellsLonLat()">检查经纬度</button>
+                    <a class="btn btn-default" ng-click="postSingleCdmaCell()">
+                        <i class="glyphicon glyphicon-edit" title="详细信息"></i>
+                        <span class="badge">{{importData.newCdmaCells.length}}</span>
+                    </a>
+                    <button class="btn btn-warning" ng-disabled="importData.newCdmaCells.length===0">
+                        <i class="glyphicon glyphicon-save" title="批量导入"></i>
+                    </button>
                 </div>
             </td>
+            <td></td>
             <td><input type="checkbox" ng-model="newCdmaCellsImport" /></td>
         </tr>
     </tbody>

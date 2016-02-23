@@ -207,6 +207,17 @@
                     deferred.reject(reason);
                 });
                 return deferred.promise;
+            },
+            dumpOneENodebExcel: function(item) {
+                var deferred = $q.defer();
+                $http.post(appUrlService.getApiUrl('DumpENodebExcel'), item)
+                    .success(function (result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
             }
         };
     });

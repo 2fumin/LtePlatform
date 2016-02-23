@@ -78,23 +78,6 @@
         }
     };
 
-    self.postSingleENodeb = function() {
-        if (self.editENodeb() === null && self.newENodebs().length > 0) {
-            self.editENodeb(self.newENodebs().pop());
-        }
-        $("#editENodeb").modal("show");
-    };
-
-    self.saveENodeb = function() {
-        sendRequest(app.dataModel.dumpENodebExcelUrl, "POST", self.editENodeb(), function(result) {
-            if (result === true) {
-                self.editENodeb(null);
-                self.dumpResultMessage("完成一个LTE基站导入数据库！");
-            }
-            $("#editENodeb").modal("hide");
-        });
-    };
-
     self.postSingleBts = function () {
         if (self.editBts() === null && self.newBtss().length > 0) {
             self.editBts(self.newBtss().pop());
