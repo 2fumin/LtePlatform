@@ -20,20 +20,20 @@
     <tbody>
         <tr ng-repeat="item in importData.newCells">
             <td>{{item.eNodebId}}</td>
-            <td>{{item.eNodebId}}</td>
+            <td>{{item.sectorId}}</td>
+            <td>{{item.frequency}}</td>
             <td>{{item.longtitute}}</td>
             <td>{{item.lattitute}}</td>
-            <td>{{item.address}}</td>
-            <td>{{item.planNum}}</td>
-            <td>{{item.lattitute}}</td>
-            <td>{{item.address}}</td>
-            <td>{{item.planNum}}</td>
+            <td>{{item.isIndoor}}</td>
+            <td>{{item.height}}</td>
+            <td>{{item.azimuth}}</td>
+            <td>{{item.antennaGain}}</td>
             <td>
                 <div class="btn-group">
-                    <button class="btn btn-info" ng-click="editENodeb(item, $index)">
+                    <button class="btn btn-info" ng-click="editCell(item, $index)">
                         <i class="glyphicon glyphicon-edit" title="编辑信息"></i>
                     </button>
-                    <button class="btn btn-warning" ng-click="postSingleENodeb(item, $index)">
+                    <button class="btn btn-warning" ng-click="postSingleCell(item, $index)">
                         <i class="glyphicon glyphicon-save" title="直接导入"></i>
                     </button>
                 </div>

@@ -665,6 +665,7 @@
     <Content Include="Scripts\angular-ui\uib\timepicker.js" />
     <Content Include="Scripts\angular-ui\uib\tooltip.js" />
     <Content Include="Scripts\angular-ui\uib\typeahead.js" />
+    <Content Include="Scripts\parameters\import\cells.controller.js" />
     <Content Include="Scripts\parameters\import\eNodeb.lonLat.controller.js" />
     <Content Include="Scripts\parameters\import\eNodebs.controller.js" />
     <Content Include="Scripts\parameters\import\index.controller.js" />
