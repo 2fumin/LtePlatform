@@ -97,16 +97,6 @@
         $("#editCell").modal("show");
     }
 
-    self.saveCell = function () {
-        sendRequest(app.dataModel.dumpCellExcelUrl, "POST", self.editCell(), function (result) {
-            if (result === true) {
-                self.editCell(null);
-                self.dumpResultMessage("完成一个LTE小区导入数据库！");
-            }
-            $("#editCell").modal("hide");
-        });
-    };
-
     self.postSingleCdmaCell = function () {
         if (self.editCdmaCell() === null && self.newCdmaCells().length > 0) {
             self.editCdmaCell(self.newCdmaCells().pop());
