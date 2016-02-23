@@ -35,17 +35,6 @@ var queryCdmaCellLonLatEdits = function(cells) {
     return result;
 };
 
-var postAllENodebs = function(viewModel) {
-    if (viewModel.newENodebs().length > 0) {
-        sendRequest(app.dataModel.newENodebExcelsUrl, "POST", {
-            infos: viewModel.newENodebs()
-        }, function(result) {
-            viewModel.dumpResultMessage(viewModel.dumpResultMessage() + "完成LTE基站导入" + result + "个；");
-            viewModel.newENodebs([]);
-        });
-    }
-};
-
 var postAllBtss = function(viewModel) {
     if (viewModel.newBtss().length > 0) {
         sendRequest(app.dataModel.newBtsExcelsUrl, "POST", {

@@ -218,6 +218,19 @@
                         deferred.reject(reason);
                     });
                 return deferred.promise;
+            },
+            dumpMultipleENodebExcels: function(items) {
+                var deferred = $q.defer();
+                $http.post(appUrlService.getApiUrl('NewENodebExcels'), {
+                        infos: items
+                    })
+                    .success(function(result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function(reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
             }
         };
     });
