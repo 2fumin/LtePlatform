@@ -46,17 +46,6 @@ var postAllBtss = function(viewModel) {
     }
 };
 
-var postAllCells = function(viewModel) {
-    if (viewModel.newCells().length > 0) {
-        sendRequest(app.dataModel.newCellExcelsUrl, "POST", {
-            infos: viewModel.newCells()
-        }, function(result) {
-            viewModel.dumpResultMessage(viewModel.dumpResultMessage() + "完成LTE小区导入" + result + "个；");
-            viewModel.newCells([]);
-        });
-    }
-};
-
 var postAllCdmaCells = function(viewModel) {
     if (viewModel.newCdmaCells().length > 0) {
         sendRequest(app.dataModel.newCdmaCellExcelsUrl, "POST", {

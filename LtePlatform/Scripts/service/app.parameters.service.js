@@ -242,6 +242,19 @@
                         deferred.reject(reason);
                     });
                 return deferred.promise;
+            },
+            dumpMultipleCellExcels: function (items) {
+                var deferred = $q.defer();
+                $http.post(appUrlService.getApiUrl('NewCellExcels'), {
+                    infos: items
+                })
+                    .success(function (result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
             }
         };
     });

@@ -665,6 +665,7 @@
     <Content Include="Scripts\angular-ui\uib\timepicker.js" />
     <Content Include="Scripts\angular-ui\uib\tooltip.js" />
     <Content Include="Scripts\angular-ui\uib\typeahead.js" />
+    <Content Include="Scripts\parameters\import\cell.lonLat.controller.js" />
     <Content Include="Scripts\parameters\import\cells.controller.js" />
     <Content Include="Scripts\parameters\import\eNodeb.lonLat.controller.js" />
     <Content Include="Scripts\parameters\import\eNodebs.controller.js" />
@@ -1077,7 +1078,7 @@
     <None Include="Views\Parameters\_AlarmImport.cshtml" />
     <Content Include="appViews\Parameters\Import\Index.html" />
     <Content Include="appViews\Parameters\Import\ENodebLonLatTable.html" />
-    <Content Include="Views\Parameters\_CellLonLatTable.cshtml" />
+    <Content Include="appViews\Parameters\Import\CellLonLatTable.html" />
     <Content Include="Views\Parameters\_BtsLonLatTable.cshtml" />
     <Content Include="Views\Parameters\_CdmaCellLonLatTable.cshtml" />
     <Content Include="appViews\Parameters\Import\EditENodebDialog.html" />

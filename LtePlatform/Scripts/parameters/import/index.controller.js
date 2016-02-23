@@ -16,4 +16,16 @@
         }
     };
 
+    $scope.postAllCells = function () {
+        if ($scope.importData.newCells.length > 0) {
+            basicImportService.dumpMultipleCellExcels($scope.importData.newCells).then(function (result) {
+                $scope.importData.updateMessages.push({
+                    contents: "完成LTE小区导入" + result + "个",
+                    type: 'success'
+                });
+                $scope.importData.newCells = [];
+            });
+        }
+    };
+
 });

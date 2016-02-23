@@ -47,7 +47,7 @@
                         <i class="glyphicon glyphicon-edit" title="详细信息"></i>
                         <span class="badge">{{importData.newCells.length}}</span>
                     </a>
-                    <button class="btn btn-warning" ng-disabled="importData.newCells.length===0">
+                    <button class="btn btn-warning" ng-disabled="importData.newCells.length===0" ng-click="postAllCells()">
                         <i class="glyphicon glyphicon-save" title="批量导入"></i>
                     </button>
                 </div>

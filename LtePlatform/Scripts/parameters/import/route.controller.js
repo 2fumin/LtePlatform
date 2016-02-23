@@ -18,9 +18,9 @@
                 templateUrl: viewDir + "CellInfos.html",
                 controller: "import.cells"
             })
-            .when('/trendchart', {
-                templateUrl: viewDir + "TrendChart.html",
-                controller: "rutrace.trendchart"
+            .when('/cellLonLat', {
+                templateUrl: viewDir + "CellLonLatTable.html",
+                controller: "cell.lonLat"
             })
             .when('/top', {
                 templateUrl: viewDir + "Top.html",
