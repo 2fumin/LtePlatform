@@ -14,9 +14,9 @@
                 templateUrl: viewDir + "ENodebLonLatTable.html",
                 controller: "eNodeb.lonLat"
             })
-            .when('/chart', {
-                templateUrl: viewDir + "Chart.html",
-                controller: "rutrace.chart"
+            .when('/cellInfos', {
+                templateUrl: viewDir + "CellInfos.html",
+                controller: "import.cells"
             })
             .when('/trendchart', {
                 templateUrl: viewDir + "TrendChart.html",
