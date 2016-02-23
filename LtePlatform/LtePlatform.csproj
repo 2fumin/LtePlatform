@@ -390,6 +390,7 @@
     <Content Include="appViews\Manage\CurrentUser.html" />
     <Content Include="appViews\Manage\Roles.html" />
     <Content Include="appViews\Manage\RoleUser.html" />
+    <Content Include="appViews\Parameters\Import\ENodebInfos.html" />
     <Content Include="appViews\Rutrace\Chart.html" />
     <Content Include="appViews\Rutrace\Index.html" />
     <Content Include="appViews\Rutrace\Interference\Index.html" />
@@ -663,6 +664,8 @@
     <Content Include="Scripts\angular-ui\uib\timepicker.js" />
     <Content Include="Scripts\angular-ui\uib\tooltip.js" />
     <Content Include="Scripts\angular-ui\uib\typeahead.js" />
+    <Content Include="Scripts\parameters\import\eNodebs.controller.js" />
+    <Content Include="Scripts\parameters\import\index.controller.js" />
     <Content Include="Scripts\parameters\import\route.controller.js" />
     <Content Include="Scripts\rutrace\index.controller.js" />
     <Content Include="Scripts\rutrace\map.controller.js" />

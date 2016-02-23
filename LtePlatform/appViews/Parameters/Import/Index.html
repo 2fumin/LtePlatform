@@ -19,7 +19,9 @@
             <td>
                 <div class="btn-group" ng-if="importData.newENodebs.length">
                     <button class="btn btn-warning" ng-click="checkENodebsLonLat()">检查经纬度</button>
-                    <button class="btn btn-warning" ng-click="postSingleENodeb()">逐个导入</button>
+                    <a class="btn btn-warning" ng-href="{{rootPath}}eNodebInfos">
+                        <i class="glyphicon glyphicon-edit" title="详细信息"></i>
+                    </a>
                 </div>
             </td>
             <td><input type="checkbox" ng-model="newENodebsImport" /></td>

@@ -1,11 +1,6 @@
 ﻿function BasicImportViewModel(app, dataModel) {
     var self = this;
-
-    self.newENodebsImport = ko.observable(true);
-    self.newCellsImport = ko.observable(true);
-    self.newBtssImport = ko.observable(true);
-    self.newCdmaCellsImport = ko.observable(true);
-
+    
     self.newENodebLonLatEdits = ko.observableArray([]);
     self.newCellLonLatEdits = ko.observableArray([]);
     self.newBtsLonLatEdits = ko.observableArray([]);

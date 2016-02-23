@@ -6,9 +6,9 @@
                 templateUrl: viewDir + "Index.html",
                 controller: "import.index"
             })
-            .when('/trend', {
-                templateUrl: viewDir + "Trend.html",
-                controller: "rutrace.trend"
+            .when('/eNodebInfos', {
+                templateUrl: viewDir + "ENodebInfos.html",
+                controller: "import.eNodebs"
             })
             .when('/top', {
                 templateUrl: viewDir + "Top.html",
@@ -59,21 +59,21 @@
     };
 
     basicImportService.queryENodebExcels().then(function(data) {
-        $rootScope.newENodebs = data;
+        $rootScope.importData.newENodebs = data;
     });
     basicImportService.queryCellExcels().then(function (data) {
-        $rootScope.newCells = data;
+        $rootScope.importData.newCells = data;
     });
     basicImportService.queryBtsExcels().then(function (data) {
-        $rootScope.newBtss = data;
+        $rootScope.importData.newBtss = data;
     });
     basicImportService.queryCdmaCellExcels().then(function (data) {
-        $rootScope.newCdmaCells = data;
+        $rootScope.importData.newCdmaCells = data;
     });
     basicImportService.queryVanishedENodebs().then(function (data) {
-        $rootScope.vanishedENodebIds = data;
+        $rootScope.importData.vanishedENodebIds = data;
     });
     basicImportService.queryVanishedCells().then(function (data) {
-        $rootScope.vanishedCellIds = data;
+        $rootScope.importData.vanishedCellIds = data;
     });
 });
