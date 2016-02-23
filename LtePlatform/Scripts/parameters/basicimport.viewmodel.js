@@ -1,10 +1,6 @@
 ﻿function BasicImportViewModel(app, dataModel) {
     var self = this;
 
-    self.newENodebs = ko.observableArray([]);
-    self.newCells = ko.observableArray([]);
-    self.newBtss = ko.observableArray([]);
-    self.newCdmaCells = ko.observableArray([]);
     self.newENodebsImport = ko.observable(true);
     self.newCellsImport = ko.observable(true);
     self.newBtssImport = ko.observable(true);
@@ -15,8 +11,6 @@
     self.newBtsLonLatEdits = ko.observableArray([]);
     self.newCdmaCellLonLatEdits = ko.observableArray([]);
 
-    self.vanishedENodebIds = ko.observableArray([]);
-    self.vanishedCellIds = ko.observableArray([]);
     self.dumpResultMessage = ko.observable("");
     self.canDump = ko.observable(true);
 
@@ -24,31 +18,6 @@
     self.editCell = ko.observable(null);
     self.editBts = ko.observable(null);
     self.editCdmaCell = ko.observable(null);
-
-    Sammy(function () {
-        this.get('#basicImport', function () {
-            $("#open-date").datepicker({ dateFormat: 'yy-mm-dd' });
-            sendRequest(app.dataModel.newENodebExcelsUrl, "GET", null, function(data) {
-                self.newENodebs(data);
-            });
-            sendRequest(app.dataModel.newCellExcelsUrl, "GET", null, function (data) {
-                self.newCells(data);
-            });
-            sendRequest(app.dataModel.newBtsExcelsUrl, "GET", null, function (data) {
-                self.newBtss(data);
-            });
-            sendRequest(app.dataModel.newCdmaCellExcelsUrl, "GET", null, function (data) {
-                self.newCdmaCells(data);
-            });
-            sendRequest(app.dataModel.dumpENodebExcelUrl, "GET", null, function(data) {
-                self.vanishedENodebIds(data);
-            });
-            sendRequest(app.dataModel.dumpCellExcelUrl, "GET", null, function(data) {
-                self.vanishedCellIds(data);
-            });
-        });
-        this.get('/Parameters/BasicImport', function () { this.app.runRoute('get', '#basicImport'); });
-    });
 
     self.checkENodebsLonLat = function() {
         self.newENodebLonLatEdits(queryENodebLonLatEdits(self.newENodebs()));

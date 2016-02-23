@@ -19,9 +19,10 @@
     <div class="col-md-4">
         <h4>工参文件选择</h4>
         @using (Html.BeginForm("LteImportPost", "Parameters",
-                FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
+            FormMethod.Post, new {enctype = "multipart/form-data", @class = "form-horizontal", role = "form"}))
         {
-            <p><label class="control-label">LTE Excel文件选择：</label></p>
+            <p><label class="control-label">LTE Excel文件选择：</label>
+            </p>
             <div class="form-group">
                 <div class="col-md-8">
                     <input name="lteExcel" class="form-control" type="file" accept=".xlsx"/>
@@ -36,7 +37,8 @@
         @using (Html.BeginForm("CdmaImportPost", "Parameters",
             FormMethod.Post, new {enctype = "multipart/form-data", @class = "form-horizontal", role = "form"}))
         {
-            <p><label class="control-label">CDMA Excel文件选择：</label></p>
+            <p><label class="control-label">CDMA Excel文件选择：</label>
+            </p>
             <div class="form-group">
                 <div class="col-md-8">
                     <input name="cdmaExcel" class="form-control" type="file" accept=".xls"/>
@@ -50,7 +52,21 @@
 
         }
     </div>
-    <div ng-view></div>
+    <div class="col-md-8">
+        <div uib-alert ng-repeat="message in importData.updateMessages" type="{{message.type}}" dismiss-on-timeout="2000" close="closeAlert($index)">
+            {{message.contents}}
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    工参读取结果及操作平台
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div ng-view></div>
+            </div>
+        </div>
+    </div>
 </div>
 
 @section Scripts{
@@ -65,6 +81,7 @@
     <script src="~/Scripts/service/app.parameters.service.js"></script>
     <script>
         var app = angular.module('myApp',
-            ['ngRoute', "highcharts-ng", "ui.bootstrap", 'myApp.url', 'myApp.region', 'myApp.kpi', 'myApp.parameters']);
+        ['ngRoute', "highcharts-ng", "ui.bootstrap", 'myApp.url', 'myApp.region', 'myApp.kpi', 'myApp.parameters']);
     </script>
+    <script src="~/Scripts/parameters/import/route.controller.js"></script>
 }
