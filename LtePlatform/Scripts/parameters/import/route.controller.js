@@ -10,9 +10,9 @@
                 templateUrl: viewDir + "ENodebInfos.html",
                 controller: "import.eNodebs"
             })
-            .when('/top', {
-                templateUrl: viewDir + "Top.html",
-                controller: "rutrace.top"
+            .when('/eNodebLonLat', {
+                templateUrl: viewDir + "ENodebLonLatTable.html",
+                controller: "eNodeb.lonLat"
             })
             .when('/chart', {
                 templateUrl: viewDir + "Chart.html",

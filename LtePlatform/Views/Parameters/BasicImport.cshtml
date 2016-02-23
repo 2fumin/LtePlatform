@@ -79,11 +79,22 @@
     <script src="~/Scripts/service/app.region.service.js"></script>
     <script src="~/Scripts/service/app.kpi.service.js"></script>
     <script src="~/Scripts/service/app.parameters.service.js"></script>
+    <script src="~/Scripts/service/ne.geometry.service.js"></script>
     <script>
         var app = angular.module('myApp',
-        ['ngRoute', "highcharts-ng", "ui.bootstrap", 'myApp.url', 'myApp.region', 'myApp.kpi', 'myApp.parameters']);
+        [
+            'ngRoute',
+            "highcharts-ng",
+            "ui.bootstrap",
+            'myApp.url',
+            'myApp.region',
+            'myApp.kpi',
+            'myApp.parameters',
+            'ne.geometry'
+        ]);
     </script>
     <script src="~/Scripts/parameters/import/route.controller.js"></script>
     <script src="~/Scripts/parameters/import/index.controller.js"></script>
     <script src="~/Scripts/parameters/import/eNodebs.controller.js"></script>
+    <script src="~/Scripts/parameters/import/eNodeb.lonLat.controller.js"></script>
 }

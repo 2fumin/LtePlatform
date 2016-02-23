@@ -15,13 +15,8 @@
     self.editCdmaCell = ko.observable(null);
 
     self.checkENodebsLonLat = function() {
-        self.newENodebLonLatEdits(queryENodebLonLatEdits(self.newENodebs()));
+        
         $('#eNodeb-lon-lat').modal('show');
-    };
-
-    self.postENodebLonLat = function() {
-        mapLonLatEdits(self.newENodebs, self.newENodebLonLatEdits());
-        $('#eNodeb-lon-lat').modal('hide');
     };
 
     self.checkCellsLonLat = function() {

@@ -664,6 +664,7 @@
     <Content Include="Scripts\angular-ui\uib\timepicker.js" />
     <Content Include="Scripts\angular-ui\uib\tooltip.js" />
     <Content Include="Scripts\angular-ui\uib\typeahead.js" />
+    <Content Include="Scripts\parameters\import\eNodeb.lonLat.controller.js" />
     <Content Include="Scripts\parameters\import\eNodebs.controller.js" />
     <Content Include="Scripts\parameters\import\index.controller.js" />
     <Content Include="Scripts\parameters\import\route.controller.js" />
@@ -675,6 +676,7 @@
     <Content Include="Scripts\service\app.kpi.service.js" />
     <Content Include="Scripts\service\app.parameters.service.js" />
     <Content Include="Scripts\service\app.url.service.js" />
+    <Content Include="Scripts\service\ne.geometry.service.js" />
     <Content Include="template\accordion\accordion-group.html" />
     <Content Include="template\accordion\accordion.html" />
     <Content Include="template\alert\alert.html" />
@@ -1072,7 +1074,7 @@
     <Content Include="Views\Parameters\QueryMap.cshtml" />
     <None Include="Views\Parameters\_AlarmImport.cshtml" />
     <Content Include="appViews\Parameters\Import\Index.html" />
-    <Content Include="Views\Parameters\_ENodebLonLatTable.cshtml" />
+    <Content Include="appViews\Parameters\Import\ENodebLonLatTable.html" />
     <Content Include="Views\Parameters\_CellLonLatTable.cshtml" />
     <Content Include="Views\Parameters\_BtsLonLatTable.cshtml" />
     <Content Include="Views\Parameters\_CdmaCellLonLatTable.cshtml" />

@@ -1,0 +1,32 @@
+﻿<h4 class="text-center text-primary">
+    LTE基站经纬度调整
+    <a class="btn btn-success" style="float: right" ng-href="{{rootPath}}index">返回</a>
+</h4>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>基站编号</th>
+        <th>基站名称</th>
+        <th>区域</th>
+        <th>镇区</th>
+        <th>经度</th>
+        <th>纬度</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="item in newENodebLonLatEdits">
+        <td>{{item.eNodebId}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.district}}</td>
+        <td>{{item.town}}</td>
+        <td><input ng-model="item.longtitute"/></td>
+        <td><input ng-model="item.lattitute"/></td>
+    </tr>
+    </tbody>
+</table>
+<p>
+    <button style="float: right" class="btn btn-primary" ng-if="newENodebLonLatEdits.length"
+                 ng-click="postENodebLonLat()">
+        保存
+    </button>
+</p>
