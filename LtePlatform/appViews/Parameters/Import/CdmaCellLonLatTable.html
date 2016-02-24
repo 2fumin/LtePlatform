@@ -1,0 +1,32 @@
+﻿<h4 class="text-center text-primary">
+    CDMA小区经纬度调整
+    <a class="btn btn-success" style="float: right" ng-href="{{rootPath}}index">返回</a>
+</h4>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>基站编号</th>
+            <th>扇区编号</th>
+            <th>频点</th>
+            <th>是否室内</th>
+            <th>经度</th>
+            <th>纬度</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in newCellLonLatEdits">
+            <td>{{item.btsId}}</td>
+            <td>{{item.sectorId}}</td>
+            <td>{{item.frequency}}</td>
+            <td>{{item.isIndoor}}</td>
+            <td><input ng-model="item.longtitute" /></td>
+            <td><input ng-model="item.lattitute" /></td>
+        </tr>
+    </tbody>
+</table>
+<p>
+    <button style="float: right" class="btn btn-primary" ng-if="newCellLonLatEdits.length"
+            ng-click="postCellLonLat()">
+        保存
+    </button>
+</p>

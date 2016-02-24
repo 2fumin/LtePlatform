@@ -238,9 +238,31 @@
                     });
                 return deferred.promise;
             },
+            dumpOneBtsExcel: function (item) {
+                var deferred = $q.defer();
+                $http.post(appUrlService.getApiUrl('DumpBtsExcel'), item)
+                    .success(function (result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            },
             dumpOneCellExcel: function (item) {
                 var deferred = $q.defer();
                 $http.post(appUrlService.getApiUrl('DumpCellExcel'), item)
+                    .success(function (result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            },
+            dumpOneCdmaCellExcel: function (item) {
+                var deferred = $q.defer();
+                $http.post(appUrlService.getApiUrl('DumpCdmaCellExcel'), item)
                     .success(function (result) {
                         deferred.resolve(result);
                     })
@@ -262,9 +284,35 @@
                     });
                 return deferred.promise;
             },
+            dumpMultipleBtsExcels: function (items) {
+                var deferred = $q.defer();
+                $http.post(appUrlService.getApiUrl('NewBtsExcels'), {
+                    infos: items
+                })
+                    .success(function (result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            },
             dumpMultipleCellExcels: function (items) {
                 var deferred = $q.defer();
                 $http.post(appUrlService.getApiUrl('NewCellExcels'), {
+                    infos: items
+                })
+                    .success(function (result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            },
+            dumpMultipleCdmaCellExcels: function (items) {
+                var deferred = $q.defer();
+                $http.post(appUrlService.getApiUrl('NewCdmaCellExcels'), {
                     infos: items
                 })
                     .success(function (result) {

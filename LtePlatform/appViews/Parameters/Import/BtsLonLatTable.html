@@ -1,0 +1,32 @@
+﻿<h4 class="text-center text-primary">
+    CDMA基站经纬度调整
+    <a class="btn btn-success" style="float: right" ng-href="{{rootPath}}index">返回</a>
+</h4>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>BSC</th>
+            <th>基站编号/th>
+            <th>基站名称</th>
+            <th>区域</th>
+            <th>经度</th>
+            <th>纬度</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in newBtsLonLatEdits">
+            <td>{{item.bscId}}</td>
+            <td>{{item.btsId}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.districtName}}</td>
+            <td><input ng-model="item.longtitute" /></td>
+            <td><input ng-model="item.lattitute" /></td>
+        </tr>
+    </tbody>
+</table>
+<p>
+    <button style="float: right" class="btn btn-primary" ng-if="newBtsLonLatEdits.length"
+            ng-click="postBtsLonLat()">
+        保存
+    </button>
+</p>

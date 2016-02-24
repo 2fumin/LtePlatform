@@ -16,6 +16,18 @@
         }
     };
 
+    $scope.postAllBtss = function () {
+        if ($scope.importData.newBtss.length > 0) {
+            basicImportService.dumpMultipleBtsExcels($scope.importData.newBtss).then(function (result) {
+                $scope.importData.updateMessages.push({
+                    contents: "完成CDMA基站导入" + result + "个",
+                    type: 'success'
+                });
+                $scope.importData.newBtss = [];
+            });
+        }
+    };
+
     $scope.postAllCells = function () {
         if ($scope.importData.newCells.length > 0) {
             basicImportService.dumpMultipleCellExcels($scope.importData.newCells).then(function (result) {
@@ -24,6 +36,18 @@
                     type: 'success'
                 });
                 $scope.importData.newCells = [];
+            });
+        }
+    };
+
+    $scope.postAllCdmaCells = function () {
+        if ($scope.importData.newCdmaCells.length > 0) {
+            basicImportService.dumpMultipleCdmaCellExcels($scope.importData.newCdmaCells).then(function (result) {
+                $scope.importData.updateMessages.push({
+                    contents: "完成CDMA小区导入" + result + "个",
+                    type: 'success'
+                });
+                $scope.importData.newCdmaCells = [];
             });
         }
     };

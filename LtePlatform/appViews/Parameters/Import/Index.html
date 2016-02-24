@@ -71,7 +71,7 @@
             <td>CDMA基站</td>
             <td>
                 <div class="btn-group">
-                    <button class="btn btn-default" ng-click="checkBtssLonLat()">检查经纬度</button>
+                    <button class="btn btn-default" ng-click="{{rootPath}}btsLonLat">检查经纬度</button>
                     <a class="btn btn-default" ng-href="{{rootPath}}btsInfos">
                         <i class="glyphicon glyphicon-edit" title="详细信息"></i>
                         <span class="badge">{{importData.newBtss.length}}</span>
@@ -99,7 +99,7 @@
             <td>CDMA小区</td>
             <td>
                 <div class="btn-group">
-                    <button class="btn btn-default" ng-click="checkCdmaCellsLonLat()">检查经纬度</button>
+                    <button class="btn btn-default" ng-click="{{rootPath}}cdmaCellLonLat">检查经纬度</button>
                     <a class="btn btn-default" ng-href="{{rootPath}}cdmaCellInfos">
                         <i class="glyphicon glyphicon-edit" title="详细信息"></i>
                         <span class="badge">{{importData.newCdmaCells.length}}</span>

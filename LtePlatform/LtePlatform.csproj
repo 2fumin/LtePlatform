@@ -670,6 +670,8 @@
     <Content Include="Scripts\angular-ui\uib\timepicker.js" />
     <Content Include="Scripts\angular-ui\uib\tooltip.js" />
     <Content Include="Scripts\angular-ui\uib\typeahead.js" />
+    <Content Include="Scripts\parameters\import\btss.controller.js" />
+    <Content Include="Scripts\parameters\import\cdmaCells.controller.js" />
     <Content Include="Scripts\parameters\import\cell.lonLat.controller.js" />
     <Content Include="Scripts\parameters\import\cell.vanished.controller.js" />
     <Content Include="Scripts\parameters\import\cells.controller.js" />
@@ -947,7 +949,6 @@
     <Content Include="Scripts\angular-ui\angular-scenario.js" />
     <Content Include="Scripts\angular-ui\angular-touch.js" />
     <Content Include="Scripts\angular-ui\angular-ui-router.js" />
-    <Content Include="Scripts\parameters\basicimport.controller.js" />
     <Content Include="Scripts\parameters\basicimport.viewmodel.js" />
     <Content Include="Scripts\parameters\common.controller.js" />
     <Content Include="Scripts\parameters\list.viewmodel.js" />
@@ -1085,8 +1086,8 @@
     <None Include="Views\Parameters\_AlarmImport.cshtml" />
     <Content Include="appViews\Parameters\Import\Index.html" />
     <Content Include="appViews\Parameters\Import\ENodebLonLatTable.html" />
-    <Content Include="Views\Parameters\_BtsLonLatTable.cshtml" />
-    <Content Include="Views\Parameters\_CdmaCellLonLatTable.cshtml" />
+    <Content Include="appViews\Parameters\Import\BtsLonLatTable.html" />
+    <Content Include="appViews\Parameters\Import\CdmaCellLonLatTable.html" />
     <Content Include="appViews\Parameters\Import\EditENodebDialog.html" />
     <Content Include="appViews\Parameters\Import\EditCellDialog.html" />
     <Content Include="appViews\Parameters\Import\EditBtsDialog.html" />

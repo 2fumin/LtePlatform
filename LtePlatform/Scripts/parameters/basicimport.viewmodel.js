@@ -14,21 +14,6 @@
     self.editBts = ko.observable(null);
     self.editCdmaCell = ko.observable(null);
 
-    self.checkENodebsLonLat = function() {
-        
-        $('#eNodeb-lon-lat').modal('show');
-    };
-
-    self.checkCellsLonLat = function() {
-        self.newCellLonLatEdits(queryCellLonLatEdits(self.newCells()));
-        $('#cell-lon-lat').modal('show');
-    };
-
-    self.postCellLonLat = function() {
-        mapLonLatEdits(self.newCells, self.newCellLonLatEdits());
-        $('#cell-lon-lat').modal('hide');
-    };
-
     self.checkBtssLonLat = function() {
         self.newBtsLonLatEdits(queryBtsLonLatEdits(self.newBtss()));
         $('#bts-lon-lat').modal('show');
@@ -71,47 +56,6 @@
                 self.vanishedCellIds([]);
             });
         }
-    };
-
-    self.postSingleBts = function () {
-        if (self.editBts() === null && self.newBtss().length > 0) {
-            self.editBts(self.newBtss().pop());
-        }
-        $("#editBts").modal("show");
-    };
-
-    self.saveBts = function () {
-        sendRequest(app.dataModel.dumpBtsExcelUrl, "POST", self.editBts(), function (result) {
-            if (result === true) {
-                self.editBts(null);
-                self.dumpResultMessage("完成一个CDMA基站导入数据库！");
-            }
-            $("#editBts").modal("hide");
-        });
-    };
-
-    self.postSingleCell=function() {
-        if (self.editCell() === null && self.newCells().length > 0) {
-            self.editCell(self.newCells().pop());
-        }
-        $("#editCell").modal("show");
-    }
-
-    self.postSingleCdmaCell = function () {
-        if (self.editCdmaCell() === null && self.newCdmaCells().length > 0) {
-            self.editCdmaCell(self.newCdmaCells().pop());
-        }
-        $("#editCdmaCell").modal("show");
-    }
-
-    self.saveCdmaCell = function () {
-        sendRequest(app.dataModel.dumpCdmaCellExcelUrl, "POST", self.editCdmaCell(), function (result) {
-            if (result === true) {
-                self.editCdmaCell(null);
-                self.dumpResultMessage("完成一个CDMA小区导入数据库！");
-            }
-            $("#editCdmaCell").modal("hide");
-        });
     };
 
     return self;
