@@ -167,6 +167,11 @@
     <Compile Include="Notifications\UserNotificationInfoWithNotificationInfoExtensions.cs" />
     <Compile Include="Notifications\UserNotificationManager.cs" />
     <Compile Include="Notifications\UserNotificationState.cs" />
+    <Compile Include="RealTime\IOnlineClient.cs" />
+    <Compile Include="RealTime\IOnlineClientManager.cs" />
+    <Compile Include="RealTime\OnlineClient.cs" />
+    <Compile Include="RealTime\OnlineClientManager.cs" />
+    <Compile Include="RealTime\OnlineClientManagerExtensions.cs" />
     <Compile Include="Runtime\Caching\AbpCacheNames.cs" />
     <Compile Include="MultiTenancy\ITenantIdResolver.cs" />
     <Compile Include="MultiTenancy\NullTenantIdResolver.cs" />
