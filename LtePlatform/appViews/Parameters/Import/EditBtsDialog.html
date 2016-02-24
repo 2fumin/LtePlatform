@@ -1,0 +1,52 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
+    <h4 class="modal-title">编辑CDMA基站信息</h4>
+</div>
+<div class="modal-body form-horizontal" data-bind="with: editBts">
+    <div class="form-group">
+        <label class="col-sm-3 control-label">基站名称</label>
+        <div class="col-sm-9">
+            <span class="form-control">{{item.name}}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">基站编号</label>
+        <div class="col-sm-3">
+            <span class="form-control">{{item.btsId}}</span>
+        </div>
+        <label class="col-sm-3 control-label">BSC编号</label>
+        <div class="col-sm-3">
+            <span class="form-control">{{item.bscId}}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">区域</label>
+        <div class="col-sm-3">
+            <span class="form-control">{{item.districtName}}</span>
+        </div>
+        <label class="col-sm-3 control-label">镇区</label>
+        <div class="col-sm-3">
+            <span class="form-control">{{item.townName}}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">经度</label>
+        <div class="col-sm-3">
+            <span class="form-control">{{item.longtitute}}</span>
+        </div>
+        <label class="col-sm-3 control-label">纬度</label>
+        <div class="col-sm-3">
+            <span class="form-control">{{item.lattitute}}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">地址</label>
+        <div class="col-sm-9">
+            <input class="form-control" ng-model="item.address" />
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-warning" ng-click="ok()">保存信息</button>
+    <button class="btn btn-default" type="button" ng-click="cancel()">放弃保存</button>
+</div>

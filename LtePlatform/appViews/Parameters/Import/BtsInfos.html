@@ -1,0 +1,37 @@
+﻿<h4 class="text-center text-primary">
+    新增CDMA基站信息
+    <a class="btn btn-success" style="float: right" ng-href="{{rootPath}}index">返回</a>
+</h4>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>基站名称</th>
+            <th>基站编号</th>
+            <th>经度</th>
+            <th>纬度</th>
+            <th>地址</th>
+            <th>BSC编号</th>
+            <th style="min-width: 100px">编辑操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in importData.newENodebs">
+            <td>{{item.name}}</td>
+            <td>{{item.btsId}}</td>
+            <td>{{item.longtitute}}</td>
+            <td>{{item.lattitute}}</td>
+            <td>{{item.address}}</td>
+            <td>{{item.bscId}}</td>
+            <td>
+                <div class="btn-group">
+                    <button class="btn btn-info" ng-click="editBts(item, $index)">
+                        <i class="glyphicon glyphicon-edit" title="编辑信息"></i>
+                    </button>
+                    <button class="btn btn-warning" ng-click="postSingleBts(item, $index)">
+                        <i class="glyphicon glyphicon-save" title="直接导入"></i>
+                    </button>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

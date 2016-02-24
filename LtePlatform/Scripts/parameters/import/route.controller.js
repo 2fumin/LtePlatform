@@ -30,13 +30,29 @@
                 templateUrl: viewDir + "VanishedCellInfos.html",
                 controller: "cell.vanished"
             })
-            .when('/interference', {
-                templateUrl: viewDir + "Interference/Index.html",
-                controller: "rutrace.interference"
+            .when('/btsInfos', {
+                templateUrl: viewDir + "BtsInfos.html",
+                controller: "import.btss"
             })
-            .when('/baidumap', {
-                templateUrl: viewDir + "Map/Index.html",
-                controller: "rutrace.map"
+            .when('/btsLonLat', {
+                templateUrl: viewDir + "BtsLonLatTable.html",
+                controller: "bts.lonLat"
+            })
+            .when('/cdmaCellInfos', {
+                templateUrl: viewDir + "CdmaCellInfos.html",
+                controller: "import.cdmaCells"
+            })
+            .when('/cdmaCellLonLat', {
+                templateUrl: viewDir + "CdmaCellLonLatTable.html",
+                controller: "cdmaCell.lonLat"
+            })
+            .when('/vanishedBtsInfos', {
+                templateUrl: viewDir + "VanishedBtss.html",
+                controller: "bts.vanished"
+            })
+            .when('/vanishedCdmaCellInfos', {
+                templateUrl: viewDir + "VanishedCdmaCellInfos.html",
+                controller: "cdmaCell.vanished"
             })
             .otherwise({
                 redirectTo: '/'
@@ -51,6 +67,8 @@
         newCdmaCells: [],
         vanishedENodebIds: [],
         vanishedCellIds: [],
+        vanishedBtsIds: [],
+        vanishedCdmaCellIds: [],
         updateMessages: []
     };
 

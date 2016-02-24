@@ -72,7 +72,7 @@
             <td>
                 <div class="btn-group">
                     <button class="btn btn-default" ng-click="checkBtssLonLat()">检查经纬度</button>
-                    <a class="btn btn-default" ng-click="postSingleBts()">
+                    <a class="btn btn-default" ng-href="{{rootPath}}btsInfos">
                         <i class="glyphicon glyphicon-edit" title="详细信息"></i>
                         <span class="badge">{{importData.newBtss.length}}</span>
                     </a>
@@ -81,7 +81,18 @@
                     </button>
                 </div>
             </td>
-            <td></td>
+            <td>
+                <div class="btn-group">
+                    <a class="btn btn-default" ng-href="{{rootPath}}vanishedBtsInfos">
+                        <i class="glyphicon glyphicon-edit" title="详细信息"></i>
+                        <span class="badge">{{importData.vanishedBtsIds.length}}</span>
+                    </a>
+                    <button class="btn btn-warning" ng-disabled="importData.vanishedBtsIds.length===0"
+                            ng-click="vanishBtss()">
+                        <i class="glyphicon glyphicon-save" title="导入"></i>
+                    </button>
+                </div>
+            </td>
             <td><input type="checkbox" ng-model="newBtssImport" /></td>
         </tr>
         <tr>
@@ -89,7 +100,7 @@
             <td>
                 <div class="btn-group">
                     <button class="btn btn-default" ng-click="checkCdmaCellsLonLat()">检查经纬度</button>
-                    <a class="btn btn-default" ng-click="postSingleCdmaCell()">
+                    <a class="btn btn-default" ng-href="{{rootPath}}cdmaCellInfos">
                         <i class="glyphicon glyphicon-edit" title="详细信息"></i>
                         <span class="badge">{{importData.newCdmaCells.length}}</span>
                     </a>
@@ -98,7 +109,18 @@
                     </button>
                 </div>
             </td>
-            <td></td>
+            <td>
+                <div class="btn-group">
+                    <a class="btn btn-default" ng-href="{{rootPath}}vanishedCdmaCellInfos">
+                        <i class="glyphicon glyphicon-edit" title="详细信息"></i>
+                        <span class="badge">{{importData.vanishedCdmaCellIds.length}}</span>
+                    </a>
+                    <button class="btn btn-warning" ng-disabled="importData.vanishedCdmaCellIds.length===0"
+                            ng-click="vanishCdmaCells()">
+                        <i class="glyphicon glyphicon-save" title="导入"></i>
+                    </button>
+                </div>
+            </td>
             <td><input type="checkbox" ng-model="newCdmaCellsImport" /></td>
         </tr>
     </tbody>
