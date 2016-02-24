@@ -1,0 +1,30 @@
+﻿<h4 class="text-center text-primary">
+    待消亡LTE基站信息
+    <a class="btn btn-success" style="float: right" ng-href="{{rootPath}}index">返回</a>
+</h4>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>基站名称</th>
+            <th>基站编号</th>
+            <th>厂家</th>
+            <th>经度</th>
+            <th>纬度</th>
+            <th>地址</th>
+            <th>规划编号</th>
+            <th>开通日期</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in vanishedENodebs">
+            <td>{{item.name}}</td>
+            <td>{{item.eNodebId}}</td>
+            <td>{{item.factory}}</td>
+            <td>{{item.longtitute}}</td>
+            <td>{{item.lattitute}}</td>
+            <td>{{item.address}}</td>
+            <td>{{item.planNum}}</td>
+            <td>{{item.openDate | date: 'yyyy-MM-dd'}}</td>
+        </tr>
+    </tbody>
+</table>

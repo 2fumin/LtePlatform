@@ -24,11 +24,11 @@
             })
             .when('/vanishedENodebInfos', {
                 templateUrl: viewDir + "VanishedENodebs.html",
-                controller: "rutrace.top"
-            })
-            .when('/import', {
-                templateUrl: viewDir + "ENodebInfos.html",
                 controller: "eNodeb.vanished"
+            })
+            .when('/vanishedCellInfos', {
+                templateUrl: viewDir + "VanishedCellInfos.html",
+                controller: "cell.vanished"
             })
             .when('/interference', {
                 templateUrl: viewDir + "Interference/Index.html",

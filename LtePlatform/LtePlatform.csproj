@@ -393,6 +393,7 @@
     <Content Include="appViews\Parameters\Import\CellInfos.html" />
     <Content Include="appViews\Parameters\Import\CellLonLatTable.html" />
     <Content Include="appViews\Parameters\Import\ENodebInfos.html" />
+    <Content Include="appViews\Parameters\Import\VanishedENodebs.html" />
     <Content Include="appViews\Rutrace\Chart.html" />
     <Content Include="appViews\Rutrace\Index.html" />
     <Content Include="appViews\Rutrace\Interference\Index.html" />
@@ -669,6 +670,7 @@
     <Content Include="Scripts\parameters\import\cell.lonLat.controller.js" />
     <Content Include="Scripts\parameters\import\cells.controller.js" />
     <Content Include="Scripts\parameters\import\eNodeb.lonLat.controller.js" />
+    <Content Include="Scripts\parameters\import\eNodeb.vanished.controller.js" />
     <Content Include="Scripts\parameters\import\eNodebs.controller.js" />
     <Content Include="Scripts\parameters\import\index.controller.js" />
     <Content Include="Scripts\parameters\import\route.controller.js" />
