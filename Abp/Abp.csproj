@@ -179,6 +179,16 @@
     <Compile Include="Runtime\Session\ClaimsAbpSession.cs" />
     <Compile Include="Runtime\Validation\BooleanValueValidator.cs" />
     <Compile Include="Runtime\Validation\ValueValidatorBase.cs" />
+    <Compile Include="Threading\BackgroundWorkers\BackgroundWorkerBase.cs" />
+    <Compile Include="Threading\BackgroundWorkers\BackgroundWorkerManager.cs" />
+    <Compile Include="Threading\BackgroundWorkers\IBackgroundWorker.cs" />
+    <Compile Include="Threading\BackgroundWorkers\IBackgroundWorkerManager.cs" />
+    <Compile Include="Threading\BackgroundWorkers\PeriodicBackgroundWorkerBase.cs" />
+    <Compile Include="Threading\IRunnable.cs" />
+    <Compile Include="Threading\RunnableBase.cs" />
+    <Compile Include="Threading\RunnableExtensions.cs" />
+    <Compile Include="Threading\ThreadCultureSanitizer.cs" />
+    <Compile Include="Threading\Timers\AbpTimer.cs" />
     <Compile Include="UI\Inputs\LocalizableComboboxItem.cs" />
     <Compile Include="UI\Inputs\ILocalizableComboboxItem.cs" />
     <Compile Include="UI\Inputs\ILocalizableComboboxItemSource.cs" />
