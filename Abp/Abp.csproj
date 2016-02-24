@@ -112,6 +112,7 @@
     <Compile Include="Events\Bus\Entities\EntityCreatingEventData.cs" />
     <Compile Include="Events\Bus\Entities\EntityDeletingEventData.cs" />
     <Compile Include="Events\Bus\Entities\EntityUpdatingEventData.cs" />
+    <Compile Include="IGuidGenerator.cs" />
     <Compile Include="Localization\Dictionaries\Json\JsonEmbeddedFileLocalizationDictionaryProvider.cs" />
     <Compile Include="Localization\Dictionaries\Json\JsonFileLocalizationDictionaryProvider.cs" />
     <Compile Include="Localization\Dictionaries\Json\JsonLocalizationDictionary.cs" />
@@ -172,6 +173,7 @@
     <Compile Include="RealTime\OnlineClient.cs" />
     <Compile Include="RealTime\OnlineClientManager.cs" />
     <Compile Include="RealTime\OnlineClientManagerExtensions.cs" />
+    <Compile Include="RegularGuidGenerator.cs" />
     <Compile Include="Runtime\Caching\AbpCacheNames.cs" />
     <Compile Include="MultiTenancy\ITenantIdResolver.cs" />
     <Compile Include="MultiTenancy\NullTenantIdResolver.cs" />
@@ -179,6 +181,7 @@
     <Compile Include="Runtime\Session\ClaimsAbpSession.cs" />
     <Compile Include="Runtime\Validation\BooleanValueValidator.cs" />
     <Compile Include="Runtime\Validation\ValueValidatorBase.cs" />
+    <Compile Include="SequentialGuidGenerator.cs" />
     <Compile Include="Threading\BackgroundWorkers\BackgroundWorkerBase.cs" />
     <Compile Include="Threading\BackgroundWorkers\BackgroundWorkerManager.cs" />
     <Compile Include="Threading\BackgroundWorkers\IBackgroundWorker.cs" />
