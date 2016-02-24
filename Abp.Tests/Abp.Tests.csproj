@@ -129,6 +129,7 @@
     </Compile>
     <Compile Include="Localization\XmlEmbeddedFileLocalizationDictionaryProvider_Tests.cs" />
     <Compile Include="Net\Mail\SmtpEmailSender_Tests.cs" />
+    <Compile Include="Notifications\NotificationPublisher_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reflection\ReflectionHelper_Tests.cs" />
     <Compile Include="Reflection\TypeHelper_Tests.cs" />
