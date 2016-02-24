@@ -391,6 +391,7 @@
     <Content Include="appViews\Manage\Roles.html" />
     <Content Include="appViews\Manage\RoleUser.html" />
     <Content Include="appViews\Parameters\Import\CellInfos.html" />
+    <Content Include="appViews\Parameters\Import\CellLonLatTable.html" />
     <Content Include="appViews\Parameters\Import\ENodebInfos.html" />
     <Content Include="appViews\Rutrace\Chart.html" />
     <Content Include="appViews\Rutrace\Index.html" />
@@ -1078,7 +1079,6 @@
     <None Include="Views\Parameters\_AlarmImport.cshtml" />
     <Content Include="appViews\Parameters\Import\Index.html" />
     <Content Include="appViews\Parameters\Import\ENodebLonLatTable.html" />
-    <Content Include="appViews\Parameters\Import\CellLonLatTable.html" />
     <Content Include="Views\Parameters\_BtsLonLatTable.cshtml" />
     <Content Include="Views\Parameters\_CdmaCellLonLatTable.cshtml" />
     <Content Include="appViews\Parameters\Import\EditENodebDialog.html" />
