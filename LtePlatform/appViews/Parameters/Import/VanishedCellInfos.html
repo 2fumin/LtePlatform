@@ -1,0 +1,36 @@
+﻿<h4 class="text-center text-primary">
+    待消亡LTE小区信息
+    <a class="btn btn-success" style="float: right" ng-href="{{rootPath}}index">返回</a>
+</h4>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>基站编号</th>
+            <th>扇区编号</th>
+            <th>频点</th>
+            <th>经度</th>
+            <th>纬度</th>
+            <th>室内小区</th>
+            <th>天线挂高</th>
+            <th>方位角</th>
+            <th>天线增益</th>
+            <th>PCI</th>
+            <th>PRACH</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in vanishedCells">
+            <td>{{item.eNodebId}}</td>
+            <td>{{item.sectorId}}</td>
+            <td>{{item.frequency}}</td>
+            <td>{{item.longtitute}}</td>
+            <td>{{item.lattitute}}</td>
+            <td>{{item.isIndoor}}</td>
+            <td>{{item.height}}</td>
+            <td>{{item.azimuth}}</td>
+            <td>{{item.antennaGain}}</td>
+            <td>{{item.pci}}</td>
+            <td>{{item.prach}}</td>
+        </tr>
+    </tbody>
+</table>

@@ -287,6 +287,19 @@
                         deferred.reject(reason);
                     });
                 return deferred.promise;
+            },
+            vanishCellIds: function (ids) {
+                var deferred = $q.defer();
+                $http.put(appUrlService.getApiUrl('DumpCellExcel'), {
+                    cellIdPairs: ids
+                })
+                    .success(function (result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
             }
         };
     });

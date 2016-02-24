@@ -39,6 +39,12 @@
     };
 
     $scope.vanishCells = function() {
-
+        basicImportService.vanishCellIds($scope.importData.vanishedCellIds).then(function () {
+            $scope.importData.updateMessages.push({
+                contents: "完成消亡LTE小区：" + $scope.importData.vanishedCellIds.length,
+                type: 'success'
+            });
+            $scope.importData.vanishedCellIds = [];
+        });
     };
 });
