@@ -22,13 +22,13 @@
                 templateUrl: viewDir + "CellLonLatTable.html",
                 controller: "cell.lonLat"
             })
-            .when('/top', {
-                templateUrl: viewDir + "Top.html",
+            .when('/vanishedENodebInfos', {
+                templateUrl: viewDir + "VanishedENodebs.html",
                 controller: "rutrace.top"
             })
             .when('/import', {
-                templateUrl: viewDir + "Import.html",
-                controller: "rutrace.import"
+                templateUrl: viewDir + "ENodebInfos.html",
+                controller: "eNodeb.vanished"
             })
             .when('/interference', {
                 templateUrl: viewDir + "Interference/Index.html",

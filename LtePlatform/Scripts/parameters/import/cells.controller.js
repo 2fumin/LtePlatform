@@ -1,5 +1,5 @@
 ﻿app.controller("import.cells", function ($scope, $uibModal, $log, basicImportService) {
-    $scope.editENodeb = function (item, index) {
+    $scope.editCell = function (item, index) {
         var modalInstance = $uibModal.open({
             animation: true,
             templateUrl: '/appViews/Parameters/Import/EditCellDialog.html',
@@ -12,12 +12,12 @@
             }
         });
         modalInstance.result.then(function (result) {
-            $scope.postSingleENodeb(result, index);
+            $scope.postSingleCell(result, index);
         }, function () {
             $log.info('Modal dismissed at: ' + new Date());
         });
     };
-    $scope.postSingleENodeb = function (item, index) {
+    $scope.postSingleCell = function (item, index) {
         basicImportService.dumpOneCellExcel(item).then(function (result) {
             if (result) {
                 $scope.importData.newCells.splice(index, 1);
