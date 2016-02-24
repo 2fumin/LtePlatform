@@ -69,6 +69,11 @@
   <ItemGroup>
     <Compile Include="AbpConsts.cs" />
     <Compile Include="AbpServiceBase.cs" />
+    <Compile Include="Authorization\IPermissionDependency.cs" />
+    <Compile Include="Authorization\IPermissionDependencyContext.cs" />
+    <Compile Include="Authorization\PermissionDependencyContext.cs" />
+    <Compile Include="Authorization\PermissionDependencyExtensions.cs" />
+    <Compile Include="Authorization\SimplePermissionDependency.cs" />
     <Compile Include="Dependency\SingletonDependency.cs" />
     <Compile Include="Application\Features\Feature.cs" />
     <Compile Include="Application\Features\FeatureChecker.cs" />
