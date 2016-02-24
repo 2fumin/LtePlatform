@@ -28,4 +28,17 @@
         }
     };
 
+    $scope.vanishENodebs = function () {
+        basicImportService.vanishENodebIds($scope.importData.vanishedENodebIds).then(function() {
+            $scope.importData.updateMessages.push({
+                contents: "完成消亡LTE基站：" + $scope.importData.vanishedENodebIds.length,
+                type: 'success'
+            });
+            $scope.importData.vanishedENodebIds = [];
+        });
+    };
+
+    $scope.vanishCells = function() {
+
+    };
 });
