@@ -1,0 +1,43 @@
+﻿<h4 class="text-center text-primary">
+    新增CDMA小区信息
+    <a class="btn btn-success" style="float: right" ng-href="{{rootPath}}index">返回</a>
+</h4>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>基站编号</th>
+            <th>扇区编号</th>
+            <th>频点</th>
+            <th>经度</th>
+            <th>纬度</th>
+            <th>室内小区</th>
+            <th>天线挂高</th>
+            <th>方位角</th>
+            <th>载扇类型</th>
+            <th style="min-width: 100px">编辑操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in importData.newCells">
+            <td>{{item.btsId}}</td>
+            <td>{{item.sectorId}}</td>
+            <td>{{item.frequency}}</td>
+            <td>{{item.longtitute}}</td>
+            <td>{{item.lattitute}}</td>
+            <td>{{item.isIndoor}}</td>
+            <td>{{item.height}}</td>
+            <td>{{item.azimuth}}</td>
+            <td>{{item.cellType}}</td>
+            <td>
+                <div class="btn-group">
+                    <button class="btn btn-info" ng-click="editCdmaCell(item, $index)">
+                        <i class="glyphicon glyphicon-edit" title="编辑信息"></i>
+                    </button>
+                    <button class="btn btn-warning" ng-click="postSingleCdmaCell(item, $index)">
+                        <i class="glyphicon glyphicon-save" title="直接导入"></i>
+                    </button>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

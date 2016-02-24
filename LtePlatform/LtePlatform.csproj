@@ -391,6 +391,7 @@
     <Content Include="appViews\Manage\Roles.html" />
     <Content Include="appViews\Manage\RoleUser.html" />
     <Content Include="appViews\Parameters\Import\BtsInfos.html" />
+    <Content Include="appViews\Parameters\Import\CdmaCellInfos.html" />
     <Content Include="appViews\Parameters\Import\CellInfos.html" />
     <Content Include="appViews\Parameters\Import\CellLonLatTable.html" />
     <Content Include="appViews\Parameters\Import\ENodebInfos.html" />
@@ -1089,7 +1090,7 @@
     <Content Include="appViews\Parameters\Import\EditENodebDialog.html" />
     <Content Include="appViews\Parameters\Import\EditCellDialog.html" />
     <Content Include="appViews\Parameters\Import\EditBtsDialog.html" />
-    <Content Include="Views\Parameters\_EditCdmaCellExcel.cshtml" />
+    <Content Include="appViews\Parameters\Import\EditCdmaCellDialog.html" />
     <Content Include="Views\Parameters\_ENodebMapInfoBox.cshtml" />
     <Content Include="Views\Parameters\_BtsMapInfoBox.cshtml" />
     <None Include="Views\Parameters\_List.cshtml" />
