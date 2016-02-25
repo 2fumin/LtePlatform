@@ -37,6 +37,7 @@
     };
     $scope.updateInfo = function(cell) {
         $scope.topStat.current = cell;
+        $scope.updateTopCells(cell);
     };
 
     topPreciseService.getOrderSelection().then(function (result) {

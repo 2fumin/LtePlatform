@@ -126,6 +126,18 @@
                     deferred.reject(reason);
                 });
                 return deferred.promise;
+            },
+            queryCellSectors: function (cells) {
+                var deferred = $q.defer();
+                $http.post(appUrlService.getApiUrl('Cell'), {
+                    views: cells
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
             }
         };
     })
