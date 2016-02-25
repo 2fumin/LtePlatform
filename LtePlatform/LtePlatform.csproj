@@ -688,6 +688,7 @@
     <Content Include="Scripts\rutrace\map.controller.js" />
     <Content Include="Scripts\rutrace\precise.chart.controller.js" />
     <Content Include="Scripts\rutrace\root.controller.js" />
+    <Content Include="Scripts\rutrace\top.district.controller.js" />
     <Content Include="Scripts\rutrace\trend.chart.controller.js" />
     <Content Include="Scripts\rutrace\trend.controller.js" />
     <Content Include="Scripts\service\app.kpi.service.js" />
