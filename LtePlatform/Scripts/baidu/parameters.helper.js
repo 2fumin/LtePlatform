@@ -109,13 +109,6 @@ var getSectorInfoHtml = function(data, type) {
     return $("#sector-info-box").html();
 };
 
-var removeAllLteSectors = function() {
-    var count = map.lteSectors.length;
-    for (var i = 0; i < count; i++) {
-        map.removeOverlay(map.lteSectors.pop());
-    }
-};
-
 var removeAllCdmaSectors = function() {
     var count = map.cdmaSectors.length;
     for (var i = 0; i < count; i++) {

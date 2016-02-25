@@ -157,6 +157,7 @@
     })
     .factory('baiduMapService', function() {
         var map = {};
+        map.lteSectors = [];
         return {
             initializeMap: function(tag, zoomLevel) {
                 map = new BMap.Map(tag);
@@ -193,6 +194,12 @@
 
                 map.addControl(topLeftControl);
                 map.addControl(topLeftNavigation);
+            },
+            removeAllLteSectors: function() {
+                var count = map.lteSectors.length;
+                for (var i = 0; i < count; i++) {
+                    map.removeOverlay(map.lteSectors.pop());
+                }
             }
         };
     });
