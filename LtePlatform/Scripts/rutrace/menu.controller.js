@@ -14,6 +14,10 @@
                     templateUrl: viewDir + "Top.html",
                     controller: "rutrace.top"
                 })
+                .when('/topDistrict/:district', {
+                    templateUrl: viewDir + "Top.html",
+                    controller: "rutrace.top.district"
+                })
                 .when('/chart', {
                     templateUrl: viewDir + "Chart.html",
                     controller: "rutrace.chart"
@@ -70,31 +74,3 @@
             });
         };
     });
-
-app.controller("rutrace.root", function($scope) {
-    $scope.page = { title: "指标总体情况" };
-    $scope.overallStat = {
-        currentDistrict: "",
-        districtStats: [],
-        townStats: [],
-        cityStat: {},
-        dateString: ""
-    };
-    $scope.trendStat = {
-        mrStats: [],
-        preciseStats: [],
-        districts: [],
-        districtStats: [],
-        townStats: [],
-        beginDateString: "",
-        endDateString: ""
-    };
-    $scope.topStat = {
-        current: {},
-        interference: {},
-        victims: {},
-        coverages: {},
-        updateInteferenceProgress: {},
-        updateVictimProgress: {}
-    };
-});

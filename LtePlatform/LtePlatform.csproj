@@ -687,6 +687,7 @@
     <Content Include="Scripts\rutrace\index.controller.js" />
     <Content Include="Scripts\rutrace\map.controller.js" />
     <Content Include="Scripts\rutrace\precise.chart.controller.js" />
+    <Content Include="Scripts\rutrace\root.controller.js" />
     <Content Include="Scripts\rutrace\trend.chart.controller.js" />
     <Content Include="Scripts\rutrace\trend.controller.js" />
     <Content Include="Scripts\service\app.kpi.service.js" />
@@ -1105,9 +1106,7 @@
     <Content Include="Views\Shared\_KnockoutPaging.cshtml" />
     <None Include="Views\Parameters\_NeighborImport.cshtml" />
     <Content Include="Views\Rutrace\_RutraceMenu.cshtml" />
-    <None Include="Views\Rutrace\Coverage.cshtml" />
     <None Include="Views\Rutrace\Index.cshtml" />
-    <None Include="Views\Rutrace\WorkItem.cshtml" />
     <Content Include="appViews\Rutrace\Interference\MatchCellDialog.html" />
     <Content Include="appViews\Rutrace\Import.html" />
   </ItemGroup>
