@@ -287,7 +287,6 @@
                 });
                 return deferred.promise;
             },
-
             queryTopKpisInDistrict: function (begin, end, topCount, orderSelection, city, district) {
                 var deferred = $q.defer();
                 $http({

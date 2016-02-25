@@ -36,6 +36,11 @@ namespace Lte.Parameters.Concrete
             return GetAllList(x => x.CityName == city);
         }
 
+        public List<Town> GetAllList(string city, string district)
+        {
+            return GetAllList(x => x.CityName == city && x.DistrictName == district);
+        }
+
         public EFTownRepository(IDbContextProvider<EFParametersContext> dbContextProvider) : base(dbContextProvider)
         {
         }

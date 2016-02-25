@@ -6,10 +6,9 @@ using AutoMapper;
 using Lte.Domain.Regular;
 using Lte.Evaluations.ViewModels.Basic;
 using Lte.Parameters.Abstract;
-using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.Basic;
 
-namespace Lte.Evaluations.DataService
+namespace Lte.Evaluations.DataService.Basic
 {
     public class ENodebQueryService
     {
@@ -29,6 +28,14 @@ namespace Lte.Evaluations.DataService
                 ? null
                 : _eNodebRepository.GetAll().Where(x => x.TownId == townItem.Id).ToList().MapTo<IEnumerable<ENodebView>>();
         }
+
+        public IEnumerable<ENodeb> GetENodebsByDistrict(string city, string district)
+        {
+            var towns = _townRepository.GetAllList(city, district);
+            return from town in towns
+                join eNodeb in _eNodebRepository.GetAllList() on town.Id equals eNodeb.TownId
+                select eNodeb;
+        } 
 
         public IEnumerable<ENodebView> GetByGeneralName(string name)
         {

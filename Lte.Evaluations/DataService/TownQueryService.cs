@@ -44,6 +44,6 @@ namespace Lte.Evaluations.DataService
                     .Select(x => x.TownName)
                     .Distinct()
                     .ToList();
-        } 
+        }
     }
 }
