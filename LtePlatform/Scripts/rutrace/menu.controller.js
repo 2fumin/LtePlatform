@@ -34,7 +34,7 @@
                     templateUrl: viewDir + "Interference/Index.html",
                     controller: "rutrace.interference"
                 })
-                .when('/baidumap', {
+                .when('/baidumap/:name', {
                     templateUrl: viewDir + "Map/Index.html",
                     controller: "rutrace.map"
                 })
