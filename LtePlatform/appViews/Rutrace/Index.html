@@ -51,9 +51,12 @@
             <td>{{stat.firstRate | number: 2}}</td>
             <td>{{stat.thirdRate | number: 2}}</td>
             <td>
-                <button class="btn btn-primary" ng-click="overallStat.currentDistrict = stat.district">
-                    详细
-                </button>
+                <div class="btn-group-sm">
+                    <button class="btn btn-sm btn-primary" ng-click="overallStat.currentDistrict = stat.district">
+                        详细
+                    </button>
+                    <a class="btn btn-sm btn-default" ng-href="{{rootPath}}topDistrict/{{stat.district}}">TOP指标</a>
+                </div>
             </td>
         </tr>
         <tr>
@@ -63,7 +66,9 @@
             <td>{{overallStat.cityStat.preciseRate | number: 2}}</td>
             <td>{{overallStat.cityStat.firstRate | number: 2}}</td>
             <td>{{overallStat.cityStat.thirdRate | number: 2}}</td>
-            <td>-</td>
+            <td>
+                <a class="btn btn-sm btn-default" ng-href="{{rootPath}}top">TOP指标</a>
+            </td>
         </tr>
     </tbody>
 </table>
