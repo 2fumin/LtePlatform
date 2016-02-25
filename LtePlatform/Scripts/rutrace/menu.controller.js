@@ -58,6 +58,17 @@
             }
         ];
         $rootScope.rootPath = rootUrl + "/";
+
+        $rootScope.updateMenuItems = function(namePrefix, urlPrefix, name) {
+            var items = $rootScope.menuItems;
+            for (var i = 0; i < items.length; i++) {
+                if (items[i].displayName === namePrefix + "-" + name) return;
+            }
+            items.push({
+                displayName: namePrefix + "-" + name,
+                url: urlPrefix + "/" + name
+            });
+        };
     });
 
 app.controller("rutrace.root", function($scope) {
