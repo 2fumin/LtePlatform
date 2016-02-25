@@ -395,6 +395,8 @@
     <Content Include="appViews\Parameters\Import\CellInfos.html" />
     <Content Include="appViews\Parameters\Import\CellLonLatTable.html" />
     <Content Include="appViews\Parameters\Import\ENodebInfos.html" />
+    <Content Include="appViews\Parameters\Import\VanishedBtss.html" />
+    <Content Include="appViews\Parameters\Import\VanishedCdmaCellInfos.html" />
     <Content Include="appViews\Parameters\Import\VanishedCellInfos.html" />
     <Content Include="appViews\Parameters\Import\VanishedENodebs.html" />
     <Content Include="appViews\Rutrace\Chart.html" />
@@ -670,7 +672,9 @@
     <Content Include="Scripts\angular-ui\uib\timepicker.js" />
     <Content Include="Scripts\angular-ui\uib\tooltip.js" />
     <Content Include="Scripts\angular-ui\uib\typeahead.js" />
+    <Content Include="Scripts\parameters\import\bts.lonLat.controller.js" />
     <Content Include="Scripts\parameters\import\btss.controller.js" />
+    <Content Include="Scripts\parameters\import\cdmaCell.lonLat.controller.js" />
     <Content Include="Scripts\parameters\import\cdmaCells.controller.js" />
     <Content Include="Scripts\parameters\import\cell.lonLat.controller.js" />
     <Content Include="Scripts\parameters\import\cell.vanished.controller.js" />
