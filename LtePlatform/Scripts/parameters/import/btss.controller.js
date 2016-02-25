@@ -39,3 +39,16 @@
         });
     };
 });
+
+app.controller('import.btss.dialog', function ($scope, $uibModalInstance, item) {
+    $scope.item = item;
+    $scope.dateOpened = false;
+
+    $scope.ok = function () {
+        $uibModalInstance.close($scope.item);
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+});
