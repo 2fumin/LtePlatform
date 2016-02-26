@@ -53,10 +53,7 @@
                 setCellFocus(sector);
             }
         }
-        var west = map.getBounds().getSouthWest().lng;
-        var south = map.getBounds().getSouthWest().lat;
-        var east = map.getBounds().getNorthEast().lng;
-        var north = map.getBounds().getNorthEast().lat;
+        
         sendRequest(app.dataModel.sectorViewUrl, "POST", {
             west: west,
             east: east,

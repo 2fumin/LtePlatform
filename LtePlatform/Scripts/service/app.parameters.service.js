@@ -138,6 +138,22 @@
                     deferred.reject(reason);
                 });
                 return deferred.promise;
+            },
+            queryRangeSectors: function(range, excludedIds) {
+                var deferred = $q.defer();
+                $http.post(appUrlService.getApiUrl('SectorView'), {
+                    west: range.west,
+                    east: range.east,
+                    south: range.south,
+                    north: range.north,
+                    excludedCells: excludedIds
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
             }
         };
     })

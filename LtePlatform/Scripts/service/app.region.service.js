@@ -265,6 +265,14 @@
                     fillOpacity: 0.5
                 });
                 return sector;
+            },
+            getCurrentMapRange: function() {
+                return {
+                    west: map.getBounds().getSouthWest().lng,
+                    south: map.getBounds().getSouthWest().lat,
+                    east: map.getBounds().getNorthEast().lng,
+                    north: map.getBounds().getNorthEast().lat
+                };
             }
         };
     });
