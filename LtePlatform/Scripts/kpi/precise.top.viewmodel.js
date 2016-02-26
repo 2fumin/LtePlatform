@@ -32,29 +32,6 @@
         this.get('/Kpi/PreciseTop', function () { this.app.runRoute('get', '#preciseTop'); });
     });
 
-    self.showStat = function () {
-        self.cellViews([]);
-        sendRequest(app.dataModel.preciseStatUrl, "GET", {
-            begin: self.startDate(),
-            end: self.endDate(),
-            topCount: self.topCount(),
-            orderSelection: self.orderPolicy()
-        }, function (result) {
-            self.cellViews(result);
-            sendRequest(app.dataModel.cellUrl, "POST", {
-                views: result
-            }, function(sectors) {
-                self.cellSectors(sectors);
-                removeAllLteSectors();
-                for (var i = 0; i < sectors.length; i++) {
-                    if (sectors[i].height >= 0) {
-                        addOneGeneralSector(sectors[i], "PreciseSector");
-                    }
-                }
-            });
-        });
-    };
-
     self.toggleNeighbors = function() {
         toggleDisplay(map.neighborSectors);
     };

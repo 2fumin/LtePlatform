@@ -1,4 +1,4 @@
-﻿app.controller("rutrace.map", function ($scope, $routeParams, $location, baiduMapService, networkElementService) {
+﻿app.controller("rutrace.map", function ($scope, $timeout, $routeParams, $location, baiduMapService, networkElementService) {
     var cell = $scope.topStat.current;
     $scope.preciseSector = {};
     if ($routeParams.name !== cell.eNodebName + "-" + cell.sectorName) {
@@ -12,12 +12,12 @@
     baiduMapService.initializeMap("all-map", 12);
     networkElementService.queryCellSectors([$scope.topStat.current]).then(function (result) {
         $scope.preciseSector = result[0];
+        $timeout(function() {
+            var html = $("#sector-info-box").html();
+            baiduMapService.addOneSector(baiduMapService.generateSector($scope.preciseSector), html, "400px");
+            baiduMapService.setCellFocus($scope.preciseSector.baiduLongtitute, $scope.preciseSector.baiduLattitute, 16);
+        }, 2000);
     });
     $scope.toggleNeighbors = function() {
     };
-    $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
-        var html = $("#sector-info-box").html();
-        baiduMapService.addOneSector(baiduMapService.generateSector($scope.preciseSector), html, "400px");
-        
-    });
 });
