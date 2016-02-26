@@ -608,7 +608,7 @@
     <Content Include="Scripts\angular-ui\uib\buttons.js" />
     <Content Include="Scripts\angular-ui\uib\carousel.js" />
     <Content Include="Scripts\angular-ui\customize\directive.datetimepicker.js" />
-    <Content Include="Scripts\angular-ui\customize\directive.dialog.js" />
+    <Content Include="Scripts\angular-ui\customize\directive.public.js" />
     <Content Include="Scripts\angular-ui\customize\directive.panel.js" />
     <Content Include="Scripts\angular-ui\customize\dump.progress.factory.js" />
     <Content Include="Scripts\angular-ui\local\bootstrap-datetimepicker.ar.js" />

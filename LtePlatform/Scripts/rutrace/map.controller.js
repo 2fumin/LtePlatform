@@ -14,7 +14,10 @@
         $scope.preciseSector = result[0];
     });
     $scope.toggleNeighbors = function() {
+    };
+    $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
         var html = $("#sector-info-box").html();
         baiduMapService.addOneSector(baiduMapService.generateSector($scope.preciseSector), html, "400px");
-    };
+        
+    });
 });
