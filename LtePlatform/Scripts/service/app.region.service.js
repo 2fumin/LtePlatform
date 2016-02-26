@@ -247,6 +247,12 @@
                     infoBox.open(this.getPath()[2]);
                 });
             },
+            addOneSectorToScope: function(sector, callBack, neighbor) {
+                map.addOverlay(sector);
+                sector.addEventListener("click", function () {
+                    callBack(neighbor);
+                });
+            },
             setCellFocus: function (longtitute, lattitute, zoomLevel) {
                 zoomLevel = zoomLevel || 15;
                 map.centerAndZoom(new BMap.Point(longtitute, lattitute), zoomLevel);

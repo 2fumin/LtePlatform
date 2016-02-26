@@ -2,6 +2,7 @@
     var cell = $scope.topStat.current;
     $scope.preciseSector = {};
     $scope.range = {};
+    $scope.neighbor = {};
     if ($routeParams.name !== cell.eNodebName + "-" + cell.sectorName) {
         if ($scope.topStat.cells[$routeParams.name] === undefined) {
             $location.path('/Rutrace#/top');
@@ -20,6 +21,16 @@
             $scope.range = baiduMapService.getCurrentMapRange();
         }, 1000);
     });
+
+    $scope.showNeighbor = function (neighbor) {
+        console.log(neighbor);
+        
+        $scope.neighbor = neighbor;
+        $timeout(function() {
+            var html = $("#neighbor-info-box").html();
+            console.log(html);
+        }, 1000);
+    };
     $scope.$watch("range", function(range) {
         networkElementService.queryRangeSectors(range, [
             {
@@ -28,14 +39,10 @@
             }
         ]).then(function(sectors) {
             for (var i = 0; i < sectors.length; i++) {
-                $scope.neighbor = sectors[i];
-                $timeout(function (neighbor, service) {
-                    var html = $("#neighbor-info-box").html();
-                    console.log(html);
-                    service.addOneSector(service.generateSector(neighbor, "green"), html, "400px");
-                }, 100, $scope.neighbor, baiduMapService);
+                baiduMapService.addOneSectorToScope(baiduMapService.generateSector(sectors[i], "green"), $scope.showNeighbor, sectors[i]);
             }
         });
+        
     });
             
     $scope.toggleNeighbors = function() {
