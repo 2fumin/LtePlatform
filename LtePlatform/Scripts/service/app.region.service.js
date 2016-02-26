@@ -68,73 +68,82 @@
             }
         }
     })
-    .factory('geometryService', function() {
+    .factory('geometryService', function () {
+        var getDistanceFunc = function(p1Lat, p1Lng, p2Lat, p2Lng) {
+            var earthRadiusKm = 6378.137;
+            var dLat1InRad = p1Lat * (Math.PI / 180);
+            var dLong1InRad = p1Lng * (Math.PI / 180);
+            var dLat2InRad = p2Lat * (Math.PI / 180);
+            var dLong2InRad = p2Lng * (Math.PI / 180);
+            var dLongitude = dLong2InRad - dLong1InRad;
+            var dLatitude = dLat2InRad - dLat1InRad;
+            var a = Math.pow(Math.sin(dLatitude / 2), 2) + Math.cos(dLat1InRad) * Math.cos(dLat2InRad) * Math.pow(Math.sin(dLongitude / 2), 2);
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            var dDistance = earthRadiusKm * c;
+            return dDistance;
+        };
         var getLonLatFunc = function (centre, x, y) {
-            var lat = centre.lat + y / getDistance(centre.lat, centre.lng, centre.lat + 1, centre.lng);
-            var lng = centre.lng + x / getDistance(centre.lat, centre.lng, centre.lat, centre.lng + 1);
+            var lat = centre.lat + y / getDistanceFunc(centre.lat, centre.lng, centre.lat + 1, centre.lng);
+            var lng = centre.lng + x / getDistanceFunc(centre.lat, centre.lng, centre.lat, centre.lng + 1);
             return new BMap.Point(lng, lat);
+        };
+        var getPositionFunc = function(centre, r, angle) {
+            var x = r * Math.cos(angle * Math.PI / 180);
+            var y = r * Math.sin(angle * Math.PI / 180);
+            return getLonLatFunc(centre, x, y);
+        };
+        var getRadiusFunc = function(zoom) {
+            var rSation = 70;
+            var rSector = 0.2;
+            switch (zoom) {
+            case 15:
+                rSector = rSector * 0.75;
+                rSation = rSation * 0.75;
+                break;
+            case 16:
+                rSector = rSector / 2.5;
+                rSation = rSation / 2.5;
+                break;
+            case 17:
+                rSector = rSector / 5;
+                rSation = rSation / 5;
+                break;
+            default:
+                break;
+            }
+
+            return { rSector: rSector, rStation: rSation };
         };
         return {
             getDistance: function(p1Lat, p1Lng, p2Lat, p2Lng) {
-                var earthRadiusKm = 6378.137;
-                var dLat1InRad = p1Lat * (Math.PI / 180);
-                var dLong1InRad = p1Lng * (Math.PI / 180);
-                var dLat2InRad = p2Lat * (Math.PI / 180);
-                var dLong2InRad = p2Lng * (Math.PI / 180);
-                var dLongitude = dLong2InRad - dLong1InRad;
-                var dLatitude = dLat2InRad - dLat1InRad;
-                var a = Math.pow(Math.sin(dLatitude / 2), 2) + Math.cos(dLat1InRad) * Math.cos(dLat2InRad) * Math.pow(Math.sin(dLongitude / 2), 2);
-                var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-                var dDistance = earthRadiusKm * c;
-                return dDistance;
+                return getDistanceFunc(p1Lat, p1Lng, p2Lat, p2Lng);
             },
             getLonLat: function(centre, x, y) {
                 return getLonLatFunc(centre, x, y);
             },
             getPosition: function(centre, r, angle) {
-                var x = r * Math.cos(angle * Math.PI / 180);
-                var y = r * Math.sin(angle * Math.PI / 180);
-                return getLonLatFunc(centre, x, y);
+                return getPositionFunc(centre, r, angle);
             },
             generateSectorPolygonPoints: function(centre, irotation, iangle, zoom) {
                 var assemble = [];
                 var dot;
                 var i;
-                var r = getRadius(zoom).rSector;
+                var r = getRadiusFunc(zoom).rSector;
 
                 for (i = 0; i <= r; i += r / 2) {
-                    dot = getPosition(centre, i, irotation);
+                    dot = getPositionFunc(centre, i, irotation);
                     assemble.push(dot);
                 }
 
                 for (i = 0; i <= iangle; i += iangle / 5) {
-                    dot = getPosition(centre, r, i + irotation);
+                    dot = getPositionFunc(centre, r, i + irotation);
                     assemble.push(dot);
                 }
 
                 return assemble;
             },
             getRadius: function(zoom) {
-                var rSation = 70;
-                var rSector = 0.2;
-                switch (zoom) {
-                    case 15:
-                        rSector = rSector * 0.75;
-                        rSation = rSation * 0.75;
-                        break;
-                    case 16:
-                        rSector = rSector / 2.5;
-                        rSation = rSation / 2.5;
-                        break;
-                    case 17:
-                        rSector = rSector / 5;
-                        rSation = rSation / 5;
-                        break;
-                    default:
-                        break;
-                }
-
-                return { rSector: rSector, rStation: rSation };
+                return getRadiusFunc(zoom);
             },
             getDtPointRadius: function (zoom) {
                 var radius = 17;
@@ -155,9 +164,8 @@
             }
         };
     })
-    .factory('baiduMapService', function() {
+    .factory('baiduMapService', function (geometryService) {
         var map = {};
-        map.lteSectors = [];
         return {
             initializeMap: function(tag, zoomLevel) {
                 map = new BMap.Map(tag);
@@ -195,11 +203,68 @@
                 map.addControl(topLeftControl);
                 map.addControl(topLeftNavigation);
             },
-            removeAllLteSectors: function() {
-                var count = map.lteSectors.length;
-                for (var i = 0; i < count; i++) {
-                    map.removeOverlay(map.lteSectors.pop());
+            removeOverlay: function(overlay) {
+                map.removeOverlay(overlay);
+            },
+            removeOverlays: function(overlays) {
+                for (var i = 0; i < overlays.length; i++) {
+                    map.removeOverlay(overlays[i]);
                 }
+            },
+            addOneMarker: function(marker, html) {
+                map.addOverlay(marker);
+                var infoBox = new BMapLib.InfoBox(map, html, {
+                    boxStyle: {
+                        background: "url('/Content/themes/baidu/tipbox.jpg') no-repeat center top",
+                        width: "270px",
+                        height: "200px"
+                    },
+                    closeIconUrl: "/Content/themes/baidu/close.png",
+                    closeIconMargin: "1px 1px 0 0",
+                    enableAutoPan: true,
+                    align: INFOBOX_AT_TOP
+                });
+                marker.addEventListener("click", function () {
+
+                    infoBox.open(this);
+                });
+            },
+            addOneSector: function(sector, html, boxHeight) {
+                boxHeight = boxHeight || "300px";
+                map.addOverlay(sector);
+                var infoBox = new BMapLib.InfoBox(map, html, {
+                    boxStyle: {
+                        background: "url('/Content/themes/baidu/tipbox.jpg') no-repeat center top",
+                        width: "270px",
+                        height: boxHeight
+                    },
+                    closeIconUrl: "/Content/themes/baidu/close.png",
+                    closeIconMargin: "1px 1px 0 0",
+                    enableAutoPan: true,
+                    align: INFOBOX_AT_TOP
+                });
+                sector.addEventListener("click", function () {
+                    infoBox.open(this.getPath()[2]);
+                });
+            },
+            setCellFocus: function (longtitute, lattitute, zoomLevel) {
+                zoomLevel = zoomLevel || 15;
+                map.centerAndZoom(new BMap.Point(longtitute, lattitute), zoomLevel);
+            },
+            generateSector: function(data, sectorColor) {
+                var center = { lng: data.baiduLongtitute, lat: data.baiduLattitute };
+                var iangle = 65;
+                var irotation = data.azimuth - iangle / 2;
+                var zoom = map.getZoom();
+                var points = geometryService.generateSectorPolygonPoints(center, irotation, iangle, zoom);
+                sectorColor = sectorColor || "blue";
+                var sector = new BMap.Polygon(points, {
+                    strokeWeight: 2,
+                    strokeColor: sectorColor,
+                    fillColor: sectorColor,
+                    fillOpacity: 0.5
+                });
+                return sector;
             }
         };
     });
