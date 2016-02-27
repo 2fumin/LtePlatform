@@ -1,4 +1,4 @@
-﻿app.controller("rutrace.map", function ($scope, $timeout, $routeParams, $location, baiduMapService, networkElementService) {
+﻿app.controller("rutrace.map", function ($scope, $timeout, $routeParams, $location, $uibModal, $log, baiduMapService, networkElementService) {
     var cell = $scope.topStat.current;
     $scope.preciseSector = {};
     $scope.range = {};
@@ -23,13 +23,25 @@
     });
 
     $scope.showNeighbor = function (neighbor) {
-        console.log(neighbor);
-        
-        $scope.neighbor = neighbor;
-        $timeout(function() {
-            var html = $("#neighbor-info-box").html();
-            console.log(html);
-        }, 1000);
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: '/appViews/Rutrace/Map/NeighborMapInfoBox.html',
+            controller: 'map.neighbor.dialog',
+            size: 'sm',
+            resolve: {
+                dialogTitle: function () {
+                    return neighbor.cellName + "小区信息";
+                },
+                neighbor: function () {
+                    return neighbor;
+                }
+            }
+        });
+        modalInstance.result.then(function (nei) {
+            console.log(nei);
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
     };
     $scope.$watch("range", function(range) {
         networkElementService.queryRangeSectors(range, [
