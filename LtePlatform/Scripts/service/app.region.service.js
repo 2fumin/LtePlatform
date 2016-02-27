@@ -169,7 +169,7 @@
         return {
             initializeMap: function(tag, zoomLevel) {
                 map = new BMap.Map(tag);
-                map.centerAndZoom("佛山", zoomLevel);
+                map.centerAndZoom(new BMap.Point(113.01, 23.02), zoomLevel);
                 map.setMinZoom(8); //设置地图最小级别
                 map.setMaxZoom(17); //设置地图最大级别
 
@@ -193,8 +193,7 @@
                         }); //建立多边形覆盖物
                         map.addOverlay(ply); //添加覆盖物
                         pointArray = pointArray.concat(ply.getPath());
-                    }
-                    map.setViewport(pointArray); //调整视野                 
+                    }        
                 });
 
                 var topLeftControl = new BMap.ScaleControl({ anchor: BMAP_ANCHOR_TOP_LEFT }); // 左上角，添加比例尺
