@@ -10,7 +10,7 @@
     $scope.page.title = "小区地理化分析"+ "-" + $routeParams.name;
     $scope.updateMenuItems("小区地理化分析", $scope.rootPath + "baidumap", $routeParams.name);
 
-    $scope.showPrecise = function(precise) {
+    $scope.showPrecise = function (precise) {
         var modalInstance = $uibModal.open({
             animation: true,
             templateUrl: '/appViews/Rutrace/Map/PreciseSectorMapInfoBox.html',
@@ -60,23 +60,20 @@
         var sectorTriangle = baiduMapService.generateSector(result[0], "blue");
         baiduMapService.addOneSectorToScope(sectorTriangle, $scope.showPrecise, result[0]);
 
-        baiduMapService.setCellFocus(result[0].baiduLongtitute, result[0].baiduLattitute, 16);
-        //$scope.range = baiduMapService.getCurrentMapRange();
+        baiduMapService.setCellFocus(result[0].baiduLongtitute, result[0].baiduLattitute, 15);
+        var range = baiduMapService.getCurrentMapRange();
+        networkElementService.queryRangeSectors(range, [
+            {
+                cellId: $scope.topStat.current.cellId,
+                sectorId: $scope.topStat.current.sectorId
+            }
+        ]).then(function(sectors) {
+            for (var i = 0; i < sectors.length; i++) {
+                baiduMapService.addOneSectorToScope(baiduMapService.generateSector(sectors[i], "green"), $scope.showNeighbor, sectors[i]);
+            }
+        });
     });
 
-    //$scope.$watch("range", function(range) {
-    //    networkElementService.queryRangeSectors(range, [
-    //        {
-    //            cellId: $scope.topStat.current.cellId,
-    //            sectorId: $scope.topStat.current.sectorId
-    //        }
-    //    ]).then(function(sectors) {
-    //        for (var i = 0; i < sectors.length; i++) {
-    //            baiduMapService.addOneSectorToScope(baiduMapService.generateSector(sectors[i], "green"), $scope.showNeighbor, sectors[i]);
-    //        }
-    //    });
-        
-    //});
             
     $scope.toggleNeighbors = function() {
     };
