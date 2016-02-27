@@ -5,77 +5,9 @@
 
 <h2>@ViewBag.Title。</h2>
 <div class="row" ng-app="myApp" ng-controller="manage.root">
-    <div class="col-md-6">
-        <p class="text-success">@ViewBag.StatusMessage</p>
-        <div panel-info panel-title="panelRoot">
-            <dl class="dl-horizontal">
-                <dt>密码:</dt>
-                <dd>
-                    @(Model.HasPassword 
-                        ? Html.ActionLink("更改密码", "ChangePassword", null, new {@class = "btn btn-primary"}) 
-                        : Html.ActionLink("创建", "SetPassword", null, new {@class = "btn btn-primary"}))
-                </dd>
-                <dt>外部登录名:</dt>
-                <dd>
-                    @Model.Logins.Count 
-                    @Html.ActionLink("管理", "ManageLogins", null, new { @class = "btn btn-primary" }) 
-                </dd>
-                <dt>电话号码:</dt>
-                <dd>
-                    @(Model.PhoneNumber ?? "无") 
-                    @if (Model.PhoneNumber != null)
-                    {
-                        <div class="btn-group">
-                            @Html.ActionLink("更改", "AddPhoneNumber", null, new { @class = "btn btn-warning" })
-                            @Html.ActionLink("删除", "RemovePhoneNumber", null, new { @class = "btn btn-danger" })
-                        </div>
-                    }
-                    else
-                    {
-                        @Html.ActionLink("添加", "AddPhoneNumber", null, new { @class = "btn btn-primary" })
-                    }
-                    
-                </dd>
-
-                <dt>双因素身份验证:</dt>
-                <dd>
-                    @*<p>
-                        没有配置双因素身份验证提供程序。有关设置此 ASP.NET 应用程序
-                        以支持双因素身份验证的详细信息，请参阅<a href="http://go.microsoft.com/fwlink/?LinkId=403804">此文</a>。
-                    </p>*@
-                    @if (Model.TwoFactor)
-                    {
-                        using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
-                        {
-                            @Html.AntiForgeryToken()
-                            <text>已启用
-                                <input type="submit" value="禁用" class="btn btn-link"/>
-                            </text>
-                        }
-                    }
-                    else
-                    {
-                        using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
-                        {
-                            @Html.AntiForgeryToken()
-                            <text>已禁用
-                                <input type="submit" value="启用" class="btn btn-link"/>
-                            </text>
-                        }
-                    }
-                </dd>
-                <dt>管理员专用：</dt>
-                <dd>
-                    <div class="btn-group">
-                        <a href="/Manage#/" class="btn btn-primary">本用户权限</a>
-                        <a href="/Manage#/all" class="btn btn-primary">用户管理</a>
-                        <a href="/Manage#/roles" class="btn btn-primary">权限管理</a>
-                    </div>
-                </dd>
-            </dl>
-        </div>
+    <div class="col-md-4">
     </div>
-    <div class="col-md-6">
+    <div class="col-md-8">
         <div ng-view></div>
     </div>
 </div>

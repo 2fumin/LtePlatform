@@ -1,3 +1,44 @@
 ﻿<div panel-info panel-title="panelTitle">
-    
+    <table class="table table-responsive">
+        <tbody>
+        <tr>
+            <td><label>密码:</label></td>
+            <td>
+                <a class="btn btn-default" ng-show="currentUser.hasPassword" ng-href="{{rootPath}}changePassword">更改密码</a>
+                <a class="btn btn-default" ng-show="!currentUser.hasPassword" ng-href="{{rootPath}}setPassword">创建密码</a>
+            </td>
+        </tr>
+        <tr>
+            <td><label>外部登录名:</label></td>
+            <td>
+                {{currentUser.logins.length}}
+                <a class="btn btn-default" ng-href="{{rootPath}}manageLogins">管理</a>
+            </td>
+        </tr>
+        <tr>
+            <td><label>电话号码:</label></td>
+            <td>
+                {{currentUser.phoneNumber}}
+                <div class="btn-group" ng-show="currentUser.phoneNumber !== '无'">
+                    <a class="btn btn-default" ng-href="{{rootPath}}addPhoneNumber">更改</a>
+                    <a class="btn btn-default" ng-href="{{rootPath}}removePhoneNumber">删除</a>
+                </div>
+                <a class="btn btn-default" ng-href="{{rootPath}}removePhoneNumber" ng-show="currentUser.phoneNumber === '无'">删除</a>
+            </td>
+        </tr>
+        <tr>
+            <td><label>双因素身份验证:</label></td>
+            <td>
+                <div class="text-info" ng-show="currentUser.twoFactor">
+                    已启用
+                    <a class="btn btn-default" ng-href="{{rootPath}}disableTwoFactorAuthentication">更改</a>
+                </div>
+                <div class="text-info" ng-show="!currentUser.twoFactor">
+                    已禁用
+                    <a class="btn btn-default" ng-href="{{rootPath}}enableTwoFactorAuthentication">启用</a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>

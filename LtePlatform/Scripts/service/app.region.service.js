@@ -185,7 +185,7 @@
             },
             addCityBoundary: function(city) {
                 var bdary = new BMap.Boundary();
-                bdary.get("佛山市", function(rs) { //获取行政区域
+                bdary.get(city, function(rs) { //获取行政区域
                     var count = rs.boundaries.length; //行政区域的点有多少个
                     if (count === 0) {
                         return;
