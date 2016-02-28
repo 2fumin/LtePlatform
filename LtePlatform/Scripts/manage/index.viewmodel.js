@@ -42,8 +42,8 @@
         };
     });
 
-app.controller("manage.current", function($scope, $http) {
-    $http.get("/api/CurrentUser", null).success(function(result) {
+app.controller("manage.current", function ($scope, authorizeService) {
+    authorizeService.queryCurrentUserInfo().then(function (result) {
         $scope.currentUser = result;
     });
 });
