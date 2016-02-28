@@ -42,6 +42,8 @@
         };
     });
 
-app.controller("manage.current", function($scope) {
-    console.log($scope.page.title);
+app.controller("manage.current", function($scope, $http) {
+    $http.get("/api/CurrentUser", null).success(function(result) {
+        $scope.currentUser = result;
+    });
 });

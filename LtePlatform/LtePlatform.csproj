@@ -245,6 +245,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\UserContextConfiguration.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
@@ -285,6 +286,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Account\ApplicationRolesController.cs" />
     <Compile Include="Controllers\Account\ApplicationUsersController.cs" />
+    <Compile Include="Controllers\Account\UserContextController.cs" />
     <Compile Include="Controllers\AdminitrativeRegion\CityListController.cs" />
     <Compile Include="Controllers\CollegeController.cs" />
     <Compile Include="Controllers\College\College3GTestController.cs" />

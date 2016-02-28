@@ -72,7 +72,8 @@ namespace LtePlatform.Controllers
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
-            return View(model);
+            UserContextConfiguration.CurrentUser = model;
+            return View();
         }
 
         //
