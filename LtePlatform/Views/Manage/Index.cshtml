@@ -4,8 +4,23 @@
 }
 
 <h2>@ViewBag.Title。</h2>
-<div class="row" ng-app="myApp" ng-controller="manage.root">
+<div class="row" ng-app="myApp">
     <div class="col-md-4">
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h2 class="panel-title">
+                    <strong>账号权限管理功能</strong>
+                </h2>
+            </div>
+            <div class="panel-body">
+                <div class="list-group">
+                    <a class="list-group-item" ng-repeat="menuItem in menuItems" ng-class="{active: page.title == menuItem.displayName}"
+                       ng-href="{{menuItem.url}}">
+                        {{menuItem.displayName}}
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="col-md-8">
         <div ng-view></div>
@@ -16,10 +31,9 @@
 {
     <script src="~/Scripts/angular.js"></script>
     <script src="~/Scripts/angular-route.min.js"></script>
-    <script src="~/Scripts/app/common.js"></script>
-    <script src="~/Scripts/app/app.datamodel.js"></script>
+    <script src="~/Scripts/service/app.url.service.js"></script>
     <script>
-        var app = angular.module('myApp', ['ngRoute']);
+        var app = angular.module('myApp', ['ngRoute', 'myApp.url']);
     </script>
     <script src="~/Scripts/manage/index.viewmodel.js"></script>
     <script src="~/Scripts/manage/manage.all.js"></script>
