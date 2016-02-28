@@ -99,41 +99,26 @@ namespace LtePlatform.Controllers
             }
             return RedirectToAction("ManageLogins", new { Message = message });
         }
-
-        //
-        // GET: /Manage/AddPhoneNumber
-        public ActionResult AddPhoneNumber()
+        
+        public async Task<ActionResult> AddPhoneNumber(string number)
         {
-            return View();
-        }
-
-        //
-        // POST: /Manage/AddPhoneNumber
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AddPhoneNumber(AddPhoneNumberViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
             // 生成令牌并发送该令牌
-            var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), model.Number);
+            var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), number);
             if (UserManager.SmsService == null)
                 return RedirectToAction("VerifyPhoneNumber", new
                 {
-                    PhoneNumber = model.Number,
+                    PhoneNumber = number,
                     Code = code
                 });
             var message = new IdentityMessage
             {
-                Destination = model.Number,
+                Destination = number,
                 Body = "你的安全代码是: " + code
             };
             await UserManager.SmsService.SendAsync(message);
             return RedirectToAction("VerifyPhoneNumber", new
             {
-                PhoneNumber = model.Number,
+                PhoneNumber = number,
                 Code = code
             });
         }

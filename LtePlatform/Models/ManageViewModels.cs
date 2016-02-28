@@ -57,15 +57,7 @@ namespace LtePlatform.Models
         [Compare("NewPassword", ErrorMessage = "新密码和确认密码不匹配。")]
         public string ConfirmPassword { get; set; }
     }
-
-    public class AddPhoneNumberViewModel
-    {
-        [Required]
-        [Phone]
-        [Display(Name = "电话号码")]
-        public string Number { get; set; }
-    }
-
+    
     public class VerifyPhoneNumberViewModel
     {
         [Required]

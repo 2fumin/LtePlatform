@@ -674,6 +674,7 @@
     <Content Include="Scripts\angular-ui\uib\timepicker.js" />
     <Content Include="Scripts\angular-ui\uib\tooltip.js" />
     <Content Include="Scripts\angular-ui\uib\typeahead.js" />
+    <Content Include="Scripts\manage\phoneNumber.signup.js" />
     <Content Include="Scripts\parameters\import\bts.lonLat.controller.js" />
     <Content Include="Scripts\parameters\import\btss.controller.js" />
     <Content Include="Scripts\parameters\import\cdmaCell.lonLat.controller.js" />
@@ -1001,7 +1002,7 @@
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Home\_Home.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="appViews\Manage\AddPhoneNumber.html" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
     <Content Include="Views\Manage\ManageLogins.cshtml" />

@@ -18,12 +18,13 @@
         <tr>
             <td><label>电话号码:</label></td>
             <td>
-                {{currentUser.phoneNumber}}
-                <div class="btn-group" ng-show="currentUser.phoneNumber !== '无'">
-                    <a class="btn btn-default" ng-href="{{rootPath}}addPhoneNumber">更改</a>
+                <span ng-show="currentUser.phoneNumber !== null">{{currentUser.phoneNumber}}</span>
+                <div class="btn-group" ng-show="currentUser.phoneNumber !== null">
+                    <a class="btn btn-default" ng-href="{{rootPath}}modifyPhoneNumber">更改</a>
                     <a class="btn btn-default" ng-href="{{rootPath}}removePhoneNumber">删除</a>
                 </div>
-                <a class="btn btn-default" ng-href="{{rootPath}}removePhoneNumber" ng-show="currentUser.phoneNumber === '无'">删除</a>
+                <span ng-show="currentUser.phoneNumber === null">无</span>
+                <a class="btn btn-default" ng-href="{{rootPath}}addPhoneNumber" ng-show="currentUser.phoneNumber === null">新增</a>
             </td>
         </tr>
         <tr>

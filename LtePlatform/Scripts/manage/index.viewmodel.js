@@ -17,6 +17,10 @@
                     templateUrl: '/appViews/Manage/RoleUser.html',
                     controller: 'manage.roleUser'
                 })
+                .when('/addPhoneNumber', {
+                    templateUrl: '/appViews/Manage/AddPhoneNumber.html',
+                    controller: "phoneNumber.signup"
+                })
                 .otherwise({
                     redirectTo: '/'
                 });
