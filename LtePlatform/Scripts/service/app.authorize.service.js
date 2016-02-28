@@ -17,6 +17,38 @@
                 });
                 return deferred.promise;
             },
+            queryCurrentUserMessage: function () {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('CurrentMessage'),
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
+            },
+            deleteCurrentUserMessage: function () {
+                var deferred = $q.defer();
+                $http({
+                    method: 'DELETE',
+                    url: appUrlService.getApiUrl('CurrentMessage'),
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
+            },
             queryAllUsers: function() {
                 var deferred = $q.defer();
                 $http({

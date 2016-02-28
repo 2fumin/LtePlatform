@@ -30,7 +30,7 @@
                 });
         }
     ])
-    .run(function($rootScope) {
+    .run(function ($rootScope, authorizeService) {
         var rootUrl = "/Manage#";
         $rootScope.menuItems = [
             {
@@ -51,11 +51,20 @@
         };
         $rootScope.closeAlert = function (index) {
             $rootScope.page.messages.splice(index, 1);
+            authorizeService.deleteCurrentUserMessage().then(function () {
+            });
         };
     });
 
 app.controller("manage.current", function ($scope, authorizeService) {
     authorizeService.queryCurrentUserInfo().then(function (result) {
         $scope.currentUser = result;
+    });
+    authorizeService.queryCurrentUserMessage().then(function (result) {
+        if (result === "") return;
+        $scope.page.messages.push({
+            contents: result,
+            type: "info"
+        });
     });
 });
