@@ -21,7 +21,7 @@ app.controller('manage.roles', function ($scope, authorizeService) {
         }, function(reason) {
             $scope.page.messages.push({
                 contents: reason,
-                type: 'error'
+                type: 'warning'
             });
         });
     };
@@ -35,7 +35,7 @@ app.controller('manage.roles', function ($scope, authorizeService) {
         }, function (reason) {
             $scope.page.messages.push({
                 contents: reason,
-                type: 'error'
+                type: 'warning'
             });
         });
     };

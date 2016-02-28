@@ -20,7 +20,7 @@
             <td>
                 <span ng-show="currentUser.phoneNumber !== null">{{currentUser.phoneNumber}}</span>
                 <div class="btn-group" ng-show="currentUser.phoneNumber !== null">
-                    <a class="btn btn-default" ng-href="{{rootPath}}modifyPhoneNumber">更改</a>
+                    <a class="btn btn-default" ng-href="{{rootPath}}modifyPhoneNumber/{{currentUser.phoneNumber}}">更改</a>
                     <a class="btn btn-default" ng-href="{{rootPath}}removePhoneNumber">删除</a>
                 </div>
                 <span ng-show="currentUser.phoneNumber === null">无</span>
