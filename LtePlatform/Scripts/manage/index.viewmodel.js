@@ -21,6 +21,10 @@
                     templateUrl: '/appViews/Manage/AddPhoneNumber.html',
                     controller: "phoneNumber.signup"
                 })
+                .when('/modifyPhoneNumber/:number', {
+                    templateUrl: '/appViews/Manage/AddPhoneNumber.html',
+                    controller: "phoneNumber.modify"
+                })
                 .otherwise({
                     redirectTo: '/'
                 });
