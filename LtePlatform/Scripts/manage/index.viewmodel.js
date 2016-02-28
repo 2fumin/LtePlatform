@@ -38,7 +38,11 @@
         ];
         $rootScope.rootPath = rootUrl + "/";
         $rootScope.page = {
-            title: "本账号信息管理"
+            title: "本账号信息管理",
+            messages: []
+        };
+        $rootScope.closeAlert = function (index) {
+            $rootScope.page.messages.splice(index, 1);
         };
     });
 

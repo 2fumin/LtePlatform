@@ -1,51 +1,41 @@
 ﻿
-app.controller('manage.roles', function ($scope, $http) {
-    $scope.panelTitle = "角色权限管理";
+app.controller('manage.roles', function ($scope, authorizeService) {
+    $scope.page.title = "所有角色管理";
     $scope.manageRoles = [];
     $scope.roleName = "";
     $scope.message = "";
     $scope.updateRoleList = function () {
-        $http({
-            method: 'GET',
-            url: $scope.dataModel.applicationRolesUrl,
-            headers: {
-                'Authorization': 'Bearer ' + $scope.dataModel.getAccessToken()
-            }
-        }).success(function (result) {
+        authorizeService.updateRoleList().then(function (result) {
             $scope.manageRoles = result;
             $scope.roleName = "New role " + result.length;
         });
     };
-    $scope.addRole = function (name) {
-        $http({
-            method: 'GET',
-            url: $scope.dataModel.applicationRolesUrl,
-            headers: {
-                'Authorization': 'Bearer ' + $scope.dataModel.getAccessToken()
-            },
-            params: {
-                roleName: name,
-                action: "create"
-            }
-        }).success(function(result) {
+    $scope.addRole = function () {
+        authorizeService.addRole($scope.roleName).then(function (result) {
             $scope.updateRoleList();
-            $scope.message = result;
+            $scope.page.messages.push({
+                contents: result,
+                type: 'success'
+            });
+        }, function(reason) {
+            $scope.page.messages.push({
+                contents: reason,
+                type: 'error'
+            });
         });
     };
     $scope.deleteRole = function(name) {
-        $http({
-            method: 'GET',
-            url: $scope.dataModel.applicationRolesUrl,
-            headers: {
-                'Authorization': 'Bearer ' + $scope.dataModel.getAccessToken()
-            },
-            params: {
-                roleName: name,
-                action: "delete"
-            }
-        }).success(function(result) {
+        authorizeService.deleteRole(name).then(function (result) {
             $scope.updateRoleList();
-            $scope.message = result;
+            $scope.page.messages.push({
+                contents: result,
+                type: 'success'
+            });
+        }, function (reason) {
+            $scope.page.messages.push({
+                contents: reason,
+                type: 'error'
+            });
         });
     };
 

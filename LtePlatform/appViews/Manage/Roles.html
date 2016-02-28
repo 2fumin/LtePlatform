@@ -1,7 +1,4 @@
-﻿<div panel-warning panel-title="panelTitle">
-    <div class="alert alert-info" ng-if="message.length">
-        {{message}}
-    </div> 
+﻿<div panel-warning panel-title="page.title">
     <div class="form-horizontal">
         <div class="form-group">
             <label class="col-md-4 control-label">角色名称：</label>
@@ -9,7 +6,7 @@
                 <input class="form-control" type="text" ng-model="roleName"/>
             </div>
             <div class="col-md-3">
-                <button class="btn btn-primary" ng-click="addRole(roleName)">新增</button>
+                <button class="btn btn-primary" ng-click="addRole()">新增</button>
             </div>
         </div>
     </div>
@@ -27,7 +24,7 @@
                 <td>{{role.name}}</td>
                 <td>{{role.roleId}}</td>
                 <td>
-                    <a href="/Manage#/roleUser/{{role.name}}" class="btn btn-primary">用户调整</a>
+                    <a ng-href="{{rootPath}}roleUser/{{role.name}}" class="btn btn-primary">用户调整</a>
                     <button class="btn btn-danger" ng-click="deleteRole(role.name)">删除</button>
                 </td>
             </tr>

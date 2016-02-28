@@ -1,9 +1,4 @@
-﻿@model LtePlatform.Models.IndexViewModel
-@{
-    ViewBag.Title = "账号权限管理";
-}
-
-<h2>@ViewBag.Title。</h2>
+﻿
 <div class="row" ng-app="myApp">
     <div class="col-md-4">
         <div class="panel panel-warning">
@@ -23,6 +18,9 @@
         </div>
     </div>
     <div class="col-md-8">
+        <div uib-alert ng-repeat="message in page.messages" type="{{message.type}}" dismiss-on-timeout="2000" close="closeAlert($index)">
+            {{message.contents}}
+        </div>
         <div ng-view></div>
     </div>
 </div>
@@ -31,10 +29,11 @@
 {
     <script src="~/Scripts/angular.js"></script>
     <script src="~/Scripts/angular-route.min.js"></script>
+    @Scripts.Render("~/bundles/ui-bootstraps")
     <script src="~/Scripts/service/app.url.service.js"></script>
     <script src="~/Scripts/service/app.authorize.service.js"></script>
     <script>
-        var app = angular.module('myApp', ['ngRoute', 'myApp.authorize']);
+        var app = angular.module('myApp', ['ngRoute', "ui.bootstrap", 'myApp.authorize']);
     </script>
     <script src="~/Scripts/manage/index.viewmodel.js"></script>
     <script src="~/Scripts/manage/manage.all.js"></script>
