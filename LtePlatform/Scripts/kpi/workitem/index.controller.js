@@ -38,15 +38,8 @@
     $scope.chartView = "initial";
 
     $scope.updateWorkItemTable = function (items) {
-        $http({
-            method: 'GET',
-            url: $scope.dataModel.workItemUrl,
-            params: {
-                'statCondition': $scope.currentState.name,
-                'typeCondition': $scope.currentType.name,
-                'itemsPerPage': items
-            }
-        }).success(function (result) {
+        workitemService.queryWithPaging($scope.currentState.name, $scope.currentType.name,
+            $scope.itemsPerPage.value).then(function (result) {
             $scope.totalPages = result;
             if ($scope.currentPage > result) {
                 $scope.currentPage = result;

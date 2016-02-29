@@ -22,6 +22,27 @@
                     deferred.reject(reason);
                 });
                 return deferred.promise;
+            },
+            queryTotalPages: function(state, type, itemsPerPage) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('WorkItem'),
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                    },
+                    params: {
+                        'statCondition': state,
+                        'typeCondition': type,
+                        'itemsPerPage': itemsPerPage
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
             }
         };
     });
