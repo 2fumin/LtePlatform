@@ -20,19 +20,4 @@ namespace LtePlatform.Controllers.Account
             return UserContextConfiguration.CurrentUser;
         } 
     }
-
-    public class CurrentMessageController : ApiController
-    {
-        [HttpGet]
-        public string Get()
-        {
-            return UserContextConfiguration.CurrentMessage;
-        }
-
-        [HttpDelete]
-        public void Delete()
-        {
-            UserContextConfiguration.CurrentMessage = "";
-        }
-    }
 }

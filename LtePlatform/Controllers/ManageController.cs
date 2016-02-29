@@ -52,17 +52,8 @@ namespace LtePlatform.Controllers
 
         //
         // GET: /Manage/Index
-        public async Task<ActionResult> Index(ManageMessageId? message)
+        public async Task<ActionResult> Index()
         {
-            UserContextConfiguration.CurrentMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "已更改你的密码。"
-                : message == ManageMessageId.SetPasswordSuccess ? "已设置你的密码。"
-                : message == ManageMessageId.SetTwoFactorSuccess ? "已设置你的双重身份验证提供程序。"
-                : message == ManageMessageId.Error ? "出现错误。"
-                : message == ManageMessageId.AddPhoneSuccess ? "已添加你的电话号码。"
-                : message == ManageMessageId.RemovePhoneSuccess ? "已删除你的电话号码。"
-                : "";
-
             var userId = User.Identity.GetUserId();
             var model = new IndexViewModel
             {
