@@ -120,6 +120,23 @@
                     deferred.reject(reason);
                 });
                 return deferred.promise;
+            },
+            changePassword: function(input) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'POST',
+                    url: '/Manage/ChangePassword',
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                    },
+                    data: input
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
             }
         };
     });

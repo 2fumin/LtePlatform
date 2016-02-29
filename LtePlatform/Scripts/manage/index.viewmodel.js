@@ -25,6 +25,10 @@
                     templateUrl: '/appViews/Manage/AddPhoneNumber.html',
                     controller: "phoneNumber.modify"
                 })
+                .when('/changePassword', {
+                    templateUrl: '/appViews/Manage/ChangePassword.html',
+                    controller: "password.change"
+                })
                 .otherwise({
                     redirectTo: '/'
                 });

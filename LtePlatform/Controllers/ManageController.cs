@@ -213,7 +213,11 @@ namespace LtePlatform.Controllers
         public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
         {
             var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
-            if (!result.Succeeded) return Json("修改密码失败！");
+            if (!result.Succeeded)
+            {
+                var message = result.Errors.Aggregate("修改密码失败！", (current, errorMessage) => current + (";" + errorMessage));
+                return Json(message);
+            }
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             if (user != null)
             {
