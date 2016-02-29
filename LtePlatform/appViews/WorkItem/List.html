@@ -20,6 +20,17 @@
                 <div class="input-group">
                     <select ng-model="currentType" class="form-control" ng-options="type.name for type in types"></select>
                     <span class="input-group-btn">
+                        <button class="btn btn-success" ng-click="showCharts()">图表</button>
+                    </span>
+                </div>
+            </div>
+            <div>
+                <div class="col-md-4">
+                    <label>每页条数</label>
+                </div>
+                <div class="input-group">
+                    <select ng-model="itemsPerPage" class="form-control" ng-options="size.value for size in pageSizeSelection"></select>
+                    <span class="input-group-btn">
                         <button class="btn btn-warning" ng-click="updateSectorIds()">
                             更新扇区编号
                             <span class="badge pull-right" ng-if="updateNums">{{updateNums}}</span>
@@ -27,7 +38,6 @@
                     </span>
                 </div>
             </div>
-            <div></div>
         </div>
         <table class="table table-hover">
             <thead>
@@ -35,6 +45,7 @@
                     <th>区域</th>
                     <th>编号</th>
                     <th>类型</th>
+                    <th>子类型</th>
                     <th>状态</th>
                     <th>时限</th>
                     <th>操作</th>
@@ -45,6 +56,7 @@
                     <td>{{view.district}}</td>
                     <td>{{view.serialNumber}}</td>
                     <td>{{view.workItemType}}</td>
+                    <td>{{view.workItemSubType}}</td>
                     <td>{{view.workItemState}}</td>
                     <td>{{view.deadline}}</td>
                     <td>

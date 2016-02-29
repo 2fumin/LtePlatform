@@ -33,7 +33,6 @@
     $scope.itemsPerPage = $scope.pageSizeSelection[1];
     $scope.canGotoCurrentPage = false;
     $scope.currentView = {};
-    $scope.updateNums = 0;
 
     $scope.chartView = "initial";
 
@@ -67,8 +66,11 @@
     };
 
     $scope.updateSectorIds = function() {
-        $http.put($scope.dataModel.workItemUrl).success(function(result) {
-            $scope.updateNums = result;
+        workitemService.updateSectorIds().then(function (result) {
+            $scope.page.messages.push({
+                contents: "一共更新扇区编号：" + result + "条",
+                type: "success"
+            });
         });
     };
 

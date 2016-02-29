@@ -43,6 +43,16 @@
                     deferred.reject(reason);
                 });
                 return deferred.promise;
+            },
+            updateSectorIds: function() {
+                var deferred = $q.defer();
+                $http.put(appUrlService.getApiUrl('WorkItem')).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
             }
         };
     });
