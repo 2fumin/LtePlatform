@@ -1,20 +1,98 @@
-﻿<div class="panel panel-info" ng-if="chartView=='details'">
+﻿<div class="panel panel-info">
     <div class="panel-heading">
         <h3 class="panel-title">
-            工单编号{{serialNumber}}信息
+            工单编号{{currentView.serialNumber}}信息
         </h3>
     </div>
-    <div class="panel-body" ng-controller="kpi.workitem.details">
-    </div>
-</div>
-<div class="panel panel-info" ng-if="chartView=='chart'">
-    <div class="panel-heading">
-        <div class="panel-title">
-            工单统计图表
-        </div>
-    </div>
     <div class="panel-body">
-        <div id="type-chart" style="min-height: 400px"></div>
-        <div id="state-chart" style="min-height: 400px"></div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th style="width: 100px">项目</th>
+                    <th>信息</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>工单类型</td>
+                    <td>{{currentView.workItemType}}</td>
+                </tr>
+                <tr>
+                    <td>工单子类型</td>
+                    <td>{{currentView.workItemSubType}}</td>
+                </tr>
+                <tr>
+                    <td>基站编号</td>
+                    <td>
+                        {{currentView.eNodebId}}
+                        <button class="btn btn-primary btn-xs" style="float: right" ng-click="queryBtsInfo()"
+                                ng-if="currentView.eNodebId > 0">
+                            基站信息
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>扇区编号</td>
+                    <td>
+                        {{currentView.sectorId}}
+                        <button class="btn btn-primary btn-xs" style="float: right" ng-click="queryCellInfo()"
+                                ng-if="currentView.eNodebId > 0">
+                            小区信息
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>区域信息</td>
+                    <td>
+                        {{currentView.city}}
+                        {{currentView.district}}
+                        {{currentView.town}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>派单时间</td>
+                    <td>{{currentView.beginTime}}</td>
+                </tr>
+                <tr>
+                    <td>回单期限</td>
+                    <td>{{currentView.deadline}}</td>
+                </tr>
+                <tr>
+                    <td>重复信息</td>
+                    <td>
+                        重复派单次数：{{currentView.repeatTimes}}
+                        ；驳回次数：{{currentView.repeatTimes}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>责任人</td>
+                    <td>{{currentView.staffName}}</td>
+                </tr>
+                <tr>
+                    <td>反馈时间</td>
+                    <td>{{currentView.feedbackTime}}</td>
+                </tr>
+                <tr>
+                    <td>完成时间</td>
+                    <td>{{currentView.finishTime}}</td>
+                </tr>
+                <tr>
+                    <td>定位原因</td>
+                    <td>{{currentView.workItemCause}}</td>
+                </tr>
+                <tr>
+                    <td>工单状态</td>
+                    <td>{{currentView.workItemState}}</td>
+                </tr>
+                <tr>
+                    <td>平台信息</td>
+                    <td>{{currentView.comments}}</td>
+                </tr>
+                <tr>
+                    <td>反馈信息</td>
+                    <td>{{currentView.feedbackContents}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

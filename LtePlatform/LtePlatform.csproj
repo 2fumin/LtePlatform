@@ -434,6 +434,7 @@
     <Content Include="appViews\Test\Simple\Interpolate.html" />
     <Content Include="appViews\Test\Simple\Parse.html" />
     <Content Include="appViews\Test\Simple\SimpleType.html" />
+    <Content Include="appViews\WorkItem\Charts.html" />
     <Content Include="appViews\WorkItem\Details.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
@@ -935,7 +936,7 @@
     <Content Include="Scripts\kpi\preciseimport.viewmodel.js" />
     <Content Include="Scripts\kpi\top.drop2G.viewmodel.js" />
     <Content Include="Scripts\kpi\workitem\service.js" />
-    <Content Include="Scripts\kpi\workitem.details.controller.js" />
+    <Content Include="Scripts\kpi\workitem\details.controller.js" />
     <Content Include="Scripts\kpi\workitem\index.controller.js" />
     <Content Include="Scripts\manage\index.viewmodel.js" />
     <Content Include="Scripts\manage\manage.all.js" />
@@ -1080,7 +1081,6 @@
     <None Include="Views\Kpi\_TopDrop2GTable.cshtml" />
     <Content Include="Views\Kpi\_TopDrop2GTrendTable.cshtml" />
     <Content Include="Views\Kpi\_TownPreciseViewTable.cshtml" />
-    <Content Include="Views\Kpi\_WorkItemDetailsTable.cshtml" />
     <Content Include="Views\Kpi\_WorkItemInfrastructureDialog.cshtml" />
     <Content Include="appViews\WorkItem\List.html" />
     <None Include="Views\Parameters\AlarmImport.cshtml" />

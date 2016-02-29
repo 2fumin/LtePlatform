@@ -6,9 +6,9 @@
                     templateUrl: rootDir + 'List.html',
                     controller: "kpi.workitem"
                 })
-                .when('/all', {
-                    templateUrl: '/appViews/Manage/AllUsers.html',
-                    controller: 'manage.all'
+                .when('/details/:number', {
+                    templateUrl: rootDir + 'Details.html',
+                    controller: 'kpi.workitem.details'
                 })
                 .when('/roles', {
                     templateUrl: '/appViews/Manage/Roles.html',
