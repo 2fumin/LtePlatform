@@ -704,6 +704,7 @@
     <Content Include="Scripts\service\app.parameters.service.js" />
     <Content Include="Scripts\service\app.url.service.js" />
     <Content Include="Scripts\service\ne.geometry.service.js" />
+    <Content Include="Scripts\service\workitem.service.js" />
     <Content Include="template\accordion\accordion-group.html" />
     <Content Include="template\accordion\accordion.html" />
     <Content Include="template\alert\alert.html" />
@@ -1056,14 +1057,11 @@
     <Content Include="Views\College\_KpiReport.cshtml" />
     <Content Include="Views\College\_EditKpi.cshtml" />
     <Content Include="Views\College\_PreciseKpi.cshtml" />
-    <Content Include="Views\Kpi\PreciseTop.cshtml" />
     <Content Include="Views\College\_Infrastructure.cshtml" />
     <Content Include="Views\College\_CollegeStatTable.cshtml" />
     <Content Include="Views\Dt\_List.cshtml" />
     <Content Include="Scripts\knockout.validation.min.js.map" />
     <Content Include="Views\College\_CollegeMapInfoBox.cshtml" />
-    <Content Include="Views\Kpi\_PreciseTop.cshtml" />
-    <Content Include="Views\Kpi\_PreciseTopTable.cshtml" />
     <Content Include="appViews\Rutrace\Map\PreciseSectorMapInfoBox.html" />
     <Content Include="Views\College\_DistributionMapInfoBox.cshtml" />
     <Content Include="Views\College\_Coverage.cshtml" />

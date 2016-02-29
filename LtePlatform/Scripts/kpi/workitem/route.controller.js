@@ -57,4 +57,7 @@
         $rootScope.closeAlert = function (index) {
             $rootScope.page.messages.splice(index, 1);
         };
+        $rootScope.viewData = {
+            items: []
+        };
     });

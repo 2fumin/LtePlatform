@@ -1,4 +1,4 @@
-﻿app.controller("kpi.workitem", function ($scope, $http, showPieChart) {
+﻿app.controller("kpi.workitem", function ($scope, $http, showPieChart, workitemService) {
     $scope.states = [
     {
         name: '未完成'
@@ -31,13 +31,11 @@
         value: 50
     }];
     $scope.itemsPerPage = $scope.pageSizeSelection[1];
-    $scope.workItemViews = [];
     $scope.canGotoCurrentPage = false;
     $scope.currentView = {};
     $scope.updateNums = 0;
 
     $scope.chartView = "initial";
-    $scope.dataModel = new AppDataModel();
 
     $scope.updateWorkItemTable = function (items) {
         $http({
@@ -58,17 +56,9 @@
     };
 
     $scope.query = function () {
-        $http({
-            method: 'GET',
-            url: $scope.dataModel.workItemUrl,
-            params: {
-                'statCondition': $scope.currentState.name,
-                'typeCondition': $scope.currentType.name,
-                'itemsPerPage': $scope.itemsPerPage.value,
-                'page': $scope.currentPage
-            }
-        }).success(function (result) {
-            $scope.workItemViews = result;
+        workitemService.queryWithPaging($scope.currentState.name, $scope.currentType.name,
+            $scope.itemsPerPage.value, $scope.currentPage).then(function(result) {
+            $scope.viewData.items = result;
         });
     };
 
