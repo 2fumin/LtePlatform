@@ -45,7 +45,7 @@ namespace LtePlatform.Controllers
             return View();
         }
 
-        public ActionResult TopDrop2GDaily()
+        public ActionResult WorkItem()
         {
             return View();
         }

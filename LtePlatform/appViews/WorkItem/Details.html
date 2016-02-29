@@ -1,0 +1,20 @@
+﻿<div class="panel panel-info" ng-if="chartView=='details'">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            工单编号{{serialNumber}}信息
+        </h3>
+    </div>
+    <div class="panel-body" ng-controller="kpi.workitem.details">
+    </div>
+</div>
+<div class="panel panel-info" ng-if="chartView=='chart'">
+    <div class="panel-heading">
+        <div class="panel-title">
+            工单统计图表
+        </div>
+    </div>
+    <div class="panel-body">
+        <div id="type-chart" style="min-height: 400px"></div>
+        <div id="state-chart" style="min-height: 400px"></div>
+    </div>
+</div>

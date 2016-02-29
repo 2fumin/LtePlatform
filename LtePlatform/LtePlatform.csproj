@@ -434,6 +434,7 @@
     <Content Include="appViews\Test\Simple\Interpolate.html" />
     <Content Include="appViews\Test\Simple\Parse.html" />
     <Content Include="appViews\Test\Simple\SimpleType.html" />
+    <Content Include="appViews\WorkItem\Details.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Areas\TestPage\Scripts\5ch5\Dictionary.js">
@@ -674,6 +675,7 @@
     <Content Include="Scripts\angular-ui\uib\timepicker.js" />
     <Content Include="Scripts\angular-ui\uib\tooltip.js" />
     <Content Include="Scripts\angular-ui\uib\typeahead.js" />
+    <Content Include="Scripts\kpi\workitem\route.controller.js" />
     <Content Include="Scripts\manage\password.change.js" />
     <Content Include="Scripts\manage\phoneNumber.signup.js" />
     <Content Include="Scripts\parameters\import\bts.lonLat.controller.js" />
@@ -931,9 +933,9 @@
     <Content Include="Scripts\kpi\preciseimport.controller.js" />
     <Content Include="Scripts\kpi\preciseimport.viewmodel.js" />
     <Content Include="Scripts\kpi\top.drop2G.viewmodel.js" />
-    <Content Include="Scripts\kpi\workitem.controller.js" />
+    <Content Include="Scripts\kpi\workitem\service.js" />
     <Content Include="Scripts\kpi\workitem.details.controller.js" />
-    <Content Include="Scripts\kpi\workitem.viewmodel.js" />
+    <Content Include="Scripts\kpi\workitem\index.controller.js" />
     <Content Include="Scripts\manage\index.viewmodel.js" />
     <Content Include="Scripts\manage\manage.all.js" />
     <Content Include="Scripts\manage\manage.role.user.js" />
@@ -1031,7 +1033,7 @@
     <Content Include="Views\Dt\List.cshtml" />
     <Content Include="Views\Kpi\_KpiMenu.cshtml" />
     <Content Include="Views\Kpi\TopDrop2G.cshtml" />
-    <Content Include="Views\Kpi\TopDrop2GDaily.cshtml" />
+    <Content Include="Views\Kpi\WorkItem.cshtml" />
     <Content Include="Views\Kpi\TopConnection3G.cshtml" />
     <Content Include="Views\Kpi\Import.cshtml" />
     <Content Include="Views\Kpi\_CityKpi.cshtml" />
@@ -1082,8 +1084,7 @@
     <Content Include="Views\Kpi\_TownPreciseViewTable.cshtml" />
     <Content Include="Views\Kpi\_WorkItemDetailsTable.cshtml" />
     <Content Include="Views\Kpi\_WorkItemInfrastructureDialog.cshtml" />
-    <None Include="Views\Kpi\_WorkItemList.cshtml" />
-    <None Include="Views\Kpi\_WorkItemTable.cshtml" />
+    <Content Include="appViews\WorkItem\List.html" />
     <None Include="Views\Parameters\AlarmImport.cshtml" />
     <Content Include="Views\Shared\_AlertPanel.cshtml" />
     <Content Include="Views\Shared\_ENodebTable.cshtml" />

@@ -1,0 +1,60 @@
+﻿<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            工单监控
+        </h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <label>工单状态：</label>
+                <div class="input-group">
+                    <select ng-model="currentState" class="form-control" ng-options="state.name for state in states"></select>
+                    <span class="input-group-btn">
+                        <button class="btn btn-success" ng-click="showCharts()">图表</button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label>工单分类：</label>
+                <div class="input-group">
+                    <select ng-model="currentType" class="form-control" ng-options="type.name for type in types"></select>
+                    <span class="input-group-btn">
+                        <button class="btn btn-warning" ng-click="updateSectorIds()">
+                            更新扇区编号
+                            <span class="badge pull-right" ng-if="updateNums">{{updateNums}}</span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>区域</th>
+            <th>编号</th>
+            <th>类型</th>
+            <th>状态</th>
+            <th>时限</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody ng-repeat="view in workItemViews">
+        <tr>
+            <td>{{view.district}}</td>
+            <td>{{view.serialNumber}}</td>
+            <td>{{view.workItemType}}</td>
+            <td>{{view.workItemState}}</td>
+            <td>{{view.deadline}}</td>
+            <td>
+                <div class="btn-group-xs">
+                    <button class="btn btn-xs btn-primary" ng-click="showDetails(view)">详细</button>
+                    <button class="btn btn-xs btn-info">反馈</button>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
