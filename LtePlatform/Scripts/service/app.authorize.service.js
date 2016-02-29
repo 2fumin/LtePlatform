@@ -139,6 +139,22 @@
                     deferred.reject(reason);
                 });
                 return deferred.promise;
+            },
+            removePhoneNumber: function () {
+                var deferred = $q.defer();
+                $http({
+                    method: 'POST',
+                    url: '/Manage/RemovePhoneNumber',
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
             }
         };
     });

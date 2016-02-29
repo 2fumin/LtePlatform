@@ -164,19 +164,21 @@ namespace LtePlatform.Controllers
 
         //
         // GET: /Manage/RemovePhoneNumber
+        [HttpPost]
         public async Task<ActionResult> RemovePhoneNumber()
         {
             var result = await UserManager.SetPhoneNumberAsync(User.Identity.GetUserId(), null);
             if (!result.Succeeded)
             {
-                return RedirectToAction("Index", new { Message = ManageMessageId.Error });
+                var message = result.Errors.Aggregate("删除电话号码失败！", (current, errorMessage) => current + (";" + errorMessage));
+                return Json(message);
             }
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             if (user != null)
             {
                 await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
             }
-            return RedirectToAction("Index", new { Message = ManageMessageId.RemovePhoneSuccess });
+            return Json("删除电话号码成功！");
         }
         
         //
