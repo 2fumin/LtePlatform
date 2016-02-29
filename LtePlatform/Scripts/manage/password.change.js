@@ -5,11 +5,11 @@
                 $scope.page.messages.push({
                     contents: result,
                     type: 'success'
-                }, function(reason) {
-                    $scope.page.messages.push({
-                        contents: reason,
-                        type: 'warning'
-                    });
+                });
+            }, function(reason) {
+                $scope.page.messages.push({
+                    contents: reason,
+                    type: 'warning'
                 });
             });
         } else {

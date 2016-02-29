@@ -100,25 +100,24 @@ namespace LtePlatform.Controllers
             return RedirectToAction("ManageLogins", new { Message = message });
         }
         
-        public async Task<ActionResult> AddPhoneNumber(string number)
+        [HttpPost]
+        public async Task<ActionResult> AddPhoneNumber(VerifyPhoneNumberViewModel model)
         {
             // 生成令牌并发送该令牌
-            var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), number);
-            if (UserManager.SmsService == null)
-                return RedirectToAction("VerifyPhoneNumber", new
+            var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), model.PhoneNumber);
+            if (UserManager.SmsService != null)
+            {
+                var message = new IdentityMessage
                 {
-                    PhoneNumber = number,
-                    Code = code
-                });
-            var message = new IdentityMessage
+                    Destination = model.PhoneNumber,
+                    Body = "你的安全代码是: " + code
+                };
+                await UserManager.SmsService.SendAsync(message);
+            }
+
+            return Json(new VerifyPhoneNumberViewModel
             {
-                Destination = number,
-                Body = "你的安全代码是: " + code
-            };
-            await UserManager.SmsService.SendAsync(message);
-            return RedirectToAction("VerifyPhoneNumber", new
-            {
-                PhoneNumber = number,
+                PhoneNumber = model.PhoneNumber,
                 Code = code
             });
         }
@@ -152,42 +151,24 @@ namespace LtePlatform.Controllers
             }
             return RedirectToAction("Index", "Manage");
         }
-
-        //
-        // GET: /Manage/VerifyPhoneNumber
-        public ActionResult VerifyPhoneNumber(string phoneNumber, string code)
-        {
-            // 通过 SMS 提供程序发送短信以验证电话号码
-            return phoneNumber == null ? View("Error") : View(new VerifyPhoneNumberViewModel
-            {
-                PhoneNumber = phoneNumber,
-                Code = code
-            });
-        }
-
+        
         //
         // POST: /Manage/VerifyPhoneNumber
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> VerifyPhoneNumber(VerifyPhoneNumberViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
             var result = await UserManager.ChangePhoneNumberAsync(User.Identity.GetUserId(), model.PhoneNumber, model.Code);
-            if (result.Succeeded)
+            if (!result.Succeeded)
             {
-                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-                if (user != null)
-                {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                }
-                return RedirectToAction("Index", new { Message = ManageMessageId.AddPhoneSuccess });
+                var message = result.Errors.Aggregate("验证电话号码失败！", (current, errorMessage) => current + (";" + errorMessage));
+                return Json(message);
             }
-            // 如果我们进行到这一步时某个地方出错，则重新显示表单
-            ModelState.AddModelError("", "无法验证电话号码");
-            return View(model);
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            if (user != null)
+            {
+                await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+            }
+            return Json("验证电话号码成功！");
         }
 
         //

@@ -18,7 +18,8 @@
         </div>
     </div>
     <div class="col-md-8">
-        <div uib-alert ng-repeat="message in page.messages" type="{{message.type}}" dismiss-on-timeout="2000" close="closeAlert($index)">
+        <div uib-alert ng-repeat="message in page.messages" type="{{message.type}}" 
+             dismiss-on-timeout="5000" close="closeAlert($index)">
             {{message.contents}}
         </div>
         <div ng-view></div>

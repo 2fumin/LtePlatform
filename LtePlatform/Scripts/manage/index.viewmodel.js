@@ -65,10 +65,12 @@ app.controller("manage.current", function ($scope, authorizeService) {
         $scope.currentUser = result;
     });
     authorizeService.queryCurrentUserMessage().then(function (result) {
-        if (result === "") return;
-        $scope.page.messages.push({
-            contents: result,
-            type: "info"
-        });
+        if (result !== "") {
+            $scope.page.messages.push({
+                contents: result,
+                type: "info"
+            });
+        }
+
     });
 });

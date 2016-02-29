@@ -1,9 +1,9 @@
-﻿<form name="signup_form" novalidate ng-submit="signupForm()" ng-controller="phoneNumber.signup" class="form-horizontal">
-    <h4>添加电话号码</h4>
+﻿<form name="signup_form" novalidate ng-submit="signupForm()" class="form-horizontal">
+    <h4>{{action}}电话号码</h4>
     <div class="form-group">
         <label class="col-md-3 control-label">电话号码</label>
         <div class="col-md-9">
-            <input type="text" name="number" class="form-control" ng-model="signup.number" ng-minlength="8" ng-maxlength="20" required/>
+            <input type="text" name="number" class="form-control" ng-model="signup.phoneNumber" ng-minlength="8" ng-maxlength="20" required/>
             <div class="text-danger"
                  ng-show="signup_form.number.$dirty && signup_form.number.$invalid">
                 <small ng-show="signup_form.number.$error.required">
@@ -14,6 +14,16 @@
                 </small>
                 <small ng-show="signup_form.number.$error.maxlength">
                     电话号码最长20位
+                </small>
+            </div>
+        </div>
+        <label class="col-md-3 control-label" ng-show="verify">验证代码</label>
+        <div class="col-md-9" ng-show="verify">
+            <input type="text" name="code" class="form-control" ng-model="signup.code" required />
+            <div class="text-danger"
+                 ng-show="signup_form.code.$dirty && signup_form.code.$invalid">
+                <small ng-show="signup_form.code.$error.required">
+                    验证代码是必须填的！
                 </small>
             </div>
         </div>

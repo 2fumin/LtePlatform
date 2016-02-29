@@ -137,6 +137,40 @@
                     deferred.reject(reason);
                 });
                 return deferred.promise;
+            },
+            addPhoneNumber: function(input) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'POST',
+                    url: '/Manage/AddPhoneNumber',
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                    },
+                    data: input
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
+            },
+            verifyPhoneNumber: function (input) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'POST',
+                    url: '/Manage/VerifyPhoneNumber',
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                    },
+                    data: input
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
             }
         };
     });
