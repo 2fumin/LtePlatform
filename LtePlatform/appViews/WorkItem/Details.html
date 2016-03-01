@@ -31,12 +31,12 @@
                     <td>
                         {{currentView.eNodebId}}
                         <a class="btn btn-primary btn-xs" style="float: right" 
-                           ng-href="{{rootPath}}eNodeb/{{currentView.eNodebId}}"
+                           ng-href="{{rootPath}}eNodeb/{{currentView.eNodebId}}/{{currentView.serialNumber}}"
                            ng-show="currentView.eNodebId > 10000">
                             LTE基站信息
                         </a>
                         <a class="btn btn-primary btn-xs" style="float: right" 
-                           ng-href="{{rootPath}}bts/{{currentView.eNodebId}}"
+                           ng-href="{{rootPath}}bts/{{currentView.eNodebId}}/{{currentView.serialNumber}}"
                            ng-show="currentView.eNodebId > 0 && currentView.eNodebId <= 10000">
                             CDMA基站信息
                         </a>
@@ -47,12 +47,12 @@
                     <td>
                         {{currentView.sectorId}}
                         <a class="btn btn-primary btn-xs" style="float: right" 
-                           ng-href="{{rootPath}}cell/{{currentView.eNodebId}}/{{currentView.sectorId}}"
+                           ng-href="{{rootPath}}cell/{{currentView.eNodebId}}/{{currentView.sectorId}}/{{currentView.serialNumber}}"
                            ng-show="currentView.eNodebId > 10000">
                             LTE小区信息
                         </a>
                         <a class="btn btn-primary btn-xs" style="float: right"
-                           ng-href="{{rootPath}}cdmaCell/{{currentView.eNodebId}}/{{currentView.sectorId}}"
+                           ng-href="{{rootPath}}cdmaCell/{{currentView.eNodebId}}/{{currentView.sectorId}}/{{currentView.serialNumber}}"
                            ng-show="currentView.eNodebId > 0 && currentView.eNodebId <= 10000">
                             CDMA小区信息
                         </a>

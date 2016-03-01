@@ -14,7 +14,7 @@
                     templateUrl: rootDir + 'Charts.html',
                     controller: 'kpi.workitem.chart'
                 })
-                .when('/eNodeb/:eNodebId', {
+                .when('/eNodeb/:eNodebId/:serialNumber', {
                     templateUrl: rootDir + 'ENodebInfo.html',
                     controller: 'workitem.eNodeb'
                 })
