@@ -1,50 +1,17 @@
 ﻿app.controller("kpi.workitem", function ($scope, workitemService) {
     $scope.page.title = "工单总览";
-    $scope.states = [
-    {
-        name: '未完成'
-    }, {
-        name: '全部'
-    }];
-    $scope.currentState = $scope.states[0];
-    $scope.types = [
-    {
-        name: '全部'
-    }, {
-        name: '2/3G'
-    }, {
-        name: '4G'
-    }];
-    $scope.currentType = $scope.types[0];
-
-    $scope.totalItems = 0;
-    $scope.currentPage = 1;
-    $scope.pageSizeSelection = [
-    {
-        value: 10
-    }, {
-        value: 15
-    }, {
-        value: 20
-    }, {
-        value: 30
-    }, {
-        value: 50
-    }];
-    $scope.itemsPerPage = $scope.pageSizeSelection[1];
 
     $scope.updateWorkItemTable = function() {
-        workitemService.queryTotalPages($scope.currentState.name, $scope.currentType.name,
-            $scope.itemsPerPage.value).then(function(result) {
-            $scope.totalItems = result;
-            $scope.currentPage = 1;
+        workitemService.queryTotalPages($scope.viewData.currentState.name, $scope.viewData.currentType.name,
+            $scope.viewData.itemsPerPage.value).then(function (result) {
+                $scope.viewData.totalItems = result;
             $scope.query();
         });
     };
 
     $scope.query = function () {
-        workitemService.queryWithPaging($scope.currentState.name, $scope.currentType.name,
-            $scope.itemsPerPage.value, $scope.currentPage).then(function(result) {
+        workitemService.queryWithPaging($scope.viewData.currentState.name, $scope.viewData.currentType.name,
+            $scope.viewData.itemsPerPage.value, $scope.viewData.currentPage).then(function (result) {
             $scope.viewData.items = result;
         });
     };
@@ -58,5 +25,7 @@
         });
     };
 
-    $scope.updateWorkItemTable();
+    if ($scope.viewData.items.length === 0) {
+        $scope.updateWorkItemTable();
+    }
 });
