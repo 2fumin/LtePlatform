@@ -68,6 +68,45 @@
                     deferred.reject(reason);
                 });
                 return deferred.promise;
+            },
+            queryByENodebId: function (eNodebId) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('WorkItem'),
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                    },
+                    params: {
+                        eNodebId: eNodebId
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
+            },
+            queryByCellId: function (eNodebId, sectorId) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('WorkItem'),
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                    },
+                    params: {
+                        eNodebId: eNodebId,
+                        sectorId: sectorId
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
             }
         };
     });

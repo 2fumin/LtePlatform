@@ -440,6 +440,7 @@
     <Content Include="appViews\WorkItem\Charts.html" />
     <Content Include="appViews\WorkItem\Details.html" />
     <Content Include="appViews\WorkItem\ENodebInfo.html" />
+    <Content Include="appViews\WorkItem\WorkItemTable.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Areas\TestPage\Scripts\5ch5\Dictionary.js">

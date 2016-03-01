@@ -1,0 +1,29 @@
+﻿<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>区域</th>
+            <th>编号</th>
+            <th>类型</th>
+            <th>子类型</th>
+            <th>状态</th>
+            <th>时限</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody ng-repeat="view in viewData.items">
+        <tr>
+            <td>{{view.district}}</td>
+            <td>{{view.serialNumber}}</td>
+            <td>{{view.workItemType}}</td>
+            <td>{{view.workItemSubType}}</td>
+            <td>{{view.workItemState}}</td>
+            <td>{{view.deadline}}</td>
+            <td>
+                <div class="btn-group-xs">
+                    <a class="btn btn-xs btn-primary" ng-href="{{rootPath}}details/{{view.serialNumber}}">详细</a>
+                    <button class="btn btn-xs btn-info">反馈</button>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
