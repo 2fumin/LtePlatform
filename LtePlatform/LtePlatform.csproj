@@ -435,6 +435,7 @@
     <Content Include="appViews\Test\Simple\Parse.html" />
     <Content Include="appViews\Test\Simple\SimpleType.html" />
     <Content Include="appViews\WorkItem\BtsInfo.html" />
+    <Content Include="appViews\WorkItem\CellInfo.html" />
     <Content Include="appViews\WorkItem\Charts.html" />
     <Content Include="appViews\WorkItem\Details.html" />
     <Content Include="appViews\WorkItem\ENodebInfo.html" />
@@ -929,7 +930,7 @@
     <Content Include="Scripts\kpi\common.controller.js" />
     <Content Include="Scripts\kpi\workitem\bts.js" />
     <Content Include="Scripts\kpi\directive.workitem.cdma.js" />
-    <Content Include="Scripts\kpi\directive.workitem.cell.js" />
+    <Content Include="Scripts\kpi\workitem\cell.js" />
     <Content Include="Scripts\kpi\workitem\eNodeb.js" />
     <Content Include="Scripts\kpi\interference.import.controller.js" />
     <Content Include="Scripts\kpi\interference.mongo.controller.js" />
