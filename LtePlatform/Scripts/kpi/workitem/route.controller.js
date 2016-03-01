@@ -18,17 +18,17 @@
                     templateUrl: rootDir + 'ENodebInfo.html',
                     controller: 'workitem.eNodeb'
                 })
-                .when('/addPhoneNumber', {
-                    templateUrl: '/appViews/Manage/AddPhoneNumber.html',
-                    controller: "phoneNumber.signup"
+                .when('/bts/:btsId/:serialNumber', {
+                    templateUrl: rootDir + 'BtsInfo.html',
+                    controller: "workitem.bts"
                 })
-                .when('/modifyPhoneNumber/:number', {
-                    templateUrl: '/appViews/Manage/AddPhoneNumber.html',
-                    controller: "phoneNumber.modify"
+                .when('/cell/:eNodebId/:sectorId/:serialNumber', {
+                    templateUrl: rootDir + 'CellInfo.html',
+                    controller: "workitem.cell"
                 })
-                .when('/changePassword', {
-                    templateUrl: '/appViews/Manage/ChangePassword.html',
-                    controller: "password.change"
+                .when('/cdmaCell/:btsId/:sectorId/:serialNumber', {
+                    templateUrl: rootDir + 'CdmaCellInfo.html',
+                    controller: "workitem.cdmaCell"
                 })
                 .otherwise({
                     redirectTo: '/'

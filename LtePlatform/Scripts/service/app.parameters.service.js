@@ -108,6 +108,26 @@
                 });
                 return deferred.promise;
             },
+            queryCdmaCellInfo: function (btsId, sectorId) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('Cell'),
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                    },
+                    params: {
+                        btsId: btsId,
+                        sectorId: sectorId
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
+            },
             queryENodebInfo: function (eNodebId) {
                 var deferred = $q.defer();
                 $http({
@@ -118,6 +138,25 @@
                     },
                     params: {
                         eNodebId: eNodebId
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
+            },
+            queryBtsInfo: function (btsId) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('Bts'),
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                    },
+                    params: {
+                        btsId: btsId
                     }
                 }).success(function (result) {
                     deferred.resolve(result);
