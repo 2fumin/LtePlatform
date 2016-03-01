@@ -1,4 +1,4 @@
-﻿app.controller("kpi.workitem", function ($scope, $http, showPieChart, workitemService) {
+﻿app.controller("kpi.workitem", function ($scope, workitemService) {
     $scope.states = [
     {
         name: '未完成'
@@ -36,7 +36,7 @@
 
     $scope.chartView = "initial";
 
-    $scope.updateWorkItemTable = function (items) {
+    $scope.updateWorkItemTable = function () {
         workitemService.queryWithPaging($scope.currentState.name, $scope.currentType.name,
             $scope.itemsPerPage.value).then(function (result) {
             $scope.totalPages = result;
@@ -52,17 +52,6 @@
             $scope.itemsPerPage.value, $scope.currentPage).then(function(result) {
             $scope.viewData.items = result;
         });
-    };
-
-    $scope.showCharts = function () {
-        if ($scope.chartView === 'initial') {
-            $http.get($scope.dataModel.workItemUrl).success(function (result) {
-                showPieChart.type(result, "#type-chart");
-                showPieChart.state(result, "#state-chart");
-            });
-        }
-
-        $scope.chartView = "chart";
     };
 
     $scope.updateSectorIds = function() {
@@ -90,21 +79,21 @@
         if (newValue === oldValue) {
             return;
         }
-        $scope.updateWorkItemTable($scope.itemsPerPage.value);
+        $scope.updateWorkItemTable();
     });
 
     $scope.$watch('currentState', function(newValue, oldValue) {
         if (newValue === oldValue) {
             return;
         }
-        $scope.updateWorkItemTable($scope.itemsPerPage.value);
+        $scope.updateWorkItemTable();
     });
 
     $scope.$watch('currentType', function(newValue, oldValue) {
         if (newValue === oldValue) {
             return;
         }
-        $scope.updateWorkItemTable($scope.itemsPerPage.value);
+        $scope.updateWorkItemTable();
     });
 
     $scope.queryFirstPage = function () {
@@ -127,10 +116,5 @@
         $scope.query();
     };
 
-    $scope.showDetails = function (data) {
-        $scope.chartView = "details";
-        $scope.currentView = data;
-    };
-
-    $scope.updateWorkItemTable($scope.itemsPerPage.value);
+    $scope.updateWorkItemTable();
 });

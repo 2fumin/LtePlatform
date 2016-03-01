@@ -11,7 +11,7 @@
                 <div class="input-group">
                     <select ng-model="currentState" class="form-control" ng-options="state.name for state in states"></select>
                     <span class="input-group-btn">
-                        <button class="btn btn-success" ng-click="showCharts()">图表</button>
+                        <a class="btn btn-success" ng-href="{{rootPath}}chart">图表</a>
                     </span>
                 </div>
             </div>

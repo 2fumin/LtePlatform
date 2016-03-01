@@ -44,6 +44,22 @@
                 });
                 return deferred.promise;
             },
+            queryChartData: function () {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('WorkItem'),
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
+            },
             updateSectorIds: function() {
                 var deferred = $q.defer();
                 $http.put(appUrlService.getApiUrl('WorkItem')).success(function (result) {

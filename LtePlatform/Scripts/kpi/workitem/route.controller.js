@@ -10,9 +10,9 @@
                     templateUrl: rootDir + 'Details.html',
                     controller: 'kpi.workitem.details'
                 })
-                .when('/roles', {
-                    templateUrl: '/appViews/Manage/Roles.html',
-                    controller: 'manage.roles'
+                .when('/chart', {
+                    templateUrl: rootDir + 'Charts.html',
+                    controller: 'kpi.workitem.chart'
                 })
                 .when('/roleUser/:name', {
                     templateUrl: '/appViews/Manage/RoleUser.html',
