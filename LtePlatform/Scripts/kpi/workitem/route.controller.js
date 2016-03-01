@@ -42,8 +42,8 @@
                 displayName: "工单总览",
                 url: rootUrl + "/"
             }, {
-                displayName: "所有用户信息管理",
-                url: rootUrl + "/all"
+                displayName: "统计图表",
+                url: rootUrl + "/chart"
             }, {
                 displayName: "所有角色管理",
                 url: rootUrl + "/roles"

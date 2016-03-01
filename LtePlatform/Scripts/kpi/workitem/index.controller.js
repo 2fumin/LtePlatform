@@ -1,4 +1,5 @@
 ﻿app.controller("kpi.workitem", function ($scope, workitemService) {
+    $scope.page.title = "工单总览";
     $scope.states = [
     {
         name: '未完成'
