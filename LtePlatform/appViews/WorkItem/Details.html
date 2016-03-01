@@ -9,7 +9,12 @@
             <thead>
                 <tr>
                     <th style="width: 100px">项目</th>
-                    <th>信息</th>
+                    <th>
+                        信息
+                        <a class="btn btn-success btn-xs" style="float:right" ng-href="{{rootPath}}">
+                            返回总览
+                        </a>
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -25,20 +30,32 @@
                     <td>基站编号</td>
                     <td>
                         {{currentView.eNodebId}}
-                        <button class="btn btn-primary btn-xs" style="float: right" ng-click="queryBtsInfo()"
-                                ng-if="currentView.eNodebId > 0">
-                            基站信息
-                        </button>
+                        <a class="btn btn-primary btn-xs" style="float: right" 
+                           ng-href="{{rootPath}}eNodeb/{{currentView.eNodebId}}"
+                           ng-show="currentView.eNodebId > 10000">
+                            LTE基站信息
+                        </a>
+                        <a class="btn btn-primary btn-xs" style="float: right" 
+                           ng-href="{{rootPath}}bts/{{currentView.eNodebId}}"
+                           ng-show="currentView.eNodebId > 0 && currentView.eNodebId <= 10000">
+                            CDMA基站信息
+                        </a>
                     </td>
                 </tr>
                 <tr>
                     <td>扇区编号</td>
                     <td>
                         {{currentView.sectorId}}
-                        <button class="btn btn-primary btn-xs" style="float: right" ng-click="queryCellInfo()"
-                                ng-if="currentView.eNodebId > 0">
-                            小区信息
-                        </button>
+                        <a class="btn btn-primary btn-xs" style="float: right" 
+                           ng-href="{{rootPath}}cell/{{currentView.eNodebId}}/{{currentView.sectorId}}"
+                           ng-show="currentView.eNodebId > 10000">
+                            LTE小区信息
+                        </a>
+                        <a class="btn btn-primary btn-xs" style="float: right"
+                           ng-href="{{rootPath}}cdmaCell/{{currentView.eNodebId}}/{{currentView.sectorId}}"
+                           ng-show="currentView.eNodebId > 0 && currentView.eNodebId <= 10000">
+                            CDMA小区信息
+                        </a>
                     </td>
                 </tr>
                 <tr>
