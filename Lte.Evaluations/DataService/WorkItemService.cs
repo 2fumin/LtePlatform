@@ -97,6 +97,22 @@ namespace Lte.Evaluations.DataService
             return views;
         }
 
+        public async Task<IEnumerable<WorkItemView>> QueryViews(int eNodebId)
+        {
+            var statList = await _repository.GetAllListAsync(eNodebId);
+            var views = Mapper.Map<List<WorkItem>, List<WorkItemView>>(statList);
+            views.ForEach(x => x.UpdateTown(_eNodebRepository, _btsRepository, _townRepository));
+            return views;
+        }
+
+        public async Task<IEnumerable<WorkItemView>> QueryViews(int eNodebId, byte sectorId)
+        {
+            var statList = await _repository.GetAllListAsync(eNodebId, sectorId);
+            var views = Mapper.Map<List<WorkItem>, List<WorkItemView>>(statList);
+            views.ForEach(x => x.UpdateTown(_eNodebRepository, _btsRepository, _townRepository));
+            return views;
+        }
+
         public IEnumerable<WorkItemView> QueryViews()
         {
             var views = Mapper.Map<List<WorkItem>, List<WorkItemView>>(_repository.GetAllList());

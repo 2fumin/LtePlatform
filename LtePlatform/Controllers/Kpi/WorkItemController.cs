@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using Lte.Evaluations.DataService;
 using Lte.Evaluations.DataService.Basic;
@@ -51,6 +52,25 @@ namespace LtePlatform.Controllers.Kpi
             int page)
         {
             return _service.QueryViews(statCondition, typeCondition, itemsPerPage, page);
+        }
+
+        [HttpGet]
+        [ApiDoc("查询对应基站编号的所有工单")]
+        [ApiParameterDoc("eNodebId", "基站编号")]
+        [ApiResponse("对应的所有工单")]
+        public async Task<IEnumerable<WorkItemView>> Get(int eNodebId)
+        {
+            return await _service.QueryViews(eNodebId);
+        }
+
+        [HttpGet]
+        [ApiDoc("查询对应基站编号和扇区编号的所有工单")]
+        [ApiParameterDoc("eNodebId", "基站编号")]
+        [ApiParameterDoc("sectorId", "扇区编号")]
+        [ApiResponse("对应的所有工单")]
+        public async Task<IEnumerable<WorkItemView>> Get(int eNodebId, byte sectorId)
+        {
+            return await _service.QueryViews(eNodebId, sectorId);
         }
 
         [HttpPut]
