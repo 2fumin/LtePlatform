@@ -78,11 +78,11 @@ namespace Lte.Evaluations.DataService
             return "完成工单导入：" + count + "条";
         }
 
-        public int QueryTotalPages(string statCondition, string typeCondition, int itemsPerPage)
+        public int QueryTotalItems(string statCondition, string typeCondition)
         {
             var predict = (statCondition + '_' + typeCondition).GetWorkItemFilter();
             var counts = predict == null ? _repository.Count() : _repository.Count(predict);
-            return (int) Math.Ceiling((double) counts/itemsPerPage);
+            return counts;
         }
 
         public IEnumerable<WorkItemView> QueryViews(string statCondition, string typeCondition, int itemsPerPage,

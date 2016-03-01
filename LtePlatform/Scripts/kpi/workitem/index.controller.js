@@ -17,7 +17,7 @@
     }];
     $scope.currentType = $scope.types[0];
 
-    $scope.totalPages = 0;
+    $scope.totalItems = 0;
     $scope.currentPage = 1;
     $scope.pageSizeSelection = [
     {
@@ -32,18 +32,12 @@
         value: 50
     }];
     $scope.itemsPerPage = $scope.pageSizeSelection[1];
-    $scope.canGotoCurrentPage = false;
-    $scope.currentView = {};
 
-    $scope.chartView = "initial";
-
-    $scope.updateWorkItemTable = function () {
-        workitemService.queryWithPaging($scope.currentState.name, $scope.currentType.name,
-            $scope.itemsPerPage.value).then(function (result) {
-            $scope.totalPages = result;
-            if ($scope.currentPage > result) {
-                $scope.currentPage = result;
-            }
+    $scope.updateWorkItemTable = function() {
+        workitemService.queryTotalPages($scope.currentState.name, $scope.currentType.name,
+            $scope.itemsPerPage.value).then(function(result) {
+            $scope.totalItems = result;
+            $scope.currentPage = 1;
             $scope.query();
         });
     };
@@ -68,19 +62,17 @@
         if (newValue === oldValue) {
             return;
         }
-        if (newValue >= 1 && newValue <= $scope.totalPages) {
-            $scope.canGotoCurrentPage = true;
-        } else {
-            $scope.canGotoCurrentPage = false;
-            $scope.currentPage = 1;
-        }
+        $scope.query();
     });
 
     $scope.$watch('itemsPerPage', function(newValue, oldValue) {
         if (newValue === oldValue) {
             return;
         }
-        $scope.updateWorkItemTable();
+        if ($scope.currentPage > Math.ceil($scope.totalItems / newValue)) {
+            $scope.currentPage = Math.ceil($scope.totalItems / newValue);
+        }
+        $scope.query();
     });
 
     $scope.$watch('currentState', function(newValue, oldValue) {
@@ -96,26 +88,6 @@
         }
         $scope.updateWorkItemTable();
     });
-
-    $scope.queryFirstPage = function () {
-        $scope.currentPage = 1;
-        $scope.query();
-    };
-
-    $scope.queryPrevPage = function () {
-        $scope.currentPage = $scope.currentPage - 1;
-        $scope.query();
-    };
-
-    $scope.queryNextPage = function () {
-        $scope.currentPage = $scope.currentPage + 1;
-        $scope.query();
-    };
-
-    $scope.queryLastPage = function () {
-        $scope.currentPage = $scope.totalPages;
-        $scope.query();
-    };
 
     $scope.updateWorkItemTable();
 });

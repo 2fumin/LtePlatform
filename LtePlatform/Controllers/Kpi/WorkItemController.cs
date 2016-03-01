@@ -31,14 +31,13 @@ namespace LtePlatform.Controllers.Kpi
         }
 
         [HttpGet]
-        [ApiDoc("查询指定条件下的工单列表需要显示的页数")]
+        [ApiDoc("查询指定条件下的工单列表数量")]
         [ApiParameterDoc("statCondition", "工单状态条件")]
         [ApiParameterDoc("typeCondition", "工单类型条件")]
-        [ApiParameterDoc("itemsPerPage", "每页显示的工单数")]
-        [ApiResponse("需要显示的页数")]
-        public int Get(string statCondition, string typeCondition, int itemsPerPage)
+        [ApiResponse("总的数量")]
+        public int Get(string statCondition, string typeCondition)
         {
-            return _service.QueryTotalPages(statCondition, typeCondition, itemsPerPage);
+            return _service.QueryTotalItems(statCondition, typeCondition);
         }
 
         [HttpGet]

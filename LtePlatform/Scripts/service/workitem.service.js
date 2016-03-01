@@ -23,7 +23,7 @@
                 });
                 return deferred.promise;
             },
-            queryTotalPages: function(state, type, itemsPerPage) {
+            queryTotalPages: function(state, type) {
                 var deferred = $q.defer();
                 $http({
                     method: 'GET',
@@ -33,8 +33,7 @@
                     },
                     params: {
                         'statCondition': state,
-                        'typeCondition': type,
-                        'itemsPerPage': itemsPerPage
+                        'typeCondition': type
                     }
                 }).success(function (result) {
                     deferred.resolve(result);
