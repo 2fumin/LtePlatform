@@ -12,7 +12,8 @@
 <div ng-app="myApp" class="row">
     <div class="col-md-4">
         <div class="list-group">
-            <a class="list-group-item" ng-repeat="menuItem in menuItems" ng-class="{active: page.title == menuItem.displayName}"
+            <a class="list-group-item" ng-repeat="menuItem in menuItems" 
+               ng-class="{active: page.title == menuItem.displayName}"
                ng-href="{{menuItem.url}}">
                 {{menuItem.displayName}}
             </a>
@@ -37,16 +38,20 @@
     <script src="~/Scripts/mycharts/drilldownPie.js"></script>
     <script src="~/Scripts/service/app.url.service.js"></script>
     <script src="~/Scripts/service/workitem.service.js"></script>
+    <script src="~/Scripts/service/app.parameters.service.js"></script>
     <script>
-        var app = angular.module('myApp', ['ngRoute', "highcharts-ng", "ui.bootstrap", 'kpi.workitem']);
+        var app = angular.module('myApp', [
+            'ngRoute',
+            "highcharts-ng",
+            "ui.bootstrap",
+            'kpi.workitem',
+            'myApp.parameters'
+        ]);
     </script>
     <script src="~/Scripts/kpi/workitem/service.js"></script>
     <script src="~/Scripts/kpi/workitem/route.controller.js"></script>
     <script src="~/Scripts/kpi/workitem/index.controller.js"></script>
     <script src="~/Scripts/kpi/workitem/details.controller.js"></script>
     <script src="~/Scripts/kpi/workitem/chart.controller.js"></script>
-    <script src="~/Scripts/kpi/directive.workitem.enodeb.js"></script>
-    <script src="~/Scripts/kpi/directive.workitem.bts.js"></script>
-    <script src="~/Scripts/kpi/directive.workitem.cell.js"></script>
-    <script src="~/Scripts/kpi/directive.workitem.cdma.js"></script>
+    <script src="~/Scripts/kpi/workitem/eNodeb.js"></script>
 }

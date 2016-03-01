@@ -14,9 +14,9 @@
                     templateUrl: rootDir + 'Charts.html',
                     controller: 'kpi.workitem.chart'
                 })
-                .when('/roleUser/:name', {
-                    templateUrl: '/appViews/Manage/RoleUser.html',
-                    controller: 'manage.roleUser'
+                .when('/eNodeb/:eNodebId', {
+                    templateUrl: rootDir + 'ENodebInfo.html',
+                    controller: 'workitem.eNodeb'
                 })
                 .when('/addPhoneNumber', {
                     templateUrl: '/appViews/Manage/AddPhoneNumber.html',
