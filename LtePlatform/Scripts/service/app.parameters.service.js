@@ -112,7 +112,7 @@
                 var deferred = $q.defer();
                 $http({
                     method: 'GET',
-                    url: appUrlService.getApiUrl('Cell'),
+                    url: appUrlService.getApiUrl('CdmaCell'),
                     headers: {
                         'Authorization': 'Bearer ' + appUrlService.getAccessToken()
                     },
