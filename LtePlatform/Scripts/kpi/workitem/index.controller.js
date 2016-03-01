@@ -58,36 +58,5 @@
         });
     };
 
-    $scope.$watch('currentPage', function(newValue, oldValue) {
-        if (newValue === oldValue) {
-            return;
-        }
-        $scope.query();
-    });
-
-    $scope.$watch('itemsPerPage', function(newValue, oldValue) {
-        if (newValue === oldValue) {
-            return;
-        }
-        if ($scope.currentPage > Math.ceil($scope.totalItems / newValue)) {
-            $scope.currentPage = Math.ceil($scope.totalItems / newValue);
-        }
-        $scope.query();
-    });
-
-    $scope.$watch('currentState', function(newValue, oldValue) {
-        if (newValue === oldValue) {
-            return;
-        }
-        $scope.updateWorkItemTable();
-    });
-
-    $scope.$watch('currentType', function(newValue, oldValue) {
-        if (newValue === oldValue) {
-            return;
-        }
-        $scope.updateWorkItemTable();
-    });
-
     $scope.updateWorkItemTable();
 });
