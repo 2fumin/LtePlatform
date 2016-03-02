@@ -1,6 +1,6 @@
 ﻿app.controller("kpi.workitem", function ($scope, workitemService) {
     $scope.page.title = "工单总览";
-
+    
     $scope.updateWorkItemTable = function() {
         workitemService.queryTotalPages($scope.viewData.currentState.name, $scope.viewData.currentType.name,
             $scope.viewData.itemsPerPage.value).then(function (result) {
@@ -12,7 +12,8 @@
     $scope.query = function () {
         workitemService.queryWithPaging($scope.viewData.currentState.name, $scope.viewData.currentType.name,
             $scope.viewData.itemsPerPage.value, $scope.viewData.currentPage).then(function (result) {
-            $scope.viewData.items = result;
+                $scope.viewData.items = result;
+                $scope.viewItems = $scope.viewData.items;
         });
     };
 
@@ -27,5 +28,7 @@
 
     if ($scope.viewData.items.length === 0) {
         $scope.updateWorkItemTable();
+    } else {
+        $scope.viewItems = $scope.viewData.items;
     }
 });
