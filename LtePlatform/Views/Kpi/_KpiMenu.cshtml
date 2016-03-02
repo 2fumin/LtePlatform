@@ -1,14 +1,5 @@
 ﻿<ul class="nav nav-pills">
-    <li>
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            传统指标<span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-            <li>@Html.ActionLink("基本指标", "Index", "Kpi")</li>
-            <li>@Html.ActionLink("TOP忙时掉话", "TopDrop2G", "Kpi")</li>
-            <li>@Html.ActionLink("TOP 3G连接", "TopConnection3G", "Kpi")</li>
-        </ul>
-    </li>
+    <li>@Html.ActionLink("基本指标", "Index", "Kpi")</li>
     <li>@Html.ActionLink("工参导入", "BasicImport", "Parameters")</li>
     <li>@Html.ActionLink("工单监控", "WorkItem", "Kpi")</li>
     <li>

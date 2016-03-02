@@ -937,7 +937,6 @@
     <Content Include="Scripts\kpi\interference.import.controller.js" />
     <Content Include="Scripts\kpi\interference.mongo.controller.js" />
     <Content Include="Scripts\kpi\interferenceimport.viewmodel.js" />
-    <Content Include="Scripts\kpi\precise.top.viewmodel.js" />
     <Content Include="Scripts\kpi\preciseimport.controller.js" />
     <Content Include="Scripts\kpi\preciseimport.viewmodel.js" />
     <Content Include="Scripts\kpi\top.drop2G.viewmodel.js" />

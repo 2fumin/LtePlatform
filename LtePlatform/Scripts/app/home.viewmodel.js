@@ -8,7 +8,7 @@
     }, {
         title: "精确覆盖专题分析",
         comments: "综合分析后台指标、MR、路测信令和小区跟踪数据，挖掘小区的重叠覆盖、过覆盖等问题，对精确覆盖的效果进行模拟，并在百度地图上呈现。",
-        buttonName: "精确覆盖分析",
+        buttonName: "精确覆盖",
         url: "/Rutrace"
     }, {
         title: "校园网专题优化",
@@ -16,14 +16,19 @@
         buttonName: "校园网一览",
         url: "/College/Map"
     }, {
-        title: "指标监控分析",
-        comments: "对日常指标的监控、精确覆盖率指标分析和地理化呈现",
-        buttonName: "日常指标监控",
+        title: "传统指标监控",
+        comments: "对传统指标（主要是2G和3G）的监控、分析和地理化呈现",
+        buttonName: "传统指标",
         url: "/Kpi"
     }, {
+        title: "工单监控分析",
+        comments: "对接本部优化部4G网优平台，实现对日常工单的监控和分析",
+        buttonName: "工单监控",
+        url: "/Kpi/WorkItem"
+    }, {
         title: "小区基础信息",
-        comments: "全网基站、小区列表和地理化显示、对全网的基站按照基站名称、地址等信息进行查询，并进行个别基站小区的增删、修改信息的操作",
-        buttonName: "LTE小区列表",
+        comments: "全网LTE和CDMA基站、小区列表和地理化显示、对全网的基站按照基站名称、地址等信息进行查询，并进行个别基站小区的增删、修改信息的操作",
+        buttonName: "基础信息",
         url: "/Parameters/List"
     }, {
         title: "DT基础信息",
