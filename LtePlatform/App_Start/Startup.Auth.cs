@@ -76,9 +76,9 @@ namespace LtePlatform
             //    consumerKey: "",
             //    consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //    appId: "",
-            //    appSecret: "");
+            app.UseFacebookAuthentication(
+                appId: "199895863702433",
+                appSecret: "e3dbb0b63bee24179b1f6d4c3aabf478");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
