@@ -391,6 +391,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="appViews\BasicKpi\Trend.html" />
     <Content Include="appViews\Manage\AllUsers.html" />
     <Content Include="appViews\Manage\CurrentUser.html" />
     <Content Include="appViews\Manage\Roles.html" />
@@ -684,6 +685,7 @@
     <Content Include="Scripts\angular-ui\uib\timepicker.js" />
     <Content Include="Scripts\angular-ui\uib\tooltip.js" />
     <Content Include="Scripts\angular-ui\uib\typeahead.js" />
+    <Content Include="Scripts\kpi\basic\route.controller.js" />
     <Content Include="Scripts\kpi\workitem\chart.controller.js" />
     <Content Include="Scripts\kpi\workitem\route.controller.js" />
     <Content Include="Scripts\manage\password.change.js" />
@@ -1046,10 +1048,10 @@
     <Content Include="Views\Kpi\WorkItem.cshtml" />
     <Content Include="Views\Kpi\TopConnection3G.cshtml" />
     <Content Include="Views\Kpi\Import.cshtml" />
-    <Content Include="Views\Kpi\_CityKpi.cshtml" />
+    <Content Include="appViews\BasicKpi\Index.html" />
     <Content Include="Scripts\kpi\index.viewmodel.js" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
-    <Content Include="Views\Kpi\_CityKpiTable.cshtml" />
+    <Content Include="appViews\BasicKpi\KpiTable.html" />
     <Content Include="Views\College\Edit.cshtml" />
     <Content Include="Views\College\Infrastructure.cshtml" />
     <Content Include="Views\College\Coverage.cshtml" />

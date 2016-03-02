@@ -1,0 +1,28 @@
+﻿<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            指标趋势查询
+        </h3>
+    </div>
+    <div class="panel-body">
+        <p>
+            开始日期：
+            <input id="BeginDate" data-bind="value: beginDate" />
+            结束日期：
+            <input id="EndDate" data-bind="value: endDate" />
+        </p>
+        <p>
+            指标选择:
+            <select data-bind="value: kpiSelection, options: kpiOptions"></select>
+            <button type="button" class="btn btn-success" data-bind="click: showTrend">
+                <span class="glyphicon glyphicon-book"></span>
+                图表展示
+            </button>
+        </p>
+        <div class="panel" data-bind="foreach: kpiOptions">
+            <div data-bind="visible: $data == $root.index().kpiSelection(), attr: { name: $data}"
+                 style="min-height: 500px" class="kpi-trend">
+            </div>
+        </div>
+    </div>
+</div>
