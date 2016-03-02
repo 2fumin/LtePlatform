@@ -103,7 +103,11 @@
                 </tr>
                 <tr>
                     <td>平台信息</td>
-                    <td>{{currentView.comments}}</td>
+                    <td></td>
+                </tr>
+                <tr ng-repeat="info in platformInfos">
+                    <td>{{info.time}}</td>
+                    <td>{{info.contents}}</td>
                 </tr>
                 <tr>
                     <td>反馈信息</td>
