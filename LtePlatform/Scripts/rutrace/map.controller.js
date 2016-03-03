@@ -1,4 +1,5 @@
-﻿app.controller("rutrace.map", function ($scope, $timeout, $routeParams, $location, $uibModal, $log, baiduMapService, networkElementService) {
+﻿app.controller("rutrace.map", function ($scope, $timeout, $routeParams, $location, $uibModal, $log,
+    geometryService, baiduMapService, networkElementService) {
     var cell = $scope.topStat.current;
     $scope.range = {};
     if ($routeParams.name !== cell.eNodebName + "-" + cell.sectorName) {
@@ -56,22 +57,28 @@
     };
 
     networkElementService.queryCellSectors([$scope.topStat.current]).then(function (result) {
-        baiduMapService.initializeMap("all-map", 12);
-        var sectorTriangle = baiduMapService.generateSector(result[0], "blue");
-        baiduMapService.addOneSectorToScope(sectorTriangle, $scope.showPrecise, result[0]);
+        geometryService.transformToBaidu(result[0].longtitute, result[0].lattitute).then(function (coors) {
+            baiduMapService.initializeMap("all-map", 12);
+            result[0].longtitute = coors.x;
+            result[0].lattitute = coors.y;
+            var sectorTriangle = baiduMapService.generateSector(result[0], "blue");
+            baiduMapService.addOneSectorToScope(sectorTriangle, $scope.showPrecise, result[0]);
 
-        baiduMapService.setCellFocus(result[0].baiduLongtitute, result[0].baiduLattitute, 15);
-        var range = baiduMapService.getCurrentMapRange();
-        networkElementService.queryRangeSectors(range, [
-            {
-                cellId: $scope.topStat.current.cellId,
-                sectorId: $scope.topStat.current.sectorId
-            }
-        ]).then(function(sectors) {
-            for (var i = 0; i < sectors.length; i++) {
-                baiduMapService.addOneSectorToScope(baiduMapService.generateSector(sectors[i], "green"), $scope.showNeighbor, sectors[i]);
-            }
+            baiduMapService.setCellFocus(result[0].longtitute, result[0].lattitute, 15);
+            var range = baiduMapService.getCurrentMapRange();
+            networkElementService.queryRangeSectors(range, [
+                {
+                    cellId: $scope.topStat.current.cellId,
+                    sectorId: $scope.topStat.current.sectorId
+                }
+            ]).then(function (sectors) {
+                for (var i = 0; i < sectors.length; i++) {
+                    baiduMapService.addOneSectorToScope(baiduMapService.generateSector(sectors[i], "green"),
+                        $scope.showNeighbor, sectors[i]);
+                }
+            });
         });
+        
     });
 
             

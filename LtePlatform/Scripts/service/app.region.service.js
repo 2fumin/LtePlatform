@@ -68,7 +68,7 @@
             }
         }
     })
-    .factory('geometryService', function () {
+    .factory('geometryService', function ($http, $q, appUrlService) {
         var getDistanceFunc = function(p1Lat, p1Lng, p2Lat, p2Lng) {
             var earthRadiusKm = 6378.137;
             var dLat1InRad = p1Lat * (Math.PI / 180);
@@ -114,6 +114,8 @@
 
             return { rSector: rSector, rStation: rSation };
         };
+        var myKey = 'LlMnTd7NcCWI1ibhDAdKeVlG';
+        var baiduApiUrl = '//api.map.baidu.com/geoconv/v1/?callback=JSON_CALLBACK';
         return {
             getDistance: function(p1Lat, p1Lng, p2Lat, p2Lng) {
                 return getDistanceFunc(p1Lat, p1Lng, p2Lat, p2Lng);
@@ -161,11 +163,24 @@
                         break;
                 }
                 return radius;
+            },
+            transformToBaidu: function (longtitute, lattitute) {
+                var deferred = $q.defer();
+                $http.jsonp(baiduApiUrl + '&coords='+ longtitute + ',' + lattitute
+                        + '&from=1&to=5&ak=' + myKey).success(function (result) {
+                    deferred.resolve(result.result[0]);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
             }
         };
     })
     .factory('baiduMapService', function (geometryService) {
         var map = {};
+        var longtituteOffset = 0.01176493217;
+        var lattituteOffset = 0.003184424923;
         return {
             initializeMap: function(tag, zoomLevel) {
                 map = new BMap.Map(tag);
@@ -254,8 +269,8 @@
                 zoomLevel = zoomLevel || 15;
                 map.centerAndZoom(new BMap.Point(longtitute, lattitute), zoomLevel);
             },
-            generateSector: function(data, sectorColor) {
-                var center = { lng: data.baiduLongtitute, lat: data.baiduLattitute };
+            generateSector: function (data, sectorColor) {                
+                var center = { lng: data.longtitute, lat: data.lattitute };
                 var iangle = 65;
                 var irotation = data.azimuth - iangle / 2;
                 var zoom = map.getZoom();
@@ -271,10 +286,10 @@
             },
             getCurrentMapRange: function() {
                 return {
-                    west: map.getBounds().getSouthWest().lng,
-                    south: map.getBounds().getSouthWest().lat,
-                    east: map.getBounds().getNorthEast().lng,
-                    north: map.getBounds().getNorthEast().lat
+                    west: map.getBounds().getSouthWest().lng - longtituteOffset,
+                    south: map.getBounds().getSouthWest().lat - lattituteOffset,
+                    east: map.getBounds().getNorthEast().lng - longtituteOffset,
+                    north: map.getBounds().getNorthEast().lat - lattituteOffset
                 };
             }
         };
