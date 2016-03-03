@@ -13,9 +13,9 @@ namespace Lte.Evaluations.ViewModels.Precise
 
         public double DownTilt { get; set; }
 
-        public double BaiduLongtitute { get; set; }
+        public double Longtitute { get; set; }
 
-        public double BaiduLattitute { get; set; }
+        public double Lattitute { get; set; }
 
         public short Pci { get; set; }
 
@@ -33,8 +33,6 @@ namespace Lte.Evaluations.ViewModels.Precise
             {
                 cell.CloneProperties(sector);
                 sector.DownTilt = cell.MTilt + cell.ETilt;
-                sector.BaiduLongtitute = cell.Longtitute + GeoMath.BaiduLongtituteOffset;
-                sector.BaiduLattitute = cell.Lattitute + GeoMath.BaiduLattituteOffset;
             }
             return sector;
         }

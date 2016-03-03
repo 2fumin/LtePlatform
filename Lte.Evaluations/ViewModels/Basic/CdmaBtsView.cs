@@ -20,13 +20,7 @@ namespace Lte.Evaluations.ViewModels.Basic
 
         [MemberDoc("纬度")]
         public double Lattitute { get; set; }
-
-        [MemberDoc("百度地图经度")]
-        public double BaiduLongtitute => Longtitute + GeoMath.BaiduLongtituteOffset;
-
-        [MemberDoc("百度地图纬度")]
-        public double BaiduLattitute => Lattitute + GeoMath.BaiduLattituteOffset;
-
+        
         [MemberDoc("地址")]
         public string Address { get; set; }
 

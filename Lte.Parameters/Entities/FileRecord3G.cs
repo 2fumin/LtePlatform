@@ -52,11 +52,7 @@ namespace Lte.Parameters.Entities
         public double Longtitute { get; set; }
 
         public double Lattitute { get; set; }
-
-        public double BaiduLongtitute => Longtitute + GeoMath.BaiduLongtituteOffset;
-
-        public double BaiduLattitute => Lattitute + GeoMath.BaiduLattituteOffset;
-
+        
         public double Sinr { get; set; }
 
         public double RxAgc0 { get; set; }

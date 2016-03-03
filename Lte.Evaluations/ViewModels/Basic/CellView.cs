@@ -38,11 +38,7 @@ namespace Lte.Evaluations.ViewModels.Basic
         public double Longtitute { get; set; }
 
         public double Lattitute { get; set; }
-
-        public double BaiduLongtitute => Longtitute + GeoMath.BaiduLongtituteOffset;
-
-        public double BaiduLattitute => Lattitute + GeoMath.BaiduLattituteOffset;
-
+        
         public static CellView ConstructView(Cell cell, IENodebRepository repository)
         {
             var view = Mapper.Map<Cell, CellView>(cell);

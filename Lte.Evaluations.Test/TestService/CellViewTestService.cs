@@ -10,8 +10,6 @@ namespace Lte.Evaluations.Test.TestService
             double baiduLattitute, double azimuth, string indoor)
         {
             Assert.AreEqual(view.ENodebName + "-" + view.SectorId, cellName);
-            Assert.AreEqual(view.BaiduLongtitute, baiduLontitute);
-            Assert.AreEqual(view.BaiduLattitute, baiduLattitute);
             Assert.AreEqual(view.Azimuth, azimuth);
             Assert.AreEqual(view.Indoor, indoor);
         }
@@ -20,8 +18,6 @@ namespace Lte.Evaluations.Test.TestService
             double baiduLattitute, double azimuth, string indoor)
         {
             Assert.AreEqual(view.BtsName + "-" + view.SectorId, cellName);
-            Assert.AreEqual(view.BaiduLongtitute, baiduLontitute);
-            Assert.AreEqual(view.BaiduLattitute, baiduLattitute);
             Assert.AreEqual(view.Azimuth, azimuth);
             Assert.AreEqual(view.Indoor, indoor);
         }

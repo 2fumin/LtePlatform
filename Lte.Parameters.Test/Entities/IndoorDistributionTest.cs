@@ -35,8 +35,6 @@ namespace Lte.Parameters.Test.Entities
             Assert.AreEqual(item.Range, "range");
             Assert.AreEqual(item.SourceName, "source");
             Assert.AreEqual(item.SourceType, "type");
-            Assert.AreEqual(item.BaiduLongtitute, info.Longtitute + GeoMath.BaiduLongtituteOffset);
-            Assert.AreEqual(item.BaiduLattitute, info.Lattitute + GeoMath.BaiduLattituteOffset);
         }
     }
 }

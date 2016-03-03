@@ -17,11 +17,7 @@ namespace Lte.Parameters.Entities
         public double Longtitute { get; set; }
         
         public double Lattitute { get; set; }
-
-        public double BaiduLongtitute => Longtitute + GeoMath.BaiduLongtituteOffset;
-
-        public double BaiduLattitute => Lattitute + GeoMath.BaiduLattituteOffset;
-
+        
         public static IndoorDistribution ConstructItem(IndoorDistributionExcel info)
         {
             return Mapper.Map<IndoorDistributionExcel, IndoorDistribution>(info);

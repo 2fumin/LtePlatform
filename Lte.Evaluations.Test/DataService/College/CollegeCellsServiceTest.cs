@@ -51,9 +51,6 @@ namespace Lte.Evaluations.Test.DataService.College
                 Assert.IsNotNull(views);
                 var cellViews = views as CellView[] ?? views.ToArray();
                 Assert.AreEqual(cellViews.Count(), 1);
-                cellViews.ElementAt(0)
-                    .AssertEqual(cellName, lontitute + GeoMath.BaiduLongtituteOffset,
-                        lattitute + GeoMath.BaiduLattituteOffset, azimuth, indoor);
             }
         }
 
@@ -75,9 +72,6 @@ namespace Lte.Evaluations.Test.DataService.College
                 Assert.IsNotNull(views);
                 var cellViews = views as SectorView[] ?? views.ToArray();
                 Assert.AreEqual(cellViews.Count(), 1);
-                cellViews.ElementAt(0)
-                    .AssertEqual(cellName, lontitute + GeoMath.BaiduLongtituteOffset,
-                        lattitute + GeoMath.BaiduLattituteOffset, azimuth, indoor);
             }
         }
     }

@@ -9,11 +9,7 @@ namespace Lte.Domain.Common.Geo
         private const double EarthRadius = 6371;
 
         private const double Eps = 1E-6;
-
-        public static double BaiduLongtituteOffset { get; set; } = 0.0123;
-
-        public static double BaiduLattituteOffset { get; set; } = 0.003;
-
+        
         public static double Distance(this IGeoPoint<double> p1, IGeoPoint<double> p2)
         {
             return (EarthRadius * Math.Acos(Math.Sin(p1.Lattitute * (Math.PI / 180)) * Math.Sin(p2.Lattitute * (Math.PI / 180))

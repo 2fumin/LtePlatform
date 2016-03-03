@@ -27,11 +27,7 @@ namespace Lte.Evaluations.ViewModels.Basic
         public double Longtitute { get; set; }
 
         public double Lattitute { get; set; }
-
-        public double BaiduLongtitute => Longtitute + GeoMath.BaiduLongtituteOffset;
-
-        public double BaiduLattitute => Lattitute + GeoMath.BaiduLattituteOffset;
-
+        
         public double Height { get; set; }
 
         public double DownTilt { get; set; }

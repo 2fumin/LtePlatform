@@ -36,10 +36,10 @@ namespace Lte.Parameters.Concrete
         public List<Cell> GetAllList(double west, double east, double south, double north)
         {
             return GetAllList(x =>
-                x.Longtitute + GeoMath.BaiduLongtituteOffset >= west 
-                && x.Longtitute + GeoMath.BaiduLongtituteOffset <= east 
-                && x.Lattitute + GeoMath.BaiduLattituteOffset >= south 
-                && x.Lattitute + GeoMath.BaiduLattituteOffset <= north);
+                x.Longtitute >= west 
+                && x.Longtitute <= east 
+                && x.Lattitute >= south 
+                && x.Lattitute <= north);
         }
 
         public List<Cell> GetAllInUseList()
