@@ -1,4 +1,4 @@
-﻿app.controller("kpi.basic", function ($scope, appRegionService, appFormatService) {
+﻿app.controller("kpi.basic", function ($scope, appRegionService, appFormatService, kpi2GService) {
     $scope.page.title = "指标总体情况";
     var yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
@@ -15,7 +15,10 @@
         selected: '主要'
     };
     $scope.showKpi = function () {
-
+        kpi2GService.queryDayStats($scope.city.selected, $scope.statDate.value).then(function (result) {
+            $scope.statDate.value = result.statDate;
+            $scope.statList = result.statViews;
+        });
     };
     appRegionService.initializeCities()
         .then(function (result) {

@@ -20,11 +20,11 @@ namespace Lte.Evaluations.ViewModels
         [MemberDoc("方位角")]
         public double Azimuth { get; set; }
 
-        [MemberDoc("百度地图经度")]
-        public double BaiduLongtitute { get; set; }
+        [MemberDoc("经度")]
+        public double Longtitute { get; set; }
 
-        [MemberDoc("百度地图纬度")]
-        public double BaiduLattitute { get; set; }
+        [MemberDoc("纬度")]
+        public double Lattitute { get; set; }
 
         [MemberDoc("天线挂高")]
         public double Height { get; set; }

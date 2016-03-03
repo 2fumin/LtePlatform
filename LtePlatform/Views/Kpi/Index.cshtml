@@ -45,13 +45,15 @@
     <script src="~/Scripts/service/app.url.service.js"></script>
     <script src="~/Scripts/service/app.region.service.js"></script>
     <script src="~/Scripts/service/app.parameters.service.js"></script>
+    <script src="~/Scripts/service/kpi.basic.service.js"></script>
     <script>
         var app = angular.module('myApp', [
             'ngRoute',
             "highcharts-ng",
             "ui.bootstrap",
             'myApp.parameters',
-            'myApp.region'
+            'myApp.region',
+            'kpi.basic'
         ]);
     </script>
     <script src="~/Scripts/kpi/basic/route.controller.js"></script>
