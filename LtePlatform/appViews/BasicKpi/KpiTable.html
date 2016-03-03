@@ -2,37 +2,37 @@
     <thead>
         <tr>
             <th>地市/片区</th>
-            <th data-bind="visible: view() != '3G'">2G全天话务量</th>
-            <th data-bind="visible: view() != '3G'">掉话率</th>
-            <th data-bind="visible: view() != '3G'">2G呼建</th>
-            <th data-bind="visible: view() == '2G'">Ec/Io优良率</th>
-            <th data-bind="visible: view() == '2G'">2G利用率</th>
-            <th data-bind="visible: view() != '2G'">全天流量(GB)</th>
-            <th data-bind="visible: view() == '3G'">3G全天话务量</th>
-            <th data-bind="visible: view() != '2G'">掉线率</th>
-            <th data-bind="visible: view() != '2G'">3G连接</th>
-            <th data-bind="visible: view() != '2G'">C/I优良率</th>
-            <th data-bind="visible: view() == '3G'">反向链路繁忙率</th>
-            <th data-bind="visible: view() != '2G'">3G切2G流量比</th>
-            <th data-bind="visible: view() == '3G'">3G利用率</th>
+            <th ng-show="views.selected != '3G'">2G全天话务量</th>
+            <th ng-show="views.selected != '3G'">掉话率</th>
+            <th ng-show="views.selected != '3G'">2G呼建</th>
+            <th ng-show="views.selected == '2G'">Ec/Io优良率</th>
+            <th ng-show="views.selected == '2G'">2G利用率</th>
+            <th ng-show="views.selected != '2G'">3G全天流量(GB)</th>
+            <th ng-show="views.selected == '3G'">3G全天话务量</th>
+            <th ng-show="views.selected != '2G'">掉线率</th>
+            <th ng-show="views.selected != '2G'">3G连接</th>
+            <th ng-show="views.selected != '2G'">C/I优良率</th>
+            <th ng-show="views.selected == '3G'">反向链路繁忙率</th>
+            <th ng-show="views.selected != '2G'">3G切2G流量比</th>
+            <th ng-show="views.selected == '3G'">3G利用率</th>
         </tr>
     </thead>
-    <tbody data-bind="foreach: kpiDateList">
+    <tbody ng-repeat="stat in statList">
         <tr>
-            <td data-bind="text: region"></td>
-            <td data-bind="text: erlangIncludingSwitch.toFixed(0), visible: $root.index().view() != '3G'"></td>
-            <td data-bind="text: (100 * drop2GRate).toFixed(3), visible: $root.index().view() != '3G'"></td>
-            <td data-bind="text: (100 * callSetupRate).toFixed(2), visible: $root.index().view() != '3G'"></td>
-            <td data-bind="text: (100 * ecio).toFixed(2), visible: $root.index().view() == '2G'"></td>
-            <td data-bind="text: (100 * utility2GRate).toFixed(2), visible: $root.index().view() == '2G'"></td>
-            <td data-bind="text: (flow.toFixed(0) / 1024).toFixed(0), visible: $root.index().view() != '2G'"></td>
-            <td data-bind="text: erlang3G.toFixed(0), visible: $root.index().view() == '3G'"></td>
-            <td data-bind="text: (100 * drop3GRate).toFixed(2), visible: $root.index().view() != '2G'"></td>
-            <td data-bind="text: (100 * connectionRate).toFixed(2), visible: $root.index().view() != '2G'"></td>
-            <td data-bind="text: (100 * ci).toFixed(2), visible: $root.index().view() != '2G'"></td>
-            <td data-bind="text: (100 * linkBusyRate).toFixed(2), visible: $root.index().view() == '3G'"></td>
-            <td data-bind="text: downSwitchRate.toFixed(2), visible: $root.index().view() != '2G'"></td>
-            <td data-bind="text: utility3GRate.toFixed(2), visible: $root.index().view() == '3G'"></td>
+            <td>{{stat.region}}</td>
+            <td ng-show="views.selected != '3G'">{{stat.erlangIncludingSwitch | number: 0}}</td>
+            <td ng-show="views.selected != '3G'">{{100 * stat.drop2GRate | number: 3}}</td>
+            <td ng-show="views.selected != '3G'">{{100 * stat.callSetupRate | number: 2}}</td>
+            <td ng-show="views.selected == '2G'">{{100 * stat.ecio | number: 2}}</td>
+            <td ng-show="views.selected == '2G'">{{100 * stat.utility2GRate | number: 2}}</td>
+            <td ng-show="views.selected != '2G'">{{stat.flow / 1024 | number: 0}}</td>
+            <td ng-show="views.selected == '3G'">{{stat.erlang3G | number: 0}}</td>
+            <td ng-show="views.selected != '2G'">{{100 * stat.drop3GRate | number: 2}}</td>
+            <td ng-show="views.selected != '2G'">{{100 * stat.connectionRate | number: 2}}</td>
+            <td ng-show="views.selected != '2G'">{{100 * stat.ci | number: 2}}</td>
+            <td ng-show="views.selected == '3G'">{{100 * stat.linkBusyRate | number: 2}}</td>
+            <td ng-show="views.selected != '2G'">{{stat.downSwitchRate | number: 2}}</td>
+            <td ng-show="views.selected == '3G'">{{stat.utility3GRate | number: 2}}</td>
         </tr>
     </tbody>
 </table>
