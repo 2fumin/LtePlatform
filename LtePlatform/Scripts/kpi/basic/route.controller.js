@@ -43,10 +43,6 @@
                 url: rootUrl + "/"
             }
         ];
-        $rootScope.city = {
-            selected: "",
-            options: []
-        };
         $rootScope.rootPath = rootUrl + "/";
         $rootScope.page = {
             title: "指标总体情况",
@@ -58,11 +54,10 @@
 
         appRegionService.initializeCities()
             .then(function (result) {
-                $rootScope.city = result;
-                for (var i = 0; i < result[i]; i++) {
+                for (var i = 0; i < result.options.length; i++) {
                     $rootScope.menuItems.push({
-                        displayName: "指标变化趋势-" + result[i],
-                        url: rootUrl + "/trend/" + result[i]
+                        displayName: "指标变化趋势-" + result.options[i],
+                        url: rootUrl + "/trend/" + result.options[i]
                     });
                 }
             });

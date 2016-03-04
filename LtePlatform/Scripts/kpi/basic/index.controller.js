@@ -6,16 +6,22 @@
         value: yesterday,
         opened: false
     };
-    
+    $scope.city = {
+        selected: "",
+        options: []
+    };
     $scope.views = {
         options: ['主要', '2G', '3G'],
         selected: '主要'
     };
     $scope.showKpi = function () {
         kpi2GService.queryDayStats($scope.city.selected, $scope.statDate.value).then(function (result) {
-            $scope.statDate.value = result.statDate;
+            $scope.statDate.value = appFormatService.getDate(result.statDate);
             $scope.statList = result.statViews;
         });
     };
-    $scope.showKpi();
+    appRegionService.initializeCities().then(function (result) {
+        $scope.city = result;
+        $scope.showKpi();
+    });
 });
