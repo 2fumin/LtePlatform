@@ -14,5 +14,7 @@ namespace Lte.Parameters.Abstract
         int Import(IEnumerable<CdmaRegionStatExcel> stats);
 
         List<CdmaRegionStat> GetAllList(DateTime begin, DateTime end);
+
+        Task<List<CdmaRegionStat>> GetAllListAsync(DateTime begin, DateTime end);
     }
 }

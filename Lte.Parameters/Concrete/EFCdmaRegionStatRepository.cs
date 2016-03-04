@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using Abp.EntityFramework.AutoMapper;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
@@ -30,6 +31,11 @@ namespace Lte.Parameters.Concrete
         public List<CdmaRegionStat> GetAllList(DateTime begin, DateTime end)
         {
             return GetAllList(x => x.StatDate >= begin && x.StatDate < end);
+        }
+
+        public async Task<List<CdmaRegionStat>> GetAllListAsync(DateTime begin, DateTime end)
+        {
+            return await GetAllListAsync(x => x.StatDate >= begin && x.StatDate < end);
         }
     }
 }

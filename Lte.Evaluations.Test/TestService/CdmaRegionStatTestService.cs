@@ -84,10 +84,10 @@ namespace Lte.Evaluations.Test.TestService
             _statRepository.MockCdmaRegionStats(statList);
         }
 
-        public CdmaRegionDateView QueryLastDateStat(string initialDate, string city)
+        public async Task<CdmaRegionDateView> QueryLastDateStat(string initialDate, string city)
         {
             var service = new CdmaRegionStatService(_regionRepository.Object, _statRepository.Object);
-            return service.QueryLastDateStat(DateTime.Parse(initialDate), city);
+            return await service.QueryLastDateStat(DateTime.Parse(initialDate), city);
         }
 
         public CdmaRegionStatTrend QueryDateTrend(string beginDate, string endDate, string city)

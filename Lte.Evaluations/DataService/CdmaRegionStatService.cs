@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using Lte.Domain.Regular;
 using Lte.Evaluations.ViewModels;
@@ -22,14 +23,13 @@ namespace Lte.Evaluations.DataService
             _statRepository = statRepository;
         }
 
-        public CdmaRegionDateView QueryLastDateStat(DateTime initialDate, string city)
+        public async Task<CdmaRegionDateView> QueryLastDateStat(DateTime initialDate, string city)
         {
             var beginDate = initialDate.AddDays(-100);
             var endDate = initialDate.AddDays(1);
-            var query =
-                _statRepository.GetAllList(beginDate, endDate);
+            var query = await _statRepository.GetAllListAsync(beginDate, endDate);
             var regions
-                = _regionRepository.GetAllList(city).Select(x => x.Region).Distinct().OrderBy(x => x);
+                = (await _regionRepository.GetAllListAsync(city)).Select(x => x.Region).Distinct().OrderBy(x => x);
             var result = (from q in query
                 join r in regions
                     on q.Region equals r

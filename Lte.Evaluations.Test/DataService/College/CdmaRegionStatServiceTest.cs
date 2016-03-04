@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Abp.EntityFramework.AutoMapper;
 using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.Test.DataService.Queries;
@@ -47,11 +48,11 @@ namespace Lte.Evaluations.Test.DataService.College
         [TestCase("2015-5-1", "region1", "2015-4-1", 10)]
         [TestCase("2015-6-2", "region2", "2015-4-20", 15)]
         [TestCase("2015-6-2", "region3", "2015-5-20", 15)]
-        public void TestQueryLastDateStat_Normal(string initialDate,
+        public async Task TestQueryLastDateStat_Normal(string initialDate,
             string region, string recordDate, double erlang)
         {
             _testService.ImportElangRecord(region, recordDate, erlang);
-            var result = _testService.QueryLastDateStat(initialDate, "city");
+            var result = await _testService.QueryLastDateStat(initialDate, "city");
             Assert.IsNotNull(result);
             Assert.AreEqual(result.StatDate, DateTime.Parse(recordDate));
             Assert.AreEqual(result.StatViews.Count(), 2);
@@ -87,11 +88,11 @@ namespace Lte.Evaluations.Test.DataService.College
         [TestCase("2015-6-2", "region2", "2015-2-10", 15)]
         [TestCase("2015-6-2", "region3", "2015-1-25", 15)]
         [TestCase("2015-6-3", "region4", "2015-1-25", 15)]
-        public void TestQueryLastDateStat_DateOutOfRange(string initialDate,
+        public async Task TestQueryLastDateStat_DateOutOfRange(string initialDate,
             string region, string recordDate, double erlang)
         {
             _testService.ImportElangRecord(region, recordDate, erlang);
-            var result = _testService.QueryLastDateStat(initialDate, "city");
+            var result = await _testService.QueryLastDateStat(initialDate, "city");
             Assert.IsNull(result);
         }
 
@@ -103,12 +104,12 @@ namespace Lte.Evaluations.Test.DataService.College
             new[] { "2015-5-20", "2015-5-19", "2015-5-21" }, new[] { 15, 26.2, 14 }, 2)]
         [TestCase(4, "2015-6-2", "region2",
             new[] { "2015-4-20", "2015-4-26", "2015-4-17" }, new[] { 15.1, 17, 18 }, 1)]
-        public void TestQueryLastDateStat_SingleRegion_MultiDates(int testNo,
+        public async Task TestQueryLastDateStat_SingleRegion_MultiDates(int testNo,
             string initialDate, string region, string[] recordDates, double[] erlangs,
             int matchedIndex)
         {
             _testService.ImportElangRecords(region, recordDates, erlangs);
-            var result = _testService.QueryLastDateStat(initialDate, "city");
+            var result = await _testService.QueryLastDateStat(initialDate, "city");
             Assert.IsNotNull(result);
             Assert.AreEqual(result.StatDate, DateTime.Parse(recordDates[matchedIndex]));
             Assert.AreEqual(result.StatViews.Count(), 2);
@@ -122,11 +123,11 @@ namespace Lte.Evaluations.Test.DataService.College
             "2015-4-20", new[] { 15, 11.4, 12.3 })]
         [TestCase(3, "2015-6-2", new[] { "region3", "region2" },
             "2015-5-20", new[] { 15.9, 16.4 })]
-        public void TestQueryLastDateStat_MultiRegions_SingleDate_AllRegionsMatched(int testNo,
+        public async Task TestQueryLastDateStat_MultiRegions_SingleDate_AllRegionsMatched(int testNo,
             string initialDate, string[] regions, string recordDate, double[] erlangs)
         {
             _testService.ImportElangRecords(regions, recordDate, erlangs);
-            var result = _testService.QueryLastDateStat(initialDate, "city");
+            var result = await _testService.QueryLastDateStat(initialDate, "city");
             Assert.IsNotNull(result);
             Assert.AreEqual(result.StatDate, DateTime.Parse(recordDate));
             Assert.AreEqual(result.StatViews.Count(), regions.Length + 1);
@@ -141,11 +142,11 @@ namespace Lte.Evaluations.Test.DataService.College
             new[] { "2015-5-20", "2015-5-19", "2015-5-21" }, new[] { 15, 11.4, 12.3 }, 2)]
         [TestCase(3, "2015-6-2", new[] { "region3", "region2" },
             new[] { "2015-4-20", "2015-4-26", "2015-4-17" }, new[] { 15.9, 16.4 }, 1)]
-        public void TestQueryLastDateStat_MultiRegions_MultDates_AllRegionsMatched(int testNo,
+        public async Task TestQueryLastDateStat_MultiRegions_MultDates_AllRegionsMatched(int testNo,
             string initialDate, string[] regions, string[] recordDates, double[] erlangs, int matchedIndex)
         {
             _testService.ImportElangRecords(regions, recordDates, erlangs);
-            var result = _testService.QueryLastDateStat(initialDate, "city");
+            var result = await _testService.QueryLastDateStat(initialDate, "city");
             Assert.IsNotNull(result);
             Assert.AreEqual(result.StatDate, DateTime.Parse(recordDates[matchedIndex]));
             Assert.AreEqual(result.StatViews.Count(), 2);
@@ -161,11 +162,11 @@ namespace Lte.Evaluations.Test.DataService.College
         [TestCase(3, "2015-6-2", new[] { "region3", "region2", "region1", "region3", "region1" },
             new[] { "2015-4-20", "2015-4-26", "2015-4-17", "2015-4-26", "2015-4-26" }, 
             new[] { 15.9, 16.4, 20.7, 9.9, 2.3 }, new[] { 1, 3, 4 })]
-        public void TestQueryLastDateStat_MultiRegions_MultDates_OneDateMatchedMultiRegions(int testNo,
+        public async Task TestQueryLastDateStat_MultiRegions_MultDates_OneDateMatchedMultiRegions(int testNo,
             string initialDate, string[] regions, string[] recordDates, double[] erlangs, int[] matchedIndices)
         {
             _testService.ImportElangRecords(regions, recordDates, erlangs);
-            var result = _testService.QueryLastDateStat(initialDate, "city");
+            var result = await _testService.QueryLastDateStat(initialDate, "city");
             Assert.IsNotNull(result);
             Assert.AreEqual(result.StatDate, DateTime.Parse(recordDates[matchedIndices[0]]));
             Assert.AreEqual(result.StatViews.Count(), matchedIndices.Length + 1);
@@ -178,12 +179,12 @@ namespace Lte.Evaluations.Test.DataService.College
             "2015-4-20", new[] { 15, 11, 12 }, new[] { 11, 13, 17 })]
         [TestCase(3, "2015-6-2", new[] { "region3", "region2" },
             "2015-5-20", new[] { 15, 16 }, new[] { 11, 13 })]
-        public void TestQueryLastDateStat_MultiRegions_SingleDate_DropRateConsidered(int testNo,
+        public async Task TestQueryLastDateStat_MultiRegions_SingleDate_DropRateConsidered(int testNo,
             string initialDate, string[] regions, string recordDate,
             int[] drop2GNums, int[] drop2GDems)
         {
             _testService.ImportDrop2Gs(regions, recordDate, drop2GNums, drop2GDems);
-            var result = _testService.QueryLastDateStat(initialDate, "city");
+            var result = await _testService.QueryLastDateStat(initialDate, "city");
             Assert.IsNotNull(result);
             Assert.AreEqual(result.StatDate, DateTime.Parse(recordDate));
             Assert.AreEqual(result.StatViews.Count(), regions.Length + 1);
