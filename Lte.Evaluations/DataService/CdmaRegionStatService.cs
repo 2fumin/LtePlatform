@@ -42,7 +42,7 @@ namespace Lte.Evaluations.DataService
             stats.Add(cityStat);
             return new CdmaRegionDateView
             {
-                StatDate = maxDate.ToShortDateString(),
+                StatDate = maxDate,
                 StatViews = Mapper.Map<List<CdmaRegionStat>, List<CdmaRegionStatView>>(stats)
             };
         }

@@ -9,7 +9,6 @@ using Lte.Evaluations.Test.TestService;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.Basic;
-using Lte.Parameters.MockOperations;
 using Moq;
 using NUnit.Framework;
 
@@ -54,7 +53,7 @@ namespace Lte.Evaluations.Test.DataService.College
             _testService.ImportElangRecord(region, recordDate, erlang);
             var result = _testService.QueryLastDateStat(initialDate, "city");
             Assert.IsNotNull(result);
-            Assert.AreEqual(DateTime.Parse(result.StatDate), DateTime.Parse(recordDate));
+            Assert.AreEqual(result.StatDate, DateTime.Parse(recordDate));
             Assert.AreEqual(result.StatViews.Count(), 2);
             result.StatViews.ElementAt(0).AssertRegionAndErlang2G(region, erlang);
             result.StatViews.ElementAt(1).AssertRegionAndErlang2G("city", erlang);
@@ -111,7 +110,7 @@ namespace Lte.Evaluations.Test.DataService.College
             _testService.ImportElangRecords(region, recordDates, erlangs);
             var result = _testService.QueryLastDateStat(initialDate, "city");
             Assert.IsNotNull(result);
-            Assert.AreEqual(DateTime.Parse(result.StatDate), DateTime.Parse(recordDates[matchedIndex]));
+            Assert.AreEqual(result.StatDate, DateTime.Parse(recordDates[matchedIndex]));
             Assert.AreEqual(result.StatViews.Count(), 2);
             result.StatViews.ElementAt(0).AssertRegionAndErlang2G(region, erlangs[matchedIndex]);
             result.StatViews.ElementAt(1).AssertRegionAndErlang2G("city", erlangs[matchedIndex]);
@@ -129,7 +128,7 @@ namespace Lte.Evaluations.Test.DataService.College
             _testService.ImportElangRecords(regions, recordDate, erlangs);
             var result = _testService.QueryLastDateStat(initialDate, "city");
             Assert.IsNotNull(result);
-            Assert.AreEqual(DateTime.Parse(result.StatDate), DateTime.Parse(recordDate));
+            Assert.AreEqual(result.StatDate, DateTime.Parse(recordDate));
             Assert.AreEqual(result.StatViews.Count(), regions.Length + 1);
             for (int i=0;i<regions.Length;i++)
                 result.StatViews.ElementAt(i).AssertRegionAndErlang2G(regions[i], erlangs[i]);
@@ -148,7 +147,7 @@ namespace Lte.Evaluations.Test.DataService.College
             _testService.ImportElangRecords(regions, recordDates, erlangs);
             var result = _testService.QueryLastDateStat(initialDate, "city");
             Assert.IsNotNull(result);
-            Assert.AreEqual(DateTime.Parse(result.StatDate), DateTime.Parse(recordDates[matchedIndex]));
+            Assert.AreEqual(result.StatDate, DateTime.Parse(recordDates[matchedIndex]));
             Assert.AreEqual(result.StatViews.Count(), 2);
             result.StatViews.ElementAt(0).AssertRegionAndErlang2G(regions[matchedIndex], erlangs[matchedIndex]);
             result.StatViews.ElementAt(1).AssertRegionAndErlang2G("city", erlangs[matchedIndex]);
@@ -168,7 +167,7 @@ namespace Lte.Evaluations.Test.DataService.College
             _testService.ImportElangRecords(regions, recordDates, erlangs);
             var result = _testService.QueryLastDateStat(initialDate, "city");
             Assert.IsNotNull(result);
-            Assert.AreEqual(DateTime.Parse(result.StatDate), DateTime.Parse(recordDates[matchedIndices[0]]));
+            Assert.AreEqual(result.StatDate, DateTime.Parse(recordDates[matchedIndices[0]]));
             Assert.AreEqual(result.StatViews.Count(), matchedIndices.Length + 1);
             result.StatViews.AssertRegionAndErlang2G(regions, erlangs, matchedIndices, "city");
         }
@@ -186,9 +185,9 @@ namespace Lte.Evaluations.Test.DataService.College
             _testService.ImportDrop2Gs(regions, recordDate, drop2GNums, drop2GDems);
             var result = _testService.QueryLastDateStat(initialDate, "city");
             Assert.IsNotNull(result);
-            Assert.AreEqual(DateTime.Parse(result.StatDate), DateTime.Parse(recordDate));
+            Assert.AreEqual(result.StatDate, DateTime.Parse(recordDate));
             Assert.AreEqual(result.StatViews.Count(), regions.Length + 1);
-            for (int i = 0; i < regions.Length; i++)
+            for (var i = 0; i < regions.Length; i++)
                 result.StatViews.ElementAt(i).AssertRegionAndDropRate(regions[i], (double) drop2GNums[i]/drop2GDems[i]);
             result.StatViews.ElementAt(regions.Length).AssertRegionAndDropRate("city",
                 (double) drop2GNums.Sum()/drop2GDems.Sum());
