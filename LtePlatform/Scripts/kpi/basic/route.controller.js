@@ -10,9 +10,9 @@
                     templateUrl: rootDir + 'Trend.html',
                     controller: 'kpi.trend'
                 })
-                .when('/chart', {
-                    templateUrl: rootDir + 'Charts.html',
-                    controller: 'kpi.workitem.chart'
+                .when('/topDrop2G', {
+                    templateUrl: rootDir + 'TopDrop2G.html',
+                    controller: 'kpi.topDrop2G'
                 })
                 .when('/eNodeb/:eNodebId/:serialNumber', {
                     templateUrl: rootDir + 'ENodebInfo.html',
@@ -41,6 +41,9 @@
             {
                 displayName: "指标总体情况",
                 url: rootUrl + "/"
+            }, {
+                displayName: "TOP掉话指标",
+                url: rootUrl + "/topDrop2G"
             }
         ];
         $rootScope.rootPath = rootUrl + "/";

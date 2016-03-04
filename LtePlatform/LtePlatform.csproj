@@ -391,6 +391,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="appViews\BasicKpi\TopDrop2GTrend.html" />
     <Content Include="appViews\BasicKpi\Trend.html" />
     <Content Include="appViews\Manage\AllUsers.html" />
     <Content Include="appViews\Manage\CurrentUser.html" />
@@ -687,6 +688,7 @@
     <Content Include="Scripts\angular-ui\uib\typeahead.js" />
     <Content Include="Scripts\kpi\basic\index.controller.js" />
     <Content Include="Scripts\kpi\basic\route.controller.js" />
+    <Content Include="Scripts\kpi\basic\top.drop2G.js" />
     <Content Include="Scripts\kpi\basic\trend.controller.js" />
     <Content Include="Scripts\kpi\workitem\chart.controller.js" />
     <Content Include="Scripts\kpi\workitem\route.controller.js" />
@@ -1047,12 +1049,10 @@
     <Content Include="Views\Parameters\List.cshtml" />
     <Content Include="Views\Dt\List.cshtml" />
     <Content Include="Views\Kpi\_KpiMenu.cshtml" />
-    <Content Include="Views\Kpi\TopDrop2G.cshtml" />
     <Content Include="Views\Kpi\WorkItem.cshtml" />
     <Content Include="Views\Kpi\TopConnection3G.cshtml" />
     <Content Include="Views\Kpi\Import.cshtml" />
     <Content Include="appViews\BasicKpi\Index.html" />
-    <Content Include="Scripts\kpi\index.viewmodel.js" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <Content Include="appViews\BasicKpi\KpiTable.html" />
     <Content Include="Views\College\Edit.cshtml" />
@@ -1090,9 +1090,9 @@
     <Content Include="Views\Kpi\WorkItemImport.cshtml" />
     <Content Include="appViews\Rutrace\Map\NeighborMapInfoBox.html" />
     <Content Include="Views\Kpi\_InterferenceImport.cshtml" />
-    <None Include="Views\Kpi\_TopDrop2G.cshtml" />
-    <None Include="Views\Kpi\_TopDrop2GTable.cshtml" />
-    <Content Include="Views\Kpi\_TopDrop2GTrendTable.cshtml" />
+    <Content Include="appViews\BasicKpi\TopDrop2G.html" />
+    <Content Include="appViews\BasicKpi\TopDrop2GTable.html" />
+    <Content Include="appViews\BasicKpi\TopDrop2GTrendTable.html" />
     <Content Include="Views\Kpi\_TownPreciseViewTable.cshtml" />
     <Content Include="appViews\WorkItem\List.html" />
     <None Include="Views\Parameters\AlarmImport.cshtml" />
