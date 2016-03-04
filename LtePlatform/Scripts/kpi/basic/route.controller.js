@@ -6,7 +6,7 @@
                     templateUrl: rootDir + 'Index.html',
                     controller: "kpi.basic"
                 })
-                .when('/trend', {
+                .when('/trend/:city', {
                     templateUrl: rootDir + 'Trend.html',
                     controller: 'kpi.trend'
                 })
@@ -35,20 +35,18 @@
                 });
         }
 ])
-    .run(function ($rootScope) {
+    .run(function ($rootScope, appRegionService) {
         var rootUrl = "/Kpi#";
         $rootScope.menuItems = [
             {
                 displayName: "指标总体情况",
                 url: rootUrl + "/"
-            }, {
-                displayName: "指标变化趋势",
-                url: rootUrl + "/trend"
-            }, {
-                displayName: "所有角色管理",
-                url: rootUrl + "/roles"
             }
         ];
+        $rootScope.city = {
+            selected: "",
+            options: []
+        };
         $rootScope.rootPath = rootUrl + "/";
         $rootScope.page = {
             title: "指标总体情况",
@@ -57,4 +55,15 @@
         $rootScope.closeAlert = function (index) {
             $rootScope.page.messages.splice(index, 1);
         };
+
+        appRegionService.initializeCities()
+            .then(function (result) {
+                $rootScope.city = result;
+                for (var i = 0; i < result[i]; i++) {
+                    $rootScope.menuItems.push({
+                        displayName: "指标变化趋势-" + result[i],
+                        url: rootUrl + "/trend/" + result[i]
+                    });
+                }
+            });
     });

@@ -1,5 +1,5 @@
-﻿app.controller('kpi.trend', function ($scope, kpi2GService) {
-    $scope.page.title = "指标变化趋势";
+﻿app.controller('kpi.trend', function ($scope, $routeParams, kpi2GService) {
+    $scope.page.title = "指标变化趋势-" + $routeParams.city;
     var lastWeek = new Date();
     lastWeek.setDate(lastWeek.getDate() - 7);
     $scope.beginDate = {
@@ -17,5 +17,10 @@
             options: result,
             selected: result[0]
         };
+        kpi2GService.queryKpiTrend($routeParams.city, $scope.beginDate.value, $scope.endDate.value).then(function (data) {
+            for (var i = 0; i < result.length; i++) {
+                $scope.configs[result[i]] = kpi2GService.generateComboChartOptions(data, result[i]);
+            }
+        });        
     })
 });

@@ -6,10 +6,7 @@
         value: yesterday,
         opened: false
     };
-    $scope.city = {
-        selected: "",
-        options: []
-    };
+    
     $scope.views = {
         options: ['主要', '2G', '3G'],
         selected: '主要'
@@ -20,9 +17,5 @@
             $scope.statList = result.statViews;
         });
     };
-    appRegionService.initializeCities()
-        .then(function (result) {
-            $scope.city = result;
-            $scope.showKpi();
-        });
+    $scope.showKpi();
 });

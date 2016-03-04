@@ -1,5 +1,5 @@
-﻿angular.module('kpi.basic', ['myApp.url'])
-    .factory('kpi2GService', function ($q, $http, appUrlService){
+﻿angular.module('kpi.basic', ['myApp.url', 'myApp.url'])
+    .factory('kpi2GService', function ($q, $http, appUrlService, appFormatService){
         return {
             queryDayStats: function (city, initialDate) {
                 var deferred = $q.defer();
@@ -36,6 +36,53 @@
                     deferred.reject(reason);
                 });
                 return deferred.promise;
+            },
+            queryKpiTrend: function (city, begin, end) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('KpiDataList'),
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                    },
+                    params: {
+                        city: city,
+                        begin: begin,
+                        end: end
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
+            },
+            generateComboChartOptions: function (data, name) {
+                var chart = new ComboChart();
+                chart.title.text = name;
+                var kpiOption = appFormatService.lowerFirstLetter(name);
+                chart.xAxis[0].categories = data.statDates;
+                chart.yAxis[0].title.text = name;
+                chart.xAxis[0].title.text = '日期';
+                for (var i = 0; i < data.regionList.length - 1; i++) {
+                    chart.series.push({
+                        type: kpiOption === "2G呼建(%)" ? 'line' : 'column',
+                        name: data.regionList[i],
+                        data: data.kpiDetails[kpiOption][i]
+                    });
+                }
+                chart.series.push({
+                    type: 'spline',
+                    name: self.currentCity(),
+                    data: data.kpiDetails[kpiOption][data.regionList.length - 1],
+                    marker: {
+                        lineWidth: 2,
+                        lineColor: Highcharts.getOptions().colors[3],
+                        fillColor: 'white'
+                    }
+                });
+                return chart.options;
             }
         };
     });
