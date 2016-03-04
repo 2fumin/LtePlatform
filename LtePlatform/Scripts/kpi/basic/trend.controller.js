@@ -19,7 +19,7 @@
         };
         kpi2GService.queryKpiTrend($routeParams.city, $scope.beginDate.value, $scope.endDate.value).then(function (data) {
             for (var i = 0; i < result.length; i++) {
-                $scope.configs[result[i]] = kpi2GService.generateComboChartOptions(data, result[i]);
+                $scope.configs[result[i]] = kpi2GService.generateComboChartOptions(data, result[i], $routeParams.city);
             }
         });        
     })

@@ -47,8 +47,8 @@
                     },
                     params: {
                         city: city,
-                        begin: begin,
-                        end: end
+                        beginDate: begin,
+                        endDate: end
                     }
                 }).success(function (result) {
                     deferred.resolve(result);
@@ -58,7 +58,7 @@
                 });
                 return deferred.promise;
             },
-            generateComboChartOptions: function (data, name) {
+            generateComboChartOptions: function (data, name, city) {
                 var chart = new ComboChart();
                 chart.title.text = name;
                 var kpiOption = appFormatService.lowerFirstLetter(name);
@@ -74,7 +74,7 @@
                 }
                 chart.series.push({
                     type: 'spline',
-                    name: self.currentCity(),
+                    name: city,
                     data: data.kpiDetails[kpiOption][data.regionList.length - 1],
                     marker: {
                         lineWidth: 2,
