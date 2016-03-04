@@ -5,24 +5,45 @@
         </h3>
     </div>
     <div class="panel-body">
-        <p>
-            开始日期：
-            <input id="BeginDate" data-bind="value: beginDate" />
-            结束日期：
-            <input id="EndDate" data-bind="value: endDate" />
-        </p>
-        <p>
-            指标选择:
-            <select data-bind="value: kpiSelection, options: kpiOptions"></select>
-            <button type="button" class="btn btn-success" data-bind="click: showTrend">
-                <span class="glyphicon glyphicon-book"></span>
-                图表展示
-            </button>
-        </p>
-        <div class="panel" data-bind="foreach: kpiOptions">
-            <div data-bind="visible: $data == $root.index().kpiSelection(), attr: { name: $data}"
-                 style="min-height: 500px" class="kpi-trend">
+        <div class="row">
+            <div class="col-md-4">
+                <label>开始日期：</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" uib-datepicker-popup ng-model="beginDate.value"
+                           is-open="beginDate.opened" ng-required="true" close-text="Close" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="beginDate.opened = true">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                        </button>
+                    </span>
+                </div>
             </div>
+            <div class="col-md-4">
+                <label>结束日期：</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" uib-datepicker-popup ng-model="endDate.value"
+                           is-open="endDate.opened" ng-required="true" close-text="Close" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="endDate.opened = true">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label>指标选择:</label>
+                <div class="input-group">
+                    <select class="form-control" ng-model="kpi.selected" ng-options="k as k for k in kpi.options"></select>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-success" ng-click="showTrend()">
+                            <i class="glyphicon glyphicon-search" title="统计数据"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div ng-repeat="k in kpi.options">
+            <highchart config="configs[k]" ng-show="k === kpi.selected"></highchart>
         </div>
     </div>
 </div>
