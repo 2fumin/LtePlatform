@@ -63,11 +63,11 @@ namespace Lte.Evaluations.Test.DataService.College
         [TestCase("2015-3-30", "2015-5-1", "region1", "2015-4-1", 10)]
         [TestCase("2015-4-10", "2015-6-2", "region2", "2015-4-20", 15)]
         [TestCase("2015-5-4", "2015-6-2", "region3", "2015-5-20", 15)]
-        public void TestQueryDateTrend_Normal(string beginDate, string endDate,
+        public async Task TestQueryDateTrend_Normal(string beginDate, string endDate,
             string region, string recordDate, double erlang)
         {
             _testService.ImportElangRecord(region, recordDate, erlang);
-            var result = _testService.QueryDateTrend(beginDate, endDate, "city");
+            var result = await _testService.QueryDateTrend(beginDate, endDate, "city");
             Assert.IsNotNull(result);
             Assert.AreEqual(DateTime.Parse(result.StatDates.ElementAt(0)), DateTime.Parse(recordDate));
             Assert.AreEqual(result.ViewList.Count, 2);
@@ -76,11 +76,11 @@ namespace Lte.Evaluations.Test.DataService.College
         [TestCase("2015-5-1", "region4", "2015-4-1", 10)]
         [TestCase("2015-6-2", "region5", "2015-4-10", 15)]
         [TestCase("2015-6-2", "region6", "2015-5-25", 15)]
-        public void TestQueryLastDateStat_RegionNotFound(string initialDate,
+        public async Task TestQueryLastDateStat_RegionNotFound(string initialDate,
             string region, string recordDate, double erlang)
         {
             _testService.ImportElangRecord(region, recordDate, erlang);
-            var result = _testService.QueryLastDateStat(initialDate, "city");
+            var result = await _testService.QueryLastDateStat(initialDate, "city");
             Assert.IsNull(result);
         }
 

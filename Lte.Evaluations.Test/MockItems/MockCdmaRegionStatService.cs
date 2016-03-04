@@ -18,6 +18,13 @@ namespace Lte.Evaluations.Test.MockItems
                     (begin, end) =>
                         repository.Object.GetAll().Where(x => x.StatDate >= begin && x.StatDate < end).ToList());
 
+            repository.Setup(x => x.GetAllListAsync(It.IsAny<DateTime>(), It.IsAny<DateTime>()))
+                .Returns<DateTime, DateTime>(
+                    (begin, end) =>
+                        Task.Run(
+                            () =>
+                                repository.Object.GetAll().Where(x => x.StatDate >= begin && x.StatDate < end).ToList()));
+
             repository.Setup(x => x.Import(It.IsAny<IEnumerable<CdmaRegionStatExcel>>()))
                 .Returns<IEnumerable<CdmaRegionStatExcel>>(stats => stats.Count());
         }

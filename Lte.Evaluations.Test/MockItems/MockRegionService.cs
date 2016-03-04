@@ -14,6 +14,10 @@ namespace Lte.Evaluations.Test.MockItems
         {
             repository.Setup(x => x.GetAllList(It.IsAny<string>()))
                 .Returns<string>(city => repository.Object.GetAll().Where(x => x.City == city).ToList());
+
+            repository.Setup(x => x.GetAllListAsync(It.IsAny<string>()))
+                .Returns<string>(city => Task.Run(() =>
+                    repository.Object.GetAll().Where(x => x.City == city).ToList()));
         }
     }
 }

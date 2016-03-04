@@ -47,13 +47,12 @@ namespace Lte.Evaluations.DataService
             };
         }
 
-        public CdmaRegionStatTrend QueryStatTrend(DateTime begin, DateTime end, string city)
+        public async Task<CdmaRegionStatTrend> QueryStatTrend(DateTime begin, DateTime end, string city)
         {
             var endDate = end.AddDays(1);
-            var query = _statRepository.GetAll().Where(x => x.StatDate >= begin && x.StatDate < endDate);
+            var query = await _statRepository.GetAllListAsync(begin, endDate);
             var regions
-                = _regionRepository.GetAllList().Where(x => x.City == city)
-                .Select(x => x.Region).Distinct().OrderBy(x => x);
+                = (await _regionRepository.GetAllListAsync(city)).Select(x => x.Region).Distinct().OrderBy(x => x);
             var result = (from q in query
                           join r in regions
                               on q.Region equals r
@@ -71,9 +70,9 @@ namespace Lte.Evaluations.DataService
             };
         }
 
-        public CdmaRegionStatDetails QueryStatDetails(DateTime begin, DateTime end, string city)
+        public async Task<CdmaRegionStatDetails> QueryStatDetails(DateTime begin, DateTime end, string city)
         {
-            var trend = QueryStatTrend(begin, end, city);
+            var trend = await QueryStatTrend(begin, end, city);
             return trend == null ? null : new CdmaRegionStatDetails(trend);
         }
 

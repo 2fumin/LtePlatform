@@ -39,9 +39,9 @@ namespace LtePlatform.Controllers.Kpi
         [ApiParameterDoc("beginDate", "开始日期")]
         [ApiParameterDoc("endDate", "结束日期")]
         [ApiResponse("指定城市的详细指标")]
-        public IHttpActionResult Get(string city, DateTime beginDate, DateTime endDate)
+        public async Task<IHttpActionResult> Get(string city, DateTime beginDate, DateTime endDate)
         {
-            var details = _service.QueryStatDetails(beginDate, endDate, city);
+            var details = await _service.QueryStatDetails(beginDate, endDate, city);
             return details == null ? (IHttpActionResult)BadRequest("查询日期内的指标失败！") : Ok(details);
         }
 
