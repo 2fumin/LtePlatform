@@ -1,64 +1,64 @@
 ﻿angular.module('kpi.basic', ['myApp.url', 'myApp.url'])
-    .factory('kpi2GService', function ($q, $http, appUrlService, appFormatService){
+    .factory('kpi2GService', function($q, $http, appUrlService, appFormatService) {
         return {
-            queryDayStats: function (city, initialDate) {
+            queryDayStats: function(city, initialDate) {
                 var deferred = $q.defer();
                 $http({
-                    method: 'GET',
-                    url: appUrlService.getApiUrl('KpiDataList'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    },
-                    params: {
-                        city: city,
-                        statDate: initialDate
-                    }
-                }).success(function (result) {
-                    deferred.resolve(result);
-                })
-                .error(function (reason) {
-                    deferred.reject(reason);
-                });
+                        method: 'GET',
+                        url: appUrlService.getApiUrl('KpiDataList'),
+                        headers: {
+                            'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                        },
+                        params: {
+                            city: city,
+                            statDate: initialDate
+                        }
+                    }).success(function(result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function(reason) {
+                        deferred.reject(reason);
+                    });
                 return deferred.promise;
             },
-            queryKpiOptions: function () {
+            queryKpiOptions: function() {
                 var deferred = $q.defer();
                 $http({
-                    method: 'GET',
-                    url: appUrlService.getApiUrl('KpiDataList'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    }
-                }).success(function (result) {
-                    deferred.resolve(result);
-                })
-                .error(function (reason) {
-                    deferred.reject(reason);
-                });
+                        method: 'GET',
+                        url: appUrlService.getApiUrl('KpiDataList'),
+                        headers: {
+                            'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                        }
+                    }).success(function(result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function(reason) {
+                        deferred.reject(reason);
+                    });
                 return deferred.promise;
             },
-            queryKpiTrend: function (city, begin, end) {
+            queryKpiTrend: function(city, begin, end) {
                 var deferred = $q.defer();
                 $http({
-                    method: 'GET',
-                    url: appUrlService.getApiUrl('KpiDataList'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    },
-                    params: {
-                        city: city,
-                        beginDate: begin,
-                        endDate: end
-                    }
-                }).success(function (result) {
-                    deferred.resolve(result);
-                })
-                .error(function (reason) {
-                    deferred.reject(reason);
-                });
+                        method: 'GET',
+                        url: appUrlService.getApiUrl('KpiDataList'),
+                        headers: {
+                            'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                        },
+                        params: {
+                            city: city,
+                            beginDate: begin,
+                            endDate: end
+                        }
+                    }).success(function(result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function(reason) {
+                        deferred.reject(reason);
+                    });
                 return deferred.promise;
             },
-            generateComboChartOptions: function (data, name, city) {
+            generateComboChartOptions: function(data, name, city) {
                 var chart = new ComboChart();
                 chart.title.text = name;
                 var kpiOption = appFormatService.lowerFirstLetter(name);
@@ -85,4 +85,28 @@
                 return chart.options;
             }
         };
+    })
+    .factory('drop2GService', function($q, $http, appUrlService, appFormatService) {
+        return {
+            queryDayStats: function (city, initialDate) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('TopDrop2G'),
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                    },
+                    params: {
+                        city: city,
+                        statDate: initialDate
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            }
+        }
     });
