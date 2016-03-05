@@ -20,4 +20,12 @@
     kpiImportService.queryDumpHistroy($scope.beginDate.value, $scope.endDate.value).then(function(result) {
         $scope.dumpHistory = result;
     });
+
+    kpiImportService.queryTotalDumpItems().then(function(result) {
+        $scope.progressInfo.totalDumpItems = result;
+    });
+
+    kpiImportService.queryTownPreciseViews().then(function(result) {
+        $scope.townPreciseViews = result;
+    });
 });
