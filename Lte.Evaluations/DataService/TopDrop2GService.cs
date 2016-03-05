@@ -44,7 +44,7 @@ namespace Lte.Evaluations.DataService
             });
             return new TopDrop2GDateView
             {
-                StatDate = begin.ToShortDateString(),
+                StatDate = begin,
                 StatViews = views
             };
         }

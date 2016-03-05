@@ -41,7 +41,7 @@ namespace Abp.MongoDb.Uow
 
         public override async Task SaveChangesAsync()
         {
-
+            await Task.Run(() => { SaveChanges(); });
         }
 
         protected override void CompleteUow()
@@ -51,7 +51,7 @@ namespace Abp.MongoDb.Uow
 
         protected override async Task CompleteUowAsync()
         {
-
+            await Task.Run(() => { CompleteUow(); });
         }
 
         protected override void DisposeUow()

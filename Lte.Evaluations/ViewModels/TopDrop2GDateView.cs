@@ -12,7 +12,7 @@ namespace Lte.Evaluations.ViewModels
     public class TopDrop2GDateView
     {
         [MemberDoc("统计日期")]
-        public string StatDate { get; set; }
+        public DateTime StatDate { get; set; }
 
         [MemberDoc("TOP掉话小区视图列表")]
         public IEnumerable<TopDrop2GCellView> StatViews { get; set; }
