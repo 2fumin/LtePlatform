@@ -8,13 +8,13 @@
         <td>出现次数</td>
     </tr>
     </thead>
-    <tbody data-bind="foreach: trendCells">
-    <tr>
-        <td data-bind="text: cellName"></td>
-        <td data-bind="text: eNodebName"></td>
-        <td data-bind="text: totalDrops"></td>
-        <td data-bind="text: (100 * dropRate).toFixed(2)"></td>
-        <td data-bind="text: topDates"></td>
+    <tbody>
+    <tr ng-repeat="cell in trendCells">
+        <td>{{cell.cellName}}</td>
+        <td>{{cell.eNodebName}}</td>
+        <td>{{cell.totalDrops}}</td>
+        <td>{{100 * cell.dropRate | number: 2}}</td>
+        <td>{{cell.topDates}}</td>
     </tr>
     </tbody>
 </table>

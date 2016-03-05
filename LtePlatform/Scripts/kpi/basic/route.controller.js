@@ -14,9 +14,9 @@
                     templateUrl: rootDir + 'TopDrop2G.html',
                     controller: 'kpi.topDrop2G'
                 })
-                .when('/eNodeb/:eNodebId/:serialNumber', {
-                    templateUrl: rootDir + 'ENodebInfo.html',
-                    controller: 'workitem.eNodeb'
+                .when('/topDrop2GTrend/:cellId/:sectorId', {
+                    templateUrl: rootDir + 'TopDrop2GTrend.html',
+                    controller: 'kpi.topDrop2G.trend'
                 })
                 .when('/bts/:btsId/:serialNumber', {
                     templateUrl: rootDir + 'BtsInfo.html',
