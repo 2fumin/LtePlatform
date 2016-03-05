@@ -32,6 +32,11 @@
                 <label>排序依据:</label>
                 <div class="input-group">
                     <select class="form-control" ng-model="orderPolicy.selected" ng-options="o as o for o in orderPolicy.options"></select>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-success" ng-click="showTrend()">
+                            <i class="glyphicon glyphicon-search" title="统计数据"></i>
+                        </button>
+                    </span>
                 </div>
                 <label>TOP个数：</label>
                 <div class="input-group">
