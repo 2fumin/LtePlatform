@@ -25,9 +25,7 @@
     </div>
 </div>
 <div class="col-md-6">
-    @{
-        Html.RenderPartial("_PreciseHistoryTable");
-    }
+    <div ng-include="'/appViews/Import/Precise/HistoryTable.html'"></div>
 </div>
 <div class="col-md-6">
     <div class="panel panel-info">
@@ -37,9 +35,7 @@
             </h3>
         </div>
         <div class="panel-body">
-            @{
-                Html.RenderPartial("_TownPreciseViewTable");
-            }
+            <div ng-include="'/appViews/Import/Precise/TownViewTable.html'"></div>
         </div>
     </div>
 </div>

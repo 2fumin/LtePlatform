@@ -1086,14 +1086,14 @@
     <Content Include="Views\Kpi\InterferenceImport.cshtml" />
     <None Include="Views\Kpi\PreciseImport.cshtml" />
     <Content Include="Views\Kpi\_PreciseImport.cshtml" />
-    <Content Include="Views\Kpi\_PreciseHistoryTable.cshtml" />
+    <Content Include="appViews\Import\Precise\HistoryTable.html" />
     <Content Include="Views\Kpi\WorkItemImport.cshtml" />
     <Content Include="appViews\Rutrace\Map\NeighborMapInfoBox.html" />
     <Content Include="Views\Kpi\_InterferenceImport.cshtml" />
     <Content Include="appViews\BasicKpi\TopDrop2G.html" />
     <Content Include="appViews\BasicKpi\TopDrop2GTable.html" />
     <Content Include="appViews\BasicKpi\TopDrop2GTrendTable.html" />
-    <Content Include="Views\Kpi\_TownPreciseViewTable.cshtml" />
+    <Content Include="appViews\Import\Precise\TownViewTable.html" />
     <Content Include="appViews\WorkItem\List.html" />
     <None Include="Views\Parameters\AlarmImport.cshtml" />
     <Content Include="Views\Shared\_AlertPanel.cshtml" />
