@@ -12,6 +12,14 @@ namespace Lte.Evaluations.ViewModels
         [MemberDoc("LTE基站名称")]
         public string ENodebName { get; set; }
 
+        public int BtsId { get; set; }
+
+        public byte SectorId { get; set; }
+
+        public int MoAssignmentSuccess { get; set; }
+
+        public int MtAssignmentSuccess { get; set; }
+
         [MemberDoc("掉话总数")]
         public int TotalDrops { get; set; }
 

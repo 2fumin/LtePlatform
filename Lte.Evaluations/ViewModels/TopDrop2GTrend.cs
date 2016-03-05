@@ -18,5 +18,10 @@ namespace Lte.Evaluations.ViewModels
         public int TotalCallAttempst { get; set; }
 
         public int TopDates { get; set; }
+
+        public int MoAssignmentSuccess { get; set; }
+
+        public int MtAssignmentSuccess { get; set; }
+
     }
 }

@@ -21,7 +21,7 @@ namespace Lte.Evaluations.MapperSerive
                     on stat.BtsId equals bts.BtsId into btsQuery
                 from bq in btsQuery.DefaultIfEmpty()
                 join eNodeb in eNodebRepository.GetAllList()
-                    on (bq == null ? -1 : bq.ENodebId) equals eNodeb.ENodebId into query
+                    on bq?.ENodebId ?? -1 equals eNodeb.ENodebId into query
                 from q in query.DefaultIfEmpty()
                 select new TopCellContainer<TTopCell>
                 {
@@ -42,7 +42,9 @@ namespace Lte.Evaluations.MapperSerive
                     SectorId = g.Key.SectorId,
                     TopDates = g.Count(),
                     TotalDrops = g.Sum(x => x.Drops),
-                    TotalCallAttempst = g.Sum(x => x.TrafficAssignmentSuccess)
+                    TotalCallAttempst = g.Sum(x => x.TrafficAssignmentSuccess),
+                    MoAssignmentSuccess = g.Sum(x => x.MoAssignmentSuccess),
+                    MtAssignmentSuccess = g.Sum(x => x.MtAssignmentSuccess)
                 };
         }
     }
