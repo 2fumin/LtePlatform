@@ -10,15 +10,15 @@
             <th>第三邻区数</th>
         </tr>
     </thead>
-    <tbody data-bind="foreach: townPreciseViews">
-        <tr>
-            <td data-bind="text: city"></td>
-            <td data-bind="text: district"></td>
-            <td data-bind="text: town"></td>
-            <td data-bind="text: totalMrs"></td>
-            <td data-bind="text: firstNeighbors"></td>
-            <td data-bind="text: secondNeighbors"></td>
-            <td data-bind="text: thirdNeighbors"></td>
+    <tbody>
+        <tr ng-repeat="view in townPreciseViews">
+            <td>{{townPreciseViews.city}}</td>
+            <td>{{townPreciseViews.district}}</td>
+            <td>{{townPreciseViews.town}}</td>
+            <td>{{townPreciseViews.totalMrs}}</td>
+            <td>{{townPreciseViews.firstNeighbors}}</td>
+            <td>{{townPreciseViews.secondNeighbors}}</td>
+            <td>{{townPreciseViews.thirdNeighbors}}</td>
         </tr>
     </tbody>
 </table>
