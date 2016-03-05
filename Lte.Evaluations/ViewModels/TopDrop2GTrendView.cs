@@ -16,6 +16,8 @@ namespace Lte.Evaluations.ViewModels
 
         public byte SectorId { get; set; }
 
+        public int CellId { get; set; }
+
         public int MoAssignmentSuccess { get; set; }
 
         public int MtAssignmentSuccess { get; set; }

@@ -34,12 +34,13 @@ namespace Lte.Evaluations.MapperSerive
         public static IEnumerable<TopDrop2GTrend> QueryTrends(this IEnumerable<TopDrop2GCell> stats)
         {
             return from stat in stats
-                group stat by new {stat.BtsId, stat.SectorId}
+                group stat by new {stat.BtsId, stat.SectorId, stat.CellId}
                 into g
                 select new TopDrop2GTrend
                 {
                     BtsId = g.Key.BtsId,
                     SectorId = g.Key.SectorId,
+                    CellId = g.Key.CellId,
                     TopDates = g.Count(),
                     TotalDrops = g.Sum(x => x.Drops),
                     TotalCallAttempst = g.Sum(x => x.TrafficAssignmentSuccess),

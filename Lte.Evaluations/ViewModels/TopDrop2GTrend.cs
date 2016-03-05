@@ -11,6 +11,8 @@ namespace Lte.Evaluations.ViewModels
     {
         public int BtsId { get; set; }
 
+        public int CellId { get; set; }
+
         public byte SectorId { get; set; }
 
         public int TotalDrops { get; set; }
