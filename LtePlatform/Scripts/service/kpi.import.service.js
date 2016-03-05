@@ -20,38 +20,6 @@
                     deferred.reject(reason);
                 });
                 return deferred.promise;
-            },
-            queryTotalDumpItems: function () {
-                var deferred = $q.defer();
-                $http({
-                    method: 'GET',
-                    url: appUrlService.getApiUrl('PreciseImport'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    }
-                }).success(function (result) {
-                    deferred.resolve(result);
-                })
-                .error(function (reason) {
-                    deferred.reject(reason);
-                });
-                return deferred.promise;
-            },
-            queryTownPreciseViews: function () {
-                var deferred = $q.defer();
-                $http({
-                    method: 'GET',
-                    url: appUrlService.getApiUrl('TownPreciseImport'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    }
-                }).success(function (result) {
-                    deferred.resolve(result);
-                })
-                .error(function (reason) {
-                    deferred.reject(reason);
-                });
-                return deferred.promise;
             }
         };
     });
