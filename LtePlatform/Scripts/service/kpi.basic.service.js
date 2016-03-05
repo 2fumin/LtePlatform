@@ -107,6 +107,45 @@
                         deferred.reject(reason);
                     });
                 return deferred.promise;
+            },
+            queryOrderPolicy: function() {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('TopDrop2G'),
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            },
+            queryCellTrend: function(begin, end, city, policy, topCount) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('TopDrop2G'),
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                    },
+                    params: {
+                        begin: begin,
+                        end: end,
+                        city: city,
+                        policy: policy,
+                        topCount: topCount
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
             }
         }
     });

@@ -14,7 +14,7 @@
                     templateUrl: rootDir + 'TopDrop2G.html',
                     controller: 'kpi.topDrop2G'
                 })
-                .when('/topDrop2GTrend/:cellId/:sectorId', {
+                .when('/topDrop2GTrend/:city/:cellId/:sectorId', {
                     templateUrl: rootDir + 'TopDrop2GTrend.html',
                     controller: 'kpi.topDrop2G.trend'
                 })
