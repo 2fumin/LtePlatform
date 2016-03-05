@@ -13,7 +13,7 @@
     $scope.showKpi = function() {
         drop2GService.queryDayStats($scope.city.selected, $scope.statDate.value).then(function (result) {
             $scope.statDate.value = appFormatService.getDate(result.statDate);
-            $scope.oneDayCells = result.statViews;
+            $scope.topData.drop2G = result.statViews;
         });
     };
     appRegionService.initializeCities().then(function (result) {

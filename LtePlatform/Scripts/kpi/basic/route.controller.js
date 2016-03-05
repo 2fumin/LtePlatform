@@ -51,6 +51,10 @@
             title: "指标总体情况",
             messages: []
         };
+        $rootScope.topData = {
+            drop2G: [],
+            connection3G: []
+        };
         $rootScope.closeAlert = function (index) {
             $rootScope.page.messages.splice(index, 1);
         };
