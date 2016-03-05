@@ -14,7 +14,7 @@
                     templateUrl: rootDir + 'TopDrop2G.html',
                     controller: 'kpi.topDrop2G'
                 })
-                .when('/topDrop2GTrend/:city/:cellId/:sectorId', {
+                .when('/topDrop2GTrend/:city', {
                     templateUrl: rootDir + 'TopDrop2GTrend.html',
                     controller: 'kpi.topDrop2G.trend'
                 })
@@ -65,6 +65,10 @@
                     $rootScope.menuItems.push({
                         displayName: "指标变化趋势-" + result.options[i],
                         url: rootUrl + "/trend/" + result.options[i]
+                    });
+                    $rootScope.menuItems.push({
+                        displayName: "TOP掉话变化趋势-" + result.options[i],
+                        url: rootUrl + "/topDrop2GTrend/" + result.options[i]
                     });
                 }
             });
