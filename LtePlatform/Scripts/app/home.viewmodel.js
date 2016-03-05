@@ -1,4 +1,4 @@
-﻿app.controller("homeController", function($scope, $http) {
+﻿app.controller("homeController", function ($scope, $http, appUrlService) {
     $scope.menuItems = [
     {
         title: "小区覆盖仿真模拟",
@@ -37,15 +37,18 @@
         url: "/Dt/List"
     }];
 
-    $scope.dataModel = new AppDataModel();
-    $scope.dataModel.initializeAuthorization();
     $http({
         method: 'get',
-        url: $scope.dataModel.userInfoUrl,
+        url: appUrlService.userInfoUrl,
         headers: {
-            'Authorization': 'Bearer ' + $scope.dataModel.getAccessToken()
+            'Authorization': 'Bearer ' + appUrlService.getAccessToken()
         }
     }).success(function(data) {
         $scope.currentUser = data;
     });
+
+    $scope.status = {
+        isopen: false
+    };
+
 });
