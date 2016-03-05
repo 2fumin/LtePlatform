@@ -691,6 +691,7 @@
     <Content Include="Scripts\kpi\basic\top.drop2G.js" />
     <Content Include="Scripts\kpi\basic\top.drop2G.trend.js" />
     <Content Include="Scripts\kpi\basic\trend.controller.js" />
+    <Content Include="Scripts\kpi\precise.import.js" />
     <Content Include="Scripts\kpi\workitem\chart.controller.js" />
     <Content Include="Scripts\kpi\workitem\route.controller.js" />
     <Content Include="Scripts\manage\password.change.js" />
@@ -721,6 +722,7 @@
     <Content Include="Scripts\service\app.parameters.service.js" />
     <Content Include="Scripts\service\app.url.service.js" />
     <Content Include="Scripts\service\kpi.basic.service.js" />
+    <Content Include="Scripts\service\kpi.import.service.js" />
     <Content Include="Scripts\service\ne.geometry.service.js" />
     <Content Include="Scripts\service\workitem.service.js" />
     <Content Include="template\accordion\accordion-group.html" />
@@ -948,7 +950,6 @@
     <Content Include="Scripts\kpi\interference.import.controller.js" />
     <Content Include="Scripts\kpi\interference.mongo.controller.js" />
     <Content Include="Scripts\kpi\interferenceimport.viewmodel.js" />
-    <Content Include="Scripts\kpi\preciseimport.controller.js" />
     <Content Include="Scripts\kpi\preciseimport.viewmodel.js" />
     <Content Include="Scripts\kpi\top.drop2G.viewmodel.js" />
     <Content Include="Scripts\kpi\workitem\service.js" />
