@@ -70,9 +70,6 @@ var drawCollegeMap = function (viewModel, data) {
             method: 'get',
             url: app.dataModel.collegeRegionUrl + '/' + info.id,
             contentType: "application/json; charset=utf-8",
-            headers: {
-                'Authorization': 'Bearer ' + app.dataModel.getAccessToken()
-            },
             success: function (result) {
                 drawCollegeRegions(viewModel, result);
             }
@@ -81,9 +78,6 @@ var drawCollegeMap = function (viewModel, data) {
             method: 'get',
             url: app.dataModel.collegeStatUrl + '/' + info.id,
             contentType: "application/json; charset=utf-8",
-            headers: {
-                'Authorization': 'Bearer ' + app.dataModel.getAccessToken()
-            },
             success: function (college) {
                 addOneCollegeMarkerInfo(viewModel, college);
             }

@@ -25,9 +25,6 @@
                 method: 'get',
                 url: app.dataModel.topDrop2GUrl,
                 contentType: "application/json; charset=utf-8",
-                headers: {
-                    'Authorization': 'Bearer ' + app.dataModel.getAccessToken()
-                },
                 success: function (data) {
                     self.policySelection(data);
                 }

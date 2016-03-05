@@ -22,9 +22,6 @@
                 method: 'get',
                 url: app.dataModel.collegeStatUrl,
                 contentType: "application/json; charset=utf-8",
-                headers: {
-                    'Authorization': 'Bearer ' + app.dataModel.getAccessToken()
-                },
                 success: function (data) {
                     self.collegeList(data);
                 }

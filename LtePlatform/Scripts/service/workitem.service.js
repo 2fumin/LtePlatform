@@ -6,9 +6,6 @@
                 $http({
                     method: 'GET',
                     url: appUrlService.getApiUrl('WorkItem'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    },
                     params: {
                         'statCondition': state,
                         'typeCondition': type,
@@ -28,9 +25,6 @@
                 $http({
                     method: 'GET',
                     url: appUrlService.getApiUrl('WorkItem'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    },
                     params: {
                         'statCondition': state,
                         'typeCondition': type
@@ -47,10 +41,7 @@
                 var deferred = $q.defer();
                 $http({
                     method: 'GET',
-                    url: appUrlService.getApiUrl('WorkItem'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    }
+                    url: appUrlService.getApiUrl('WorkItem')
                 }).success(function (result) {
                     deferred.resolve(result);
                 })
@@ -74,9 +65,6 @@
                 $http({
                     method: 'GET',
                     url: appUrlService.getApiUrl('WorkItem'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    },
                     params: {
                         eNodebId: eNodebId
                     }
@@ -93,9 +81,6 @@
                 $http({
                     method: 'GET',
                     url: appUrlService.getApiUrl('WorkItem'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    },
                     params: {
                         eNodebId: eNodebId,
                         sectorId: sectorId

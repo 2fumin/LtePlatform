@@ -14,7 +14,6 @@ using LtePlatform.Models;
 
 namespace LtePlatform.Controllers
 {
-    [Authorize]
     public class MeController : ApiController
     {
         private ApplicationUserManager _userManager;

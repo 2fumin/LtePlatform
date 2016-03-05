@@ -6,9 +6,6 @@
                 $http({
                     method: 'GET',
                     url: appUrlService.getApiUrl('PreciseImport'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    },
                     params: {
                         begin: beginDate,
                         end: endDate

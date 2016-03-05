@@ -24,9 +24,6 @@
                 $http({
                     method: 'GET',
                     url: appUrlService.getApiUrl('PreciseRegion'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    },
                     params: {
                         city: city,
                         statDate: initialDate
@@ -44,9 +41,6 @@
                 $http({
                     method: 'GET',
                     url: appUrlService.getApiUrl('PreciseRegion'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    },
                     params: {
                         city: city,
                         begin: beginDate,
@@ -254,9 +248,6 @@
                 $http({
                     method: 'GET',
                     url: appUrlService.getApiUrl('PreciseStat'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    }
                 }).success(function (result) {
                     deferred.resolve(result);
                 })
@@ -270,9 +261,6 @@
                 $http({
                     method: 'GET',
                     url: appUrlService.getApiUrl('PreciseStat'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    },
                     params: {
                         'begin': begin,
                         'end': end,
@@ -292,9 +280,6 @@
                 $http({
                     method: 'GET',
                     url: appUrlService.getApiUrl('PreciseStat'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    },
                     params: {
                         'begin': begin,
                         'end': end,
@@ -324,9 +309,6 @@
                 $http({
                     method: 'GET',
                     url: appUrlService.getApiUrl('InterferenceNeighbor'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    },
                     params: {
                         'cellId': cellId,
                         'sectorId': sectorId
@@ -344,9 +326,6 @@
                 $http({
                     method: 'GET',
                     url: appUrlService.getApiUrl('InterferenceNeighbor'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    },
                     params: {
                         'begin': begin,
                         'end': end,
@@ -366,9 +345,6 @@
                 $http({
                     method: 'GET',
                     url: appUrlService.getApiUrl('InterferenceNeighbor'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    },
                     params: {
                         neighborCellId: cellId,
                         neighborSectorId: sectorId
@@ -386,9 +362,6 @@
                 $http({
                     method: 'GET',
                     url: appUrlService.getApiUrl('InterferenceVictim'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    },
                     params: {
                         'begin': begin,
                         'end': end,

@@ -5,10 +5,7 @@
                 var deferred = $q.defer();
                 $http({
                     method: 'GET',
-                    url: appUrlService.getApiUrl('CityList'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    }
+                    url: appUrlService.getApiUrl('CityList')
                 }).success(function (result) {
                     deferred.resolve({
                         options: result,
@@ -25,9 +22,6 @@
                 $http({
                     method: 'GET',
                     url: appUrlService.getApiUrl('CityList'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    },
                     params: {
                         city: cityName
                     }

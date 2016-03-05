@@ -39,10 +39,7 @@
 
     $http({
         method: 'get',
-        url: appUrlService.userInfoUrl,
-        headers: {
-            'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-        }
+        url: appUrlService.userInfoUrl
     }).success(function(data) {
         $scope.currentUser = data;
     });

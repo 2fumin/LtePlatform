@@ -6,9 +6,6 @@
                 $http({
                     method: 'GET',
                     url: appUrlService.getApiUrl('NearestPciCell'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    },
                     params: {
                         'cellId': cell.cellId,
                         'sectorId': cell.sectorId
@@ -51,9 +48,6 @@
                 $http({
                     method: 'GET',
                     url: appUrlService.getApiUrl('Cell'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    },
                     params: {
                         'eNodebId': eNodebId,
                         'sectorId': sectorId,
@@ -93,9 +87,6 @@
                 $http({
                     method: 'GET',
                     url: appUrlService.getApiUrl('Cell'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    },
                     params: {
                         eNodebId: cellId,
                         sectorId: sectorId
@@ -113,9 +104,6 @@
                 $http({
                     method: 'GET',
                     url: appUrlService.getApiUrl('CdmaCell'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    },
                     params: {
                         btsId: btsId,
                         sectorId: sectorId
@@ -133,9 +121,6 @@
                 $http({
                     method: 'GET',
                     url: appUrlService.getApiUrl('ENodeb'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    },
                     params: {
                         eNodebId: eNodebId
                     }
@@ -152,9 +137,6 @@
                 $http({
                     method: 'GET',
                     url: appUrlService.getApiUrl('Bts'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    },
                     params: {
                         btsId: btsId
                     }
@@ -203,9 +185,6 @@
                 $http({
                     method: 'GET',
                     url: appUrlService.getApiUrl('NewENodebExcels'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    }
                 }).success(function (result) {
                     deferred.resolve(result);
                 })
@@ -219,9 +198,6 @@
                 $http({
                     method: 'GET',
                     url: appUrlService.getApiUrl('NewCellExcels'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    }
                 }).success(function (result) {
                     deferred.resolve(result);
                 })
@@ -235,9 +211,6 @@
                 $http({
                     method: 'GET',
                     url: appUrlService.getApiUrl('NewBtsExcels'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    }
                 }).success(function (result) {
                     deferred.resolve(result);
                 })
@@ -251,9 +224,6 @@
                 $http({
                     method: 'GET',
                     url: appUrlService.getApiUrl('NewCdmaCellExcels'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    }
                 }).success(function (result) {
                     deferred.resolve(result);
                 })
@@ -267,9 +237,6 @@
                 $http({
                     method: 'GET',
                     url: appUrlService.getApiUrl('DumpENodebExcel'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    }
                 }).success(function (result) {
                     deferred.resolve(result);
                 })
@@ -282,10 +249,7 @@
                 var deferred = $q.defer();
                 $http({
                     method: 'GET',
-                    url: appUrlService.getApiUrl('DumpCellExcel'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    }
+                    url: appUrlService.getApiUrl('DumpCellExcel')
                 }).success(function (result) {
                     deferred.resolve(result);
                 })

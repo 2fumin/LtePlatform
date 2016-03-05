@@ -50,17 +50,16 @@
                 }
             }
         };
-        initializeAuthorization();
+        var getAccessToken = function() {
+            var token = sessionStorage.getItem("accessToken");
+            if (!token) initializeAuthorization();
+            return token || sessionStorage.getItem("accessToken");
+        };
         return {
             getApiUrl: function(topic) {
                 return '/api/' + topic;
             },
             userInfoUrl: "/api/Me",
             siteUrl: "/",
-            getAccessToken: function () {
-                var token = sessionStorage.getItem("accessToken");
-                if (!token) initializeAuthorization();
-                return token || sessionStorage.getItem("accessToken");
-            }
         };
     });

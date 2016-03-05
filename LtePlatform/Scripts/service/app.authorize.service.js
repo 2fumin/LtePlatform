@@ -5,10 +5,7 @@
                 var deferred = $q.defer();
                 $http({
                     method: 'GET',
-                    url: appUrlService.getApiUrl('CurrentUser'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    }
+                    url: appUrlService.getApiUrl('CurrentUser')
                 }).success(function (result) {
                     deferred.resolve(result);
                 })
@@ -21,10 +18,7 @@
                 var deferred = $q.defer();
                 $http({
                     method: 'GET',
-                    url: appUrlService.getApiUrl('ApplicationUsers'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    }
+                    url: appUrlService.getApiUrl('ApplicationUsers')
                 }).success(function (result) {
                     deferred.resolve(result);
                 })
@@ -37,10 +31,7 @@
                 var deferred = $q.defer();
                 $http({
                     method: 'GET',
-                    url: appUrlService.getApiUrl('ApplicationRoles'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    }
+                    url: appUrlService.getApiUrl('ApplicationRoles')
                 }).success(function (result) {
                     deferred.resolve(result);
                 })
@@ -54,9 +45,6 @@
                 $http({
                     method: 'GET',
                     url: appUrlService.getApiUrl('ApplicationRoles'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    },
                     params: {
                         roleName: name,
                         action: "create"
@@ -74,9 +62,6 @@
                 $http({
                     method: 'GET',
                     url: appUrlService.getApiUrl('ApplicationRoles'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    },
                     params: {
                         roleName: name,
                         action: "delete"
@@ -94,9 +79,6 @@
                 $http({
                     method: 'POST',
                     url: '/Manage/ChangePassword',
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    },
                     data: input
                 }).success(function (result) {
                     deferred.resolve(result);
@@ -111,9 +93,6 @@
                 $http({
                     method: 'POST',
                     url: '/Manage/AddPhoneNumber',
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    },
                     data: input
                 }).success(function (result) {
                     deferred.resolve(result);
@@ -128,9 +107,6 @@
                 $http({
                     method: 'POST',
                     url: '/Manage/VerifyPhoneNumber',
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    },
                     data: input
                 }).success(function (result) {
                     deferred.resolve(result);
@@ -144,10 +120,7 @@
                 var deferred = $q.defer();
                 $http({
                     method: 'POST',
-                    url: '/Manage/RemovePhoneNumber',
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    }
+                    url: '/Manage/RemovePhoneNumber'
                 }).success(function (result) {
                     deferred.resolve(result);
                 })

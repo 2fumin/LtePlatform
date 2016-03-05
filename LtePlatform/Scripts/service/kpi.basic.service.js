@@ -6,9 +6,6 @@
                 $http({
                         method: 'GET',
                         url: appUrlService.getApiUrl('KpiDataList'),
-                        headers: {
-                            'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                        },
                         params: {
                             city: city,
                             statDate: initialDate
@@ -25,10 +22,7 @@
                 var deferred = $q.defer();
                 $http({
                         method: 'GET',
-                        url: appUrlService.getApiUrl('KpiDataList'),
-                        headers: {
-                            'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                        }
+                        url: appUrlService.getApiUrl('KpiDataList')
                     }).success(function(result) {
                         deferred.resolve(result);
                     })
@@ -42,9 +36,6 @@
                 $http({
                         method: 'GET',
                         url: appUrlService.getApiUrl('KpiDataList'),
-                        headers: {
-                            'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                        },
                         params: {
                             city: city,
                             beginDate: begin,
@@ -93,9 +84,6 @@
                 $http({
                     method: 'GET',
                     url: appUrlService.getApiUrl('TopDrop2G'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    },
                     params: {
                         city: city,
                         statDate: initialDate
@@ -112,10 +100,7 @@
                 var deferred = $q.defer();
                 $http({
                     method: 'GET',
-                    url: appUrlService.getApiUrl('TopDrop2G'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    }
+                    url: appUrlService.getApiUrl('TopDrop2G')
                 }).success(function (result) {
                     deferred.resolve(result);
                 })
@@ -129,9 +114,6 @@
                 $http({
                     method: 'GET',
                     url: appUrlService.getApiUrl('TopDrop2G'),
-                    headers: {
-                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
-                    },
                     params: {
                         begin: begin,
                         end: end,

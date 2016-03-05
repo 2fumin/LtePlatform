@@ -27,9 +27,6 @@
                 method: 'get',
                 url: app.dataModel.collegeQueryUrl,
                 contentType: "application/json; charset=utf-8",
-                headers: {
-                    'Authorization': 'Bearer ' + app.dataModel.getAccessToken()
-                },
                 success: function (data) {
                     drawCollegeMap(self, data);
                     for (var i = 0; i < data.length; i++) {
