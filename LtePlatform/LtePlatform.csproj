@@ -694,6 +694,7 @@
     <Content Include="Scripts\kpi\precise.import.js" />
     <Content Include="Scripts\kpi\workitem\chart.controller.js" />
     <Content Include="Scripts\kpi\workitem\route.controller.js" />
+    <Content Include="Scripts\manage\manage.current.js" />
     <Content Include="Scripts\manage\password.change.js" />
     <Content Include="Scripts\manage\phoneNumber.signup.js" />
     <Content Include="Scripts\parameters\import\bts.lonLat.controller.js" />

@@ -11,7 +11,6 @@ using Microsoft.Owin.Security;
 
 namespace LtePlatform.Controllers.Account
 {
-    [Authorize]
     public class CurrentUserController : ApiController
     {
         [HttpGet]

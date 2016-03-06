@@ -8,7 +8,6 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace LtePlatform.Controllers.Account
 {
-    [Authorize]
     [ApiControl("用户角色管理控制器")]
     public class ApplicationRolesController : ApiController
     {
