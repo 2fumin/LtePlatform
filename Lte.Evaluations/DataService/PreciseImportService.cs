@@ -139,8 +139,8 @@ namespace Lte.Evaluations.DataService
             var results = new List<PreciseHistory>();
             while (begin < end.AddDays(1))
             {
-                var beginDate = begin;
-                var endDate = begin.AddDays(1);
+                var beginDate = begin.Date;
+                var endDate = beginDate.AddDays(1);
                 var items = _repository.GetAllList(beginDate, endDate);
                 var townItems = _regionRepository.GetAllList(beginDate, endDate);
                 results.Add(new PreciseHistory

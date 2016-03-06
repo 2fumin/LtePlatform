@@ -8,18 +8,16 @@
             <strong>@ViewBag.Title</strong>
         </h2>
     </div>
-    <p>
-        @{
-            Html.RenderPartial("_KpiMenu");
-        }
-    </p>
+    <div class="panel-body">
+        <div class="row" ng-app="myApp" ng-controller="interference.root">
+            @{
+                Html.RenderPartial("_InterferenceImport");
+            }
+        </div>
+    </div>
 </div>
 
-<div class="row" ng-app="myApp" ng-controller="interference.root">
-    @{
-        Html.RenderPartial("_InterferenceImport");
-    }
-</div>
+
 
 @section Scripts{
     <script src="~/Scripts/angular.js"></script>
@@ -28,7 +26,6 @@
     <script src="~/Scripts/angular-ui/bootstrap-datetimepicker.min.js"></script>
     <script src="~/Scripts/angular-ui/local/bootstrap-datetimepicker.zh-CN.js"></script>
     <script src="~/Scripts/app/common.js"></script>
-    <script src="~/Scripts/app/app.datamodel.js"></script>
     <script>
         var app = angular.module('myApp', ['ngRoute', 'myApp.Services']);
     </script>

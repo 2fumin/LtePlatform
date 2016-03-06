@@ -8,64 +8,63 @@
             <strong>@ViewBag.Title</strong>
         </h2>
     </div>
-    <p>
-        @{
-            Html.RenderPartial("../Kpi/_KpiMenu");
-        }
-    </p>
-</div>
+    <div class="panel-body">
+        <div class="row" ng-app="myApp">
+            <div class="col-md-4">
+                <h4>工参文件选择</h4>
+                @using (Html.BeginForm("LteImportPost", "Parameters",
+                    FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
+                {
+                    <p>
+                        <label class="control-label">LTE Excel文件选择：</label>
+                    </p>
+                    <div class="form-group">
+                        <div class="col-md-8">
+                            <input name="lteExcel" class="form-control" type="file" accept=".xlsx" />
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-save"></span>保存
+                            </button>
+                        </div>
+                    </div>
+                }
+                @using (Html.BeginForm("CdmaImportPost", "Parameters",
+                    FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
+                {
+                    <p>
+                        <label class="control-label">CDMA Excel文件选择：</label>
+                    </p>
+                    <div class="form-group">
+                        <div class="col-md-8">
+                            <input name="cdmaExcel" class="form-control" type="file" accept=".xls" />
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-save"></span>保存
+                            </button>
+                        </div>
+                    </div>
 
-<div class="row" ng-app="myApp">
-    <div class="col-md-4">
-        <h4>工参文件选择</h4>
-        @using (Html.BeginForm("LteImportPost", "Parameters",
-            FormMethod.Post, new {enctype = "multipart/form-data", @class = "form-horizontal", role = "form"}))
-        {
-            <p><label class="control-label">LTE Excel文件选择：</label>
-            </p>
-            <div class="form-group">
-                <div class="col-md-8">
-                    <input name="lteExcel" class="form-control" type="file" accept=".xlsx"/>
-                </div>
-                <div class="col-md-4">
-                    <button type="submit" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-save"></span>保存
-                    </button>
-                </div>
+                }
             </div>
-        }
-        @using (Html.BeginForm("CdmaImportPost", "Parameters",
-            FormMethod.Post, new {enctype = "multipart/form-data", @class = "form-horizontal", role = "form"}))
-        {
-            <p><label class="control-label">CDMA Excel文件选择：</label>
-            </p>
-            <div class="form-group">
-                <div class="col-md-8">
-                    <input name="cdmaExcel" class="form-control" type="file" accept=".xls"/>
+            <div class="col-md-8">
+                <div uib-alert ng-repeat="message in importData.updateMessages" type="{{message.type}}" dismiss-on-timeout="2000" close="closeAlert($index)">
+                    {{message.contents}}
                 </div>
-                <div class="col-md-4">
-                    <button type="submit" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-save"></span>保存
-                    </button>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            工参读取结果及操作平台
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div ng-view></div>
+                    </div>
                 </div>
-            </div>
-
-        }
-    </div>
-    <div class="col-md-8">
-        <div uib-alert ng-repeat="message in importData.updateMessages" type="{{message.type}}" dismiss-on-timeout="2000" close="closeAlert($index)">
-            {{message.contents}}
-        </div>
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title">
-                    工参读取结果及操作平台
-                </h3>
-            </div>
-            <div class="panel-body">
-                <div ng-view></div>
             </div>
         </div>
+
     </div>
 </div>
 

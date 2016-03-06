@@ -4,27 +4,25 @@
             <strong>网优平台工单监控</strong>
         </h2>
     </div>
-    @{
-        Html.RenderPartial("_KpiMenu");
-    }
-</div>
-
-<div ng-app="myApp" class="row">
-    <div class="col-md-4">
-        <div class="list-group">
-            <a class="list-group-item" ng-repeat="menuItem in menuItems" 
-               ng-class="{active: page.title == menuItem.displayName}"
-               ng-href="{{menuItem.url}}">
-                {{menuItem.displayName}}
-            </a>
+    <div class="panel-body">
+        <div ng-app="myApp" class="row">
+            <div class="col-md-4">
+                <div class="list-group">
+                    <a class="list-group-item" ng-repeat="menuItem in menuItems"
+                       ng-class="{active: page.title == menuItem.displayName}"
+                       ng-href="{{menuItem.url}}">
+                        {{menuItem.displayName}}
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div uib-alert ng-repeat="message in page.messages" type="{{message.type}}"
+                     dismiss-on-timeout="5000" close="closeAlert($index)">
+                    {{message.contents}}
+                </div>
+                <div ng-view></div>
+            </div>
         </div>
-    </div>
-    <div class="col-md-8">
-        <div uib-alert ng-repeat="message in page.messages" type="{{message.type}}"
-             dismiss-on-timeout="5000" close="closeAlert($index)">
-            {{message.contents}}
-        </div>
-        <div ng-view></div>
     </div>
 </div>
 
