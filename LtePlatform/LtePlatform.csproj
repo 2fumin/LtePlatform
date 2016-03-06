@@ -329,7 +329,6 @@
     <Compile Include="Controllers\Kpi\TownPreciseImportController.cs" />
     <Compile Include="Controllers\Kpi\WorkItemController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\MeController.cs" />
     <Compile Include="Controllers\Mr\InterferenceMatrixController.cs" />
     <Compile Include="Controllers\Mr\InterferenceNeighborController.cs" />
     <Compile Include="Controllers\Mr\NeighborMonitorController.cs" />

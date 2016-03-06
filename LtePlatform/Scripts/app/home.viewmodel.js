@@ -1,4 +1,4 @@
-﻿app.controller("homeController", function ($scope, $http, appUrlService) {
+﻿app.controller("homeController", function ($scope) {
     $scope.menuItems = [
     {
         title: "小区覆盖仿真模拟",
@@ -36,13 +36,6 @@
         buttonName: "DT数据查看",
         url: "/Dt/List"
     }];
-
-    $http({
-        method: 'get',
-        url: appUrlService.userInfoUrl
-    }).success(function(data) {
-        $scope.currentUser = data;
-    });
 
     $scope.status = {
         isopen: false
