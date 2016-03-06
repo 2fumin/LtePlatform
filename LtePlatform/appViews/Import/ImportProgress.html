@@ -1,0 +1,17 @@
+﻿<p>
+    总数：{{progressInfo.totalDumpItems}}&nbsp;
+    成功数：{{progressInfo.totalSuccessItems}}&nbsp;
+    失败数：{{progressInfo.totalFailItems}}
+</p>
+<div uib-progress>
+    <div uib-bar value="100*progressInfo.totalSuccessItems / progressInfo.totalDumpItems" type="success">
+        <span ng-show="100*progressInfo.totalSuccessItems / progressInfo.totalDumpItems > 5">
+            {{100*progressInfo.totalSuccessItems / progressInfo.totalDumpItems | number: 2}}%
+        </span>
+    </div>
+    <div uib-bar value="100*progressInfo.totalFailItems / progressInfo.totalDumpItems" type="erroe">
+        <span ng-show="100*progressInfo.totalFailItems / progressInfo.totalDumpItems > 5">
+            {{100*progressInfo.totalFailItems / progressInfo.totalDumpItems | number: 2}}%
+        </span>
+    </div>
+</div>

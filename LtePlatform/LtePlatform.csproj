@@ -393,6 +393,7 @@
   <ItemGroup>
     <Content Include="appViews\BasicKpi\TopDrop2GTrend.html" />
     <Content Include="appViews\BasicKpi\Trend.html" />
+    <Content Include="appViews\Import\ImportProgress.html" />
     <Content Include="appViews\Manage\AllUsers.html" />
     <Content Include="appViews\Manage\CurrentUser.html" />
     <Content Include="appViews\Manage\Roles.html" />
@@ -948,7 +949,6 @@
     <Content Include="Scripts\kpi\interference.import.controller.js" />
     <Content Include="Scripts\kpi\interference.mongo.controller.js" />
     <Content Include="Scripts\kpi\interferenceimport.viewmodel.js" />
-    <Content Include="Scripts\kpi\preciseimport.viewmodel.js" />
     <Content Include="Scripts\kpi\top.drop2G.viewmodel.js" />
     <Content Include="Scripts\kpi\workitem\service.js" />
     <Content Include="Scripts\kpi\workitem\details.controller.js" />

@@ -47,6 +47,13 @@
                 $scope.dumpItems();
             } else {
                 $scope.updateHistory();
+                if ($scope.townPreciseViews.length > 0) {
+                    $scope.dumpTownItems();
+                }
+                
+                $scope.progressInfo.totalDumpItems = 0;
+                $scope.progressInfo.totalSuccessItems = 0;
+                $scope.progressInfo.totalFailItems = 0;
             }
         }, function() {
             $scope.progressInfo.totalFailItems = $scope.progressInfo.totalFailItems + 1;
@@ -54,6 +61,13 @@
                 $scope.dumpItems();
             } else {
                 $scope.updateHistory();
+                if ($scope.townPreciseViews.length > 0) {
+                    $scope.dumpTownItems();
+                }
+
+                $scope.progressInfo.totalDumpItems = 0;
+                $scope.progressInfo.totalSuccessItems = 0;
+                $scope.progressInfo.totalFailItems = 0;
             }
         });
     };
