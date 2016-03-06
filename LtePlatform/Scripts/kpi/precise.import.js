@@ -36,6 +36,27 @@
             $scope.dumpHistory = result;
         });
     };
+    $scope.dumpItems = function() {
+        preciseImportService.dumpSingleItem().then(function(result) {
+            if (result) {
+                $scope.progressInfo.totalSuccessItems = $scope.progressInfo.totalSuccessItems + 1;
+            } else {
+                $scope.progressInfo.totalFailItems = $scope.progressInfo.totalFailItems + 1;
+            }
+            if ($scope.progressInfo.totalSuccessItems + $scope.progressInfo.totalFailItems < $scope.progressInfo.totalDumpItems) {
+                $scope.dumpItems();
+            } else {
+                $scope.updateHistory();
+            }
+        }, function() {
+            $scope.progressInfo.totalFailItems = $scope.progressInfo.totalFailItems + 1;
+            if ($scope.progressInfo.totalSuccessItems + $scope.progressInfo.totalFailItems < $scope.progressInfo.totalDumpItems) {
+                $scope.dumpItems();
+            } else {
+                $scope.updateHistory();
+            }
+        });
+    };
 
     $scope.updateHistory();
    

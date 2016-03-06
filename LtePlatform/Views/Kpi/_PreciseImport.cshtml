@@ -16,7 +16,7 @@
                 成功数：{{progressInfo.totalSuccessItems}}&nbsp;
                 失败数：{{progressInfo.totalFailItems}}
             </p>
-            <div class="progress" ng-show="totalDumpItems>0">
+            <div class="progress">
                 <div class="progress-bar" role="progressbar" aria-valuemax="100" aria-valuemin="0"
                      ng-style="{width: 100*(progressInfo.totalSuccessItems+progressInfo.totalFailItems)/progressInfo.totalDumpItems+'%'}"></div>
             </div>

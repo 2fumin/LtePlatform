@@ -941,7 +941,6 @@
     <Content Include="Scripts\knockout-3.4.0.js" />
     <Content Include="Scripts\knockout.validation.js" />
     <Content Include="Scripts\knockout.validation.min.js" />
-    <Content Include="Scripts\kpi\common.controller.js" />
     <Content Include="Scripts\kpi\workitem\bts.js" />
     <Content Include="Scripts\kpi\workitem\cdmaCell.js" />
     <Content Include="Scripts\kpi\workitem\cell.js" />
