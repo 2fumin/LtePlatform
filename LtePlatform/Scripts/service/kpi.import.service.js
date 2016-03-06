@@ -53,6 +53,18 @@
                         deferred.reject(reason);
                     });
                 return deferred.promise;
+            },
+            dumpTownItems: function(views) {
+                var deferred = $q.defer();
+                $http.post(appUrlService.getApiUrl('TownPreciseImport'), {
+                    views: views
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
             }
         };
     });

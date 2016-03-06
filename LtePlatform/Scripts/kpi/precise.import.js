@@ -25,10 +25,19 @@
             $scope.townPreciseViews = [];
         });
     };
+    $scope.dumpTownItems = function() {
+        preciseImportService.dumpTownItems($scope.townPreciseViews).then(function() {
+            $scope.townPreciseViews = [];
+            $scope.updateHistory();
+        });
+    };
+    $scope.updateHistory = function() {
+        preciseImportService.queryDumpHistroy($scope.beginDate.value, $scope.endDate.value).then(function(result) {
+            $scope.dumpHistory = result;
+        });
+    };
 
-    preciseImportService.queryDumpHistroy($scope.beginDate.value, $scope.endDate.value).then(function (result) {
-        $scope.dumpHistory = result;
-    });
+    $scope.updateHistory();
    
     preciseImportService.queryTotalDumpItems().then(function (result) {
         $scope.progressInfo.totalDumpItems = result;
