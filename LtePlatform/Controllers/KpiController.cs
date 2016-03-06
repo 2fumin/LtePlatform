@@ -35,11 +35,6 @@ namespace LtePlatform.Controllers
             return View();
         }
         
-        public ActionResult TopDrop2G()
-        {
-            return View();
-        }
-
         public ActionResult WorkItem()
         {
             return View();

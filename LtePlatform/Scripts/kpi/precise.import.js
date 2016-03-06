@@ -1,4 +1,4 @@
-﻿app.controller("precise.import", function($scope, kpiImportService) {
+﻿app.controller("precise.import", function ($scope, preciseImportService) {
     var lastWeek = new Date();
     lastWeek.setDate(lastWeek.getDate() - 7);
     $scope.beginDate = {
@@ -17,15 +17,24 @@
     $scope.dumpHistory = [];
     $scope.townPreciseViews = [];
 
-    kpiImportService.queryDumpHistroy($scope.beginDate.value, $scope.endDate.value).then(function(result) {
+    $scope.clearItems = function() {
+        preciseImportService.clearImportItems().then(function() {
+            $scope.progressInfo.totalDumpItems = 0;
+            $scope.progressInfo.totalSuccessItems = 0;
+            $scope.progressInfo.totalFailItems = 0;
+            $scope.townPreciseViews = [];
+        });
+    };
+
+    preciseImportService.queryDumpHistroy($scope.beginDate.value, $scope.endDate.value).then(function (result) {
         $scope.dumpHistory = result;
     });
    
-    kpiImportService.queryTotalDumpItems().then(function(result) {
+    preciseImportService.queryTotalDumpItems().then(function (result) {
         $scope.progressInfo.totalDumpItems = result;
     });
 
-    kpiImportService.queryTownPreciseViews().then(function(result) {
+    preciseImportService.queryTownPreciseViews().then(function (result) {
         $scope.townPreciseViews = result;
     });
 });

@@ -45,6 +45,7 @@ namespace Lte.Evaluations.DataService
                 var items = CsvContext.Read<PreciseCoverage4GCsv>(reader, CsvFileDescription.CommaDescription).ToList();
                 var statTime = items[0].StatTime;
                 var stats = Mapper.Map<List<PreciseCoverage4GCsv>, List<PreciseCoverage4G>>(items);
+                PreciseCoverage4Gs = new Stack<PreciseCoverage4G>();
                 foreach (var stat in stats)
                 {
                     PreciseCoverage4Gs.Push(stat);
