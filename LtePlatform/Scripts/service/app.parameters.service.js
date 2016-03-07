@@ -4,21 +4,21 @@
             queryCellNeighbors: function(cell) {
                 var deferred = $q.defer();
                 $http({
-                    method: 'GET',
-                    url: appUrlService.getApiUrl('NearestPciCell'),
-                    params: {
-                        'cellId': cell.cellId,
-                        'sectorId': cell.sectorId
-                    }
-                }).success(function (result) {
-                    deferred.resolve(result);
-                })
-                .error(function (reason) {
-                    deferred.reject(reason);
-                });
+                        method: 'GET',
+                        url: appUrlService.getApiUrl('NearestPciCell'),
+                        params: {
+                            'cellId': cell.cellId,
+                            'sectorId': cell.sectorId
+                        }
+                    }).success(function(result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function(reason) {
+                        deferred.reject(reason);
+                    });
                 return deferred.promise;
             },
-            updateCellPci: function (cell) {
+            updateCellPci: function(cell) {
                 var deferred = $q.defer();
                 $http.post(appUrlService.getApiUrl('NearestPciCell'), cell)
                     .success(function(result) {
@@ -46,34 +46,34 @@
             queryNearestCells: function(eNodebId, sectorId, pci) {
                 var deferred = $q.defer();
                 $http({
-                    method: 'GET',
-                    url: appUrlService.getApiUrl('Cell'),
-                    params: {
-                        'eNodebId': eNodebId,
-                        'sectorId': sectorId,
-                        'pci': pci
-                    }
-                }).success(function (result) {
-                    deferred.resolve(result);
-                })
-                .error(function (reason) {
-                    deferred.reject(reason);
-                });
+                        method: 'GET',
+                        url: appUrlService.getApiUrl('Cell'),
+                        params: {
+                            'eNodebId': eNodebId,
+                            'sectorId': sectorId,
+                            'pci': pci
+                        }
+                    }).success(function(result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function(reason) {
+                        deferred.reject(reason);
+                    });
                 return deferred.promise;
             },
             updateNeighbors: function(cellId, sectorId, pci, nearestCellId, nearestSectorId) {
                 var deferred = $q.defer();
                 $http.put(appUrlService.getApiUrl('NearestPciCell'), {
-                    cellId: cellId,
-                    sectorId: sectorId,
-                    pci: pci,
-                    nearestCellId: nearestCellId,
-                    nearestSectorId: nearestSectorId
-                })
-                    .success(function (result) {
+                        cellId: cellId,
+                        sectorId: sectorId,
+                        pci: pci,
+                        nearestCellId: nearestCellId,
+                        nearestSectorId: nearestSectorId
+                    })
+                    .success(function(result) {
                         deferred.resolve(result);
                     })
-                    .error(function (reason) {
+                    .error(function(reason) {
                         deferred.reject(reason);
                     });
                 return deferred.promise;
@@ -85,219 +85,219 @@
             queryCellInfo: function(cellId, sectorId) {
                 var deferred = $q.defer();
                 $http({
-                    method: 'GET',
-                    url: appUrlService.getApiUrl('Cell'),
-                    params: {
-                        eNodebId: cellId,
-                        sectorId: sectorId
-                    }
-                }).success(function (result) {
-                    deferred.resolve(result);
-                })
-                .error(function (reason) {
-                    deferred.reject(reason);
-                });
+                        method: 'GET',
+                        url: appUrlService.getApiUrl('Cell'),
+                        params: {
+                            eNodebId: cellId,
+                            sectorId: sectorId
+                        }
+                    }).success(function(result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function(reason) {
+                        deferred.reject(reason);
+                    });
                 return deferred.promise;
             },
-            queryCdmaCellInfo: function (btsId, sectorId) {
+            queryCdmaCellInfo: function(btsId, sectorId) {
                 var deferred = $q.defer();
                 $http({
-                    method: 'GET',
-                    url: appUrlService.getApiUrl('CdmaCell'),
-                    params: {
-                        btsId: btsId,
-                        sectorId: sectorId
-                    }
-                }).success(function (result) {
-                    deferred.resolve(result);
-                })
-                .error(function (reason) {
-                    deferred.reject(reason);
-                });
+                        method: 'GET',
+                        url: appUrlService.getApiUrl('CdmaCell'),
+                        params: {
+                            btsId: btsId,
+                            sectorId: sectorId
+                        }
+                    }).success(function(result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function(reason) {
+                        deferred.reject(reason);
+                    });
                 return deferred.promise;
             },
-            queryENodebInfo: function (eNodebId) {
+            queryENodebInfo: function(eNodebId) {
                 var deferred = $q.defer();
                 $http({
-                    method: 'GET',
-                    url: appUrlService.getApiUrl('ENodeb'),
-                    params: {
-                        eNodebId: eNodebId
-                    }
-                }).success(function (result) {
-                    deferred.resolve(result);
-                })
-                .error(function (reason) {
-                    deferred.reject(reason);
-                });
+                        method: 'GET',
+                        url: appUrlService.getApiUrl('ENodeb'),
+                        params: {
+                            eNodebId: eNodebId
+                        }
+                    }).success(function(result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function(reason) {
+                        deferred.reject(reason);
+                    });
                 return deferred.promise;
             },
-            queryBtsInfo: function (btsId) {
+            queryBtsInfo: function(btsId) {
                 var deferred = $q.defer();
                 $http({
-                    method: 'GET',
-                    url: appUrlService.getApiUrl('Bts'),
-                    params: {
-                        btsId: btsId
-                    }
-                }).success(function (result) {
-                    deferred.resolve(result);
-                })
-                .error(function (reason) {
-                    deferred.reject(reason);
-                });
+                        method: 'GET',
+                        url: appUrlService.getApiUrl('Bts'),
+                        params: {
+                            btsId: btsId
+                        }
+                    }).success(function(result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function(reason) {
+                        deferred.reject(reason);
+                    });
                 return deferred.promise;
             },
-            queryCellSectors: function (cells) {
+            queryCellSectors: function(cells) {
                 var deferred = $q.defer();
                 $http.post(appUrlService.getApiUrl('Cell'), {
-                    views: cells
-                }).success(function (result) {
-                    deferred.resolve(result);
-                })
-                .error(function (reason) {
-                    deferred.reject(reason);
-                });
+                        views: cells
+                    }).success(function(result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function(reason) {
+                        deferred.reject(reason);
+                    });
                 return deferred.promise;
             },
             queryRangeSectors: function(range, excludedIds) {
                 var deferred = $q.defer();
                 $http.post(appUrlService.getApiUrl('SectorView'), {
-                    west: range.west,
-                    east: range.east,
-                    south: range.south,
-                    north: range.north,
-                    excludedCells: excludedIds
-                }).success(function (result) {
-                    deferred.resolve(result);
-                })
-                .error(function (reason) {
-                    deferred.reject(reason);
-                });
+                        west: range.west,
+                        east: range.east,
+                        south: range.south,
+                        north: range.north,
+                        excludedCells: excludedIds
+                    }).success(function(result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function(reason) {
+                        deferred.reject(reason);
+                    });
                 return deferred.promise;
             }
         };
     })
     .factory('basicImportService', function($q, $http, appUrlService) {
         return {
-            queryENodebExcels: function () {
+            queryENodebExcels: function() {
                 var deferred = $q.defer();
                 $http({
-                    method: 'GET',
-                    url: appUrlService.getApiUrl('NewENodebExcels'),
-                }).success(function (result) {
-                    deferred.resolve(result);
-                })
-                .error(function (reason) {
-                    deferred.reject(reason);
-                });
+                        method: 'GET',
+                        url: appUrlService.getApiUrl('NewENodebExcels'),
+                    }).success(function(result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function(reason) {
+                        deferred.reject(reason);
+                    });
                 return deferred.promise;
             },
-            queryCellExcels: function () {
+            queryCellExcels: function() {
                 var deferred = $q.defer();
                 $http({
-                    method: 'GET',
-                    url: appUrlService.getApiUrl('NewCellExcels'),
-                }).success(function (result) {
-                    deferred.resolve(result);
-                })
-                .error(function (reason) {
-                    deferred.reject(reason);
-                });
+                        method: 'GET',
+                        url: appUrlService.getApiUrl('NewCellExcels'),
+                    }).success(function(result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function(reason) {
+                        deferred.reject(reason);
+                    });
                 return deferred.promise;
             },
-            queryBtsExcels: function () {
+            queryBtsExcels: function() {
                 var deferred = $q.defer();
                 $http({
-                    method: 'GET',
-                    url: appUrlService.getApiUrl('NewBtsExcels'),
-                }).success(function (result) {
-                    deferred.resolve(result);
-                })
-                .error(function (reason) {
-                    deferred.reject(reason);
-                });
+                        method: 'GET',
+                        url: appUrlService.getApiUrl('NewBtsExcels'),
+                    }).success(function(result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function(reason) {
+                        deferred.reject(reason);
+                    });
                 return deferred.promise;
             },
-            queryCdmaCellExcels: function () {
+            queryCdmaCellExcels: function() {
                 var deferred = $q.defer();
                 $http({
-                    method: 'GET',
-                    url: appUrlService.getApiUrl('NewCdmaCellExcels'),
-                }).success(function (result) {
-                    deferred.resolve(result);
-                })
-                .error(function (reason) {
-                    deferred.reject(reason);
-                });
+                        method: 'GET',
+                        url: appUrlService.getApiUrl('NewCdmaCellExcels'),
+                    }).success(function(result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function(reason) {
+                        deferred.reject(reason);
+                    });
                 return deferred.promise;
             },
-            queryVanishedENodebs: function () {
+            queryVanishedENodebs: function() {
                 var deferred = $q.defer();
                 $http({
-                    method: 'GET',
-                    url: appUrlService.getApiUrl('DumpENodebExcel'),
-                }).success(function (result) {
-                    deferred.resolve(result);
-                })
-                .error(function (reason) {
-                    deferred.reject(reason);
-                });
+                        method: 'GET',
+                        url: appUrlService.getApiUrl('DumpENodebExcel'),
+                    }).success(function(result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function(reason) {
+                        deferred.reject(reason);
+                    });
                 return deferred.promise;
             },
-            queryVanishedCells: function () {
+            queryVanishedCells: function() {
                 var deferred = $q.defer();
                 $http({
-                    method: 'GET',
-                    url: appUrlService.getApiUrl('DumpCellExcel')
-                }).success(function (result) {
-                    deferred.resolve(result);
-                })
-                .error(function (reason) {
-                    deferred.reject(reason);
-                });
+                        method: 'GET',
+                        url: appUrlService.getApiUrl('DumpCellExcel')
+                    }).success(function(result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function(reason) {
+                        deferred.reject(reason);
+                    });
                 return deferred.promise;
             },
             dumpOneENodebExcel: function(item) {
                 var deferred = $q.defer();
                 $http.post(appUrlService.getApiUrl('DumpENodebExcel'), item)
-                    .success(function (result) {
+                    .success(function(result) {
                         deferred.resolve(result);
                     })
-                    .error(function (reason) {
+                    .error(function(reason) {
                         deferred.reject(reason);
                     });
                 return deferred.promise;
             },
-            dumpOneBtsExcel: function (item) {
+            dumpOneBtsExcel: function(item) {
                 var deferred = $q.defer();
                 $http.post(appUrlService.getApiUrl('DumpBtsExcel'), item)
-                    .success(function (result) {
+                    .success(function(result) {
                         deferred.resolve(result);
                     })
-                    .error(function (reason) {
+                    .error(function(reason) {
                         deferred.reject(reason);
                     });
                 return deferred.promise;
             },
-            dumpOneCellExcel: function (item) {
+            dumpOneCellExcel: function(item) {
                 var deferred = $q.defer();
                 $http.post(appUrlService.getApiUrl('DumpCellExcel'), item)
-                    .success(function (result) {
+                    .success(function(result) {
                         deferred.resolve(result);
                     })
-                    .error(function (reason) {
+                    .error(function(reason) {
                         deferred.reject(reason);
                     });
                 return deferred.promise;
             },
-            dumpOneCdmaCellExcel: function (item) {
+            dumpOneCdmaCellExcel: function(item) {
                 var deferred = $q.defer();
                 $http.post(appUrlService.getApiUrl('DumpCdmaCellExcel'), item)
-                    .success(function (result) {
+                    .success(function(result) {
                         deferred.resolve(result);
                     })
-                    .error(function (reason) {
+                    .error(function(reason) {
                         deferred.reject(reason);
                     });
                 return deferred.promise;
@@ -315,41 +315,41 @@
                     });
                 return deferred.promise;
             },
-            dumpMultipleBtsExcels: function (items) {
+            dumpMultipleBtsExcels: function(items) {
                 var deferred = $q.defer();
                 $http.post(appUrlService.getApiUrl('NewBtsExcels'), {
-                    infos: items
-                })
-                    .success(function (result) {
+                        infos: items
+                    })
+                    .success(function(result) {
                         deferred.resolve(result);
                     })
-                    .error(function (reason) {
+                    .error(function(reason) {
                         deferred.reject(reason);
                     });
                 return deferred.promise;
             },
-            dumpMultipleCellExcels: function (items) {
+            dumpMultipleCellExcels: function(items) {
                 var deferred = $q.defer();
                 $http.post(appUrlService.getApiUrl('NewCellExcels'), {
-                    infos: items
-                })
-                    .success(function (result) {
+                        infos: items
+                    })
+                    .success(function(result) {
                         deferred.resolve(result);
                     })
-                    .error(function (reason) {
+                    .error(function(reason) {
                         deferred.reject(reason);
                     });
                 return deferred.promise;
             },
-            dumpMultipleCdmaCellExcels: function (items) {
+            dumpMultipleCdmaCellExcels: function(items) {
                 var deferred = $q.defer();
                 $http.post(appUrlService.getApiUrl('NewCdmaCellExcels'), {
-                    infos: items
-                })
-                    .success(function (result) {
+                        infos: items
+                    })
+                    .success(function(result) {
                         deferred.resolve(result);
                     })
-                    .error(function (reason) {
+                    .error(function(reason) {
                         deferred.reject(reason);
                     });
                 return deferred.promise;
@@ -357,28 +357,65 @@
             vanishENodebIds: function(ids) {
                 var deferred = $q.defer();
                 $http.put(appUrlService.getApiUrl('DumpENodebExcel'), {
-                    eNodebIds: ids
-                })
-                    .success(function (result) {
+                        eNodebIds: ids
+                    })
+                    .success(function(result) {
                         deferred.resolve(result);
                     })
-                    .error(function (reason) {
+                    .error(function(reason) {
                         deferred.reject(reason);
                     });
                 return deferred.promise;
             },
-            vanishCellIds: function (ids) {
+            vanishCellIds: function(ids) {
                 var deferred = $q.defer();
                 $http.put(appUrlService.getApiUrl('DumpCellExcel'), {
-                    cellIdPairs: ids
-                })
-                    .success(function (result) {
+                        cellIdPairs: ids
+                    })
+                    .success(function(result) {
                         deferred.resolve(result);
                     })
-                    .error(function (reason) {
+                    .error(function(reason) {
                         deferred.reject(reason);
                     });
                 return deferred.promise;
             }
         };
+    })
+    .factory('neighborImportService', function($q, $http, appUrlService) {
+        return {
+            queryDumpNeighbors: function() {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('DumpNeighbor')
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            },
+            clearDumpNeighbors: function () {
+                var deferred = $q.defer();
+                $http.delete(appUrlService.getApiUrl('DumpNeighbor')).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            },
+            dumpSingleItem: function () {
+                var deferred = $q.defer();
+                $http.put(appUrlService.getApiUrl('DumpNeighbor')).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            }
+        }
     });
