@@ -22,9 +22,6 @@
             if ($scope.progressInfo.totalSuccessItems + $scope.progressInfo.totalFailItems < $scope.progressInfo.totalDumpItems) {
                 $scope.dumpItems();
             } else {
-                if ($scope.townPreciseViews.length > 0) {
-                    $scope.dumpTownItems();
-                }
                 $scope.progressInfo.totalDumpItems = 0;
                 $scope.progressInfo.totalSuccessItems = 0;
                 $scope.progressInfo.totalFailItems = 0;
@@ -34,9 +31,6 @@
             if ($scope.progressInfo.totalSuccessItems + $scope.progressInfo.totalFailItems < $scope.progressInfo.totalDumpItems) {
                 $scope.dumpItems();
             } else {
-                if ($scope.townPreciseViews.length > 0) {
-                    $scope.dumpTownItems();
-                }
                 $scope.progressInfo.totalDumpItems = 0;
                 $scope.progressInfo.totalSuccessItems = 0;
                 $scope.progressInfo.totalFailItems = 0;
