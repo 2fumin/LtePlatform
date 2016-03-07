@@ -9,54 +9,52 @@
         </h2>
     </div>
     <p>
-        @{
-            Html.RenderPartial("_ParametersMenu");
-        }
+        <div class="row">
+            <div class="col-md-6">
+                @{
+                    Html.RenderPartial("_AlertPanel");
+                    using (Html.BeginForm("ZteNeighborPost", "Parameters",
+                        FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
+                    {
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">中兴邻区关系导入：</label>
+                            <div class="col-md-6">
+                                <input name="neighborZte" class="form-control" type="file" multiple accept=".csv" />
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-save"></span>导入
+                                </button>
+                            </div>
+                        </div>
+                    }
+                    using (Html.BeginForm("HwNeighborPost", "Parameters",
+                        FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
+                    {
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">华为邻区关系导入：</label>
+                            <div class="col-md-6">
+                                <input name="neighborHw" class="form-control" type="file" multiple accept=".csv" />
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-save"></span>导入
+                                </button>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+            <div class="col-md-6">
+                @{
+                    Html.RenderPartial("_NeighborImport");
+                }
+            </div>
+        </div>
     </p>
 </div>
 
-<div class="row">
-    <div class="col-md-6">
-        @{
-            Html.RenderPartial("_AlertPanel");
-            using (Html.BeginForm("ZteNeighborPost", "Parameters",
-                FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
-            {
-                <div class="form-group">
-                    <label class="col-md-4 control-label">中兴邻区关系导入：</label>
-                    <div class="col-md-6">
-                        <input name="neighborZte" class="form-control" type="file" multiple accept=".csv" />
-                    </div>
-                    <div class="col-md-2">
-                        <button type="submit" class="btn btn-primary">
-                            <span class="glyphicon glyphicon-save"></span>导入
-                        </button>
-                    </div>
-                </div>
-            }
-            using (Html.BeginForm("HwNeighborPost", "Parameters",
-                FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
-            {
-                <div class="form-group">
-                    <label class="col-md-4 control-label">华为邻区关系导入：</label>
-                    <div class="col-md-6">
-                        <input name="neighborHw" class="form-control" type="file" multiple accept=".csv" />
-                    </div>
-                    <div class="col-md-2">
-                        <button type="submit" class="btn btn-primary">
-                            <span class="glyphicon glyphicon-save"></span>导入
-                        </button>
-                    </div>
-                </div>
-            }
-        }
-    </div>
-    <div class="col-md-6">
-        @{
-            Html.RenderPartial("_NeighborImport");
-        }
-    </div>
-</div>
+
 
 @section Scripts{
     @Styles.Render("~/Content/themes/base/css")

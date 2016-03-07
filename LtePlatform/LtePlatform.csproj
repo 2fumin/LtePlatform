@@ -1100,7 +1100,6 @@
     <Content Include="Views\Shared\_BtsTable.cshtml" />
     <Content Include="Views\Shared\_CdmaCellTable.cshtml" />
     <Content Include="Views\Shared\_DistributionTable.cshtml" />
-    <Content Include="Views\Parameters\_ParametersMenu.cshtml" />
     <None Include="Views\Parameters\BasicImport.cshtml" />
     <None Include="Views\Parameters\NeighborImport.cshtml" />
     <Content Include="Views\Parameters\QueryMap.cshtml" />
