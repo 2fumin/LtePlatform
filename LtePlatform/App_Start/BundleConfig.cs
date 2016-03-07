@@ -65,20 +65,7 @@ namespace LtePlatform
                 "~/Scripts/app/app.viewmodel.js",
                 "~/Scripts/dt/list.viewmodel.js",
                 "~/Scripts/app/_run.js"));
-            
-            bundles.Add(new ScriptBundle("~/bundles/kpiPreciseTrend").Include(
-                "~/Scripts/sammy-{version}.js",
-                "~/Scripts/app/common.js",
-                "~/Scripts/mycharts/comboChart.js",
-                "~/Scripts/mycharts/drilldown.chart.js",
-                "~/Scripts/mycharts/drilldownPie.js",
-                "~/Scripts/app/app.datamodel.js",
-                "~/Scripts/app/app.viewmodel.js",
-                "~/Scripts/kpi/common.controller.js",
-                "~/Scripts/kpi/precise.controller.js",
-                "~/Scripts/kpi/precise.trend.viewmodel.js",
-                "~/Scripts/app/_run.js"));
-            
+           
             bundles.Add(new ScriptBundle("~/bundles/collegeMap").Include(
                 "~/Scripts/sammy-{version}.js",
                 "~/Scripts/app/common.js",
@@ -151,15 +138,6 @@ namespace LtePlatform
                 "~/Scripts/college/precise.controller.js",
                 "~/Scripts/app/_run.js"));
             
-            bundles.Add(new ScriptBundle("~/bundles/parametersNeighborImport").Include(
-                "~/Scripts/sammy-{version}.js",
-                "~/Scripts/app/common.js",
-                "~/Scripts/app/app.datamodel.js",
-                "~/Scripts/app/app.viewmodel.js",
-                "~/Scripts/parameters/common.controller.js",
-                "~/Scripts/parameters/neighborimport.viewmodel.js",
-                "~/Scripts/app/_run.js"));
-
             bundles.Add(new ScriptBundle("~/bundles/parametersAlarmImport").Include(
                 "~/Scripts/sammy-{version}.js",
                 "~/Scripts/app/common.js",

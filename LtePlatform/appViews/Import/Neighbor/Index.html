@@ -1,0 +1,14 @@
+﻿<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            邻区导入进度
+        </h3>
+    </div>
+    <div class="panel-body">
+        <p>
+            <button class="btn btn-primary" ng-click="dumpItems()" ng-disabled="totalDumpItems.length === 0">一键导入</button>
+            <button class="btn btn-danger" ng-click="clearItems()" ng-disabled="totalDumpItems.length === 0">清除导入</button>
+        </p>
+        <div ng-include="'/appViews/Import/ImportProgress.html'"></div>
+    </div>
+</div>
