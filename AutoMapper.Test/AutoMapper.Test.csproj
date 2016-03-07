@@ -155,6 +155,8 @@
     <Compile Include="Core\MappingOrder.cs" />
     <Compile Include="Core\MapToAttributeTest.cs" />
     <Compile Include="Core\MaxDepthTests.cs" />
+    <Compile Include="Core\When_configuring_a_member_to_skip_based_on_the_property_value.cs" />
+    <Compile Include="Core\When_configuring_a_member_to_skip_based_on_the_property_value_with_custom_mapping.cs" />
     <Compile Include="IMappingExpression\ForCtorParam.cs" />
     <Compile Include="IMappingExpression\NonGenericAllMembersNullSubstitute.cs" />
     <Compile Include="IMappingExpression\NonGenericConstructorTests.cs" />
