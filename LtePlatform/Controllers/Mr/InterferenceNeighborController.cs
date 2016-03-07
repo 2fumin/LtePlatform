@@ -9,7 +9,6 @@ using LtePlatform.Models;
 namespace LtePlatform.Controllers.Mr
 {
     [ApiControl("干扰邻区查询控制器")]
-    [Authorize]
     public class InterferenceNeighborController : ApiController
     {
         private readonly InterferenceNeighborService _service;
