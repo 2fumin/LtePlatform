@@ -16,7 +16,11 @@ namespace Lte.Parameters.Entities.Work
             new Tuple<WorkItemType, string>(WorkItemType.Kpi4G, "4G性能故障"),
             new Tuple<WorkItemType, string>(WorkItemType.NetworkProblem, "网元故障"),
             new Tuple<WorkItemType, string>(WorkItemType.RrcConnection, "RRC连接成功率恶化"),
-            new Tuple<WorkItemType, string>(WorkItemType.Others, "其他类型")
+            new Tuple<WorkItemType, string>(WorkItemType.Others, "其他类型"),
+            new Tuple<WorkItemType, string>(WorkItemType.DailyTask, "日常网优作业计划"),
+            new Tuple<WorkItemType, string>(WorkItemType.DailyReport, "日报"),
+            new Tuple<WorkItemType, string>(WorkItemType.Yilutong, "翼路通"),
+            new Tuple<WorkItemType, string>(WorkItemType.KeySite, "省-集团测试保障-关键站点清单收集")
         };
 
         public static string GetWorkItemTypeDescription(this WorkItemType type)
@@ -45,7 +49,29 @@ namespace Lte.Parameters.Entities.Work
             new Tuple<WorkItemSubtype, string>(WorkItemSubtype.Rssi, "RSSI故障"),
             new Tuple<WorkItemSubtype, string>(WorkItemSubtype.UplinkInterference, "小区级上行干扰"),
             new Tuple<WorkItemSubtype, string>(WorkItemSubtype.UplinkSevereInterference, "小区级上行严重干扰"),
-            new Tuple<WorkItemSubtype, string>(WorkItemSubtype.Others, "其他类型")
+            new Tuple<WorkItemSubtype, string>(WorkItemSubtype.Others, "其他类型"),
+            new Tuple<WorkItemSubtype, string>(WorkItemSubtype.AutomaticDt, "自动路测系统管理"),
+            new Tuple<WorkItemSubtype, string>(WorkItemSubtype.ResourceOptimize, "资源调优管理"),
+            new Tuple<WorkItemSubtype, string>(WorkItemSubtype.ProjectOptimization, "专题专项优化"),
+            new Tuple<WorkItemSubtype, string>(WorkItemSubtype.CommunicationSustain, "重大通信保障"),
+            new Tuple<WorkItemSubtype, string>(WorkItemSubtype.OptimizationWorkItem, "优化工单处理"),
+            new Tuple<WorkItemSubtype, string>(WorkItemSubtype.KpiAlarm, "性能监控预警"),
+            new Tuple<WorkItemSubtype, string>(WorkItemSubtype.RectifyDemand, "网优整改需求管理"),
+            new Tuple<WorkItemSubtype, string>(WorkItemSubtype.NetworkPlan, "网络规划选址"),
+            new Tuple<WorkItemSubtype, string>(WorkItemSubtype.SpecialData, "特殊数据更新"),
+            new Tuple<WorkItemSubtype, string>(WorkItemSubtype.Dispossessed, "逼迁应急优化"),
+            new Tuple<WorkItemSubtype, string>(WorkItemSubtype.ParameterCheck, "参数核查优化"),
+            new Tuple<WorkItemSubtype, string>(WorkItemSubtype.ClusterRf, "簇射频优化"),
+            new Tuple<WorkItemSubtype, string>(WorkItemSubtype.CoverageEvaluation, "覆盖系统评估"),
+            new Tuple<WorkItemSubtype, string>(WorkItemSubtype.InterferenceCheck, "干扰排查整治"),
+            new Tuple<WorkItemSubtype, string>(WorkItemSubtype.EngineeringOptimization, "工程优化管理"),
+            new Tuple<WorkItemSubtype, string>(WorkItemSubtype.PlanDemandLibrary, "规划需求库管理"),
+            new Tuple<WorkItemSubtype, string>(WorkItemSubtype.EngineeringParameters, "基站工参维护"),
+            new Tuple<WorkItemSubtype, string>(WorkItemSubtype.MarketSustain, "市场支撑保障"),
+            new Tuple<WorkItemSubtype, string>(WorkItemSubtype.CapacityEvaluation, "容量系统评估"),
+            new Tuple<WorkItemSubtype, string>(WorkItemSubtype.CustomerComplain, "客户投诉处理"),
+            new Tuple<WorkItemSubtype, string>(WorkItemSubtype.WeeklyAnalysis, "每周质量分析"),
+            new Tuple<WorkItemSubtype, string>(WorkItemSubtype.DailyTest, "日常测试管理")
         };
 
         public static string GetWorkItemSubtypeDescription(this WorkItemSubtype type)

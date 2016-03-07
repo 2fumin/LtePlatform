@@ -34,6 +34,8 @@ namespace Lte.Parameters.Concrete
             stat.RejectTimes = info.RejectTimes;
             stat.RepeatTimes = info.RepeatTimes;
             stat.State = info.State;
+            stat.Type = info.Type;
+            stat.Subtype = info.Subtype;
 
             Update(stat);
         }

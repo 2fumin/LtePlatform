@@ -14,7 +14,11 @@ namespace Lte.Parameters.Entities.Work
         Interference4G,
         RrcConnection,
         NetworkProblem,
-        Others
+        Others,
+        DailyTask,
+        DailyReport,
+        Yilutong,
+        KeySite
     }
 
     public enum WorkItemSubtype: short
@@ -31,7 +35,29 @@ namespace Lte.Parameters.Entities.Work
         PreciseRate,
         UplinkInterference,
         UplinkSevereInterference,
-        Others
+        Others,
+        AutomaticDt,
+        ResourceOptimize,
+        ProjectOptimization,
+        CommunicationSustain,
+        OptimizationWorkItem,
+        KpiAlarm,
+        RectifyDemand,
+        NetworkPlan,
+        SpecialData,
+        Dispossessed,
+        ParameterCheck,
+        ClusterRf,
+        CoverageEvaluation,
+        InterferenceCheck,
+        EngineeringOptimization,
+        PlanDemandLibrary,
+        EngineeringParameters,
+        MarketSustain,
+        CapacityEvaluation,
+        CustomerComplain,
+        WeeklyAnalysis,
+        DailyTest
     }
 
     public enum WorkItemState: byte
