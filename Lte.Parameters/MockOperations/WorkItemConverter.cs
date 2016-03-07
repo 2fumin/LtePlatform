@@ -18,9 +18,11 @@ namespace Lte.Parameters.MockOperations
             source.CloneProperties(result);
             result.Cause = source.CauseDescription.GetWorkItemCause();
             result.State = source.StateDescription.GetState();
-            var typeFields = source.Title.Split('_');
-            var titleFields = source.Title.GetSplittedFields("--");
-            var titleFields2 = source.Title.GetSplittedFields("—");
+
+            var title = source.Title ?? "";
+            var typeFields = title.Split('_');
+            var titleFields = title.GetSplittedFields("--");
+            var titleFields2 = title.GetSplittedFields("—");
             if (typeFields.Length > 3)
             {
                 result.Type = typeFields[1].GetWorkItemType();
@@ -49,7 +51,7 @@ namespace Lte.Parameters.MockOperations
             {
                 result.Type = WorkItemType.Others;
                 result.Subtype = WorkItemSubtype.Others;
-                result.FeedbackContents = "[" + DateTime.Now + "]创建信息：" + source.Title;
+                result.FeedbackContents = "[" + DateTime.Now + "]创建信息：" + title;
             }
             return result;
         }

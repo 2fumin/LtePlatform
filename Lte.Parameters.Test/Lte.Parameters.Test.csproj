@@ -76,6 +76,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converter\WorkItemConverterTest.cs" />
     <Compile Include="Entities\AlarmStatCsvTest.cs" />
     <Compile Include="Entities\CdmaCellConstructionTest.cs" />
     <Compile Include="Entities\CellConstructionTest.cs" />
