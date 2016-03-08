@@ -68,12 +68,18 @@ namespace Lte.Evaluations.MapperSerive
                     opt => opt.MapFrom(s => Mapper.Map<TopConnection3GCell, TopConnection3GCellView>(s.TopCell)));
         }
 
-        public static void MapTopDrop2GTrend()
+        public static void MapTopKpiTrend()
         {
             Mapper.CreateMap<TopDrop2GTrend, TopDrop2GTrendView>();
             Mapper.CreateMap<TopCellContainer<TopDrop2GTrend>, TopDrop2GTrendViewContainer>()
                 .ForMember(d => d.TopDrop2GTrendView,
                     opt => opt.MapFrom(s => Mapper.Map<TopDrop2GTrend, TopDrop2GTrendView>(s.TopCell)))
+                .ForMember(d => d.CellName, opt => opt.MapFrom(s => s.CdmaName + "-" + s.TopCell.SectorId))
+                .ForMember(d => d.ENodebName, opt => opt.MapFrom(s => s.LteName));
+            Mapper.CreateMap<TopConnection3GTrend, TopConnection3GTrendView>();
+            Mapper.CreateMap<TopCellContainer<TopConnection3GTrend>, TopConnection3GTrendViewContainer>()
+                .ForMember(d => d.TopConnection3GTrendView,
+                    opt => opt.MapFrom(s => Mapper.Map<TopConnection3GTrend, TopConnection3GTrendView>(s.TopCell)))
                 .ForMember(d => d.CellName, opt => opt.MapFrom(s => s.CdmaName + "-" + s.TopCell.SectorId))
                 .ForMember(d => d.ENodebName, opt => opt.MapFrom(s => s.LteName));
         }

@@ -45,5 +45,23 @@ namespace Lte.Evaluations.MapperSerive.Kpi
                     MtAssignmentSuccess = g.Sum(x => x.MtAssignmentSuccess)
                 };
         }
+
+        public static IEnumerable<TopConnection3GTrend> QueryTrends(this IEnumerable<TopConnection3GCell> stats)
+        {
+            return from stat in stats
+                   group stat by new { stat.BtsId, stat.SectorId, stat.CellId }
+                into g
+                   select new TopConnection3GTrend
+                   {
+                       BtsId = g.Key.BtsId,
+                       SectorId = g.Key.SectorId,
+                       CellId = g.Key.CellId,
+                       TopDates = g.Count(),
+                       WirelessDrop = g.Sum(x => x.WirelessDrop),
+                       ConnectionAttempts = g.Sum(x => x.ConnectionAttempts),
+                       ConnectionFails = g.Sum(x => x.ConnectionFails),
+                       LinkBusyRate = g.Average(x => x.LinkBusyRate)
+                   };
+        }
     }
 }

@@ -101,6 +101,7 @@
     <Compile Include="DataService\Dump\NewENodebListContainer.cs" />
     <Compile Include="DataService\Basic\ENodebQueryService.cs" />
     <Compile Include="DataService\Mr\InterferenceMatrixService.cs" />
+    <Compile Include="DataService\TopConnection3GService.cs" />
     <Compile Include="MapperSerive\Kpi\TopConnection3GCellViewContainer.cs" />
     <Compile Include="MapperSerive\Kpi\TopConnection3GTrendViewContainer.cs" />
     <Compile Include="ViewModels\Kpi\TopConnection3GTrendView.cs" />

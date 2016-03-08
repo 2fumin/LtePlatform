@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using Lte.Parameters.Abstract;
@@ -25,6 +26,11 @@ namespace Lte.Parameters.Concrete
                 count++;
             }
             return count;
+        }
+
+        public List<TopConnection3GCell> GetAllList(string city, DateTime begin, DateTime end)
+        {
+            return GetAll().Where(x => x.StatTime >= begin && x.StatTime < end && x.City == city).ToList();
         }
     }
 }

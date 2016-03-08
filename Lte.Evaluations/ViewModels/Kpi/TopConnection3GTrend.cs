@@ -10,6 +10,8 @@ namespace Lte.Evaluations.ViewModels.Kpi
 
         public byte SectorId { get; set; }
 
+        public int TopDates { get; set; }
+
         public int WirelessDrop { get; set; }
 
         public int ConnectionAttempts { get; set; }
