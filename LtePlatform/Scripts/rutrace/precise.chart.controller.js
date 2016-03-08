@@ -1,5 +1,5 @@
 ﻿
-app.controller("rutrace.chart", function ($scope, $location, appKpiService) {
+app.controller("rutrace.chart", function ($scope, $location, $timeout, appKpiService) {
     if ($scope.overallStat.districtStats.length === 0) $location.path($scope.rootPath);
 
     $scope.showCharts = function () {
@@ -8,4 +8,8 @@ app.controller("rutrace.chart", function ($scope, $location, appKpiService) {
         $("#precise").highcharts(appKpiService.getPreciseRateOptions($scope.overallStat.districtStats,
             $scope.overallStat.townStats));
     };
+
+    $timeout(function() {
+        $scope.showCharts();
+    }, 1000);
 });

@@ -1,5 +1,5 @@
 ﻿
-app.controller("rutrace.trendchart", function ($scope, $location, appKpiService) {
+app.controller("rutrace.trendchart", function ($scope, $location, $timeout, appKpiService) {
     if ($scope.trendStat.mrStats.length === 0) $location.path($scope.rootPath + "trend");
 
     $scope.showCharts = function () {
@@ -12,4 +12,7 @@ app.controller("rutrace.trendchart", function ($scope, $location, appKpiService)
         $scope.trendStat.districts);
     $scope.timePreciseConfig = appKpiService.getPreciseDistrictOptions($scope.trendStat.preciseStats,
         $scope.trendStat.districts);
+    $timeout(function() {
+        $scope.showCharts();
+    }, 1000);
 });

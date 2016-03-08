@@ -2,11 +2,8 @@
     <div class="panel-heading">
         <h3 class="panel-title">
             {{overallStat.dateString}}精确覆盖率指标
+            <a ng-href="{{rootPath}}" class="btn btn-sm btn-default" style="float: right">返回</a>
         </h3>
-        <div class="btn-group-sm" style="float: right">
-            <button class="btn btn-sm btn-primary" ng-click="showCharts()">显示</button>
-            <a ng-href="{{rootPath}}" class="btn btn-sm btn-success">返回</a>
-        </div>
     </div>
     <div class="panel-body">
         <div uib-tabset active="active">
