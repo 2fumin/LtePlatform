@@ -393,6 +393,8 @@
   <ItemGroup>
     <Content Include="appViews\BasicKpi\TopConnection3G.html" />
     <Content Include="appViews\BasicKpi\TopConnection3GTable.html" />
+    <Content Include="appViews\BasicKpi\TopConnection3GTrend.html" />
+    <Content Include="appViews\BasicKpi\TopConnection3GTrendTable.html" />
     <Content Include="appViews\BasicKpi\TopDrop2GTrend.html" />
     <Content Include="appViews\BasicKpi\Trend.html" />
     <Content Include="appViews\Import\ImportProgress.html" />
@@ -692,6 +694,7 @@
     <Content Include="Scripts\kpi\basic\index.controller.js" />
     <Content Include="Scripts\kpi\basic\route.controller.js" />
     <Content Include="Scripts\kpi\basic\top.connection3G.js" />
+    <Content Include="Scripts\kpi\basic\top.connection3G.trend.js" />
     <Content Include="Scripts\kpi\basic\top.drop2G.js" />
     <Content Include="Scripts\kpi\basic\top.drop2G.trend.js" />
     <Content Include="Scripts\kpi\basic\trend.controller.js" />

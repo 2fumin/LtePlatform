@@ -20,7 +20,7 @@ namespace Lte.Evaluations.Policy
             => new Dictionary<string, OrderTopConnection3GPolicy>
         {
             {"按照连接失败次数降序排列", OrderTopConnection3GPolicy.OrderByConnectionFailsDescending },
-            {"按照掉话率升序排列", OrderTopConnection3GPolicy.OrderByConnectionRate },
+            {"按照连接成功率升序排列", OrderTopConnection3GPolicy.OrderByConnectionRate },
             {"按照出现次数降序排列", OrderTopConnection3GPolicy.OrderByTopDatesDescending }
         };
 
@@ -31,9 +31,9 @@ namespace Lte.Evaluations.Policy
             switch (policy)
             {
                 case OrderTopConnection3GPolicy.OrderByConnectionFailsDescending:
-                    return stats.OrderByDescending(x => x.DropRate).Take(topCount);
+                    return stats.OrderByDescending(x => x.ConnectionFails).Take(topCount);
                 case OrderTopConnection3GPolicy.OrderByConnectionRate:
-                    return stats.OrderBy(x => x.ConnectionFails).Take(topCount);
+                    return stats.OrderBy(x => x.ConnectionRate).Take(topCount);
                 default:
                     return stats.OrderByDescending(x => x.TopDates).Take(topCount);
             }

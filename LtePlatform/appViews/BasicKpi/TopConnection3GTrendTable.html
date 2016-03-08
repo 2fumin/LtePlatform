@@ -1,0 +1,34 @@
+﻿<table class="table table-hover">
+    <thead>
+        <tr>
+            <td>小区名称</td>
+            <td>LTE小区名称</td>
+            <td>无线掉线次数</td>
+            <td>掉线率(%)</td>
+            <td>连接尝试次数</td>
+            <th>连接失败次数</th>
+            <th>连接成功率(%)</th>
+            <td>链路繁忙率</td>
+            <td>TOP天数</td>
+            <th>查看信息</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="cell in trendCells">
+            <td>{{cell.cellName}}</td>
+            <td>{{cell.eNodebName}}-{{cell.sectorId}}</td>
+            <td>{{cell.wirelessDrop}}</td>
+            <td>{{100 * cell.dropRate | number: 2}}</td>
+            <td>{{cell.connectionAttempts}}</td>
+            <td>{{cell.connectionFails}}</td>
+            <td>{{100 * cell.connectionRate | number: 2}}</td>
+            <td>{{cell.linkBusyRate | number: 2}}</td>
+            <td>{{cell.topDates}}</td>
+            <td>
+                <a class="btn btn-primary" ng-href="{{rootPath}}cellConnection3GHistory/{{cell.cellId}}/{{cell.sectorId}}">
+                    <span class="glyphicon glyphicon-search"></span>历史信息
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>

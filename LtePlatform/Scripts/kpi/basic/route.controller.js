@@ -22,9 +22,9 @@
                     templateUrl: rootDir + 'TopDrop2GTrend.html',
                     controller: 'kpi.topDrop2G.trend'
                 })
-                .when('/bts/:btsId/:serialNumber', {
-                    templateUrl: rootDir + 'BtsInfo.html',
-                    controller: "workitem.bts"
+                .when('/topConnection3GTrend/:city', {
+                    templateUrl: rootDir + 'TopConnection3GTrend.html',
+                    controller: 'kpi.topConnection3G.trend'
                 })
                 .when('/cell/:eNodebId/:sectorId/:serialNumber', {
                     templateUrl: rootDir + 'CellInfo.html',
@@ -76,6 +76,10 @@
                     $rootScope.menuItems.push({
                         displayName: "TOP掉话变化趋势-" + result.options[i],
                         url: rootUrl + "/topDrop2GTrend/" + result.options[i]
+                    });
+                    $rootScope.menuItems.push({
+                        displayName: "TOP连接变化趋势-" + result.options[i],
+                        url: rootUrl + "/topConnection3GTrend/" + result.options[i]
                     });
                 }
             });
