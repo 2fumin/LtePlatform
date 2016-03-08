@@ -16,7 +16,7 @@ namespace Lte.Evaluations.Test.ViewModel
         [Test]
         public void Test()
         {
-            KpiMapperService.MapTopDrop2G();
+            KpiMapperService.MapTopKpi();
             var source = new TopCellContainer<TopDrop2GCell>
             {
                 LteName = "aaa",

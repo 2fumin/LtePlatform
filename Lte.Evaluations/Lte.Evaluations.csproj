@@ -101,6 +101,7 @@
     <Compile Include="DataService\Dump\NewENodebListContainer.cs" />
     <Compile Include="DataService\Basic\ENodebQueryService.cs" />
     <Compile Include="DataService\Mr\InterferenceMatrixService.cs" />
+    <Compile Include="MapperSerive\TopConnection3GCellViewContainer.cs" />
     <Compile Include="ViewModels\Mr\InterferenceMatrixView.cs" />
     <Compile Include="DataService\Mr\InterferenceNeighborService.cs" />
     <Compile Include="DataService\KpiImportService.cs" />
@@ -159,6 +160,7 @@
     <Compile Include="ViewModels\RasterInfoView.cs" />
     <Compile Include="ViewModels\SectorView.cs" />
     <Compile Include="ViewModels\TopConnection3GCellView.cs" />
+    <Compile Include="ViewModels\TopConnection3GDateView.cs" />
     <Compile Include="ViewModels\TopDrop2GCellView.cs" />
     <Compile Include="ViewModels\TopDrop2GDateView.cs" />
     <Compile Include="ViewModels\TopDrop2GTrend.cs" />

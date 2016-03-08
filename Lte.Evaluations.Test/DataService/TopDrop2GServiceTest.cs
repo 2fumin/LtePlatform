@@ -27,7 +27,7 @@ namespace Lte.Evaluations.Test.DataService
         [TestFixtureSetUp]
         public void TestFixtureService()
         {
-            KpiMapperService.MapTopDrop2G();
+            KpiMapperService.MapTopKpi();
             KpiMapperService.MapTopDrop2GTrend();
             _service = new TopDrop2GService(_repository.Object, _btsRepository.Object, _eNodebRepository.Object);
             _testService = new TopDrop2GTestService(_repository, _btsRepository, _eNodebRepository);

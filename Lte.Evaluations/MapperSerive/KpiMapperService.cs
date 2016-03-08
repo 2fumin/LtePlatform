@@ -54,12 +54,16 @@ namespace Lte.Evaluations.MapperSerive
                 .ForMember(d => d.AlarmTypeDescription, opt => opt.MapFrom(s => s.AlarmType.GetAlarmTypeDescription()));
         }
 
-        public static void MapTopDrop2G()
+        public static void MapTopKpi()
         {
             Mapper.CreateMap<TopDrop2GCell, TopDrop2GCellView>();
             Mapper.CreateMap<TopCellContainer<TopDrop2GCell>, TopDrop2GCellViewContainer>()
                 .ForMember(d => d.TopDrop2GCellView,
                     opt => opt.MapFrom(s => Mapper.Map<TopDrop2GCell, TopDrop2GCellView>(s.TopCell)));
+            Mapper.CreateMap<TopConnection3GCell, TopConnection3GCellView>();
+            Mapper.CreateMap<TopCellContainer<TopConnection3GCell>, TopConnection3GCellViewContainer>()
+                .ForMember(d => d.TopConnection3GCellView,
+                    opt => opt.MapFrom(s => Mapper.Map<TopConnection3GCell, TopConnection3GCellView>(s.TopCell)));
         }
 
         public static void MapTopDrop2GTrend()

@@ -38,7 +38,7 @@ namespace Lte.Evaluations.MapperSerive
             KpiMapperService.MapCellPrecise();
             KpiMapperService.MapTownPrecise();
             KpiMapperService.MapAlarmStat();
-            KpiMapperService.MapTopDrop2G();
+            KpiMapperService.MapTopKpi();
             KpiMapperService.MapTopDrop2GTrend();
             KpiMapperService.MapPreciseStat();
             KpiMapperService.MapWorkItem();
