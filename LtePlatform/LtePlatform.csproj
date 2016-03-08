@@ -418,6 +418,7 @@
     <Content Include="appViews\Rutrace\Interference\Victim.html" />
     <Content Include="appViews\Rutrace\Map\Index.html" />
     <Content Include="appViews\Rutrace\Top.html" />
+    <Content Include="appViews\Rutrace\TopTable.html" />
     <Content Include="appViews\Rutrace\Trend.html" />
     <Content Include="appViews\Rutrace\TrendChart.html" />
     <Content Include="appViews\Test\Chapter10\DateTimeTest.html" />
