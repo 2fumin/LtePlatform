@@ -727,6 +727,7 @@
     <Content Include="Scripts\rutrace\top.district.controller.js" />
     <Content Include="Scripts\rutrace\trend.chart.controller.js" />
     <Content Include="Scripts\rutrace\trend.controller.js" />
+    <Content Include="Scripts\rutrace\workitems.controller.js" />
     <Content Include="Scripts\service\app.authorize.service.js" />
     <Content Include="Scripts\service\app.kpi.service.js" />
     <Content Include="Scripts\service\app.parameters.service.js" />

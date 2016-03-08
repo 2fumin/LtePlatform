@@ -42,6 +42,10 @@
                     templateUrl: viewDir + "Map/Index.html",
                     controller: "rutrace.map"
                 })
+                .when('/workItems/:cellId/:sectorId', {
+                    templateUrl: "/appViews/WorkItem/WorkItemTable.html",
+                    controller: "rutrace.workitems"
+                })
                 .otherwise({
                     redirectTo: '/'
                 });
