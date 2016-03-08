@@ -1,4 +1,4 @@
-﻿app.controller("rutrace.top.district", function($scope, $routeParams, $http, appUrlService, topPreciseService) {
+﻿app.controller("rutrace.top.district", function($scope, $routeParams, $http, appUrlService, topPreciseService, workitemService) {
     $scope.page.title = "TOP指标分析-" + $routeParams.district;
     $scope.topCells = [];
     var lastWeek = new Date();
@@ -25,6 +25,19 @@
         topPreciseService.queryTopKpisInDistrict($scope.beginDate.value, $scope.endDate.value, $scope.topCount.selected,
             $scope.orderPolicy.selected, $scope.overallStat.city, $routeParams.district).then(function (result) {
                 $scope.topCells = result;
+                for (var i = 0; i < $scope.topCells.length; i++) {
+                    var cell = $scope.topCells[i];
+                    workitemService.queryByCellId(cell.cellId, cell.sectorId).then(function (items) {
+                        if (items.length > 0) {
+                            for (var j = 0; j < $scope.topCells.length; j++) {
+                                if (items[0].eNodebId === $scope.topCells[j].cellId && items[0].sectorId === $scope.topCells[j].sectorId) {
+                                    $scope.topCells[j].hasWorkItems = true;
+                                    break;
+                                }
+                            }
+                        }
+                    });
+                }
             });
     };
     $scope.monitorAll = function () {
