@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Lte.Evaluations.ViewModels;
 using Lte.Evaluations.ViewModels.Kpi;
 
-namespace Lte.Evaluations.MapperSerive
+namespace Lte.Evaluations.MapperSerive.Kpi
 {
-    public class TopDrop2GTrendViewContainer
+    public class TopConnection3GTrendViewContainer
     {
-        public TopDrop2GTrendView TopDrop2GTrendView { get; set; }
+        public TopConnection3GTrendView TopConnection3GTrendView { get; set; }
 
         public string ENodebName { get; set; }
 

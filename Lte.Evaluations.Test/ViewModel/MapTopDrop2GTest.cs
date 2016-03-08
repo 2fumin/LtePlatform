@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Lte.Evaluations.MapperSerive;
+using Lte.Evaluations.MapperSerive.Kpi;
 using Lte.Parameters.Entities;
 using NUnit.Framework;
 

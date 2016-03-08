@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Lte.Evaluations.ViewModels;
-using Lte.Evaluations.ViewModels.Kpi;
+﻿using Lte.Evaluations.ViewModels.Kpi;
 
-namespace Lte.Evaluations.MapperSerive
+namespace Lte.Evaluations.MapperSerive.Kpi
 {
     public class TopConnection3GCellViewContainer
     {

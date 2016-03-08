@@ -1,6 +1,6 @@
 ﻿using Lte.Parameters.Entities;
 
-namespace Lte.Evaluations.MapperSerive
+namespace Lte.Evaluations.MapperSerive.Kpi
 {
     public class TopPrecise4GContainer
     {

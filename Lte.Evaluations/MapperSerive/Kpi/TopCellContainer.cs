@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Lte.Parameters.Abstract;
-using Lte.Parameters.Entities;
+﻿using Lte.Parameters.Abstract;
 
-namespace Lte.Evaluations.MapperSerive
+namespace Lte.Evaluations.MapperSerive.Kpi
 {
     public class TopCellContainer<TTopCell>
         where TTopCell : IBtsIdQuery

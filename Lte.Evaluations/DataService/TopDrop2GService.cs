@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Lte.Evaluations.MapperSerive;
+using Lte.Evaluations.MapperSerive.Kpi;
 using Lte.Evaluations.ViewModels;
 using Lte.Evaluations.ViewModels.Kpi;
 using Lte.Parameters.Abstract;

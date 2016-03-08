@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Lte.Evaluations.MapperSerive;
+using Lte.Evaluations.MapperSerive.Kpi;
 using Lte.Parameters.Entities;
 using NUnit.Framework;
 using Shouldly;

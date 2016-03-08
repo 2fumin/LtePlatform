@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Lte.Domain.Common.Wireless;
+using Lte.Evaluations.MapperSerive.Kpi;
 using Lte.Evaluations.ViewModels;
 using Lte.Evaluations.ViewModels.Kpi;
 using Lte.Evaluations.ViewModels.Precise;
