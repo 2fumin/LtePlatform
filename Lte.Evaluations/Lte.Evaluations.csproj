@@ -158,6 +158,7 @@
     <Compile Include="ViewModels\RegionKpi\PreciseRegionDateView.cs" />
     <Compile Include="ViewModels\RasterInfoView.cs" />
     <Compile Include="ViewModels\SectorView.cs" />
+    <Compile Include="ViewModels\TopConnection3GCellView.cs" />
     <Compile Include="ViewModels\TopDrop2GCellView.cs" />
     <Compile Include="ViewModels\TopDrop2GDateView.cs" />
     <Compile Include="ViewModels\TopDrop2GTrend.cs" />

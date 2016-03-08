@@ -29,13 +29,7 @@ namespace Lte.Parameters.Entities
         public int ConnectionFails { get; set; }
 
         public double LinkBusyRate { get; set; }
-
-        public double ConnectionRate => (double)(ConnectionAttempts - ConnectionFails) / ConnectionAttempts;
-
-        public double DropRate => (double)WirelessDrop / (ConnectionAttempts - ConnectionFails);
-
-        public TopConnection3GCell() { }
-
+        
         public static TopConnection3GCell ConstructStat(TopConnection3GCellExcel cellExcel)
         {
             return Mapper.Map<TopConnection3GCellExcel, TopConnection3GCell>(cellExcel);

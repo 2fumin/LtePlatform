@@ -1,0 +1,35 @@
+﻿<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            {{page.title}}
+        </h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <label>城市：</label>
+                <div class="input-group">
+                    <select class="form-control" ng-model="city.selected" ng-options="c as c for c in city.options"></select>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-success" ng-click="showKpi()">
+                            <i class="glyphicon glyphicon-search" title="统计"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label>日期：</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" uib-datepicker-popup ng-model="statDate.value" is-open="statDate.opened" 
+                           ng-required="true" close-text="Close" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="statDate.opened = true">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div ng-include="'/appViews/BasicKpi/TopConnection3GTable.html'"></div>
+    </div>
+</div>

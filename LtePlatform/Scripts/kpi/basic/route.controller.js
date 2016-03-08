@@ -14,6 +14,10 @@
                     templateUrl: rootDir + 'TopDrop2G.html',
                     controller: 'kpi.topDrop2G'
                 })
+                .when('/topConnnection3G', {
+                    templateUrl: rootDir + 'TopConnection3G.html',
+                    controller: 'kpi.topConnection3G'
+                })
                 .when('/topDrop2GTrend/:city', {
                     templateUrl: rootDir + 'TopDrop2GTrend.html',
                     controller: 'kpi.topDrop2G.trend'
@@ -44,6 +48,9 @@
             }, {
                 displayName: "TOP掉话指标",
                 url: rootUrl + "/topDrop2G"
+            }, {
+                displayName: "TOP连接成功率指标",
+                url: rootUrl + "/topConnection3G"
             }
         ];
         $rootScope.rootPath = rootUrl + "/";

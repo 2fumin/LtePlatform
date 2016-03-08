@@ -1,0 +1,34 @@
+﻿<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>小区编号</th>
+            <th>CDMA基站名称</th>
+            <th>LTE基站名称</th>
+            <th>扇区编号</th>
+            <th>频点</th>
+            <th>掉话次数</th>
+            <th>主叫次数</th>
+            <th>被叫次数</th>
+            <th>掉话率</th>
+            <th>查看信息</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="cell in topData.connection3G">
+            <td>{{cell.cellId}}</td>
+            <td>{{cell.cdmaName}}</td>
+            <td>{{cell.lteName}}</td>
+            <td>{{cell.sectorId}}</td>
+            <td>{{cell.frequency}}</td>
+            <td>{{cell.drops}}</td>
+            <td>{{cell.moAssignmentSuccess}}</td>
+            <td>{{cell.mtAssignmentSuccess}}</td>
+            <td>{{cell.dropRate * 100 | number: 2}}%</td>
+            <td>
+                <a class="btn btn-primary" ng-href="{{rootPath}}cellConnection3GHistory/{{cell.cellId}}/{{cell.sectorId}}">
+                    <span class="glyphicon glyphicon-search"></span>历史信息
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
