@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper.Should;
 using Lte.Evaluations.ViewModels;
+using Lte.Evaluations.ViewModels.Kpi;
 using NUnit.Framework;
 using Shouldly;
 

@@ -1,7 +1,6 @@
-﻿using Lte.Domain.Regular;
-using Lte.Domain.Regular.Attributes;
+﻿using Lte.Domain.Regular.Attributes;
 
-namespace Lte.Evaluations.ViewModels
+namespace Lte.Evaluations.ViewModels.Kpi
 {
     [TypeDoc("TOP掉话小区指标趋势视图")]
     public class TopDrop2GTrendView

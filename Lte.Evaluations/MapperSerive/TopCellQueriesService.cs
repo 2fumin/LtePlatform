@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Lte.Evaluations.ViewModels;
+using Lte.Evaluations.ViewModels.Kpi;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 

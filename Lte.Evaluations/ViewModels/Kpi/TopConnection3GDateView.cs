@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Lte.Domain.Regular.Attributes;
 
-namespace Lte.Evaluations.ViewModels
+namespace Lte.Evaluations.ViewModels.Kpi
 {
     [TypeDoc("单日TOP连接成功率小区视图")]
     public class TopConnection3GDateView

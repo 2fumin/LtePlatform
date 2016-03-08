@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Lte.Parameters.Abstract;
+﻿using Lte.Parameters.Abstract;
 
-namespace Lte.Evaluations.ViewModels
+namespace Lte.Evaluations.ViewModels.Kpi
 {
     public class TopDrop2GTrend : IBtsIdQuery
     {
