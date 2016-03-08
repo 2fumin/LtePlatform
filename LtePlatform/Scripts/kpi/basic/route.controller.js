@@ -14,7 +14,7 @@
                     templateUrl: rootDir + 'TopDrop2G.html',
                     controller: 'kpi.topDrop2G'
                 })
-                .when('/topConnnection3G', {
+                .when('/topConnection3G', {
                     templateUrl: rootDir + 'TopConnection3G.html',
                     controller: 'kpi.topConnection3G'
                 })

@@ -23,9 +23,9 @@
             <td>{{cell.wirelessDrop}}</td>
             <td>{{cell.connectionAttempts}}</td>
             <td>{{cell.connectionFails}}</td>
-            <td>{{cell.linkBusyRate}}</td>
-            <td>{{cell.connectionRate}}%</td>
-            <td>{{cell.dropRate}}%</td>
+            <td>{{cell.linkBusyRate | number: 2}}%</td>
+            <td>{{100 * cell.connectionRate | number: 2}}%</td>
+            <td>{{100 * cell.dropRate | number: 2}}%</td>
             <td>
                 <a class="btn btn-primary" ng-href="{{rootPath}}cellConnection3GHistory/{{cell.cellId}}/{{cell.sectorId}}">
                     <span class="glyphicon glyphicon-search"></span>历史信息
