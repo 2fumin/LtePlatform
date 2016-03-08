@@ -119,6 +119,8 @@ namespace LtePlatform
 
             ninjectKernel.Bind<TopDrop2GService>().ToSelf();
 
+            ninjectKernel.Bind<TopConnection3GService>().ToSelf();
+
             ninjectKernel.Bind<BasicImportService>().ToSelf();
 
             ninjectKernel.Bind<ENodebDumpService>().ToSelf();
