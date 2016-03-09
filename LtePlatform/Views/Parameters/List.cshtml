@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "全网基站小区统计";
+    ViewBag.Title = "基础数据模块";
 }
 
 <div class="panel panel-warning" ng-app="myApp">
@@ -23,11 +23,13 @@
 
 @section Scripts{
     <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/angular-ui-router.min.js"></script>
     <script src="~/Scripts/highcharts/highcharts.src.js"></script>
     <script src="~/Scripts/highcharts/highcharts-ng.js"></script>
-    <script src="~/Scripts/angular-ui-router.min.js"></script>
     <script>
         var app = angular.module('myApp', ["highcharts-ng", 'ui.router']);
     </script>
+    <script src="~/Scripts/parameters/route.controller.js"></script>
     <script src="~/Scripts/parameters/list.controller.js"></script>
+    <script src="~/Scripts/parameters/menu.root.js"></script>
 }

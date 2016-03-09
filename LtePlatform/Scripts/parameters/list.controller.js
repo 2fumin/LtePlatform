@@ -1,4 +1,5 @@
-﻿app.controller("parameters.list", function($scope, $http) {
+﻿app.controller("parameters.list", function ($scope, $http) {
+    $scope.page.title = "基础数据总揽";
     $scope.chartConfig = {
 
         options: {

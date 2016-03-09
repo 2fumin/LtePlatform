@@ -1,70 +1,24 @@
 ﻿app.config(function ($stateProvider, $urlRouterProvider) {
-        var viewDir = "/appViews/Rutrace/";
+        var viewDir = "/appViews/Parameters/";
         $stateProvider
-            .when('/', {
-                templateUrl: viewDir + "Index.html",
-                controller: "rutrace.index"
-            })
-            .when('/trend', {
-                templateUrl: viewDir + "Trend.html",
-                controller: "rutrace.trend"
-            })
-            .when('/top', {
-                templateUrl: viewDir + "Top.html",
-                controller: "rutrace.top"
-            })
-            .when('/topDistrict/:district', {
-                templateUrl: viewDir + "Top.html",
-                controller: "rutrace.top.district"
-            })
-            .when('/chart', {
-                templateUrl: viewDir + "Chart.html",
-                controller: "rutrace.chart"
-            })
-            .when('/trendchart', {
-                templateUrl: viewDir + "TrendChart.html",
-                controller: "rutrace.trendchart"
-            })
-            .when('/top', {
-                templateUrl: viewDir + "Top.html",
-                controller: "rutrace.top"
-            })
-            .when('/import', {
-                templateUrl: viewDir + "Import.html",
-                controller: "rutrace.import"
-            })
-            .when('/interference', {
-                templateUrl: viewDir + "Interference/Index.html",
-                controller: "rutrace.interference"
-            })
-            .when('/baidumap/:name', {
-                templateUrl: viewDir + "Map/Index.html",
-                controller: "rutrace.map"
-            })
-            .when('/details/:number', {
-                templateUrl: viewDir + "WorkItem/ForCell.html",
-                controller: "workitem.details"
-            })
-            .when('/workItems/:cellId/:sectorId', {
-                templateUrl: viewDir + "WorkItem/ForCell.html",
-                controller: "rutrace.workitems"
+            .state('list', {
+                views: {
+                    'menu': {
+                        templateUrl: "/appViews/GeneralMenu.html",
+                        controller: "menu.root"
+                    },
+                    "contents": {
+                        templateUrl: viewDir + "List.html",
+                        controller: "parameters.list"
+                    }
+                },
+                url: "/"
             });
         $urlRouterProvider.otherwise('/');
     })
     .run(function($rootScope) {
-        var rootUrl = "/Rutrace#";
-        $rootScope.menuItems = [
-            {
-                displayName: "指标总体情况",
-                url: rootUrl + "/"
-            }, {
-                displayName: "指标变化趋势",
-                url: rootUrl + "/trend"
-            }, {
-                displayName: "TOP指标分析",
-                url: rootUrl + "/top"
-            }
-        ];
+        var rootUrl = "/Parameters/List#";
+        $rootScope.menuItems = [];
         $rootScope.rootPath = rootUrl + "/";
 
         $rootScope.updateMenuItems = function(namePrefix, urlPrefix, name) {
@@ -79,5 +33,8 @@
         };
         $rootScope.viewData = {
             workItems: []
+        };
+        $rootScope.page = {
+            title: "基础数据总揽"
         };
     });
