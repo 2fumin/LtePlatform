@@ -1115,7 +1115,6 @@
     <Content Include="Views\Shared\_DistributionTable.cshtml" />
     <None Include="Views\Parameters\BasicImport.cshtml" />
     <None Include="Views\Parameters\NeighborImport.cshtml" />
-    <Content Include="Views\Parameters\QueryMap.cshtml" />
     <None Include="Views\Parameters\_AlarmImport.cshtml" />
     <Content Include="appViews\Parameters\Import\Index.html" />
     <Content Include="appViews\Parameters\Import\ENodebLonLatTable.html" />
@@ -1128,7 +1127,7 @@
     <Content Include="Views\Parameters\_ENodebMapInfoBox.cshtml" />
     <Content Include="Views\Parameters\_BtsMapInfoBox.cshtml" />
     <Content Include="appViews\Parameters\List.html" />
-    <Content Include="Views\Parameters\_QueryMap.cshtml" />
+    <Content Include="appViews\Parameters\QueryMap.html" />
     <Content Include="Views\Parameters\_SectorMapInfoBox.cshtml" />
     <Content Include="Views\Shared\_DtKpiSelection.cshtml" />
     <Content Include="appViews\Import\Neighbor\Index.html" />
