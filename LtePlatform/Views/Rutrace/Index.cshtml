@@ -3,9 +3,7 @@
 }
 <div class="row" ng-app="myApp" ng-controller="rutrace.root">
     <div class="col-md-4">
-        @{
-            Html.RenderPartial("_RutraceMenu");
-        }
+        <div ng-include="'/appViews/GeneralMenu.html'"></div>
     </div>
     <div class="col-md-8">
         <h3 class="text-center text-primary"><strong>{{page.title}}</strong></h3>

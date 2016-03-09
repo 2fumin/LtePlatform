@@ -3,31 +3,31 @@
     ViewBag.Title = "全网基站小区统计";
 }
 
-<div class="panel panel-warning">
+<div class="panel panel-warning" ng-app="myApp">
     <div class="panel-heading">
         <h2 class="panel-title">
             <strong>@ViewBag.Title</strong>
         </h2>
     </div>
-    <p>
-        @{
-            Html.RenderPartial("_ParametersMenu");
-        }
-    </p>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-4">
+                <div ui-view="menu"></div>
+            </div>
+            <div class="col-md-8">
+                <div ui-view="contents"></div>
+            </div>
+        </div>
+    </div>
 </div>
-
-@section SPAViews{
-    @{
-        Html.RenderPartial("_List");
-    }
-}
 
 @section Scripts{
     <script src="~/Scripts/angular.min.js"></script>
     <script src="~/Scripts/highcharts/highcharts.src.js"></script>
     <script src="~/Scripts/highcharts/highcharts-ng.js"></script>
+    <script src="~/Scripts/angular-ui-router.min.js"></script>
     <script>
-        var app = angular.module('myApp', ["highcharts-ng"]);
+        var app = angular.module('myApp', ["highcharts-ng", 'ui.router']);
     </script>
-    <script src="~/Scripts/parameters/list.viewmodel.js"></script>
+    <script src="~/Scripts/parameters/list.controller.js"></script>
 }

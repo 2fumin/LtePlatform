@@ -1,4 +1,4 @@
-﻿app.controller("listController", function($scope, $http) {
+﻿app.controller("parameters.list", function($scope, $http) {
     $scope.chartConfig = {
 
         options: {

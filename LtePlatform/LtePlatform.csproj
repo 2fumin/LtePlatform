@@ -719,6 +719,7 @@
     <Content Include="Scripts\parameters\import\index.controller.js" />
     <Content Include="Scripts\parameters\import\route.controller.js" />
     <Content Include="Scripts\parameters\neighbor\import.controller.js" />
+    <Content Include="Scripts\parameters\route.controller.js" />
     <Content Include="Scripts\rutrace\index.controller.js" />
     <Content Include="Scripts\rutrace\map.controller.js" />
     <Content Include="Scripts\rutrace\map.neighbor.dialog.js" />
@@ -993,9 +994,8 @@
     <Content Include="Scripts\angular-ui\angular-scenario.js" />
     <Content Include="Scripts\angular-ui\angular-touch.js" />
     <Content Include="Scripts\angular-ui\angular-ui-router.js" />
-    <Content Include="Scripts\parameters\basicimport.viewmodel.js" />
     <Content Include="Scripts\parameters\common.controller.js" />
-    <Content Include="Scripts\parameters\list.viewmodel.js" />
+    <Content Include="Scripts\parameters\list.controller.js" />
     <Content Include="Scripts\parameters\neighborimport.viewmodel.js" />
     <Content Include="Scripts\parameters\querymap.controller.js" />
     <Content Include="Scripts\parameters\querymap.viewmodel.js" />
@@ -1057,7 +1057,7 @@
     <Content Include="Views\Evaluation\RegionDef.cshtml" />
     <Content Include="Views\College\Map.cshtml" />
     <Content Include="Views\Kpi\Index.cshtml" />
-    <Content Include="Views\Parameters\List.cshtml" />
+    <None Include="Views\Parameters\List.cshtml" />
     <Content Include="Views\Dt\List.cshtml" />
     <Content Include="Views\Kpi\WorkItem.cshtml" />
     <Content Include="Views\Kpi\TopConnection3G.cshtml" />
@@ -1126,13 +1126,12 @@
     <Content Include="appViews\Parameters\Import\EditCdmaCellDialog.html" />
     <Content Include="Views\Parameters\_ENodebMapInfoBox.cshtml" />
     <Content Include="Views\Parameters\_BtsMapInfoBox.cshtml" />
-    <None Include="Views\Parameters\_List.cshtml" />
+    <Content Include="appViews\Parameters\List.html" />
     <Content Include="Views\Parameters\_QueryMap.cshtml" />
     <Content Include="Views\Parameters\_SectorMapInfoBox.cshtml" />
     <Content Include="Views\Shared\_DtKpiSelection.cshtml" />
-    <Content Include="Views\Shared\_KnockoutPaging.cshtml" />
     <Content Include="appViews\Import\Neighbor\Index.html" />
-    <Content Include="Views\Rutrace\_RutraceMenu.cshtml" />
+    <Content Include="appViews\GeneralMenu.html" />
     <None Include="Views\Rutrace\Index.cshtml" />
     <Content Include="appViews\Rutrace\Interference\MatchCellDialog.html" />
     <Content Include="appViews\Rutrace\Import.html" />

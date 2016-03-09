@@ -70,6 +70,7 @@
             }
         ];
         $rootScope.rootPath = rootUrl + "/";
+        $rootScope.menuTitle = "精确覆盖率功能";
 
         $rootScope.updateMenuItems = function(namePrefix, urlPrefix, name) {
             var items = $rootScope.menuItems;
