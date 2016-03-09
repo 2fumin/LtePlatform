@@ -43,7 +43,7 @@
                     controller: "rutrace.map"
                 })
                 .when('/workItems/:cellId/:sectorId', {
-                    templateUrl: "/appViews/WorkItem/WorkItemTable.html",
+                    templateUrl: viewDir + "WorkItem/ForCell.html",
                     controller: "rutrace.workitems"
                 })
                 .otherwise({
@@ -76,5 +76,8 @@
                 displayName: namePrefix + "-" + name,
                 url: urlPrefix + "/" + name
             });
+        };
+        $rootScope.viewData = {
+            workItems: []
         };
     });
