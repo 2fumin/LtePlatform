@@ -786,7 +786,6 @@
     <Content Include="Scripts\baidu\cloud\timecontrol.js" />
     <Content Include="Scripts\baidu\college.helper.js" />
     <Content Include="Scripts\baidu\dtgenerator.js" />
-    <Content Include="Scripts\baidu\mapContainer.js" />
     <Content Include="Scripts\baidu\parameters.helper.js" />
     <Content Include="Scripts\baidu\plugins\baidu.tangram.js" />
     <Content Include="Scripts\baidu\plugins\InfoBox.js" />

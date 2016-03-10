@@ -270,10 +270,10 @@
                     infoBox.open(this);
                 });
             },
-            addOneMarkerToScope: function (marker, callback) {
+            addOneMarkerToScope: function (marker, callback, data) {
                 map.addOverlay(marker);
                 marker.addEventListener("click", function () {
-                    callback(marker);
+                    callback(data);
                 });
             },
             addOneSector: function(sector, html, boxHeight) {
@@ -326,6 +326,12 @@
                     east: map.getBounds().getNorthEast().lng + xOffset,
                     north: map.getBounds().getNorthEast().lat + yOffset
                 };
+            },
+            generateIconMarker: function(longtitute, lattitute, iconUrl) {
+                var icon = new BMap.Icon(iconUrl, new BMap.Size(20, 30));
+                return new BMap.Marker(new BMap.Point(longtitute, lattitute), {
+                    icon: icon
+                });
             }
         };
     });

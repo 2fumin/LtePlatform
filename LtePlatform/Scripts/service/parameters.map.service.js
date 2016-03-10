@@ -9,13 +9,15 @@
                         for (var i = 0; i < eNodebs.length; i++) {
                             eNodebs[i].longtitute += xOffset;
                             eNodebs[i].lattitute += yOffset;
-                            baiduMapService.addOneMarkerToScope(eNodebs[i], showENodebInfo);
+                            var marker = baiduMapService.generateIconMarker(eNodebs[i].longtitute, eNodebs[i].lattitute,
+                                "/Content/Images/Hotmap/site_or.png");
+                            baiduMapService.addOneMarkerToScope(marker, showENodebInfo, eNodebs[i]);
                             networkElementService.queryCellInfosInOneENodeb(eNodebs[i].eNodebId).then(function(cells) {
                                 for (var j = 0; j < cells.length; j++) {
                                     cells[j].longtitute += xOffset;
                                     cells[j].lattitute += yOffset;
                                     var cellSector = baiduMapService.generateSector(cells[j]);
-                                    baiduMapService.addOneSectorToScope(cellSector, cells[j], showCellInfo);
+                                    baiduMapService.addOneSectorToScope(cellSector, showCellInfo, cells[j]);
                                 }
                             });
                         }
