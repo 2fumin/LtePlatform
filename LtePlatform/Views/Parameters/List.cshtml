@@ -32,9 +32,10 @@
     <script src="~/Scripts/service/app.url.service.js"></script>
     <script src="~/Scripts/service/app.region.service.js"></script>
     <script src="~/Scripts/service/app.parameters.service.js"></script>
+    <script src="~/Scripts/service/parameters.map.service.js"></script>
     <script>
         var app = angular.module('myApp', ["highcharts-ng", 'ui.router', "ui.bootstrap", 'myApp.url',
-                'myApp.region']);
+                'myApp.region', 'myApp.parameters', 'parametersMap']);
     </script>
     <script src="~/Scripts/parameters/route.controller.js"></script>
     <script src="~/Scripts/parameters/list.controller.js"></script>

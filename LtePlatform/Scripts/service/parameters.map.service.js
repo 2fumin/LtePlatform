@@ -1,0 +1,26 @@
+﻿angular.module('parametersMap', ['myApp.region', 'myApp.parameters'])
+    .factory('parametersMapService', function (baiduMapService, networkElementService, geometryService) {
+        return {
+            showElementsInOneTown: function(city, district, town, showENodebInfo, showCellInfo) {
+                networkElementService.queryENodebsInOneTown(city, district, town).then(function (eNodebs) {
+                    geometryService.transformToBaidu(eNodebs[0].longtitute, eNodebs[0].lattitute).then(function(coors) {
+                        var xOffset = coors.x - eNodebs[0].longtitute;
+                        var yOffset = coors.y - eNodebs[0].lattitute;
+                        for (var i = 0; i < eNodebs.length; i++) {
+                            eNodebs[i].longtitute += xOffset;
+                            eNodebs[i].lattitute += yOffset;
+                            baiduMapService.addOneMarkerToScope(eNodebs[i], showENodebInfo);
+                            networkElementService.queryCellInfosInOneENodeb(eNodebs[i].eNodebId).then(function(cells) {
+                                for (var j = 0; j < cells.length; j++) {
+                                    cells[j].longtitute += xOffset;
+                                    cells[j].lattitute += yOffset;
+                                    var cellSector = baiduMapService.generateSector(cells[j]);
+                                    baiduMapService.addOneSectorToScope(cellSector, cells[j], showCellInfo);
+                                }
+                            });
+                        }
+                    });
+                });
+            }
+        }
+    });

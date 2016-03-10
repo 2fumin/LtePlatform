@@ -739,6 +739,7 @@
     <Content Include="Scripts\service\kpi.basic.service.js" />
     <Content Include="Scripts\service\kpi.import.service.js" />
     <Content Include="Scripts\service\ne.geometry.service.js" />
+    <Content Include="Scripts\service\parameters.map.service.js" />
     <Content Include="Scripts\service\workitem.service.js" />
     <Content Include="template\accordion\accordion-group.html" />
     <Content Include="template\accordion\accordion.html" />
@@ -997,7 +998,6 @@
     <Content Include="Scripts\angular-ui\angular-ui-router.js" />
     <Content Include="Scripts\parameters\list.controller.js" />
     <Content Include="Scripts\parameters\neighborimport.viewmodel.js" />
-    <Content Include="Scripts\parameters\querymap.controller.js" />
     <Content Include="Scripts\parameters\query.map.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />

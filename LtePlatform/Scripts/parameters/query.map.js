@@ -1,9 +1,10 @@
-﻿app.controller("query.map", function($scope, appRegionService, baiduMapService) {
+﻿app.controller("query.map", function ($scope, appRegionService, baiduMapService, parametersMapService) {
     $scope.page.title = "小区地图查询";
     $scope.network = {
         options: ["LTE", "CDMA"],
         selected: "LTE"
     };
+    $scope.queryText = "";
     
     $scope.updateDistricts = function() {
         appRegionService.queryDistricts($scope.city.selected).then(function(result) {
@@ -17,8 +18,28 @@
             $scope.town.selected = result[0];
         });
     };
+    $scope.showENodebInfo = function(eNodeb) {
+
+    };
+    $scope.showCellInfo = function(cell) {
+
+    };
     $scope.queryItems = function() {
         baiduMapService.clearOverlays();
+        if ($scope.network.selected === "LTE") {
+            if ($scope.queryText.trim() === "") {
+                parametersMapService.showElementsInOneTown($scope.city.selected, $scope.district.selected, $scope.town.selected,
+                    $scope.showENodebInfo, $scope.showCellInfo);
+            } else {
+                
+            }
+        } else {
+            if ($scope.queryText.trim() === "") {
+
+            } else {
+
+            }
+        }
     };
 
     appRegionService.initializeCities().then(function(result) {

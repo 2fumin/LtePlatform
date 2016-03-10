@@ -83,7 +83,7 @@
             }
         }
     })
-    .factory('geometryService', function ($http, $q, appUrlService) {
+    .factory('geometryService', function ($http, $q) {
         var getDistanceFunc = function(p1Lat, p1Lng, p2Lat, p2Lng) {
             var earthRadiusKm = 6378.137;
             var dLat1InRad = p1Lat * (Math.PI / 180);
@@ -268,6 +268,12 @@
                 marker.addEventListener("click", function () {
 
                     infoBox.open(this);
+                });
+            },
+            addOneMarkerToScope: function (marker, callback) {
+                map.addOverlay(marker);
+                marker.addEventListener("click", function () {
+                    callback(marker);
                 });
             },
             addOneSector: function(sector, html, boxHeight) {
