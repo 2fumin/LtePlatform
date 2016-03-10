@@ -13,6 +13,19 @@
                     }
                 },
                 url: "/"
+            })
+            .state('query', {
+                views: {
+                    'menu': {
+                        templateUrl: "/appViews/GeneralMenu.html",
+                        controller: "menu.root"
+                    },
+                    "contents": {
+                        templateUrl: viewDir + "QueryMap.html",
+                        controller: "query.map"
+                    }
+                },
+                url: "/query"
             });
         $urlRouterProvider.otherwise('/');
     })

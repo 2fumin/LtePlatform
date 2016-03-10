@@ -32,6 +32,23 @@
                     deferred.reject(reason);
                 });
                 return deferred.promise;
+            },
+            queryTowns: function (cityName, districtName) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('CityList'),
+                    params: {
+                        city: cityName,
+                        district: districtName
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
             }
         };
     })

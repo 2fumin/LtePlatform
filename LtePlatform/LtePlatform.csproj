@@ -995,11 +995,10 @@
     <Content Include="Scripts\angular-ui\angular-scenario.js" />
     <Content Include="Scripts\angular-ui\angular-touch.js" />
     <Content Include="Scripts\angular-ui\angular-ui-router.js" />
-    <Content Include="Scripts\parameters\common.controller.js" />
     <Content Include="Scripts\parameters\list.controller.js" />
     <Content Include="Scripts\parameters\neighborimport.viewmodel.js" />
     <Content Include="Scripts\parameters\querymap.controller.js" />
-    <Content Include="Scripts\parameters\querymap.viewmodel.js" />
+    <Content Include="Scripts\parameters\query.map.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\rutrace\coverage.controller.js" />

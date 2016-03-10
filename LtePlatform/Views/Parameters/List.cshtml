@@ -11,10 +11,10 @@
     </div>
     <div class="panel-body">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div ui-view="menu"></div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <div ui-view="contents"></div>
             </div>
         </div>
@@ -22,15 +22,21 @@
 </div>
 
 @section Scripts{
+    <link href="~/Content/themes/map/all.css" rel="stylesheet"/>
     <script src="~/Scripts/angular.min.js"></script>
     <script src="~/Scripts/angular-ui-router.min.js"></script>
-    <script src="~/Scripts/highcharts/highcharts.src.js"></script>
+    @Scripts.Render("~/bundles/highcharts")
     <script src="~/Scripts/highcharts/highcharts-ng.js"></script>
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=OeWDTDlnolWHBNP1GSkDph34"></script>
+    @Scripts.Render("~/bundles/ui-bootstraps")
+    <script src="~/Scripts/service/app.url.service.js"></script>
+    <script src="~/Scripts/service/app.region.service.js"></script>
     <script>
-        var app = angular.module('myApp', ["highcharts-ng", 'ui.router']);
+        var app = angular.module('myApp', ["highcharts-ng", 'ui.router', "ui.bootstrap", 'myApp.url',
+                'myApp.region']);
     </script>
     <script src="~/Scripts/parameters/route.controller.js"></script>
     <script src="~/Scripts/parameters/list.controller.js"></script>
     <script src="~/Scripts/parameters/menu.root.js"></script>
+    <script src="~/Scripts/parameters/query.map.js"></script>
 }

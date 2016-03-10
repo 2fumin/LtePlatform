@@ -6,8 +6,8 @@
             displayName: "基础数据总揽",
             url: rootUrl + "/"
         }, {
-            displayName: "指标变化趋势",
-            url: rootUrl + "/trend"
+            displayName: "小区地图查询",
+            url: rootUrl + "/query"
         }, {
             displayName: "TOP指标分析",
             url: rootUrl + "/top"

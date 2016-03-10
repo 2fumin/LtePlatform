@@ -1,19 +1,19 @@
 ﻿<div class="cloudmap-wrapper">
     <div class="cloudmap-tools">
         <span class="cloudmap-city-name">选择网络</span>
-        <select class="cloudmap-select-city" data-bind="value: currentNetwork, options: networks"></select>
+        <select class="cloudmap-select-city" ng-model="network.selected" ng-options="n as n for n in network.options"></select>
         <span class="cloudmap-city-name">城市</span>
-        <select class="cloudmap-select-city" data-bind="value: currentCity, options: cities"></select>
+        <select class="cloudmap-select-city" ng-model="city.selected" ng-options="c as c for c in city.options" ng-change="updateDistricts()"></select>
         <span class="cloudmap-city-name">区域</span>
-        <select class="cloudmap-select-city" data-bind="value: currentDistrict, options: districts"></select>
+        <select class="cloudmap-select-city" ng-model="district.selected" ng-options="d as d for d in district.options" ng-change="updateTowns()"></select>
         <span class="cloudmap-city-name">镇区</span>
-        <select class="cloudmap-select-city" data-bind="value: currentTown, options: towns"></select>
+        <select class="cloudmap-select-city" ng-model="town.selected" ng-options="t as t for t in town.options"></select>
         <span class="cloudmap-city-name">模糊查询</span>
-        <input class="cloudmap-search-city" data-bind="value: queryText"/>
-        <button class="cloudmap-search-b" data-bind="click: queryItems"></button>
+        <input class="cloudmap-search-city" ng-model="queryText"/>
+        <button class="cloudmap-search-b" ng-click="queryItems()"></button>
     </div>
     <div class="cloudmap-baiduwrapper">
-        <div id="mapContent" style="width: 100%;height: 600px;overflow: hidden;margin:0;"></div>
+        <div id="map" style="width: 100%;height: 600px;overflow: hidden;margin:0;"></div>
         <div class="map-w">
             <ul id="colorBar">
                 <li class="map-w-1"></li>

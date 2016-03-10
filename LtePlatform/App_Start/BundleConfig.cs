@@ -174,10 +174,7 @@ namespace LtePlatform
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                 "~/Content/themes/base/all.css"));
-
-            bundles.Add(new StyleBundle("~/Content/themes/cloudmap/css").Include(
-                "~/Content/themes/map/all.css"));
-
+            
             bundles.Add(new StyleBundle("~/Content/HelpPage").Include(
                 "~/Areas/HelpPage/HelpPage.css"));
         }
