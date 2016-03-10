@@ -189,13 +189,24 @@
                     deferred.reject(reason);
                 });
                 return deferred.promise;
+            },
+            transformBaiduCoors: function (coors) {
+                var deferred = $q.defer();
+                $http.jsonp(baiduApiUrl + '&coords=' + coors.longtitute + ',' + coors.lattitute
+                    + '&from=1&to=5&ak=' + myKey).success(function(result) {
+                    coors.longtitute = result.result[0].x;
+                    coors.lattitute = result.result[0].y;
+                    deferred.resolve(coors);
+                    })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;;
             }
         };
     })
     .factory('baiduMapService', function (geometryService) {
         var map = {};
-        var longtituteOffset = 0.01176493217;
-        var lattituteOffset = 0.003184424923;
         return {
             initializeMap: function(tag, zoomLevel) {
                 map = new BMap.Map(tag);
@@ -237,6 +248,9 @@
                 for (var i = 0; i < overlays.length; i++) {
                     map.removeOverlay(overlays[i]);
                 }
+            },
+            clearOverlays: function() {
+                map.clearOverlays();
             },
             addOneMarker: function(marker, html) {
                 map.addOverlay(marker);
@@ -299,12 +313,12 @@
                 });
                 return sector;
             },
-            getCurrentMapRange: function() {
+            getCurrentMapRange: function(xOffset, yOffset) {
                 return {
-                    west: map.getBounds().getSouthWest().lng - longtituteOffset,
-                    south: map.getBounds().getSouthWest().lat - lattituteOffset,
-                    east: map.getBounds().getNorthEast().lng - longtituteOffset,
-                    north: map.getBounds().getNorthEast().lat - lattituteOffset
+                    west: map.getBounds().getSouthWest().lng + xOffset,
+                    south: map.getBounds().getSouthWest().lat + yOffset,
+                    east: map.getBounds().getNorthEast().lng + xOffset,
+                    north: map.getBounds().getNorthEast().lat + yOffset
                 };
             }
         };

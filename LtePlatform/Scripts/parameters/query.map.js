@@ -18,7 +18,7 @@
         });
     };
     $scope.queryItems = function() {
-
+        baiduMapService.clearOverlays();
     };
 
     appRegionService.initializeCities().then(function(result) {

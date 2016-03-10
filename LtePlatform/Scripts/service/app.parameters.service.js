@@ -99,6 +99,22 @@
                     });
                 return deferred.promise;
             },
+            queryCellInfosInOneENodeb: function (eNodebId) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('Cell'),
+                    params: {
+                        eNodebId: eNodebId
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            },
             queryCdmaCellInfo: function(btsId, sectorId) {
                 var deferred = $q.defer();
                 $http({
@@ -112,6 +128,22 @@
                         deferred.resolve(result);
                     })
                     .error(function(reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            },
+            queryCdmaCellInfosInOneBts: function (btsId) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('CdmaCell'),
+                    params: {
+                        btsId: btsId
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
                         deferred.reject(reason);
                     });
                 return deferred.promise;
@@ -132,6 +164,40 @@
                     });
                 return deferred.promise;
             },
+            queryENodebsInOneTown: function (city, district, town) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('ENodeb'),
+                    params: {
+                        city: city,
+                        district: district,
+                        town: town
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            },
+            queryENodebsByGeneralName: function (name) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('ENodeb'),
+                    params: {
+                        name: name
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            },
             queryBtsInfo: function(btsId) {
                 var deferred = $q.defer();
                 $http({
@@ -144,6 +210,40 @@
                         deferred.resolve(result);
                     })
                     .error(function(reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            },
+            queryBtssInOneTown: function (city, district, town) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('Bts'),
+                    params: {
+                        city: city,
+                        district: district,
+                        town: town
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            },
+            queryBtssByGeneralName: function (name) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('Bts'),
+                    params: {
+                        name: name
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
                         deferred.reject(reason);
                     });
                 return deferred.promise;
