@@ -1,4 +1,4 @@
-﻿app.controller("query.map", function($scope, appRegionService) {
+﻿app.controller("query.map", function($scope, appRegionService, baiduMapService) {
     $scope.page.title = "小区地图查询";
     $scope.network = {
         options: ["LTE", "CDMA"],
@@ -23,6 +23,7 @@
 
     appRegionService.initializeCities().then(function(result) {
         $scope.city = result;
+        baiduMapService.initializeMap("map", 12);
         appRegionService.queryDistricts($scope.city.selected).then(function (districts) {
             $scope.district = {
                 options: districts,
