@@ -28,7 +28,7 @@ namespace Lte.Parameters.Concrete
             if (stat == null) return;
             var info = Mapper.Map<WorkItemExcel, WorkItem>(itemExcel);
             stat.Comments = info.Comments;
-            stat.FeedbackContents = info.FeedbackContents;
+            
             stat.FeedbackTime = info.FeedbackTime;
             stat.FinishTime = info.FinishTime;
             stat.RejectTimes = info.RejectTimes;
