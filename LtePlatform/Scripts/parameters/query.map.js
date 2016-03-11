@@ -39,6 +39,27 @@
             $log.info('Modal dismissed at: ' + new Date());
         });
     };
+    $scope.showBtsInfo = function (bts) {
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: '/appViews/Parameters/Map/BtsMapInfoBox.html',
+            controller: 'map.bts.dialog',
+            size: 'sm',
+            resolve: {
+                dialogTitle: function () {
+                    return bts.name + "-" + "基站基本信息";
+                },
+                bts: function () {
+                    return bts;
+                }
+            }
+        });
+        modalInstance.result.then(function (info) {
+            console.log(info);
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
     $scope.showCellInfo = function(cell) {
         var modalInstance = $uibModal.open({
             animation: true,
@@ -71,9 +92,10 @@
             }
         } else {
             if ($scope.queryText.trim() === "") {
-
+                parametersMapService.showCdmaInOneTown($scope.city.selected, $scope.district.selected, $scope.town.selected,
+                    $scope.showBtsInfo, $scope.showCellInfo);
             } else {
-
+                parametersMapService.showCdmaWithGeneralName($scope.queryText, $scope.showBtsInfo, $scope.showCellInfo);
             }
         }
     };

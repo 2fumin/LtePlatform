@@ -1,0 +1,44 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" aria-hidden="true">
+        &times;
+    </button>
+    <h4 class="modal-title text-primary">{{dialogTitle}}</h4>
+</div>
+<div class="modal-body">
+    <div class="infoBoxContent">
+        <div class="title">
+            <strong>CDMA基站基本信息: </strong>
+        </div>
+        <div class="list">
+            <ul>
+                <li>
+                    <div class="left">基站编号</div>
+                    <div class="rmb">{{bts.btsId}}</div>
+                </li>
+                <li>
+                    <div class="left">基站名称</div>
+                    <div class="rmb">{{bts.name}}</div>
+                </li>
+                <li>
+                    <div class="left">经度</div>
+                    <div class="rmb">{{bts.longtitute}}</div>
+                </li>
+                <li>
+                    <div class="left">纬度</div>
+                    <div class="rmb">{{bts.lattitute}}</div>
+                </li>
+                <li>
+                    <div class="left">BSC</div>
+                    <div class="rmb">{{bts.bscId}}</div>
+                </li>
+                <li>
+                    <p>{{bts.address}}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-warning" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+</div>
