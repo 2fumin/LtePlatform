@@ -67,7 +67,7 @@
                 parametersMapService.showElementsInOneTown($scope.city.selected, $scope.district.selected, $scope.town.selected,
                     $scope.showENodebInfo, $scope.showCellInfo);
             } else {
-                
+                parametersMapService.showElementsWithGeneralName($scope.queryText, $scope.showENodebInfo, $scope.showCellInfo);
             }
         } else {
             if ($scope.queryText.trim() === "") {
