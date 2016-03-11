@@ -718,6 +718,7 @@
     <Content Include="Scripts\parameters\import\eNodebs.controller.js" />
     <Content Include="Scripts\parameters\import\index.controller.js" />
     <Content Include="Scripts\parameters\import\route.controller.js" />
+    <Content Include="Scripts\parameters\map\eNodeb.dialog.js" />
     <Content Include="Scripts\parameters\neighbor\import.controller.js" />
     <Content Include="Scripts\parameters\menu.root.js" />
     <Content Include="Scripts\parameters\route.controller.js" />
@@ -1122,11 +1123,10 @@
     <Content Include="appViews\Parameters\Import\EditCellDialog.html" />
     <Content Include="appViews\Parameters\Import\EditBtsDialog.html" />
     <Content Include="appViews\Parameters\Import\EditCdmaCellDialog.html" />
-    <Content Include="Views\Parameters\_ENodebMapInfoBox.cshtml" />
-    <Content Include="Views\Parameters\_BtsMapInfoBox.cshtml" />
+    <Content Include="appViews\Parameters\Map\ENodebMapInfoBox.html" />
+    <Content Include="appViews\Parameters\Map\_BtsMapInfoBox.cshtml" />
     <Content Include="appViews\Parameters\List.html" />
     <Content Include="appViews\Parameters\QueryMap.html" />
-    <Content Include="Views\Parameters\_SectorMapInfoBox.cshtml" />
     <Content Include="Views\Shared\_DtKpiSelection.cshtml" />
     <Content Include="appViews\Import\Neighbor\Index.html" />
     <Content Include="appViews\GeneralMenu.html" />

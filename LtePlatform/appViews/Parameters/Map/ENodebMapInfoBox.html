@@ -1,0 +1,52 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" aria-hidden="true">
+        &times;
+    </button>
+    <h4 class="modal-title text-primary">{{dialogTitle}}</h4>
+</div>
+<div class="modal-body">
+    <div class="infoBoxContent">
+        <div class="title">
+            <strong>LTE基站基本信息: </strong>
+        </div>
+        <div class="list">
+            <ul>
+                <li>
+                    <div class="left">基站编号</div>
+                    <div class="rmb">{{eNodeb.eNodebId}}</div>
+                </li>
+                <li>
+                    <div class="left">基站名称</div>
+                    <div class="rmb">{{eNodeb.name}}</div>
+                </li>
+                <li>
+                    <div class="left">规划编号</div>
+                    <div class="rmb">{{eNodeb.planNum}}</div>
+                </li>
+                <li>
+                    <div class="left">入网日期</div>
+                    <div class="rmb">{{eNodeb.openDate}}</div>
+                </li>
+                <li>
+                    <div class="left">经度</div>
+                    <div class="rmb">{{eNodeb.longtitute}}</div>
+                </li>
+                <li>
+                    <div class="left">纬度</div>
+                    <div class="rmb">{{eNodeb.lattitute}}</div>
+                </li>
+                <li>
+                    <div class="left">厂家</div>
+                    <div class="rmb">{{eNodeb.factory}}</div>
+                </li>
+                <li>
+                    <p>{{eNodeb.address}}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-warning" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+</div>

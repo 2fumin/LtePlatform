@@ -1,4 +1,4 @@
-﻿app.controller("query.map", function ($scope, appRegionService, baiduMapService, parametersMapService) {
+﻿app.controller("query.map", function ($scope, $uibModal, $log, appRegionService, baiduMapService, parametersMapService) {
     $scope.page.title = "小区地图查询";
     $scope.network = {
         options: ["LTE", "CDMA"],
@@ -19,7 +19,25 @@
         });
     };
     $scope.showENodebInfo = function(eNodeb) {
-
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: '/appViews/Parameters/Map/ENodebMapInfoBox.html',
+            controller: 'map.eNodeb.dialog',
+            size: 'sm',
+            resolve: {
+                dialogTitle: function () {
+                    return eNodeb.name + "-" + "基站基本信息";
+                },
+                eNodeb: function () {
+                    return eNodeb;
+                }
+            }
+        });
+        modalInstance.result.then(function (info) {
+            console.log(info);
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
     };
     $scope.showCellInfo = function(cell) {
 
