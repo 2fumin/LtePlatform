@@ -70,7 +70,18 @@ namespace Lte.Evaluations.DataService
                 from eq in eNodebQuery.DefaultIfEmpty()
                 where eq == null
                 select eNodeb.ENodebId;
-        } 
+        }
+
+        public IEnumerable<int> GetVanishedBtsIds()
+        {
+            if (!BtsExcels.Any()) return new List<int>();
+            return from bts in _btsRepository.GetAllInUseList()
+                   join info in BtsExcels
+                       on bts.BtsId equals info.BtsId into btsQuery
+                   from eq in btsQuery.DefaultIfEmpty()
+                   where eq == null
+                   select bts.BtsId;
+        }
 
         public IEnumerable<CellExcel> GetNewCellExcels()
         {
@@ -94,7 +105,19 @@ namespace Lte.Evaluations.DataService
                 from cq in cellQuery.DefaultIfEmpty()
                 where cq == null
                 select new CellIdPair {CellId = cell.ENodebId, SectorId = cell.SectorId};
-        } 
+        }
+
+        public IEnumerable<CellIdPair> GetVanishedCdmaCellIds()
+        {
+            if (!CdmaCellExcels.Any()) return new List<CellIdPair>();
+            return from cell in _cdmaCellRepository.GetAllInUseList()
+                   join info in CdmaCellExcels
+                       on new { cell.BtsId, cell.SectorId } equals new { info.BtsId, info.SectorId }
+                       into cellQuery
+                   from cq in cellQuery.DefaultIfEmpty()
+                   where cq == null
+                   select new CellIdPair { CellId = cell.BtsId, SectorId = cell.SectorId };
+        }
 
         public IEnumerable<BtsExcel> GetNewBtsExcels()
         {

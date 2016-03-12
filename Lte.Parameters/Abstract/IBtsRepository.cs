@@ -13,6 +13,10 @@ namespace Lte.Parameters.Abstract
     {
         CdmaBts GetByBtsId(int btsId);
 
+        CdmaBts GetByName(string name);
+
+        List<CdmaBts> GetAllInUseList();
+
         int SaveChanges();
     }
 }

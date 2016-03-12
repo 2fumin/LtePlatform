@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Abp.EntityFramework;
 using Abp.EntityFramework.Repositories;
 using Lte.Parameters.Abstract;
@@ -11,6 +12,16 @@ namespace Lte.Parameters.Concrete
         public CdmaBts GetByBtsId(int btsId)
         {
             return FirstOrDefault(x => x.BtsId == btsId);
+        }
+
+        public CdmaBts GetByName(string name)
+        {
+            return FirstOrDefault(x => x.Name == name);
+        }
+
+        public List<CdmaBts> GetAllInUseList()
+        {
+            return GetAll().Where(x => x.IsInUse).ToList();
         }
 
         public int SaveChanges()

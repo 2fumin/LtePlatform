@@ -67,5 +67,18 @@ namespace Lte.Evaluations.DataService.Dump
             _btsRepository.SaveChanges();
             return true;
         }
+
+        public void VanishBtss(ENodebIdsContainer container)
+        {
+            foreach (
+                var bts in
+                    container.ENodebIds.Select(btsId => _btsRepository.GetByBtsId(btsId))
+                        .Where(bts => bts != null))
+            {
+                bts.IsInUse = false;
+                _btsRepository.Update(bts);
+            }
+            _btsRepository.SaveChanges();
+        }
     }
 }
