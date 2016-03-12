@@ -1,26 +1,44 @@
-﻿<div class="panel panel-info">
-    <div class="panel panel-info">
-        <div class="panel-heading">
-            <h3 class="panel-title">
-                {{panelTitle}}
-            </h3>
-        </div>
-    </div>
-    <div class="panel-body">
-        <div class="btn-group">
-            <button class="btn btn-warning" ng-click="reset()">重置</button>
-            <button class="btn btn-primary" ng-click="dump()">导入</button>
-        </div>
-        <p>
-            总数：{{progressInfo.dumpCells.length}}&nbsp;
-            成功数：{{progressInfo.totalSuccessItems}}&nbsp;
-            失败数：{{progressInfo.totalFailItems}}&nbsp;
-            小区信息：{{progressInfo.cellInfo}}
-        </p>
-        <div class="progress" ng-if="progressInfo.dumpCells.length > 0">
-            <div class="progress-bar" role="progressbar" aria-valuemax="100" aria-valuemin="0"
-                 ng-style="{width: 100*(progressInfo.totalSuccessItems+progressInfo.totalFailItems)/progressInfo.dumpCells.length+'%'}">
+﻿<div class="row">
+    <div class="col-md-6">
+        <div>
+            <label>开始日期：</label>
+            <div class="input-group">
+                <input type="text" class="form-control" uib-datepicker-popup ng-model="beginDate.value"
+                       is-open="beginDate.opened" ng-required="true" close-text="Close"/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="beginDate.opened = true">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                    <button class="btn btn-warning" ng-click="reset()">重置</button>
+                </span>
             </div>
         </div>
+    </div>
+    <div class="col-md-6">
+        <div>
+            <label>结束日期：</label>
+            <div class="input-group">
+                <input type="text" class="form-control" uib-datepicker-popup ng-model="endDate.value"
+                       is-open="endDate.opened" ng-required="true" close-text="Close" />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="endDate.opened = true">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                    <button class="btn btn-primary" ng-click="dump()">导入</button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p>
+    总数：{{progressInfo.dumpCells.length}}&nbsp;
+    成功数：{{progressInfo.totalSuccessItems}}&nbsp;
+    失败数：{{progressInfo.totalFailItems}}&nbsp;
+    小区信息：{{progressInfo.cellInfo}}
+</p>
+<div class="progress" ng-if="progressInfo.dumpCells.length > 0">
+    <div class="progress-bar" role="progressbar" aria-valuemax="100" aria-valuemin="0"
+         ng-style="{width: 100*(progressInfo.totalSuccessItems+progressInfo.totalFailItems)/progressInfo.dumpCells.length+'%'}">
     </div>
 </div>

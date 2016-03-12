@@ -9,10 +9,30 @@
         </h2>
     </div>
     <div class="panel-body">
-        <div class="row" ng-app="myApp" ng-controller="interference.root">
-            @{
-                Html.RenderPartial("_InterferenceImport");
-            }
+        <div class="row" ng-app="myApp">
+            <div class="col-md-6">
+                @{
+                    Html.RenderPartial("_AlertPanel");
+                    using (Html.BeginForm("InterferencePost", "Kpi",
+                        FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
+                    {
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">干扰矩阵数据导入：</label>
+                            <div class="col-md-6">
+                                <input name="files" class="form-control" type="file" multiple accept=".txt" />
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-save"></span>导入
+                                </button>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+            <div class="col-md-6">
+                <div ng-include="'/appViews/FromTxt.html'"></div>
+            </div>
         </div>
     </div>
 </div>
@@ -34,5 +54,4 @@
     <script src="~/Scripts/angular-ui/customize/directive.panel.js"></script>
     <script src="~/Scripts/kpi/interferenceimport.viewmodel.js"></script>
     <script src="~/Scripts/kpi/interference.import.controller.js"></script>
-    <script src="~/Scripts/kpi/interference.mongo.controller.js"></script>
 }

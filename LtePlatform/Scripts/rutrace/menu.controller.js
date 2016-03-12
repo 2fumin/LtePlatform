@@ -50,6 +50,10 @@
                     templateUrl: viewDir + "WorkItem/ForCell.html",
                     controller: "rutrace.workitems"
                 })
+                .when('/mongo', {
+                    templateUrl: '/appViews/FromMongo.html',
+                    controller: 'interference.mongo'
+                })
                 .otherwise({
                     redirectTo: '/'
                 });
@@ -67,6 +71,9 @@
             }, {
                 displayName: "TOP指标分析",
                 url: rootUrl + "/top"
+            }, {
+                displayName: "从MongoDB导入",
+                url: rootUrl + "/mongo"
             }
         ];
         $rootScope.rootPath = rootUrl + "/";

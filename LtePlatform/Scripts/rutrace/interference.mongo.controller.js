@@ -1,13 +1,22 @@
 ﻿
 app.controller('interference.mongo', function ($scope, $http, dumpProgress) {
-    $scope.dataModel = new AppDataModel();
     $scope.progressInfo = {
         dumpCells: [],
         totalSuccessItems: 0,
         totalFailItems: 0,
         cellInfo: ""
     };
-    $scope.panelTitle = "从MongoDB导入";
+    $scope.page.title = "从MongoDB导入";
+    var lastWeek = new Date();
+    lastWeek.setDate(lastWeek.getDate() - 7);
+    $scope.beginDate = {
+        value: lastWeek,
+        opened: false
+    };
+    $scope.endDate = {
+        value: new Date(),
+        opened: false
+    };
 
     $scope.reset = function () {
         $http({

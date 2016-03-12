@@ -962,8 +962,7 @@
     <Content Include="Scripts\kpi\workitem\cell.js" />
     <Content Include="Scripts\kpi\workitem\eNodeb.js" />
     <Content Include="Scripts\kpi\interference.import.controller.js" />
-    <Content Include="Scripts\kpi\interference.mongo.controller.js" />
-    <Content Include="Scripts\kpi\interferenceimport.viewmodel.js" />
+    <Content Include="Scripts\rutrace\interference.mongo.controller.js" />
     <Content Include="Scripts\kpi\top.drop2G.viewmodel.js" />
     <Content Include="Scripts\kpi\workitem\service.js" />
     <Content Include="Scripts\kpi\workitem\details.controller.js" />
@@ -1099,7 +1098,6 @@
     <Content Include="appViews\Import\Precise\HistoryTable.html" />
     <Content Include="Views\Kpi\WorkItemImport.cshtml" />
     <Content Include="appViews\Rutrace\Map\NeighborMapInfoBox.html" />
-    <Content Include="Views\Kpi\_InterferenceImport.cshtml" />
     <Content Include="appViews\BasicKpi\TopDrop2G.html" />
     <Content Include="appViews\BasicKpi\TopDrop2GTable.html" />
     <Content Include="appViews\BasicKpi\TopDrop2GTrendTable.html" />
