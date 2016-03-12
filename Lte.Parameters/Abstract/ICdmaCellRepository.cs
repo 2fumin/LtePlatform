@@ -14,5 +14,7 @@ namespace Lte.Parameters.Abstract
         List<CdmaCell> GetAllList(int btsId);
 
         List<CdmaCell> GetAllInUseList();
+
+        int SaveChanges();
     }
 }
