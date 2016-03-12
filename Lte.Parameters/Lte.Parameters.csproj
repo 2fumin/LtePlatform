@@ -168,7 +168,6 @@
     <Compile Include="Entities\College\College4GTestResults.cs" />
     <Compile Include="Entities\College\CollegeInfo.cs" />
     <Compile Include="Entities\College\CollegeKpi.cs" />
-    <Compile Include="Entities\College\CollegeStat.cs" />
     <Compile Include="Abstract\IAlarmRepository.cs" />
     <Compile Include="Entities\CsvFilesInfo.cs" />
     <Compile Include="Entities\Basic\ENodeb.cs" />

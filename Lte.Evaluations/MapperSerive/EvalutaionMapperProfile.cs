@@ -2,6 +2,7 @@
 using AutoMapper;
 using Lte.Evaluations.ViewModels;
 using Lte.Evaluations.ViewModels.Basic;
+using Lte.Evaluations.ViewModels.College;
 using Lte.Evaluations.ViewModels.RegionKpi;
 using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.Basic;

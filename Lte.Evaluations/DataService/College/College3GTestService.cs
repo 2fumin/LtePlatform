@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Abp.EntityFramework.AutoMapper;
 using Lte.Evaluations.ViewModels;
+using Lte.Evaluations.ViewModels.College;
 using Lte.Parameters.Abstract.College;
 using Lte.Parameters.Entities.College;
 

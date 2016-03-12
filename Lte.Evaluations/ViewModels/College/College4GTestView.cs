@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Abp.EntityFramework.AutoMapper;
-using Lte.Domain.Regular;
 using Lte.Domain.Regular.Attributes;
-using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.College;
 
-namespace Lte.Evaluations.ViewModels
+namespace Lte.Evaluations.ViewModels.College
 {
     [AutoMapFrom(typeof(College4GTestResults))]
     [TypeDoc("记录校园网4G测试记录视图的类")]

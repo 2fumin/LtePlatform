@@ -105,6 +105,7 @@
     <Compile Include="MapperSerive\Kpi\TopConnection3GCellViewContainer.cs" />
     <Compile Include="MapperSerive\Kpi\TopConnection3GTrendViewContainer.cs" />
     <Compile Include="Policy\OrderTopConnection3GService.cs" />
+    <Compile Include="ViewModels\College\CollegeStat.cs" />
     <Compile Include="ViewModels\Kpi\TopConnection3GTrendView.cs" />
     <Compile Include="ViewModels\Mr\InterferenceMatrixView.cs" />
     <Compile Include="DataService\Mr\InterferenceNeighborService.cs" />
@@ -153,9 +154,9 @@
     <Compile Include="ViewModels\RegionKpi\CdmaRegionStatView.cs" />
     <Compile Include="ViewModels\Precise\CellPreciseKpiView.cs" />
     <Compile Include="ViewModels\Basic\CellView.cs" />
-    <Compile Include="ViewModels\College3GTestView.cs" />
-    <Compile Include="ViewModels\College4GTestView.cs" />
-    <Compile Include="ViewModels\CollegeKpiView.cs" />
+    <Compile Include="ViewModels\College\College3GTestView.cs" />
+    <Compile Include="ViewModels\College\College4GTestView.cs" />
+    <Compile Include="ViewModels\College\CollegeKpiView.cs" />
     <Compile Include="ViewModels\RegionKpi\DistrictPreciseView.cs" />
     <Compile Include="ViewModels\Basic\ENodebView.cs" />
     <Compile Include="ViewModels\Precise\Precise4GView.cs" />

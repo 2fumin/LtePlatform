@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Abp.EntityFramework.AutoMapper;
-using Lte.Domain.Regular;
-using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.College;
 
-namespace Lte.Evaluations.ViewModels
+namespace Lte.Evaluations.ViewModels.College
 {
     [AutoMapFrom(typeof(College3GTestResults))]
     public class College3GTestView

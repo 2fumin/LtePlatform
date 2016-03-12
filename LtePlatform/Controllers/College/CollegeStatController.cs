@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
 using Lte.Evaluations.DataService.College;
-using Lte.Parameters.Entities.College;
+using Lte.Evaluations.ViewModels.College;
 using LtePlatform.Models;
 
 namespace LtePlatform.Controllers.College

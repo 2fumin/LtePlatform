@@ -1,8 +1,10 @@
 ﻿using Lte.Domain.Regular.Attributes;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Abstract.College;
+using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.College;
 
-namespace Lte.Parameters.Entities.College
+namespace Lte.Evaluations.ViewModels.College
 {
     [TypeDoc("校园网统计信息，主要包括用户数和有关的基础信息")]
     public class CollegeStat
