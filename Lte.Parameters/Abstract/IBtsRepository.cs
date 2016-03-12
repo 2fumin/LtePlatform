@@ -12,5 +12,7 @@ namespace Lte.Parameters.Abstract
     public interface IBtsRepository : IRepository<CdmaBts>
     {
         CdmaBts GetByBtsId(int btsId);
+
+        int SaveChanges();
     }
 }

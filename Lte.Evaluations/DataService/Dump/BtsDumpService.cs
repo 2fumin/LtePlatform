@@ -42,23 +42,30 @@ namespace Lte.Evaluations.DataService.Dump
                 if (_btsRepository.Insert(bts) != null)
                     count++;
             }
+            _btsRepository.SaveChanges();
             return count;
         }
 
         public bool DumpSingleBtsExcel(BtsExcel info)
         {
             var bts = CdmaBts.ConstructBts(info, _townRepository);
-            var result = _btsRepository.Insert(bts);
-            if (result != null)
+            if (bts == null)
             {
+                bts = CdmaBts.ConstructBts(info, _townRepository);
+                var result = _btsRepository.Insert(bts);
+                if (result == null) return false;
                 var item = BasicImportService.BtsExcels.FirstOrDefault(x => x.BtsId == info.BtsId);
                 if (item != null)
                 {
                     BasicImportService.BtsExcels.Remove(item);
                 }
+                _btsRepository.SaveChanges();
                 return true;
             }
-            return false;
+            bts.IsInUse = true;
+            _btsRepository.Update(bts);
+            _btsRepository.SaveChanges();
+            return true;
         }
     }
 }
