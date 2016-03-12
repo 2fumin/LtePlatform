@@ -1,9 +1,9 @@
-﻿angular.module('myApp.Services', [])
-    .factory('dumpProgress', function($http) {
+﻿angular.module('myApp.dumpInterference', ['myApp.url'])
+    .factory('dumpProgress', function($http, appUrlService) {
         var serviceInstance = {};
 
-        serviceInstance.clear = function(actionUrl, progressInfo) {
-            $http.delete(actionUrl).success(function() {
+        serviceInstance.clear = function(progressInfo) {
+            $http.delete(appUrlService.getApiUrl('DumpInterference')).success(function () {
                 progressInfo.totalDumpItems = 0;
                 progressInfo.totalSuccessItems = 0;
                 progressInfo.totalFailItems = 0;
@@ -33,11 +33,11 @@
             });
         };
 
-        serviceInstance.dumpMongo = function (actionUrl, progressInfo, begin, end, index, step) {
+        serviceInstance.dumpMongo = function (progressInfo, begin, end, index, step) {
             var self = serviceInstance;
             if (progressInfo.dumpCells.length < index + 1) return;
             var cell = progressInfo.dumpCells[index];
-            $http.post(actionUrl, {
+            $http.post(appUrlService.getApiUrl('DumpInterference'), {
                 pciCell: cell,
                 begin: begin,
                 end: end
@@ -45,7 +45,7 @@
                 progressInfo.cellInfo = cell.eNodebId + '-' + cell.sectorId + '-' + cell.pci + ': ' + result;
                 progressInfo.totalSuccessItems = progressInfo.totalSuccessItems + 1;
                 if (progressInfo.totalSuccessItems + progressInfo.totalFailItems < progressInfo.dumpCells.length) {
-                    self.dumpMongo(actionUrl, progressInfo, begin, end, index + step, step);
+                    self.dumpMongo(progressInfo, begin, end, index + step, step);
                 } else {
                     progressInfo.totalSuccessItems = 0;
                     progressInfo.totalFailItems = 0;
@@ -54,11 +54,26 @@
                 progressInfo.totalFailItems = progressInfo.totalFailItems + 1;
                 progressInfo.cellInfo = cell.eNodebId + '-' + cell.sectorId + '-' + cell.pci + ': Fail!!!';
                 if (progressInfo.totalSuccessItems + progressInfo.totalFailItems < progressInfo.dumpCells.length) {
-                    self.dumpMongo(actionUrl, progressInfo, begin, end, index + step, step);
+                    self.dumpMongo(progressInfo, begin, end, index + step, step);
                 } else {
                     progressInfo.totalSuccessItems = 0;
                     progressInfo.totalFailItems = 0;
                 }
+            });
+        };
+
+        serviceInstance.resetProgress = function (progressInfo, begin, end) {
+            $http({
+                method: 'GET',
+                url: appUrlService.getApiUrl('DumpInterference'),
+                params: {
+                    'begin': begin,
+                    'end': end
+                }
+            }).success(function (result) {
+                progressInfo.dumpCells = result;
+                progressInfo.totalFailItems = 0;
+                progressInfo.totalSuccessItems = 0;
             });
         };
 

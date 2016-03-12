@@ -1,5 +1,5 @@
 ﻿
-app.controller('interference.mongo', function ($scope, $http, dumpProgress) {
+app.controller('interference.mongo', function ($scope, dumpProgress) {
     $scope.progressInfo = {
         dumpCells: [],
         totalSuccessItems: 0,
@@ -19,23 +19,12 @@ app.controller('interference.mongo', function ($scope, $http, dumpProgress) {
     };
 
     $scope.reset = function () {
-        $http({
-            method: 'GET',
-            url: $scope.dataModel.dumpInterferenceUrl,
-            params: {
-                'begin': $scope.beginDate.value,
-                'end': $scope.endDate.value
-            }
-        }).success(function (result) {
-            $scope.progressInfo.dumpCells = result;
-            $scope.progressInfo.totalFailItems = 0;
-            $scope.progressInfo.totalSuccessItems = 0;
-        });
+        dumpProgress.resetProgress($scope.progressInfo, $scope.beginDate.value, $scope.endDate.value);
     };
 
     $scope.dump = function () {
         for (var i = 0; i < 16; i++) {
-            dumpProgress.dumpMongo($scope.dataModel.dumpInterferenceUrl, $scope.progressInfo, $scope.beginDate.value, $scope.endDate.value, i, 16);
+            dumpProgress.dumpMongo($scope.progressInfo, $scope.beginDate.value, $scope.endDate.value, i, 16);
         }
     };
 
