@@ -707,8 +707,10 @@
     <Content Include="Scripts\manage\password.change.js" />
     <Content Include="Scripts\manage\phoneNumber.signup.js" />
     <Content Include="Scripts\parameters\import\bts.lonLat.controller.js" />
+    <Content Include="Scripts\parameters\import\bts.vanished.controller.js" />
     <Content Include="Scripts\parameters\import\btss.controller.js" />
     <Content Include="Scripts\parameters\import\cdmaCell.lonLat.controller.js" />
+    <Content Include="Scripts\parameters\import\cdmaCell.vanished.controller.js" />
     <Content Include="Scripts\parameters\import\cdmaCells.controller.js" />
     <Content Include="Scripts\parameters\import\cell.lonLat.controller.js" />
     <Content Include="Scripts\parameters\import\cell.vanished.controller.js" />
