@@ -52,7 +52,12 @@ namespace Lte.Evaluations.DataService
         public CdmaBtsView GetByBtsId(int btsId)
         {
             var item = _btsRepository.GetByBtsId(btsId);
-            return item?.MapTo<CdmaBtsView>();
+            if (item == null) return null;
+            var view = item.MapTo<CdmaBtsView>();
+            var town = _townRepository.Get(item.TownId);
+            view.DistrictName = town.DistrictName;
+            view.TownName = town.TownName;
+            return view;
         }
     }
 }

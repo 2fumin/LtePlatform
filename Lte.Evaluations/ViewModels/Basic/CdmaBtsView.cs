@@ -18,6 +18,12 @@ namespace Lte.Evaluations.ViewModels.Basic
         [MemberDoc("经度")]
         public double Longtitute { get; set; }
 
+        [MemberDoc("区域")]
+        public string DistrictName { get; set; }
+
+        [MemberDoc("镇区")]
+        public string TownName { get; set; }
+
         [MemberDoc("纬度")]
         public double Lattitute { get; set; }
         
