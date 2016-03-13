@@ -37,6 +37,19 @@ namespace Lte.Evaluations.MapperSerive
         public byte SectorId { get; set; }
     }
 
+    [TypeDoc("CDMA小区编号和扇区编号定义 ")]
+    public class CdmaCellIdPair
+    {
+        [MemberDoc("小区编号")]
+        public int CellId { get; set; }
+
+        [MemberDoc("扇区编号")]
+        public byte SectorId { get; set; }
+
+        [MemberDoc("小区类型")]
+        public string CellType { get; set; }
+    }
+
     [TypeDoc("基站编号容器")]
     public class ENodebIdsContainer
     {
@@ -49,5 +62,12 @@ namespace Lte.Evaluations.MapperSerive
     {
         [MemberDoc("小区编号列表")]
         public IEnumerable<CellIdPair> CellIdPairs { get; set; } 
+    }
+
+    [TypeDoc("CDMA小区编号容器")]
+    public class CdmaCellIdsContainer
+    {
+        [MemberDoc("小区编号列表")]
+        public IEnumerable<CdmaCellIdPair> CellIdPairs { get; set; }
     }
 }

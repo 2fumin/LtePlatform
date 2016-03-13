@@ -132,6 +132,24 @@
                     });
                 return deferred.promise;
             },
+            queryCdmaCellInfoWithType: function (btsId, sectorId, cellType) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('CdmaCell'),
+                    params: {
+                        btsId: btsId,
+                        sectorId: sectorId,
+                        cellType: cellType
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            },
             queryCdmaCellInfosInOneBts: function (btsId) {
                 var deferred = $q.defer();
                 $http({

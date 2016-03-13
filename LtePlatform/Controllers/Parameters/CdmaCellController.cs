@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Web.Http;
-using Lte.Evaluations.DataService;
+using Lte.Evaluations.DataService.Basic;
 using Lte.Evaluations.ViewModels;
 using LtePlatform.Models;
 
@@ -30,13 +26,25 @@ namespace LtePlatform.Controllers.Parameters
         }
 
         [HttpGet]
-        [ApiDoc("给定基站编号和扇区编号查询CDMA小区")]
+        [ApiDoc("给定基站编号和扇区编号查询CDMA复合小区（同时包括1X和DO信息）")]
         [ApiParameterDoc("btsId", "基站编号")]
         [ApiParameterDoc("sectorId", "扇区编号")]
         [ApiResponse("CDMA小区，如果找不到则会返回错误")]
         public IHttpActionResult Get(int btsId, byte sectorId)
         {
             var item = _service.QueryCell(btsId, sectorId);
+            return item == null ? (IHttpActionResult)BadRequest("The cell cannot be found!") : Ok(item);
+        }
+
+        [HttpGet]
+        [ApiDoc("给定基站编号和扇区编号以及小区类型查询CDMA复合小区")]
+        [ApiParameterDoc("btsId", "基站编号")]
+        [ApiParameterDoc("sectorId", "扇区编号")]
+        [ApiParameterDoc("cellType", "小区类型")]
+        [ApiResponse("CDMA小区，如果找不到则会返回错误")]
+        public IHttpActionResult Get(int btsId, byte sectorId, string cellType)
+        {
+            var item = _service.QueryCell(btsId, sectorId, cellType);
             return item == null ? (IHttpActionResult)BadRequest("The cell cannot be found!") : Ok(item);
         }
     }

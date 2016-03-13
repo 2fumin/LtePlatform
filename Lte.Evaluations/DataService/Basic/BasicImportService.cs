@@ -107,16 +107,16 @@ namespace Lte.Evaluations.DataService
                 select new CellIdPair {CellId = cell.ENodebId, SectorId = cell.SectorId};
         }
 
-        public IEnumerable<CellIdPair> GetVanishedCdmaCellIds()
+        public IEnumerable<CdmaCellIdPair> GetVanishedCdmaCellIds()
         {
-            if (!CdmaCellExcels.Any()) return new List<CellIdPair>();
+            if (!CdmaCellExcels.Any()) return new List<CdmaCellIdPair>();
             return from cell in _cdmaCellRepository.GetAllInUseList()
                    join info in CdmaCellExcels
-                       on new { cell.BtsId, cell.SectorId } equals new { info.BtsId, info.SectorId }
+                       on new { cell.BtsId, cell.SectorId, cell.CellType } equals new { info.BtsId, info.SectorId, info.CellType }
                        into cellQuery
                    from cq in cellQuery.DefaultIfEmpty()
                    where cq == null
-                   select new CellIdPair { CellId = cell.BtsId, SectorId = cell.SectorId };
+                   select new CdmaCellIdPair { CellId = cell.BtsId, SectorId = cell.SectorId, CellType = cell.CellType };
         }
 
         public IEnumerable<BtsExcel> GetNewBtsExcels()

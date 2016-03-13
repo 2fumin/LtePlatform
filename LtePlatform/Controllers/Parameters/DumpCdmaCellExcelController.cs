@@ -36,7 +36,7 @@ namespace LtePlatform.Controllers.Parameters
         [HttpGet]
         [ApiDoc("对比导入的CDMA小区信息和数据库现有信息，获取所有待消亡的CDMA小区编号信息")]
         [ApiResponse("所有待消亡的CDMA小区编号信息")]
-        public IEnumerable<CellIdPair> Get()
+        public IEnumerable<CdmaCellIdPair> Get()
         {
             return _importService.GetVanishedCdmaCellIds();
         }
@@ -44,7 +44,7 @@ namespace LtePlatform.Controllers.Parameters
         [HttpPut]
         [ApiDoc("批量修改数据库中CDMA小区的消亡状态")]
         [ApiParameterDoc("container", "待消亡的CDMA小区编号容器")]
-        public void Put(CellIdsContainer container)
+        public void Put(CdmaCellIdsContainer container)
         {
             _service.VanishCells(container);
         }

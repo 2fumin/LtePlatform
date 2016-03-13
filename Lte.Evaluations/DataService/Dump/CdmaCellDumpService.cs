@@ -58,12 +58,12 @@ namespace Lte.Evaluations.DataService.Dump
             return true;
         }
 
-        public void VanishCells(CellIdsContainer container)
+        public void VanishCells(CdmaCellIdsContainer container)
         {
             foreach (
                 var cell in
                     container.CellIdPairs.Select(
-                        cellIdPair => _cellRepository.GetBySectorId(cellIdPair.CellId, cellIdPair.SectorId))
+                        cellIdPair => _cellRepository.GetBySectorIdAndCellType(cellIdPair.CellId, cellIdPair.SectorId, cellIdPair.CellType))
                         .Where(cell => cell != null))
             {
                 cell.IsInUse = false;
