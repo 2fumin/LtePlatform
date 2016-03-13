@@ -62,6 +62,16 @@
         });
     };
 
+    $scope.vanishBtss = function() {
+        basicImportService.vanishBtsIds($scope.importData.vanishedBtsIds).then(function() {
+            $scope.importData.updateMessages.push({
+                contents: "完成消亡CDMA基站：" + $scope.importData.vanishedBtsIds.length,
+                type: 'success'
+            });
+            $scope.importData.vanishedBtsIds = [];
+        });
+    };
+
     $scope.vanishCells = function() {
         basicImportService.vanishCellIds($scope.importData.vanishedCellIds).then(function () {
             $scope.importData.updateMessages.push({
@@ -69,6 +79,16 @@
                 type: 'success'
             });
             $scope.importData.vanishedCellIds = [];
+        });
+    };
+
+    $scope.vanishCdmaCells = function() {
+        basicImportService.vanishCdmaCellIds($scope.importData.vanishedCdmaCellIds).then(function() {
+            $scope.importData.updateMessages.push({
+                contents: "完成消亡CDMA小区：" + $scope.importData.vanishedCdmaCellIds.length,
+                type: 'success'
+            });
+            $scope.importData.vanishedCdmaCellIds = [];
         });
     };
 });

@@ -94,4 +94,10 @@
     basicImportService.queryVanishedCells().then(function (data) {
         $rootScope.importData.vanishedCellIds = data;
     });
+    basicImportService.queryVanishedBtss().then(function (data) {
+        $rootScope.importData.vanishedBtsIds = data;
+    });
+    basicImportService.queryVanishedCdmaCells().then(function (data) {
+        $rootScope.importData.vanishedCdmaCellIds = data;
+    });
 });

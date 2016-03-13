@@ -336,11 +336,24 @@
                 var deferred = $q.defer();
                 $http({
                         method: 'GET',
-                        url: appUrlService.getApiUrl('DumpENodebExcel'),
+                        url: appUrlService.getApiUrl('DumpENodebExcel')
                     }).success(function(result) {
                         deferred.resolve(result);
                     })
                     .error(function(reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            },
+            queryVanishedBtss: function () {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('DumpBtsExcel')
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
                         deferred.reject(reason);
                     });
                 return deferred.promise;
@@ -354,6 +367,19 @@
                         deferred.resolve(result);
                     })
                     .error(function(reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            },
+            queryVanishedCdmaCells: function () {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('DumpCdmaCellExcel')
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
                         deferred.reject(reason);
                     });
                 return deferred.promise;
@@ -467,6 +493,19 @@
                     });
                 return deferred.promise;
             },
+            vanishBtsIds: function (ids) {
+                var deferred = $q.defer();
+                $http.put(appUrlService.getApiUrl('DumpBtsExcel'), {
+                    eNodebIds: ids
+                })
+                    .success(function (result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            },
             vanishCellIds: function(ids) {
                 var deferred = $q.defer();
                 $http.put(appUrlService.getApiUrl('DumpCellExcel'), {
@@ -476,6 +515,19 @@
                         deferred.resolve(result);
                     })
                     .error(function(reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            },
+            vanishCdmaCellIds: function (ids) {
+                var deferred = $q.defer();
+                $http.put(appUrlService.getApiUrl('DumpCdmaCellExcel'), {
+                    cellIdPairs: ids
+                })
+                    .success(function (result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function (reason) {
                         deferred.reject(reason);
                     });
                 return deferred.promise;
