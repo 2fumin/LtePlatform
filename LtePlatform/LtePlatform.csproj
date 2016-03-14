@@ -421,6 +421,7 @@
     <Content Include="appViews\Rutrace\TopTable.html" />
     <Content Include="appViews\Rutrace\Trend.html" />
     <Content Include="appViews\Rutrace\TrendChart.html" />
+    <Content Include="appViews\Rutrace\WorkItem\CellTrend.html" />
     <Content Include="appViews\Rutrace\WorkItem\ForCell.html" />
     <Content Include="appViews\Test\Chapter10\DateTimeTest.html" />
     <Content Include="appViews\Test\Chapter10\demo.accordion.html" />

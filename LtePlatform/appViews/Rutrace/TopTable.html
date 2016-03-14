@@ -25,21 +25,49 @@
             </td>
             <td>
                 <div style="min-width: 160px" class="input-group" ng-click="updateInfo(cell)">
-                    <a class="btn btn-warning" ng-href="{{rootPath}}interference">
-                        <i class="glyphicon glyphicon-fullscreen" title="干扰信息"></i>
-                    </a>
-                    <a class="btn btn-success" ng-href="{{rootPath}}coverage">
-                        <i class="glyphicon glyphicon-tree-conifer" title="覆盖信息"></i>
-                    </a>
-                    <a class="btn btn-default" ng-href="{{rootPath}}baidumap/{{cell.eNodebName}}-{{cell.sectorId}}">
-                        <i class="glyphicon glyphicon-globe" title="地理化显示"></i>
-                    </a>
+                    <div class="btn-group" uib-dropdown>
+                        <button id="single-button" type="button" class="btn" 
+                                ng-class="{'btn-primary': cell.hasWorkItems, 'btn-default': !cell.hasWorkItems}"
+                                uib-dropdown-toggle ng-disabled="disabled">
+                            详细 <span class="caret"></span>
+                        </button>
+                        <ul uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                            <li role="menuitem">
+                                <a class="btn btn-warning" ng-href="{{rootPath}}interference">
+                                    <i class="glyphicon glyphicon-fullscreen" title="干扰信息"></i>
+                                    干扰信息
+                                </a>
+                            </li>
+                            <li role="menuitem">
+                                <a class="btn btn-success" ng-href="{{rootPath}}coverage">
+                                    <i class="glyphicon glyphicon-tree-conifer" title="覆盖信息"></i>
+                                    覆盖信息
+                                </a>
+                            </li>
+                            <li role="menuitem">
+                                <a class="btn btn-default" ng-href="{{rootPath}}baidumap/{{cell.eNodebName}}-{{cell.sectorId}}">
+                                    <i class="glyphicon glyphicon-globe" title="地理化显示"></i> 
+                                    地理化显示
+                                </a>
+                            </li>
+                            <li role="menuitem">
+                                <a class="btn btn-default" ng-show="cell.hasWorkItems === true"
+                                   ng-href="{{rootPath}}cellTrend/{{cell.cellId}}/{{cell.sectorId}}">
+                                    <i class="glyphicon glyphicon-stats" title="单个小区按日期的变化趋势"></i>
+                                    变化趋势
+                                </a>
+                            </li>
+                            <li role="menuitem">
+                                <a class="btn btn-default" ng-show="cell.hasWorkItems === true"
+                                   ng-href="{{rootPath}}workItems/{{cell.cellId}}/{{cell.sectorId}}">
+                                    <i class="glyphicon glyphicon-dashboard" title="工单查看"></i>
+                                    工单查看
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                     <a class="btn btn-default" ng-href="{{rootPath}}import">
                         <i class="glyphicon glyphicon-cloud-download" title="监控导入"></i>
-                    </a>
-                    <a class="btn btn-default" ng-show="cell.hasWorkItems === true"
-                       ng-href="{{rootPath}}workItems/{{cell.cellId}}/{{cell.sectorId}}">
-                        <i class="glyphicon glyphicon-dashboard" title="工单查看"></i>
                     </a>
                 </div>
             </td>
