@@ -52,7 +52,7 @@
     <tbody>
         <tr ng-repeat="stat in trendStat.mrStats">
             <td>{{stat.statDate | date: 'yyyy-MM-dd'}}</td>
-            <td ng-repeat="value in stat.values">{{value}}</td>
+            <td ng-repeat="value in stat.values">{{value | number: 0}}</td>
         </tr>
     </tbody>
 </table>
