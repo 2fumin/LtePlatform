@@ -394,4 +394,102 @@
                 return deferred.promise;
             }
         };
+    })
+    .factory('cellPreciseService', function($q, $http, appUrlService) {
+        return{
+            queryDataSpanKpi: function (begin, end, cellId, sectorId) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('PreciseStat'),
+                    params: {
+                        'begin': begin,
+                        'end': end,
+                        'cellId': cellId,
+                        'sectorId': sectorId
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
+            },
+            getMrsOptions: function (stats, title) {
+                var chart = new ComboChart();
+                chart.title.text = title;
+                var statDates = [];
+                var mrStats = [];
+                var firstNeighbors = [];
+                var secondNeighbors = [];
+                var thirdNeighbors = [];
+                for (var i = 0; i < stats.length; i++) {
+                    var stat = stats[i];
+                    statDates.push(stat.dateString);
+                    mrStats.push(stat.totalMrs);
+                    firstNeighbors.push(stat.firstNeighbors);
+                    secondNeighbors.push(stat.secondNeighbors);
+                    thirdNeighbors.push(stat.thirdNeighbors);
+                }
+                chart.xAxis[0].categories = statDates;
+                chart.yAxis[0].title.text = "MR数量";
+                chart.xAxis[0].title.text = '日期';
+                chart.series.push({
+                    type: "column",
+                    name: "MR总数",
+                    data: mrStats
+                });
+                chart.series.push({
+                    type: "spline",
+                    name: "第一邻区MR数",
+                    data: firstNeighbors
+                });
+                chart.series.push({
+                    type: "spline",
+                    name: "第二邻区MR数",
+                    data: secondNeighbors
+                });
+                chart.series.push({
+                    type: "spline",
+                    name: "第三邻区MR数",
+                    data: thirdNeighbors
+                });
+                return chart.options;
+            },
+            getPreciseOptions: function (stats, title) {
+                var chart = new ComboChart();
+                chart.title.text = title;
+                var statDates = [];
+                var firstRate = [];
+                var secondRate = [];
+                var thirdRate = [];
+                for (var i = 0; i < stats.length; i++) {
+                    var stat = stats[i];
+                    statDates.push(stat.dateString);
+                    firstRate.push(100 - parseFloat(stat.firstRate));
+                    secondRate.push(100 - parseFloat(stat.secondRate));
+                    thirdRate.push(100 - parseFloat(stat.thirdRate));
+                }
+                chart.xAxis[0].categories = statDates;
+                chart.xAxis[0].title.text = '日期';
+                chart.yAxis[0].title.text = "精确覆盖率";
+                chart.series.push({
+                    type: "spline",
+                    name: "第一邻区精确覆盖率",
+                    data: firstRate
+                });
+                chart.series.push({
+                    type: "spline",
+                    name: "第二邻区精确覆盖率",
+                    data: secondRate
+                });
+                chart.series.push({
+                    type: "spline",
+                    name: "第三邻区精确覆盖率",
+                    data: thirdRate
+                });
+                return chart.options;
+            }
+        };
     });
