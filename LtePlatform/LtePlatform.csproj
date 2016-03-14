@@ -726,6 +726,7 @@
     <Content Include="Scripts\parameters\neighbor\import.controller.js" />
     <Content Include="Scripts\parameters\menu.root.js" />
     <Content Include="Scripts\parameters\route.controller.js" />
+    <Content Include="Scripts\rutrace\cell.trend.js" />
     <Content Include="Scripts\rutrace\index.controller.js" />
     <Content Include="Scripts\rutrace\map.controller.js" />
     <Content Include="Scripts\rutrace\map.neighbor.dialog.js" />

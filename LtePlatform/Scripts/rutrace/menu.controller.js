@@ -50,6 +50,10 @@
                     templateUrl: viewDir + "WorkItem/ForCell.html",
                     controller: "rutrace.workitems"
                 })
+                .when('/cellTrend/:cellId/:sectorId/:name', {
+                    templateUrl: viewDir + "WorkItem/CellTrend.html",
+                    controller: "cell.trend"
+                })
                 .when('/mongo', {
                     templateUrl: '/appViews/FromMongo.html',
                     controller: 'interference.mongo'
