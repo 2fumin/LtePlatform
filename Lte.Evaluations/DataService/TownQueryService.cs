@@ -49,16 +49,16 @@ namespace Lte.Evaluations.DataService
 
         public List<DistrictStat> QueryDistrictStats(string city)
         {
-            var eNodebTownIds = _eNodebRepository.GetAll().Select(x => new
+            var eNodebTownIds = _eNodebRepository.GetAllInUseList().Select(x => new
             {
                 x.TownId, x.ENodebId
-            }).ToList();
-            var btsTownIds = _btsRepository.GetAll().Select(x => new
+            });
+            var btsTownIds = _btsRepository.GetAllInUseList().Select(x => new
             {
                 x.TownId, x.BtsId
-            }).ToList();
-            var cellENodebIds = _cellRepository.GetAll().Select(x => x.ENodebId).ToList();
-            var cdmaCellBtsIds = _cdmaCellRepository.GetAll().Select(x => x.BtsId).ToList();
+            });
+            var cellENodebIds = _cellRepository.GetAllInUseList().Select(x => x.ENodebId);
+            var cdmaCellBtsIds = _cdmaCellRepository.GetAllInUseList().Select(x => x.BtsId);
             return (from district in GetDistricts(city)
                 let townList = _repository.GetAllList(city, district)
                 let eNodebs = (from t in townList join e in eNodebTownIds on t.Id equals e.TownId select e)
@@ -87,18 +87,18 @@ namespace Lte.Evaluations.DataService
 
         public List<TownStat> QueryTownStats(string city, string district)
         {
-            var eNodebTownIds = _eNodebRepository.GetAll().Select(x => new
+            var eNodebTownIds = _eNodebRepository.GetAllInUseList().Select(x => new
             {
                 x.TownId,
                 x.ENodebId
-            }).ToList();
-            var btsTownIds = _btsRepository.GetAll().Select(x => new
+            });
+            var btsTownIds = _btsRepository.GetAllInUseList().Select(x => new
             {
                 x.TownId,
                 x.BtsId
-            }).ToList();
-            var cellENodebIds = _cellRepository.GetAll().Select(x => x.ENodebId).ToList();
-            var cdmaCellBtsIds = _cdmaCellRepository.GetAll().Select(x => x.BtsId).ToList();
+            });
+            var cellENodebIds = _cellRepository.GetAllInUseList().Select(x => x.ENodebId);
+            var cdmaCellBtsIds = _cdmaCellRepository.GetAllInUseList().Select(x => x.BtsId);
             return (from town in _repository.GetAllList(city, district)
                 let eNodebs = eNodebTownIds.Where(x => x.TownId == town.Id)
                 let btss = btsTownIds.Where(x => x.TownId == town.Id)
