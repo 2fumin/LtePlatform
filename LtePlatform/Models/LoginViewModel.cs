@@ -16,4 +16,14 @@ namespace LtePlatform.Models
         [Display(Name = "Remember Me?")]
         public bool RememberMe { get; set; }
     }
+
+    public class ForgotPasswordViewModel
+    {
+        [Required]
+        public string UserName { get; set; }
+
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+    }
 }

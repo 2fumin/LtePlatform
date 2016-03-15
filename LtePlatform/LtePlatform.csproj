@@ -373,7 +373,6 @@
     <Compile Include="Models\ApiDocAttribute.cs" />
     <Compile Include="Models\DocProvider.cs" />
     <Compile Include="Models\ExternalLoginListViewModel.cs" />
-    <Compile Include="Models\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\ForgotViewModel.cs" />
     <Compile Include="Models\HttpFileUploadService.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -401,6 +400,7 @@
     <Content Include="appViews\Import\ImportProgress.html" />
     <Content Include="appViews\Manage\AllUsers.html" />
     <Content Include="appViews\Manage\CurrentUser.html" />
+    <Content Include="appViews\Manage\ForgotPassword.html" />
     <Content Include="appViews\Manage\Roles.html" />
     <Content Include="appViews\Manage\RoleUser.html" />
     <Content Include="appViews\Parameters\Import\BtsInfos.html" />
@@ -709,6 +709,7 @@
     <Content Include="Scripts\kpi\workitem\route.controller.js" />
     <Content Include="Scripts\manage\manage.current.js" />
     <Content Include="Scripts\manage\password.change.js" />
+    <Content Include="Scripts\manage\password.forgot.js" />
     <Content Include="Scripts\manage\phoneNumber.signup.js" />
     <Content Include="Scripts\mycharts\gradientPie.js" />
     <Content Include="Scripts\parameters\import\bts.lonLat.controller.js" />
