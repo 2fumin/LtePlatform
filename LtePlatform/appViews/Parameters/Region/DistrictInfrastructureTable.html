@@ -16,8 +16,11 @@
             <td>{{stat.totalLteCells}}</td>
             <td>{{stat.totalCdmaBts}}</td>
             <td>{{stat.totalCdmaCells}}</td>
-            <td>
-                
+            <td style="min-width: 80px">
+                <div class="btn-group">
+                    <a ng-href="{{rootPath}}eNodebList/{{currentDistrict}}/{{stat.town}}" class="btn btn-default btn-sm"title="LTE基站列表">L</a>
+                    <a ng-href="{{rootPath}}btsList/{{currentDistrict}}/{{stat.town}}" class="btn btn-default btn-sm" title="CDMA基站列表">C</a>
+                </div>
             </td>
         </tr>
     </tbody>
