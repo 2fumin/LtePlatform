@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using Abp.Net.Mail.Smtp;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
@@ -12,12 +13,44 @@ using LtePlatform.Models;
 
 namespace LtePlatform
 {
+    public class UserEmailSenderConfiguration : ISmtpEmailSenderConfiguration
+    {
+        public string DefaultFromAddress => "ouyh19@189.cn";
+
+        public string DefaultFromDisplayName => "Ouyang Hui";
+
+        public string Host => "smtp.189.cn";
+
+        public int Port => 25;
+
+        public string UserName => "ouyh19";
+
+        public string Password => "md@287965";
+
+        public string Domain => "";
+
+        public bool EnableSsl => false;
+
+        public bool UseDefaultCredentials => false;
+    }
+
     public class EmailService : IIdentityMessageService
     {
+        private readonly SmtpEmailSender _smtpEmailSender;
+
+        public EmailService()
+        {
+            var configuration = new UserEmailSenderConfiguration();
+            _smtpEmailSender = new SmtpEmailSender(configuration);
+        }
+
         public Task SendAsync(IdentityMessage message)
         {
             // 在此处插入电子邮件服务可发送电子邮件。
-            return Task.FromResult(0);
+            return Task.Run(() =>
+            {
+                _smtpEmailSender.Send(message.Destination, message.Subject, message.Body);
+            });
         }
     }
 
