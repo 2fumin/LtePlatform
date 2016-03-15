@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper.Should;
-using Lte.Evaluations.DataService;
+using Lte.Evaluations.DataService.Kpi;
 using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.Test.MockItems;
 using Lte.Evaluations.Test.TestService;

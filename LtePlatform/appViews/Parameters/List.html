@@ -1,11 +1,50 @@
 ﻿<div class="row">
-    <div class="col-md-4">
-        <div class="row">
-            <highchart config="chartConfig"></highchart>
+    <div class="col-md-6">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    全市基站小区统计
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>城市：</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <select class="form-control" ng-model="city.selected" ng-options="c as c for c in city.options"></select>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-success" ng-click="showCityStats()">
+                                    <i class="glyphicon glyphicon-search"></i>统计
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div ng-include="'/appViews/Parameters/Region/CityInfrastructureTable.html'"></div>
+                <div highchart config="cityLteENodebConfig"></div>
+                <div highchart config="cityLteCellConfig"></div>
+                <div highchart config="cityCdmaENodebConfig"></div>
+                <div highchart config="cityCdmaCellConfig"></div>
+            </div>
         </div>
     </div>
-    <div class="col-md-4">
-        
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    {{currentDistrict}}基站小区统计
+                </div>
+            </div>
+            <div class="panel-body">
+                <div ng-include="'/appViews/Parameters/Region/DistrictInfrastructureTable.html'"></div>
+                <div highchart config="districtLteENodebConfig"></div>
+                <div highchart config="districtLteCellConfig"></div>
+                <div highchart config="districtCdmaENodebConfig"></div>
+                <div highchart config="districtCdmaCellConfig"></div>
+            </div>
+        </div>
     </div>
 </div>
 

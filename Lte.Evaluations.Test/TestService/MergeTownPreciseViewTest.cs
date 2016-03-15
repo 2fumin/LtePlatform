@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Abp.EntityFramework.AutoMapper;
-using Lte.Evaluations.DataService;
+using Lte.Evaluations.DataService.Kpi;
 using Lte.Evaluations.ViewModels.RegionKpi;
 using NUnit.Framework;
 

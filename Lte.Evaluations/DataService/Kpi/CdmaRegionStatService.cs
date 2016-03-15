@@ -4,13 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Lte.Domain.Regular;
-using Lte.Evaluations.ViewModels;
 using Lte.Evaluations.ViewModels.RegionKpi;
 using Lte.Parameters.Abstract;
-using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.Basic;
 
-namespace Lte.Evaluations.DataService
+namespace Lte.Evaluations.DataService.Kpi
 {
     public class CdmaRegionStatService
     {

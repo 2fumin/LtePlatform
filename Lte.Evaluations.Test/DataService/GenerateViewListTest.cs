@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Lte.Evaluations.DataService;
+using Lte.Evaluations.DataService.Kpi;
 using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.Test.DataService.Queries;
-using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.Basic;
 using NUnit.Framework;
 

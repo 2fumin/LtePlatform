@@ -411,6 +411,8 @@
     <Content Include="appViews\Parameters\Import\VanishedCdmaCellInfos.html" />
     <Content Include="appViews\Parameters\Import\VanishedCellInfos.html" />
     <Content Include="appViews\Parameters\Import\VanishedENodebs.html" />
+    <Content Include="appViews\Parameters\Region\CityInfrastructureTable.html" />
+    <Content Include="appViews\Parameters\Region\DistrictInfrastructureTable.html" />
     <Content Include="appViews\Rutrace\Chart.html" />
     <Content Include="appViews\Rutrace\Index.html" />
     <Content Include="appViews\Rutrace\Interference\Index.html" />
@@ -1000,7 +1002,6 @@
     <Content Include="Scripts\angular-ui\angular-touch.js" />
     <Content Include="Scripts\angular-ui\angular-ui-router.js" />
     <Content Include="Scripts\parameters\list.controller.js" />
-    <Content Include="Scripts\parameters\neighborimport.viewmodel.js" />
     <Content Include="Scripts\parameters\query.map.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />

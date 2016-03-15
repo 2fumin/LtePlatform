@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Http;
-using Lte.Evaluations.DataService;
+using Lte.Evaluations.DataService.Kpi;
 using Lte.Evaluations.ViewModels.Precise;
 using LtePlatform.Models;
 

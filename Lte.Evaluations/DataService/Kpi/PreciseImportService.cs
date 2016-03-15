@@ -11,7 +11,7 @@ using Lte.Evaluations.ViewModels.RegionKpi;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 
-namespace Lte.Evaluations.DataService
+namespace Lte.Evaluations.DataService.Kpi
 {
     public class PreciseImportService
     {

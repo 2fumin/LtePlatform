@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.MapperSerive.Kpi;
 using Lte.Evaluations.Policy;
 using Lte.Evaluations.ViewModels.Precise;
@@ -9,7 +8,7 @@ using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.Basic;
 
-namespace Lte.Evaluations.DataService
+namespace Lte.Evaluations.DataService.Kpi
 {
     public class PreciseStatService
     {

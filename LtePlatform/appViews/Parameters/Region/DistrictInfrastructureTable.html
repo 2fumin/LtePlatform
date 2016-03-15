@@ -1,0 +1,24 @@
+﻿<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>镇区</th>
+            <th>4G基站数</th>
+            <th>4G小区数</th>
+            <th>3G基站数</th>
+            <th>3G小区数</th>
+            <th>查询</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="stat in townStats">
+            <td>{{stat.district}}</td>
+            <td>{{stat.totalLteENodebs}}</td>
+            <td>{{stat.totalLteCells}}</td>
+            <td>{{stat.totalCdmaBts}}</td>
+            <td>{{stat.totalCdmaCells}}</td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+</table>

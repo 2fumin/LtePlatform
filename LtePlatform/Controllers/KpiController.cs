@@ -6,6 +6,7 @@
  using System.Web.Mvc;
  using Lte.Domain.Common;
  using Lte.Evaluations.DataService;
+ using Lte.Evaluations.DataService.Kpi;
  using Lte.Evaluations.DataService.Mr;
  using LtePlatform.Models;
 
