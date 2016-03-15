@@ -710,6 +710,7 @@
     <Content Include="Scripts\manage\manage.current.js" />
     <Content Include="Scripts\manage\password.change.js" />
     <Content Include="Scripts\manage\phoneNumber.signup.js" />
+    <Content Include="Scripts\mycharts\gradientPie.js" />
     <Content Include="Scripts\parameters\import\bts.lonLat.controller.js" />
     <Content Include="Scripts\parameters\import\bts.vanished.controller.js" />
     <Content Include="Scripts\parameters\import\btss.controller.js" />
@@ -748,6 +749,7 @@
     <Content Include="Scripts\service\kpi.basic.service.js" />
     <Content Include="Scripts\service\kpi.import.service.js" />
     <Content Include="Scripts\service\ne.geometry.service.js" />
+    <Content Include="Scripts\service\parameters.chart.js" />
     <Content Include="Scripts\service\parameters.map.service.js" />
     <Content Include="Scripts\service\workitem.service.js" />
     <Content Include="template\accordion\accordion-group.html" />
