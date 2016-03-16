@@ -18,17 +18,18 @@ angular.module('ui.bootstrap.paging', [])
           ctrl.render();
         };
 
-        if ($attrs.itemsPerPage) {
-          ctrl._watchers.push($scope.$parent.$watch($attrs.itemsPerPage, function(value) {
-            ctrl.itemsPerPage = parseInt(value, 10);
-            $scope.totalPages = ctrl.calculateTotalPages();
-            ctrl.updatePage();
-          }));
-        } else {
-          ctrl.itemsPerPage = config.itemsPerPage;
-        }
+          if ($attrs.itemsPerPage) {
+              ctrl._watchers.push($scope.$parent.$watch($attrs.itemsPerPage, function(value) {
+                  ctrl.itemsPerPage = parseInt(value, 10);
+                  $scope.totalPages = ctrl.calculateTotalPages();
+                  console.log($scope.totalPages);
+                  ctrl.updatePage();
+              }));
+          } else {
+              ctrl.itemsPerPage = config.itemsPerPage;
+          }
 
-        $scope.$watch('totalItems', function(newTotal, oldTotal) {
+          $scope.$watch('totalItems', function(newTotal, oldTotal) {
           if (angular.isDefined(newTotal) || newTotal !== oldTotal) {
             $scope.totalPages = ctrl.calculateTotalPages();
             ctrl.updatePage();
