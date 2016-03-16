@@ -33,6 +33,14 @@ namespace Lte.Evaluations.DataService.Basic
             return _repository.GetAllList(west, east, south, north);
         }
 
+        public IEnumerable<CellView> GetCellViews(int eNodebId)
+        {
+            var cells = _repository.GetAllList(eNodebId);
+            return cells.Any()
+                ? cells.Select(x => CellView.ConstructView(x, _eNodebRepository))
+                : new List<CellView>();
+        }
+
         public IEnumerable<CellView> GetNearbyCellsWithPci(int eNodebId, byte sectorId, short pci)
         {
             var cell = _repository.GetBySectorId(eNodebId, sectorId);

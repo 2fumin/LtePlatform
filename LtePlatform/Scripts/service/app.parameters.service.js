@@ -115,6 +115,38 @@
                     });
                 return deferred.promise;
             },
+            queryCellViewsInOneENodeb: function (eNodebId) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('Cell'),
+                    params: {
+                        cellId: eNodebId
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            },
+            queryCellSectorIds: function (name) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('Cell'),
+                    params: {
+                        eNodebName: name
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            },
             queryCdmaCellInfo: function(btsId, sectorId) {
                 var deferred = $q.defer();
                 $http({

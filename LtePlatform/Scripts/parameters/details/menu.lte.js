@@ -13,11 +13,11 @@
             url: rootUrl + "/eNodebInfo" + "/" + $stateParams.eNodebId + "/" + $stateParams.name
         }
     ];
-    networkElementService.queryCellInfosInOneENodeb($stateParams.eNodebId).then(function(result) {
+    networkElementService.queryCellSectorIds($stateParams.name).then(function (result) {
         for (var i = 0; i < result.length; i++) {
             $scope.menuItems.push({
-                displayName: $stateParams.name + "-" + result[i].sectorId + "小区信息",
-                url: rootUrl + "/eNodebInfo" + "/" + $stateParams.eNodebId + "/" + $stateParams.name + "/" + result[i].sectorId
+                displayName: $stateParams.name + "-" + result[i] + "小区信息",
+                url: rootUrl + "/cellInfo" + "/" + $stateParams.eNodebId + "/" + $stateParams.name + "/" + result[i]
             });
         }
     });

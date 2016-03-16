@@ -80,6 +80,15 @@ namespace LtePlatform.Controllers.Parameters
         }
 
         [HttpGet]
+        [ApiDoc("给定基站编号对应的小区视图列表")]
+        [ApiParameterDoc("cellId", "基站编号")]
+        [ApiResponse("基站编号对应的小区视图列表")]
+        public IEnumerable<CellView> GetViews(int cellId)
+        {
+            return _service.GetCellViews(cellId);
+        }
+
+        [HttpGet]
         [ApiDoc("给定基站编号对定的扇区视图对象列表")]
         [ApiParameterDoc("eNodebId", "基站编号")]
         [ApiResponse("对定的扇区视图对象列表")]
