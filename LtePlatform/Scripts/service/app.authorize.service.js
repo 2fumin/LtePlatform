@@ -88,6 +88,20 @@
                 });
                 return deferred.promise;
             },
+            forgotPassword: function (input) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'POST',
+                    url: '/Manage/ForgotPassword',
+                    data: input
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
+            },
             addPhoneNumber: function(input) {
                 var deferred = $q.defer();
                 $http({
