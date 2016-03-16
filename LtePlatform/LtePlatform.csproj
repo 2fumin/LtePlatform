@@ -712,6 +712,9 @@
     <Content Include="Scripts\manage\password.forgot.js" />
     <Content Include="Scripts\manage\phoneNumber.signup.js" />
     <Content Include="Scripts\mycharts\gradientPie.js" />
+    <Content Include="Scripts\parameters\details\bts.list.js" />
+    <Content Include="Scripts\parameters\details\eNodeb.list.js" />
+    <Content Include="Scripts\parameters\details\menu.town.js" />
     <Content Include="Scripts\parameters\import\bts.lonLat.controller.js" />
     <Content Include="Scripts\parameters\import\bts.vanished.controller.js" />
     <Content Include="Scripts\parameters\import\btss.controller.js" />

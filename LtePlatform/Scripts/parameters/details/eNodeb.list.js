@@ -1,0 +1,1 @@
+﻿app.controller("eNodeb.list", function ($scope, $stateParams) { });

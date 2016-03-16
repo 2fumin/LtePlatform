@@ -1,0 +1,1 @@
+﻿app.controller("bts.list", function ($scope, $stateParams) { });
