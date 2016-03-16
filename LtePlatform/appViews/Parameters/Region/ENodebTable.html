@@ -1,4 +1,6 @@
-﻿<table class="table table-hover">
+﻿<div uib-pagination total-items="eNodebList.length" ng-model="currentPage" max-size="10"
+     class="pagination-sm" boundary-link-numbers="true" rotate="false"></div>
+<table class="table table-hover">
     <thead>
         <tr>
             <th>LTE基站编号</th>
@@ -12,7 +14,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="eNodeb in eNodebList">
+        <tr ng-repeat="eNodeb in eNodebList.slice((currentPage - 1) * 10, currentPage * 10)">
             <td>{{eNodeb.eNodebId}}</td>
             <td>{{eNodeb.name}}</td>
             <td>{{eNodeb.planNum}}</td>

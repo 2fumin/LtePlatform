@@ -1,4 +1,6 @@
-﻿<table class="table table-striped">
+﻿<div uib-pagination total-items="btsList.length" ng-model="currentPage" max-size="10"
+     class="pagination-sm" boundary-link-numbers="true" rotate="false"></div>
+<table class="table table-striped">
     <thead>
         <tr>
             <th>基站名称</th>
@@ -11,7 +13,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="bts in btsList">
+        <tr ng-repeat="bts in btsList.slice((currentPage - 1) * 10, currentPage * 10)">
             <td>{{bts.name}}</td>
             <td>{{bts.btsId}}</td>
             <td>{{bts.bscId}}</td>
