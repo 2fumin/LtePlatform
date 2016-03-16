@@ -207,15 +207,7 @@ namespace LtePlatform.Controllers
         {
             return View();
         }
-
-        //
-        // GET: /Account/ForgotPasswordConfirmation
-        [AllowAnonymous]
-        public ActionResult ForgotPasswordConfirmation()
-        {
-            return View();
-        }
-
+        
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
