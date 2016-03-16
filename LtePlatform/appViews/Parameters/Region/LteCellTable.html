@@ -14,23 +14,27 @@
             <th>方位角</th>
             <th>下倾</th>
             <th>天线增益(dB)</th>
+            <th>详细信息</th>
         </tr>
     </thead>
-    <tbody data-bind="foreach: cellList">
-        <tr>
-            <td data-bind="text: eNodebName"></td>
-            <td data-bind="text: sectorId"></td>
-            <td data-bind="text: frequency"></td>
-            <td data-bind="text: bandClass"></td>
-            <td data-bind="text: pci"></td>
-            <td data-bind="text: prach"></td>
-            <td data-bind="text: rsPower"></td>
-            <td data-bind="text: tac"></td>
-            <td data-bind="text: indoor"></td>
-            <td data-bind="text: height"></td>
-            <td data-bind="text: azimuth"></td>
-            <td data-bind="text: downTilt"></td>
-            <td data-bind="text: antennaGain"></td>
+    <tbody>
+        <tr ng-repeat="cell in cellList">
+            <td>{{cell.eNodebName}}</td>
+            <td>{{cell.sectorId}}</td>
+            <td>{{cell.frequency}}</td>
+            <td>{{cell.bandClass}}</td>
+            <td>{{cell.pci}}</td>
+            <td>{{cell.prach}}</td>
+            <td>{{cell.rsPower}}</td>
+            <td>{{cell.tac}}</td>
+            <td>{{cell.indoor}}</td>
+            <td>{{cell.height}}</td>
+            <td>{{cell.azimuth}}</td>
+            <td>{{cell.downTilt}}</td>
+            <td>{{cell.antennaGain}}</td>
+            <td>
+                <a ng-href="{{rootPath}}cellInfo/{{cell.eNodebId}}/{{cell.eNodebName}}/{{cell.sectorId}}" class="btn btn-default">小区信息</a>
+            </td>
         </tr>
     </tbody>
 </table>
