@@ -17,7 +17,9 @@
         <td>{{stat.totalCdmaBts}}</td>
         <td>{{stat.totalCdmaCells}}</td>
         <td>
-            <button class="btn btn-default" ng-click="showDistrictDetails(stat.district)">详细</button>
+            <button class="btn btn-default" ng-click="showDistrictDetails(stat.district)" ng-show="stat.district!=='佛山'">
+                详细
+            </button>
         </td>
     </tr>
     </tbody>
