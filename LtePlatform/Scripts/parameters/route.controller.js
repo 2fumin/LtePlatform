@@ -52,6 +52,32 @@
                     }
                 },
                 url: "/btsList/:city/:district/:town"
+            })
+            .state('eNodebInfo', {
+                views: {
+                    'menu': {
+                        templateUrl: "/appViews/GeneralMenu.html",
+                        controller: "menu.lte"
+                    },
+                    "contents": {
+                        templateUrl: viewDir + "Region/ENodebInfo.html",
+                        controller: "eNodeb.info"
+                    }
+                },
+                url: "/eNodebInfo/:eNodebId/:name"
+            })
+            .state('cellInfo', {
+                views: {
+                    'menu': {
+                        templateUrl: "/appViews/GeneralMenu.html",
+                        controller: "menu.lte"
+                    },
+                    "contents": {
+                        templateUrl: viewDir + "Region/CellInfo.html",
+                        controller: "cell.info"
+                    }
+                },
+                url: "/cellInfo/:eNodebId/:name/:sectorId"
             });
         $urlRouterProvider.otherwise('/');
     })

@@ -414,6 +414,7 @@
     <Content Include="appViews\Parameters\Import\VanishedENodebs.html" />
     <Content Include="appViews\Parameters\Region\CityInfrastructureTable.html" />
     <Content Include="appViews\Parameters\Region\DistrictInfrastructureTable.html" />
+    <Content Include="appViews\Parameters\Region\ENodebInfo.html" />
     <Content Include="appViews\Rutrace\Chart.html" />
     <Content Include="appViews\Rutrace\Index.html" />
     <Content Include="appViews\Rutrace\Interference\Index.html" />
@@ -713,7 +714,9 @@
     <Content Include="Scripts\manage\phoneNumber.signup.js" />
     <Content Include="Scripts\mycharts\gradientPie.js" />
     <Content Include="Scripts\parameters\details\bts.list.js" />
+    <Content Include="Scripts\parameters\details\eNodeb.info.js" />
     <Content Include="Scripts\parameters\details\eNodeb.list.js" />
+    <Content Include="Scripts\parameters\details\menu.lte.js" />
     <Content Include="Scripts\parameters\details\menu.town.js" />
     <Content Include="Scripts\parameters\import\bts.lonLat.controller.js" />
     <Content Include="Scripts\parameters\import\bts.vanished.controller.js" />

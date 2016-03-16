@@ -4,6 +4,7 @@ using System.Linq;
 using Abp.EntityFramework.AutoMapper;
 using AutoMapper;
 using Lte.Domain.Common.Geo;
+using Lte.Domain.Regular;
 using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.Basic;
 
@@ -17,7 +18,13 @@ namespace Lte.Evaluations.ViewModels.Basic
         public string Name { get; set; }
 
         public string Factory { get; set; }
-        
+
+        public IpAddress GatewayIp { get; set; }
+
+        public IpAddress Ip { get; set; }
+
+        public bool IsInUse { get; set; }
+
         public double Longtitute { get; set; }
         
         public double Lattitute { get; set; }

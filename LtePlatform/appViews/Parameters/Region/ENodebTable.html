@@ -21,7 +21,8 @@
             <td>{{eNodeb.longtitute}}</td>
             <td>{{eNodeb.lattitute}}</td>
             <td>
-                
+                <a ng-href="{{rootPath}}eNodebInfo/{{eNodeb.eNodebId}}/{{eNodeb.name}}"
+                   class="btn btn-sm" ng-class="{'btn-default': !eNodeb.isInUse, 'btn-success': eNodeb.isInUse}">基站详细信息</a>
             </td>
         </tr>
     </tbody>
