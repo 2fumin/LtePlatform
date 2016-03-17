@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Abstract.College;
-using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.College;
 
-namespace Lte.Parameters.Concrete
+namespace Lte.Parameters.Concrete.College
 {
     public class EFCollegeKpiRepository : LightWeightRepositroyBase<CollegeKpi>, ICollegeKpiRepository
     {

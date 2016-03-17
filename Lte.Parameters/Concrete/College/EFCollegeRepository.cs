@@ -5,7 +5,7 @@ using Lte.Parameters.Abstract.College;
 using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.College;
 
-namespace Lte.Parameters.Concrete
+namespace Lte.Parameters.Concrete.College
 {
     public class EFCollegeRepository : LightWeightRepositroyBase<CollegeInfo>, ICollegeRepository
     {

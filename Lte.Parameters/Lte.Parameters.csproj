@@ -131,10 +131,10 @@
     <Compile Include="Concrete\Basic\EFCdmaCellRepository.cs" />
     <Compile Include="Concrete\EFCdmaRegionStatRepository.cs" />
     <Compile Include="Concrete\Basic\EFCellRepository.cs" />
-    <Compile Include="Concrete\EFCollege3GTestRepository.cs" />
-    <Compile Include="Concrete\EFCollege4GTestRepository.cs" />
-    <Compile Include="Concrete\EFCollegeKpiRepository.cs" />
-    <Compile Include="Concrete\EFCollegeRepository.cs" />
+    <Compile Include="Concrete\College\EFCollege3GTestRepository.cs" />
+    <Compile Include="Concrete\College\EFCollege4GTestRepository.cs" />
+    <Compile Include="Concrete\College\EFCollegeKpiRepository.cs" />
+    <Compile Include="Concrete\College\EFCollegeRepository.cs" />
     <Compile Include="Concrete\Basic\EFENodebRepository.cs" />
     <Compile Include="Concrete\EFIndoorDistributionRepository.cs" />
     <Compile Include="Concrete\EFInfrastructureRepository.cs" />

@@ -12,5 +12,7 @@ namespace Lte.Parameters.Abstract
     public interface ICellHuaweiMongoRepository : IRepository<CellHuaweiMongo, ObjectId>
     {
         List<CellHuaweiMongo> GetAllList(int eNodebId);
+
+        List<CellHuaweiMongo> GetRecentList(int eNodebId);
     }
 }

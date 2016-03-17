@@ -28,5 +28,13 @@ namespace Lte.Parameters.Concrete.Basic
             var query = MongoDB.Driver.Builders.Query<CellHuaweiMongo>.EQ(e => e.eNodeB_Id, eNodebId);
             return Collection.Find(query).AsQueryable().ToList();
         }
+
+        public List<CellHuaweiMongo> GetRecentList(int eNodebId)
+        {
+            var query = MongoDB.Driver.Builders.Query<CellHuaweiMongo>.EQ(e => e.eNodeB_Id, eNodebId);
+            var list = Collection.Find(query).AsQueryable();
+            var recentDate = list.Max(x => x.iDate);
+            return list.Where(x => x.iDate == recentDate).ToList();
+        }
     }
 }

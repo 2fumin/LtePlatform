@@ -22,5 +22,14 @@ namespace Lte.Parameters.Test.Basic
             Assert.AreEqual(results.Count, 27);
             Assert.AreEqual(results[0].iDate, "20160122");
         }
+
+        [Test]
+        public void Test_GetRecentListByENodeb()
+        {
+            var results = _repository.GetRecentList(500814);
+            Assert.IsNotNull(results);
+            Assert.AreEqual(results.Count, 3);
+            Assert.AreEqual(results[0].iDate, "20160311");
+        }
     }
 }

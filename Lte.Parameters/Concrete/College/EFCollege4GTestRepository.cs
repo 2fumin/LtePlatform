@@ -4,7 +4,7 @@ using Abp.EntityFramework.Repositories;
 using Lte.Parameters.Abstract.College;
 using Lte.Parameters.Entities.College;
 
-namespace Lte.Parameters.Concrete
+namespace Lte.Parameters.Concrete.College
 {
     public class EFCollege4GTestRepository : EfRepositoryBase<EFParametersContext, College4GTestResults>, ICollege4GTestRepository
     {
