@@ -2,6 +2,7 @@
 using Lte.Evaluations.Test.MockItems;
 using Lte.Evaluations.ViewModels.Basic;
 using Lte.Parameters.Abstract;
+using Lte.Parameters.Abstract.Basic;
 using Lte.Parameters.Entities.Basic;
 using Moq;
 using NUnit.Framework;

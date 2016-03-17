@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Lte.Parameters.Abstract;
+using Lte.Parameters.Abstract.Basic;
 using Lte.Parameters.Abstract.College;
 
 namespace Lte.Evaluations.DataService.College

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Lte.Evaluations.ViewModels.Precise;
 using Lte.Parameters.Abstract;
+using Lte.Parameters.Abstract.Basic;
 
 namespace Lte.Evaluations.DataService.College
 {

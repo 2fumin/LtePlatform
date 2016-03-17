@@ -1,7 +1,8 @@
 ﻿using System.Linq;
-using Lte.Evaluations.DataService;
+using Lte.Evaluations.DataService.Basic;
 using Lte.Evaluations.Test.MockItems;
 using Lte.Parameters.Abstract;
+using Lte.Parameters.Abstract.Basic;
 using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.ExcelCsv;
 using Moq;

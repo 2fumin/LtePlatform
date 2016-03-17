@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Lte.Evaluations.ViewModels.Basic;
 using Lte.Parameters.Entities;
 using Lte.Parameters.Abstract;
+using Lte.Parameters.Abstract.Basic;
 
 namespace Lte.Evaluations.DataService
 {

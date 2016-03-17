@@ -6,6 +6,7 @@ using AutoMapper;
 using Lte.Domain.Regular;
 using Lte.Evaluations.ViewModels.Basic;
 using Lte.Parameters.Abstract;
+using Lte.Parameters.Abstract.Basic;
 using Lte.Parameters.Entities;
 
 namespace Lte.Evaluations.DataService

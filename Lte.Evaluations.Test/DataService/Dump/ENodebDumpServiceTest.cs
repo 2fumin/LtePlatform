@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using AutoMapper.Should;
 using Lte.Domain.Regular;
 using Lte.Evaluations.DataService.Dump;
 using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.Test.DataService.Queries;
 using Lte.Evaluations.Test.MockItems;
 using Lte.Parameters.Abstract;
+using Lte.Parameters.Abstract.Basic;
 using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.Basic;
 using Lte.Parameters.MockOperations;

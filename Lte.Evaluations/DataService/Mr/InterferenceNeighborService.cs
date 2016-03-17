@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Lte.Evaluations.ViewModels.Mr;
 using Lte.Parameters.Abstract;
+using Lte.Parameters.Abstract.Basic;
 
 namespace Lte.Evaluations.DataService.Mr
 {

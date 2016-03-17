@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Lte.Domain.Common;
 using Lte.Domain.Regular;
-using Lte.Parameters.Abstract;
+using Lte.Parameters.Abstract.Basic;
 using Lte.Parameters.Entities.ExcelCsv;
 
 namespace Lte.Parameters.Entities

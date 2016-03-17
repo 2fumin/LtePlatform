@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Lte.Domain.LinqToExcel;
 using Lte.Evaluations.Policy;
 using Lte.Evaluations.ViewModels;
 using Lte.Parameters.Abstract;
+using Lte.Parameters.Abstract.Basic;
 using Lte.Parameters.Entities.Work;
 
 namespace Lte.Evaluations.DataService

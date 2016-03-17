@@ -6,6 +6,7 @@ using Lte.Evaluations.DataService.Dump;
 using Lte.Evaluations.DataService.Kpi;
 using Lte.Evaluations.DataService.Mr;
 using Lte.Parameters.Abstract;
+using Lte.Parameters.Abstract.Basic;
 using Lte.Parameters.Abstract.College;
 using Lte.Parameters.Concrete;
 using Lte.Parameters.Concrete.Basic;

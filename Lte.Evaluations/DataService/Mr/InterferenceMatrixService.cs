@@ -7,6 +7,7 @@ using Abp.EntityFramework.AutoMapper;
 using AutoMapper;
 using Lte.Evaluations.MapperSerive;
 using Lte.Parameters.Abstract;
+using Lte.Parameters.Abstract.Basic;
 using Lte.Parameters.Entities.Basic;
 using Lte.Parameters.Entities.ExcelCsv;
 using Lte.Parameters.Entities.Mr;

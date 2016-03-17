@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Lte.Domain.Regular;
 using Lte.Domain.Regular.Attributes;
 using Lte.Parameters.Abstract;
+using Lte.Parameters.Abstract.Basic;
 
 namespace Lte.Evaluations.ViewModels
 {

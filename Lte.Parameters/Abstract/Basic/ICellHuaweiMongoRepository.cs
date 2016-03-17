@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Abp.Domain.Repositories;
 using Lte.Parameters.Entities.Basic;
 using MongoDB.Bson;
 
-namespace Lte.Parameters.Abstract
+namespace Lte.Parameters.Abstract.Basic
 {
     public interface ICellHuaweiMongoRepository : IRepository<CellHuaweiMongo, ObjectId>
     {

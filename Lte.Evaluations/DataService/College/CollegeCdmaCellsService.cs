@@ -4,6 +4,7 @@ using AutoMapper;
 using Lte.Evaluations.ViewModels;
 using Lte.Evaluations.ViewModels.Basic;
 using Lte.Parameters.Abstract;
+using Lte.Parameters.Abstract.Basic;
 
 namespace Lte.Evaluations.DataService.College
 {

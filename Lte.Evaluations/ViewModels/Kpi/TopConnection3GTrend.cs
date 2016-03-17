@@ -1,4 +1,4 @@
-﻿using Lte.Parameters.Abstract;
+﻿using Lte.Parameters.Abstract.Basic;
 
 namespace Lte.Evaluations.ViewModels.Kpi
 {

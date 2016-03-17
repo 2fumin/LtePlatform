@@ -2,6 +2,7 @@
 using Abp.Domain.Entities;
 using AutoMapper;
 using Lte.Parameters.Abstract;
+using Lte.Parameters.Abstract.Basic;
 
 namespace Lte.Parameters.Entities.Kpi
 {

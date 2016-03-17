@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
-using Lte.Domain.Common.Geo;
 using Lte.Domain.Regular;
-using Lte.Parameters.Abstract;
+using Lte.Parameters.Abstract.Basic;
 
 namespace Lte.Evaluations.ViewModels.Precise
 {

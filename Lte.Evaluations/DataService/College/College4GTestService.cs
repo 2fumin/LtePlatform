@@ -6,6 +6,7 @@ using Abp.EntityFramework.AutoMapper;
 using Lte.Evaluations.ViewModels;
 using Lte.Evaluations.ViewModels.College;
 using Lte.Parameters.Abstract;
+using Lte.Parameters.Abstract.Basic;
 using Lte.Parameters.Abstract.College;
 using Lte.Parameters.Entities.College;
 

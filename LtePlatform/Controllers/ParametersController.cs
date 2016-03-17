@@ -3,6 +3,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using Lte.Evaluations.DataService;
+using Lte.Evaluations.DataService.Basic;
 using Lte.Evaluations.DataService.Mr;
 using LtePlatform.Models;
 
@@ -91,12 +92,7 @@ namespace LtePlatform.Controllers
         {
             return View();
         }
-
-        public ActionResult QueryMap()
-        {
-            return View();
-        }
-
+        
         [HttpPost]
         public ActionResult ZteNeighborPost(HttpPostedFileBase[] neighborZte)
         {

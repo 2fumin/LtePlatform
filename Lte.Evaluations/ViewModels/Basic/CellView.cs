@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
-using Lte.Domain.Common.Geo;
-using Lte.Parameters.Abstract;
+using Lte.Parameters.Abstract.Basic;
 using Lte.Parameters.Entities.Basic;
 
 namespace Lte.Evaluations.ViewModels.Basic
