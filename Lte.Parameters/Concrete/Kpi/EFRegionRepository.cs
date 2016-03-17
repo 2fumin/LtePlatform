@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 
-namespace Lte.Parameters.Concrete
+namespace Lte.Parameters.Concrete.Kpi
 {
     public class EFRegionRepository : LightWeightRepositroyBase<OptimizeRegion>, IRegionRepository
     {

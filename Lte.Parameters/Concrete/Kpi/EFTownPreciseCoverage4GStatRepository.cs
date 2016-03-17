@@ -4,7 +4,7 @@ using System.Data.Entity;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities.Kpi;
 
-namespace Lte.Parameters.Concrete
+namespace Lte.Parameters.Concrete.Kpi
 {
     public class EFTownPreciseCoverage4GStatRepository : LightWeightRepositroyBase<TownPreciseCoverage4GStat>,
         ITownPreciseCoverage4GStatRepository

@@ -6,14 +6,18 @@ using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.Kpi;
 
-namespace Lte.Parameters.Concrete
+namespace Lte.Parameters.Concrete.Kpi
 {
-    public class EFTopConnection3GRepository : LightWeightRepositroyBase<TopConnection3GCell>,
-        ITopConnection3GRepository
+    public class EFTopDrop2GCellRepository : LightWeightRepositroyBase<TopDrop2GCell>, ITopDrop2GCellRepository
     {
-        protected override DbSet<TopConnection3GCell> Entities => context.TopConnection3GStats;
+        protected override DbSet<TopDrop2GCell> Entities => context.TopDrop2GStats;
 
-        public int Import(IEnumerable<TopConnection3GCellExcel> stats)
+        public List<TopDrop2GCell> GetAllList(string city, DateTime begin, DateTime end)
+        {
+            return GetAll().Where(x => x.StatTime >= begin && x.StatTime < end && x.City == city).ToList();
+        }
+
+        public int Import(IEnumerable<TopDrop2GCellExcel> stats)
         {
             var count = 0;
             foreach (var stat in from stat in stats
@@ -23,15 +27,10 @@ namespace Lte.Parameters.Concrete
                 where info == null
                 select stat)
             {
-                Insert(TopConnection3GCell.ConstructStat(stat));
+                Insert(TopDrop2GCell.ConstructStat(stat));
                 count++;
             }
             return count;
-        }
-
-        public List<TopConnection3GCell> GetAllList(string city, DateTime begin, DateTime end)
-        {
-            return GetAll().Where(x => x.StatTime >= begin && x.StatTime < end && x.City == city).ToList();
         }
     }
 }

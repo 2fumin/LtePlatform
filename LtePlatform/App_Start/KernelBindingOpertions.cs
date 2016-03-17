@@ -11,6 +11,7 @@ using Lte.Parameters.Abstract.College;
 using Lte.Parameters.Concrete;
 using Lte.Parameters.Concrete.Basic;
 using Lte.Parameters.Concrete.College;
+using Lte.Parameters.Concrete.Kpi;
 using Lte.Parameters.Concrete.Mr;
 using Ninject;
 

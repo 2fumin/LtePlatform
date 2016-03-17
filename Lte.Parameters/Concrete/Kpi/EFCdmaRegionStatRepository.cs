@@ -8,7 +8,7 @@ using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.Basic;
 
-namespace Lte.Parameters.Concrete
+namespace Lte.Parameters.Concrete.Kpi
 {
     public class EFCdmaRegionStatRepository : LightWeightRepositroyBase<CdmaRegionStat>, ICdmaRegionStatRepository
     {
