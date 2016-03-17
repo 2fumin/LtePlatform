@@ -5,7 +5,7 @@ using Lte.Evaluations.DataService.Kpi;
 using Lte.Evaluations.Test.MockItems;
 using Lte.Evaluations.ViewModels.RegionKpi;
 using Lte.Parameters.Abstract;
-using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Kpi;
 using Moq;
 
 namespace Lte.Evaluations.Test.TestService

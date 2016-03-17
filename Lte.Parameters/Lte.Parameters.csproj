@@ -191,15 +191,15 @@
     <Compile Include="Entities\LteNeighborCell.cs" />
     <Compile Include="Entities\NearestPciCell.cs" />
     <Compile Include="Entities\OptimizeRegion.cs" />
-    <Compile Include="Entities\PreciseCoverage4G.cs" />
-    <Compile Include="Entities\PreciseCoverage4GCsv.cs" />
+    <Compile Include="Entities\Kpi\PreciseCoverage4G.cs" />
+    <Compile Include="Entities\Kpi\PreciseCoverage4GCsv.cs" />
     <Compile Include="Entities\RasterInfo.cs" />
-    <Compile Include="Entities\TopConnection3GCell.cs" />
+    <Compile Include="Entities\Kpi\TopConnection3GCell.cs" />
     <Compile Include="Entities\ExcelCsv\TopConnection3GCellExcel.cs" />
-    <Compile Include="Entities\TopDrop2GCell.cs" />
+    <Compile Include="Entities\Kpi\TopDrop2GCell.cs" />
     <Compile Include="Entities\ExcelCsv\TopDrop2GCellExcel.cs" />
     <Compile Include="Entities\Town.cs" />
-    <Compile Include="Entities\TownPreciseCoverage4GStat.cs" />
+    <Compile Include="Entities\Kpi\TownPreciseCoverage4GStat.cs" />
     <Compile Include="Entities\Work\WorkItem.cs" />
     <Compile Include="Entities\Work\WorkItemExcel.cs" />
     <Compile Include="Entities\Work\WorkItemType.cs" />
@@ -302,6 +302,9 @@
     <EmbeddedResource Include="Migrations\201601150734100_Modify_Interence_Matrix_2016_0115.resx">
       <DependentUpon>201601150734100_Modify_Interence_Matrix_2016_0115.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entities\Switch\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

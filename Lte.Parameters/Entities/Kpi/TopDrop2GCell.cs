@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Abp.Domain.Entities;
 using AutoMapper;
-using Lte.Domain.Common;
-using Lte.Domain.Regular;
 using Lte.Parameters.Abstract;
 
-namespace Lte.Parameters.Entities
+namespace Lte.Parameters.Entities.Kpi
 {
     public class TopDrop2GCell : Entity, IBtsIdQuery
     {

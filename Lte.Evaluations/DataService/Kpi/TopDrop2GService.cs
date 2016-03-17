@@ -5,7 +5,7 @@ using AutoMapper;
 using Lte.Evaluations.MapperSerive.Kpi;
 using Lte.Evaluations.ViewModels.Kpi;
 using Lte.Parameters.Abstract;
-using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Kpi;
 
 namespace Lte.Evaluations.DataService.Kpi
 {

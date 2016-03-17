@@ -3,6 +3,7 @@ using System.Linq;
 using Lte.Evaluations.ViewModels.Kpi;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Kpi;
 
 namespace Lte.Evaluations.MapperSerive.Kpi
 {

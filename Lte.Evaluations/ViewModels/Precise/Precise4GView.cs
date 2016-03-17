@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Lte.Parameters.Abstract;
-using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Kpi;
 
 namespace Lte.Evaluations.ViewModels.Precise
 {

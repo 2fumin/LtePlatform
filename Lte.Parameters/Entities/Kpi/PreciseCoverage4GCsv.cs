@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Lte.Domain.LinqToCsv;
 
-namespace Lte.Parameters.Entities
+namespace Lte.Parameters.Entities.Kpi
 {
     public class PreciseCoverage4GCsv
     {

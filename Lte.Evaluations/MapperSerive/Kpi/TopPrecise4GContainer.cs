@@ -1,4 +1,4 @@
-﻿using Lte.Parameters.Entities;
+﻿using Lte.Parameters.Entities.Kpi;
 
 namespace Lte.Evaluations.MapperSerive.Kpi
 {

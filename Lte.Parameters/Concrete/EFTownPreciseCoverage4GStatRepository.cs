@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using Lte.Parameters.Abstract;
-using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Kpi;
 
 namespace Lte.Parameters.Concrete
 {

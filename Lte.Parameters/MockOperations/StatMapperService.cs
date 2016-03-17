@@ -10,6 +10,7 @@ using Lte.Domain.Common;
 using Lte.Domain.Regular;
 using Lte.Parameters.Entities.Basic;
 using Lte.Parameters.Entities.ExcelCsv;
+using Lte.Parameters.Entities.Kpi;
 using Lte.Parameters.Entities.Mr;
 using Lte.Parameters.Entities.Work;
 

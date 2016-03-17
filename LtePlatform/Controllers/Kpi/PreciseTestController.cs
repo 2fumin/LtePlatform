@@ -5,7 +5,7 @@ using System.Web.Http;
 using Lte.Evaluations.DataService.Kpi;
 using Lte.Evaluations.ViewModels.RegionKpi;
 using Lte.Parameters.Abstract;
-using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Kpi;
 using LtePlatform.Models;
 
 namespace LtePlatform.Controllers.Kpi

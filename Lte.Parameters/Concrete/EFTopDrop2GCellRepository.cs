@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Kpi;
 
 namespace Lte.Parameters.Concrete
 {

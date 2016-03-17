@@ -17,6 +17,9 @@
                         deferred.reject(reason);
                     });
                 return deferred.promise;
-            }
+            },
+            cellSpecificOffsetDict: [
+                -24, -22, -20, -18, -16, -14, -12, -10, -8, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24
+            ]
         };
     });

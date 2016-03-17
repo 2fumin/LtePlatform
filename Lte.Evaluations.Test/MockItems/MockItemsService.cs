@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Moq;
-using Lte.Parameters.MockOperations;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.Basic;
+using Lte.Parameters.Entities.Kpi;
+using Lte.Parameters.MockOperations;
+using Moq;
 
 namespace Lte.Evaluations.Test.MockItems
 {

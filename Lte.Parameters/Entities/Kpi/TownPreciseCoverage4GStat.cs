@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Text;
-using System.Threading.Tasks;
 using Abp.Domain.Entities;
 
-namespace Lte.Parameters.Entities
+namespace Lte.Parameters.Entities.Kpi
 {
     public class TownPreciseCoverage4GStat : Entity
     {

@@ -7,6 +7,7 @@ using Lte.Evaluations.DataService.Kpi;
 using Lte.Evaluations.Policy;
 using Lte.Evaluations.ViewModels.Precise;
 using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Kpi;
 using LtePlatform.Models;
 
 namespace LtePlatform.Controllers.Kpi

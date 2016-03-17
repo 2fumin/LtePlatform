@@ -1,5 +1,6 @@
 ﻿using System;
 using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Kpi;
 using Lte.Parameters.MockOperations;
 using NUnit.Framework;
 
