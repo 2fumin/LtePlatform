@@ -1,0 +1,26 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Lte.Parameters.Abstract.Switch;
+using Lte.Parameters.Concrete.Switch;
+using NUnit.Framework;
+
+namespace Lte.Parameters.Test.Switch
+{
+    [TestFixture]
+    public class CellMeasGroupZteRepositoryTests
+    {
+        private readonly ICellMeasGroupZteRepository _repository = new CellMeasGroupZteRepository();
+
+        [Test]
+        public void Test_GetByENodeb()
+        {
+            var result = _repository.GetRecent(551203);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(result.iDate, "20160304");
+        }
+
+    }
+}
