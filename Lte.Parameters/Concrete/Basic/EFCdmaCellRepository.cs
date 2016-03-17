@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using Abp.EntityFramework;
 using Abp.EntityFramework.Repositories;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities.Basic;
 
-namespace Lte.Parameters.Concrete
+namespace Lte.Parameters.Concrete.Basic
 {
     public class EFCdmaCellRepository : EfRepositoryBase<EFParametersContext, CdmaCell>, ICdmaCellRepository
     {

@@ -2,11 +2,10 @@
 using System.Linq;
 using Abp.EntityFramework;
 using Abp.EntityFramework.Repositories;
-using Lte.Domain.Common.Geo;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities.Basic;
 
-namespace Lte.Parameters.Concrete
+namespace Lte.Parameters.Concrete.Basic
 {
     public class EFCellRepository : EfRepositoryBase<EFParametersContext, Cell>, ICellRepository
     {

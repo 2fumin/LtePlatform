@@ -101,6 +101,7 @@
     <Compile Include="Abstract\IBtsRepository.cs" />
     <Compile Include="Abstract\ICdmaCellRepository.cs" />
     <Compile Include="Abstract\ICdmaRegionStatRepository.cs" />
+    <Compile Include="Abstract\ICellHuaweiMongoRepository.cs" />
     <Compile Include="Abstract\ICellRepository.cs" />
     <Compile Include="Abstract\College\ICollege3GTestRepository.cs" />
     <Compile Include="Abstract\College\ICollege4GTestRepository.cs" />
@@ -124,16 +125,17 @@
     <Compile Include="Abstract\IWorkItemRepository.cs" />
     <Compile Include="Abstract\LightWeightRepositroyBase.cs" />
     <Compile Include="Abstract\PagingRepositoryBase.cs" />
+    <Compile Include="Concrete\Basic\CellHuaweiMongoRepository.cs" />
     <Compile Include="Concrete\EFAlameRepository.cs" />
-    <Compile Include="Concrete\EFBtsRepository.cs" />
-    <Compile Include="Concrete\EFCdmaCellRepository.cs" />
+    <Compile Include="Concrete\Basic\EFBtsRepository.cs" />
+    <Compile Include="Concrete\Basic\EFCdmaCellRepository.cs" />
     <Compile Include="Concrete\EFCdmaRegionStatRepository.cs" />
-    <Compile Include="Concrete\EFCellRepository.cs" />
+    <Compile Include="Concrete\Basic\EFCellRepository.cs" />
     <Compile Include="Concrete\EFCollege3GTestRepository.cs" />
     <Compile Include="Concrete\EFCollege4GTestRepository.cs" />
     <Compile Include="Concrete\EFCollegeKpiRepository.cs" />
     <Compile Include="Concrete\EFCollegeRepository.cs" />
-    <Compile Include="Concrete\EFENodebRepository.cs" />
+    <Compile Include="Concrete\Basic\EFENodebRepository.cs" />
     <Compile Include="Concrete\EFIndoorDistributionRepository.cs" />
     <Compile Include="Concrete\EFInfrastructureRepository.cs" />
     <Compile Include="Concrete\Mr\EFInterferenceMatrixRepository.cs" />
@@ -153,6 +155,7 @@
     <Compile Include="Concrete\Mr\InterferenceMongoRepository.cs" />
     <Compile Include="Concrete\MyMongoProvider.cs" />
     <Compile Include="Entities\AlarmStat.cs" />
+    <Compile Include="Entities\Basic\CellHuaweiMongo.cs" />
     <Compile Include="Entities\ExcelCsv\AlarmStatCsv.cs" />
     <Compile Include="Entities\ExcelCsv\AlarmStatHuawei.cs" />
     <Compile Include="Entities\AreaTestDate.cs" />

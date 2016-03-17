@@ -1,0 +1,26 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Lte.Parameters.Abstract;
+using Lte.Parameters.Concrete.Basic;
+using NUnit.Framework;
+
+namespace Lte.Parameters.Test.Basic
+{
+    [TestFixture]
+    public class CellHuaweiMongoRepositoryTests
+    {
+        private readonly ICellHuaweiMongoRepository _repository = new CellHuaweiMongoRepository();
+
+        [Test]
+        public void Test_GetByENodeb()
+        {
+            var results = _repository.GetAllList(500814);
+            Assert.IsNotNull(results);
+            Assert.AreEqual(results.Count, 27);
+            Assert.AreEqual(results[0].iDate, "20160122");
+        }
+    }
+}

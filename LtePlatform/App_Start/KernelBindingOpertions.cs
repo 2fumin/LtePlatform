@@ -8,6 +8,7 @@ using Lte.Evaluations.DataService.Mr;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Abstract.College;
 using Lte.Parameters.Concrete;
+using Lte.Parameters.Concrete.Basic;
 using Lte.Parameters.Concrete.Mr;
 using Ninject;
 
@@ -73,6 +74,8 @@ namespace LtePlatform
             ninjectKernel.Bind<IInterferenceMatrixRepository>().To<EFInterferenceMatrixRepository>();
 
             ninjectKernel.Bind<IInterferenceMongoRepository>().To<InterferenceMongoRepository>();
+
+            ninjectKernel.Bind<ICellHuaweiMongoRepository>().To<CellHuaweiMongoRepository>();
 
             ninjectKernel.Bind<CdmaRegionStatService>().ToSelf();
 

@@ -5,7 +5,7 @@ using Abp.EntityFramework.Repositories;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities.Basic;
 
-namespace Lte.Parameters.Concrete
+namespace Lte.Parameters.Concrete.Basic
 {
     public class EFENodebRepository : EfRepositoryBase<EFParametersContext, ENodeb>, IENodebRepository
     {   
