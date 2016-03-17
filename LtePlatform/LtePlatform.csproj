@@ -758,6 +758,7 @@
     <Content Include="Scripts\service\app.url.service.js" />
     <Content Include="Scripts\service\kpi.basic.service.js" />
     <Content Include="Scripts\service\kpi.import.service.js" />
+    <Content Include="Scripts\service\mongo\cell.huawei.js" />
     <Content Include="Scripts\service\ne.geometry.service.js" />
     <Content Include="Scripts\service\parameters.chart.js" />
     <Content Include="Scripts\service\parameters.map.service.js" />
