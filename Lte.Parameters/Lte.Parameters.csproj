@@ -155,6 +155,7 @@
     <Compile Include="Concrete\MasterTestContext.cs" />
     <Compile Include="Concrete\Mr\InterferenceMongoRepository.cs" />
     <Compile Include="Concrete\MyMongoProvider.cs" />
+    <Compile Include="Concrete\Switch\CellMeasGroupZteRepository.cs" />
     <Compile Include="Entities\AlarmStat.cs" />
     <Compile Include="Entities\Basic\CellHuaweiMongo.cs" />
     <Compile Include="Entities\ExcelCsv\AlarmStatCsv.cs" />
