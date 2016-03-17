@@ -14,5 +14,7 @@ namespace Lte.Parameters.Abstract
         List<CellHuaweiMongo> GetAllList(int eNodebId);
 
         List<CellHuaweiMongo> GetRecentList(int eNodebId);
+
+        CellHuaweiMongo GetRecent(int eNodebId, byte sectorId);
     }
 }

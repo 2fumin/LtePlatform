@@ -77,6 +77,7 @@
     <Compile Include="DataService\Basic\BasicImportService.cs" />
     <Compile Include="DataService\Basic\BtsQueryService.cs" />
     <Compile Include="DataService\Basic\CdmaCellService.cs" />
+    <Compile Include="DataService\Basic\CellHuaweiMongoService.cs" />
     <Compile Include="DataService\Kpi\CdmaRegionStatService.cs" />
     <Compile Include="DataService\Basic\CellService.cs" />
     <Compile Include="DataService\College\College3GTestService.cs" />

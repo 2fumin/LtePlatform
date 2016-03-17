@@ -36,5 +36,15 @@ namespace Lte.Parameters.Concrete.Basic
             var recentDate = list.Max(x => x.iDate);
             return list.Where(x => x.iDate == recentDate).ToList();
         }
+
+        public CellHuaweiMongo GetRecent(int eNodebId, byte sectorId)
+        {
+            var query =
+                MongoDB.Driver.Builders.Query<CellHuaweiMongo>.Where(
+                    e => e.eNodeB_Id == eNodebId && e.CellId == sectorId);
+            var list = Collection.Find(query).AsQueryable();
+            var recentDate = list.Max(x => x.iDate);
+            return list.FirstOrDefault(x => x.iDate == recentDate);
+        }
     }
 }

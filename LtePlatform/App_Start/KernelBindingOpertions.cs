@@ -153,6 +153,8 @@ namespace LtePlatform
             ninjectKernel.Bind<NeighborMonitorService>().ToSelf();
 
             ninjectKernel.Bind<InterferenceNeighborService>().ToSelf();
+
+            ninjectKernel.Bind<CellHuaweiMongoService>().ToSelf();
         }
     }
 }
