@@ -402,6 +402,7 @@
     <Content Include="appViews\Manage\AllUsers.html" />
     <Content Include="appViews\Manage\CurrentUser.html" />
     <Content Include="appViews\Manage\ForgotPassword.html" />
+    <Content Include="appViews\Manage\ResetPassword.html" />
     <Content Include="appViews\Manage\Roles.html" />
     <Content Include="appViews\Manage\RoleUser.html" />
     <Content Include="appViews\Parameters\Import\BtsInfos.html" />

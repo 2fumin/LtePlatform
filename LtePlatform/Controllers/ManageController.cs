@@ -205,16 +205,22 @@ namespace LtePlatform.Controllers
         public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
             var userByName = await UserManager.FindByNameAsync(model.UserName);
+            if (userByName == null)
+                return Json(new {Type = "warning", Message = "用户名称对应的用户不存在！"});
             var userByEmail = await UserManager.FindByEmailAsync(model.Email);
-            if (userByName == null || userByEmail == null || !(await UserManager.IsEmailConfirmedAsync(userByName.Id)))
+            if (userByEmail == null)
+                return Json(new { Type = "warning", Message = "用户邮箱对应的用户不存在！" });
+            if (userByEmail.UserName!=model.UserName)
+                return Json(new { Type = "warning", Message = "用户邮箱和用户名不匹配！" });
+            if (!(await UserManager.IsEmailConfirmedAsync(userByName.Id)))
             {
-                return Json("该用户不存在或者未经确认！");
+                return Json(new { Type = "warning", Message = "该用户邮箱未经确认！" });
             }
             
             string code = await UserManager.GeneratePasswordResetTokenAsync(userByEmail.Id);
             var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = userByEmail.Id, code = code }, protocol: Request.Url.Scheme);
             await UserManager.SendEmailAsync(userByEmail.Id, "重置密码", "请通过单击<a href=\"" + callbackUrl + "\">此处</a>来重置你的密码");
-            return Json("启用帐户确认和密码重置链接的电子邮件已发送到" +  model.Email);
+            return Json(new { Type = "success", Message = "启用帐户确认和密码重置链接的电子邮件已发送到" +  model.Email});
         }
 
         //
