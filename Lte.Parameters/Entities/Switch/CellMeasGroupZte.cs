@@ -3,7 +3,7 @@ using MongoDB.Bson;
 
 namespace Lte.Parameters.Entities.Switch
 {
-    public class CellMeasGroupZte : IEntity<ObjectId>
+    public class CellMeasGroupZte : IEntity<ObjectId>, IMongoZte
     {
         public ObjectId Id { get; set; }
 
