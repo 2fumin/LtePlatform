@@ -34,6 +34,7 @@ namespace Lte.Evaluations.MapperSerive
             
             InfrastructureMapperService.MapCdmaCell();
             InfrastructureMapperService.MapCell();
+            InfrastructureMapperService.MapHoParametersService();
 
             KpiMapperService.MapCdmaRegionStat();
             KpiMapperService.MapCellPrecise();
