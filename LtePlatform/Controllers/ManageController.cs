@@ -190,16 +190,14 @@ namespace LtePlatform.Controllers
             if (!result.Succeeded)
             {
                 var message = result.Errors.Aggregate("修改密码失败！", (current, errorMessage) => current + (";" + errorMessage));
-                return Json(message);
+                return Json(new {Type = "warning", Message = message});
             }
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            if (user != null)
-            {
-                await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-            }
-            return Json("修改密码成功！");
+            if (user == null) return Json(new {Type = "warning", Message = "获取当前用户信息失败！"});
+            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+            return Json(new { Type = "success", Message = "修改密码成功！"});
         }
-
+        
         //
         // POST: /Account/ForgotPassword
         [HttpPost]
@@ -326,12 +324,6 @@ namespace LtePlatform.Controllers
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
             return user?.PasswordHash != null;
-        }
-
-        private bool HasPhoneNumber()
-        {
-            var user = UserManager.FindById(User.Identity.GetUserId());
-            return user?.PhoneNumber != null;
         }
 
         public enum ManageMessageId

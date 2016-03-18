@@ -3,8 +3,8 @@
         if ($scope.signup_form.$valid) {
             authorizeService.changePassword($scope.signup).then(function(result) {
                 $scope.page.messages.push({
-                    contents: result,
-                    type: 'success'
+                    contents: result.Message,
+                    type: result.Type
                 });
             }, function(reason) {
                 $scope.page.messages.push({
