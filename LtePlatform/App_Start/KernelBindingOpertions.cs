@@ -89,6 +89,10 @@ namespace LtePlatform
 
             ninjectKernel.Bind<IIntraFreqHoGroupRepository>().To<IntraFreqHoGroupRepository>();
 
+            ninjectKernel.Bind<IIntraRatHoCommRepository>().To<IntraRatHoCommRepository>();
+
+            ninjectKernel.Bind<IInterRatHoCommRepository>().To<InterRatHoCommRepository>();
+
             ninjectKernel.Bind<CdmaRegionStatService>().ToSelf();
 
             ninjectKernel.Bind<CollegeStatService>().ToSelf();

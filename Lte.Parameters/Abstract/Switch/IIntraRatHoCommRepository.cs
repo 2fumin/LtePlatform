@@ -6,6 +6,6 @@ namespace Lte.Parameters.Abstract.Switch
 {
     public interface IIntraRatHoCommRepository : IRepository<IntraRatHoComm, ObjectId>
     {
-        IntraFreqHoGroup GetRecent(int eNodebId);
+        IntraRatHoComm GetRecent(int eNodebId);
     }
 }

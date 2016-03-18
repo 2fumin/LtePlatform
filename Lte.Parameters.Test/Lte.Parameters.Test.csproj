@@ -100,7 +100,9 @@
     <Compile Include="Mr\InterferenceMongoRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Switch\CellMeasGroupZteRepositoryTests.cs" />
+    <Compile Include="Switch\InterRatHoCommRepositoryTests.cs" />
     <Compile Include="Switch\IntraFreqHoGroupRepositoryTests.cs" />
+    <Compile Include="Switch\IntraRatHoCommRepositoryTests.cs" />
     <Compile Include="Switch\UeEUtranMeasurementRepositoryTests.cs" />
   </ItemGroup>
   <ItemGroup>

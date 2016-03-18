@@ -42,6 +42,8 @@ namespace Lte.Parameters.Entities.Switch
 
         public int InterFreqHoA1A2TrigQuan { get; set; }
 
+        public int objId { get; set; }
+
         public int InterFreqHoRprtInterval { get; set; }
 
         public int A3InterFreqHoA1A2TrigQuan { get; set; }
