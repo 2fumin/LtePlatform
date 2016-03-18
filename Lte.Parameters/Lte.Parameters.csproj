@@ -160,6 +160,7 @@
     <Compile Include="Concrete\Switch\UeEUtranMeasurementRepository.cs" />
     <Compile Include="Entities\AlarmStat.cs" />
     <Compile Include="Entities\Basic\CellHuaweiMongo.cs" />
+    <Compile Include="Entities\Basic\IHuaweiMongo.cs" />
     <Compile Include="Entities\ExcelCsv\AlarmStatCsv.cs" />
     <Compile Include="Entities\ExcelCsv\AlarmStatHuawei.cs" />
     <Compile Include="Entities\AreaTestDate.cs" />
@@ -204,6 +205,9 @@
     <Compile Include="Entities\ExcelCsv\TopDrop2GCellExcel.cs" />
     <Compile Include="Entities\Switch\CellMeasGroupZte.cs" />
     <Compile Include="Entities\Switch\IMongoZte.cs" />
+    <Compile Include="Entities\Switch\InterRatHoComm.cs" />
+    <Compile Include="Entities\Switch\IntraFreqHoGroup.cs" />
+    <Compile Include="Entities\Switch\IntraRatHoComm.cs" />
     <Compile Include="Entities\Switch\UeEUtranMeasurementZte.cs" />
     <Compile Include="Entities\Town.cs" />
     <Compile Include="Entities\Kpi\TownPreciseCoverage4GStat.cs" />

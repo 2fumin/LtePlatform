@@ -8,7 +8,7 @@ using MongoDB.Bson;
 
 namespace Lte.Parameters.Entities.Basic
 {
-    public class CellHuaweiMongo : IEntity<ObjectId>
+    public class CellHuaweiMongo : IEntity<ObjectId>, IHuaweiMongo
     {
         public ObjectId Id { get; set; }
 
