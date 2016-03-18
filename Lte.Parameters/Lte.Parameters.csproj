@@ -126,6 +126,7 @@
     <Compile Include="Abstract\LightWeightRepositroyBase.cs" />
     <Compile Include="Abstract\PagingRepositoryBase.cs" />
     <Compile Include="Abstract\Switch\ICellMeasGroupZteRepository.cs" />
+    <Compile Include="Abstract\Switch\IIntraFreqHoGroupRepository.cs" />
     <Compile Include="Abstract\Switch\IUeEUtranMeasurementRepository.cs" />
     <Compile Include="Concrete\Basic\CellHuaweiMongoRepository.cs" />
     <Compile Include="Concrete\EFAlameRepository.cs" />
@@ -157,6 +158,7 @@
     <Compile Include="Concrete\Mr\InterferenceMongoRepository.cs" />
     <Compile Include="Concrete\MyMongoProvider.cs" />
     <Compile Include="Concrete\Switch\CellMeasGroupZteRepository.cs" />
+    <Compile Include="Concrete\Switch\IntraFreqHoGroupRepository.cs" />
     <Compile Include="Concrete\Switch\UeEUtranMeasurementRepository.cs" />
     <Compile Include="Entities\AlarmStat.cs" />
     <Compile Include="Entities\Basic\CellHuaweiMongo.cs" />
