@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
 using Lte.Evaluations.ViewModels;
-using Lte.Parameters.Abstract;
+using Lte.Parameters.Abstract.Kpi;
 using Lte.Parameters.Entities;
 
 namespace Lte.Evaluations.DataService

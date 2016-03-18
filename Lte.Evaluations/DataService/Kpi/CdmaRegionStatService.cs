@@ -6,6 +6,7 @@ using AutoMapper;
 using Lte.Domain.Regular;
 using Lte.Evaluations.ViewModels.RegionKpi;
 using Lte.Parameters.Abstract;
+using Lte.Parameters.Abstract.Kpi;
 using Lte.Parameters.Entities.Basic;
 
 namespace Lte.Evaluations.DataService.Kpi

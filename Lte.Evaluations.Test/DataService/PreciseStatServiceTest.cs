@@ -7,6 +7,7 @@ using Lte.Evaluations.Policy;
 using Lte.Evaluations.Test.MockItems;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Abstract.Basic;
+using Lte.Parameters.Abstract.Kpi;
 using Lte.Parameters.Entities.Kpi;
 using Moq;
 using NUnit.Framework;

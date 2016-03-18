@@ -8,6 +8,7 @@ using Lte.Evaluations.Test.DataService.Queries;
 using Lte.Evaluations.Test.MockItems;
 using Lte.Evaluations.Test.TestService;
 using Lte.Parameters.Abstract;
+using Lte.Parameters.Abstract.Kpi;
 using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.Basic;
 using Moq;

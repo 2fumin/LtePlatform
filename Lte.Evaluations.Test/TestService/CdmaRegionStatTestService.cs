@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Lte.Evaluations.DataService;
 using Lte.Evaluations.DataService.Kpi;
 using Lte.Evaluations.Test.MockItems;
-using Lte.Evaluations.ViewModels;
 using Lte.Evaluations.ViewModels.RegionKpi;
 using Lte.Parameters.Abstract;
-using Lte.Parameters.Entities;
+using Lte.Parameters.Abstract.Kpi;
 using Lte.Parameters.Entities.Basic;
 using Moq;
 

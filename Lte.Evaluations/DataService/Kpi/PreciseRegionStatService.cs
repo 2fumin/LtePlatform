@@ -4,6 +4,7 @@ using System.Linq;
 using Lte.Domain.Regular;
 using Lte.Evaluations.ViewModels.RegionKpi;
 using Lte.Parameters.Abstract;
+using Lte.Parameters.Abstract.Kpi;
 
 namespace Lte.Evaluations.DataService.Kpi
 {

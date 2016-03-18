@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Abp.Domain.Repositories;
 using Lte.Parameters.Entities.Kpi;
 
-namespace Lte.Parameters.Abstract
+namespace Lte.Parameters.Abstract.Kpi
 {
     public interface IPreciseCoverage4GRepository : IRepository<PreciseCoverage4G>
     {

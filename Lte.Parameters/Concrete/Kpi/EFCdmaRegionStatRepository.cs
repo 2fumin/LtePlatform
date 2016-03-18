@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Abp.EntityFramework.AutoMapper;
 using Lte.Parameters.Abstract;
+using Lte.Parameters.Abstract.Kpi;
 using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.Basic;
 

@@ -2,6 +2,7 @@
 using System.Linq;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Abstract.Basic;
+using Lte.Parameters.Abstract.Kpi;
 using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.Basic;
 using Lte.Parameters.Entities.Kpi;

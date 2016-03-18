@@ -4,6 +4,7 @@ using System.Linq;
 using Lte.Evaluations.ViewModels.Precise;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Abstract.Basic;
+using Lte.Parameters.Abstract.Kpi;
 
 namespace Lte.Evaluations.DataService.College
 {

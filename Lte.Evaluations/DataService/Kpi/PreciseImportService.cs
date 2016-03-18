@@ -10,6 +10,7 @@ using Lte.Evaluations.ViewModels.Precise;
 using Lte.Evaluations.ViewModels.RegionKpi;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Abstract.Basic;
+using Lte.Parameters.Abstract.Kpi;
 using Lte.Parameters.Entities.Kpi;
 
 namespace Lte.Evaluations.DataService.Kpi

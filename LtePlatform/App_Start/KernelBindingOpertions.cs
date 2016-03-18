@@ -8,6 +8,7 @@ using Lte.Evaluations.DataService.Mr;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Abstract.Basic;
 using Lte.Parameters.Abstract.College;
+using Lte.Parameters.Abstract.Kpi;
 using Lte.Parameters.Abstract.Switch;
 using Lte.Parameters.Concrete;
 using Lte.Parameters.Concrete.Basic;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Lte.Domain.LinqToExcel;
 using Lte.Parameters.Abstract;
+using Lte.Parameters.Abstract.Kpi;
 using Lte.Parameters.Entities;
 
 namespace Lte.Evaluations.DataService.Kpi
