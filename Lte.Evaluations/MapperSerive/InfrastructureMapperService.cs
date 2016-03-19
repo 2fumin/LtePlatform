@@ -38,6 +38,26 @@ namespace Lte.Evaluations.MapperSerive
                 .ForMember(d => d.MaxReportCellNum, opt => opt.MapFrom(s => s.IntraRatHoMaxRprtCell))
                 .ForMember(d => d.TriggerQuantity, opt => opt.MapFrom(s => s.IntraFreqHoA3TrigQuan))
                 .ForMember(d => d.ReportQuantity, opt => opt.MapFrom(s => s.IntraFreqHoA3RprtQuan));
+
+            Mapper.CreateMap<UeEUtranMeasurementZte, ENodebIntraFreqHoView>()
+                .ForMember(d=>d.ENodebId, opt=>opt.MapFrom(s=>s.eNodeB_Id))
+                .ForMember(d=>d.ReportInterval, opt=>opt.MapFrom(s=>s.reportInterval))
+                .ForMember(d => d.ReportAmount, opt => opt.MapFrom(s => s.reportAmount))
+                .ForMember(d => d.MaxReportCellNum, opt => opt.MapFrom(s => s.maxReportCellNum))
+                .ForMember(d => d.TriggerQuantity, opt => opt.MapFrom(s => s.triggerQuantity))
+                .ForMember(d => d.ReportQuantity, opt => opt.MapFrom(s => s.reportQuantity));
+
+            Mapper.CreateMap<IntraFreqHoGroup, CellIntraFreqHoView>()
+                .ForMember(d => d.ENodebId, opt => opt.MapFrom(s => s.eNodeB_Id))
+                .ForMember(d => d.Hysteresis, opt => opt.MapFrom(s => s.IntraFreqHoA3Hyst))
+                .ForMember(d => d.TimeToTrigger, opt => opt.MapFrom(s => s.IntraFreqHoA3TimeToTrig))
+                .ForMember(d => d.A3Offset, opt => opt.MapFrom(s => s.IntraFreqHoA3Offset));
+
+            Mapper.CreateMap<UeEUtranMeasurementZte, CellIntraFreqHoView>()
+                .ForMember(d => d.ENodebId, opt => opt.MapFrom(s => s.eNodeB_Id))
+                .ForMember(d => d.Hysteresis, opt => opt.MapFrom(s => s.hysteresis))
+                .ForMember(d => d.TimeToTrigger, opt => opt.MapFrom(s => s.timeToTrigger))
+                .ForMember(d => d.A3Offset, opt => opt.MapFrom(s => s.a3Offset));
         }
     }
 }

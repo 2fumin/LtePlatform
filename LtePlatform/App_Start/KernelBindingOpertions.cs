@@ -5,6 +5,7 @@ using Lte.Evaluations.DataService.College;
 using Lte.Evaluations.DataService.Dump;
 using Lte.Evaluations.DataService.Kpi;
 using Lte.Evaluations.DataService.Mr;
+using Lte.Evaluations.DataService.Switch;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Abstract.Basic;
 using Lte.Parameters.Abstract.College;
@@ -170,6 +171,8 @@ namespace LtePlatform
             ninjectKernel.Bind<InterferenceNeighborService>().ToSelf();
 
             ninjectKernel.Bind<CellHuaweiMongoService>().ToSelf();
+
+            ninjectKernel.Bind<IntraFreqHoService>().ToSelf();
         }
     }
 }

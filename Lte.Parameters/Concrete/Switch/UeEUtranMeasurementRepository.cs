@@ -29,6 +29,7 @@ namespace Lte.Parameters.Concrete.Switch
                 MongoDB.Driver.Builders.Query<UeEUtranMeasurementZte>.Where(
                     e => e.eNodeB_Id == eNodebId && e.measCfgIdx == measIndex);
             var list = Collection.Find(query).AsQueryable();
+            if (!list.Any()) return null;
             var recentDate = list.Max(x => x.iDate);
             return list.FirstOrDefault(x => x.iDate == recentDate);
         }
