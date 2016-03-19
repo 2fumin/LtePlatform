@@ -156,6 +156,20 @@
                     deferred.reject(reason);
                 });
                 return deferred.promise;
+            },
+            confirmEmail: function (input) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'POST',
+                    url: '/Manage/ConfirmEmail',
+                    data: input
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
             }
         };
     });

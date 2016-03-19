@@ -69,6 +69,15 @@ namespace LtePlatform.Controllers
             return View();
         }
 
+        public async Task<ActionResult> ConfirmEmail(IndexViewModel model)
+        {
+            var userId = User.Identity.GetUserId();
+            string code = await UserManager.GenerateEmailConfirmationTokenAsync(userId);
+            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = userId, code = code }, protocol: Request.Url.Scheme);
+            await UserManager.SendEmailAsync(userId, "确认你的帐户", "请通过单击<a href=\"" + callbackUrl + "\">此处</a>来确认你的帐户");
+            return Json(new { Type = "success", Message = "确认邮箱链接的电子邮件已发送到" +  model.Email});
+        }
+
         //
         // POST: /Manage/RemoveLogin
         [HttpPost]
