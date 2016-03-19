@@ -61,7 +61,9 @@ namespace LtePlatform.Controllers
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                Email = await UserManager.GetEmailAsync(userId),
+                EmailHasBeenConfirmed = await UserManager.IsEmailConfirmedAsync(userId)
             };
             UserContextConfiguration.CurrentUser = model;
             return View();
