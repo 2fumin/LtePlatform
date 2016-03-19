@@ -7,7 +7,7 @@
                 return data;
             }
 
-            var pairs = queryString.split("&");
+            var pairs = queryString.split("?")[1].split("&");
 
             for (var i = 0; i < pairs.length; i++) {
                 pair = pairs[i];
@@ -61,5 +61,7 @@
             },
             userInfoUrl: "/api/Me",
             siteUrl: "/",
+            parseQueryString: parseQueryString,
+            getAccessToken: getAccessToken
         };
     });
