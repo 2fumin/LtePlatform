@@ -16,6 +16,7 @@ This is a .net solution for LTE wireless network optimization when I work in Chi
 1. 工单信息：已提供导入接口，从省中心4G平台上导出后再导入。
 1. 校园网基础信息：2015年专项时建立，待完善。
 1. DT数据：Sqlserver数据，采用存储过程导入。
+
 ###目录结构
 1. Entities-定义数据库实体类
 1. Abstract
