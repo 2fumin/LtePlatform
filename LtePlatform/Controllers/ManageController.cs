@@ -199,7 +199,7 @@ namespace LtePlatform.Controllers
         }
         
         //
-        // POST: /Account/ForgotPassword
+        // POST: /Manage/ForgotPassword
         [HttpPost]
         [AllowAnonymous]
         public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
@@ -221,6 +221,28 @@ namespace LtePlatform.Controllers
             var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = userByEmail.Id, code = code }, protocol: Request.Url.Scheme);
             await UserManager.SendEmailAsync(userByEmail.Id, "重置密码", "请通过单击<a href=\"" + callbackUrl + "\">此处</a>来重置你的密码");
             return Json(new { Type = "success", Message = "启用帐户确认和密码重置链接的电子邮件已发送到" +  model.Email});
+        }
+
+        //
+        // POST: /Manage/ResetPassword
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            var userByName = await UserManager.FindByNameAsync(model.UserName);
+            if (userByName == null)
+                return Json(new { Type = "warning", Message = "用户名称对应的用户不存在！" });
+            var userByEmail = await UserManager.FindByEmailAsync(model.Email);
+            if (userByEmail == null)
+                return Json(new { Type = "warning", Message = "用户邮箱对应的用户不存在！" });
+            if (userByEmail.UserName != model.UserName)
+                return Json(new { Type = "warning", Message = "用户邮箱和用户名不匹配！" });
+            var result = await UserManager.ResetPasswordAsync(userByName.Id, model.Code, model.Password);
+            if (result.Succeeded)
+            {
+                return Json(new { Type = "success", Message = "用户密码修改成功，请重新登陆！" });
+            }
+            return Json(new { Type = "warning", Message = "用户密码修改失败！" });
         }
 
         //

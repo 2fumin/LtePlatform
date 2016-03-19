@@ -6,14 +6,19 @@
         confirmPassword: "",
         code: appUrlService.parseQueryString($window.location.href).code
     };
-    console.log($scope.signup.code);
+    $scope.page = {
+        messages: []
+    };
     $scope.signupForm = function () {
         $scope.signupForm = function () {
-            authorizeService.forgotPassword($scope.signup).then(function (result) {
+            authorizeService.resetPassword($scope.signup).then(function (result) {
                 $scope.page.messages.push({
                     contents: result.Message,
                     type: result.Type
                 });
+                if (result.Type === 'success') {
+                    $window.location.href = "/Account/Login";
+                }
             }, function (reason) {
                 $scope.page.messages.push({
                     contents: reason,
@@ -21,5 +26,8 @@
                 });
             });
         };
+    };
+    $scope.closeAlert = function (index) {
+        $scope.page.messages.splice(index, 1);
     };
 });

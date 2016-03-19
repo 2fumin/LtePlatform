@@ -102,6 +102,20 @@
                 });
                 return deferred.promise;
             },
+            resetPassword: function (input) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'POST',
+                    url: '/Manage/ResetPassword',
+                    data: input
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
+            },
             addPhoneNumber: function(input) {
                 var deferred = $q.defer();
                 $http({
