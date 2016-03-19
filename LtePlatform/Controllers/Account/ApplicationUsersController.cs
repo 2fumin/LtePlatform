@@ -23,7 +23,8 @@ namespace LtePlatform.Controllers.Account
                 UserName = x.UserName,
                 Email = x.Email,
                 PhoneNumber = x.PhoneNumber,
-                Hometown = x.Hometown
+                Hometown = x.Hometown,
+                EmailHasBeenConfirmed = false
             });
         } 
     }

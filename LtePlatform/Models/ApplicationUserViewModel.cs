@@ -21,5 +21,8 @@ namespace LtePlatform.Models
 
         [MemberDoc("电子邮箱")]
         public string Email { get; set; }
+
+        [MemberDoc("电子邮箱是否已确认")]
+        public bool EmailHasBeenConfirmed { get; set; }
     }
 }

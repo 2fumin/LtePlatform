@@ -6,6 +6,7 @@
                 <th>邮箱</th>
                 <th>号码</th>
                 <th>家乡</th>
+                <th>邮箱是否已确认</th>
                 <th>查询操作</th>
             </tr>
         </thead>
@@ -15,6 +16,7 @@
                 <td>{{user.email}}</td>
                 <td>{{user.phoneNumber}}</td>
                 <td>{{user.hometown}}</td>
+                <td>{{user.emailHasBeenConfirmed?"是":"否"}}</td>
                 <td></td>
             </tr>
         </tbody>
