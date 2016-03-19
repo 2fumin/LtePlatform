@@ -78,6 +78,15 @@ namespace LtePlatform.Controllers
             return Json(new { Type = "success", Message = "确认邮箱链接的电子邮件已发送到" +  model.Email});
         }
 
+        [HttpGet]
+        public async Task<ActionResult> EmailHasBeenConfirmed(string userName)
+        {
+            var user = await UserManager.FindByNameAsync(userName);
+            if (user == null) return Json(new {Name = userName, Result = false}, JsonRequestBehavior.AllowGet);
+            bool result = await UserManager.IsEmailConfirmedAsync(user.Id);
+            return Json(new { Name = userName, Result = result}, JsonRequestBehavior.AllowGet);
+        }
+
         //
         // POST: /Manage/RemoveLogin
         [HttpPost]

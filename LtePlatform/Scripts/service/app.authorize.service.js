@@ -27,6 +27,22 @@
                 });
                 return deferred.promise;
             },
+            queryEmailConfirmed: function (name) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: '/Manage/EmailHasBeenConfirmed',
+                    params: {
+                        userName: name
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
+            },
             updateRoleList: function() {
                 var deferred = $q.defer();
                 $http({
