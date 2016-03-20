@@ -37,13 +37,15 @@
     <script src="~/Scripts/service/parameters.map.service.js"></script>
     <script src="~/Scripts/service/parameters.chart.js"></script>
     <script src="~/Scripts/service/mongo/cell.huawei.js"></script>
+    <script src="~/Scripts/service/mongo/handoff.js"></script>
     <script>
         var app = angular.module('myApp', [
             "highcharts-ng", 'ui.router',
             "ui.bootstrap", 'myApp.url',
             'myApp.region', 'myApp.parameters',
             'parametersMap', 'parameters.chart',
-            'huawei.mongo.parameters'
+            'huawei.mongo.parameters',
+            'handoff.parameters'
         ]);
     </script>
     <script src="~/Scripts/parameters/route.controller.js"></script>
