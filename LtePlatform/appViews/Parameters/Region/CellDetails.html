@@ -1,0 +1,54 @@
+﻿<table class="table table-hover">
+    <tbody>
+        <tr>
+            <td>频点</td>
+            <td>{{lteCellDetails.frequency}}</td>
+            <td>经度</td>
+            <td>{{lteCellDetails.longtitute}}</td>
+            <td>纬度</td>
+            <td>{{lteCellDetails.lattitute}}</td>
+        </tr>
+        <tr>
+            <td>挂高</td>
+            <td>{{lteCellDetails.height}}</td>
+            <td>方位角</td>
+            <td>{{lteCellDetails.azimuth}}</td>
+            <td>下倾角</td>
+            <td>{{lteCellDetails.downTilt}}</td>
+        </tr>
+        <tr>
+            <td>室内外</td>
+            <td>{{lteCellDetails.indoor}}</td>
+            <td>天线增益</td>
+            <td>{{lteCellDetails.antennaGain}}</td>
+            <td>RS功率</td>
+            <td>{{lteCellDetails.rsPower}}</td>
+        </tr>
+        <tr>
+            <td>PCI</td>
+            <td>{{lteCellDetails.pci}}</td>
+            <td>PRACH</td>
+            <td>{{lteCellDetails.prach}}</td>
+            <td>TAC</td>
+            <td>{{lteCellDetails.tac}}</td>
+        </tr>
+    </tbody>
+    <tbody ng-show="isHuaweiCell">
+        <tr>
+            <td>网管PCI</td>
+            <td>{{cellMongo.phyCellId}}</td>
+            <td>网管PRACH</td>
+            <td>{{cellMongo.rootSequenceIdx}}</td>
+            <td>华为本地小区标识</td>
+            <td>{{cellMongo.localCellId}}</td>
+        </tr>
+        <tr>
+            <td>服务小区偏移量</td>
+            <td>{{cellMongo.cellSpecificOffset | dbStep32}}dB</td>
+            <td>服务小区偏置</td>
+            <td>{{cellMongo.qoffsetFreq | dbStep32}}dB</td>
+            <td>前导格式</td>
+            <td>{{cellMongo.preambleFmt}}</td>
+        </tr>
+    </tbody>
+</table>

@@ -406,6 +406,7 @@
     <Content Include="appViews\Manage\ResetPassword.html" />
     <Content Include="appViews\Manage\Roles.html" />
     <Content Include="appViews\Manage\RoleUser.html" />
+    <Content Include="appViews\Parameters\Ho\CellIntraFreq.html" />
     <Content Include="appViews\Parameters\Ho\ENodebIntraFreq.html" />
     <Content Include="appViews\Parameters\Import\BtsInfos.html" />
     <Content Include="appViews\Parameters\Import\CdmaCellInfos.html" />
@@ -416,6 +417,7 @@
     <Content Include="appViews\Parameters\Import\VanishedCdmaCellInfos.html" />
     <Content Include="appViews\Parameters\Import\VanishedCellInfos.html" />
     <Content Include="appViews\Parameters\Import\VanishedENodebs.html" />
+    <Content Include="appViews\Parameters\Region\CellDetails.html" />
     <Content Include="appViews\Parameters\Region\CellInfo.html" />
     <Content Include="appViews\Parameters\Region\CityInfrastructureTable.html" />
     <Content Include="appViews\Parameters\Region\DistrictInfrastructureTable.html" />
