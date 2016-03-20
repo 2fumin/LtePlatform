@@ -44,9 +44,9 @@
     </tr>
     <tr>
         <td>服务小区偏移量</td>
-        <td>{{cellMongo.cellSpecificOffsetdB}}dB</td>
+        <td>{{cellMongo.cellSpecificOffset | dbStep32}}dB</td>
         <td>服务小区偏置</td>
-        <td>{{cellMongo.qoffsetFreqdB}}dB</td>
+        <td>{{cellMongo.qoffsetFreq | dbStep32}}dB</td>
         <td>前导格式</td>
         <td>{{cellMongo.preambleFmt}}</td>
     </tr>

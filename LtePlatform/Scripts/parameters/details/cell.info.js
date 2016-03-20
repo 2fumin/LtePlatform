@@ -9,8 +9,6 @@
             $scope.isHuaweiCell = true;
             cellHuaweiMongoService.queryCellParameters($stateParams.eNodebId, $stateParams.sectorId).then(function(info) {
                 $scope.cellMongo = info;
-                $scope.cellMongo.cellSpecificOffsetdB = cellHuaweiMongoService.cellSpecificOffsetDict[info.cellSpecificOffset];
-                $scope.cellMongo.qoffsetFreqdB = cellHuaweiMongoService.cellSpecificOffsetDict[info.qoffsetFreq];
             });
         }
     });
