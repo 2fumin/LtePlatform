@@ -1,0 +1,34 @@
+﻿<table class="table table-hover">
+    <tbody>
+        <tr>
+            <td>基站名称</td>
+            <td>{{eNodebDetails.name}}</td>
+            <td>厂家</td>
+            <td>{{eNodebDetails.factory}}</td>
+            <td>规划编码</td>
+            <td>{{eNodebDetails.planNum}}</td>
+        </tr>
+        <tr>
+            <td>基站编号</td>
+            <td>{{eNodebDetails.eNodebId}}</td>
+            <td>网关地址</td>
+            <td>{{eNodebDetails.gatewayIp.addressString}}</td>
+            <td>IP</td>
+            <td>{{eNodebDetails.ip.addressString}}</td>
+        </tr>
+        <tr>
+            <td>经度</td>
+            <td>{{eNodebDetails.longtitute}}</td>
+            <td>纬度</td>
+            <td>{{eNodebDetails.lattitute}}</td>
+            <td>开通日期</td>
+            <td>{{eNodebDetails.openDate | date: 'yyyy-MM-dd'}}</td>
+        </tr>
+        <tr>
+            <td>基站地址</td>
+            <td colspan="4">{{eNodebDetails.address}}</td>
+            <td ng-show="eNodebDetails.isInUse" style="color: green">在用</td>
+            <td ng-show="!eNodebDetails.isInUse" style="color: gray">已消亡</td>
+        </tr>
+    </tbody>
+</table>
