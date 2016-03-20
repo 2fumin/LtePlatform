@@ -55,9 +55,9 @@ namespace Lte.Evaluations.MapperSerive
 
             Mapper.CreateMap<UeEUtranMeasurementZte, CellIntraFreqHoView>()
                 .ForMember(d => d.ENodebId, opt => opt.MapFrom(s => s.eNodeB_Id))
-                .ForMember(d => d.Hysteresis, opt => opt.MapFrom(s => s.hysteresis))
+                .ForMember(d => d.Hysteresis, opt => opt.MapFrom(s => s.hysteresis * 2))
                 .ForMember(d => d.TimeToTrigger, opt => opt.MapFrom(s => s.timeToTrigger))
-                .ForMember(d => d.A3Offset, opt => opt.MapFrom(s => s.a3Offset));
+                .ForMember(d => d.A3Offset, opt => opt.MapFrom(s => s.a3Offset * 2));
         }
     }
 }

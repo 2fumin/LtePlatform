@@ -57,11 +57,11 @@ namespace Lte.Parameters.Entities.Switch
 
         public int reportCriteria { get; set; }
 
-        public int a3Offset { get; set; }
+        public double a3Offset { get; set; }
 
         public int measCfgFunc { get; set; }
 
-        public int hysteresis { get; set; }
+        public double hysteresis { get; set; }
 
         public int prdRptRurpose { get; set; }
 
@@ -72,5 +72,7 @@ namespace Lte.Parameters.Entities.Switch
         public int reportOnLeave { get; set; }
 
         public int UeEUtranMeasurement { get; set; }
+
+        public static int IntraFreqHoConfigId { get; set; } = -1;
     }
 }
