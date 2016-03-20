@@ -3,13 +3,13 @@
     <tbody>
         <tr>
             <td>A3事件判决迟滞</td>
-            <td>{{intraFreqHo.hysteresis}}</td>
+            <td>{{intraFreqHo.hysteresis | halfDb}}dB</td>
             <td>A3事件发生到上报的延迟</td>
             <td>{{intraFreqHo.timeToTrigger}}</td>
         </tr>
         <tr>
             <td>A3事件偏置</td>
-            <td>{{intraFreqHo.a3Offset}}</td>
+            <td>{{intraFreqHo.a3Offset | halfDb}}dB</td>
         </tr>
     </tbody>
 </table>

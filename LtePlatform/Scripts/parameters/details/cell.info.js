@@ -1,4 +1,4 @@
-﻿app.controller("cell.info", function ($scope, $stateParams, networkElementService, cellHuaweiMongoService) {
+﻿app.controller("cell.info", function ($scope, $stateParams, networkElementService, cellHuaweiMongoService, intraFreqHoService) {
     $scope.page.title = $stateParams.name + "-" + $stateParams.sectorId + "小区信息";
     $scope.isHuaweiCell = false;
     networkElementService.queryCellInfo($stateParams.eNodebId, $stateParams.sectorId).then(function (result) {
@@ -11,5 +11,8 @@
                 $scope.cellMongo = info;
             });
         }
+    });
+    intraFreqHoService.queryCellParameters($stateParams.eNodebId, $stateParams.sectorId).then(function(result) {
+        $scope.intraFreqHo = result;
     });
 });
