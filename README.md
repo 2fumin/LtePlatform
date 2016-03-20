@@ -19,10 +19,12 @@ This is a .net solution for LTE wireless network optimization when I work in Chi
 
 ###目录结构
 1. Entities-定义数据库实体类
-1. Abstract
-1. Concrete
+1. Abstract-定义数据库仓储（Repository）接口
+1. Concrete-定义数据库仓储（Repository）具体类，从接口到具体类实现由应用程序的注入依赖实现，具体到本项目，采用MVC和API的注入依赖实现
 1. MapService
+
 ###基础数据信息类
+
 ###指标类
 
 ##Lte.Evaluations
@@ -32,6 +34,5 @@ This is a .net solution for LTE wireless network optimization when I work in Chi
 
 ##Lte.Domain
 
-##TraceParser
-
 ##LtePlatform
+本项目的应用程序部分，实际上融合了后端程序和前端程序。后端程序主要包括Asp.Net MVC和WebAPI两个部分；前端程序主要采用了谷歌的AngularJS和Twitter的Bootstrap框架。
