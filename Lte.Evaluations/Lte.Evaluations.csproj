@@ -177,7 +177,10 @@
     <Compile Include="ViewModels\RegionKpi\TownENodebStatView.cs" />
     <Compile Include="ViewModels\RegionKpi\TownPreciseView.cs" />
     <Compile Include="ViewModels\Switch\CellIntraFreqHoView.cs" />
+    <Compile Include="ViewModels\Switch\ENodebInterFreqHoView.cs" />
     <Compile Include="ViewModels\Switch\ENodebIntraFreqHoView.cs" />
+    <Compile Include="ViewModels\Switch\IHoEventView.cs" />
+    <Compile Include="ViewModels\Switch\InterFreqEvents.cs" />
     <Compile Include="ViewModels\WorkItemView.cs" />
   </ItemGroup>
   <ItemGroup>

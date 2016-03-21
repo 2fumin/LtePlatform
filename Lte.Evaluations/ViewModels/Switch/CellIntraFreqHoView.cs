@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lte.Evaluations.ViewModels.Switch
 {
-    public class CellIntraFreqHoView
+    public class CellIntraFreqHoView : IHoEventView
     {
         public int ENodebId { get; set; }
 

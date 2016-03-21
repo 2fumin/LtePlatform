@@ -92,9 +92,7 @@ namespace Lte.Parameters.Entities.Neighbor
         public int IfMlbThdRsrpOffset { get; set; }
 
         public int QoffsetFreq { get; set; }
-
         public ObjectId Id { get; set; }
-
         public bool IsTransient()
         {
             return false;
