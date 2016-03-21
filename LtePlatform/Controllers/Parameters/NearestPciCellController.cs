@@ -3,7 +3,7 @@ using System.Web.Http;
 using Lte.Evaluations.DataService.Mr;
 using Lte.Evaluations.ViewModels.Mr;
 using Lte.Evaluations.ViewModels.Precise;
-using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Neighbor;
 using LtePlatform.Models;
 
 namespace LtePlatform.Controllers.Parameters

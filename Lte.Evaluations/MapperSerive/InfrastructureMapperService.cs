@@ -2,8 +2,8 @@
 using Lte.Evaluations.ViewModels.Basic;
 using Lte.Evaluations.ViewModels.Mr;
 using Lte.Evaluations.ViewModels.Switch;
-using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.Basic;
+using Lte.Parameters.Entities.Neighbor;
 using Lte.Parameters.Entities.Switch;
 
 namespace Lte.Evaluations.MapperSerive

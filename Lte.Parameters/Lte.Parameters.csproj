@@ -199,8 +199,9 @@
     <Compile Include="Entities\Mr\InterferenceMatrixMongo.cs" />
     <Compile Include="Entities\Mr\InterferenceMatrixPci.cs" />
     <Compile Include="Entities\Mr\InterferenceMatrixStat.cs" />
-    <Compile Include="Entities\LteNeighborCell.cs" />
-    <Compile Include="Entities\NearestPciCell.cs" />
+    <Compile Include="Entities\Neighbor\EutranInterNFreq.cs" />
+    <Compile Include="Entities\Neighbor\LteNeighborCell.cs" />
+    <Compile Include="Entities\Neighbor\NearestPciCell.cs" />
     <Compile Include="Entities\OptimizeRegion.cs" />
     <Compile Include="Entities\Kpi\PreciseCoverage4G.cs" />
     <Compile Include="Entities\Kpi\PreciseCoverage4GCsv.cs" />

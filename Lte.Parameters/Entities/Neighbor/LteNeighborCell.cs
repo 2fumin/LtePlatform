@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Abp.Domain.Entities;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
+using Abp.Domain.Entities;
 using Lte.Domain.Regular.Attributes;
 
-namespace Lte.Parameters.Entities
+namespace Lte.Parameters.Entities.Neighbor
 {
     [Table("dbo.LteNeighborCells")]
     [KnownType(typeof(NearestPciCell))]

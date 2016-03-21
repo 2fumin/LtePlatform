@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
 using Lte.Evaluations.DataService.Mr;
-using Lte.Parameters.Entities;
+using Lte.Parameters.Entities.Neighbor;
 using LtePlatform.Models;
 
 namespace LtePlatform.Controllers.Parameters

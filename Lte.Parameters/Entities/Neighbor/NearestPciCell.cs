@@ -4,7 +4,7 @@ using Lte.Domain.Regular;
 using Lte.Parameters.Abstract.Basic;
 using Lte.Parameters.Entities.ExcelCsv;
 
-namespace Lte.Parameters.Entities
+namespace Lte.Parameters.Entities.Neighbor
 {
     [Table("dbo.LteNeighborCells")]
     public class NearestPciCell : LteNeighborCell
