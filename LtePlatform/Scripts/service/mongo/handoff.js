@@ -40,4 +40,24 @@
         return function(input) {
             return angular.isNumber(input) ? input / 2 : input;
         };
+    })
+    .filter("triggerQuantity", function(){
+        var types=["RSRP", "RSRQ"];
+        return function(input){
+            return input===0||input===1?types[input]:input;
+        };
+    })
+    .fileter("reportQuantity", function(){
+        var types=["与触发量相同", "全部发送"];
+        return function(input){
+            return input===0||input===1?types[input]:input;
+        };
+    })
+    .filter("timeToTrigger", function(){
+        var durations=[
+            0, 40, 64, 80, 100, 128, 160, 256, 320, 480, 512, 640, 1024, 1280, 2560, 5120
+        ];
+        return function(input){
+            return angular.isNumber(input) && input>=0 && input<16 ? durations[input] : input
+        }
     });
