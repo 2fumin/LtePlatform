@@ -104,5 +104,11 @@ namespace Lte.Parameters.Entities.Basic
         public int FreqBand { get; set; }
 
         public int QoffsetFreq { get; set; }
+
+        public int? SectorEqmNum { get; set; }
+
+        public int? MultiRruCellMode { get; set; }
+
+        public int? CpriEthCompressionRatio { get; set; }
     }
 }
