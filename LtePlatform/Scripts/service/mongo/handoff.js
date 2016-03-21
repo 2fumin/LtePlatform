@@ -60,4 +60,12 @@
         return function(input){
             return angular.isNumber(input) && input>=0 && input<16 ? durations[input] : input
         }
+    })
+    .filter("reportAmount", function(){
+        var amounts=[
+            "1", "2", "4", "8", "16", "32", "64", "无限次"
+        ];
+        return function(input){
+            return angular.isNumber(input) && input>=0 && input<8 ? amounts[input] : input
+        }
     });
