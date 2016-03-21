@@ -47,7 +47,7 @@
             return input===0||input===1?types[input]:input;
         };
     })
-    .fileter("reportQuantity", function(){
+    .filter("reportQuantity", function(){
         var types=["与触发量相同", "全部发送"];
         return function(input){
             return input===0||input===1?types[input]:input;
