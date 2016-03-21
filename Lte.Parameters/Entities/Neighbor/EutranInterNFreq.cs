@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Abp.Domain.Entities;
 using Lte.Parameters.Entities.Basic;
+using MongoDB.Bson;
 
 namespace Lte.Parameters.Entities.Neighbor
 {
-    public class EutranInterNFreq : IHuaweiMongo
+    public class EutranInterNFreq : IEntity<ObjectId>, IHuaweiMongo
     {
         public string iDate { get; set; }
 
@@ -90,5 +92,12 @@ namespace Lte.Parameters.Entities.Neighbor
         public int IfMlbThdRsrpOffset { get; set; }
 
         public int QoffsetFreq { get; set; }
+
+        public ObjectId Id { get; set; }
+
+        public bool IsTransient()
+        {
+            return false;
+        }
     }
 }

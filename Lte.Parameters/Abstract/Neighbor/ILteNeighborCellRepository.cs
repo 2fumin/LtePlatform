@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using Abp.Domain.Repositories;
-using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.Neighbor;
 
-namespace Lte.Parameters.Abstract
+namespace Lte.Parameters.Abstract.Neighbor
 {
     public interface ILteNeighborCellRepository : IRepository<LteNeighborCell>
     {

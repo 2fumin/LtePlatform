@@ -10,12 +10,14 @@ using Lte.Parameters.Abstract;
 using Lte.Parameters.Abstract.Basic;
 using Lte.Parameters.Abstract.College;
 using Lte.Parameters.Abstract.Kpi;
+using Lte.Parameters.Abstract.Neighbor;
 using Lte.Parameters.Abstract.Switch;
 using Lte.Parameters.Concrete;
 using Lte.Parameters.Concrete.Basic;
 using Lte.Parameters.Concrete.College;
 using Lte.Parameters.Concrete.Kpi;
 using Lte.Parameters.Concrete.Mr;
+using Lte.Parameters.Concrete.Neighbor;
 using Lte.Parameters.Concrete.Switch;
 using Ninject;
 
@@ -93,6 +95,8 @@ namespace LtePlatform
             ninjectKernel.Bind<IIntraRatHoCommRepository>().To<IntraRatHoCommRepository>();
 
             ninjectKernel.Bind<IInterRatHoCommRepository>().To<InterRatHoCommRepository>();
+
+            ninjectKernel.Bind<IEutranInterNFreqRepository>().To<EutranInterNFreqRepository>();
 
             ninjectKernel.Bind<CdmaRegionStatService>().ToSelf();
 

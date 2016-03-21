@@ -77,6 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Basic\CellHuaweiMongoRepositoryTests.cs" />
+    <Compile Include="Basic\EutranInterNFreqRepositoryTests.cs" />
     <Compile Include="Converter\WorkItemConverterTest.cs" />
     <Compile Include="Entities\AlarmStatCsvTest.cs" />
     <Compile Include="Entities\CdmaCellConstructionTest.cs" />

@@ -96,6 +96,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\Basic\IEutranInterNFreqRepository.cs" />
     <Compile Include="Abstract\IAreaTestDateRepository.cs" />
     <Compile Include="Abstract\Basic\IBtsIdQuery.cs" />
     <Compile Include="Abstract\Basic\IBtsRepository.cs" />
@@ -113,7 +114,7 @@
     <Compile Include="Abstract\IInfrastructureRepository.cs" />
     <Compile Include="Abstract\IInterferenceMatrixRepository.cs" />
     <Compile Include="Abstract\IInterferenceMongoRepository.cs" />
-    <Compile Include="Abstract\ILteNeighborCellRepository.cs" />
+    <Compile Include="Abstract\Neighbor\ILteNeighborCellRepository.cs" />
     <Compile Include="Abstract\IPagingRepository.cs" />
     <Compile Include="Abstract\Kpi\IPreciseCoverage4GRepository.cs" />
     <Compile Include="Abstract\IRasterInfoRepository.cs" />
@@ -144,7 +145,7 @@
     <Compile Include="Concrete\EFIndoorDistributionRepository.cs" />
     <Compile Include="Concrete\EFInfrastructureRepository.cs" />
     <Compile Include="Concrete\Mr\EFInterferenceMatrixRepository.cs" />
-    <Compile Include="Concrete\EFLteNeighborCellRepository.cs" />
+    <Compile Include="Concrete\Neighbor\EFLteNeighborCellRepository.cs" />
     <Compile Include="Concrete\EFParametersContext.cs" />
     <Compile Include="Concrete\Kpi\EFPreciseCoverage4GRepository.cs" />
     <Compile Include="Concrete\Kpi\EFRegionRepository.cs" />
@@ -159,6 +160,7 @@
     <Compile Include="Concrete\MasterTestContext.cs" />
     <Compile Include="Concrete\Mr\InterferenceMongoRepository.cs" />
     <Compile Include="Concrete\MyMongoProvider.cs" />
+    <Compile Include="Concrete\Neighbor\EutranInterNFreqRepository.cs" />
     <Compile Include="Concrete\Switch\CellMeasGroupZteRepository.cs" />
     <Compile Include="Concrete\Switch\InterRatHoCommRepository.cs" />
     <Compile Include="Concrete\Switch\IntraFreqHoGroupRepository.cs" />
