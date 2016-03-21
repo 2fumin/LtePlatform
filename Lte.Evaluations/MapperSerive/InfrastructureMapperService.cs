@@ -58,6 +58,43 @@ namespace Lte.Evaluations.MapperSerive
                 .ForMember(d => d.Hysteresis, opt => opt.MapFrom(s => s.hysteresis * 2))
                 .ForMember(d => d.TimeToTrigger, opt => opt.MapFrom(s => s.timeToTrigger))
                 .ForMember(d => d.A3Offset, opt => opt.MapFrom(s => s.a3Offset * 2));
+
+            Mapper.CreateMap<EutranInterNFreq, NeighborInterFreqHoConfig>()
+                .ForMember(d => d.Earfcn, opt => opt.MapFrom(s => s.DlEarfcn));
+
+            Mapper.CreateMap<UeEUtranMeasurementZte, InterFreqEventA1>()
+                .ForMember(d => d.Hysteresis, opt => opt.MapFrom(s => s.hysteresis))
+                .ForMember(d => d.TimeToTrigger, opt => opt.MapFrom(s => s.timeToTrigger))
+                .ForMember(d => d.ThresholdOfRsrp, opt => opt.MapFrom(s => s.thresholdOfRSRP))
+                .ForMember(d => d.ThresholdOfRsrq, opt => opt.MapFrom(s => s.thresholdOfRSRQ));
+
+            Mapper.CreateMap<UeEUtranMeasurementZte, InterFreqEventA2>()
+                .ForMember(d => d.Hysteresis, opt => opt.MapFrom(s => s.hysteresis))
+                .ForMember(d => d.TimeToTrigger, opt => opt.MapFrom(s => s.timeToTrigger))
+                .ForMember(d => d.ThresholdOfRsrp, opt => opt.MapFrom(s => s.thresholdOfRSRP))
+                .ForMember(d => d.ThresholdOfRsrq, opt => opt.MapFrom(s => s.thresholdOfRSRQ));
+
+            Mapper.CreateMap<UeEUtranMeasurementZte, InterFreqEventA3>()
+                .ForMember(d => d.Hysteresis, opt => opt.MapFrom(s => s.hysteresis))
+                .ForMember(d => d.TimeToTrigger, opt => opt.MapFrom(s => s.timeToTrigger))
+                .ForMember(d => d.ThresholdOfRsrp, opt => opt.MapFrom(s => s.thresholdOfRSRP))
+                .ForMember(d => d.ThresholdOfRsrq, opt => opt.MapFrom(s => s.thresholdOfRSRQ))
+                .ForMember(d => d.A3Offset, opt => opt.MapFrom(s => s.a3Offset));
+
+            Mapper.CreateMap<UeEUtranMeasurementZte, InterFreqEventA4>()
+                .ForMember(d => d.Hysteresis, opt => opt.MapFrom(s => s.hysteresis))
+                .ForMember(d => d.TimeToTrigger, opt => opt.MapFrom(s => s.timeToTrigger))
+                .ForMember(d => d.ThresholdOfRsrp, opt => opt.MapFrom(s => s.thresholdOfRSRP))
+                .ForMember(d => d.ThresholdOfRsrq, opt => opt.MapFrom(s => s.thresholdOfRSRQ));
+
+            Mapper.CreateMap<UeEUtranMeasurementZte, InterFreqEventA5>()
+                .ForMember(d => d.Hysteresis, opt => opt.MapFrom(s => s.hysteresis))
+                .ForMember(d => d.TimeToTrigger, opt => opt.MapFrom(s => s.timeToTrigger))
+                .ForMember(d => d.ThresholdOfRsrp, opt => opt.MapFrom(s => s.thresholdOfRSRP))
+                .ForMember(d => d.ThresholdOfRsrq, opt => opt.MapFrom(s => s.thresholdOfRSRQ))
+                .ForMember(d => d.Threshold2OfRsrp, opt => opt.MapFrom(s => s.a5Threshold2OfRSRP))
+                .ForMember(d => d.Threshold2OfRsrq, opt => opt.MapFrom(s => s.a5Threshold2OfRSRQ));
+
         }
     }
 }
