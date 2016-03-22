@@ -34,10 +34,6 @@ namespace Lte.Evaluations.ViewModels.Switch
 
         public int TimeToTrigger { get; set; }
 
-        public int ThresholdOfRsrp { get; set; }
-
-        public int ThresholdOfRsrq { get; set; }
-
         public int A3Offset { get; set; }
     }
 

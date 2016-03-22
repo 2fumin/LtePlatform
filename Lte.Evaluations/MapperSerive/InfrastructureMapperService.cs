@@ -52,15 +52,22 @@ namespace Lte.Evaluations.MapperSerive
                 .ForMember(d => d.Hysteresis, opt => opt.MapFrom(s => s.IntraFreqHoA3Hyst))
                 .ForMember(d => d.TimeToTrigger, opt => opt.MapFrom(s => s.IntraFreqHoA3TimeToTrig))
                 .ForMember(d => d.A3Offset, opt => opt.MapFrom(s => s.IntraFreqHoA3Offset));
-
+            
             Mapper.CreateMap<UeEUtranMeasurementZte, CellIntraFreqHoView>()
                 .ForMember(d => d.ENodebId, opt => opt.MapFrom(s => s.eNodeB_Id))
                 .ForMember(d => d.Hysteresis, opt => opt.MapFrom(s => s.hysteresis * 2))
                 .ForMember(d => d.TimeToTrigger, opt => opt.MapFrom(s => s.timeToTrigger))
                 .ForMember(d => d.A3Offset, opt => opt.MapFrom(s => s.a3Offset * 2));
-
-            Mapper.CreateMap<EutranInterNFreq, NeighborInterFreqHoConfig>()
-                .ForMember(d => d.Earfcn, opt => opt.MapFrom(s => s.DlEarfcn));
+            
+            Mapper.CreateMap<IntraRatHoComm, ENodebInterFreqHoView>()
+                .ForMember(d => d.ENodebId, opt => opt.MapFrom(s => s.eNodeB_Id))
+                .ForMember(d => d.InterFreqHoA4RprtQuan, opt => opt.MapFrom(s => s.InterFreqHoA4RprtQuan))
+                .ForMember(d => d.InterFreqHoA4TrigQuan, opt => opt.MapFrom(s => s.InterFreqHoA4TrigQuan))
+                .ForMember(d => d.InterFreqHoA1TrigQuan, opt => opt.MapFrom(s => s.InterFreqHoA1A2TrigQuan))
+                .ForMember(d => d.InterFreqHoA2TrigQuan, opt => opt.MapFrom(s => s.InterFreqHoA1A2TrigQuan))
+                .ForMember(d => d.A3InterFreqHoA1TrigQuan, opt => opt.MapFrom(s => s.A3InterFreqHoA1A2TrigQuan))
+                .ForMember(d => d.A3InterFreqHoA2TrigQuan, opt => opt.MapFrom(s => s.A3InterFreqHoA1A2TrigQuan))
+                .ForMember(d => d.InterFreqHoRprtInterval, opt => opt.MapFrom(s => s.InterFreqHoRprtInterval));
 
             Mapper.CreateMap<UeEUtranMeasurementZte, InterFreqEventA1>()
                 .ForMember(d => d.Hysteresis, opt => opt.MapFrom(s => s.hysteresis))
@@ -77,8 +84,6 @@ namespace Lte.Evaluations.MapperSerive
             Mapper.CreateMap<UeEUtranMeasurementZte, InterFreqEventA3>()
                 .ForMember(d => d.Hysteresis, opt => opt.MapFrom(s => s.hysteresis))
                 .ForMember(d => d.TimeToTrigger, opt => opt.MapFrom(s => s.timeToTrigger))
-                .ForMember(d => d.ThresholdOfRsrp, opt => opt.MapFrom(s => s.thresholdOfRSRP))
-                .ForMember(d => d.ThresholdOfRsrq, opt => opt.MapFrom(s => s.thresholdOfRSRQ))
                 .ForMember(d => d.A3Offset, opt => opt.MapFrom(s => s.a3Offset));
 
             Mapper.CreateMap<UeEUtranMeasurementZte, InterFreqEventA4>()
@@ -95,6 +100,22 @@ namespace Lte.Evaluations.MapperSerive
                 .ForMember(d => d.Threshold2OfRsrp, opt => opt.MapFrom(s => s.a5Threshold2OfRSRP))
                 .ForMember(d => d.Threshold2OfRsrq, opt => opt.MapFrom(s => s.a5Threshold2OfRSRQ));
 
+            Mapper.CreateMap<InterFreqHoGroup, CellInterFreqHoView>()
+                .ForMember(d => d.InterFreqEventA1.Hysteresis, opt => opt.MapFrom(s => s.InterFreqHoA1A2Hyst))
+                .ForMember(d => d.InterFreqEventA1.TimeToTrigger, opt => opt.MapFrom(s => s.InterFreqHoA1A2TimeToTrig))
+                .ForMember(d => d.InterFreqEventA2.Hysteresis, opt => opt.MapFrom(s => s.InterFreqHoA1A2Hyst))
+                .ForMember(d => d.InterFreqEventA2.TimeToTrigger, opt => opt.MapFrom(s => s.InterFreqHoA1A2TimeToTrig))
+                .ForMember(d => d.InterFreqEventA3.A3Offset, opt => opt.MapFrom(s => s.InterFreqHoA3Offset))
+                .ForMember(d => d.InterFreqEventA4.Hysteresis, opt => opt.MapFrom(s => s.InterFreqHoA4Hyst))
+                .ForMember(d => d.InterFreqEventA4.TimeToTrigger, opt => opt.MapFrom(s => s.InterFreqHoA4TimeToTrig))
+                .ForMember(d => d.InterFreqEventA4.ThresholdOfRsrp, opt => opt.MapFrom(s => s.InterFreqHoA4ThdRsrp))
+                .ForMember(d => d.InterFreqEventA4.ThresholdOfRsrq, opt => opt.MapFrom(s => s.InterFreqHoA4ThdRsrq))
+                .ForMember(d => d.InterFreqEventA5.Hysteresis, opt => opt.MapFrom(s => s.InterFreqHoA4Hyst))
+                .ForMember(d => d.InterFreqEventA5.TimeToTrigger, opt => opt.MapFrom(s => s.InterFreqHoA4TimeToTrig))
+                .ForMember(d => d.InterFreqEventA5.ThresholdOfRsrp, opt => opt.MapFrom(s => s.InterFreqHoA4ThdRsrp))
+                .ForMember(d => d.InterFreqEventA5.ThresholdOfRsrq, opt => opt.MapFrom(s => s.InterFreqHoA4ThdRsrq))
+                .ForMember(d => d.InterFreqEventA5.ThresholdOfRsrp, opt => opt.MapFrom(s => s.InterFreqHoA5Thd1Rsrp))
+                .ForMember(d => d.InterFreqEventA5.ThresholdOfRsrq, opt => opt.MapFrom(s => s.InterFreqHoA5Thd1Rsrq));
         }
     }
 }

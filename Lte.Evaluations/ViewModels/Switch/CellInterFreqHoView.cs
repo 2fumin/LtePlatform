@@ -8,9 +8,9 @@ namespace Lte.Evaluations.ViewModels.Switch
 {
     public class CellInterFreqHoView
     {
-        public int ENodebId { get; set; }
+        public int Earfcn { get; set; }
 
-        public int SectorId { get; set; }
+        public int InterFreqHoEventType { get; set; }
 
         public InterFreqEventA1 InterFreqEventA1 { get; set; }
 
@@ -22,11 +22,5 @@ namespace Lte.Evaluations.ViewModels.Switch
 
         public InterFreqEventA5 InterFreqEventA5 { get; set; }
     }
-
-    public class NeighborInterFreqHoConfig
-    {
-        public int Earfcn { get; set; }
-
-        public int InterFreqHoEventType { get; set; }
-    }
+    
 }
