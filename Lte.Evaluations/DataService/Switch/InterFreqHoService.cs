@@ -58,7 +58,7 @@ namespace Lte.Evaluations.DataService.Switch
             var a2ConfigId = zteGroup == null ? 30 : int.Parse(zteGroup.openInterFMeasCfg.Split(',')[0]);
             var a2Config = _zteMeasurementRepository.GetRecent(eNodebId, a2ConfigId);
             view.InterFreqHoA1TrigQuan = view.A3InterFreqHoA2TrigQuan = a2Config?.triggerQuantity ?? 0;
-            var hoEventId = zteGroup == null ? 40 : int.Parse(zteGroup.interFHOMeasCfg.Split(',')[0]);
+            var hoEventId = zteGroup == null ? 70 : int.Parse(zteGroup.interFHOMeasCfg.Split(',')[0]);
             var hoEvent = _zteMeasurementRepository.GetRecent(eNodebId, hoEventId);
             view.InterFreqHoA4TrigQuan = hoEvent?.triggerQuantity ?? 0;
             view.InterFreqHoA4RprtQuan = hoEvent?.reportQuantity ?? 0;
@@ -79,11 +79,17 @@ namespace Lte.Evaluations.DataService.Switch
                 var hoGroup = _huaweiCellHoRepository.GetRecent(eNodebId, localCellId);
                 if (hoGroup == null) return null;
                 var intraFreqConfig = _intraFreqHoGroupRepository.GetRecent(eNodebId, localCellId);
-                foreach (var freq in nFreqs)
+                foreach (var config in nFreqs.Select(freq => new CellInterFreqHoView
                 {
-                    var config = Mapper.Map<InterFreqHoGroup, CellInterFreqHoView>(hoGroup);
-                    config.Earfcn = freq.DlEarfcn;
-                    config.InterFreqHoEventType = freq.InterFreqHoEventType;
+                    Earfcn = freq.DlEarfcn,
+                    InterFreqHoEventType = freq.InterFreqHoEventType,
+                    InterFreqEventA1 = Mapper.Map<InterFreqHoGroup, InterFreqEventA1>(hoGroup),
+                    InterFreqEventA2 = Mapper.Map<InterFreqHoGroup, InterFreqEventA2>(hoGroup),
+                    InterFreqEventA3 = Mapper.Map<InterFreqHoGroup, InterFreqEventA3>(hoGroup),
+                    InterFreqEventA4 = Mapper.Map<InterFreqHoGroup, InterFreqEventA4>(hoGroup),
+                    InterFreqEventA5 = Mapper.Map<InterFreqHoGroup, InterFreqEventA5>(hoGroup)
+                }))
+                {
                     if (intraFreqConfig != null)
                     {
                         config.InterFreqEventA3.Hysteresis = intraFreqConfig.IntraFreqHoA3Hyst;
@@ -91,7 +97,7 @@ namespace Lte.Evaluations.DataService.Switch
                     }
                     switch (config.InterFreqHoEventType)
                     {
-                        case 0:
+                        case 2:
                             config.InterFreqEventA1.ThresholdOfRsrp = hoGroup.A3InterFreqHoA1ThdRsrp;
                             config.InterFreqEventA2.ThresholdOfRsrp = hoGroup.A3InterFreqHoA2ThdRsrp;
                             config.InterFreqEventA1.ThresholdOfRsrq = hoGroup.A3InterFreqHoA1ThdRsrq;
@@ -109,21 +115,35 @@ namespace Lte.Evaluations.DataService.Switch
                 return results;
             }
             var zteGroup = _zteGroupRepository.GetRecent(eNodebId);
-            var configId = zteGroup == null ? 40 : int.Parse(zteGroup.interFHOMeasCfg.Split(',')[0]);
+            var view = new CellInterFreqHoView
+            {
+                Earfcn = 0
+            };
+            var configId = zteGroup == null ? 70 : int.Parse(zteGroup.interFHOMeasCfg.Split(',')[0]);
             var measurement = _zteMeasurementRepository.GetRecent(eNodebId, configId);
-            if (measurement == null) return null;
+            if (measurement != null)
+            {
+                view.InterFreqHoEventType = measurement.eventId;
+                view.InterFreqEventA3 = Mapper.Map<UeEUtranMeasurementZte, InterFreqEventA3>(measurement);
+                view.InterFreqEventA4 = Mapper.Map<UeEUtranMeasurementZte, InterFreqEventA4>(measurement);
+                view.InterFreqEventA5 = Mapper.Map<UeEUtranMeasurementZte, InterFreqEventA5>(measurement);
+            }
+            configId = zteGroup == null ? 60 : int.Parse(zteGroup.closedInterFMeasCfg.Split(',')[0]);
+            measurement = _zteMeasurementRepository.GetRecent(eNodebId, configId);
+            if (measurement != null)
+            {
+                view.InterFreqEventA1 = Mapper.Map<UeEUtranMeasurementZte, InterFreqEventA1>(measurement);
+            }
+            configId = zteGroup == null ? 0 : int.Parse(zteGroup.openInterFMeasCfg.Split(',')[0]);
+            measurement = _zteMeasurementRepository.GetRecent(eNodebId, configId);
+            if (measurement != null)
+            {
+                view.InterFreqEventA2 = Mapper.Map<UeEUtranMeasurementZte, InterFreqEventA2>(measurement);
+            }
+
             return new List<CellInterFreqHoView>
             {
-                new CellInterFreqHoView
-                {
-                    Earfcn = 0,
-                    InterFreqHoEventType = configId,
-                    InterFreqEventA1 = Mapper.Map<UeEUtranMeasurementZte, InterFreqEventA1>(measurement),
-                    InterFreqEventA2 = Mapper.Map<UeEUtranMeasurementZte, InterFreqEventA2>(measurement),
-                    InterFreqEventA3 = Mapper.Map<UeEUtranMeasurementZte, InterFreqEventA3>(measurement),
-                    InterFreqEventA4 = Mapper.Map<UeEUtranMeasurementZte, InterFreqEventA4>(measurement),
-                    InterFreqEventA5 = Mapper.Map<UeEUtranMeasurementZte, InterFreqEventA5>(measurement)
-                }
+                view
             };
         }
     }
