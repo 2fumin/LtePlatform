@@ -214,6 +214,7 @@
     <Compile Include="Entities\ExcelCsv\TopDrop2GCellExcel.cs" />
     <Compile Include="Entities\Switch\CellMeasGroupZte.cs" />
     <Compile Include="Entities\Switch\IMongoZte.cs" />
+    <Compile Include="Entities\Switch\InterFreqHoGroup.cs" />
     <Compile Include="Entities\Switch\InterRatHoComm.cs" />
     <Compile Include="Entities\Switch\IntraFreqHoGroup.cs" />
     <Compile Include="Entities\Switch\IntraRatHoComm.cs" />
