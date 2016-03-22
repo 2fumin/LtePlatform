@@ -179,6 +179,8 @@ namespace LtePlatform
             ninjectKernel.Bind<CellHuaweiMongoService>().ToSelf();
 
             ninjectKernel.Bind<IntraFreqHoService>().ToSelf();
+
+            ninjectKernel.Bind<InterFreqHoService>().ToSelf();
         }
     }
 }
