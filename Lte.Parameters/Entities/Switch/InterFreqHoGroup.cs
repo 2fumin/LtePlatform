@@ -54,6 +54,8 @@ namespace Lte.Parameters.Entities.Switch
 
         public int A3InterFreqHoA2ThdRsrp { get; set; }
 
+        public int InterFreqLoadBasedHoA4ThdRsrq { get; set; }
+
         public int FreqPriInterFreqHoA2ThdRsrq { get; set; }
 
         public int UlBadQualHoA4Offset { get; set; }

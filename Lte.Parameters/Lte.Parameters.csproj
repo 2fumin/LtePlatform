@@ -127,6 +127,7 @@
     <Compile Include="Abstract\LightWeightRepositroyBase.cs" />
     <Compile Include="Abstract\PagingRepositoryBase.cs" />
     <Compile Include="Abstract\Switch\ICellMeasGroupZteRepository.cs" />
+    <Compile Include="Abstract\Switch\IInterFreqHoGroupRepository.cs" />
     <Compile Include="Abstract\Switch\IInterRatHoCommRepository.cs" />
     <Compile Include="Abstract\Switch\IIntraFreqHoGroupRepository.cs" />
     <Compile Include="Abstract\Switch\IIntraRatHoCommRepository.cs" />
@@ -162,6 +163,7 @@
     <Compile Include="Concrete\MyMongoProvider.cs" />
     <Compile Include="Concrete\Neighbor\EutranInterNFreqRepository.cs" />
     <Compile Include="Concrete\Switch\CellMeasGroupZteRepository.cs" />
+    <Compile Include="Concrete\Switch\InterFreqHoGroupRepository.cs" />
     <Compile Include="Concrete\Switch\InterRatHoCommRepository.cs" />
     <Compile Include="Concrete\Switch\IntraFreqHoGroupRepository.cs" />
     <Compile Include="Concrete\Switch\IntraRatHoCommRepository.cs" />

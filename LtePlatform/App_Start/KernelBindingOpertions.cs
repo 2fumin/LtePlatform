@@ -98,6 +98,8 @@ namespace LtePlatform
 
             ninjectKernel.Bind<IEutranInterNFreqRepository>().To<EutranInterNFreqRepository>();
 
+            ninjectKernel.Bind<IInterFreqHoGroupRepository>().To<InterFreqHoGroupRepository>();
+
             ninjectKernel.Bind<CdmaRegionStatService>().ToSelf();
 
             ninjectKernel.Bind<CollegeStatService>().ToSelf();
