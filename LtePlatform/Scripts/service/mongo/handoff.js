@@ -36,7 +36,27 @@
             }
         };
     })
-    .filter("halfDb", function() {
+    .factory('interFreqHoService', function($q, $http, appUrlService) {
+        return {
+            queryENodebParameters: function(eNodebId) {
+                var deferred = $q.defer();
+                $http({
+                        method: 'GET',
+                        url: appUrlService.getApiUrl('InterFreqHo'),
+                        params: {
+                            eNodebId: eNodebId
+                        }
+                    }).success(function(result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function(reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            }
+        };
+    })
+        .filter("halfDb", function() {
         return function(input) {
             return angular.isNumber(input) ? input / 2 : input;
         };
@@ -57,8 +77,16 @@
         var durations=[
             0, 40, 64, 80, 100, 128, 160, 256, 320, 480, 512, 640, 1024, 1280, 2560, 5120
         ];
-        return function(input){
-            return angular.isNumber(input) && input>=0 && input<16 ? durations[input] : input
+        return function(input) {
+            return angular.isNumber(input) && input >= 0 && input < 16 ? durations[input] : input;
+        }
+    })
+    .filter("reportInterval", function () {
+        var durations = [
+            '120ms', '240ms', '480ms', '640ms', '1024ms', '2048ms', '5120ms', '10240ms', '1min', '6min', '12min', '30min', '60min'
+        ];
+        return function (input) {
+            return angular.isNumber(input) && input >= 0 && input < 13 ? durations[input] : 'illegal';
         }
     })
     .filter("reportAmount", function(){

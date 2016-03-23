@@ -97,7 +97,7 @@ namespace Lte.Evaluations.DataService.Switch
                     }
                     switch (config.InterFreqHoEventType)
                     {
-                        case 2:
+                        case 0:
                             config.InterFreqEventA1.ThresholdOfRsrp = hoGroup.A3InterFreqHoA1ThdRsrp;
                             config.InterFreqEventA2.ThresholdOfRsrp = hoGroup.A3InterFreqHoA2ThdRsrp;
                             config.InterFreqEventA1.ThresholdOfRsrq = hoGroup.A3InterFreqHoA1ThdRsrq;
