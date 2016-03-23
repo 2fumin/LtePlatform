@@ -20,6 +20,8 @@ namespace Lte.Parameters.Test.Switch
             var result = _repository.GetRecent(500814, 2);
             Assert.IsNotNull(result);
             Assert.AreEqual(result.iDate, "20160318");
+            Assert.AreEqual(result.InterFreqHoA5Thd1Rsrp, -109);
+            Assert.AreEqual(result.InterFreqHoA5Thd1Rsrq, -24);
         }
     }
 }

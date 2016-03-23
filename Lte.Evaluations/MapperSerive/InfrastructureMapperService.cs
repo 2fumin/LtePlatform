@@ -122,8 +122,8 @@ namespace Lte.Evaluations.MapperSerive
                 .ForMember(d => d.TimeToTrigger, opt => opt.MapFrom(s => s.InterFreqHoA4TimeToTrig))
                 .ForMember(d => d.ThresholdOfRsrp, opt => opt.MapFrom(s => s.InterFreqHoA4ThdRsrp))
                 .ForMember(d => d.ThresholdOfRsrq, opt => opt.MapFrom(s => s.InterFreqHoA4ThdRsrq))
-                .ForMember(d => d.ThresholdOfRsrp, opt => opt.MapFrom(s => s.InterFreqHoA5Thd1Rsrp))
-                .ForMember(d => d.ThresholdOfRsrq, opt => opt.MapFrom(s => s.InterFreqHoA5Thd1Rsrq));
+                .ForMember(d => d.Threshold2OfRsrp, opt => opt.MapFrom(s => s.InterFreqHoA5Thd1Rsrp))
+                .ForMember(d => d.Threshold2OfRsrq, opt => opt.MapFrom(s => s.InterFreqHoA5Thd1Rsrq));
             
         }
     }
