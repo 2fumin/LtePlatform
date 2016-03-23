@@ -407,6 +407,7 @@
     <Content Include="appViews\Manage\ResetPassword.html" />
     <Content Include="appViews\Manage\Roles.html" />
     <Content Include="appViews\Manage\RoleUser.html" />
+    <Content Include="appViews\Parameters\Ho\CellInterFreq.html" />
     <Content Include="appViews\Parameters\Ho\CellIntraFreq.html" />
     <Content Include="appViews\Parameters\Ho\ENodebInterFreq.html" />
     <Content Include="appViews\Parameters\Ho\ENodebIntraFreq.html" />

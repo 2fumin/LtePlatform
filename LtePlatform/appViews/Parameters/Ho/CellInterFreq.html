@@ -1,0 +1,85 @@
+﻿<h4 class="text-primary">小区异频切换参数</h4>
+<table class="table table-hover" ng-repeat="ho in interFreqHo">
+    <thead>
+    <tr>
+        <th>频点号</th>
+        <th>{{ho.earfcn>0?ho.earfcn:'中兴小区'}}</th>
+        <th>异频切换采用的切换事件</th>
+        <th>
+            <span ng-show="ho.earfcn>0">{{ho.interFreqHoEventType | huaweiEvent}}</span>
+            <span ng-show="ho.earfcn===0">{{ho.interFreqHoEventType | zteIntraRatEvent}}</span>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr style="font-weight: bold; color: blue">
+        <td>A1事件</td>
+    </tr>
+    <tr>
+        <td>判决迟滞</td>
+        <td>{{ho.interFreqEventA1.hysteresis | halfDb}}dB</td>
+        <td>事件上报延迟</td>
+        <td>{{ho.interFreqEventA1.timeToTrigger | timeToTrigger}}毫秒</td>
+        <td>RSRP门限</td>
+        <td>{{ho.interFreqEventA1.thresholdOfRsrp}}dB</td>
+        <td>RSRQ门限</td>
+        <td>{{ho.interFreqEventA1.thresholdOfRsrq | halfDb}}dB</td>
+    </tr>
+    <tr style="font-weight: bold; color: blue">
+        <td>A2事件</td>
+    </tr>
+    <tr>
+        <td>判决迟滞</td>
+        <td>{{ho.interFreqEventA2.hysteresis | halfDb}}dB</td>
+        <td>事件上报延迟</td>
+        <td>{{ho.interFreqEventA2.timeToTrigger | timeToTrigger}}毫秒</td>
+        <td>RSRP门限</td>
+        <td>{{ho.interFreqEventA2.thresholdOfRsrp}}dB</td>
+        <td>RSRQ门限</td>
+        <td>{{ho.interFreqEventA2.thresholdOfRsrq | halfDb}}dB</td>
+    </tr>
+    <tr style="font-weight: bold; color: blue">
+        <td>A3事件</td>
+    </tr>
+    <tr>
+        <td>判决迟滞</td>
+        <td>{{ho.interFreqEventA3.hysteresis | halfDb}}dB</td>
+        <td>事件上报延迟</td>
+        <td>{{ho.interFreqEventA3.timeToTrigger | timeToTrigger}}毫秒</td>
+        <td>A3偏置</td>
+        <td>{{ho.interFreqEventA3.a3Offset | halfDb}}dB</td>
+    </tr>
+    <tr style="font-weight: bold; color: blue">
+        <td>A4事件</td>
+    </tr>
+    <tr>
+        <td>判决迟滞</td>
+        <td>{{ho.interFreqEventA4.hysteresis | halfDb}}dB</td>
+        <td>事件上报延迟</td>
+        <td>{{ho.interFreqEventA4.timeToTrigger | timeToTrigger}}毫秒</td>
+        <td>RSRP门限</td>
+        <td>{{ho.interFreqEventA4.thresholdOfRsrp}}dB</td>
+        <td>RSRQ门限</td>
+        <td>{{ho.interFreqEventA4.thresholdOfRsrq | halfDb}}dB</td>
+    </tr>
+    <tr style="font-weight: bold; color: blue">
+        <td>A5事件</td>
+    </tr>
+    <tr>
+        <td>判决迟滞</td>
+        <td>{{ho.interFreqEventA5.hysteresis | halfDb}}dB</td>
+        <td>RSRP门限</td>
+        <td>{{ho.interFreqEventA5.thresholdOfRsrp}}dB</td>
+        <td>RSRQ门限</td>
+        <td>{{ho.interFreqEventA5.thresholdOfRsrq | halfDb}}dB</td>
+    </tr>
+    <tr>
+        <td>事件上报延迟</td>
+        <td>{{ho.interFreqEventA5.timeToTrigger | timeToTrigger}}毫秒</td>
+        <td>RSRP门限2</td>
+        <td>{{ho.interFreqEventA5.threshold2OfRsrp}}dB</td>
+        <td>RSRQ门限2</td>
+        <td>{{ho.interFreqEventA5.threshold2OfRsrq | halfDb}}dB</td>
+    </tr>
+    </tbody>
+</table>
