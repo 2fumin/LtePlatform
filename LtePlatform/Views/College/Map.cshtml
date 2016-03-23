@@ -8,13 +8,11 @@
             <strong>@ViewBag.Title</strong>
         </h2>
     </div>
-    @{
-        Html.RenderPartial("_CollegeMapInfoBox");
-        Html.RenderPartial("../Parameters/_ENodebMapInfoBox");
-        Html.RenderPartial("../Parameters/_BtsMapInfoBox");
-        Html.RenderPartial("../Parameters/_SectorMapInfoBox");
-        Html.RenderPartial("_DistributionMapInfoBox");
-    }
+    <div class="panel-body">
+        <div class="row">
+            
+        </div>
+    </div>
 </div>
 
 @section SPAViews{
@@ -34,11 +32,7 @@
 @section Scripts{
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=OeWDTDlnolWHBNP1GSkDph34"></script>
     <link rel="stylesheet" href="~/Content/themes/baidu/InfoWindow.css" />
-    @Styles.Render("~/Content/themes/base/css")
     @Styles.Render("~/Content/themes/cloudmap/css")
-    @Scripts.Render("~/bundles/knockout")
     @Scripts.Render("~/bundles/highcharts")
-    @Scripts.Render("~/bundles/jqueryui")
-    @Scripts.Render("~/bundles/collegeMap")
 }
 
