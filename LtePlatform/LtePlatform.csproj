@@ -334,6 +334,7 @@
     <Compile Include="Controllers\Mongo\CellHuaweiMongoController.cs" />
     <Compile Include="Controllers\Mongo\InterFreqHoController.cs" />
     <Compile Include="Controllers\Mongo\IntraFreqHoController.cs" />
+    <Compile Include="Controllers\Mongo\NeighborCellMongoController.cs" />
     <Compile Include="Controllers\Mr\InterferenceMatrixController.cs" />
     <Compile Include="Controllers\Mr\InterferenceNeighborController.cs" />
     <Compile Include="Controllers\Mr\NeighborMonitorController.cs" />

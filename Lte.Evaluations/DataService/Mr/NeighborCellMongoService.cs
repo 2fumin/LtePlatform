@@ -64,17 +64,14 @@ namespace Lte.Evaluations.DataService.Mr
                     var innerRelation = eNodebRelations.FirstOrDefault(x => x.parentLDN == relation.refEUtranCellFDD);
                     if (innerRelation != null)
                     {
-                        neighbor.NeighborSectorId = byte.Parse(innerRelation.description.Split('=')[1]);
+                        var fields = innerRelation.description.Split('=');
+                        if (fields.Length>1) neighbor.NeighborSectorId = byte.Parse(fields[1]);
                         neighbor.NeighborCellName = innerRelation.eNodeB_Name;
                         var neighborCell = _cellRepository.GetBySectorId(eNodebId, neighbor.NeighborSectorId);
                         if (neighborCell != null) neighbor.NeighborPci = neighborCell.Pci;
                     }
                 }
-                if (relation.userLabel != null)
-                {
-                    neighbor.NeighborCellName =
-                        relation.userLabel.Split(new[] {"--"}, StringSplitOptions.RemoveEmptyEntries)[1];
-                }
+                neighbor.NeighborCellName = relation.userLabel;
                 var external =
                     externals.FirstOrDefault(x => x.reservedByEUtranRelation.Contains(relation.refExternalEUtranCellFDD));
                 if (external != null)
