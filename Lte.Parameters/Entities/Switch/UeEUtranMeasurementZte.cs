@@ -8,7 +8,7 @@ using MongoDB.Bson;
 
 namespace Lte.Parameters.Entities.Switch
 {
-    public class UeEUtranMeasurementZte : IEntity<ObjectId>, IMongoZte
+    public class UeEUtranMeasurementZte : IEntity<ObjectId>, IZteMongo
     {
         public ObjectId Id { get; set; }
 

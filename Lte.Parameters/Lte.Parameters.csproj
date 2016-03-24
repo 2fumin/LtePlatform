@@ -205,7 +205,7 @@
     <Compile Include="Entities\Mr\InterferenceMatrixStat.cs" />
     <Compile Include="Entities\Neighbor\EutranInterNFreq.cs" />
     <Compile Include="Entities\Neighbor\EutranIntraFreqNCell.cs" />
-    <Compile Include="Entities\Neighbor\EUtranRelation.cs" />
+    <Compile Include="Entities\Neighbor\EUtranRelationZte.cs" />
     <Compile Include="Entities\Neighbor\LteNeighborCell.cs" />
     <Compile Include="Entities\Neighbor\NearestPciCell.cs" />
     <Compile Include="Entities\OptimizeRegion.cs" />
@@ -217,7 +217,7 @@
     <Compile Include="Entities\Kpi\TopDrop2GCell.cs" />
     <Compile Include="Entities\ExcelCsv\TopDrop2GCellExcel.cs" />
     <Compile Include="Entities\Switch\CellMeasGroupZte.cs" />
-    <Compile Include="Entities\Switch\IMongoZte.cs" />
+    <Compile Include="Entities\Switch\IZteMongo.cs" />
     <Compile Include="Entities\Switch\InterFreqHoGroup.cs" />
     <Compile Include="Entities\Switch\InterRatHoComm.cs" />
     <Compile Include="Entities\Switch\IntraFreqHoGroup.cs" />

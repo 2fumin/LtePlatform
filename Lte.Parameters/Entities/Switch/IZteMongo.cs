@@ -1,6 +1,6 @@
 ﻿namespace Lte.Parameters.Entities.Switch
 {
-    public interface IMongoZte
+    public interface IZteMongo
     {
         int eNodeB_Id { get; set; }
 
