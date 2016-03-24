@@ -1,0 +1,26 @@
+﻿<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>基站编号</th>
+            <th>扇区编号</th>
+            <th>邻区名称</th>
+            <th>邻区PCI</th>
+            <th>测量优先级</th>
+            <th>允许切换</th>
+            <th>允许自动删除</th>
+            <th>由ANR生成</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="cell in mongoNeighbors">
+            <td>{{cell.neighborCellId}}</td>
+            <td>{{cell.neighborSectorId}}</td>
+            <td>{{cell.neighborCellName}}</td>
+            <td>{{cell.neighborPci}}</td>
+            <td>{{cell.cellPriority == 0 ? '低' : (cell.cellPriority == 1 ? '中' : '高')}}</td>
+            <td>{{cell.handoffAllowed ? '允许' : '禁止'}}</td>
+            <td>{{cell.removedAllowed ? '允许' : '禁止'}}</td>
+            <td>{{cell.isAnrCreated ? '是' : '否'}}</td>
+        </tr>
+    </tbody>
+</table>

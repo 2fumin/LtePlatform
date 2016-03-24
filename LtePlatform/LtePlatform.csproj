@@ -430,6 +430,7 @@
     <Content Include="appViews\Rutrace\Chart.html" />
     <Content Include="appViews\Rutrace\Index.html" />
     <Content Include="appViews\Rutrace\Interference\Index.html" />
+    <Content Include="appViews\Rutrace\Interference\MongoNeighbors.html" />
     <Content Include="appViews\Rutrace\Interference\Source.html" />
     <Content Include="appViews\Rutrace\Interference\Victim.html" />
     <Content Include="appViews\Rutrace\Map\Index.html" />
