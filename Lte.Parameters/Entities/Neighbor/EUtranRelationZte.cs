@@ -74,7 +74,7 @@ namespace Lte.Parameters.Entities.Neighbor
         public string supercellFlag { get; set; }
 
         public string refExternalEUtranCellTDD { get; set; }
-
+        
         public ObjectId Id { get; set; }
 
         public bool IsTransient()

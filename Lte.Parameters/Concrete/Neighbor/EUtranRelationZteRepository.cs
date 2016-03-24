@@ -23,9 +23,14 @@ namespace Lte.Parameters.Concrete.Neighbor
 
         }
 
-        public IEnumerable<EUtranRelationZte> GetRecent(int eNodebId, byte sectorId)
+        public List<EUtranRelationZte> GetRecentList(int eNodebId, byte sectorId)
         {
-            throw new NotImplementedException();
+            var query =
+                MongoDB.Driver.Builders.Query<EUtranRelationZte>.Where(
+                    e => e.eNodeB_Id == eNodebId && e.description == "cellLocalId=" + sectorId);
+            var list = Collection.Find(query).AsQueryable();
+            var recentDate = list.Max(x => x.iDate);
+            return list.Where(x => x.iDate == recentDate).ToList();
         }
     }
 }

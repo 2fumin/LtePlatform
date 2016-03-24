@@ -30,13 +30,15 @@ namespace Lte.Parameters.Entities.Neighbor
 
         public string NeighbourCellName { get; set; }
 
+        public int LocalCellId { get; set; }
+
         public int AttachCellSwitch { get; set; }
 
         public int NoHoFlag { get; set; }
 
         public int CellId { get; set; }
 
-        public int LocalCellName { get; set; }
+        public string LocalCellName { get; set; }
 
         public int CellRangeExpansion { get; set; }
 

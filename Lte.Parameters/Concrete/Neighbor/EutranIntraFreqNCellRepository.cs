@@ -23,9 +23,14 @@ namespace Lte.Parameters.Concrete.Neighbor
 
         }
 
-        public IEnumerable<EutranIntraFreqNCell> GetRecent(int eNodebId, byte localCellId)
+        public List<EutranIntraFreqNCell> GetRecentList(int eNodebId, byte localCellId)
         {
-            throw new NotImplementedException();
+            var query =
+                MongoDB.Driver.Builders.Query<EutranIntraFreqNCell>.Where(
+                    e => e.eNodeB_Id == eNodebId && e.LocalCellId == localCellId);
+            var list = Collection.Find(query).AsQueryable();
+            var recentDate = list.Max(x => x.iDate);
+            return list.Where(x => x.iDate == recentDate).ToList();
         }
     }
 }

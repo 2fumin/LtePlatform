@@ -7,6 +7,6 @@ namespace Lte.Parameters.Abstract.Neighbor
 {
     public interface IEUtranRelationZteRepository : IRepository<EUtranRelationZte, ObjectId>
     {
-        IEnumerable<EUtranRelationZte> GetRecent(int eNodebId, byte sectorId);
+        List<EUtranRelationZte> GetRecentList(int eNodebId, byte sectorId);
     }
 }
