@@ -1,4 +1,5 @@
-﻿app.controller("rutrace.interference", function ($scope, $http, $location, networkElementService, topPreciseService) {
+﻿app.controller("rutrace.interference", function ($scope, $http, $location, networkElementService, topPreciseService,
+    neighborMongoService) {
     $scope.currentCellName = $scope.topStat.current.eNodebName + "-" + $scope.topStat.current.sectorId;
     $scope.page.title = "TOP指标干扰分析: " + $scope.currentCellName;
     $scope.oneAtATime = false;
@@ -36,8 +37,7 @@
     };
     $scope.updateMessages = [];
 
-    $scope.showInterference = function() {
-        var cell = $scope.topStat.current;
+    $scope.showInterference = function(cell) {
         $scope.interferenceCells = [];
         $scope.victimCells = [];
 
@@ -91,11 +91,16 @@
     if ($scope.topStat.current.eNodebName === undefined || $scope.topStat.current.eNodebName === "")
         $location.path($scope.rootPath + "top");
     else {
-        if ($scope.topStat.interference[$scope.currentCellName] === undefined) {
-            $scope.showInterference();
-        } else {
-            $scope.interferenceCells = $scope.topStat.interference[$scope.currentCellName];
-            $scope.victimCells = $scope.topStat.victims[$scope.currentCellName];
-        }
+        var currentCell = $scope.topStat.current;
+        neighborMongoService.queryNeighbors(currentCell.cellId, currentCell.sectorId).then(function (result) {
+            $scope.mongoNeighbors = result;
+            if ($scope.topStat.interference[$scope.currentCellName] === undefined) {
+                $scope.showInterference(currentCell);
+            } else {
+                $scope.interferenceCells = $scope.topStat.interference[$scope.currentCellName];
+                $scope.victimCells = $scope.topStat.victims[$scope.currentCellName];
+            }
+        });
+
     }
 });

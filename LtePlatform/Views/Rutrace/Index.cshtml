@@ -25,6 +25,7 @@
     <script src="~/Scripts/service/app.kpi.service.js"></script>
     <script src="~/Scripts/service/app.parameters.service.js"></script>
     <script src="~/Scripts/service/workitem.service.js"></script>
+    <script src="~/Scripts/service/mongo/neighbor.js"></script>
     <script src="~/Scripts/mycharts/drilldown.chart.js"></script>
     <script src="~/Scripts/mycharts/drilldownPie.js"></script>
     <script src="~/Scripts/mycharts/drilldownColumn.js"></script>
@@ -34,7 +35,8 @@
     <script>
         var app = angular.module('myApp',
             ['ngRoute', "highcharts-ng", "ui.bootstrap", 'myApp.url',
-                'myApp.region', 'myApp.kpi', 'myApp.parameters', 'kpi.workitem', 'myApp.dumpInterference']);
+                'myApp.region', 'myApp.kpi', 'myApp.parameters',
+                'kpi.workitem', 'myApp.dumpInterference', 'neighbor.mongo']);
     </script>
     <script src="~/Scripts/rutrace/menu.controller.js"></script>
     <script src="~/Scripts/rutrace/root.controller.js"></script>
