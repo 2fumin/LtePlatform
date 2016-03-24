@@ -22,6 +22,9 @@ namespace Lte.Evaluations.ViewModels.Mr
         [MemberDoc("邻区扇区编号")]
         public byte NeighborSectorId { get; set; }
 
+        [MemberDoc("邻区名称")]
+        public string NeighborCellName { get; set; }
+
         [MemberDoc("PCI，便于查询邻区")]
         public short NeighborPci { get; set; }
 

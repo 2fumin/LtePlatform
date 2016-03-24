@@ -37,6 +37,9 @@ namespace Lte.Evaluations.MapperSerive
 
             Mapper.CreateMap<EutranIntraFreqNCell, NeighborCellMongo>()
                 .ForMember(d => d.CellId, opt => opt.MapFrom(s => s.eNodeB_Id))
+                .ForMember(d => d.NeighborCellId, opt => opt.MapFrom(s => s.eNodeBId))
+                .ForMember(d => d.NeighborSectorId, opt => opt.MapFrom(s => s.CellId))
+                .ForMember(d => d.NeighborCellName, opt => opt.MapFrom(s => s.NeighbourCellName))
                 .ForMember(d => d.IsAnrCreated, opt => opt.MapFrom(s => s.AnrFlag > 0))
                 .ForMember(d => d.HandoffAllowed, opt => opt.MapFrom(s => s.NoHoFlag == 0))
                 .ForMember(d => d.RemovedAllowed, opt => opt.MapFrom(s => s.NoRmvFlag == 0))
