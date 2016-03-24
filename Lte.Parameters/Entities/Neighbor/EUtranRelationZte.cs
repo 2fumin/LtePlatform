@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Abp.Domain.Entities;
 using Lte.Parameters.Entities.Switch;
+using MongoDB.Bson;
 
 namespace Lte.Parameters.Entities.Neighbor
 {
-    public class EUtranRelationZte : IZteMongo
+    public class EUtranRelationZte : IEntity<ObjectId>, IZteMongo
     {
         public int eNodeB_Id { get; set; }
 
@@ -72,5 +74,12 @@ namespace Lte.Parameters.Entities.Neighbor
         public string supercellFlag { get; set; }
 
         public string refExternalEUtranCellTDD { get; set; }
+
+        public ObjectId Id { get; set; }
+
+        public bool IsTransient()
+        {
+            return false;
+        }
     }
 }

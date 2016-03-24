@@ -114,6 +114,8 @@
     <Compile Include="Abstract\IInfrastructureRepository.cs" />
     <Compile Include="Abstract\IInterferenceMatrixRepository.cs" />
     <Compile Include="Abstract\IInterferenceMongoRepository.cs" />
+    <Compile Include="Abstract\Neighbor\IEutranIntraFreqNCellRepository.cs" />
+    <Compile Include="Abstract\Neighbor\IEUtranRelationZteRepository.cs" />
     <Compile Include="Abstract\Neighbor\ILteNeighborCellRepository.cs" />
     <Compile Include="Abstract\IPagingRepository.cs" />
     <Compile Include="Abstract\Kpi\IPreciseCoverage4GRepository.cs" />
@@ -162,6 +164,8 @@
     <Compile Include="Concrete\Mr\InterferenceMongoRepository.cs" />
     <Compile Include="Concrete\MyMongoProvider.cs" />
     <Compile Include="Concrete\Neighbor\EutranInterNFreqRepository.cs" />
+    <Compile Include="Concrete\Neighbor\EutranIntraFreqNCellRepository.cs" />
+    <Compile Include="Concrete\Neighbor\EUtranRelationZteRepository.cs" />
     <Compile Include="Concrete\Switch\CellMeasGroupZteRepository.cs" />
     <Compile Include="Concrete\Switch\InterFreqHoGroupRepository.cs" />
     <Compile Include="Concrete\Switch\InterRatHoCommRepository.cs" />
