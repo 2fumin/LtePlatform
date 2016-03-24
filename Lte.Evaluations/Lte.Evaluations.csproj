@@ -151,6 +151,7 @@
     <Compile Include="ViewModels\Basic\CdmaCellView.cs" />
     <Compile Include="ViewModels\Basic\CdmaCompoundCellView.cs" />
     <Compile Include="ViewModels\Mr\NearestPciCellView.cs" />
+    <Compile Include="ViewModels\Mr\NeighborCellMongo.cs" />
     <Compile Include="ViewModels\Precise\Precise4GSector.cs" />
     <Compile Include="ViewModels\RegionKpi\CdmaRegionDateView.cs" />
     <Compile Include="ViewModels\RegionKpi\CdmaRegionStatDetails.cs" />
