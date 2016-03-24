@@ -48,6 +48,8 @@ namespace Lte.Evaluations.DataService.Mr
                     x.SectorId = sectorId;
                     var neighborCell = _cellRepository.GetBySectorId(x.NeighborCellId, x.NeighborSectorId);
                     if (neighborCell != null) x.NeighborPci = neighborCell.Pci;
+                    var neighborENodeb = _eNodebRepository.GetByENodebId(x.NeighborCellId);
+                    if (neighborENodeb != null) x.NeighborCellName = neighborENodeb.Name + "-" + x.NeighborSectorId;
                 });
                 return results;
             }
@@ -58,6 +60,7 @@ namespace Lte.Evaluations.DataService.Mr
             {
                 var neighbor = Mapper.Map<EUtranRelationZte, NeighborCellMongo>(relation);
                 neighbor.SectorId = sectorId;
+                neighbor.NeighborCellName = relation.userLabel;
                 if (relation.refExternalEUtranCellFDD == "")
                 {
                     neighbor.NeighborCellId = eNodebId;
@@ -65,23 +68,36 @@ namespace Lte.Evaluations.DataService.Mr
                     if (innerRelation != null)
                     {
                         var fields = innerRelation.description.Split('=');
-                        if (fields.Length>1) neighbor.NeighborSectorId = byte.Parse(fields[1]);
+                        if (fields.Length > 1) neighbor.NeighborSectorId = byte.Parse(fields[1]);
                         neighbor.NeighborCellName = innerRelation.eNodeB_Name;
                         var neighborCell = _cellRepository.GetBySectorId(eNodebId, neighbor.NeighborSectorId);
                         if (neighborCell != null) neighbor.NeighborPci = neighborCell.Pci;
                     }
                 }
-                neighbor.NeighborCellName = relation.userLabel;
-                var external =
-                    externals.FirstOrDefault(x => x.reservedByEUtranRelation.Contains(relation.refExternalEUtranCellFDD));
-                if (external != null)
+                else
                 {
-                    neighbor.NeighborCellId = external.eNBId;
-                    neighbor.NeighborSectorId = (byte)external.cellLocalId;
-                    neighbor.NeighborPci = (short)external.pci;
+                    var external =
+                        externals.FirstOrDefault(
+                            x =>
+                                x.reservedByEUtranRelation != null &&
+                                x.reservedByEUtranRelation.Contains(relation.refExternalEUtranCellFDD.Replace(
+                                    "ExternalEUtranCellFDD",
+                                    "EUtranCellFDD=1,EUtranRelation")));
+                    if (external != null)
+                    {
+                        neighbor.NeighborCellId = external.eNBId;
+                        neighbor.NeighborSectorId = (byte) external.cellLocalId;
+                        neighbor.NeighborPci = (short) external.pci;
+                    }
                 }
                 return neighbor;
+                
             }).ToList();
+        }
+
+        public List<ExternalEUtranCellFDDZte> QueryExternalCells(int eNodebId)
+        {
+            return _zteExternalRepository.GetRecentList(eNodebId);
         }
     }
 }

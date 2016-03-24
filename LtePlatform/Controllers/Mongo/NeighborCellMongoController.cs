@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Lte.Evaluations.DataService.Mr;
 using Lte.Evaluations.ViewModels.Mr;
+using Lte.Parameters.Entities.Neighbor;
 
 namespace LtePlatform.Controllers.Mongo
 {
@@ -22,6 +23,12 @@ namespace LtePlatform.Controllers.Mongo
         public List<NeighborCellMongo> Get(int eNodebId, byte sectorId)
         {
             return _service.QueryNeighbors(eNodebId, sectorId);
+        }
+
+        [HttpGet]
+        public List<ExternalEUtranCellFDDZte> Get(int eNodebId)
+        {
+            return _service.QueryExternalCells(eNodebId);
         }
     }
 }
