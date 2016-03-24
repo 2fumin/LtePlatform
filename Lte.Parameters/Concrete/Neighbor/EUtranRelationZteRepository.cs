@@ -32,5 +32,15 @@ namespace Lte.Parameters.Concrete.Neighbor
             var recentDate = list.Max(x => x.iDate);
             return list.Where(x => x.iDate == recentDate).ToList();
         }
+
+        public List<EUtranRelationZte> GetRecentList(int eNodebId)
+        {
+            var query =
+                MongoDB.Driver.Builders.Query<EUtranRelationZte>.Where(
+                    e => e.eNodeB_Id == eNodebId);
+            var list = Collection.Find(query).AsQueryable();
+            var recentDate = list.Max(x => x.iDate);
+            return list.Where(x => x.iDate == recentDate).ToList();
+        }
     }
 }

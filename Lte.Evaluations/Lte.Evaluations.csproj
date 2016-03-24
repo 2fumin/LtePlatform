@@ -103,6 +103,7 @@
     <Compile Include="DataService\Basic\ENodebQueryService.cs" />
     <Compile Include="DataService\Mr\InterferenceMatrixService.cs" />
     <Compile Include="DataService\Kpi\TopConnection3GService.cs" />
+    <Compile Include="DataService\Mr\NeighborCellMongoService.cs" />
     <Compile Include="DataService\Switch\InterFreqHoService.cs" />
     <Compile Include="DataService\Switch\IntraFreqHoService.cs" />
     <Compile Include="MapperSerive\Kpi\TopConnection3GCellViewContainer.cs" />
