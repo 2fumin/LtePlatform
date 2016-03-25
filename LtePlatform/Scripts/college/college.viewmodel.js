@@ -1,4 +1,20 @@
-﻿function MapViewModel(app, dataModel) {
+﻿var initializeCollegeList = function (viewModel) {
+    $.ajax({
+        method: 'get',
+        url: app.dataModel.collegeQueryUrl,
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            viewModel.colleges.removeAll();
+            for (var i = 0; i < data.length; i++) {
+                viewModel.colleges.push(data[i].name);
+            }
+            if (viewModel.queryCells !== undefined) {
+                viewModel.queryCells();
+            }
+        }
+    });
+};
+function MapViewModel(app, dataModel) {
     var self = this;
 
     self.beginDate = ko.observable((new Date()).getDateFromToday(-7).Format("yyyy-MM-dd"));

@@ -401,6 +401,7 @@
     <Content Include="appViews\BasicKpi\TopConnection3GTrendTable.html" />
     <Content Include="appViews\BasicKpi\TopDrop2GTrend.html" />
     <Content Include="appViews\BasicKpi\Trend.html" />
+    <Content Include="appViews\College\AllMap.html" />
     <Content Include="appViews\Import\ImportProgress.html" />
     <Content Include="appViews\Manage\AllUsers.html" />
     <Content Include="appViews\Manage\CurrentUser.html" />
@@ -711,6 +712,8 @@
     <Content Include="Scripts\angular-ui\uib\timepicker.js" />
     <Content Include="Scripts\angular-ui\uib\tooltip.js" />
     <Content Include="Scripts\angular-ui\uib\typeahead.js" />
+    <Content Include="Scripts\college\all.map.js" />
+    <Content Include="Scripts\college\route.controller.js" />
     <Content Include="Scripts\kpi\basic\index.controller.js" />
     <Content Include="Scripts\kpi\basic\route.controller.js" />
     <Content Include="Scripts\kpi\basic\top.connection3G.js" />
@@ -918,17 +921,18 @@
     <None Include="Properties\PublishProfiles\Lte2.pubxml" />
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Scripts\angular-messages.min.js.map" />
+    <Content Include="Scripts\college\menu.root.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\coffee-script.js" />
-    <Content Include="Scripts\college\common.controller.js" />
+    <Content Include="Scripts\college\college.menu.js" />
     <Content Include="Scripts\college\coverage.viewmodel.js" />
     <Content Include="Scripts\college\infrastructure.viewmodel.js" />
     <Content Include="Scripts\college\kpi.controller.js" />
     <Content Include="Scripts\college\kpi.viewmodel.js" />
     <Content Include="Scripts\college\map.controller.js" />
-    <Content Include="Scripts\college\map.viewmodel.js" />
+    <Content Include="Scripts\college\college.viewmodel.js" />
     <Content Include="Scripts\college\precise.controller.js" />
     <Content Include="Scripts\college\precise.viewmodel.js" />
     <Content Include="Scripts\college\test.controller.js" />
