@@ -1117,12 +1117,12 @@
     <Content Include="Views\College\_EditKpi.cshtml" />
     <Content Include="Views\College\_PreciseKpi.cshtml" />
     <Content Include="Views\College\_Infrastructure.cshtml" />
-    <Content Include="Views\College\_CollegeStatTable.cshtml" />
+    <Content Include="appViews\College\Table\CollegeStatTable.html" />
     <Content Include="Views\Dt\_List.cshtml" />
     <Content Include="Scripts\knockout.validation.min.js.map" />
-    <Content Include="Views\College\_CollegeMapInfoBox.cshtml" />
+    <Content Include="appViews\College\Table\CollegeMapInfoBox.html" />
     <Content Include="appViews\Rutrace\Map\PreciseSectorMapInfoBox.html" />
-    <Content Include="Views\College\_DistributionMapInfoBox.cshtml" />
+    <Content Include="appViews\College\Table\DistributionMapInfoBox.html" />
     <Content Include="Views\College\_Coverage.cshtml" />
     <Content Include="Views\College\_CoverageMap.cshtml" />
     <Content Include="Scripts\rutrace\interference.neighbors.controller.js" />
