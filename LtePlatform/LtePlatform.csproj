@@ -1102,7 +1102,7 @@
     <Content Include="Views\College\KpiReport.cshtml" />
     <Content Include="Views\College\TestReport.cshtml" />
     <Content Include="Views\College\PreciseKpi.cshtml" />
-    <Content Include="Views\College\_CollegeMenu.cshtml" />
+    <Content Include="appViews\College\CollegeMenu.html" />
     <Content Include="Views\College\_Map.cshtml" />
     <Content Include="Views\College\_TestReport.cshtml" />
     <Content Include="Views\College\_College3GTest.cshtml" />

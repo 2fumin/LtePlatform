@@ -1,0 +1,13 @@
+﻿<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            校园列表
+        </h4>
+    </div>
+    <div class="panel-body">
+        <div class="list-group">
+            <a ng-repeat="collegeName in collegeInfo.names" ng-href="{{collegeInfo.url}}/{{collegeName}}">{{collegeName}}</a>
+            @Html.ActionLink("校园地图", "Map", "College", null, new { @class = "list-group-item" })@Html.ActionLink("基础信息", "Infrastructure", "College", null, new { @class = "list-group-item" })@Html.ActionLink("信息编辑", "Edit", "College", null, new { @class = "list-group-item" })@Html.ActionLink("校园覆盖", "Coverage", "College", null, new { @class = "list-group-item" })@Html.ActionLink("测试报告", "TestReport", "College", null, new { @class = "list-group-item" })@Html.ActionLink("指标报告", "KpiReport", "College", null, new { @class = "list-group-item" })@Html.ActionLink("精确覆盖", "PreciseKpi", "College", null, new { @class = "list-group-item" })
+        </div>
+    </div>
+</div>
