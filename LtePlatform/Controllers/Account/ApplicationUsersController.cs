@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 namespace LtePlatform.Controllers.Account
 {
     [ApiControl("应用程序用户管理控制器")]
+    [Authorize]
     public class ApplicationUsersController : ApiController
     {
         [HttpGet]

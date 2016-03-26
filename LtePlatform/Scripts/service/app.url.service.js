@@ -31,7 +31,8 @@
         };
         var getFragment = function() {
             if (window.location.hash.indexOf("#") === 0) {
-                return parseQueryString(window.location.hash.substr(1));
+                var queryString = window.location.hash.replace("/", "?");
+                return parseQueryString(queryString);
             } else {
                 return {};
             }
@@ -62,6 +63,7 @@
             userInfoUrl: "/api/Me",
             siteUrl: "/",
             parseQueryString: parseQueryString,
-            getAccessToken: getAccessToken
+            getAccessToken: getAccessToken,
+            initializeAuthorization: initializeAuthorization
         };
     });

@@ -18,7 +18,10 @@
                 var deferred = $q.defer();
                 $http({
                     method: 'GET',
-                    url: appUrlService.getApiUrl('ApplicationUsers')
+                    url: appUrlService.getApiUrl('ApplicationUsers'),
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                    }
                 }).success(function (result) {
                     deferred.resolve(result);
                 })

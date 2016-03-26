@@ -1,4 +1,4 @@
-﻿app.controller("homeController", function ($scope) {
+﻿app.controller("homeController", function ($scope, appUrlService) {
     $scope.menuItems = [
     {
         title: "小区覆盖仿真模拟",
@@ -41,4 +41,5 @@
         isopen: false
     };
 
+    appUrlService.initializeAuthorization();
 });
