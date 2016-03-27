@@ -33,5 +33,15 @@ namespace Lte.Evaluations.DataService.College
                 ? new List<CollegeStat>()
                 : infos.Select(x => new CollegeStat(_repository, x, _infrastructureRepository));
         }
+
+        public IEnumerable<string> QueryNames()
+        {
+            return _repository.GetAllList().Select(x => x.Name).Distinct();
+        }
+
+        public IEnumerable<string> QueryNames(int year)
+        {
+            return _repository.GetAllList(year).Select(x => x.Name).Distinct();
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Abp.Domain.Repositories;
+﻿using System.Collections.Generic;
+using Abp.Domain.Repositories;
 using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.College;
 
@@ -11,5 +12,7 @@ namespace Lte.Parameters.Abstract.College
         CollegeInfo GetByName(string name);
 
         RectangleRange GetRange(string name);
+
+        List<CollegeInfo> GetAllList(int year);
     }
 }

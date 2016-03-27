@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Abstract.College;
@@ -26,6 +27,11 @@ namespace Lte.Parameters.Concrete.College
         {
             var college = GetByName(name);
             return college == null ? null : GetRegion(college.Id)?.RectangleRange;
+        }
+
+        public List<CollegeInfo> GetAllList(int year)
+        {
+            return GetAll().Where(x => x.OldOpenDate.Year == year).ToList();
         }
     }
 }
