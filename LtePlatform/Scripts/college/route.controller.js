@@ -17,6 +17,22 @@
                     }
                 },
                 url: "/"
+            }).state('collegeMap', {
+                views: {
+                    'menu': {
+                        templateUrl: "/appViews/GeneralMenu.html",
+                        controller: "menu.root"
+                    },
+                    "contents": {
+                        templateUrl: viewDir + "AllMap.html",
+                        controller: "map.name"
+                    },
+                    'collegeList': {
+                        templateUrl: viewDir + "CollegeMenu.html",
+                        controller: "college.menu"
+                    }
+                },
+                url: "/map/:name"
             });
         $urlRouterProvider.otherwise('/');
     })
