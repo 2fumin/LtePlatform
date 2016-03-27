@@ -20,7 +20,7 @@
             });
         $urlRouterProvider.otherwise('/');
     })
-    .run(function($rootScope) {
+    .run(function($rootScope, collegeService) {
         var rootUrl = "/College/Map#";
         $rootScope.menuItems = [];
         $rootScope.rootPath = rootUrl + "/";
@@ -46,4 +46,7 @@
         $rootScope.page = {
             title: "校园网总览"
         };
+        collegeService.queryNames().then(function(result) {
+            $rootScope.collegeInfo.names = result;
+        });
     });

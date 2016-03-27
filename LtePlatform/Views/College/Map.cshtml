@@ -32,11 +32,12 @@
     @Scripts.Render("~/bundles/ui-bootstraps")
     <script src="~/Scripts/service/app.url.service.js"></script>
     <script src="~/Scripts/service/app.region.service.js"></script>
+    <script src="~/Scripts/service/topic/college.js"></script>
     <script>
         var app = angular.module('myApp', [
             "highcharts-ng", 'ui.router',
             "ui.bootstrap", 'myApp.url',
-            'myApp.region'
+            'myApp.region', 'college'
         ]);
     </script>
     <script src="~/Scripts/college/route.controller.js"></script>

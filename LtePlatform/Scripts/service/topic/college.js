@@ -1,0 +1,18 @@
+﻿angular.module('college', ['myApp.url'])
+    .factory('collegeService', function($q, $http, appUrlService) {
+        return {
+            queryNames: function () {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('CollegeNames'),
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
+            }
+        }
+    });
