@@ -35,8 +35,13 @@
                 url: urlPrefix + "/" + name
             });
         };
-        $rootScope.viewData = {
-            workItems: []
+        $rootScope.collegeInfo = {
+            year: {
+                options: [2015, 2016],
+                selected: 2015
+            },
+            url: $rootScope.rootPath + "map",
+            names: []
         };
         $rootScope.page = {
             title: "校园网总览"
