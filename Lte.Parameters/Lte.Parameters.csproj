@@ -224,6 +224,7 @@
     <Compile Include="Entities\Kpi\TopDrop2GCell.cs" />
     <Compile Include="Entities\ExcelCsv\TopDrop2GCellExcel.cs" />
     <Compile Include="Entities\Switch\CellMeasGroupZte.cs" />
+    <Compile Include="Entities\Switch\EUtranCellMeasurementZte.cs" />
     <Compile Include="Entities\Switch\IZteMongo.cs" />
     <Compile Include="Entities\Switch\InterFreqHoGroup.cs" />
     <Compile Include="Entities\Switch\InterRatHoComm.cs" />
