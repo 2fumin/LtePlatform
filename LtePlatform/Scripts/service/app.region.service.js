@@ -379,6 +379,55 @@
                 return new BMap.Marker(new BMap.Point(longtitute, lattitute), {
                     icon: icon
                 });
+            },
+            generateMarker: function(longtitute, lattitute) {
+                return new BMap.Marker(new BMap.Point(longtitute, lattitute));
+            },
+            drawPolygonAndGetCenter: function (coors) {
+                var centerx = 0;
+                var centery = 0;
+                var points = [];
+                for (var p = 0; p < coors.length / 2; p++) {
+                    points.push(new BMap.Point(parseFloat(coors[2 * p]), parseFloat(coors[2 * p + 1])));
+                    centerx += parseFloat(coors[2 * p]);
+                    centery += parseFloat(coors[2 * p + 1]);
+                }
+                centerx /= coors.length / 2;
+                centery /= coors.length / 2;
+                var polygon = new BMap.Polygon(points,
+                    { strokeColor: "blue", strokeWeight: 2, strokeOpacity: 0.2 });
+                map.addOverlay(polygon);
+                return {
+                    X: centerx,
+                    Y: centery
+                };
+            },
+            drawRectangleAndGetCenter: function (coors) {
+                var centerx = (parseFloat(coors[0]) + parseFloat(coors[2])) / 2;
+                var centery = (parseFloat(coors[1]) + parseFloat(coors[3])) / 2;
+                var rectangle = new BMap.Polygon([
+                    new BMap.Point(parseFloat(coors[0]), parseFloat(coors[1])),
+                    new BMap.Point(parseFloat(coors[2]), parseFloat(coors[1])),
+                    new BMap.Point(parseFloat(coors[2]), parseFloat(coors[3])),
+                    new BMap.Point(parseFloat(coors[0]), parseFloat(coors[3]))
+                ], { strokeColor: "blue", strokeWeight: 2, strokeOpacity: 0.2 });
+                map.addOverlay(rectangle);
+                return {
+                    X: centerx,
+                    Y: centery
+                };
+            },
+            drawCircleAndGetCenter: function(coors) {
+                var centerx = parseFloat(coors[0]);
+                var centery = parseFloat(coors[1]);
+                var circle = new BMap.Circle(new BMap.Point(parseFloat(coors[0]), parseFloat(coors[1])),
+                    parseFloat(coors[2]),
+                    { strokeColor: "blue", strokeWeight: 2, strokeOpacity: 0.2 });
+                map.addOverlay(circle);
+                return {
+                    X: centerx,
+                    Y: centery
+                };
             }
         };
     });

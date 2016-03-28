@@ -781,6 +781,7 @@
     <Content Include="Scripts\service\parameters.chart.js" />
     <Content Include="Scripts\service\parameters.map.service.js" />
     <Content Include="Scripts\service\topic\college.js" />
+    <Content Include="Scripts\service\topic\college.map.service.js" />
     <Content Include="Scripts\service\workitem.service.js" />
     <Content Include="template\accordion\accordion-group.html" />
     <Content Include="template\accordion\accordion.html" />
