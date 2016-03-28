@@ -1,4 +1,4 @@
-﻿<table class="table table-hover" data-bind="visible: setView()=='list'">
+﻿<table class="table table-hover">
     <thead>
         <tr>
             <th>校园名称</th>
@@ -10,42 +10,46 @@
             <th>3G小区数</th>
             <th>4G室分数</th>
             <th>3G室分数</th>
+            <th>详细信息</th>
         </tr>
     </thead>
-    <tbody data-bind="foreach: collegeList">
-        <tr>
-            <td data-bind="text: name"></td>
-            <td data-bind="text: expectedSubscribers"></td>
-            <td data-bind="text: $data.area.toFixed(2)"></td>
+    <tbody>
+        <tr ng-repeat="college in collegeList">
+            <td>{{college.name}}</td>
+            <td>{{college.expectedSubscribers}}</td>
+            <td>{{college.area | number: 2}}</td>
             <td>
-                <a href="#" data-bind="click: function () { $root.infrastructure().showENodebs(name);}">
-                    <span data-bind="text: totalLteENodebs"></span>
+                <a href="#" ng-click="showENodebs(college.name)">
+                    {{college.totalLteENodebs}}
                 </a>
             </td>
             <td>
-                <a href="#" data-bind="click: function () { $root.infrastructure().showCells(name);}">
-                    <span data-bind="text: totalLteCells"></span>
+                <a href="#" ng-click="showCells(college.name)">
+                    {{college.totalLteCells}}
                 </a>
             </td>
             <td>
-                <a href="#" data-bind="click: function () { $root.infrastructure().showBtss(name); }">
-                    <span data-bind="text: totalCdmaBts"></span>
+                <a href="#" ng-click="showBtss(college.name)">
+                    {{college.totalCdmaBts}}
                 </a>
             </td>
             <td>
-                <a href="#" data-bind="click: function () { $root.infrastructure().showCdmaCells(name); }">
-                    <span data-bind="text: totalCdmaCells"></span>
+                <a href="#" ng-click="showCdmaCells(college.name)">
+                    {{college.totalCdmaCells}}
                 </a>
             </td>
             <td>
-                <a href="#" data-bind="click: function () { $root.infrastructure().showLteDistributions(name); }">
-                    <span data-bind="text: totalLteIndoors"></span>
+                <a href="#" ng-click="showLteDistributions(college.name)">
+                    {{college.totalLteIndoors}}
                 </a>
             </td>
             <td>
-                <a href="#" data-bind="click: function () { $root.infrastructure().showCdmaDistributions(name); }">
-                    <span data-bind="text: totalCdmaIndoors"></span>
+                <a href="#" ng-click="showCdmaDistributions(college.name)">
+                    {{college.totalCdmaIndoors}}
                 </a>
+            </td>
+            <td>
+                <a ng-href="{{rootPath}}query/{{college.name}}" class="btn btn-default">详细</a>
             </td>
         </tr>
     </tbody>

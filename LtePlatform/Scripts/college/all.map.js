@@ -1,5 +1,6 @@
 ﻿app.controller("all.map", function ($scope, $uibModal, $log,  baiduMapService, collegeMapService) {
     $scope.collegeInfo.url = $scope.rootPath + "map";
+    $scope.page.title = "校园网总览";
 
     var showCollegDialogs = function(college) {
         var modalInstance = $uibModal.open({

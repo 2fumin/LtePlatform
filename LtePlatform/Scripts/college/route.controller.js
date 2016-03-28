@@ -33,6 +33,22 @@
                     }
                 },
                 url: "/map/:name"
+            }).state('query', {
+                views: {
+                    'menu': {
+                        templateUrl: "/appViews/GeneralMenu.html",
+                        controller: "menu.root"
+                    },
+                    "contents": {
+                        templateUrl: viewDir + "/Table/CollegeStatTable.html",
+                        controller: "all.query"
+                    },
+                    'collegeList': {
+                        templateUrl: viewDir + "CollegeMenu.html",
+                        controller: "college.menu"
+                    }
+                },
+                url: "/query"
             });
         $urlRouterProvider.otherwise('/');
     })
