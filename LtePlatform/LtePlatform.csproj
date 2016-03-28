@@ -1106,7 +1106,6 @@
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <Content Include="appViews\BasicKpi\KpiTable.html" />
     <Content Include="Views\College\Edit.cshtml" />
-    <Content Include="Views\College\Infrastructure.cshtml" />
     <Content Include="Views\College\Coverage.cshtml" />
     <Content Include="Views\College\KpiReport.cshtml" />
     <Content Include="Views\College\TestReport.cshtml" />
@@ -1121,7 +1120,6 @@
     <Content Include="Views\College\_KpiReport.cshtml" />
     <Content Include="Views\College\_EditKpi.cshtml" />
     <Content Include="Views\College\_PreciseKpi.cshtml" />
-    <Content Include="Views\College\_Infrastructure.cshtml" />
     <Content Include="appViews\College\Table\CollegeStatTable.html" />
     <Content Include="Views\Dt\_List.cshtml" />
     <Content Include="Scripts\knockout.validation.min.js.map" />

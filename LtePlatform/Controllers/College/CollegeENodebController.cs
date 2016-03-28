@@ -18,12 +18,12 @@ namespace LtePlatform.Controllers.College
         }
 
         [HttpGet]
-        [ApiDoc("查询单个校园的LTE基站名称列表")]
+        [ApiDoc("查询单个校园的LTE基站列表")]
         [ApiParameterDoc("collegeName", "校园名称")]
-        [ApiResponse("LTE基站名称列表")]
-        public IEnumerable<string> Get(string collegeName)
+        [ApiResponse("LTE基站列表")]
+        public IEnumerable<ENodebView> Get(string collegeName)
         {
-            return _service.QueryCollegeENodebNames(collegeName);
+            return _service.QueryCollegeENodebs(collegeName);
         }
 
         [HttpGet]

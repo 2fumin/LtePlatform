@@ -57,27 +57,7 @@ namespace Lte.Evaluations.Test.DataService.College
                 Assert.AreEqual(views.Count(), 0);
             }
         }
-
-        [TestCase(1)]
-        [TestCase(2)]
-        [TestCase(3)]
-        [TestCase(4)]
-        [TestCase(5)]
-        public void Test_QueryCollegeENodebNames_SingleInfrastructure(int id)
-        {
-            _testService.MockOneENodebInfrastructure(id);
-            var names = _service.QueryCollegeENodebNames("College-" + id);
-            if (id > 0 && id <= 3)
-            {
-                Assert.AreEqual(names.Count(), 1);
-                Assert.AreEqual(names.ElementAt(0), "ENodeb-" + id);
-            }
-            else
-            {
-                Assert.AreEqual(names.Count(), 0);
-            }
-        }
-
+        
         [TestCase(1, "2015-12-30", "2015-1-2")]
         [TestCase(2, "2015-12-11", "2015-12-20")]
         [TestCase(3, "2015-12-30", "2015-1-2")]

@@ -35,13 +35,16 @@ namespace Lte.Evaluations.DataService.College
                 select ENodebView.ConstructView(eNodeb, stats)).ToList();
         }
 
-        public IEnumerable<string> QueryCollegeENodebNames(string collegeName)
+        public IEnumerable<ENodebView> QueryCollegeENodebs(string collegeName)
         {
             var ids = _repository.GetENodebIds(collegeName);
-            return ids.Select(_eNodebRepository.Get
-                ).Where(eNodeb => eNodeb != null).ToList().Select(x => x.Name);
-        } 
-
+            return (from id in ids
+                select _eNodebRepository.Get(id)
+                into eNodeb
+                where eNodeb != null
+                select Mapper.Map<ENodeb, ENodebView>(eNodeb)).ToList();
+        }
+        
         public IEnumerable<ENodebView> QueryCollegeENodebs(IEnumerable<string> collegeNames)
         {
             var concateIds = collegeNames.Select(x => _repository.GetENodebIds(x));
