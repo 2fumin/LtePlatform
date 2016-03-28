@@ -8,4 +8,9 @@ namespace Lte.Parameters.Abstract.Switch
     {
         CellMeasGroupZte GetRecent(int eNodebId);
     }
+
+    public interface IEUtranCellMeasurementZteRepository : IRepository<EUtranCellMeasurementZte, ObjectId>
+    {
+        EUtranCellMeasurementZte GetRecent(int eNodebId, byte sectorId);
+    }
 }
