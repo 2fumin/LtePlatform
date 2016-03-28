@@ -24,6 +24,28 @@
         });
     };
 
+    $scope.showCells = function (name) {
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: '/appViews/College/Infrastructure/LteCellDialog.html',
+            controller: 'cell.dialog',
+            size: 'sm',
+            resolve: {
+                dialogTitle: function () {
+                    return name + "-" + "LTE小区信息";
+                },
+                name: function () {
+                    return name;
+                }
+            }
+        });
+        modalInstance.result.then(function (info) {
+            console.log(info);
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
+
     collegeService.queryStats().then(function(colleges) {
         $scope.collegeList = colleges;
     });

@@ -55,6 +55,22 @@
                     deferred.reject(reason);
                 });
                 return deferred.promise;
+            },
+            queryCells: function (name) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('CollegeCells/'),
+                    params: {
+                        collegeName: name
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
             }
         }
     });

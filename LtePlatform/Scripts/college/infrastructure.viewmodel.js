@@ -1,38 +1,6 @@
 ﻿function InfrastructureViewModel(app, dataModel) {
     var self = this;
 
-    self.setView = ko.observable('list');
-    self.currentName = ko.observable();
-    self.beginDate = ko.observable((new Date()).getDateFromToday(-7).Format("yyyy-MM-dd"));
-    self.endDate = ko.observable((new Date()).getDateFromToday(-1).Format("yyyy-MM-dd"));
-    self.collegeList = ko.observableArray([]);
-    self.eNodebList = ko.observableArray([]);
-    self.cellList = ko.observableArray([]);
-    self.btsList = ko.observableArray([]);
-    self.cdmaCellList = ko.observableArray([]);
-    self.distributionList = ko.observableArray([]);
-    self.alarms = ko.observableArray([]);
-
-    self.gobackList = function () {
-        self.setView('list');
-    };
-
-    self.refreshAlarms = function () {
-        self.showENodebs(self.currentName());
-    };
-
-    self.showENodebs = function (name) {
-        sendRequest(app.dataModel.collegeENodebUrl, "GET", {
-            collegeName: name,
-            begin: self.beginDate(),
-            end: self.endDate()
-        }, function (data) {
-            self.eNodebList(data);
-            self.setView('eNodebs');
-            self.currentName(name);
-        });
-    };
-
     self.showCells = function (name) {
         sendRequest(app.dataModel.collegeCellsUrl, "GET", { collegeName: name }, function (data) {
             self.cellList(data);
