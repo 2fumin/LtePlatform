@@ -5,7 +5,7 @@
                 var deferred = $q.defer();
                 $http({
                     method: 'GET',
-                    url: appUrlService.getApiUrl('CollegeNames'),
+                    url: appUrlService.getApiUrl('CollegeNames')
                 }).success(function (result) {
                     deferred.resolve(result);
                 })
@@ -18,7 +18,7 @@
                 var deferred = $q.defer();
                 $http({
                     method: 'GET',
-                    url: appUrlService.getApiUrl('CollegeStat'),
+                    url: appUrlService.getApiUrl('CollegeStat')
                 }).success(function (result) {
                     deferred.resolve(result);
                 })
@@ -31,7 +31,7 @@
                 var deferred = $q.defer();
                 $http({
                     method: 'GET',
-                    url: appUrlService.getApiUrl('CollegeRegion/' + id),
+                    url: appUrlService.getApiUrl('CollegeRegion/' + id)
                 }).success(function (result) {
                     deferred.resolve(result);
                 })

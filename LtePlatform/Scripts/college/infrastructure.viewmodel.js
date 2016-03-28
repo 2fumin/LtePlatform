@@ -13,23 +13,6 @@
     self.distributionList = ko.observableArray([]);
     self.alarms = ko.observableArray([]);
 
-    Sammy(function () {
-        this.get('#infrastructure', function () {
-            $("#BeginDate").datepicker({ dateFormat: 'yy-mm-dd' });
-            $("#EndDate").datepicker({ dateFormat: 'yy-mm-dd' });
-
-            $.ajax({
-                method: 'get',
-                url: app.dataModel.collegeStatUrl,
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-                    self.collegeList(data);
-                }
-            });
-        });
-        this.get('/College/Infrastructure', function () { this.app.runRoute('get', '#infrastructure'); });
-    });
-
     self.gobackList = function () {
         self.setView('list');
     };
