@@ -1,4 +1,10 @@
-﻿<div id="college-info-box" style="display: none">
+﻿<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" aria-hidden="true">
+        &times;
+    </button>
+    <h4 class="modal-title text-primary">{{dialogTitle}}</h4>
+</div>
+<div class="modal-body">
     <div class="infoBoxContent">
         <div class="title">
             <strong>校园基本信息: </strong>
@@ -7,39 +13,39 @@
             <ul>
                 <li>
                     <div class="left">校园名称:</div>
-                    <div class="rmb" id="college-name"></div>
+                    <div class="rmb">{{college.name}}</div>
                 </li>
                 <li>
                     <div class="left">用户数:</div>
-                    <div class="rmb" id="college-subscribers"></div>
+                    <div class="rmb">{{college.expectedSubscribers}}</div>
                 </li>
                 <li>
                     <div class="left">区域面积（平方米）: </div>
-                    <div class="rmb" id="college-area"></div>
+                    <div class="rmb">{{college.area | number: 2}}</div>
                 </li>
                 <li>
                     <div class="left">LTE基站数: </div>
-                    <div class="rmb" id="college-lte-enodebs"></div>
+                    <div class="rmb">{{college.totalLteENodebs}}</div>
                 </li>
                 <li>
                     <div class="left">LTE小区数:</div>
-                    <div class="rmb" id="college-lte-cells"></div>
+                    <div class="rmb">{{college.totalLteIndoors}}</div>
                 </li>
                 <li>
                     <div class="left">CDMA基站数:</div>
-                    <div class="rmb" id="college-cdma-btss"></div>
+                    <div class="rmb">{{college.totalCdmaBts}}</div>
                 </li>
                 <li>
                     <div class="left">CDMA小区数:</div>
-                    <div class="rmb" id="college-cdma-cells"></div>
+                    <div class="rmb">{{college.totalCdmaCells}}</div>
                 </li>
                 <li>
                     <div class="left">LTE室内分布数: </div>
-                    <div class="rmb" id="college-lte-distributions"></div>
+                    <div class="rmb">{{college.totalLteIndoors}}</div>
                 </li>
                 <li>
                     <div class="left">CDMA室内分布数: </div>
-                    <div class="rmb" id="college-cdma-distributions"></div>
+                    <div class="rmb">{{college.totalCdmaIndoors}}</div>
                 </li>
             </ul>
         </div>
