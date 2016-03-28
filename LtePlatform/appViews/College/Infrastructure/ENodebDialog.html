@@ -1,0 +1,30 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" aria-hidden="true">
+        &times;
+    </button>
+    <h4 class="modal-title text-primary">{{dialogTitle}}</h4>
+</div>
+<table class="table table-hover">
+<thead>
+    <tr>
+        <th>LTE基站编号</th>
+        <th>基站名称</th>
+        <th>规划编号</th>
+        <th>入网日期</th>
+        <th>地址</th>
+    </tr>
+</thead>
+<tbody>
+    <tr ng-repeat="eNodeb in eNodebList">
+        <td>{{eNodeb.eNodebId}}</td>
+        <td>{{eNodeb.name}}</td>
+        <td>{{eNodeb.planNum}}</td>
+        <td>{{eNodeb.openDate | date: 'yyyy-MM-dd'}}</td>
+        <td>{{eNodeb.address}}</td>
+    </tr>
+</tbody>
+</table>
+<div class="modal-footer">
+    <button class="btn btn-warning" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+</div>

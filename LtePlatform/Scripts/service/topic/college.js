@@ -39,6 +39,22 @@
                     deferred.reject(reason);
                 });
                 return deferred.promise;
+            },
+            queryENodebs: function (name) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('CollegeENodeb/'),
+                    params: {
+                        collegeName: name
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
             }
         }
     });
