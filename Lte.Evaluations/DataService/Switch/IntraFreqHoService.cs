@@ -33,40 +33,141 @@ namespace Lte.Evaluations.DataService.Switch
             _eNodebRepository = eNodebRepository;
         }
 
-        public ENodebIntraFreqHoView QueryENodebHo(int eNodebId)
+        interface IENodebQuery
+        {
+            ENodebIntraFreqHoView Query();
+        }
+
+        private IENodebQuery ConstructENodebQuery(int eNodebId)
         {
             var eNodeb = _eNodebRepository.GetByENodebId(eNodebId);
             if (eNodeb == null) return null;
-            if (eNodeb.Factory == "华为")
+            return eNodeb.Factory == "华为"
+                ? (IENodebQuery) new HuaweiENodebQuery(_huaweiENodebHoRepository, eNodebId)
+                : new ZteENodebQuery(_zteGroupRepository, _zteMeasurementRepository, eNodebId);
+        }
+
+        class HuaweiENodebQuery : IENodebQuery
+        {
+            private readonly IIntraRatHoCommRepository _huaweiENodebHoRepository;
+            private readonly int _eNodebId;
+
+            public HuaweiENodebQuery(IIntraRatHoCommRepository huaweiENodebHoRepository, int eNodebId)
             {
-                var huaweiPara = _huaweiENodebHoRepository.GetRecent(eNodebId);
+                _huaweiENodebHoRepository = huaweiENodebHoRepository;
+                _eNodebId = eNodebId;
+            }
+
+            public ENodebIntraFreqHoView Query()
+            {
+                var huaweiPara = _huaweiENodebHoRepository.GetRecent(_eNodebId);
                 return huaweiPara == null ? null : Mapper.Map<IntraRatHoComm, ENodebIntraFreqHoView>(huaweiPara);
             }
-            if (UeEUtranMeasurementZte.IntraFreqHoConfigId < 0)
+        }
+
+        class ZteENodebQuery : IENodebQuery
+        {
+            private readonly ICellMeasGroupZteRepository _zteGroupRepository;
+            private readonly IUeEUtranMeasurementRepository _zteMeasurementRepository;
+            private readonly int _eNodebId;
+
+            public ZteENodebQuery(ICellMeasGroupZteRepository zteGroupRepository,
+                IUeEUtranMeasurementRepository zteMeasurementRepository, int eNodebId)
             {
-                var zteGroup = _zteGroupRepository.GetRecent(eNodebId);
-                UeEUtranMeasurementZte.IntraFreqHoConfigId = zteGroup == null ? 50 : int.Parse(zteGroup.intraFHOMeasCfg.Split(',')[0]);
+                _zteGroupRepository = zteGroupRepository;
+                _zteMeasurementRepository = zteMeasurementRepository;
+                _eNodebId = eNodebId;
             }
-            
-            var ztePara = _zteMeasurementRepository.GetRecent(eNodebId, UeEUtranMeasurementZte.IntraFreqHoConfigId);
-            return ztePara == null ? null : Mapper.Map<UeEUtranMeasurementZte, ENodebIntraFreqHoView>(ztePara);
+
+            public ENodebIntraFreqHoView Query()
+            {
+                if (UeEUtranMeasurementZte.IntraFreqHoConfigId < 0)
+                {
+                    var zteGroup = _zteGroupRepository.GetRecent(_eNodebId);
+                    UeEUtranMeasurementZte.IntraFreqHoConfigId = zteGroup == null
+                        ? 50
+                        : int.Parse(zteGroup.intraFHOMeasCfg.Split(',')[0]);
+                }
+
+                var ztePara = _zteMeasurementRepository.GetRecent(_eNodebId, UeEUtranMeasurementZte.IntraFreqHoConfigId);
+                return ztePara == null ? null : Mapper.Map<UeEUtranMeasurementZte, ENodebIntraFreqHoView>(ztePara);
+            }
+        }
+
+        public ENodebIntraFreqHoView QueryENodebHo(int eNodebId)
+        {
+            var query = ConstructENodebQuery(eNodebId);
+            return query?.Query();
+        }
+
+        interface ICellQuery
+        {
+            CellIntraFreqHoView Query();
+        }
+
+        private ICellQuery ConstructCellQuery(int eNodebId, byte sectorId)
+        {
+            var eNodeb = _eNodebRepository.GetByENodebId(eNodebId);
+            if (eNodeb == null) return null;
+            return eNodeb.Factory == "华为"
+                ? (ICellQuery) new HuaweiCellQuery(_huaweiCellRepository, _huaweiCellHoRepository, eNodebId, sectorId)
+                : new ZteCellQuery(_zteMeasurementRepository, _zteGroupRepository, eNodebId, sectorId);
+        }
+
+        class HuaweiCellQuery : ICellQuery
+        {
+            private readonly ICellHuaweiMongoRepository _huaweiCellRepository;
+            private readonly IIntraFreqHoGroupRepository _huaweiCellHoRepository;
+            private readonly int _eNodebId;
+            private readonly byte _sectorId;
+
+            public HuaweiCellQuery(ICellHuaweiMongoRepository huaweiCellRepository,
+                IIntraFreqHoGroupRepository huaweiCellHoRepository, int eNodebId, byte sectorId)
+            {
+                _huaweiCellHoRepository = huaweiCellHoRepository;
+                _huaweiCellRepository = huaweiCellRepository;
+                _eNodebId = eNodebId;
+                _sectorId = sectorId;
+            }
+
+            public CellIntraFreqHoView Query()
+            {
+                var huaweiCell = _huaweiCellRepository.GetRecent(_eNodebId, _sectorId);
+                var localCellId = huaweiCell?.LocalCellId ?? _sectorId;
+                var huaweiPara = _huaweiCellHoRepository.GetRecent(_eNodebId, localCellId);
+                return huaweiPara == null ? null : Mapper.Map<IntraFreqHoGroup, CellIntraFreqHoView>(huaweiPara);
+            }
+        }
+
+        class ZteCellQuery : ICellQuery
+        {
+            private readonly IUeEUtranMeasurementRepository _zteMeasurementRepository;
+            private readonly ICellMeasGroupZteRepository _zteGroupRepository;
+            private readonly int _eNodebId;
+            private readonly byte _sectorId;
+
+            public ZteCellQuery(IUeEUtranMeasurementRepository zteMeasurementRepository,
+                ICellMeasGroupZteRepository zteGroupRepository, int eNodebId, byte sectorId)
+            {
+                _zteGroupRepository = zteGroupRepository;
+                _zteMeasurementRepository = zteMeasurementRepository;
+                _eNodebId = eNodebId;
+                _sectorId = sectorId;
+            }
+
+            public CellIntraFreqHoView Query()
+            {
+                var zteGroup = _zteGroupRepository.GetRecent(_eNodebId);
+                var configId = zteGroup == null ? 50 : int.Parse(zteGroup.intraFHOMeasCfg.Split(',')[0]);
+                var ztePara = _zteMeasurementRepository.GetRecent(_eNodebId, configId);
+                return ztePara == null ? null : Mapper.Map<UeEUtranMeasurementZte, CellIntraFreqHoView>(ztePara);
+            }
         }
 
         public CellIntraFreqHoView QueryCellHo(int eNodebId, byte sectorId)
         {
-            var eNodeb = _eNodebRepository.GetByENodebId(eNodebId);
-            if (eNodeb == null) return null;
-            if (eNodeb.Factory == "华为")
-            {
-                var huaweiCell = _huaweiCellRepository.GetRecent(eNodebId, sectorId);
-                var localCellId = huaweiCell?.LocalCellId ?? sectorId;
-                var huaweiPara = _huaweiCellHoRepository.GetRecent(eNodebId, localCellId);
-                return huaweiPara == null ? null : Mapper.Map<IntraFreqHoGroup, CellIntraFreqHoView>(huaweiPara);
-            }
-            var zteGroup = _zteGroupRepository.GetRecent(eNodebId);
-            var configId = zteGroup == null ? 50 : int.Parse(zteGroup.intraFHOMeasCfg.Split(',')[0]);
-            var ztePara = _zteMeasurementRepository.GetRecent(eNodebId, configId);
-            return ztePara == null ? null : Mapper.Map<UeEUtranMeasurementZte, CellIntraFreqHoView>(ztePara);
+            var query = ConstructCellQuery(eNodebId, sectorId);
+            return query?.Query();
         }
     }
 }

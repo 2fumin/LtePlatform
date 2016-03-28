@@ -36,4 +36,18 @@ namespace Lte.Parameters.Test.Switch
             Assert.AreEqual(int.Parse(result.intraFHOMeasCfg.Split(',')[0]), 50);
         }
     }
+
+    [TestFixture]
+    public class EUtranCellMeasurementZteRepositoryTests
+    {
+        private readonly IEUtranCellMeasurementZteRepository _repository = new EUtranCellMeasurementZteRepository();
+
+        [Test]
+        public void Test_GetBySectorId()
+        {
+            var result = _repository.GetRecent(502776, 48);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(result.iDate, "20160325");
+        }
+    }
 }
