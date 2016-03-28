@@ -428,6 +428,21 @@
                     X: centerx,
                     Y: centery
                 };
+            },
+            drawLabel: function(name, longtitute, lattitute) {
+                var opts = {
+                    position: new BMap.Point(longtitute, lattitute),    // 指定文本标注所在的地理位置
+                    offset: new BMap.Size(10, -20)    //设置文本偏移量
+                };
+                var label = new BMap.Label(name, opts);  // 创建文本标注对象
+                label.setStyle({
+                    color: "red",
+                    fontSize: "12px",
+                    height: "20px",
+                    lineHeight: "20px",
+                    fontFamily: "微软雅黑"
+                });
+                map.addOverlay(label);
             }
         };
     });
