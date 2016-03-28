@@ -8,7 +8,7 @@ using MongoDB.Bson;
 
 namespace Lte.Parameters.Entities.Switch
 {
-    public class EUtranCellMeasurementZte : IEntity<ObjectId>, IZteMongo
+    public class EUtranCellMeasurementZte : IEntity<ObjectId>, IZteMongo, IZteMeasGroup
     {
         public ObjectId Id { get; set; }
 
@@ -225,7 +225,7 @@ namespace Lte.Parameters.Entities.Switch
 
         public int rsrpPeriodMeasCfgIdDl { get; set; }
 
-        public int openInterFMeasCfg { get; set; }
+        public string openInterFMeasCfg { get; set; }
 
         public int icicMeasCfg { get; set; }
 
