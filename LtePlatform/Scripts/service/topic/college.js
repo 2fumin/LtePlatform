@@ -71,6 +71,38 @@
                     deferred.reject(reason);
                 });
                 return deferred.promise;
+            },
+            queryBtss: function (name) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('CollegeBtss/'),
+                    params: {
+                        collegeName: name
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
+            },
+            queryCdmaCells: function (name) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('CollegeCdmaCells/'),
+                    params: {
+                        collegeName: name
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
             }
         }
     });

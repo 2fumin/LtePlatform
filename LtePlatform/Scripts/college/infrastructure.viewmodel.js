@@ -1,14 +1,6 @@
 ﻿function InfrastructureViewModel(app, dataModel) {
     var self = this;
 
-    self.showCells = function (name) {
-        sendRequest(app.dataModel.collegeCellsUrl, "GET", { collegeName: name }, function (data) {
-            self.cellList(data);
-            self.setView('cells');
-            self.currentName(name);
-        });
-    };
-
     self.showBtss = function (name) {
         sendRequest(app.dataModel.collegeBtssUrl, "GET", { collegeName: name }, function (data) {
             self.btsList(data);
