@@ -20,7 +20,10 @@
             <td>{{bts.longtitute}}</td>
             <td>{{bts.lattitute}}</td>
             <td>{{bts.address}}</td>
-            <td></td>
+            <td>
+                <a ng-href="{{rootPath}}btsInfo/{{bts.btsId}}/{{bts.name}}"
+                   class="btn btn-sm" ng-class="{'btn-default': !bts.isInUse, 'btn-success': bts.isInUse}">基站详细信息</a>
+            </td>
         </tr>
     </tbody>
 </table>

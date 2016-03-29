@@ -66,6 +66,19 @@
                 },
                 url: "/eNodebInfo/:eNodebId/:name"
             })
+            .state('btsInfo', {
+                views: {
+                    'menu': {
+                        templateUrl: "/appViews/GeneralMenu.html",
+                        controller: "menu.cdma"
+                    },
+                    "contents": {
+                        templateUrl: viewDir + "Region/BtsInfo.html",
+                        controller: "bts.info"
+                    }
+                },
+                url: "/btsInfo/:btsId/:name"
+            })
             .state('cellInfo', {
                 views: {
                     'menu': {

@@ -14,11 +14,11 @@
         }
     ];
     networkElementService.queryCellSectorIds($stateParams.name).then(function (result) {
-        for (var i = 0; i < result.length; i++) {
+        angular.forEach(result, function(sectorId) {
             $scope.menuItems.push({
-                displayName: $stateParams.name + "-" + result[i] + "小区信息",
-                url: rootUrl + "/cellInfo" + "/" + $stateParams.eNodebId + "/" + $stateParams.name + "/" + result[i]
+                displayName: $stateParams.name + "-" + sectorId + "小区信息",
+                url: rootUrl + "/cellInfo" + "/" + $stateParams.eNodebId + "/" + $stateParams.name + "/" + sectorId
             });
-        }
+        });
     });
 });
