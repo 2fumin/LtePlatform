@@ -1,0 +1,42 @@
+<div class="title">
+    <strong>A2异频切换参数: </strong>
+</div>
+<div class="list" ng-repeat="ho in interFreqHo">
+    <ul>
+        <li>
+            <div class="left">频点号</div>
+            <div class="rmb">{{ho.earfcn>0?ho.earfcn:'中兴小区'}}</div>
+        </li>
+        <li>
+            <div class="left">异频切换采用的切换事件</div>
+            <div class="rmb">
+                <span ng-show="ho.earfcn>0">{{ho.interFreqHoEventType | huaweiEvent}}</span>
+                <span ng-show="ho.earfcn===0">{{ho.interFreqHoEventType | zteIntraRatEvent}}</span>
+            </div>
+        </li>
+        <li>
+            <div class="left">判决迟滞</div>
+            <div class="rmb">{{ho.interFreqEventA5.hysteresis | halfDb}}dB</div>
+        </li>
+        <li>
+            <div class="left">事件上报延迟</div>
+            <div class="rmb">{{ho.interFreqEventA5.timeToTrigger | timeToTrigger}}毫秒</div>
+        </li>
+        <li>
+            <div class="left">RSRP门限</div>
+            <div class="rmb">{{ho.interFreqEventA5.thresholdOfRsrp}}dB</div>
+        </li>
+        <li>
+            <div class="left">RSRQ门限</div>
+            <div class="rmb">{{ho.interFreqEventA5.thresholdOfRsrq | halfDb}}dB</div>
+        </li>
+        <li>
+            <div class="left">RSRP门限2</div>
+            <div class="rmb">{{ho.interFreqEventA5.threshold2OfRsrp}}dB</div>
+        </li>
+        <li>
+            <div class="left">RSRQ门限2</div>
+            <div class="rmb">{{ho.interFreqEventA5.threshold2OfRsrq | halfDb}}dB</div>
+        </li>
+    </ul>
+</div>
