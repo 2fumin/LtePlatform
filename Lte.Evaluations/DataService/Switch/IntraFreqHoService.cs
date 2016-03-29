@@ -15,18 +15,20 @@ namespace Lte.Evaluations.DataService.Switch
     {
         private readonly IUeEUtranMeasurementRepository _zteMeasurementRepository;
         private readonly ICellMeasGroupZteRepository _zteGroupRepository;
+        private readonly IEUtranCellMeasurementZteRepository _zteCellGroupRepository;
         private readonly IIntraFreqHoGroupRepository _huaweiCellHoRepository;
         private readonly IIntraRatHoCommRepository _huaweiENodebHoRepository;
         private readonly ICellHuaweiMongoRepository _huaweiCellRepository;
         private readonly IENodebRepository _eNodebRepository;
 
         public IntraFreqHoService(IUeEUtranMeasurementRepository zteMeasurementRepository,
-            ICellMeasGroupZteRepository zteGroupRepository,
+            ICellMeasGroupZteRepository zteGroupRepository, IEUtranCellMeasurementZteRepository zteCellGroupRepository,
             IIntraFreqHoGroupRepository huaweiCellHoRepository, IIntraRatHoCommRepository huaweiENodebHoRepository,
             ICellHuaweiMongoRepository huaweiCellRepository, IENodebRepository eNodebRepository)
         {
             _zteMeasurementRepository = zteMeasurementRepository;
             _zteGroupRepository = zteGroupRepository;
+            _zteCellGroupRepository = zteCellGroupRepository;
             _huaweiCellHoRepository = huaweiCellHoRepository;
             _huaweiENodebHoRepository = huaweiENodebHoRepository;
             _huaweiCellRepository = huaweiCellRepository;
@@ -55,7 +57,8 @@ namespace Lte.Evaluations.DataService.Switch
             return eNodeb.Factory == "华为"
                 ? (IMongoQuery<CellIntraFreqHoView>)
                     new HuaweiCellQuery(_huaweiCellRepository, _huaweiCellHoRepository, eNodebId, sectorId)
-                : new ZteCellQuery(_zteMeasurementRepository, _zteGroupRepository, eNodebId, sectorId);
+                : new ZteCellQuery(_zteMeasurementRepository, _zteGroupRepository, _zteCellGroupRepository, eNodebId,
+                    sectorId);
         }
 
         public CellIntraFreqHoView QueryCellHo(int eNodebId, byte sectorId)
@@ -141,22 +144,33 @@ namespace Lte.Evaluations.DataService.Switch
     {
         private readonly IUeEUtranMeasurementRepository _zteMeasurementRepository;
         private readonly ICellMeasGroupZteRepository _zteGroupRepository;
+        private readonly IEUtranCellMeasurementZteRepository _zteCellGroupRepository;
         private readonly int _eNodebId;
         private readonly byte _sectorId;
 
         public ZteCellQuery(IUeEUtranMeasurementRepository zteMeasurementRepository,
-            ICellMeasGroupZteRepository zteGroupRepository, int eNodebId, byte sectorId)
+            ICellMeasGroupZteRepository zteGroupRepository, IEUtranCellMeasurementZteRepository zteCellGroupRepository, 
+            int eNodebId, byte sectorId)
         {
             _zteGroupRepository = zteGroupRepository;
             _zteMeasurementRepository = zteMeasurementRepository;
+            _zteCellGroupRepository = zteCellGroupRepository;
             _eNodebId = eNodebId;
             _sectorId = sectorId;
         }
 
         public CellIntraFreqHoView Query()
         {
-            var zteGroup = _zteGroupRepository.GetRecent(_eNodebId);
-            var configId = zteGroup == null ? 50 : int.Parse(zteGroup.intraFHOMeasCfg.Split(',')[0]);
+            var zteCellGroup = _zteCellGroupRepository.GetRecent(_eNodebId, _sectorId);
+            int configId;
+            if (zteCellGroup != null)
+                configId = int.Parse(zteCellGroup.intraFHOMeasCfg.Split(',')[0]);
+            else
+            {
+                var zteGroup = _zteGroupRepository.GetRecent(_eNodebId);
+                configId = zteGroup == null ? 50 : int.Parse(zteGroup.intraFHOMeasCfg.Split(',')[0]);
+            }
+
             var ztePara = _zteMeasurementRepository.GetRecent(_eNodebId, configId);
             return ztePara == null ? null : Mapper.Map<UeEUtranMeasurementZte, CellIntraFreqHoView>(ztePara);
         }
