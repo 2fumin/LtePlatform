@@ -185,7 +185,7 @@ namespace Lte.Parameters.Entities.Switch
 
         public int geranCarriFreqNum { get; set; }
 
-        public int eutranMeasParas_interCarriFreq { get; set; }
+        public double eutranMeasParas_interCarriFreq { get; set; }
 
         public int tarNeighCellRsrqThr { get; set; }
 
