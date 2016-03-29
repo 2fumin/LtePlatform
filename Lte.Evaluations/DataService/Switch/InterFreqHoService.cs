@@ -15,6 +15,7 @@ namespace Lte.Evaluations.DataService.Switch
     {
         private readonly IUeEUtranMeasurementRepository _zteMeasurementRepository;
         private readonly ICellMeasGroupZteRepository _zteGroupRepository;
+        private readonly IEUtranCellMeasurementZteRepository _zteCellGroupRepository;
         private readonly IIntraRatHoCommRepository _huaweiENodebHoRepository;
         private readonly IInterFreqHoGroupRepository _huaweiCellHoRepository;
         private readonly ICellHuaweiMongoRepository _huaweiCellRepository;
@@ -23,13 +24,14 @@ namespace Lte.Evaluations.DataService.Switch
         private readonly IIntraFreqHoGroupRepository _intraFreqHoGroupRepository;
 
         public InterFreqHoService(IUeEUtranMeasurementRepository zteMeasurementRepository,
-            ICellMeasGroupZteRepository zteGroupRepository,
+            ICellMeasGroupZteRepository zteGroupRepository, IEUtranCellMeasurementZteRepository zteCellGroupRepository,
             IIntraRatHoCommRepository huaweiENodebHoRepository, IInterFreqHoGroupRepository huaweiCellHoRepository,
             ICellHuaweiMongoRepository huaweiCellRepository, IENodebRepository eNodebRepository,
             IEutranInterNFreqRepository huaweiNFreqRepository, IIntraFreqHoGroupRepository intraFreqHoGroupRepository)
         {
             _zteMeasurementRepository = zteMeasurementRepository;
             _zteGroupRepository = zteGroupRepository;
+            _zteCellGroupRepository = zteCellGroupRepository;
             _huaweiENodebHoRepository = huaweiENodebHoRepository;
             _huaweiCellHoRepository = huaweiCellHoRepository;
             _huaweiCellRepository = huaweiCellRepository;
@@ -61,7 +63,8 @@ namespace Lte.Evaluations.DataService.Switch
                 ? (IMongoQuery<List<CellInterFreqHoView>>)
                     new HuaweiInterFreqCellQuery(_huaweiCellHoRepository, _huaweiCellRepository, _huaweiNFreqRepository,
                         _intraFreqHoGroupRepository, eNodebId, sectorId)
-                : new ZteInterFreqCellQuery(_zteMeasurementRepository, _zteGroupRepository, eNodebId, sectorId);
+                : new ZteInterFreqCellQuery(_zteMeasurementRepository, _zteGroupRepository, _zteCellGroupRepository,
+                    eNodebId, sectorId);
         }
 
         public List<CellInterFreqHoView> QueryCellHo(int eNodebId, byte sectorId)
@@ -196,26 +199,43 @@ namespace Lte.Evaluations.DataService.Switch
     {
         private readonly IUeEUtranMeasurementRepository _zteMeasurementRepository;
         private readonly ICellMeasGroupZteRepository _zteGroupRepository;
+        private readonly IEUtranCellMeasurementZteRepository _zteCellGroupRepository;
         private readonly int _eNodebId;
         private readonly byte _sectorId;
 
         public ZteInterFreqCellQuery(IUeEUtranMeasurementRepository zteMeasurementRepository,
-            ICellMeasGroupZteRepository zteGroupRepository, int eNodebId, byte sectorId)
+            ICellMeasGroupZteRepository zteGroupRepository, IEUtranCellMeasurementZteRepository zteCellGroupRepository,
+            int eNodebId, byte sectorId)
         {
             _zteMeasurementRepository = zteMeasurementRepository;
             _zteGroupRepository = zteGroupRepository;
+            _zteCellGroupRepository = zteCellGroupRepository;
             _eNodebId = eNodebId;
             _sectorId = sectorId;
         }
 
         public List<CellInterFreqHoView> Query()
         {
-            var zteGroup = _zteGroupRepository.GetRecent(_eNodebId);
             var view = new CellInterFreqHoView
             {
                 Earfcn = 0
             };
-            var configId = zteGroup == null ? 70 : int.Parse(zteGroup.interFHOMeasCfg.Split(',')[0]);
+
+            var zteCellGroup = _zteCellGroupRepository.GetRecent(_eNodebId, _sectorId);
+            int configId, configIdA1, configIdA2;
+            if (zteCellGroup != null)
+            {
+                configId = int.Parse(zteCellGroup.interFHOMeasCfg.Split(',')[0]);
+                configIdA1 = int.Parse(zteCellGroup.closedInterFMeasCfg.Split(',')[0]);
+                configIdA2 = int.Parse(zteCellGroup.openInterFMeasCfg.Split(',')[0]);
+            }
+            else
+            {
+                var zteGroup = _zteGroupRepository.GetRecent(_eNodebId);
+                configId = zteGroup == null ? 70 : int.Parse(zteGroup.interFHOMeasCfg.Split(',')[0]);
+                configIdA1 = zteGroup == null ? 10 : int.Parse(zteGroup.closedInterFMeasCfg.Split(',')[0]);
+                configIdA2 = zteGroup == null ? 20 : int.Parse(zteGroup.openInterFMeasCfg.Split(',')[0]);
+            }
             var measurement = _zteMeasurementRepository.GetRecent(_eNodebId, configId);
             if (measurement != null)
             {
@@ -224,14 +244,12 @@ namespace Lte.Evaluations.DataService.Switch
                 view.InterFreqEventA4 = Mapper.Map<UeEUtranMeasurementZte, InterFreqEventA4>(measurement);
                 view.InterFreqEventA5 = Mapper.Map<UeEUtranMeasurementZte, InterFreqEventA5>(measurement);
             }
-            configId = zteGroup == null ? 60 : int.Parse(zteGroup.closedInterFMeasCfg.Split(',')[0]);
-            measurement = _zteMeasurementRepository.GetRecent(_eNodebId, configId);
+            measurement = _zteMeasurementRepository.GetRecent(_eNodebId, configIdA1);
             if (measurement != null)
             {
                 view.InterFreqEventA1 = Mapper.Map<UeEUtranMeasurementZte, InterFreqEventA1>(measurement);
             }
-            configId = zteGroup == null ? 0 : int.Parse(zteGroup.openInterFMeasCfg.Split(',')[0]);
-            measurement = _zteMeasurementRepository.GetRecent(_eNodebId, configId);
+            measurement = _zteMeasurementRepository.GetRecent(_eNodebId, configIdA2);
             if (measurement != null)
             {
                 view.InterFreqEventA2 = Mapper.Map<UeEUtranMeasurementZte, InterFreqEventA2>(measurement);
