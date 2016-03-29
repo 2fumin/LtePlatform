@@ -33,6 +33,14 @@ namespace Lte.Evaluations.DataService.Basic
             return item == null ? null : Mapper.Map<CdmaCell, CdmaCellView>(item);
         }
 
+        public List<byte> GetSectorIds(string btsName)
+        {
+            var bts = _btsRepository.GetByName(btsName);
+            return bts == null
+                ? null
+                : _repository.GetAll().Where(x => x.BtsId == bts.BtsId).Select(x => x.SectorId).Distinct().ToList();
+        }
+
         public IEnumerable<SectorView> QuerySectors(int btsId)
         {
             var cells = _repository.GetAllList(btsId);

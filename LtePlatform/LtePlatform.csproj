@@ -745,6 +745,7 @@
     <Content Include="Scripts\parameters\details\cell.info.js" />
     <Content Include="Scripts\parameters\details\eNodeb.info.js" />
     <Content Include="Scripts\parameters\details\eNodeb.list.js" />
+    <Content Include="Scripts\parameters\details\menu.cdma.js" />
     <Content Include="Scripts\parameters\details\menu.lte.js" />
     <Content Include="Scripts\parameters\details\menu.town.js" />
     <Content Include="Scripts\parameters\import\bts.lonLat.controller.js" />

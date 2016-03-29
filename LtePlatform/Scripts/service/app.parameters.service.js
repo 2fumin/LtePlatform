@@ -147,6 +147,22 @@
                     });
                 return deferred.promise;
             },
+            queryCdmaSectorIds: function (name) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('CdmaCell'),
+                    params: {
+                        btsName: name
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            },
             queryCdmaCellInfo: function(btsId, sectorId) {
                 var deferred = $q.defer();
                 $http({

@@ -64,8 +64,7 @@ namespace LtePlatform.Controllers.Parameters
         [ApiResponse("LTE小区，如果找不到则会返回错误")]
         public IHttpActionResult GetLocal(int eNodebId, byte localSector)
         {
-            var item = _service.GetCell(eNodebId, localSector);
-            if (item == null) item = _service.GetCell(eNodebId, (byte)(localSector + 48));
+            var item = _service.GetCell(eNodebId, localSector) ?? _service.GetCell(eNodebId, (byte)(localSector + 48));
             return item == null ? (IHttpActionResult)BadRequest("The cell cannot be found!") : Ok(item);
         }
 
