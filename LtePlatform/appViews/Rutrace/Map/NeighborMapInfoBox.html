@@ -47,6 +47,8 @@
     </div>
 </div>
 <div class="modal-footer">
+    <label>参数查看：</label>
+    <select ng-model="parameter.selected" ng-options="p as p for p in parameter.options"></select>
     <button class="btn btn-warning" ng-click="ok()">OK</button>
     <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
 </div>
