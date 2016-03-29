@@ -6,44 +6,8 @@
 </div>
 <div class="modal-body">
     <div class="infoBoxContent">
-        <div class="title">
-            <strong>扇区基本信息: </strong>
-        </div>
-        <div class="list">
-            <ul>
-                <li>
-                    <div class="left">小区名称</div>
-                    <div class="rmb">{{neighbor.cellName}}</div>
-                </li>
-                <li>
-                    <div class="left">室内外</div>
-                    <div class="rmb">{{neighbor.indoor}}</div>
-                </li>
-                <li>
-                    <div class="left">方位角</div>
-                    <div class="rmb">{{neighbor.azimuth}}</div>
-                </li>
-                <li>
-                    <div class="left">天线挂高</div>
-                    <div class="rmb" id="">{{neighbor.height}}</div>
-                </li>
-                <li>
-                    <div class="left">下倾角</div>
-                    <div class="rmb" id="">{{neighbor.downTilt}}</div>
-                </li>
-                <li>
-                    <div class="left">天线增益</div>
-                    <div class="rmb" id="">{{neighbor.antennaGain}}</div>
-                </li>
-                <li>
-                    <div class="left">频点信息</div>
-                    <div class="rmb" id="">{{neighbor.frequency}}</div>
-                </li>
-                <li>
-                    <p id="">{{neighbor.otherInfos}}</p>
-                </li>
-            </ul>
-        </div>
+        <div ng-include="'/appViews/Parameters/Map/LteCellBasicInfo.html'" ng-show="parameter.selected==='基本参数'"></div>
+        <div ng-include="'/appViews/Parameters/Map/CellIntraFreq.html'" ng-show="parameter.selected==='同频切换'"></div>
     </div>
 </div>
 <div class="modal-footer">
