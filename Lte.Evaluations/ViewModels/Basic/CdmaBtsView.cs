@@ -35,5 +35,8 @@ namespace Lte.Evaluations.ViewModels.Basic
 
         [MemberDoc("BSC编号")]
         public int BscId { get; set; }
+
+        [MemberDoc("是否在用")]
+        public bool IsInUse { get; set; }
     }
 }

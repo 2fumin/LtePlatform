@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Abp.EntityFramework.AutoMapper;
-using AutoMapper;
 using Lte.Domain.Regular;
 using Lte.Evaluations.ViewModels.Basic;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Abstract.Basic;
-using Lte.Parameters.Entities;
 
-namespace Lte.Evaluations.DataService
+namespace Lte.Evaluations.DataService.Basic
 {
     public class BtsQueryService
     {

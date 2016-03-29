@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Lte.Evaluations.DataService;
+using Lte.Evaluations.DataService.Basic;
 using LtePlatform.Models;
 
 namespace LtePlatform.Controllers.Parameters
@@ -28,7 +29,7 @@ namespace LtePlatform.Controllers.Parameters
         public IHttpActionResult Get(string city, string district, string town)
         {
             var result = _service.GetByTownNames(city, district, town);
-            return result == null ? (IHttpActionResult)BadRequest("This town has no eNodebs!") : Ok(result);
+            return result == null ? (IHttpActionResult)BadRequest("This town has no btss!") : Ok(result);
         }
 
         [HttpGet]
@@ -38,7 +39,7 @@ namespace LtePlatform.Controllers.Parameters
         public IHttpActionResult Get(string name)
         {
             var result = _service.GetByGeneralName(name);
-            return result == null ? (IHttpActionResult)BadRequest("No eNodebs given the query conditions!") : Ok(result);
+            return result == null ? (IHttpActionResult)BadRequest("No bts given the query conditions!") : Ok(result);
         }
 
         [HttpGet]
