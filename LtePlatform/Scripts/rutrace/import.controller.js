@@ -5,7 +5,7 @@
     $scope.showNeighbors = function() {
         var cell = $scope.topStat.current;
         $scope.neighborCells = [];
-        neighborService.queryCellNeighbors(cell).then(function(result) {
+        neighborService.queryCellNeighbors(cell.cellId, cell.sectorId).then(function(result) {
             $scope.neighborCells = result;
         });
     };

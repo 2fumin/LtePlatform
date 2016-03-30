@@ -1,14 +1,14 @@
 ﻿angular.module('myApp.parameters', ['myApp.url'])
     .factory('neighborService', function($q, $http, appUrlService) {
         return {
-            queryCellNeighbors: function(cell) {
+            queryCellNeighbors: function(cellId, sectorId) {
                 var deferred = $q.defer();
                 $http({
                         method: 'GET',
                         url: appUrlService.getApiUrl('NearestPciCell'),
                         params: {
-                            'cellId': cell.cellId,
-                            'sectorId': cell.sectorId
+                            'cellId': cellId,
+                            'sectorId': sectorId
                         }
                     }).success(function(result) {
                         deferred.resolve(result);
