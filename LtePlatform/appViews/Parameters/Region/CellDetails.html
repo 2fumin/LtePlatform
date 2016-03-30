@@ -32,14 +32,12 @@
             <td>TAC</td>
             <td>{{lteCellDetails.tac}}</td>
         </tr>
-    </tbody>
-    <tbody ng-show="isHuaweiCell">
         <tr>
             <td>网管PCI</td>
             <td>{{cellMongo.phyCellId}}</td>
             <td>网管PRACH</td>
             <td>{{cellMongo.rootSequenceIdx}}</td>
-            <td>华为本地小区标识</td>
+            <td>本地小区标识（仅华为有效）</td>
             <td>{{cellMongo.localCellId}}</td>
         </tr>
         <tr>
