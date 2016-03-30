@@ -1,4 +1,5 @@
-﻿app.controller('map.neighbor.dialog', function ($scope, $uibModalInstance, intraFreqHoService, neighbor, dialogTitle) {
+﻿app.controller('map.neighbor.dialog', function ($scope, $uibModalInstance, intraFreqHoService, interFreqHoService,
+    neighbor, dialogTitle) {
     $scope.neighbor = neighbor;
     $scope.dialogTitle = dialogTitle;
     $scope.parameter = {
@@ -19,5 +20,8 @@
     var sectorId = $scope.neighbor.cellName.split('-')[1];
     intraFreqHoService.queryCellParameters(eNodebId, sectorId).then(function (result) {
         $scope.intraFreqHo = result;
+    });
+    interFreqHoService.queryCellParameters(eNodebId, sectorId).then(function (result) {
+        $scope.interFreqHo = result;
     });
 });

@@ -425,6 +425,11 @@
     <Content Include="appViews\Parameters\Import\VanishedCdmaCellInfos.html" />
     <Content Include="appViews\Parameters\Import\VanishedCellInfos.html" />
     <Content Include="appViews\Parameters\Import\VanishedENodebs.html" />
+    <Content Include="appViews\Parameters\Map\A1InterFreq.html" />
+    <Content Include="appViews\Parameters\Map\A2InterFreq.html" />
+    <Content Include="appViews\Parameters\Map\A3InterFreq.html" />
+    <Content Include="appViews\Parameters\Map\A4InterFreq.html" />
+    <Content Include="appViews\Parameters\Map\A5InterFreq.html" />
     <Content Include="appViews\Parameters\Map\CellIntraFreq.html" />
     <Content Include="appViews\Parameters\Map\LteCellBasicInfo.html" />
     <Content Include="appViews\Parameters\Region\CellDetails.html" />
