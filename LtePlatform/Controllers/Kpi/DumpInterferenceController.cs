@@ -45,6 +45,12 @@ namespace LtePlatform.Controllers.Kpi
             return (end < begin) ? new List<PciCell>() : InterferenceMatrixService.PciCellList;
         }
 
+        [HttpGet]
+        public List<InterferenceMatrixMongo> Get(int eNodebId, short pci, DateTime date)
+        {
+            return _service.QueryMongoList(eNodebId, pci, date);
+        }
+
         [HttpPost]
         [ApiDoc("导入指定小区信息、开始日期和结束日期的干扰矩阵信息")]
         [ApiParameterDoc("dumpInfo", "指定小区信息、开始日期和结束日期")]

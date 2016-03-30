@@ -42,7 +42,6 @@ namespace Lte.Evaluations.DataService.Mr
         
         public int DumpMongoStats(PciCell cellInfo, DateTime begin, DateTime end)
         {
-            if (_mongoRepository.GetOne(cellInfo.ENodebId, cellInfo.Pci) == null) return 0;
             var statTime = begin.Date;
             var count = 0;
             while (statTime < end.Date)
@@ -97,6 +96,11 @@ namespace Lte.Evaluations.DataService.Mr
         public InterferenceMatrixMongo QueryMongo(int eNodebId, short pci, DateTime date)
         {
             return _mongoRepository.GetOne(eNodebId, pci, date.ToString("yyyyMMdd"));
+        }
+
+        public List<InterferenceMatrixMongo> QueryMongoList(int eNodebId, short pci, DateTime date)
+        {
+            return _mongoRepository.GetList(eNodebId, pci, date.ToString("yyyyMMdd"));
         }
 
         public List<InterferenceMatrixStat> QueryStats(int eNodebId, short pci, DateTime time)
