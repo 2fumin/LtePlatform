@@ -79,10 +79,8 @@ namespace Lte.Evaluations.DataService.Mr
                     var external =
                         externals.FirstOrDefault(
                             x =>
-                                x.reservedByEUtranRelation != null &&
-                                x.reservedByEUtranRelation.Contains(relation.refExternalEUtranCellFDD.Replace(
-                                    "ExternalEUtranCellFDD",
-                                    "EUtranCellFDD=1,EUtranRelation")));
+                                x.description != null &&
+                                x.description.Contains(relation.refExternalEUtranCellFDD.Split(',')[2]));
                     if (external != null)
                     {
                         neighbor.NeighborCellId = external.eNBId;
