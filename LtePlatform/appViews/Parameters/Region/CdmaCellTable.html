@@ -1,8 +1,7 @@
 ﻿<table class="table table-striped">
     <thead>
         <tr>
-            <th>基站编号</th>
-            <th>扇区编号</th>
+            <th>小区名称</th>
             <th>小区类别</th>
             <th>频点列表</th>
             <th>小区编号</th>
@@ -18,8 +17,7 @@
     </thead>
     <tbody>
         <tr ng-repeat="cell in cdmaCellList">
-            <td>{{cell.btsId}}</td>
-            <td>{{cell.sectorId}}</td>
+            <td>{{cell.btsName}}-{{cell.sectorId}}</td>
             <td>{{cell.cellType}}</td>
             <td>{{cell.frequencyList}}</td>
             <td>{{cell.cellId}}</td>

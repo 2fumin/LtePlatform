@@ -3,4 +3,7 @@
     networkElementService.queryBtsInfo($stateParams.btsId).then(function (result) {
         $scope.btsDetails = result;
     });
+    networkElementService.queryCdmaCellViews($stateParams.name).then(function (result) {
+        $scope.cdmaCellList = result;
+    });
 });
