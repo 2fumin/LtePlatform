@@ -38,6 +38,7 @@
     <script src="~/Scripts/service/parameters.chart.js"></script>
     <script src="~/Scripts/service/mongo/cell.huawei.js"></script>
     <script src="~/Scripts/service/mongo/handoff.js"></script>
+    <script src="~/Scripts/service/mongo/neighbor.js"></script>
     <script>
         var app = angular.module('myApp', [
             "highcharts-ng", 'ui.router',
@@ -45,7 +46,7 @@
             'myApp.region', 'myApp.parameters',
             'parametersMap', 'parameters.chart',
             'huawei.mongo.parameters',
-            'handoff.parameters'
+            'handoff.parameters', 'neighbor.mongo'
         ]);
     </script>
     <script src="~/Scripts/parameters/route.controller.js"></script>
