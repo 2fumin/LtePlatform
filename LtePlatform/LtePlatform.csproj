@@ -433,6 +433,7 @@
     <Content Include="appViews\Parameters\Map\CellIntraFreq.html" />
     <Content Include="appViews\Parameters\Map\LteCellBasicInfo.html" />
     <Content Include="appViews\Parameters\Region\BtsInfo.html" />
+    <Content Include="appViews\Parameters\Region\CdmaCellDetails.html" />
     <Content Include="appViews\Parameters\Region\CellDetails.html" />
     <Content Include="appViews\Parameters\Region\CellInfo.html" />
     <Content Include="appViews\Parameters\Region\CityInfrastructureTable.html" />
