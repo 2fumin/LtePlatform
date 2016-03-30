@@ -135,6 +135,7 @@
     <Compile Include="Abstract\Switch\IIntraRatHoCommRepository.cs" />
     <Compile Include="Abstract\Switch\IUeEUtranMeasurementRepository.cs" />
     <Compile Include="Concrete\Basic\CellHuaweiMongoRepository.cs" />
+    <Compile Include="Concrete\Basic\EUtranCellFDDZteRepository.cs" />
     <Compile Include="Concrete\EFAlameRepository.cs" />
     <Compile Include="Concrete\Basic\EFBtsRepository.cs" />
     <Compile Include="Concrete\Basic\EFCdmaCellRepository.cs" />

@@ -13,4 +13,9 @@ namespace Lte.Parameters.Abstract.Basic
 
         CellHuaweiMongo GetRecent(int eNodebId, byte sectorId);
     }
+
+    public interface IEUtranCellFDDZteRepository : IRepository<EUtranCellFDDZte, ObjectId>
+    {
+        EUtranCellFDDZte GetRecent(int eNodebId, byte sectorId);
+    }
 }

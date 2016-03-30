@@ -102,7 +102,7 @@ namespace Lte.Parameters.Entities.Basic
 
         public double maximumTransmissionPower { get; set; }
 
-        public int addiFreqBand { get; set; }
+        public string addiFreqBand { get; set; }
 
         public int maxUeRbNumDl { get; set; }
 
@@ -228,7 +228,7 @@ namespace Lte.Parameters.Entities.Basic
 
         public int rlfSwitch { get; set; }
 
-        public string fullConfigSwch { get; set; }
+        public int fullConfigSwch { get; set; }
 
         public int bandIndicator { get; set; }
 

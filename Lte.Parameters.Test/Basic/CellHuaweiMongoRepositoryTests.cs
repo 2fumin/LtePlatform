@@ -54,4 +54,19 @@ namespace Lte.Parameters.Test.Basic
             Assert.AreEqual(results, 3);
         }
     }
+
+    [TestFixture]
+    public class EUtranCellFDDZteRepositoryTests
+    {
+        private readonly IEUtranCellFDDZteRepository _repository = new EUtranCellFDDZteRepository();
+
+        [Test]
+        public void Test_GetRecentBySectorId()
+        {
+            var results = _repository.GetRecent(502776, 49);
+            Assert.IsNotNull(results);
+            Assert.AreEqual(results.iDate, "20160325");
+        }
+
+    }
 }
