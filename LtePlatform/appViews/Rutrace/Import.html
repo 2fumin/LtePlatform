@@ -10,8 +10,11 @@
     <div class="panel-body">
         <p>
             <div class="btn-group" style="float: right">
-                <button class="btn btn-primary" ng-if="neighborCells.length" ng-click="updatePci()">
+                <button class="btn btn-default" ng-if="neighborCells.length" ng-click="updatePci()">
                     更新PCI
+                </button>
+                <button class="btn btn-default" ng-click="synchronizeNeighbors()">
+                    同步邻区
                 </button>
                 <button class="btn btn-warning" ng-if="!topStat.current.isMonitored" ng-click="addMonitor()">
                     加入监控
@@ -19,7 +22,7 @@
                 <button class="btn btn-info" ng-if="neighborCells.length" ng-click="monitorNeighbors()">
                     监控邻区
                 </button>
-                <a class="btn btn-success" ng-href="{{rootPath}}top">返回TOP列表</a>
+                <a class="btn btn-default" ng-href="{{rootPath}}top">返回</a>
             </div>
         </p>
         <table class="table table-hover">

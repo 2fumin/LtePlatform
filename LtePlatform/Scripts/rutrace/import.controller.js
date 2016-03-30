@@ -1,4 +1,5 @@
-﻿app.controller("rutrace.import", function ($scope, $http, $location, neighborService, topPreciseService) {
+﻿app.controller("rutrace.import", function ($scope, $http, $location, neighborService, neighborMongoService,
+    topPreciseService) {
     $scope.neighborCells = [];
     $scope.updateMessages = [];
 
@@ -17,6 +18,36 @@
                 counts: result
             });
             $scope.showNeighbors();
+        });
+    };
+    $scope.synchronizeNeighbors = function () {
+        var cell = $scope.topStat.current;
+        var count = 0;
+        neighborMongoService.queryNeighbors(cell.cellId, cell.sectorId).then(function(neighbors) {
+            angular.forEach(neighbors, function (neighbor) {
+                if (neighbor.neighborCellId > 0 && neighbor.neighborPci > 0) {
+                    neighborService.updateNeighbors(neighbor.cellId, neighbor.sectorId, neighbor.neighborPci,
+                        neighbor.neighborCellId, neighbor.neighborSectorId).then(function() {
+                        count += 1;
+                        if (count === neighbors.length) {
+                            $scope.updateMessages.push({
+                                cellName: cell.eNodebName + '-' + cell.sectorId,
+                                counts: count
+                            });
+                            $scope.showNeighbors();
+                        }
+                    });
+                } else {
+                    count += 1;
+                    if (count === neighbors.length) {
+                        $scope.updateMessages.push({
+                            cellName: cell.eNodebName + '-' + cell.sectorId,
+                            counts: count
+                        });
+                        $scope.showNeighbors();
+                    }
+                }
+            });
         });
     };
     $scope.closeAlert = function (index) {
