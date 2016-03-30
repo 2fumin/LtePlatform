@@ -1,26 +1,28 @@
 ﻿<table class="table table-hover">
     <tbody>
-        <tr>
-            <td>基站名称</td>
-            <td>{{btsDetails.name}}</td>
-            <td>基站编号</td>
-            <td>{{btsDetails.btsId}}</td>
-            <td>BSC编号</td>
-            <td>{{btsDetails.bscId}}</td>
-        </tr>
-        <tr>
-            <td>经度</td>
-            <td>{{btsDetails.longtitute}}</td>
-            <td>纬度</td>
-            <td>{{btsDetails.lattitute}}</td>
-            <td>区域</td>
-            <td>{{btsDetails.districtName}}</td>
-        </tr>
-        <tr>
-            <td>基站地址</td>
-            <td colspan="4">{{btsDetails.address}}</td>
-            <td ng-show="btsDetails.isInUse" style="color: green">在用</td>
-            <td ng-show="!btsDetails.isInUse" style="color: gray">已消亡</td>
-        </tr>
+    <tr>
+        <td>基站名称</td>
+        <td>{{btsDetails.name}}</td>
+        <td>基站编号</td>
+        <td>{{btsDetails.btsId}}</td>
+        <td>BSC编号</td>
+        <td>{{btsDetails.bscId}}</td>
+    </tr>
+    <tr>
+        <td>经度</td>
+        <td>{{btsDetails.longtitute}}</td>
+        <td>纬度</td>
+        <td>{{btsDetails.lattitute}}</td>
+        <td>区域</td>
+        <td>{{btsDetails.districtName}}</td>
+    </tr>
+    <tr>
+        <td>基站地址</td>
+        <td colspan="4">{{btsDetails.address}}</td>
+        <td ng-show="btsDetails.isInUse" style="color: green">在用</td>
+        <td ng-show="!btsDetails.isInUse" style="color: gray">已消亡</td>
+    </tr>
     </tbody>
 </table>
+<div class="well">小区信息</div>
+<div ng-include="'/appViews/Parameters/Region/CdmaCellTable.html'"></div>

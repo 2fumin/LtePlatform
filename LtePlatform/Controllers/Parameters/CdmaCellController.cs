@@ -36,6 +36,16 @@ namespace LtePlatform.Controllers.Parameters
         }
 
         [HttpGet]
+        [ApiDoc("给定基站名对应的小区列表")]
+        [ApiParameterDoc("name", "基站名")]
+        [ApiResponse("对应的小区列表，如果找不到则会返回错误")]
+        public IHttpActionResult GetViews(string name)
+        {
+            var query = _service.GetCellViews(name);
+            return query == null ? (IHttpActionResult)BadRequest("Wrong ENodeb Name!") : Ok(query);
+        }
+
+        [HttpGet]
         [ApiDoc("给定基站编号和扇区编号查询CDMA复合小区（同时包括1X和DO信息）")]
         [ApiParameterDoc("btsId", "基站编号")]
         [ApiParameterDoc("sectorId", "扇区编号")]

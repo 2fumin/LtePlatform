@@ -41,6 +41,16 @@ namespace Lte.Evaluations.DataService.Basic
                 : _repository.GetAll().Where(x => x.BtsId == bts.BtsId).Select(x => x.SectorId).Distinct().ToList();
         }
 
+        public List<CdmaCellView> GetCellViews(string name)
+        {
+            var bts = _btsRepository.GetByName(name);
+            var results = bts == null
+                ? null
+                : Mapper.Map<IEnumerable<CdmaCell>, List<CdmaCellView>>(_repository.GetAll().Where(x => x.BtsId == bts.BtsId));
+            results?.ForEach(x => x.BtsName = name);
+            return results;
+        }
+
         public IEnumerable<SectorView> QuerySectors(int btsId)
         {
             var cells = _repository.GetAllList(btsId);
