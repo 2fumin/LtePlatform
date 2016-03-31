@@ -47,37 +47,27 @@ namespace Lte.Evaluations.DataService.Mr
             while (statTime < end.Date)
             {
                 var time = statTime;
-                if (_mongoRepository.GetOne(cellInfo.ENodebId, cellInfo.Pci, time.ToString("yyyyMMdd")) == null)
+                var nextDay = time.AddDays(1);
+                var existedStat =
+                    _repository.Count(
+                        x =>
+                            x.ENodebId == cellInfo.ENodebId && x.SectorId == cellInfo.SectorId &&
+                            x.RecordTime >= time && x.RecordTime < nextDay);
+                if (existedStat > 10)
                 {
-                    statTime = statTime.AddDays(1);
+                    statTime = nextDay;
                     continue;
                 }
-                for (var i = 0; i < 24; i++)
+                var mongoStats = QueryStats(cellInfo.ENodebId, cellInfo.Pci, time);
+                foreach (var mongoStat in mongoStats)
                 {
-                    if (_mongoRepository.GetOne(cellInfo.ENodebId, cellInfo.Pci, time.ToString("yyyyMMddHH")) == null)
-                    {
-                        statTime = statTime.AddHours(1);
-                        continue;
-                    }
-                    for (var j = 0; j < 4; j++)
-                    {
-                        statTime = statTime.AddMinutes(15);
-                        var existedStat =
-                            _repository.FirstOrDefault(
-                                x =>
-                                    x.ENodebId == cellInfo.ENodebId && x.SectorId == cellInfo.SectorId &&
-                                    x.RecordTime == time);
-                        if (existedStat != null) continue;
-                        var mongoStats = QueryStats(cellInfo.ENodebId, cellInfo.Pci, time);
-                        foreach (var mongoStat in mongoStats)
-                        {
-                            mongoStat.SectorId = cellInfo.SectorId;
-                            _repository.Insert(mongoStat);
-                        }
-                    }
+                    mongoStat.SectorId = cellInfo.SectorId;
+                    _repository.Insert(mongoStat);
 
-                    count += _repository.SaveChanges();
                 }
+                count += _repository.SaveChanges();
+
+                statTime = nextDay;
             }
             return count;
         }
@@ -105,15 +95,23 @@ namespace Lte.Evaluations.DataService.Mr
 
         public List<InterferenceMatrixStat> QueryStats(int eNodebId, short pci, DateTime time)
         {
-            var statList = _mongoRepository.GetList(eNodebId, pci, time);
+            var statList = _mongoRepository.GetList(eNodebId, pci, time.ToString("yyyyMMdd"));
             if (!statList.Any()) return new List<InterferenceMatrixStat>();
-            var results = Mapper.Map<List<InterferenceMatrixMongo>, List<InterferenceMatrixStat>>(statList);
-            results.ForEach(x =>
-            {
-                x.RecordTime = time;
-                x.ENodebId = eNodebId;
-            });
-            return results;
+            var results = Mapper.Map<List<InterferenceMatrixMongo>, IEnumerable<InterferenceMatrixStat>>(statList);
+            return (from s in results
+                group s by new {s.DestPci, s.ENodebId}
+                into g
+                select new InterferenceMatrixStat
+                {
+                    ENodebId = g.Key.ENodebId,
+                    DestPci = g.Key.DestPci,
+                    InterferenceLevel = g.Sum(x => x.InterferenceLevel),
+                    Mod3Interferences = g.Sum(x => x.Mod3Interferences),
+                    Mod6Interferences = g.Sum(x => x.Mod6Interferences),
+                    OverInterferences10Db = g.Sum(x => x.OverInterferences10Db),
+                    OverInterferences6Db = g.Sum(x => x.OverInterferences6Db),
+                    RecordTime = time
+                }).ToList();
         }
 
         public void UploadInterferenceStats(StreamReader reader, string path)

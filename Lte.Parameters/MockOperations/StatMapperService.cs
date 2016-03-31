@@ -62,6 +62,8 @@ namespace Lte.Parameters.MockOperations
             Mapper.CreateMap<InterferenceMatrixMongo, InterferenceMatrixStat>()
                 .ForMember(d => d.DestPci,
                     opt => opt.MapFrom(s => s.ENODEBID_PCI_NPCI_NFREQ.Split('_')[2].ConvertToShort(0)))
+                .ForMember(d => d.ENodebId,
+                    opt => opt.MapFrom(s => s.ENODEBID_PCI_NPCI_NFREQ.Split('_')[0].ConvertToInt(0)))
                 .ForMember(d => d.InterferenceLevel, opt => opt.MapFrom(s => s.INTERF_ONLY_COFREQ ?? 0))
                 .ForMember(d => d.Mod3Interferences, opt => opt.MapFrom(s => s.MOD3_COUNT ?? 0))
                 .ForMember(d => d.Mod6Interferences, opt => opt.MapFrom(s => s.MOD6_COUNT ?? 0))
