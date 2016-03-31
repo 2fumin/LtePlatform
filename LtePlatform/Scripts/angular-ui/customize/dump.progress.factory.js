@@ -1,5 +1,5 @@
 ﻿angular.module('myApp.dumpInterference', ['myApp.url'])
-    .factory('dumpProgress', function($http, appUrlService) {
+    .factory('dumpProgress', function($http, $q, appUrlService) {
         var serviceInstance = {};
 
         serviceInstance.clear = function(progressInfo) {
@@ -62,7 +62,8 @@
             });
         };
 
-        serviceInstance.resetProgress = function (progressInfo, begin, end) {
+        serviceInstance.resetProgress = function (begin, end) {
+            var deferred = $q.defer();
             $http({
                 method: 'GET',
                 url: appUrlService.getApiUrl('DumpInterference'),
@@ -71,10 +72,12 @@
                     'end': end
                 }
             }).success(function (result) {
-                progressInfo.dumpCells = result;
-                progressInfo.totalFailItems = 0;
-                progressInfo.totalSuccessItems = 0;
+                deferred.resolve(result);
+            })
+            .error(function (reason) {
+                deferred.reject(reason);
             });
+            return deferred.promise;
         };
 
         return serviceInstance;

@@ -17,9 +17,14 @@ app.controller('interference.mongo', function ($scope, dumpProgress) {
         value: new Date(),
         opened: false
     };
+    $scope.currentPage = 1;
 
     $scope.reset = function () {
-        dumpProgress.resetProgress($scope.progressInfo, $scope.beginDate.value, $scope.endDate.value);
+        dumpProgress.resetProgress($scope.beginDate.value, $scope.endDate.value).then(function(result) {
+            $scope.progressInfo.dumpCells = result;
+            $scope.progressInfo.totalFailItems = 0;
+            $scope.progressInfo.totalSuccessItems = 0;
+        });
     };
 
     $scope.dump = function () {

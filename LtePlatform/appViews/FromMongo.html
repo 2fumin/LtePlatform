@@ -24,7 +24,7 @@
                     <button type="button" class="btn btn-default" ng-click="endDate.opened = true">
                         <i class="glyphicon glyphicon-calendar"></i>
                     </button>
-                    <button class="btn btn-primary" ng-click="dump()">导入</button>
+                    <button class="btn btn-primary" ng-click="dump()" disabled>导入</button>
                 </span>
             </div>
         </div>
@@ -42,3 +42,4 @@
          ng-style="{width: 100*(progressInfo.totalSuccessItems+progressInfo.totalFailItems)/progressInfo.dumpCells.length+'%'}">
     </div>
 </div>
+<div ng-include="'/appViews/Rutrace/Interference/DumpCells.html'"></div>

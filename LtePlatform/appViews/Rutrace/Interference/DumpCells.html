@@ -1,0 +1,27 @@
+﻿<div uib-pagination total-items="progressInfo.dumpCells.length" ng-model="currentPage" items-per-page="20"
+     class="pagination-sm" boundary-link-numbers="true" rotate="false"  max-size="10"></div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>基站编号</th>
+            <th>频点</th>
+            <th>PCI</th>
+            <th>扇区编号</th>
+            <th>基站名称</th>
+            <th>查询信息</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="cell in progressInfo.dumpCells.slice((currentPage - 1) * 20, currentPage * 20)">
+            <td>{{cell.eNodebId}}</td>
+            <td>{{cell.frequency}}</td>
+            <td>{{cell.pci}}</td>
+            <td>{{cell.sectorId}}</td>
+            <td>{{cell.name}}</td>
+            <td>
+                <a ng-href="{{rootPath}}btsInfo/{{bts.btsId}}/{{bts.name}}"
+                   class="btn btn-sm" ng-class="{'btn-default': !bts.isInUse, 'btn-success': bts.isInUse}">基站详细信息</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
