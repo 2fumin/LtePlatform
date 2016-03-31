@@ -68,6 +68,28 @@
         });
     };
 
+    $scope.showCdmaCells = function (name) {
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: '/appViews/College/Infrastructure/CdmaCellDialog.html',
+            controller: 'cdmaCell.dialog',
+            size: 'sm',
+            resolve: {
+                dialogTitle: function () {
+                    return name + "-" + "CDMA小区信息";
+                },
+                name: function () {
+                    return name;
+                }
+            }
+        });
+        modalInstance.result.then(function (info) {
+            console.log(info);
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
+
     collegeService.queryStats().then(function(colleges) {
         $scope.collegeList = colleges;
     });

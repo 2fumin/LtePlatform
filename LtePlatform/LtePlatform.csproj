@@ -403,6 +403,7 @@
     <Content Include="appViews\BasicKpi\Trend.html" />
     <Content Include="appViews\College\AllMap.html" />
     <Content Include="appViews\College\Infrastructure\BtsDialog.html" />
+    <Content Include="appViews\College\Infrastructure\CdmaCellDialog.html" />
     <Content Include="appViews\College\Infrastructure\ENodebDialog.html" />
     <Content Include="appViews\College\Infrastructure\LteCellDialog.html" />
     <Content Include="appViews\Import\ImportProgress.html" />
@@ -731,6 +732,7 @@
     <Content Include="Scripts\college\map\college.dialog.js" />
     <Content Include="Scripts\college\query\all.js" />
     <Content Include="Scripts\college\query\bts.dialog.js" />
+    <Content Include="Scripts\college\query\cdmaCell.dialog.js" />
     <Content Include="Scripts\college\query\cell.dialog.js" />
     <Content Include="Scripts\college\query\eNodeb.dialog.js" />
     <Content Include="Scripts\college\route.controller.js" />

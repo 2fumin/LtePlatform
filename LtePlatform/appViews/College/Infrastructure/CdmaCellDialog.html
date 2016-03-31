@@ -1,0 +1,40 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" aria-hidden="true">
+        &times;
+    </button>
+    <h4 class="modal-title text-primary">{{dialogTitle}}</h4>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>小区名称</th>
+            <th>小区类别</th>
+            <th>频点列表</th>
+            <th>小区编号</th>
+            <th>LAC</th>
+            <th>PN</th>
+            <th>高度</th>
+            <th>下倾</th>
+            <th>方位角</th>
+            <th>天线增益</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="cell in cdmaCellList">
+            <td>{{cell.btsName}}-{{cell.sectorId}}</td>
+            <td>{{cell.cellType}}</td>
+            <td>{{cell.frequencyList}}</td>
+            <td>{{cell.cellId}}</td>
+            <td>{{cell.lac}}</td>
+            <td>{{cell.pn}}</td>
+            <td>{{cell.height}}</td>
+            <td>{{cell.downTilt}}</td>
+            <td>{{cell.azimuth}}</td>
+            <td>{{cell.antennaGain}}dB</td>
+        </tr>
+    </tbody>
+</table>
+<div class="modal-footer">
+    <button class="btn btn-warning" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+</div>
