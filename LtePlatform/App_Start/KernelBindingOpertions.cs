@@ -110,6 +110,8 @@ namespace LtePlatform
 
             ninjectKernel.Bind<IEUtranCellFDDZteRepository>().To<EUtranCellFDDZteRepository>();
 
+            ninjectKernel.Bind<IPrachFDDZteRepository>().To<PrachFDDZteRepository>();
+
             ninjectKernel.Bind<CdmaRegionStatService>().ToSelf();
 
             ninjectKernel.Bind<CollegeStatService>().ToSelf();

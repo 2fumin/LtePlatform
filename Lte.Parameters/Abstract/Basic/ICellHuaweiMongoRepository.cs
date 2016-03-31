@@ -18,4 +18,9 @@ namespace Lte.Parameters.Abstract.Basic
     {
         EUtranCellFDDZte GetRecent(int eNodebId, byte sectorId);
     }
+
+    public interface IPrachFDDZteRepository : IRepository<PrachFDDZte, ObjectId>
+    {
+        PrachFDDZte GetRecent(int eNodebId, byte sectorId);
+    }
 }

@@ -136,6 +136,7 @@
     <Compile Include="Abstract\Switch\IUeEUtranMeasurementRepository.cs" />
     <Compile Include="Concrete\Basic\CellHuaweiMongoRepository.cs" />
     <Compile Include="Concrete\Basic\EUtranCellFDDZteRepository.cs" />
+    <Compile Include="Concrete\Basic\PrachFDDZteRepository.cs" />
     <Compile Include="Concrete\EFAlameRepository.cs" />
     <Compile Include="Concrete\Basic\EFBtsRepository.cs" />
     <Compile Include="Concrete\Basic\EFCdmaCellRepository.cs" />
@@ -170,6 +171,7 @@
     <Compile Include="Concrete\Neighbor\ExternalEUtranCellFDDZteRepository.cs" />
     <Compile Include="Concrete\Switch\EUtranCellMeasurementZteRepository.cs" />
     <Compile Include="Entities\Basic\EUtranCellFDDZte.cs" />
+    <Compile Include="Entities\Basic\PrachFDDZte.cs" />
     <Compile Include="Entities\Neighbor\ExternalEUtranCellFDDZte.cs" />
     <Compile Include="Concrete\Switch\CellMeasGroupZteRepository.cs" />
     <Compile Include="Concrete\Switch\InterFreqHoGroupRepository.cs" />
