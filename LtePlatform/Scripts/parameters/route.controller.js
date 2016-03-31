@@ -91,6 +91,19 @@
                     }
                 },
                 url: "/cellInfo/:eNodebId/:name/:sectorId"
+            })
+            .state('cdmaCellInfo', {
+                views: {
+                    'menu': {
+                        templateUrl: "/appViews/GeneralMenu.html",
+                        controller: "menu.cdma"
+                    },
+                    "contents": {
+                        templateUrl: viewDir + "Region/CdmaCellDetails.html",
+                        controller: "cdmaCell.info"
+                    }
+                },
+                url: "/cdmaCellInfo/:btsId/:name/:sectorId"
             });
         $urlRouterProvider.otherwise('/');
     })

@@ -15,7 +15,7 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>buildscripts\CastleKey.snk</AssemblyOriginatorKeyFile>
     <DefineConstants>DOTNET;DOTNET45</DefineConstants>
-    <ProjectGuid>{EE27E11C-6C25-4D85-AD17-E0801D7E83D7}</ProjectGuid>
+    <ProjectGuid>{73FB5B0B-5796-41DC-A5A6-743D585F6B5B}</ProjectGuid>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
