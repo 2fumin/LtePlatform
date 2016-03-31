@@ -1,5 +1,5 @@
 ﻿
-app.controller('interference.mongo', function ($scope, dumpProgress) {
+app.controller('interference.mongo', function ($scope, $uibModal, $log, dumpProgress, networkElementService) {
     $scope.progressInfo = {
         dumpCells: [],
         totalSuccessItems: 0,
@@ -24,6 +24,43 @@ app.controller('interference.mongo', function ($scope, dumpProgress) {
             $scope.progressInfo.dumpCells = result;
             $scope.progressInfo.totalFailItems = 0;
             $scope.progressInfo.totalSuccessItems = 0;
+            angular.forEach($scope.progressInfo.dumpCells, function(cell) {
+                networkElementService.queryENodebInfo(cell.eNodebId).then(function(eNodeb) {
+                    cell.name = eNodeb.name;
+                });
+            });
+        });
+    };
+
+    $scope.dumpMongo = function(cell) {
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: '/appViews/Rutrace/Interference/DumpCellMongoDialog.html',
+            controller: 'dump.cell.mongo',
+            size: 'lg',
+            resolve: {
+                dialogTitle: function () {
+                    return cell.name + "-" + cell.sectorId + "干扰数据导入";
+                },
+                eNodebId: function() {
+                    return cell.eNodebId;
+                },
+                sectorId: function() {
+                    return cell.sectorId;
+                },
+                begin: function() {
+                    return $scope.beginDate;
+                },
+                end: function() {
+                    return $scope.endDate;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (info) {
+            console.log(info);
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
         });
     };
 

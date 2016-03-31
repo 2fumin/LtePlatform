@@ -19,8 +19,7 @@
             <td>{{cell.sectorId}}</td>
             <td>{{cell.name}}</td>
             <td>
-                <a ng-href="{{rootPath}}btsInfo/{{bts.btsId}}/{{bts.name}}"
-                   class="btn btn-sm" ng-class="{'btn-default': !bts.isInUse, 'btn-success': bts.isInUse}">基站详细信息</a>
+                <button class="btn btn-default" ng-click="dumpMongo(cell)">导入数据</button>
             </td>
         </tr>
     </tbody>
