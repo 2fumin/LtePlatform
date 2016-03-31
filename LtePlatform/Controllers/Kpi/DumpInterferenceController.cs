@@ -57,7 +57,7 @@ namespace LtePlatform.Controllers.Kpi
         [ApiResponse("一共导入的数量")]
         public int Post(PciCellDumpInfo dumpInfo)
         {
-            return _service.DumpMongoStats(dumpInfo.PciCell, dumpInfo.Begin, dumpInfo.End);
+            return _service.DumpMongoStats(dumpInfo.PciCell, dumpInfo.Begin.Date, dumpInfo.End.Date);
         }
    
         [HttpDelete]

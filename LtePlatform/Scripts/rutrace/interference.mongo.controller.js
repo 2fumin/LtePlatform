@@ -23,8 +23,8 @@ app.controller('interference.mongo', function ($scope, dumpProgress) {
     };
 
     $scope.dump = function () {
-        for (var i = 0; i < 16; i++) {
-            dumpProgress.dumpMongo($scope.progressInfo, $scope.beginDate.value, $scope.endDate.value, i, 16);
+        for (var i = 0; i < 2; i++) {
+            dumpProgress.dumpMongo($scope.progressInfo, $scope.beginDate.value, $scope.endDate.value, i, 2);
         }
     };
 

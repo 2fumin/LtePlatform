@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Concrete.Mr;
 using Lte.Parameters.Entities.Mr;
+using MongoDB.Bson;
+using MongoDB.Driver.Builders;
 using NUnit.Framework;
 using Shouldly;
 
@@ -72,6 +74,44 @@ namespace Lte.Parameters.Test.Mr
             result.MOD6_COUNT.ShouldBe(0);
             result.OVERCOVER_COFREQ_6DB.ShouldBe(2);
             result.OVERCOVER_COFREQ_10DB.ShouldBe(2);
+        }
+
+        [Test]
+        public void Test_GetList()
+        {
+            var result = _repository.GetList(500026, 88, new DateTime(2016, 3, 23));
+            Assert.IsNotNull(result);
+        }
+
+        [TestCase(1000, 10, "20160224")]
+        public void Test_Document(int eNodebId, short pci, string dateString)
+        {
+            var query1 = Query<InterferenceMatrixMongo>
+                .GTE(e => e.ENODEBID_PCI_NPCI_NFREQ, eNodebId + "_" + pci + "_");
+            var query2 = Query<InterferenceMatrixMongo>
+                .LT(e => e.ENODEBID_PCI_NPCI_NFREQ, eNodebId + "_" + pci + "_a");
+            var query3 = Query<InterferenceMatrixMongo>
+                .GTE(e => e.current_date, dateString + "00");
+            var query4 = Query<InterferenceMatrixMongo>
+                .LT(e => e.current_date, dateString + "24");
+            var query = Query.And(query1, query2, query3, query4);
+            var document = query.ToBsonDocument();
+            var resultQuery = Query.Create(document);
+            Assert.AreEqual(document.ToString(),
+                "{ \"ENODEBID_PCI_NPCI_NFREQ\" : { \"$gte\" : \"1000_10_\", \"$lt\" : \"1000_10_a\" }, \"current_date\" : { \"$gte\" : \"2016022400\", \"$lt\" : \"2016022424\" } }");
+            Assert.IsNotNull(resultQuery);
+        }
+
+        [TestCase(1000, 10, "20160224")]
+        public void Test_Regex(int eNodebId, short pci, string dateString)
+        {
+            var query1 = Query<InterferenceMatrixMongo>.Matches(e => e.ENODEBID_PCI_NPCI_NFREQ,
+                new BsonRegularExpression("^" + eNodebId + "_" + pci + "_"));
+            var query2 = Query<InterferenceMatrixMongo>.Matches(e => e.current_date,
+                new BsonRegularExpression("^" + dateString));
+            var query = Query.And(query1, query2);
+            var document = query.ToBsonDocument(); Assert.AreEqual(document.ToString(),
+                 "{ \"ENODEBID_PCI_NPCI_NFREQ\" : /^1000_10_/, \"current_date\" : /^20160224/ }");
         }
     }
 }

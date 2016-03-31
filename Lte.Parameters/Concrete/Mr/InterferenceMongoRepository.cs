@@ -74,15 +74,11 @@ namespace Lte.Parameters.Concrete.Mr
 
         public List<InterferenceMatrixMongo> GetList(int eNodebId, short pci, string dateString)
         {
-            var query1 = MongoDB.Driver.Builders.Query<InterferenceMatrixMongo>
-                .GTE(e => e.ENODEBID_PCI_NPCI_NFREQ, eNodebId + "_" + pci + "_");
-            var query2 = MongoDB.Driver.Builders.Query<InterferenceMatrixMongo>
-                .LT(e => e.ENODEBID_PCI_NPCI_NFREQ, eNodebId + "_" + pci + "_a");
-            var query3 = MongoDB.Driver.Builders.Query<InterferenceMatrixMongo>
-                .GTE(e => e.current_date, dateString);
-            var query4 = MongoDB.Driver.Builders.Query<InterferenceMatrixMongo>
-                .LT(e => e.current_date, dateString + "24");
-            var query = MongoDB.Driver.Builders.Query.And(query1, query2, query3, query4);
+            var query1 = MongoDB.Driver.Builders.Query<InterferenceMatrixMongo>.Matches(e => e.ENODEBID_PCI_NPCI_NFREQ,
+                new BsonRegularExpression("^" + eNodebId + "_" + pci + "_"));
+            var query2 = MongoDB.Driver.Builders.Query<InterferenceMatrixMongo>.Matches(e => e.current_date,
+                new BsonRegularExpression("^" + dateString));
+            var query = MongoDB.Driver.Builders.Query.And(query1, query2);
             return Collection.Find(query).AsQueryable().ToList();
         }
     }

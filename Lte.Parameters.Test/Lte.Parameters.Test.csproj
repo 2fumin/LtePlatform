@@ -144,6 +144,14 @@
       <Project>{0e9a3a2a-49cd-4f6c-847c-dc79b4b65ce6}</Project>
       <Name>MongoDB.Bson</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MongoDB.Driver.Legacy\MongoDB.Driver.Legacy.csproj">
+      <Project>{97962946-aa1e-4308-b7a7-6ad92bdbc358}</Project>
+      <Name>MongoDB.Driver.Legacy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MongoDB.Driver\MongoDB.Driver.csproj">
+      <Project>{ae5166cd-76b0-4911-bd80-ced9521f37a1}</Project>
+      <Name>MongoDB.Driver</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
