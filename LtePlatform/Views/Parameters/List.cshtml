@@ -3,7 +3,7 @@
     ViewBag.Title = "基础数据模块";
 }
 
-<div class="panel panel-warning" ng-app="myApp">
+<div class="panel panel-warning">
     <div class="panel-heading">
         <h2 class="panel-title">
             <strong>@ViewBag.Title</strong>
@@ -22,33 +22,7 @@
 </div>
 
 @section Scripts{
-    <link href="~/Content/themes/map/all.css" rel="stylesheet"/>
-    <link href="~/Content/themes/baidu/InfoWindow.css" rel="stylesheet"/>
-    <script src="~/Scripts/angular.min.js"></script>
-    <script src="~/Scripts/angular-ui-router.min.js"></script>
-    @Scripts.Render("~/bundles/highcharts")
-    <script src="~/Scripts/highcharts/highcharts-ng.js"></script>
-    <script src="~/Scripts/mycharts/gradientPie.js"></script>
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=OeWDTDlnolWHBNP1GSkDph34"></script>
-    @Scripts.Render("~/bundles/ui-bootstraps")
-    <script src="~/Scripts/service/app.url.service.js"></script>
-    <script src="~/Scripts/service/app.region.service.js"></script>
-    <script src="~/Scripts/service/app.parameters.service.js"></script>
-    <script src="~/Scripts/service/parameters.map.service.js"></script>
-    <script src="~/Scripts/service/parameters.chart.js"></script>
-    <script src="~/Scripts/service/mongo/cell.huawei.js"></script>
-    <script src="~/Scripts/service/mongo/handoff.js"></script>
-    <script src="~/Scripts/service/mongo/neighbor.js"></script>
-    <script>
-        var app = angular.module('myApp', [
-            "highcharts-ng", 'ui.router',
-            "ui.bootstrap", 'myApp.url',
-            'myApp.region', 'myApp.parameters',
-            'parametersMap', 'parameters.chart',
-            'huawei.mongo.parameters',
-            'handoff.parameters', 'neighbor.mongo'
-        ]);
-    </script>
     <script src="~/Scripts/parameters/route.controller.js"></script>
     <script src="~/Scripts/parameters/list.controller.js"></script>
     <script src="~/Scripts/parameters/menu.root.js"></script>

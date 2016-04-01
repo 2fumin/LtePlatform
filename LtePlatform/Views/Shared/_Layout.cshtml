@@ -36,23 +36,41 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <link href="~/Content/themes/map/all.css" rel="stylesheet" />
+    <link href="~/Content/themes/baidu/InfoWindow.css" rel="stylesheet" />
     <script src="~/Scripts/angular.min.js"></script>
     <script src="~/Scripts/angular-route.min.js"></script>
+    <script src="~/Scripts/angular-ui-router.min.js"></script>
     @Scripts.Render("~/bundles/ui-bootstraps")
     @Scripts.Render("~/bundles/highcharts")
     <script src="~/Scripts/highcharts/highcharts-ng.js"></script>
     <script src="~/Scripts/mycharts/drilldown.chart.js"></script>
     <script src="~/Scripts/mycharts/drilldownPie.js"></script>
-    <script src="~/Scripts/service/app.url.service.js"></script>
-    <script src="~/Scripts/service/workitem.service.js"></script>
+    <script src="~/Scripts/mycharts/gradientPie.js"></script>
     <script src="~/Scripts/service/app.parameters.service.js"></script>
+    <script src="~/Scripts/service/app.region.service.js"></script>
+    <script src="~/Scripts/service/app.url.service.js"></script>
+    <script src="~/Scripts/service/mongo/cell.huawei.js"></script>
+    <script src="~/Scripts/service/mongo/handoff.js"></script>
+    <script src="~/Scripts/service/mongo/neighbor.js"></script>
+    <script src="~/Scripts/service/parameters.chart.js"></script>
+    <script src="~/Scripts/service/parameters.map.service.js"></script>
+    <script src="~/Scripts/service/workitem.service.js"></script>
     <script>
         var app = angular.module('myApp', [
-            'ngRoute',
+            'handoff.parameters',
             "highcharts-ng",
-            "ui.bootstrap",
+            'huawei.mongo.parameters',
             'kpi.workitem',
-            'myApp.parameters'
+            'myApp.parameters',
+            'myApp.region',
+            'myApp.url',
+            'neighbor.mongo',
+            'ngRoute',
+            'parametersMap',
+            'parameters.chart',
+            "ui.bootstrap",
+            'ui.router'
         ]);
     </script>
     @RenderSection("Scripts", required: false)
