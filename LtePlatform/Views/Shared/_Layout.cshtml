@@ -43,10 +43,14 @@
     <script src="~/Scripts/angular-ui-router.min.js"></script>
     @Scripts.Render("~/bundles/ui-bootstraps")
     @Scripts.Render("~/bundles/highcharts")
+    <script src="~/Scripts/angular-ui/customize/dump.progress.factory.js"></script>
     <script src="~/Scripts/highcharts/highcharts-ng.js"></script>
+    <script src="~/Scripts/mycharts/comboChart.js"></script>
     <script src="~/Scripts/mycharts/drilldown.chart.js"></script>
+    <script src="~/Scripts/mycharts/drilldownColumn.js"></script>
     <script src="~/Scripts/mycharts/drilldownPie.js"></script>
     <script src="~/Scripts/mycharts/gradientPie.js"></script>
+    <script src="~/Scripts/service/app.kpi.service.js"></script>
     <script src="~/Scripts/service/app.parameters.service.js"></script>
     <script src="~/Scripts/service/app.region.service.js"></script>
     <script src="~/Scripts/service/app.url.service.js"></script>
@@ -62,6 +66,8 @@
             "highcharts-ng",
             'huawei.mongo.parameters',
             'kpi.workitem',
+            'myApp.dumpInterference',
+            'myApp.kpi',
             'myApp.parameters',
             'myApp.region',
             'myApp.url',

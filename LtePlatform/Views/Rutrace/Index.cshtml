@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "精确覆盖率";
 }
-<div class="row" ng-app="myApp" ng-controller="rutrace.root">
+<div class="row" ng-controller="rutrace.root">
     <div class="col-md-4">
         <div ng-include="'/appViews/GeneralMenu.html'"></div>
     </div>
@@ -12,34 +12,9 @@
 </div>
 
 @section Scripts{
-    <link rel="stylesheet" href="~/Content/themes/baidu/InfoWindow.css"/>
-    <script src="~/Scripts/angular.js"></script>
-    <script src="~/Scripts/angular-route.min.js"></script>
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=LlMnTd7NcCWI1ibhDAdKeVlG"></script>
     <script src="~/Scripts/baidu/plugins/baidu.tangram.js"></script>
     <script src="~/Scripts/baidu/plugins/InfoBox.js"></script>
-    @Scripts.Render("~/bundles/highcharts")
-    <script src="~/Scripts/highcharts/highcharts-ng.js"></script>
-    <script src="~/Scripts/service/app.url.service.js"></script>
-    <script src="~/Scripts/service/app.region.service.js"></script>
-    <script src="~/Scripts/service/app.kpi.service.js"></script>
-    <script src="~/Scripts/service/app.parameters.service.js"></script>
-    <script src="~/Scripts/service/workitem.service.js"></script>
-    <script src="~/Scripts/service/mongo/neighbor.js"></script>
-    <script src="~/Scripts/mycharts/drilldown.chart.js"></script>
-    <script src="~/Scripts/mycharts/drilldownPie.js"></script>
-    <script src="~/Scripts/mycharts/drilldownColumn.js"></script>
-    <script src="~/Scripts/mycharts/comboChart.js"></script>
-    <script src="~/Scripts/angular-ui/customize/dump.progress.factory.js"></script>
-    <script src="~/Scripts/service/mongo/handoff.js"></script>
-    @Scripts.Render("~/bundles/ui-bootstraps")
-    <script>
-        var app = angular.module('myApp',
-            ['ngRoute', "highcharts-ng", "ui.bootstrap", 'myApp.url',
-                'myApp.region', 'myApp.kpi', 'myApp.parameters',
-                'kpi.workitem', 'myApp.dumpInterference', 'neighbor.mongo',
-                'handoff.parameters']);
-    </script>
     <script src="~/Scripts/rutrace/menu.controller.js"></script>
     <script src="~/Scripts/rutrace/root.controller.js"></script>
     <script src="~/Scripts/rutrace/index.controller.js"></script>
