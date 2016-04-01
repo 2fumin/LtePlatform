@@ -39,6 +39,16 @@ namespace Lte.Evaluations.DataService.Mr
                 PciCellList = cells.MapTo<List<PciCell>>();
             }
         }
+
+        public int QueryExistedStatsCount(int eNodebId, byte sectorId, DateTime date)
+        {
+            var nextDay = date.AddDays(1);
+            return
+                _repository.Count(
+                    x =>
+                        x.ENodebId == eNodebId && x.SectorId == sectorId && x.RecordTime >= date &&
+                        x.RecordTime < nextDay);
+        }
         
         public int DumpMongoStats(PciCell cellInfo, DateTime begin, DateTime end)
         {
@@ -49,10 +59,7 @@ namespace Lte.Evaluations.DataService.Mr
                 var time = statTime;
                 var nextDay = time.AddDays(1);
                 var existedStat =
-                    _repository.Count(
-                        x =>
-                            x.ENodebId == cellInfo.ENodebId && x.SectorId == cellInfo.SectorId &&
-                            x.RecordTime >= time && x.RecordTime < nextDay);
+                    QueryExistedStatsCount(cellInfo.ENodebId,cellInfo.SectorId, time);
                 if (existedStat > 10)
                 {
                     statTime = nextDay;

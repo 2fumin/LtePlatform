@@ -51,6 +51,12 @@ namespace LtePlatform.Controllers.Kpi
             return _service.QueryMongoList(eNodebId, pci, date);
         }
 
+        [HttpGet]
+        public int GetExisted(int eNodebId, byte sectorId, DateTime date)
+        {
+            return _service.QueryExistedStatsCount(eNodebId, sectorId, date);
+        }
+
         [HttpPost]
         [ApiDoc("导入指定小区信息、开始日期和结束日期的干扰矩阵信息")]
         [ApiParameterDoc("dumpInfo", "指定小区信息、开始日期和结束日期")]
