@@ -59,9 +59,13 @@
     <script src="~/Scripts/service/mongo/neighbor.js"></script>
     <script src="~/Scripts/service/parameters.chart.js"></script>
     <script src="~/Scripts/service/parameters.map.service.js"></script>
+    <script src="~/Scripts/service/topic/college.js"></script>
+    <script src="~/Scripts/service/topic/college.map.service.js"></script>
     <script src="~/Scripts/service/workitem.service.js"></script>
     <script>
         var app = angular.module('myApp', [
+            'college',
+            'college.map',
             'handoff.parameters',
             "highcharts-ng",
             'huawei.mongo.parameters',

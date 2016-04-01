@@ -2,7 +2,7 @@
     ViewBag.Title = "校园网专题";
 }
 
-<div class="panel panel-warning" ng-app="myApp">
+<div class="panel panel-warning">
     <div class="panel-heading">
         <h2 class="panel-title">
             <strong>@ViewBag.Title</strong>
@@ -23,24 +23,6 @@
 
 @section Scripts {
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=OeWDTDlnolWHBNP1GSkDph34"></script>
-    <link rel="stylesheet" href="~/Content/themes/baidu/InfoWindow.css" />
-    <link href="~/Content/themes/map/all.css" rel="stylesheet" />
-    <script src="~/Scripts/angular.min.js"></script>
-    <script src="~/Scripts/angular-ui-router.min.js"></script>
-    @Scripts.Render("~/bundles/highcharts")
-    <script src="~/Scripts/highcharts/highcharts-ng.js"></script>
-    @Scripts.Render("~/bundles/ui-bootstraps")
-    <script src="~/Scripts/service/app.url.service.js"></script>
-    <script src="~/Scripts/service/app.region.service.js"></script>
-    <script src="~/Scripts/service/topic/college.js"></script>
-    <script src="~/Scripts/service/topic/college.map.service.js"></script>
-    <script>
-        var app = angular.module('myApp', [
-            "highcharts-ng", 'ui.router',
-            "ui.bootstrap", 'myApp.url',
-            'myApp.region', 'college', 'college.map'
-        ]);
-    </script>
     <script src="~/Scripts/college/route.controller.js"></script>
     <script src="~/Scripts/college/menu.root.js"></script>
     <script src="~/Scripts/college/college.menu.js"></script>
