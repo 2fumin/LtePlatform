@@ -49,10 +49,10 @@ app.controller('interference.mongo', function ($scope, $uibModal, $log, dumpProg
                     return cell.sectorId;
                 },
                 begin: function() {
-                    return $scope.beginDate;
+                    return $scope.beginDate.value;
                 },
                 end: function() {
-                    return $scope.endDate;
+                    return $scope.endDate.value;
                 }
             }
         });

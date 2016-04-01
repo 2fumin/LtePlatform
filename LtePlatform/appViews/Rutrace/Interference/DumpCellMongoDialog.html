@@ -4,6 +4,20 @@
     </button>
     <h4 class="modal-title text-primary">{{dialogTitle}}</h4>
 </div>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>日期</th>
+        <th>已导入数</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="record in dateRecords">
+        <td>{{record.date | date: "yyyy-MM-dd"}}</td>
+        <td>{{record.existedRecords}}</td>
+    </tr>
+    </tbody>
+</table>
 <div class="modal-footer">
     <button class="btn btn-warning" ng-click="ok()">OK</button>
     <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>

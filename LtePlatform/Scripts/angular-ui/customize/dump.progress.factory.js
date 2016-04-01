@@ -80,5 +80,24 @@
             return deferred.promise;
         };
 
+        serviceInstance.queryExistedItems = function(eNodebId, sectorId, date) {
+            var deferred = $q.defer();
+            $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('DumpInterference'),
+                    params: {
+                        eNodebId: eNodebId,
+                        sectorId: sectorId,
+                        date: date
+                    }
+                }).success(function(result) {
+                    deferred.resolve(result);
+                })
+                .error(function(reason) {
+                    deferred.reject(reason);
+                });
+            return deferred.promise;
+        };
+
         return serviceInstance;
     });
