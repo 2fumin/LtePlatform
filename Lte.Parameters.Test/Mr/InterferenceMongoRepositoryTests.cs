@@ -7,6 +7,7 @@ using Lte.Parameters.Abstract;
 using Lte.Parameters.Concrete.Mr;
 using Lte.Parameters.Entities.Mr;
 using MongoDB.Bson;
+using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using NUnit.Framework;
 using Shouldly;
@@ -65,21 +66,21 @@ namespace Lte.Parameters.Test.Mr
         [Test]
         public void Test_GetOne()
         {
-            var result = _repository.GetOne("522409_304_241_1825", "201512301530");
+            var result = _repository.GetOne("500026_88_155_1825", "201603190000");
             Assert.IsNotNull(result);
 
-            Assert.AreEqual((double)result.INTERF_ONLY_COFREQ, 11.88, 1E-7);
-            result.current_date.ShouldBe("201512301530");
-            result.MOD3_COUNT.ShouldBe(2);
+            Assert.AreEqual((double)result.INTERF_ONLY_COFREQ, 4.38, 1E-7);
+            result.current_date.ShouldBe("201603190000");
+            result.MOD3_COUNT.ShouldBe(0);
             result.MOD6_COUNT.ShouldBe(0);
-            result.OVERCOVER_COFREQ_6DB.ShouldBe(2);
-            result.OVERCOVER_COFREQ_10DB.ShouldBe(2);
+            result.OVERCOVER_COFREQ_6DB.ShouldBe(0);
+            result.OVERCOVER_COFREQ_10DB.ShouldBe(1);
         }
 
         [Test]
         public void Test_GetList()
         {
-            var result = _repository.GetList(500026, 88, new DateTime(2016, 3, 23));
+            var result = _repository.GetList(500026, 88, "20160323");
             Assert.IsNotNull(result);
         }
 
@@ -102,7 +103,13 @@ namespace Lte.Parameters.Test.Mr
             Assert.IsNotNull(resultQuery);
         }
 
-        [TestCase(1000, 10, "20160224")]
+        class MyRepository : InterferenceMongoRepository
+        {
+            public MongoCollection<InterferenceMatrixMongo> MyCollection => Collection;
+        }
+
+        [TestCase(500026, 88, "20160323")]
+        [TestCase(499773, 105, "20160323")]
         public void Test_Regex(int eNodebId, short pci, string dateString)
         {
             var query1 = Query<InterferenceMatrixMongo>.Matches(e => e.ENODEBID_PCI_NPCI_NFREQ,
@@ -110,8 +117,18 @@ namespace Lte.Parameters.Test.Mr
             var query2 = Query<InterferenceMatrixMongo>.Matches(e => e.current_date,
                 new BsonRegularExpression("^" + dateString));
             var query = Query.And(query1, query2);
-            var document = query.ToBsonDocument(); Assert.AreEqual(document.ToString(),
-                 "{ \"ENODEBID_PCI_NPCI_NFREQ\" : /^1000_10_/, \"current_date\" : /^20160224/ }");
+            var document = query.ToBsonDocument();
+            Assert.AreEqual(document.ToString(),
+                "{ \"ENODEBID_PCI_NPCI_NFREQ\" : /^" + eNodebId + "_" + pci + "_/, \"current_date\" : /^" + dateString +
+                "/ }");
+            var myRepository = new MyRepository();
+            var cursor = myRepository.MyCollection.Find(query);
+            Assert.IsNotNull(cursor);
+            var item = cursor.First();
+            Assert.IsNotNull(item);
+            Assert.AreEqual(item.current_date.Substring(0,8), dateString);
+            var list = cursor.ToList();
+            Assert.IsNotNull(list);
         }
     }
 }
