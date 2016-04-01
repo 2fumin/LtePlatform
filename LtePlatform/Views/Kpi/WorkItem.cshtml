@@ -5,7 +5,7 @@
         </h2>
     </div>
     <div class="panel-body">
-        <div ng-app="myApp" class="row">
+        <div class="row">
             <div class="col-md-4">
                 <div class="list-group">
                     <a class="list-group-item" ng-repeat="menuItem in menuItems"
@@ -27,25 +27,6 @@
 </div>
 
 @section Scripts{
-    <script src="~/Scripts/angular.js"></script>
-    <script src="~/Scripts/angular-route.min.js"></script>
-    @Scripts.Render("~/bundles/ui-bootstraps")
-    @Scripts.Render("~/bundles/highcharts")
-    <script src="~/Scripts/highcharts/highcharts-ng.js"></script>
-    <script src="~/Scripts/mycharts/drilldown.chart.js"></script>
-    <script src="~/Scripts/mycharts/drilldownPie.js"></script>
-    <script src="~/Scripts/service/app.url.service.js"></script>
-    <script src="~/Scripts/service/workitem.service.js"></script>
-    <script src="~/Scripts/service/app.parameters.service.js"></script>
-    <script>
-        var app = angular.module('myApp', [
-            'ngRoute',
-            "highcharts-ng",
-            "ui.bootstrap",
-            'kpi.workitem',
-            'myApp.parameters'
-        ]);
-    </script>
     <script src="~/Scripts/kpi/workitem/service.js"></script>
     <script src="~/Scripts/kpi/workitem/route.controller.js"></script>
     <script src="~/Scripts/kpi/workitem/index.controller.js"></script>
