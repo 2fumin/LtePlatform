@@ -1,6 +1,6 @@
 ﻿<ul class="nav navbar-nav">
     <li>
-        <a ng-href="/">专题网优</a>
+        <a ng-href="/">首页</a>
     </li>
     <li class="dropdown">
         <a href="" id="single-button" class="dropdown-toggle" data-toggle="dropdown" ng-disabled="disabled">
@@ -32,13 +32,20 @@
             </li>
         </ul>
     </li>
-    <li>
-        <a ng-href="/Help">使用说明</a>
-    </li>
-    <li>
-        <a ng-href="/TestPage/QUnitTest">脚本测试</a>
-    </li>
-    <li>
-        <a ng-href="/TestPage/AngularTest/Simple">AngularJS</a>
+    <li class="dropdown">
+        <a href="" id="accessory" class="dropdown-toggle" data-toggle="dropdown" ng-disabled="disabled">
+            辅助功能 <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="accessory">
+            <li role="presentation">
+                <a role="menuitem" ng-href="/Help">使用说明</a>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" ng-href="/TestPage/QUnitTest">脚本测试</a>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" ng-href="/TestPage/AngularTest/Simple">AngularJS</a>
+            </li> 
+        </ul>
     </li>
 </ul>
