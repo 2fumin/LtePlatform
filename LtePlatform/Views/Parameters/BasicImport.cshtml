@@ -9,7 +9,7 @@
         </h2>
     </div>
     <div class="panel-body">
-        <div class="row" ng-app="myApp">
+        <div class="row">
             <div class="col-md-4">
                 <h4>工参文件选择</h4>
                 @using (Html.BeginForm("LteImportPost", "Parameters",
@@ -69,29 +69,6 @@
 </div>
 
 @section Scripts{
-    <script src="~/Scripts/angular.js"></script>
-    <script src="~/Scripts/angular-route.min.js"></script>
-    @Scripts.Render("~/bundles/ui-bootstraps")
-    @Scripts.Render("~/bundles/highcharts")
-    <script src="~/Scripts/highcharts/highcharts-ng.js"></script>
-    <script src="~/Scripts/service/app.url.service.js"></script>
-    <script src="~/Scripts/service/app.region.service.js"></script>
-    <script src="~/Scripts/service/app.kpi.service.js"></script>
-    <script src="~/Scripts/service/app.parameters.service.js"></script>
-    <script src="~/Scripts/service/ne.geometry.service.js"></script>
-    <script>
-        var app = angular.module('myApp',
-        [
-            'ngRoute',
-            "highcharts-ng",
-            "ui.bootstrap",
-            'myApp.url',
-            'myApp.region',
-            'myApp.kpi',
-            'myApp.parameters',
-            'ne.geometry'
-        ]);
-    </script>
     <script src="~/Scripts/parameters/import/route.controller.js"></script>
     <script src="~/Scripts/parameters/import/index.controller.js"></script>
     <script src="~/Scripts/parameters/import/eNodebs.controller.js"></script>
