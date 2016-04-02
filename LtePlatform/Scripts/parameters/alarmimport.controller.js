@@ -1,9 +1,12 @@
-﻿var updateDumpHistory = function (viewModel) {
-    sendRequest(app.dataModel.dumpAlarmUrl, "GET", {
-        begin: viewModel.beginDate(),
-        end: viewModel.endDate()
-    }, function (result) {
-        viewModel.dumpHistory([]);
-        viewModel.dumpHistory(result);
-    });
-};
+﻿app.controller("alarm.import", function($scope) {
+    var lastWeek = new Date();
+    lastWeek.setDate(lastWeek.getDate() - 7);
+    $scope.beginDate = {
+        value: lastWeek,
+        opened: false
+    };
+    $scope.endDate = {
+        value: new Date(),
+        opened: false
+    };
+});
