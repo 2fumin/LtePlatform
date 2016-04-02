@@ -1,5 +1,6 @@
 ﻿app.controller("homeController", function ($scope, appUrlService) {
-    $scope.menuItems = [
+    appUrlService.initializeAuthorization();
+    $scope.areaItems = [
     {
         title: "小区覆盖仿真模拟",
         comments: "根据各小区的工程参数模拟覆盖范围，主要覆盖指标（RSRP、SINR）进行分析和呈现",
@@ -41,5 +42,47 @@
         isopen: false
     };
 
-    appUrlService.initializeAuthorization();
+    $scope.menuItems = [
+        {
+            displayName: "覆盖优化",
+            tag: "coverage",
+            isActive: true,
+            subItems: [
+            {
+                displayName: "精确覆盖专题分析",
+                url: "/Rutrace"
+            }, {
+                displayName: "小区覆盖仿真模拟",
+                url: "/Evaluation/RegionDef"
+            }, {
+                displayName: "DT基础信息",
+                url: "/Dt/List"
+            }]
+        }, {
+            displayName: "容量优化",
+            tag: "capacity",
+            isActive: false,
+            subItems: [{
+                displayName: "小区基础信息",
+                url: "/Parameters/List"
+            }, {
+                displayName: "小区流量分析",
+                url: "/Kpi/Flow"
+            }]
+        }, {
+            displayName: "质量分析",
+            tag: "kpi",
+            isActive: false,
+            subItems: [{
+                displayName: "传统指标监控",
+                url: "/Kpi"
+            }, {
+                displayName: "工单监控分析",
+                url: "/Kpi/WorkItem"
+            }, {
+                displayName: "校园网专题优化",
+                url: "/College/Map"
+            }]
+        }
+    ];
 });

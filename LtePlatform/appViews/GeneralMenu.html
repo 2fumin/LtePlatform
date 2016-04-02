@@ -1,15 +1,19 @@
-﻿<div class="panel panel-warning">
-    <div class="panel-heading">
-        <h2 class="panel-title">
-            <strong>{{menuTitle}}</strong>
-        </h2>
-    </div>
-    <div class="panel-body">
-        <div class="list-group">
-            <a class="list-group-item" ng-repeat="menuItem in menuItems" ng-class="{active: page.title == menuItem.displayName}"
-               ng-href="{{menuItem.url}}">
-                {{menuItem.displayName}}
-            </a>
+﻿<div class="panel-group" id="accordion">
+    <div ng-repeat="menuItem in menuItems" class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#{{menuItem.tag}}">
+                    <strong>{{menuItem.displayName}}</strong>
+                </a>
+            </h4>
+        </div>
+        <div id="{{menuItem.tag}}" class="panel-collapse collapse" ng-class="{'in': menuItem.isActive}">
+            <div class="list-group">
+                <a class="list-group-item" ng-repeat="subItem in menuItem.subItems" ng-class="{active: page.title == subItem.displayName}"
+                   ng-href="{{subItem.url}}">
+                    {{subItem.displayName}}
+                </a>
+            </div>
         </div>
     </div>
 </div>
