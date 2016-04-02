@@ -15,7 +15,7 @@
     ];
     networkElementService.queryCdmaSectorIds($stateParams.name).then(function (result) {
         angular.forEach(result, function(sectorId) {
-            $scope.menuItems.push({
+            $scope.menuItems[1].push({
                 displayName: $stateParams.name + "-" + sectorId + "小区信息",
                 url: rootUrl + "/cdmaCellInfo" + "/" + $stateParams.btsId + "/" + $stateParams.name + "/" + sectorId
             });

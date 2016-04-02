@@ -112,14 +112,14 @@
         $rootScope.menuItems = [];
         $rootScope.rootPath = rootUrl + "/";
 
-        $rootScope.updateMenuItems = function(namePrefix, urlPrefix, name) {
-            var items = $rootScope.menuItems;
+        $rootScope.updateMenuItems = function(title, url) {
+            var items = $rootScope.menuItems[1].subItems;
             for (var i = 0; i < items.length; i++) {
-                if (items[i].displayName === namePrefix + "-" + name) return;
+                if (items[i].displayName === title) return;
             }
             items.push({
-                displayName: namePrefix + "-" + name,
-                url: urlPrefix + "/" + name
+                displayName: title,
+                url: url
             });
         };
         $rootScope.viewData = {
