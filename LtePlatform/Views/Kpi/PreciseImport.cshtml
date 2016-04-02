@@ -30,9 +30,7 @@
                     }
                 }
             </div>
-            @{
-                Html.RenderPartial("_PreciseImport");
-            }
+            <div ng-include="'/appViews/Import/Precise/Import.html'"></div>
         </div>
     </div>
 </div>
@@ -40,12 +38,5 @@
 
 
 @section Scripts{
-    <script src="~/Scripts/angular.min.js"></script>
-    @Scripts.Render("~/bundles/ui-bootstraps")
-    <script src="~/Scripts/service/app.url.service.js"></script>
-    <script src="~/Scripts/service/kpi.import.service.js"></script>
-    <script>
-        var app = angular.module('myApp', ["ui.bootstrap", 'myApp.url', 'kpi.import']);
-    </script>
     <script src="~/Scripts/kpi/precise.import.js"></script>
 }

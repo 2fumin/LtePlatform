@@ -1157,7 +1157,7 @@
     <None Include="Views\College\_Edit.cshtml" />
     <Content Include="Views\Kpi\InterferenceImport.cshtml" />
     <None Include="Views\Kpi\PreciseImport.cshtml" />
-    <Content Include="Views\Kpi\_PreciseImport.cshtml" />
+    <Content Include="appViews\Import\Precise\Import.html" />
     <Content Include="appViews\Import\Precise\HistoryTable.html" />
     <Content Include="Views\Kpi\WorkItemImport.cshtml" />
     <Content Include="appViews\Rutrace\Map\NeighborMapInfoBox.html" />
