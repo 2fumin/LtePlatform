@@ -39,18 +39,30 @@
                 });
         }
 ])
-    .run(function ($rootScope, appRegionService) {
+    .run(function ($rootScope, appRegionService, menuItemService) {
         var rootUrl = "/Kpi#";
         $rootScope.menuItems = [
             {
-                displayName: "指标总体情况",
-                url: rootUrl + "/"
+                displayName: "总体情况",
+                isActive: true,
+                subItems: [
+                    {
+                        displayName: "指标总体情况",
+                        url: rootUrl + "/"
+                    }
+                ]
             }, {
-                displayName: "TOP掉话指标",
-                url: rootUrl + "/topDrop2G"
-            }, {
-                displayName: "TOP连接成功率指标",
-                url: rootUrl + "/topConnection3G"
+                displayName: "TOP指标",
+                isActive: true,
+                subItems: [
+                    {
+                        displayName: "TOP掉话指标",
+                        url: rootUrl + "/topDrop2G"
+                    }, {
+                        displayName: "TOP连接成功率指标",
+                        url: rootUrl + "/topConnection3G"
+                    }
+                ]
             }
         ];
         $rootScope.rootPath = rootUrl + "/";
@@ -68,19 +80,16 @@
 
         appRegionService.initializeCities()
             .then(function (result) {
-                for (var i = 0; i < result.options.length; i++) {
-                    $rootScope.menuItems.push({
-                        displayName: "指标变化趋势-" + result.options[i],
-                        url: rootUrl + "/trend/" + result.options[i]
-                    });
-                    $rootScope.menuItems.push({
-                        displayName: "TOP掉话变化趋势-" + result.options[i],
-                        url: rootUrl + "/topDrop2GTrend/" + result.options[i]
-                    });
-                    $rootScope.menuItems.push({
-                        displayName: "TOP连接变化趋势-" + result.options[i],
-                        url: rootUrl + "/topConnection3GTrend/" + result.options[i]
-                    });
-                }
+                angular.forEach(result.options, function(district) {
+                    menuItemService.updateMenuItem($rootScope.menuItems, 0,
+                        "指标变化趋势-" + district,
+                        $rootScope.rootPath + "trend/" + district);
+                    menuItemService.updateMenuItem($rootScope.menuItems, 1,
+                        "TOP掉话变化趋势-" + district,
+                        $rootScope.rootPath + "topDrop2GTrend/" + district);
+                    menuItemService.updateMenuItem($rootScope.menuItems, 1,
+                        "TOP掉话变化趋势-" + district,
+                        $rootScope.rootPath + "topConnection3GTrend/" + district);
+                });
             });
     });

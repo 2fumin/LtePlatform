@@ -3,26 +3,11 @@
 }
 
 
-<div class="row" ng-app="myApp">
-    <div class="col-md-4">
-        <div class="panel panel-warning">
-            <div class="panel-heading">
-                <h2 class="panel-title">
-                    <strong>@ViewBag.Title</strong>
-                </h2>
-            </div>
-            <div class="panel-body">
-                <div class="list-group">
-                    <a class="list-group-item" ng-repeat="menuItem in menuItems"
-                       ng-class="{active: page.title == menuItem.displayName}"
-                       ng-href="{{menuItem.url}}">
-                        {{menuItem.displayName}}
-                    </a>
-                </div>
-            </div>
-        </div>
+<div class="row">
+    <div class="col-md-3" ng-show="sideBarShown">
+        <div ng-include="'/appViews/GeneralMenu.html'"></div>
     </div>
-    <div class="col-md-8">
+    <div ng-class="{'col-md-9': sideBarShown, 'col-md-12': !sideBarShown}">
         <div uib-alert ng-repeat="message in page.messages" type="{{message.type}}"
              dismiss-on-timeout="5000" close="closeAlert($index)">
             {{message.contents}}
