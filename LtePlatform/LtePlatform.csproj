@@ -957,7 +957,6 @@
     <Content Include="Scripts\coffee-script.js" />
     <Content Include="Scripts\college\college.menu.js" />
     <Content Include="Scripts\college\coverage.viewmodel.js" />
-    <Content Include="Scripts\college\infrastructure.viewmodel.js" />
     <Content Include="Scripts\college\kpi.controller.js" />
     <Content Include="Scripts\college\kpi.viewmodel.js" />
     <Content Include="Scripts\college\map.controller.js" />
@@ -1172,7 +1171,7 @@
     <Content Include="appViews\Parameters\Region\LteCellTable.html" />
     <Content Include="appViews\Parameters\Region\BtsTable.html" />
     <Content Include="appViews\Parameters\Region\CdmaCellTable.html" />
-    <Content Include="Views\Shared\_DistributionTable.cshtml" />
+    <Content Include="appViews\College\Infrastructure\DistributionDialog.html" />
     <None Include="Views\Parameters\BasicImport.cshtml" />
     <None Include="Views\Parameters\NeighborImport.cshtml" />
     <Content Include="appViews\Import\Alarm\Import.html" />

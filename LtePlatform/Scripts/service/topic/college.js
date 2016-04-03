@@ -103,6 +103,38 @@
                     deferred.reject(reason);
                 });
                 return deferred.promise;
+            },
+            queryLteDistributions: function (name) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('CollegeLteDistributions/'),
+                    params: {
+                        collegeName: name
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
+            },
+            queryCdmaDistributions: function (name) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('CollegeCdmaDistributions/'),
+                    params: {
+                        collegeName: name
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
             }
         }
     });

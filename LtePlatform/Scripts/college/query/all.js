@@ -89,6 +89,50 @@
             $log.info('Modal dismissed at: ' + new Date());
         });
     };
+    
+    $scope.showLteDistributions = function (name) {
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: '/appViews/College/Infrastructure/DistributionDialog.html',
+            controller: 'lte.distribution.dialog',
+            size: 'sm',
+            resolve: {
+                dialogTitle: function () {
+                    return name + "-" + "LTE室分信息";
+                },
+                name: function () {
+                    return name;
+                }
+            }
+        });
+        modalInstance.result.then(function (info) {
+            console.log(info);
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
+
+    $scope.showCdmaDistributions = function (name) {
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: '/appViews/College/Infrastructure/DistributionDialog.html',
+            controller: 'cdma.distribution.dialog',
+            size: 'sm',
+            resolve: {
+                dialogTitle: function () {
+                    return name + "-" + "CDMA室分信息";
+                },
+                name: function () {
+                    return name;
+                }
+            }
+        });
+        modalInstance.result.then(function (info) {
+            console.log(info);
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
 
     collegeService.queryStats().then(function(colleges) {
         $scope.collegeList = colleges;
