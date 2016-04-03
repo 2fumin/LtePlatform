@@ -1,5 +1,5 @@
 ﻿<div class="panel-group" id="accordion">
-    <div ng-repeat="menuItem in menuItems" class="panel panel-default">
+    <div ng-repeat="menuItem in menuItems" class="panel panel-default" ng-show="menuItem.subItems.length>0">
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#{{menuItem.tag}}">

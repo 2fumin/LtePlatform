@@ -1,5 +1,5 @@
 ﻿angular.module('myApp.url', [])
-    .factory('appUrlService', function () {
+    .factory('appUrlService', function() {
         var parseQueryString = function(queryString) {
             var data = {}, pair, separatorIndex, escapedKey, escapedValue, key, value;
 
@@ -37,7 +37,7 @@
                 return {};
             }
         };
-        var initializeAuthorization = function () {
+        var initializeAuthorization = function() {
             if (!sessionStorage.getItem("accessToken")) {
                 var fragment = getFragment();
 
@@ -65,5 +65,24 @@
             parseQueryString: parseQueryString,
             getAccessToken: getAccessToken,
             initializeAuthorization: initializeAuthorization
+        };
+    })
+    .factory('menuItemService', function() {
+        return {
+            updateMenuItem: function (items, index, title, url) {
+                if (index >= items.length) return;
+                var subItems = items[index].subItems;
+                for (var i = 0; i < subItems.length; i++) {
+                    if (subItems[i].displayName === title) return;
+                }
+                subItems.push({
+                    displayName: title,
+                    url: url
+                });
+                angular.forEach(items, function(item) {
+                    item.isActive = false;
+                });
+                items[index].isActive = true;
+            }
         };
     });

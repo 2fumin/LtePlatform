@@ -109,19 +109,29 @@
     })
     .run(function($rootScope) {
         var rootUrl = "/Parameters/List#";
-        $rootScope.menuItems = [];
+        $rootScope.menuItems = [
+            {
+                displayName: "总体情况",
+                tag: "overall",
+                isActive: true,
+                subItems: [
+                    {
+                        displayName: "基础数据总揽",
+                        url: rootUrl + "/"
+                    }, {
+                        displayName: "小区地图查询",
+                        url: rootUrl + "/query"
+                    }
+                ]
+            }, {
+                displayName: "详细查询",
+                tag: "details",
+                isActive: false,
+                subItems: []
+            }
+        ];
         $rootScope.rootPath = rootUrl + "/";
 
-        $rootScope.updateMenuItems = function(title, url) {
-            var items = $rootScope.menuItems[1].subItems;
-            for (var i = 0; i < items.length; i++) {
-                if (items[i].displayName === title) return;
-            }
-            items.push({
-                displayName: title,
-                url: url
-            });
-        };
         $rootScope.viewData = {
             workItems: []
         };
