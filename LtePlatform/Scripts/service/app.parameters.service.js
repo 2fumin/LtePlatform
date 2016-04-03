@@ -684,6 +684,26 @@
                         deferred.reject(reason);
                     });
                 return deferred.promise;
+            },
+            dumpSingleItem: function () {
+                var deferred = $q.defer();
+                $http.put(appUrlService.getApiUrl('DumpAlarm')).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            },
+            clearImportItems: function () {
+                var deferred = $q.defer();
+                $http.delete(appUrlService.getApiUrl('DumpAlarm')).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
             }
         };
     });

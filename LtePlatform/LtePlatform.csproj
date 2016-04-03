@@ -1051,7 +1051,6 @@
     <Content Include="Scripts\numeric\sparse2.js" />
     <Content Include="Scripts\numeric\svd.js" />
     <Content Include="Scripts\parameters\alarmimport.controller.js" />
-    <Content Include="Scripts\parameters\alarmimport.viewmodel.js" />
     <Content Include="Scripts\angular-ui\angular-animate.js" />
     <Content Include="Scripts\angular-ui\angular-aria.js" />
     <Content Include="Scripts\angular-ui\angular-cookies.js" />
