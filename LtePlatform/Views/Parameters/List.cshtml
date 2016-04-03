@@ -3,21 +3,12 @@
     ViewBag.Title = "基础数据模块";
 }
 
-<div class="panel panel-warning">
-    <div class="panel-heading">
-        <h2 class="panel-title">
-            <strong>@ViewBag.Title</strong>
-        </h2>
+<div class="row">
+    <div class="col-md-3">
+        <div ui-view="menu"></div>
     </div>
-    <div class="panel-body">
-        <div class="row">
-            <div class="col-md-3">
-                <div ui-view="menu"></div>
-            </div>
-            <div class="col-md-9">
-                <div ui-view="contents"></div>
-            </div>
-        </div>
+    <div class="col-md-9">
+        <div ui-view="contents"></div>
     </div>
 </div>
 

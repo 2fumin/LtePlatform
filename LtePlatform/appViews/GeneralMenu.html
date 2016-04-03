@@ -2,12 +2,12 @@
     <div ng-repeat="menuItem in menuItems" class="panel panel-default" ng-show="menuItem.subItems.length>0">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#{{menuItem.tag}}">
+                <a data-toggle="collapse" data-parent="#accordion" href="" ng-click="menuItem.isActive=!menuItem.isActive">
                     <strong>{{menuItem.displayName}}</strong>
                 </a>
             </h4>
         </div>
-        <div id="{{menuItem.tag}}" class="panel-collapse collapse" ng-class="{'in': menuItem.isActive}">
+        <div class="panel-collapse collapse" ng-class="{'in': menuItem.isActive}">
             <div class="list-group">
                 <a class="list-group-item" ng-repeat="subItem in menuItem.subItems" ng-class="{active: page.title == subItem.displayName}"
                    ng-href="{{subItem.url}}">
