@@ -67,32 +67,37 @@
         var rootUrl = "/Rutrace#";
         $rootScope.menuItems = [
             {
-                displayName: "指标总体情况",
-                url: rootUrl + "/"
+                displayName: "总体情况",
+                isActive: true,
+                subItems: [
+                    {
+                        displayName: "指标总体情况",
+                        url: rootUrl + "/"
+                    }, {
+                        displayName: "指标变化趋势",
+                        url: rootUrl + "/trend"
+                    }, {
+                        displayName: "TOP指标分析",
+                        url: rootUrl + "/top"
+                    }
+                ]
             }, {
-                displayName: "指标变化趋势",
-                url: rootUrl + "/trend"
+                displayName: "详细查询",
+                isActive: false,
+                subItems: []
             }, {
-                displayName: "TOP指标分析",
-                url: rootUrl + "/top"
-            }, {
-                displayName: "从MongoDB导入",
-                url: rootUrl + "/mongo"
+                displayName: "辅助功能",
+                isActive: false,
+                subItems: [
+                    {
+                        displayName: "从MongoDB导入",
+                        url: rootUrl + "/mongo"
+                    }
+                ]
             }
         ];
         $rootScope.rootPath = rootUrl + "/";
-        $rootScope.menuTitle = "精确覆盖率功能";
 
-        $rootScope.updateMenuItems = function(namePrefix, urlPrefix, name) {
-            var items = $rootScope.menuItems;
-            for (var i = 0; i < items.length; i++) {
-                if (items[i].displayName === namePrefix + "-" + name) return;
-            }
-            items.push({
-                displayName: namePrefix + "-" + name,
-                url: urlPrefix + "/" + name
-            });
-        };
         $rootScope.viewData = {
             workItems: []
         };

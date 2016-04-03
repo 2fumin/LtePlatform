@@ -2,10 +2,10 @@
     ViewBag.Title = "精确覆盖率";
 }
 <div class="row" ng-controller="rutrace.root">
-    <div class="col-md-4">
+    <div class="col-md-3" ng-show="sideBarShown">
         <div ng-include="'/appViews/GeneralMenu.html'"></div>
     </div>
-    <div class="col-md-8">
+    <div ng-class="{'col-md-9': sideBarShown, 'col-md-12': !sideBarShown}">
         <h3 class="text-center text-primary"><strong>{{page.title}}</strong></h3>
         <div ng-view></div>
     </div>
