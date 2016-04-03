@@ -39,14 +39,17 @@
         var rootUrl = "/Kpi/WorkItem#";
         $rootScope.menuItems = [
             {
-                displayName: "工单总览",
-                url: rootUrl + "/"
-            }, {
-                displayName: "统计图表",
-                url: rootUrl + "/chart"
-            }, {
-                displayName: "所有角色管理",
-                url: rootUrl + "/roles"
+                displayName: "总体情况",
+                isActive: true,
+                subItems: [
+                    {
+                        displayName: "工单总览",
+                        url: rootUrl + "/"
+                    }, {
+                        displayName: "统计图表",
+                        url: rootUrl + "/chart"
+                    }
+                ]
             }
         ];
         $rootScope.rootPath = rootUrl + "/";
