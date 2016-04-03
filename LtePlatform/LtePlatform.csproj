@@ -733,9 +733,11 @@
     <Content Include="Scripts\college\map\college.dialog.js" />
     <Content Include="Scripts\college\query\all.js" />
     <Content Include="Scripts\college\query\bts.dialog.js" />
+    <Content Include="Scripts\college\query\cdma.distribution.dialog.js" />
     <Content Include="Scripts\college\query\cdmaCell.dialog.js" />
     <Content Include="Scripts\college\query\cell.dialog.js" />
     <Content Include="Scripts\college\query\eNodeb.dialog.js" />
+    <Content Include="Scripts\college\query\lte.distribution.dialog.js" />
     <Content Include="Scripts\college\route.controller.js" />
     <Content Include="Scripts\kpi\basic\index.controller.js" />
     <Content Include="Scripts\kpi\basic\route.controller.js" />
