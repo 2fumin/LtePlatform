@@ -18,7 +18,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <img width="60" src="~/Content/Images/Logo_new_version.png"/>
+                <img width="60" src="~/Content/Images/Logo_new_version.png" ng-click="sideBarShown=!sideBarShown"/>
             </div>
             <div class="navbar-collapse collapse">
                 <div ng-include="'/appViews/HeaderMenu.html'"></div>
@@ -65,30 +65,7 @@
     <script src="~/Scripts/service/topic/college.js"></script>
     <script src="~/Scripts/service/topic/college.map.service.js"></script>
     <script src="~/Scripts/service/workitem.service.js"></script>
-    <script>
-        var app = angular.module('myApp', [
-            'college',
-            'college.map',
-            'handoff.parameters',
-            "highcharts-ng",
-            'huawei.mongo.parameters',
-            'kpi.basic',
-            'kpi.import',
-            'kpi.workitem',
-            'myApp.dumpInterference',
-            'myApp.kpi',
-            'myApp.parameters',
-            'myApp.region',
-            'myApp.url',
-            'ne.geometry',
-            'neighbor.mongo',
-            'ngRoute',
-            'parametersMap',
-            'parameters.chart',
-            "ui.bootstrap",
-            'ui.router'
-        ]);
-    </script>
+    <script src="~/Scripts/app/common.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

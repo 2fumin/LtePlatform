@@ -1,8 +1,8 @@
 ﻿<div class="row" ng-controller="homeController">
-    <div class="col-md-3">
+    <div class="col-md-3" ng-show="sideBarShown">
         <div ng-include="'/appViews/GeneralMenu.html'"></div>
     </div>
-    <div class="col-md-9">
+    <div ng-class="{'col-md-9': sideBarShown, 'col-md-12': !sideBarShown}">
         <div ng-include="'/appViews/Home.html'"></div>
     </div>
 </div>

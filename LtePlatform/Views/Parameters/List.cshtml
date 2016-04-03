@@ -4,10 +4,10 @@
 }
 
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-3" ng-show="sideBarShown">
         <div ui-view="menu"></div>
     </div>
-    <div class="col-md-9">
+    <div ng-class="{'col-md-9': sideBarShown, 'col-md-12': !sideBarShown}">
         <div ui-view="contents"></div>
     </div>
 </div>
