@@ -652,4 +652,38 @@
                 return deferred.promise;
             }
         }
+    })
+    .factory('alarmImportService',function($q, $http, appUrlService) {
+        return {
+            queryDumpHistory: function(begin, end) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('DumpAlarm'),
+                    params: {
+                        begin: begin,
+                        end: end
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            }, 
+            queryDumpItems: function () {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('DumpAlarm')
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            }
+        };
     });

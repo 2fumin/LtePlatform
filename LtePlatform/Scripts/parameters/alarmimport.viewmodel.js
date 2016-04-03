@@ -1,30 +1,9 @@
 ﻿function AlarmImportViewModel(app, dataModel) {
     var self = this;
 
-    self.initialize = ko.observable(true);
-    self.totalDumpItems = ko.observable(0);
-    self.totalSuccessItems = ko.observable(0);
-    self.totalFailItems = ko.observable(0);
-    self.beginDate = ko.observable((new Date()).getDateFromToday(-7).Format("yyyy-MM-dd"));
-    self.endDate = ko.observable((new Date()).Format("yyyy-MM-dd"));
     self.dumpHistory = ko.observableArray([]);
 
     Sammy(function () {
-        this.get('#alarmImport', function () {
-            $("#BeginDate").datepicker({ dateFormat: 'yy-mm-dd' });
-            $("#EndDate").datepicker({ dateFormat: 'yy-mm-dd' });
-            self.initialize(true);
-            self.updateHistoryItems();
-        });
-        this.post('#alarmZtePost', function () {
-            $("#BeginDate").datepicker({ dateFormat: 'yy-mm-dd' });
-            $("#EndDate").datepicker({ dateFormat: 'yy-mm-dd' });
-            self.initialize(false);
-            updateDumpHistory(self);
-            sendRequest(app.dataModel.dumpAlarmUrl, "GET", null, function (result) {
-                self.totalDumpItems(result);
-            });
-        });
         this.post('#alarmHwPost', function () {
             $("#BeginDate").datepicker({ dateFormat: 'yy-mm-dd' });
             $("#EndDate").datepicker({ dateFormat: 'yy-mm-dd' });
