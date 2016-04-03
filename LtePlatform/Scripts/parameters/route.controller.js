@@ -112,7 +112,6 @@
         $rootScope.menuItems = [
             {
                 displayName: "总体情况",
-                tag: "overall",
                 isActive: true,
                 subItems: [
                     {
@@ -125,7 +124,6 @@
                 ]
             }, {
                 displayName: "详细查询",
-                tag: "details",
                 isActive: false,
                 subItems: []
             }

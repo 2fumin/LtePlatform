@@ -45,7 +45,6 @@
     $scope.menuItems = [
         {
             displayName: "覆盖优化",
-            tag: "coverage",
             isActive: true,
             subItems: [
             {
@@ -60,7 +59,6 @@
             }]
         }, {
             displayName: "容量优化",
-            tag: "capacity",
             isActive: false,
             subItems: [{
                 displayName: "小区基础信息",
@@ -71,7 +69,6 @@
             }]
         }, {
             displayName: "质量分析",
-            tag: "kpi",
             isActive: false,
             subItems: [{
                 displayName: "传统指标监控",
