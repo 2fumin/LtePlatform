@@ -25,7 +25,7 @@
                         controller: "menu.root"
                     },
                     "contents": {
-                        templateUrl: viewDir + "AllMap.html",
+                        templateUrl: viewDir + "CollegeMap.html",
                         controller: "map.name"
                     },
                     'collegeList': {

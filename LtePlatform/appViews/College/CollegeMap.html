@@ -1,0 +1,12 @@
+﻿<h4 class="text-primary">{{collegeName}}基础信息地图</h4>
+<div class="btn-group">
+    <a class="btn" ng-class="{'btn-primary': collegeInfo.type=='lte', 'btn-default': collegeInfo.type!='lte'}"
+       ng-href="{{rootPath}}map/{{collegeName}}/lte">LTE</a>
+    <a class="btn" ng-class="{'btn-primary': collegeInfo.type=='cdma', 'btn-default': collegeInfo.type!='cdma'}"
+       ng-href="{{rootPath}}map/{{collegeName}}/cmda">CDMA</a>
+    <a class="btn" ng-class="{'btn-primary': collegeInfo.type=='lteDistribution', 'btn-default': collegeInfo.type!='lteDistribution'}"
+       ng-href="{{rootPath}}map/{{collegeName}}/lteDistribution">LTE室分</a>
+    <a class="btn" ng-class="{'btn-primary': collegeInfo.type=='cdmaDistribution', 'btn-default': collegeInfo.type!='cdmaDistribution'}"
+       ng-href="{{rootPath}}map/{{collegeName}}/cdmaDistribution">CDMA室分</a>
+</div>
+<div id="all-map" style="width: 100%;height: 600px;overflow: hidden;margin:0;"></div>
