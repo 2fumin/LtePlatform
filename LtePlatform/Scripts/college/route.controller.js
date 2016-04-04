@@ -12,12 +12,13 @@
                         controller: "all.map"
                     },
                     'collegeList': {
-                        templateUrl: viewDir + "CollegeMenu.html",
+                        templateUrl: viewDir + "CollegeMenuType.html",
                         controller: "college.menu"
                     }
                 },
                 url: "/"
             }).state('collegeMap', {
+                abstract: true,
                 views: {
                     'menu': {
                         templateUrl: "/appViews/GeneralMenu.html",
@@ -28,11 +29,13 @@
                         controller: "map.name"
                     },
                     'collegeList': {
-                        templateUrl: viewDir + "CollegeMenu.html",
+                        templateUrl: viewDir + "CollegeMenuType.html",
                         controller: "college.menu"
                     }
                 },
                 url: "/map/:name"
+            }).state('collegeMap.lte', {
+                url: "/lte"
             }).state('query', {
                 views: {
                     'menu': {
@@ -63,7 +66,8 @@
                 selected: 2015
             },
             url: $rootScope.rootPath + "map",
-            names: []
+            names: [],
+            type: ""
         };
         $rootScope.page = {
             title: "校园网总览"

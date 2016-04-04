@@ -1,0 +1,14 @@
+﻿<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            校园列表
+        </h4>
+    </div>
+    <div class="panel-body">
+        <label>年份</label>
+        <select ng-model="collegeInfo.year.selected" ng-options="p as p for p in collegeInfo.year.options"></select>
+        <div class="list-group">
+            <a ng-repeat="collegeName in collegeInfo.names" class="list-group-item" ng-href="{{collegeInfo.url}}/{{collegeName}}/{{collegeInfo.type}}">{{collegeName}}</a>
+        </div>
+    </div>
+</div>
