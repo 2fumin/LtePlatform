@@ -3,13 +3,13 @@
     ViewBag.Title = "第 10 章　指令详解";
 }
 
-<div class="row" ng-app="myApp" ng-controller="chap10.root">
-    <div class="col-md-4">
+<div class="row" ng-controller="chap10.root">
+    <div class="col-md-3">
         @{
             Html.RenderPartial("_AngularJSMenu");
         }
     </div>
-    <div class="col-md-8">
+    <div class="col-md-9">
         <h2>@ViewBag.Title</h2>
         <p>
             <ul class="nav nav-pills">
@@ -36,39 +36,7 @@
 
 @section Scripts
 {
-    <script src="~/Scripts/angular.js"></script>
-    <script src="~/Scripts/angular-route.min.js"></script>
     <link href="~/Content/themes/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
-    <script src="~/Scripts/angular-ui/bootstrap-datetimepicker.min.js"></script>
-    <script src="~/Scripts/angular-ui/local/bootstrap-datetimepicker.zh-CN.js"></script>
-    <script src="~/Scripts/angular-ui/ui-bootstrap.js"></script>
-    <script src="~/Scripts/angular-ui/uib/accordion.js"></script>
-    <script src="~/Scripts/angular-ui/uib/alert.js"></script>
-    <script src="~/Scripts/angular-ui/uib/buttons.js"></script>
-    <script src="~/Scripts/angular-ui/uib/carousel.js"></script>
-    <script src="~/Scripts/angular-ui/uib/collapse.js"></script>
-    <script src="~/Scripts/angular-ui/uib/dateparser.js"></script>
-    <script src="~/Scripts/angular-ui/uib/datepicker.js"></script>
-    <script src="~/Scripts/angular-ui/uib/debounce.js"></script>
-    <script src="~/Scripts/angular-ui/uib/dropdown.js"></script>
-    <script src="~/Scripts/angular-ui/uib/isClass.js"></script>
-    <script src="~/Scripts/angular-ui/uib/modal.js"></script>
-    <script src="~/Scripts/angular-ui/uib/pager.js"></script>
-    <script src="~/Scripts/angular-ui/uib/pagination.js"></script>
-    <script src="~/Scripts/angular-ui/uib/paging.js"></script>
-    <script src="~/Scripts/angular-ui/uib/popover.js"></script>
-    <script src="~/Scripts/angular-ui/uib/position.js"></script>
-    <script src="~/Scripts/angular-ui/uib/progressbar.js"></script>
-    <script src="~/Scripts/angular-ui/uib/rating.js"></script>
-    <script src="~/Scripts/angular-ui/uib/stackedMap.js"></script>
-    <script src="~/Scripts/angular-ui/uib/tooltip.js"></script>
-    <script src="~/Scripts/angular-ui/uib/tabs.js"></script>
-    <script src="~/Scripts/angular-ui/uib/timepicker.js"></script>
-    <script src="~/Scripts/angular-ui/uib/typeahead.js"></script>
-    <script src="~/Scripts/app/common.js"></script>
-    <script type="text/javascript">
-        var app = angular.module("myApp", ['ngRoute', "ui.bootstrap"]);
-    </script>
     <script src="~/Areas/TestPage/Scripts/angular/chap10.viewmodel.js"></script>
     <script src="~/Areas/TestPage/Scripts/angular/datetime.test.controller.js"></script>
     <script src="~/Areas/TestPage/Scripts/angular/menu.controller.js"></script>

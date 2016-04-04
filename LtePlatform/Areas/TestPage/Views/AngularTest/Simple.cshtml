@@ -3,13 +3,13 @@
     ViewBag.Title = "Simple AngularJS Test";
 }
 
-<div class="row" ng-app="simpleAngular" ng-controller="simple.root">
-    <div class="col-md-4">
+<div class="row" ng-controller="simple.root">
+    <div class="col-md-3">
         @{ 
             Html.RenderPartial("_AngularJSMenu");
         }
     </div>
-    <div class="col-md-8">
+    <div class="col-md-9">
         <h2>@ViewBag.Title</h2>
         <p>
             <ul class="nav nav-pills">
@@ -24,11 +24,6 @@
 
 @section Scripts
 {
-    <script src="~/Scripts/angular.js"></script>
-    <script src="~/Scripts/angular-route.min.js"></script>
-    <script>
-        var app = angular.module("simpleAngular", ['ngRoute']);
-    </script>
     <script src="~/Areas/TestPage/Scripts/angular/simple.controller.js"></script>
     <script src="~/Areas/TestPage/Scripts/angular/menu.controller.js"></script>
 }
