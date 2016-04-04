@@ -13,7 +13,7 @@
                     },
                     'collegeList': {
                         templateUrl: viewDir + "CollegeMenuType.html",
-                        controller: "college.menu"
+                        controller: "college.menu.lte"
                     }
                 },
                 url: "/"
@@ -29,13 +29,24 @@
                         controller: "map.name"
                     },
                     'collegeList': {
-                        templateUrl: viewDir + "CollegeMenuType.html",
-                        controller: "college.menu"
+                        templateUrl: viewDir + "CollegeMenuType.html"
                     }
                 },
                 url: "/map/:name"
             }).state('collegeMap.lte', {
+                views: {
+                    'collegeList': {
+                        controller: "college.menu.lte"
+                    }
+                },
                 url: "/lte"
+            }).state('collegeMap.cdma', {
+                views: {
+                    'collegeList': {
+                        controller: "college.menu.cdma"
+                    }
+                },
+                url: "/cdma"
             }).state('query', {
                 views: {
                     'menu': {
