@@ -1124,7 +1124,6 @@
     <None Include="Views\Parameters\List.cshtml" />
     <Content Include="Views\Dt\List.cshtml" />
     <Content Include="Views\Kpi\WorkItem.cshtml" />
-    <Content Include="Views\Kpi\TopConnection3G.cshtml" />
     <Content Include="Views\Kpi\Import.cshtml" />
     <Content Include="appViews\BasicKpi\Index.html" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />

@@ -28,12 +28,14 @@ namespace LtePlatform.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult AlarmImport()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult ZteAlarmPost(HttpPostedFileBase[] alarmZte)
         {
             if (alarmZte == null || alarmZte.Length <= 0 || string.IsNullOrEmpty(alarmZte[0]?.FileName))
@@ -47,6 +49,7 @@ namespace LtePlatform.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult HwAlarmPost(HttpPostedFileBase[] alarmHw)
         {
             if (alarmHw == null || alarmHw.Length <= 0 || string.IsNullOrEmpty(alarmHw[0]?.FileName))
@@ -59,12 +62,14 @@ namespace LtePlatform.Controllers
             return View("AlarmImport");
         }
 
+        [Authorize]
         public ActionResult BasicImport()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult LteImportPost()
         {
             var lteFile = Request.Files["lteExcel"];
@@ -77,6 +82,7 @@ namespace LtePlatform.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult CdmaImportPost()
         {
             var cdmaFile = Request.Files["cdmaExcel"];
@@ -88,12 +94,14 @@ namespace LtePlatform.Controllers
             return RedirectToAction("BasicImport");
         }
 
+        [Authorize]
         public ActionResult NeighborImport()
         {
             return View();
         }
         
         [HttpPost]
+        [Authorize]
         public ActionResult ZteNeighborPost(HttpPostedFileBase[] neighborZte)
         {
             if (neighborZte != null && neighborZte.Length > 0 && !string.IsNullOrEmpty(neighborZte[0]?.FileName))
@@ -108,6 +116,7 @@ namespace LtePlatform.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult HwNeighborPost(HttpPostedFileBase[] neighborHw)
         {
             if (neighborHw != null && neighborHw.Length > 0 && !string.IsNullOrEmpty(neighborHw[0]?.FileName))

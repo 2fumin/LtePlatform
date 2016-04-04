@@ -6,38 +6,6 @@
     self.collegeInfos = ko.observableArray([]);
     self.collegeNames = ko.observableArray([]);
 
-    Sammy(function () {
-        this.get('#collegeMap', function () {
-            $("#BeginDate").datepicker({ dateFormat: 'yy-mm-dd' });
-            $("#EndDate").datepicker({ dateFormat: 'yy-mm-dd' });
-
-            initializeMap('all-map', 11);
-            map.addEventListener("zoomend", function() {
-                if (map.getZoom() > 13) {
-                    drawCollegeENodebs(self);
-                    drawCollegeBtss(self);
-                    drawCollegeCells(self);
-                    drawCollegeCdmaCells(self);
-                    drawCollegeLteDistributions(self);
-                    drawCollegeCdmaDistributions(self);
-                }
-            });
-
-            $.ajax({
-                method: 'get',
-                url: app.dataModel.collegeQueryUrl,
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-                    drawCollegeMap(self, data);
-                    for (var i = 0; i < data.length; i++) {
-                        self.collegeNames.push(data[i].name);
-                    }
-                }
-            });
-        });
-        this.get('/College/Map', function () { this.app.runRoute('get', '#collegeMap'); });
-    });
-
     self.showRates = function() {
         sendRequest(app.dataModel.college4GTestUrl, "GET", {
             begin: self.beginDate(),

@@ -40,18 +40,15 @@ namespace LtePlatform.Controllers
         {
             return View();
         }
-
-        public ActionResult TopConnection3G()
-        {
-            return View();
-        }
-
+        
+        [Authorize]
         public ActionResult Import()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public ViewResult KpiImport()
         {
             var message = new List<string>();
@@ -78,12 +75,14 @@ namespace LtePlatform.Controllers
             return View("Import");
         }
 
+        [Authorize]
         public ActionResult PreciseImport()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public ViewResult PrecisePost()
         {
             var message = new List<string>();
@@ -102,12 +101,14 @@ namespace LtePlatform.Controllers
             return View("PreciseImport");
         }
 
+        [Authorize]
         public ActionResult WorkItemImport()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult WorkItemPost()
         {
             var httpPostedFileBase = Request.Files["workItem"];
@@ -123,12 +124,14 @@ namespace LtePlatform.Controllers
             return View("WorkItemImport");
         }
 
+        [Authorize]
         public ActionResult InterferenceImport()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult InterferencePost(HttpPostedFileBase[] files)
         {
             if (files == null || files.Length <= 0 || string.IsNullOrEmpty(files[0]?.FileName))
