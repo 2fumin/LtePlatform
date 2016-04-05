@@ -44,12 +44,16 @@ namespace Lte.Evaluations.DataService
                 var stats = CsvContext.Read<AlarmStatCsv>(reader, CsvFileDescription.CommaDescription).ToList();
                 foreach (var stat in stats)
                 {
-                    AlarmStats.Push(AlarmStat.ConstructStat(stat));
+                    AlarmStats.Push(Mapper.Map<AlarmStatCsv, AlarmStat>(stat));
                 }
             }
             catch
             {
-                // ignored
+                var stats = CsvContext.Read<AlarmCurrentZteCsv>(reader, CsvFileDescription.CommaDescription).ToList();
+                foreach (var stat in stats)
+                {
+                    AlarmStats.Push(Mapper.Map<AlarmCurrentZteCsv, AlarmStat>(stat));
+                }
             }
         }
 
@@ -60,7 +64,7 @@ namespace Lte.Evaluations.DataService
                 var stats = CsvContext.Read<AlarmStatHuawei>(reader, CsvFileDescription.CommaDescription).ToList();
                 foreach (var stat in stats)
                 {
-                    AlarmStats.Push(AlarmStat.ConstructStat(stat));
+                    AlarmStats.Push(Mapper.Map<AlarmStatHuawei, AlarmStat>(stat));
                 }
             }
             catch
@@ -82,6 +86,11 @@ namespace Lte.Evaluations.DataService
             {
                 _repository.Insert(stat);
             }
+            else
+            {
+                item.RecoverTime = stat.RecoverTime;
+            }
+            _repository.SaveChanges();
             return true;
         }
 

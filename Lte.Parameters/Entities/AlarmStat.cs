@@ -30,15 +30,6 @@ namespace Lte.Parameters.Entities
         public AlarmType AlarmType { get; set; }
 
         public string Details { get; set; }
-
-        public static AlarmStat ConstructStat(AlarmStatCsv info)
-        {
-            return Mapper.Map<AlarmStatCsv, AlarmStat>(info);
-        }
-
-        public static AlarmStat ConstructStat(AlarmStatHuawei info)
-        {
-            return Mapper.Map<AlarmStatHuawei, AlarmStat>(info);
-        }
+        
     }
 }
