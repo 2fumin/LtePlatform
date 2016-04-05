@@ -1,4 +1,6 @@
-﻿using Lte.Evaluations.DataService.Switch;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Lte.Evaluations.DataService.Switch;
 using Lte.Parameters.Abstract.Basic;
 using Lte.Parameters.Abstract.Switch;
 using Lte.Parameters.Entities.Basic;
@@ -39,6 +41,25 @@ namespace Lte.Evaluations.DataService.Basic
             var query = ConstructQuery(eNodebId, sectorId);
             return query?.Query();
         }
+
+        public HuaweiLocalCellDef QueryLocalCellDef(int eNodebId)
+        {
+            var eNodeb = _eNodebRepository.GetByENodebId(eNodebId);
+            if (eNodeb == null || eNodeb.Factory != "华为") return null;
+            var cells = _repository.GetRecentList(eNodebId);
+            return new HuaweiLocalCellDef
+            {
+                ENodebId = eNodebId,
+                LocalCellDict = cells.ToDictionary(x => x.LocalCellId, y => y.CellId)
+            };
+        }
+    }
+
+    public class HuaweiLocalCellDef
+    {
+        public int ENodebId { get; set; }
+
+        public Dictionary<int, int> LocalCellDict { get; set; }
     }
 
     internal class HuaweiCellQuery : IMongoQuery<CellHuaweiMongo>

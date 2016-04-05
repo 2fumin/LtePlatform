@@ -23,5 +23,12 @@ namespace LtePlatform.Controllers.Mongo
         {
             return _service.QueryRecentCellInfo(eNodebId, sectorId);
         }
+
+        [HttpGet]
+        public HuaweiLocalCellDef Get(int eNodebId)
+        {
+            return _service.QueryLocalCellDef(eNodebId);
+        }
+
     }
 }

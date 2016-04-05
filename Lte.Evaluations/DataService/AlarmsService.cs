@@ -5,8 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Lte.Domain.Common.Wireless;
 using Lte.Domain.LinqToCsv.Context;
 using Lte.Domain.LinqToCsv.Description;
+using Lte.Evaluations.DataService.Basic;
 using Lte.Evaluations.ViewModels;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities;
@@ -127,6 +129,28 @@ namespace Lte.Evaluations.DataService
                 begin = begin.AddDays(1);
             }
             return results;
-        } 
+        }
+
+        public int DumpHuaweiAlarmInfo(HuaweiLocalCellDef cellDef)
+        {
+            var items = _repository.GetAllList(DateTime.Now.AddDays(-100), DateTime.Now, cellDef.ENodebId);
+            foreach (var item in items.Where(x => x.SectorId == 0))
+            {
+                if (item.AlarmType == AlarmType.BadPerformance && item.AlarmCategory == AlarmCategory.Huawei)
+                {
+                    //eNodeB名称=北滘机楼LBBU38, 本地小区标识=2, PCI值=29, 下行频点=1825, 小区双工模式=FDD, 冲突类型=混淆, 小区名称=北滘雄峰R_2, eNodeB标识=552694, 小区标识=50
+                    var localCellId =
+                        int.Parse(
+                            item.Details.Split(new[] {", "}, StringSplitOptions.RemoveEmptyEntries)[1].Split('=')[1]);
+                    if (cellDef.LocalCellDict.ContainsKey(localCellId))
+                        item.SectorId = (byte) cellDef.LocalCellDict[localCellId];
+                    item.AlarmCategory = AlarmCategory.Qos;
+                }
+                else
+                    item.SectorId = 255;
+                _repository.Update(item);
+            }
+            return _repository.SaveChanges();
+        }
     } 
 }

@@ -206,6 +206,10 @@
       <Project>{25b6ccb6-4b12-4df2-b4c9-2d30ae6bd254}</Project>
       <Name>Lte.Parameters</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MongoDB.Bson\MongoDB.Bson.csproj">
+      <Project>{0e9a3a2a-49cd-4f6c-847c-dc79b4b65ce6}</Project>
+      <Name>MongoDB.Bson</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
