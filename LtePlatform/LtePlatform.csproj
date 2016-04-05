@@ -1132,7 +1132,6 @@
     <Content Include="appViews\BasicKpi\KpiTable.html" />
     <Content Include="Views\College\Edit.cshtml" />
     <Content Include="Views\College\Coverage.cshtml" />
-    <Content Include="Views\College\KpiReport.cshtml" />
     <Content Include="Views\College\PreciseKpi.cshtml" />
     <Content Include="appViews\College\CollegeMenu.html" />
     <Content Include="Views\College\_Map.cshtml" />

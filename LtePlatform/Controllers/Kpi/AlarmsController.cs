@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Lte.Evaluations.DataService;
+using Lte.Evaluations.DataService.Basic;
 using Lte.Evaluations.ViewModels;
 using LtePlatform.Models;
 
@@ -39,6 +40,12 @@ namespace LtePlatform.Controllers.Kpi
         public IEnumerable<AlarmView> Get(int eNodebId, byte sectorId, DateTime begin, DateTime end)
         {
             return _service.Get(eNodebId, sectorId, begin, end);
+        }
+
+        [HttpPost]
+        public int Post(HuaweiLocalCellDef cellDef)
+        {
+            return _service.DumpHuaweiAlarmInfo(cellDef);
         }
     }
 }
