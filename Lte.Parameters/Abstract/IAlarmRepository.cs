@@ -11,6 +11,10 @@ namespace Lte.Parameters.Abstract
 
         List<AlarmStat> GetAllList(DateTime begin, DateTime end, int eNodebId);
 
+        List<AlarmStat> GetAllList(DateTime begin, DateTime end, int eNodebId, byte sectorId);
+
+        int Count(DateTime begin, DateTime end, int eNodebId);
+
         int SaveChanges();
     }
 }

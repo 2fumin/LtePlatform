@@ -30,9 +30,15 @@ namespace Lte.Evaluations.DataService
             return Mapper.Map<IEnumerable<AlarmStat>, IEnumerable<AlarmView>>(stats);
         }
 
+        public IEnumerable<AlarmView> Get(int eNodebId, byte sectorId, DateTime begin, DateTime end)
+        {
+            var stats = _repository.GetAllList(begin, end, eNodebId, sectorId);
+            return Mapper.Map<IEnumerable<AlarmStat>, IEnumerable<AlarmView>>(stats);
+        }
+
         public int GetCounts(int eNodebId, DateTime begin, DateTime end)
         {
-            return _repository.GetAllList(begin, end, eNodebId).Count;
+            return _repository.Count(begin, end, eNodebId);
         }
 
         private static Stack<AlarmStat> AlarmStats { get; set; }

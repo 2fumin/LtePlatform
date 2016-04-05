@@ -29,5 +29,16 @@ namespace LtePlatform.Controllers.Kpi
         {
             return _service.Get(eNodebId, begin, end);
         }
+
+        [ApiDoc("查询指定基站和时间段内的告警列表视图")]
+        [ApiParameterDoc("eNodebId", "基站编号")]
+        [ApiParameterDoc("sectorId", "扇区编号")]
+        [ApiParameterDoc("begin", "开始日期")]
+        [ApiParameterDoc("end", "结束日期")]
+        [ApiResponse("告警列表视图")]
+        public IEnumerable<AlarmView> Get(int eNodebId, byte sectorId, DateTime begin, DateTime end)
+        {
+            return _service.Get(eNodebId, sectorId, begin, end);
+        }
     }
 }
