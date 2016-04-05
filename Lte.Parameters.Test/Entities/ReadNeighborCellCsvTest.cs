@@ -71,5 +71,6 @@ namespace Lte.Parameters.Test.Entities
             var infos = NeighborCellZteCsv.ReadNeighborCellZteCsvs(reader);
             Assert.AreEqual(infos.Count, 998);
         }
+
     }
 }

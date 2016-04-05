@@ -49,11 +49,7 @@ namespace Lte.Evaluations.DataService
             }
             catch
             {
-                var stats = CsvContext.Read<AlarmCurrentZteCsv>(reader, CsvFileDescription.CommaDescription).ToList();
-                foreach (var stat in stats)
-                {
-                    AlarmStats.Push(Mapper.Map<AlarmCurrentZteCsv, AlarmStat>(stat));
-                }
+                //ignore.
             }
         }
 
@@ -76,7 +72,7 @@ namespace Lte.Evaluations.DataService
         public bool DumpOneStat()
         {
             var stat = AlarmStats.Pop();
-            if (stat == null) return false;
+            if (stat == null) throw new NullReferenceException("alarm stat is null!");
             var item =
                 _repository.FirstOrDefault(
                     x =>
@@ -97,6 +93,11 @@ namespace Lte.Evaluations.DataService
         public int GetAlarmsToBeDump()
         {
             return AlarmStats.Count;
+        }
+
+        public IEnumerable<AlarmStat> QueryAlarmStats()
+        {
+            return AlarmStats;
         }
 
         public void ClearAlarmStats()
