@@ -62,6 +62,9 @@
                     if (btss.length === 0) return;
                     showCdmaElements(btss, showBtsInfo, showCellInfo);
                 });
+            },
+            showENodebsElements: function(eNodebs, showENodebInfo, showCellInfo) {
+                return showENodebsElements(eNodebs, showENodebInfo, showCellInfo);
             }
         }
     })
@@ -106,6 +109,27 @@
                 modalInstance.result.then(function (info) {
                     console.log(info);
                 }, function () {
+                    $log.info('Modal dismissed at: ' + new Date());
+                });
+            },
+            showCellInfo: function(cell) {
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: '/appViews/Rutrace/Map/NeighborMapInfoBox.html',
+                    controller: 'map.neighbor.dialog',
+                    size: 'sm',
+                    resolve: {
+                        dialogTitle: function() {
+                            return cell.cellName + "小区信息";
+                        },
+                        neighbor: function() {
+                            return cell;
+                        }
+                    }
+                });
+                modalInstance.result.then(function(nei) {
+                    console.log(nei);
+                }, function() {
                     $log.info('Modal dismissed at: ' + new Date());
                 });
             }

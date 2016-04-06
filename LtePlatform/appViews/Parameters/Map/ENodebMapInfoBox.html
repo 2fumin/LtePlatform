@@ -25,15 +25,15 @@
                 </li>
                 <li>
                     <div class="left">入网日期</div>
-                    <div class="rmb">{{eNodeb.openDate}}</div>
+                    <div class="rmb">{{eNodeb.openDate | date: "yyyy-MM-dd"}}</div>
                 </li>
                 <li>
                     <div class="left">经度</div>
-                    <div class="rmb">{{eNodeb.longtitute}}</div>
+                    <div class="rmb">{{eNodeb.longtitute | number: 3}}</div>
                 </li>
                 <li>
                     <div class="left">纬度</div>
-                    <div class="rmb">{{eNodeb.lattitute}}</div>
+                    <div class="rmb">{{eNodeb.lattitute | number: 3}}</div>
                 </li>
                 <li>
                     <div class="left">厂家</div>

@@ -20,42 +20,21 @@
         });
     };
 
-    $scope.showCellInfo = function(cell) {
-        var modalInstance = $uibModal.open({
-            animation: true,
-            templateUrl: '/appViews/Rutrace/Map/NeighborMapInfoBox.html',
-            controller: 'map.neighbor.dialog',
-            size: 'sm',
-            resolve: {
-                dialogTitle: function () {
-                    return cell.cellName + "小区信息";
-                },
-                neighbor: function () {
-                    return cell;
-                }
-            }
-        });
-        modalInstance.result.then(function (nei) {
-            console.log(nei);
-        }, function () {
-            $log.info('Modal dismissed at: ' + new Date());
-        });
-    };
     $scope.queryItems = function() {
         baiduMapService.clearOverlays();
         if ($scope.network.selected === "LTE") {
             if ($scope.queryText.trim() === "") {
                 parametersMapService.showElementsInOneTown($scope.city.selected, $scope.district.selected, $scope.town.selected,
-                    parametersDialogService.showENodebInfo, $scope.showCellInfo);
+                    parametersDialogService.showENodebInfo, parametersDialogService.showCellInfo);
             } else {
-                parametersMapService.showElementsWithGeneralName($scope.queryText, parametersDialogService.showENodebInfo, $scope.showCellInfo);
+                parametersMapService.showElementsWithGeneralName($scope.queryText, parametersDialogService.showENodebInfo, parametersDialogService.showCellInfo);
             }
         } else {
             if ($scope.queryText.trim() === "") {
                 parametersMapService.showCdmaInOneTown($scope.city.selected, $scope.district.selected, $scope.town.selected,
-                    parametersDialogService.showBtsInfo, $scope.showCellInfo);
+                    parametersDialogService.showBtsInfo, parametersDialogService.showCellInfo);
             } else {
-                parametersMapService.showCdmaWithGeneralName($scope.queryText, parametersDialogService.showBtsInfo, $scope.showCellInfo);
+                parametersMapService.showCdmaWithGeneralName($scope.queryText, parametersDialogService.showBtsInfo, parametersDialogService.showCellInfo);
             }
         }
     };
