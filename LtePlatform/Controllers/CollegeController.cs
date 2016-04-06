@@ -23,11 +23,6 @@ namespace LtePlatform.Controllers
         {
             return View();
         }
-
-        public ActionResult KpiReport()
-        {
-            return View();
-        }
         
         public ActionResult PreciseKpi()
         {

@@ -60,8 +60,54 @@
             showCdmaWithGeneralName: function (name, showBtsInfo, showCellInfo) {
                 networkElementService.queryBtssByGeneralName(name).then(function (btss) {
                     if (btss.length === 0) return;
-                    showCdmaElements(eNodebs, showBtsInfo, showCellInfo);
+                    showCdmaElements(btss, showBtsInfo, showCellInfo);
                 });
             }
         }
+    })
+    .factory('parametersDialogService', function ($uibModal, $log) {
+        return {
+            showENodebInfo: function(eNodeb) {
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: '/appViews/Parameters/Map/ENodebMapInfoBox.html',
+                    controller: 'map.eNodeb.dialog',
+                    size: 'sm',
+                    resolve: {
+                        dialogTitle: function() {
+                            return eNodeb.name + "-" + "基站基本信息";
+                        },
+                        eNodeb: function() {
+                            return eNodeb;
+                        }
+                    }
+                });
+                modalInstance.result.then(function(info) {
+                    console.log(info);
+                }, function() {
+                    $log.info('Modal dismissed at: ' + new Date());
+                });
+            },
+            showBtsInfo: function (bts) {
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: '/appViews/Parameters/Map/BtsMapInfoBox.html',
+                    controller: 'map.bts.dialog',
+                    size: 'sm',
+                    resolve: {
+                        dialogTitle: function () {
+                            return bts.name + "-" + "基站基本信息";
+                        },
+                        bts: function () {
+                            return bts;
+                        }
+                    }
+                });
+                modalInstance.result.then(function (info) {
+                    console.log(info);
+                }, function () {
+                    $log.info('Modal dismissed at: ' + new Date());
+                });
+            }
+        };
     });

@@ -1,29 +1,4 @@
 ﻿
-var drawCollegeMap = function (viewModel, data) {
-    for (var index = 0; index < data.length; index++) {
-        var info = {};
-        info.id = data[index].id;
-        info.name = data[index].name;
-        viewModel.collegeInfos.push(info);
-        $.ajax({
-            method: 'get',
-            url: app.dataModel.collegeRegionUrl + '/' + info.id,
-            contentType: "application/json; charset=utf-8",
-            success: function (result) {
-                drawCollegeRegions(viewModel, result);
-            }
-        });
-        $.ajax({
-            method: 'get',
-            url: app.dataModel.collegeStatUrl + '/' + info.id,
-            contentType: "application/json; charset=utf-8",
-            success: function (college) {
-                addOneCollegeMarkerInfo(viewModel, college);
-            }
-        });
-    }
-};
-
 var drawCollegeENodebs = function(viewModel) {
     if (map.eNodebMarkers.length > 0) return;
     sendRequest(app.dataModel.collegeENodebUrl, "POST", {
