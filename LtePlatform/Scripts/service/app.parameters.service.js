@@ -704,6 +704,16 @@
                         deferred.reject(reason);
                     });
                 return deferred.promise;
+            },
+            updateHuaweiAlarmInfos: function(cellDef) {
+                var deferred = $q.defer();
+                $http.post(appUrlService.getApiUrl('Alarms'), cellDef).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
             }
         };
     });

@@ -1,5 +1,5 @@
 ﻿app.controller("eNodeb.info", function ($scope, $stateParams, networkElementService, cellHuaweiMongoService, 
-    intraFreqHoService, interFreqHoService) {
+    alarmImportService, intraFreqHoService, interFreqHoService) {
     $scope.page.title = $stateParams.name + "基础信息";
 
     //查询基站基本信息
@@ -7,7 +7,7 @@
         $scope.eNodebDetails = result;
         if (result.factory === '华为') {
             cellHuaweiMongoService.queryLocalCellDef(result.eNodebId).then(function(cellDef) {
-
+                alarmImportService.updateHuaweiAlarmInfos(cellDef).then(function() {});
             });
         }
     });

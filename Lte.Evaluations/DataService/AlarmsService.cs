@@ -136,15 +136,40 @@ namespace Lte.Evaluations.DataService
             var items = _repository.GetAllList(DateTime.Now.AddDays(-100), DateTime.Now, cellDef.ENodebId);
             foreach (var item in items.Where(x => x.SectorId == 0))
             {
-                if (item.AlarmType == AlarmType.BadPerformance && item.AlarmCategory == AlarmCategory.Huawei)
+                if (item.AlarmCategory == AlarmCategory.Huawei)
                 {
-                    //eNodeB名称=北滘机楼LBBU38, 本地小区标识=2, PCI值=29, 下行频点=1825, 小区双工模式=FDD, 冲突类型=混淆, 小区名称=北滘雄峰R_2, eNodeB标识=552694, 小区标识=50
-                    var localCellId =
-                        int.Parse(
-                            item.Details.Split(new[] {", "}, StringSplitOptions.RemoveEmptyEntries)[1].Split('=')[1]);
-                    if (cellDef.LocalCellDict.ContainsKey(localCellId))
-                        item.SectorId = (byte) cellDef.LocalCellDict[localCellId];
-                    item.AlarmCategory = AlarmCategory.Qos;
+                    switch (item.AlarmType)
+                    {
+                        //eNodeB名称=大良南区电信LBBU6, 本地小区标识=3, 小区双工模式=FDD, 小区名称=大良美的广场擎峰_3, eNodeB标识=501157, 小区标识=51, 具体问题=射频单元异常
+                        case AlarmType.CellDown://AlarmType=4
+                            item.AlarmCategory = AlarmCategory.Qos;
+                            item.SectorId =
+                                byte.Parse(
+                                    item.Details.Split(new[] {", "}, StringSplitOptions.RemoveEmptyEntries)[5].Split('=')
+                                        [1]);
+                            break;
+                        //eNodeB名称=杏坛电信LBBU13, 本地小区标识=2, PCI值=212, 下行频点=1825, 小区双工模式=FDD, 冲突类型=混淆, 小区名称=杏坛万亩员工村R_2, eNodeB标识=500578, 小区标识=50
+                        case AlarmType.PciCrack://AlarmType=46
+                            item.AlarmCategory = AlarmCategory.Qos;
+                            item.SectorId =
+                                byte.Parse(
+                                    item.Details.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries)[8].Split('=')
+                                        [1]);
+                            break;
+                        //eNodeB名称=乐从奥运林, 本地小区标识=0, 小区双工模式=FDD, 小区当前使用发射通道数=2, 小区当前使用接收通道数=4, 小区名称=乐从奥运林_0, eNodeB标识=499773, 小区标识=0, 具体问题=基带降额
+                        //eNodeB名称=乐从东平桥脚, 本地小区标识=4, 小区双工模式=FDD, 小区当前使用发射通道数=1, 小区当前使用接收通道数=2, 小区名称=乐从东平桥脚_4, eNodeB标识=500264, 小区标识=4, 具体问题=通道异常
+                        //eNodeB名称=容桂华口接入机房LBBU2, 本地小区标识=1, 小区双工模式=FDD, 小区当前使用发射通道数=2, 小区当前使用接收通道数=4, 小区名称=容桂骏业路R_1, eNodeB标识=552563, 小区标识=49, 具体问题=基带降额
+                        case AlarmType.BadPerformance://AlarmType=43
+                            item.SectorId =
+                               byte.Parse(
+                                   item.Details.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries)[7].Split('=')
+                                       [1]);
+                            item.AlarmCategory = AlarmCategory.Apparatus;
+                            break;
+                        default:
+                            item.SectorId = 255;
+                            break;
+                    }
                 }
                 else
                     item.SectorId = 255;

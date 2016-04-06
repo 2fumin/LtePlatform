@@ -2,53 +2,53 @@
 {
     public enum AlarmType : short
     {
-        CeNotEnough,
+        CeNotEnough,//0
         StarUnlocked,
         TrunkProblem,
         RssiProblem,
-        CellDown,
+        CellDown,//4
         VswrProblem,
         VswrLte,
         Unimportant,
         LinkBroken,
         X2Broken,
-        X2UserPlane,
+        X2UserPlane,//10
         S1Broken,
         S1UserPlane,
         EthernetBroken,
         LteCellDown,
-        LteCellError,
+        LteCellError,//15
         SuperCellDown,
         ENodebDown,
         GnssStar,
         GnssFeed,
-        PaDeactivate,
+        PaDeactivate,//20
         RruBroken,
         RxChannel,
         SntpFail,
         VersionError,
-        InitializationError,
+        InitializationError,//25
         BoardInexist,
         BoardInitialize,
         BoardPowerDown,
         BoardCommunication,
-        BoardSoftId,
+        BoardSoftId,//30
         FiberReceiver,
         FiberModule,
         BbuInitialize,
         Temperature,
-        FanTemperature,
+        FanTemperature,//35
         NoClock,
         InnerError,
         SoftwareAbnormal,
         ApparatusPowerDown,
-        InputVolte,
+        InputVolte,//40
         OuterApparatus,
         ParametersConfiguation,
-        BadPerformance,
+        BadPerformance,//43
         Others,
         DatabaseDelay,
-        PciCrack,
+        PciCrack,//46
         RruRtwp,
         BbuCpriInterface,
         BbuCpriLost,
