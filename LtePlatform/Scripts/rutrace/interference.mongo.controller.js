@@ -48,6 +48,9 @@ app.controller('interference.mongo', function ($scope, $uibModal, $log, dumpProg
                 sectorId: function() {
                     return cell.sectorId;
                 },
+                pci: function() {
+                    return cell.pci;
+                },
                 begin: function() {
                     return $scope.beginDate.value;
                 },

@@ -1,7 +1,8 @@
-﻿app.controller('dump.cell.mongo', function ($scope, $uibModalInstance, dumpProgress, appFormatService, dialogTitle, eNodebId, sectorId, begin, end) {
+﻿app.controller('dump.cell.mongo', function ($scope, $uibModalInstance, dumpProgress, appFormatService, dialogTitle, eNodebId, sectorId, pci, begin, end) {
     $scope.dialogTitle = dialogTitle;
 
     $scope.dateRecords = [];
+    $scope.currentDetails = [];
 
     $scope.ok = function () {
         $uibModalInstance.close($scope.dateRecords);
@@ -14,10 +15,17 @@
     $scope.queryRecords = function() {
         angular.forEach($scope.dateRecords, function(record) {
             dumpProgress.queryExistedItems(eNodebId, sectorId, record.date).then(function(result) {
-                var expectedDate = appFormatService.getDate(result.item1);
                 for (var i = 0; i < $scope.dateRecords.length; i++) {
-                    if ($scope.dateRecords[i].date === expectedDate) {
-                        $scope.dateRecords[i].existedRecords = result.item2;
+                    if ($scope.dateRecords[i].date === result.date) {
+                        $scope.dateRecords[i].existedRecords = result.value;
+                        break;
+                    }
+                }
+            });
+            dumpProgress.queryMongoItems(eNodebId, pci, record.date).then(function (result) {
+                for (var i = 0; i < $scope.dateRecords.length; i++) {
+                    if ($scope.dateRecords[i].date === result.date) {
+                        $scope.dateRecords[i].mongoRecords = result.value;
                         break;
                     }
                 }
@@ -25,7 +33,10 @@
         });
     };
 
-    $scope.dateRecords = [];
+    $scope.updateDetails = function(records) {
+        $scope.currentDetails = records;
+    };
+
     var startDate = new Date(begin);
     while (startDate < end) {
         var date = new Date(startDate);

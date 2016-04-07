@@ -26,9 +26,9 @@ namespace LtePlatform.Controllers.Mr
         [ApiParameterDoc("pci", "PCI")]
         [ApiParameterDoc("date", "时间戳信息")]
         [ApiResponse("统计信息")]
-        public InterferenceMatrixMongo Get(int eNodebId, short pci, DateTime date)
+        public List<InterferenceMatrixMongo> Get(int eNodebId, short pci, DateTime date)
         {
-            return _service.QueryMongo(eNodebId, pci, date);
+            return _service.QueryMongoList(eNodebId, pci, date);
         }
 
         [HttpGet]

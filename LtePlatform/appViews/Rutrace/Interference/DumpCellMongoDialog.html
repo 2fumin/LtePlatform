@@ -9,12 +9,44 @@
     <tr>
         <th>日期</th>
         <th>已导入数</th>
+        <th>Mongo记录数</th>
+        <th>操作</th>
     </tr>
     </thead>
     <tbody>
     <tr ng-repeat="record in dateRecords">
         <td>{{record.date | date: "yyyy-MM-dd"}}</td>
         <td>{{record.existedRecords}}</td>
+        <td>{{record.mongoRecords.length}}</td>
+        <td>
+            <div class="btn-group">
+                <button class="btn btn-default" ng-click="updateDetails(record.mongoRecords)">详情</button>
+                <button class="btn btn-primary" ng-click="dumpRecords(record.mongoRecords)" ng-show="record.mongoRecords.length">导入</button>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<p>==============</p>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>邻区PCI</th>
+        <th>干扰水平</th>
+        <th>Mod3干扰数</th>
+        <th>Mod6干扰数</th>
+        <th>6dB干扰数</th>
+        <th>10dB干扰数</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="detail in currentDetails">
+        <td>{{detail.destPci}}</td>
+        <td>{{detail.interferenceLevel}}</td>
+        <td>{{detail.mod3Interferences}}</td>
+        <td>{{detail.mod6Interferences}}</td>
+        <td>{{detail.overInterferences10Db}}</td>
+        <td>{{detail.overInterferences6Db}}</td>
     </tr>
     </tbody>
 </table>

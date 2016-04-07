@@ -91,9 +91,28 @@
                         date: date
                     }
                 }).success(function(result) {
-                    deferred.resolve(result);
+                    deferred.resolve({ date: date, value: result });
                 })
                 .error(function(reason) {
+                    deferred.reject(reason);
+                });
+            return deferred.promise;
+        };
+
+        serviceInstance.queryMongoItems = function (eNodebId, pci, date) {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: appUrlService.getApiUrl('DumpInterference'),
+                params: {
+                    eNodebId: eNodebId,
+                    pci: pci,
+                    date: date
+                }
+            }).success(function (result) {
+                deferred.resolve({date: date, value: result});
+            })
+                .error(function (reason) {
                     deferred.reject(reason);
                 });
             return deferred.promise;

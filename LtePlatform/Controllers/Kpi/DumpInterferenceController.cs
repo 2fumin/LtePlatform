@@ -46,15 +46,15 @@ namespace LtePlatform.Controllers.Kpi
         }
 
         [HttpGet]
-        public List<InterferenceMatrixMongo> Get(int eNodebId, short pci, DateTime date)
+        public List<InterferenceMatrixStat> Get(int eNodebId, short pci, DateTime date)
         {
-            return _service.QueryMongoList(eNodebId, pci, date);
+            return _service.QueryStats(eNodebId, pci, date);
         }
 
         [HttpGet]
-        public Tuple<DateTime,int> GetExisted(int eNodebId, byte sectorId, DateTime date)
+        public int GetExisted(int eNodebId, byte sectorId, DateTime date)
         {
-            return new Tuple<DateTime, int>(date, _service.QueryExistedStatsCount(eNodebId, sectorId, date));
+            return _service.QueryExistedStatsCount(eNodebId, sectorId, date);
         }
 
         [HttpPost]
