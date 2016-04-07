@@ -24,10 +24,13 @@ namespace Lte.Parameters.Test.Mr
         {
             var mongoStat = new InterferenceMatrixMongo
             {
-                INTERF_ONLY_COFREQ = 26.34,
-                current_date = "201512301445",
-                ENODEBID_PCI_NPCI_NFREQ = "500026_88_301_1825",
-                OVERCOVER_COFREQ_10DB = 2
+                InterfLevel = 26.34,
+                CurrentDate = new DateTime(2015,12,30,14,45,0),
+                ENodebId = 500026,
+                Pci = 88,
+                NeighborPci =301,
+                NeighborFreq = 1825,
+                Over10db = 2
             };
             var stat = Mapper.Map<InterferenceMatrixMongo, InterferenceMatrixStat>(mongoStat);
             Assert.IsNotNull(stat);

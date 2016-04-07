@@ -11,18 +11,13 @@ namespace Lte.Parameters.Abstract
 {
     public interface IInterferenceMongoRepository : IRepository<InterferenceMatrixMongo, ObjectId>
     {
-        List<InterferenceMatrixMongo> GetByENodebInfo(string eNodebInfo);
-
-        InterferenceMatrixMongo GetOne(string eNodebInfo, string timeString);
-
         InterferenceMatrixMongo GetOne(int eNodebId, short pci);
 
-        InterferenceMatrixMongo GetOne(int eNodebId, short pci, string dateString);
+        InterferenceMatrixMongo GetOne(int eNodebId, short pci, DateTime time);
 
         List<InterferenceMatrixMongo> GetList(int eNodebId, short pci);
 
-        List<InterferenceMatrixMongo> GetList(int eNodebId, short pci, DateTime time);
+        List<InterferenceMatrixMongo> GetList(int eNodebId, short pci, DateTime date);
 
-        List<InterferenceMatrixMongo> GetList(int eNodebId, short pci, string dateString);
     }
 }

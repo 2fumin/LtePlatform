@@ -19,17 +19,7 @@ namespace LtePlatform.Controllers.Mr
         {
             _service = service;
         }
-
-        [HttpGet]
-        [ApiDoc("根据小区信息和时间戳信息从MongoDB数据库中获取一条统计信息")]
-        [ApiParameterDoc("eNodebInfo", "小区信息")]
-        [ApiParameterDoc("timeString", "时间戳信息")]
-        [ApiResponse("一条统计信息（没有小区信息")]
-        public InterferenceMatrixStat Get(string eNodebInfo, string timeString)
-        {
-            return _service.QueryStat(eNodebInfo, timeString);
-        }
-
+        
         [HttpGet]
         [ApiDoc("根据小区信息和时间戳信息从MongoDB数据库中获取统计信息")]
         [ApiParameterDoc("eNodebId", "基站编号")]

@@ -27,31 +27,6 @@ namespace MongoDB.Driver.Legacy.TestHelpers
             if (MrMongoCollection == null)
                 MrMongoCollection = MrMongoDatabase.GetCollection<InterferenceMatrixMongo>("CellInterfMatrix");
         }
-
-        public Task<List<BsonDocument>> GetInterferenceInfos(string eNodebInfo)
-        {
-            return MrCollection.Find(new BsonDocument("ENODEBID_PCI_NPCI_NFREQ", eNodebInfo)).ToListAsync();
-        }
-
-        public Task<List<InterferenceMatrixMongo>> GetMongoInfos(string eNodebInfo)
-        {
-            return MrMongoCollection.Find(x => x.ENODEBID_PCI_NPCI_NFREQ == eNodebInfo).ToListAsync();
-        }
-
-        public Task<List<BsonDocument>> GetInterferenceInfosByTime(string timeString)
-        {
-            return MrCollection.Find(new BsonDocument("current_date", timeString)).ToListAsync();
-        }
-
-        public Task<List<BsonDocument>> GetInterferenceInfosByENodebAndTime(string eNodebInfo, string timeString)
-        {
-            return
-                MrCollection.Find(
-                    new BsonDocument(new List<BsonElement>
-                    {
-                        new BsonElement("ENODEBID_PCI_NPCI_NFREQ", eNodebInfo),
-                        new BsonElement("current_date", timeString)
-                    })).ToListAsync();
-        }
+        
     }
 }

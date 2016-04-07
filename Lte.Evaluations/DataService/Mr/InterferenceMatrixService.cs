@@ -78,13 +78,7 @@ namespace Lte.Evaluations.DataService.Mr
             }
             return count;
         }
-
-        public InterferenceMatrixStat QueryStat(string eNodebInfo, string timeString)
-        {
-            var mongoStat = _mongoRepository.GetOne(eNodebInfo, timeString);
-            return mongoStat == null ? null : Mapper.Map<InterferenceMatrixMongo, InterferenceMatrixStat>(mongoStat);
-        }
-
+        
         public InterferenceMatrixMongo QueryMongo(int eNodebId, short pci)
         {
             return _mongoRepository.GetOne(eNodebId, pci);
@@ -92,17 +86,17 @@ namespace Lte.Evaluations.DataService.Mr
 
         public InterferenceMatrixMongo QueryMongo(int eNodebId, short pci, DateTime date)
         {
-            return _mongoRepository.GetOne(eNodebId, pci, date.ToString("yyyyMMdd"));
+            return _mongoRepository.GetOne(eNodebId, pci, date);
         }
 
         public List<InterferenceMatrixMongo> QueryMongoList(int eNodebId, short pci, DateTime date)
         {
-            return _mongoRepository.GetList(eNodebId, pci, date.ToString("yyyyMMdd"));
+            return _mongoRepository.GetList(eNodebId, pci, date);
         }
 
         public List<InterferenceMatrixStat> QueryStats(int eNodebId, short pci, DateTime time)
         {
-            var statList = _mongoRepository.GetList(eNodebId, pci, time.ToString("yyyyMMdd"));
+            var statList = _mongoRepository.GetList(eNodebId, pci, time);
             if (!statList.Any()) return new List<InterferenceMatrixStat>();
             var results = Mapper.Map<List<InterferenceMatrixMongo>, IEnumerable<InterferenceMatrixStat>>(statList);
             return (from s in results

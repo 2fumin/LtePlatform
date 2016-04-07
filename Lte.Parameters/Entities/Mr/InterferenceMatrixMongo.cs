@@ -16,19 +16,25 @@ namespace Lte.Parameters.Entities.Mr
         {
             return false;
         }
+        
+        public int ENodebId { get; set; }
 
-        public double? INTERF_ONLY_COFREQ { get; set; }
+        public int Pci { get; set; }
+        
+        public int? Over10db { get; set; }
 
-        public string current_date { get; set; }
+        public int? Mod3Count { get; set; }
 
-        public int? MOD3_COUNT { get; set; }
+        public int? Over6db { get; set; }
 
-        public int? MOD6_COUNT { get; set; }
+        public int? Mod6Count { get; set; }
 
-        public int? OVERCOVER_COFREQ_6DB { get; set; }
+        public DateTime CurrentDate { get; set; }
 
-        public string ENODEBID_PCI_NPCI_NFREQ { get; set; }
+        public double? InterfLevel { get; set; }
 
-        public double? OVERCOVER_COFREQ_10DB { get; set; }
+        public int NeighborFreq { get; set; }
+
+        public int NeighborPci { get; set; }
     }
 }

@@ -23,35 +23,20 @@ namespace Lte.Parameters.Concrete.Mr
         {
             
         }
-
-        public List<InterferenceMatrixMongo> GetByENodebInfo(string eNodebInfo)
-        {
-            var query = MongoDB.Driver.Builders.Query<InterferenceMatrixMongo>.EQ(e => e.ENODEBID_PCI_NPCI_NFREQ, eNodebInfo);
-            return Collection.Find(query).AsQueryable().ToList();
-        }
         
-        public InterferenceMatrixMongo GetOne(string eNodebInfo, string timeString)
-        {
-            var query =
-                MongoDB.Driver.Builders.Query<InterferenceMatrixMongo>.Where(
-                    e => e.ENODEBID_PCI_NPCI_NFREQ == eNodebInfo && e.current_date == timeString);
-            return Collection.FindOne(query);
-        }
-
         public InterferenceMatrixMongo GetOne(int eNodebId, short pci)
         {
             var query =
                 MongoDB.Driver.Builders.Query<InterferenceMatrixMongo>.Where(
-                    e => e.ENODEBID_PCI_NPCI_NFREQ.StartsWith(eNodebId + "_" + pci));
+                    e => e.ENodebId == eNodebId && e.Pci == pci);
             return Collection.FindOne(query);
         }
 
-        public InterferenceMatrixMongo GetOne(int eNodebId, short pci, string dateString)
+        public InterferenceMatrixMongo GetOne(int eNodebId, short pci, DateTime time)
         {
             var query =
                 MongoDB.Driver.Builders.Query<InterferenceMatrixMongo>.Where(
-                    e => e.ENODEBID_PCI_NPCI_NFREQ.StartsWith(eNodebId + "_" + pci)
-                    && e.current_date.StartsWith(dateString));
+                    e => e.ENodebId == eNodebId && e.Pci == pci && e.CurrentDate == time);
             return Collection.FindOne(query);
         }
 
@@ -59,25 +44,18 @@ namespace Lte.Parameters.Concrete.Mr
         {
             var query =
                 MongoDB.Driver.Builders.Query<InterferenceMatrixMongo>.Where(
-                    e => e.ENODEBID_PCI_NPCI_NFREQ.StartsWith(eNodebId + "_" + pci));
+                    e => e.ENodebId == eNodebId && e.Pci == pci);
             return Collection.Find(query).AsQueryable().ToList();
         }
 
-        public List<InterferenceMatrixMongo> GetList(int eNodebId, short pci, DateTime time)
+        public List<InterferenceMatrixMongo> GetList(int eNodebId, short pci, DateTime date)
         {
-            var timeString = time.ToString("yyyyMMdd");
-            return GetList(eNodebId, pci, timeString);
+            var nextDate = date.AddDays(1);
+            var query =
+                MongoDB.Driver.Builders.Query<InterferenceMatrixMongo>.Where(
+                    e => e.ENodebId == eNodebId && e.Pci == pci && e.CurrentDate >= date && e.CurrentDate < nextDate);
+            return Collection.Find(query).AsQueryable().ToList();
         }
-
-        public List<InterferenceMatrixMongo> GetList(int eNodebId, short pci, string dateString)
-        {
-            var query1 = MongoDB.Driver.Builders.Query<InterferenceMatrixMongo>.Matches(e => e.ENODEBID_PCI_NPCI_NFREQ,
-                new BsonRegularExpression("^" + eNodebId + "_" + pci + "_"));
-            var query2 = MongoDB.Driver.Builders.Query<InterferenceMatrixMongo>.Matches(e => e.current_date,
-                new BsonRegularExpression("^" + dateString));
-            var query = MongoDB.Driver.Builders.Query.And(query1, query2);
-            var cursor = Collection.Find(query);
-            return cursor.ToList();
-        }
+        
     }
 }
