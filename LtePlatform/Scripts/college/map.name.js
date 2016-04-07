@@ -11,6 +11,9 @@
             });
             break;
         case 'cdma':
+            collegeService.queryBtss($scope.collegeName).then(function (btss) {
+                parametersMapService.showENodebsElements(btss, parametersDialogService.showENodebInfo, parametersDialogService.showCellInfo);
+            });
             break;
         case 'lteDistribution':
             break;
