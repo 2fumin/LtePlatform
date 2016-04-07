@@ -36,5 +36,12 @@ namespace LtePlatform.Controllers.Mr
         {
             return _service.QueryMongo(eNodebId, pci);
         }
+
+        [HttpGet]
+        public int Get(int eNodebId, byte sectorId, DateTime date, double interference)
+        {
+            _service.TestDumpOneStat(eNodebId, sectorId, date, interference);
+            return 1;
+        }
     }
 }

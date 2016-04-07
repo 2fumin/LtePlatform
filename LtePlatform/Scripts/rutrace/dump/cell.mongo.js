@@ -13,8 +13,8 @@
     };
 
     $scope.queryRecords = function() {
-        angular.forEach($scope.dateRecords, function(record) {
-            dumpProgress.queryExistedItems(eNodebId, sectorId, record.date).then(function(result) {
+        angular.forEach($scope.dateRecords, function (record) {
+            dumpProgress.queryExistedItems(eNodebId, sectorId, record.date).then(function (result) {
                 for (var i = 0; i < $scope.dateRecords.length; i++) {
                     if ($scope.dateRecords[i].date === result.date) {
                         $scope.dateRecords[i].existedRecords = result.value;
@@ -37,14 +37,18 @@
         $scope.currentDetails = records;
     };
 
-    $scope.dumpRecords = function(records) {
-        dumpProgress.dumpMongo({
-            statList: records,
-            eNodebId: eNodebId,
-            sectorId: sectorId
-        }).then(function(result) {
-            console.log(result);
-        });
+    $scope.dumpRecords = function (records, index) {
+        index = index || 0;
+        if (index < records.length) {
+            var stat = records[index];
+            stat.eNodebId = eNodebId;
+            stat.sectorId = sectorId;
+            dumpProgress.dumpMongo(stat).then(function() {
+                $scope.dumpRecords(records, index + 1);
+            });
+        } else {
+            $scope.queryRecords();
+        }
     };
 
     var startDate = new Date(begin);

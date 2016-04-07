@@ -42,28 +42,39 @@ namespace Lte.Evaluations.DataService.Mr
 
         public int QueryExistedStatsCount(int eNodebId, byte sectorId, DateTime date)
         {
-            var nextDay = date.AddDays(1);
+            var beginDay = date.Date;
+            var nextDay = date.AddDays(1).Date;
             return
                 _repository.Count(
                     x =>
-                        x.ENodebId == eNodebId && x.SectorId == sectorId && x.RecordTime >= date &&
+                        x.ENodebId == eNodebId && x.SectorId == sectorId && x.RecordTime >= beginDay &&
                         x.RecordTime < nextDay);
         }
         
-        public int DumpMongoStats(InterferenceMatrixList statList)
+        public int DumpMongoStats(InterferenceMatrixStat stat)
         {
-            foreach (var stat in statList.StatList)
-            {
-                var existedStat =
-                    _repository.FirstOrDefault(
-                        x =>
-                            x.ENodebId == statList.ENodebId && x.SectorId == statList.SectorId &&
-                            x.RecordTime == stat.RecordTime);
-                if (existedStat == null)
-                    _repository.Insert(stat);
-            }
-            
+            stat.RecordTime = stat.RecordTime.Date;
+            var existedStat =
+                _repository.FirstOrDefault(
+                    x =>
+                        x.ENodebId == stat.ENodebId && x.SectorId == stat.SectorId
+                        && x.DestPci == stat.DestPci && x.RecordTime == stat.RecordTime);
+            if (existedStat == null)
+                _repository.Insert(stat);
+
             return _repository.SaveChanges();
+        }
+
+        public void TestDumpOneStat(int eNodebId, byte sectorId, DateTime date, double interference)
+        {
+            _repository.Insert(new InterferenceMatrixStat
+            {
+                ENodebId = eNodebId,
+                SectorId = sectorId,
+                RecordTime = date,
+                InterferenceLevel = interference
+            });
+            _repository.SaveChanges();
         }
         
         public InterferenceMatrixMongo QueryMongo(int eNodebId, short pci)
@@ -161,13 +172,5 @@ namespace Lte.Evaluations.DataService.Mr
             InterferenceMatrixStats.Clear();
         }
     }
-
-    public class InterferenceMatrixList
-    {
-        public List<InterferenceMatrixStat> StatList { get; set; }
-
-        public int ENodebId { get; set; }
-
-        public byte SectorId { get; set; }
-    }
+    
 }

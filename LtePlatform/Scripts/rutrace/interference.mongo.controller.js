@@ -10,11 +10,12 @@ app.controller('interference.mongo', function ($scope, $uibModal, $log, dumpProg
     var lastWeek = new Date();
     lastWeek.setDate(lastWeek.getDate() - 7);
     $scope.beginDate = {
-        value: lastWeek,
+        value: new Date(lastWeek.getFullYear(), lastWeek.getMonth(), lastWeek.getDate(), 8),
         opened: false
     };
+    var today = new Date();
     $scope.endDate = {
-        value: new Date(),
+        value: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 8),
         opened: false
     };
     $scope.currentPage = 1;

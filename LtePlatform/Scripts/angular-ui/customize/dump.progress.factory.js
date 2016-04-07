@@ -1,5 +1,5 @@
 ﻿angular.module('myApp.dumpInterference', ['myApp.url'])
-    .factory('dumpProgress', function($http, $q, appUrlService) {
+    .factory('dumpProgress', function ($http, $q, appUrlService, appFormatService) {
         var serviceInstance = {};
 
         serviceInstance.clear = function(progressInfo) {
@@ -33,10 +33,11 @@
             });
         };
 
-        serviceInstance.dumpMongo = function (statList) {
+        serviceInstance.dumpMongo = function (stat) {
             var deferred = $q.defer();
-            $http.post(appUrlService.getApiUrl('DumpInterference'), statList).success(function (result) {
-                deferred.resolve({ date: date, value: result });
+            $http.post(appUrlService.getApiUrl('DumpInterference'), stat)
+                .success(function (result) {
+                deferred.resolve(result);
             })
                 .error(function (reason) {
                     deferred.reject(reason);
@@ -70,7 +71,7 @@
                     params: {
                         eNodebId: eNodebId,
                         sectorId: sectorId,
-                        date: date
+                        date: appFormatService.getDateString(date, 'yyyy-MM-dd')
                     }
                 }).success(function(result) {
                     deferred.resolve({ date: date, value: result });
