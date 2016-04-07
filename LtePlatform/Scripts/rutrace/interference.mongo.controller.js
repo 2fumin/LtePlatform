@@ -68,9 +68,7 @@ app.controller('interference.mongo', function ($scope, $uibModal, $log, dumpProg
     };
 
     $scope.dump = function () {
-        for (var i = 0; i < 2; i++) {
-            dumpProgress.dumpMongo($scope.progressInfo, $scope.beginDate.value, $scope.endDate.value, i, 2);
-        }
+        
     };
 
     $scope.reset();

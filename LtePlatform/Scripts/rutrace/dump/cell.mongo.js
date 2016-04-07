@@ -37,6 +37,16 @@
         $scope.currentDetails = records;
     };
 
+    $scope.dumpRecords = function(records) {
+        dumpProgress.dumpMongo({
+            statList: records,
+            eNodebId: eNodebId,
+            sectorId: sectorId
+        }).then(function(result) {
+            console.log(result);
+        });
+    };
+
     var startDate = new Date(begin);
     while (startDate < end) {
         var date = new Date(startDate);

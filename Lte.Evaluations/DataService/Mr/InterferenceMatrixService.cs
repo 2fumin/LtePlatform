@@ -50,33 +50,20 @@ namespace Lte.Evaluations.DataService.Mr
                         x.RecordTime < nextDay);
         }
         
-        public int DumpMongoStats(PciCell cellInfo, DateTime begin, DateTime end)
+        public int DumpMongoStats(InterferenceMatrixList statList)
         {
-            var statTime = begin.Date;
-            var count = 0;
-            while (statTime < end.Date)
+            foreach (var stat in statList.StatList)
             {
-                var time = statTime;
-                var nextDay = time.AddDays(1);
                 var existedStat =
-                    QueryExistedStatsCount(cellInfo.ENodebId,cellInfo.SectorId, time);
-                if (existedStat > 10)
-                {
-                    statTime = nextDay;
-                    continue;
-                }
-                var mongoStats = QueryStats(cellInfo.ENodebId, cellInfo.Pci, time);
-                foreach (var mongoStat in mongoStats)
-                {
-                    mongoStat.SectorId = cellInfo.SectorId;
-                    _repository.Insert(mongoStat);
-
-                }
-                count += _repository.SaveChanges();
-
-                statTime = nextDay;
+                    _repository.FirstOrDefault(
+                        x =>
+                            x.ENodebId == statList.ENodebId && x.SectorId == statList.SectorId &&
+                            x.RecordTime == stat.RecordTime);
+                if (existedStat == null)
+                    _repository.Insert(stat);
             }
-            return count;
+            
+            return _repository.SaveChanges();
         }
         
         public InterferenceMatrixMongo QueryMongo(int eNodebId, short pci)
@@ -173,5 +160,14 @@ namespace Lte.Evaluations.DataService.Mr
         {
             InterferenceMatrixStats.Clear();
         }
+    }
+
+    public class InterferenceMatrixList
+    {
+        public List<InterferenceMatrixStat> StatList { get; set; }
+
+        public int ENodebId { get; set; }
+
+        public byte SectorId { get; set; }
     }
 }

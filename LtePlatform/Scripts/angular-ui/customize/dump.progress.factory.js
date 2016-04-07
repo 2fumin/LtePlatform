@@ -33,33 +33,15 @@
             });
         };
 
-        serviceInstance.dumpMongo = function (progressInfo, begin, end, index, step) {
-            var self = serviceInstance;
-            if (progressInfo.dumpCells.length < index + 1) return;
-            var cell = progressInfo.dumpCells[index];
-            $http.post(appUrlService.getApiUrl('DumpInterference'), {
-                pciCell: cell,
-                begin: begin,
-                end: end
-            }).success(function(result) {
-                progressInfo.cellInfo = cell.eNodebId + '-' + cell.sectorId + '-' + cell.pci + ': ' + result;
-                progressInfo.totalSuccessItems = progressInfo.totalSuccessItems + 1;
-                if (progressInfo.totalSuccessItems + progressInfo.totalFailItems < progressInfo.dumpCells.length) {
-                    self.dumpMongo(progressInfo, begin, end, index + step, step);
-                } else {
-                    progressInfo.totalSuccessItems = 0;
-                    progressInfo.totalFailItems = 0;
-                }
-            }).error(function() {
-                progressInfo.totalFailItems = progressInfo.totalFailItems + 1;
-                progressInfo.cellInfo = cell.eNodebId + '-' + cell.sectorId + '-' + cell.pci + ': Fail!!!';
-                if (progressInfo.totalSuccessItems + progressInfo.totalFailItems < progressInfo.dumpCells.length) {
-                    self.dumpMongo(progressInfo, begin, end, index + step, step);
-                } else {
-                    progressInfo.totalSuccessItems = 0;
-                    progressInfo.totalFailItems = 0;
-                }
-            });
+        serviceInstance.dumpMongo = function (statList) {
+            var deferred = $q.defer();
+            $http.post(appUrlService.getApiUrl('DumpInterference'), statList).success(function (result) {
+                deferred.resolve({ date: date, value: result });
+            })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+            return deferred.promise;
         };
 
         serviceInstance.resetProgress = function (begin, end) {

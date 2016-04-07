@@ -15,16 +15,7 @@ namespace Lte.Evaluations.MapperSerive
 
         public int Frequency { get; set; }
     }
-
-    public class PciCellDumpInfo
-    {
-        public PciCell PciCell { get; set; }
-
-        public DateTime Begin { get; set; }
-
-        public DateTime End { get; set; }
-    }
-
+    
     [AutoMapFrom(typeof(PciCell))]
     public class PciCellPair
     {

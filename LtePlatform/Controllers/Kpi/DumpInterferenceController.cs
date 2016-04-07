@@ -61,9 +61,9 @@ namespace LtePlatform.Controllers.Kpi
         [ApiDoc("导入指定小区信息、开始日期和结束日期的干扰矩阵信息")]
         [ApiParameterDoc("dumpInfo", "指定小区信息、开始日期和结束日期")]
         [ApiResponse("一共导入的数量")]
-        public int Post(PciCellDumpInfo dumpInfo)
+        public int Post(InterferenceMatrixList dumpInfo)
         {
-            return _service.DumpMongoStats(dumpInfo.PciCell, dumpInfo.Begin.Date, dumpInfo.End.Date);
+            return _service.DumpMongoStats(dumpInfo);
         }
    
         [HttpDelete]
