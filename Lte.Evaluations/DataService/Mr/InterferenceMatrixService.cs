@@ -96,6 +96,18 @@ namespace Lte.Evaluations.DataService.Mr
         {
             var statList = _mongoRepository.GetList(eNodebId, pci, time);
             if (!statList.Any()) return new List<InterferenceMatrixStat>();
+            return GenereateStatList(time, statList);
+        }
+
+        public List<InterferenceMatrixStat> QueryStats(int eNodebId, short pci)
+        {
+            var statList = _mongoRepository.GetList(eNodebId, pci);
+            if (!statList.Any()) return new List<InterferenceMatrixStat>();
+            return GenereateStatList(statList);
+        }
+
+        private static List<InterferenceMatrixStat> GenereateStatList(DateTime time, List<InterferenceMatrixMongo> statList)
+        {
             var results = Mapper.Map<List<InterferenceMatrixMongo>, IEnumerable<InterferenceMatrixStat>>(statList);
             return (from s in results
                 group s by new {s.DestPci, s.ENodebId}
@@ -111,6 +123,25 @@ namespace Lte.Evaluations.DataService.Mr
                     OverInterferences6Db = g.Sum(x => x.OverInterferences6Db),
                     RecordTime = time
                 }).ToList();
+        }
+
+        private static List<InterferenceMatrixStat> GenereateStatList(List<InterferenceMatrixMongo> statList)
+        {
+            var results = Mapper.Map<List<InterferenceMatrixMongo>, IEnumerable<InterferenceMatrixStat>>(statList);
+            return (from s in results
+                    group s by new { s.DestPci, s.ENodebId, RecordDate = s.RecordTime.Date }
+                into g
+                    select new InterferenceMatrixStat
+                    {
+                        ENodebId = g.Key.ENodebId,
+                        DestPci = g.Key.DestPci,
+                        InterferenceLevel = g.Sum(x => x.InterferenceLevel),
+                        Mod3Interferences = g.Sum(x => x.Mod3Interferences),
+                        Mod6Interferences = g.Sum(x => x.Mod6Interferences),
+                        OverInterferences10Db = g.Sum(x => x.OverInterferences10Db),
+                        OverInterferences6Db = g.Sum(x => x.OverInterferences6Db),
+                        RecordTime = g.Key.RecordDate
+                    }).ToList();
         }
 
         public void UploadInterferenceStats(StreamReader reader, string path)
