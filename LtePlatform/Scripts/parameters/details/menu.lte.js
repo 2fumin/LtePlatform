@@ -2,8 +2,9 @@
     $scope.menuTitle = $stateParams.name + "详细信息";
     
     menuItemService.updateMenuItem($scope.menuItems, 1,
-        $stateParams.name + "基础信息",
+        $stateParams.name + "LTE基础信息",
         $scope.rootPath + "eNodebInfo" + "/" + $stateParams.eNodebId + "/" + $stateParams.name);
+    $scope.menu.accordions[$stateParams.name + "LTE基础信息"] = true;
     
     networkElementService.queryCellSectorIds($stateParams.name).then(function (result) {
         angular.forEach(result, function (sectorId) {

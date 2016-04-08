@@ -1,6 +1,6 @@
 ﻿app.controller("eNodeb.info", function ($scope, $stateParams, networkElementService, cellHuaweiMongoService, 
     alarmImportService, intraFreqHoService, interFreqHoService) {
-    $scope.page.title = $stateParams.name + "基础信息";
+    $scope.page.title = $stateParams.name + "LTE基础信息";
 
     //查询基站基本信息
     networkElementService.queryENodebInfo($stateParams.eNodebId).then(function (result) {

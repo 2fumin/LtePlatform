@@ -128,6 +128,11 @@
                 subItems: []
             }
         ];
+        $rootScope.menu = {
+            accordions: {
+        
+            }
+        };
         $rootScope.rootPath = rootUrl + "/";
 
         $rootScope.viewData = {

@@ -9,10 +9,19 @@
         </div>
         <div class="panel-collapse collapse" ng-class="{'in': menuItem.isActive}">
             <div class="list-group">
-                <a class="list-group-item" ng-repeat="subItem in menuItem.subItems" ng-class="{active: page.title == subItem.displayName}"
-                   ng-href="{{subItem.url}}">
-                    {{subItem.displayName}}
-                </a>
+                <div ng-class="{active: page.title == subItem.displayName}" class="list-group-item row" ng-repeat="subItem in menuItem.subItems">
+                    <a class="col-md-10" ng-href="{{subItem.url}}">
+                        {{subItem.displayName}}
+                    </a>
+                    <div ng-show="menu.accordions[subItem.displayName] === true" class="col-md-2">
+                        <i class="glyphicon glyphicon-chevron-down" 
+                           ng-click="menu.accordions[subItem.displayName] = false"></i>
+                    </div>
+                    <div ng-show="menu.accordions[subItem.displayName] === false" class="col-md-2">
+                        <i class="glyphicon glyphicon-chevron-up" 
+                           ng-click="menu.accordions[subItem.displayName] = true"></i>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
