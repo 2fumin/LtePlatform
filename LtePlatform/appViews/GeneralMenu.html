@@ -9,7 +9,9 @@
         </div>
         <div class="panel-collapse collapse" ng-class="{'in': menuItem.isActive}">
             <div class="list-group">
-                <div ng-class="{active: page.title == subItem.displayName}" class="list-group-item row" ng-repeat="subItem in menuItem.subItems">
+                <div ng-class="{active: page.title == subItem.displayName}"
+                     ng-hide="menu.accordions[subItem.masterName] === false"
+                     class="list-group-item row" ng-repeat="subItem in menuItem.subItems">
                     <a class="col-md-10" ng-href="{{subItem.url}}">
                         {{subItem.displayName}}
                     </a>

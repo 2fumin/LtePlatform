@@ -10,7 +10,8 @@
         angular.forEach(result, function (sectorId) {
             menuItemService.updateMenuItem($scope.menuItems, 1,
                 $stateParams.name + "-" + sectorId + "小区信息",
-                $scope.rootPath + "cellInfo" + "/" + $stateParams.eNodebId + "/" + $stateParams.name + "/" + sectorId);
+                $scope.rootPath + "cellInfo" + "/" + $stateParams.eNodebId + "/" + $stateParams.name + "/" + sectorId,
+                $stateParams.name + "LTE基础信息");
         });
     });
 });
