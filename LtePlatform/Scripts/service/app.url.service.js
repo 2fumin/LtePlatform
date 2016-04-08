@@ -64,7 +64,13 @@
             siteUrl: "/",
             parseQueryString: parseQueryString,
             getAccessToken: getAccessToken,
-            initializeAuthorization: initializeAuthorization
+            initializeAuthorization: initializeAuthorization,
+            getPlanUrlHost: function() {
+                return (window.location.hostname === '219.128.254.41') ? 'http://219.128.254.36:8002/' : 'http://10.17.165.111:8002/';
+            },
+            getDtUrlHost: function() {
+                return (window.location.hostname === '219.128.254.41') ? 'http://219.128.254.41:2888/' : 'http://10.17.165.100:2888/';
+            }
         };
     })
     .factory('menuItemService', function() {

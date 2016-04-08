@@ -56,6 +56,12 @@
             }, {
                 displayName: "DT基础信息",
                 url: "/Dt/List"
+            }, {
+                displayName: "规划辅助工具",
+                url: appUrlService.getPlanUrlHost() + 'guihuafuzhu/index.php'
+            }, {
+                displayName: "路测数据管理工具",
+                url: appUrlService.getDtUrlHost() + 'admin'
             }]
         }, {
             displayName: "容量优化",
