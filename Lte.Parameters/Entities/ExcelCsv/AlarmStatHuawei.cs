@@ -31,7 +31,7 @@ namespace Lte.Parameters.Entities
         public string Details { get; set; }
 
         [CsvColumn(Name = "清除时间(NT)")]
-        public DateTime RecoverTime { get; set; }
+        public string RecoverTime { get; set; }
 
         [CsvColumn(Name = "eNodeB ID", CanBeNull = true)]
         public string ENodebIdString { get; set; }

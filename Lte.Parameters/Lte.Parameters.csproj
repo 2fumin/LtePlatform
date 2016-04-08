@@ -172,6 +172,7 @@
     <Compile Include="Concrete\Switch\EUtranCellMeasurementZteRepository.cs" />
     <Compile Include="Entities\Basic\EUtranCellFDDZte.cs" />
     <Compile Include="Entities\Basic\PrachFDDZte.cs" />
+    <Compile Include="Entities\Channel\PowerControlDLZte.cs" />
     <Compile Include="Entities\Neighbor\ExternalEUtranCellFDDZte.cs" />
     <Compile Include="Concrete\Switch\CellMeasGroupZteRepository.cs" />
     <Compile Include="Concrete\Switch\InterFreqHoGroupRepository.cs" />

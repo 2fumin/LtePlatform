@@ -134,5 +134,20 @@ namespace Lte.Parameters.Test.Entities
             var statList = Mapper.Map<IEnumerable<AlarmStatHuawei>, List<AlarmStat>>(stats);
             Assert.AreEqual(statList.Count, count);
         }
+
+        [TestCase("huawei", 6)]
+        [TestCase("huawei9273", 9272)]
+        public void Test_Integrity_Huawei(string fileName, int count)
+        {
+            var testDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CsvFiles");
+            var path = Path.Combine(testDir, fileName + ".csv");
+            IEnumerable<AlarmStatHuawei> stats = CsvContext.Read<AlarmStatHuawei>(path,
+                CsvFileDescription.CommaDescription).ToList();
+            Assert.IsNotNull(stats);
+            Assert.AreEqual(stats.Count(), count);
+
+            var statList = Mapper.Map<IEnumerable<AlarmStatHuawei>, List<AlarmStat>>(stats);
+            Assert.AreEqual(statList.Count, count);
+        }
     }
 }
