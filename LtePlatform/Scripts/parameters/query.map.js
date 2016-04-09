@@ -32,9 +32,9 @@
         } else {
             if ($scope.queryText.trim() === "") {
                 parametersMapService.showCdmaInOneTown($scope.city.selected, $scope.district.selected, $scope.town.selected,
-                    parametersDialogService.showBtsInfo, parametersDialogService.showCellInfo);
+                    parametersDialogService.showBtsInfo, parametersDialogService.showCdmaCellInfo);
             } else {
-                parametersMapService.showCdmaWithGeneralName($scope.queryText, parametersDialogService.showBtsInfo, parametersDialogService.showCellInfo);
+                parametersMapService.showCdmaWithGeneralName($scope.queryText, parametersDialogService.showBtsInfo, parametersDialogService.showCdmaCellInfo);
             }
         }
     };

@@ -434,6 +434,7 @@
     <Content Include="appViews\Parameters\Map\A3InterFreq.html" />
     <Content Include="appViews\Parameters\Map\A4InterFreq.html" />
     <Content Include="appViews\Parameters\Map\A5InterFreq.html" />
+    <Content Include="appViews\Parameters\Map\CdmaCellInfoBox.html" />
     <Content Include="appViews\Parameters\Map\CellIntraFreq.html" />
     <Content Include="appViews\Parameters\Map\LteCellBasicInfo.html" />
     <Content Include="appViews\Parameters\Region\BtsInfo.html" />
@@ -781,6 +782,7 @@
     <Content Include="Scripts\parameters\import\index.controller.js" />
     <Content Include="Scripts\parameters\import\route.controller.js" />
     <Content Include="Scripts\parameters\map\bts.dialog.js" />
+    <Content Include="Scripts\parameters\map\cdma.cell.dialog.js" />
     <Content Include="Scripts\parameters\map\eNodeb.dialog.js" />
     <Content Include="Scripts\parameters\neighbor\import.controller.js" />
     <Content Include="Scripts\parameters\menu.root.js" />
