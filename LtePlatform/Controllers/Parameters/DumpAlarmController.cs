@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Lte.Evaluations.DataService;
 using Lte.Evaluations.ViewModels;
+using Lte.Parameters.Entities;
 using LtePlatform.Models;
 
 namespace LtePlatform.Controllers.Parameters
@@ -34,6 +35,12 @@ namespace LtePlatform.Controllers.Parameters
         public int Get()
         {
             return _service.GetAlarmsToBeDump();
+        }
+
+        [HttpGet]
+        public IEnumerable<AlarmStat> Get(int begin, int range)
+        {
+            return _service.GetAlarmsToBeDump(begin, range);
         }
 
         [HttpGet]

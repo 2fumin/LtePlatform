@@ -21,7 +21,7 @@ namespace Lte.Parameters.Entities
         [CsvColumn(Name = "名称")]
         public string AlarmCodeDescription { get; set; }
 
-        [CsvColumn(Name = "发生时间(NT)")]
+        [CsvColumn(Name = "最近发生时间(NT)")]
         public DateTime HappenTime { get; set; }
 
         [CsvColumn(Name = "用户自定义标识")]

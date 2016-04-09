@@ -103,6 +103,11 @@ namespace Lte.Evaluations.DataService
             return AlarmStats.Count;
         }
 
+        public IEnumerable<AlarmStat> GetAlarmsToBeDump(int begin, int range)
+        {
+            return AlarmStats.Skip(begin).Take(range);
+        }
+
         public IEnumerable<AlarmStat> QueryAlarmStats()
         {
             return AlarmStats;
