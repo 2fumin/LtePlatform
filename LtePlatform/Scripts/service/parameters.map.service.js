@@ -194,8 +194,8 @@
             showCollegeCdmaCellInfo: function (cell) {
                 var modalInstance = $uibModal.open({
                     animation: true,
-                    templateUrl: '/appViews/Parameters/Map/CdmaCellInfoBox.html',
-                    controller: 'college.cdma.cell.dialog',
+                    templateUrl: '/appViews/College/Table/CdmaCellInfoBox.html',
+                    controller: 'map.cdma.cell.dialog',
                     size: 'sm',
                     resolve: {
                         dialogTitle: function () {
