@@ -1,13 +1,16 @@
 ﻿angular.module('parametersMap', ['myApp.region', 'myApp.parameters'])
     .factory('parametersMapService', function (baiduMapService, networkElementService, geometryService) {
+        var showCellSectors = function(cells, showCellInfo, xOffset, yOffset) {
+            angular.forEach(cells, function(cell) {
+                cell.longtitute += xOffset;
+                cell.lattitute += yOffset;
+                var cellSector = baiduMapService.generateSector(cell);
+                baiduMapService.addOneSectorToScope(cellSector, showCellInfo, cell);
+            });
+        };
         var showSectors = function(queryFunc, eNodebId, xOffset, yOffset, showCellInfo) {
             queryFunc(eNodebId).then(function(cells) {
-                for (var j = 0; j < cells.length; j++) {
-                    cells[j].longtitute += xOffset;
-                    cells[j].lattitute += yOffset;
-                    var cellSector = baiduMapService.generateSector(cells[j]);
-                    baiduMapService.addOneSectorToScope(cellSector, showCellInfo, cells[j]);
-                }
+                showCellSectors(cells, showCellInfo, xOffset, yOffset);
             });
         };
         var showENodebsElements = function(eNodebs, showENodebInfo, showCellInfo) {
@@ -15,14 +18,15 @@
                 var xOffset = coors.x - eNodebs[0].longtitute;
                 var yOffset = coors.y - eNodebs[0].lattitute;
                 baiduMapService.setCellFocus(coors.x, coors.y, 16);
-                for (var i = 0; i < eNodebs.length; i++) {
-                    eNodebs[i].longtitute += xOffset;
-                    eNodebs[i].lattitute += yOffset;
-                    var marker = baiduMapService.generateIconMarker(eNodebs[i].longtitute, eNodebs[i].lattitute,
+                angular.forEach(eNodebs, function(eNodeb) {
+                    eNodeb.longtitute += xOffset;
+                    eNodeb.lattitute += yOffset;
+                    var marker = baiduMapService.generateIconMarker(eNodeb.longtitute, eNodeb.lattitute,
                         "/Content/Images/Hotmap/site_or.png");
-                    baiduMapService.addOneMarkerToScope(marker, showENodebInfo, eNodebs[i]);
-                    showSectors(networkElementService.queryCellInfosInOneENodeb, eNodebs[i].eNodebId, xOffset, yOffset, showCellInfo);
-                }
+                    baiduMapService.addOneMarkerToScope(marker, showENodebInfo, eNodeb);
+                    if (showCellInfo !== undefined)
+                        showSectors(networkElementService.queryCellInfosInOneENodeb, eNodeb.eNodebId, xOffset, yOffset, showCellInfo);
+                });
             });
         };
         var showCdmaElements = function (btss, showBtsInfo, showCellInfo) {
@@ -30,19 +34,20 @@
                 var xOffset = coors.x - btss[0].longtitute;
                 var yOffset = coors.y - btss[0].lattitute;
                 baiduMapService.setCellFocus(coors.x, coors.y, 16);
-                for (var i = 0; i < btss.length; i++) {
-                    btss[i].longtitute += xOffset;
-                    btss[i].lattitute += yOffset;
-                    var marker = baiduMapService.generateIconMarker(btss[i].longtitute, btss[i].lattitute,
+                angular.forEach(btss, function(bts) {
+                    bts.longtitute += xOffset;
+                    bts.lattitute += yOffset;
+                    var marker = baiduMapService.generateIconMarker(bts.longtitute, bts.lattitute,
                         "/Content/Images/Hotmap/site_bl.png");
-                    baiduMapService.addOneMarkerToScope(marker, showBtsInfo, btss[i]);
-                    showSectors(networkElementService.queryCdmaCellInfosInOneBts, btss[i].btsId, xOffset, yOffset, showCellInfo);
-                }
+                    baiduMapService.addOneMarkerToScope(marker, showBtsInfo, bts);
+                    if (showCellInfo !== undefined)
+                        showSectors(networkElementService.queryCdmaCellInfosInOneBts, bts.btsId, xOffset, yOffset, showCellInfo);
+                });
             });
         };
         return {
             showElementsInOneTown: function(city, district, town, showENodebInfo, showCellInfo) {
-                networkElementService.queryENodebsInOneTown(city, district, town).then(function (eNodebs) {
+                networkElementService.queryENodebsInOneTown(city, district, town).then(function(eNodebs) {
                     showENodebsElements(eNodebs, showENodebInfo, showCellInfo);
                 });
             },
@@ -52,19 +57,30 @@
                     showENodebsElements(eNodebs, showENodebInfo, showCellInfo);
                 });
             },
-            showCdmaInOneTown: function (city, district, town, showBtsInfo, showCellInfo) {
-                networkElementService.queryBtssInOneTown(city, district, town).then(function (btss) {
+            showCdmaInOneTown: function(city, district, town, showBtsInfo, showCellInfo) {
+                networkElementService.queryBtssInOneTown(city, district, town).then(function(btss) {
                     showCdmaElements(btss, showBtsInfo, showCellInfo);
                 });
             },
-            showCdmaWithGeneralName: function (name, showBtsInfo, showCellInfo) {
-                networkElementService.queryBtssByGeneralName(name).then(function (btss) {
+            showCdmaWithGeneralName: function(name, showBtsInfo, showCellInfo) {
+                networkElementService.queryBtssByGeneralName(name).then(function(btss) {
                     if (btss.length === 0) return;
                     showCdmaElements(btss, showBtsInfo, showCellInfo);
                 });
             },
-            showENodebsElements: function(eNodebs, showENodebInfo, showCellInfo) {
-                return showENodebsElements(eNodebs, showENodebInfo, showCellInfo);
+            showENodebsElements: function(eNodebs, showENodebInfo) {
+                return showENodebsElements(eNodebs, showENodebInfo);
+            },
+            showBtssElements: function(btss, showBtsInfo) {
+                return showCdmaElements(btss, showBtsInfo);
+            },
+            showCellSectors: function(cells, showCellInfo) {
+                geometryService.transformToBaidu(cells[0].longtitute, cells[0].lattitute).then(function(coors) {
+                    var xOffset = coors.x - cells[0].longtitute;
+                    var yOffset = coors.y - cells[0].lattitute;
+                    baiduMapService.setCellFocus(coors.x, coors.y, 16);
+                    showCellSectors(cells, showCellInfo, xOffset, yOffset);
+                });
             }
         }
     })
@@ -130,6 +146,27 @@
                 modalInstance.result.then(function(nei) {
                     console.log(nei);
                 }, function() {
+                    $log.info('Modal dismissed at: ' + new Date());
+                });
+            },
+            showCollegeCellInfo: function (cell) {
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: '/appViews/College/Table/CollegeCellInfoBox.html',
+                    controller: 'college.cell.dialog',
+                    size: 'sm',
+                    resolve: {
+                        dialogTitle: function () {
+                            return cell.eNodebName + "-" + cell.sectorId + "小区信息";
+                        },
+                        cell: function () {
+                            return cell;
+                        }
+                    }
+                });
+                modalInstance.result.then(function (nei) {
+                    console.log(nei);
+                }, function () {
                     $log.info('Modal dismissed at: ' + new Date());
                 });
             },

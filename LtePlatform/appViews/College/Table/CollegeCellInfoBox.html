@@ -1,0 +1,23 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" aria-hidden="true">
+        &times;
+    </button>
+    <h4 class="modal-title text-primary">{{dialogTitle}}</h4>
+</div>
+<div class="modal-body">
+    <div class="infoBoxContent">
+        <div ng-include="'/appViews/College/Table/CollegeCellBasicInfo.html'" ng-show="parameter.selected==='基本参数'"></div>
+        <div ng-include="'/appViews/Parameters/Map/CellIntraFreq.html'" ng-show="parameter.selected==='同频切换'"></div>
+        <div ng-include="'/appViews/Parameters/Map/A1InterFreq.html'" ng-show="parameter.selected==='A1异频切换'"></div>
+        <div ng-include="'/appViews/Parameters/Map/A2InterFreq.html'" ng-show="parameter.selected==='A2异频切换'"></div>
+        <div ng-include="'/appViews/Parameters/Map/A3InterFreq.html'" ng-show="parameter.selected==='A3异频切换'"></div>
+        <div ng-include="'/appViews/Parameters/Map/A4InterFreq.html'" ng-show="parameter.selected==='A4异频切换'"></div>
+        <div ng-include="'/appViews/Parameters/Map/A5InterFreq.html'" ng-show="parameter.selected==='A5异频切换'"></div>
+    </div>
+</div>
+<div class="modal-footer">
+    <label>参数查看：</label>
+    <select ng-model="parameter.selected" ng-options="p as p for p in parameter.options"></select>
+    <button class="btn btn-warning" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+</div>

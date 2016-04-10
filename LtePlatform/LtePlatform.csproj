@@ -408,6 +408,8 @@
     <Content Include="appViews\College\Infrastructure\CdmaCellDialog.html" />
     <Content Include="appViews\College\Infrastructure\ENodebDialog.html" />
     <Content Include="appViews\College\Infrastructure\LteCellDialog.html" />
+    <Content Include="appViews\College\Table\CollegeCellBasicInfo.html" />
+    <Content Include="appViews\College\Table\CollegeCellInfoBox.html" />
     <Content Include="appViews\HeaderMenu.html" />
     <Content Include="appViews\Import\ImportProgress.html" />
     <Content Include="appViews\Manage\AllUsers.html" />

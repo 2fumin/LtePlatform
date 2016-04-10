@@ -7,12 +7,18 @@
     switch($stateParams.type) {
         case 'lte':
             collegeService.queryENodebs($scope.collegeName).then(function(eNodebs) {
-                parametersMapService.showENodebsElements(eNodebs, parametersDialogService.showENodebInfo, parametersDialogService.showCellInfo);
+                parametersMapService.showENodebsElements(eNodebs, parametersDialogService.showENodebInfo);
+            });
+            collegeService.queryCells($scope.collegeName).then(function(cells) {
+                parametersMapService.showCellSectors(cells, parametersDialogService.showCollegeCellInfo);
             });
             break;
         case 'cdma':
             collegeService.queryBtss($scope.collegeName).then(function (btss) {
-                parametersMapService.showENodebsElements(btss, parametersDialogService.showENodebInfo, parametersDialogService.showCellInfo);
+                parametersMapService.showENodebsElements(btss, parametersDialogService.showENodebInfo);
+            });
+            collegeService.queryCdmaCells($scope.collegeName).then(function (cells) {
+                parametersMapService.showCellSectors(cells, parametersDialogService.showCellInfo);
             });
             break;
         case 'lteDistribution':
