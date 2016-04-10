@@ -13,11 +13,11 @@ app.controller("rutrace.trend", function ($scope, appRegionService, appKpiServic
     };
 
     $scope.showTrend = function () {
-        $scope.trendStat.mrStats = [];
-        $scope.trendStat.preciseStats = [];
         appKpiService.getDateSpanPreciseRegionKpi($scope.city.selected, $scope.beginDate.value, $scope.endDate.value)
             .then(function (result) {
-                appKpiService.generateDistrictStats($scope.trendStat, $scope.trendStat.districts, result);
+                var stats = appKpiService.generateDistrictStats($scope.trendStat.districts, result);
+                $scope.trendStat.mrStats = stats.mrStats;
+                $scope.trendStat.preciseStats = stats.preciseStats;
                 if (result.length > 0) {
                     appKpiService.generateTrendStatsForPie($scope.trendStat, result);
                     $scope.trendStat.mrStats.push(appKpiService.calculateAverageRates($scope.trendStat.mrStats));
@@ -33,7 +33,6 @@ app.controller("rutrace.trend", function ($scope, appRegionService, appKpiServic
             var city = $scope.city.selected;
             appRegionService.queryDistricts(city)
                 .then(function (districts) {
-                    districts.push(city);
                     $scope.trendStat.districts = districts;
                     $scope.showTrend();
             });

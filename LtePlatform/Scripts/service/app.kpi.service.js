@@ -164,41 +164,48 @@
                 }
                 return chart.options;
             },
-            generateDistrictStats: function (trendStat, districts, result) {
-                for (var i = 0; i < result.length; i++) {
-                    var districtViews = result[i].districtPreciseViews;
-                    var statDate = result[i].statDate;
+            generateDistrictStats: function (districts, stats) {
+                var mrStats = [];
+                var preciseStats = [];
+                angular.forEach(stats, function(stat) {
+                    var districtViews = stat.districtPreciseViews;
+                    var statDate = stat.statDate;
                     var totalMrs = 0;
                     var totalSecondNeighbors = 0;
                     var districtMrStats = [];
                     var districtPreciseRates = [];
-                    for (var j = 0; j < districts.length - 1; j++) {
-                        var currentDistrictMrs = 0;
-                        var currentPreciseRate = 0;
+                    angular.forEach(districts, function(district) {
                         for (var k = 0; k < districtViews.length; k++) {
                             var view = districtViews[k];
-                            if (view.district === districts[j]) {
-                                currentDistrictMrs = view.totalMrs;
-                                currentPreciseRate = view.preciseRate;
-                                totalMrs += currentDistrictMrs;
+                            if (view.district === district) {
+                                districtMrStats.push(view.totalMrs);
+                                districtPreciseRates.push(view.preciseRate);
+                                totalMrs += view.totalMrs;
                                 totalSecondNeighbors += view.secondNeighbors;
                                 break;
                             }
                         }
-                        districtMrStats.push(currentDistrictMrs);
-                        districtPreciseRates.push(currentPreciseRate);
-                    }
+                        if (k === districtViews.length) {
+                            districtMrStats.push(0);
+                            districtPreciseRates.push(0);
+                        }
+
+                    });
                     districtMrStats.push(totalMrs);
                     districtPreciseRates.push(100 - 100 * totalSecondNeighbors / totalMrs);
-                    trendStat.mrStats.push({
+                    mrStats.push({
                         statDate: statDate,
                         values: districtMrStats
                     });
-                    trendStat.preciseStats.push({
+                    preciseStats.push({
                         statDate: statDate,
                         values: districtPreciseRates
                     });
-                }
+                });
+                return {
+                    mrStats: mrStats,
+                    preciseStats: preciseStats
+                };
             },
             calculateAverageRates: function(preciseStats) {
                 var result = {
