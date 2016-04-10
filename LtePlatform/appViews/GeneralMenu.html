@@ -12,7 +12,11 @@
                 <div ng-class="{active: page.title == subItem.displayName}"
                      ng-hide="menu.accordions[subItem.masterName] === false"
                      class="list-group-item row" ng-repeat="subItem in menuItem.subItems">
-                    <a class="col-md-10" ng-href="{{subItem.url}}">
+                    <a ng-show="!subItem.tooltip" class="col-md-10" ng-href="{{subItem.url}}">
+                        {{subItem.displayName}}
+                    </a>
+                    <a ng-show="subItem.tooltip" class="col-md-10" ng-href="{{subItem.url}}" 
+                       uib-tooltip="{{subItem.tooltip}}" tooltip-class="customClass" tooltip-placement="bottom">
                         {{subItem.displayName}}
                     </a>
                     <div ng-show="menu.accordions[subItem.displayName] === true" class="col-md-2">

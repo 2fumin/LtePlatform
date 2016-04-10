@@ -413,6 +413,10 @@
     <Content Include="appViews\College\Table\CollegeCellBasicInfo.html" />
     <Content Include="appViews\College\Table\CollegeCellInfoBox.html" />
     <Content Include="appViews\HeaderMenu.html" />
+    <Content Include="appViews\Home\Kpi2G.html" />
+    <Content Include="appViews\Home\Kpi4G.html" />
+    <Content Include="appViews\Home\Network.html" />
+    <Content Include="appViews\Home\WorkItem.html" />
     <Content Include="appViews\Import\ImportProgress.html" />
     <Content Include="appViews\Manage\AllUsers.html" />
     <Content Include="appViews\Manage\CurrentUser.html" />
@@ -1136,9 +1140,6 @@
     <Content Include="appViews\BasicKpi\Index.html" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <Content Include="appViews\BasicKpi\KpiTable.html" />
-    <Content Include="Views\College\Edit.cshtml" />
-    <Content Include="Views\College\Coverage.cshtml" />
-    <Content Include="Views\College\PreciseKpi.cshtml" />
     <Content Include="appViews\College\CollegeMenu.html" />
     <Content Include="Views\College\_Map.cshtml" />
     <Content Include="appViews\College\Test\Report.html" />

@@ -1,7 +1,7 @@
 ﻿<div class="row">
     <div class="col-md-6" ng-repeat="areaItem in areaItems">
         <h4 class="text-warning">{{areaItem.title}}</h4>
-        <p class="text-info">{{areaItem.comments}}</p>
+        <div ng-include="areaItem.comments"></div>
         <p><a class="btn btn-primary" ng-href="{{areaItem.url}}">{{areaItem.buttonName}}</a></p>
     </div>
 </div>
