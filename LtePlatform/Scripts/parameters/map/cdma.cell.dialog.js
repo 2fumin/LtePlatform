@@ -2,7 +2,6 @@
     neighbor, dialogTitle) {
     $scope.neighbor = neighbor;
     $scope.dialogTitle = dialogTitle;
-    $scope.infoUrl = '/appViews/Parameters/Map/LteCellBasicInfo.html';
 
     $scope.ok = function () {
         $uibModalInstance.close($scope.neighbor);
