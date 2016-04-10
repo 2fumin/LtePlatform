@@ -51,9 +51,9 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="stat in trendStat.mrStats">
+        <tr ng-repeat="stat in trendStat.stats">
             <td>{{stat.statDate | date: 'yyyy-MM-dd'}}</td>
-            <td ng-repeat="value in stat.values">{{value | number: 0}}</td>
+            <td ng-repeat="value in stat.values">{{value.mr | number: 0}}</td>
         </tr>
     </tbody>
 </table>
@@ -67,9 +67,9 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="stat in trendStat.preciseStats">
+        <tr ng-repeat="stat in trendStat.stats">
             <td>{{stat.statDate | date: 'yyyy-MM-dd'}}</td>
-            <td ng-repeat="value in stat.values">{{value | number: 2}}</td>
+            <td ng-repeat="value in stat.values">{{value.precise | number: 2}}</td>
         </tr>
     </tbody>
 </table>

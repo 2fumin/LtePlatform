@@ -165,47 +165,44 @@
                 return chart.options;
             },
             generateDistrictStats: function (districts, stats) {
-                var mrStats = [];
-                var preciseStats = [];
+                var outputStats = [];
                 angular.forEach(stats, function(stat) {
                     var districtViews = stat.districtPreciseViews;
                     var statDate = stat.statDate;
                     var totalMrs = 0;
                     var totalSecondNeighbors = 0;
-                    var districtMrStats = [];
-                    var districtPreciseRates = [];
+                    var values = [];
                     angular.forEach(districts, function(district) {
                         for (var k = 0; k < districtViews.length; k++) {
                             var view = districtViews[k];
                             if (view.district === district) {
-                                districtMrStats.push(view.totalMrs);
-                                districtPreciseRates.push(view.preciseRate);
+                                values.push({
+                                    mr: view.totalMrs,
+                                    precise: view.preciseRate
+                                });
                                 totalMrs += view.totalMrs;
                                 totalSecondNeighbors += view.secondNeighbors;
                                 break;
                             }
                         }
                         if (k === districtViews.length) {
-                            districtMrStats.push(0);
-                            districtPreciseRates.push(0);
+                            values.push({
+                                mr: 0,
+                                precise: 0
+                            });
                         }
 
                     });
-                    districtMrStats.push(totalMrs);
-                    districtPreciseRates.push(100 - 100 * totalSecondNeighbors / totalMrs);
-                    mrStats.push({
-                        statDate: statDate,
-                        values: districtMrStats
+                    values.push({
+                        mr: totalMrs,
+                        precise: 100 - 100 * totalSecondNeighbors / totalMrs
                     });
-                    preciseStats.push({
+                    outputStats.push({
                         statDate: statDate,
-                        values: districtPreciseRates
+                        values: values
                     });
                 });
-                return {
-                    mrStats: mrStats,
-                    preciseStats: preciseStats
-                };
+                return outputStats;
             },
             calculateAverageRates: function(preciseStats) {
                 var result = {

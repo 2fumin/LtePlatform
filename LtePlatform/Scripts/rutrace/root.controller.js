@@ -10,8 +10,7 @@ app.controller("rutrace.root", function ($scope, appRegionService, menuItemServi
         city: ""
     };
     $scope.trendStat = {
-        mrStats: [],
-        preciseStats: [],
+        stats: [],
         districts: [],
         districtStats: [],
         townStats: [],
