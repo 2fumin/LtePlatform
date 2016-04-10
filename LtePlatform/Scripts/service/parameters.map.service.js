@@ -190,6 +190,27 @@
                 }, function () {
                     $log.info('Modal dismissed at: ' + new Date());
                 });
+            },
+            showCollegeCdmaCellInfo: function (cell) {
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: '/appViews/Parameters/Map/CdmaCellInfoBox.html',
+                    controller: 'college.cdma.cell.dialog',
+                    size: 'sm',
+                    resolve: {
+                        dialogTitle: function () {
+                            return cell.btsName + "-" + cell.sectorId + "小区信息";
+                        },
+                        neighbor: function () {
+                            return cell;
+                        }
+                    }
+                });
+                modalInstance.result.then(function (nei) {
+                    console.log(nei);
+                }, function () {
+                    $log.info('Modal dismissed at: ' + new Date());
+                });
             }
         };
     });

@@ -18,7 +18,7 @@
                 parametersMapService.showENodebsElements(btss, parametersDialogService.showENodebInfo);
             });
             collegeService.queryCdmaCells($scope.collegeName).then(function (cells) {
-                parametersMapService.showCellSectors(cells, parametersDialogService.showCellInfo);
+                parametersMapService.showCellSectors(cells, parametersDialogService.showCollegeCdmaCellInfo);
             });
             break;
         case 'lteDistribution':
