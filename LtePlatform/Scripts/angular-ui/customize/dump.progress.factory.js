@@ -117,11 +117,10 @@
                 queryFunc();
             }
         };
-        serviceInstance.dumpAllRecords = function(records, outerIndex, innerIndex, eNodebId, sectorId, queryFunc) {
+        serviceInstance.dumpAllRecords = function (records, outerIndex, innerIndex, eNodebId, sectorId, queryFunc) {
             if (outerIndex >= records.length) {
                 if (queryFunc !== undefined)
                     queryFunc();
-                return 0;
             }
             var subRecord = records[outerIndex];
             if (subRecord.existedRecords < 10 && innerIndex < subRecord.mongoRecords.length) {
@@ -129,10 +128,10 @@
                 stat.eNodebId = eNodebId;
                 stat.sectorId = sectorId;
                 dumpProgress.dumpMongo(stat).then(function() {
-                    return 1 + serviceInstance.dumpAllRecords(records, outerIndex, innerIndex + 1, eNodebId, sectorId, queryFunc);
+                    serviceInstance.dumpAllRecords(records, outerIndex, innerIndex + 1, eNodebId, sectorId, queryFunc);
                 });
             }
-            return serviceInstance.dumpAllRecords(records, outerIndex + 1, 0, eNodebId, sectorId, queryFunc);
+            serviceInstance.dumpAllRecords(records, outerIndex + 1, 0, eNodebId, sectorId, queryFunc);
         };
 
         return serviceInstance;

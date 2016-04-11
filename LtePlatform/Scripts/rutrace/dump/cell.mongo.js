@@ -13,7 +13,7 @@
         $uibModalInstance.dismiss('cancel');
     };
 
-    $scope.queryRecords = function() {
+    $scope.queryRecords = function () {
         angular.forEach($scope.dateRecords, function (record) {
             dumpProgress.queryExistedItems(eNodebId, sectorId, record.date).then(function (result) {
                 for (var i = 0; i < $scope.dateRecords.length; i++) {
@@ -43,7 +43,7 @@
     };
 
     $scope.dumpAllRecords = function () {
-        console.log(dumpPreciseService.dumpAllRecords($scope.dateRecords, 0, 0, eNodebId, sectorId, $scope.queryRecords));
+        dumpPreciseService.dumpAllRecords($scope.dateRecords, 0, 0, eNodebId, sectorId, $scope.queryRecords);
     };
 
     var startDate = new Date(begin);
