@@ -204,18 +204,22 @@
                 });
                 return outputStats;
             },
-            calculateAverageRates: function(preciseStats) {
+            calculateAverageRates: function(stats) {
                 var result = {
                     statDate: "平均值",
                     values: []
                 };
-                if (preciseStats.length === 0) return result;
-                for (var i = 0; i < preciseStats.length; i++) {
-                    for (var j = 0; j < preciseStats[i].values.length; j++) {
+                if (stats.length === 0) return result;
+                for (var i = 0; i < stats.length; i++) {
+                    for (var j = 0; j < stats[i].values.length; j++) {
                         if (i === 0) {
-                            result.values.push(preciseStats[i].values[j] / preciseStats.length);
+                            result.values.push({
+                                mr: stats[i].values[j].mr / stats.length,
+                                precise: stats[i].values[j].precise / stats.length
+                            });
                         } else {
-                            result.values[j] += preciseStats[i].values[j] / preciseStats.length;
+                            result.values[j].mr += stats[i].values[j].mr / stats.length;
+                            result.values[j].precise += stats[i].values[j].precise / stats.length;
                         }
                     }
                 }

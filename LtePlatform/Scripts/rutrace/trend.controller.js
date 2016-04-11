@@ -18,8 +18,7 @@ app.controller("rutrace.trend", function ($scope, appRegionService, appKpiServic
                 $scope.trendStat.stats = appKpiService.generateDistrictStats($scope.trendStat.districts, result);
                 if (result.length > 0) {
                     appKpiService.generateTrendStatsForPie($scope.trendStat, result);
-                    $scope.trendStat.mrStats.push(appKpiService.calculateAverageRates($scope.trendStat.mrStats));
-                    $scope.trendStat.preciseStats.push(appKpiService.calculateAverageRates($scope.trendStat.preciseStats));
+                    $scope.trendStat.stats.push(appKpiService.calculateAverageRates($scope.trendStat.stats));
                 }
                 $scope.trendStat.beginDateString = appFormatService.getDateString($scope.beginDate.value, "yyyy年MM月dd日");
                 $scope.trendStat.endDateString = appFormatService.getDateString($scope.endDate.value, "yyyy年MM月dd日");
