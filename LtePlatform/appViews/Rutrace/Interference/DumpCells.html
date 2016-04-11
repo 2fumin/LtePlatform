@@ -9,6 +9,7 @@
             <th>扇区编号</th>
             <th>基站名称</th>
             <th>查询信息</th>
+            <th>导入情况</th>
         </tr>
     </thead>
     <tbody>
@@ -18,6 +19,7 @@
             <td>{{cell.pci}}</td>
             <td>{{cell.sectorId}}</td>
             <td>{{cell.name}}</td>
+            <td>{{cell.dumpInfo}}</td>
             <td>
                 <button class="btn btn-default" ng-click="dumpMongo(cell)">导入数据</button>
             </td>

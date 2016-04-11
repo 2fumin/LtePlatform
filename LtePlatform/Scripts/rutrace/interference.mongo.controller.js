@@ -29,6 +29,7 @@ app.controller('interference.mongo', function ($scope, $uibModal, $log, dumpProg
                 networkElementService.queryENodebInfo(cell.eNodebId).then(function(eNodeb) {
                     cell.name = eNodeb.name;
                 });
+                cell.dumpInfo = "未开始";
             });
         });
     };

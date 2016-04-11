@@ -43,7 +43,7 @@
     };
 
     $scope.dumpAllRecords = function () {
-        dumpPreciseService.dumpAllRecords($scope.dateRecords, 0, 0, eNodebId, sectorId, $scope.queryRecords);
+        console.log(dumpPreciseService.dumpAllRecords($scope.dateRecords, 0, 0, eNodebId, sectorId, $scope.queryRecords));
     };
 
     var startDate = new Date(begin);
