@@ -14,6 +14,7 @@ using Lte.Parameters.Abstract.Neighbor;
 using Lte.Parameters.Abstract.Switch;
 using Lte.Parameters.Concrete;
 using Lte.Parameters.Concrete.Basic;
+using Lte.Parameters.Concrete.Channel;
 using Lte.Parameters.Concrete.College;
 using Lte.Parameters.Concrete.Kpi;
 using Lte.Parameters.Concrete.Mr;
@@ -111,6 +112,8 @@ namespace LtePlatform
             ninjectKernel.Bind<IEUtranCellFDDZteRepository>().To<EUtranCellFDDZteRepository>();
 
             ninjectKernel.Bind<IPrachFDDZteRepository>().To<PrachFDDZteRepository>();
+
+            ninjectKernel.Bind<IPowerControlDLZteRepository>().To<PowerControlDLZteRepository>();
 
             ninjectKernel.Bind<CdmaRegionStatService>().ToSelf();
 

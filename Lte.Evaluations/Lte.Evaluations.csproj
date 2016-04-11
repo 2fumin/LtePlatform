@@ -112,6 +112,7 @@
     <Compile Include="MapperSerive\Kpi\TopConnection3GTrendViewContainer.cs" />
     <Compile Include="Policy\OrderTopConnection3GService.cs" />
     <Compile Include="ViewModels\Basic\RegionStat.cs" />
+    <Compile Include="ViewModels\Channel\CellPower.cs" />
     <Compile Include="ViewModels\College\CollegeStat.cs" />
     <Compile Include="ViewModels\Kpi\TopConnection3GTrendView.cs" />
     <Compile Include="ViewModels\Mr\InterferenceMatrixView.cs" />

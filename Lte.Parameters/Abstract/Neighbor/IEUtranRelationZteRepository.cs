@@ -23,6 +23,6 @@ namespace Lte.Parameters.Abstract.Neighbor
     {
         List<PowerControlDLZte> GetRecentList(int eNodebId);
 
-        List<PowerControlDLZte> GetRecentList(int eNodebId, byte sectorId);
+        PowerControlDLZte GetRecent(int eNodebId, byte sectorId);
     }
 }
