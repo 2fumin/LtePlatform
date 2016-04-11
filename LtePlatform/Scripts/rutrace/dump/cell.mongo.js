@@ -1,4 +1,5 @@
-﻿app.controller('dump.cell.mongo', function ($scope, $uibModalInstance, dumpProgress, appFormatService, dialogTitle, eNodebId, sectorId, pci, begin, end) {
+﻿app.controller('dump.cell.mongo', function ($scope, $uibModalInstance, dumpProgress, appFormatService, dumpPreciseService,
+    dialogTitle, eNodebId, sectorId, pci, begin, end) {
     $scope.dialogTitle = dialogTitle;
 
     $scope.dateRecords = [];
@@ -37,18 +38,12 @@
         $scope.currentDetails = records;
     };
 
-    $scope.dumpRecords = function (records, index) {
-        index = index || 0;
-        if (index < records.length) {
-            var stat = records[index];
-            stat.eNodebId = eNodebId;
-            stat.sectorId = sectorId;
-            dumpProgress.dumpMongo(stat).then(function() {
-                $scope.dumpRecords(records, index + 1);
-            });
-        } else {
-            $scope.queryRecords();
-        }
+    $scope.dumpRecords = function (records) {
+        dumpPreciseService.dumpRecords(records, 0, eNodebId, sectorId, $scope.queryRecords);
+    };
+
+    $scope.dumpAllRecords = function () {
+        dumpPreciseService.dumpAllRecords($scope.dateRecords, 0, 0, eNodebId, sectorId, $scope.queryRecords);
     };
 
     var startDate = new Date(begin);

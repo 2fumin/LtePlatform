@@ -81,7 +81,7 @@
                 });
             return deferred.promise;
         };
-
+        
         serviceInstance.queryMongoItems = function (eNodebId, pci, date) {
             var deferred = $q.defer();
             $http({
@@ -99,6 +99,41 @@
                     deferred.reject(reason);
                 });
             return deferred.promise;
+        };
+
+        return serviceInstance;
+    })
+    .factory('dumpPreciseService', function (dumpProgress) {
+        var serviceInstance = {};
+        serviceInstance.dumpRecords = function(records, index, eNodebId, sectorId, queryFunc) {
+            if (index < records.length) {
+                var stat = records[index];
+                stat.eNodebId = eNodebId;
+                stat.sectorId = sectorId;
+                dumpProgress.dumpMongo(stat).then(function () {
+                    serviceInstance.dumpRecords(records, index + 1, eNodebId, sectorId, queryFunc);
+                });
+            } else {
+                queryFunc();
+            }
+        };
+        serviceInstance.dumpAllRecords = function(records, outerIndex, innerIndex, eNodebId, sectorId, queryFunc) {
+            if (outerIndex >= records.length) {
+                if (queryFunc !== undefined)
+                    queryFunc();
+            } else {
+                var subRecord = records[outerIndex];
+                if (subRecord.existedRecords < 10 && innerIndex < subRecord.mongoRecords.length) {
+                    var stat = subRecord.mongoRecords[innerIndex];
+                    stat.eNodebId = eNodebId;
+                    stat.sectorId = sectorId;
+                    dumpProgress.dumpMongo(stat).then(function() {
+                        serviceInstance.dumpAllRecords(records, outerIndex, innerIndex + 1, eNodebId, sectorId, queryFunc);
+                    });
+                } else {
+                    serviceInstance.dumpAllRecords(records, outerIndex + 1, 0, eNodebId, sectorId, queryFunc);
+                }
+            }
         };
 
         return serviceInstance;
