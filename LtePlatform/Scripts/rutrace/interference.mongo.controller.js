@@ -1,5 +1,5 @@
 ﻿
-app.controller('interference.mongo', function ($scope, $uibModal, $log, dumpProgress, networkElementService) {
+app.controller('interference.mongo', function ($scope, $uibModal, $log, dumpProgress, networkElementService, dumpPreciseService) {
     $scope.progressInfo = {
         dumpCells: [],
         totalSuccessItems: 0,
@@ -69,8 +69,39 @@ app.controller('interference.mongo', function ($scope, $uibModal, $log, dumpProg
         });
     };
 
+    $scope.generateDumpRecords = function (dumpRecords, startDate, endDate, eNodebId, sectorId, pci) {
+        if (startDate >= endDate) {
+            dumpPreciseService.dumpAllRecords(dumpRecords, 0, 0, eNodebId, sectorId, $scope.dump);
+            return;
+        }
+        var date = new Date(startDate);
+        dumpProgress.queryExistedItems(eNodebId, sectorId, date).then(function (existed) {
+            dumpProgress.queryMongoItems(eNodebId, pci, existed.date).then(function (records) {
+                dumpRecords.push({
+                    date: records.date,
+                    existedRecords: existed.value,
+                    mongoRecords: records.value
+                });
+                startDate.setDate(date.getDate() + 1);
+                $scope.generateDumpRecords(dumpRecords, startDate, endDate, eNodebId, sectorId, pci);
+            });
+        });
+    };
+
     $scope.dump = function () {
-        
+        if ($scope.progressInfo.totalSuccessItems >= $scope.progressInfo.dumpCells.length) return;
+        var cell = $scope.progressInfo.dumpCells[$scope.progressInfo.totalSuccessItems];
+        cell.dumpInfo = "已导入";
+        $scope.progressInfo.totalSuccessItems += 1;
+        var eNodebId = cell.eNodebId;
+        var sectorId = cell.sectorId;
+        var pci = cell.pci;
+        var begin = $scope.beginDate.value;
+        var startDate = new Date(begin);
+        var end = $scope.endDate.value;
+        var endDate = new Date(end);
+        var dumpRecords = [];
+        $scope.generateDumpRecords(dumpRecords, startDate, endDate, eNodebId, sectorId, pci);
     };
 
     $scope.reset();
