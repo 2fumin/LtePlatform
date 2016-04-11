@@ -108,19 +108,19 @@
                 }
                 return chart.options;
             },
-            getMrsDistrictOptions: function(mrStats, districts){
+            getMrsDistrictOptions: function(stats, districts){
                 var chart = new ComboChart();
                 chart.title.text = "MR总数变化趋势图";
                 var statDates = [];
                 var districtStats = [];
-                for (var i = 0; i < mrStats.length; i++) {
-                    var stat = mrStats[i];
+                for (var i = 0; i < stats.length; i++) {
+                    var stat = stats[i];
                     statDates.push(stat.statDate);
                     for (var j = 0; j < districts.length ; j++) {
-                        if (i == 0) {
-                            districtStats.push([stat.values[j]]);
+                        if (i === 0) {
+                            districtStats.push([stat.values[j].mr]);
                         } else {
-                            districtStats[j].push(stat.values[j]);
+                            districtStats[j].push(stat.values[j].mr);
                         }
                     }
                 }
@@ -136,19 +136,19 @@
                 }
                 return chart.options;
             },
-            getPreciseDistrictOptions: function(preciseStats, districts){
+            getPreciseDistrictOptions: function(stats, districts){
                 var chart = new ComboChart();
                 chart.title.text = "精确覆盖率变化趋势图";
                 var statDates = [];
                 var districtStats = [];
-                for (var i = 0; i < preciseStats.length; i++) {
-                    var stat = preciseStats[i];
+                for (var i = 0; i < stats.length; i++) {
+                    var stat = stats[i];
                     statDates.push(stat.statDate);
                     for (var j = 0; j < districts.length ; j++) {
-                        if (i == 0) {
-                            districtStats.push([stat.values[j]]);
+                        if (i === 0) {
+                            districtStats.push([stat.values[j].precise]);
                         } else {
-                            districtStats[j].push(stat.values[j]);
+                            districtStats[j].push(stat.values[j].precise);
                         }
                     }
                 }

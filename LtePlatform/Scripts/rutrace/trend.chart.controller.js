@@ -1,6 +1,5 @@
 ﻿
 app.controller("rutrace.trendchart", function ($scope, $location, $timeout, appKpiService) {
-    if ($scope.trendStat.mrStats.length === 0) $location.path($scope.rootPath + "trend");
 
     $scope.showCharts = function () {
         $("#mr-pie").highcharts(appKpiService.getMrPieOptions($scope.trendStat.districtStats,
@@ -8,9 +7,9 @@ app.controller("rutrace.trendchart", function ($scope, $location, $timeout, appK
         $("#precise").highcharts(appKpiService.getPreciseRateOptions($scope.trendStat.districtStats,
             $scope.trendStat.townStats));
     };
-    $scope.timeMrConfig = appKpiService.getMrsDistrictOptions($scope.trendStat.mrStats,
+    $scope.timeMrConfig = appKpiService.getMrsDistrictOptions($scope.trendStat.stats,
         $scope.trendStat.districts);
-    $scope.timePreciseConfig = appKpiService.getPreciseDistrictOptions($scope.trendStat.preciseStats,
+    $scope.timePreciseConfig = appKpiService.getPreciseDistrictOptions($scope.trendStat.stats,
         $scope.trendStat.districts);
     $timeout(function() {
         $scope.showCharts();
