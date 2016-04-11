@@ -42,7 +42,7 @@ namespace LtePlatform
 
             ninjectKernel.Bind<IInfrastructureRepository>().To<EFInfrastructureRepository>();
 
-            ninjectKernel.Bind<IAlarmRepository>().To<EFAlameRepository>();
+            ninjectKernel.Bind<IAlarmRepository>().To<EFAlarmRepository>();
 
             ninjectKernel.Bind<ICollege3GTestRepository>().To<EFCollege3GTestRepository>();
 

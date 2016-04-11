@@ -110,8 +110,8 @@
     <Compile Include="Abstract\College\ICollegeRepository.cs" />
     <Compile Include="Abstract\Kpi\ICsvFileInfoRepository.cs" />
     <Compile Include="Abstract\Basic\IENodebRepository.cs" />
-    <Compile Include="Abstract\IIndoorDistributioinRepository.cs" />
-    <Compile Include="Abstract\IInfrastructureRepository.cs" />
+    <Compile Include="Abstract\Infrastructure\IIndoorDistributioinRepository.cs" />
+    <Compile Include="Abstract\Infrastructure\IInfrastructureRepository.cs" />
     <Compile Include="Abstract\IInterferenceMatrixRepository.cs" />
     <Compile Include="Abstract\IInterferenceMongoRepository.cs" />
     <Compile Include="Abstract\Neighbor\IEutranIntraFreqNCellRepository.cs" />
@@ -120,11 +120,11 @@
     <Compile Include="Abstract\IPagingRepository.cs" />
     <Compile Include="Abstract\Kpi\IPreciseCoverage4GRepository.cs" />
     <Compile Include="Abstract\IRasterInfoRepository.cs" />
-    <Compile Include="Abstract\IRegionRepository.cs" />
+    <Compile Include="Abstract\Infrastructure\IRegionRepository.cs" />
     <Compile Include="Abstract\Kpi\ITopConnection3GRepository.cs" />
     <Compile Include="Abstract\Kpi\ITopDrop2GCellRepository.cs" />
     <Compile Include="Abstract\Kpi\ITownPreciseCoverage4GStatRepository.cs" />
-    <Compile Include="Abstract\ITownRepository.cs" />
+    <Compile Include="Abstract\Infrastructure\ITownRepository.cs" />
     <Compile Include="Abstract\IWorkItemRepository.cs" />
     <Compile Include="Abstract\LightWeightRepositroyBase.cs" />
     <Compile Include="Abstract\PagingRepositoryBase.cs" />
@@ -137,7 +137,8 @@
     <Compile Include="Concrete\Basic\CellHuaweiMongoRepository.cs" />
     <Compile Include="Concrete\Basic\EUtranCellFDDZteRepository.cs" />
     <Compile Include="Concrete\Basic\PrachFDDZteRepository.cs" />
-    <Compile Include="Concrete\EFAlameRepository.cs" />
+    <Compile Include="Concrete\Channel\PowerControlDLZteRepository.cs" />
+    <Compile Include="Concrete\EFAlarmRepository.cs" />
     <Compile Include="Concrete\Basic\EFBtsRepository.cs" />
     <Compile Include="Concrete\Basic\EFCdmaCellRepository.cs" />
     <Compile Include="Concrete\Kpi\EFCdmaRegionStatRepository.cs" />
@@ -147,8 +148,8 @@
     <Compile Include="Concrete\College\EFCollegeKpiRepository.cs" />
     <Compile Include="Concrete\College\EFCollegeRepository.cs" />
     <Compile Include="Concrete\Basic\EFENodebRepository.cs" />
-    <Compile Include="Concrete\EFIndoorDistributionRepository.cs" />
-    <Compile Include="Concrete\EFInfrastructureRepository.cs" />
+    <Compile Include="Concrete\Infrastructure\EFIndoorDistributionRepository.cs" />
+    <Compile Include="Concrete\Infrastructure\EFInfrastructureRepository.cs" />
     <Compile Include="Concrete\Mr\EFInterferenceMatrixRepository.cs" />
     <Compile Include="Concrete\Neighbor\EFLteNeighborCellRepository.cs" />
     <Compile Include="Concrete\EFParametersContext.cs" />
@@ -157,7 +158,7 @@
     <Compile Include="Concrete\Kpi\EFTopConnection3GRepository.cs" />
     <Compile Include="Concrete\Kpi\EFTopDrop2GCellRepository.cs" />
     <Compile Include="Concrete\Kpi\EFTownPreciseCoverage4GStatRepository.cs" />
-    <Compile Include="Concrete\EFTownRepository.cs" />
+    <Compile Include="Concrete\Infrastructure\EFTownRepository.cs" />
     <Compile Include="Concrete\EFWorkItemRepository.cs" />
     <Compile Include="Concrete\MasterAreaTestDateDateRepository.cs" />
     <Compile Include="Concrete\MasterCsvFileInfoRepository.cs" />

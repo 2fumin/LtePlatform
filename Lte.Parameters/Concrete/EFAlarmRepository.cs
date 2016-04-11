@@ -8,7 +8,7 @@ using Lte.Parameters.Entities;
 
 namespace Lte.Parameters.Concrete
 {
-    public class EFAlameRepository : EfRepositoryBase<EFParametersContext, AlarmStat>, IAlarmRepository
+    public class EFAlarmRepository : EfRepositoryBase<EFParametersContext, AlarmStat>, IAlarmRepository
     {
         public List<AlarmStat> GetAllList(DateTime begin, DateTime end)
         {
@@ -37,7 +37,7 @@ namespace Lte.Parameters.Concrete
             return Context.SaveChanges();
         }
 
-        public EFAlameRepository(IDbContextProvider<EFParametersContext> dbContextProvider) : base(dbContextProvider)
+        public EFAlarmRepository(IDbContextProvider<EFParametersContext> dbContextProvider) : base(dbContextProvider)
         {
         }
     }
