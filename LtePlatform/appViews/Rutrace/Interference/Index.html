@@ -36,7 +36,7 @@
                 <option ng-repeat="p in orderPolicy.options" label="{{p.name}}" value="{{p.value}}">{{p.name}}</option>
             </select>
             <span class="input-group-btn">
-                <button type="button" class="btn btn-warning" ng-click="showInterference()">
+                <button type="button" class="btn btn-warning" ng-click="showInterference(topStat.current)">
                     <i class="glyphicon glyphicon-search" title="统计干扰"></i>
                 </button>
                 <a class="btn btn-success" ng-href="{{rootPath}}top">
