@@ -94,4 +94,13 @@
             $scope.victimCells = $scope.topStat.victims[$scope.currentCellName];
         }
     });
+    networkElementService.queryCellInfo($routeParams.cellId, $routeParams.sectorId).then(function(info) {
+        $scope.topStat.current = {
+            cellId: $routeParams.cellId,
+            sectorId: $routeParams.sectorId,
+            eNodebName: $routeParams.name,
+            longtitute: info.longtitute,
+            lattitute: info.lattitute
+        };
+    });
 });
