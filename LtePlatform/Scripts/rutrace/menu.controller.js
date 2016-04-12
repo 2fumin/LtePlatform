@@ -34,7 +34,7 @@
                     templateUrl: viewDir + "Import.html",
                     controller: "rutrace.import"
                 })
-                .when('/interference', {
+                .when('/interference/:cellId/:sectorId/:name', {
                     templateUrl: viewDir + "Interference/Index.html",
                     controller: "rutrace.interference"
                 })

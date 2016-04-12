@@ -1,7 +1,9 @@
-﻿app.controller("rutrace.interference", function ($scope, $http, $location, networkElementService, topPreciseService,
-    neighborMongoService) {
-    $scope.currentCellName = $scope.topStat.current.eNodebName + "-" + $scope.topStat.current.sectorId;
+﻿app.controller("rutrace.interference", function ($scope, $http, $location, $routeParams,
+    networkElementService, topPreciseService, menuItemService, neighborMongoService) {
+    $scope.currentCellName = $routeParams.name + "-" + $routeParams.sectorId;
     $scope.page.title = "TOP指标干扰分析: " + $scope.currentCellName;
+    menuItemService.updateMenuItem($scope.menuItems, 1, $scope.page.title, 
+        $scope.rootPath + $routeParams.cellId + "/" + $routeParams.sectorId + "/" +$routeParams.name)
     $scope.oneAtATime = false;
     var lastWeek = new Date();
     lastWeek.setDate(lastWeek.getDate() - 7);
@@ -37,24 +39,19 @@
     };
     $scope.updateMessages = [];
 
-    $scope.showInterference = function(cell) {
+    $scope.showInterference = function() {
         $scope.interferenceCells = [];
         $scope.victimCells = [];
 
-        networkElementService.queryCellInfo(cell.cellId, cell.sectorId).then(function(info) {
-            cell.longtitute = info.longtitute;
-            cell.lattitute = info.lattitute;
-            topPreciseService.queryInterferenceNeighbor($scope.beginDate.value, $scope.endDate.value,
-                cell.cellId, cell.sectorId).then(function(result) {
-                $scope.interferenceCells = result;
-                $scope.topStat.interference[$scope.currentCellName] = result;
-            });
-
+        topPreciseService.queryInterferenceNeighbor($scope.beginDate.value, $scope.endDate.value,
+            $routeParams.cellId, $routeParams.sectorId).then(function(result) {
+            $scope.interferenceCells = result;
+            $scope.topStat.interference[$scope.currentCellName] = result;
         });
 
         if ($scope.topStat.updateInteferenceProgress[$scope.currentCellName] !== true) {
             $scope.topStat.updateInteferenceProgress[$scope.currentCellName] = true;
-            topPreciseService.updateInterferenceNeighbor(cell.cellId, cell.sectorId).then(function(result) {
+            topPreciseService.updateInterferenceNeighbor($routeParams.cellId, $routeParams.sectorId).then(function (result) {
                 $scope.updateMessages.push({
                     cellName: $scope.currentCellName,
                     counts: result,
@@ -66,7 +63,7 @@
 
         if ($scope.topStat.updateVictimProgress[$scope.currentCellName] !== true) {
             $scope.topStat.updateVictimProgress[$scope.currentCellName] = true;
-            topPreciseService.updateInterferenceVictim(cell.cellId, cell.sectorId).then(function(result) {
+            topPreciseService.updateInterferenceVictim($routeParams.cellId, $routeParams.sectorId).then(function (result) {
                 $scope.updateMessages.push({
                     cellName: $scope.currentCellName,
                     counts: result,
@@ -77,7 +74,7 @@
         }
 
         topPreciseService.queryInterferenceVictim($scope.beginDate.value, $scope.endDate.value,
-            cell.cellId, cell.sectorId).then(function(result) {
+            $routeParams.cellId, $routeParams.sectorId).then(function (result) {
             $scope.victimCells = result;
             $scope.topStat.victims[$scope.currentCellName] = result;
         });
@@ -88,19 +85,13 @@
         $scope.updateMessages.splice(index, 1);
     };
 
-    if ($scope.topStat.current.eNodebName === undefined || $scope.topStat.current.eNodebName === "")
-        $location.path($scope.rootPath + "top");
-    else {
-        var currentCell = $scope.topStat.current;
-        neighborMongoService.queryNeighbors(currentCell.cellId, currentCell.sectorId).then(function (result) {
-            $scope.mongoNeighbors = result;
-            if ($scope.topStat.interference[$scope.currentCellName] === undefined) {
-                $scope.showInterference(currentCell);
-            } else {
-                $scope.interferenceCells = $scope.topStat.interference[$scope.currentCellName];
-                $scope.victimCells = $scope.topStat.victims[$scope.currentCellName];
-            }
-        });
-
-    }
+    neighborMongoService.queryNeighbors($routeParams.cellId, $routeParams.sectorId).then(function (result) {
+        $scope.mongoNeighbors = result;
+        if ($scope.topStat.interference[$scope.currentCellName] === undefined) {
+            $scope.showInterference();
+        } else {
+            $scope.interferenceCells = $scope.topStat.interference[$scope.currentCellName];
+            $scope.victimCells = $scope.topStat.victims[$scope.currentCellName];
+        }
+    });
 });
