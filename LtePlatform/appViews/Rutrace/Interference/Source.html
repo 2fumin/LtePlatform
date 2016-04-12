@@ -9,6 +9,7 @@
             <th>6dB干扰数</th>
             <th>10dB干扰数</th>
             <th>总干扰水平</th>
+            <th>为系统邻区</th>
             <th>操作</th>
         </tr>
     </thead>
@@ -21,8 +22,10 @@
             <td>{{cell.overInterferences6Db | number:1}}</td>
             <td>{{cell.overInterferences10Db | number:1}}</td>
             <td>{{cell.interferenceLevel | number:2}}</td>
+            <td>{{cell.isMongoNeighbor?'是':'否'}}</td>
             <td>
-                <button class="btn btn-sm btn-warning" ng-if="cell.neighborCellName==='未匹配小区'" ng-click="match(cell)">
+                <button class="btn btn-sm btn-warning" 
+                        ng-show="cell.neighborCellName==='未匹配小区' || !cell.isMongoNeighbor" ng-click="match(cell)">
                     匹配
                 </button>
             </td>

@@ -44,7 +44,16 @@
         $scope.victimCells = [];
 
         topPreciseService.queryInterferenceNeighbor($scope.beginDate.value, $scope.endDate.value,
-            $routeParams.cellId, $routeParams.sectorId).then(function(result) {
+            $routeParams.cellId, $routeParams.sectorId).then(function (result) {
+            angular.forEach(result, function(cell) {
+                for (var i = 0; i < $scope.mongoNeighbors.length; i++) {
+                    var neighbor = $scope.mongoNeighbors[i];
+                    if (neighbor.neighborPci === cell.destPci) {
+                        cell.isMongoNeighbor = true;
+                        break;
+                    }
+                }
+            });
             $scope.interferenceCells = result;
             $scope.topStat.interference[$scope.currentCellName] = result;
         });
