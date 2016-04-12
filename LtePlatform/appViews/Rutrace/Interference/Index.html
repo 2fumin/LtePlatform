@@ -48,7 +48,7 @@
 </div>
 <div uib-accordion close-others="oneAtATime">
     <div uib-accordion-group heading="干扰源分析({{interferenceCells.length}})" panel-class="panel-warning">
-        <div ng-include="'/appViews/Rutrace/Interference/Source.html'"></div>
+        <div ng-include="'/appViews/Rutrace/Interference/Source.html'" ng-controller="rutrace.interference.neighbors"></div>
     </div>
     <div uib-accordion-group heading="被干扰小区({{victimCells.length}})" panel-class="panel-success">
         <div ng-include="'/appViews/Rutrace/Interference/Victim.html'"></div>
