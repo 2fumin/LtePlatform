@@ -12,6 +12,8 @@ namespace Lte.Parameters.Abstract.Basic
         List<CellHuaweiMongo> GetRecentList(int eNodebId);
 
         CellHuaweiMongo GetRecent(int eNodebId, byte sectorId);
+
+        CellHuaweiMongo GetByLocal(int eNodebId, int localCellId);
     }
 
     public interface IEUtranCellFDDZteRepository : IRepository<EUtranCellFDDZte, ObjectId>

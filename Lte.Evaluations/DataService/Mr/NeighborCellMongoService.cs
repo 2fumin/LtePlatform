@@ -150,7 +150,7 @@ namespace Lte.Evaluations.DataService.Mr
                 result.NeighborCellName = neighborCellName;
                 result.NeighborCellId = _destENodebId;
                 result.NeighborSectorId = _destSectorId;
-                var huaweiCell = _huaweiCellRepository.GetRecent(x.eNodeB_Id, (byte) x.LocalCellId);
+                var huaweiCell = _huaweiCellRepository.GetByLocal(x.eNodeB_Id, x.LocalCellId);
                 result.SectorId = (byte?) (huaweiCell?.CellId) ?? 255;
                 return result;
             }).ToList();

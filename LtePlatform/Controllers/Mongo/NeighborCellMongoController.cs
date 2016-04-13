@@ -26,6 +26,12 @@ namespace LtePlatform.Controllers.Mongo
         }
 
         [HttpGet]
+        public List<NeighborCellMongo> GetReverse(int destENodebId, byte destSectorId)
+        {
+            return _service.QueryReverseNeighbors(destENodebId, destSectorId);
+        }
+
+        [HttpGet]
         public List<ExternalEUtranCellFDDZte> Get(int eNodebId)
         {
             return _service.QueryExternalCells(eNodebId);
