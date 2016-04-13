@@ -25,6 +25,8 @@ namespace Lte.Parameters.Entities.Neighbor
 
         public string description { get; set; }
 
+        public int? esCellNum { get; set; }
+
         public double earfcnDl { get; set; }
 
         public int cellType { get; set; }

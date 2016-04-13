@@ -46,9 +46,27 @@ namespace Lte.Evaluations.DataService.Mr
                     sectorId);
         }
 
+        private IMongoQuery<List<NeighborCellMongo>> ConstructReverseNeighborQuery(int destENodebId, byte destSectorId)
+        {
+            var eNodeb = _eNodebRepository.GetByENodebId(destENodebId);
+            if (eNodeb == null) return null;
+            return eNodeb.Factory == "华为"
+                ? (IMongoQuery<List<NeighborCellMongo>>)
+                    new HuaweiReverseNeighborQuery(_cellRepository, _eNodebRepository, _huaweiCellRepository,
+                        _huaweiNeighborRepository, destENodebId, destSectorId)
+                : new ZteReverseNeighborQuery(_cellRepository, _zteNeighborRepository, _zteExternalRepository,
+                    destENodebId, destSectorId);
+        }
+
         public List<NeighborCellMongo> QueryNeighbors(int eNodebId, byte sectorId)
         {
             var query = ConstructNeighborQuery(eNodebId, sectorId);
+            return query?.Query();
+        }
+
+        public List<NeighborCellMongo> QueryReverseNeighbors(int destENodebId, byte destSectorId)
+        {
+            var query = ConstructReverseNeighborQuery(destENodebId, destSectorId);
             return query?.Query();
         }
 
@@ -94,6 +112,48 @@ namespace Lte.Evaluations.DataService.Mr
                 if (neighborENodeb != null) x.NeighborCellName = neighborENodeb.Name + "-" + x.NeighborSectorId;
             });
             return results;
+        }
+    }
+
+    internal class HuaweiReverseNeighborQuery : IMongoQuery<List<NeighborCellMongo>>
+    {
+        private readonly ICellRepository _cellRepository;
+        private readonly IENodebRepository _eNodebRepository;
+        private readonly ICellHuaweiMongoRepository _huaweiCellRepository;
+        private readonly IEutranIntraFreqNCellRepository _huaweiNeighborRepository;
+        private readonly int _destENodebId;
+        private readonly byte _destSectorId;
+
+        public HuaweiReverseNeighborQuery(ICellRepository cellRepository, IENodebRepository eNodebRepository,
+            ICellHuaweiMongoRepository huaweiCellRepository, IEutranIntraFreqNCellRepository huaweiNeighborRepository,
+            int destENodebId, byte destSectorId)
+        {
+            _cellRepository = cellRepository;
+            _eNodebRepository = eNodebRepository;
+            _huaweiCellRepository = huaweiCellRepository;
+            _huaweiNeighborRepository = huaweiNeighborRepository;
+            _destENodebId = destENodebId;
+            _destSectorId = destSectorId;
+        }
+
+        public List<NeighborCellMongo> Query()
+        {
+            var neighborCell = _cellRepository.GetBySectorId(_destENodebId, _destSectorId);
+            var neighborPci = neighborCell?.Pci;
+            var neighborENodeb = _eNodebRepository.GetByENodebId(_destENodebId);
+            var neighborCellName = neighborENodeb?.Name ?? "未知基站" + "-" + _destSectorId;
+            var huaweiNeighbors = _huaweiNeighborRepository.GetReverseList(_destENodebId, _destSectorId);
+            return huaweiNeighbors.Select(x =>
+            {
+                var result = Mapper.Map<EutranIntraFreqNCell, NeighborCellMongo>(x);
+                result.NeighborPci = neighborPci ?? 0;
+                result.NeighborCellName = neighborCellName;
+                result.NeighborCellId = _destENodebId;
+                result.NeighborSectorId = _destSectorId;
+                var huaweiCell = _huaweiCellRepository.GetRecent(x.eNodeB_Id, (byte) x.LocalCellId);
+                result.SectorId = (byte?) (huaweiCell?.CellId) ?? 255;
+                return result;
+            }).ToList();
         }
     }
 
@@ -154,6 +214,47 @@ namespace Lte.Evaluations.DataService.Mr
                 }
                 return neighbor;
 
+            }).ToList();
+        }
+    }
+
+    internal class ZteReverseNeighborQuery : IMongoQuery<List<NeighborCellMongo>>
+    {
+        private readonly ICellRepository _cellRepository;
+        private readonly IEUtranRelationZteRepository _zteNeighborRepository;
+        private readonly IExternalEUtranCellFDDZteRepository _zteExternalRepository;
+        private readonly int _destENodebId;
+        private readonly byte _destSectorId;
+
+        public ZteReverseNeighborQuery(ICellRepository cellRepository, IEUtranRelationZteRepository zteNeighborRepository,
+            IExternalEUtranCellFDDZteRepository zteExternalRepository, int destENodebId, byte destSectorId)
+        {
+            _cellRepository = cellRepository;
+            _zteExternalRepository = zteExternalRepository;
+            _zteNeighborRepository = zteNeighborRepository;
+            _destENodebId = destENodebId;
+            _destSectorId = destSectorId;
+        }
+
+        public List<NeighborCellMongo> Query()
+        {
+            var externals = _zteExternalRepository.GetReverseList(_destENodebId, _destSectorId);
+            return externals.Select(x =>
+            {
+                var result = Mapper.Map<ExternalEUtranCellFDDZte, NeighborCellMongo>(x);
+                var eNodebRelations = _zteNeighborRepository.GetRecentList(x.eNodeB_Id);
+                var relation =
+                    eNodebRelations.FirstOrDefault(
+                        r => r.refExternalEUtranCellFDD.Contains("ExternalEUtranCellFDD=" + x.ExternalEUtranCellFDD));
+                if (relation != null)
+                {
+                    result.SectorId = byte.Parse(relation.description.Split('=')[1]);
+                    result.IsAnrCreated = relation.isAnrCreated == 1;
+                    result.HandoffAllowed = relation.isHOAllowed == 1;
+                    result.RemovedAllowed = relation.isRemoveAllowed == 1;
+                    result.CellPriority = relation.nCelPriority;
+                }
+                return result;
             }).ToList();
         }
     }

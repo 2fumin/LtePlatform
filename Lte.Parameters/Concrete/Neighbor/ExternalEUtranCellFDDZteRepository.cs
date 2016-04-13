@@ -32,5 +32,15 @@ namespace Lte.Parameters.Concrete.Neighbor
             var recentDate = list.Max(x => x.iDate);
             return list.Where(x => x.iDate == recentDate).ToList();
         }
+
+        public List<ExternalEUtranCellFDDZte> GetReverseList(int destENodebId, byte destSectorId)
+        {
+            var query =
+                   MongoDB.Driver.Builders.Query<ExternalEUtranCellFDDZte>.Where(
+                       e => e.eNBId == destENodebId && e.cellLocalId == destSectorId);
+            var list = Collection.Find(query).AsQueryable();
+            var recentDate = list.Max(x => x.iDate);
+            return list.Where(x => x.iDate == recentDate).ToList();
+        }
     }
 }

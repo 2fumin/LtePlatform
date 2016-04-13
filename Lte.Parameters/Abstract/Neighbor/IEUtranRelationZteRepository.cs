@@ -17,6 +17,8 @@ namespace Lte.Parameters.Abstract.Neighbor
     public interface IExternalEUtranCellFDDZteRepository : IRepository<ExternalEUtranCellFDDZte, ObjectId>
     {
         List<ExternalEUtranCellFDDZte> GetRecentList(int eNodebId);
+
+        List<ExternalEUtranCellFDDZte> GetReverseList(int destENodebId, byte destSectorId);
     }
 
     public interface IPowerControlDLZteRepository : IRepository<PowerControlDLZte, ObjectId>

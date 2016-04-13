@@ -20,7 +20,16 @@ namespace Lte.Parameters.Test.Basic
             var results = _repository.GetRecentList(551203);
             Assert.IsNotNull(results);
             Assert.AreEqual(results.Count, 81);
-            Assert.AreEqual(results[0].iDate, "20160318");
+            Assert.AreEqual(results[0].iDate, "20160408");
+        }
+
+        [Test]
+        public void Test_GetReverseBySectorId()
+        {
+            var results = _repository.GetReverseList(501676, 50);
+            Assert.IsNotNull(results);
+            Assert.AreEqual(results.Count, 12);
+            Assert.AreEqual(results[0].iDate, "20160408");
         }
     }
 }
