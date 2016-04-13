@@ -28,5 +28,13 @@ namespace Lte.Evaluations.DataService.Mr
             });
             return _repository.SaveChanges();
         }
+
+        public bool QueryCellMonitored(int cellId, byte sectorId)
+        {
+            var cell = _cellRepository.GetBySectorId(cellId, sectorId);
+            if (cell == null) return false;
+            var item = _repository.GetTopPreciseMonitor(cell.Id);
+            return item != null;
+        }
     }
 }

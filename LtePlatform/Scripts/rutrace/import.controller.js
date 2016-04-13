@@ -1,5 +1,5 @@
 ﻿app.controller("rutrace.import", function ($scope, $http, $location, neighborService, neighborMongoService,
-    topPreciseService) {
+    topPreciseService, networkElementService) {
     $scope.neighborCells = [];
     $scope.updateMessages = [];
 
@@ -11,6 +11,11 @@
         });
         neighborMongoService.queryReverseNeighbors(cell.cellId, cell.sectorId).then(function (result) {
             $scope.reverseCells = result;
+            angular.forEach(result, function(neighbor) {
+                networkElementService.queryENodebInfo(neighbor.cellId).then(function(info) {
+                    neighbor.eNodebName = info.name;
+                });
+            });
         });
     };
     $scope.updatePci = function () {
@@ -66,12 +71,11 @@
         });
     };
     $scope.monitorNeighbors = function() {
-        for (var i = 0; i < $scope.neighborCells.length; i++) {
-            var cell = $scope.neighborCells[i];
+        angular.forEach($scope.neighborCells.length, function(cell) {
             if (cell.isMonitored === false) {
                 $scope.addNeighborMonitor(cell);
             }
-        }
+        });
     };
 
     if ($scope.topStat.current.eNodebName === undefined || $scope.topStat.current.eNodebName === "")

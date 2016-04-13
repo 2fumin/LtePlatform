@@ -23,5 +23,11 @@ namespace LtePlatform.Controllers.Mr
         {
             return _service.AddOneMonitor(view.CellId, view.SectorId);
         }
+
+        [HttpGet]
+        public bool Get(int cellId, byte sectorId)
+        {
+            return _service.QueryCellMonitored(cellId, sectorId);
+        }
     }
 }
