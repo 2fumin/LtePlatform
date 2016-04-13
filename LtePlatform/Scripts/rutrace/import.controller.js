@@ -9,6 +9,9 @@
         neighborService.queryCellNeighbors(cell.cellId, cell.sectorId).then(function(result) {
             $scope.neighborCells = result;
         });
+        neighborMongoService.queryReverseNeighbors(cell.cellId, cell.sectorId).then(function (result) {
+            $scope.reverseCells = result;
+        });
     };
     $scope.updatePci = function () {
         var cell = $scope.topStat.current;

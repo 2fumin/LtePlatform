@@ -25,33 +25,66 @@
                 <a class="btn btn-default" ng-href="{{rootPath}}top">返回</a>
             </div>
         </p>
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th>小区编号</th>
-                <th>扇区编号</th>
-                <th>邻区小区编号</th>
-                <th>邻区小区名称</th>
-                <th>PCI</th>
-                <th>切换次数</th>
-                <th>是否监控</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="neighbor in neighborCells">
-                <td>{{neighbor.cellId}}</td>
-                <td>{{neighbor.sectorId}}</td>
-                <td>{{neighbor.nearestCellId}}</td>
-                <td>{{neighbor.nearestENodebName}}-{{neighbor.nearestSectorId}}</td>
-                <td>{{neighbor.pci}}</td>
-                <td>{{neighbor.totalTimes}}</td>
-                <td>
-                    <span ng-if="neighbor.isMonitored">已监控</span>
-                    <span ng-if="!neighbor.isMonitored" style="color: red">未监控</span>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <div uib-tabset active="active">
+            <div uib-tab index="0" heading="正向邻区">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>小区编号</th>
+                        <th>扇区编号</th>
+                        <th>邻区小区编号</th>
+                        <th>邻区小区名称</th>
+                        <th>PCI</th>
+                        <th>切换次数</th>
+                        <th>是否监控</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="neighbor in neighborCells">
+                        <td>{{neighbor.cellId}}</td>
+                        <td>{{neighbor.sectorId}}</td>
+                        <td>{{neighbor.nearestCellId}}</td>
+                        <td>{{neighbor.nearestENodebName}}-{{neighbor.nearestSectorId}}</td>
+                        <td>{{neighbor.pci}}</td>
+                        <td>{{neighbor.totalTimes}}</td>
+                        <td>
+                            <span ng-if="neighbor.isMonitored">已监控</span>
+                            <span ng-if="!neighbor.isMonitored" style="color: red">未监控</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div uib-tab index="1" heading="反向邻区">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>小区编号</th>
+                            <th>扇区编号</th>
+                            <th>邻区优先级</th>
+                            <th>允许切换</th>
+                            <th>ANR生成</th>
+                            <th>基站名称</th>
+                            <th>是否监控</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="neighbor in reverseCells">
+                            <td>{{neighbor.cellId}}</td>
+                            <td>{{neighbor.sectorId}}</td>
+                            <td>{{neighbor.cellPriority}}</td>
+                            <td>{{neighbor.handoffAllowed ? '是' : '否'}}</td>
+                            <td>{{neighbor.isAnrCreated ? '是' : '否'}}</td>
+                            <td>{{neighbor.eNodebName}}</td>
+                            <td>
+                                <span ng-if="neighbor.isMonitored">已监控</span>
+                                <span ng-if="!neighbor.isMonitored" style="color: red">未监控</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+       </div>
     </div>
 </div>
 
