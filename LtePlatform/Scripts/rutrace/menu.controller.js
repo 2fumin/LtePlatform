@@ -30,7 +30,7 @@
                     templateUrl: viewDir + "Top.html",
                     controller: "rutrace.top"
                 })
-                .when('/import', {
+                .when('/import/:cellId/:sectorId/:name', {
                     templateUrl: viewDir + "Import.html",
                     controller: "rutrace.import"
                 })

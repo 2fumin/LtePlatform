@@ -123,7 +123,7 @@
                     queryFunc();
             } else {
                 var subRecord = records[outerIndex];
-                if (subRecord.existedRecords < 10 && innerIndex < subRecord.mongoRecords.length) {
+                if (subRecord.existedRecords < 1000 && innerIndex < subRecord.mongoRecords.length) {
                     var stat = subRecord.mongoRecords[innerIndex];
                     stat.eNodebId = eNodebId;
                     stat.sectorId = sectorId;
