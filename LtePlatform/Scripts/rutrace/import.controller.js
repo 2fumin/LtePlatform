@@ -8,12 +8,20 @@
         $scope.neighborCells = [];
         neighborService.queryCellNeighbors(cell.cellId, cell.sectorId).then(function(result) {
             $scope.neighborCells = result;
+            angular.forEach(result, function(neighbor) {
+                topPreciseService.queryMonitor(neighbor.cellId, neighbor.sectorId).then(function(monitored) {
+                    neighbor.isMonitored = monitored;
+                });
+            });
         });
         neighborMongoService.queryReverseNeighbors(cell.cellId, cell.sectorId).then(function (result) {
             $scope.reverseCells = result;
             angular.forEach(result, function(neighbor) {
                 networkElementService.queryENodebInfo(neighbor.cellId).then(function(info) {
                     neighbor.eNodebName = info.name;
+                });
+                topPreciseService.queryMonitor(neighbor.cellId, neighbor.sectorId).then(function (monitored) {
+                    neighbor.isMonitored = monitored;
                 });
             });
         });
@@ -65,15 +73,22 @@
         var cell = $scope.topStat.current;
         topPreciseService.addMonitor(cell);
     };
-    $scope.addNeighborMonitor = function (cell) {
-        neighborService.monitorNeighbors(cell).then(function() {
-            cell.isMonitored = true;
-        });
-    };
     $scope.monitorNeighbors = function() {
-        angular.forEach($scope.neighborCells.length, function(cell) {
+        angular.forEach($scope.neighborCells, function(cell) {
             if (cell.isMonitored === false) {
-                $scope.addNeighborMonitor(cell);
+                neighborService.monitorNeighbors(cell).then(function () {
+                    cell.isMonitored = true;
+                });
+            }
+        });
+        angular.forEach($scope.reverseCells, function (cell) {
+            if (cell.isMonitored === false) {
+                neighborService.monitorNeighbors({
+                    nearestCellId: cell.cellId,
+                    nearestSectorId: cell.sectorId
+                }).then(function () {
+                    cell.isMonitored = true;
+                });
             }
         });
     };
