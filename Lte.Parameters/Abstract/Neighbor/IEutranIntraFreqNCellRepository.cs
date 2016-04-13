@@ -12,5 +12,7 @@ namespace Lte.Parameters.Abstract.Neighbor
     public interface IEutranIntraFreqNCellRepository : IRepository<EutranIntraFreqNCell, ObjectId>
     {
         List<EutranIntraFreqNCell> GetRecentList(int eNodebId, byte localCellId);
+
+        List<EutranIntraFreqNCell> GetReverseList(int destENodebId, byte destSectorId);
     }
 }
