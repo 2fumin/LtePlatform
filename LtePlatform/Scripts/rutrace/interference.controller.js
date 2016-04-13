@@ -1,9 +1,9 @@
-﻿app.controller("rutrace.interference", function ($scope, $http, $location, $routeParams,
+﻿app.controller("rutrace.interference", function ($scope, $http, $routeParams,
     networkElementService, topPreciseService, menuItemService, neighborMongoService) {
     $scope.currentCellName = $routeParams.name + "-" + $routeParams.sectorId;
     $scope.page.title = "TOP指标干扰分析: " + $scope.currentCellName;
-    menuItemService.updateMenuItem($scope.menuItems, 1, $scope.page.title, 
-        $scope.rootPath + $routeParams.cellId + "/" + $routeParams.sectorId + "/" +$routeParams.name)
+    menuItemService.updateMenuItem($scope.menuItems, 1, $scope.page.title,
+        $scope.rootPath + "interference/" + $routeParams.cellId + "/" + $routeParams.sectorId + "/" + $routeParams.name);
     $scope.oneAtATime = false;
     var lastWeek = new Date();
     lastWeek.setDate(lastWeek.getDate() - 7);

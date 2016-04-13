@@ -1,12 +1,18 @@
-﻿app.controller("rutrace.import", function ($scope, $http, $location, neighborService, neighborMongoService,
-    topPreciseService, networkElementService) {
+﻿app.controller("rutrace.import", function ($scope, $http, $routeParams,
+    menuItemService, neighborService, neighborMongoService, topPreciseService, networkElementService) {
+    $scope.currentCellName = $routeParams.name + "-" + $routeParams.sectorId;
+    $scope.page.title = "TOP指标邻区监控: " + $scope.currentCellName;
+    menuItemService.updateMenuItem($scope.menuItems, 1, $scope.page.title,
+        $scope.rootPath + "import/" + $routeParams.cellId + "/" + $routeParams.sectorId + "/" + $routeParams.name);
     $scope.neighborCells = [];
     $scope.updateMessages = [];
+    topPreciseService.queryMonitor($routeParams.cellId, $routeParams.sectorId).then(function(result) {
+        $scope.cellMonitored = result;
+    });
 
     $scope.showNeighbors = function() {
-        var cell = $scope.topStat.current;
         $scope.neighborCells = [];
-        neighborService.queryCellNeighbors(cell.cellId, cell.sectorId).then(function(result) {
+        neighborService.queryCellNeighbors($routeParams.cellId, $routeParams.sectorId).then(function (result) {
             $scope.neighborCells = result;
             angular.forEach(result, function(neighbor) {
                 topPreciseService.queryMonitor(neighbor.cellId, neighbor.sectorId).then(function(monitored) {
@@ -14,7 +20,7 @@
                 });
             });
         });
-        neighborMongoService.queryReverseNeighbors(cell.cellId, cell.sectorId).then(function (result) {
+        neighborMongoService.queryReverseNeighbors($routeParams.cellId, $routeParams.sectorId).then(function (result) {
             $scope.reverseCells = result;
             angular.forEach(result, function(neighbor) {
                 networkElementService.queryENodebInfo(neighbor.cellId).then(function(info) {
@@ -37,9 +43,8 @@
         });
     };
     $scope.synchronizeNeighbors = function () {
-        var cell = $scope.topStat.current;
         var count = 0;
-        neighborMongoService.queryNeighbors(cell.cellId, cell.sectorId).then(function(neighbors) {
+        neighborMongoService.queryNeighbors($routeParams.cellId, $routeParams.sectorId).then(function(neighbors) {
             angular.forEach(neighbors, function (neighbor) {
                 if (neighbor.neighborCellId > 0 && neighbor.neighborPci > 0) {
                     neighborService.updateNeighbors(neighbor.cellId, neighbor.sectorId, neighbor.neighborPci,
@@ -47,7 +52,7 @@
                         count += 1;
                         if (count === neighbors.length) {
                             $scope.updateMessages.push({
-                                cellName: cell.eNodebName + '-' + cell.sectorId,
+                                cellName: $scope.currentCellName,
                                 counts: count
                             });
                             $scope.showNeighbors();
@@ -57,7 +62,7 @@
                     count += 1;
                     if (count === neighbors.length) {
                         $scope.updateMessages.push({
-                            cellName: cell.eNodebName + '-' + cell.sectorId,
+                            cellName: $scope.currentCellName,
                             counts: count
                         });
                         $scope.showNeighbors();
@@ -70,8 +75,10 @@
         $scope.updateMessages.splice(index, 1);
     }
     $scope.addMonitor = function() {
-        var cell = $scope.topStat.current;
-        topPreciseService.addMonitor(cell);
+        topPreciseService.addMonitor({
+            cellId: $routeParams.cellId,
+            sectorId: $routeParams.sectorId
+        });
     };
     $scope.monitorNeighbors = function() {
         angular.forEach($scope.neighborCells, function(cell) {
@@ -93,10 +100,6 @@
         });
     };
 
-    if ($scope.topStat.current.eNodebName === undefined || $scope.topStat.current.eNodebName === "")
-        $location.path($scope.rootPath + "top");
-    else {
-        $scope.showNeighbors();
-    }
+    $scope.showNeighbors();
         
 });

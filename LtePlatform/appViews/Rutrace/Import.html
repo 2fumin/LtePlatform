@@ -4,7 +4,7 @@
 <div class="panel panel-info">
     <div class="panel-heading">
         <h3 class="panel-title">
-            {{topStat.current.eNodebName + "-" + topStat.current.sectorId}}小区邻区列表
+            {{currentCellName}}小区邻区列表
         </h3>
     </div>
     <div class="panel-body">
@@ -16,7 +16,7 @@
                 <button class="btn btn-default" ng-click="synchronizeNeighbors()">
                     同步邻区
                 </button>
-                <button class="btn btn-warning" ng-if="!topStat.current.isMonitored" ng-click="addMonitor()">
+                <button class="btn btn-warning" ng-if="!cellMonitored" ng-click="addMonitor()">
                     加入监控
                 </button>
                 <button class="btn btn-info" ng-if="neighborCells.length" ng-click="monitorNeighbors()">
