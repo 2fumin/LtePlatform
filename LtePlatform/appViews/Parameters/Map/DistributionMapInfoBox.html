@@ -1,0 +1,45 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" aria-hidden="true">
+        &times;
+    </button>
+    <h4 class="modal-title text-primary">{{dialogTitle}}</h4>
+</div>
+<div class="modal-body">
+    <div class="infoBoxContent">
+        <div class="title">
+            <strong>室内分布基本信息: </strong>
+        </div>
+        <div class="list">
+            <ul>
+                <li>
+                    <div class="left">室分名称</div>
+                    <div class="rmb">{{distribution.name}}</div>
+                </li>
+                <li>
+                    <div class="left">覆盖范围</div>
+                    <div class="rmb">{{distribution.range}}</div>
+                </li>
+                <li>
+                    <div class="left">施主基站</div>
+                    <div class="rmb">{{distribution.sourceName}}</div>
+                </li>
+                <li>
+                    <div class="left">信源种类</div>
+                    <div class="rmb">{{distribution.sourceType}}</div>
+                </li>
+                <li>
+                    <div class="left">经度</div>
+                    <div class="rmb">{{distribution.longtitute | number: 3}}</div>
+                </li>
+                <li>
+                    <div class="left">纬度</div>
+                    <div class="rmb">{{distribution.lattitute | number: 3}}</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-warning" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+</div>

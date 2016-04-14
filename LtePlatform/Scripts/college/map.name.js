@@ -23,8 +23,8 @@
             break;
         case 'lteDistribution':
             collegeService.queryLteDistributions($scope.collegeName).then(function(distributions) {
-                parametersMapService.showENodebsElements(distributions, parametersDialogService.showENodebInfo);
-            })
+                parametersMapService.showENodebsElements(distributions, parametersDialogService.showDistributionInfo);
+            });
             break;
         default:
             break;

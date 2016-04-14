@@ -107,6 +107,27 @@
                     $log.info('Modal dismissed at: ' + new Date());
                 });
             },
+            showDistributionInfo: function (distribution) {
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: '/appViews/Parameters/Map/DistributionMapInfoBox.html',
+                    controller: 'map.distribution.dialog',
+                    size: 'sm',
+                    resolve: {
+                        dialogTitle: function () {
+                            return distribution.name + "-" + "室内分布基本信息";
+                        },
+                        distribution: function () {
+                            return distribution;
+                        }
+                    }
+                });
+                modalInstance.result.then(function (info) {
+                    console.log(info);
+                }, function () {
+                    $log.info('Modal dismissed at: ' + new Date());
+                });
+            },
             showBtsInfo: function (bts) {
                 var modalInstance = $uibModal.open({
                     animation: true,
