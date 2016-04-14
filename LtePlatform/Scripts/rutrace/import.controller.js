@@ -134,9 +134,11 @@
         }, $scope.beginDate.value, $scope.endDate.value);
     };
     $scope.dumpReverseMongo = function (cell) {
+        var begin = new Date($scope.beginDate.value);
+        var end = new Date($scope.endDate.value);
         networkElementService.queryCellInfo(cell.cellId, cell.sectorId).then(function(info) {
             dumpPreciseService.dumpDateSpanSingleNeighborRecords(cell.cellId, cell.sectorId, info.pci, cell.neighborCellId,
-                cell.neighborSectorId, cell.neighborPci, $scope.beginDate.value, $scope.endDate.value);
+                cell.neighborSectorId, cell.neighborPci, begin, end);
         });
 
     };
