@@ -1,5 +1,6 @@
 ﻿
-app.controller('interference.mongo', function ($scope, $uibModal, $log, dumpProgress, networkElementService, dumpPreciseService) {
+app.controller('interference.mongo', function ($scope, neighborMongoService,
+    dumpProgress, networkElementService, dumpPreciseService) {
     $scope.progressInfo = {
         dumpCells: [],
         totalSuccessItems: 0,
@@ -34,39 +35,8 @@ app.controller('interference.mongo', function ($scope, $uibModal, $log, dumpProg
         });
     };
 
-    $scope.dumpMongo = function(cell) {
-        var modalInstance = $uibModal.open({
-            animation: true,
-            templateUrl: '/appViews/Rutrace/Interference/DumpCellMongoDialog.html',
-            controller: 'dump.cell.mongo',
-            size: 'lg',
-            resolve: {
-                dialogTitle: function () {
-                    return cell.name + "-" + cell.sectorId + "干扰数据导入";
-                },
-                eNodebId: function() {
-                    return cell.eNodebId;
-                },
-                sectorId: function() {
-                    return cell.sectorId;
-                },
-                pci: function() {
-                    return cell.pci;
-                },
-                begin: function() {
-                    return $scope.beginDate.value;
-                },
-                end: function() {
-                    return $scope.endDate.value;
-                }
-            }
-        });
-
-        modalInstance.result.then(function (info) {
-            console.log(info);
-        }, function () {
-            $log.info('Modal dismissed at: ' + new Date());
-        });
+    $scope.dumpMongo = function (cell) {
+        neighborMongoService.dumpMongoDialog(cell, $scope.beginDate.value, $scope.endDate.value);
     };
 
     $scope.generateDumpRecords = function (dumpRecords, startDate, endDate, eNodebId, sectorId, pci) {

@@ -1,90 +1,121 @@
 ﻿<div uib-alert ng-repeat="message in updateMessages" type="success" dismiss-on-timeout="2000" close="closeAlert($index)">
     {{message.cellName}}共完成{{message.counts}}条邻区信息导入
 </div>
-<div class="panel panel-info">
-    <div class="panel-heading">
-        <h3 class="panel-title">
-            {{currentCellName}}小区邻区列表
-        </h3>
+<div class="row">
+    <div class="col-md-6">
+        <div>
+            <label>开始日期：</label>
+            <div class="input-group">
+                <input type="text" class="form-control" uib-datepicker-popup ng-model="beginDate.value"
+                       is-open="beginDate.opened" ng-required="true" close-text="Close" />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="beginDate.opened = true">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                    <button class="btn btn-warning" ng-click="reset()">重置</button>
+                </span>
+            </div>
+        </div>
     </div>
-    <div class="panel-body">
-        <p>
-            <div class="btn-group" style="float: right">
-                <button class="btn btn-default" ng-if="neighborCells.length" ng-click="updatePci()">
-                    更新PCI
-                </button>
-                <button class="btn btn-default" ng-click="synchronizeNeighbors()">
-                    同步邻区
-                </button>
-                <button class="btn btn-warning" ng-if="!cellMonitored" ng-click="addMonitor()">
-                    加入监控
-                </button>
-                <button class="btn btn-info" ng-if="neighborCells.length" ng-click="monitorNeighbors()">
-                    监控邻区
-                </button>
-                <a class="btn btn-default" ng-href="{{rootPath}}top">返回</a>
+    <div class="col-md-6">
+        <div>
+            <label>结束日期：</label>
+            <div class="input-group">
+                <input type="text" class="form-control" uib-datepicker-popup ng-model="endDate.value"
+                       is-open="endDate.opened" ng-required="true" close-text="Close" />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="endDate.opened = true">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                    <button class="btn btn-primary" ng-click="dump()">导入</button>
+                </span>
             </div>
-        </p>
-        <div uib-tabset active="active">
-            <div uib-tab index="0" heading="正向邻区">
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th>小区编号</th>
-                        <th>扇区编号</th>
-                        <th>邻区小区编号</th>
-                        <th>邻区小区名称</th>
-                        <th>PCI</th>
-                        <th>切换次数</th>
-                        <th>是否监控</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="neighbor in neighborCells">
-                        <td>{{neighbor.cellId}}</td>
-                        <td>{{neighbor.sectorId}}</td>
-                        <td>{{neighbor.nearestCellId}}</td>
-                        <td>{{neighbor.nearestENodebName}}-{{neighbor.nearestSectorId}}</td>
-                        <td>{{neighbor.pci}}</td>
-                        <td>{{neighbor.totalTimes}}</td>
-                        <td>
-                            <span ng-if="neighbor.isMonitored">已监控</span>
-                            <span ng-if="!neighbor.isMonitored" style="color: red">未监控</span>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div uib-tab index="1" heading="反向邻区">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>小区编号</th>
-                            <th>扇区编号</th>
-                            <th>邻区优先级</th>
-                            <th>允许切换</th>
-                            <th>ANR生成</th>
-                            <th>基站名称</th>
-                            <th>是否监控</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="neighbor in reverseCells">
-                            <td>{{neighbor.cellId}}</td>
-                            <td>{{neighbor.sectorId}}</td>
-                            <td>{{neighbor.cellPriority}}</td>
-                            <td>{{neighbor.handoffAllowed ? '是' : '否'}}</td>
-                            <td>{{neighbor.isAnrCreated ? '是' : '否'}}</td>
-                            <td>{{neighbor.eNodebName}}</td>
-                            <td>
-                                <span ng-if="neighbor.isMonitored">已监控</span>
-                                <span ng-if="!neighbor.isMonitored" style="color: red">未监控</span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-       </div>
+        </div>
+    </div>
+</div>
+<p>
+    <div class="btn-group" style="float: right">
+        <button class="btn btn-default" ng-if="neighborCells.length" ng-click="updatePci()">
+            更新PCI
+        </button>
+        <button class="btn btn-default" ng-click="synchronizeNeighbors()">
+            同步邻区
+        </button>
+        <button class="btn btn-warning" ng-if="!cellMonitored" ng-click="addMonitor()">
+            加入监控
+        </button>
+        <button class="btn btn-info" ng-if="neighborCells.length" ng-click="monitorNeighbors()">
+            监控邻区
+        </button>
+        <a class="btn btn-default" ng-href="{{rootPath}}top">返回</a>
+    </div>
+</p>
+<div uib-tabset active="active">
+    <div uib-tab index="0" heading="正向邻区">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>小区编号</th>
+                    <th>扇区编号</th>
+                    <th>邻区小区编号</th>
+                    <th>邻区小区名称</th>
+                    <th>PCI</th>
+                    <th>切换次数</th>
+                    <th>是否监控</th>
+                    <th>导入情况</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="neighbor in neighborCells">
+                    <td>{{neighbor.cellId}}</td>
+                    <td>{{neighbor.sectorId}}</td>
+                    <td>{{neighbor.nearestCellId}}</td>
+                    <td>{{neighbor.nearestENodebName}}-{{neighbor.nearestSectorId}}</td>
+                    <td>{{neighbor.pci}}</td>
+                    <td>{{neighbor.totalTimes}}</td>
+                    <td>
+                        <span ng-if="neighbor.isMonitored">已监控</span>
+                        <span ng-if="!neighbor.isMonitored" style="color: red">未监控</span>
+                    </td>
+                    <td>
+                        <button class="btn btn-default" ng-click="dumpMongo(neighbor)">导入数据</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div uib-tab index="1" heading="反向邻区">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>小区编号</th>
+                    <th>扇区编号</th>
+                    <th>邻区优先级</th>
+                    <th>允许切换</th>
+                    <th>ANR生成</th>
+                    <th>基站名称</th>
+                    <th>是否监控</th>
+                    <th>导入情况</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="neighbor in reverseCells">
+                    <td>{{neighbor.cellId}}</td>
+                    <td>{{neighbor.sectorId}}</td>
+                    <td>{{neighbor.cellPriority}}</td>
+                    <td>{{neighbor.handoffAllowed ? '是' : '否'}}</td>
+                    <td>{{neighbor.isAnrCreated ? '是' : '否'}}</td>
+                    <td>{{neighbor.eNodebName}}</td>
+                    <td>
+                        <span ng-if="neighbor.isMonitored">已监控</span>
+                        <span ng-if="!neighbor.isMonitored" style="color: red">未监控</span>
+                    </td>
+                    <td>
+                        <button class="btn btn-default" ng-click="dumpMongo(neighbor)">导入数据</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 
