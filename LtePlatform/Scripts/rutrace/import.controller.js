@@ -115,6 +115,16 @@
         });
     };
 
+    $scope.dump = function() {
+        networkElementService.queryCellInfo($routeParams.cellId, $routeParams.sectorId).then(function (info) {
+            neighborMongoService.dumpMongoDialog({
+                eNodebId: $routeParams.cellId,
+                sectorId: $routeParams.sectorId,
+                pci: info.pci,
+                name: $routeParams.name
+            }, $scope.beginDate.value, $scope.endDate.value);
+        });
+    };
     $scope.dumpMongo = function (cell) {
         neighborMongoService.dumpMongoDialog({
             eNodebId: cell.nearestCellId,

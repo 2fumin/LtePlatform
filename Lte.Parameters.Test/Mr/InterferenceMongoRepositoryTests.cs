@@ -55,10 +55,11 @@ namespace Lte.Parameters.Test.Mr
             results[0].Over10db.ShouldBe(1);
         }
         
-        [Test]
-        public void Test_GetList()
+        [TestCase(501298, 328, 329, "2016-03-27")]
+        [TestCase(501454, 255, 438, "2016-03-27")]
+        public void Test_GetList(int eNodebId, short pci, short neighborPci, string dateString)
         {
-            var result = _repository.GetList(500026, 88, new DateTime(2016, 3, 23));
+            var result = _repository.GetList(eNodebId, pci, neighborPci, DateTime.Parse(dateString));
             Assert.IsNotNull(result);
         }
     }

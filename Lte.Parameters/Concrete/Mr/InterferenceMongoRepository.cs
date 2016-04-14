@@ -31,15 +31,7 @@ namespace Lte.Parameters.Concrete.Mr
                     e => e.ENodebId == eNodebId && e.Pci == pci);
             return Collection.FindOne(query);
         }
-
-        public InterferenceMatrixMongo GetOne(int eNodebId, short pci, DateTime time)
-        {
-            var query =
-                MongoDB.Driver.Builders.Query<InterferenceMatrixMongo>.Where(
-                    e => e.ENodebId == eNodebId && e.Pci == pci && e.CurrentDate == time);
-            return Collection.FindOne(query);
-        }
-
+        
         public List<InterferenceMatrixMongo> GetList(int eNodebId, short pci)
         {
             var query =
@@ -56,6 +48,15 @@ namespace Lte.Parameters.Concrete.Mr
                     e => e.ENodebId == eNodebId && e.Pci == pci && e.CurrentDate >= date && e.CurrentDate < nextDate);
             return Collection.Find(query).AsQueryable().ToList();
         }
-        
+
+        public List<InterferenceMatrixMongo> GetList(int eNodebId, short pci, short neighborPci, DateTime date)
+        {
+            var nextDate = date.AddDays(1);
+            var query =
+                MongoDB.Driver.Builders.Query<InterferenceMatrixMongo>.Where(
+                    e => e.ENodebId == eNodebId && e.Pci == pci && e.NeighborPci == neighborPci
+                    && e.CurrentDate >= date && e.CurrentDate < nextDate);
+            return Collection.Find(query).AsQueryable().ToList();
+        }
     }
 }

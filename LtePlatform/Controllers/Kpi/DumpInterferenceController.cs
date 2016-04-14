@@ -46,10 +46,17 @@ namespace LtePlatform.Controllers.Kpi
         }
 
         [HttpGet]
-        [ApiDoc("验证输入日期段是否合法，如合法则返回待导入的小区信息列表（即受监控的信息列表）")]
+        [ApiDoc("返回待导入的小区信息列表（即受监控的信息列表）")]
         public List<InterferenceMatrixStat> Get(int eNodebId, short pci, DateTime date)
         {
             return _service.QueryStats(eNodebId, pci, date);
+        }
+
+        [HttpGet]
+        [ApiDoc("返回待导入的小区信息")]
+        public InterferenceMatrixStat Get(int eNodebId, short pci, short neighborPci, DateTime date)
+        {
+            return _service.QueryStat(eNodebId, pci, neighborPci, date);
         }
 
         [HttpGet]

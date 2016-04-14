@@ -81,12 +81,7 @@ namespace Lte.Evaluations.DataService.Mr
         {
             return _mongoRepository.GetOne(eNodebId, pci);
         }
-
-        public InterferenceMatrixMongo QueryMongo(int eNodebId, short pci, DateTime date)
-        {
-            return _mongoRepository.GetOne(eNodebId, pci, date);
-        }
-
+        
         public List<InterferenceMatrixMongo> QueryMongoList(int eNodebId, short pci, DateTime date)
         {
             return _mongoRepository.GetList(eNodebId, pci, date);
@@ -97,6 +92,23 @@ namespace Lte.Evaluations.DataService.Mr
             var statList = _mongoRepository.GetList(eNodebId, pci, time);
             if (!statList.Any()) return new List<InterferenceMatrixStat>();
             return GenereateStatList(time, statList);
+        }
+
+        public InterferenceMatrixStat QueryStat(int eNodebId, short pci, short neighborPci, DateTime time)
+        {
+            var statList = _mongoRepository.GetList(eNodebId, pci, neighborPci, time);
+            if (!statList.Any()) return null;
+            return new InterferenceMatrixStat
+            {
+                ENodebId = eNodebId,
+                DestPci = neighborPci,
+                InterferenceLevel = statList.Sum(x => x.InterfLevel ?? 0),
+                Mod3Interferences = statList.Sum(x => x.Mod3Count ?? 0),
+                Mod6Interferences = statList.Sum(x => x.Mod6Count ?? 0),
+                OverInterferences10Db = statList.Sum(x => x.Over10db ?? 0),
+                OverInterferences6Db = statList.Sum(x => x.Over6db ?? 0),
+                RecordTime = time
+            };
         }
 
         public List<InterferenceMatrixStat> QueryStats(int eNodebId, short pci)
