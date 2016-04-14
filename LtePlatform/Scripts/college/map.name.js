@@ -27,6 +27,9 @@
             });
             break;
         default:
+            collegeService.queryCdmaDistributions($scope.collegeName).then(function (distributions) {
+                parametersMapService.showENodebsElements(distributions, parametersDialogService.showDistributionInfo);
+            });
             break;
     }
 });
