@@ -101,6 +101,26 @@
             return deferred.promise;
         };
 
+        serviceInstance.queryNeighborMongoItem = function (eNodebId, pci, neighborPci, date) {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: appUrlService.getApiUrl('DumpInterference'),
+                params: {
+                    eNodebId: eNodebId,
+                    pci: pci,
+                    neighborPci: neighborPci,
+                    date: date
+                }
+            }).success(function (result) {
+                deferred.resolve({date: date, value: result});
+            })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+            return deferred.promise;
+        };
+
         return serviceInstance;
     })
     .factory('dumpPreciseService', function (dumpProgress) {
@@ -134,6 +154,25 @@
                     serviceInstance.dumpAllRecords(records, outerIndex + 1, 0, eNodebId, sectorId, queryFunc);
             }
 
+        };
+        serviceInstance.dumpDateSpanSingleNeighborRecords = function(eNodebId, sectorId, pci, destENodebId, destSectorId, destPci, date, end) {
+            if (date < end) {
+                dumpProgress.queryNeighborMongoItem(eNodebId, pci, destPci, date).then(function (result) {
+                    var stat = result.value;
+                    var nextDate = result.date;
+                    nextDate.setDate(nextDate.getDate() + 1);
+                    if (stat) {
+                        stat.sectorId = sectorId;
+                        stat.destENodebId = destENodebId;
+                        stat.destSectorId = destSectorId;
+                        dumpProgress.dumpMongo(stat).then(function() {
+                            serviceInstance.dumpDateSpanSingleNeighborRecords(eNodebId, sectorId, pci, destENodebId, destSectorId, destPci, nextDate, end);
+                        });
+                    } else {
+                        serviceInstance.dumpDateSpanSingleNeighborRecords(eNodebId, sectorId, pci, destENodebId, destSectorId, destPci, nextDate, end);
+                    }
+                });
+            }
         };
 
         return serviceInstance;

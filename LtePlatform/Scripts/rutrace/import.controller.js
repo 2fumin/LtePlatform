@@ -1,5 +1,5 @@
 ﻿app.controller("rutrace.import", function ($scope, $http, $routeParams,
-    menuItemService, neighborService, neighborMongoService, topPreciseService, networkElementService) {
+    menuItemService, neighborService, neighborMongoService, topPreciseService, networkElementService, dumpPreciseService) {
     $scope.currentCellName = $routeParams.name + "-" + $routeParams.sectorId;
     $scope.page.title = "TOP指标邻区监控: " + $scope.currentCellName;
     menuItemService.updateMenuItem($scope.menuItems, 1, $scope.page.title,
@@ -135,12 +135,8 @@
     };
     $scope.dumpReverseMongo = function (cell) {
         networkElementService.queryCellInfo(cell.cellId, cell.sectorId).then(function(info) {
-            neighborMongoService.dumpMongoDialog({
-                eNodebId: cell.cellId,
-                sectorId: cell.sectorId,
-                pci: info.pci,
-                name: cell.eNodebName
-            }, $scope.beginDate.value, $scope.endDate.value);
+            dumpPreciseService.dumpDateSpanSingleNeighborRecords(cell.cellId, cell.sectorId, info.pci, cell.neighborCellId,
+                cell.neighborSectorId, cell.neighborPci, $scope.beginDate.value, $scope.endDate.value);
         });
 
     };
