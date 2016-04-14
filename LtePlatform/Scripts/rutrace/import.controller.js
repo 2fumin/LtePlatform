@@ -20,6 +20,9 @@
                 });
             });
         });
+        
+    };
+    $scope.showReverseNeighbors=function() {
         neighborMongoService.queryReverseNeighbors($routeParams.cellId, $routeParams.sectorId).then(function (result) {
             $scope.reverseCells = result;
             angular.forEach(result, function(neighbor) {
@@ -31,7 +34,7 @@
                 });
             });
         });
-    };
+    }
     $scope.updatePci = function () {
         var cell = $scope.topStat.current;
         neighborService.updateCellPci(cell).then(function(result) {
@@ -100,6 +103,6 @@
         });
     };
 
+    $scope.showReverseNeighbors();
     $scope.showNeighbors();
-        
 });

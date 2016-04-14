@@ -130,8 +130,8 @@
                     dumpProgress.dumpMongo(stat).then(function() {
                         serviceInstance.dumpAllRecords(records, outerIndex, innerIndex + 1, eNodebId, sectorId, queryFunc);
                     });
-                }
-                serviceInstance.dumpAllRecords(records, outerIndex + 1, 0, eNodebId, sectorId, queryFunc);
+                } else
+                    serviceInstance.dumpAllRecords(records, outerIndex + 1, 0, eNodebId, sectorId, queryFunc);
             }
 
         };
