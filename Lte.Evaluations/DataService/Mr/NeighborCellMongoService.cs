@@ -242,10 +242,7 @@ namespace Lte.Evaluations.DataService.Mr
             return externals.Select(x =>
             {
                 var result = Mapper.Map<ExternalEUtranCellFDDZte, NeighborCellMongo>(x);
-                var eNodebRelations = _zteNeighborRepository.GetRecentList(x.eNodeB_Id);
-                var relation =
-                    eNodebRelations.FirstOrDefault(
-                        r => r.refExternalEUtranCellFDD.Contains("ExternalEUtranCellFDD=" + x.ExternalEUtranCellFDD));
+                var relation = _zteNeighborRepository.GetRecent(x.eNodeB_Id, x.ExternalEUtranCellFDD);
                 if (relation != null)
                 {
                     result.SectorId = byte.Parse(relation.description.Split('=')[1]);

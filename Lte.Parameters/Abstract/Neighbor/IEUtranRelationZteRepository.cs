@@ -12,6 +12,8 @@ namespace Lte.Parameters.Abstract.Neighbor
         List<EUtranRelationZte> GetRecentList(int eNodebId, byte sectorId);
 
         List<EUtranRelationZte> GetRecentList(int eNodebId);
+
+        EUtranRelationZte GetRecent(int eNodebId, int externalId);
     }
 
     public interface IExternalEUtranCellFDDZteRepository : IRepository<ExternalEUtranCellFDDZte, ObjectId>

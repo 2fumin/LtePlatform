@@ -40,5 +40,16 @@ namespace Lte.Parameters.Test.Basic
             Assert.AreEqual(results.Count, 592);
             Assert.AreEqual(results[0].iDate, "20160408");
         }
+
+        [TestCase(551203, 49, "20160408")]
+        [TestCase(502776, 148, "20160408")]
+        [TestCase(502776, 123, "20160408")]
+        [TestCase(551606, 35, "20160408")]
+        public void Test_GetRecent(int eNodebId, int externalId, string date)
+        {
+            var result = _repository.GetRecent(eNodebId, externalId);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(result.iDate, date);
+        }
     }
 }
