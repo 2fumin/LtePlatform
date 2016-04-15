@@ -39,7 +39,7 @@ namespace Lte.Parameters.Entities.Switch
 
         public int filterCoeffRsrq { get; set; }
 
-        public int measBaseVoiceSwch { get; set; }
+        public BsonValue measBaseVoiceSwch { get; set; }
 
         public int uePosiMeasSwch { get; set; }
 
@@ -308,5 +308,33 @@ namespace Lte.Parameters.Entities.Switch
         public int ratSrvccPara_ratSrvcc2 { get; set; }
 
         public int redA2Switch { get; set; }
+
+        public int? eutranMeasParas_interFreqMeasPerformance { get; set; }
+
+        public int? CDMA2000MeasParas_cdmaFreqCSFBMeasInd { get; set; }
+
+        public int? csfbBldRedRanSharePlcy { get; set; }
+
+        public int? hoBasedRSRPandRSRQSwch { get; set; }
+
+        public string r8r9UnsuptEutraFreqs { get; set; }
+
+        public int? perQCIIntraFreqMeaGrpCfg { get; set; }
+
+        public int? eutranMeasParas_eutranFreqPSHOMeasInd { get; set; }
+
+        public int? CDMA2000MeasParas_cdmaFreqPSHOMeasInd { get; set; }
+
+        public int? perQCIInterRATMeaGrpCfg { get; set; }
+
+        public int? measScaleFactor { get; set; }
+
+        public int? eutranMeasParas_supportInterFHO4QCI1 { get; set; }
+
+        public int? perQCIMeasSwch { get; set; }
+
+        public int? eutranMeasParas_perQCIInterFreqMeaGrpCfg { get; set; }
+
+        public int? CDMA2000MeasParas_cdmaFreqSRVCCMeasInd { get; set; }
     }
 }

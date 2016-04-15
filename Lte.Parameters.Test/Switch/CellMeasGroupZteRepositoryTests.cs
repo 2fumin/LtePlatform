@@ -31,7 +31,7 @@ namespace Lte.Parameters.Test.Switch
         {
             var result=_outerRepository.GetRecent(551203);
             Assert.IsNotNull(result);
-            Assert.AreEqual(result.iDate, "20160318");
+            Assert.AreEqual(result.iDate, "20160408");
             Assert.AreEqual(result.intraFHOMeasCfg, "50,51");
             Assert.AreEqual(int.Parse(result.intraFHOMeasCfg.Split(',')[0]), 50);
         }
@@ -47,7 +47,7 @@ namespace Lte.Parameters.Test.Switch
         {
             var result = _repository.GetRecent(502776, 48);
             Assert.IsNotNull(result);
-            Assert.AreEqual(result.iDate, "20160325");
+            Assert.AreEqual(result.iDate, "20160408");
         }
     }
 }

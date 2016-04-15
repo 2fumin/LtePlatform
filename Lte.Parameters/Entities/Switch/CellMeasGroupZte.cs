@@ -143,5 +143,9 @@ namespace Lte.Parameters.Entities.Switch
         public string openInterFMeasCfg { get; set; }
 
         public int intraLBMeasExtCfg { get; set; }
+
+        public int? homePLMNeasCfg { get; set; }
+
+        public int? periodCdmaMeasCfg { get; set; }
     }
 }
