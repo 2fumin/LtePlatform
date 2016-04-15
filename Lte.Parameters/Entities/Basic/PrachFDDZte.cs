@@ -83,5 +83,11 @@ namespace Lte.Parameters.Entities.Basic
         public int ueSpeedThrd { get; set; }
 
         public int numberOfRAPreambles { get; set; }
+
+        public int? prachFMRecTAThresh { get; set; }
+
+        public int? prachSupFarCoverSwch { get; set; }
+
+        public int? prachFMRecOnTASwch { get; set; }
     }
 }
