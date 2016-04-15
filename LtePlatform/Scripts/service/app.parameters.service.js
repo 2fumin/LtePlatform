@@ -18,6 +18,24 @@
                     });
                 return deferred.promise;
             },
+            querySystemNeighborCell: function (cellId, sectorId, pci) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('NearestPciCell'),
+                    params: {
+                        'cellId': cellId,
+                        'sectorId': sectorId,
+                        'pci': pci
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            },
             updateCellPci: function(cell) {
                 var deferred = $q.defer();
                 $http.post(appUrlService.getApiUrl('NearestPciCell'), cell)

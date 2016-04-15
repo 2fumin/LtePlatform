@@ -1,4 +1,4 @@
-﻿angular.module('myApp.dumpInterference', ['myApp.url'])
+﻿angular.module('myApp.dumpInterference', ['myApp.url', 'myApp.parameters'])
     .factory('dumpProgress', function ($http, $q, appUrlService, appFormatService) {
         var serviceInstance = {};
 
@@ -123,15 +123,20 @@
 
         return serviceInstance;
     })
-    .factory('dumpPreciseService', function (dumpProgress) {
+    .factory('dumpPreciseService', function (dumpProgress, neighborService) {
         var serviceInstance = {};
         serviceInstance.dumpRecords = function(records, index, eNodebId, sectorId, queryFunc) {
             if (index < records.length) {
                 var stat = records[index];
-                stat.eNodebId = eNodebId;
                 stat.sectorId = sectorId;
-                dumpProgress.dumpMongo(stat).then(function () {
-                    serviceInstance.dumpRecords(records, index + 1, eNodebId, sectorId, queryFunc);
+                neighborService.querySystemNeighborCell(eNodebId, sectorId, stat.destPci).then(function(neighbor) {
+                    if (neighbor) {
+                        stat.destENodebId = neighbor.nearestCellId;
+                        stat.destSectorId = neighbor.nearestSectorId;
+                    }
+                    dumpProgress.dumpMongo(stat).then(function() {
+                        serviceInstance.dumpRecords(records, index + 1, eNodebId, sectorId, queryFunc);
+                    });
                 });
             } else {
                 queryFunc();
@@ -145,10 +150,15 @@
                 var subRecord = records[outerIndex];
                 if (subRecord.existedRecords < 1000 && innerIndex < subRecord.mongoRecords.length) {
                     var stat = subRecord.mongoRecords[innerIndex];
-                    stat.eNodebId = eNodebId;
                     stat.sectorId = sectorId;
-                    dumpProgress.dumpMongo(stat).then(function() {
-                        serviceInstance.dumpAllRecords(records, outerIndex, innerIndex + 1, eNodebId, sectorId, queryFunc);
+                    neighborService.querySystemNeighborCell(eNodebId, sectorId, stat.destPci).then(function(neighbor) {
+                        if (neighbor) {
+                            stat.destENodebId = neighbor.nearestCellId;
+                            stat.destSectorId = neighbor.nearestSectorId;
+                        }
+                        dumpProgress.dumpMongo(stat).then(function() {
+                            serviceInstance.dumpAllRecords(records, outerIndex, innerIndex + 1, eNodebId, sectorId, queryFunc);
+                        });
                     });
                 } else
                     serviceInstance.dumpAllRecords(records, outerIndex + 1, 0, eNodebId, sectorId, queryFunc);
