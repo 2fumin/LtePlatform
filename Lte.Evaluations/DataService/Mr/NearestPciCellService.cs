@@ -45,7 +45,12 @@ namespace Lte.Evaluations.DataService.Mr
         public List<NearestPciCell> QueryNeighbors(int cellId, byte sectorId)
         {
             return _repository.GetAllList(cellId, sectorId);
-        } 
+        }
+
+        public NearestPciCell QueryNearestPciCell(int cellId, byte sectorId, short pci)
+        {
+            return _repository.GetNearestPciCell(cellId, sectorId, pci);
+        }
 
         public int UpdateNeighborPcis(int cellId, byte sectorId)
         {
