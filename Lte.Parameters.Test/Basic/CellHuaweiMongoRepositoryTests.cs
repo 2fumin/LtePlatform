@@ -65,7 +65,7 @@ namespace Lte.Parameters.Test.Basic
         {
             var results = _repository.GetRecent(502776, 49);
             Assert.IsNotNull(results);
-            Assert.AreEqual(results.iDate, "20160325");
+            Assert.AreEqual(results.iDate, "20160408");
         }
 
     }

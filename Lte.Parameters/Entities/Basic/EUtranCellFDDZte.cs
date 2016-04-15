@@ -267,5 +267,71 @@ namespace Lte.Parameters.Entities.Basic
         public int magicRadioSwch { get; set; }
 
         public int qam64DemSpIndUl { get; set; }
+
+        public int? narrowInterferenceSwch { get; set; }
+
+        public string reservedPara10 { get; set; }
+
+        public string reservedPara9 { get; set; }
+
+        public string reservedPara8 { get; set; }
+
+        public string reservedPara7 { get; set; }
+
+        public string reservedPara6 { get; set; }
+
+        public string reservedPara5 { get; set; }
+
+        public string reservedPara4 { get; set; }
+
+        public string reservedPara3 { get; set; }
+
+        public string reservedPara2 { get; set; }
+
+        public string reservedPara1 { get; set; }
+
+        public int? deRohcSch { get; set; }
+
+        public int? bandWidth { get; set; }
+
+        public int? sfBitmapSwchDl { get; set; }
+
+        public int? codeRateSwitchDl { get; set; }
+
+        public string relatedCellLocalId { get; set; }
+
+        public int? codeRateSwitchUl { get; set; }
+
+        public int? magicRadioULDCESwch { get; set; }
+
+        public int? narrowInterferenceLen { get; set; }
+
+        public int? sfBitmapSwchUl { get; set; }
+
+        public int? switchDlPRBRandom { get; set; }
+
+        public int? hiterThreshold { get; set; }
+
+        public int? pucchDTXThre { get; set; }
+
+        public int? prachSupFarCoverSwch { get; set; }
+
+        public string refSignalResCfg { get; set; }
+
+        public int? mbsfnSyncAreaID { get; set; }
+
+        public int? mbmsCCEAdaptMod { get; set; }
+
+        public int? cfiNotSameSwitch { get; set; }
+
+        public int? bfRbExpandSwch { get; set; }
+
+        public int? qamSwch { get; set; }
+
+        public int? forbidRbNum4NStandBWDl { get; set; }
+
+        public int? atmosphericSwch { get; set; }
+
+        public int? earfcn { get; set; }
     }
 }
