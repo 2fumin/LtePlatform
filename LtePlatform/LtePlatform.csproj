@@ -740,6 +740,7 @@
     <Content Include="Scripts\angular-ui\uib\timepicker.js" />
     <Content Include="Scripts\angular-ui\uib\tooltip.js" />
     <Content Include="Scripts\angular-ui\uib\typeahead.js" />
+    <Content Include="Scripts\app\home.kpi4G.js" />
     <Content Include="Scripts\college\all.map.js" />
     <Content Include="Scripts\college\map.name.js" />
     <Content Include="Scripts\college\map\college.dialog.js" />

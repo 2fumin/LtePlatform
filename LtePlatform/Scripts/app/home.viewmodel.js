@@ -1,4 +1,4 @@
-﻿app.controller("homeController", function ($scope, appUrlService) {
+﻿app.controller("homeController", function ($scope, appUrlService, appRegionService) {
     appUrlService.initializeAuthorization();
     $scope.areaItems = [{
         title: "4G指标",
@@ -25,7 +25,20 @@
     $scope.status = {
         isopen: false
     };
-
+    var yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    $scope.statDate = {
+        value: yesterday,
+        opened: false
+    };
+    $scope.city = {
+        selected: "",
+        options: []
+    };
+    appRegionService.initializeCities()
+        .then(function (result) {
+            $scope.city = result;
+        });
     $scope.menuItems = [
         {
             displayName: "覆盖优化",
