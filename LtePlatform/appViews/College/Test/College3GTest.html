@@ -9,16 +9,16 @@
             <td></td>
         </tr>
     </thead>
-    <tbody data-bind="foreach: test3G">
-        <tr>
-            <td data-bind="text: collegeName"></td>
-            <td data-bind="text: downloadRate+'kBps'"></td>
-            <td data-bind="text: accessUsers"></td>
-            <td data-bind="text: minRssi+'~'+maxRssi"></td>
-            <td data-bind="text: vswr"></td>
+    <tbody>
+        <tr ng-repeat="test in test3G">
+            <td>{{test.collegeName}}</td>
+            <td>{{test.downloadRate}}kBps</td>
+            <td>{{test.accessUsers}}</td>
+            <td>{{test.minRssi}}~{{test.maxRssi}}dBm</td>
+            <td>{{test.vswr}}</td>
             <td>
                 <button class="btn btn-danger" 
-                        data-bind="click: function () { $root.test().deleteTest3G($data); }">
+                        ng-click="deleteTest3G(test)">
                     删除
                 </button>
             </td>

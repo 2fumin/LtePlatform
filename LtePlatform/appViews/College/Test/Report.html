@@ -37,29 +37,6 @@
             <li class="active"><a href="#show-list" data-toggle="tab">测试信息列表</a></li>
             <li><a href="#import-info" data-toggle="tab"></a></li>
         </ul>
-        <div id="myTabContent" class="tab-content">
-            <div id="show-list" class="tab-pane fade in active">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h4></h4>
-                    </div>
-                </div>
-                @{
-                    Html.RenderPartial("_College3GTest");
-                }
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h4></h4>
-                    </div>
-                </div>
-                @{
-                    Html.RenderPartial("_College4GTest");
-                }
-            </div>
-            <div id="import-info" class="tab-pane fade">
-                
-            </div>
-        </div>
     </div>
     @{
         Html.RenderPartial("_Edit3GTest");
