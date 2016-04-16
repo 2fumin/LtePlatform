@@ -77,6 +77,31 @@
             }
         };
     })
+    .factory('kpi4GDisplayService', function() {
+        return {
+            generatePreciseBarOptions: function(districtStats, cityStat) {
+                var chart = new ComboChart();
+                chart.title.text = cityStat.city + "精确覆盖率统计";
+                var category = [];
+                var precise = [];
+                angular.forEach(districtStats, function(stat) {
+                    category.push(stat.district);
+                    precise.push(stat.preciseRate);
+                });
+                category.push(cityStat.city);
+                precise.push(cityStat.preciseRate);
+                chart.xAxis[0].categories = category;
+                chart.yAxis[0].title.text = '精确覆盖率';
+                chart.xAxis[0].title.text = '区域';
+                chart.series.push({
+                    type: 'bar',
+                    name: '精确覆盖率',
+                    data: precise
+                });
+                return chart.options;
+            }
+        };
+    })
     .factory('drop2GService', function($q, $http, appUrlService) {
         return {
             queryDayStats: function (city, initialDate) {
