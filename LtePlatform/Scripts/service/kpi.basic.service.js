@@ -80,7 +80,7 @@
     .factory('kpi4GDisplayService', function() {
         return {
             generatePreciseBarOptions: function(districtStats, cityStat) {
-                var chart = new ComboChart();
+                var chart = new BarChart();
                 chart.title.text = cityStat.city + "精确覆盖率统计";
                 var category = [];
                 var precise = [];
@@ -90,9 +90,11 @@
                 });
                 category.push(cityStat.city);
                 precise.push(cityStat.preciseRate);
-                chart.xAxis[0].categories = category;
-                chart.yAxis[0].title.text = '精确覆盖率';
-                chart.xAxis[0].title.text = '区域';
+                chart.xAxis.categories = category;
+                chart.yAxis.title.text = '精确覆盖率';
+                chart.xAxis.title.text = '区域';
+                chart.yAxis.min = 80;
+                chart.yAxis.max = 100;
                 chart.series.push({
                     type: 'bar',
                     name: '精确覆盖率',

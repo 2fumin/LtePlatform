@@ -2,7 +2,8 @@
     appKpiService.getRecentPreciseRegionKpi($scope.city.selected, $scope.statDate.value)
         .then(function(result) {
             $scope.statDate.value = appFormatService.getDate(result.statDate);
+            $scope.cityStat = appKpiService.getCityStat(result.districtPreciseViews, $scope.city.selected);
             $("#preciseConfig").highcharts(kpi4GDisplayService.generatePreciseBarOptions(result.districtPreciseViews,
-                appKpiService.getCityStat(result.districtPreciseViews, $scope.city.selected)));
+                $scope.cityStat));
         });
 });
