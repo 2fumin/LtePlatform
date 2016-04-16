@@ -412,6 +412,7 @@
     <Content Include="appViews\College\Table\CdmaCellInfoBox.html" />
     <Content Include="appViews\College\Table\CollegeCellBasicInfo.html" />
     <Content Include="appViews\College\Table\CollegeCellInfoBox.html" />
+    <Content Include="appViews\College\Test\GenerateReport.html" />
     <Content Include="appViews\HeaderMenu.html" />
     <Content Include="appViews\Home\Kpi2G.html" />
     <Content Include="appViews\Home\Kpi4G.html" />
@@ -1146,8 +1147,8 @@
     <Content Include="appViews\College\CollegeMenu.html" />
     <Content Include="Views\College\_Map.cshtml" />
     <Content Include="appViews\College\Test\Report.html" />
-    <Content Include="Views\College\_College3GTest.cshtml" />
-    <Content Include="Views\College\_College4GTest.cshtml" />
+    <Content Include="appViews\College\Test\College3GTest.html" />
+    <Content Include="appViews\College\Test\College4GTest.html" />
     <Content Include="Views\College\_Edit3GTest.cshtml" />
     <Content Include="Views\College\_Edit4GTest.cshtml" />
     <Content Include="Views\College\_KpiReport.cshtml" />

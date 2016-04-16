@@ -1,0 +1,40 @@
+﻿<div uib-tabset active="active">
+    <div uib-tab index="0" heading="4G测试记录">
+        <div ng-include="'/appViews/College/Test/College4GTest.html'"></div>
+    </div>
+    <div uib-tab index="1" heading="3G测试记录">
+        <div ng-include="'/appViews/College/Test/College3GTest.html'"></div>
+    </div>
+    <div uib-tab index="2" heading="输出邮件信息">
+        <h5>
+            2015年校园秋季营销支撑保障-4小时公告-<span data-bind="text: date"></span>-
+            <span data-bind="text: hour"></span>
+        </h5>
+        <p>3G网络三重测试指标：</p>
+        <div data-bind="foreach: test3G">
+            <p>
+                <span data-bind="text: collegeName"></span>：
+                平均下载速率<span data-bind="text: downloadRate + 'kBps'"></span>KB、
+                接入用户数<span data-bind="text: accessUsers"></span>个、
+                RSSI<span data-bind="text: minRssi"></span>dBm 至
+                <span data-bind="text: maxRssi"></span>dBm、
+                驻波比<span data-bind="text: vswr"></span>；
+            </p>
+        </div>
+        <br />
+        <br />
+        <p>4G网络三重测试指标：</p>
+        <div data-bind="foreach: test4G">
+            <p>
+                <span data-bind="text: collegeName"></span>：
+                下载速率<span data-bind="text: downloadRate"></span>kBps、
+                上传速率<span data-bind="text: uploadRate"></span>kBps、
+                接入<span data-bind="text: cellName"></span>扇区
+                （PCI：<span data-bind="text: pci"></span>）、
+                扇区接入用户数<span data-bind="text: accessUsers"></span>个、
+                RSRP值<span data-bind="text: rsrp"></span>dBm、
+                SINR值<span data-bind="text: sinr"></span>、高清视频流畅；
+            </p>
+        </div>
+    </div>
+</div>
