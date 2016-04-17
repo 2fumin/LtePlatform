@@ -63,18 +63,9 @@ namespace LtePlatform.Areas.HelpPage.Controllers
             return View();
         }
 
-        public ActionResult Api(string apiId)
+        public JsonResult Api(string apiId)
         {
-            if (!string.IsNullOrEmpty(apiId))
-            {
-                HelpPageApiModel apiModel = Configuration.GetHelpPageApiModel(apiId);
-                if (apiModel != null)
-                {
-                    return View(apiModel);
-                }
-            }
-
-            return View(ErrorViewName);
+            return Json(Configuration.GetHelpPageApiModel(apiId), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ResourceModel(string modelName)

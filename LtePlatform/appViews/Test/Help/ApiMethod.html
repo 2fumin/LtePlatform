@@ -1,0 +1,21 @@
+﻿<a class="btn btn-default" ng-href="{{rootPath}}">返回总表</a>
+<table class="help-page-table">
+    <thead>
+        <tr>
+            <th>Method Name</th>
+            <th>Relative Path</th>
+            <th>Method descriptions</th>
+            <th>API infos</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="method in methods">
+            <td>{{method.MethodName}}</td>
+            <td>{{method.RelativePath}}</td>
+            <td class="api-documentation">{{method.Documentation}}</td>
+            <td>
+                <a ng-href="{{rootPath}}api/{{method.FriendlyId}}">Details</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

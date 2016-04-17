@@ -489,6 +489,7 @@
     <Content Include="appViews\Test\Chapter10\demo.pagination.html" />
     <Content Include="appViews\Test\Chapter10\demo.modal.html" />
     <Content Include="appViews\Test\Chapter10\Links.html" />
+    <Content Include="appViews\Test\Help\ApiMethod.html" />
     <Content Include="appViews\Test\Simple\Add.html" />
     <Content Include="appViews\Test\Simple\Clock.html" />
     <Content Include="appViews\Test\Simple\Interpolate.html" />
@@ -503,6 +504,7 @@
     <Content Include="appViews\WorkItem\WorkItemTable.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\HelpPage\Scripts\api.group.js" />
+    <Content Include="Areas\HelpPage\Scripts\api.method.js" />
     <Content Include="Areas\HelpPage\Scripts\route.js" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Areas\TestPage\Scripts\5ch5\Dictionary.js">
