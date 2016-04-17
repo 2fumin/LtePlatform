@@ -8,11 +8,11 @@
     </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="api in apiDescription">
-            <td class="api-name">{{api.ControllerName}}</td>
-            <td class="api-name">{{api.ControllerType}}</td>
+        <tr ng-repeat="api in apiDescription | orderBy: 'ControllerName'">
+            <td>{{api.ControllerName}}</td>
+            <td>{{api.ControllerType}}</td>
             <td class="api-documentation">{{api.Documentation}}</td>
-            <td class="api-name">
+            <td>
                 <a ng-href="{{rootPath}}method/{{api.ControllerName}}">Details</a>
             </td>
         </tr>
