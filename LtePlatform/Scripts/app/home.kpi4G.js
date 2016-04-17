@@ -1,4 +1,10 @@
 ﻿app.controller("home.kpi4G", function ($scope, appKpiService, appFormatService, kpi4GDisplayService) {
+    var yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    $scope.statDate = {
+        value: yesterday,
+        opened: false
+    };
     appKpiService.getRecentPreciseRegionKpi($scope.city.selected, $scope.statDate.value)
         .then(function(result) {
             $scope.statDate.value = appFormatService.getDate(result.statDate);

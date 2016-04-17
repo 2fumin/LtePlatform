@@ -25,12 +25,6 @@
     $scope.status = {
         isopen: false
     };
-    var yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 1);
-    $scope.statDate = {
-        value: yesterday,
-        opened: false
-    };
     $scope.city = {
         selected: "",
         options: []

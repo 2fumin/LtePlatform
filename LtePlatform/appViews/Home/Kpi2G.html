@@ -1,1 +1,5 @@
-﻿<p>这是传统指标！</p>
+﻿<div ng-controller="home.kpi2G">
+    <p>统计日期：{{statDate.value | date: "yyyy年MM月dd日"}}</p>
+    <p>掉话率：{{dropRate | number: 2}}%</p>
+    <p>连接成功率：{{connectionRate | number: 2}}%</p>
+</div>
