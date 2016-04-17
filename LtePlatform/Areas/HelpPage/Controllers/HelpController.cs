@@ -63,9 +63,18 @@ namespace LtePlatform.Areas.HelpPage.Controllers
             return View();
         }
 
-        public JsonResult Api(string apiId)
+        public JsonResult ApiDetails(string apiId)
         {
-            return Json(Configuration.GetHelpPageApiModel(apiId), JsonRequestBehavior.AllowGet);
+            return Json(Configuration.GetHelpPageApiModel(apiId)?.UriParameters.Select(des=>new
+            {
+                des.Name,
+                Annotations = des.Annotations.Select(x=>x.Documentation),
+                des.Documentation,
+                TypeDocumentation = des.TypeDescription.Documentation,
+                TypeName = des.TypeDescription.Name,
+                Type = des.TypeDescription.ModelType.ToString()
+            }), 
+                JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ResourceModel(string modelName)

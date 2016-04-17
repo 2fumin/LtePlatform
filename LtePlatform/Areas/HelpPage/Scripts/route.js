@@ -10,6 +10,10 @@
                     templateUrl: viewDir + "ApiMethod.html",
                     controller: "api.method"
                 })
+                .when('/api/:apiId/:method', {
+                    templateUrl: viewDir + "Api.html",
+                    controller: "api.details"
+                })
                 .otherwise({
                     redirectTo: '/'
                 });
