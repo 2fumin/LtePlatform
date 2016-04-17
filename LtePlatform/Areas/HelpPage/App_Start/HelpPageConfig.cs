@@ -42,7 +42,7 @@ namespace LtePlatform.Areas.HelpPage
             config.SetSampleObjects(new Dictionary<Type, object>
             {
                 {typeof(string), "sample string"},
-                {typeof(IEnumerable<string>), new string[]{"sample 1", "sample 2"}}
+                {typeof(IEnumerable<string>), new[]{"sample 1", "sample 2"}}
             });
 
             // Extend the following to provide factories for types not handled automatically (those lacking parameterless
@@ -83,30 +83,24 @@ namespace LtePlatform.Areas.HelpPage
 #if Handle_PageResultOfT
         private static object GeneratePageResult(HelpPageSampleGenerator sampleGenerator, Type type)
         {
-            if (type.IsGenericType)
-            {
-                Type openGenericType = type.GetGenericTypeDefinition();
-                if (openGenericType == typeof(PageResult<>))
-                {
-                    // Get the T in PageResult<T>
-                    Type[] typeParameters = type.GetGenericArguments();
-                    Debug.Assert(typeParameters.Length == 1);
+            if (!type.IsGenericType) return null;
+            var openGenericType = type.GetGenericTypeDefinition();
+            if (openGenericType != typeof (PageResult<>)) return null;
+            // Get the T in PageResult<T>
+            var typeParameters = type.GetGenericArguments();
+            Debug.Assert(typeParameters.Length == 1);
 
-                    // Create an enumeration to pass as the first parameter to the PageResult<T> constuctor
-                    Type itemsType = typeof(List<>).MakeGenericType(typeParameters);
-                    object items = sampleGenerator.GetSampleObject(itemsType);
+            // Create an enumeration to pass as the first parameter to the PageResult<T> constuctor
+            var itemsType = typeof(List<>).MakeGenericType(typeParameters);
+            var items = sampleGenerator.GetSampleObject(itemsType);
 
-                    // Fill in the other information needed to invoke the PageResult<T> constuctor
-                    Type[] parameterTypes = new Type[] { itemsType, typeof(Uri), typeof(long?), };
-                    object[] parameters = new object[] { items, null, (long)ObjectGenerator.DefaultCollectionSize, };
+            // Fill in the other information needed to invoke the PageResult<T> constuctor
+            var parameterTypes = new[] { itemsType, typeof(Uri), typeof(long?), };
+            var parameters = new[] { items, null, (long)ObjectGenerator.DefaultCollectionSize, };
 
-                    // Call PageResult(IEnumerable<T> items, Uri nextPageLink, long? count) constructor
-                    ConstructorInfo constructor = type.GetConstructor(parameterTypes);
-                    return constructor.Invoke(parameters);
-                }
-            }
-
-            return null;
+            // Call PageResult(IEnumerable<T> items, Uri nextPageLink, long? count) constructor
+            var constructor = type.GetConstructor(parameterTypes);
+            return constructor.Invoke(parameters);
         }
 #endif
     }

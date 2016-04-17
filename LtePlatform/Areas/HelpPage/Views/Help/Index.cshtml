@@ -3,13 +3,10 @@
 @using System.Web.Http.Description
 @using System.Collections.ObjectModel
 @using System.Web.Optimization
-@model Collection<ApiDescription>
 
 @{
     ViewBag.Title = "ASP.NET Web API Help Page";
-
-    // Group APIs by controller
-    ILookup<HttpControllerDescriptor, ApiDescription> apiGroups = Model.ToLookup(api => api.ActionDescriptor.ControllerDescriptor);
+    
 }
 
 <header class="help-page">
@@ -29,10 +26,6 @@
         </div>
     </section>
     <section class="content-wrapper main-content clear-fix">
-        @foreach (var group in apiGroups)
-        {
-            @Html.DisplayFor(m => group, "ApiGroup")
-        }
     </section>
 </div>
 

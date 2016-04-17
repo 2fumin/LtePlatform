@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Web.Http;
 using System.Web.Mvc;
 using LtePlatform.Areas.HelpPage.ModelDescriptions;
@@ -25,10 +26,28 @@ namespace LtePlatform.Areas.HelpPage.Controllers
 
         public HttpConfiguration Configuration { get; }
 
+        public JsonResult ApiDescriptions()
+        {
+            return Json(Configuration.Services.GetApiExplorer().ApiDescriptions.Select(api =>
+            {
+                var descriptor = api.ActionDescriptor.ControllerDescriptor;
+                return new
+                {
+                    ControllerName = descriptor.ControllerName,
+                    ControllerType = descriptor.ControllerType.ToString(),
+                    FriendlyId= api.GetFriendlyId(),
+                    MethodName = api.HttpMethod.Method,
+                    RelativePath = api.RelativePath,
+                    Documentation = api.Documentation
+                };
+            }), 
+                JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Index()
         {
             ViewBag.DocumentationProvider = Configuration.Services.GetDocumentationProvider();
-            return View(Configuration.Services.GetApiExplorer().ApiDescriptions);
+            return View();
         }
 
         public ActionResult Api(string apiId)
