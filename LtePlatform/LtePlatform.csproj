@@ -502,6 +502,8 @@
     <Content Include="appViews\WorkItem\ENodebInfo.html" />
     <Content Include="appViews\WorkItem\WorkItemTable.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Areas\HelpPage\Scripts\api.group.js" />
+    <Content Include="Areas\HelpPage\Scripts\route.js" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Areas\TestPage\Scripts\5ch5\Dictionary.js">
       <DependentUpon>Dictionary.coffee</DependentUpon>
@@ -892,8 +894,8 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\DictionaryModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ComplexTypeModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
-    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
-    <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="appViews\Test\Help\ApiGroup.html" />
+    <Content Include="appViews\Test\Help\Api.html" />
     <Content Include="Content\google\AF4iYPZnDjGMiNsxxSXYQfY6323mHUZFJMgTvxaG2iE.woff2" />
     <Content Include="Content\google\q41y_9MUP_N8ipOH4ORRvw.woff2" />
     <Content Include="Content\google\F587cG5P5ff3TX6w4JloryEAvth_LlrfE80CYdSH47w.woff2" />

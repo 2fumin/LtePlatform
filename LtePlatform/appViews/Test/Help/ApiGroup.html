@@ -1,0 +1,20 @@
+<table class="help-page-table">
+    <thead>
+    <tr>
+        <th>Controller Name</th>
+        <th>Full Name</th>
+        <th>Main functional descriptions</th>
+        <th>Action infos</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="api in apiDescription">
+            <td class="api-name">{{api.ControllerName}}</td>
+            <td class="api-name">{{api.ControllerType}}</td>
+            <td class="api-documentation">{{api.Documentation}}</td>
+            <td class="api-name">
+                <a ng-href="{{rootPath}}method/{{api.ControllerName}}">Details</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

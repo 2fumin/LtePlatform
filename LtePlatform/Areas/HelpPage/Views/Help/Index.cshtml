@@ -26,9 +26,12 @@
         </div>
     </section>
     <section class="content-wrapper main-content clear-fix">
+        <div ng-view></div>
     </section>
 </div>
 
 @section Scripts{
     @Styles.Render("~/Content/HelpPage")
+    <script src="~/Areas/HelpPage/Scripts/route.js"></script>
+    <script src="~/Areas/HelpPage/Scripts/api.group.js"></script>
 }

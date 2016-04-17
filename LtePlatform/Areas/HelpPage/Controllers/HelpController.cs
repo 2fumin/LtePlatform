@@ -28,6 +28,7 @@ namespace LtePlatform.Areas.HelpPage.Controllers
 
         public JsonResult ApiDescriptions()
         {
+            var provider = Configuration.Services.GetDocumentationProvider();
             return Json(Configuration.Services.GetApiExplorer().ApiDescriptions.Select(api =>
             {
                 var descriptor = api.ActionDescriptor.ControllerDescriptor;
@@ -35,18 +36,30 @@ namespace LtePlatform.Areas.HelpPage.Controllers
                 {
                     ControllerName = descriptor.ControllerName,
                     ControllerType = descriptor.ControllerType.ToString(),
-                    FriendlyId= api.GetFriendlyId(),
-                    MethodName = api.HttpMethod.Method,
-                    RelativePath = api.RelativePath,
-                    Documentation = api.Documentation
+                    Documentation = provider.GetDocumentation(descriptor)
                 };
+            }).Distinct(),
+                JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ApiMethod(string controllerName)
+        {
+            var description =
+                Configuration.Services.GetApiExplorer()
+                    .ApiDescriptions.Where(
+                        api => api.ActionDescriptor.ControllerDescriptor.ControllerName == controllerName);
+            return Json(description.Select(api => new
+            {
+                FriendlyId = api.GetFriendlyId(),
+                MethodName = api.HttpMethod.Method,
+                RelativePath = api.RelativePath,
+                Documentation = api.Documentation
             }), 
                 JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Index()
         {
-            ViewBag.DocumentationProvider = Configuration.Services.GetDocumentationProvider();
             return View();
         }
 
