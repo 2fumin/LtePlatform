@@ -335,6 +335,7 @@
     <Compile Include="Controllers\Mongo\InterFreqHoController.cs" />
     <Compile Include="Controllers\Mongo\IntraFreqHoController.cs" />
     <Compile Include="Controllers\Mongo\NeighborCellMongoController.cs" />
+    <Compile Include="Controllers\Mr\CellStasticController.cs" />
     <Compile Include="Controllers\Mr\InterferenceMatrixController.cs" />
     <Compile Include="Controllers\Mr\InterferenceNeighborController.cs" />
     <Compile Include="Controllers\Mr\NeighborMonitorController.cs" />

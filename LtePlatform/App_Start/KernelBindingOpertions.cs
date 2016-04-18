@@ -200,6 +200,8 @@ namespace LtePlatform
             ninjectKernel.Bind<InterFreqHoService>().ToSelf();
 
             ninjectKernel.Bind<NeighborCellMongoService>().ToSelf();
+
+            ninjectKernel.Bind<CellStasticService>().ToSelf();
         }
     }
 }
