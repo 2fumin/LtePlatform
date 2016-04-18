@@ -2,7 +2,19 @@
     <p>统计日期：{{statDate.value | date: "yyyy年MM月dd日"}}</p>
     <p>
         今日指标值：{{cityStat.preciseRate | number: 2}}%
-        <div uib-rating aria-labelledby="default-rating" ng-model="rate" max="max" read-only="isReadonly"></div>
+        <div uib-rating aria-labelledby="default-rating" ng-model="rate" max="max" read-only="isReadonly"
+             uib-tooltip-template="'rateTooltipTemplate.html'" tooltip-class="customClass" tooltip-placement="bottom"></div>
     </p>
     <div id="preciseConfig"></div>
+    <script type="text/ng-template" id="rateTooltipTemplate.html">
+        <h6>精确覆盖率星级定义</h6>
+        <ul>
+            <li><strong>5星：</strong>精确覆盖率大于94.6%</li>
+            <li><strong>4星：</strong>精确覆盖率大于93.6%且小于等于94.6%</li>
+            <li><strong>3星：</strong>精确覆盖率大于92.6%且小于等于93.6%</li>
+            <li><strong>2星：</strong>精确覆盖率大于91.6%且小于等于92.6%</li>
+            <li><strong>1星：</strong>精确覆盖率大于90%且小于等于91.6%</li>
+            <li><strong>0星：</strong>精确覆盖率小于等于90%</li>
+        </ul>
+    </script>
 </div>
