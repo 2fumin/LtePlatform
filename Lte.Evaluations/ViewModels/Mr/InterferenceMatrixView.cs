@@ -60,4 +60,19 @@ namespace Lte.Evaluations.ViewModels.Mr
         [MemberDoc("总干扰水平")]
         public double InterferenceLevel { get; set; }
     }
+
+    public class CellStasticView
+    {
+        public double Mod3Count { get; set; }
+
+        public double WeakCoverCount { get; set; }
+
+        public double Mod6Count { get; set; }
+
+        public double OverCoverCount { get; set; }
+
+        public double PreciseCount { get; set; }
+
+        public double MrCount { get; set; }
+    }
 }

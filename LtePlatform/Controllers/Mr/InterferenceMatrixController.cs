@@ -32,6 +32,10 @@ namespace LtePlatform.Controllers.Mr
         }
 
         [HttpGet]
+        [ApiDoc("根据小区信息从MongoDB数据库中获取统计信息")]
+        [ApiParameterDoc("eNodebId", "基站编号")]
+        [ApiParameterDoc("pci", "PCI")]
+        [ApiResponse("统计信息")]
         public InterferenceMatrixMongo Get(int eNodebId, short pci)
         {
             return _service.QueryMongo(eNodebId, pci);
