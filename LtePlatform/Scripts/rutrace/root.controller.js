@@ -24,7 +24,9 @@ app.controller("rutrace.root", function ($scope, appRegionService, menuItemServi
         victims: {},
         coverages: {},
         updateInteferenceProgress: {},
-        updateVictimProgress: {}
+        updateVictimProgress: {},
+        mongoNeighbors: {},
+        pieOptions: {}
     };
     $scope.updateTopCells = function(cell) {
         var cellName = cell.eNodebName + "-" + cell.sectorId;

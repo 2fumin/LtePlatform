@@ -1,4 +1,4 @@
-﻿app.controller("rutrace.interference", function ($scope, $http, $routeParams,
+﻿app.controller("rutrace.interference", function ($scope, $timeout, $routeParams,
     networkElementService, topPreciseService, menuItemService, neighborMongoService) {
     $scope.currentCellName = $routeParams.name + "-" + $routeParams.sectorId;
     $scope.page.title = "TOP指标干扰分析: " + $scope.currentCellName;
@@ -62,6 +62,7 @@
                 $scope.topStat.victims[$scope.currentCellName] = victims;
                 });
             var pieOptions = topPreciseService.getInterferencePieOptions(result, $scope.currentCellName);
+            $scope.topStat.pieOptions[$scope.currentCellName] = pieOptions;
             $("#interference-over6db").highcharts(pieOptions.over6DbOption);
             $("#interference-over10db").highcharts(pieOptions.over10DbOption);
         });
@@ -98,16 +99,23 @@
         $scope.updateMessages.splice(index, 1);
     };
 
-    neighborMongoService.queryNeighbors($routeParams.cellId, $routeParams.sectorId).then(function (result) {
-        $scope.mongoNeighbors = result;
-        if ($scope.topStat.interference[$scope.currentCellName] === undefined) {
+    if ($scope.topStat.interference[$scope.currentCellName] === undefined) {
+        neighborMongoService.queryNeighbors($routeParams.cellId, $routeParams.sectorId).then(function(result) {
+            $scope.mongoNeighbors = result;
+            $scope.topStat.mongoNeighbors[$scope.currentCellName] = result;
             $scope.showInterference();
             $scope.updateNeighborInfos();
-        } else {
-            $scope.interferenceCells = $scope.topStat.interference[$scope.currentCellName];
-            $scope.victimCells = $scope.topStat.victims[$scope.currentCellName];
-        }
-    });
+        });
+    } else {
+        $scope.interferenceCells = $scope.topStat.interference[$scope.currentCellName];
+        $scope.victimCells = $scope.topStat.victims[$scope.currentCellName];
+        $scope.mongoNeighbors = $scope.topStat.mongoNeighbors[$scope.currentCellName];
+        var newOptions = $scope.topStat.pieOptions[$scope.currentCellName];
+        $timeout(function() {
+            $("#interference-over6db").highcharts(newOptions.over6DbOption);
+            $("#interference-over10db").highcharts(newOptions.over10DbOption);
+        }, 1000);
+    }
     networkElementService.queryCellInfo($routeParams.cellId, $routeParams.sectorId).then(function(info) {
         $scope.topStat.current = {
             cellId: $routeParams.cellId,

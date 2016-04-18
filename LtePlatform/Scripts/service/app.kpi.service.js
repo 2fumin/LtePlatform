@@ -429,7 +429,6 @@
             getInterferencePieOptions: function(interferenceCells, currentCellName) {
                 var over6DbPie = new GradientPie();
                 var over10DbPie = new GradientPie();
-                over6DbPie.initializeColors();
                 over6DbPie.series[0].name = '6dB干扰日平均次数';
                 over10DbPie.series[0].name = '10dB干扰日平均次数';
                 over6DbPie.title.text = currentCellName + '6dB干扰日平均次数';
