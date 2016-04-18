@@ -1,5 +1,5 @@
 ﻿function GradientPie() {
-    
+    var self = {};
     self.chart = {
         plotBackgroundColor: null,
         plotBorderWidth: null,
