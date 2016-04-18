@@ -70,6 +70,14 @@
                 }
                 return calculateDistrictRates(stat);
             },
+            calculatePreciseRating: function(precise) {
+                if (precise > 94.6) return 5;
+                else if (precise > 93.6) return 4;
+                else if (precise > 92.6) return 3;
+                else if (precise > 91.6) return 2;
+                else if (precise > 90) return 1;
+                else return 0;
+            },
             getMrPieOptions: function (districtStats, townStats) {
                 var chart = new DrilldownPie();
                 chart.title.text = "分镇区测量报告数分布图";

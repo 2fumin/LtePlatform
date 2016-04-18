@@ -1,5 +1,8 @@
-﻿<div ng-controller="home.kpi4G">
+﻿<div ng-controller="home.kpi4G" ng-init="max = 5; isReadonly = true">
     <p>统计日期：{{statDate.value | date: "yyyy年MM月dd日"}}</p>
-    <p>今日指标值：{{cityStat.preciseRate | number: 2}}%</p>
+    <p>
+        今日指标值：{{cityStat.preciseRate | number: 2}}%
+        <div uib-rating aria-labelledby="default-rating" ng-model="rate" max="max" read-only="isReadonly"></div>
+    </p>
     <div id="preciseConfig"></div>
 </div>

@@ -9,6 +9,7 @@
         .then(function(result) {
             $scope.statDate.value = appFormatService.getDate(result.statDate);
             $scope.cityStat = appKpiService.getCityStat(result.districtPreciseViews, $scope.city.selected);
+            $scope.rate = appKpiService.calculatePreciseRating($scope.cityStat.preciseRate);
             $("#preciseConfig").highcharts(kpi4GDisplayService.generatePreciseBarOptions(result.districtPreciseViews,
                 $scope.cityStat));
         });
