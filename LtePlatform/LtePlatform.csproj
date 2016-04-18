@@ -456,6 +456,8 @@
     <Content Include="appViews\Parameters\Region\ENodebDetails.html" />
     <Content Include="appViews\Parameters\Region\ENodebInfo.html" />
     <Content Include="appViews\Rutrace\Chart.html" />
+    <Content Include="appViews\Rutrace\Import\BackwardNeighbors.html" />
+    <Content Include="appViews\Rutrace\Import\ForwardNeighbors.html" />
     <Content Include="appViews\Rutrace\Index.html" />
     <Content Include="appViews\Rutrace\Interference\DumpCellMongoDialog.html" />
     <Content Include="appViews\Rutrace\Interference\DumpCells.html" />

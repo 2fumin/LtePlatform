@@ -1,0 +1,31 @@
+﻿<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>小区编号</th>
+            <th>扇区编号</th>
+            <th>邻区优先级</th>
+            <th>允许切换</th>
+            <th>ANR生成</th>
+            <th>基站名称</th>
+            <th>是否监控</th>
+            <th>导入情况</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="neighbor in reverseCells">
+            <td>{{neighbor.cellId}}</td>
+            <td>{{neighbor.sectorId}}</td>
+            <td>{{neighbor.cellPriority}}</td>
+            <td>{{neighbor.handoffAllowed ? '是' : '否'}}</td>
+            <td>{{neighbor.isAnrCreated ? '是' : '否'}}</td>
+            <td>{{neighbor.eNodebName}}</td>
+            <td>
+                <span ng-if="neighbor.isMonitored">已监控</span>
+                <span ng-if="!neighbor.isMonitored" style="color: red">未监控</span>
+            </td>
+            <td>
+                <button class="btn btn-default" ng-click="dumpReverseMongo(neighbor)">导入数据</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
