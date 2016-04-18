@@ -104,6 +104,7 @@
     <Compile Include="Kpi\CdmaCityStatExcelTest.cs" />
     <Compile Include="Kpi\CdmaRegionStatExcelTest.cs" />
     <Compile Include="Kpi\CdmaTopKpiExcelTest.cs" />
+    <Compile Include="Mr\CellStasticRepositoryTests.cs" />
     <Compile Include="Mr\InterferenceMatrixStatTest.cs" />
     <Compile Include="Mr\InterferenceMongoRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

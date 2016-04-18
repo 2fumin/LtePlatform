@@ -19,4 +19,11 @@ namespace Lte.Parameters.Abstract
 
         List<InterferenceMatrixMongo> GetList(int eNodebId, short pci, short neighborPci, DateTime date);
     }
+
+    public interface ICellStasticRepository : IRepository<CellStastic, ObjectId>
+    {
+        List<CellStastic> GetList(int eNodebId, short pci);
+
+        List<CellStastic> GetList(int eNodebId, short pci, DateTime date);
+    }
 }

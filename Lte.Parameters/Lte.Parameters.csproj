@@ -150,6 +150,7 @@
     <Compile Include="Concrete\Basic\EFENodebRepository.cs" />
     <Compile Include="Concrete\Infrastructure\EFIndoorDistributionRepository.cs" />
     <Compile Include="Concrete\Infrastructure\EFInfrastructureRepository.cs" />
+    <Compile Include="Concrete\Mr\CellStasticRepository.cs" />
     <Compile Include="Concrete\Mr\EFInterferenceMatrixRepository.cs" />
     <Compile Include="Concrete\Neighbor\EFLteNeighborCellRepository.cs" />
     <Compile Include="Concrete\EFParametersContext.cs" />
@@ -174,6 +175,7 @@
     <Compile Include="Entities\Basic\EUtranCellFDDZte.cs" />
     <Compile Include="Entities\Basic\PrachFDDZte.cs" />
     <Compile Include="Entities\Channel\PowerControlDLZte.cs" />
+    <Compile Include="Entities\Mr\CellStastic.cs" />
     <Compile Include="Entities\Neighbor\ExternalEUtranCellFDDZte.cs" />
     <Compile Include="Concrete\Switch\CellMeasGroupZteRepository.cs" />
     <Compile Include="Concrete\Switch\InterFreqHoGroupRepository.cs" />

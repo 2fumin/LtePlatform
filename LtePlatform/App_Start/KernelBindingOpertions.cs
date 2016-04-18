@@ -115,6 +115,8 @@ namespace LtePlatform
 
             ninjectKernel.Bind<IPowerControlDLZteRepository>().To<PowerControlDLZteRepository>();
 
+            ninjectKernel.Bind<ICellStasticRepository>().To<CellStasticRepository>();
+
             ninjectKernel.Bind<CdmaRegionStatService>().ToSelf();
 
             ninjectKernel.Bind<CollegeStatService>().ToSelf();
