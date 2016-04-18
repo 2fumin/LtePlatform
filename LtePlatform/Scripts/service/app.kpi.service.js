@@ -276,57 +276,57 @@
     })
     .factory('topPreciseService', function ($q, $http, appUrlService) {
         return {
-            getOrderSelection: function () {
+            getOrderSelection: function() {
                 var deferred = $q.defer();
                 $http({
-                    method: 'GET',
-                    url: appUrlService.getApiUrl('PreciseStat'),
-                }).success(function (result) {
-                    deferred.resolve(result);
-                })
-                .error(function (reason) {
-                    deferred.reject(reason);
-                });
+                        method: 'GET',
+                        url: appUrlService.getApiUrl('PreciseStat'),
+                    }).success(function(result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function(reason) {
+                        deferred.reject(reason);
+                    });
                 return deferred.promise;
             },
-            queryTopKpis: function (begin, end, topCount, orderSelection) {
+            queryTopKpis: function(begin, end, topCount, orderSelection) {
                 var deferred = $q.defer();
                 $http({
-                    method: 'GET',
-                    url: appUrlService.getApiUrl('PreciseStat'),
-                    params: {
-                        'begin': begin,
-                        'end': end,
-                        'topCount': topCount,
-                        'orderSelection': orderSelection
-                    }
-                }).success(function (result) {
-                    deferred.resolve(result);
-                })
-                .error(function (reason) {
-                    deferred.reject(reason);
-                });
+                        method: 'GET',
+                        url: appUrlService.getApiUrl('PreciseStat'),
+                        params: {
+                            'begin': begin,
+                            'end': end,
+                            'topCount': topCount,
+                            'orderSelection': orderSelection
+                        }
+                    }).success(function(result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function(reason) {
+                        deferred.reject(reason);
+                    });
                 return deferred.promise;
             },
-            queryTopKpisInDistrict: function (begin, end, topCount, orderSelection, city, district) {
+            queryTopKpisInDistrict: function(begin, end, topCount, orderSelection, city, district) {
                 var deferred = $q.defer();
                 $http({
-                    method: 'GET',
-                    url: appUrlService.getApiUrl('PreciseStat'),
-                    params: {
-                        'begin': begin,
-                        'end': end,
-                        'topCount': topCount,
-                        'orderSelection': orderSelection,
-                        city: city,
-                        district: district
-                    }
-                }).success(function (result) {
-                    deferred.resolve(result);
-                })
-                .error(function (reason) {
-                    deferred.reject(reason);
-                });
+                        method: 'GET',
+                        url: appUrlService.getApiUrl('PreciseStat'),
+                        params: {
+                            'begin': begin,
+                            'end': end,
+                            'topCount': topCount,
+                            'orderSelection': orderSelection,
+                            city: city,
+                            district: district
+                        }
+                    }).success(function(result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function(reason) {
+                        deferred.reject(reason);
+                    });
                 return deferred.promise;
             },
             addMonitor: function(cell) {
@@ -337,94 +337,117 @@
                     cell.isMonitored = true;
                 });
             },
-            queryMonitor: function (cellId, sectorId) {
+            queryMonitor: function(cellId, sectorId) {
                 var deferred = $q.defer();
                 $http({
-                    method: 'GET',
-                    url: appUrlService.getApiUrl('NeighborMonitor'),
-                    params: {
-                        'cellId': cellId,
-                        'sectorId': sectorId
-                    }
-                }).success(function (result) {
-                    deferred.resolve(result);
-                })
-                .error(function (reason) {
-                    deferred.reject(reason);
-                });
+                        method: 'GET',
+                        url: appUrlService.getApiUrl('NeighborMonitor'),
+                        params: {
+                            'cellId': cellId,
+                            'sectorId': sectorId
+                        }
+                    }).success(function(result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function(reason) {
+                        deferred.reject(reason);
+                    });
                 return deferred.promise;
             },
             updateInterferenceNeighbor: function(cellId, sectorId) {
                 var deferred = $q.defer();
                 $http({
-                    method: 'GET',
-                    url: appUrlService.getApiUrl('InterferenceNeighbor'),
-                    params: {
-                        'cellId': cellId,
-                        'sectorId': sectorId
-                    }
-                }).success(function (result) {
-                    deferred.resolve(result);
-                })
-                .error(function (reason) {
-                    deferred.reject(reason);
-                });
+                        method: 'GET',
+                        url: appUrlService.getApiUrl('InterferenceNeighbor'),
+                        params: {
+                            'cellId': cellId,
+                            'sectorId': sectorId
+                        }
+                    }).success(function(result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function(reason) {
+                        deferred.reject(reason);
+                    });
                 return deferred.promise;
             },
-            queryInterferenceNeighbor: function (begin, end, cellId, sectorId) {
+            queryInterferenceNeighbor: function(begin, end, cellId, sectorId) {
                 var deferred = $q.defer();
                 $http({
-                    method: 'GET',
-                    url: appUrlService.getApiUrl('InterferenceNeighbor'),
-                    params: {
-                        'begin': begin,
-                        'end': end,
-                        'cellId': cellId,
-                        'sectorId': sectorId
-                    }
-                }).success(function (result) {
-                    deferred.resolve(result);
-                })
-                .error(function (reason) {
-                    deferred.reject(reason);
-                });
+                        method: 'GET',
+                        url: appUrlService.getApiUrl('InterferenceNeighbor'),
+                        params: {
+                            'begin': begin,
+                            'end': end,
+                            'cellId': cellId,
+                            'sectorId': sectorId
+                        }
+                    }).success(function(result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function(reason) {
+                        deferred.reject(reason);
+                    });
                 return deferred.promise;
             },
-            updateInterferenceVictim: function (cellId, sectorId) {
+            updateInterferenceVictim: function(cellId, sectorId) {
                 var deferred = $q.defer();
                 $http({
-                    method: 'GET',
-                    url: appUrlService.getApiUrl('InterferenceNeighbor'),
-                    params: {
-                        neighborCellId: cellId,
-                        neighborSectorId: sectorId
-                    }
-                }).success(function (result) {
-                    deferred.resolve(result);
-                })
-                .error(function (reason) {
-                    deferred.reject(reason);
-                });
+                        method: 'GET',
+                        url: appUrlService.getApiUrl('InterferenceNeighbor'),
+                        params: {
+                            neighborCellId: cellId,
+                            neighborSectorId: sectorId
+                        }
+                    }).success(function(result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function(reason) {
+                        deferred.reject(reason);
+                    });
                 return deferred.promise;
             },
-            queryInterferenceVictim: function (begin, end, cellId, sectorId) {
+            queryInterferenceVictim: function(begin, end, cellId, sectorId) {
                 var deferred = $q.defer();
                 $http({
-                    method: 'GET',
-                    url: appUrlService.getApiUrl('InterferenceVictim'),
-                    params: {
-                        'begin': begin,
-                        'end': end,
-                        'cellId': cellId,
-                        'sectorId': sectorId
-                    }
-                }).success(function (result) {
-                    deferred.resolve(result);
-                })
-                .error(function (reason) {
-                    deferred.reject(reason);
-                });
+                        method: 'GET',
+                        url: appUrlService.getApiUrl('InterferenceVictim'),
+                        params: {
+                            'begin': begin,
+                            'end': end,
+                            'cellId': cellId,
+                            'sectorId': sectorId
+                        }
+                    }).success(function(result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function(reason) {
+                        deferred.reject(reason);
+                    });
                 return deferred.promise;
+            },
+            getInterferencePieOptions: function(interferenceCells, currentCellName) {
+                var over6DbPie = new GradientPie();
+                var over10DbPie = new GradientPie();
+                over6DbPie.initializeColors();
+                over6DbPie.series[0].name = '6dB干扰日平均次数';
+                over10DbPie.series[0].name = '10dB干扰日平均次数';
+                over6DbPie.title.text = currentCellName + '6dB干扰日平均次数';
+                over10DbPie.title.text = currentCellName + '10dB干扰日平均次数';
+                angular.forEach(interferenceCells, function(cell) {
+                    over6DbPie.series[0].data.push({
+                        name: cell.neighborCellName,
+                        y: cell.overInterferences6Db
+                    });
+                    over10DbPie.series[0].data.push({
+                        name: cell.neighborCellName,
+                        y: cell.overInterferences10Db
+                    });
+                });
+                return {
+                    over6DbOption: over6DbPie.options,
+                    over10DbOption: over10DbPie.options
+                };
             }
         };
     })

@@ -44,7 +44,7 @@
         $scope.victimCells = [];
 
         topPreciseService.queryInterferenceNeighbor($scope.beginDate.value, $scope.endDate.value,
-            $routeParams.cellId, $routeParams.sectorId).then(function (result) {
+            $routeParams.cellId, $routeParams.sectorId).then(function(result) {
             angular.forEach(result, function(cell) {
                 for (var i = 0; i < $scope.mongoNeighbors.length; i++) {
                     var neighbor = $scope.mongoNeighbors[i];
@@ -56,8 +56,18 @@
             });
             $scope.interferenceCells = result;
             $scope.topStat.interference[$scope.currentCellName] = result;
+            topPreciseService.queryInterferenceVictim($scope.beginDate.value, $scope.endDate.value,
+                $routeParams.cellId, $routeParams.sectorId).then(function(victims) {
+                $scope.victimCells = victims;
+                $scope.topStat.victims[$scope.currentCellName] = victims;
+                });
+            var pieOptions = topPreciseService.getInterferencePieOptions(result, $scope.currentCellName);
+            $("#interference-over6db").highcharts(pieOptions.over6DbOption);
+            $("#interference-over10db").highcharts(pieOptions.over10DbOption);
         });
+    };
 
+    $scope.updateNeighborInfos=function() {
         if ($scope.topStat.updateInteferenceProgress[$scope.currentCellName] !== true) {
             $scope.topStat.updateInteferenceProgress[$scope.currentCellName] = true;
             topPreciseService.updateInterferenceNeighbor($routeParams.cellId, $routeParams.sectorId).then(function (result) {
@@ -82,13 +92,7 @@
             });
         }
 
-        topPreciseService.queryInterferenceVictim($scope.beginDate.value, $scope.endDate.value,
-            $routeParams.cellId, $routeParams.sectorId).then(function (result) {
-            $scope.victimCells = result;
-            $scope.topStat.victims[$scope.currentCellName] = result;
-        });
-
-    };
+    }
 
     $scope.closeAlert = function(index) {
         $scope.updateMessages.splice(index, 1);
@@ -98,6 +102,7 @@
         $scope.mongoNeighbors = result;
         if ($scope.topStat.interference[$scope.currentCellName] === undefined) {
             $scope.showInterference();
+            $scope.updateNeighborInfos();
         } else {
             $scope.interferenceCells = $scope.topStat.interference[$scope.currentCellName];
             $scope.victimCells = $scope.topStat.victims[$scope.currentCellName];
