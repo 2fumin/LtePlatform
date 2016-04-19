@@ -148,7 +148,7 @@
                     queryFunc();
             } else {
                 var subRecord = records[outerIndex];
-                if (subRecord.existedRecords < 1000 && innerIndex < subRecord.mongoRecords.length) {
+                if (subRecord.existedRecords < subRecord.mongoRecords.length && innerIndex < subRecord.mongoRecords.length) {
                     var stat = subRecord.mongoRecords[innerIndex];
                     stat.sectorId = sectorId;
                     neighborService.querySystemNeighborCell(eNodebId, sectorId, stat.destPci).then(function(neighbor) {
