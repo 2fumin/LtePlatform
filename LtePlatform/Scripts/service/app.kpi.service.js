@@ -426,6 +426,25 @@
                     });
                 return deferred.promise;
             },
+            queryCellStastic: function(cellId, pci, begin, end){
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('CellStastic'),
+                    params: {
+                        eNodebId: cellId,
+                        pci: pci,
+                        begin: begin,
+                        end: end
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            },
             getInterferencePieOptions: function(interferenceCells, currentCellName) {
                 var over6DbPie = new GradientPie();
                 var over10DbPie = new GradientPie();
@@ -466,6 +485,25 @@
                     over10DbOption: over10DbPie.options,
                     mod3Option: mod3Pie.options,
                     mod6Option: mod6Pie.options
+                };
+            },
+            getStrengthColumnOptions: function (interferenceCells, mrCount, currentCellName) {
+                over6DbColumn = new Column3d();
+                over10DbColumn = new Column3d();
+                over6DbColumn.series[0].name = '6dB干扰强度';
+                over10DbColumn.series[0].name = '10dB干扰强度';
+                over6DbColumn.title.text = currentCellName + ': 6dB干扰干扰强度';
+                over10DbColumn.title.text = currentCellName + ': 10dB干扰干扰强度';
+                
+                angular.forEach(interferenceCells, function(cell) {
+                    over6DbColumn.series[0].data.push(cell.overInterferences6Db / mrCount * 100);
+                    over10DbColumn.series[0].data.push(cell.overInterferences10Db / mrCount * 100);
+                    over6DbColumn.xAxis.categories.push(cell.neighborCellName);
+                    over10DbColumn.xAxis.categories.push(cell.neighborCellName);
+                });
+                return {
+                    over6DbOption: over6DbColumn.options,
+                    over10DbOption: over10DbColumn.options
                 };
             }
         };

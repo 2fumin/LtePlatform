@@ -67,6 +67,15 @@
             $("#interference-over10db").highcharts(pieOptions.over10DbOption);
             $("#interference-mod3").highcharts(pieOptions.mod3Option);
             $("#interference-mod6").highcharts(pieOptions.mod6Option);
+            networkElementService.queryCellInfo($routeParams.cellId, $routeParams.sectorId).then(function (info) {
+                topPreciseService.queryCellStastic($routeParams.cellId, info.pci,
+                    $scope.beginDate.value, $scope.endDate.value).then(function (stastic) {
+                        var columnOptions = topPreciseService.getStrengthColumnOptions(result, stastic.mrCount,
+                            $scope.currentCellName);
+                        $("#strength-over6db").highcharts(columnOptions.over6DbOption);
+                        $("#strength-over10db").highcharts(columnOptions.over10DbOption);
+                    });
+            });
         });
     };
 
