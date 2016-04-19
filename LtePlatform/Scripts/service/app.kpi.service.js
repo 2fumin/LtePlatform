@@ -429,10 +429,16 @@
             getInterferencePieOptions: function(interferenceCells, currentCellName) {
                 var over6DbPie = new GradientPie();
                 var over10DbPie = new GradientPie();
+                var mod3Pie = new GradientPie();
+                var mod6Pie = new GradientPie();
                 over6DbPie.series[0].name = '6dB干扰日平均次数';
                 over10DbPie.series[0].name = '10dB干扰日平均次数';
-                over6DbPie.title.text = currentCellName + '6dB干扰日平均次数';
-                over10DbPie.title.text = currentCellName + '10dB干扰日平均次数';
+                over6DbPie.title.text = currentCellName + ': 6dB干扰日平均次数';
+                over10DbPie.title.text = currentCellName + ': 10dB干扰日平均次数';
+                mod3Pie.series[0].name = 'MOD3干扰日平均次数';
+                mod6Pie.series[0].name = 'MOD6干扰日平均次数';
+                mod3Pie.title.text = currentCellName + ': MOD3干扰日平均次数';
+                mod6Pie.title.text = currentCellName + ': MOD6干扰日平均次数';
                 angular.forEach(interferenceCells, function(cell) {
                     over6DbPie.series[0].data.push({
                         name: cell.neighborCellName,
@@ -442,10 +448,24 @@
                         name: cell.neighborCellName,
                         y: cell.overInterferences10Db
                     });
+                    if (cell.mod3Interferences > 0) {
+                        mod3Pie.series[0].data.push({
+                            name: cell.neighborCellName,
+                            y: cell.mod3Interferences
+                        });
+                    }
+                    if (cell.mod6Interferences > 0) {
+                        mod6Pie.series[0].data.push({
+                            name: cell.neighborCellName,
+                            y: cell.mod6Interferences
+                        });
+                    }
                 });
                 return {
                     over6DbOption: over6DbPie.options,
-                    over10DbOption: over10DbPie.options
+                    over10DbOption: over10DbPie.options,
+                    mod3Option: mod3Pie.options,
+                    mod6Option: mod6Pie.options
                 };
             }
         };

@@ -65,6 +65,8 @@
             $scope.topStat.pieOptions[$scope.currentCellName] = pieOptions;
             $("#interference-over6db").highcharts(pieOptions.over6DbOption);
             $("#interference-over10db").highcharts(pieOptions.over10DbOption);
+            $("#interference-mod3").highcharts(pieOptions.mod3Option);
+            $("#interference-mod6").highcharts(pieOptions.mod6Option);
         });
     };
 
@@ -114,6 +116,8 @@
         $timeout(function() {
             $("#interference-over6db").highcharts(newOptions.over6DbOption);
             $("#interference-over10db").highcharts(newOptions.over10DbOption);
+            $("#interference-mod3").highcharts(newOptions.mod3Option);
+            $("#interference-mod6").highcharts(newOptions.mod6Option);
         }, 1000);
     }
     networkElementService.queryCellInfo($routeParams.cellId, $routeParams.sectorId).then(function(info) {
