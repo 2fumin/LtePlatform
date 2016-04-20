@@ -17,6 +17,11 @@ namespace Lte.Parameters.Concrete
             return await GetAllListAsync(x => x.ENodebId == eNodebId);
         }
 
+        public async Task<List<WorkItem>> GetAllListAsync(DateTime begin, DateTime end)
+        {
+            return await GetAllListAsync(x => x.BeginTime > begin && x.BeginTime <= end);
+        }
+
         public async Task<List<WorkItem>> GetAllListAsync(int eNodebId, byte sectorId)
         {
             return await GetAllListAsync(x => x.ENodebId == eNodebId && x.SectorId == sectorId);

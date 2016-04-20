@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -81,6 +82,17 @@ namespace Lte.Evaluations.DataService
             var predict = (statCondition + '_' + typeCondition).GetWorkItemFilter();
             var counts = predict == null ? _repository.Count() : _repository.Count(predict);
             return counts;
+        }
+
+        public async Task<Tuple<int, int, int>> QueryTotalItemsThisMonth()
+        {
+            var lastMonthDate = DateTime.Today.Day < 26 ? DateTime.Today.AddMonths(-1) : DateTime.Today;
+            var begin = new DateTime(lastMonthDate.Year, lastMonthDate.Month, 26);
+            var end = begin.AddMonths(1);
+            var items = await _repository.GetAllListAsync(begin, end);
+            return new Tuple<int, int, int>(items.Count, items.Count(x => x.FinishTime != null),
+                items.Count(x => (x.Deadline < DateTime.Today && x.FinishTime == null) ||
+                (x.FinishTime != null && x.FinishTime > x.Deadline)));
         }
 
         public IEnumerable<WorkItemView> QueryViews(string statCondition, string typeCondition, int itemsPerPage,

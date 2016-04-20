@@ -81,4 +81,20 @@ namespace LtePlatform.Controllers.Kpi
             return _service.UpdateLteSectorIds();
         }
     }
+
+    public class WorkItemCurrentMonthController : ApiController
+    {
+        private readonly WorkItemService _service;
+
+        public WorkItemCurrentMonthController(WorkItemService service)
+        {
+            _service = service;
+        }
+
+        [HttpGet]
+        public async Task<Tuple<int, int, int>> Get()
+        {
+            return await _service.QueryTotalItemsThisMonth();
+        }
+    }
 }
