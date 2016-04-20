@@ -1,6 +1,6 @@
 ﻿<div ng-controller="home.workitem">
-    <p>本月工单数：</p>
-    <p>完成率：</p>
-    <p>完成及时率：</p>
+    <p>本月工单数：{{totalItems}}</p>
+    <p>完成率：{{finishedItems / totalItems * 100 | number: 2}}%</p>
+    <p>完成及时率：{{100 - lateItems / totalItems * 100 | number: 2}}%</p>
     <div id="workitemConfig"></div>
 </div>
