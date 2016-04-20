@@ -1,7 +1,4 @@
 <?php
-	error_reporting(0);
-	ob_start();
-	session_start();  //打开会话
 	$conn=mysql_connect("localhost","root","Abcdef9*"); //mysql主机,用户名,密码
 	if($conn==null)
 	{
