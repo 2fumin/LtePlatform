@@ -19,7 +19,7 @@ namespace Lte.Parameters.Concrete
 
         public async Task<List<WorkItem>> GetAllListAsync(DateTime begin, DateTime end)
         {
-            return await GetAllListAsync(x => x.BeginTime > begin && x.BeginTime <= end);
+            return await GetAllListAsync(x => x.Deadline > begin && x.Deadline <= end);
         }
 
         public async Task<List<WorkItem>> GetAllListAsync(int eNodebId, byte sectorId)

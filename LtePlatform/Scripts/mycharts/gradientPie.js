@@ -126,10 +126,7 @@ function GaugeMeter() {
     };
     self.series = [{
         name: 'Speed',
-        data: [80],
-        tooltip: {
-            valueSuffix: ' km/h'
-        }
+        data: [80]
     }];
     self.options = {
         chart: self.chart,

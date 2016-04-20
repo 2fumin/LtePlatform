@@ -2,5 +2,12 @@
     <p>本月工单数：{{totalItems}}</p>
     <p>完成率：{{finishedItems / totalItems * 100 | number: 2}}%</p>
     <p>完成及时率：{{100 - lateItems / totalItems * 100 | number: 2}}%</p>
-    <div id="workitemConfig"></div>
+    <div class="row">
+        <div class="col-md-6">
+            <div id="workitemFinished"></div>
+        </div>
+        <div class="col-md-6">
+            <div id="workitemInTime"></div>
+        </div>
+    </div>    
 </div>
