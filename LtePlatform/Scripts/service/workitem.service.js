@@ -92,6 +92,19 @@
                     deferred.reject(reason);
                 });
                 return deferred.promise;
+            },
+            queryCurrentMonth: function () {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('WorkItemCurrentMonth')
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
             }
         };
     });
