@@ -72,6 +72,7 @@
                     $scope.beginDate.value, $scope.endDate.value).then(function (stastic) {
                         var columnOptions = topPreciseService.getStrengthColumnOptions(result, stastic.mrCount,
                             $scope.currentCellName);
+                        $scope.topStat.columnOptions[$scope.currentCellName] = columnOptions;
                         $("#strength-over6db").highcharts(columnOptions.over6DbOption);
                         $("#strength-over10db").highcharts(columnOptions.over10DbOption);
                     });
@@ -122,11 +123,14 @@
         $scope.victimCells = $scope.topStat.victims[$scope.currentCellName];
         $scope.mongoNeighbors = $scope.topStat.mongoNeighbors[$scope.currentCellName];
         var newOptions = $scope.topStat.pieOptions[$scope.currentCellName];
+        var newColumnOptions = $scope.topStat.columnOptions[$scope.currentCellName];
         $timeout(function() {
             $("#interference-over6db").highcharts(newOptions.over6DbOption);
             $("#interference-over10db").highcharts(newOptions.over10DbOption);
             $("#interference-mod3").highcharts(newOptions.mod3Option);
             $("#interference-mod6").highcharts(newOptions.mod6Option);
+            $("#strength-over6db").highcharts(newColumnOptions.over6DbOption);
+            $("#strength-over10db").highcharts(newColumnOptions.over10DbOption);
         }, 1000);
     }
     networkElementService.queryCellInfo($routeParams.cellId, $routeParams.sectorId).then(function(info) {
