@@ -1,5 +1,20 @@
-﻿<div ng-controller="home.kpi2G">
+﻿<div ng-controller="home.kpi2G" ng-init="max = 5; isReadonly = true">
     <p>统计日期：{{statDate.value | date: "yyyy年MM月dd日"}}</p>
-    <p>掉话率：{{dropRate | number: 2}}%</p>
+    <p>
+        掉话率：{{dropRate | number: 2}}%
+        <div uib-rating aria-labelledby="default-rating" ng-model="dropStar" max="max" read-only="isReadonly"
+             uib-tooltip-template="'dropTooltipTemplate.html'" tooltip-class="customClass" tooltip-placement="bottom"></div>
+    </p>
     <p>连接成功率：{{connectionRate | number: 2}}%</p>
+    <script type="text/ng-template" id="dropTooltipTemplate.html">
+        <h6>掉话率星级定义</h6>
+        <ul>
+            <li><strong>5星：</strong>掉话率小于0.2%</li>
+            <li><strong>4星：</strong>掉话率小于0.3%且大于等于0.2%</li>
+            <li><strong>3星：</strong>掉话率小于0.35%且大于等于0.3%</li>
+            <li><strong>2星：</strong>掉话率小于0.4%且大于等于0.35%</li>
+            <li><strong>1星：</strong>掉话率小于0.5%且大于等于0.4%</li>
+            <li><strong>0星：</strong>掉话率大于等于0.5%</li>
+        </ul>
+    </script>
 </div>

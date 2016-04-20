@@ -9,6 +9,7 @@
         $scope.statDate.value = appFormatService.getDate(result.statDate);
         var stat = result.statViews[result.statViews.length - 1];
         $scope.dropRate = stat.drop2GRate * 100;
+        $scope.dropStar = appKpiService.calculateDropStar($scope.dropRate);
         $scope.connectionRate = stat.connectionRate * 100;
     });
 });

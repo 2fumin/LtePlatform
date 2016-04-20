@@ -78,6 +78,14 @@
                 else if (precise > 90) return 1;
                 else return 0;
             },
+            calculateDropStar: function (drop) {
+                if (drop < 0.2) return 5;
+                else if (drop < 0.3) return 4;
+                else if (drop < 0.35) return 3;
+                else if (drop < 0.4) return 2;
+                else if (drop < 0.5) return 1;
+                else return 0;
+            },
             getMrPieOptions: function (districtStats, townStats) {
                 var chart = new DrilldownPie();
                 chart.title.text = "分镇区测量报告数分布图";
