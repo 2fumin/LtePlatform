@@ -18,7 +18,7 @@ namespace LtePlatform.Areas.HelpPage
 {
     public static class HelpPageConfigurationExtensions
     {
-        private const string ApiModelPrefix = "";
+        private const string ApiModelPrefix = "MS_HelpPageApiModel_";
 
         /// <summary>
         /// Sets the documentation provider for help page.
