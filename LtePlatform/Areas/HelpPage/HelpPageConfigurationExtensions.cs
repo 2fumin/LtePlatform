@@ -18,7 +18,7 @@ namespace LtePlatform.Areas.HelpPage
 {
     public static class HelpPageConfigurationExtensions
     {
-        private const string ApiModelPrefix = "MS_HelpPageApiModel_";
+        private const string ApiModelPrefix = "";
 
         /// <summary>
         /// Sets the documentation provider for help page.
@@ -222,7 +222,8 @@ namespace LtePlatform.Areas.HelpPage
             var modelId = ApiModelPrefix + apiDescriptionId;
             if (config.Properties.TryGetValue(modelId, out model)) return (HelpPageApiModel) model;
             var apiDescriptions = config.Services.GetApiExplorer().ApiDescriptions;
-            var apiDescription = apiDescriptions.FirstOrDefault(api => string.Equals(api.GetFriendlyId(), apiDescriptionId, StringComparison.OrdinalIgnoreCase));
+            var apiDescription = apiDescriptions.FirstOrDefault(api =>
+                string.Equals(api.GetFriendlyId(), apiDescriptionId, StringComparison.OrdinalIgnoreCase));
             if (apiDescription == null) return null;
             model = GenerateApiModel(apiDescription, config);
             config.Properties.TryAdd(modelId, model);

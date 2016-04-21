@@ -69,9 +69,14 @@ namespace LtePlatform.Areas.HelpPage.Controllers
             return Json(model == null, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult ConfigProperties()
+        public JsonResult GetApiDescriptions()
         {
-            return Json(Configuration.Properties.Keys.Select(x=>x.ToString()), JsonRequestBehavior.AllowGet);
+            return Json(Configuration.Services.GetApiExplorer().ApiDescriptions.Select(x=> new 
+            {
+                x.Documentation,
+                Id = x.GetFriendlyId()
+            }), 
+                JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult ApiDetails(string apiId)
