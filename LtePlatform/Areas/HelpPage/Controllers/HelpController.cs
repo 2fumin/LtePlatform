@@ -63,6 +63,17 @@ namespace LtePlatform.Areas.HelpPage.Controllers
             return View();
         }
 
+        public JsonResult ModelEmpty(string apiId)
+        {
+            var model = Configuration.GetHelpPageApiModel(apiId);
+            return Json(model == null, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ConfigProperties()
+        {
+            return Json(Configuration.Properties.Keys.Select(x=>x.ToString()), JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult ApiDetails(string apiId)
         {
             return Json(Configuration.GetHelpPageApiModel(apiId)?.UriParameters.Select(des=>new

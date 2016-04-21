@@ -14,6 +14,7 @@
         finishedGauge.yAxis.plotBands[2].to = $scope.totalItems;
         finishedGauge.series[0].name = '完成工单数';
         finishedGauge.series[0].data[0] = $scope.finishedItems;
+        finishedGauge.yAxis.title.text = '工单数';
         inTimeGauge.title.text = '工单及时性';
         inTimeGauge.yAxis.max = $scope.totalItems;
         inTimeGauge.yAxis.plotBands[0].to = $scope.totalItems * 0.6;
@@ -23,6 +24,7 @@
         inTimeGauge.yAxis.plotBands[2].to = $scope.totalItems;
         inTimeGauge.series[0].name = '未超时工单数';
         inTimeGauge.series[0].data[0] = $scope.totalItems - $scope.lateItems;
+        inTimeGauge.yAxis.title.text = '工单数';
         $("#workitemFinished").highcharts(finishedGauge.options);
         $("#workitemInTime").highcharts(inTimeGauge.options);
     });
