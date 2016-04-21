@@ -4,8 +4,8 @@
             <th>被干扰小区名称</th>
             <th>模3干扰数</th>
             <th>模6干扰数</th>
-            <th>6dB干扰数</th>
-            <th>10dB干扰数</th>
+            <th>6dB干扰数/前后比</th>
+            <th>10dB干扰数/前后比</th>
             <th>总干扰水平</th>
         </tr>
     </thead>
@@ -14,8 +14,20 @@
             <td>{{cell.victimCellName}}</td>
             <td>{{cell.mod3Interferences | number:1}}</td>
             <td>{{cell.mod6Interferences | number:1}}</td>
-            <td>{{cell.overInterferences6Db | number:1}}</td>
-            <td>{{cell.overInterferences10Db | number:1}}</td>
+            <td>
+                {{cell.overInterferences6Db | number:1}}/
+                <span ng-show="!cell.forwardInterferences6Db">-</span>
+                <span ng-show="cell.forwardInterferences6Db">
+                    {{cell.forwardInterferences6Db/cell.overInterferences6Db | number: 2}}
+                </span>
+            </td>
+            <td>
+                {{cell.overInterferences10Db | number:1}}/
+                <span ng-show="!cell.forwardInterferences10Db">-</span>
+                <span ng-show="cell.forwardInterferences10Db">
+                    {{cell.forwardInterferences10Db/cell.overInterferences10Db | number: 2}}
+                </span>
+            </td>
             <td>{{cell.interferenceLevel | number:2}}</td>
         </tr>
     </tbody>

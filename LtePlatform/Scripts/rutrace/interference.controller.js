@@ -57,7 +57,17 @@
             $scope.interferenceCells = result;
             $scope.topStat.interference[$scope.currentCellName] = result;
             topPreciseService.queryInterferenceVictim($scope.beginDate.value, $scope.endDate.value,
-                $routeParams.cellId, $routeParams.sectorId).then(function(victims) {
+                $routeParams.cellId, $routeParams.sectorId).then(function (victims) {
+                    angular.forEach(victims, function (victim) {
+                        for (var j = 0; j < result.length; j++) {
+                            if (result[j].destENodebId === victim.victimENodebId
+                                && result[j].destSectorId === victim.victimSectorId) {
+                                victim.forwardInterferences6Db = result[j].overInterferences6Db;
+                                victim.forwardInterferences10Db = result[j].overInterferences10Db;
+                                break;
+                            }
+                        }
+                    });
                 $scope.victimCells = victims;
                 $scope.topStat.victims[$scope.currentCellName] = victims;
                 });
