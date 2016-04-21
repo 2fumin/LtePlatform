@@ -5,7 +5,8 @@
         value: yesterday,
         opened: false
     };
-    kpi2GService.queryDayStats($scope.city.selected, $scope.statDate.value).then(function (result) {
+    kpi2GService.queryDayStats($scope.city.selected || '佛山', $scope.statDate.value || new Date())
+        .then(function (result) {
         $scope.statDate.value = appFormatService.getDate(result.statDate);
         var stat = result.statViews[result.statViews.length - 1];
         $scope.dropRate = stat.drop2GRate * 100;
