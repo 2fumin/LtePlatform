@@ -45,7 +45,7 @@ namespace LtePlatform.Areas.HelpPage.Models
         /// <summary>
         /// Gets the request body parameter descriptions.
         /// </summary>
-        public IList<ParameterDescription> RequestBodyParameters => GetParameterDescriptions(RequestModelDescription);
+        public IList<ParameterDescription> RequestBodyParameters => RequestModelDescription.GetParameterDescriptions();
 
         /// <summary>
         /// Gets or sets the <see cref="ModelDescription"/> that describes the resource.
@@ -55,7 +55,7 @@ namespace LtePlatform.Areas.HelpPage.Models
         /// <summary>
         /// Gets the resource property descriptions.
         /// </summary>
-        public IList<ParameterDescription> ResourceProperties => GetParameterDescriptions(ResourceDescription);
+        public IList<ParameterDescription> ResourceProperties => ResourceDescription.GetParameterDescriptions();
 
         /// <summary>
         /// Gets the sample requests associated with the API.
@@ -71,19 +71,6 @@ namespace LtePlatform.Areas.HelpPage.Models
         /// Gets the error messages associated with this model.
         /// </summary>
         public Collection<string> ErrorMessages { get; private set; }
-
-        private static IList<ParameterDescription> GetParameterDescriptions(ModelDescription modelDescription)
-        {
-            var complexTypeModelDescription = modelDescription as ComplexTypeModelDescription;
-            if (complexTypeModelDescription != null)
-            {
-                return complexTypeModelDescription.Properties;
-            }
-
-            var collectionModelDescription = modelDescription as CollectionModelDescription;
-            if (collectionModelDescription == null) return null;
-            complexTypeModelDescription = collectionModelDescription.ElementDescription as ComplexTypeModelDescription;
-            return complexTypeModelDescription?.Properties;
-        }
+        
     }
 }

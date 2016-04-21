@@ -63,14 +63,18 @@ namespace LtePlatform.Areas.HelpPage.Controllers
             return View();
         }
 
-        public JsonResult ModelDoc(string apiId)
+        public JsonResult ApiActionDoc(string apiId)
         {
             var description = Configuration.Services.GetApiExplorer().ApiDescriptions
                 .FirstOrDefault(x => x.GetFriendlyId() == apiId);
-            return Json(new
+            return Json(description == null ? null : new
             {
                 description.Documentation,
-                description.ParameterDescriptions.Count,
+                ParameterDescriptions = description.ParameterDescriptions.Select(des => new 
+                {
+                    des.Documentation,
+                    des.Name
+                }),
                 description.RelativePath,
                 ResponseDoc = description.ResponseDescription.Documentation,
             },

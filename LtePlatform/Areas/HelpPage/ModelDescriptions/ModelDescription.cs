@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace LtePlatform.Areas.HelpPage.ModelDescriptions
 {
@@ -12,5 +13,7 @@ namespace LtePlatform.Areas.HelpPage.ModelDescriptions
         public Type ModelType { get; set; }
 
         public string Name { get; set; }
+
+        public abstract IList<ParameterDescription> GetParameterDescriptions();
     }
 }
