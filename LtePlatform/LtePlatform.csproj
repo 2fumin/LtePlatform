@@ -495,6 +495,7 @@
     <Content Include="appViews\Test\Help\ApiMethod.html" />
     <Content Include="appViews\Test\Simple\Add.html" />
     <Content Include="appViews\Test\Simple\Clock.html" />
+    <Content Include="appViews\Test\Simple\Index.html" />
     <Content Include="appViews\Test\Simple\Interpolate.html" />
     <Content Include="appViews\Test\Simple\Parse.html" />
     <Content Include="appViews\Test\Simple\SimpleType.html" />
@@ -535,6 +536,7 @@
     <Content Include="Areas\TestPage\Scripts\angular\demo.progress.js" />
     <Content Include="Areas\TestPage\Scripts\angular\demo.popover.js" />
     <Content Include="Areas\TestPage\Scripts\angular\demo.pager.js" />
+    <Content Include="Areas\TestPage\Scripts\qunit\route.js" />
     <Content Include="Content\themes\ui-bootstrap.css" />
     <Content Include="Scripts\angular-ui\uib\alert.js" />
     <Content Include="Areas\TestPage\Scripts\angular\chap10.viewmodel.js" />
