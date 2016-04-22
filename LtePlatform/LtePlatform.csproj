@@ -576,7 +576,6 @@
     <Content Include="Areas\TestPage\Scripts\main\stack.js" />
     <Content Include="Areas\TestPage\Scripts\main\test.js" />
     <Content Include="Areas\TestPage\Scripts\only.js" />
-    <Content Include="Areas\TestPage\Scripts\reporter-html.js" />
     <Content Include="Areas\TestPage\Scripts\setTimeout.js" />
     <Content Include="Areas\TestPage\Scripts\single-testid.js" />
     <Content Include="Areas\TestPage\Scripts\stack-errors.js" />
