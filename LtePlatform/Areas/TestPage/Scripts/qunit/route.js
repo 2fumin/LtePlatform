@@ -26,7 +26,7 @@
             title: "",
             introduction: ""
         };
-        $scope.menuItems = [
+        $rootScope.menuItems = [
         {
             displayName: "QUnit官网案例测试",
             isActive: true,
@@ -34,11 +34,11 @@
             {
                 displayName: "QUnit例子",
                 url: "/",
-                tooltip: "综合分析后台指标、MR、路测信令和小区跟踪数据，挖掘小区的重叠覆盖、过覆盖等问题，对精确覆盖的效果进行模拟，并在百度地图上呈现。"
+                tooltip: "使用QUNnit进行测试的代码。"
             }, {
                 displayName: "Main Test",
-                url: "/Main",
-                tooltip: "根据各小区的工程参数模拟覆盖范围，主要覆盖指标（RSRP、SINR）进行分析和呈现"
+                url: "/main",
+                tooltip: "测试主页"
             }, {
                 displayName: "Legacy Markup",
                 url: "/LegacyMarkup",
