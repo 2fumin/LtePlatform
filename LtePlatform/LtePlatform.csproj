@@ -537,6 +537,7 @@
     <Content Include="Areas\TestPage\Scripts\angular\demo.popover.js" />
     <Content Include="Areas\TestPage\Scripts\angular\demo.pager.js" />
     <Content Include="Areas\TestPage\Scripts\qunit\qunit.index.js" />
+    <Content Include="Areas\TestPage\Scripts\qunit\qunit.main.js" />
     <Content Include="Areas\TestPage\Scripts\qunit\route.js" />
     <Content Include="Content\themes\ui-bootstrap.css" />
     <Content Include="Scripts\angular-ui\uib\alert.js" />
@@ -926,7 +927,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Areas\TestPage\Views\QUnitTest\AutoStart.cshtml" />
     <Content Include="Areas\TestPage\Views\QUnitTest\Headless.cshtml" />
-    <Content Include="Areas\TestPage\Views\QUnitTest\Main.cshtml" />
+    <Content Include="appViews\Test\Simple\Main.html" />
     <Content Include="Areas\TestPage\Views\QUnitTest\Logs.cshtml" />
     <Content Include="Areas\TestPage\Views\CoffeeScript\Hotseat.cshtml" />
     <Content Include="Areas\TestPage\Scripts\5ch5\Dictionary.coffee">

@@ -6,9 +6,9 @@
                     templateUrl: viewDir + "Index.html",
                     controller: "qunit.index"
                 })
-                .when('/method/:name', {
-                    templateUrl: viewDir + "ApiMethod.html",
-                    controller: "api.method"
+                .when('/main', {
+                    templateUrl: viewDir + "Main.html",
+                    controller: "qunit.main"
                 })
                 .when('/api/:apiId/:method', {
                     templateUrl: viewDir + "Api.html",
@@ -20,7 +20,7 @@
         }
     ])
     .run(function($rootScope) {
-        var rootUrl = "/TestPage/QUintTest/Help#";
+        var rootUrl = "/TestPage/QUnitTest#";
         $rootScope.rootPath = rootUrl + "/";
         $rootScope.page = {
             title: "",
@@ -33,11 +33,11 @@
             subItems: [
             {
                 displayName: "QUnit例子",
-                url: "/",
+                url: rootUrl + "/",
                 tooltip: "使用QUNnit进行测试的代码。"
             }, {
-                displayName: "Main Test",
-                url: "/main",
+                displayName: "QUnit主测试界面",
+                url:  rootUrl + "/main",
                 tooltip: "测试主页"
             }, {
                 displayName: "Legacy Markup",
