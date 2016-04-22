@@ -1,2 +1,16 @@
 <a class="btn btn-default" ng-href="{{rootPath}}">返回总表</a>
 <a class="btn btn-default" ng-href="{{rootPath}}method/{{method}}">返回{{method}}</a>
+<table class="help-page-table">
+    <thead>
+        <tr>
+            <th>Parameter Name</th>
+            <th>Parameter Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="parameter in parameters">
+            <td>{{parameter.Name}}</td>
+            <td>{{parameter.Documentation}}</td>
+        </tr>
+    </tbody>
+</table>
