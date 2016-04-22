@@ -10,9 +10,9 @@
                     templateUrl: viewDir + "Main.html",
                     controller: "qunit.main"
                 })
-                .when('/api/:apiId/:method', {
-                    templateUrl: viewDir + "Api.html",
-                    controller: "api.details"
+                .when('/legacy', {
+                    templateUrl: viewDir + "LegacyMarkup.html",
+                    controller: "legacy.markup"
                 })
                 .otherwise({
                     redirectTo: '/'
@@ -41,8 +41,7 @@
                 tooltip: "测试主页"
             }, {
                 displayName: "Legacy Markup",
-                url: "/LegacyMarkup",
-                tooltip: "按照区域或专题查看已导入的DT基础信息"
+                url: rootUrl + "/legacy"
             }, {
                 displayName: "No QUnit Markup",
                 url: "/NoQUnitMarkup"

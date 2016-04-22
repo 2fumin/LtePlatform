@@ -536,6 +536,7 @@
     <Content Include="Areas\TestPage\Scripts\angular\demo.progress.js" />
     <Content Include="Areas\TestPage\Scripts\angular\demo.popover.js" />
     <Content Include="Areas\TestPage\Scripts\angular\demo.pager.js" />
+    <Content Include="Areas\TestPage\Scripts\qunit\legacy.markup.js" />
     <Content Include="Areas\TestPage\Scripts\qunit\qunit.index.js" />
     <Content Include="Areas\TestPage\Scripts\qunit\qunit.main.js" />
     <Content Include="Areas\TestPage\Scripts\qunit\route.js" />
@@ -916,7 +917,7 @@
     <Content Include="Areas\TestPage\Views\web.config" />
     <Content Include="Areas\TestPage\Views\_ViewStart.cshtml" />
     <Content Include="Areas\TestPage\Views\QUnitTest\Index.cshtml" />
-    <Content Include="Areas\TestPage\Views\QUnitTest\LegacyMarkup.cshtml" />
+    <Content Include="appViews\Test\Simple\LegacyMarkup.html" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
