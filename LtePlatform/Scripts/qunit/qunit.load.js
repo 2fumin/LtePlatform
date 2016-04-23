@@ -8,7 +8,48 @@
 
 	// Deprecated QUnit.init - Ref #530
 	// Re-initialize the configuration options
-	QUnit.init = function () {
+	var defined = {
+		document: window.document !== undefined,
+		sessionStorage: (function () {
+			var x = "qunit-test-string";
+			try {
+				sessionStorage.setItem(x, x);
+				sessionStorage.removeItem(x);
+				return true;
+			} catch (e) {
+				return false;
+			}
+		}())
+	};
+
+    function id(name) {
+        return defined.document && document.getElementById && document.getElementById(name);
+    }
+
+    function escapeText(s) {
+        if (!s) {
+            return "";
+        }
+        s = s + "";
+
+        // Both single quotes and double quotes (for attributes)
+        return s.replace(/['"<>&]/g, function (s) {
+            switch (s) {
+            case "'":
+                return "&#039;";
+            case "\"":
+                return "&quot;";
+            case "<":
+                return "&lt;";
+            case ">":
+                return "&gt;";
+            case "&":
+                return "&amp;";
+            }
+        });
+    }
+
+    QUnit.init = function () {
 		var result,
             config = QUnit.config;
 
@@ -61,53 +102,16 @@
 			tests.parentNode.insertBefore(result, tests);
 			result.innerHTML = "Running...<br />&#160;";
 		}
-	};
+    };
 
-	var config = QUnit.config,
+    var config = QUnit.config,
         collapseNext = false,
         hasOwn = Object.prototype.hasOwnProperty,
-        defined = {
-        	document: window.document !== undefined,
-        	sessionStorage: (function () {
-        		var x = "qunit-test-string";
-        		try {
-        			sessionStorage.setItem(x, x);
-        			sessionStorage.removeItem(x);
-        			return true;
-        		} catch (e) {
-        			return false;
-        		}
-        	}())
-        },
         modulesList = [];
 
 	/**
 	* Escape text for attribute or text content.
-	*/
-	function escapeText(s) {
-		if (!s) {
-			return "";
-		}
-		s = s + "";
-
-		// Both single quotes and double quotes (for attributes)
-		return s.replace(/['"<>&]/g, function (s) {
-			switch (s) {
-				case "'":
-					return "&#039;";
-				case "\"":
-					return "&quot;";
-				case "<":
-					return "&lt;";
-				case ">":
-					return "&gt;";
-				case "&":
-					return "&amp;";
-			}
-		});
-	}
-
-	/**
+	*/ /**
 	 * @param {HTMLElement} elem
 	 * @param {string} type
 	 * @param {Function} fn
@@ -173,11 +177,7 @@
 		}
 	}
 
-    function id(name) {
-		return defined.document && document.getElementById && document.getElementById(name);
-	}
-
-	function getUrlConfigHtml() {
+    function getUrlConfigHtml() {
 		var i,
             j,
             val,
@@ -411,6 +411,7 @@
 		addEvent(moduleFilter.lastChild, "change", applyUrlParams);
 
 		toolbar.appendChild(moduleFilter);
+	    return false;
 	}
 
 	function appendToolbar() {
@@ -489,7 +490,46 @@
 		}
 	}
 
-	function appendTestsList(modules) {
+    function getNameHtml(name, module) {
+        var nameHtml = "";
+
+        if (module) {
+            nameHtml = "<span class='module-name'>" + escapeText(module) + "</span>: ";
+        }
+
+        nameHtml += "<span class='test-name'>" + escapeText(name) + "</span>";
+
+        return nameHtml;
+    }
+
+    function appendTest(name, testId, moduleName) {
+        var tests = id("qunit-tests");
+
+        if (!tests) {
+            return;
+        }
+
+        var title = document.createElement("strong");
+        title.innerHTML = getNameHtml(name, moduleName);
+
+        var rerunTrigger = document.createElement("a");
+        rerunTrigger.innerHTML = "Rerun";
+        rerunTrigger.href = setUrl({ testId: testId });
+
+        var testBlock = document.createElement("li");
+        testBlock.appendChild(title);
+        testBlock.appendChild(rerunTrigger);
+        testBlock.id = "qunit-test-output-" + testId;
+
+        var assertList = document.createElement("ol");
+        assertList.className = "qunit-assert-list";
+
+        testBlock.appendChild(assertList);
+
+        tests.appendChild(testBlock);
+    }
+
+    function appendTestsList(modules) {
 		var i, l, x, z, test, moduleObj;
 
 		for (i = 0, l = modules.length; i < l; i++) {
@@ -505,36 +545,8 @@
 				appendTest(test.name, test.testId, moduleObj.name);
 			}
 		}
-	}
+    } // HTML Reporter initialization and load
 
-	function appendTest(name, testId, moduleName) {
-		var tests = id("qunit-tests");
-
-		if (!tests) {
-			return;
-		}
-
-		var title = document.createElement("strong");
-		title.innerHTML = getNameHtml(name, moduleName);
-
-		var rerunTrigger = document.createElement("a");
-		rerunTrigger.innerHTML = "Rerun";
-		rerunTrigger.href = setUrl({ testId: testId });
-
-		var testBlock = document.createElement("li");
-		testBlock.appendChild(title);
-		testBlock.appendChild(rerunTrigger);
-		testBlock.id = "qunit-test-output-" + testId;
-
-		var assertList = document.createElement("ol");
-		assertList.className = "qunit-assert-list";
-
-		testBlock.appendChild(assertList);
-
-		tests.appendChild(testBlock);
-	}
-
-	// HTML Reporter initialization and load
 	QUnit.begin(function (details) {
 		var qunit = id("qunit");
 
@@ -615,20 +627,7 @@
 			window.scrollTo(0, 0);
 		}
 	});
-
-	function getNameHtml(name, module) {
-		var nameHtml = "";
-
-		if (module) {
-			nameHtml = "<span class='module-name'>" + escapeText(module) + "</span>: ";
-		}
-
-		nameHtml += "<span class='test-name'>" + escapeText(name) + "</span>";
-
-		return nameHtml;
-	}
-
-	QUnit.testStart(function (details) {
+    QUnit.testStart(function (details) {
 		var bad;
 
 		var testBlock = id("qunit-test-output-" + details.testId);
