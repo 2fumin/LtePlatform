@@ -540,6 +540,7 @@
     <Content Include="Areas\TestPage\Scripts\qunit\qunit.index.js" />
     <Content Include="Areas\TestPage\Scripts\qunit\qunit.main.js" />
     <Content Include="Areas\TestPage\Scripts\qunit\route.js" />
+    <Content Include="Content\themes\qunit.css" />
     <Content Include="Content\themes\ui-bootstrap.css" />
     <Content Include="Scripts\angular-ui\uib\alert.js" />
     <Content Include="Areas\TestPage\Scripts\angular\chap10.viewmodel.js" />
@@ -623,7 +624,6 @@
     <Content Include="Content\Images\TimeControl\time-btn-pause.png" />
     <Content Include="Content\Images\TimeControl\time-btn-play.png" />
     <Content Include="Content\Images\TimeControl\time-progress.png" />
-    <Content Include="Content\qunit-1.20.0.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
