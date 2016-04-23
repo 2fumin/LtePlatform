@@ -815,6 +815,7 @@
     <Content Include="Scripts\parameters\neighbor\import.controller.js" />
     <Content Include="Scripts\parameters\menu.root.js" />
     <Content Include="Scripts\parameters\route.controller.js" />
+    <Content Include="Scripts\qunit\qunit-1.20.0.js" />
     <Content Include="Scripts\rutrace\cell.trend.js" />
     <Content Include="Scripts\rutrace\dump\cell.mongo.js" />
     <Content Include="Scripts\rutrace\index.controller.js" />
@@ -882,7 +883,6 @@
     <Content Include="Scripts\app\html5csv.js" />
     <Content Include="Scripts\app\lz-string.js" />
     <Content Include="Scripts\app\lz-string.min.js" />
-    <Content Include="Scripts\app\qunit-1.20.0.js" />
     <Content Include="Scripts\baidu\cloud\geography.map.js" />
     <Content Include="Scripts\baidu\cloud\page.js" />
     <Content Include="Scripts\baidu\cloud\timecontrol.js" />
@@ -1152,6 +1152,7 @@
     <Content Include="Views\Evaluation\RegionDef.cshtml" />
     <Content Include="Views\College\Map.cshtml" />
     <Content Include="Views\Kpi\Index.cshtml" />
+    <Content Include="Scripts\qunit\qunit.load.js" />
     <None Include="Views\Parameters\List.cshtml" />
     <Content Include="Views\Dt\List.cshtml" />
     <Content Include="Views\Kpi\WorkItem.cshtml" />
