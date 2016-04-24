@@ -117,6 +117,10 @@ namespace LtePlatform
 
             ninjectKernel.Bind<ICellStasticRepository>().To<CellStasticRepository>();
 
+            ninjectKernel.Bind<IPDSCHCfgRepository>().To<PDSCHCfgRepository>();
+
+            ninjectKernel.Bind<ICellDlpcPdschPaRepository>().To<CellDlpcPdschPaRepository>();
+
             ninjectKernel.Bind<CdmaRegionStatService>().ToSelf();
 
             ninjectKernel.Bind<CollegeStatService>().ToSelf();

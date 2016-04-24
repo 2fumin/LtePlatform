@@ -137,6 +137,8 @@
     <Compile Include="Concrete\Basic\CellHuaweiMongoRepository.cs" />
     <Compile Include="Concrete\Basic\EUtranCellFDDZteRepository.cs" />
     <Compile Include="Concrete\Basic\PrachFDDZteRepository.cs" />
+    <Compile Include="Concrete\Channel\CellDlpcPdschPaRepository.cs" />
+    <Compile Include="Concrete\Channel\PDSCHCfgRepository.cs" />
     <Compile Include="Concrete\Channel\PowerControlDLZteRepository.cs" />
     <Compile Include="Concrete\EFAlarmRepository.cs" />
     <Compile Include="Concrete\Basic\EFBtsRepository.cs" />
@@ -174,6 +176,8 @@
     <Compile Include="Concrete\Switch\EUtranCellMeasurementZteRepository.cs" />
     <Compile Include="Entities\Basic\EUtranCellFDDZte.cs" />
     <Compile Include="Entities\Basic\PrachFDDZte.cs" />
+    <Compile Include="Entities\Channel\CellDlpcPdschPa.cs" />
+    <Compile Include="Entities\Channel\PDSCHCfg.cs" />
     <Compile Include="Entities\Channel\PowerControlDLZte.cs" />
     <Compile Include="Entities\Mr\CellStastic.cs" />
     <Compile Include="Entities\Neighbor\ExternalEUtranCellFDDZte.cs" />
