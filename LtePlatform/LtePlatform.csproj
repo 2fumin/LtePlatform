@@ -408,6 +408,7 @@
     <Content Include="appViews\College\CollegeMenuType.html" />
     <Content Include="appViews\College\Infrastructure\BtsDialog.html" />
     <Content Include="appViews\College\Infrastructure\CdmaCellDialog.html" />
+    <Content Include="appViews\College\Infrastructure\CollegeQuery.html" />
     <Content Include="appViews\College\Infrastructure\ENodebDialog.html" />
     <Content Include="appViews\College\Infrastructure\LteCellDialog.html" />
     <Content Include="appViews\College\Table\CdmaCellBasicInfo.html" />
@@ -769,6 +770,7 @@
     <Content Include="Scripts\college\query\cell.dialog.js" />
     <Content Include="Scripts\college\query\eNodeb.dialog.js" />
     <Content Include="Scripts\college\query\lte.distribution.dialog.js" />
+    <Content Include="Scripts\college\query\query.name.js" />
     <Content Include="Scripts\college\route.controller.js" />
     <Content Include="Scripts\kpi\basic\index.controller.js" />
     <Content Include="Scripts\kpi\basic\route.controller.js" />

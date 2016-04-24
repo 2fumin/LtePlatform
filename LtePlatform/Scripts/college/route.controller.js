@@ -49,6 +49,22 @@
                     }
                 },
                 url: "/query"
+            }).state('collegeQuery', {
+                views: {
+                    'menu': {
+                        templateUrl: "/appViews/GeneralMenu.html",
+                        controller: "menu.root"
+                    },
+                    "contents": {
+                        templateUrl: viewDir + "/Infrastructure/CollegeQuery.html",
+                        controller: "query.name"
+                    },
+                    'collegeList': {
+                        templateUrl: viewDir + "CollegeMenu.html",
+                        controller: "college.menu"
+                    }
+                },
+                url: "/query/:name"
             });
         $urlRouterProvider.otherwise('/');
     })
