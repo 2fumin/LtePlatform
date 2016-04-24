@@ -1,0 +1,15 @@
+﻿<h4 class="text-primary">系统主要功率参数</h4>
+<table class="table table-hover">
+    <tbody>
+        <tr>
+            <td>参考信号功率</td>
+            <td>{{cellPower.rsPower | number: 2}}dB</td>
+            <td>Pb</td>
+            <td>{{cellPower.pb}}</td>
+        </tr>
+        <tr>
+            <td>PDSCH的Pa</td>
+            <td>{{cellPower.pa | halfDb}}dB</td>
+        </tr>
+    </tbody>
+</table>
