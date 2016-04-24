@@ -69,5 +69,7 @@ namespace Lte.Parameters.Entities.Channel
         public string pdcchF2APwrOfst { get; set; }
 
         public int paForDCCH { get; set; }
+
+        public int csiRSPwrOfst { get; set; }
     }
 }
