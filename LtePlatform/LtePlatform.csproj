@@ -332,6 +332,7 @@
     <Compile Include="Controllers\Kpi\WorkItemController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\Mongo\CellHuaweiMongoController.cs" />
+    <Compile Include="Controllers\Mongo\CellPowerController.cs" />
     <Compile Include="Controllers\Mongo\InterFreqHoController.cs" />
     <Compile Include="Controllers\Mongo\IntraFreqHoController.cs" />
     <Compile Include="Controllers\Mongo\NeighborCellMongoController.cs" />

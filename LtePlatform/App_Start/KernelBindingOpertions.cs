@@ -206,6 +206,8 @@ namespace LtePlatform
             ninjectKernel.Bind<NeighborCellMongoService>().ToSelf();
 
             ninjectKernel.Bind<CellStasticService>().ToSelf();
+
+            ninjectKernel.Bind<CellPowerService>().ToSelf();
         }
     }
 }

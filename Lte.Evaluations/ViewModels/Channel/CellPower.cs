@@ -28,5 +28,13 @@ namespace Lte.Evaluations.ViewModels.Channel
             Pb = cellFdd.pb;
             Pa = pcDl.paForDTCH;
         }
+
+        public CellPower(PDSCHCfg cfg, CellDlpcPdschPa paCfg)
+        {
+            ENodebId = cfg.eNodeB_Id;
+            RsPower = cfg.ReferenceSignalPwr*0.1;
+            Pb = cfg.Pb;
+            Pa = paCfg.PaPcOff;
+        }
     }
 }
