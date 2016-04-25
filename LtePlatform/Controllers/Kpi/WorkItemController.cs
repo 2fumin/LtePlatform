@@ -14,6 +14,7 @@ using LtePlatform.Models;
 namespace LtePlatform.Controllers.Kpi
 {
     [ApiControl("工单查询控制器")]
+    [Authorize]
     public class WorkItemController : ApiController
     {
         private readonly WorkItemService _service;
@@ -36,6 +37,7 @@ namespace LtePlatform.Controllers.Kpi
         [ApiParameterDoc("statCondition", "工单状态条件")]
         [ApiParameterDoc("typeCondition", "工单类型条件")]
         [ApiResponse("总的数量")]
+        [AllowAnonymous]
         public int Get(string statCondition, string typeCondition)
         {
             return _service.QueryTotalItems(statCondition, typeCondition);

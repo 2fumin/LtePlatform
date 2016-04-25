@@ -11,6 +11,9 @@
                         'typeCondition': type,
                         'itemsPerPage': itemsPerPage,
                         'page': page
+                    },
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
                     }
                 }).success(function (result) {
                     deferred.resolve(result);
@@ -28,6 +31,9 @@
                     params: {
                         'statCondition': state,
                         'typeCondition': type
+                    },
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
                     }
                 }).success(function (result) {
                     deferred.resolve(result);
@@ -62,11 +68,16 @@
             },
             feedback: function (message, serialNumber) {
                 var deferred = $q.defer();
-                $http.post(appUrlService.getApiUrl('WorkItem'), {
+                $http({
+                    method: 'POST',
+                    url: appUrlService.getApiUrl('WorkItem'),
+                    data: {
                         message: message,
                         serialNumber: serialNumber
-                    }).success(function (result) {
-                    deferred.resolve(result);
+                    },
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                    }
                 })
                 .error(function (reason) {
                     deferred.reject(reason);
