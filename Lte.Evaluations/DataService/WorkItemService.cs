@@ -30,9 +30,10 @@ namespace Lte.Evaluations.DataService
             _cellRepository = cellRepository;
         }
 
-        public List<WorkItem> QueryAllList()
+        public WorkItemView Query(string serialNumber)
         {
-            return _repository.GetAllList();
+            var item = _repository.GetAll().FirstOrDefault(x => x.SerialNumber == serialNumber);
+            return Mapper.Map<WorkItem, WorkItemView>(item);
         }
 
         public int UpdateLteSectorIds()

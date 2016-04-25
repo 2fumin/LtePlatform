@@ -75,6 +75,13 @@ namespace LtePlatform.Controllers.Kpi
             return await _service.QueryViews(eNodebId, sectorId);
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public WorkItemView Get(string serialNumber)
+        {
+            return _service.Query(serialNumber);
+        }
+
         [HttpPut]
         [ApiDoc("更新LTE扇区编号")]
         [ApiResponse("更新扇区编号数")]
