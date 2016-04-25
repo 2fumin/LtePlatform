@@ -60,6 +60,19 @@
                 });
                 return deferred.promise;
             },
+            feedback: function (message, serialNumber) {
+                var deferred = $q.defer();
+                $http.post(appUrlService.getApiUrl('WorkItem'), {
+                        message: message,
+                        serialNumber: serialNumber
+                    }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
+            },
             queryByENodebId: function (eNodebId) {
                 var deferred = $q.defer();
                 $http({

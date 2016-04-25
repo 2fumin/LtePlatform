@@ -81,6 +81,7 @@ namespace LtePlatform.Controllers.Kpi
             return _service.UpdateLteSectorIds();
         }
 
+        [HttpPost]
         public void Post(WorkItemFeedbackView view)
         {
             _service.FeedBack(User.Identity.Name, view.Message, view.SerialNumber);

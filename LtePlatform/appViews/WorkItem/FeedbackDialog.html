@@ -1,0 +1,46 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
+    <h4 class="modal-title">{{dialogTitle}}</h4>
+</div>
+<div class="modal-body form-horizontal">
+    <div class="form-group">
+        <label class="col-sm-3 control-label">区域</label>
+        <div class="col-sm-9">
+            <span class="form-control">{{item.district}}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">类型</label>
+        <div class="col-sm-9">
+            <span class="form-control">{{item.workItemType}}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">子类型</label>
+        <div class="col-sm-9">
+            <span class="form-control">{{item.workItemSubType}}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">状态</label>
+        <div class="col-sm-9">
+            <span class="form-control">{{item.workItemState}}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">时限</label>
+        <div class="col-sm-9">
+            <span class="form-control">{{item.deadline}}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">反馈信息</label>
+        <div class="col-sm-9">
+            <textarea rows="5" class="form-control" ng-model="message"></textarea>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-warning" ng-click="ok()">保存信息</button>
+    <button class="btn btn-default" type="button" ng-click="cancel()">放弃保存</button>
+</div>
