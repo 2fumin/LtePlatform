@@ -96,4 +96,12 @@ namespace Lte.Evaluations.ViewModels
             }
         }
     }
+
+    public class WorkItemFeedbackView
+    {
+        [MemberDoc("工单编号")]
+        public string SerialNumber { get; set; }
+
+        public string Message { get; set; }
+    }
 }

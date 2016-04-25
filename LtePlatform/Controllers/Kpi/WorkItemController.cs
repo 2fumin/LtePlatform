@@ -80,6 +80,11 @@ namespace LtePlatform.Controllers.Kpi
         {
             return _service.UpdateLteSectorIds();
         }
+
+        public void Post(WorkItemFeedbackView view)
+        {
+            _service.FeedBack(User.Identity.Name, view.Message, view.SerialNumber);
+        }
     }
 
     public class WorkItemCurrentMonthController : ApiController

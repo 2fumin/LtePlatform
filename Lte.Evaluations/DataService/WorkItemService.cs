@@ -129,5 +129,17 @@ namespace Lte.Evaluations.DataService
             views.ForEach(x => x.UpdateTown(_eNodebRepository, _btsRepository, _townRepository));
             return views;
         }
+
+        public void FeedBack(string userName, string message, string serialNumber)
+        {
+            var item = _repository.GetAll().FirstOrDefault(x => x.SerialNumber == serialNumber);
+            if (item != null)
+            {
+                var now = DateTime.Now;
+                item.FeedbackContents += "[" + now + "]" + userName + ":" + message;
+                item.FeedbackTime = now;
+                _repository.Update(item);
+            }
+        }
     }
 }
