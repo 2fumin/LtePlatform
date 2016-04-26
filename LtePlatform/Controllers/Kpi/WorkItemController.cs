@@ -83,6 +83,7 @@ namespace LtePlatform.Controllers.Kpi
         }
 
         [HttpPut]
+        [AllowAnonymous]
         [ApiDoc("更新LTE扇区编号")]
         [ApiResponse("更新扇区编号数")]
         public int Put()
