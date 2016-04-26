@@ -114,6 +114,34 @@
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
             });
+        },
+        calculatePlatformInfo: function (comments) {
+            var platformInfos = [];
+            var fields = comments.split('[');
+            if (fields.length > 1) {
+                for (var j = 1; j < fields.length; j++) {
+                    var subFields = fields[j].split(']');
+                    platformInfos.push({
+                        time: subFields[0],
+                        contents: subFields[1]
+                    });
+                }
+            }
+            return platformInfos;
+        },
+        calculateFeedbackInfo: function (comments) {
+            var feedbackInfos = [];
+            var fields = comments.split('[');
+            if (fields.length > 1) {
+                for (var j = 1; j < fields.length; j++) {
+                    var subFields = fields[j].split(']');
+                    feedbackInfos.push({
+                        time: subFields[0],
+                        contents: subFields[1]
+                    });
+                }
+            }
+            return feedbackInfos;
         }
     };
 });
