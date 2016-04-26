@@ -1,4 +1,5 @@
 ﻿using System;
+using Abp.EntityFramework.AutoMapper;
 using Lte.Domain.Regular.Attributes;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Abstract.Basic;
@@ -103,5 +104,24 @@ namespace Lte.Evaluations.ViewModels
         public string SerialNumber { get; set; }
 
         public string Message { get; set; }
+    }
+
+    [AutoMapFrom(typeof(WorkItemView))]
+    public class WorkItemChartView
+    {
+        [MemberDoc("工单类型")]
+        public string WorkItemType { get; set; }
+
+        [MemberDoc("工单子类型")]
+        public string WorkItemSubType { get; set; }
+
+        [MemberDoc("区域")]
+        public string District { get; set; }
+
+        [MemberDoc("镇区")]
+        public string Town { get; set; }
+
+        [MemberDoc("工单状态")]
+        public string WorkItemState { get; set; }
     }
 }

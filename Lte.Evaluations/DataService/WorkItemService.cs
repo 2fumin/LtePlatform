@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Abp.EntityFramework.AutoMapper;
 using AutoMapper;
 using Lte.Domain.LinqToExcel;
 using Lte.Evaluations.Policy;
@@ -126,11 +127,11 @@ namespace Lte.Evaluations.DataService
             return views;
         }
 
-        public IEnumerable<WorkItemView> QueryViews()
+        public IEnumerable<WorkItemChartView> QueryViews()
         {
             var views = Mapper.Map<List<WorkItem>, List<WorkItemView>>(_repository.GetAllList());
             views.ForEach(x => x.UpdateTown(_eNodebRepository, _btsRepository, _townRepository));
-            return views;
+            return views.MapTo<IEnumerable<WorkItemChartView>>();
         }
 
         public void FeedBack(string userName, string message, string serialNumber)

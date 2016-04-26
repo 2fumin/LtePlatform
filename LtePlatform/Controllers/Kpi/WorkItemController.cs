@@ -27,7 +27,7 @@ namespace LtePlatform.Controllers.Kpi
         [HttpGet]
         [ApiDoc("查询所有工单列表")]
         [ApiResponse("所有工单列表")]
-        public IEnumerable<WorkItemView> Get()
+        public IEnumerable<WorkItemChartView> Get()
         {
             return _service.QueryViews();
         }

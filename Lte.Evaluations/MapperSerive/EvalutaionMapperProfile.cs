@@ -61,6 +61,7 @@ namespace Lte.Evaluations.MapperSerive
             AutoMapperHelper.CreateMap(typeof(CdmaRegionStat));
             AutoMapperHelper.CreateMap(typeof(InterferenceMatrixStat));
             AutoMapperHelper.CreateMap(typeof (DistrictPreciseView));
+            AutoMapperHelper.CreateMap(typeof(WorkItemChartView));
         }
     }
 }
