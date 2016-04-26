@@ -1,4 +1,4 @@
-﻿app.controller("kpi.workitem", function ($scope, $uibModal, $log, workitemService) {
+﻿app.controller("kpi.workitem", function ($scope, workitemService, workItemDialog) {
     $scope.page.title = "工单总览";
     
     $scope.updateWorkItemTable = function() {
@@ -27,28 +27,7 @@
     };
 
     $scope.feedback = function(view) {
-        var modalInstance = $uibModal.open({
-            animation: true,
-            templateUrl: '/appViews/WorkItem/FeedbackDialog.html',
-            controller: 'workitem.feedback.dialog',
-            size: 'lg',
-            resolve: {
-                dialogTitle: function () {
-                    return view.serialNumber + "工单反馈";
-                },
-                input: function () {
-                    return view;
-                }
-            }
-        });
-
-        modalInstance.result.then(function (output) {
-            workitemService.feedback(output, view.serialNumber).then(function() {
-                $scope.query();
-            });
-        }, function () {
-            $log.info('Modal dismissed at: ' + new Date());
-        });
+        workItemDialog.feedback(view, $scope.query);
     };
 
     if ($scope.viewData.items.length === 0) {
@@ -56,18 +35,4 @@
     } else {
         $scope.viewItems = $scope.viewData.items;
     }
-});
-
-app.controller('workitem.feedback.dialog', function ($scope, $uibModalInstance, input, dialogTitle) {
-    $scope.item = input;
-    $scope.dialogTitle = dialogTitle;
-    $scope.message = "";
-
-    $scope.ok = function () {
-        $uibModalInstance.close($scope.message);
-    };
-
-    $scope.cancel = function () {
-        $uibModalInstance.dismiss('cancel');
-    };
 });
