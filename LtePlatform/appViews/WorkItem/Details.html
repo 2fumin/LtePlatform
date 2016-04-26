@@ -111,7 +111,11 @@
                 </tr>
                 <tr>
                     <td>反馈信息</td>
-                    <td>{{currentView.feedbackContents}}</td>
+                    <td></td>
+                </tr>
+                <tr ng-repeat="info in feedbackInfos">
+                    <td>{{info.time}}</td>
+                    <td>{{info.contents}}</td>
                 </tr>
             </tbody>
         </table>
