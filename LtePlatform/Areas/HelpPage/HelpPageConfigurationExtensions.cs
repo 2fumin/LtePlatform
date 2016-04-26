@@ -240,7 +240,7 @@ namespace LtePlatform.Areas.HelpPage
 
             var modelGenerator = config.GetModelDescriptionGenerator();
             var sampleGenerator = config.GetHelpPageSampleGenerator();
-            GenerateUriParameters(apiModel, modelGenerator);
+            apiModel.UriParameters = apiModel.ApiDescription.GenerateUriParameters(modelGenerator);
             GenerateRequestModelDescription(apiModel, modelGenerator, sampleGenerator);
             GenerateResourceDescription(apiModel, modelGenerator);
             GenerateSamples(apiModel, sampleGenerator);
@@ -248,9 +248,11 @@ namespace LtePlatform.Areas.HelpPage
             return apiModel;
         }
 
-        private static void GenerateUriParameters(HelpPageApiModel apiModel, ModelDescriptionGenerator modelGenerator)
+        public static Collection<ParameterDescription> GenerateUriParameters(
+            this ApiDescription apiDescription,
+            ModelDescriptionGenerator modelGenerator)
         {
-            var apiDescription = apiModel.ApiDescription;
+            var uriParameters = new Collection<ParameterDescription>();
             foreach (var apiParameter in apiDescription.ParameterDescriptions)
             {
                 if (apiParameter.Source != ApiParameterSource.FromUri) continue;
@@ -264,39 +266,20 @@ namespace LtePlatform.Areas.HelpPage
                     typeDescription = modelGenerator.GetOrCreateModelDescription(parameterType);
                     complexTypeDescription = typeDescription as ComplexTypeModelDescription;
                 }
-
-                // Example:
-                // [TypeConverter(typeof(PointConverter))]
-                // public class Point
-                // {
-                //     public Point(int x, int y)
-                //     {
-                //         X = x;
-                //         Y = y;
-                //     }
-                //     public int X { get; set; }
-                //     public int Y { get; set; }
-                // }
-                // Class Point is bindable with a TypeConverter, so Point will be added to UriParameters collection.
-                // 
-                // public class Point
-                // {
-                //     public int X { get; set; }
-                //     public int Y { get; set; }
-                // }
+                
                 // Regular complex class Point will have properties X and Y added to UriParameters collection.
                 if (complexTypeDescription != null
                     && !IsBindableWithTypeConverter(parameterType))
                 {
                     foreach (var uriParameter in complexTypeDescription.Properties)
                     {
-                        apiModel.UriParameters.Add(uriParameter);
+                        uriParameters.Add(uriParameter);
                     }
                 }
                 else if (parameterDescriptor != null)
                 {
                     var uriParameter =
-                        AddParameterDescription(apiModel, apiParameter, typeDescription);
+                        uriParameters.AddParameterDescription(apiParameter, typeDescription);
 
                     if (!parameterDescriptor.IsOptional)
                     {
@@ -323,9 +306,10 @@ namespace LtePlatform.Areas.HelpPage
                     // when source is FromUri. Ignored in request model and among resource parameters but listed
                     // as a simple string here.
                     var modelDescription = modelGenerator.GetOrCreateModelDescription(typeof(string));
-                    AddParameterDescription(apiModel, apiParameter, modelDescription);
+                    uriParameters.AddParameterDescription(apiParameter, modelDescription);
                 }
             }
+            return uriParameters;
         }
 
         private static bool IsBindableWithTypeConverter(Type parameterType)
@@ -338,7 +322,8 @@ namespace LtePlatform.Areas.HelpPage
             return TypeDescriptor.GetConverter(parameterType).CanConvertFrom(typeof(string));
         }
 
-        private static ParameterDescription AddParameterDescription(HelpPageApiModel apiModel,
+        public static ParameterDescription AddParameterDescription(
+            this Collection<ParameterDescription> uriParameters,
             ApiParameterDescription apiParameter, ModelDescription typeDescription)
         {
             var parameterDescription = new ParameterDescription
@@ -348,7 +333,7 @@ namespace LtePlatform.Areas.HelpPage
                 TypeDescription = typeDescription,
             };
 
-            apiModel.UriParameters.Add(parameterDescription);
+            uriParameters.Add(parameterDescription);
             return parameterDescription;
         }
 

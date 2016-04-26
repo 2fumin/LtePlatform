@@ -16,7 +16,6 @@ namespace LtePlatform.Areas.HelpPage.Models
         /// </summary>
         public HelpPageApiModel()
         {
-            UriParameters = new Collection<ParameterDescription>();
             SampleRequests = new Dictionary<MediaTypeHeaderValue, object>();
             SampleResponses = new Dictionary<MediaTypeHeaderValue, object>();
             ErrorMessages = new Collection<string>();
@@ -30,7 +29,7 @@ namespace LtePlatform.Areas.HelpPage.Models
         /// <summary>
         /// Gets or sets the <see cref="ParameterDescription"/> collection that describes the URI parameters for the API.
         /// </summary>
-        public Collection<ParameterDescription> UriParameters { get; private set; }
+        public Collection<ParameterDescription> UriParameters { get; set; }
 
         /// <summary>
         /// Gets or sets the documentation for the request.

@@ -67,16 +67,18 @@ namespace LtePlatform.Areas.HelpPage.Controllers
         {
             var description = Configuration.Services.GetApiExplorer().ApiDescriptions
                 .FirstOrDefault(x => x.GetFriendlyId() == apiId);
-            return Json(description == null ? null : new
+            if (description == null) return null;
+            var modelGenerator = Configuration.GetModelDescriptionGenerator();
+            var parametersDescriptions = description.GenerateUriParameters(modelGenerator);
+            return Json(new
             {
-                description.Documentation,
-                ParameterDescriptions = description.ParameterDescriptions.Select(des => new 
+                ParameterDescriptions = parametersDescriptions.Select(x => new
                 {
-                    des.Documentation,
-                    des.Name
-                }),
-                description.RelativePath,
-                ResponseDoc = description.ResponseDescription.Documentation,
+                    x.Name,
+                    x.Documentation,
+                    TypeDocumentation = x.TypeDescription.Documentation,
+                    TypeName = x.TypeDescription.Name
+                })
             },
                 JsonRequestBehavior.AllowGet);
         }

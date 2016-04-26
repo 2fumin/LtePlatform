@@ -5,12 +5,16 @@
         <tr>
             <th>Parameter Name</th>
             <th>Parameter Description</th>
+            <th>Type Name</th>
+            <th>Type Description</th>
         </tr>
     </thead>
     <tbody>
         <tr ng-repeat="parameter in parameters">
             <td>{{parameter.Name}}</td>
             <td>{{parameter.Documentation}}</td>
+            <td>{{parameter.TypeName}}</td>
+            <td>{{parameter.TypeDocumentation}}</td>
         </tr>
     </tbody>
 </table>
