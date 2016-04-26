@@ -1,21 +1,19 @@
-﻿app.controller("workitem.details", function($scope, $http, $routeParams) {
-    $scope.viewItems = $scope.viewData.workItems;
-    for (var i = 0; i < $scope.viewItems.length; i++) {
-        if ($scope.viewItems[i].serialNumber === $routeParams.number) {
-            $scope.currentView = $scope.viewItems[i];
-            $scope.platformInfos = [];
-            var comments = $scope.currentView.comments;
-            var fields = comments.split('[');
-            if (fields.length > 1) {
-                for (var j = 1; j < fields.length; j++) {
-                    var subFields = fields[j].split(']');
-                    $scope.platformInfos.push({
-                        time: subFields[0],
-                        contents: subFields[1]
-                    });
-                }
+﻿app.controller("workitem.details", function($scope, $routeParams, workitemService, workItemDialog) {
+    if ($scope.viewData.workItems === undefined || $scope.viewData.workItems.length === 0) {
+        workitemService.querySingleItem($routeParams.number).then(function (result) {
+            $scope.currentView = result;
+            $scope.platformInfos = workItemDialog.calculatePlatformInfo($scope.currentView.comments);
+            $scope.feedbackInfos = workItemDialog.calculateFeedbackInfo($scope.currentView.feedbackContents);
+        });
+    } else {
+        $scope.viewItems = $scope.viewData.workItems;
+        for (var i = 0; i < $scope.viewData.workItems.length; i++) {
+            if ($scope.viewData.workItems[i].serialNumber === $routeParams.number) {
+                $scope.currentView = $scope.viewData.workItems[i];
+                $scope.platformInfos = workItemDialog.calculatePlatformInfo($scope.currentView.comments);
+                $scope.feedbackInfos = workItemDialog.calculateFeedbackInfo($scope.currentView.feedbackContents);
+                break;
             }
-            break;
         }
     }
 });
