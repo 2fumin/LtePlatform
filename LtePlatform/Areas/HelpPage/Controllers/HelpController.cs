@@ -77,7 +77,8 @@ namespace LtePlatform.Areas.HelpPage.Controllers
                     x.Name,
                     x.Documentation,
                     TypeDocumentation = x.TypeDescription.Documentation,
-                    TypeName = x.TypeDescription.Name
+                    TypeName = x.TypeDescription.Name,
+                    AnnotationDoc = x.Annotations.Select(an => an.Documentation)
                 })
             },
                 JsonRequestBehavior.AllowGet);

@@ -7,14 +7,19 @@
             <th>Parameter Description</th>
             <th>Type Name</th>
             <th>Type Description</th>
+            <th>Additional information</th>
         </tr>
     </thead>
     <tbody>
         <tr ng-repeat="parameter in parameters">
-            <td>{{parameter.Name}}</td>
-            <td>{{parameter.Documentation}}</td>
-            <td>{{parameter.TypeName}}</td>
-            <td>{{parameter.TypeDocumentation}}</td>
+            <td class="parameter-name">{{parameter.Name}}</td>
+            <td class="parameter-documentation">{{parameter.Documentation}}</td>
+            <td class="parameter-name">{{parameter.TypeName}}</td>
+            <td class="parameter-documentation">{{parameter.TypeDocumentation}}</td>
+            <td class="parameter-annotations">
+                <p ng-show="!parameter.AnnotationDoc.length">无</p>
+                <p ng-repeat="doc in parameter.AnnotationDoc">{{doc}}</p>
+            </td>
         </tr>
     </tbody>
 </table>
