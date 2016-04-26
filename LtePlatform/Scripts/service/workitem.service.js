@@ -110,6 +110,9 @@
                     url: appUrlService.getApiUrl('WorkItem'),
                     params: {
                         eNodebId: eNodebId
+                    },
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
                     }
                 }).success(function (result) {
                     deferred.resolve(result);
@@ -127,6 +130,9 @@
                     params: {
                         eNodebId: eNodebId,
                         sectorId: sectorId
+                    },
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
                     }
                 }).success(function (result) {
                     deferred.resolve(result);

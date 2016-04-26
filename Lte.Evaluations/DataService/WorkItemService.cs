@@ -33,7 +33,9 @@ namespace Lte.Evaluations.DataService
         public WorkItemView Query(string serialNumber)
         {
             var item = _repository.GetAll().FirstOrDefault(x => x.SerialNumber == serialNumber);
-            return Mapper.Map<WorkItem, WorkItemView>(item);
+            var result = Mapper.Map<WorkItem, WorkItemView>(item);
+            result.UpdateTown(_eNodebRepository, _btsRepository, _townRepository);
+            return result;
         }
 
         public int UpdateLteSectorIds()
