@@ -1,9 +1,16 @@
-﻿app.controller('workitem.eNodeb', function ($scope, networkElementService, $routeParams, workitemService) {
+﻿app.controller('workitem.eNodeb', function ($scope, networkElementService, $routeParams, workitemService,
+    workItemDialog) {
     $scope.serialNumber = $routeParams.serialNumber;
+    $scope.queryWorkItems = function () {
+        workitemService.queryByENodebId($routeParams.eNodebId).then(function (result) {
+            $scope.viewItems = result;
+        });
+    };
+    $scope.feedback = function (view) {
+        workItemDialog.feedback(view, $scope.queryWorkItems);
+    };
     networkElementService.queryENodebInfo($routeParams.eNodebId).then(function (result) {
         $scope.eNodebDetails = result;
     });
-    workitemService.queryByENodebId($routeParams.eNodebId).then(function (result) {
-        $scope.viewItems = result;
-    });
+    $scope.queryWorkItems();
 });
