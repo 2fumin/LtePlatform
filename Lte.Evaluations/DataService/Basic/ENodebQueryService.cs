@@ -65,5 +65,14 @@ namespace Lte.Evaluations.DataService.Basic
             var item = _eNodebRepository.GetByENodebId(eNodebId);
             return item?.MapTo<ENodebView>();
         }
+
+        public Tuple<string, string, string> GetTownNamesByENodebId(int eNodebId)
+        {
+            var item = _eNodebRepository.GetByENodebId(eNodebId);
+            var town = item == null ? null : _townRepository.Get(item.TownId);
+            return town == null
+                ? null
+                : new Tuple<string, string, string>(town.CityName, town.DistrictName, town.TownName);
+        }
     }
 }

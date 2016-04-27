@@ -292,6 +292,7 @@
     <Compile Include="Controllers\Account\UserContextController.cs" />
     <Compile Include="Controllers\AdminitrativeRegion\CityListController.cs" />
     <Compile Include="Controllers\AdminitrativeRegion\RegionStatsController.cs" />
+    <Compile Include="Controllers\AdminitrativeRegion\TownController.cs" />
     <Compile Include="Controllers\CollegeController.cs" />
     <Compile Include="Controllers\College\College3GTestController.cs" />
     <Compile Include="Controllers\College\College4GTestController.cs" />

@@ -77,6 +77,9 @@ namespace LtePlatform.Controllers.Kpi
 
         [HttpGet]
         [AllowAnonymous]
+        [ApiDoc("根据工单序列码查询对应的工单，这里假定工单的序列码是唯一的")]
+        [ApiParameterDoc("serialNumber", "序列码")]
+        [ApiResponse("对应的工单，这里假定工单的序列码是唯一的，若查不到，则返回空值")]
         public WorkItemView Get(string serialNumber)
         {
             return _service.Query(serialNumber);
@@ -92,12 +95,15 @@ namespace LtePlatform.Controllers.Kpi
         }
 
         [HttpPost]
+        [ApiDoc("反馈工单信息")]
+        [ApiParameterDoc("view", "反馈的工单信息，包括序列码和反馈内容")]
         public void Post(WorkItemFeedbackView view)
         {
             _service.FeedBack(User.Identity.Name, view.Message, view.SerialNumber);
         }
     }
 
+    [ApiControl("本月（上个26日至下个25日）工单完成情况查询控制器")]
     public class WorkItemCurrentMonthController : ApiController
     {
         private readonly WorkItemService _service;
@@ -108,6 +114,8 @@ namespace LtePlatform.Controllers.Kpi
         }
 
         [HttpGet]
+        [ApiDoc("查询本月（工单要求完成时间介于上个26日至下个25日）工单完成情况")]
+        [ApiResponse("本月（上个26日至下个25日）工单完成情况, 包括总数、已完成数和超时数")]
         public async Task<Tuple<int, int, int>> Get()
         {
             return await _service.QueryTotalItemsThisMonth();
