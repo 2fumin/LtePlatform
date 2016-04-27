@@ -1,13 +1,22 @@
 ﻿<div ng-controller="home.workitem">
-    <p>本月工单数：{{totalItems}}</p>
-    <p>完成率：{{finishedItems / totalItems * 100 | number: 2}}%</p>
-    <p>完成及时率：{{100 - lateItems / totalItems * 100 | number: 2}}%</p>
+    <p uib-tooltip="本月是指上个26日（今天在26日前，则为上月26日；否则为本月26日）到下个25日（今天在25日后，则为下月25日；否则为本月25日）之间的一个整月，对应考核周期。本月工单数是指工单要求完成时限在本考核周期内的所有工单数" 
+       tooltip-class="customClass" tooltip-placement="bottom">
+        本月工单数：{{totalItems}}
+    </p>
+    <p uib-tooltip="完成率=本月已完成工单数/本月工单数" 
+       tooltip-class="customClass" tooltip-placement="bottom">
+        完成率：{{finishedItems / totalItems * 100 | number: 2}}%
+    </p>
+    <p uib-tooltip="不及时工单数=已完成但完成时间在时限之后的工单数+工单状态为未完成且时限已过的工单数。完成及时率=(本月工单数-本月不及时工单数)/本月工单数" 
+       tooltip-class="customClass" tooltip-placement="bottom">
+        完成及时率：{{100 - lateItems / totalItems * 100 | number: 2}}%
+    </p>
     <div class="row">
         <div class="col-md-6">
-            <div id="workitemFinished"></div>
+            <div id="workitemFinished" style="min-height:250px"></div>
         </div>
         <div class="col-md-6">
-            <div id="workitemInTime"></div>
+            <div id="workitemInTime" style="min-height:250px"></div>
         </div>
     </div>    
 </div>
