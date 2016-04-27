@@ -1,6 +1,12 @@
 ﻿app.controller("eNodeb.info", function ($scope, $stateParams, networkElementService, cellHuaweiMongoService, 
-    alarmImportService, intraFreqHoService, interFreqHoService) {
+    alarmImportService, intraFreqHoService, interFreqHoService, appRegionService) {
     $scope.page.title = $stateParams.name + "LTE基础信息";
+
+    appRegionService.queryENodebTown($stateParams.eNodebId).then(function(result) {
+        $scope.city = result.item1;
+        $scope.district = result.item2;
+        $scope.town = result.item3;
+    });
 
     //查询基站基本信息
     networkElementService.queryENodebInfo($stateParams.eNodebId).then(function (result) {

@@ -1,4 +1,7 @@
-﻿<div ng-include="'/appViews/Parameters/Region/ENodebDetails.html'"></div>
+﻿<a class="btn btn-default" style="float: right" ng-href="{{rootPath}}eNodebList/{{city}}/{{district}}/{{town}}">
+    返回{{city}}{{district}}{{town}}基站列表
+</a>
+<div ng-include="'/appViews/Parameters/Region/ENodebDetails.html'"></div>
 <div uib-tabset active="active">
     <div uib-tab index="0" heading="小区列表">
         <div ng-include="'/appViews/Parameters/Region/LteCellTable.html'"></div>

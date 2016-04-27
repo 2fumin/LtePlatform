@@ -96,6 +96,22 @@
                     deferred.reject(reason);
                 });
                 return deferred.promise;
+            },
+            queryENodebTown: function (eNodebId) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('Town'),
+                    params: {
+                        eNodebId: eNodebId
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
             }
         };
     })
