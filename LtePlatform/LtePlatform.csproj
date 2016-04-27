@@ -413,6 +413,7 @@
     <Content Include="appViews\College\Infrastructure\ENodebDialog.html" />
     <Content Include="appViews\College\Infrastructure\ENodebTable.html" />
     <Content Include="appViews\College\Infrastructure\LteCellDialog.html" />
+    <Content Include="appViews\College\Infrastructure\LteCellTable.html" />
     <Content Include="appViews\College\Table\CdmaCellBasicInfo.html" />
     <Content Include="appViews\College\Table\CdmaCellInfoBox.html" />
     <Content Include="appViews\College\Table\CollegeCellBasicInfo.html" />

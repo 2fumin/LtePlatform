@@ -4,4 +4,7 @@
     collegeService.queryENodebs($scope.collegeName).then(function (eNodebs) {
         $scope.eNodebList = eNodebs;
     });
+    collegeService.queryCells($scope.collegeName).then(function (cells) {
+        $scope.cellList = cells;
+    });
 });

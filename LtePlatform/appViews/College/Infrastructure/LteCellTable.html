@@ -1,0 +1,36 @@
+﻿<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>基站名称</th>
+            <th>扇区编号</th>
+            <th>频点</th>
+            <th>频带编号</th>
+            <th>PCI</th>
+            <th>PRACH</th>
+            <th>RS功率</th>
+            <th>TAC</th>
+            <th>室内外</th>
+            <th>高度</th>
+            <th>方位角</th>
+            <th>下倾</th>
+            <th>天线增益(dB)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="cell in cellList">
+            <td>{{cell.eNodebName}}</td>
+            <td>{{cell.sectorId}}</td>
+            <td>{{cell.frequency}}</td>
+            <td>{{cell.bandClass}}</td>
+            <td>{{cell.pci}}</td>
+            <td>{{cell.prach}}</td>
+            <td>{{cell.rsPower}}</td>
+            <td>{{cell.tac}}</td>
+            <td>{{cell.indoor}}</td>
+            <td>{{cell.height}}</td>
+            <td>{{cell.azimuth}}</td>
+            <td>{{cell.downTilt}}</td>
+            <td>{{cell.antennaGain}}</td>
+        </tr>
+    </tbody>
+</table>
