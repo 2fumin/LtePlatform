@@ -452,6 +452,7 @@
     <Content Include="appViews\Parameters\Map\CellIntraFreq.html" />
     <Content Include="appViews\Parameters\Map\DistributionMapInfoBox.html" />
     <Content Include="appViews\Parameters\Map\LteCellBasicInfo.html" />
+    <Content Include="appViews\Parameters\Region\Alarm.html" />
     <Content Include="appViews\Parameters\Region\BtsInfo.html" />
     <Content Include="appViews\Parameters\Region\CdmaCellDetails.html" />
     <Content Include="appViews\Parameters\Region\CellDetails.html" />
@@ -796,6 +797,7 @@
     <Content Include="Scripts\parameters\details\bts.list.js" />
     <Content Include="Scripts\parameters\details\cdmaCell.info.js" />
     <Content Include="Scripts\parameters\details\cell.info.js" />
+    <Content Include="Scripts\parameters\details\eNodeb.alarm.js" />
     <Content Include="Scripts\parameters\details\eNodeb.info.js" />
     <Content Include="Scripts\parameters\details\eNodeb.list.js" />
     <Content Include="Scripts\parameters\details\menu.cdma.js" />

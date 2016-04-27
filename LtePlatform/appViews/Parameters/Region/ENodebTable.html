@@ -24,7 +24,9 @@
             <td>{{eNodeb.lattitute}}</td>
             <td>
                 <a ng-href="{{rootPath}}eNodebInfo/{{eNodeb.eNodebId}}/{{eNodeb.name}}"
-                   class="btn btn-sm" ng-class="{'btn-default': !eNodeb.isInUse, 'btn-success': eNodeb.isInUse}">基站详细信息</a>
+                   class="btn btn-sm" ng-class="{'btn-default': !eNodeb.isInUse, 'btn-success': eNodeb.isInUse}">详细信息</a>
+                <a ng-href="{{rootPath}}alarm/{{eNodeb.eNodebId}}/{{eNodeb.name}}" ng-show="eNodeb.isInUse"
+                   class="btn btn-sm btn-default">告警查询</a>
             </td>
         </tr>
     </tbody>
