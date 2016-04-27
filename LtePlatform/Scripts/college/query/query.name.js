@@ -7,4 +7,7 @@
     collegeService.queryCells($scope.collegeName).then(function (cells) {
         $scope.cellList = cells;
     });
+    collegeService.queryBtss($scope.collegeName).then(function (btss) {
+        $scope.btsList = btss;
+    });
 });

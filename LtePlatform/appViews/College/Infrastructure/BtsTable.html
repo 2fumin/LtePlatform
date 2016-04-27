@@ -1,0 +1,22 @@
+﻿<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>基站名称</th>
+            <th>基站编号</th>
+            <th>BSC编号</th>
+            <th>经度</th>
+            <th>纬度</th>
+            <th>地址</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="bts in btsList">
+            <td>{{bts.name}}</td>
+            <td>{{bts.btsId}}</td>
+            <td>{{bts.bscId}}</td>
+            <td>{{bts.longtitute}}</td>
+            <td>{{bts.lattitute}}</td>
+            <td>{{bts.address}}</td>
+        </tr>
+    </tbody>
+</table>

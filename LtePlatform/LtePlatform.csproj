@@ -408,6 +408,7 @@
     <Content Include="appViews\College\CollegeMap.html" />
     <Content Include="appViews\College\CollegeMenuType.html" />
     <Content Include="appViews\College\Infrastructure\BtsDialog.html" />
+    <Content Include="appViews\College\Infrastructure\BtsTable.html" />
     <Content Include="appViews\College\Infrastructure\CdmaCellDialog.html" />
     <Content Include="appViews\College\Infrastructure\CollegeQuery.html" />
     <Content Include="appViews\College\Infrastructure\ENodebDialog.html" />
