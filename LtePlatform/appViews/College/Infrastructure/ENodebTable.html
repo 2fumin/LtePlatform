@@ -1,0 +1,24 @@
+﻿<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>LTE基站编号</th>
+            <th>基站名称</th>
+            <th>规划编号</th>
+            <th>入网日期</th>
+            <th>地址</th>
+            <th>经度</th>
+            <th>纬度</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="eNodeb in eNodebList">
+            <td>{{eNodeb.eNodebId}}</td>
+            <td>{{eNodeb.name}}</td>
+            <td>{{eNodeb.planNum}}</td>
+            <td>{{eNodeb.openDate | date: 'yyyy-MM-dd'}}</td>
+            <td>{{eNodeb.address}}</td>
+            <td>{{eNodeb.longtitute}}</td>
+            <td>{{eNodeb.lattitute}}</td>
+        </tr>
+    </tbody>
+</table>

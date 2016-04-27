@@ -411,6 +411,7 @@
     <Content Include="appViews\College\Infrastructure\CdmaCellDialog.html" />
     <Content Include="appViews\College\Infrastructure\CollegeQuery.html" />
     <Content Include="appViews\College\Infrastructure\ENodebDialog.html" />
+    <Content Include="appViews\College\Infrastructure\ENodebTable.html" />
     <Content Include="appViews\College\Infrastructure\LteCellDialog.html" />
     <Content Include="appViews\College\Table\CdmaCellBasicInfo.html" />
     <Content Include="appViews\College\Table\CdmaCellInfoBox.html" />

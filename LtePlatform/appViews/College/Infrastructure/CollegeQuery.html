@@ -1,1 +1,8 @@
 ﻿<h4 class="text-primary">{{collegeName}}基础信息查询与编辑</h4>
+<div uib-tabset active="active">
+    <div uib-tab index="0" heading="LTE基站列表">
+        <div ng-include="'/appViews/College/Infrastructure/ENodebTable.html'"></div>
+    </div>
+    <div uib-tab index="1" heading="LTE小区列表"></div>
+</div>
+    
