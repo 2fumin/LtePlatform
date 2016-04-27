@@ -10,4 +10,7 @@
     collegeService.queryBtss($scope.collegeName).then(function (btss) {
         $scope.btsList = btss;
     });
+    collegeService.queryCdmaCells($scope.collegeName).then(function (cells) {
+        $scope.cdmaCellList = cells;
+    });
 });
