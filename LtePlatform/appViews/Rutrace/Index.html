@@ -37,6 +37,7 @@
             <th>区</th>
             <th>MR总数</th>
             <th>精确覆盖率</th>
+            <th>本区目标值</th>
             <th>第一邻区精确覆盖率</th>
             <th>第三邻区精确覆盖率</th>
             <th></th>
@@ -47,7 +48,10 @@
             <td>{{stat.city}}</td>
             <td>{{stat.district}}</td>
             <td>{{stat.totalMrs}}</td>
-            <td>{{stat.preciseRate | number: 2}}</td>
+            <td ng-style="{color: stat.preciseRate < stat.objectRate ? 'red' : 'green'}">
+                {{stat.preciseRate | number: 2}}
+            </td>
+            <td>{{stat.objectRate | number: 2}}</td>
             <td>{{stat.firstRate | number: 2}}</td>
             <td>{{stat.thirdRate | number: 2}}</td>
             <td>
@@ -63,7 +67,10 @@
             <td>{{overallStat.cityStat.city}}</td>
             <td>{{overallStat.cityStat.district}}</td>
             <td>{{overallStat.cityStat.totalMrs}}</td>
-            <td>{{overallStat.cityStat.preciseRate | number: 2}}</td>
+            <td ng-style="{color: overallStat.preciseRate < overallStat.objectRate ? 'red' : 'green'}">
+                {{overallStat.cityStat.preciseRate | number: 2}}
+            </td>
+            <td>{{overallStat.cityStat.objectRate | number: 2}}</td>
             <td>{{overallStat.cityStat.firstRate | number: 2}}</td>
             <td>{{overallStat.cityStat.thirdRate | number: 2}}</td>
             <td>

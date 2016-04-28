@@ -43,9 +43,9 @@
                 url: "/Rutrace",
                 tooltip: "综合分析后台指标、MR、路测信令和小区跟踪数据，挖掘小区的重叠覆盖、过覆盖等问题，对精确覆盖的效果进行模拟，并在百度地图上呈现。"
             }, {
-                displayName: "小区覆盖仿真模拟",
+                displayName: "专题覆盖优化",
                 url: "/Evaluation/RegionDef",
-                tooltip: "根据各小区的工程参数模拟覆盖范围，主要覆盖指标（RSRP、SINR）进行分析和呈现"
+                tooltip: "包括万栋楼宇等室内外场景优化；根据各小区的工程参数模拟覆盖范围，主要覆盖指标（RSRP、SINR）进行分析和呈现"
             }, {
                 displayName: "规划辅助",
                 url: appUrlService.getPlanUrlHost() + 'guihuafuzhu/index.php'

@@ -273,12 +273,22 @@
                         }
                     }
                 }
-                for (k = 0; k < trendStat.districtStats.length; k++) {
-                    calculateDistrictRates(trendStat.districtStats[k]);
-                }
-                for (k = 0; k < trendStat.townStats.length; k++) {
-                    calculateTownRates(trendStat.townStats[k]);
-                }
+                angular.forEach(trendStat.districtStats, function(stat) {
+                    calculateDistrictRates(stat);
+                });
+                angular.forEach(trendStat.townStats, function(stat) {
+                    calculateTownRates(stat);
+                });
+            },
+            getPreciseObject: function(district) {
+                var objectTable = {
+                    "禅城": 94,
+                    "南海": 94,
+                    "三水": 94,
+                    "高明": 94,
+                    "顺德": 90
+                };
+                return objectTable[district] === undefined ? 94 : objectTable[district];
             }
         }
     })
