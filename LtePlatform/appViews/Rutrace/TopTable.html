@@ -26,8 +26,7 @@
             <td>
                 <div style="min-width: 160px" class="input-group" ng-click="updateInfo(cell)">
                     <div class="btn-group" uib-dropdown>
-                        <button id="single-button" type="button" class="btn" 
-                                ng-class="{'btn-primary': cell.hasWorkItems, 'btn-default': !cell.hasWorkItems}"
+                        <button id="single-button" type="button" class="btn btn-default"
                                 uib-dropdown-toggle ng-disabled="disabled">
                             详细 <span class="caret"></span>
                         </button>
@@ -46,7 +45,7 @@
                             </li>
                             <li role="menuitem">
                                 <a class="btn btn-default" ng-href="{{rootPath}}baidumap/{{cell.eNodebName}}-{{cell.sectorId}}">
-                                    <i class="glyphicon glyphicon-globe" title="地理化显示"></i> 
+                                    <i class="glyphicon glyphicon-globe" title="地理化显示"></i>
                                     地理化显示
                                 </a>
                             </li>
@@ -57,6 +56,15 @@
                                     变化趋势
                                 </a>
                             </li>
+                        </ul>
+                    </div>
+                    <div class="btn-group" uib-dropdown>
+                        <button id="work-button" type="button" class="btn"
+                                ng-class="{'btn-primary': cell.hasWorkItems, 'btn-default': !cell.hasWorkItems}"
+                                uib-dropdown-toggle ng-disabled="disabled">
+                            问题处理 <span class="caret"></span>
+                        </button>
+                        <ul uib-dropdown-menu role="menu" aria-labelledby="work-button">
                             <li role="menuitem">
                                 <a class="btn btn-default" ng-show="cell.hasWorkItems === true"
                                    ng-href="{{rootPath}}workItems/{{cell.cellId}}/{{cell.sectorId}}">
@@ -64,11 +72,14 @@
                                     工单查看
                                 </a>
                             </li>
+                            <li role="menuitem">
+                                <a class="btn btn-default" ng-href="{{rootPath}}import/{{cell.cellId}}/{{cell.sectorId}}/{{cell.eNodebName}}">
+                                    <i class="glyphicon glyphicon-cloud-download" title="监控导入"></i>
+                                    监控导入
+                                </a>
+                            </li>
                         </ul>
                     </div>
-                    <a class="btn btn-default" ng-href="{{rootPath}}import/{{cell.cellId}}/{{cell.sectorId}}/{{cell.eNodebName}}">
-                        <i class="glyphicon glyphicon-cloud-download" title="监控导入"></i>
-                    </a>
                 </div>
             </td>
         </tr>
