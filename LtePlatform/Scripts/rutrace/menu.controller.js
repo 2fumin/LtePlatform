@@ -76,15 +76,21 @@
                     }, {
                         displayName: "指标变化趋势",
                         url: rootUrl + "/trend"
-                    }, {
-                        displayName: "TOP指标分析",
-                        url: rootUrl + "/top"
                     }
                 ]
             }, {
                 displayName: "详细查询",
                 isActive: false,
                 subItems: []
+            }, {
+                displayName: "TOP指标",
+                isActive: true,
+                subItems: [
+                    {
+                        displayName: "分析",
+                        url: rootUrl + "/top"
+                    }
+                ]
             }, {
                 displayName: "辅助功能",
                 isActive: false,

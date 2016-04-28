@@ -40,7 +40,7 @@ app.controller("rutrace.root", function ($scope, appRegionService, menuItemServi
         $scope.overallStat.city = result.selected;
         appRegionService.queryDistricts(result.selected).then(function (districts) {
             for (var i = 0; i < districts.length; i++) {
-                menuItemService.updateMenuItem($scope.menuItems, 0,
+                menuItemService.updateMenuItem($scope.menuItems, 2,
                     "TOP指标分析-" + districts[i],
                     $scope.rootPath + "topDistrict/" + districts[i]);
             }
