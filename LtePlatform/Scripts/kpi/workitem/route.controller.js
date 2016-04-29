@@ -31,7 +31,7 @@
                     controller: "workitem.cdmaCell"
                 })
                 .when('/stat/:district', {
-                    templateUrl: rootDir + 'List.html',
+                    templateUrl: rootDir + 'DistrictList.html',
                     controller: "workitem.district"
                 })
                 .otherwise({

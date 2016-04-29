@@ -2,37 +2,23 @@
     $scope.page.title = "工单统计-" + $routeParams.district;
 
     $scope.updateWorkItemTable = function () {
-        workitemService.queryTotalPages($scope.viewData.currentState.name, $scope.viewData.currentType.name,
-            $scope.viewData.itemsPerPage.value).then(function (result) {
-                $scope.viewData.totalItems = result;
+        workitemService.queryTotalPagesByDistrict($scope.viewData.currentState.name, $scope.viewData.currentType.name,
+            $routeParams.district).then(function (result) {
+                $scope.totalItems = result;
                 $scope.query();
             });
     };
 
     $scope.query = function () {
-        workitemService.queryWithPaging($scope.viewData.currentState.name, $scope.viewData.currentType.name,
-            $scope.viewData.itemsPerPage.value, $scope.viewData.currentPage).then(function (result) {
-                $scope.viewData.items = result;
-                $scope.viewItems = $scope.viewData.items;
+        workitemService.queryWithPagingByDistrict($scope.viewData.currentState.name, $scope.viewData.currentType.name,
+            $routeParams.district, $scope.viewData.itemsPerPage.value, $scope.viewData.currentPage).then(function (result) {
+                $scope.viewItems = result;
             });
-    };
-
-    $scope.updateSectorIds = function () {
-        workitemService.updateSectorIds().then(function (result) {
-            $scope.page.messages.push({
-                contents: "一共更新扇区编号：" + result + "条",
-                type: "success"
-            });
-        });
     };
 
     $scope.feedback = function (view) {
         workItemDialog.feedback(view, $scope.query);
     };
 
-    if ($scope.viewData.items.length === 0) {
-        $scope.updateWorkItemTable();
-    } else {
-        $scope.viewItems = $scope.viewData.items;
-    }
+    $scope.updateWorkItemTable();
 });

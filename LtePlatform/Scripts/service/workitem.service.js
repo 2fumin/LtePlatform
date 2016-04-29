@@ -23,6 +23,29 @@
                 });
                 return deferred.promise;
             },
+            queryWithPagingByDistrict: function (state, type, district, itemsPerPage, page) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('WorkItem'),
+                    params: {
+                        statCondition: state,
+                        typeCondition: type,
+                        district: district,
+                        itemsPerPage: itemsPerPage,
+                        page: page
+                    },
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
+            },
             queryTotalPages: function(state, type) {
                 var deferred = $q.defer();
                 $http({
@@ -31,6 +54,27 @@
                     params: {
                         'statCondition': state,
                         'typeCondition': type
+                    },
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
+            },
+            queryTotalPagesByDistrict: function (state, type, district) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('WorkItem'),
+                    params: {
+                        statCondition: state,
+                        typeCondition: type,
+                        district: district
                     },
                     headers: {
                         'Authorization': 'Bearer ' + appUrlService.getAccessToken()
