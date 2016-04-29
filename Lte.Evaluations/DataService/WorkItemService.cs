@@ -88,6 +88,19 @@ namespace Lte.Evaluations.DataService
             return counts;
         }
 
+        public int QueryTotalItems(string statCondition, string typeCondition, string district)
+        {
+            var predict = (statCondition + '_' + typeCondition).GetWorkItemFilter();
+            var towns = _townRepository.GetAllList(x => x.DistrictName == district);
+            if (!towns.Any()) return 0;
+            var eNodebs = from eNodeb in _eNodebRepository.GetAllList()
+                join town in towns on eNodeb.TownId equals town.Id
+                select eNodeb;
+            var items = predict == null ? _repository.GetAllList() : _repository.GetAllList(predict);
+            return
+                (from item in items join eNodeb in eNodebs on item.ENodebId equals eNodeb.ENodebId select item).Count();
+        }
+
         public async Task<Tuple<int, int, int>> QueryTotalItemsThisMonth()
         {
             var lastMonthDate = DateTime.Today.Day < 26 ? DateTime.Today.AddMonths(-1) : DateTime.Today;
@@ -109,6 +122,23 @@ namespace Lte.Evaluations.DataService
             var views = Mapper.Map<List<WorkItem>, List<WorkItemView>>(stats.ToList());
             views.ForEach(x => x.UpdateTown(_eNodebRepository, _btsRepository, _townRepository));
             return views;
+        }
+
+        public IEnumerable<WorkItemView> QueryViews(string statCondition, string typeCondition, string district, 
+            int itemsPerPage, int page)
+        {
+            var predict = (statCondition + '_' + typeCondition).GetWorkItemFilter();
+            var towns = _townRepository.GetAllList(x => x.DistrictName == district);
+            if (!towns.Any()) return new List<WorkItemView>();
+            var eNodebs = from eNodeb in _eNodebRepository.GetAllList()
+                          join town in towns on eNodeb.TownId equals town.Id
+                          select eNodeb;
+            var stats = predict == null
+                ? _repository.GetAll(page, itemsPerPage, x => x.Deadline)
+                : _repository.Get(predict, page, itemsPerPage, x => x.Deadline);
+            var views = Mapper.Map<List<WorkItem>, List<WorkItemView>>(stats.ToList());
+            views.ForEach(x => x.UpdateTown(_eNodebRepository, _btsRepository, _townRepository));
+            return from view in views join eNodeb in eNodebs on view.ENodebId equals eNodeb.ENodebId select view;
         }
 
         public async Task<IEnumerable<WorkItemView>> QueryViews(int eNodebId)
