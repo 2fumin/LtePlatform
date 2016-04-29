@@ -7,7 +7,7 @@
        tooltip-class="customClass" tooltip-placement="bottom">
         完成率：{{finishedItems / totalItems * 100 | number: 2}}%
     </p>
-    <p uib-tooltip="不及时工单数=已完成但完成时间在时限之后的工单数+工单状态为未完成且时限已过的工单数。完成及时率=(本月工单数-本月不及时工单数)/本月工单数" 
+    <p uib-tooltip="不及时工单数=已完成但完成时间在时限之后的工单数+工单状态为未完成且时限已过的工单数。完成及时率=(本月工单数-本月不及时工单数)/本月工单数。本指标值为考核指标，目标值为85%。" 
        tooltip-class="customClass" tooltip-placement="bottom">
         完成及时率：{{100 - lateItems / totalItems * 100 | number: 2}}%
     </p>

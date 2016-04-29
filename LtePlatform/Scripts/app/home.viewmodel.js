@@ -89,7 +89,7 @@
                 tooltip: "按照区域或专题查看已导入的DT基础信息"
             }, {
                 displayName: "基础信息管理",
-                url: "/"
+                url: appUrlService.getParameterUrlHost() + 'index.php'
             }]
         }
     ];
