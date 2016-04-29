@@ -69,11 +69,16 @@
         ];
         $rootScope.types = [
             {
+                name: '考核部分'
+            },
+            {
                 name: '全部'
             }, {
                 name: '2/3G'
             }, {
                 name: '4G'
+            }, {
+                name: '作业计划'
             }
         ];
         $rootScope.pageSizeSelection = [

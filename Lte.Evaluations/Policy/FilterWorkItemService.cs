@@ -23,6 +23,14 @@ namespace Lte.Evaluations.Policy
                         x =>
                             x.Type == WorkItemType.Infrastructure4G || x.Type == WorkItemType.Interference4G ||
                             x.Type == WorkItemType.Kpi4G || x.Type == WorkItemType.RrcConnection;
+                case "全部_考核部分":
+                    return
+                        x =>
+                            x.Type == WorkItemType.Interference4G || x.Type == WorkItemType.Kpi4G ||
+                            x.Type == WorkItemType.Kpi2G;
+                case "全部_作业计划":
+                    return
+                        x => x.Type == WorkItemType.DailyTask;
                 case "未完成_2/3G":
                     return
                         x =>
@@ -34,6 +42,15 @@ namespace Lte.Evaluations.Policy
                             x.State != WorkItemState.Finished &&
                             (x.Type == WorkItemType.Infrastructure4G || x.Type == WorkItemType.Interference4G ||
                              x.Type == WorkItemType.Kpi4G || x.Type == WorkItemType.RrcConnection);
+                case "未完成_考核部分":
+                    return
+                        x =>
+                            x.State != WorkItemState.Finished &&
+                            (x.Type == WorkItemType.Interference4G || x.Type == WorkItemType.Kpi4G ||
+                            x.Type == WorkItemType.Kpi2G);
+                case "未完成_作业计划":
+                    return
+                        x => x.State != WorkItemState.Finished && x.Type == WorkItemType.DailyTask;
                 default:
                     return null;
             }
