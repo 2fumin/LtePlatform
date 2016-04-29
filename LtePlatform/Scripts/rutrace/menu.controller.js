@@ -50,6 +50,10 @@
                     templateUrl: viewDir + "WorkItem/ForCell.html",
                     controller: "rutrace.workitems"
                 })
+                .when('/workitemDistrict/:district', {
+                    templateUrl: viewDir + "WorkItem/ForCell.html",
+                    controller: "rutrace.workitem.district"
+                })
                 .when('/cellTrend/:cellId/:sectorId/:name', {
                     templateUrl: viewDir + "WorkItem/CellTrend.html",
                     controller: "cell.trend"

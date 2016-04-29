@@ -46,7 +46,11 @@
     <tbody>
         <tr ng-repeat="stat in overallStat.districtStats">
             <td>{{stat.city}}</td>
-            <td>{{stat.district}}</td>
+            <td>
+                <button class="btn btn-sm btn-default" ng-click="overallStat.currentDistrict = stat.district">
+                    {{stat.district}}
+                </button>
+            </td>
             <td>{{stat.totalMrs}}</td>
             <td ng-style="{color: stat.preciseRate < stat.objectRate ? 'red' : 'green'}">
                 {{stat.preciseRate | number: 2}}
@@ -56,9 +60,7 @@
             <td>{{stat.thirdRate | number: 2}}</td>
             <td>
                 <div class="btn-group-sm">
-                    <button class="btn btn-sm btn-primary" ng-click="overallStat.currentDistrict = stat.district">
-                        详细
-                    </button>
+                    <a class="btn btn-sm btn-primary" ng-href="{{rootPath}}workitemDistrict/{{stat.district}}">工单处理</a>
                     <a class="btn btn-sm btn-default" ng-href="{{rootPath}}topDistrict/{{stat.district}}">TOP指标</a>
                 </div>
             </td>
@@ -81,7 +83,7 @@
 </table>
 
 <h4 class="text-primary text-center">
-    {{overallStat.currentDistrict}}详细统计信息
+    {{overallStat.currentDistrict}}镇区统计信息
 </h4>
 
 <table class="table table-hover">
