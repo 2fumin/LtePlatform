@@ -133,12 +133,11 @@ namespace Lte.Evaluations.DataService
             var eNodebs = from eNodeb in _eNodebRepository.GetAllList()
                           join town in towns on eNodeb.TownId equals town.Id
                           select eNodeb;
-            var stats = predict == null
-                ? _repository.GetAll(page, itemsPerPage, x => x.Deadline)
-                : _repository.Get(predict, page, itemsPerPage, x => x.Deadline);
-            var views = Mapper.Map<List<WorkItem>, List<WorkItemView>>(stats.ToList());
-            views.ForEach(x => x.UpdateTown(_eNodebRepository, _btsRepository, _townRepository));
-            return from view in views join eNodeb in eNodebs on view.ENodebId equals eNodeb.ENodebId select view;
+            var stats = predict == null ? _repository.GetAllList() : _repository.GetAllList(predict);
+            var views = Mapper.Map<List<WorkItem>, List<WorkItemView>>(stats);
+            var districtViews = (from view in views join eNodeb in eNodebs on view.ENodebId equals eNodeb.ENodebId select view).ToList();
+            districtViews.ForEach(x => x.UpdateTown(_eNodebRepository, _btsRepository, _townRepository));
+            return districtViews.Skip(itemsPerPage*(page - 1)).Take(itemsPerPage);
         }
 
         public async Task<IEnumerable<WorkItemView>> QueryViews(int eNodebId)
