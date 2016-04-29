@@ -22,6 +22,16 @@ namespace Lte.Parameters.Concrete
             return await GetAllListAsync(x => x.Deadline > begin && x.Deadline <= end);
         }
 
+        public async Task<List<WorkItem>> GetAllKpiListAsync(DateTime begin, DateTime end)
+        {
+            return
+                await
+                    GetAllListAsync(
+                        x =>
+                            x.Deadline > begin && x.Deadline <= end && (x.Type == WorkItemType.Interference4G ||
+                            x.Type == WorkItemType.Kpi2G || x.Type == WorkItemType.Kpi4G));
+        }
+
         public async Task<List<WorkItem>> GetAllListAsync(int eNodebId, byte sectorId)
         {
             return await GetAllListAsync(x => x.ENodebId == eNodebId && x.SectorId == sectorId);
