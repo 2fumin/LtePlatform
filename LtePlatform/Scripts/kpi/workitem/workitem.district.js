@@ -1,12 +1,12 @@
-﻿app.controller("kpi.workitem", function ($scope, workitemService, workItemDialog, appRegionService, menuItemService) {
-    $scope.page.title = "工单总览";
-    
-    $scope.updateWorkItemTable = function() {
+﻿app.controller("workitem.district", function ($scope, $routeParams, workitemService, workItemDialog) {
+    $scope.page.title = "工单统计-" + $routeParams.district;
+
+    $scope.updateWorkItemTable = function () {
         workitemService.queryTotalPages($scope.viewData.currentState.name, $scope.viewData.currentType.name,
             $scope.viewData.itemsPerPage.value).then(function (result) {
                 $scope.viewData.totalItems = result;
-            $scope.query();
-        });
+                $scope.query();
+            });
     };
 
     $scope.query = function () {
@@ -14,10 +14,10 @@
             $scope.viewData.itemsPerPage.value, $scope.viewData.currentPage).then(function (result) {
                 $scope.viewData.items = result;
                 $scope.viewItems = $scope.viewData.items;
-        });
+            });
     };
 
-    $scope.updateSectorIds = function() {
+    $scope.updateSectorIds = function () {
         workitemService.updateSectorIds().then(function (result) {
             $scope.page.messages.push({
                 contents: "一共更新扇区编号：" + result + "条",
@@ -26,7 +26,7 @@
         });
     };
 
-    $scope.feedback = function(view) {
+    $scope.feedback = function (view) {
         workItemDialog.feedback(view, $scope.query);
     };
 
@@ -35,13 +35,4 @@
     } else {
         $scope.viewItems = $scope.viewData.items;
     }
-    appRegionService.initializeCities().then(function (result) {
-        appRegionService.queryDistricts(result.selected).then(function (districts) {
-            angular.forEach(districts, function(district) {
-                menuItemService.updateMenuItem($scope.menuItems, 1,
-                    "工单统计-" + district,
-                    $scope.rootPath + "stat/" + district);
-            });
-        });
-    });
 });

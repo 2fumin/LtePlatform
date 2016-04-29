@@ -30,6 +30,10 @@
                     templateUrl: rootDir + 'CdmaCellInfo.html',
                     controller: "workitem.cdmaCell"
                 })
+                .when('/stat/:district', {
+                    templateUrl: rootDir + 'List.html',
+                    controller: "workitem.district"
+                })
                 .otherwise({
                     redirectTo: '/'
                 });
@@ -50,6 +54,10 @@
                         url: rootUrl + "/chart"
                     }
                 ]
+            }, {
+                displayName: "分区指标",
+                isActive: true,
+                subItems: []
             }
         ];
         $rootScope.rootPath = rootUrl + "/";

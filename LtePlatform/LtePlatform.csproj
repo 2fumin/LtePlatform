@@ -790,6 +790,7 @@
     <Content Include="Scripts\kpi\workitem\chart.controller.js" />
     <Content Include="Scripts\kpi\workitem\route.controller.js" />
     <Content Include="Scripts\kpi\workitem\feedback.dialog.js" />
+    <Content Include="Scripts\kpi\workitem\workitem.district.js" />
     <Content Include="Scripts\manage\manage.current.js" />
     <Content Include="Scripts\manage\password.change.js" />
     <Content Include="Scripts\manage\password.forgot.js" />
