@@ -47,79 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AsyncHelper.cs" />
-    <Compile Include="ClaimsIdentityFactory.cs" />
-    <Compile Include="Constants.cs" />
-    <Compile Include="Crypto.cs" />
-    <Compile Include="DefaultAuthenticationTypes.cs" />
-    <Compile Include="EmailTokenProvider.cs" />
-    <Compile Include="EntityFramework\EntityStore.cs" />
-    <Compile Include="EntityFramework\IdentityDbContext.cs" />
-    <Compile Include="EntityFramework\IdentityRole.cs" />
-    <Compile Include="EntityFramework\IdentityUser.cs" />
-    <Compile Include="EntityFramework\IdentityUserClaim.cs" />
-    <Compile Include="EntityFramework\IdentityUserLogin.cs" />
-    <Compile Include="EntityFramework\IdentityUserRole.cs" />
-    <Compile Include="EntityFramework\RoleStore.cs" />
-    <Compile Include="EntityFramework\UserStore.cs" />
-    <Compile Include="IClaimsIdentityFactory.cs" />
-    <Compile Include="IdentityExtensions.cs" />
-    <Compile Include="IdentityMessage.cs" />
-    <Compile Include="IdentityResult.cs" />
-    <Compile Include="IIdentityMessageService.cs" />
-    <Compile Include="IIdentityValidator.cs" />
-    <Compile Include="IPasswordHasher.cs" />
-    <Compile Include="IQueryableRoleStore.cs" />
-    <Compile Include="IQueryableUserStore.cs" />
-    <Compile Include="IRole.cs" />
-    <Compile Include="IRoleStore.cs" />
-    <Compile Include="IUser.cs" />
-    <Compile Include="IUserClaimStore.cs" />
-    <Compile Include="IUserEmailStore.cs" />
-    <Compile Include="IUserLockoutStore.cs" />
-    <Compile Include="IUserLoginStore.cs" />
-    <Compile Include="IUserPasswordStore.cs" />
-    <Compile Include="IUserPhoneNumberStore.cs" />
-    <Compile Include="IUserRoleStore.cs" />
-    <Compile Include="IUserSecurityStampStore.cs" />
-    <Compile Include="IUserStore.cs" />
-    <Compile Include="IUserTokenProvider.cs" />
-    <Compile Include="MinimumLengthValidator.cs" />
-    <Compile Include="Owin\AppBuilderExtensions.cs" />
-    <Compile Include="Owin\AuthenticationManagerExtensions.cs" />
-    <Compile Include="Owin\DataProtectorTokenProvider.cs" />
-    <Compile Include="Owin\ExternalLoginInfo.cs" />
-    <Compile Include="Owin\IdentityFactoryMiddleware.cs" />
-    <Compile Include="Owin\IdentityFactoryOptions.cs" />
-    <Compile Include="Owin\IdentityFactoryProvider.cs" />
-    <Compile Include="Owin\IIdentityFactoryProvider.cs" />
-    <Compile Include="Owin\OwinContextExtensions.cs" />
-    <Compile Include="Owin\SecurityStampValidator.cs" />
-    <Compile Include="Owin\SignInManager.cs" />
-    <Compile Include="Owin\SignInManagerExtensions.cs" />
-    <Compile Include="Owin\SignInStatus.cs" />
-    <Compile Include="Owin\StreamExtensions.cs" />
-    <Compile Include="PasswordHasher.cs" />
-    <Compile Include="PasswordValidator.cs" />
-    <Compile Include="PasswordVerificationResult.cs" />
-    <Compile Include="PhoneNumberTokenProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Rfc6238AuthenticationService.cs" />
-    <Compile Include="RoleManager.cs" />
-    <Compile Include="RoleManagerExtensions.cs" />
-    <Compile Include="RoleValidator.cs" />
-    <Compile Include="SecurityToken.cs" />
-    <Compile Include="TaskExtensions.cs" />
-    <Compile Include="TotpSecurityStampBasedTokenProvider.cs" />
-    <Compile Include="UserLoginInfo.cs" />
-    <Compile Include="UserManager.cs" />
-    <Compile Include="UserManagerExtensions.cs" />
-    <Compile Include="UserValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

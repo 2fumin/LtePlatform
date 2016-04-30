@@ -13,12 +13,7 @@ namespace LtePlatform.Areas.TestPage.Controllers
         {
             return View();
         }
-
-        public ActionResult LegacyMarkup()
-        {
-            return View();
-        }
-
+        
         public ActionResult NoQUnitMarkup()
         {
             return View();
@@ -38,12 +33,7 @@ namespace LtePlatform.Areas.TestPage.Controllers
         {
             return View();
         }
-
-        public ActionResult Main()
-        {
-            return View();
-        }
-
+        
         public ActionResult Logs()
         {
             return View();
