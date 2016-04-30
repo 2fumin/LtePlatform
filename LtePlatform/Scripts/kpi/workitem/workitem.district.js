@@ -12,6 +12,9 @@
     $scope.query = function () {
         workitemService.queryWithPagingByDistrict($scope.viewData.currentState.name, $scope.viewData.currentType.name,
             $routeParams.district, $scope.viewData.itemsPerPage.value, $scope.viewData.currentPage).then(function (result) {
+            angular.forEach(result, function(view) {
+                view.detailsPath = $scope.rootPath + "details/" + view.serialNumber + "/" + view.district;
+            });
                 $scope.viewItems = result;
             });
     };

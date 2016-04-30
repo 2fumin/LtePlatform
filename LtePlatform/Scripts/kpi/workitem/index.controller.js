@@ -12,6 +12,9 @@
     $scope.query = function () {
         workitemService.queryWithPaging($scope.viewData.currentState.name, $scope.viewData.currentType.name,
             $scope.viewData.itemsPerPage.value, $scope.viewData.currentPage).then(function (result) {
+                angular.forEach(result, function (view) {
+                    view.detailsPath = $scope.rootPath + "details/" + view.serialNumber;
+                });
                 $scope.viewData.items = result;
                 $scope.viewItems = $scope.viewData.items;
         });

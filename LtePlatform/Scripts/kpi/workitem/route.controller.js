@@ -10,6 +10,10 @@
                     templateUrl: rootDir + 'Details.html',
                     controller: 'kpi.workitem.details'
                 })
+                .when('/details/:number/:district', {
+                    templateUrl: rootDir + 'Details.html',
+                    controller: 'kpi.workitem.details.district'
+                })
                 .when('/chart', {
                     templateUrl: rootDir + 'Charts.html',
                     controller: 'kpi.workitem.chart'
