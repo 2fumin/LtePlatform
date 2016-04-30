@@ -1,24 +1,22 @@
-﻿app.controller("kpi.workitem.details", function ($scope, $http, $routeParams, workitemService,
-    workItemDialog) {
-    $scope.detailsView = "none";
+﻿app.controller("kpi.workitem.details", function ($scope, $routeParams, workitemService, workItemDialog) {
+    $scope.gobackPath = $scope.rootPath;
+    $scope.gobackTitle = "返回总览";
     
-    $scope.dialogTitle = "工单网元信息";
-
-    if ($scope.currentView === undefined) {
-        workitemService.querySingleItem($routeParams.number).then(function(result) {
-            $scope.currentView = result;
-            $scope.platformInfos = workItemDialog.calculatePlatformInfo($scope.currentView.comments);
-            $scope.feedbackInfos = workItemDialog.calculateFeedbackInfo($scope.currentView.feedbackContents);
-        });
-    } else {
-        for (var i = 0; i < $scope.viewData.items.length; i++) {
-            if ($scope.viewData.items[i].serialNumber === $routeParams.number) {
-                $scope.currentView = $scope.viewData.items[i];
-                $scope.platformInfos = workItemDialog.calculatePlatformInfo($scope.currentView.comments);
-                $scope.feedbackInfos = workItemDialog.calculateFeedbackInfo($scope.currentView.feedbackContents);
-                break;
-            }
-        }
-    }
+    workitemService.querySingleItem($routeParams.number).then(function (result) {
+        $scope.currentView = result;
+        $scope.platformInfos = workItemDialog.calculatePlatformInfo($scope.currentView.comments);
+        $scope.feedbackInfos = workItemDialog.calculateFeedbackInfo($scope.currentView.feedbackContents);
+    });
 
 });
+
+app.controller("kpi.workitem.details.district", function($scope, $routeParams, workitemService, workItemDialog) {
+    $scope.gobackPath = $scope.rootPath + "stat/" + $routeParams.district;
+    $scope.gobackTitle = "返回工单统计-" + $routeParams.district;
+
+    workitemService.querySingleItem($routeParams.number).then(function (result) {
+        $scope.currentView = result;
+        $scope.platformInfos = workItemDialog.calculatePlatformInfo($scope.currentView.comments);
+        $scope.feedbackInfos = workItemDialog.calculateFeedbackInfo($scope.currentView.feedbackContents);
+    });
+})
