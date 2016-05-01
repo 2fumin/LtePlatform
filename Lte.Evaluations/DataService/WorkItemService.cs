@@ -91,14 +91,11 @@ namespace Lte.Evaluations.DataService
         public int QueryTotalItems(string statCondition, string typeCondition, string district)
         {
             var predict = (statCondition + '_' + typeCondition).GetWorkItemFilter();
-            var towns = _townRepository.GetAllList(x => x.DistrictName == district);
-            if (!towns.Any()) return 0;
-            var eNodebs = from eNodeb in _eNodebRepository.GetAllList()
-                join town in towns on eNodeb.TownId equals town.Id
-                select eNodeb;
             var items = predict == null ? _repository.GetAllList() : _repository.GetAllList(predict);
-            return
-                (from item in items join eNodeb in eNodebs on item.ENodebId equals eNodeb.ENodebId select item).Count();
+            if (!items.Any()) return 0;
+            var views = Mapper.Map<List<WorkItem>, List<WorkItemView>>(items).ToList();
+            views.ForEach(x => x.UpdateTown(_eNodebRepository, _btsRepository, _townRepository));
+            return views.Count(x => x.District == district);
         }
 
         public async Task<Tuple<int, int, int>> QueryTotalItemsThisMonth()
@@ -128,16 +125,11 @@ namespace Lte.Evaluations.DataService
             int itemsPerPage, int page)
         {
             var predict = (statCondition + '_' + typeCondition).GetWorkItemFilter();
-            var towns = _townRepository.GetAllList(x => x.DistrictName == district);
-            if (!towns.Any()) return new List<WorkItemView>();
-            var eNodebs = from eNodeb in _eNodebRepository.GetAllList()
-                          join town in towns on eNodeb.TownId equals town.Id
-                          select eNodeb;
             var stats = predict == null ? _repository.GetAllList() : _repository.GetAllList(predict);
             var views = Mapper.Map<List<WorkItem>, List<WorkItemView>>(stats);
-            var districtViews = (from view in views join eNodeb in eNodebs on view.ENodebId equals eNodeb.ENodebId select view).ToList();
+            var districtViews = views.ToList();
             districtViews.ForEach(x => x.UpdateTown(_eNodebRepository, _btsRepository, _townRepository));
-            return districtViews.Skip(itemsPerPage*(page - 1)).Take(itemsPerPage);
+            return districtViews.Where(x => x.District == district).Skip(itemsPerPage*(page - 1)).Take(itemsPerPage);
         }
 
         public async Task<IEnumerable<WorkItemView>> QueryViews(int eNodebId)
