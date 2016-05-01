@@ -115,6 +115,28 @@
                 $log.info('Modal dismissed at: ' + new Date());
             });
         },
+        showDetails: function(view) {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: '/appViews/WorkItem/DetailsDialog.html',
+                controller: 'workitem.details.dialog',
+                size: 'lg',
+                resolve: {
+                    dialogTitle: function () {
+                        return view.serialNumber + "工单信息";
+                    },
+                    input: function () {
+                        return view;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (output) {
+                console.log(output);
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        },
         calculatePlatformInfo: function (comments) {
             var platformInfos = [];
             var fields = comments.split('[');

@@ -1,0 +1,114 @@
+﻿<table class="table table-striped">
+    <thead>
+        <tr>
+            <th style="width: 100px">项目</th>
+            <th>
+                信息
+                <a class="btn btn-success btn-xs" style="float:right" ng-href="{{gobackPath}}" ng-if="gobackPath">
+                    {{gobackTitle}}
+                </a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>工单类型</td>
+            <td>{{currentView.workItemType}}</td>
+        </tr>
+        <tr>
+            <td>工单子类型</td>
+            <td>{{currentView.workItemSubType}}</td>
+        </tr>
+        <tr>
+            <td>基站编号</td>
+            <td>
+                {{currentView.eNodebId}}
+                <a class="btn btn-primary btn-xs" style="float: right"
+                   ng-href="{{rootPath}}eNodeb/{{currentView.eNodebId}}/{{currentView.serialNumber}}"
+                   ng-if="currentView.eNodebId > 10000">
+                    LTE基站信息
+                </a>
+                <a class="btn btn-primary btn-xs" style="float: right"
+                   ng-href="{{rootPath}}bts/{{currentView.eNodebId}}/{{currentView.serialNumber}}"
+                   ng-if="currentView.eNodebId > 0 && currentView.eNodebId <= 10000">
+                    CDMA基站信息
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>扇区编号</td>
+            <td>
+                {{currentView.sectorId}}
+                <a class="btn btn-primary btn-xs" style="float: right"
+                   ng-href="{{rootPath}}cell/{{currentView.eNodebId}}/{{currentView.sectorId}}/{{currentView.serialNumber}}"
+                   ng-if="currentView.eNodebId > 10000">
+                    LTE小区信息
+                </a>
+                <a class="btn btn-primary btn-xs" style="float: right"
+                   ng-href="{{rootPath}}cdmaCell/{{currentView.eNodebId}}/{{currentView.sectorId}}/{{currentView.serialNumber}}"
+                   ng-if="currentView.eNodebId > 0 && currentView.eNodebId <= 10000">
+                    CDMA小区信息
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>区域信息</td>
+            <td>
+                {{currentView.city}}
+                {{currentView.district}}
+                {{currentView.town}}
+            </td>
+        </tr>
+        <tr>
+            <td>派单时间</td>
+            <td>{{currentView.beginTime}}</td>
+        </tr>
+        <tr>
+            <td>回单期限</td>
+            <td>{{currentView.deadline}}</td>
+        </tr>
+        <tr>
+            <td>重复信息</td>
+            <td>
+                重复派单次数：{{currentView.repeatTimes}}
+                ；驳回次数：{{currentView.repeatTimes}}
+            </td>
+        </tr>
+        <tr>
+            <td>责任人</td>
+            <td>{{currentView.staffName}}</td>
+        </tr>
+        <tr>
+            <td>反馈时间</td>
+            <td>{{currentView.feedbackTime}}</td>
+        </tr>
+        <tr>
+            <td>完成时间</td>
+            <td>{{currentView.finishTime}}</td>
+        </tr>
+        <tr>
+            <td>定位原因</td>
+            <td>{{currentView.workItemCause}}</td>
+        </tr>
+        <tr>
+            <td>工单状态</td>
+            <td>{{currentView.workItemState}}</td>
+        </tr>
+        <tr>
+            <td>平台信息</td>
+            <td></td>
+        </tr>
+        <tr ng-repeat="info in platformInfos">
+            <td>{{info.time}}</td>
+            <td>{{info.contents}}</td>
+        </tr>
+        <tr>
+            <td>反馈信息</td>
+            <td></td>
+        </tr>
+        <tr ng-repeat="info in feedbackInfos">
+            <td>{{info.time}}</td>
+            <td>{{info.contents}}</td>
+        </tr>
+    </tbody>
+</table>

@@ -513,6 +513,8 @@
     <Content Include="appViews\WorkItem\CellInfo.html" />
     <Content Include="appViews\WorkItem\Charts.html" />
     <Content Include="appViews\WorkItem\Details.html" />
+    <Content Include="appViews\WorkItem\DetailsDialog.html" />
+    <Content Include="appViews\WorkItem\DetailsTable.html" />
     <Content Include="appViews\WorkItem\DistrictList.html" />
     <Content Include="appViews\WorkItem\ENodebInfo.html" />
     <Content Include="appViews\WorkItem\FeedbackDialog.html" />
