@@ -123,6 +123,8 @@
                 var deferred = $q.defer();
                 $http.put(appUrlService.getApiUrl('WorkItem')).success(function (result) {
                     deferred.resolve(result);
+                }).success(function (result) {
+                    deferred.resolve(result);
                 })
                 .error(function (reason) {
                     deferred.reject(reason);
@@ -141,6 +143,8 @@
                     headers: {
                         'Authorization': 'Bearer ' + appUrlService.getAccessToken()
                     }
+                }).success(function (result) {
+                    deferred.resolve(result);
                 })
                 .error(function (reason) {
                     deferred.reject(reason);

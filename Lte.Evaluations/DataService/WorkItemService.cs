@@ -163,16 +163,14 @@ namespace Lte.Evaluations.DataService
             return views.MapTo<IEnumerable<WorkItemChartView>>();
         }
 
-        public void FeedBack(string userName, string message, string serialNumber)
+        public bool FeedBack(string userName, string message, string serialNumber)
         {
             var item = _repository.GetAll().FirstOrDefault(x => x.SerialNumber == serialNumber);
-            if (item != null)
-            {
-                var now = DateTime.Now;
-                item.FeedbackContents += "[" + now + "]" + userName + ":" + message;
-                item.FeedbackTime = now;
-                _repository.Update(item);
-            }
+            if (item == null) return false;
+            var now = DateTime.Now;
+            item.FeedbackContents += "[" + now + "]" + userName + ":" + message;
+            item.FeedbackTime = now;
+            return _repository.Update(item) != null;
         }
     }
 }

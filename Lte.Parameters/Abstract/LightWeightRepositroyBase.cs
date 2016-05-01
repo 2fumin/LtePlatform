@@ -146,11 +146,11 @@ namespace Lte.Parameters.Abstract
 
         public TEntity Update(TEntity entity)
         {
-            Guard.ArgumentNotNull(entity, "entity");
-            var info = Entities.Attach(entity);
+            if (context.Set<TEntity>().Local.Contains(entity))
+                context.Set<TEntity>().Attach(entity);
             context.Entry(entity).State = EntityState.Modified;
             context.SaveChanges();
-            return info;
+            return entity;
         }
 
         public Task<TEntity> UpdateAsync(TEntity entity)

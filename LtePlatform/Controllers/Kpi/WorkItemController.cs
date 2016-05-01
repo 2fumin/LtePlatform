@@ -123,9 +123,9 @@ namespace LtePlatform.Controllers.Kpi
         [HttpPost]
         [ApiDoc("反馈工单信息")]
         [ApiParameterDoc("view", "反馈的工单信息，包括序列码和反馈内容")]
-        public void Post(WorkItemFeedbackView view)
+        public bool Post(WorkItemFeedbackView view)
         {
-            _service.FeedBack(User.Identity.Name, view.Message, view.SerialNumber);
+            return _service.FeedBack(User.Identity.Name, view.Message, view.SerialNumber);
         }
     }
 
