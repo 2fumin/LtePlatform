@@ -241,7 +241,7 @@ namespace LtePlatform.Areas.HelpPage
             var modelGenerator = config.GetModelDescriptionGenerator();
             var sampleGenerator = config.GetHelpPageSampleGenerator();
             apiModel.UriParameters = apiModel.ApiDescription.GenerateUriParameters(modelGenerator);
-            GenerateRequestModelDescription(apiModel, modelGenerator, sampleGenerator);
+            apiModel.RequestModelDescription = apiModel.ApiDescription.GenerateRequestModelDescription(modelGenerator, sampleGenerator);
             GenerateResourceDescription(apiModel, modelGenerator);
             GenerateSamples(apiModel, sampleGenerator);
 
@@ -337,28 +337,29 @@ namespace LtePlatform.Areas.HelpPage
             return parameterDescription;
         }
 
-        private static void GenerateRequestModelDescription(HelpPageApiModel apiModel, ModelDescriptionGenerator modelGenerator, HelpPageSampleGenerator sampleGenerator)
+        public static ModelDescription GenerateRequestModelDescription(this ApiDescription apiDescription, 
+            ModelDescriptionGenerator modelGenerator, 
+            HelpPageSampleGenerator sampleGenerator)
         {
-            var apiDescription = apiModel.ApiDescription;
             foreach (var apiParameter in apiDescription.ParameterDescriptions)
             {
                 if (apiParameter.Source == ApiParameterSource.FromBody)
                 {
                     var parameterType = apiParameter.ParameterDescriptor.ParameterType;
-                    apiModel.RequestModelDescription = modelGenerator.GetOrCreateModelDescription(parameterType);
-                    apiModel.RequestDocumentation = apiParameter.Documentation;
+                    return modelGenerator.GetOrCreateModelDescription(parameterType);
                 }
-                else if (apiParameter.ParameterDescriptor != null &&
+                if (apiParameter.ParameterDescriptor != null &&
                     apiParameter.ParameterDescriptor.ParameterType == typeof(HttpRequestMessage))
                 {
                     var parameterType = sampleGenerator.ResolveHttpRequestMessageType(apiDescription);
 
                     if (parameterType != null)
                     {
-                        apiModel.RequestModelDescription = modelGenerator.GetOrCreateModelDescription(parameterType);
+                        return modelGenerator.GetOrCreateModelDescription(parameterType);
                     }
                 }
             }
+            return null;
         }
 
         private static void GenerateResourceDescription(HelpPageApiModel apiModel, ModelDescriptionGenerator modelGenerator)

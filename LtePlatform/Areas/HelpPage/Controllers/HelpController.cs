@@ -69,7 +69,9 @@ namespace LtePlatform.Areas.HelpPage.Controllers
                 .FirstOrDefault(x => x.GetFriendlyId() == apiId);
             if (description == null) return null;
             var modelGenerator = Configuration.GetModelDescriptionGenerator();
+            var sampleGenerator = Configuration.GetHelpPageSampleGenerator();
             var parametersDescriptions = description.GenerateUriParameters(modelGenerator);
+            var requestModelDescription = description.GenerateRequestModelDescription(modelGenerator, sampleGenerator);
             return Json(new
             {
                 ParameterDescriptions = parametersDescriptions.Select(x => new
@@ -79,7 +81,11 @@ namespace LtePlatform.Areas.HelpPage.Controllers
                     TypeDocumentation = x.TypeDescription.Documentation,
                     TypeName = x.TypeDescription.Name,
                     AnnotationDoc = x.Annotations.Select(an => an.Documentation)
-                })
+                }),
+                Sources = description.ParameterDescriptions.Select(x=>x.Source),
+                modelDoc = requestModelDescription?.Documentation,
+                modelType = requestModelDescription?.ModelType.ToString(),
+                modelName = requestModelDescription?.Name
             },
                 JsonRequestBehavior.AllowGet);
         }
