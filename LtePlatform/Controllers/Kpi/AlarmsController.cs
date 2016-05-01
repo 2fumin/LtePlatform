@@ -43,6 +43,9 @@ namespace LtePlatform.Controllers.Kpi
         }
 
         [HttpPost]
+        [ApiDoc("修改数据库中的华为告警记录")]
+        [ApiParameterDoc("cellDef", "华为小区信息")]
+        [ApiResponse("修改结果")]
         public int Post(HuaweiLocalCellDef cellDef)
         {
             return _service.DumpHuaweiAlarmInfo(cellDef);

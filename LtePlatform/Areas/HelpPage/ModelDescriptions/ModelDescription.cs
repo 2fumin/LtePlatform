@@ -10,6 +10,8 @@ namespace LtePlatform.Areas.HelpPage.ModelDescriptions
     {
         public string Documentation { get; set; }
 
+        public string ParameterDocumentation { get; set; }
+
         public Type ModelType { get; set; }
 
         public string Name { get; set; }

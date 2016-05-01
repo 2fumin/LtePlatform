@@ -346,7 +346,9 @@ namespace LtePlatform.Areas.HelpPage
                 if (apiParameter.Source == ApiParameterSource.FromBody)
                 {
                     var parameterType = apiParameter.ParameterDescriptor.ParameterType;
-                    return modelGenerator.GetOrCreateModelDescription(parameterType);
+                    var result = modelGenerator.GetOrCreateModelDescription(parameterType);
+                    result.ParameterDocumentation = apiParameter.Documentation;
+                    return result;
                 }
                 if (apiParameter.ParameterDescriptor != null &&
                     apiParameter.ParameterDescriptor.ParameterType == typeof(HttpRequestMessage))
@@ -355,7 +357,9 @@ namespace LtePlatform.Areas.HelpPage
 
                     if (parameterType != null)
                     {
-                        return modelGenerator.GetOrCreateModelDescription(parameterType);
+                        var result = modelGenerator.GetOrCreateModelDescription(parameterType);
+                        result.ParameterDocumentation = apiParameter.Documentation;
+                        return result;
                     }
                 }
             }

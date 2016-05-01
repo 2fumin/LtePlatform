@@ -82,10 +82,13 @@ namespace LtePlatform.Areas.HelpPage.Controllers
                     TypeName = x.TypeDescription.Name,
                     AnnotationDoc = x.Annotations.Select(an => an.Documentation)
                 }),
-                Sources = description.ParameterDescriptions.Select(x=>x.Source),
-                modelDoc = requestModelDescription?.Documentation,
-                modelType = requestModelDescription?.ModelType.ToString(),
-                modelName = requestModelDescription?.Name
+                FromBodyModel = requestModelDescription==null?null: new
+                {
+                    requestModelDescription.Name,
+                    Type = requestModelDescription.ModelType.ToString(),
+                    requestModelDescription.Documentation,
+                    requestModelDescription.ParameterDocumentation
+                }
             },
                 JsonRequestBehavior.AllowGet);
         }
