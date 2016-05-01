@@ -46,7 +46,7 @@
                     templateUrl: viewDir + "WorkItem/ForCell.html",
                     controller: "workitem.details"
                 })
-                .when('/workItems/:cellId/:sectorId', {
+                .when('/workItems/:cellId/:sectorId/:name', {
                     templateUrl: viewDir + "WorkItem/ForCell.html",
                     controller: "rutrace.workitems"
                 })
