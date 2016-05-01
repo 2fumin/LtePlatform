@@ -9,6 +9,9 @@
     $scope.feedback = function (view) {
         workItemDialog.feedback(view, $scope.queryWorkItems);
     };
+    $scope.showDetails = function (view) {
+        workItemDialog.showDetails(view);
+    };
     networkElementService.queryBtsInfo($routeParams.btsId).then(function (result) {
         $scope.btsDetails = result;
     });

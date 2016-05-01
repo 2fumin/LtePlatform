@@ -9,6 +9,9 @@
     $scope.feedback = function (view) {
         workItemDialog.feedback(view, $scope.queryWorkItems);
     };
+    $scope.showDetails = function (view) {
+        workItemDialog.showDetails(view);
+    };
     networkElementService.queryCdmaCellInfo($routeParams.btsId, $routeParams.sectorId).then(function (result) {
         $scope.cdmaCellDetails = result;
     });
