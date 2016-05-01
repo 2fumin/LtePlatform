@@ -11,15 +11,23 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="parameter in parameters">
-            <td class="parameter-name">{{parameter.Name}}</td>
-            <td class="parameter-documentation">{{parameter.Documentation}}</td>
-            <td class="parameter-name">{{parameter.TypeName}}</td>
-            <td class="parameter-documentation">{{parameter.TypeDocumentation}}</td>
-            <td class="parameter-annotations">
-                <p ng-show="!parameter.AnnotationDoc.length">无</p>
-                <p ng-repeat="doc in parameter.AnnotationDoc">{{doc}}</p>
-            </td>
-        </tr>
+    <tr ng-repeat="parameter in parameters">
+        <td class="parameter-name">{{parameter.Name}}</td>
+        <td class="parameter-documentation">{{parameter.Documentation}}</td>
+        <td class="parameter-name">{{parameter.TypeName}}</td>
+        <td class="parameter-documentation">{{parameter.TypeDocumentation}}</td>
+        <td class="parameter-annotations">
+            <p ng-show="!parameter.AnnotationDoc.length">无</p>
+            <p ng-repeat="doc in parameter.AnnotationDoc">{{doc}}</p>
+        </td>
+    </tr>
+    <tr ng-if="bodyModel">
+        <td class="parameter-name">{{bodyModel.Name}}</td>
+        <td class="parameter-documentation">{{bodyModel.ParameterDocumentation}}</td>
+        <td class="parameter-name">{{bodyModel.Type}}</td>
+        <td class="parameter-documentation">{{bodyModel.Documentation}}</td>
+        <td class="parameter-annotations">
+        </td>
+    </tr>
     </tbody>
 </table>

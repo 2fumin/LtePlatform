@@ -9,6 +9,7 @@
     }).success(function (result) {
         $scope.page.title = result.RelativePath;
         $scope.page.introduction = result.ResponseDoc;
-        $scope.parameters = result.ParameterDescriptions
+        $scope.parameters = result.ParameterDescriptions;
+        $scope.bodyModel = result.FromBodyModel;
     });
 });
