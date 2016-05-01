@@ -108,8 +108,9 @@
             });
 
             modalInstance.result.then(function (output) {
-                workitemService.feedback(output, view.serialNumber).then(function () {
-                    callbackFunc();
+                workitemService.feedback(output, view.serialNumber).then(function (result) {
+                    if (result)
+                        callbackFunc();
                 });
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
