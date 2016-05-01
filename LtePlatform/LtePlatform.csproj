@@ -791,6 +791,7 @@
     <Content Include="Scripts\kpi\basic\trend.controller.js" />
     <Content Include="Scripts\kpi\precise.import.js" />
     <Content Include="Scripts\kpi\workitem\chart.controller.js" />
+    <Content Include="Scripts\kpi\workitem\details.dialog.js" />
     <Content Include="Scripts\kpi\workitem\route.controller.js" />
     <Content Include="Scripts\kpi\workitem\feedback.dialog.js" />
     <Content Include="Scripts\kpi\workitem\workitem.district.js" />
