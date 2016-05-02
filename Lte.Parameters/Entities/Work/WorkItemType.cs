@@ -18,7 +18,8 @@ namespace Lte.Parameters.Entities.Work
         DailyTask,
         DailyReport,
         Yilutong,
-        KeySite
+        KeySite,
+        SelfConstruction
     }
 
     public enum WorkItemSubtype: short

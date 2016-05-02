@@ -20,7 +20,8 @@ namespace Lte.Parameters.Entities.Work
             new Tuple<WorkItemType, string>(WorkItemType.DailyTask, "日常网优作业计划"),
             new Tuple<WorkItemType, string>(WorkItemType.DailyReport, "日报"),
             new Tuple<WorkItemType, string>(WorkItemType.Yilutong, "翼路通"),
-            new Tuple<WorkItemType, string>(WorkItemType.KeySite, "省-集团测试保障-关键站点清单收集")
+            new Tuple<WorkItemType, string>(WorkItemType.KeySite, "省-集团测试保障-关键站点清单收集"),
+            new Tuple<WorkItemType, string>(WorkItemType.SelfConstruction, "自建工单")
         };
 
         public static string GetWorkItemTypeDescription(this WorkItemType type)

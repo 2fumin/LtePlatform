@@ -32,6 +32,16 @@ namespace Lte.Parameters.Concrete
                             x.Type == WorkItemType.Kpi2G || x.Type == WorkItemType.Kpi4G));
         }
 
+        public async Task<WorkItem> GetPreciseExistedAsync(int eNodebId, byte sectorId)
+        {
+            return
+                await
+                    FirstOrDefaultAsync(
+                        x =>
+                            x.ENodebId == eNodebId && x.SectorId == sectorId && x.Subtype == WorkItemSubtype.PreciseRate &&
+                            x.State != WorkItemState.Finished);
+        }
+
         public async Task<List<WorkItem>> GetAllListAsync(int eNodebId, byte sectorId)
         {
             return await GetAllListAsync(x => x.ENodebId == eNodebId && x.SectorId == sectorId);

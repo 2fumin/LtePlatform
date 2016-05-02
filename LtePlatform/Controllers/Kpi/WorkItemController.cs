@@ -8,6 +8,7 @@ using System.Web.Http;
 using Lte.Evaluations.DataService;
 using Lte.Evaluations.DataService.Basic;
 using Lte.Evaluations.ViewModels;
+using Lte.Evaluations.ViewModels.Precise;
 using Lte.Parameters.Entities.Work;
 using LtePlatform.Models;
 
@@ -123,6 +124,7 @@ namespace LtePlatform.Controllers.Kpi
         [HttpPost]
         [ApiDoc("反馈工单信息")]
         [ApiParameterDoc("view", "反馈的工单信息，包括序列码和反馈内容")]
+        [ApiResponse("反馈是否成功（写入数据库）")]
         public bool Post(WorkItemFeedbackView view)
         {
             return _service.FeedBack(User.Identity.Name, view.Message, view.SerialNumber);
@@ -145,6 +147,27 @@ namespace LtePlatform.Controllers.Kpi
         public async Task<Tuple<int, int, int>> Get()
         {
             return await _service.QueryTotalItemsThisMonth();
+        }
+    }
+
+    [ApiControl("精确覆盖率类工单查询控制器")]
+    [Authorize]
+    public class PreciseWorkItemController : ApiController
+    {
+        private readonly WorkItemService _service;
+
+        public PreciseWorkItemController(WorkItemService service)
+        {
+            _service = service;
+        }
+
+        [HttpPost]
+        [ApiDoc("创建精确覆盖率工单")]
+        [ApiParameterDoc("view", "精确覆盖率的工单信息，包括小区信息、精确覆盖率信息、统计起止日期等")]
+        [ApiResponse("创建是否成功，如成功返回工单编号，否则返回空值")]
+        public async Task<string> Post(PreciseImportView view)
+        {
+            return await _service.ConstructPreciseWorkItem(view.View, view.Begin, view.End, User.Identity.Name);
         }
     }
 }

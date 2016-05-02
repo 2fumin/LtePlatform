@@ -4,7 +4,6 @@ using System.Linq;
 using Lte.Evaluations.MapperSerive.Kpi;
 using Lte.Evaluations.Policy;
 using Lte.Evaluations.ViewModels.Precise;
-using Lte.Parameters.Abstract;
 using Lte.Parameters.Abstract.Basic;
 using Lte.Parameters.Abstract.Kpi;
 using Lte.Parameters.Entities.Basic;
@@ -16,18 +15,13 @@ namespace Lte.Evaluations.DataService.Kpi
     {
         private readonly IPreciseCoverage4GRepository _repository;
         private readonly IENodebRepository _eNodebRepository;
-        private readonly ICellRepository _cellRepository;
-        private readonly IInfrastructureRepository _infrastructureRepository;
 
         public static int TotalMrsThreshold { get; } = 3000;
 
-        public PreciseStatService(IPreciseCoverage4GRepository repository, IENodebRepository eNodebRepository,
-            ICellRepository cellRepository, IInfrastructureRepository infrastructureRepository)
+        public PreciseStatService(IPreciseCoverage4GRepository repository, IENodebRepository eNodebRepository)
         {
             _repository = repository;
             _eNodebRepository = eNodebRepository;
-            _cellRepository = cellRepository;
-            _infrastructureRepository = infrastructureRepository;
         }
 
         public IEnumerable<Precise4GView> GetTopCountViews(DateTime begin, DateTime end, int topCount,
@@ -38,8 +32,7 @@ namespace Lte.Evaluations.DataService.Kpi
             var orderResult = GetTopCountStats(begin, end, topCount, policy);
             return orderResult.Select(x =>
             {
-                var view = Precise4GView.ConstructView(x.PreciseCoverage4G, _eNodebRepository, _infrastructureRepository,
-                    _cellRepository);
+                var view = Precise4GView.ConstructView(x.PreciseCoverage4G, _eNodebRepository);
                 view.TopDates = x.TopDates;
                 return view;
             });
@@ -53,8 +46,7 @@ namespace Lte.Evaluations.DataService.Kpi
             var orderResult = GetTopCountStats(begin, end, topCount, policy, eNodebs);
             return orderResult.Select(x =>
             {
-                var view = Precise4GView.ConstructView(x.PreciseCoverage4G, _eNodebRepository, _infrastructureRepository,
-                    _cellRepository);
+                var view = Precise4GView.ConstructView(x.PreciseCoverage4G, _eNodebRepository);
                 view.TopDates = x.TopDates;
                 return view;
             });

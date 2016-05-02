@@ -7,6 +7,7 @@ using AutoMapper;
 using Lte.Domain.LinqToExcel;
 using Lte.Evaluations.Policy;
 using Lte.Evaluations.ViewModels;
+using Lte.Evaluations.ViewModels.Precise;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Abstract.Basic;
 using Lte.Parameters.Entities.Work;
@@ -163,6 +164,34 @@ namespace Lte.Evaluations.DataService
             item.FeedbackContents += "[" + now + "]" + userName + ":" + message;
             item.FeedbackTime = now;
             return _repository.Update(item) != null;
+        }
+
+        public async Task<string> ConstructPreciseWorkItem(Precise4GView view, DateTime begin, DateTime end, string userName)
+        {
+            var existedItem = await _repository.GetPreciseExistedAsync(view.CellId, view.SectorId);
+            if (existedItem != null) return null;
+            var serialNumber = "SELF-FS-Precise-" + view.CellId + "-" + view.SectorId + "-" + begin.ToString("yyyyMMdd") +
+                               "-" + end.ToString("yyyyMMdd");
+            existedItem = await _repository.FirstOrDefaultAsync(x => x.SerialNumber == serialNumber);
+            if (existedItem != null) return null;
+            var item = new WorkItem
+            {
+                BeginTime = end,
+                Cause = WorkItemCause.WeakCoverage,
+                SerialNumber = serialNumber,
+                ENodebId = view.CellId,
+                SectorId = view.SectorId,
+                Deadline = end.AddMonths(1),
+                StaffName = userName,
+                Type = WorkItemType.SelfConstruction,
+                Subtype = WorkItemSubtype.PreciseRate,
+                State = WorkItemState.ToBeSigned,
+                Comments =
+                    "[" + DateTime.Now + "]" + userName + ": 创建工单" + serialNumber + ";精确覆盖率=" + view.SecondRate +
+                    ";MR总数=" + view.TotalMrs + ";TOP天数=" + view.TopDates
+            };
+            var result = await _repository.InsertAsync(item);
+            return result?.SerialNumber;
         }
     }
 }

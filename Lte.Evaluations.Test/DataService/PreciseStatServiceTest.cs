@@ -28,8 +28,7 @@ namespace Lte.Evaluations.Test.DataService
         public void TestFixtureSetup()
         {
             KpiMapperService.MapPreciseStat();
-            _service = new PreciseStatService(_repository.Object, _eNodebRepository.Object, _cellRepository.Object,
-                _infrastructure.Object);
+            _service = new PreciseStatService(_repository.Object, _eNodebRepository.Object);
             _repository.MockOperations();
             _eNodebRepository.MockOperations();
             _eNodebRepository.MockThreeENodebs();

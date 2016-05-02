@@ -1,5 +1,5 @@
-﻿using AutoMapper;
-using Lte.Parameters.Abstract;
+﻿using System;
+using AutoMapper;
 using Lte.Parameters.Abstract.Basic;
 using Lte.Parameters.Entities.Kpi;
 
@@ -25,13 +25,21 @@ namespace Lte.Evaluations.ViewModels.Precise
 
         public int TopDates { get; set; }
         
-        public static Precise4GView ConstructView(PreciseCoverage4G stat, IENodebRepository repository,
-            IInfrastructureRepository infrastructureRepository, ICellRepository cellRepository)
+        public static Precise4GView ConstructView(PreciseCoverage4G stat, IENodebRepository repository)
         {
             var view = Mapper.Map<PreciseCoverage4G, Precise4GView>(stat);
             var eNodeb = repository.GetByENodebId(stat.CellId);
             view.ENodebName = eNodeb?.Name;
             return view;
         }
+    }
+
+    public class PreciseImportView
+    {
+        public Precise4GView View { get; set; }
+
+        public DateTime Begin { get; set; }
+
+        public DateTime End { get; set; }
     }
 }
