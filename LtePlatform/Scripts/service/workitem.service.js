@@ -202,6 +202,27 @@
                     deferred.reject(reason);
                 });
                 return deferred.promise;
+            },
+            constructPreciseItem: function (cell, begin, end) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'POST',
+                    url: appUrlService.getApiUrl('PreciseWorkItem'),
+                    data: {
+                        view: cell,
+                        begin: begin,
+                        end: end
+                    },
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
             }
         };
     });
