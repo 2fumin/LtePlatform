@@ -43,12 +43,14 @@
         });
     };
     $scope.monitorAll = function () {
-        for (var i = 0; i < $scope.topCells.length; i++) {
-            var cell = $scope.topCells[i];
+        angular.forEach($scope.topCells, function(cell) {
             if (cell.isMonitored === false) {
                 topPreciseService.addMonitor(cell);
             }
-        }
+        });
+    };
+    $scope.createWorkitem = function(cell) {
+        console.log(cell);
     };
 
     topPreciseService.getOrderSelection().then(function (result) {
