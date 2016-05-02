@@ -421,6 +421,7 @@
     <Content Include="appViews\College\Table\CollegeCellBasicInfo.html" />
     <Content Include="appViews\College\Table\CollegeCellInfoBox.html" />
     <Content Include="appViews\College\Test\GenerateReport.html" />
+    <Content Include="appViews\Evaluation\Home.html" />
     <Content Include="appViews\HeaderMenu.html" />
     <Content Include="appViews\Home\Kpi2G.html" />
     <Content Include="appViews\Home\Kpi4G.html" />
@@ -766,6 +767,8 @@
     <Content Include="Scripts\angular-ui\uib\timepicker.js" />
     <Content Include="Scripts\angular-ui\uib\tooltip.js" />
     <Content Include="Scripts\angular-ui\uib\typeahead.js" />
+    <Content Include="Scripts\app\evaluation\home.js" />
+    <Content Include="Scripts\app\evaluation\route.controller.js" />
     <Content Include="Scripts\app\home.kpi2G.js" />
     <Content Include="Scripts\app\home.kpi4G.js" />
     <Content Include="Scripts\app\home.network.js" />
@@ -1015,7 +1018,7 @@
     <Content Include="Scripts\college\precise.viewmodel.js" />
     <Content Include="Scripts\college\test.controller.js" />
     <Content Include="Scripts\college\test.viewmodel.js" />
-    <Content Include="Scripts\dt\list.viewmodel.js" />
+    <Content Include="Scripts\app\dt\list.viewmodel.js" />
     <Content Include="Scripts\highcharts\adapters\standalone-framework.js" />
     <Content Include="Scripts\highcharts\adapters\standalone-framework.src.js" />
     <Content Include="Scripts\highcharts\highcharts-ng.js" />
