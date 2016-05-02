@@ -3,7 +3,7 @@
     $scope.dialogTitle = dialogTitle;
     $scope.message = "";
     $scope.platformInfos = workItemDialog.calculatePlatformInfo($scope.currentView.comments);
-    $scope.feedbackInfos = workItemDialog.calculateFeedbackInfo($scope.currentView.feedbackContents);
+    $scope.feedbackInfos = workItemDialog.calculatePlatformInfo($scope.currentView.feedbackContents);
     $scope.preventChangeParentView = true;
 
     $scope.ok = function () {
