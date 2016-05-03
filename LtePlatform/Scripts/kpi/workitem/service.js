@@ -116,7 +116,7 @@
                 $log.info('Modal dismissed at: ' + new Date());
             });
         },
-        showDetails: function(view) {
+        showDetails: function (view, callbackFunc) {
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: '/appViews/WorkItem/DetailsDialog.html',
@@ -132,10 +132,10 @@
                 }
             });
 
-            modalInstance.result.then(function (output) {
-                console.log(output);
+            modalInstance.result.then(function () {
+                if (callbackFunc) callbackFunc();
             }, function () {
-                $log.info('Modal dismissed at: ' + new Date());
+                if (callbackFunc) callbackFunc();
             });
         },
         calculatePlatformInfo: function (comments) {

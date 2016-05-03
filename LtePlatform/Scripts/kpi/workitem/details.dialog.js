@@ -11,7 +11,10 @@
     };
     $scope.signIn = function() {
         workitemService.signIn($scope.currentView.serialNumber).then(function(result) {
-            if (result) $scope.currentView = result;
+            if (result) {
+                $scope.currentView = result;
+                $scope.feedbackInfos = workItemDialog.calculatePlatformInfo($scope.currentView.feedbackContents);
+            }
         });
     };
     $scope.cancel = function () {

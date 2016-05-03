@@ -10,7 +10,7 @@
         workItemDialog.feedback(view, $scope.queryWorkItems);
     };
     $scope.showDetails = function (view) {
-        workItemDialog.showDetails(view);
+        workItemDialog.showDetails(view, $scope.queryWorkItems);
     };
     $scope.queryWorkItems();
 });
