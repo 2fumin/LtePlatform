@@ -367,12 +367,12 @@
                 zoomLevel = zoomLevel || 15;
                 map.centerAndZoom(new BMap.Point(longtitute, lattitute), zoomLevel);
             },
-            generateSector: function (data, sectorColor) {                
+            generateSector: function (data, sectorColor, scalor) {                
                 var center = { lng: data.longtitute, lat: data.lattitute };
                 var iangle = 65;
                 var irotation = data.azimuth - iangle / 2;
                 var zoom = map.getZoom();
-                var points = geometryService.generateSectorPolygonPoints(center, irotation, iangle, zoom);
+                var points = geometryService.generateSectorPolygonPoints(center, irotation, iangle, zoom, scalor);
                 sectorColor = sectorColor || "blue";
                 var sector = new BMap.Polygon(points, {
                     strokeWeight: 2,

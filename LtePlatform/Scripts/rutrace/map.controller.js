@@ -1,5 +1,5 @@
 ﻿app.controller("rutrace.map", function ($scope, $timeout, $routeParams, $location, $uibModal, $log,
-    geometryService, baiduMapService, networkElementService, menuItemService) {
+    geometryService, baiduMapService, networkElementService, menuItemService, cellPreciseService) {
     $scope.page.title = "小区地理化分析" + ": " + $routeParams.name + "-" + $routeParams.sectorId;
     menuItemService.updateMenuItem($scope.menuItems, 1,
         $scope.page.title,
@@ -50,36 +50,34 @@
         });
     };
 
-    networkElementService.queryCellSectors([$scope.topStat.current]).then(function (result) {
-        geometryService.transformToBaidu(result[0].longtitute, result[0].lattitute).then(function (coors) {
-            baiduMapService.initializeMap("all-map", 12);
-            var xOffset = coors.x - result[0].longtitute;
-            var yOffset = coors.y - result[0].lattitute;
-            result[0].longtitute = coors.x;
-            result[0].lattitute = coors.y;
+    cellPreciseService.queryOneWeekKpi($routeParams.cellId, $routeParams.sectorId).then(function(cellView) {
+        networkElementService.queryCellSectors([cellView]).then(function (result) {
+            geometryService.transformToBaidu(result[0].longtitute, result[0].lattitute).then(function (coors) {
+                baiduMapService.initializeMap("all-map", 12);
+                var xOffset = coors.x - result[0].longtitute;
+                var yOffset = coors.y - result[0].lattitute;
+                result[0].longtitute = coors.x;
+                result[0].lattitute = coors.y;
 
-            var sectorTriangle = baiduMapService.generateSector(result[0], "blue");
-            baiduMapService.addOneSectorToScope(sectorTriangle, $scope.showPrecise, result[0]);
+                var sectorTriangle = baiduMapService.generateSector(result[0], "blue", 1.25);
+                baiduMapService.addOneSectorToScope(sectorTriangle, $scope.showPrecise, result[0]);
 
-            baiduMapService.setCellFocus(result[0].longtitute, result[0].lattitute, 15);
-            var range = baiduMapService.getCurrentMapRange(-xOffset, -yOffset);
-            
-            networkElementService.queryRangeSectors(range, [
-                {
-                    cellId: $scope.topStat.current.cellId,
-                    sectorId: $scope.topStat.current.sectorId
-                }
-            ]).then(function (sectors) {
-                for (var i = 0; i < sectors.length; i++) {
-                    sectors[i].longtitute += xOffset;
-                    sectors[i].lattitute += yOffset;
-                    baiduMapService.addOneSectorToScope(baiduMapService.generateSector(sectors[i], "green"),
-                        $scope.showNeighbor, sectors[i]);
-                }
+                baiduMapService.setCellFocus(result[0].longtitute, result[0].lattitute, 15);
+                var range = baiduMapService.getCurrentMapRange(-xOffset, -yOffset);
+
+                networkElementService.queryRangeSectors(range, []).then(function (sectors) {
+                    angular.forEach(sectors, function(sector) {
+                        sector.longtitute += xOffset;
+                        sector.lattitute += yOffset;
+                        baiduMapService.addOneSectorToScope(baiduMapService.generateSector(sector, "green"),
+                            $scope.showNeighbor, sector);
+                    });
+                });
             });
+
         });
-        
     });
+    
 
             
     $scope.toggleNeighbors = function() {

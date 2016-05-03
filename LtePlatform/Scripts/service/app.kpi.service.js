@@ -547,6 +547,23 @@
                 });
                 return deferred.promise;
             },
+            queryOneWeekKpi: function (cellId, sectorId) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('PreciseStat'),
+                    params: {
+                        'cellId': cellId,
+                        'sectorId': sectorId
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
+            },
             getMrsOptions: function (stats, title) {
                 var chart = new ComboChart();
                 chart.title.text = title;

@@ -31,11 +31,11 @@ var getPosition = function(centre, r, angle) {
 // irotation: 方位角
 // iangle: 水平波瓣宽度
 // zoom: 当前百度地图缩放级别
-var generateSectorPolygonPoints = function(centre, irotation, iangle, zoom) {
+var generateSectorPolygonPoints = function(centre, irotation, iangle, zoom, scalor) {
     var assemble = [];
     var dot;
     var i;
-    var r = getRadius(zoom).rSector;
+    var r = getRadius(zoom * (scalor || 1)).rSector;
 
     for (i = 0; i <= r; i += r / 2) {
         dot = getPosition(centre, i, irotation);
@@ -50,9 +50,9 @@ var generateSectorPolygonPoints = function(centre, irotation, iangle, zoom) {
     return assemble;
 };
 
-var getRadius = function(zoom) {
-    var rSation = 70;
-    var rSector = 0.2;
+var getRadius = function(zoom, scalor) {
+    var rSation = 70 * scalor;
+    var rSector = 0.2 * scalor;
     switch (zoom) {
     case 15:
         rSector = rSector * 0.75;
