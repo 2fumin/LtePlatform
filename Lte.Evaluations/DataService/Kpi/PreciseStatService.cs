@@ -120,11 +120,21 @@ namespace Lte.Evaluations.DataService.Kpi
             return orderResult;
         }
 
-        public IEnumerable<PreciseCoverage4G> GetOneWeekStats(int cellId, byte sectorId, DateTime date)
+        public Precise4GView GetOneWeekStats(int cellId, byte sectorId, DateTime date)
         {
             var begin = date.AddDays(-7);
-            var end = date.AddDays(1);
-            return GetTimeSpanStats(cellId, sectorId, begin, end);
+            var end = date;
+            var stats = GetTimeSpanStats(cellId, sectorId, begin, end).ToArray();
+            var sumStat = new PreciseCoverage4G
+            {
+                CellId = cellId,
+                SectorId = sectorId,
+                FirstNeighbors = stats.Sum(q => q.FirstNeighbors),
+                SecondNeighbors = stats.Sum(q => q.SecondNeighbors),
+                ThirdNeighbors = stats.Sum(q => q.ThirdNeighbors),
+                TotalMrs = stats.Sum(q => q.TotalMrs)
+            };
+            return Precise4GView.ConstructView(sumStat, _eNodebRepository);
         }
 
         public IEnumerable<PreciseCoverage4G> GetTimeSpanStats(int cellId, byte sectorId, DateTime begin, DateTime end)

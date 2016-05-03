@@ -1,17 +1,9 @@
 ﻿app.controller("rutrace.map", function ($scope, $timeout, $routeParams, $location, $uibModal, $log,
     geometryService, baiduMapService, networkElementService, menuItemService) {
-    var cell = $scope.topStat.current;
-    $scope.range = {};
-    if ($routeParams.name !== cell.eNodebName + "-" + cell.sectorName) {
-        if ($scope.topStat.cells[$routeParams.name] === undefined) {
-            $location.path('/Rutrace#/top');
-        }
-        $scope.topStat.current = $scope.topStat.cells[$routeParams.name];
-    }
-    $scope.page.title = "小区地理化分析" + "-" + $routeParams.name;
+    $scope.page.title = "小区地理化分析" + ": " + $routeParams.name + "-" + $routeParams.sectorId;
     menuItemService.updateMenuItem($scope.menuItems, 1,
         $scope.page.title,
-        $scope.rootPath + "baidumap/" + $routeParams.name);
+        $scope.rootPath + "baidumap/" + $routeParams.cellId + "/" + $routeParams.sectorId + "/" + $routeParams.name);
 
     $scope.showPrecise = function (precise) {
         var modalInstance = $uibModal.open({

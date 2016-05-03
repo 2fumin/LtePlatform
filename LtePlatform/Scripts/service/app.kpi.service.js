@@ -506,8 +506,8 @@
                 };
             },
             getStrengthColumnOptions: function (interferenceCells, mrCount, currentCellName) {
-                over6DbColumn = new Column3d();
-                over10DbColumn = new Column3d();
+                var over6DbColumn = new Column3d();
+                var over10DbColumn = new Column3d();
                 over6DbColumn.series[0].name = '6dB干扰强度';
                 over10DbColumn.series[0].name = '10dB干扰强度';
                 over6DbColumn.title.text = currentCellName + ': 6dB干扰干扰强度';

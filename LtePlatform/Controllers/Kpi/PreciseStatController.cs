@@ -63,11 +63,10 @@ namespace LtePlatform.Controllers.Kpi
         [ApiDoc("指定小区（基站）编号、扇区编号和日期，获得一周以内的精确覆盖率统计记录")]
         [ApiParameterDoc("cellId", "小区（基站）编号")]
         [ApiParameterDoc("sectorId", "扇区编号")]
-        [ApiParameterDoc("date", "日期（最后一天）")]
-        [ApiResponse("一周以内的精确覆盖率统计记录")]
-        public IEnumerable<PreciseCoverage4G> Get(int cellId, byte sectorId, DateTime date)
+        [ApiResponse("一周以内的精确覆盖率聚合统计记录")]
+        public Precise4GView Get(int cellId, byte sectorId)
         {
-            return _service.GetOneWeekStats(cellId, sectorId, date);
+            return _service.GetOneWeekStats(cellId, sectorId, DateTime.Today);
         }
 
         [HttpGet]
