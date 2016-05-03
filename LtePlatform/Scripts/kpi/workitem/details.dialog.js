@@ -9,7 +9,9 @@
     $scope.ok = function () {
         $uibModalInstance.close($scope.message);
     };
-
+    $scope.signIn = function() {
+        console.log($scope.currentView);
+    };
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
