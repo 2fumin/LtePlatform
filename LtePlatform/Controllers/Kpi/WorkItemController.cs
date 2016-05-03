@@ -112,6 +112,15 @@ namespace LtePlatform.Controllers.Kpi
             return _service.Query(serialNumber);
         }
 
+        [HttpGet]
+        [ApiDoc("根据工单序列码查询对应的工单，并进行签收")]
+        [ApiParameterDoc("signinNumber", "序列码")]
+        [ApiResponse("对应的工单，这里假定工单的序列码是唯一的，若查不到或更新失败，则返回空值")]
+        public async Task<WorkItemView> SignIn(string signinNumber)
+        {
+            return await _service.SignInWorkItem(signinNumber, User.Identity.Name);
+        }
+
         [HttpPut]
         [AllowAnonymous]
         [ApiDoc("更新LTE扇区编号")]

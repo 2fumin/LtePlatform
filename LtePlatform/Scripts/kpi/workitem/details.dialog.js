@@ -1,4 +1,4 @@
-﻿app.controller('workitem.details.dialog', function ($scope, $uibModalInstance, input, dialogTitle, workItemDialog) {
+﻿app.controller('workitem.details.dialog', function ($scope, $uibModalInstance, input, dialogTitle, workItemDialog, workitemService) {
     $scope.currentView = input;
     $scope.dialogTitle = dialogTitle;
     $scope.message = "";
@@ -10,7 +10,9 @@
         $uibModalInstance.close($scope.message);
     };
     $scope.signIn = function() {
-        console.log($scope.currentView);
+        workitemService.signIn($scope.currentView.serialNumber).then(function(result) {
+            if (result) $scope.currentView = result;
+        });
     };
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');

@@ -103,6 +103,25 @@
                 });
                 return deferred.promise;
             },
+            signIn: function (serialNumber) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('WorkItem'),
+                    params: {
+                        signinNumber: serialNumber
+                    },
+                    headers: {
+                        'Authorization': 'Bearer ' + appUrlService.getAccessToken()
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
+            },
             queryChartData: function () {
                 var deferred = $q.defer();
                 $http({

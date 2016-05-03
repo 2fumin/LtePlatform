@@ -193,5 +193,18 @@ namespace Lte.Evaluations.DataService
             var result = await _repository.InsertAsync(item);
             return result?.SerialNumber;
         }
+
+        public async Task<WorkItemView> SignInWorkItem(string serialNumber, string userName)
+        {
+            var existedItem = await _repository.FirstOrDefaultAsync(x => x.SerialNumber == serialNumber);
+            if (existedItem == null) return null;
+            existedItem.FeedbackContents += "[" + DateTime.Now + "]" + userName + ": 签收工单";
+            existedItem.FeedbackTime = DateTime.Now;
+            existedItem.State = WorkItemState.Processing;
+            var result = await _repository.UpdateAsync(existedItem);
+            var view = result == null ? null : Mapper.Map<WorkItem, WorkItemView>(result);
+            view?.UpdateTown(_eNodebRepository, _btsRepository, _townRepository);
+            return view;
+        }
     }
 }
