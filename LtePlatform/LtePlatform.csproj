@@ -904,7 +904,6 @@
     <Content Include="Scripts\app\html5csv.js" />
     <Content Include="Scripts\app\lz-string.js" />
     <Content Include="Scripts\app\lz-string.min.js" />
-    <Content Include="Scripts\baidu\cloud\geography.map.js" />
     <Content Include="Scripts\baidu\cloud\page.js" />
     <Content Include="Scripts\baidu\cloud\timecontrol.js" />
     <Content Include="Scripts\baidu\college.helper.js" />

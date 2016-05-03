@@ -204,11 +204,11 @@
             getPosition: function(centre, r, angle) {
                 return getPositionFunc(centre, r, angle);
             },
-            generateSectorPolygonPoints: function(centre, irotation, iangle, zoom) {
+            generateSectorPolygonPoints: function(centre, irotation, iangle, zoom, scalor) {
                 var assemble = [];
                 var dot;
                 var i;
-                var r = getRadiusFunc(zoom).rSector;
+                var r = getRadiusFunc(zoom).rSector * (scalor || 1);
 
                 for (i = 0; i <= r; i += r / 2) {
                     dot = getPositionFunc(centre, i, irotation);
