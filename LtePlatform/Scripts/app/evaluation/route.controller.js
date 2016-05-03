@@ -1,5 +1,5 @@
 ﻿app.config([
-        '$routeProvider', function ($routeProvider) {
+        '$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
             var rootDir = "/appViews/Evaluation/";
             $routeProvider
                 .when('/', {
@@ -41,6 +41,8 @@
                 .otherwise({
                     redirectTo: '/'
                 });
+            $httpProvider.defaults.useXDomain = true;
+            delete $httpProvider.defaults.headers.common['X-Requested-With'];
         }
 ])
     .run(function ($rootScope) {

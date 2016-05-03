@@ -146,7 +146,7 @@
             }
         }
     })
-    .factory('geometryService', function ($http, $q) {
+    .factory('geometryService', function ($http, $q, appUrlService) {
         var getDistanceFunc = function(p1Lat, p1Lng, p2Lat, p2Lng) {
             var earthRadiusKm = 6378.137;
             var dLat1InRad = p1Lat * (Math.PI / 180);
@@ -264,6 +264,17 @@
                 .error(function (reason) {
                     deferred.reject(reason);
                 });
+                return deferred.promise;;
+            },
+            queryWandonglouyu: function () {
+                var deferred = $q.defer();
+                $http.get(appUrlService.getPlanUrlHost() + 'phpApi/wandonglouyu.php')
+                    .success(function(result) {
+                        deferred.resolve(result);
+                    })
+                    .error(function(reason) {
+                        deferred.reject(reason);
+                    });
                 return deferred.promise;;
             }
         };

@@ -29,6 +29,20 @@
                 });
             });
         };
+        var showPhpElements = function (elements, showElementInfo) {
+            geometryService.transformToBaidu(elements[0].longtitute, elements[0].lattitute).then(function (coors) {
+                var xOffset = coors.x - parseFloat(elements[0].longtitute);
+                var yOffset = coors.y - parseFloat(elements[0].lattitute);
+                baiduMapService.setCellFocus(coors.x, coors.y, 16);
+                angular.forEach(elements, function (element) {
+                    element.longtitute = xOffset + parseFloat(element.longtitute);
+                    element.lattitute = yOffset + parseFloat(element.lattitute);
+                    var marker = baiduMapService.generateIconMarker(element.longtitute, element.lattitute,
+                        "/Content/Images/Hotmap/site_or.png");
+                    baiduMapService.addOneMarkerToScope(marker, showElementInfo, element);
+                });
+            });
+        };
         var showCdmaElements = function (btss, showBtsInfo, showCellInfo) {
             geometryService.transformToBaidu(btss[0].longtitute, btss[0].lattitute).then(function (coors) {
                 var xOffset = coors.x - btss[0].longtitute;
@@ -81,6 +95,9 @@
                     baiduMapService.setCellFocus(coors.x, coors.y, 16);
                     showCellSectors(cells, showCellInfo, xOffset, yOffset);
                 });
+            },
+            showPhpElements: function(elements, showElementInfo) {
+                return showPhpElements(elements, showElementInfo);
             }
         }
     })

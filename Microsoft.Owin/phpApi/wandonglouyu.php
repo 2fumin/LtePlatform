@@ -1,6 +1,7 @@
 <?php
 include_once("encode_json.php");
 header('content-type:application/json;charset=utf8');
+header('Access-Control-Allow-Origin: *');
 include_once("zonghexinxiConnection.php");
 $sqlwd = "SELECT 经度, 纬度, 楼群名称, 类型, RSRP达标率, 评估结果1, 是否5米地图区域 FROM wandonglouyu";
 $resultwd = mysql_query($sqlwd);
