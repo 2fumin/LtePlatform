@@ -20,6 +20,8 @@ namespace Lte.Parameters.Abstract
 
         Task<List<WorkItem>> GetAllKpiListAsync(DateTime begin, DateTime end);
 
+        Task<List<WorkItem>> GetAllPreciseListAsync(DateTime begin, DateTime end);
+
         Task<WorkItem> GetPreciseExistedAsync(int eNodebId, byte sectorId);
     }
 }

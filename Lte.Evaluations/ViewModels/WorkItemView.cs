@@ -71,30 +71,26 @@ namespace Lte.Evaluations.ViewModels
         {
             if (ENodebId > 10000)
             {
-                var eNodeb = eNodebRepository.GetByENodebId(ENodebId);
-                if (eNodeb != null)
-                {
-                    var town = eNodeb.TownId == -1 ? null : townRepository.Get(eNodeb.TownId);
-                    if (town != null)
-                    {
-                        City = town.CityName;
-                        District = town.DistrictName;
-                        Town = town.TownName;
-                        return;
-                    }
-                }
+                UpdateTown(eNodebRepository, townRepository);
             }
             var bts = btsRepository.GetByBtsId(ENodebId);
-            if (bts != null)
-            {
-                var town = bts.TownId == -1 ? null : townRepository.Get(bts.TownId);
-                if (town != null)
-                {
-                    City = town.CityName;
-                    District = town.DistrictName;
-                    Town = town.TownName;
-                }
-            }
+            if (bts == null) return;
+            var town = bts.TownId == -1 ? null : townRepository.Get(bts.TownId);
+            if (town == null) return;
+            City = town.CityName;
+            District = town.DistrictName;
+            Town = town.TownName;
+        }
+
+        public void UpdateTown(IENodebRepository eNodebRepository, ITownRepository townRepository)
+        {
+            var eNodeb = eNodebRepository.GetByENodebId(ENodebId);
+            if (eNodeb == null) return;
+            var town = eNodeb.TownId == -1 ? null : townRepository.Get(eNodeb.TownId);
+            if (town == null) return;
+            City = town.CityName;
+            District = town.DistrictName;
+            Town = town.TownName;
         }
     }
 
