@@ -491,6 +491,7 @@
     <Content Include="appViews\Rutrace\TrendChart.html" />
     <Content Include="appViews\Rutrace\WorkItem\CellTrend.html" />
     <Content Include="appViews\Rutrace\WorkItem\ForCell.html" />
+    <Content Include="appViews\Rutrace\WorkItem\ForCity.html" />
     <Content Include="appViews\Test\Chapter10\DateTimeTest.html" />
     <Content Include="appViews\Test\Chapter10\demo.accordion.html" />
     <Content Include="appViews\Test\Chapter10\demo.alert.html" />
@@ -1129,7 +1130,7 @@
     <Content Include="Scripts\rutrace\interference.controller.js" />
     <Content Include="Scripts\rutrace\menu.controller.js" />
     <Content Include="Scripts\rutrace\topcells.controller.js" />
-    <Content Include="Scripts\rutrace\workitem.list.controller.js" />
+    <Content Include="Scripts\rutrace\workitem.list..js" />
     <Content Include="Scripts\sammy-0.7.5.js" />
     <Content Include="Scripts\sammy-0.7.5.min.js" />
     <Content Include="Scripts\_references.js" />

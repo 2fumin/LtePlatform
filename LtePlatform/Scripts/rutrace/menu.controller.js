@@ -51,8 +51,12 @@
                     controller: "rutrace.workitems"
                 })
                 .when('/workitemDistrict/:district', {
-                    templateUrl: viewDir + "WorkItem/ForCell.html",
-                    controller: "rutrace.workitem.district"
+                    templateUrl: viewDir + "WorkItem/ForCity.html",
+                    controller: "workitem.district"
+                })
+                .when('/workitemCity', {
+                    templateUrl: viewDir + "WorkItem/ForCity.html",
+                    controller: "workitem.city"
                 })
                 .when('/cellTrend/:cellId/:sectorId/:name', {
                     templateUrl: viewDir + "WorkItem/CellTrend.html",
