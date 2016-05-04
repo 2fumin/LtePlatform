@@ -1,4 +1,4 @@
-﻿app.controller("workitem.city", function ($scope, workitemService) {
+﻿app.controller("workitem.city", function ($scope, workitemService, workItemDialog) {
     $scope.page.title = "精确覆盖优化工单一览";
     var lastWeek = new Date();
     lastWeek.setDate(lastWeek.getDate() - 100);
@@ -10,10 +10,13 @@
         value: new Date(),
         opened: false
     };
-    $scope.showDetails = function() {
+    $scope.queryWorkItems = function () {
         workitemService.queryPreciseDateSpan($scope.beginDate.value, $scope.endDate.value).then(function(views) {
             $scope.viewItems = views;
         });
     };
-    $scope.showDetails();
+    $scope.showDetails = function (view) {
+        workItemDialog.showDetails(view, $scope.queryWorkItems);
+    };
+    $scope.queryWorkItems();
 });
