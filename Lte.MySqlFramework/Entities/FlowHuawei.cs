@@ -19,6 +19,10 @@ namespace Lte.MySqlFramework.Entities
 
         public int MaxUsers { get; set; }
 
+        public double AverageActiveUsers { get; set; }
+
+        public int MaxActiveUsers { get; set; }
+
         public double UplinkAverageUsers { get; set; }
 
         public int UplinkMaxUsers { get; set; }

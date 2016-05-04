@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Concrete\MySqlContext.cs" />
     <Compile Include="Entities\FlowHuawei.cs" />
+    <Compile Include="Entities\FlowHuaweiCsv.cs" />
     <Compile Include="Migrations\201605040638276_Initialize_MySql_20160504.cs" />
     <Compile Include="Migrations\201605040638276_Initialize_MySql_20160504.Designer.cs">
       <DependentUpon>201605040638276_Initialize_MySql_20160504.cs</DependentUpon>
@@ -66,6 +67,10 @@
     <Compile Include="Migrations\201605040857589_Initialize_MySql_201605041.cs" />
     <Compile Include="Migrations\201605040857589_Initialize_MySql_201605041.Designer.cs">
       <DependentUpon>201605040857589_Initialize_MySql_201605041.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605040929003_Initialize_MySql_201605042.cs" />
+    <Compile Include="Migrations\201605040929003_Initialize_MySql_201605042.Designer.cs">
+      <DependentUpon>201605040929003_Initialize_MySql_201605042.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -87,6 +92,10 @@
       <Project>{ee27e11c-6c25-4d85-ad17-e0801d7e83d7}</Project>
       <Name>Castle.Windsor</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lte.Domain\Lte.Domain.csproj">
+      <Project>{adeef82d-6389-47c4-8f7c-d7f85c01d64e}</Project>
+      <Name>Lte.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -98,6 +107,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605040857589_Initialize_MySql_201605041.resx">
       <DependentUpon>201605040857589_Initialize_MySql_201605041.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605040929003_Initialize_MySql_201605042.resx">
+      <DependentUpon>201605040929003_Initialize_MySql_201605042.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
