@@ -151,7 +151,7 @@ namespace Lte.Evaluations.DataService
 
         public async Task<IEnumerable<WorkItemView>> QueryPreciseViews(DateTime begin, DateTime end)
         {
-            var statList = await _repository.GetAllPreciseListAsync(begin, end);
+            var statList = await _repository.GetUnfinishedPreciseListAsync(begin, end);
             var views = Mapper.Map<List<WorkItem>, List<WorkItemView>>(statList);
             views.ForEach(x => x.UpdateTown(_eNodebRepository, _btsRepository, _townRepository));
             return views;

@@ -209,6 +209,23 @@
                 });
                 return deferred.promise;
             },
+            queryPreciseDateSpan: function (begin, end) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('PreciseWorkItem'),
+                    params: {
+                        begin: begin,
+                        end: end
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+                return deferred.promise;
+            },
             queryCurrentMonth: function () {
                 var deferred = $q.defer();
                 $http({
