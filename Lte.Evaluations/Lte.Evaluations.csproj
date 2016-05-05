@@ -103,6 +103,7 @@
     <Compile Include="DataService\Dump\NewCellListContainer.cs" />
     <Compile Include="DataService\Dump\NewENodebListContainer.cs" />
     <Compile Include="DataService\Basic\ENodebQueryService.cs" />
+    <Compile Include="DataService\Kpi\FlowService.cs" />
     <Compile Include="DataService\Mr\CellStasticService.cs" />
     <Compile Include="DataService\Mr\InterferenceMatrixService.cs" />
     <Compile Include="DataService\Kpi\TopConnection3GService.cs" />

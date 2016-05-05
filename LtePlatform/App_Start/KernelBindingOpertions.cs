@@ -6,6 +6,8 @@ using Lte.Evaluations.DataService.Dump;
 using Lte.Evaluations.DataService.Kpi;
 using Lte.Evaluations.DataService.Mr;
 using Lte.Evaluations.DataService.Switch;
+using Lte.MySqlFramework.Abstract;
+using Lte.MySqlFramework.Concrete;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Abstract.Basic;
 using Lte.Parameters.Abstract.College;
@@ -32,6 +34,10 @@ namespace LtePlatform
 
             ninjectKernel.Bind<IDbContextProvider<EFParametersContext>>()
                 .To<SimpleDbContextProvider<EFParametersContext>>();
+
+            ninjectKernel.Bind<MySqlContext>().ToSelf();
+
+            ninjectKernel.Bind<IDbContextProvider<MySqlContext>>().To<SimpleDbContextProvider<MySqlContext>>();
 
             ninjectKernel.Bind<ITownRepository>().To<EFTownRepository>();
 
@@ -120,6 +126,8 @@ namespace LtePlatform
             ninjectKernel.Bind<IPDSCHCfgRepository>().To<PDSCHCfgRepository>();
 
             ninjectKernel.Bind<ICellDlpcPdschPaRepository>().To<CellDlpcPdschPaRepository>();
+
+            ninjectKernel.Bind<IFlowHuaweiRepository>().To<FlowHuaweiRepository>();
 
             ninjectKernel.Bind<CdmaRegionStatService>().ToSelf();
 
