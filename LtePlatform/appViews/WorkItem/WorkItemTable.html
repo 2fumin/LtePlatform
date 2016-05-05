@@ -2,10 +2,11 @@
     <thead>
         <tr>
             <th>区域</th>
-            <th>编号</th>
+            <th>工单编号</th>
+            <th>基站名称</th>
             <th>类型</th>
             <th>子类型</th>
-            <th>状态</th>
+            <th style="min-width: 50px">状态</th>
             <th>时限</th>
             <th>操作</th>
         </tr>
@@ -13,7 +14,8 @@
     <tbody ng-repeat="view in viewItems">
         <tr>
             <td>{{view.district}}</td>
-            <td>{{view.serialNumber}}</td>
+            <td style="max-width: 150px">{{view.serialNumber}}</td>
+            <td>{{view.eNodebName}}</td>
             <td>{{view.workItemType}}</td>
             <td>{{view.workItemSubType}}</td>
             <td>{{view.workItemState}}</td>

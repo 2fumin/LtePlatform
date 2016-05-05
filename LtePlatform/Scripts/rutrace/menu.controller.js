@@ -42,7 +42,7 @@
                     templateUrl: viewDir + "Map/Index.html",
                     controller: "rutrace.map"
                 })
-                .when('/details/:number', {
+                .when('/details/:cellId/:sectorId/:name', {
                     templateUrl: viewDir + "WorkItem/ForCell.html",
                     controller: "workitem.details"
                 })

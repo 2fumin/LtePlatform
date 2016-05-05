@@ -857,8 +857,8 @@
     <Content Include="Scripts\rutrace\top.district.controller.js" />
     <Content Include="Scripts\rutrace\trend.chart.controller.js" />
     <Content Include="Scripts\rutrace\trend.controller.js" />
-    <Content Include="Scripts\rutrace\workitem.details.js" />
-    <Content Include="Scripts\rutrace\workitems.controller.js" />
+    <Content Include="Scripts\rutrace\workitem\workitem.details.js" />
+    <Content Include="Scripts\rutrace\workitem\workitems.controller.js" />
     <Content Include="Scripts\service\app.authorize.service.js" />
     <Content Include="Scripts\service\app.kpi.service.js" />
     <Content Include="Scripts\service\app.parameters.service.js" />
@@ -1130,7 +1130,7 @@
     <Content Include="Scripts\rutrace\interference.controller.js" />
     <Content Include="Scripts\rutrace\menu.controller.js" />
     <Content Include="Scripts\rutrace\topcells.controller.js" />
-    <Content Include="Scripts\rutrace\workitem.list..js" />
+    <Content Include="Scripts\rutrace\workitem\workitem.list..js" />
     <Content Include="Scripts\sammy-0.7.5.js" />
     <Content Include="Scripts\sammy-0.7.5.min.js" />
     <Content Include="Scripts\_references.js" />

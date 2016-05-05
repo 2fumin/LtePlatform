@@ -66,6 +66,9 @@ namespace Lte.Evaluations.ViewModels
         [MemberDoc("本平台反馈信息")]
         public string FeedbackContents { get; set; }
 
+        [MemberDoc("基站名称")]
+        public string ENodebName { get; set; }
+
         public void UpdateTown(IENodebRepository eNodebRepository, IBtsRepository btsRepository,
             ITownRepository townRepository)
         {
@@ -75,6 +78,7 @@ namespace Lte.Evaluations.ViewModels
             }
             var bts = btsRepository.GetByBtsId(ENodebId);
             if (bts == null) return;
+            ENodebName = bts.Name;
             var town = bts.TownId == -1 ? null : townRepository.Get(bts.TownId);
             if (town == null) return;
             City = town.CityName;
@@ -86,6 +90,7 @@ namespace Lte.Evaluations.ViewModels
         {
             var eNodeb = eNodebRepository.GetByENodebId(ENodebId);
             if (eNodeb == null) return;
+            ENodebName = eNodeb.Name;
             var town = eNodeb.TownId == -1 ? null : townRepository.Get(eNodeb.TownId);
             if (town == null) return;
             City = town.CityName;

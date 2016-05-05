@@ -23,6 +23,7 @@
             <td>基站编号</td>
             <td>
                 {{currentView.eNodebId}}
+                <span ng-if="currentView.eNodebName">({{currentView.eNodebName}})</span>
                 <a class="btn btn-primary btn-xs" style="float: right"
                    ng-href="{{rootPath}}eNodeb/{{currentView.eNodebId}}/{{currentView.serialNumber}}"
                    ng-if="currentView.eNodebId > 10000  && !preventChangeParentView">

@@ -11,7 +11,10 @@
         opened: false
     };
     $scope.queryWorkItems = function () {
-        workitemService.queryPreciseDateSpan($scope.beginDate.value, $scope.endDate.value).then(function(views) {
+        workitemService.queryPreciseDateSpan($scope.beginDate.value, $scope.endDate.value).then(function (views) {
+            angular.forEach(views, function(view) {
+                view.detailsPath = $scope.rootPath + "details/" + view.eNodebId + "/" + view.sectorId + "/" + view.eNodebName;
+            });
             $scope.viewItems = views;
         });
     };
