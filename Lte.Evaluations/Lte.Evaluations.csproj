@@ -205,6 +205,10 @@
       <Project>{adeef82d-6389-47c4-8f7c-d7f85c01d64e}</Project>
       <Name>Lte.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lte.MySqlFramework\Lte.MySqlFramework.csproj">
+      <Project>{8ccf960a-1969-4df2-b81b-d3e46f0cd3d7}</Project>
+      <Name>Lte.MySqlFramework</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lte.Parameters\Lte.Parameters.csproj">
       <Project>{25b6ccb6-4b12-4df2-b4c9-2d30ae6bd254}</Project>
       <Name>Lte.Parameters</Name>

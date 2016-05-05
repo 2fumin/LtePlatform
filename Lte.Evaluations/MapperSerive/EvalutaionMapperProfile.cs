@@ -4,6 +4,7 @@ using Lte.Evaluations.ViewModels;
 using Lte.Evaluations.ViewModels.Basic;
 using Lte.Evaluations.ViewModels.College;
 using Lte.Evaluations.ViewModels.RegionKpi;
+using Lte.MySqlFramework.Abstract;
 using Lte.Parameters.Entities;
 using Lte.Parameters.Entities.Basic;
 using Lte.Parameters.Entities.ExcelCsv;
@@ -45,6 +46,8 @@ namespace Lte.Evaluations.MapperSerive
             BaiduMapperService.MapCdmaCellView();
             BaiduMapperService.MapCellView();
             BaiduMapperService.MapDtViews();
+
+            MySqlMapperService.MapFlow();
 
             AutoMapperHelper.CreateMap(typeof (ENodebView));
             AutoMapperHelper.CreateMap(typeof (CdmaBtsView));
