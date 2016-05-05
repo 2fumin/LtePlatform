@@ -17,7 +17,7 @@ namespace Lte.Parameters.Test.Entities
         [TestFixtureSetUp]
         public void TestFixtureSetup()
         {
-            AlarmMapperService.MapAlarms();
+            CoreMapperService.MapAlarms();
         }
 
         [Test]
@@ -135,7 +135,7 @@ namespace Lte.Parameters.Test.Entities
             Assert.AreEqual(statList.Count, count);
         }
 
-        [TestCase("huawei", 6)]
+        [TestCase("huawei", 1)]
         [TestCase("huawei9273", 9272)]
         public void Test_Integrity_Huawei(string fileName, int count)
         {

@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\MySqlMapperService.cs" />
     <Compile Include="Concrete\MySqlContext.cs" />
     <Compile Include="Entities\FlowHuawei.cs" />
     <Compile Include="Entities\FlowHuaweiCsv.cs" />

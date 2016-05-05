@@ -20,7 +20,7 @@ namespace Lte.Parameters.Test.Entities
         [TestFixtureSetUp]
         public void TestFixtureSetup()
         {
-            AlarmMapperService.MapAlarms();
+            CoreMapperService.MapAlarms();
         }
         
         [Test]

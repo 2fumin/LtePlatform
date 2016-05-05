@@ -18,8 +18,7 @@ namespace Lte.Evaluations.MapperSerive
         {
             CoreMapperService.MapCell();
             CoreMapperService.MapDtItems();
-
-            AlarmMapperService.MapAlarms();
+            CoreMapperService.MapAlarms();
             StatMapperService.MapPreciseCoverage();
             StatMapperService.MapTopConnection3G();
             StatMapperService.MapTopDrop2G();

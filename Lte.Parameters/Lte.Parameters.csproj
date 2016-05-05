@@ -275,7 +275,6 @@
       <DependentUpon>201605040553139_Initialize_MySql_20160504.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="MockOperations\AlarmMapperService.cs" />
     <Compile Include="MockOperations\CoreMapperService.cs" />
     <Compile Include="MockOperations\InterferenceMatrixCsvContainer.cs" />
     <Compile Include="MockOperations\MockItemsAudited.cs" />

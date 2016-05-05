@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Lte.Domain.LinqToCsv.Context;
 using Lte.Domain.LinqToCsv.Description;
 using Lte.Domain.Regular;
-using Lte.Evaluations.DataService;
 using Lte.Parameters.Entities;
 using Lte.Parameters.MockOperations;
 using NUnit.Framework;
 
-namespace Lte.Evaluations.Test.DataService
+namespace Lte.Evaluations.DataService
 {
     [TestFixture]
     public class AlarmUploadTest
@@ -22,7 +19,7 @@ namespace Lte.Evaluations.Test.DataService
         [TestFixtureSetUp]
         public void TestFixtureSetup()
         {
-            AlarmMapperService.MapAlarms();
+            CoreMapperService.MapAlarms();
         }
 
         [SetUp]
