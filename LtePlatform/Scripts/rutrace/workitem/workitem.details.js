@@ -1,4 +1,5 @@
-﻿app.controller("workitem.details", function($scope, $routeParams, workitemService, workItemDialog) {
+﻿app.controller("workitem.details", function ($scope, $routeParams, workitemService, workItemDialog) {
+    $scope.page.title = "工单编号" + $routeParams.number + "信息"
     $scope.queryWorkItems = function () {
         workitemService.querySingleItem($routeParams.number).then(function (result) {
             $scope.currentView = result;

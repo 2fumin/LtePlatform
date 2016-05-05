@@ -13,7 +13,7 @@
     $scope.queryWorkItems = function () {
         workitemService.queryPreciseDateSpan($scope.beginDate.value, $scope.endDate.value).then(function (views) {
             angular.forEach(views, function(view) {
-                view.detailsPath = $scope.rootPath + "details/" + view.eNodebId + "/" + view.sectorId + "/" + view.eNodebName;
+                view.detailsPath = $scope.rootPath + "details/" + view.serialNumber;
             });
             $scope.viewItems = views;
         });
