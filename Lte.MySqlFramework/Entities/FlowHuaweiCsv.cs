@@ -78,16 +78,25 @@ namespace Lte.MySqlFramework.Entities
         [CsvColumn(Name = "统计周期内上行DCI所使用的PDCCH CCE个数 (无)")]
         public int UplinkDciCces { get; set; }
 
-        public double DownlinkDciCceRate { get; set; }
+        [CsvColumn(Name = "统计周期内下行DCI所使用的PDCCH CCE个数 (无)")]
+        public int DownlinkDciCces { get; set; }
 
+        [CsvColumn(Name = "统计周期内可用的PDCCH CCE的个数 (无)")]
+        public int TotalCces { get; set; }
+
+        [CsvColumn(Name = "PUCCH的PRB资源分配的平均值 (无)")]
         public double PucchPrbs { get; set; }
 
-        public double LastTtiUplinkFlow { get; set; }
+        [CsvColumn(Name = "使UE缓存为空的最后一个TTI所传的上行PDCP吞吐量 (比特)")]
+        public int LastTtiUplinkFlowInByte { get; set; }
 
-        public double ButLastUplinkDuration { get; set; }
+        [CsvColumn(Name = "扣除使UE缓存为空的最后一个TTI之后的上行数传时长 (毫秒)")]
+        public int ButLastUplinkDurationInMs { get; set; }
 
-        public double LastTtiDownlinkFlow { get; set; }
+        [CsvColumn(Name = "使缓存为空的最后一个TTI所传的下行PDCP吞吐量 (比特)")]
+        public int LastTtiDownlinkFlowInByte { get; set; }
 
-        public double ButLastDownlinkDuration { get; set; }
+        [CsvColumn(Name = "扣除使下行缓存为空的最后一个TTI之后的数传时长 (毫秒)")]
+        public int ButLastDownlinkDurationInMs { get; set; }
     }
 }

@@ -8,7 +8,7 @@ using Lte.Parameters.MockOperations;
 using NUnit.Framework;
 using Shouldly;
 
-namespace Lte.Evaluations.Test.MapperService
+namespace Lte.Evaluations.MapperService
 {
     [TestFixture]
     public class MapFromENodebContainerServiceTest
@@ -16,7 +16,7 @@ namespace Lte.Evaluations.Test.MapperService
         [TestFixtureSetUp]
         public void TestFixtureSetup()
         {
-            CoreMapperService.MapENodeb();
+            CoreMapperService.MapCell();
             ParametersDumpMapperService.MapFromENodebContainerService();
         }
 

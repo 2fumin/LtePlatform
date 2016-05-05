@@ -13,22 +13,14 @@ namespace Lte.Parameters.MockOperations
 {
     public static class CoreMapperService
     {
-        public static void MapCdmaCell()
-        {
-            Mapper.CreateMap<CdmaCellExcel, CdmaCell>()
-                .ForMember(d => d.Frequency, opt => opt.Ignore())
-                .ForMember(d => d.IsOutdoor, opt => opt.MapFrom(s => s.IsIndoor.Trim() == "否"));
-        }
-
         public static void MapCell()
         {
             Mapper.CreateMap<CellExcel, Cell>()
                 .ForMember(d => d.AntennaPorts, opt => opt.MapFrom(s => s.TransmitReceive.GetAntennaPortsConfig()))
                 .ForMember(d => d.IsOutdoor, opt => opt.MapFrom(s => s.IsIndoor.Trim() == "否"));
-        }
-        
-        public static void MapENodeb()
-        {
+            Mapper.CreateMap<CdmaCellExcel, CdmaCell>()
+                .ForMember(d => d.Frequency, opt => opt.Ignore())
+                .ForMember(d => d.IsOutdoor, opt => opt.MapFrom(s => s.IsIndoor.Trim() == "否"));
             Mapper.CreateMap<ENodebExcel, ENodeb>()
                 .ForMember(d => d.IsFdd,
                     opt => opt.MapFrom(s => s.DivisionDuplex.IndexOf("FDD", StringComparison.Ordinal) >= 0))

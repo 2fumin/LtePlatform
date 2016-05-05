@@ -70,6 +70,7 @@ namespace Lte.Parameters.Entities.Basic
             if (!currentFrequency.IsCdmaFrequency()) return;
             
             if (HasFrequency(currentFrequency)) return;
+            AntennaGain = cellExcelInfo.AntennaGain;
             if (Frequency1 == -1)
             {
                 Frequency1 = AddFrequency(currentFrequency);

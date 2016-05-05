@@ -16,9 +16,7 @@ namespace Lte.Evaluations.MapperSerive
     {
         protected override void Configure()
         {
-            CoreMapperService.MapCdmaCell();
             CoreMapperService.MapCell();
-            CoreMapperService.MapENodeb();
             CoreMapperService.MapDtItems();
 
             AlarmMapperService.MapAlarms();

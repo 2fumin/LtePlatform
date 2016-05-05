@@ -12,7 +12,7 @@ namespace Lte.Parameters.Test.Entities
         [TestFixtureSetUp]
         public void TestFixtureSetup()
         {
-            CoreMapperService.MapCdmaCell();
+            CoreMapperService.MapCell();
         }
 
         [TestCase(1233, 23, 1234, 37, "DO", 1, true)]
@@ -143,7 +143,7 @@ namespace Lte.Parameters.Test.Entities
             Assert.AreEqual(cell.Frequency, overallFrequency, "frequency");
             Assert.AreEqual(cell.Frequency1, 37);
             Assert.AreEqual(cell.Frequency2, frequency == 37 || !frequency.IsCdmaFrequency() ? -1 : frequency);
-            Assert.AreEqual(cell.AntennaGain, !frequency.IsCdmaFrequency() ? 12.8 : antennaGain);
+            Assert.AreEqual(cell.AntennaGain, !frequency.IsCdmaFrequency() || frequency == 37 ? 12.8 : antennaGain);
         }
 
         [TestCase(1233, 23, 1234, 37, "DO", 13.6, 3)]
@@ -188,7 +188,7 @@ namespace Lte.Parameters.Test.Entities
             Assert.AreEqual(cell.Frequency1, 37);
             Assert.AreEqual(cell.Frequency2, 78);
             Assert.AreEqual(cell.Frequency3, frequency == 37 || frequency == 78 || !frequency.IsCdmaFrequency() ? -1 : frequency);
-            Assert.AreEqual(cell.AntennaGain, !frequency.IsCdmaFrequency() ? 12.8 : antennaGain);
+            Assert.AreEqual(cell.AntennaGain, frequency == 37 || frequency == 78 || !frequency.IsCdmaFrequency() ? 12.8 : antennaGain);
         }
     }
 }

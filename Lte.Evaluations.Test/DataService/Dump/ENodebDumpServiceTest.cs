@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Lte.Domain.Regular;
-using Lte.Evaluations.DataService.Dump;
 using Lte.Evaluations.MapperSerive;
 using Lte.Evaluations.Test.DataService.Queries;
 using Lte.Evaluations.Test.MockItems;
@@ -13,7 +12,7 @@ using Moq;
 using NUnit.Framework;
 using Shouldly;
 
-namespace Lte.Evaluations.Test.DataService.Dump
+namespace Lte.Evaluations.DataService.Dump
 {
     [TestFixture]
     public class ENodebDumpServiceTest
@@ -31,7 +30,7 @@ namespace Lte.Evaluations.Test.DataService.Dump
             _townRepository.MockOpertion();
             _townRepository.MockSixTowns();
             ParametersDumpMapperService.MapFromENodebContainerService();
-            CoreMapperService.MapENodeb();
+            CoreMapperService.MapCell();
         }
 
         [SetUp]

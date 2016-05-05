@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Lte.Evaluations.DataService.Dump;
 using Lte.Evaluations.Test.MockItems;
 using Lte.Parameters.Abstract.Basic;
 using Lte.Parameters.Entities;
@@ -9,7 +8,7 @@ using Moq;
 using NUnit.Framework;
 using Shouldly;
 
-namespace Lte.Evaluations.Test.DataService.Dump
+namespace Lte.Evaluations.DataService.Dump
 {
     [TestFixture]
     public class CdmaCellDumpServiceTest
@@ -23,7 +22,7 @@ namespace Lte.Evaluations.Test.DataService.Dump
             _service=new CdmaCellDumpService(_cellRepository.Object);
             _cellRepository.MockOperations();
             _cellRepository.MockRepositorySaveItems<CdmaCell, ICdmaCellRepository>();
-            CoreMapperService.MapCdmaCell();
+            CoreMapperService.MapCell();
         }
 
         [SetUp]
