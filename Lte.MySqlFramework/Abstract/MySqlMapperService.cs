@@ -27,8 +27,10 @@ namespace Lte.MySqlFramework.Abstract
                 .ForMember(d => d.PdcpUplinkFlow, opt => opt.MapFrom(s => (double) s.PdcpUplinkFlowInByte/(1024*1024)))
                 .ForMember(d => d.DownlinkDuration, opt => opt.MapFrom(s => (double) s.DownlinkDurationInMs/1000))
                 .ForMember(d => d.UplinkDuration, opt => opt.MapFrom(s => (double) s.UplinkDurationInMs/1000))
+                .ForMember(d => d.PagingUsers, opt => opt.MapFrom(s => s.PagingUsersString.ConvertToInt(0)))
                 .ForMember(d => d.UplinkDciCceRate, opt => opt.MapFrom(s => (double) s.UplinkDciCces/s.TotalCces))
                 .ForMember(d => d.DownlinkDciCceRate, opt => opt.MapFrom(s => (double) s.DownlinkDciCces/s.TotalCces))
+                .ForMember(d => d.PucchPrbs, opt => opt.MapFrom(s => s.PucchPrbsString.ConvertToDouble(0)))
                 .ForMember(d => d.LastTtiUplinkFlow,
                     opt => opt.MapFrom(s => (double) s.LastTtiUplinkFlowInByte/(1024*1024)))
                 .ForMember(d => d.ButLastUplinkDuration,

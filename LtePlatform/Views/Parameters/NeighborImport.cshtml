@@ -13,6 +13,21 @@
             <div class="col-md-6">
                 @{
                     Html.RenderPartial("_AlertPanel");
+                    using (Html.BeginForm("HwFlowPost", "Parameters",
+                        FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
+                    {
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">华为流量统计导入：</label>
+                            <div class="col-md-6">
+                                <input name="flowHw" class="form-control" type="file" multiple accept=".csv" />
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-save"></span>导入
+                                </button>
+                            </div>
+                        </div>
+                    }
                     using (Html.BeginForm("ZteNeighborPost", "Parameters",
                         FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
                     {

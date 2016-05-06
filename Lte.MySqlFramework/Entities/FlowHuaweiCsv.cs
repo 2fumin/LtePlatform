@@ -19,10 +19,10 @@ namespace Lte.MySqlFramework.Entities
         public string CellInfo { get; set; }
         
         [CsvColumn(Name = "小区PDCP层所发送的下行数据的总吞吐量 (比特)")]
-        public int PdcpDownlinkFlowInByte { get; set; }
+        public long PdcpDownlinkFlowInByte { get; set; }
 
         [CsvColumn(Name = "小区PDCP层所接收到的上行数据的总吞吐量 (比特)")]
-        public int PdcpUplinkFlowInByte { get; set; }
+        public long PdcpUplinkFlowInByte { get; set; }
 
         [CsvColumn(Name = "小区内的平均用户数 (无)")]
         public double AverageUsers { get; set; }
@@ -55,7 +55,7 @@ namespace Lte.MySqlFramework.Entities
         public int UplinkDurationInMs { get; set; }
 
         [CsvColumn(Name = "小区Uu接口寻呼用户个数 (无)")]
-        public int PagingUsers { get; set; }
+        public string PagingUsersString { get; set; }
 
         [CsvColumn(Name = "下行Physical Resource Block被使用的平均个数 (无)")]
         public double DownlinkAveragePrbs { get; set; }
@@ -79,25 +79,25 @@ namespace Lte.MySqlFramework.Entities
         public int DedicatedPreambles { get; set; }
 
         [CsvColumn(Name = "统计周期内上行DCI所使用的PDCCH CCE个数 (无)")]
-        public int UplinkDciCces { get; set; }
+        public long UplinkDciCces { get; set; }
 
         [CsvColumn(Name = "统计周期内下行DCI所使用的PDCCH CCE个数 (无)")]
-        public int DownlinkDciCces { get; set; }
+        public long DownlinkDciCces { get; set; }
 
         [CsvColumn(Name = "统计周期内可用的PDCCH CCE的个数 (无)")]
-        public int TotalCces { get; set; }
+        public long TotalCces { get; set; }
 
         [CsvColumn(Name = "PUCCH的PRB资源分配的平均值 (无)")]
-        public double PucchPrbs { get; set; }
+        public string PucchPrbsString { get; set; }
 
         [CsvColumn(Name = "使UE缓存为空的最后一个TTI所传的上行PDCP吞吐量 (比特)")]
-        public int LastTtiUplinkFlowInByte { get; set; }
+        public long LastTtiUplinkFlowInByte { get; set; }
 
         [CsvColumn(Name = "扣除使UE缓存为空的最后一个TTI之后的上行数传时长 (毫秒)")]
         public int ButLastUplinkDurationInMs { get; set; }
 
         [CsvColumn(Name = "使缓存为空的最后一个TTI所传的下行PDCP吞吐量 (比特)")]
-        public int LastTtiDownlinkFlowInByte { get; set; }
+        public long LastTtiDownlinkFlowInByte { get; set; }
 
         [CsvColumn(Name = "扣除使下行缓存为空的最后一个TTI之后的数传时长 (毫秒)")]
         public int ButLastDownlinkDurationInMs { get; set; }
