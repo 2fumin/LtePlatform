@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Http;
+using Lte.Evaluations.DataService.Kpi;
 using Lte.Evaluations.DataService.Mr;
 using LtePlatform.Models;
 
@@ -36,6 +37,34 @@ namespace LtePlatform.Controllers.Parameters
         public void Delete()
         {
             _service.ClearNeighbors();
+        }
+    }
+
+    public class DumpHuaweiFlowController : ApiController
+    {
+        private readonly FlowService _service;
+
+        public DumpHuaweiFlowController(FlowService service)
+        {
+            _service = service;
+        }
+
+        [HttpPut]
+        public Task<bool> Put()
+        {
+            return _service.DumpOneHuaweiStat();
+        }
+
+        [HttpGet]
+        public int Get()
+        {
+            return _service.FlowHuaweiCount;
+        }
+
+        [HttpDelete]
+        public void Delete()
+        {
+            _service.ClearHuaweiStats();
         }
     }
 }

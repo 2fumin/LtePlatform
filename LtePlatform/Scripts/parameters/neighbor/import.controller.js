@@ -1,4 +1,4 @@
-﻿app.controller("neighbor.import", function ($scope, neighborImportService) {
+﻿app.controller("neighbor.import", function ($scope, neighborImportService, flowImportService) {
     $scope.progressInfo = {
         totalSuccessItems: 0,
         totalFailItems: 0,
@@ -18,17 +18,32 @@
             neighborImportService.updateFailProgress($scope.progressInfo, $scope.dumpNeighborItems);
         });
     };
+
+    $scope.huaweiInfo = {
+        totalSuccessItems: 0,
+        totalFailItems: 0,
+        totalDumpItems: 0
+    };
+    $scope.clearHuaweiItems=function() {
+        flowImportService.clearDumpHuaweis().then(function () {
+            $scope.huaweiInfo.totalDumpItems = 0;
+            $scope.huaweiInfo.totalSuccessItems = 0;
+            $scope.huaweiInfo.totalFailItems = 0;
+        });
+    }
+    $scope.dumpHuaweiItems = function() {
+        flowImportService.dumpHuaweiItem().then(function (result) {
+            neighborImportService.updateSuccessProgress(result, $scope.huaweiInfo, $scope.dumpHuaweiItems);
+        }, function () {
+            neighborImportService.updateFailProgress($scope.huaweiInfo, $scope.dumpHuaweiItems);
+        });
+    };
+
     neighborImportService.queryDumpNeighbors().then(function(result) {
         $scope.progressInfo.totalDumpItems = result;
     });
-    console.log($scope.progressInfo);
-    $scope.huaweiInfo = {
-        totalSuccessItems: 50,
-        totalFailItems: 0,
-        totalDumpItems: 100
-    };
-    $scope.dumpHuaweiItems = function() {
-        console.log($scope.huaweiInfo);
-    };
+    flowImportService.queryHuaweiFlows().then(function (result) {
+        $scope.huaweiInfo.totalDumpItems = result;
+    });
 
 });

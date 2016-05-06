@@ -48,10 +48,10 @@ namespace Lte.Evaluations.DataService.Kpi
             if (item == null)
             {
                 var result = await _huaweiRepository.InsertAsync(stat);
+                _huaweiRepository.SaveChanges();
                 return result != null;
             }
-            _huaweiRepository.SaveChanges();
-            return true;
+            return false;
         }
 
         public void ClearHuaweiStats()

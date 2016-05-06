@@ -695,6 +695,43 @@
             }
         }
     })
+    .factory('flowImportService', function ($q, $http, appUrlService) {
+        return {
+            queryHuaweiFlows: function () {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('DumpHuaweiFlow')
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            },
+            clearDumpHuaweis: function () {
+                var deferred = $q.defer();
+                $http.delete(appUrlService.getApiUrl('DumpHuaweiFlow')).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            },
+            dumpHuaweiItem: function () {
+                var deferred = $q.defer();
+                $http.put(appUrlService.getApiUrl('DumpHuaweiFlow')).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            }
+        }
+    })
     .factory('alarmImportService',function($q, $http, appUrlService) {
         return {
             queryDumpHistory: function(begin, end) {
