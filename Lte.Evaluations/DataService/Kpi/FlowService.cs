@@ -53,5 +53,10 @@ namespace Lte.Evaluations.DataService.Kpi
             _huaweiRepository.SaveChanges();
             return true;
         }
+
+        public void ClearHuaweiStats()
+        {
+            FlowHuaweis.Clear();
+        }
     }
 }

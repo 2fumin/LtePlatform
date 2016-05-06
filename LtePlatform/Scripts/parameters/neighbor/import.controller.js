@@ -1,38 +1,34 @@
 ﻿app.controller("neighbor.import", function ($scope, neighborImportService) {
-    $scope.neighborInfo = {
+    $scope.progressInfo = {
         totalSuccessItems: 0,
         totalFailItems: 0,
         totalDumpItems: 0
     };
-    $scope.huaweiInfo = {
-        totalSuccessItems: 0,
-        totalFailItems: 0,
-        totalDumpItems: 0
-    };
-    $scope.progressInfo = $scope.huaweiInfo;
-
-    $scope.clearNeighborItems = function () {
+    $scope.clearItems = function () {
         neighborImportService.clearDumpNeighbors().then(function () {
-            $scope.neighborInfo.totalDumpItems = 0;
-            $scope.neighborInfo.totalSuccessItems = 0;
-            $scope.neighborInfo.totalFailItems = 0;
+            $scope.progressInfo.totalDumpItems = 0;
+            $scope.progressInfo.totalSuccessItems = 0;
+            $scope.progressInfo.totalFailItems = 0;
         });
     };
-    $scope.dumpNeighborItems = function () {
+    $scope.dumpItems = function () {
         neighborImportService.dumpSingleItem().then(function (result) {
             neighborImportService.updateSuccessProgress(result, $scope.progressInfo, $scope.dumpNeighborItems);
         }, function () {
             neighborImportService.updateFailProgress($scope.progressInfo, $scope.dumpNeighborItems);
         });
     };
-    $scope.dumpHuaweiItems = function() {
-        $scope.progressInfo = $scope.huaweiInfo;
-    };
-    $scope.clearHuaweiItems=function() {
-        $scope.progressInfo = $scope.huaweiInfo;
-    }
-
     neighborImportService.queryDumpNeighbors().then(function(result) {
-        $scope.neighborInfo.totalDumpItems = result;
+        $scope.progressInfo.totalDumpItems = result;
     });
+    console.log($scope.progressInfo);
+    $scope.huaweiInfo = {
+        totalSuccessItems: 50,
+        totalFailItems: 0,
+        totalDumpItems: 100
+    };
+    $scope.dumpHuaweiItems = function() {
+        console.log($scope.huaweiInfo);
+    };
+
 });

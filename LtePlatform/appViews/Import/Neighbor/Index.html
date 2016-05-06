@@ -7,14 +7,45 @@
         <button class="btn btn-danger" ng-click="clearHuaweiItems()" ng-disabled="huaweiInfo.totalDumpItems === 0">
             清除导入
         </button>
+        总数：{{huaweiInfo.totalDumpItems}}&nbsp;
+        成功数：{{huaweiInfo.totalSuccessItems}}&nbsp;
+        失败数：{{huaweiInfo.totalFailItems}}
+        <div uib-progress>
+            <div uib-bar value="100*huaweiInfo.totalSuccessItems / huaweiInfo.totalDumpItems" type="success">
+                <span ng-show="100*huaweiInfo.totalSuccessItems / huaweiInfo.totalDumpItems > 5">
+                    {{100*huaweiInfo.totalSuccessItems / huaweiInfo.totalDumpItems | number: 2}}%
+                </span>
+            </div>
+            <div uib-bar value="100*huaweiInfo.totalFailItems / huaweiInfo.totalDumpItems" type="erroe">
+                <span ng-show="100*huaweiInfo.totalFailItems / huaweiInfo.totalDumpItems > 5">
+                    {{100*huaweiInfo.totalFailItems / huaweiInfo.totalDumpItems | number: 2}}%
+                </span>
+            </div>
+        </div>
     </div>
-    <div uib-tab index="1" heading="邻区导入" ng-click="progressInfo = neighborInfo">
-        <button class="btn btn-primary" ng-click="dumpNeighborItems()" ng-disabled="neighborInfo.totalDumpItems === 0">
-            一键导入
-        </button>
-        <button class="btn btn-danger" ng-click="clearNeighborItems()" ng-disabled="neighborInfo.totalDumpItems === 0">
-            清除导入
-        </button>
+    <div uib-tab index="1" heading="邻区导入">
+        <p>
+            <button class="btn btn-primary" ng-click="dumpItems()" ng-disabled="progressInfo.totalDumpItems === 0">
+                一键导入
+            </button>
+            <button class="btn btn-danger" ng-click="clearItems()" ng-disabled="progressInfo.totalDumpItems === 0">
+                清除导入
+            </button>
+            总数：{{progressInfo.totalDumpItems}}&nbsp;
+            成功数：{{progressInfo.totalSuccessItems}}&nbsp;
+            失败数：{{progressInfo.totalFailItems}}
+            <div uib-progress>
+                <div uib-bar value="100*progressInfo.totalSuccessItems / progressInfo.totalDumpItems" type="success">
+                    <span ng-show="100*progressInfo.totalSuccessItems / progressInfo.totalDumpItems > 5">
+                        {{100*progressInfo.totalSuccessItems / progressInfo.totalDumpItems | number: 2}}%
+                    </span>
+                </div>
+                <div uib-bar value="100*progressInfo.totalFailItems / progressInfo.totalDumpItems" type="erroe">
+                    <span ng-show="100*progressInfo.totalFailItems / progressInfo.totalDumpItems > 5">
+                        {{100*progressInfo.totalFailItems / progressInfo.totalDumpItems | number: 2}}%
+                    </span>
+                </div>
+            </div>
+        </p>
     </div>
 </div>
-<div ng-include="'/appViews/Import/ImportProgress.html'"></div>
