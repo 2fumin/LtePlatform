@@ -1,44 +1,38 @@
 ﻿app.controller("neighbor.import", function ($scope, neighborImportService) {
-    $scope.progressInfo = {
+    $scope.neighborInfo = {
         totalSuccessItems: 0,
         totalFailItems: 0,
         totalDumpItems: 0
     };
+    $scope.huaweiInfo = {
+        totalSuccessItems: 0,
+        totalFailItems: 0,
+        totalDumpItems: 0
+    };
+    $scope.progressInfo = $scope.huaweiInfo;
 
-    $scope.clearItems = function () {
+    $scope.clearNeighborItems = function () {
         neighborImportService.clearDumpNeighbors().then(function () {
-            $scope.progressInfo.totalDumpItems = 0;
-            $scope.progressInfo.totalSuccessItems = 0;
-            $scope.progressInfo.totalFailItems = 0;
+            $scope.neighborInfo.totalDumpItems = 0;
+            $scope.neighborInfo.totalSuccessItems = 0;
+            $scope.neighborInfo.totalFailItems = 0;
         });
     };
-    $scope.dumpItems = function () {
+    $scope.dumpNeighborItems = function () {
         neighborImportService.dumpSingleItem().then(function (result) {
-            if (result) {
-                $scope.progressInfo.totalSuccessItems = $scope.progressInfo.totalSuccessItems + 1;
-            } else {
-                $scope.progressInfo.totalFailItems = $scope.progressInfo.totalFailItems + 1;
-            }
-            if ($scope.progressInfo.totalSuccessItems + $scope.progressInfo.totalFailItems < $scope.progressInfo.totalDumpItems) {
-                $scope.dumpItems();
-            } else {
-                $scope.progressInfo.totalDumpItems = 0;
-                $scope.progressInfo.totalSuccessItems = 0;
-                $scope.progressInfo.totalFailItems = 0;
-            }
+            neighborImportService.updateSuccessProgress(result, $scope.progressInfo, $scope.dumpNeighborItems);
         }, function () {
-            $scope.progressInfo.totalFailItems = $scope.progressInfo.totalFailItems + 1;
-            if ($scope.progressInfo.totalSuccessItems + $scope.progressInfo.totalFailItems < $scope.progressInfo.totalDumpItems) {
-                $scope.dumpItems();
-            } else {
-                $scope.progressInfo.totalDumpItems = 0;
-                $scope.progressInfo.totalSuccessItems = 0;
-                $scope.progressInfo.totalFailItems = 0;
-            }
+            neighborImportService.updateFailProgress($scope.progressInfo, $scope.dumpNeighborItems);
         });
     };
+    $scope.dumpHuaweiItems = function() {
+        $scope.progressInfo = $scope.huaweiInfo;
+    };
+    $scope.clearHuaweiItems=function() {
+        $scope.progressInfo = $scope.huaweiInfo;
+    }
 
     neighborImportService.queryDumpNeighbors().then(function(result) {
-        $scope.progressInfo.totalDumpItems = result;
+        $scope.neighborInfo.totalDumpItems = result;
     });
 });

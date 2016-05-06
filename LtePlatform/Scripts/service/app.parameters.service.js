@@ -668,6 +668,30 @@
                         deferred.reject(reason);
                     });
                 return deferred.promise;
+            },
+            updateSuccessProgress: function(result, progressInfo, callback) {
+                if (result) {
+                    progressInfo.totalSuccessItems += 1;
+                } else {
+                    progressInfo.totalFailItem += 1;
+                }
+                if (progressInfo.totalSuccessItems + progressInfo.totalFailItems < progressInfo.totalDumpItems) {
+                    callback();
+                } else {
+                    progressInfo.totalDumpItems = 0;
+                    progressInfo.totalSuccessItems = 0;
+                    progressInfo.totalFailItems = 0;
+                }
+            },
+            updateFailProgress: function(progressInfo, callback) {
+                progressInfo.totalFailItems += 1;
+                if (progressInfo.totalSuccessItems + progressInfo.totalFailItems < progressInfo.totalDumpItems) {
+                    callback();
+                } else {
+                    progressInfo.totalDumpItems = 0;
+                    progressInfo.totalSuccessItems = 0;
+                    progressInfo.totalFailItems = 0;
+                }
             }
         }
     })
