@@ -729,6 +729,22 @@
                         deferred.reject(reason);
                     });
                 return deferred.promise;
+            },
+            queryHuaweiStat: function(index) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('DumpHuaweiFlow'),
+                    params: {
+                        index: index
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
             }
         }
     })

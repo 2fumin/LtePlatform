@@ -2,6 +2,7 @@
 using System.Web.Http;
 using Lte.Evaluations.DataService.Kpi;
 using Lte.Evaluations.DataService.Mr;
+using Lte.MySqlFramework.Entities;
 using LtePlatform.Models;
 
 namespace LtePlatform.Controllers.Parameters
@@ -59,6 +60,12 @@ namespace LtePlatform.Controllers.Parameters
         public int Get()
         {
             return _service.FlowHuaweiCount;
+        }
+
+        [HttpGet]
+        public FlowHuawei Get(int index)
+        {
+            return _service.QueryHuaweiStat(index);
         }
 
         [HttpDelete]

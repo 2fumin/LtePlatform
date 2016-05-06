@@ -12,7 +12,7 @@ namespace Lte.MySqlFramework.Entities
 {
     public class FlowHuaweiCsv
     {
-        [CsvColumn(Name = "最近发生时间(NT)")]
+        [CsvColumn(Name = "开始时间")]
         public DateTime StatTime { get; set; }
 
         [CsvColumn(Name = "小区")]

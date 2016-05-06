@@ -44,6 +44,11 @@
     });
     flowImportService.queryHuaweiFlows().then(function (result) {
         $scope.huaweiInfo.totalDumpItems = result;
+        if (result > 100) {
+            flowImportService.queryHuaweiStat(100).then(function(stat) {
+                console.log(stat);
+            });
+        }
     });
 
 });

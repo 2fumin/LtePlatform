@@ -58,5 +58,10 @@ namespace Lte.Evaluations.DataService.Kpi
         {
             FlowHuaweis.Clear();
         }
+
+        public FlowHuawei QueryHuaweiStat(int index)
+        {
+            return FlowHuaweis.ElementAt(index);
+        }
     }
 }
