@@ -51,7 +51,7 @@ namespace LtePlatform.Controllers.Parameters
         }
 
         [HttpPut]
-        public Task<bool> Put()
+        public Task<FlowHuawei> Put()
         {
             return _service.DumpOneHuaweiStat();
         }
