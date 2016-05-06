@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Lte.Domain.LinqToCsv;
+using Lte.Domain.LinqToCsv.Context;
+using Lte.Domain.LinqToCsv.Description;
 
 namespace Lte.MySqlFramework.Entities
 {
@@ -98,5 +101,10 @@ namespace Lte.MySqlFramework.Entities
 
         [CsvColumn(Name = "扣除使下行缓存为空的最后一个TTI之后的数传时长 (毫秒)")]
         public int ButLastDownlinkDurationInMs { get; set; }
+
+        public static List<FlowHuaweiCsv> ReadFlowHuaweiCsvs(StreamReader reader)
+        {
+            return CsvContext.Read<FlowHuaweiCsv>(reader, CsvFileDescription.CommaDescription).ToList();
+        }
     }
 }

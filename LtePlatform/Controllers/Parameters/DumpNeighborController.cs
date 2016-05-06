@@ -28,7 +28,7 @@ namespace LtePlatform.Controllers.Parameters
         [ApiResponse("当前等待导入邻区数")]
         public int Get()
         {
-            return _service.GetNeighborsToBeDump();
+            return _service.NearestCellCount;
         }
         
         [HttpDelete]

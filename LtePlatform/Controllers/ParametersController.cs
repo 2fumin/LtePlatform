@@ -4,23 +4,27 @@ using System.Web;
 using System.Web.Mvc;
 using Lte.Evaluations.DataService;
 using Lte.Evaluations.DataService.Basic;
+using Lte.Evaluations.DataService.Kpi;
 using Lte.Evaluations.DataService.Mr;
 using LtePlatform.Models;
 
 namespace LtePlatform.Controllers
 {
+    [Authorize]
     public class ParametersController : Controller
     {
         private readonly BasicImportService _basicImportService;
         private readonly AlarmsService _alarmsService;
         private readonly NearestPciCellService _neighborService;
+        private readonly FlowService _flowService;
 
         public ParametersController(BasicImportService basicImportService, AlarmsService alarmsService,
-            NearestPciCellService neighborService)
+            NearestPciCellService neighborService, FlowService flowService)
         {
             _basicImportService = basicImportService;
             _alarmsService = alarmsService;
             _neighborService = neighborService;
+            _flowService = flowService;
         }
 
         public ActionResult List()
@@ -28,14 +32,12 @@ namespace LtePlatform.Controllers
             return View();
         }
 
-        [Authorize]
         public ActionResult AlarmImport()
         {
             return View();
         }
 
         [HttpPost]
-        [Authorize]
         public ActionResult ZteAlarmPost(HttpPostedFileBase[] alarmZte)
         {
             if (alarmZte == null || alarmZte.Length <= 0 || string.IsNullOrEmpty(alarmZte[0]?.FileName))
@@ -49,7 +51,6 @@ namespace LtePlatform.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public ActionResult HwAlarmPost(HttpPostedFileBase[] alarmHw)
         {
             if (alarmHw == null || alarmHw.Length <= 0 || string.IsNullOrEmpty(alarmHw[0]?.FileName))
@@ -61,15 +62,13 @@ namespace LtePlatform.Controllers
             }
             return View("AlarmImport");
         }
-
-        [Authorize]
+        
         public ActionResult BasicImport()
         {
             return View();
         }
 
         [HttpPost]
-        [Authorize]
         public ActionResult LteImportPost()
         {
             var lteFile = Request.Files["lteExcel"];
@@ -82,7 +81,6 @@ namespace LtePlatform.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public ActionResult CdmaImportPost()
         {
             var cdmaFile = Request.Files["cdmaExcel"];
@@ -101,7 +99,6 @@ namespace LtePlatform.Controllers
         }
         
         [HttpPost]
-        [Authorize]
         public ActionResult ZteNeighborPost(HttpPostedFileBase[] neighborZte)
         {
             if (neighborZte != null && neighborZte.Length > 0 && !string.IsNullOrEmpty(neighborZte[0]?.FileName))
@@ -116,7 +113,6 @@ namespace LtePlatform.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public ActionResult HwNeighborPost(HttpPostedFileBase[] neighborHw)
         {
             if (neighborHw != null && neighborHw.Length > 0 && !string.IsNullOrEmpty(neighborHw[0]?.FileName))
@@ -125,6 +121,20 @@ namespace LtePlatform.Controllers
                 foreach (var file in neighborHw)
                 {
                     _neighborService.UploadHwNeighbors(new StreamReader(file.InputStream, Encoding.GetEncoding("GB2312")));
+                }
+            }
+            return View("NeighborImport");
+        }
+
+        [HttpPost]
+        public ActionResult HwFlowPost(HttpPostedFileBase[] flowHw)
+        {
+            if (flowHw != null && flowHw.Length > 0 && !string.IsNullOrEmpty(flowHw[0]?.FileName))
+            {
+                ViewBag.Message = "共上传华为流量信息文件" + flowHw.Length + "个！";
+                foreach (var file in flowHw)
+                {
+                    _flowService.UploadFlowHuaweis(new StreamReader(file.InputStream, Encoding.GetEncoding("GB2312")));
                 }
             }
             return View("NeighborImport");

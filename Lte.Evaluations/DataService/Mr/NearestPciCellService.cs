@@ -18,7 +18,9 @@ namespace Lte.Evaluations.DataService.Mr
         private readonly IENodebRepository _eNodebRepository;
         private readonly IInfrastructureRepository _infrastructureRepository;
 
-        private static Stack<NearestPciCell> NearestCells { get; set; } 
+        private static Stack<NearestPciCell> NearestCells { get; set; }
+
+        public int NearestCellCount => NearestCells.Count;
 
         public NearestPciCellService(INearestPciCellRepository repository, ICellRepository cellRepository,
             IENodebRepository eNodebRepository, IInfrastructureRepository infrastructureRepository)
@@ -132,12 +134,7 @@ namespace Lte.Evaluations.DataService.Mr
             _repository.SaveChanges();
             return true;
         }
-
-        public int GetNeighborsToBeDump()
-        {
-            return NearestCells.Count;
-        }
-
+        
         public void ClearNeighbors()
         {
             NearestCells.Clear();

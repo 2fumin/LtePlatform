@@ -216,6 +216,8 @@ namespace LtePlatform
             ninjectKernel.Bind<CellStasticService>().ToSelf();
 
             ninjectKernel.Bind<CellPowerService>().ToSelf();
+
+            ninjectKernel.Bind<FlowService>().ToSelf();
         }
     }
 }
