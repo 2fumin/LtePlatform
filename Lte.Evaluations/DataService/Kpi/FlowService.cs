@@ -35,10 +35,10 @@ namespace Lte.Evaluations.DataService.Kpi
             }
         }
 
-        public async Task<FlowHuawei> DumpOneHuaweiStat()
+        public async Task<bool> DumpOneHuaweiStat()
         {
             var stat = FlowHuaweis.Pop();
-            if (stat == null) return null;
+            if (stat == null) return false;
             var item =
                 await
                     _huaweiRepository.FirstOrDefaultAsync(
@@ -49,8 +49,9 @@ namespace Lte.Evaluations.DataService.Kpi
             {
                 var result = await _huaweiRepository.InsertAsync(stat);
                 _huaweiRepository.SaveChanges();
+                return result != null;
             }
-            return stat;
+            return false;
         }
 
         public void ClearHuaweiStats()

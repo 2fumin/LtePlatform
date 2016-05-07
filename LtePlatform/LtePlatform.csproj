@@ -493,6 +493,7 @@
     <Content Include="appViews\Rutrace\WorkItem\CellTrend.html" />
     <Content Include="appViews\Rutrace\WorkItem\ForCell.html" />
     <Content Include="appViews\Rutrace\WorkItem\ForCity.html" />
+    <Content Include="appViews\Rutrace\WorkItem\PlatformAndFeedbackInfo.html" />
     <Content Include="appViews\Test\Chapter10\DateTimeTest.html" />
     <Content Include="appViews\Test\Chapter10\demo.accordion.html" />
     <Content Include="appViews\Test\Chapter10\demo.alert.html" />

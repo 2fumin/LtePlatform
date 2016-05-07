@@ -1,0 +1,33 @@
+﻿<div class="row">
+    <div class="col-md-6">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th colspan="2">平台信息</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="info in platformInfos">
+                    <td>{{info.time}}</td>
+                    <td>{{info.contents}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th colspan="2">反馈信息</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="info in feedbackInfos">
+                    <td>{{info.time}}</td>
+                    <td>{{info.contents}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
