@@ -1,4 +1,5 @@
-﻿app.controller("workitem.details", function ($scope, $routeParams, workitemService, workItemDialog, appFormatService, cellPreciseService) {
+﻿app.controller("workitem.details", function ($scope, $routeParams, $uibModal, $log,
+    workitemService, workItemDialog, appFormatService, cellPreciseService) {
     $scope.page.title = "工单编号" + $routeParams.number + "信息";
     var lastWeek = new Date();
     lastWeek.setDate(lastWeek.getDate() - 7);
@@ -34,7 +35,29 @@
             });
     };
     $scope.analyzeInterferenceSource = function() {
-        
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: '/appViews/Rutrace/Interference/SourceDialog.html',
+            controller: 'interference.source.dialog',
+            size: 'lg',
+            resolve: {
+                dialogTitle: function () {
+                    return $scope.currentView.eNodebName + "-" + $scope.currentView.sectorId + "干扰源分析";
+                },
+                eNodebId: function () {
+                    return $scope.currentView.eNodebId;
+                },
+                sectorId: function () {
+                    return $scope.currentView.sectorId;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (info) {
+            $scope.interferenceSourceComments = info;
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
     };
     $scope.queryWorkItems();
 });

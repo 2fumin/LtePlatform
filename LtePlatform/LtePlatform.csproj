@@ -483,6 +483,7 @@
     <Content Include="appViews\Rutrace\Interference\Index.html" />
     <Content Include="appViews\Rutrace\Interference\MongoNeighbors.html" />
     <Content Include="appViews\Rutrace\Interference\Source.html" />
+    <Content Include="appViews\Rutrace\Interference\SourceDialog.html" />
     <Content Include="appViews\Rutrace\Interference\Victim.html" />
     <Content Include="appViews\Rutrace\Map\Index.html" />
     <Content Include="appViews\Rutrace\Top.html" />
@@ -851,6 +852,7 @@
     <Content Include="Scripts\rutrace\cell.trend.js" />
     <Content Include="Scripts\rutrace\dump\cell.mongo.js" />
     <Content Include="Scripts\rutrace\index.controller.js" />
+    <Content Include="Scripts\rutrace\interference\source.dialog.js" />
     <Content Include="Scripts\rutrace\map.controller.js" />
     <Content Include="Scripts\rutrace\map.neighbor.dialog.js" />
     <Content Include="Scripts\rutrace\map.precise.dialog.js" />
