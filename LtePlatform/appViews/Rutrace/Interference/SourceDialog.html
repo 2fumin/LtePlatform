@@ -5,8 +5,8 @@
     <h4 class="modal-title text-primary">{{dialogTitle}}</h4>
 </div>
 <div class="modal-body">
-    <div class="row">
-        <div class="col-md-6">
+    <div class="col-md-6">
+        <div>
             <label>开始日期：</label>
             <div class="input-group">
                 <input type="text" class="form-control" uib-datepicker-popup ng-model="beginDate.value"
@@ -18,7 +18,8 @@
                 </span>
             </div>
         </div>
-        <div class="col-md-6">
+
+        <div>
             <label>结束日期：</label>
             <div class="input-group">
                 <input type="text" class="form-control" uib-datepicker-popup ng-model="endDate.value"
@@ -27,11 +28,21 @@
                     <button type="button" class="btn btn-default" ng-click="endDate.opened = true">
                         <i class="glyphicon glyphicon-calendar"></i>
                     </button>
-                    <button type="button" class="btn btn-success" ng-click="showData()">
-                        <i class="glyphicon glyphicon-search" title="统计数据"></i>
-                    </button>
                 </span>
             </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label>排序依据：</label>
+        <div class="input-group">
+            <select class="form-control" ng-model="orderPolicy.selected">
+                <option ng-repeat="p in orderPolicy.options" label="{{p.name}}" value="{{p.value}}">{{p.name}}</option>
+            </select>
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-warning" ng-click="showInterference()">
+                    <i class="glyphicon glyphicon-search" title="统计干扰"></i>
+                </button>
+            </span>
         </div>
     </div>
     <table class="table table-striped">
@@ -47,7 +58,7 @@
             <th>为系统邻区</th>
         </tr>
         </thead>
-        <tbody ng-controller="rutrace.interference.neighbors">
+        <tbody>
         <tr ng-repeat="cell in interferenceCells | orderBy: orderPolicy.selected: true">
             <td>{{cell.neighborCellName}}</td>
             <td>{{cell.destPci}}</td>
