@@ -1091,7 +1091,7 @@
     <Content Include="Scripts\kpi\workitem\cell.js" />
     <Content Include="Scripts\kpi\workitem\eNodeb.js" />
     <Content Include="Scripts\kpi\interference.import.controller.js" />
-    <Content Include="Scripts\rutrace\interference.mongo.controller.js" />
+    <Content Include="Scripts\rutrace\interference\mongo.controller.js" />
     <Content Include="Scripts\kpi\top.drop2G.viewmodel.js" />
     <Content Include="Scripts\kpi\workitem\service.js" />
     <Content Include="Scripts\kpi\workitem\details.controller.js" />
@@ -1129,7 +1129,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\rutrace\coverage.controller.js" />
     <Content Include="Scripts\rutrace\import.controller.js" />
-    <Content Include="Scripts\rutrace\interference.controller.js" />
+    <Content Include="Scripts\rutrace\interference\controller.js" />
     <Content Include="Scripts\rutrace\menu.controller.js" />
     <Content Include="Scripts\rutrace\topcells.controller.js" />
     <Content Include="Scripts\rutrace\workitem\workitem.list..js" />
@@ -1208,7 +1208,7 @@
     <Content Include="appViews\College\Table\DistributionMapInfoBox.html" />
     <Content Include="Views\College\_Coverage.cshtml" />
     <Content Include="Views\College\_CoverageMap.cshtml" />
-    <Content Include="Scripts\rutrace\interference.neighbors.controller.js" />
+    <Content Include="Scripts\rutrace\interference\neighbors.controller.js" />
     <Content Include="Scripts\service\app.region.service.js" />
     <None Include="Views\College\_Edit.cshtml" />
     <Content Include="Views\Kpi\InterferenceImport.cshtml" />

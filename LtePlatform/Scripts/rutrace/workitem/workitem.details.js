@@ -33,5 +33,8 @@
                     $scope.beginDateString + "-" + $scope.endDateString + "精确覆盖率变化趋势");
             });
     };
+    $scope.analyzeInterferenceSource = function() {
+        
+    };
     $scope.queryWorkItems();
 });
