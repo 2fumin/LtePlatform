@@ -185,5 +185,12 @@ namespace LtePlatform.Controllers.Kpi
         {
             return await _service.QueryPreciseViews(begin, end);
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IEnumerable<WorkItemView>> Get(DateTime begin, DateTime end, string district)
+        {
+            return await _service.QueryPreciseViews(begin, end, district);
+        }
     }
 }
