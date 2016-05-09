@@ -14,10 +14,7 @@ namespace Lte.Parameters.Abstract
         InterferenceMatrixMongo GetOne(int eNodebId, short pci);
         
         List<InterferenceMatrixMongo> GetList(int eNodebId, short pci);
-
-        List<InterferenceMatrixMongo> GetList(int eNodebId, short pci, DateTime date);
-
-        List<InterferenceMatrixMongo> GetList(int eNodebId, short pci, short neighborPci, DateTime date);
+        
     }
 
     public interface ICellStasticRepository : IRepository<CellStastic, ObjectId>

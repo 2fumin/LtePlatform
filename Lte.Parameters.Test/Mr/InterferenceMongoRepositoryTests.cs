@@ -24,42 +24,50 @@ namespace Lte.Parameters.Test.Mr
         {
             var results = _repository.GetList(501373, 341);
             Assert.IsNotNull(results);
-            Assert.AreEqual(results.Count, 984);
-            Assert.AreEqual(results[0].InterfLevel ?? 0, 4.65, 1E-7);
-            results[0].CurrentDate.ShouldBe(new DateTime(2016, 3, 27, 18, 30, 0));
+            Assert.AreEqual(results.Count, 3931);
+            Assert.AreEqual(results[0].InterfLevel ?? 0, 161.48, 1E-7);
+            results[0].CurrentDate.ShouldBe(new DateTime(2016, 4, 28, 8, 45, 0));
             results[0].ENodebId.ShouldBe(501373);
             results[0].Pci.ShouldBe(341);
-            results[0].NeighborPci.ShouldBe(8);
+            results[0].NeighborPci.ShouldBe(340);
             results[0].NeighborFreq.ShouldBe(100);
-            results[0].Mod3Count.ShouldBe(1);
+            Assert.AreEqual(results[0].Mod3Count, 0);
             results[0].Mod6Count.ShouldBe(0);
-            results[0].Over6db.ShouldBe(1);
-            results[0].Over10db.ShouldBe(1);
+            results[0].Over6db.ShouldBe(23);
+            results[0].Over10db.ShouldBe(30);
         }
 
         [Test]
         public void Test_GetWithENodebIdAndPciAndTime()
         {
-            var results = _repository.GetList(501373, 341, new DateTime(2016, 3, 27));
+            var results =
+                _repository.GetList(501373, 341)
+                    .Where(x => x.CurrentDate >= new DateTime(2016, 4, 28) && x.CurrentDate < new DateTime(2016, 4, 29)).ToList();
             Assert.IsNotNull(results);
-            Assert.AreEqual(results.Count, 16);
-            Assert.AreEqual(results[0].InterfLevel ?? 0, 3.34, 1E-7);
-            results[0].CurrentDate.ShouldBe(new DateTime(2016, 3, 27, 9, 15, 0));
+            Assert.AreEqual(results.Count, 313);
+            Assert.AreEqual(results[0].InterfLevel ?? 0, 161.48, 1E-7);
+            results[0].CurrentDate.ShouldBe(new DateTime(2016, 4, 28, 8, 45, 0));
             results[0].ENodebId.ShouldBe(501373);
             results[0].Pci.ShouldBe(341);
-            results[0].NeighborPci.ShouldBe(359);
+            results[0].NeighborPci.ShouldBe(340);
             results[0].NeighborFreq.ShouldBe(100);
-            results[0].Mod3Count.ShouldBe(1);
-            results[0].Mod6Count.ShouldBe(1);
-            results[0].Over6db.ShouldBe(1);
-            results[0].Over10db.ShouldBe(1);
+            Assert.AreEqual(results[0].Mod3Count, 0);
+            results[0].Mod6Count.ShouldBe(0);
+            results[0].Over6db.ShouldBe(23);
+            results[0].Over10db.ShouldBe(30);
         }
         
-        [TestCase(501298, 328, 329, "2016-03-27")]
-        [TestCase(501454, 255, 438, "2016-03-27")]
+        [TestCase(501298, 328, 329, "2016-04-28")]
+        [TestCase(501454, 255, 438, "2016-04-28")]
         public void Test_GetList(int eNodebId, short pci, short neighborPci, string dateString)
         {
-            var result = _repository.GetList(eNodebId, pci, neighborPci, DateTime.Parse(dateString));
+            var list = _repository.GetList(eNodebId, pci);
+            var result =
+                list
+                    .Where(
+                        x =>
+                            x.NeighborPci == neighborPci && x.CurrentDate >= DateTime.Parse(dateString) &&
+                            x.CurrentDate < DateTime.Parse(dateString).AddDays(1));
             Assert.IsNotNull(result);
         }
     }
