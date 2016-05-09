@@ -11,10 +11,9 @@ namespace Lte.Parameters.Abstract
 {
     public interface IInterferenceMongoRepository : IRepository<InterferenceMatrixMongo, ObjectId>
     {
-        InterferenceMatrixMongo GetOne(int eNodebId, short pci);
-        
         List<InterferenceMatrixMongo> GetList(int eNodebId, short pci);
-        
+
+        Task<List<InterferenceMatrixMongo>> GetListAsync(int eNodebId, short pci);
     }
 
     public interface ICellStasticRepository : IRepository<CellStastic, ObjectId>

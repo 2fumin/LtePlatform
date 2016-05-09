@@ -47,22 +47,22 @@ namespace LtePlatform.Controllers.Kpi
 
         [HttpGet]
         [ApiDoc("返回待导入的小区信息列表（即受监控的信息列表）")]
-        public List<InterferenceMatrixStat> Get(int eNodebId, short pci, DateTime date)
+        public async Task<List<InterferenceMatrixStat>> Get(int eNodebId, short pci, DateTime date)
         {
-            return _service.QueryStats(eNodebId, pci, date);
+            return await _service.QueryStats(eNodebId, pci, date);
         }
 
         [HttpGet]
         [ApiDoc("返回待导入的小区信息")]
-        public InterferenceMatrixStat Get(int eNodebId, short pci, short neighborPci, DateTime date)
+        public async Task<InterferenceMatrixStat> Get(int eNodebId, short pci, short neighborPci, DateTime date)
         {
-            return _service.QueryStat(eNodebId, pci, neighborPci, date);
+            return await _service.QueryStat(eNodebId, pci, neighborPci, date);
         }
 
         [HttpGet]
-        public List<InterferenceMatrixStat> Get(int eNodebId, short pci)
+        public async Task<List<InterferenceMatrixStat>> Get(int eNodebId, short pci)
         {
-            return _service.QueryStats(eNodebId, pci);
+            return await _service.QueryStats(eNodebId, pci);
         }
 
         [HttpGet]

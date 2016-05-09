@@ -39,6 +39,13 @@ namespace Lte.Parameters.Concrete.Mr
                     e => e.ENodebId == eNodebId && e.Pci == pci);
             return Collection.Find(query).AsQueryable().ToList();
         }
-        
+
+        public async Task<List<InterferenceMatrixMongo>> GetListAsync(int eNodebId, short pci)
+        {
+            var query =
+                MongoDB.Driver.Builders.Query<InterferenceMatrixMongo>.Where(
+                    e => e.ENodebId == eNodebId && e.Pci == pci);
+            return await Collection.Find(query).AsQueryable().ToListAsync();
+        }
     }
 }

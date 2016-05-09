@@ -23,7 +23,7 @@ namespace Lte.Evaluations.DataService.Mr
 
         public static List<PciCell> PciCellList { get; private set; }
 
-        private static List<InterferenceMatrixMongo> InterferenceMatrixList { get; set; } 
+        private static Dictionary<string, List<InterferenceMatrixMongo>> InterferenceMatrixList { get; set; } 
 
         public InterferenceMatrixService(IInterferenceMatrixRepository repository, ICellRepository cellRepository,
             IInfrastructureRepository infrastructureRepository, IInterferenceMongoRepository mongoRepository)
@@ -33,7 +33,7 @@ namespace Lte.Evaluations.DataService.Mr
             if (InterferenceMatrixStats == null)
                 InterferenceMatrixStats = new Stack<InterferenceMatrixStat>();
             if (InterferenceMatrixList == null)
-                InterferenceMatrixList = new List<InterferenceMatrixMongo>();
+                InterferenceMatrixList = new Dictionary<string, List<InterferenceMatrixMongo>>();
             if (PciCellList == null)
             {
                 var cells = from cell in cellRepository.GetAllList()
@@ -83,45 +83,58 @@ namespace Lte.Evaluations.DataService.Mr
 
         public InterferenceMatrixMongo QueryMongo(int eNodebId, short pci)
         {
-            return InterferenceMatrixList.FirstOrDefault(x => x.ENodebId == eNodebId && x.Pci == pci);
+            return InterferenceMatrixList.ContainsKey(eNodebId + "-" + pci)
+                ? InterferenceMatrixList[eNodebId + "-" + pci].First()
+                : null;
         }
         
-        public List<InterferenceMatrixMongo> QueryMongoList(int eNodebId, short pci, DateTime date)
+        public async Task<List<InterferenceMatrixMongo>> QueryMongoList(int eNodebId, short pci, DateTime date)
         {
-            if (QueryMongo(eNodebId, pci) == null)
-            {
-                InterferenceMatrixList.AddRange(_mongoRepository.GetList(eNodebId, pci));
-            }
-            return
-                InterferenceMatrixList
-                    .Where(x => x.ENodebId == eNodebId && x.Pci == pci && x.CurrentDate >= date && x.CurrentDate < date.AddDays(1))
-                    .ToList();
+            if (InterferenceMatrixList.ContainsKey(eNodebId + "-" + pci))
+                return
+                    InterferenceMatrixList[eNodebId + "-" + pci]
+                        .Where(x => x.CurrentDate >= date && x.CurrentDate < date.AddDays(1)).ToList();
+            var cellList = await _mongoRepository.GetListAsync(eNodebId, pci);
+            if (cellList.Any() && !InterferenceMatrixList.ContainsKey(eNodebId + "-" + pci))
+                InterferenceMatrixList.Add(eNodebId + "-" + pci, cellList);
+            return cellList.Where(x => x.CurrentDate >= date && x.CurrentDate < date.AddDays(1)).ToList();
         }
 
-        public List<InterferenceMatrixStat> QueryStats(int eNodebId, short pci, DateTime time)
+        public async Task<List<InterferenceMatrixStat>> QueryStats(int eNodebId, short pci, DateTime time)
         {
-            if (QueryMongo(eNodebId, pci) == null)
+            List<InterferenceMatrixMongo> statList;
+            if (!InterferenceMatrixList.ContainsKey(eNodebId + "-" + pci))
             {
-                InterferenceMatrixList.AddRange(_mongoRepository.GetList(eNodebId, pci));
+                var stats = await _mongoRepository.GetListAsync(eNodebId, pci);
+                if (stats.Any() && !InterferenceMatrixList.ContainsKey(eNodebId + "-" + pci))
+                    InterferenceMatrixList.Add(eNodebId + "-" + pci, stats);
+                statList = stats.Where(x => x.CurrentDate >= time && x.CurrentDate < time.AddDays(1)).ToList();
             }
-            var statList =
-                InterferenceMatrixList
-                    .Where(x => x.ENodebId == eNodebId && x.Pci == pci && x.CurrentDate >= time && x.CurrentDate < time.AddDays(1)).ToList();
-            if (!statList.Any()) return new List<InterferenceMatrixStat>();
-            return GenereateStatList(time, statList);
+            else
+                statList =
+                    InterferenceMatrixList[eNodebId + "-" + pci].Where(
+                        x => x.CurrentDate >= time && x.CurrentDate < time.AddDays(1)).ToList();
+            return !statList.Any() ? new List<InterferenceMatrixStat>() : GenereateStatList(time, statList);
         }
 
-        public InterferenceMatrixStat QueryStat(int eNodebId, short pci, short neighborPci, DateTime time)
+        public async Task<InterferenceMatrixStat> QueryStat(int eNodebId, short pci, short neighborPci, DateTime time)
         {
-            if (QueryMongo(eNodebId, pci) == null)
+            List<InterferenceMatrixMongo> statList;
+            if (!InterferenceMatrixList.ContainsKey(eNodebId + "-" + pci))
             {
-                InterferenceMatrixList.AddRange(_mongoRepository.GetList(eNodebId, pci));
+                var stats = await _mongoRepository.GetListAsync(eNodebId, pci);
+                if (stats.Any() && !InterferenceMatrixList.ContainsKey(eNodebId + "-" + pci))
+                    InterferenceMatrixList.Add(eNodebId + "-" + pci, stats);
+                statList =
+                    stats.Where(
+                        x => x.NeighborPci == neighborPci && x.CurrentDate >= time && x.CurrentDate < time.AddDays(1))
+                        .ToList();
             }
-            var statList =
-               InterferenceMatrixList
-                    .Where(x => x.ENodebId == eNodebId && x.Pci == pci && 
-                    x.NeighborPci == neighborPci && x.CurrentDate >= time && x.CurrentDate < time.AddDays(1))
-                    .ToList();
+            else
+                statList =
+                    InterferenceMatrixList[eNodebId + "-" + pci].Where(
+                        x => x.NeighborPci == neighborPci && x.CurrentDate >= time && x.CurrentDate < time.AddDays(1))
+                        .ToList();
             if (!statList.Any()) return null;
             return new InterferenceMatrixStat
             {
@@ -136,15 +149,18 @@ namespace Lte.Evaluations.DataService.Mr
             };
         }
 
-        public List<InterferenceMatrixStat> QueryStats(int eNodebId, short pci)
+        public async Task<List<InterferenceMatrixStat>> QueryStats(int eNodebId, short pci)
         {
-            if (QueryMongo(eNodebId, pci) == null)
+            List<InterferenceMatrixMongo> stats;
+            if (!InterferenceMatrixList.ContainsKey(eNodebId + "-" + pci))
             {
-                InterferenceMatrixList.AddRange(_mongoRepository.GetList(eNodebId, pci));
+                stats = await _mongoRepository.GetListAsync(eNodebId, pci);
+                if (stats.Any() && !InterferenceMatrixList.ContainsKey(eNodebId + "-" + pci))
+                    InterferenceMatrixList.Add(eNodebId + "-" + pci, stats);
             }
-            var statList = InterferenceMatrixList.Where(x => x.ENodebId == eNodebId && x.Pci == pci).ToList();
-            if (!statList.Any()) return new List<InterferenceMatrixStat>();
-            return GenereateStatList(statList);
+            else
+                stats = InterferenceMatrixList[eNodebId + "-" + pci];
+            return !stats.Any() ? new List<InterferenceMatrixStat>() : GenereateStatList(stats);
         }
 
         private static List<InterferenceMatrixStat> GenereateStatList(DateTime time, IEnumerable<InterferenceMatrixMongo> statList)
