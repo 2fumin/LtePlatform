@@ -64,6 +64,12 @@
         <td>
             {{currentView.workItemState}}
         </td>
+        <td>
+            <a ng-href="{{rootPath}}import/{{currentView.eNodebId}}/{{currentView.sectorId}}/{{currentView.eNodebName}}"
+               class="btn btn-primary"s>
+                导入干扰信息
+            </a>
+        </td>
     </tr>
     </tbody>
 </table>
