@@ -857,6 +857,7 @@
     <Content Include="Scripts\rutrace\index.controller.js" />
     <Content Include="Scripts\rutrace\interference\source.db.chart.js" />
     <Content Include="Scripts\rutrace\interference\source.dialog.js" />
+    <Content Include="Scripts\rutrace\interference\source.mod.chart.js" />
     <Content Include="Scripts\rutrace\map.controller.js" />
     <Content Include="Scripts\rutrace\map.neighbor.dialog.js" />
     <Content Include="Scripts\rutrace\map.precise.dialog.js" />

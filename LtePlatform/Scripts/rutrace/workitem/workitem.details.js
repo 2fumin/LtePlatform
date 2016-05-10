@@ -87,5 +87,33 @@
             $log.info('Modal dismissed at: ' + new Date());
         });
     };
+    $scope.showSourceModChart = function() {
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: '/appViews/Rutrace/Interference/SourceModChartDialog.html',
+            controller: 'interference.source.mod.chart',
+            size: 'lg',
+            resolve: {
+                dialogTitle: function () {
+                    return $scope.currentView.eNodebName + "-" + $scope.currentView.sectorId + "MOD3/MOD6干扰图表";
+                },
+                eNodebId: function () {
+                    return $scope.currentView.eNodebId;
+                },
+                sectorId: function () {
+                    return $scope.currentView.sectorId;
+                },
+                name: function () {
+                    return $scope.currentView.eNodebName;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (info) {
+            $scope.interferenceSourceComments = info;
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
     $scope.queryWorkItems();
 });
