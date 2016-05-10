@@ -41,6 +41,42 @@ namespace Lte.MySqlFramework.Abstract
                     opt => opt.MapFrom(s => (double) s.LastTtiDownlinkFlowInByte/(1024*1024)))
                 .ForMember(d => d.ButLastDownlinkDuration,
                     opt => opt.MapFrom(s => (double) s.ButLastDownlinkDurationInMs/1000));
+
+            Mapper.CreateMap<FlowZteCsv, FlowZte>()
+                .ForMember(d => d.UplindPdcpFlow, opt => opt.MapFrom(s => s.UplindPdcpFlowInMByte*8))
+                .ForMember(d => d.DownlinkPdcpFlow, opt => opt.MapFrom(s => s.DownlinkPdcpFlowInMByte*8))
+                .ForMember(d => d.Qci8UplinkIpThroughput,
+                    opt =>
+                        opt.MapFrom(
+                            s =>
+                                s.Qci8UplinkIpThroughputHigh.ConvertToInt(0) +
+                                s.Qci8UplinkIpThroughputLow.Replace(",", "").ConvertToDouble(0)/1024))
+                .ForMember(d => d.Qci8UplinkIpDuration,
+                    opt => opt.MapFrom(s => s.Qci8UplinkIpThroughputDuration.ConvertToDouble(0)/1000))
+                .ForMember(d => d.Qci9UplinkIpThroughput,
+                    opt =>
+                        opt.MapFrom(
+                            s =>
+                                s.Qci9UplinkIpThroughputHigh.ConvertToInt(0) +
+                                s.Qci9UplinkIpThroughputLow.Replace(",", "").ConvertToDouble(0)/1024))
+                .ForMember(d => d.Qci9UplinkIpDuration,
+                    opt => opt.MapFrom(s => s.Qci9UplinkIpThroughputDuration.ConvertToDouble(0)/1000))
+                .ForMember(d => d.Qci8DownlinkIpThroughput,
+                    opt =>
+                        opt.MapFrom(
+                            s =>
+                                s.Qci8DownlinkIpThroughputHigh.ConvertToInt(0) +
+                                s.Qci8DownlinkIpThroughputLow.Replace(",", "").ConvertToDouble(0)/1024))
+                .ForMember(d => d.Qci8DownlinkIpDuration,
+                    opt => opt.MapFrom(s => s.Qci8DownlinkIpThroughputDuration.ConvertToDouble(0)/1000))
+                .ForMember(d => d.Qci9DownlinkIpThroughput,
+                    opt =>
+                        opt.MapFrom(
+                            s =>
+                                s.Qci9DownlinkIpThroughputHigh.ConvertToInt(0) +
+                                s.Qci9DownlinkIpThroughputLow.Replace(",", "").ConvertToDouble(0)/1024))
+                .ForMember(d => d.Qci9DownlinkIpDuration,
+                    opt => opt.MapFrom(s => s.Qci9DownlinkIpThroughputDuration.ConvertToDouble(0)/1000));
         }
     }
 }

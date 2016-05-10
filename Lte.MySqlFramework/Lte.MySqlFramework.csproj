@@ -63,6 +63,7 @@
     <Compile Include="Concrete\MySqlContext.cs" />
     <Compile Include="Entities\FlowHuawei.cs" />
     <Compile Include="Entities\FlowHuaweiCsv.cs" />
+    <Compile Include="Entities\FlowZte.cs" />
     <Compile Include="Entities\FlowZteCsv.cs" />
     <Compile Include="Migrations\201605040638276_Initialize_MySql_20160504.cs" />
     <Compile Include="Migrations\201605040638276_Initialize_MySql_20160504.Designer.cs">
@@ -75,6 +76,10 @@
     <Compile Include="Migrations\201605040929003_Initialize_MySql_201605042.cs" />
     <Compile Include="Migrations\201605040929003_Initialize_MySql_201605042.Designer.cs">
       <DependentUpon>201605040929003_Initialize_MySql_201605042.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605101113102_Add_FlowZte_20160510.cs" />
+    <Compile Include="Migrations\201605101113102_Add_FlowZte_20160510.Designer.cs">
+      <DependentUpon>201605101113102_Add_FlowZte_20160510.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -118,6 +123,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605040929003_Initialize_MySql_201605042.resx">
       <DependentUpon>201605040929003_Initialize_MySql_201605042.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605101113102_Add_FlowZte_20160510.resx">
+      <DependentUpon>201605101113102_Add_FlowZte_20160510.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
