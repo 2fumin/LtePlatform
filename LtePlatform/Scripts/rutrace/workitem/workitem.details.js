@@ -115,5 +115,33 @@
             $log.info('Modal dismissed at: ' + new Date());
         });
     };
+    $scope.showSourceStrengthChart = function() {
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: '/appViews/Rutrace/Interference/SourceStrengthChartDialog.html',
+            controller: 'interference.source.strength.chart',
+            size: 'lg',
+            resolve: {
+                dialogTitle: function() {
+                    return $scope.currentView.eNodebName + "-" + $scope.currentView.sectorId + "干扰强度图表";
+                },
+                eNodebId: function() {
+                    return $scope.currentView.eNodebId;
+                },
+                sectorId: function() {
+                    return $scope.currentView.sectorId;
+                },
+                name: function() {
+                    return $scope.currentView.eNodebName;
+                }
+            }
+        });
+
+        modalInstance.result.then(function(info) {
+            $scope.interferenceSourceComments = info;
+        }, function() {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
     $scope.queryWorkItems();
 });
