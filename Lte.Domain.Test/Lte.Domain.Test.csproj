@@ -113,6 +113,7 @@
     <Compile Include="Regular\ContainsStringTest.cs" />
     <Compile Include="Regular\DateTimeRegexTest.cs" />
     <Compile Include="Regular\EmailAndUrlTest.cs" />
+    <Compile Include="Regular\SecureConversionTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AutoMapper\AutoMapper.csproj">

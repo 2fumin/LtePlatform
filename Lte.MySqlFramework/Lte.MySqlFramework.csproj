@@ -63,6 +63,7 @@
     <Compile Include="Concrete\MySqlContext.cs" />
     <Compile Include="Entities\FlowHuawei.cs" />
     <Compile Include="Entities\FlowHuaweiCsv.cs" />
+    <Compile Include="Entities\FlowZteCsv.cs" />
     <Compile Include="Migrations\201605040638276_Initialize_MySql_20160504.cs" />
     <Compile Include="Migrations\201605040638276_Initialize_MySql_20160504.Designer.cs">
       <DependentUpon>201605040638276_Initialize_MySql_20160504.cs</DependentUpon>
