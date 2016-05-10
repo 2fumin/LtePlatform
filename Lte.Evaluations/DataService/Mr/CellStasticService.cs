@@ -20,6 +20,20 @@ namespace Lte.Evaluations.DataService.Mr
 
         public CellStasticView QueryDateSpanAverageStat(int eNodebId, short pci, DateTime begin, DateTime end)
         {
+            var dateSpanStats = QueryDateSpanStatList(eNodebId, pci, begin, end);
+            return dateSpanStats.Any() ? new CellStasticView
+            {
+                Mod3Count = dateSpanStats.Average(x => x.Mod3Count),
+                Mod6Count = dateSpanStats.Average(x => x.Mod6Count),
+                MrCount = dateSpanStats.Average(x => x.MrCount),
+                OverCoverCount = dateSpanStats.Average(x => x.OverCoverCount),
+                PreciseCount = dateSpanStats.Average(x => x.PreciseCount),
+                WeakCoverCount = dateSpanStats.Average(x => x.WeakCoverCount)
+            } : null;
+        }
+
+        public List<CellStastic> QueryDateSpanStatList(int eNodebId, short pci, DateTime begin, DateTime end)
+        {
             var dateSpanStats = new List<CellStastic>();
             while (begin < end)
             {
@@ -36,15 +50,7 @@ namespace Lte.Evaluations.DataService.Mr
                     });
                 begin = begin.AddDays(1);
             }
-            return dateSpanStats.Any() ? new CellStasticView
-            {
-                Mod3Count = dateSpanStats.Average(x => x.Mod3Count),
-                Mod6Count = dateSpanStats.Average(x => x.Mod6Count),
-                MrCount = dateSpanStats.Average(x => x.MrCount),
-                OverCoverCount = dateSpanStats.Average(x => x.OverCoverCount),
-                PreciseCount = dateSpanStats.Average(x => x.PreciseCount),
-                WeakCoverCount = dateSpanStats.Average(x => x.WeakCoverCount)
-            } : null;
+            return dateSpanStats;
         }
     }
 }

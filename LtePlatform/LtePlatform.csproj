@@ -329,6 +329,7 @@
     <Compile Include="Controllers\KpiController.cs" />
     <Compile Include="Controllers\Kpi\AlarmCountController.cs" />
     <Compile Include="Controllers\Kpi\AlarmsController.cs" />
+    <Compile Include="Controllers\Kpi\DumpFlowController.cs" />
     <Compile Include="Controllers\Kpi\DumpInterferenceController.cs" />
     <Compile Include="Controllers\Kpi\KpiDataListController.cs" />
     <Compile Include="Controllers\Kpi\PreciseImportController.cs" />

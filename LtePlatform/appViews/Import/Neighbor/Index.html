@@ -44,6 +44,22 @@
                 </span>
             </div>
         </div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>日期</th>
+                    <th>华为数量</th>
+                    <th>中兴数量</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="stat in dumpHistory">
+                    <td>{{stat.dateString}}</td>
+                    <td>{{stat.huaweiItems}}</td>
+                    <td>{{stat.zteItems}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <div uib-tab index="1" heading="邻区导入">
         <p>
