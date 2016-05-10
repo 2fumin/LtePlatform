@@ -38,17 +38,34 @@
             neighborImportService.updateFailProgress($scope.huaweiInfo, $scope.dumpHuaweiItems);
         });
     };
+    $scope.zteInfo = {
+        totalSuccessItems: 0,
+        totalFailItems: 0,
+        totalDumpItems: 0
+    };
+    $scope.clearZteItems = function () {
+        flowImportService.clearDumpHuaweis().then(function () {
+            $scope.zteInfo.totalDumpItems = 0;
+            $scope.zteInfo.totalSuccessItems = 0;
+            $scope.zteInfo.totalFailItems = 0;
+        });
+    }
+    $scope.dumpZteItems = function () {
+        flowImportService.dumpZteItem().then(function (result) {
+            neighborImportService.updateSuccessProgress(result, $scope.zteInfo, $scope.dumpZteItems);
+        }, function () {
+            neighborImportService.updateFailProgress($scope.zteInfo, $scope.dumpZteItems);
+        });
+    };
 
     neighborImportService.queryDumpNeighbors().then(function(result) {
         $scope.progressInfo.totalDumpItems = result;
     });
     flowImportService.queryHuaweiFlows().then(function (result) {
         $scope.huaweiInfo.totalDumpItems = result;
-        if (result > 100) {
-            flowImportService.queryHuaweiStat(100).then(function(stat) {
-                console.log(stat);
-            });
-        }
+    });
+    flowImportService.queryZteFlows().then(function (result) {
+        $scope.zteInfo.totalDumpItems = result;
     });
 
 });

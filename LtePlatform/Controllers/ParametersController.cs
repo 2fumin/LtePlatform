@@ -141,7 +141,7 @@ namespace LtePlatform.Controllers
         }
 
         [HttpPost]
-        public ActionResult HwZtePost(HttpPostedFileBase[] flowZte)
+        public ActionResult ZteFlowPost(HttpPostedFileBase[] flowZte)
         {
             if (flowZte != null && flowZte.Length > 0 && !string.IsNullOrEmpty(flowZte[0]?.FileName))
             {

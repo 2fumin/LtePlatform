@@ -22,6 +22,28 @@
                 </span>
             </div>
         </div>
+        <h4>中兴流量</h4>
+        <button class="btn btn-primary" ng-click="dumpZteItems()" ng-disabled="zteInfo.totalDumpItems === 0">
+            一键导入
+        </button>
+        <button class="btn btn-danger" ng-click="clearZteItems()" ng-disabled="zteInfo.totalDumpItems === 0">
+            清除导入
+        </button>
+        总数：{{zteInfo.totalDumpItems}}&nbsp;
+        成功数：{{zteInfo.totalSuccessItems}}&nbsp;
+        失败数：{{zteInfo.totalFailItems}}
+        <div uib-progress>
+            <div uib-bar value="100*zteInfo.totalSuccessItems / zteInfo.totalDumpItems" type="success">
+                <span ng-show="100*zteInfo.totalSuccessItems / zteInfo.totalDumpItems > 5">
+                    {{100*zteInfo.totalSuccessItems / zteInfo.totalDumpItems | number: 2}}%
+                </span>
+            </div>
+            <div uib-bar value="100*zteInfo.totalFailItems / zteInfo.totalDumpItems" type="erroe">
+                <span ng-show="100*zteInfo.totalFailItems / zteInfo.totalDumpItems > 5">
+                    {{100*zteInfo.totalFailItems / zteInfo.totalDumpItems | number: 2}}%
+                </span>
+            </div>
+        </div>
     </div>
     <div uib-tab index="1" heading="邻区导入">
         <p>

@@ -710,6 +710,19 @@
                     });
                 return deferred.promise;
             },
+            queryZteFlows: function () {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('DumpZteFlow')
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            },
             clearDumpHuaweis: function () {
                 var deferred = $q.defer();
                 $http.delete(appUrlService.getApiUrl('DumpHuaweiFlow')).success(function (result) {
@@ -720,9 +733,29 @@
                     });
                 return deferred.promise;
             },
+            clearDumpZtes: function () {
+                var deferred = $q.defer();
+                $http.delete(appUrlService.getApiUrl('DumpZteFlow')).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            },
             dumpHuaweiItem: function () {
                 var deferred = $q.defer();
                 $http.put(appUrlService.getApiUrl('DumpHuaweiFlow')).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            },
+            dumpZteItem: function () {
+                var deferred = $q.defer();
+                $http.put(appUrlService.getApiUrl('DumpZteFlow')).success(function (result) {
                     deferred.resolve(result);
                 })
                     .error(function (reason) {
