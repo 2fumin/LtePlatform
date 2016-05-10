@@ -74,4 +74,32 @@ namespace LtePlatform.Controllers.Parameters
             _service.ClearHuaweiStats();
         }
     }
+
+    public class DumpZteFlowController : ApiController
+    {
+        private readonly FlowService _service;
+
+        public DumpZteFlowController(FlowService service)
+        {
+            _service = service;
+        }
+
+        [HttpPut]
+        public Task<bool> Put()
+        {
+            return _service.DumpOneZteStat();
+        }
+
+        [HttpGet]
+        public int Get()
+        {
+            return _service.FlowZteCount;
+        }
+        
+        [HttpDelete]
+        public void Delete()
+        {
+            _service.ClearZteStats();
+        }
+    }
 }

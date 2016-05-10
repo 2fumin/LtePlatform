@@ -139,5 +139,19 @@ namespace LtePlatform.Controllers
             }
             return View("NeighborImport");
         }
+
+        [HttpPost]
+        public ActionResult HwZtePost(HttpPostedFileBase[] flowZte)
+        {
+            if (flowZte != null && flowZte.Length > 0 && !string.IsNullOrEmpty(flowZte[0]?.FileName))
+            {
+                ViewBag.Message = "共上传中兴流量信息文件" + flowZte.Length + "个！";
+                foreach (var file in flowZte)
+                {
+                    _flowService.UploadFlowZtes(new StreamReader(file.InputStream, Encoding.GetEncoding("GB2312")));
+                }
+            }
+            return View("NeighborImport");
+        }
     }
 }

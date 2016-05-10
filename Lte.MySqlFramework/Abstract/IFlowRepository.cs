@@ -14,7 +14,18 @@ namespace Lte.MySqlFramework.Abstract
 
         List<FlowHuawei> GetAllList(DateTime begin, DateTime end, int eNodebId);
 
-        List<FlowHuawei> GetAllList(DateTime begin, DateTime end, int eNodebId, byte sectorId);
+        List<FlowHuawei> GetAllList(DateTime begin, DateTime end, int eNodebId, byte localCellId);
+
+        int SaveChanges();
+    }
+
+    public interface IFlowZteRepository : IRepository<FlowZte>
+    {
+        List<FlowZte> GetAllList(DateTime begin, DateTime end);
+
+        List<FlowZte> GetAllList(DateTime begin, DateTime end, int eNodebId);
+
+        List<FlowZte> GetAllList(DateTime begin, DateTime end, int eNodebId, byte sectorId);
 
         int SaveChanges();
     }

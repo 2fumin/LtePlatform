@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Lte.Domain.LinqToCsv;
+using Lte.Domain.LinqToCsv.Context;
+using Lte.Domain.LinqToCsv.Description;
 
 namespace Lte.MySqlFramework.Entities
 {
@@ -83,5 +86,13 @@ namespace Lte.MySqlFramework.Entities
 
         [CsvColumn(Name = "QCI9小区下行IP Throughput数据传输时间(毫秒)")]
         public string Qci9DownlinkIpThroughputDuration { get; set; }
+
+        public static IEnumerable<FlowZteCsv> ReadFlowZteCsvs(StreamReader reader)
+        {
+            return
+                CsvContext.Read<FlowZteCsv>(reader, CsvFileDescription.CommaDescription)
+                    .ToList()
+                    .Where(x => !string.IsNullOrEmpty(x.Qci8DownlinkIpThroughputDuration));
+        }
     }
 }
