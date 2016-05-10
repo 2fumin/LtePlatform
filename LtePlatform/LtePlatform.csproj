@@ -855,6 +855,7 @@
     <Content Include="Scripts\rutrace\cell.trend.js" />
     <Content Include="Scripts\rutrace\dump\cell.mongo.js" />
     <Content Include="Scripts\rutrace\index.controller.js" />
+    <Content Include="Scripts\rutrace\interference\source.db.chart.js" />
     <Content Include="Scripts\rutrace\interference\source.dialog.js" />
     <Content Include="Scripts\rutrace\map.controller.js" />
     <Content Include="Scripts\rutrace\map.neighbor.dialog.js" />

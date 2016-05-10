@@ -59,5 +59,33 @@
             $log.info('Modal dismissed at: ' + new Date());
         });
     };
+    $scope.showSourceDbChart = function() {
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: '/appViews/Rutrace/Interference/SourceDbChartDialog.html',
+            controller: 'interference.source.db.chart',
+            size: 'lg',
+            resolve: {
+                dialogTitle: function () {
+                    return $scope.currentView.eNodebName + "-" + $scope.currentView.sectorId + "干扰源图表";
+                },
+                eNodebId: function () {
+                    return $scope.currentView.eNodebId;
+                },
+                sectorId: function () {
+                    return $scope.currentView.sectorId;
+                },
+                name: function() {
+                    return $scope.currentView.eNodebName;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (info) {
+            $scope.interferenceSourceComments = info;
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
     $scope.queryWorkItems();
 });

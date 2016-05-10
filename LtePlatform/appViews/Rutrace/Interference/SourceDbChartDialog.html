@@ -5,31 +5,33 @@
     <h4 class="modal-title text-primary">{{dialogTitle}}</h4>
 </div>
 <div class="modal-body">
-    <div class="col-md-6">
-        <label>开始日期：</label>
-        <div class="input-group">
-            <input type="text" class="form-control" uib-datepicker-popup ng-model="beginDate.value"
-                   is-open="beginDate.opened" ng-required="true" close-text="Close" />
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="beginDate.opened = true">
-                    <i class="glyphicon glyphicon-calendar"></i>
-                </button>
-            </span>
+    <div class="row">
+        <div class="col-md-6">
+            <label>开始日期：</label>
+            <div class="input-group">
+                <input type="text" class="form-control" uib-datepicker-popup ng-model="beginDate.value"
+                       is-open="beginDate.opened" ng-required="true" close-text="Close" />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="beginDate.opened = true">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                </span>
+            </div>
         </div>
-    </div>
-    <div class="col-md-6">
-        <label>结束日期：</label>
-        <div class="input-group">
-            <input type="text" class="form-control" uib-datepicker-popup ng-model="endDate.value"
-                   is-open="endDate.opened" ng-required="true" close-text="Close" />
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="endDate.opened = true">
-                    <i class="glyphicon glyphicon-calendar"></i>
-                </button>
-                <button type="button" class="btn btn-warning" ng-click="showChart()">
-                    <i class="glyphicon glyphicon-search" title="统计干扰"></i>
-                </button>
-            </span>
+        <div class="col-md-6">
+            <label>结束日期：</label>
+            <div class="input-group">
+                <input type="text" class="form-control" uib-datepicker-popup ng-model="endDate.value"
+                       is-open="endDate.opened" ng-required="true" close-text="Close" />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="endDate.opened = true">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                    <button type="button" class="btn btn-warning" ng-click="showChart()">
+                        <i class="glyphicon glyphicon-search" title="统计干扰"></i>
+                    </button>
+                </span>
+            </div>
         </div>
     </div>
     <div id="interference-over6db"></div>

@@ -94,16 +94,43 @@
                 <td>干扰源分析</td>
                 <td>{{interferenceSourceComments}}</td>
                 <td>
-                    <div class="btn-group">
-                        <button class="btn btn-default" ng-click="analyzeInterferenceSource()">分析</button>
-                        <button class="btn btn-default" ng-click="showInterferenceSourceChart()">图表</button>
+                    <button class="btn btn-default" ng-click="analyzeInterferenceSource()">分析</button>
+                    <div class="btn-group" uib-dropdown>
+                        <button id="single-button" type="button" class="btn btn-default"
+                                uib-dropdown-toggle ng-disabled="disabled">
+                            图表<span class="caret"></span>
+                        </button>
+                        <ul uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                            <li role="menuitem">
+                                <a class="btn btn-warning" href="" ng-click="showSourceDbChart()">
+                                    <i class="glyphicon glyphicon-fullscreen" title="干扰信息"></i>
+                                    基本信息
+                                </a>
+                            </li>
+                            <li role="menuitem">
+                                <a class="btn btn-success" href="" ng-click="showSourceModChart">
+                                    <i class="glyphicon glyphicon-tree-conifer" title="覆盖信息"></i>
+                                    MOD3、6干扰
+                                </a>
+                            </li>
+                            <li role="menuitem">
+                                <a class="btn btn-default" href="" ng-click="showSourceStrengthChart">
+                                    <i class="glyphicon glyphicon-globe"></i>
+                                    干扰强度
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </td>
             </tr>
                 <tr>
                     <td>干扰基站分析</td>
-                    <td></td>
-                    <td></td>
+                    <td>{{interferenceVictimComments}}</td>
+                    <td>
+                        <div class="btn-group">
+                            <button class="btn btn-default" ng-click="analyzeInterferenceVictim()">分析</button>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <td>覆盖分析</td>
