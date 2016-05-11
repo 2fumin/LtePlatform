@@ -45,4 +45,13 @@ namespace Lte.Evaluations.ViewModels
 
         public int Alarms { get; set; }
     }
+
+    public class FlowHistory
+    {
+        public string DateString { get; set; }
+
+        public int HuaweiItems { get; set; }
+
+        public int ZteItems { get; set; }
+    }
 }

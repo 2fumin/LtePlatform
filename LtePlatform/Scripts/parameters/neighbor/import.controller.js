@@ -1,4 +1,14 @@
 ﻿app.controller("neighbor.import", function ($scope, neighborImportService, flowImportService) {
+    var lastWeek = new Date();
+    lastWeek.setDate(lastWeek.getDate() - 7);
+    $scope.beginDate = {
+        value: lastWeek,
+        opened: false
+    };
+    $scope.endDate = {
+        value: new Date(),
+        opened: false
+    };
     $scope.progressInfo = {
         totalSuccessItems: 0,
         totalFailItems: 0,
@@ -66,6 +76,9 @@
         });
         flowImportService.queryZteFlows().then(function(result) {
             $scope.zteInfo.totalDumpItems = result;
+        });
+        flowImportService.queryDumpHistory($scope.beginDate.value, $scope.endDate.value).then(function (result) {
+            $scope.dumpHistory = result;
         });
     };
 

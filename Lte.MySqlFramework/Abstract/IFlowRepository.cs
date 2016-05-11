@@ -12,6 +12,8 @@ namespace Lte.MySqlFramework.Abstract
     {
         List<FlowHuawei> GetAllList(DateTime begin, DateTime end);
 
+        Task<int> CountAsync(DateTime begin, DateTime end);
+
         List<FlowHuawei> GetAllList(DateTime begin, DateTime end, int eNodebId);
 
         List<FlowHuawei> GetAllList(DateTime begin, DateTime end, int eNodebId, byte localCellId);
@@ -22,6 +24,8 @@ namespace Lte.MySqlFramework.Abstract
     public interface IFlowZteRepository : IRepository<FlowZte>
     {
         List<FlowZte> GetAllList(DateTime begin, DateTime end);
+
+        Task<int> CountAsync(DateTime begin, DateTime end);
 
         List<FlowZte> GetAllList(DateTime begin, DateTime end, int eNodebId);
 

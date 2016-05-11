@@ -21,6 +21,11 @@ namespace Lte.MySqlFramework.Concrete
             return GetAllList(x => x.StatTime >= begin && x.StatTime < end);
         }
 
+        public async Task<int> CountAsync(DateTime begin, DateTime end)
+        {
+            return await CountAsync(x => x.StatTime >= begin && x.StatTime < end);
+        }
+
         public List<FlowZte> GetAllList(DateTime begin, DateTime end, int eNodebId)
         {
             return GetAllList(x => x.StatTime >= begin && x.StatTime < end && x.ENodebId == eNodebId);

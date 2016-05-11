@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using Lte.Evaluations.DataService.Kpi;
+using Lte.Evaluations.ViewModels;
 using Lte.MySqlFramework.Entities;
+using LtePlatform.Models;
 
 namespace LtePlatform.Controllers.Kpi
 {
@@ -16,6 +18,16 @@ namespace LtePlatform.Controllers.Kpi
         public DumpFlowController(FlowService service)
         {
             _service = service;
+        }
+
+        [HttpGet]
+        [ApiDoc("获取给定日期范围内的历史流量记录数")]
+        [ApiParameterDoc("begin", "开始日期")]
+        [ApiParameterDoc("end", "结束日期")]
+        [ApiResponse("历史流量记录数")]
+        public async Task<IEnumerable<FlowHistory>> Get(DateTime begin, DateTime end)
+        {
+            return await _service.GetFlowHistories(begin, end);
         }
     }
 

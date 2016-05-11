@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Lte.Evaluations.ViewModels;
 using Lte.MySqlFramework.Abstract;
 using Lte.MySqlFramework.Entities;
 
@@ -103,6 +104,26 @@ namespace Lte.Evaluations.DataService.Kpi
         public FlowHuawei QueryHuaweiStat(int index)
         {
             return FlowHuaweis.ElementAt(index);
+        }
+
+        public async Task<IEnumerable<FlowHistory>> GetFlowHistories(DateTime begin, DateTime end)
+        {
+            var results = new List<FlowHistory>();
+            while (begin < end.AddDays(1))
+            {
+                var beginDate = begin;
+                var endDate = begin.AddDays(1);
+                var huaweiItems = await _huaweiRepository.CountAsync(beginDate, endDate);
+                var zteItems = await _zteRepository.CountAsync(beginDate, endDate);
+                results.Add(new FlowHistory
+                {
+                    DateString = begin.ToShortDateString(),
+                    HuaweiItems = huaweiItems,
+                    ZteItems = zteItems
+                });
+                begin = begin.AddDays(1);
+            }
+            return results;
         }
     }
 }

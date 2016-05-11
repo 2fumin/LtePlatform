@@ -778,6 +778,23 @@
                         deferred.reject(reason);
                     });
                 return deferred.promise;
+            },
+            queryDumpHistory: function(begin, end) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('DumpFlow'),
+                    params: {
+                        begin: begin,
+                        end: end
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
             }
         }
     })
