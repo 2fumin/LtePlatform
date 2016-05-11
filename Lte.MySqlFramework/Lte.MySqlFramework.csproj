@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\ICellStatMysqlRepository.cs" />
     <Compile Include="Abstract\IFlowRepository.cs" />
     <Compile Include="Abstract\MySqlMapperService.cs" />
     <Compile Include="Concrete\FlowHuaweiRepository.cs" />
@@ -86,6 +87,14 @@
     <Compile Include="Migrations\201605111236177_Add_CellStatMysql_20160511.cs" />
     <Compile Include="Migrations\201605111236177_Add_CellStatMysql_20160511.Designer.cs">
       <DependentUpon>201605111236177_Add_CellStatMysql_20160511.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605111304438_CellStatMysql_20160511.cs" />
+    <Compile Include="Migrations\201605111304438_CellStatMysql_20160511.Designer.cs">
+      <DependentUpon>201605111304438_CellStatMysql_20160511.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605111320562_CellStatMysql_201605111.cs" />
+    <Compile Include="Migrations\201605111320562_CellStatMysql_201605111.Designer.cs">
+      <DependentUpon>201605111320562_CellStatMysql_201605111.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -135,6 +144,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605111236177_Add_CellStatMysql_20160511.resx">
       <DependentUpon>201605111236177_Add_CellStatMysql_20160511.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605111304438_CellStatMysql_20160511.resx">
+      <DependentUpon>201605111304438_CellStatMysql_20160511.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605111320562_CellStatMysql_201605111.resx">
+      <DependentUpon>201605111320562_CellStatMysql_201605111.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

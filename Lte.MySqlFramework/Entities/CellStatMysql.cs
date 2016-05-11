@@ -11,7 +11,9 @@ namespace Lte.MySqlFramework.Entities
     {
         public int ENodebId { get; set; }
 
-        public int Pci { get; set; }
+        public byte SectorId { get; set; }
+
+        public short Pci { get; set; }
 
         public int Mod3Count { get; set; }
 
