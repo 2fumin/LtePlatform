@@ -18,7 +18,8 @@
             dumpProgress.queryExistedItems(eNodebId, sectorId, record.date).then(function (result) {
                 for (var i = 0; i < $scope.dateRecords.length; i++) {
                     if ($scope.dateRecords[i].date === result.date) {
-                        $scope.dateRecords[i].existedRecords = result.value;
+                        $scope.dateRecords[i].existedRecords = result.value.item1;
+                        $scope.dateRecords[i].existedStat = result.value.item2;
                         break;
                     }
                 }
@@ -51,7 +52,8 @@
         var date = new Date(startDate);
         $scope.dateRecords.push({
             date: date,
-            existedRecords: 0
+            existedRecords: 0,
+            existedStat: false
         });
         startDate.setDate(date.getDate() + 1);
     }

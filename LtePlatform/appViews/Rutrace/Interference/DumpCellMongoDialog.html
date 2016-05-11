@@ -10,6 +10,7 @@
         <th>日期</th>
         <th>已导入数</th>
         <th>Mongo记录数</th>
+        <th>已导入小区统计</th>
         <th>操作</th>
     </tr>
     </thead>
@@ -17,6 +18,7 @@
     <tr ng-repeat="record in dateRecords">
         <td>{{record.date | date: "yyyy-MM-dd"}}</td>
         <td>{{record.existedRecords}}</td>
+        <td>{{record.existedStat ? '是': '否'}}</td>
         <td>{{record.mongoRecords.length}}</td>
         <td>
             <div class="btn-group">

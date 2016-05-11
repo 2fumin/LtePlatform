@@ -45,7 +45,7 @@ namespace Lte.Parameters.Concrete.Mr
             var query =
                 MongoDB.Driver.Builders.Query<InterferenceMatrixMongo>.Where(
                     e => e.ENodebId == eNodebId && e.Pci == pci);
-            return await Collection.Find(query).AsQueryable().ToListAsync();
+            return await Task.Run(() => Collection.Find(query).AsQueryable().ToList());
         }
     }
 }

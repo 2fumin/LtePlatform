@@ -66,7 +66,7 @@ namespace LtePlatform.Controllers.Kpi
         }
 
         [HttpGet]
-        public int GetExisted(int eNodebId, byte sectorId, DateTime date)
+        public Tuple<int, bool> GetExisted(int eNodebId, byte sectorId, DateTime date)
         {
             return _service.QueryExistedStatsCount(eNodebId, sectorId, date);
         }

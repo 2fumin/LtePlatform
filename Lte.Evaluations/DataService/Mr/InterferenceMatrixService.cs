@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Abp.EntityFramework.AutoMapper;
 using AutoMapper;
 using Lte.Evaluations.MapperSerive;
+using Lte.MySqlFramework.Abstract;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Abstract.Basic;
 using Lte.Parameters.Entities.Basic;
@@ -18,6 +19,8 @@ namespace Lte.Evaluations.DataService.Mr
     {
         private readonly IInterferenceMatrixRepository _repository;
         private readonly IInterferenceMongoRepository _mongoRepository;
+        private readonly ICellStatMysqlRepository _statRepository;
+        private readonly ICellStasticRepository _mongoStatRepository;
 
         private static Stack<InterferenceMatrixStat> InterferenceMatrixStats { get; set; }
 
@@ -26,10 +29,13 @@ namespace Lte.Evaluations.DataService.Mr
         private static Dictionary<string, List<InterferenceMatrixMongo>> InterferenceMatrixList { get; set; } 
 
         public InterferenceMatrixService(IInterferenceMatrixRepository repository, ICellRepository cellRepository,
-            IInfrastructureRepository infrastructureRepository, IInterferenceMongoRepository mongoRepository)
+            IInfrastructureRepository infrastructureRepository, IInterferenceMongoRepository mongoRepository,
+            ICellStatMysqlRepository statRepository, ICellStasticRepository mongoStatRepository)
         {
             _repository = repository;
             _mongoRepository = mongoRepository;
+            _statRepository = statRepository;
+            _mongoStatRepository = mongoStatRepository;
             if (InterferenceMatrixStats == null)
                 InterferenceMatrixStats = new Stack<InterferenceMatrixStat>();
             if (InterferenceMatrixList == null)
@@ -44,15 +50,14 @@ namespace Lte.Evaluations.DataService.Mr
             }
         }
 
-        public int QueryExistedStatsCount(int eNodebId, byte sectorId, DateTime date)
+        public Tuple<int, bool> QueryExistedStatsCount(int eNodebId, byte sectorId, DateTime date)
         {
             var beginDay = date.Date;
             var nextDay = date.AddDays(1).Date;
-            return
-                _repository.Count(
-                    x =>
-                        x.ENodebId == eNodebId && x.SectorId == sectorId && x.RecordTime >= beginDay &&
-                        x.RecordTime < nextDay);
+            return new Tuple<int, bool>(_repository.Count(
+                x =>
+                    x.ENodebId == eNodebId && x.SectorId == sectorId && x.RecordTime >= beginDay &&
+                    x.RecordTime < nextDay), _statRepository.Get(eNodebId, sectorId, beginDay) != null);
         }
         
         public int DumpMongoStats(InterferenceMatrixStat stat)
