@@ -10,6 +10,10 @@ namespace Lte.MySqlFramework.Abstract
 {
     public interface ICellStatMysqlRepository : IRepository<CellStatMysql>
     {
+        CellStatMysql Get(int eNodebId, byte sectorId, DateTime date);
 
+        CellStatMysql Get(int eNodebId, short pci, DateTime date);
+
+        int SaveChanges();
     }
 }
