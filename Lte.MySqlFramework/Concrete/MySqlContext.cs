@@ -17,5 +17,7 @@ namespace Lte.MySqlFramework.Concrete
         public DbSet<FlowHuawei> FlowHuaweises { get; set; }
 
         public DbSet<FlowZte> FlowZtes { get; set; }
+
+        public DbSet<CellStatMysql> CellStatMysqls { get; set; }
     }
 }
