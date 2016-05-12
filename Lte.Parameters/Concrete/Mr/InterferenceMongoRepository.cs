@@ -23,7 +23,7 @@ namespace Lte.Parameters.Concrete.Mr
         {
             
         }
-        
+
         public InterferenceMatrixMongo GetOne(int eNodebId, short pci)
         {
             var query =
@@ -45,6 +45,25 @@ namespace Lte.Parameters.Concrete.Mr
             var query =
                 MongoDB.Driver.Builders.Query<InterferenceMatrixMongo>.Where(
                     e => e.ENodebId == eNodebId && e.Pci == pci);
+            return await Task.Run(() => Collection.Find(query).AsQueryable().ToList());
+        }
+
+        public async Task<List<InterferenceMatrixMongo>> GetListAsync(int eNodebId, short pci, short neighborPci, DateTime date)
+        {
+            var nextDate = date.AddDays(1);
+            var query =
+                MongoDB.Driver.Builders.Query<InterferenceMatrixMongo>.Where(
+                    e => e.ENodebId == eNodebId && e.Pci == pci && e.NeighborFreq == neighborPci 
+                    && e.CurrentDate >= date && e.CurrentDate < nextDate);
+            return await Task.Run(() => Collection.Find(query).AsQueryable().ToList());
+        }
+
+        public async Task<List<InterferenceMatrixMongo>> GetListAsync(int eNodebId, short pci, DateTime date)
+        {
+            var nextDate = date.AddDays(1);
+            var query =
+                MongoDB.Driver.Builders.Query<InterferenceMatrixMongo>.Where(
+                    e => e.ENodebId == eNodebId && e.Pci == pci && e.CurrentDate >= date && e.CurrentDate < nextDate);
             return await Task.Run(() => Collection.Find(query).AsQueryable().ToList());
         }
     }
