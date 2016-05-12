@@ -18,8 +18,8 @@
     <tr ng-repeat="record in dateRecords">
         <td>{{record.date | date: "yyyy-MM-dd"}}</td>
         <td>{{record.existedRecords}}</td>
-        <td>{{record.existedStat ? '是': '否'}}</td>
         <td>{{record.mongoRecords.length}}</td>
+        <td>{{record.existedStat ? '是': '否'}}</td>
         <td>
             <div class="btn-group">
                 <button class="btn btn-default" ng-click="updateDetails(record.mongoRecords)">详情</button>

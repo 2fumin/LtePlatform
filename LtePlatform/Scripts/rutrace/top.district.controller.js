@@ -19,6 +19,7 @@
         options: [5, 10, 15, 20],
         selected: 5
     };
+    $scope.updateMessages = [];
 
     $scope.query = function () {
         $scope.topCells = [];
@@ -50,9 +51,18 @@
             }
         }
     };
-    $scope.updateInfo = function (cell) {
-        $scope.topStat.current = cell;
-        $scope.updateTopCells(cell);
+    $scope.createWorkitem = function (cell) {
+        workitemService.constructPreciseItem(cell, $scope.beginDate.value, $scope.endDate.value).then(function (result) {
+            if (result) {
+                $scope.updateMessages.push({
+                    cellName: result
+                });
+                cell.hasWorkItems = true;
+            }
+        });
+    };
+    $scope.closeAlert = function (index) {
+        $scope.updateMessages.splice(index, 1);
     };
 
     topPreciseService.getOrderSelection().then(function (result) {
