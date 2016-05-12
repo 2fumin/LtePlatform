@@ -74,7 +74,8 @@ namespace Lte.Evaluations.DataService.Mr
         public int DumpCellStat(CellStatMysql cellStat)
         {
             var existedStat =
-                _statRepository.FirstOrDefault(x => x.ENodebId == cellStat.ENodebId && x.SectorId == cellStat.SectorId);
+                _statRepository.FirstOrDefault(x => x.ENodebId == cellStat.ENodebId && x.SectorId == cellStat.SectorId
+                                                    && x.CurrentDate == cellStat.CurrentDate);
             if (existedStat == null)
                 _statRepository.Insert(cellStat);
             return _statRepository.SaveChanges();

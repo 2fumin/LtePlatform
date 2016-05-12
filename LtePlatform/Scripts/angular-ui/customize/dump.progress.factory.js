@@ -45,6 +45,18 @@
             return deferred.promise;
         };
 
+        serviceInstance.dumpCellStat = function (stat) {
+            var deferred = $q.defer();
+            $http.post(appUrlService.getApiUrl('DumpCellStat'), stat)
+                .success(function (result) {
+                    deferred.resolve(result);
+                })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+            return deferred.promise;
+        };
+
         serviceInstance.resetProgress = function (begin, end) {
             var deferred = $q.defer();
             $http({

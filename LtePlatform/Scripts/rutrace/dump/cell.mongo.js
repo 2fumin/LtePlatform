@@ -51,6 +51,11 @@
         if (record.mongoRecords.length > record.existedRecords) {
             dumpPreciseService.dumpRecords(record.mongoRecords, 0, eNodebId, sectorId, $scope.queryRecords);
         }
+        if (!record.existedStat && record.mongoStat) {
+            dumpProgress.dumpCellStat(record.mongoStat).then(function() {
+                $scope.queryRecords();
+            });
+        }
         
     };
 
