@@ -32,6 +32,14 @@
                     }
                 }
             });
+            dumpProgress.queryMongoCellStat(eNodebId, pci, record.date).then(function (result) {
+                for (var i = 0; i < $scope.dateRecords.length; i++) {
+                    if ($scope.dateRecords[i].date === result.date) {
+                        $scope.dateRecords[i].mongoStat = result.value;
+                        break;
+                    }
+                }
+            });
         });
     };
 
@@ -39,8 +47,11 @@
         $scope.currentDetails = records;
     };
 
-    $scope.dumpRecords = function (records) {
-        dumpPreciseService.dumpRecords(records, 0, eNodebId, sectorId, $scope.queryRecords);
+    $scope.dumpRecords = function (record) {
+        if (record.mongoRecords.length > record.existedRecords) {
+            dumpPreciseService.dumpRecords(record.mongoRecords, 0, eNodebId, sectorId, $scope.queryRecords);
+        }
+        
     };
 
     $scope.dumpAllRecords = function () {

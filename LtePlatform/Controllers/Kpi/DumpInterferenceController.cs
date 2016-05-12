@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Lte.Evaluations.DataService.Mr;
 using Lte.Evaluations.MapperSerive;
+using Lte.MySqlFramework.Entities;
 using Lte.Parameters.Entities.Mr;
 using LtePlatform.Models;
 
@@ -85,6 +86,28 @@ namespace LtePlatform.Controllers.Kpi
         public void Delete()
         {
             _service.ClearStats();
+        }
+    }
+
+    public class DumpCellStatController : ApiController
+    {
+        private readonly InterferenceMatrixService _service;
+
+        public DumpCellStatController(InterferenceMatrixService service)
+        {
+            _service = service;
+        }
+
+        [HttpGet]
+        public CellStatMysql Get(int eNodebId, short pci, DateTime date)
+        {
+            return _service.QueryCellStat(eNodebId, pci, date);
+        }
+
+        [HttpPost]
+        public int Post(CellStatMysql stat)
+        {
+            return _service.DumpCellStat(stat);
         }
     }
 }

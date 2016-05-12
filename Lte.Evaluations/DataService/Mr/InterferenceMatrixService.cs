@@ -7,6 +7,7 @@ using Abp.EntityFramework.AutoMapper;
 using AutoMapper;
 using Lte.Evaluations.MapperSerive;
 using Lte.MySqlFramework.Abstract;
+using Lte.MySqlFramework.Entities;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Abstract.Basic;
 using Lte.Parameters.Entities.Basic;
@@ -70,6 +71,15 @@ namespace Lte.Evaluations.DataService.Mr
             return _repository.SaveChanges();
         }
 
+        public int DumpCellStat(CellStatMysql cellStat)
+        {
+            var existedStat =
+                _statRepository.FirstOrDefault(x => x.ENodebId == cellStat.ENodebId && x.SectorId == cellStat.SectorId);
+            if (existedStat == null)
+                _statRepository.Insert(cellStat);
+            return _statRepository.SaveChanges();
+        }
+
         public void TestDumpOneStat(int eNodebId, byte sectorId, DateTime date, double interference)
         {
             _repository.Insert(new InterferenceMatrixStat
@@ -91,6 +101,26 @@ namespace Lte.Evaluations.DataService.Mr
         {
             var cellList = await _mongoRepository.GetListAsync(eNodebId, pci, date);
             return cellList;
+        }
+
+        public CellStatMysql QueryCellStat(int eNodebId, short pci, DateTime date)
+        {
+            var cellStatList = _mongoStatRepository.GetList(eNodebId, pci, date);
+            return !cellStatList.Any()
+                ? null
+                : new CellStatMysql
+                {
+                    ENodebId = eNodebId,
+                    SectorId = PciCellList.FirstOrDefault(x => x.ENodebId == eNodebId && x.Pci == pci)?.SectorId ?? 0,
+                    Pci = pci,
+                    CurrentDate = date,
+                    Mod3Count = cellStatList.Sum(x => x.Mod3Count),
+                    Mod6Count = cellStatList.Sum(x => x.Mod6Count),
+                    MrCount = cellStatList.Sum(x => x.MrCount),
+                    OverCoverCount = cellStatList.Sum(x => x.OverCoverCount),
+                    PreciseCount = cellStatList.Sum(x => x.PreciseCount),
+                    WeakCoverCount = cellStatList.Sum(x => x.WeakCoverCount)
+                };
         }
 
         public async Task<List<InterferenceMatrixStat>> QueryStats(int eNodebId, short pci, DateTime time)
@@ -208,7 +238,7 @@ namespace Lte.Evaluations.DataService.Mr
             _repository.SaveChanges();
             return true;
         }
-
+        
         public int GetStatsToBeDump()
         {
             return InterferenceMatrixStats.Count;

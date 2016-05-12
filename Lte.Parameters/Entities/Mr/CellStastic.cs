@@ -35,4 +35,5 @@ namespace Lte.Parameters.Entities.Mr
 
         public int MrCount { get; set; }
     }
+
 }

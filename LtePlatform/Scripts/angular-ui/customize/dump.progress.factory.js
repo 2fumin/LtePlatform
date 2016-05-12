@@ -101,6 +101,25 @@
             return deferred.promise;
         };
 
+        serviceInstance.queryMongoCellStat = function (eNodebId, pci, date) {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: appUrlService.getApiUrl('DumpCellStat'),
+                params: {
+                    eNodebId: eNodebId,
+                    pci: pci,
+                    date: date
+                }
+            }).success(function (result) {
+                deferred.resolve({ date: date, value: result });
+            })
+                .error(function (reason) {
+                    deferred.reject(reason);
+                });
+            return deferred.promise;
+        };
+
         serviceInstance.queryNeighborMongoItem = function (eNodebId, pci, neighborPci, date) {
             var deferred = $q.defer();
             $http({
