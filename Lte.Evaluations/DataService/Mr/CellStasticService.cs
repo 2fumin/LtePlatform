@@ -74,5 +74,47 @@ namespace Lte.Evaluations.DataService.Mr
             }
             return dateSpanStats;
         }
+
+        public List<CellStatMysql> QueryDateSpanStatList(int eNodebId, byte sectorId, DateTime begin, DateTime end)
+        {
+            var dateSpanStats = new List<CellStatMysql>();
+            var cell = _cellRepository.GetBySectorId(eNodebId, sectorId);
+            var pci = cell?.Pci ?? 0; 
+            while (begin < end)
+            {
+                var oneDayMysqlStat = _statRepository.Get(eNodebId, sectorId, begin);
+                if (oneDayMysqlStat != null)
+                {
+                    dateSpanStats.Add(oneDayMysqlStat);
+                }
+                else
+                {
+                    var oneDayStats = _repository.GetList(eNodebId, pci, begin);
+
+                    if (oneDayStats.Any())
+                    {
+                        var stat = new CellStatMysql
+                        {
+                            Mod3Count = oneDayStats.Sum(x => x.Mod3Count),
+                            Mod6Count = oneDayStats.Sum(x => x.Mod6Count),
+                            MrCount = oneDayStats.Sum(x => x.MrCount),
+                            OverCoverCount = oneDayStats.Sum(x => x.OverCoverCount),
+                            PreciseCount = oneDayStats.Sum(x => x.PreciseCount),
+                            WeakCoverCount = oneDayStats.Sum(x => x.WeakCoverCount),
+                            CurrentDate = begin,
+                            ENodebId = eNodebId,
+                            Pci = pci,
+                            SectorId = sectorId
+                        };
+                        dateSpanStats.Add(stat);
+                        _statRepository.Insert(stat);
+                        _statRepository.SaveChanges();
+                    }
+                }
+
+                begin = begin.AddDays(1);
+            }
+            return dateSpanStats;
+        }
     }
 }

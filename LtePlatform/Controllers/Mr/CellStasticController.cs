@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Lte.Evaluations.DataService.Mr;
 using Lte.Evaluations.ViewModels.Mr;
+using Lte.MySqlFramework.Entities;
 using LtePlatform.Models;
 
 namespace LtePlatform.Controllers.Mr
@@ -30,6 +31,12 @@ namespace LtePlatform.Controllers.Mr
         public CellStasticView Get(int eNodebId, short pci, DateTime begin, DateTime end)
         {
             return _service.QueryDateSpanAverageStat(eNodebId, pci, begin, end);
+        }
+
+        [HttpGet]
+        public List<CellStatMysql> Get(int eNodebId, byte sectorId, DateTime begin, DateTime end)
+        {
+            return _service.QueryDateSpanStatList(eNodebId, sectorId, begin, end);
         }
     }
 }

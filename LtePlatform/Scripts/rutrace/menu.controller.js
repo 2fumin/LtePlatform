@@ -38,6 +38,10 @@
                     templateUrl: viewDir + "Interference/Index.html",
                     controller: "rutrace.interference"
                 })
+                .when('/coverage/:cellId/:sectorId/:name', {
+                    templateUrl: viewDir + "Coverage/Index.html",
+                    controller: "rutrace.coverage"
+                })
                 .when('/baidumap/:cellId/:sectorId/:name', {
                     templateUrl: viewDir + "Map/Index.html",
                     controller: "rutrace.map"
