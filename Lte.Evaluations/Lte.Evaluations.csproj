@@ -118,6 +118,7 @@
     <Compile Include="ViewModels\Channel\CellPower.cs" />
     <Compile Include="ViewModels\College\CollegeStat.cs" />
     <Compile Include="ViewModels\Kpi\TopConnection3GTrendView.cs" />
+    <Compile Include="ViewModels\Mr\CellStasticView.cs" />
     <Compile Include="ViewModels\Mr\InterferenceMatrixView.cs" />
     <Compile Include="DataService\Mr\InterferenceNeighborService.cs" />
     <Compile Include="DataService\Kpi\KpiImportService.cs" />
@@ -157,6 +158,7 @@
     <Compile Include="ViewModels\Basic\CdmaBtsView.cs" />
     <Compile Include="ViewModels\Basic\CdmaCellView.cs" />
     <Compile Include="ViewModels\Basic\CdmaCompoundCellView.cs" />
+    <Compile Include="ViewModels\Mr\InterferenceVictimView.cs" />
     <Compile Include="ViewModels\Mr\NearestPciCellView.cs" />
     <Compile Include="ViewModels\Mr\NeighborCellMongo.cs" />
     <Compile Include="ViewModels\Precise\Precise4GSector.cs" />

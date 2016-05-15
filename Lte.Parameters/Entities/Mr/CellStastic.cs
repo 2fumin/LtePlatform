@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Abp.Domain.Entities;
+using Lte.Domain.Common.Wireless;
 using MongoDB.Bson;
 
 namespace Lte.Parameters.Entities.Mr
 {
-    public class CellStastic : IEntity<ObjectId>
+    public class CellStastic : IEntity<ObjectId>, ICellStastic
     {
         public ObjectId Id { get; set; }
 

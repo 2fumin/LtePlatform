@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lte.Domain.Common.Wireless;
 using Lte.Evaluations.ViewModels.Mr;
+using Lte.MySqlFramework.Abstract;
 using Lte.Parameters.Abstract;
 using Lte.Parameters.Entities.Mr;
 
@@ -12,31 +14,26 @@ namespace Lte.Evaluations.DataService.Mr
     public class CellStasticService
     {
         private readonly ICellStasticRepository _repository;
+        private readonly ICellStatMysqlRepository _statRepository;
 
-        public CellStasticService(ICellStasticRepository repository)
+        public CellStasticService(ICellStasticRepository repository, ICellStatMysqlRepository statRepository)
         {
             _repository = repository;
+            _statRepository = statRepository;
         }
 
         public CellStasticView QueryDateSpanAverageStat(int eNodebId, short pci, DateTime begin, DateTime end)
         {
             var dateSpanStats = QueryDateSpanStatList(eNodebId, pci, begin, end);
-            return dateSpanStats.Any() ? new CellStasticView
-            {
-                Mod3Count = dateSpanStats.Average(x => x.Mod3Count),
-                Mod6Count = dateSpanStats.Average(x => x.Mod6Count),
-                MrCount = dateSpanStats.Average(x => x.MrCount),
-                OverCoverCount = dateSpanStats.Average(x => x.OverCoverCount),
-                PreciseCount = dateSpanStats.Average(x => x.PreciseCount),
-                WeakCoverCount = dateSpanStats.Average(x => x.WeakCoverCount)
-            } : null;
+            return dateSpanStats.Any() ? new CellStasticView(dateSpanStats) : null;
         }
 
-        public List<CellStastic> QueryDateSpanStatList(int eNodebId, short pci, DateTime begin, DateTime end)
+        public List<ICellStastic> QueryDateSpanStatList(int eNodebId, short pci, DateTime begin, DateTime end)
         {
-            var dateSpanStats = new List<CellStastic>();
+            var dateSpanStats = new List<ICellStastic>();
             while (begin < end)
             {
+                var oneDayMysqlStat = _statRepository.Get(eNodebId, pci, begin);
                 var oneDayStats = _repository.GetList(eNodebId, pci, begin);
                 if (oneDayStats.Any())
                     dateSpanStats.Add(new CellStastic

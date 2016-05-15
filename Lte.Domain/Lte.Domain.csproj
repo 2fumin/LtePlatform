@@ -69,6 +69,7 @@
     <Compile Include="Common\Wireless\AntennaPortsConfigureQueries.cs" />
     <Compile Include="Common\Wireless\FrequencyBand.cs" />
     <Compile Include="Common\Wireless\FrequencyBandQueries.cs" />
+    <Compile Include="Common\Wireless\ICellStastic.cs" />
     <Compile Include="LinqToCsv\Context\CsvContext.cs" />
     <Compile Include="LinqToCsv\Context\FileDataAccess.cs" />
     <Compile Include="LinqToCsv\Context\RowReader.cs" />
