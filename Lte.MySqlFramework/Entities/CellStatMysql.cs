@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Abp.Domain.Entities;
+using Lte.Domain.Common.Wireless;
 
 namespace Lte.MySqlFramework.Entities
 {
-    public class CellStatMysql : Entity
+    public class CellStatMysql : Entity, ICellStastic
     {
         public int ENodebId { get; set; }
 

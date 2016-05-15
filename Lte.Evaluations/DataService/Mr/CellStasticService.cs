@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using Lte.Domain.Common.Wireless;
 using Lte.Evaluations.ViewModels.Mr;
 using Lte.MySqlFramework.Abstract;
+using Lte.MySqlFramework.Entities;
 using Lte.Parameters.Abstract;
+using Lte.Parameters.Abstract.Basic;
 using Lte.Parameters.Entities.Mr;
 
 namespace Lte.Evaluations.DataService.Mr
@@ -15,11 +17,14 @@ namespace Lte.Evaluations.DataService.Mr
     {
         private readonly ICellStasticRepository _repository;
         private readonly ICellStatMysqlRepository _statRepository;
+        private readonly ICellRepository _cellRepository;
 
-        public CellStasticService(ICellStasticRepository repository, ICellStatMysqlRepository statRepository)
+        public CellStasticService(ICellStasticRepository repository, ICellStatMysqlRepository statRepository,
+            ICellRepository cellRepository)
         {
             _repository = repository;
             _statRepository = statRepository;
+            _cellRepository = cellRepository;
         }
 
         public CellStasticView QueryDateSpanAverageStat(int eNodebId, short pci, DateTime begin, DateTime end)
@@ -28,23 +33,43 @@ namespace Lte.Evaluations.DataService.Mr
             return dateSpanStats.Any() ? new CellStasticView(dateSpanStats) : null;
         }
 
-        public List<ICellStastic> QueryDateSpanStatList(int eNodebId, short pci, DateTime begin, DateTime end)
+        private List<ICellStastic> QueryDateSpanStatList(int eNodebId, short pci, DateTime begin, DateTime end)
         {
             var dateSpanStats = new List<ICellStastic>();
             while (begin < end)
             {
                 var oneDayMysqlStat = _statRepository.Get(eNodebId, pci, begin);
-                var oneDayStats = _repository.GetList(eNodebId, pci, begin);
-                if (oneDayStats.Any())
-                    dateSpanStats.Add(new CellStastic
+                if (oneDayMysqlStat != null)
+                {
+                    dateSpanStats.Add(oneDayMysqlStat);
+                }
+                else
+                {
+                    var oneDayStats = _repository.GetList(eNodebId, pci, begin);
+                    
+                    if (oneDayStats.Any())
                     {
-                        Mod3Count = oneDayStats.Sum(x => x.Mod3Count),
-                        Mod6Count = oneDayStats.Sum(x => x.Mod6Count),
-                        MrCount = oneDayStats.Sum(x => x.MrCount),
-                        OverCoverCount = oneDayStats.Sum(x => x.OverCoverCount),
-                        PreciseCount = oneDayStats.Sum(x => x.PreciseCount),
-                        WeakCoverCount = oneDayStats.Sum(x => x.WeakCoverCount)
-                    });
+                        var stat = new CellStatMysql
+                        {
+                            Mod3Count = oneDayStats.Sum(x => x.Mod3Count),
+                            Mod6Count = oneDayStats.Sum(x => x.Mod6Count),
+                            MrCount = oneDayStats.Sum(x => x.MrCount),
+                            OverCoverCount = oneDayStats.Sum(x => x.OverCoverCount),
+                            PreciseCount = oneDayStats.Sum(x => x.PreciseCount),
+                            WeakCoverCount = oneDayStats.Sum(x => x.WeakCoverCount),
+                            CurrentDate = begin,
+                            ENodebId = eNodebId,
+                            Pci = pci,
+                            SectorId =
+                                _cellRepository.FirstOrDefault(x => x.ENodebId == eNodebId && x.Pci == pci)?.SectorId ??
+                                0
+                        };
+                        dateSpanStats.Add(stat);
+                        _statRepository.Insert(stat);
+                        _statRepository.SaveChanges();
+                    }
+                }
+                
                 begin = begin.AddDays(1);
             }
             return dateSpanStats;
