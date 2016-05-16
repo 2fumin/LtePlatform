@@ -130,9 +130,9 @@ namespace Lte.Evaluations.DataService.Mr
             return !statList.Any() ? new List<InterferenceMatrixStat>() : GenereateStatList(time, statList);
         }
 
-        public async Task<InterferenceMatrixStat> QueryStat(int eNodebId, short pci, short neighborPci, DateTime time)
+        public InterferenceMatrixStat QueryStat(int eNodebId, short pci, short neighborPci, DateTime time)
         {
-            var statList = await _mongoRepository.GetListAsync(eNodebId, pci, neighborPci, time);
+            var statList = _mongoRepository.GetList(eNodebId, pci, neighborPci, time);
             if (!statList.Any()) return null;
             return new InterferenceMatrixStat
             {

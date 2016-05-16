@@ -55,9 +55,9 @@ namespace LtePlatform.Controllers.Kpi
 
         [HttpGet]
         [ApiDoc("返回待导入的小区信息")]
-        public async Task<InterferenceMatrixStat> Get(int eNodebId, short pci, short neighborPci, DateTime date)
+        public InterferenceMatrixStat Get(int eNodebId, short pci, short neighborPci, DateTime date)
         {
-            return await _service.QueryStat(eNodebId, pci, neighborPci, date);
+            return _service.QueryStat(eNodebId, pci, neighborPci, date);
         }
 
         [HttpGet]

@@ -62,10 +62,17 @@ namespace Lte.Parameters.Test.Mr
         [TestCase(552820, 241, 113, "2016-05-09")]
         [TestCase(552820, 242, 113, "2016-05-09")]
         [TestCase(552820, 240, 113, "2016-05-09")]
-        public async void Test_GetList(int eNodebId, short pci, short neighborPci, string dateString)
+        public void Test_GetList(int eNodebId, short pci, short neighborPci, string dateString)
         {
-            var result = await _repository.GetListAsync(eNodebId, pci, neighborPci, DateTime.Parse(dateString));
+            var result = _repository.GetList(eNodebId, pci, neighborPci, DateTime.Parse(dateString));
             Assert.IsNotNull(result);
+        }
+
+        [TestCase(500028, 280, 196, "2016-05-09", 26)]
+        public void Test_GetList(int eNodebId, short pci, short neighborPci, string dateString, int count)
+        {
+            var result = _repository.GetList(eNodebId, pci, neighborPci, DateTime.Parse(dateString));
+            Assert.AreEqual(result.Count, count);
         }
     }
 }
