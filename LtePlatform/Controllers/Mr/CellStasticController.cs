@@ -30,13 +30,19 @@ namespace LtePlatform.Controllers.Mr
         [ApiResponse("单个小区聚合小区干扰信息统计")]
         public CellStasticView Get(int eNodebId, short pci, DateTime begin, DateTime end)
         {
-            return _service.QueryDateSpanAverageStat(eNodebId, pci, begin, end);
+            return _service.QueryDateSpanAverageStat(eNodebId, pci, begin.Date, end.Date);
         }
 
         [HttpGet]
+        [ApiDoc("查询指定日期范围内的单个小区聚合小区覆盖信息统计")]
+        [ApiParameterDoc("eNodebId", "小区基站编号")]
+        [ApiParameterDoc("sectorId", "扇区编号")]
+        [ApiParameterDoc("begin", "开始日期")]
+        [ApiParameterDoc("end", "结束日期")]
+        [ApiResponse("单个小区聚合小区覆盖信息统计")]
         public List<CellStatMysql> Get(int eNodebId, byte sectorId, DateTime begin, DateTime end)
         {
-            return _service.QueryDateSpanStatList(eNodebId, sectorId, begin, end);
+            return _service.QueryDateSpanStatList(eNodebId, sectorId, begin.Date, end.Date);
         }
     }
 }

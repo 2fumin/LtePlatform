@@ -444,6 +444,25 @@
                     });
                 return deferred.promise;
             },
+            queryCoverage: function (begin, end, cellId, sectorId) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('CellStastic'),
+                    params: {
+                        'begin': begin,
+                        'end': end,
+                        'eNodebId': cellId,
+                        'sectorId': sectorId
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            },
             queryCellStastic: function(cellId, pci, begin, end){
                 var deferred = $q.defer();
                 $http({

@@ -18,13 +18,40 @@
             <label>结束日期：</label>
             <div class="input-group">
                 <input type="text" class="form-control" uib-datepicker-popup ng-model="endDate.value"
-                       is-open="endDate.opened" ng-required="true" close-text="Close" />
+                       is-open="endDate.opened" ng-required="true" close-text="Close"/>
                 <span class="input-group-btn">
                     <button type="button" class="btn btn-default" ng-click="endDate.opened = true">
                         <i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                    <button type="button" class="btn btn-warning" ng-click="showCoverage()">
+                        <i class="glyphicon glyphicon-search" title="统计覆盖"></i>
                     </button>
                 </span>
             </div>
         </div>
     </div>
 </div>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>日期</th>
+        <th>MR总数</th>
+        <th>MOD3干扰比例</th>
+        <th>MOD6干扰比例</th>
+        <th>弱覆盖比例</th>
+        <th>过覆盖比例</th>
+        <th>精确覆盖率</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="cell in coverageList">
+        <td>{{cell.currentDate | date: 'yyyy-MM-dd'}}</td>
+        <td>{{cell.mrCount}}</td>
+        <td>{{cell.mod3Count * 100 / cell.mrCount | number: 2}}%</td>
+        <td>{{cell.mod6Count * 100 / cell.mrCount | number: 2}}%</td>
+        <td>{{cell.weakCoverCount * 100 / cell.mrCount | number: 2}}%</td>
+        <td>{{cell.overCoverCount * 100 / cell.mrCount | number: 2}}%</td>
+        <td>{{cell.preciseCount * 100 / cell.mrCount | number: 2}}%</td>
+    </tr>
+    </tbody>
+</table>
