@@ -60,7 +60,8 @@ namespace Lte.Parameters.MockOperations
                 .ForMember(d => d.RecoverTime,
                     opt =>
                         opt.MapFrom(
-                            s => s.RecoverTime < new DateTime(2000, 1, 1) ? new DateTime(2200, 1, 1) : s.RecoverTime));
+                            s => s.RecoverTime < new DateTime(2000, 1, 1) ? new DateTime(2200, 1, 1) : s.RecoverTime))
+                .ForMember(d=>d.AlarmId,opt=>opt.MapFrom(s=>s.AlarmId.ConvertToInt(0)));
 
             Mapper.CreateMap<AlarmStatHuawei, AlarmStat>()
                 .ForMember(d => d.AlarmLevel, opt => opt.MapFrom(s => s.AlarmLevelDescription.GetAlarmLevel()))

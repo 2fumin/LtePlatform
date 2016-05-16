@@ -81,6 +81,8 @@ namespace Lte.Parameters.Test.Entities
         [TestCase("test571", 3)]
         [TestCase("test5711", 4)]
         [TestCase("历史告警查询(所有列)-0914-20-zte2", 3052)]
+        [TestCase("test-new-94-100", 277)]
+        [TestCase("test-new-94-2000", 1000)]
         public void Test_Integrity(string fileName, int count)
         {
             var testDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CsvFiles");
@@ -92,6 +94,7 @@ namespace Lte.Parameters.Test.Entities
 
             var statList = Mapper.Map<IEnumerable<AlarmStatCsv>, List<AlarmStat>>(stats);
             Assert.AreEqual(statList.Count, count);
+            Assert.IsTrue(statList[0].AlarmId > 10);
         }
 
         [TestCase(@"根源告警标识,确认状态,告警级别,网元,网元内定位,告警码,发生时间,网元类型,告警类型,告警原因,附加文本,ADMC告警,告警恢复时间,重复计数,告警对象类型,告警对象DN,单板类型,告警对象ID,站点名称(局向),站点ID(局向),告警对象名称,标准告警码,产品,告警标识,影响网元,影响网元内定位,告警修改时间,附加内容,确认/反确认用户,确认/反确认系统,告警确认/反确认时间,告警确认/反确认信息,清除用户,清除系统,恢复方式,清除信息,告警注释,注释用户,注释系统,注释时间,告警编号,网元IP,链路,网元分组,网元代理,系统类型,持续时间(hh:mm:ss),关联业务,产生方式,门限任务信息,调测状态

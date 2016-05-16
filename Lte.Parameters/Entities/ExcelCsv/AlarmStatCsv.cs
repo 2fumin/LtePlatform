@@ -43,6 +43,6 @@ namespace Lte.Parameters.Entities
         public int ENodebId { get; set; }
 
         [CsvColumn(Name = "告警标识", CanBeNull = true)]
-        public int AlarmId { get; set; }
+        public string AlarmId { get; set; }
     }
 }
