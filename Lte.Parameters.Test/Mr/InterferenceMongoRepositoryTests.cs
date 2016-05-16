@@ -20,9 +20,9 @@ namespace Lte.Parameters.Test.Mr
         private readonly IInterferenceMongoRepository _repository = new InterferenceMongoRepository();
         
         [Test]
-        public void Test_GetWithENodebIdAndPci()
+        public async void Test_GetWithENodebIdAndPci()
         {
-            var results = _repository.GetList(501373, 341);
+            var results = await _repository.GetListAsync(501373, 341);
             Assert.IsNotNull(results);
             Assert.AreEqual(results.Count, 3931);
             Assert.AreEqual(results[0].InterfLevel ?? 0, 161.48, 1E-7);
@@ -38,11 +38,10 @@ namespace Lte.Parameters.Test.Mr
         }
 
         [Test]
-        public void Test_GetWithENodebIdAndPciAndTime()
+        public async void Test_GetWithENodebIdAndPciAndTime()
         {
             var results =
-                _repository.GetList(501373, 341)
-                    .Where(x => x.CurrentDate >= new DateTime(2016, 4, 28) && x.CurrentDate < new DateTime(2016, 4, 29)).ToList();
+                await _repository.GetListAsync(501373, 341, new DateTime(2016, 4, 28));
             Assert.IsNotNull(results);
             Assert.AreEqual(results.Count, 313);
             Assert.AreEqual(results[0].InterfLevel ?? 0, 161.48, 1E-7);
@@ -59,15 +58,13 @@ namespace Lte.Parameters.Test.Mr
         
         [TestCase(501298, 328, 329, "2016-04-28")]
         [TestCase(501454, 255, 438, "2016-04-28")]
-        public void Test_GetList(int eNodebId, short pci, short neighborPci, string dateString)
+        [TestCase(500520, 34, 113, "2016-05-09")]
+        [TestCase(552820, 241, 113, "2016-05-09")]
+        [TestCase(552820, 242, 113, "2016-05-09")]
+        [TestCase(552820, 240, 113, "2016-05-09")]
+        public async void Test_GetList(int eNodebId, short pci, short neighborPci, string dateString)
         {
-            var list = _repository.GetList(eNodebId, pci);
-            var result =
-                list
-                    .Where(
-                        x =>
-                            x.NeighborPci == neighborPci && x.CurrentDate >= DateTime.Parse(dateString) &&
-                            x.CurrentDate < DateTime.Parse(dateString).AddDays(1));
+            var result = await _repository.GetListAsync(eNodebId, pci, neighborPci, DateTime.Parse(dateString));
             Assert.IsNotNull(result);
         }
     }
