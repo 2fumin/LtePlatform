@@ -1,7 +1,9 @@
 ﻿var app = angular.module('myApp', [
+    'cell.filters',
     'college',
     'college.map',
     'handoff.parameters',
+    'handoff.filters',
     "highcharts-ng",
     'huawei.mongo.parameters',
     'kpi.basic',

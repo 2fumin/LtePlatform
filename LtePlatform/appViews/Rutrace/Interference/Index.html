@@ -47,26 +47,22 @@
     </div>
 </div>
 <div uib-tabset active="active">
-    <div uib-tab index="0" heading="邻区分析">
-        <div uib-accordion close-others="oneAtATime">
-            <div uib-accordion-group heading="干扰源分析({{interferenceCells.length}})" panel-class="panel-warning">
-                <div ng-include="'/appViews/Rutrace/Interference/Source.html'" ng-controller="rutrace.interference.neighbors"></div>
-            </div>
-            <div uib-accordion-group heading="被干扰小区({{victimCells.length}})" panel-class="panel-success">
-                <div ng-include="'/appViews/Rutrace/Interference/Victim.html'"></div>
-            </div>
-            <div uib-accordion-group heading="系统邻区({{mongoNeighbors.length}})" panel-class="panel-default">
-                <div ng-include="'/appViews/Rutrace/Interference/MongoNeighbors.html'"></div>
-            </div>
-        </div>
+    <div uib-tab index="0" heading="系统邻区({{mongoNeighbors.length}})">
+        <div ng-include="'/appViews/Rutrace/Interference/MongoNeighbors.html'"></div>
     </div>
-    <div uib-tab index="1" heading="干扰份额分析">
+    <div uib-tab index="1" heading="干扰源分析({{interferenceCells.length}})">
+        <div ng-include="'/appViews/Rutrace/Interference/Source.html'" ng-controller="rutrace.interference.neighbors"></div>
+    </div>
+    <div uib-tab index="2" heading="被干扰小区({{victimCells.length}})">
+        <div ng-include="'/appViews/Rutrace/Interference/Victim.html'"></div>
+    </div>
+    <div uib-tab index="3" heading="干扰份额分析">
         <div id="interference-over6db"></div>
         <div id="interference-over10db"></div>
         <div id="interference-mod3"></div>
         <div id="interference-mod6"></div>
     </div>
-    <div uib-tab index="2" heading="干扰强度分析">
+    <div uib-tab index="4" heading="干扰强度分析">
         <div id="strength-over6db"></div>
         <div id="strength-over10db"></div>
     </div>

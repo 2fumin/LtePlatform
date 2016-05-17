@@ -876,6 +876,8 @@
     <Content Include="Scripts\service\app.kpi.service.js" />
     <Content Include="Scripts\service\app.parameters.service.js" />
     <Content Include="Scripts\service\app.url.service.js" />
+    <Content Include="Scripts\service\filters\cell.js" />
+    <Content Include="Scripts\service\filters\handoff.js" />
     <Content Include="Scripts\service\kpi.basic.service.js" />
     <Content Include="Scripts\service\kpi.import.service.js" />
     <Content Include="Scripts\service\mongo\cell.huawei.js" />
@@ -1147,8 +1149,6 @@
     <Content Include="Scripts\sammy-0.7.5.js" />
     <Content Include="Scripts\sammy-0.7.5.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Scripts\app\_run.js" />
-    <Content Include="Scripts\app\app.viewmodel.js" />
     <Content Include="Scripts\app\common.js" />
     <Content Include="Scripts\app\home.viewmodel.js" />
     <Content Include="appViews\FromMongo.html" />
