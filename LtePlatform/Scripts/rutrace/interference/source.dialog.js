@@ -33,6 +33,10 @@
         options: options,
         selected: options[4].value
     };
+    $scope.displayItems = {
+        options: [5, 10, 15, 20, 30],
+        selected: 10
+    };
 
     $scope.showInterference = function () {
         $scope.interferenceCells = [];

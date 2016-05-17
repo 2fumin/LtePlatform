@@ -44,6 +44,15 @@
                 </button>
             </span>
         </div>
+        <label>显示数目：</label>
+        <div class="input-group">
+            <select class="form-control" ng-model="displayItems.selected" ng-options="p as p for p in displayItems.options"></select>
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-warning" ng-click="showInterference()">
+                    <i class="glyphicon glyphicon-search" title="统计干扰"></i>
+                </button>
+            </span>
+        </div>
     </div>
     <table class="table table-striped">
         <thead>
@@ -59,7 +68,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="cell in interferenceCells | orderBy: orderPolicy.selected: true">
+        <tr ng-repeat="cell in (interferenceCells | orderBy: orderPolicy.selected: true).slice(0, displayItems.selected)">
             <td>{{cell.neighborCellName}}</td>
             <td>{{cell.destPci}}</td>
             <td>{{cell.mod3Interferences | number:1}}</td>
