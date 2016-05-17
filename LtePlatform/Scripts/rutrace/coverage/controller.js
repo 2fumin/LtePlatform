@@ -11,10 +11,11 @@
         value: new Date(),
         opened: false
     };
-    $scope.showCoverage=function() {
+    $scope.showCoverage = function() {
         topPreciseService.queryCoverage($scope.beginDate.value, $scope.endDate.value,
-            $routeParams.cellId, $routeParams.sectorId).then(function (result) {
+            $routeParams.cellId, $routeParams.sectorId).then(function(result) {
             $scope.coverageList = result;
         });
-    }
+    };
+    $scope.showCoverage();
 });

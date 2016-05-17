@@ -41,6 +41,7 @@
         <th>弱覆盖比例</th>
         <th>过覆盖比例</th>
         <th>精确覆盖率</th>
+        <th>查询</th>
     </tr>
     </thead>
     <tbody>
@@ -52,6 +53,12 @@
         <td>{{cell.weakCoverCount * 100 / cell.mrCount | number: 2}}%</td>
         <td>{{cell.overCoverCount * 100 / cell.mrCount | number: 2}}%</td>
         <td>{{cell.preciseCount * 100 / cell.mrCount | number: 2}}%</td>
+        <td>
+            <div class="btn-group">
+                <button class="btn btn-default" ng-click="showDetails(cell.currentDate)">详情</button>
+                <button class="btn btn-default" ng-click="analyzeTa(cell.currentDate)">TA分析</button>
+            </div>
+        </td>
     </tr>
     </tbody>
 </table>
