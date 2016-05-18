@@ -96,6 +96,7 @@
     <Compile Include="DataService\Dump\CdmaCellDumpServiceTest.cs" />
     <Compile Include="DataService\Dump\CellDumpServiceTest.cs" />
     <Compile Include="DataService\Dump\CellDumpServiceTestBase.cs" />
+    <Compile Include="DataService\Dump\FlowServiceTest.cs" />
     <Compile Include="DataService\Dump\PciCellDumpServiceTest.cs" />
     <Compile Include="DataService\ENodebQueryServiceTest.cs" />
     <Compile Include="DataService\Queries\AlarmsServiceTestQueries.cs" />
@@ -179,6 +180,10 @@
     <ProjectReference Include="..\Lte.Evaluations\Lte.Evaluations.csproj">
       <Project>{c166940a-6bd2-4f42-8156-8024d9e320c9}</Project>
       <Name>Lte.Evaluations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lte.MySqlFramework\Lte.MySqlFramework.csproj">
+      <Project>{8ccf960a-1969-4df2-b81b-d3e46f0cd3d7}</Project>
+      <Name>Lte.MySqlFramework</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lte.Parameters\Lte.Parameters.csproj">
       <Project>{25b6ccb6-4b12-4df2-b4c9-2d30ae6bd254}</Project>

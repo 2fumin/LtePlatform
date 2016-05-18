@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Lte.Domain.Regular;
 using Lte.Evaluations.ViewModels;
 using Lte.MySqlFramework.Abstract;
 using Lte.MySqlFramework.Entities;
@@ -36,8 +37,49 @@ namespace Lte.Evaluations.DataService.Kpi
 
         public void UploadFlowHuaweis(StreamReader reader)
         {
+            var originCsvs = FlowHuaweiCsv.ReadFlowHuaweiCsvs(reader);
+            var mergedCsvs = (from item in originCsvs
+                group item by new
+                {
+                    item.StatTime.Date,
+                    item.CellInfo
+                }
+                into g
+                select new FlowHuaweiCsv
+                {
+                    StatTime = g.Key.Date,
+                    AverageActiveUsers = g.Average(x => x.AverageActiveUsers),
+                    AverageUsers = g.Average(x => x.AverageUsers),
+                    ButLastDownlinkDurationInMs = g.Sum(x => x.ButLastDownlinkDurationInMs),
+                    ButLastUplinkDurationInMs = g.Sum(x => x.ButLastUplinkDurationInMs),
+                    CellInfo = g.Key.CellInfo,
+                    DedicatedPreambles = g.Sum(x => x.DedicatedPreambles),
+                    DownlinkAveragePrbs = g.Average(x => x.DownlinkAveragePrbs),
+                    DownlinkAverageUsers = g.Average(x => x.DownlinkAverageUsers),
+                    DownlinkDciCces = g.Sum(x => x.DownlinkDciCces),
+                    DownlinkDrbPbs = g.Average(x => x.DownlinkDrbPbs),
+                    DownlinkDurationInMs = g.Sum(x => x.DownlinkDurationInMs),
+                    DownlinkMaxUsers = g.Max(x => x.DownlinkMaxUsers),
+                    GroupAPreambles = g.Sum(x => x.GroupAPreambles),
+                    GroupBPreambles = g.Sum(x => x.GroupBPreambles),
+                    LastTtiDownlinkFlowInByte = g.Sum(x => x.LastTtiDownlinkFlowInByte),
+                    LastTtiUplinkFlowInByte = g.Sum(x => x.LastTtiUplinkFlowInByte),
+                    MaxActiveUsers = g.Max(x => x.MaxActiveUsers),
+                    MaxUsers = g.Max(x => x.MaxUsers),
+                    PagingUsersString = g.First().PagingUsersString,
+                    PdcpDownlinkFlowInByte = g.Sum(x => x.PdcpDownlinkFlowInByte),
+                    PdcpUplinkFlowInByte = g.Sum(x => x.PdcpUplinkFlowInByte),
+                    PucchPrbsString = g.Sum(x => x.PucchPrbsString.ConvertToInt(0)).ToString(),
+                    TotalCces = g.Sum(x => x.TotalCces),
+                    UplinkAveragePrbs = g.Average(x => x.UplinkAveragePrbs),
+                    UplinkAverageUsers = g.Average(x => x.UplinkAverageUsers),
+                    UplinkDciCces = g.Sum(x => x.UplinkDciCces),
+                    UplinkDrbPbs = g.Sum(x => x.UplinkDrbPbs),
+                    UplinkDurationInMs = g.Sum(x => x.UplinkDurationInMs),
+                    UplinkMaxUsers = g.Max(x => x.UplinkMaxUsers)
+                }).ToList();
             var flows =
-                Mapper.Map<List<FlowHuaweiCsv>, IEnumerable<FlowHuawei>>(FlowHuaweiCsv.ReadFlowHuaweiCsvs(reader));
+                Mapper.Map<List<FlowHuaweiCsv>, IEnumerable<FlowHuawei>>(mergedCsvs);
             foreach (var flow in flows)
             {
                 FlowHuaweis.Push(flow);
@@ -53,9 +95,14 @@ namespace Lte.Evaluations.DataService.Kpi
             }
         }
 
+        public FlowHuawei GetTopHuaweiItem()
+        {
+            return FlowHuaweis.Pop();
+        }
+
         public async Task<bool> DumpOneHuaweiStat()
         {
-            var stat = FlowHuaweis.Pop();
+            var stat = GetTopHuaweiItem();
             if (stat == null) return false;
             var item =
                 await
