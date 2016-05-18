@@ -242,7 +242,7 @@ namespace LtePlatform.Areas.HelpPage
             var sampleGenerator = config.GetHelpPageSampleGenerator();
             apiModel.UriParameters = apiModel.ApiDescription.GenerateUriParameters(modelGenerator);
             apiModel.RequestModelDescription = apiModel.ApiDescription.GenerateRequestModelDescription(modelGenerator, sampleGenerator);
-            GenerateResourceDescription(apiModel, modelGenerator);
+            apiModel.ResourceDescription = apiModel.ApiDescription.GenerateResourceDescription(modelGenerator);
             GenerateSamples(apiModel, sampleGenerator);
 
             return apiModel;
@@ -366,14 +366,14 @@ namespace LtePlatform.Areas.HelpPage
             return null;
         }
 
-        private static void GenerateResourceDescription(HelpPageApiModel apiModel, ModelDescriptionGenerator modelGenerator)
+        public static ModelDescription GenerateResourceDescription(this ApiDescription apiDescription, 
+            ModelDescriptionGenerator modelGenerator)
         {
-            var response = apiModel.ApiDescription.ResponseDescription;
+            var response = apiDescription.ResponseDescription;
             var responseType = response.ResponseType ?? response.DeclaredType;
-            if (responseType != null && responseType != typeof(void))
-            {
-                apiModel.ResourceDescription = modelGenerator.GetOrCreateModelDescription(responseType);
-            }
+            return (responseType != null && responseType != typeof(void)) ? 
+                modelGenerator.GetOrCreateModelDescription(responseType) : 
+                null;
         }
 
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "The exception is recorded as ErrorMessages.")]

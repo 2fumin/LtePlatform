@@ -48,12 +48,14 @@ namespace LtePlatform.Areas.HelpPage.Controllers
                 Configuration.Services.GetApiExplorer()
                     .ApiDescriptions.Where(
                         api => api.ActionDescriptor.ControllerDescriptor.ControllerName == controllerName);
+            var modelGenerator = Configuration.GetModelDescriptionGenerator();
             return Json(description.Select(api => new
             {
                 FriendlyId = api.GetFriendlyId(),
                 MethodName = api.HttpMethod.Method,
                 RelativePath = api.RelativePath,
-                Documentation = api.Documentation
+                Documentation = api.Documentation,
+                ResponseName = api.GenerateResourceDescription(modelGenerator)?.Name
             }), 
                 JsonRequestBehavior.AllowGet);
         }
@@ -72,6 +74,7 @@ namespace LtePlatform.Areas.HelpPage.Controllers
             var sampleGenerator = Configuration.GetHelpPageSampleGenerator();
             var parametersDescriptions = description.GenerateUriParameters(modelGenerator);
             var requestModelDescription = description.GenerateRequestModelDescription(modelGenerator, sampleGenerator);
+            var responseModel = description.GenerateResourceDescription(modelGenerator);
             return Json(new
             {
                 ParameterDescriptions = parametersDescriptions.Select(x => new
@@ -88,6 +91,12 @@ namespace LtePlatform.Areas.HelpPage.Controllers
                     Type = requestModelDescription.ModelType.ToString(),
                     requestModelDescription.Documentation,
                     requestModelDescription.ParameterDocumentation
+                },
+                ResponseModel = responseModel==null?null: new
+                {
+                    responseModel.Name,
+                    responseModel.Documentation,
+                    responseModel.ParameterDocumentation
                 }
             },
                 JsonRequestBehavior.AllowGet);

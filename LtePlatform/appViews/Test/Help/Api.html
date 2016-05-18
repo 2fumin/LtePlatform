@@ -1,14 +1,15 @@
 <a class="btn btn-default" ng-href="{{rootPath}}">返回总表</a>
 <a class="btn btn-default" ng-href="{{rootPath}}method/{{method}}">返回{{method}}</a>
+<h4>输入参数</h4>
 <table class="help-page-table">
     <thead>
-        <tr>
-            <th>Parameter Name</th>
-            <th>Parameter Description</th>
-            <th>Type Name</th>
-            <th>Type Description</th>
-            <th>Additional information</th>
-        </tr>
+    <tr>
+        <th>Parameter Name</th>
+        <th>Parameter Description</th>
+        <th>Type Name</th>
+        <th>Type Description</th>
+        <th>Additional information</th>
+    </tr>
     </thead>
     <tbody>
     <tr ng-repeat="parameter in parameters">
@@ -31,3 +32,6 @@
     </tr>
     </tbody>
 </table>
+<h4>输出参数</h4>
+<label>{{responseModel.Name}}</label>
+<span class="text-info">{{responseModel.Documentation}}</span>

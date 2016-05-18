@@ -11,5 +11,6 @@
         $scope.page.introduction = result.ResponseDoc;
         $scope.parameters = result.ParameterDescriptions;
         $scope.bodyModel = result.FromBodyModel;
+        $scope.responseModel = result.ResponseModel;
     });
 });
