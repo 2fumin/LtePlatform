@@ -35,3 +35,22 @@
 <h4>输出参数</h4>
 <label>{{responseModel.Name}}</label>
 <span class="text-info">{{responseModel.Documentation}}</span>
+<table class="help-page-table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Annotations</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="description in responseModel.Descriptions">
+        <td>{{description.Name}}</td>
+        <td>{{description.Documentation}}</td>
+        <td>
+            <p ng-show="!description.AnnotationDoc.length">无</p>
+            <p ng-repeat="doc in description.AnnotationDoc">{{doc}}</p>
+        </td>
+    </tr>
+    </tbody>
+</table>
