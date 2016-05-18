@@ -5,6 +5,7 @@
             <th>Method Name</th>
             <th>Relative Path</th>
             <th>Method descriptions</th>
+            <th>Response Info</th>
             <th>API infos</th>
         </tr>
     </thead>
@@ -13,6 +14,7 @@
             <td>{{method.MethodName}}</td>
             <td>{{method.RelativePath}}</td>
             <td class="api-documentation">{{method.Documentation}}</td>
+            <td class="parameter-type">{{method.ResponseName}}</td>
             <td>
                 <a ng-href="{{rootPath}}api/{{method.FriendlyId}}/{{page.title}}">Details</a>
             </td>

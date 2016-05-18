@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -75,6 +76,7 @@ namespace LtePlatform.Areas.HelpPage.Controllers
             var parametersDescriptions = description.GenerateUriParameters(modelGenerator);
             var requestModelDescription = description.GenerateRequestModelDescription(modelGenerator, sampleGenerator);
             var responseModel = description.GenerateResourceDescription(modelGenerator);
+            var responseDescription = responseModel?.GetParameterDescriptions();
             return Json(new
             {
                 ParameterDescriptions = parametersDescriptions.Select(x => new
@@ -96,7 +98,13 @@ namespace LtePlatform.Areas.HelpPage.Controllers
                 {
                     responseModel.Name,
                     responseModel.Documentation,
-                    responseModel.ParameterDocumentation
+                    responseModel.ParameterDocumentation,
+                    Descriptions = responseDescription?.Select(x => new
+                    {
+                        x.Name,
+                        x.Documentation,
+                        AnnotationDoc = x.Annotations.Select(an => an.Documentation)
+                    })
                 }
             },
                 JsonRequestBehavior.AllowGet);
