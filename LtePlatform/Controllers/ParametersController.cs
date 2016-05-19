@@ -134,8 +134,7 @@ namespace LtePlatform.Controllers
                 ViewBag.Message = "共上传华为流量信息文件" + flowHw.Length + "个！";
                 foreach (var file in flowHw)
                 {
-                    var path = file.UploadKpiFile();
-                    _flowService.UploadFlowHuaweis(new StreamReader(path, Encoding.GetEncoding("GB2312")));
+                    _flowService.UploadFlowHuaweis(new StreamReader(file.InputStream, Encoding.GetEncoding("GB2312")));
                 }
             }
             return View("NeighborImport");

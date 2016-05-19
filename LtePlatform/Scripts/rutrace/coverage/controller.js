@@ -17,5 +17,10 @@
             $scope.coverageList = result;
         });
     };
+    $scope.showDetails = function(date) {
+        topPreciseService.queryOneDayCellStastic($routeParams.cellId, $routeParams.sectorId, date).then(function(result) {
+            console.log(result);
+        });
+    };
     $scope.showCoverage();
 });

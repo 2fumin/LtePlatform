@@ -482,6 +482,24 @@
                     });
                 return deferred.promise;
             },
+            queryOneDayCellStastic: function (cellId, sectorId, date) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: appUrlService.getApiUrl('CellStastic'),
+                    params: {
+                        eNodebId: cellId,
+                        sectorId: sectorId,
+                        date: date
+                    }
+                }).success(function (result) {
+                    deferred.resolve(result);
+                })
+                    .error(function (reason) {
+                        deferred.reject(reason);
+                    });
+                return deferred.promise;
+            },
             getInterferencePieOptions: function(interferenceCells, currentCellName) {
                 var over6DbPie = new GradientPie();
                 var over10DbPie = new GradientPie();

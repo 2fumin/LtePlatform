@@ -33,6 +33,13 @@ namespace Lte.Evaluations.DataService.Mr
             return dateSpanStats.Any() ? new CellStasticView(dateSpanStats) : null;
         }
 
+        public List<CellStastic> QueryOneDayStats(int eNodebId, byte sectorId, DateTime date)
+        {
+            var cell = _cellRepository.GetBySectorId(eNodebId, sectorId);
+            var pci = cell?.Pci ?? 0;
+            return _repository.GetList(eNodebId, pci, date);
+        }
+
         private List<ICellStastic> QueryDateSpanStatList(int eNodebId, short pci, DateTime begin, DateTime end)
         {
             var dateSpanStats = new List<ICellStastic>();

@@ -60,5 +60,59 @@ namespace Lte.Evaluations.DataService.Dump
             Assert.AreEqual(item.AverageUsers, 1.718, 1E-7);
             Assert.AreEqual(item.ENodebId, 552552);
         }
+
+        [Test]
+        public void Test_Integrity2()
+        {
+            var testDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CsvFiles");
+            var path = Path.Combine(testDir, "4G话务模型(05192016 074210)@2.csv");
+            var reader = new StreamReader(path, Encoding.GetEncoding("GB2312"));
+            var originCsvs = FlowHuaweiCsv.ReadFlowHuaweiCsvs(reader);
+            Assert.AreEqual(originCsvs.Count, 101609);
+            var emptyOrigin = originCsvs.FirstOrDefault(x => x.CellInfo == "");
+            Assert.IsNotNull(emptyOrigin);
+            var mergedCsvs = (from item in originCsvs
+                group item by new
+                {
+                    item.StatTime.Date,
+                    item.CellInfo
+                }
+                into g
+                select new FlowHuaweiCsv
+                {
+                    StatTime = g.Key.Date,
+                    AverageActiveUsers = g.Average(x => x.AverageActiveUsers),
+                    AverageUsers = g.Average(x => x.AverageUsers),
+                    ButLastDownlinkDurationInMs = g.Sum(x => x.ButLastDownlinkDurationInMs),
+                    ButLastUplinkDurationInMs = g.Sum(x => x.ButLastUplinkDurationInMs),
+                    CellInfo = g.Key.CellInfo,
+                    DedicatedPreambles = g.Sum(x => x.DedicatedPreambles),
+                    DownlinkAveragePrbs = g.Average(x => x.DownlinkAveragePrbs),
+                    DownlinkAverageUsers = g.Average(x => x.DownlinkAverageUsers),
+                    DownlinkDciCces = g.Sum(x => x.DownlinkDciCces),
+                    DownlinkDrbPbs = g.Average(x => x.DownlinkDrbPbs),
+                    DownlinkDurationInMs = g.Sum(x => x.DownlinkDurationInMs),
+                    DownlinkMaxUsers = g.Max(x => x.DownlinkMaxUsers),
+                    GroupAPreambles = g.Sum(x => x.GroupAPreambles),
+                    GroupBPreambles = g.Sum(x => x.GroupBPreambles),
+                    LastTtiDownlinkFlowInByte = g.Sum(x => x.LastTtiDownlinkFlowInByte),
+                    LastTtiUplinkFlowInByte = g.Sum(x => x.LastTtiUplinkFlowInByte),
+                    MaxActiveUsers = g.Max(x => x.MaxActiveUsers),
+                    MaxUsers = g.Max(x => x.MaxUsers),
+                    PagingUsersString = g.First().PagingUsersString,
+                    PdcpDownlinkFlowInByte = g.Sum(x => x.PdcpDownlinkFlowInByte),
+                    PdcpUplinkFlowInByte = g.Sum(x => x.PdcpUplinkFlowInByte),
+                    PucchPrbsString = g.Sum(x => x.PucchPrbsString.ConvertToInt(0)).ToString(),
+                    TotalCces = g.Sum(x => x.TotalCces),
+                    UplinkAveragePrbs = g.Average(x => x.UplinkAveragePrbs),
+                    UplinkAverageUsers = g.Average(x => x.UplinkAverageUsers),
+                    UplinkDciCces = g.Sum(x => x.UplinkDciCces),
+                    UplinkDrbPbs = g.Sum(x => x.UplinkDrbPbs),
+                    UplinkDurationInMs = g.Sum(x => x.UplinkDurationInMs),
+                    UplinkMaxUsers = g.Max(x => x.UplinkMaxUsers)
+                }).ToList();
+            Assert.AreEqual(mergedCsvs.Count, 2930);
+            Assert.AreEqual(mergedCsvs[2928].CellInfo, "eNodeB名称=振华机楼LBBU9, 本地小区标识=2, 小区名称=容桂创富商务公寓_1, eNodeB标识=501109, 小区双工模式=CELL_FDD");
+        }
     }
 }
